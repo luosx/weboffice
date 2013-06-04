@@ -1,0 +1,60 @@
+<anychart>
+  <settings>
+    <animation enabled="True" />
+  </settings>
+  <charts>
+    <chart plot_type="CategorizedVertical">
+      <chart_settings>
+        <title enabled="true">
+          <text>历年耕地保有量变化（基比）</text>
+        </title>
+        <axes>
+          <y_axis position="Left">
+            <scale minimum="0" maximum="7.0" major_interval="1.0" minor_interval="1.0" />
+            <title enabled="false" />
+          </y_axis>
+          <x_axis>
+            <title enabled="false" />
+          </x_axis>
+          <extra>
+            <y_axis name="extra_y_axis_1" enabled="true">
+            <scale minimum="0" maximum="7.0" major_interval="1.0" minor_interval="1.0" />
+              <title enabled="false" />
+            </y_axis>
+          </extra>
+        </axes>
+      </chart_settings>
+      <data_plot_settings>
+        <line_series>
+          <line_style>
+            <line thickness="1" />
+          </line_style>
+          <tooltip_settings enabled="true">
+            <format>{%Value}{numDecimals:0}%</format>
+          </tooltip_settings>
+        </line_series>
+        <bar_series>
+          <tooltip_settings enabled="True" />
+        </bar_series>
+      </data_plot_settings>
+      <data>
+        <series name="Series 1" type="Line" y_axis="extra_y_axis_1" color="#F1683C">
+          <point name="2004年" y="5.5" />
+          <point name="2005年" y="4.8" />
+          <point name="2006年" y="4.2" />
+          <point name="2007年" y="2.9" />
+          <point name="2008年" y="0.5" />
+          <point name="2009年" y="0" />
+        </series>
+        <series name="Series 2" type="Bar" color="#1D8BD1">
+          <point name="2004年" y="5.5" />
+          <point name="2005年" y="4.8" />
+          <point name="2006年" y="4.2" />
+          <point name="2007年" y="2.9" />
+          <point name="2008年" y="0.5" />
+          <point name="2009年" y="0" />
+        </series>
+      </data>
+    </chart>
+  </charts>
+</anychart>

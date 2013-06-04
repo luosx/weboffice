@@ -10,67 +10,7 @@
     http://www.springframework.org/schema/jdbc   
     http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd">
     
-	<!-- simpleExample -->
-    <bean name="simpleExample" class="com.klspta.model.SimpleExample" scope="prototype"/>
-	
-	<!-- 外野设备统一入口
-	<bean name="hander" class="com.klspta.model.hander.GPSDeviceManager"/> -->
-
-	
-	<!-- 行政区划入口 -->
-	<bean name="xzqh" class="com.klspta.model.xzqh.Xzqh" />
-	<!--shp坐标转换-->
-	<!--
-	<bean name="shptransfer" class="com.klspta.model.parseShapefile.ShpTransfer84To80"/>
-	-->
-	<!-- 违法线索登记 -->
-	<bean name="createxs" class="com.klspta.web.de4t.recordclue.Createxs" scope="prototype"/>
-	<!-- 定制查询 -->
-	<bean name="queryAction" class="com.klspta.model.customQuery.QueryAction" scope="prototype"/>
-	
-	<!-- 线索办理日志 -->
-	<bean name="disposelog" class="com.klspta.model.signlog.SignlogOperation" scope="prototype"/>
-	
-	<!-- 号码归属地查询 -->
-	<bean name="mobileLocation" class="com.klspta.model.mobilelocation.MobileLocation" scope="prototype"/>
-	
-    <!-- 代办列表 -->
-	<bean name="daibanList" class="com.klspta.web.hotline.cluelist.DaibanList" scope="prototype"/>
-
-	<!-- 根据yw_guid获取所有文件 -->
-	<bean name="getFilesByYwguid" class="com.klspta.model.accessory.AccessoryUtil" scope="prototype"/>
-	
-	<!-- 办理中一般线索列表 -->
-	<bean name="banliyibanList" class="com.klspta.web.hotline.cluelist.BanliyibanList" scope="prototype"/>
-	
-	<!-- 办理中重大线索列表 -->
-	<bean name="banlizhongdaList" class="com.klspta.web.hotline.cluelist.BanlizhongdaList" scope="prototype"/>
-	
-	<!-- 不属受理范围 -->
-	<bean name="bushushouliList" class="com.klspta.web.hotline.cluelist.BushushouliList" scope="prototype"/>
-	
-	<!-- 待确定 -->
-	<bean name="daiquedingList" class="com.klspta.web.hotline.cluelist.DaiquedingList" scope="prototype"/>
-	
-	<!-- 上级退回 -->
-	<bean name="shangjituihuiList" class="com.klspta.web.hotline.cluelist.ShangjituihuiList" scope="prototype"/>
-	
-	<!-- 办结一般 -->
-	<bean name="banjieyibanList" class="com.klspta.web.hotline.cluelist.BanjieyibanList" scope="prototype"/>
-	
-	<!-- 办结重大 -->
-	<bean name="banjiezhongdaList" class="com.klspta.web.hotline.cluelist.BanjiezhongdaList" scope="prototype"/>
-	
-	<!-- 已上报 -->
-	<bean name="yishangbaoList" class="com.klspta.web.hotline.cluelist.YishangbaoList" scope="prototype"/>
-	
-	<!-- 暂存 -->
-	<bean name="zancunList" class="com.klspta.web.hotline.cluelist.ZanCunList" scope="prototype"/>
-	
-	<!-- ftp附件上传 -->
-	<bean name="ftpAC" class="com.klspta.base.util.impl.FtpUtil" scope="prototype"/>
-	
-	<!-- accessory附件上传 -->
+		<!-- accessory附件上传 -->
 	<bean name="accessory" class="com.klspta.model.accessory.AccessoryUtil" scope="prototype"/>
 	<!-- 文书管理 -->
 	<bean name="weboffice" class="com.klspta.model.webOffice.DynamicTreeOperation" scope="prototype"/>
@@ -87,21 +27,17 @@
 	<!-- PDA状态管理 -->
 	<bean name="shtcDataOperationAC" class="com.klspta.model.giscomponents.shtc.ShtcDataOperationAC" scope="prototype"/>
 	
-	<!--  -->
-	<bean name="sHManageAC" class="com.klspta.model.dc.SHManageAC" scope="prototype"/>
 	
 	<!-- 地图管理 -->
 	<bean name="mapAuthorOperation" class="com.klspta.model.mapconfig.MapAuthorOperation" scope="prototype"/>
 	
-			<!--外业任务总入口-->
+	<!--外业任务总入口-->
     <bean name="gpslocation" class="com.klspta.model.wyrw.GpsLocation" scope="prototype"/> 
 	<!-- anychart -->
 		<!--外业任务总入口-->
     <bean name="wyrwmanager" class="com.klspta.model.wyrw.WyrwManager" scope="prototype"/> 
    	<!-- 坐标转换方法 -->
     <bean name="change84To80" class="com.klspta.model.changeCoords.ChangeCoords" scope="prototype"/>
-   <!-- 坐标相关处理统一入口，逐渐替换到原来不规则命名 add by guorp 2013-4-18 -->
-    <bean name="coordinate" class="com.klspta.model.coordinate.Coordinate" scope="prototype"/>
     
 	<!-- anychart -->
     <bean name="anyChart" class="com.klspta.model.report.api.AnyChartDataSource" scope="prototype"/>
@@ -116,8 +52,20 @@
 	<bean name="accessac" class="com.klspta.model.download.AccessoryAC" scope="prototype"/>
 	<!-- 车载GPS坐标接收socket -->
 	<bean name="sendCarPosition" class="com.klspta.model.giscomponents.carMonitor.SendCarPosition" lazy-init="false"/>
+		<!-- 行政区划入口 -->
+	<bean name="xzqh" class="com.klspta.model.xzqh.Xzqh" />
+	<!-- 定制查询 -->
+	<bean name="queryAction" class="com.klspta.model.customQuery.QueryAction" scope="prototype"/>
 	
-	<!-- 坐标转换处理 -->
-	<bean name="coord" class="com.klspta.base.util.impl.CoordinateWSDLImp" scope="prototype"/>
+	<!-- 线索办理日志 -->
+	<bean name="disposelog" class="com.klspta.model.signlog.SignlogOperation" scope="prototype"/>
 	
+	<!-- 号码归属地查询 -->
+	<bean name="mobileLocation" class="com.klspta.model.mobilelocation.MobileLocation" scope="prototype"/>
+	
+
+	<!-- 根据yw_guid获取所有文件 -->
+	<bean name="getFilesByYwguid" class="com.klspta.model.accessory.AccessoryUtil" scope="prototype"/>
+		  <!-- 报表 -->
+    <bean name="reportManage" class="com.klspta.model.report.ReportManage" scope="prototype"/>	
 </beans>   

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<anychart>
+<dashboard>
+		<view type="Dashboard">
+			<title padding="0">
+				<text>安徽省合肥市图斑统计柱状图</text>
+			</title>
+			<background>
+				<inside_margin all="3" top="10" />
+			</background>
+
+			<vbox width="100%" height="100%">
+				<view name="v1" type="Chart" source="mainData" width="100%"
+					height="100%">
+					<margin top="0" />
+				</view>
+			</vbox>
+		</view>
+	</dashboard>
+	<settings>
+		<animation enabled="True" />
+	</settings>
+	<charts>
+		<chart plot_type="CategorizedVertical" name="mainData">
+			<data_plot_settings default_series_type="Bar">
+				<bar_series group_padding="0.2">
+					<tooltip_settings enabled="true" />
+				</bar_series>
+			</data_plot_settings>
+			<chart_settings>
+				<title enabled="true">
+					<text></text>
+				</title>
+				 <axes>
+           <x_axis tickmarks_placement="Center">
+            <title enabled="true">
+              <text>地区</text>
+            </title>
+          </x_axis>
+          <y_axis tickmarks_placement="Center">
+            <title enabled="true">
+              <text>图斑数量（单位：个）</text>
+            </title>
+          </y_axis>
+        </axes>
+			</chart_settings>
+			<data>
+			<series id="s1">
+                <point name="瑶海区" y="324" />
+				<point name="庐阳区" y="159" />
+				<point name="蜀山区" y="787" />
+				<point name="包河区" y="295" />
+				<point name="滨湖新区" y="195" />
+				<point name="巢湖市" y="324" />
+				<point name="高新区" y="252" />
+				<point name="肥西县" y="452" />
+				<point name="庐江县" y="152" />
+				<point name="长丰县" y="352" />
+				<point name="肥东县" y="152" />
+			</series>
+			</data>
+		</chart>
+	</charts>
+</anychart>

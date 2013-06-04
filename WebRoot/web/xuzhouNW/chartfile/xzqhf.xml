@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<anychart>
+  <settings>
+    <animation enabled="True" />
+  </settings>
+  <charts>
+    <chart plot_type="CategorizedVertical">
+      <data_plot_settings default_series_type="Bar">
+        <bar_series group_padding="0.2">
+          <tooltip_settings enabled="true" />
+        </bar_series>
+      </data_plot_settings>
+      <chart_settings>
+        <title enabled="true">
+          <text>徐州市违法线索统计表（按行政区划)</text>
+		     <font  bold="True" size="24" > 
+              </font> 
+        </title>
+         <axes>
+           <x_axis tickmarks_placement="Center">
+            <title enabled="true">
+              <text>政区</text>
+            </title>
+          </x_axis>
+          <y_axis tickmarks_placement="Center">
+            <title enabled="true">
+              <text>线索数量</text>
+            </title>
+
+          </y_axis>
+        </axes>
+      </chart_settings>
+      <data>
+        <series name="政区">
+                <point name="丰县" y="324" />
+				<point name="鼓楼区" y="159" />
+				<point name="贾汪区" y="787" />
+				<point name="九里区" y="295" />
+				<point name="沛县" y="195" />
+				<point name="邳州市" y="324" />
+				<point name="泉山区" y="252" />
+				<point name="睢宁县" y="252" />
+				<point name="铜山区" y="252" />
+				<point name="新沂市" y="252" />
+				<point name="云龙区" y="252" />
+			        <tooltip enabled="true">
+			     		 <format>
+			     	     	{%Name}:{%YValue}{numDecimals:0}件
+				   		 </format>
+				    </tooltip>
+        </series>
+      </data>
+    </chart>
+  </charts>
+</anychart>
