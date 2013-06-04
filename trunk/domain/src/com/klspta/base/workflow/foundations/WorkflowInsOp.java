@@ -27,7 +27,7 @@ public class WorkflowInsOp implements IWorkflowInsOp {
 
 	private static WorkflowInsOp instance = null;
 
-	private static final String HANDLER_HOME = "com.klspta.model.workflow.handler.";
+	private static final String HANDLER_HOME = "com.klspta.base.workflow.handler.";
 	
 	private static HanyuPinyinOutputFormat spellFormat = new HanyuPinyinOutputFormat();
 
