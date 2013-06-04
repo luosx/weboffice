@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<anychart>
+  <settings>
+    <animation enabled="True" />
+  </settings>
+  <charts>
+    <chart plot_type="Pie">
+      <data_plot_settings enable_3d_mode="false">
+        <pie_series>
+          <tooltip_settings enabled="true">
+            <format>
+{%Name}
+小计: {%Value}{numDecimals: 0}件
+百分比: {%YPercentOfSeries}{numDecimals: 2}%
+            </format>
+          </tooltip_settings>
+          <label_settings enabled="true">
+            <background enabled="false" />
+            <position anchor="Center" valign="Center" halign="Center" padding="20" />
+            <font color="White">
+              <effects>
+                <drop_shadow enabled="true" distance="2" opacity="0.5" blur_x="2" blur_y="2" />
+              </effects>
+            </font>
+            <format>{%YPercentOfSeries}{numDecimals:1}%</format>
+          </label_settings>
+        </pie_series>
+      </data_plot_settings>
+      <data>
+        <series name="Series 1" type="Pie">
+          <point name="重复线索" y="300" />
+          <point name="删除线索" y="350" />
+          <point name="退回线索" y="250" />
+          <point name="一般线索" y="150" />
+          <point name="违法线索" y="677" />
+          <point name="无效线索" y="1267" />
+        </series>
+      </data>
+      <chart_settings>
+        <title enabled="true" padding="15">
+          <text>本月违法线索处理情况统计</text>
+        </title>
+        <legend enabled="true" position="Bottom" align="Spread" ignore_auto_item="true" padding="15">
+          <format>{%Icon} {%Name} ({%YValue})</format>
+          <template>
+          </template>
+          <title enabled="true">
+            <text>线索分类</text>
+          </title>
+          <columns_separator enabled="false" />
+          <background>
+            <inside_margin left="0" right="0" />
+          </background>
+          <items>
+            <item source="Points" />
+          </items>
+        </legend>
+      </chart_settings>
+    </chart>
+  </charts>
+</anychart>
