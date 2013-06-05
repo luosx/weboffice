@@ -1,16 +1,10 @@
 package com.klspta.base.util.impl;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Enumeration;
-import java.util.Vector; //import java.util.zip.ZipEntry;
-//import java.util.zip.ZipInputStream;
-//import java.util.zip.ZipOutputStream;
 
 import org.apache.tools.ant.Project;
 import org.apache.tools.ant.taskdefs.Zip;
