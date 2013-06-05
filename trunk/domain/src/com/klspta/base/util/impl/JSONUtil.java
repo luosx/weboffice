@@ -1,6 +1,5 @@
 package com.klspta.base.util.impl;
 
-
 import com.klspta.base.util.api.IJSONUtil;
 
 import net.sf.json.JSONArray;
@@ -19,38 +18,47 @@ public final class JSONUtil implements IJSONUtil {
      * '('
      */
     private static final char LEFTKUOHAO = 123;
+
     /**
      * ')'
      */
     private static final char RIGHTKUOHAO = 125;
+
     /**
      * ','  
      */
     private static final char DOUHAO = 44;
+
     /**
      * '['
      */
     private static final char LEFTZHONGKUOHAO = 91;
+
     /**
      * ']'
      */
     private static final char RIGHTZHONGKUOHAO = 93;
+
     /**
      *  ' '
      */
     private static final char KONGGE = 32;
+
     /**
      * '\n'
      */
     private static final char FANXIEGANGN = 10;
+
     /**
      * '\r'
      */
     private static final char FANXIEGANGR = 13;
+
     /**
      * '\t'
      */
     private static final char FANXIEGANGT = 9;
+
     /**
      * '\\'
      */
@@ -233,7 +241,7 @@ public final class JSONUtil implements IJSONUtil {
                         break;
 
                     case SHUANGFANXIEGANG: // '\\'
-                        if (doc.charAt(i + 1) == '"'){
+                        if (doc.charAt(i + 1) == '"') {
                             i++;
                         }
                         break;
@@ -261,7 +269,7 @@ public final class JSONUtil implements IJSONUtil {
      */
     private boolean notBracket(StringBuffer doc, int pos) {
         for (int i = pos; i < doc.length(); i++) {
-            if (doc.charAt(i) != ' ' && doc.charAt(i) != '\n' && doc.charAt(i) != '\r'){
+            if (doc.charAt(i) != ' ' && doc.charAt(i) != '\n' && doc.charAt(i) != '\r') {
                 return doc.charAt(i) != '}' && doc.charAt(i) != ']';
             }
             doc.replace(i, i + 1, "");
@@ -280,7 +288,7 @@ public final class JSONUtil implements IJSONUtil {
      */
     private String indent(int count) {
         StringBuffer ret = new StringBuffer();
-        for (int i = 0; i < count; i++){
+        for (int i = 0; i < count; i++) {
             ret.append(INDENT);
         }
 
