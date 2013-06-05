@@ -1,7 +1,11 @@
 package com.klspta.base.util;
 
+import java.util.TimerTask;
+
+import com.klspta.base.util.api.IGPGGAUtil;
 import com.klspta.base.util.api.IGisBaseUtil;
 import com.klspta.base.util.api.IGisExpandUtil;
+import com.klspta.base.util.api.IShapeUtil;
 
 /**
  * 
@@ -39,5 +43,35 @@ public class GisUtilFactory {
      */
     public static IGisExpandUtil getCoordinateEncryptUtil() {
         return UtilFactory.getGisExpandUtil();
+    }
+
+    /**
+     * <br>Description:shp文件操作工具
+     * <br>Author:陈强峰
+     * <br>Date:2013-6-5
+     * @return
+     */
+    public static IShapeUtil getShapeUtil() {
+        return UtilFactory.getShapeUtil();
+    }
+
+    /**
+     * <br>Description:获取GPGGA字符串解析工具类实例
+     * <br>Author:陈强峰
+     * <br>Date:2013-6-5
+     * @return
+     */
+    public static IGPGGAUtil getGPGGAUtil() {
+        return UtilFactory.getGPGGAUtil();
+    }
+
+    /**
+     * <br>Description:获取GPS守护进程工具类实例
+     * <br>Author:陈强峰
+     * <br>Date:2013-6-5
+     * @return
+     */
+    public static TimerTask getGPSPointUtilTimerTask() {
+        return UtilFactory.getGPSPointUtilTimerTask();
     }
 }
