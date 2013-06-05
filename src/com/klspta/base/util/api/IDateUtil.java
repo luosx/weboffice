@@ -27,7 +27,7 @@ public interface IDateUtil {
     
     /**
      * 
-     * <br>Description:获取普通日期格式
+     * <br>Description:获取普通日期格式yyyy-MM-dd
      * <br>Author:黎春行
      * <br>Date:2012-8-31
      * @return
