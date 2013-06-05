@@ -15,11 +15,11 @@ import com.klspta.base.AbstractBaseBean;
 import com.klspta.base.util.UtilFactory;
 import com.klspta.console.ManagerFactory;
 import com.klspta.console.user.User;
-import com.klspta.model.workflow.foundations.IWorkflowInsOp;
-import com.klspta.model.workflow.foundations.IWorkflowOp;
-import com.klspta.model.workflow.foundations.JBPMServices;
-import com.klspta.model.workflow.foundations.WorkflowInsOp;
-import com.klspta.model.workflow.foundations.WorkflowOp;
+import com.klspta.base.workflow.foundations.IWorkflowInsOp;
+import com.klspta.base.workflow.foundations.IWorkflowOp;
+import com.klspta.base.workflow.foundations.JBPMServices;
+import com.klspta.base.workflow.foundations.WorkflowInsOp;
+import com.klspta.base.workflow.foundations.WorkflowOp;
 
 public class Workflow extends AbstractBaseBean {
 
