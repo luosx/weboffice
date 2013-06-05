@@ -31,18 +31,18 @@ import com.klspta.base.util.bean.shapeutil.DbfParameters;
 import com.klspta.base.util.bean.shapeutil.ShpParameters;
 
 public final class ShapeUtil implements IShapeUtil {
-
+    
     public static IShapeUtil getInstance(String key) throws Exception {
         if (!key.equals("NEW WITH UTIL FACTORY!")) {
             throw new Exception("请从UtilFacoory获取工具.");
         }
-        return new ShapeUtil();
+         return new ShapeUtil();
     }
 
     @Override
-    public ShpParameters expShpFile(ShpParameters parameters, String name) {
-        //parameters.setFilename(System.currentTimeMillis() + ".shp");
-        parameters.setFilepath(UtilFactory.getConfigUtil().getShapefileTempPathFloder() + name);
+    public ShpParameters expShpFile(ShpParameters parameters,String name) {
+    	 //parameters.setFilename(System.currentTimeMillis() + ".shp");
+        parameters.setFilepath(UtilFactory.getConfigUtil().getShapefileTempPathFloder()+name);
         Transaction t = new DefaultTransaction();
         try {
             MemoryDataStore mds = new MemoryDataStore();
@@ -54,33 +54,33 @@ public final class ShapeUtil implements IShapeUtil {
             Iterator<Map<String, String>> vit = v.iterator();
             Iterator<String> recordit = null;
             String key = "";
-            while (vit.hasNext()) {
+            while(vit.hasNext()){
                 record = vit.next();
                 recordit = record.keySet().iterator();
-                Object[] oo = new Object[Integer.parseInt(record.get("size")) + 1];
+                Object[] oo =  new Object[Integer.parseInt(record.get("size"))+1];
                 //int i = 1;
-                while (recordit.hasNext()) {
+                while(recordit.hasNext()){
                     key = recordit.next();
-                    String[] records = (record.get(key)).split(",");
-                    if (!(key.equals("size"))) {
-                        if (key.equals("geometry")) {
+                    String []records=(record.get(key)).split(",");
+                    if(!(key.equals("size"))){
+                        if(key.equals("geometry")){
                             oo[0] = wkt.read(record.get(key));
-                        } else {
-                            for (int i = 1, j = 0; i <= records.length; i++, j++) {
-                                oo[i] = records[j];
-                            }
+                        }else{ 
+                            for(int i=1,j=0;i<=records.length;i++,j++){
+                        	oo[i] = records[j];
+                           }  
                         }
                     }
-
+                
                 }
-                collection.add(SimpleFeatureBuilder.build(featureType, oo, null));
+                collection.add( SimpleFeatureBuilder.build( featureType, oo, null) );
             }
             mds.addFeatures(collection);
-            FeatureSource<?, ?> featureSource = mds.getFeatureSource("location"); //existing feature source from MemoryDataStore
-            SimpleFeatureType ft = (SimpleFeatureType) featureSource.getSchema();
+            FeatureSource<?, ?> featureSource= mds.getFeatureSource("location"); //existing feature source from MemoryDataStore
+            SimpleFeatureType ft = (SimpleFeatureType)featureSource.getSchema();
             File file = new File(parameters.getFilepath(), parameters.getFilename());
             Map<String, Serializable> params = new HashMap<String, Serializable>();
-            params.put("url", file.toURI().toURL());
+            params.put("url", file.toURI().toURL() );
             @SuppressWarnings("deprecation")
             FileDataStoreFactorySpi factory = new IndexedShapefileDataStoreFactory();
             ShapefileDataStore dataStore = (ShapefileDataStore) factory.createNewDataStore(params);
@@ -88,16 +88,16 @@ public final class ShapeUtil implements IShapeUtil {
             dataStore.setStringCharset(Charset.forName("GBK"));
             //CoordinateReferenceSystem crs=CRS.decode("EPSG:2364");
             //dataStore.forceSchemaCRS(DefaultGeographicCRS.);
-            FeatureStore<?, ?> featureStore = (FeatureStore<?, ?>) dataStore.getFeatureSource(ft
-                    .getTypeName());
+            FeatureStore<?, ?> featureStore = (FeatureStore<?, ?>) dataStore.getFeatureSource(ft.getTypeName() );
             FeatureCollection ff = featureSource.getFeatures(); // grab all features
             featureStore.addFeatures(ff);
             t.commit();
-        } catch (IOException e) {
+        }catch(IOException e){
             e.printStackTrace();
             try {
-                t.rollback();
-            } catch (IOException ioe) {
+               t.rollback();
+            }
+            catch(IOException ioe){
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -122,5 +122,6 @@ public final class ShapeUtil implements IShapeUtil {
         // TODO Auto-generated method stub
         return null;
     }
-
+    
+	
 }
