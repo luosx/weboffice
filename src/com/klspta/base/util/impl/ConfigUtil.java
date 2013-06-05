@@ -19,7 +19,7 @@ public final class ConfigUtil extends AbstractBaseBean implements IConfigUtil {
     private static String SECURITY_verifyURL;
 
     private static String SECURITY_passIPs;
-    
+
     private static String app_path;
 
     public String getApppath() {
@@ -37,9 +37,9 @@ public final class ConfigUtil extends AbstractBaseBean implements IConfigUtil {
             props = new Properties();
             props.load(basepath);
             SHAPE_FILE_TEMP_FLODER = props.getProperty("SHAPEFILE_PATH");
-            File file=new File(SHAPE_FILE_TEMP_FLODER);
-            if(!file.exists()){
-            	file.mkdirs();
+            File file = new File(SHAPE_FILE_TEMP_FLODER);
+            if (!file.exists()) {
+                file.mkdirs();
             }
             SECURITY_USEABLE = props.getProperty("SECURITY_USEABLE");
             SECURITY_verifyURL = props.getProperty("SECURITY_verifyURL");
@@ -86,7 +86,7 @@ public final class ConfigUtil extends AbstractBaseBean implements IConfigUtil {
     }
 
     public String getSQL(String key) {
-        return this.getSqlValue(sqlprops.getProperty(key));    
+        return this.getSqlValue(sqlprops.getProperty(key));
     }
 
     public String getConfig(String key) {
@@ -101,20 +101,20 @@ public final class ConfigUtil extends AbstractBaseBean implements IConfigUtil {
         }
         return 0.0;
     }
-    
-    public String getSqlValue(String sqlporperties){
-       String[] value=sqlporperties.split("@");
-       String sql=value[0];
-       if(value.length==2){
-    	   String querySrid=sqlprops.getProperty("querySrid");
-    	   Object[] arg={value[1].toUpperCase()};
-    	   List<Map<String,Object>> list=query(querySrid, SDE, arg);
-    		if(list.size()>0){
-    			Map<String,Object> map=list.get(0);
-    			sql=sql.replace("#srid", (String)map.get("srid"));
-    		}
-       }
-       return sql;
+
+    public String getSqlValue(String sqlporperties) {
+        String[] value = sqlporperties.split("@");
+        String sql = value[0];
+        if (value.length == 2) {
+            String querySrid = sqlprops.getProperty("querySrid");
+            Object[] arg = { value[1].toUpperCase() };
+            List<Map<String, Object>> list = query(querySrid, SDE, arg);
+            if (list.size() > 0) {
+                Map<String, Object> map = list.get(0);
+                sql = sql.replace("#srid", (String) map.get("srid"));
+            }
+        }
+        return sql;
     }
-	
+
 }
