@@ -22,7 +22,7 @@ var restUrl = "";
 if(restUrl == null || restUrl == ""){
 	var query = window.location.href;
 	var ss = query.split("/");
-	restUrl = "http://" + ss[2] + "/reduce/service/rest/";
+	restUrl = "http://" + ss[2] + "/" + ss[3]+ "/service/rest/";
 }
 
 
