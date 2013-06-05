@@ -192,7 +192,7 @@ public class GisBaseUtil implements IGisBaseUtil {
             return this.point80;
         }
         if (GRID.equals(changetype)) {
-            return UtilFactory.getGisGridUtil().changePoint(point);
+            return UtilFactory.getGisExpandUtil().changePoint(point);
         }
         return null;
     }
