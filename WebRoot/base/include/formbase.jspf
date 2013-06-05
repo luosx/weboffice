@@ -1,8 +1,8 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@page import="org.springframework.security.core.context.SecurityContextHolder"%>
 <%@page import="com.klspta.console.user.User"%>
-<%@page import="com.klspta.model.workflow.foundations.WorkflowOp"%>
-<%@page import="com.klspta.model.workflow.foundations.IWorkflowOp"%>
+<%@page import="com.klspta.base.workflow.foundations.WorkflowOp"%>
+<%@page import="com.klspta.base.workflow.foundations.IWorkflowOp"%>
 <%
 	String _$path = request.getContextPath();
 	String _$basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + _$path + "/";
