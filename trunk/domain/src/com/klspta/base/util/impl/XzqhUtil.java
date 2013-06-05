@@ -285,10 +285,10 @@ public class XzqhUtil extends AbstractBaseBean implements IXzqhUtil {
     public String getPublicCode(String id) {
         String sql = "select t.child_name,t.child_id from PUBLIC_CODE t where t.id='" + id
                 + "' and t.in_flag=1 order by t.child_id";
-        List rows = query(sql, YW);
+        List<Map<String, Object>> rows = query(sql, YW);
         StringBuffer sb = new StringBuffer();
         for (int i = 0; i < rows.size(); i++) {
-            Map map = (Map) rows.get(i);
+            Map<String, Object> map = (Map<String, Object>) rows.get(i);
             sb.append("{text:'" + map.get("child_name") + "',value:'" + map.get("child_id") + "'}");
             if ((i + 1) < rows.size()) {
                 sb.append(",");
