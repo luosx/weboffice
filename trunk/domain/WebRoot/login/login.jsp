@@ -5,7 +5,6 @@
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
     String type = request.getParameter("type");
     String name = ProjectInfo.getInstance().PROJECT_NAME;
-    name="dtjg";
     if("oa".equals(name)){
     	response.sendRedirect("/reduce/login/oalogin.jsp?type="+type);
     }
