@@ -1,7 +1,7 @@
 ﻿﻿<%@ page language="java" pageEncoding="UTF-8" import="java.util.*"%>
 <%@ page import="com.klspta.model.resourcetree.TreeOperation"%>
 <%@page import="java.util.Map.Entry"%>
-<%@page import="com.klspta.model.workflow.foundations.WorkflowOp"%>
+<%@page import="com.klspta.base.workflow.foundations.WorkflowOp"%>
 
 <%
 	String path = request.getContextPath();
