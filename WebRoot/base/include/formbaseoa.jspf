@@ -1,0 +1,520 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+
+<%@page import="org.springframework.security.core.context.SecurityContextHolder"%>
+<%@page import="com.klspta.console.user.User"%>
+<%
+	String _$path = request.getContextPath();
+	String _$basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + _$path + "/";
+	String  _$personalJSPath = request.getRequestURI();
+	_$personalJSPath = _$personalJSPath.replaceAll(".jsp","");
+	_$personalJSPath = _$personalJSPath.split("/")[_$personalJSPath.split("/").length - 1];
+	String _$keyfield = request.getParameter("keyfield");
+	if(_$keyfield == null || _$keyfield.equals("")){
+	    _$keyfield = "yw_guid";
+	}
+	String _$key = request.getParameter(_$keyfield);
+	String _$jdbcname = request.getParameter("jdbcname");
+    String formId = request.getParameter("activityName");
+    Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    String userId = null;
+    String fullName = "";
+    if (principal instanceof User) {
+        userId = ((User) principal).getUserID();
+        fullName = ((User) principal).getFullName();
+    } else {
+        userId = null;
+        fullName = principal.toString();
+    }	
+    String flag = (String)request.getAttribute("flag");
+    String isHaveSave = request.getParameter("isHaveSave");
+%>
+<script src="<%=_$basePath%>/base/include/ajax.js"></script>
+<script src="<%=_$basePath%>/base/form/DatePicker/WdatePicker.js"></script>
+<script src="<%=_$basePath%>/base/form/formStyleInit.js"></script>
+<link rel="stylesheet" type="text/css" href="<%=_$basePath%>/base/form/css/formStyleDefaultoa.css">
+
+<script type="text/javascript">
+document.write("<script id=__ie_onload defer src=javascript:void(0)><\/script>"); 
+var script = document.getElementById("__ie_onload"); 
+script.onreadystatechange = function() { 	
+    if (this.readyState == "complete") { 
+         formInit(""); // call the onload handler 
+    } 
+    
+}; 
+var isshowSave=false;
+window.onbeforeunload = function()
+{  
+	if(isshowSave)
+	{
+		if(confirm('离开前是否保存？')){
+			save();
+		}
+	}
+	else
+	{
+		//isshowSave=true;
+	}
+	
+}
+function loadAlert(msg)
+{
+	setTimeout(function(){
+		alert(msg);		
+	},50);
+}
+var isDefaultBean = false;
+var parameter;
+function requestData(){
+	var cusparameter = location.href.substring(location.href.indexOf("?")+1);
+	parameter = "_formName=<%= _$personalJSPath%>&_key=<%=_$key%>&_keyfield=<%=_$keyfield%>&_jdbcname=<%=_$jdbcname%>&" + cusparameter;
+    var json = null;
+    var path = "<%=_$basePath%>";
+    if("<%=flag%>" != 1){
+    	//parameter = parameter; 
+    	parameter = encodeURI(encodeURI(decodeURI(decodeURI(parameter)))); 
+    }else{
+   		parameter = encodeURI(encodeURI(decodeURI(decodeURI(parameter)))); 
+    }
+    json = ajaxRequest(path,"<%=_$personalJSPath%>","loadData",parameter);
+    if(json.indexOf("Error report") >= 0 || json.indexOf("no rest") >= 0){
+        isDefaultBean = true;
+        json = ajaxRequest(path,"formrequest","loadData",parameter);
+    }
+    return json;
+}
+
+function setupSaveButton(){
+    var myform = document.forms[0];
+    if(!isDefaultBean){
+        myform.action = "<%=_$basePath%>/service/rest/<%=_$personalJSPath%>/saveData?" + parameter;
+    }else{
+    	myform.action = "<%=_$basePath%>service/rest/formrequest/saveData?" + parameter;
+    }
+}
+var valiDatas=new Array();
+function formSave()
+{
+	try{
+		for(var i=0;i<valiDatas.length;i++)
+		{
+			//alert(!valiDatas[i].vali());
+			//return;
+			if(!valiDatas[i].vali())
+			{
+				return false;
+			}
+		}
+	}
+	catch(e)
+	{
+		alert(e);
+		alert("规则应用错误");
+		return;
+	}
+	
+	isshowSave=false;
+	save();
+	return true;
+	
+}
+function init(){
+	if("<%=isHaveSave%>"!="false")
+	{
+		
+		var fixedPrint = document.getElementById("fixedPrint");
+		var fixed = document.getElementById("fixed");
+		
+		if(fixed != null){
+	    	fixed.innerHTML = '<img src="base/form/images/save.png" onclick="formSave()" style="cursor:hand" title="保存"/><br /><img src="base/form/images/print.png" onclick="print()" style="cursor:hand" title="打印"/>';
+	    }
+		if(fixedPrint != null){
+	    	fixedPrint.innerHTML = '<img src="base/form/images/print.png" onclick="print()" style="cursor:hand" title="打印"/>';
+	    }
+    }
+
+    var nianling = document.getElementById("nianling");
+    var youbian = document.getElementById("youbian");
+    var shenfenzheng = document.getElementById("shenfenzheng");
+    var dianhua = document.getElementById("dianhua");
+    if(nianling != null){
+    	nianling.onfocus = isRegisterNl;
+    }
+    if(youbian != null){
+    	youbian.onfocus = isRegisterYb;
+    }
+    if(shenfenzheng != null){
+    	shenfenzheng.onfocus = isRegisterSfzhm;
+    }
+    if(dianhua != null){
+    	dianhua.onfocus = isRegisterDh;
+    }
+    var json = requestData();
+    if(json!='error'){
+    setupSaveButton();
+    json = unescape(json);
+    json = eval('(' + json + ')');
+    }else{
+    return;
+    }
+    var input = null;
+    var valiIndex=0;
+   
+    for(var i in json){
+        try{
+            if (typeof (i) == "function") continue;  
+            input=document.getElementsByName(i)[0];
+        
+          
+         	
+            if(input!=undefined){
+
+		        if(input.getAttribute("valiData")!=undefined)
+		       	{    	       		
+		       	    
+		       		valiDatas[valiIndex++]=new ValiArr(i,input.getAttribute("valiData"));       		
+		       	}
+	            if(input.type == "radio" || input.type == "checkbox"){
+	                var vi = 0;
+	                for(vi = 0 ; vi <= document.getElementsByName(i).length; vi++){
+	                    input = document.getElementsByName(i)[vi];
+	                    var myvalue = json[i].toString();
+	                    if(myvalue.indexOf(input.value) >= 0){
+	                    	input.checked = true;
+	                    }else{
+	                    	input.checked = false;
+	                    }
+	                }
+	            }else if(input.type == "select-one"){
+	                if(input.options.length==0){
+	                input.options.add(new Option(json[i].toString(),json[i].toString()))
+	                }
+	              for(var  t=0;t<input.options.length;t++) 
+						{ 
+						if(input.options[t].text==json[i].toString()) 
+						{ 
+							input.selectedIndex=t; 
+						} 
+						}
+	            }else{
+	                input.value=json[i].toString(); 
+	            }
+            }else{
+	            if(json[i].toString() == "true"){
+	                document.getElementsByName(i.substring(0,i.length-4))[0].disabled = false;
+	            }else{
+	                document.getElementsByName(i.substring(0,i.length-4))[0].disabled = true;
+	            }
+            }
+            
+            
+        }catch (e){
+            continue;
+        }
+    }
+    
+}
+/* 校验信访人年龄 add by 尹宇星 2011-12-06 */
+function isRegisterNl(){
+	document.getElementById("nianling").onblur = registerNl;
+}
+function registerNl(){
+	var obj = document.getElementById("nianling");
+	var nl = obj.value;
+	var reg = /^\d{1,2}$/;
+	if(nl!=""){
+		if(!reg.test(nl)){
+			alert("年龄为1到99的数字");
+			obj.focus();
+		}else if(nl==0){
+			alert("年龄不能为0");
+			obj.focus();
+		}
+	}
+}
+/* 校验邮编 add by 尹宇星 2011-12-06 */
+function isRegisterYb(){
+	document.getElementById("youbian").onblur = registerYb;
+}
+function registerYb(){
+	var obj = document.getElementById("youbian");
+	var yb = obj.value;
+	var reg = /^[0-9]{6}$/;
+	if(yb!=""){
+		if(!reg.test(yb)){
+			alert("邮政编码由6位数字组成");
+			obj.focus();
+		}
+	}
+}
+/* 校验信访人身份证号 add by 尹宇星 2011-12-06 */
+function isRegisterSfzhm(){
+	document.getElementById("shenfenzheng").onblur = registerSfzhm;
+}
+function registerSfzhm(){
+	var obj = document.getElementById("shenfenzheng");
+	var sfzhm = obj.value;
+	var reg_15 = /^[0-9]{14}(\d|x){1}$/;
+	var reg_18 = /^[0-9]{17}(\d|x){1}$/;
+	var reg_15X = /^[0-9]{14}(\d|X){1}$/;
+	var reg_18X = /^[0-9]{17}(\d|X){1}$/;
+	if(sfzhm!=""){
+		if(reg_15.test(sfzhm)||reg_18.test(sfzhm)||reg_15X.test(sfzhm)||reg_18X.test(sfzhm)){
+		
+		}else {
+			alert("身份证号码输入有误，应为15或18位数字，位数不足以 X 补齐。");
+			obj.focus();	
+		}
+	}
+}
+/* 校验信访人电话 add by 尹宇星 2011-12-06 */
+function isRegisterDh(){
+	document.getElementById("dianhua").onblur = registerDh;
+}
+function registerDh(){
+	var obj = document.getElementById("dianhua");
+	var dh = obj.value;
+	var reg = /^(\d{3,4}?[-]\d{7,8}?)|(\d{11})$/;
+	if(dh!=""){
+		if(!reg.test(dh)){
+			alert("电话格式不正确。（例如010-12345678或者13812345678）");
+			obj.focus();
+		}
+	}
+}
+
+function underwrite(obj){
+	obj.value="<%=fullName%>";
+}
+function ValiArr(ename,str)
+{
+	this.seq=0;//序列  确定整个表单验证的先后顺序
+	this.arr=new Array();
+	var valiStrs=str.split(";");
+	var valiStr;
+	
+	var vali;
+	var index;
+	var temp;
+	
+	for(var i=0;i<valiStrs.length;i++)
+	{
+		valiStr=valiStrs[i];	
+		if(valiStr!="")
+		{
+			
+	
+			vali=new ValiData(ename)
+			index=valiStr.indexOf(":");
+			//如果有提示信息
+			if(index!=-1)
+			{
+				temp=valiStr.substring(0,index);
+				//如果是序列
+				if(temp=="seq")
+				{
+					this.seq=valiStr.substring(index+1);
+					
+				}
+				else
+				{
+					//vali.warn
+				
+					temp=valiStr.substring(index+1);
+					//如果是实体
+					if(temp.indexOf("(")!=-1)
+					{
+					
+						vali.warnentity=temp.substring(1,temp.length-1)
+					}
+					else
+					{
+						vali.warn=temp.split(",");
+					}
+					valiStr=valiStr.substring(0,index);
+					
+				}
+			}	
+			index=valiStr.indexOf("[");
+			//如果有规则
+			if(index!=-1)
+			{		
+				//alert(valiStr.substring( 0 , index ));
+				vali.type=valiStr.substring( 0 , index );
+				vali.regular=valiStr.substring(index+1 , valiStr.length-1);
+			}else
+			{
+				vali.type=valiStr;
+			}
+			
+			this.arr[i]=vali;
+		}
+	}
+	
+	
+	this.vali=function()
+	{		
+		for(var i=0;i<this.arr.length;i++)
+		{
+			//alert(this.arr[i].type+" , "+this.arr[i].regular+" ,  "+this.arr[i].warn);
+			//alert(this.arr[i].type+"  "+this.arr[i].regular+"   "+this.arr[i].warn):
+			//alert("isVali "+this.arr[i].vali());
+			//alert(!(this.arr[i].valiD()));
+			if(!(this.arr[i].valiD()))
+			{				
+				return false;
+			}
+			
+		}
+		
+		return true;
+	}
+	
+}
+//验证bean
+function ValiData(ename)
+{
+	var $=this;
+	this.name=ename;
+	this.type="";
+	//this.scope="";
+	//this.regular="";
+	//this.warnentity
+
+	this.warn="";
+	
+	
+	this.valiD=function()
+	{
+		
+		if($.type=="")
+			return true;
+		var eles=document.getElementsByName($.name);	
+		if(eles[0].disabled)
+		{
+			return true;
+		}
+		if(eles[0].readonly)
+		{
+			return true;
+		}
+		if($.type=="notnull")
+			return notNull(eles);
+		else if($.type=="number")
+			return number(eles);
+		else
+		{
+			alert("["+$.name+"] 目前还没有这个类别");
+			return false;
+		}
+		
+	}
+	
+	function remind(remindstr,index)
+	{
+		if($.warnentity!=undefined)
+		{
+			oaAlert($.warnentity+remindstr);
+		}
+		else if($.warn!="")
+		{
+			if($.warn[index]!=undefined||$.warn[index]!=null)
+				oaAlert($.warn[index]);
+		}
+		else
+		{
+			oaAlert("该项"+remindstr);
+		}
+		
+	}
+	
+	function notNull(eles)
+	{
+		var ele=eles[0];
+		//alert(ele.name);
+		//alert(ele.tagName);
+		if (ele.options == undefined) {
+			if(ele.type=="radio"||ele.type=="checkbox")
+			{
+				for(var i=0;i<eles.length;i++)
+				{
+					if(eles[i].checked==true)
+						return true;
+				}
+				remind("不能为空",0);
+				ele.focus();
+				return false;
+			}
+			else if(ele.type=="text"||ele.type=="password"||ele.tagName=="TEXTAREA"){
+				
+				if (ele.value == "") {
+					
+					remind("不能为空",0);
+					ele.focus();
+					return false;
+				}
+			}
+		} else {
+
+			if (ele.selectedIndex == 0) {
+
+				remind("不能为空",0);
+				ele.focus();
+				return false;
+			}
+		}
+		
+		return true;
+	}
+	function number(eles)
+	{	
+		ele=eles[0];
+		if(!isnumber(eles))
+			return false;		
+		if($.regular==undefined)
+			return true;		
+		var scopes=$.regular.split(",");
+		
+		if(scopes[0]!="")
+		{
+			if(parseInt(ele.value)<parseInt(scopes[0]))
+			{
+				remind("必须大于"+scopes[0],1);	
+				return false;
+			}
+		}
+		
+		if(scopes[1]!="")
+		{		
+			if(parseInt(ele.value)>parseInt(scopes[1]))
+			{
+				remind("必须小于"+scopes[1],2);
+				return false;
+			}
+		}
+		
+		return true;
+	}	
+	function isnumber(eles)
+	{
+		var ele=eles[0];
+		if(ele.type!="text")
+		{
+			oaAlert("规则应用错误：哥，你用啥验证数字啊，目前只有文本框能验证数字");
+			return true;
+		}
+		if (ele.value != "") {
+			var reg = /^\d+((\.\d+)|(\d{0,}))$/;
+			if (!reg.test(ele.value)) {
+				remind("必须是数字",0);
+				ele.focus();
+				return false;
+			}
+		}
+		
+		return true;
+	}
+}
+//自定义弹出框
+
+</script>

@@ -1,0 +1,7 @@
+<%
+	String _$path1 = request.getContextPath();
+	String _$basePath1 = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + _$path1 + "/";
+%>
+    <script type="text/javascript" src="<%=_$basePath1%>/base/gis/pages/framework/frameworkConfig.js"></script>
+    <script type="text/javascript" src="<%=_$basePath1%>/base/gis/pages/framework/frameworkHttpRequest.js"></script>
+							
