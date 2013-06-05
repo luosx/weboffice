@@ -39,7 +39,7 @@ public class QueryUtil implements IQueryUtil {
      * @param strColumnName
      * @return
      */
-    public String queryForWhere(List list, String strColumnName) {
+    public String queryForWhere(List<String> list, String strColumnName) {
         String condition = null;
         String accord = null;
         String where = "";
