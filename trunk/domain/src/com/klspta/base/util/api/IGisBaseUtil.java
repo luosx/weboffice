@@ -4,7 +4,7 @@ import com.klspta.base.wkt.Point;
 import com.klspta.base.wkt.Polygon;
 
 /**
- * <br>Title:GIS基本工具
+ * <br>Title:GIS基础工具类
  * <br>Description:对gis信息的基本操作
  * <br>Author:陈强峰
  * <br>Date:2013-6-5
