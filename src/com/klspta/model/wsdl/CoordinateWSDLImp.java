@@ -40,7 +40,7 @@ import org.opengis.feature.simple.SimpleFeatureType;
 
 import com.klspta.base.AbstractBaseBean;
 import com.klspta.base.util.UtilFactory;
-import com.klspta.base.util.api.ICoordinateWSDL;
+import com.klspta.base.util.api.IGisBaseUtil;
 import com.klspta.base.util.bean.shapeutil.ShpParameters;
 import com.klspta.base.wkt.Point;
 import com.scand.fileupload.ProgressMonitorFileItemFactory;
@@ -70,9 +70,9 @@ public class CoordinateWSDLImp extends AbstractBaseBean implements ICoordinateWS
         
         try{
             if("84bl_80bl".equalsIgnoreCase(type))
-                typeVaue=ChangeCoordsSysUtil.BL84_TO_BL80;
+                typeVaue=IGisBaseUtil.BL84_TO_BL80;
             if("84bl_80plant".equalsIgnoreCase(type))
-                typeVaue=ChangeCoordsSysUtil.GPS84_TO_BALIN80;
+                typeVaue=IGisBaseUtil.GPS84_TO_BALIN80;
             if("84bl_baidu".equalsIgnoreCase(type)){
             	//调用百度地图转换接口
             	
@@ -82,30 +82,30 @@ public class CoordinateWSDLImp extends AbstractBaseBean implements ICoordinateWS
             	
             }
             if("80bl_80plant".equalsIgnoreCase(type))
-                typeVaue=ChangeCoordsSysUtil.BL80_TO_PLAIN80;
+                typeVaue=IGisBaseUtil.BL80_TO_PLAIN80;
             if("80plant_80bl".equalsIgnoreCase(type))
-                typeVaue=ChangeCoordsSysUtil.PLAIN80_TO_BL80;
+                typeVaue=IGisBaseUtil.PLAIN80_TO_BL80;
             if("84PLAINTO80PLAIN".equalsIgnoreCase(type))
-                typeVaue=ChangeCoordsSysUtil.PLAIN84_TO_PLAIN80;
+                typeVaue=IGisBaseUtil.PLAIN84_TO_PLAIN80;
             if("grid".equalsIgnoreCase(type))
-                typeVaue=ChangeCoordsSysUtil.GRID;
+                typeVaue=IGisBaseUtil.GRID;
             if("84gps_84bl".equalsIgnoreCase(type))
                 //typeVaue=ChangeCoordsSysUtil.GPS84_TO_BL84;
             if("84gps_xian80bl".equalsIgnoreCase(type)){
                 //typeVaue=ChangeCoordsSysUtil.GPS84_TO_BL84;
-                Point p = UtilFactory.getChangeCoordsSysUtil().changeMe(new Point(longitude,latitude),typeVaue); 
+                Point p = UtilFactory.getGisBaseUtil().changeMe(new Point(longitude,latitude),typeVaue); 
                 longitude=p.getX();
                 latitude=p.getY();
-                typeVaue=ChangeCoordsSysUtil.BL84_TO_BL80;
+                typeVaue=IGisBaseUtil.BL84_TO_BL80;
             }if("84gps_xian80plant".equalsIgnoreCase(type)){
                // typeVaue=ChangeCoordsSysUtil.GPS84_TO_BL84;
-                Point p = UtilFactory.getChangeCoordsSysUtil().changeMe(new Point(longitude,latitude),typeVaue); 
+                Point p = UtilFactory.getGisBaseUtil().changeMe(new Point(longitude,latitude),typeVaue); 
                 longitude=p.getX();
                 latitude=p.getY();
-                typeVaue=ChangeCoordsSysUtil.GPS84_TO_BALIN80;
+                typeVaue=IGisBaseUtil.GPS84_TO_BALIN80;
             }
 
-            Point p = UtilFactory.getChangeCoordsSysUtil().changeMe(new Point(longitude,latitude),typeVaue);            
+            Point p = UtilFactory.getGisBaseUtil().changeMe(new Point(longitude,latitude),typeVaue);            
             return p.getX()+","+p.getY();
             
         }catch(Exception e){
