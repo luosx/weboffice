@@ -6,6 +6,7 @@ import java.util.Map;
 import com.klspta.base.AbstractBaseBean;
 import com.klspta.base.AbstractDataBaseSupport;
 import com.klspta.base.util.api.IPublicCodeUtil;
+import com.klspta.base.util.bean.publiccodeutil.CodeBean;
 
 /**
  * 
