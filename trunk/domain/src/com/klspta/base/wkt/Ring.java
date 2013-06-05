@@ -50,7 +50,7 @@ public class Ring {
     }
     
     public Point getPointFormat(int index, String type){
-        return UtilFactory.getChangeCoordsSysUtil().changeMe(ring.get(index), type);
+        return UtilFactory.getGisBaseUtil().changeMe(ring.get(index), type);
     }
     
     public int getPointCount(){
