@@ -21,7 +21,7 @@ public interface ICoordinateUtil {
      * <br>Author:陈强峰
      * <br>Date:2013-6-5
      * @param point
-     * @param changetype 转换坐标(IGisBaseUtil常量)
+     * @param changetype 转换坐标(ICoordinateUtil常量)
      * @return
      */
     Point changePoint(Point point,String changetype);

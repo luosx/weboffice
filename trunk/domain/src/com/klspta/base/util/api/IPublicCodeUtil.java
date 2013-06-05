@@ -2,7 +2,7 @@
 
 import java.util.List;
 
-import com.klspta.base.util.impl.CodeBean;
+import com.klspta.base.util.bean.publiccodeutil.CodeBean;
 
 
 public interface IPublicCodeUtil {
