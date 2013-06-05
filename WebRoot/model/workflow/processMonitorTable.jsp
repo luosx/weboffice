@@ -1,5 +1,5 @@
 <%@ page language="java"  pageEncoding="utf-8"%>
-<%@page import="com.klspta.model.workflow.foundations.ProcessMonitorList"%>
+<%@page import="com.klspta.base.workflow.foundations.ProcessMonitorList"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
