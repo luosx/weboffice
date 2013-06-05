@@ -6,7 +6,7 @@ import java.util.Map;
 
 import com.klspta.base.AbstractBaseBean;
 import com.klspta.console.ManagerFactory;
-import com.klspta.model.workflow.foundations.WorkflowOp;
+import com.klspta.base.workflow.foundations.WorkflowOp;
 
 public class WorkFlowManager extends AbstractBaseBean {
 	public String yw_guid = "";

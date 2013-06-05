@@ -13,7 +13,6 @@ public class LaccWFManager extends WorkFlowManager {
 		String labh = buildlabh();
 		String sql = "update lacpb set bh='" + labh +"' where yw_guid='" + yw_guid + "'";
 		update(sql, YW);
-		
 	}
 	
 	/**
