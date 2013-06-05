@@ -5,8 +5,6 @@
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
    
     String name = ProjectInfo.getInstance().PROJECT_NAME;
-    name="dtjg";
-    
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -34,11 +32,11 @@ body {
     <body>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
-    <td width="607"><img src="<%=basePath%>web/<%=name%>/framework/images/left1.gif" width="607" height="106" /></td>
+    <td width="607"><img src="<%=basePath%>web/<%=name%>/framework/images/logo_bak.gif" width="607" height="106" /></td>
     <td background="<%=basePath%>web/<%=name%>/framework/images/webbj.jpg">&nbsp;</td>
-    <td width="420"  background="<%=basePath%>web/<%=name%>/framework/images/yanse.jpg">
-    <object id="FlashID" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="420" height="106">
-      <param name="movie" value="<%=basePath%>web/<%=name%>/framework/images/right1.gif" />
+    <td width="397"  background="<%=basePath%>web/<%=name%>/framework/images/banner_bk.gif">
+    <object id="FlashID" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="397" height="106">
+      <param name="movie" value="<%=basePath%>web/<%=name%>/framework/images/banner.swf" />
       <param name="quality" value="high" />
       <param name="swfversion" value="8.0.35.0" />
       <!-- 此 param 标签提示使用 Flash Player 6.0 r65 和更高版本的用户下载最新版本的 Flash Player。如果您不想让用户看到该提示，请将其删除。 -->
