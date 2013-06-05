@@ -13,6 +13,6 @@ public interface IQueryUtil {
      * @param strColumnName
      * @return
      */
-    public abstract String queryForWhere(List list, String strColumnName);
+    public abstract String queryForWhere(List<String> list, String strColumnName);
 
 }
