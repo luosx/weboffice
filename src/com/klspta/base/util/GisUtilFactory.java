@@ -1,10 +1,8 @@
 package com.klspta.base.util;
 
-import java.util.TimerTask;
-
-import com.klspta.base.util.api.IGPGGAUtil;
-import com.klspta.base.util.api.IGisBaseUtil;
-import com.klspta.base.util.api.IGisExpandUtil;
+import com.klspta.base.util.api.ICoordinateChangeUtil;
+import com.klspta.base.util.api.ICoordinateEncryptUtil;
+import com.klspta.base.util.api.IGridUtil;
 import com.klspta.base.util.api.IShapeUtil;
 
 /**
@@ -26,23 +24,33 @@ public class GisUtilFactory {
     }
 
     /**
-     * <br>Description:获取GIS工具
+     * <br>Description:获取坐标转换工具
      * <br>Author:陈强峰
      * <br>Date:2013-6-5
      * @return
      */
-    public static IGisBaseUtil getGisBaseUtil() {
-        return UtilFactory.getGisBaseUtil();
+    public static ICoordinateChangeUtil getCoordinateChangeUtil() {
+        return UtilFactory.getCoordinateChangeUtil();
     }
 
     /**
-     * <br>Description:GIS扩展工具
+     * <br>Description:获取坐标加密解密工具
      * <br>Author:陈强峰
      * <br>Date:2013-6-5
      * @return
      */
-    public static IGisExpandUtil getCoordinateEncryptUtil() {
-        return UtilFactory.getGisExpandUtil();
+    public static ICoordinateEncryptUtil getCoordinateEncryptUtil() {
+        return UtilFactory.getCoordinateEncryptUtil();
+    }
+
+    /**
+     * <br>Description:grid坐标转换工具
+     * <br>Author:陈强峰
+     * <br>Date:2013-6-5
+     * @return
+     */
+    public static IGridUtil getGridUtil() {
+        return UtilFactory.getGridUtil();
     }
 
     /**
@@ -53,25 +61,5 @@ public class GisUtilFactory {
      */
     public static IShapeUtil getShapeUtil() {
         return UtilFactory.getShapeUtil();
-    }
-
-    /**
-     * <br>Description:获取GPGGA字符串解析工具类实例
-     * <br>Author:陈强峰
-     * <br>Date:2013-6-5
-     * @return
-     */
-    public static IGPGGAUtil getGPGGAUtil() {
-        return UtilFactory.getGPGGAUtil();
-    }
-
-    /**
-     * <br>Description:获取GPS守护进程工具类实例
-     * <br>Author:陈强峰
-     * <br>Date:2013-6-5
-     * @return
-     */
-    public static TimerTask getGPSPointUtilTimerTask() {
-        return UtilFactory.getGPSPointUtilTimerTask();
     }
 }

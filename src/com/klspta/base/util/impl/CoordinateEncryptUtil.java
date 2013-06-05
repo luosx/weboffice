@@ -11,7 +11,7 @@ public class CoordinateEncryptUtil implements ICoordinateEncryptUtil {
 
     private static CoordinateEncryptUtil instance = null;
 
-    public static CoordinateEncryptUtil getInstance(String key) throws Exception {
+    public static ICoordinateEncryptUtil getInstance(String key) throws Exception {
         if (!key.equals("NEW WITH UTIL FACTORY!")) {
             throw new Exception("请通过UtilFactory获取实例.");
         }
