@@ -29,7 +29,7 @@ public class TreeRowMapper implements RowMapper<Object> {
     }
     public FileSystemXmlApplicationContext getAp() {
         String classpath="file:"+Thread.currentThread().getContextClassLoader().getResource("").getPath();
-        String URI = classpath.substring(0, classpath.lastIndexOf("classes/"))+"conf/web/applicationContext-default.xml";
+        String URI = classpath.substring(0, classpath.lastIndexOf("classes/"))+"conf/applicationContext-base.xml";
         FileSystemXmlApplicationContext ac;
         ac = new FileSystemXmlApplicationContext(URI);
         return ac;
