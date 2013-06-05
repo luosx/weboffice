@@ -29,14 +29,15 @@ public class FileUtil implements IFileUtil {
     private static int SIZEMAXKB = 1024 * 1024;
 
     @Override
-    public List<String> upload(HttpServletRequest request, int sizeMaxKb, int sizeThresholdKb) throws Exception {
+    public List<String> upload(HttpServletRequest request, int sizeMaxKb, int sizeThresholdKb)
+            throws Exception {
         // 判断是否为文件上传的请求
         boolean isMultipart = ServletFileUpload.isMultipartContent(request);
         if (!isMultipart) {
             throw new Exception("非文件上传request，不能调用当前方法");
         }
         try {
-            String uploadPath ="d://temp//" + new UID().toString().replaceAll(":", "-") + "//";
+            String uploadPath = "d://temp//" + new UID().toString().replaceAll(":", "-") + "//";
             File uploadFile = new File(uploadPath);
             if (!uploadFile.exists()) {
                 uploadFile.mkdirs();
@@ -54,7 +55,7 @@ public class FileUtil implements IFileUtil {
             upload.setSizeMax(sizeMaxKb * 1024);
             List fileItems = upload.parseRequest(request);
             Iterator i = fileItems.iterator();
-            List list=new ArrayList();
+            List<String> list = new ArrayList<String>();
             while (i.hasNext()) {
                 FileItem fi = (FileItem) i.next();
 
@@ -87,7 +88,6 @@ public class FileUtil implements IFileUtil {
 
     @Override
     public void deleteFile(File file) {
-        // TODO Auto-generated method stub
         File[] files = file.listFiles();
         if (files == null || files.length == 0) {
             file.delete();
@@ -97,6 +97,5 @@ public class FileUtil implements IFileUtil {
             deleteFile(fil);
         }
     }
-
 
 }

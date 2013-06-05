@@ -13,16 +13,17 @@ import com.klspta.base.util.api.IQrCodeUtil;
 import com.swetake.util.Qrcode;
 
 public final class QrCodeUtil extends AbstractBaseBean implements IQrCodeUtil {
-    
+
     private static QrCodeUtil instance;
-    
-    private QrCodeUtil(){};
-    
-    public static QrCodeUtil getInstance(String key) throws Exception{
+
+    private QrCodeUtil() {
+    };
+
+    public static QrCodeUtil getInstance(String key) throws Exception {
         if (!key.equals("NEW WITH UTIL FACTORY!")) {
             throw new Exception("请通过UtilFactory获取实例.");
         }
-        if(instance == null){
+        if (instance == null) {
             instance = new QrCodeUtil();
         }
         return instance;
@@ -62,7 +63,7 @@ public final class QrCodeUtil extends AbstractBaseBean implements IQrCodeUtil {
             }
             //创建图片
             ImageIO.write(bi, "jpg", f);
-            
+
         } // end try
         catch (Exception e) {
             e.printStackTrace();

@@ -141,37 +141,39 @@ public class StrUtil implements IStrUtil {
         }
         return tmp.toString();
     }
-    
+
     public String getGuid() {
         return new UID().toString().replaceAll(":", "-");
     }
-    
-    public String changeKeyWord(String inString,String keywords){
-    	if(inString==null|| inString.length()==0 ||keywords==null|| keywords.trim().length()==0){
-    		return inString;
-    	}
-    	keywords=keywords.trim();
-    	while(keywords.indexOf("  ")>0){//循环去掉多个空格，所有字符中间只用一个空格间隔
-    	    keywords=keywords.replace("  ", " ");
-    	}
-    	String keyWord[]=keywords.split(" ");//转换正则
-    	for(int i=0;i<keyWord.length;i++){
-    		inString=inString.replaceAll(Pattern.quote(keyWord[i]), "~"+(Pattern.quote(keyWord[i]).substring(2, Pattern.quote(keyWord[i]).length()-2))+"</B>");
-    	}
-    	return inString.replaceAll("~","<B style='color:black;background-color:#009900'>");
+
+    public String changeKeyWord(String inString, String keywords) {
+        if (inString == null || inString.length() == 0 || keywords == null || keywords.trim().length() == 0) {
+            return inString;
+        }
+        keywords = keywords.trim();
+        while (keywords.indexOf("  ") > 0) {//循环去掉多个空格，所有字符中间只用一个空格间隔
+            keywords = keywords.replace("  ", " ");
+        }
+        String keyWord[] = keywords.split(" ");//转换正则
+        for (int i = 0; i < keyWord.length; i++) {
+            inString = inString.replaceAll(Pattern.quote(keyWord[i]), "~"
+                    + (Pattern.quote(keyWord[i]).substring(2, Pattern.quote(keyWord[i]).length() - 2))
+                    + "</B>");
+        }
+        return inString.replaceAll("~", "<B style='color:black;background-color:#009900'>");
     }
 
-	@Override
-	public String manageStr(int source, int digit) {
-		int source_digit = (source + "").length();
-		if (source_digit >= digit) {
-			return source + "";
-		} else {
-			StringBuffer sb = new StringBuffer();
-			for (int i = 0; i <digit- source_digit; i++) {
-				sb.append("0");
-			}
-			return sb.toString() + source;
-		}
-	}
+    @Override
+    public String manageStr(int source, int digit) {
+        int source_digit = (source + "").length();
+        if (source_digit >= digit) {
+            return source + "";
+        } else {
+            StringBuffer sb = new StringBuffer();
+            for (int i = 0; i < digit - source_digit; i++) {
+                sb.append("0");
+            }
+            return sb.toString() + source;
+        }
+    }
 }
