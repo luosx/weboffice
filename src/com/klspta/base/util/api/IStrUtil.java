@@ -9,6 +9,7 @@ public interface IStrUtil {
      * @see com.klspta.base.util.api.IStrUtil#byte2String(byte[])
      */
     public String byte2String(byte[] b);
+
     /**
      * 
      * <br>Description:转换
@@ -17,6 +18,7 @@ public interface IStrUtil {
      * @see com.klspta.base.util.api.IStrUtil#unescape(java.lang.String)
      */
     public String unescape(String src);
+
     /**
      * 
      * <br>Description:字符转换
@@ -25,7 +27,7 @@ public interface IStrUtil {
      * @see com.klspta.base.util.api.IStrUtil#escape(java.lang.String)
      */
     public String escape(String src);
-    
+
     /**
      * <br>Description:获取guid
      * <br>Author:陈强峰
@@ -33,7 +35,7 @@ public interface IStrUtil {
      * @return
      */
     public String getGuid();
-    
+
     /**
      * <br>Description:美化关键字
      * <br>Author:陈强峰
@@ -42,8 +44,8 @@ public interface IStrUtil {
      * @param keywords
      * @return
      */
-    public String changeKeyWord(String inString,String keywords);
-    
+    public String changeKeyWord(String inString, String keywords);
+
     /*
      * 返回指定字符串
      */

@@ -24,7 +24,8 @@ public interface IFileUtil {
      * @return：上传成功的文件在服务器中的保存路径
      * @throws Exception
      */
-    public List<String> upload(HttpServletRequest request, int sizeMaxKb, int sizeThresholdKb) throws Exception;
+    public List<String> upload(HttpServletRequest request, int sizeMaxKb, int sizeThresholdKb)
+            throws Exception;
 
     /**
      * 
