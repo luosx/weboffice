@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.klspta.base.util.bean.publiccodeutil.CodeBean;
 
-
 public interface IPublicCodeUtil {
 
     /**
@@ -16,15 +15,15 @@ public interface IPublicCodeUtil {
     	 * @return
     	 */
     public abstract List<CodeBean> getCodeByID(String id);
-    
+
     /**
-	 * 
-	 * <br>Description:根据通用编码id，以list方式，返回经过排序的CodeBean
-	 * <br>Author:李如意
-	 * <br>Date:2012-3-19
-	 * @param id
-	 * @return
-	 */
+     * 
+     * <br>Description:根据通用编码id，以list方式，返回经过排序的CodeBean
+     * <br>Author:李如意
+     * <br>Date:2012-3-19
+     * @param id
+     * @return
+     */
     public abstract String getCodeByIDAndRank2Option(String id);
 
     /**

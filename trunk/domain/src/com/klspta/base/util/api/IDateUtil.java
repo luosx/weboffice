@@ -17,14 +17,15 @@ public interface IDateUtil {
      * @return
      */
     public String getChineseDate(Date d);
+
     /**
      * <br>Description:获取当前中文日期xxxx年xx月xx日
      * <br>Author:郭润沛
      * <br>Date:2011-7-21
      * @return
      */
-    public String getCurrentChineseDate() ;
-    
+    public String getCurrentChineseDate();
+
     /**
      * 
      * <br>Description:获取普通日期格式yyyy-MM-dd
@@ -33,5 +34,5 @@ public interface IDateUtil {
      * @return
      */
     public String getSimpleDate(Date d);
-    
+
 }

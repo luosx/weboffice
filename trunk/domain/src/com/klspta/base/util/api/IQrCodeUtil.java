@@ -10,14 +10,14 @@ package com.klspta.base.util.api;
  * <br>Date:2013-6-5
  */
 public interface IQrCodeUtil {
-    
-	/**
-	 * <br>Description:字符串转图片 返回图片路径
-	 * <br>Author:陈强峰
-	 * <br>Date:2013-6-5
-	 * @param str
-	 * @return
-	 */
-	public String create(String str);
-	
+
+    /**
+     * <br>Description:字符串转图片 返回图片路径
+     * <br>Author:陈强峰
+     * <br>Date:2013-6-5
+     * @param str
+     * @return
+     */
+    public String create(String str);
+
 }

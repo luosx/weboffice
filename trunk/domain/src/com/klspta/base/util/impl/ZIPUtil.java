@@ -26,99 +26,6 @@ public final class ZIPUtil implements IZIPUtil {
         return new ZIPUtil();
     }
 
-    //	@Override
-    //	public void zip(String zipFileName,String inputFile){
-    //		zip(zipFileName,new File(inputFile));
-    //	}
-    //	
-    //	private void zip(String zipFileName,File inputFile){
-    //		ZipOutputStream out = null;
-    //		try {
-    //			out = new ZipOutputStream(new FileOutputStream(zipFileName));
-    //			zip(out,inputFile,"");
-    //		} catch (FileNotFoundException e) {
-    //			e.printStackTrace();
-    //		}finally{
-    //			try {
-    //				out.close();
-    //			} catch (IOException e) {
-    //				e.printStackTrace();
-    //			}
-    //		}
-    //	}
-
-    //	private void zip(ZipOutputStream out,File f,String base){
-    //	    try {
-    //			if (f.isDirectory()){
-    //			   File[] fl = f.listFiles();
-    //		       out.putNextEntry(new ZipEntry(base + "/"));
-    //		       base = base.length() == 0 ? "" : base + "/";
-    //		       for (int i = 0; i < fl.length; i++){
-    //			       zip(out, fl[i], base+fl[i].getName());
-    //		       }
-    //		   }else{
-    //		       out.putNextEntry(new ZipEntry(base=base.length() == 0?f.getName():base));
-    //		       FileInputStream in=new FileInputStream(f);
-    //		       int b;
-    //		       while ((b = in.read()) != -1){
-    //			       out.write(b);
-    //		       }
-    //		   in.close();
-    //		   }
-    //		} catch (IOException e) {
-    //			e.printStackTrace();
-    //		}
-    //	}
-
-    //	@Override
-    //	public Vector<String> unzip(String zipFileName, String outputDirectory) {
-    //		Vector<String> filepaths = new Vector<String>();
-    //		ZipInputStream in = null;
-    //		FileOutputStream out = null;
-    //		try {
-    //			in = new ZipInputStream(new FileInputStream(zipFileName));
-    //			ZipEntry z;
-    //			while ((z = in.getNextEntry()) != null){
-    //				if (z.isDirectory()){
-    //					String name = z.getName();
-    //					name = name.substring(0,name.length() - 1);
-    //					File f = new File(outputDirectory + File.separator + name);
-    //					f.mkdirs();
-    //				}else{
-    //					File f = new File(outputDirectory);
-    //					f = new File(outputDirectory + File.separator + z.getName());
-    //					if(!f.getParentFile().exists()){
-    //					    f.getParentFile().mkdirs();
-    //					}
-    //					filepaths.add(f.getPath());
-    //					f.createNewFile();
-    //					out = new FileOutputStream(f);
-    //					int b;
-    //					while((b = in.read()) != -1){
-    //						out.write(b);
-    //					}
-    //					out.close();
-    //				}
-    //			}
-    //		} catch (FileNotFoundException e) {
-    //			e.printStackTrace();
-    //		} catch (IOException e) {
-    //			e.printStackTrace();
-    //		}finally{
-    //			try{
-    //				if(in != null){
-    //					in.close();
-    //				}
-    //				if(out != null){
-    //					out.close();
-    //				}
-    //			}catch(IOException e){
-    //				e.printStackTrace();
-    //			}
-    //		}
-    //		return filepaths;
-    //	}
-
     public void zip(String filePath, String srcPathName) {
         File file = new File(filePath);
         file.delete();
@@ -177,5 +84,4 @@ public final class ZIPUtil implements IZIPUtil {
             ex.printStackTrace();
         }
     }
-
 }
