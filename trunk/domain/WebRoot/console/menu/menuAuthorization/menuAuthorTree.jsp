@@ -25,7 +25,7 @@
 		<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 		<meta http-equiv="description" content="This is my page">
 		<%@ include file="/base/include/ext.jspf" %>
-	<script src="<%=basePath%>/base/include/ajax.js"></script>
+		<%@ include file="/base/include/restRequest.jspf"%>
 		<style>
 body {
 	font-family: helvetica, tahoma, verdana, sans-serif;
@@ -109,12 +109,18 @@ scrollbar-3dlight-color:#D4D0C8;
                 				treeIdList+=nodes[i].id;
                 				n++;
                 		}
-                	
+                		/*
                 		var path = "<%=basePath%>";
 		   		    	var beanName="menuAction";
-		   		    	var method="saveMenuAuthor";
+		   		    	var method="menuAction";
 		   		    	var parameter="roleId=<%=roleId%>&treeIdList="+treeIdList;
 		   		        var result = ajaxRequest(path,beanName,method,parameter);
+						*/
+						putClientCommond("menuAction","menuAction");
+		   		        putRestParameter("roleId", "<%=roleId%>");
+		   		        putRestParameter("treeIdList", treeIdList);
+    					var result=restRequest();
+					
 					if(result=="{success:true}"){
 						Ext.Msg.alert("提示","保存成功"); 
 					}else{

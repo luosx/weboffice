@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+﻿<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":"
@@ -18,7 +18,7 @@
 		<meta http-equiv="expires" content="0">
 		<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 		<meta http-equiv="description" content="This is my page">
-		<style>
+<style type="text/css">
 html,body {
 	font: normal 12px verdana;
 	margin: 0;
@@ -30,10 +30,9 @@ html,body {
 
 </style>
 	</head>
-	  	<frameset id="mapTreeMain" name="mapTreeMain" cols="500,*" frameborder="no" border="0" framespacing="0" >
-		<frame id="mapTree" name="mapTree" scrolling="NO" noresize
-			src="<%=basePath%>console/mapManage/mapTreeManage.jsp" />
-		<frame id="mapInfo" name="mapInfo" scrolling="NO" noresize
-			 />
+	<frameset id="user" name="user" cols="700,*" frameborder="no" border="0" framespacing="0" >
+		<frame id="grid" name="grid" scrolling="NO" noresize
+			src="<%=basePath%>console/user/userList.jsp" />
+		<frame id="info" name="info" scrolling="NO" noresize />
 	</frameset>
 </html>

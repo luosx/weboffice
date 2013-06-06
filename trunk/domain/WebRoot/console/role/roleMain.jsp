@@ -30,9 +30,9 @@ html,body {
 
 </style>
 	</head>
-	  	<frameset id="mapAuthor" name="mapAuthor" cols="200,*" frameborder="no" border="0" framespacing="0" >
-		<frame id="roleTree" name="roleTree" scrolling="NO" noresize
-			src="<%=basePath%>console/mapAuthorization/roleTree_map.jsp" />
+	  	<frameset id="zzjg" name="zzjg" cols="200,*" frameborder="no" border="0" framespacing="0" >
+		<frame id="tree" name="tree" scrolling="NO" noresize
+			src="<%=basePath%>console/role/roleTree.jsp" />
 		<frame id="info" name="info" scrolling="NO" noresize
 			 />
 		

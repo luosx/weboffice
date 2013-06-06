@@ -1,8 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@page import="org.springframework.security.core.context.SecurityContextHolder"%>
-<%@page import="com.klspta.console.organization.UserUtil" %>
-<%@page import="com.klspta.console.organization.user.UserBean" %>
-<%@page import="com.klspta.console.role.User"%>
+<%@page import="com.klspta.console.ManagerFactory"%>
+<%@page import="com.klspta.console.user.User"%>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":"
@@ -15,12 +14,12 @@
     String mobilePhone; 
 
     if (principal instanceof User) {
-        fullName = ((User) principal).getUserName();
+    	User user = (User) principal;
+        fullName = user.getFullName();
         userId = ((User) principal).getUserID();
-        UserBean userBean=UserUtil.getInstance().getUserBeanByUserId(userId);
-        emailAddress = userBean.getEmailAddress();
-        officePhone = userBean.getOfficePhone();
-        mobilePhone = userBean.getMobilePhone();
+        emailAddress = user.getEmail();
+        officePhone = user.getOfficephone();
+        mobilePhone = user.getMobilephone();
     } else {
         fullName = principal.toString();
         emailAddress = principal.toString();        

@@ -32,7 +32,7 @@ html,body {
 	</head>
 	  	<frameset id="menuAuthor" name="menuAuthor" cols="200,*" frameborder="no" border="0" framespacing="0" >
 		<frame id="roleTree" name="roleTree" scrolling="NO" noresize
-			src="<%=basePath%>console/menu/menuAuthorization/roleTree_menu.jsp" />
+			src="<%=basePath%>console/menu/menuAuthorization/roleTreemenu.jsp" />
 		<frame id="info" name="info" scrolling="NO" noresize
 			 />
 		

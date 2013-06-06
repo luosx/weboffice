@@ -164,12 +164,12 @@
 	
 	
 	var root = new Ext.tree.TreeNode({id:"1",text:"系统管理",leaf:"false"});
-	var role=new Ext.tree.TreeNode({d:"2",text:"机构管理",url:"<%=basePath%>/console/organization/roleMain.jsp"});
-	var person= new Ext.tree.TreeNode({id:"3",text:"人员管理",url:"<%=basePath%>/console/organization/userMain.jsp"});
+	var role=new Ext.tree.TreeNode({d:"2",text:"机构管理",url:"<%=basePath%>/console/role/roleMain.jsp"});
+	var person= new Ext.tree.TreeNode({id:"3",text:"人员管理",url:"<%=basePath%>/console/user/userMain.jsp"});
 	
-	var map_authority = new Ext.tree.TreeNode({id:"4",text:"地图数据授权",leaf:"false",url:"<%=basePath%>/console/mapAuthorization/mapAuthorMain.jsp"});
+	var map_authority = new Ext.tree.TreeNode({id:"4",text:"地图数据授权",leaf:"false",url:"<%=basePath%>/console/maptree/mapAuthorization/mapAuthorMain.jsp"});
 	var menu_authority = new Ext.tree.TreeNode({id:"5",text:"功能菜单授权",leaf:"false",url:"<%=basePath%>/console/menu/menuAuthorization/menuAuthorMain.jsp"});
-	var map_manage = new Ext.tree.TreeNode({id:"6",text:"图层数据管理",leaf:"false",url:"<%=basePath%>/console/mapManage/mapTreeManageMain.jsp"});
+	var map_manage = new Ext.tree.TreeNode({id:"6",text:"图层数据管理",leaf:"false",url:"<%=basePath%>/console/maptree/mapManage/mapTreeManageMain.jsp"});
 	var menu_manage = new Ext.tree.TreeNode({id:"7",text:"功能菜单管理",leaf:"false",url:"<%=basePath%>/console/menu/menuManage/menuManageMain.jsp"});
 	var process_manage = new Ext.tree.TreeNode({id:"8",text:"流程模板管理",leaf:"false",url:"<%=basePath%>/console/menu/menuManage/process.jsp"});
 	root.appendChild([role,person,map_authority,menu_authority,map_manage,menu_manage,process_manage]);
