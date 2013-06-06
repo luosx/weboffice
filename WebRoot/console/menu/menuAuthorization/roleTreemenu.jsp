@@ -1,10 +1,13 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@page import="com.klspta.console.ManagerFactory"%>
+
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":"
             + request.getServerPort() + path + "/";
+
     String tree =ManagerFactory.getRoleManager().getRoleListExtJson();
+
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -20,7 +23,7 @@
 		<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 		<meta http-equiv="description" content="This is my page">
 		<%@ include file="/base/include/ext.jspf" %>
-		<script src="<%=basePath%>/base/include/ajax.js"></script>
+		<%@ include file="/base/include/restRequest.jspf"%>
 
 		<style>
 body {
@@ -37,6 +40,7 @@ scrollbar-3dlight-color:#D4D0C8;
 
 }
 </STYLE>
+
 	</head>
 	<script>
 	var tree;
@@ -48,7 +52,7 @@ Ext.onReady(function(){
         animate:true,
         enableDD:true,
         margins: '2 2 0 2',
-        autoScroll: true,
+            autoScroll: true,
         border: false,
         containerScroll: true,
         rootVisible: false,
@@ -63,12 +67,13 @@ Ext.onReady(function(){
                 var nodeid=node.attributes.id;
                 var parentRoleId;
                 var nodeName=node.attributes.text;
+                //alert(nodeName)
                 if(node.leaf){
                 parentRoleId=node.attributes.parentId;
                 }else{
                 parentRoleId='0';
                 }
-                var url="<%=basePath%>/console/mapAuthorization/mapAuthorTree.jsp?roleId="+nodeid+"&nodeName="+nodeName;
+                var url="<%=basePath%>/console/menu/menuAuthorization/menuAuthorTree.jsp?roleId="+nodeid+"&nodeName="+nodeName;
                 url=encodeURI(encodeURI(url));
                 parent.info.location.href=url;
              }
@@ -81,10 +86,11 @@ Ext.onReady(function(){
    
 });
 
-
 </script>
+
 	<body bgcolor="#FFFFFF" >
-		<div id="jgTree"  style="margin-Left:-1px;margin-5Top:-5px"/>
+	
+		<div  id="jgTree"  style="margin-Left:-1px;margin-5Top:-5px"/>
 	</div></body>
 </html>
 

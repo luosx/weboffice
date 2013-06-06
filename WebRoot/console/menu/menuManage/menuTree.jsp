@@ -32,7 +32,7 @@
 		<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 		<meta http-equiv="description" content="This is my page">
 		<%@ include file="/base/include/ext.jspf" %>
-			<script src="<%=basePath%>/base/include/ajax.js"></script>
+		<%@ include file="/base/include/restRequest.jspf"%>
 		<style>
 body {
 	font-family: helvetica, tahoma, verdana, sans-serif;
@@ -107,11 +107,19 @@ scrollbar-3dlight-color:#D4D0C8;
 		   		   text:"删除",
 		   		    pressed:true,
 		   		    handler:function(tree){
+		   		    	/*
 		   		    	var path = "<%=basePath%>";
 		   		    	var beanName="menuAction";
 		   		    	var actionMethod="deleteMenu";
 		   		    	var parameter="treeId="+selectMenuTreeId+"&menuType=1&parentId="+parentMenuTreeId;
 		   		        var result = ajaxRequest(path,beanName,actionMethod,parameter);
+		   		    	*/
+		   		    	putClientCommond("menuAction","deleteMenu");
+    					putRestParameter("treeId", selectMenuTreeId);
+		   		        putRestParameter("menuType", "1");
+		   		        putRestParameter("parentId", parentMenuTreeId);
+    					var result = restRequest();
+		   		    	
 		   		    	//页面刷新
 		   		   		document.location.reload()
 		   		   }
@@ -141,11 +149,19 @@ scrollbar-3dlight-color:#D4D0C8;
 		   		   text:"删除",
 		   		    pressed:true,
 		   		    handler:function(tree){
+		   		    	/*
 		   		    	var path = "<%=basePath%>";
 		   		    	var beanName="menuAction";
 		   		    	var actionMethod="deleteMenu";
 		   		    	var parameter="treeId="+selectMenuTreeId+"&menuType=1&parentId="+parentMenuTreeId;
 		   		        var result = ajaxRequest(path,beanName,actionMethod,parameter);
+		   		    	*/
+		   		    	putClientCommond("menuAction","deleteMenu");
+    					putRestParameter("treeId", selectMenuTreeId);
+		   		        putRestParameter("menuType", "1");
+		   		        putRestParameter("parentId", parentMenuTreeId);
+    					var result = restRequest();
+		   		    	
 		   		    	//页面刷新
 		   		   		document.location.reload()
 		   		   }

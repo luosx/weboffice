@@ -29,7 +29,7 @@ document.onkeydown = exitFullScreen;
 </script>
   </head>
   	<frameset id="main" name="main" rows="106,*" frameborder="no" border="0" framespacing="0" >
-		<frame id="upper" name="upper" scrolling="NO" noresize src="<%=basePath%>console/upper.jsp" />
-		<frame id="lower" name="lower" scrolling="NO" noresize src="<%=basePath%>console/adminMain.jsp" />
+		<frame id="upper" name="upper" scrolling="NO" noresize src="upper.jsp" />
+		<frame id="lower" name="lower" scrolling="NO" noresize src="consoleMain.jsp" />
 	</frameset>
 </html>

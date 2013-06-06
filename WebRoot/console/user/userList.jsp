@@ -21,7 +21,7 @@
 		<meta http-equiv="expires" content="0">
 		<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 		<meta http-equiv="description" content="This is my page">
-		<script src="<%=basePath%>/base/include/ajax.js"></script>
+		<%@ include file="/base/include/restRequest.jspf"%>
 		<%@ include file="/base/include/ext.jspf" %>
 		<script type="text/javascript" src="<%=extPath%>/examples/ux/PagingMemoryProxy.js"></script>
 		<script type="text/javascript" src="<%=extPath%>/examples/ux/ProgressBarPager.js"></script>
@@ -108,11 +108,17 @@ var userId=id;
 //myData[id][9];
 Ext.MessageBox.confirm('注意', '删除后不能恢复，您确定吗？',function(btn){
   if(btn=='yes'){
-var path = "<%=basePath%>";
+  	/*
+	var path = "<%=basePath%>";
     var actionName = "userAction";
     var actionMethod = "deleteUser";
     var parameter="userId="+userId;
 	var result = ajaxRequest(path,actionName,actionMethod,parameter);
+	*/
+	putClientCommond("userAction", "deleteUser");
+	putRestParameter("userId", userId);
+	var result = restRequest();
+	
 	document.location.reload();
 	}
 	else{

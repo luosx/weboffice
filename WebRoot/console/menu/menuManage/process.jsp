@@ -1,5 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<%@page import="com.klspta.model.workflow.foundations.deploy.ProcessList"%>
+<%@page import="com.klspta.base.workflow.foundations.deploy.ProcessList"%>
 <%@ taglib uri="/WEB-INF/taglib/label.tld" prefix="common"%>
 <%
 	String path = request.getContextPath();
@@ -22,7 +22,7 @@
 		<meta http-equiv="expires" content="0">
 		<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 		<meta http-equiv="description" content="This is my page">
-		<script src="<%=basePath%>/base/include/ajax.js"></script>
+		<%@ include file="/base/include/restRequest.jspf"%>
 <%@ include file="/base/include/ext.jspf" %>
  <script type="text/javascript">
  var grid;
@@ -133,11 +133,19 @@ rowIndex = grid.store.indexOf(grid.getSelectionModel().getSelected());
 var deploymentId=grid.getStore().getAt(rowIndex).get('发布ID');
 Ext.MessageBox.confirm('注意', '将删除工作流模板，并且所有运行中的工作流将全部删除，您确定吗？',function(btn){
     if(btn=='yes'){
+    
+    	/*
 	    var path = "<%=basePath%>";
 	    var actionName = "importProcess";
 	    var actionMethod = "delProcess";
 	    var parameter="deploymentId="+deploymentId;
 		var result = ajaxRequest(path,actionName,actionMethod,parameter);
+		*/
+        putClientCommond("importProcess","delProcess");
+        putRestParameter("deploymentId", deploymentId);
+		var result=restRequest();
+		
+		
 		if(result=="true"){ 
 			//服务器端数据成功删除后，同步删除客户端列表中的数据
 			 var ds =  grid.getStore(); 

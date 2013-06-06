@@ -20,7 +20,7 @@
 		<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 		<meta http-equiv="description" content="This is my page">
 		<%@ include file="/base/include/ext.jspf" %>
-			<script src="<%=basePath%>/base/include/ajax.js"></script>
+		<%@ include file="/base/include/restRequest.jspf"%>
 		<style>
 body {
 	font-family: helvetica, tahoma, verdana, sans-serif;
@@ -66,7 +66,7 @@ Ext.onReady(function(){
                 }else{
                 parentRoleId='0';
                 }
-                parent.info.location.href="<%=basePath%>/console/organization/roleInfo.jsp?roleId="+nodeid+"&parentRoleId="+parentRoleId;
+                parent.info.location.href="<%=basePath%>/console/role/roleInfo.jsp?roleId="+nodeid+"&parentRoleId="+parentRoleId;
              }
             
          
@@ -89,7 +89,7 @@ Ext.onReady(function(){
 	   		   		var roleId=newGuid();
 	   		        //页面刷新
 	   		   		document.location.reload();
-					parent.info.location.href="<%=basePath%>/console/organization/roleInfo.jsp?roleId="+roleId+"&parentRoleId=0";
+					parent.info.location.href="<%=basePath%>/console/role/roleInfo.jsp?roleId="+roleId+"&parentRoleId=0";
 	   		   }
    		   },
    		   {
@@ -98,18 +98,25 @@ Ext.onReady(function(){
 	   		   handler:function(tree){
    		   			var roleId=newGuid();
 	   		   		document.location.reload();
-					parent.info.location.href="<%=basePath%>/console/organization/roleInfo.jsp?roleId="+roleId+"&parentRoleId="+parentRoleId;
+					parent.info.location.href="<%=basePath%>/console/role/roleInfo.jsp?roleId="+roleId+"&parentRoleId="+parentRoleId;
 	   		   }
    		   },
    		   {
 	   		   text:"删除",
 	   		    pressed:true,
 	   		    handler:function(tree){
+	   		    	/*
 	   		    	var path = "<%=basePath%>";
 	   		    	var actionName="userAction";
 	   		    	var actionMethod="deleteRole";
 	   		    	var parameter="selectRoleId="+selectRoleId;
 	   		        var result = ajaxRequest(path,actionName,actionMethod,parameter);
+	   		    	*/
+	   		        putClientCommond("userAction","deleteRole");
+	   		        putRestParameter("selectRoleId",selectRoleId);
+	   		        putRestParameter("parentTreeId", selectMapTreeId);
+   					var result=restRequest();
+	   		    	
 	   		    	//页面刷新
 	   		   		document.location.reload()
 	   		   }
@@ -122,11 +129,16 @@ Ext.onReady(function(){
    		   text:"删除",
    		    pressed:true,
    		    handler:function(tree){
+   		    /*
    		    	var path = "<%=basePath%>";
    		    	var actionName="userAction";
    		    	var actionMethod="deleteRole";
    		    	var parameter="selectRoleId="+selectRoleId;
    		        var result = ajaxRequest(path,actionName,actionMethod,parameter);
+   		    */
+		    	putClientCommond("userAction","deleteRole");
+   		        putRestParameter("selectRoleId",selectRoleId);
+				var result=restRequest();
    		    	//页面刷新
    		   		document.location.reload()
    		   }
