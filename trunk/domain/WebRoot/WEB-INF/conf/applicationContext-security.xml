@@ -17,8 +17,11 @@
 		<intercept-url pattern="/web/oa/gzzj/zb/pages/**" filters="none" />	
 		<intercept-url pattern="/web/oa/gzzj/yb/pages/**" filters="none" />	
 		
+		<!-- 解决需要重复输入密码问题 -->
+		<intercept-url pattern='/index.jsp' filters="none"/>
 		
 		<intercept-url pattern="/login/**" filters="none" />
+		
 		<intercept-url pattern="/**" access="ROLE_USER" />
 		<intercept-url pattern="/common/pages/security/admin.jsp" access="ROLE_ADMIN" />
 		<!-- session-management是针对session的管理. 这里可以不配置. 如有需求可以配置. -->
