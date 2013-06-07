@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
 
 import com.klspta.base.AbstractBaseBean;
 import com.klspta.base.util.UtilFactory;
-import com.klspta.base.util.api.IChangeCoordsSysUtil;
+import com.klspta.base.util.api.ICoordinateChangeUtil;
 import com.klspta.base.wkt.Point;
 import com.klspta.base.wkt.Polygon;
 import com.klspta.base.wkt.Ring;
@@ -31,28 +31,28 @@ import com.klspta.base.wkt.Ring;
  */
 @Component
 public class ParseShapefile extends AbstractBaseBean {
-    
+
     DecimalFormat a = new DecimalFormat("#.00");
-    
+
     public void parseShapefile() {
         String filepath = uploadFileToTempFloder();
-        if(filepath.equals("")){
+        if (filepath.equals("")) {
             putParameter("");
             response();
             return;
         }
-//      Vector<String> filepaths = UtilFactory.getZIPUtil().unzip(filepath, UtilFactory.getConfigUtil().getShapefileTempPathFloder() + "$" + System.currentTimeMillis());
-        String shapefileType="";
+        //      Vector<String> filepaths = UtilFactory.getZIPUtil().unzip(filepath, UtilFactory.getConfigUtil().getShapefileTempPathFloder() + "$" + System.currentTimeMillis());
+        String shapefileType = "";
         Map map = new HashMap();
         Vector<Vector<Vector<String>>> geometry = new Vector<Vector<Vector<String>>>();
-            if((filepath.toLowerCase()).endsWith(".shp")){
-                ShpReader sr = new ShpReader(filepath);
-                map = sr.parseShapefile();
-                shapefileType=sr.getShapefileType();
-            }/*else if(tempname.endsWith(".dbf")){
-                DbfReader dr = new DbfReader(tempname);
-                dr.parseDbfFile();
-            }*/
+        if ((filepath.toLowerCase()).endsWith(".shp")) {
+            ShpReader sr = new ShpReader(filepath);
+            map = sr.parseShapefile();
+            shapefileType = sr.getShapefileType();
+        }/*else if(tempname.endsWith(".dbf")){
+                        DbfReader dr = new DbfReader(tempname);
+                        dr.parseDbfFile();
+                    }*/
         Map<String, Object> hashmap = new HashMap<String, Object>();
         hashmap.put("success", true);
         hashmap.put("geo", map.get("geo"));
@@ -61,8 +61,8 @@ public class ParseShapefile extends AbstractBaseBean {
         putParameter(hashmap);
         response();
     }
-    
-    private String uploadFileToTempFloder(){
+
+    private String uploadFileToTempFloder() {
         String filepath = "";
         UtilFactory.getConfigUtil().getShapefileTempPathFloder();
         try {
@@ -81,11 +81,13 @@ public class ParseShapefile extends AbstractBaseBean {
                         boolean isForm = item.isFormField();// 是否是表单域
                         if (!isForm) {// 如果不适表单域，则是文件上传
                             String fileName = item.getName();// 获取上传的文件名
-                            if(!fileName.equals("")){
-                                if(!(fileName.toLowerCase()).endsWith("shp")){
+                            if (!fileName.equals("")) {
+                                if (!(fileName.toLowerCase()).endsWith("shp")) {
                                     return "";
                                 }
-                                File shpfile = new File(UtilFactory.getConfigUtil().getShapefileTempPathFloder() + System.currentTimeMillis() + ".shp");
+                                File shpfile = new File(UtilFactory.getConfigUtil()
+                                        .getShapefileTempPathFloder()
+                                        + System.currentTimeMillis() + ".shp");
                                 item.write(shpfile);// 上传文件
                                 filepath = shpfile.getPath();
                             }
@@ -98,28 +100,29 @@ public class ParseShapefile extends AbstractBaseBean {
         }
         return filepath;
     }
-    
-    private String[][] changeGeo(Vector geo, String[][] attrs){
+
+    private String[][] changeGeo(Vector geo, String[][] attrs) {
         Polygon pol = new Polygon();
         Point point;
         Iterator it = geo.iterator();
         String x = "0";
         String y = "0";
         int i = 0;
-        while(it.hasNext()){
-            Vector ss = (Vector)it.next();
+        while (it.hasNext()) {
+            Vector ss = (Vector) it.next();
             Iterator its = ss.iterator();
             Ring ring = new Ring();
-            while(its.hasNext()){
-                Vector sss = (Vector)its.next();
+            while (its.hasNext()) {
+                Vector sss = (Vector) its.next();
                 Iterator itss = sss.iterator();
-                if(itss.hasNext()){
-                    x = (String)itss.next();
+                if (itss.hasNext()) {
+                    x = (String) itss.next();
                 }
-                if(itss.hasNext()){
-                    y = (String)itss.next(); 
+                if (itss.hasNext()) {
+                    y = (String) itss.next();
                 }
-                point = UtilFactory.getChangeCoordsSysUtil().changeMe(new Point(x, y), IChangeCoordsSysUtil.BL80_TO_PLAIN80);//new Point(x, y);//
+                point = UtilFactory.getCoordinateChangeUtil().changePoint(new Point(x, y),
+                        ICoordinateChangeUtil.BL80_TO_PLAIN80);//new Point(x, y);//
                 ring.putPoint(point);
             }
             pol.clear();
@@ -131,23 +134,22 @@ public class ParseShapefile extends AbstractBaseBean {
         }
         return attrs;
     }
-    
-    
-    private String getArea(String wkt){
+
+    private String getArea(String wkt) {
         String sql = "select sde.st_area(sde.st_geometry(?, 11)) area from wpzfjc tt where rownum = 1";
         String area = "0";
         double aread = 0;
         try {
-            List<Map<String,Object>> list = query(sql, GIS, new Object[]{wkt});
-            if(list.size()>0){
-            	Map<String,Object> map=list.get(0);
-            	 area = (String)map.get("area");
-                 aread = Double.parseDouble(area);
-                 if(aread > 666.667){
-                     return (a.format(aread / 666.667)) + "亩";
-                 }else{
-                     return (a.format(aread)) + "平方米";
-                 }
+            List<Map<String, Object>> list = query(sql, GIS, new Object[] { wkt });
+            if (list.size() > 0) {
+                Map<String, Object> map = list.get(0);
+                area = (String) map.get("area");
+                aread = Double.parseDouble(area);
+                if (aread > 666.667) {
+                    return (a.format(aread / 666.667)) + "亩";
+                } else {
+                    return (a.format(aread)) + "平方米";
+                }
             }
         } catch (Exception e) {
             return "-1";
