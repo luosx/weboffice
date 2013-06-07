@@ -24,8 +24,6 @@
     <bean name="workflowNodeOperation" class="com.klspta.base.workflow.foundations.NodeOperation" scope="prototype"/>
 	<!-- ftp附件上传 -->
 	<bean name="ftpAC" class="com.klspta.base.util.impl.FtpUtil" scope="prototype"/>	
-	<!-- 坐标转换处理 -->
-	<bean name="coord" class="com.klspta.base.util.impl.CoordinateWSDLImp" scope="prototype"/>
 	<!-- 设置本地 Jdbc 对象抽取器  和 LOB抽取器，用于JdbcTemplate操作BLOB和CLOB字段 -->
 	<bean id="nativeJdbcExtractor"
 		class="org.springframework.jdbc.support.nativejdbc.CommonsDbcpNativeJdbcExtractor"
