@@ -61,7 +61,7 @@ if(item.text=='工作计划'){
 function aa(){
  document.getElementById('bot').height=document.body.clientHeight;
  document.getElementById('bot').width=document.body.clientWidth;
-  document.getElementById('bot').src="<%=basePath%>web/jinan/wpzf/workplan/1/anygantt.html";
+  document.getElementById('bot').src="<%=basePath%>web/xuzhouNW/wpzf/workplan/1/anygantt.html";
 }
   </script>
   
