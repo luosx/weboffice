@@ -1,6 +1,6 @@
 ﻿<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@page import="com.klspta.base.util.UtilFactory"%>
-<%@page import="com.klspta.web.xuzhouWW.PADDataList"%>
+<%@page import="com.klspta.web.xuzhouNW.dtxc.*"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
