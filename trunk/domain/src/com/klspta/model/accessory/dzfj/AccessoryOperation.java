@@ -88,7 +88,7 @@ public class AccessoryOperation extends AbstractBaseBean  {
      //   String file_id = accessoryBean.getFile_id();
         String sql = "insert into atta_accessory( parent_file_id, file_type, file_name, file_path, yw_guid,user_id) values(?,?,?,?,?,?)";
         Object[] args = {  parent_file_id, file_type, file_name, file_path, yw_guid, user_id };
-       update(sql,CORE, args);
+        update(sql,CORE, args);
     }
 
     /**
