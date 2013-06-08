@@ -3,7 +3,7 @@
 <%@ page import="org.apache.commons.fileupload.servlet.*"%>
 <%@ page import="com.scand.fileupload.*"%>
 <%@ page import="com.klspta.model.accessory.dzfj.AccessoryOperation"%>
-<%@ page import="com.klspta.model.accessory.dzfj.AccessoryBean"%>
+<%@ page import="com.klspta.base.util.bean.ftputil.AccessoryBean"%>
 <%@ page import="com.klspta.model.accessory.dzfj.Globals"%>
 <%@ page import="java.io.*"%>
 <%
