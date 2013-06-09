@@ -1,5 +1,7 @@
 ﻿package com.klspta.model.accessory.dzfj;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.util.List;
 import java.util.Map;
 import com.klspta.base.AbstractBaseBean;
@@ -7,6 +9,14 @@ import com.klspta.base.util.UtilFactory;
 import com.klspta.base.util.bean.ftputil.AccessoryBean;
 
 public class AccessoryAction extends AbstractBaseBean{
+	//添加一个缓存，并判断缓存地址是否存在。
+	private static String  cacheLocation = "C:\\cache";
+	static{
+		if(!(new File(cacheLocation).exists())){
+			new File(cacheLocation).mkdirs();
+		}
+	};
+	
     /**
      * 
      * <br>Description:创建文件夹
@@ -82,10 +92,38 @@ public class AccessoryAction extends AbstractBaseBean{
     }
     /**
      电子附件全部下载
+     * @throws Exception 
      */
    // public void downloadAll()  {
       //  String realPath=request.getRealPath("/")+"common//pages//accessory//download//";
       //  String yw_guid = request.getParameter("yw_guid");
        
    // }
+    /**
+     * 
+     * <br>Description:附件下载，根据附件的file_id获取下载附件
+     * <br>Author:黎春行
+     * <br>Date:2012-6-9
+     */
+    public void downLoadfile() throws Exception{
+    	String file_id = request.getParameter("file_id");
+    	AccessoryBean bean = new AccessoryBean();
+    	bean = AccessoryOperation.getInstance().getAccessoryById(file_id);
+    	String fileName = bean.getFile_name();
+    	fileName = new String(fileName.getBytes(), "ISO8859-1");
+    	String file_Path = cacheLocation + "\\" + AccessoryOperation.getInstance().download(bean, cacheLocation + "\\");
+    	FileInputStream fis = new FileInputStream(new File(file_Path));
+    	int nSize = (int)fis.available();
+    	byte[] data = new byte[nSize];
+    	fis.read(data);
+    	
+		response.setContentType("application/x-msdownload");
+		response.setHeader( "Content-Disposition", "attachment; filename="+ fileName + "\"");
+    	response.getOutputStream().write(data);
+    	response.getOutputStream().close();
+    	fis.close();
+    }
+    
+    
+    
 }
