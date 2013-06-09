@@ -11,6 +11,7 @@
     String yw_guid = request.getParameter("yw_guid");
     String tree = AccessoryBean.transfer(AccessoryOperation.getInstance()
             .getAccessorylistByYwGuid(yw_guid));
+    System.out.println(tree + "-----------------");
 	request.setCharacterEncoding("utf-8");
 	response.setCharacterEncoding("UTF-8");
     String treePath = basePath + "base/thirdres/dhtmlx//dhtmlxTree//codebase";
@@ -41,14 +42,13 @@
 			href="<%=layoutPath%>/skins/dhtmlxlayout_dhx_blue.css">
 		<link rel="stylesheet" type="text/css"
 			href="<%=layoutPath%>/skins/dhtmlxlayout_dhx_skyblue.css">
-		<%@ include file="/base/include/restRequest.jspf" %>
+		<%@ include file="/base/include/restRequest.jspf"%>
 		<script src="<%=layoutPath%>/dhtmlxcommon.js"></script>
 		<script src="<%=layoutPath%>/dhtmlxcontainer.js"></script>
 		<script src="<%=layoutPath%>/dhtmlxlayout.js"></script>
 		<script src="<%=toolbarPath%>/dhtmlxtoolbar.js"></script>
 		<script src="<%=treePath%>/dhtmlxtree.js"></script>
 		<script src="<%=treePath%>/ext/dhtmlxtree_json.js"></script>
-		<script src="<%=basePath%>base/include/ajax.js"></script>
 		<style>
 html,body {
 	width: 100%;
@@ -66,8 +66,8 @@ function doOnLoad() {
     dhxLayout.cells("a").setText("附件列表");
     dhxLayout.setCollapsedText("a", "<img src='<%=basePath%>/model/accessory/dzfj/imgs/expand-all.gif' width='16px' height='16px' border='0'>");
     dhxLayout.cells("b").setText("详细内容");
-    dhxLayout.cells("a").hideHeader();
-    dhxLayout.cells("b").hideHeader();
+   // dhxLayout.cells("a").hideHeader();
+   // dhxLayout.cells("b").hideHeader();
 	var width = document.body.clientWidth;
 	var height = document.body.clientHeight;
     dhxLayout.cells("a").setWidth(200);
@@ -80,8 +80,8 @@ function doOnLoad() {
 	tree = dhxLayout.cells("a").attachTree("0");
 	var treeArray = new Array(<%=tree%>);
 	tree.setImagePath("<%=treePath%>/imgs/csh_dhx_skyblue/");
-	tree.enableCheckBoxes(false);
-	tree.enableDragAndDrop(false);
+	//tree.enableCheckBoxes(false);
+	//tree.enableDragAndDrop(false);
 	tree.loadJSArray(treeArray);//for loading from array object
 	//更改子文件夹图标
 	for(i=0;i<treeArray.length;i++){
@@ -174,11 +174,20 @@ var yw_guid='<%=yw_guid%>';
 	parent_file_id=tree.getParentId(file_id);
 	}
 	
+	/*
 	var path = "<%=basePath%>";
   	var actionName = "accessoryAction";
   	var actionMethod = "createFolder";
     var parameter="parent_file_id="+parent_file_id+"&file_name="+file_name+"&file_type="+file_type+"&yw_guid="+yw_guid+"&user_id=1";
 	var result = ajaxRequest(path,actionName,actionMethod,parameter);
+	*/
+	putClientCommond("accessoryAction","createFolder");
+	putRestParameter("parent_file_id=",parent_file_id);
+	putRestParameter("file_name",file_name);
+	putRestParameter("file_type",file_type);
+	putRestParameter("yw_guid",yw_guid);
+	putRestParameter("user_id",'1');
+	var result=restRequest();
 	
 	document.location.reload()
 }
@@ -189,11 +198,21 @@ var file_name=getName(escape('新建文件夹'));
 if(file_name==false) return false;
 var parent_file_id=file_id;
 var yw_guid='<%=yw_guid%>';
+	/*
 	var path = "<%=basePath%>";
     var actionName = "accessoryAction";
     var actionMethod ="createFolder";
     var parameter="parent_file_id="+parent_file_id+"&file_name="+file_name+"&file_type="+file_type+"&yw_guid="+yw_guid+"&user_id=1";
 	var result = ajaxRequest(path,actionName,actionMethod,parameter);
+	*/
+	putClientCommond("accessoryAction","createFolder");
+	putRestParameter("parent_file_id",parent_file_id);
+	putRestParameter("file_name",file_name);
+	putRestParameter("file_type",file_type);
+	putRestParameter("yw_guid",yw_guid);
+	putRestParameter("user_id",'1');
+	var result=restRequest();
+	
 	document.location.reload()
 
 }
@@ -203,11 +222,18 @@ function rename(){
 	//先从数据库获取选中的树形节点名称
 		   var file_id=tree.getSelectedItemId();
 		   var yw_guid='<%=yw_guid%>';
+		   /*
 		   var path = "<%=basePath%>";
 		   var actionName = "accessoryAction";
 		   var actionMethod = "getNodeName"; 
 		   var parameter="yw_guid="+yw_guid+"&file_id="+file_id; 
-		  var  oldName = ajaxRequest(path,actionName,actionMethod,parameter);   
+		  var  oldName = ajaxRequest(path,actionName,actionMethod,parameter);
+		  */
+		  	putClientCommond("accessoryAction","getNodeName");
+			putRestParameter("yw_guid", yw_guid);
+			putRestParameter("file_id",file_id);
+			var oldName=restRequest();
+		     
 		   var newName=window.showModalDialog("<%=basePath%>model/accessory/dzfj/need_jsp/inputRename.jsp", oldName,'dialogWidth:400px;dialogHeight:0px;status:no');	 
 		//点击模态窗口的取消、关闭时，隐藏模态窗口 
 		if(newName == undefined){
@@ -217,17 +243,24 @@ function rename(){
 		   if(confirm("确定对文件重命名？") == true) {  
 			   var file_id=tree.getSelectedItemId();
 			   var yw_guid='<%=yw_guid%>';
+			   /*
 			   var path = "<%=basePath%>";
 			   var actionName = "accessoryAction";
 			   var actionMethod = "nodeRename"; 
 			   var parameter="yw_guid="+yw_guid+"&file_id="+file_id+"&newName="+escape(newName);  //对参数进行编码   
 			   result = ajaxRequest(path,actionName,actionMethod,parameter);
-		  document.location.reload() ;
+		  	   */
+		  	   putClientCommond("accessoryAction", "nodeRename");
+		  	   putRestParameter("yw_guid", yw_guid);
+		  	   putRestParameter("file_id", file_id);
+		  	   putRestParameter("newName", escape(newName));
+		  	   result = restRequest();
+		  	   
+		  	   document.location.reload() ;
 			   if(parent.Ext.getCmp("west_tree").getNodeById(file_id) != undefined){    
 			   		parent.Ext.getCmp("west_tree").getNodeById(file_id).remove() ;      
 			   		parent.Ext.getCmp("west_tree").getNodeById("4").appendChild([{ text: unescape(newName),leaf:1,id:file_id,filter:false,src:'model/accessory/dzfj/need_jsp/webOffice_read.jsp?file_id='+file_id+'&file_type=doc'}]);
 			   }
-			
 		  }else{
 		  	   return false;
 		  }
@@ -249,11 +282,18 @@ function deleteFile(){
  if(confirm("此文件将彻底删除，不可恢复，确定吗？") == true) {
    var file_id=tree.getSelectedItemId();
    var yw_guid='<%=yw_guid%>';
+   /*
 	var path = "<%=basePath%>";
     var actionName = "accessoryAction";
     var actionMethod = "deleteFile";
     var parameter="yw_guid="+yw_guid+"&file_id="+file_id;
 	var result = ajaxRequest(path,actionName,actionMethod,parameter);
+	*/
+	putClientCommond("accessoryAction", "deleteFile");
+   	putRestParameter("yw_guid", yw_guid);
+   	putRestParameter("file_id", file_id);
+   	result = restRequest();
+	
 	document.location.reload(); 
    //parent.location.reload();   
    parent.Ext.getCmp("west_tree").getNodeById(file_id).remove() ;                
@@ -271,8 +311,11 @@ dhxLayout.cells("b").attachURL("<%=basePath%>model/accessory/dzfj/need_jsp/uploa
 dhxLayout.cells("b").progressOff();
 }
 function download(){
-var file_id=tree.getSelectedItemId();
-window.open("<%=basePath%>model/accessory/dzfj/need_jsp/getAccessory.jsp?file_id="+file_id+"&type=down");
+	var file_id=tree.getSelectedItemId();
+	// window.open("<%=basePath%>model/accessory/dzfj/need_jsp/getAccessory.jsp?file_id="+file_id+"&type=down");
+	var form=document.getElementById("attachfile");
+	form.action +="?file_id=" + file_id;
+	form.submit();
 }
 
 /* 电子附件全部下载功能 
@@ -290,5 +333,7 @@ function downloadAll(){
 		<div id="parentId"
 			style="top: 0px; left: 0px; width: 100%; height: 100%;"></div>
 		<input type='text' id='name' name='name' value='' style="display:none"/> 	
+		<form id="attachfile" action="<%=basePath%>service/rest/accessoryAction/downLoadfile" method="post">
+		</form>   
 	</body>
 </html>
