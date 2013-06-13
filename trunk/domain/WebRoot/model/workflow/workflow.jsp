@@ -4,11 +4,11 @@
 <%@page import="org.jbpm.api.ProcessDefinition"%>
 <%@page import="java.util.List"%>
 <%@ page language="java"  pageEncoding="utf-8"%>
-<%@page import="com.klspta.model.workflow.foundations.IWorkflowOp"%>
-<%@page import="com.klspta.model.workflow.foundations.WorkflowOp"%>
-<%@page import="com.klspta.model.workflow.foundations.IWorkflowInsOp"%>
-<%@page import="com.klspta.model.workflow.foundations.WorkflowInsOp"%>
-<%@page import="com.klspta.model.workflow.bean.WorkItemBean"%>
+<%@page import="com.klspta.base.workflow.foundations.IWorkflowOp"%>
+<%@page import="com.klspta.base.workflow.foundations.WorkflowOp"%>
+<%@page import="com.klspta.base.workflow.foundations.IWorkflowInsOp"%>
+<%@page import="com.klspta.base.workflow.foundations.WorkflowInsOp"%>
+<%@page import="com.klspta.base.workflow.bean.WorkItemBean"%>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":"
@@ -42,7 +42,7 @@
     }else if(op != null && op.equals("remove")){
         work.delete(id);
     }else if(op != null && op.equals("donext")){
-        workIns.doNext(id, "wangf", "王峰");
+       // workIns.doNext(id, "wangf", "王峰");
     }else if(op != null && op.equals("idoit")){
         workIns.iDoIt(id, "wangf");
     }else if(op != null && op.equals("his")){
