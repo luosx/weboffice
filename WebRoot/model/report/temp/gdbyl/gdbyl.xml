@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<anychart>
+  <settings>
+    <animation enabled="True" />
+  </settings>
+  <charts>
+    <chart plot_type="CategorizedVertical">
+      
+      <chart_settings>
+        <title enabled="true">
+          <text>Multi-Series: Inverted X-Axis</text>
+        </title>
+        
+      </chart_settings>
+      <data>
+        <series id="s1">
+
+        </series>
+        <series id="s2">
+
+        </series>
+      </data>
+    </chart>
+  </charts>
+</anychart>
