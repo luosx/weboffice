@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<anychart>
+  <settings>
+    <animation enabled="True" />
+  </settings>
+  <charts>
+    <chart plot_type="Pie">
+      <data_plot_settings enable_3d_mode="false">
+        <pie_series>
+          <tooltip_settings enabled="true">
+            <format>
+{%Name}
+小计:{%Value}{numDecimals: 0}件
+百分比: {%YPercentOfSeries}{numDecimals: 2}%
+            </format>
+          </tooltip_settings>
+          <label_settings enabled="true">
+            <background enabled="false" />
+            <position anchor="Center" valign="Center" halign="Center" padding="20" />
+            <font color="White">
+              <effects>
+                <drop_shadow enabled="true" distance="2" opacity="0.5" blur_x="2" blur_y="2" />
+              </effects>
+            </font>
+            <format>{%YPercentOfSeries}{numDecimals:1}%</format>
+          </label_settings>
+        </pie_series>
+      </data_plot_settings>
+      <data>
+        <series name="Series 1" type="Pie">
+          <point name="电话" y="233" />
+          <point name="信件" y="323" />
+          <point name="电子邮件" y="213" />
+          <point name="领导批办" y="189" />
+          <point name="来访" y="677" />
+          <point name="媒体曝光" y="126" />
+		   <point name="其他" y="48" />
+        </series>
+      </data>
+      <chart_settings>
+        <title enabled="true" padding="15">
+          <text>线索类型——矿产</text>
+		       <font  bold="True" size="16" > 
+              </font> 
+        </title>
+        <legend enabled="true" position="Bottom" align="Spread" ignore_auto_item="true" padding="15">
+          <format>{%Icon} {%Name} ({%YValue}{numDecimals: 0}件)</format>
+          <template>
+          </template>
+          <title enabled="true">
+            <text>线索分类</text>
+          </title>
+          <columns_separator enabled="false" />
+          <background>
+            <inside_margin left="0" right="0" />
+          </background>
+          <items>
+            <item source="Points" />
+          </items>
+        </legend>
+      </chart_settings>
+    </chart>
+  </charts>
+</anychart>
