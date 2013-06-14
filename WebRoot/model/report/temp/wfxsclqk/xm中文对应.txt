@@ -1,9 +1,0 @@
-wflx-kc.xml      违法类型-矿产
-wflx-td.xml      违法类型-土地 
-xslx-kc.xml      线索类型 矿产
-xslx-td.xml      线索类型 土地
-xsyxx-kc.xml    线索有效性-矿产
-xsyxx-td.xm   l 线索有效性-矿产
-xzqhf.xml        按行政区划分
- 
- xzqhf.xml       违法线索统计表
