@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="GB2312"?> 
+ <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx" 
+ xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:p="http://www.springframework.org/schema/p"  
+ xsi:schemaLocation="http://www.springframework.org/schema/beans    
+ http://www.springframework.org/schema/beans/spring-beans-3.0.xsd    
+ http://www.springframework.org/schema/context    
+ http://www.springframework.org/schema/context/spring-context-3.0.xsd 
+ http://www.springframework.org/schema/tx    
+ http://www.springframework.org/schema/tx/spring-tx-3.0.xsd 
+ http://www.springframework.org/schema/jdbc    
+ http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd"> 
+ <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"> 
+    <property name="locations"> 
+         <value>file:/F:/project/domain/WebRoot/WEB-INF/classes/com/klspta/base/datasource/localdatabase.properties</value> 
+    </property> 
+ </bean> 
+ <bean id="GTZF" class="org.springframework.jdbc.datasource.DriverManagerDataSource" lazy-init="false" scope="singleton" > 
+ <property name="driverClassName" value="${GTZF.jdbc.driverClassName}" /> 
+ <property name="url" value="${GTZF.jdbc.url}" /> 
+ <property name="username" value="${GTZF.jdbc.username}" /> 
+ <property name="password" value="${GTZF.jdbc.password}" /> 
+ </bean> 
+ <bean id="GTZFTemplate" class="org.springframework.jdbc.core.JdbcTemplate" lazy-init="false" scope="singleton"> 
+ <property name="dataSource"> 
+    <ref bean="GTZF" /> 
+ </property> 
+ </bean> 
+ <bean id="ZFCF" class="org.springframework.jdbc.datasource.DriverManagerDataSource" lazy-init="false" scope="singleton" > 
+ <property name="driverClassName" value="${ZFCF.jdbc.driverClassName}" /> 
+ <property name="url" value="${ZFCF.jdbc.url}" /> 
+ <property name="username" value="${ZFCF.jdbc.username}" /> 
+ <property name="password" value="${ZFCF.jdbc.password}" /> 
+ </bean> 
+ <bean id="ZFCFTemplate" class="org.springframework.jdbc.core.JdbcTemplate" lazy-init="false" scope="singleton"> 
+ <property name="dataSource"> 
+    <ref bean="ZFCF" /> 
+ </property> 
+ </bean> 
+ <bean id="WORKFLOW" class="org.springframework.jdbc.datasource.DriverManagerDataSource" lazy-init="false" scope="singleton" > 
+ <property name="driverClassName" value="${WORKFLOW.jdbc.driverClassName}" /> 
+ <property name="url" value="${WORKFLOW.jdbc.url}" /> 
+ <property name="username" value="${WORKFLOW.jdbc.username}" /> 
+ <property name="password" value="${WORKFLOW.jdbc.password}" /> 
+ </bean> 
+ <bean id="WORKFLOWTemplate" class="org.springframework.jdbc.core.JdbcTemplate" lazy-init="false" scope="singleton"> 
+ <property name="dataSource"> 
+    <ref bean="WORKFLOW" /> 
+ </property> 
+ </bean> 
+ <bean id="GIS" class="org.springframework.jdbc.datasource.DriverManagerDataSource" lazy-init="false" scope="singleton" > 
+ <property name="driverClassName" value="${GIS.jdbc.driverClassName}" /> 
+ <property name="url" value="${GIS.jdbc.url}" /> 
+ <property name="username" value="${GIS.jdbc.username}" /> 
+ <property name="password" value="${GIS.jdbc.password}" /> 
+ </bean> 
+ <bean id="GISTemplate" class="org.springframework.jdbc.core.JdbcTemplate" lazy-init="false" scope="singleton"> 
+ <property name="dataSource"> 
+    <ref bean="GIS" /> 
+ </property> 
+ </bean> 
+ <bean id="SDE" class="org.springframework.jdbc.datasource.DriverManagerDataSource" lazy-init="false" scope="singleton" > 
+ <property name="driverClassName" value="${SDE.jdbc.driverClassName}" /> 
+ <property name="url" value="${SDE.jdbc.url}" /> 
+ <property name="username" value="${SDE.jdbc.username}" /> 
+ <property name="password" value="${SDE.jdbc.password}" /> 
+ </bean> 
+ <bean id="SDETemplate" class="org.springframework.jdbc.core.JdbcTemplate" lazy-init="false" scope="singleton"> 
+ <property name="dataSource"> 
+    <ref bean="SDE" /> 
+ </property> 
+ </bean> 
+ <bean id="CORE" class="org.springframework.jdbc.datasource.DriverManagerDataSource" lazy-init="false" scope="singleton" > 
+ <property name="driverClassName" value="${CORE.jdbc.driverClassName}" /> 
+ <property name="url" value="${CORE.jdbc.url}" /> 
+ <property name="username" value="${CORE.jdbc.username}" /> 
+ <property name="password" value="${CORE.jdbc.password}" /> 
+ </bean> 
+ <bean id="CORETemplate" class="org.springframework.jdbc.core.JdbcTemplate" lazy-init="false" scope="singleton"> 
+ <property name="dataSource"> 
+    <ref bean="CORE" /> 
+ </property> 
+ </bean> 
+ <bean id="SP" class="org.springframework.jdbc.datasource.DriverManagerDataSource" lazy-init="false" scope="singleton" > 
+ <property name="driverClassName" value="${SP.jdbc.driverClassName}" /> 
+ <property name="url" value="${SP.jdbc.url}" /> 
+ <property name="username" value="${SP.jdbc.username}" /> 
+ <property name="password" value="${SP.jdbc.password}" /> 
+ </bean> 
+ <bean id="SPTemplate" class="org.springframework.jdbc.core.JdbcTemplate" lazy-init="false" scope="singleton"> 
+ <property name="dataSource"> 
+    <ref bean="SP" /> 
+ </property> 
+ </bean> 
+ <bean id="YW" class="org.springframework.jdbc.datasource.DriverManagerDataSource" lazy-init="false" scope="singleton" > 
+ <property name="driverClassName" value="${YW.jdbc.driverClassName}" /> 
+ <property name="url" value="${YW.jdbc.url}" /> 
+ <property name="username" value="${YW.jdbc.username}" /> 
+ <property name="password" value="${YW.jdbc.password}" /> 
+ </bean> 
+ <bean id="YWTemplate" class="org.springframework.jdbc.core.JdbcTemplate" lazy-init="false" scope="singleton"> 
+ <property name="dataSource"> 
+    <ref bean="YW" /> 
+ </property> 
+ </bean> 
+ <bean id="springHelper" class="org.jbpm.pvm.internal.processengine.SpringHelper" >
+ <property name="jbpmCfg" value="com/klspta/base/workflow/conf/jbpm.cfg.xml"></property>
+ </bean>
+ <bean id="processEngine" factory-bean="springHelper" factory-method="createProcessEngine" />
+ <bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+ <property name="dataSource" ref="WORKFLOW" />
+ <property name="mappingResources">
+ <list>
+ <value>jbpm.repository.hbm.xml</value>
+ <value>jbpm.execution.hbm.xml</value>
+ <value>jbpm.history.hbm.xml</value>
+ <value>jbpm.task.hbm.xml</value>
+ <value>jbpm.identity.hbm.xml</value>
+ </list>
+ </property>
+ <property name="hibernateProperties">
+   <props>
+  <prop key="hibernate.dialect">org.hibernate.dialect.OracleDialect</prop>
+  <prop key="hibernate.hbm2ddl.auto">update</prop>
+   </props>
+ </property>
+  </bean>
+ <bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+   <property name="sessionFactory" ref="sessionFactory" />
+   <property name="dataSource" ref="WORKFLOW" />
+  </bean> 
+ </beans>
