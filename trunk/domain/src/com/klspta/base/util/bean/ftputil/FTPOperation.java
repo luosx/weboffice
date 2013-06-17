@@ -71,24 +71,6 @@ public class FTPOperation extends AbstractBaseBean implements IFTPOperation {
         	ftpConfig.setFtp_port(UtilFactory.getConfigUtil().getConfig("ftp.port"));
         	ftpConfig.setFtp_host(UtilFactory.getConfigUtil().getConfig("ftp.host"));
         	
-        	/*  20130608 change by lichunxing ,because the style of get config is change by from config.propertites
-            String sql = "select t.* from core_ftpserverconfig t";
-            List<Map<String,Object>> list = query(sql,CORE);
-            if (list.size() == 1) {
-            	Map<String,Object> map=list.get(0);
-            	ftpConfig=new FTPServerConfigBean();
-            	ftpConfig.setFtp_id((String)map.get("ftp_id"));
-            	ftpConfig.setFtp_username((String)map.get("ftp_username"));
-            	ftpConfig.setFtp_password((String)map.get("ftp_password"));
-            	ftpConfig.setFtp_port((String)map.get("ftp_port"));
-            	ftpConfig.setFtp_host((String)map.get("ftp_host"));
-            	ftpConfig.setFtp_description((String)map.get("ftp_description"));
-                //ftpConfig = (FTPServerConfigBean) list.get(0);
-            } else {
-                System.out.println("FTPServerConfig配置错误....");
-                return null;
-            }
-            */
         }
         try {
             FTPClient client = new FTPClient();
