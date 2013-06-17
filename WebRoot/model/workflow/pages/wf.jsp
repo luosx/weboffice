@@ -36,7 +36,6 @@
 		<meta http-equiv="expires" content="0">
 		<%@ include file="/base/include/ext.jspf"%>
 		<%@ include file="/base/include/restRequest.jspf" %>
-		<script src="<%=basePath%>/base/include/ajax.js"></script>
 		<script>
 	function deleteTask() {
 		lower.Ext.MessageBox.confirm('注意', '终止后不可恢复，是否继续?', function(btn) {

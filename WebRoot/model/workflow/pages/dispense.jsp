@@ -32,8 +32,7 @@
 		<meta http-equiv="pragma" content="no-cache">
 		<meta http-equiv="cache-control" content="no-cache">
 		<meta http-equiv="expires" content="0">
-
-		<script src="<%=basePath%>/base/include/ajax.js"></script>
+		<%@ include file="/base/include/restRequest.jspf" %>
 		<%@ include file="/base/include/ext.jspf"%>
 	</head>
 	<style>
@@ -99,11 +98,17 @@ html,body {
 	}
 	
 	function rollBack(){
+			/*
 	        var path = "<%=basePath%>";
 		    var actionName = "workflowNodeOperation";
 		    var actionMethod = "backTask";
 		    var parameter="wfInsId=<%=wfInsId%>";
 			var result = ajaxRequest(path,actionName,actionMethod,parameter);
+			*/
+			putClientCommond("workflowNodeOperation","backTask");
+			putRestParameter("wfInsId", "<%=wfInsId%>");
+			var result=restRequest();
+			
 			if(result=="success"){
 	              //parent.show("回退成功！");
 	              alert("回退成功！") ;
@@ -120,10 +125,16 @@ html,body {
 	function stopTask(btn){
      if(btn=='yes'){
 	 var path = "<%=basePath%>";
+	    /*
 	    var actionName = "startWorkflow";
 	    var actionMethod = "deleteTask";
 	    var parameter="wfInsId=<%=wfInsId%>&yw_guid=<%=yw_guid%>";
 		var result = ajaxRequest(path,actionName,actionMethod,parameter);
+		*/
+		putClientCommond("startWorkflow","deleteTask");
+		putRestParameter("wfInsId", "<%=wfInsId%>");
+		putRestParameter("yw_guid", "<%=yw_guid%>");
+		var result=restRequest();
 		if(result=="true"){
               parent.show("已中止！");           
               back();
