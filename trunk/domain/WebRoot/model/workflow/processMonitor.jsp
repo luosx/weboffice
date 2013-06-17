@@ -7,7 +7,7 @@
 <%@page import="com.klspta.base.workflow.bean.DoNextBean"%>
 <%@page import="com.klspta.base.workflow.bean.NodeDefineInfoBean"%>
 <%@page import="com.klspta.base.util.UtilFactory"%>
-<%@page import="com.klspta.base.workflow.foundations.ProcessMonitorList"%>
+<%@page import="com.klspta.base.workflow.foundations.ProcessMonitor"%>
 <%@page import="com.klspta.base.workflow.foundations.JBPMServices"%>
 <%
     String path = request.getContextPath();
@@ -27,7 +27,7 @@
     if(wfId!=null){  
       list=workflowOp.getNodeDefineInfoList(wfId);
     }
-    List<Map<String,Object>> list_ = new ProcessMonitorList().getHistoryTaskInfo(wfInsId);
+    List<Map<String,Object>> list_ = new ProcessMonitor().getHistoryTaskInfo(wfInsId);
     Map<String,Object> map_1 = list_.get(0);
     Map<String,Object> map_2 = list_.get(1);		
     		
