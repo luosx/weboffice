@@ -1,11 +1,7 @@
-<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<%@page import="com.klspta.base.util.UtilFactory"%>
+<%@ page language="java" pageEncoding="utf-8"%>
 <%@page
 	import="org.springframework.security.core.context.SecurityContextHolder"%>
 <%@page import="com.klspta.console.user.User"%>
-<%@ taglib prefix="sec"
-	uri="http://www.springframework.org/security/tags"%>
-<%@ taglib uri="/WEB-INF/taglib/queryLabel.tld" prefix="common"%>
 
 <%
 	String path = request.getContextPath();
@@ -13,20 +9,11 @@
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 
-	String condition = request.getParameter("condition");
-	if (condition != null && !"".equals(condition)) {
-		condition = UtilFactory.getStrUtil().unescape(condition);
-	} else {
-		condition = "";
-	}
-	String accord = request.getParameter("accord");
-	String parameters = "&condition="
-			+ UtilFactory.getStrUtil().escape(
-					UtilFactory.getStrUtil().escape(condition))
-			+ "&accord=" + accord;
+
 	Object principal = SecurityContextHolder.getContext()
 			.getAuthentication().getPrincipal();
-	String userName = ((User) principal).getUsername();
+    String userName = ((User) principal).getUsername();
+	String fullName = ((User) principal).getFullName();
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -39,51 +26,53 @@
 		<meta http-equiv="pragma" content="no-cache">
 		<meta http-equiv="cache-control" content="no-cache">
 		<meta http-equiv="expires" content="0">
-		<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-		<meta http-equiv="description" content="This is my page">
-		<script src="<%=basePath%>/base/include/ajax.js"></script>
-		<%@ include file="/base/include/ext.jspf"%>
 		<%@ include file="/base/include/restRequest.jspf" %>
+		<%@ include file="/base/include/ext.jspf"%>
+		<script src="<%=basePath%>base/thirdres/ext/examples/ux/fileuploadfield/FileUploadField.js" type="text/javascript"></script>
+		<link rel="stylesheet" type="text/css" href="<%=basePath%>base/thirdres/ext/examples/ux/fileuploadfield/css/fileuploadfield.css"/>
 		<script type="text/javascript">
 var myData;
 var grid;
+var sm;
+var width;
+var height;
 Ext.onReady(function(){
-	//myData= ajaxRequest("<%=basePath%>", "processList", "getProcessList", 'userName=<%=userName%>');
-	//myData=eval(myData);
-	putClientCommond("processList","getProcessList");
-	putRestParameter("userName","<%=userName%>");
+	putClientCommond("lacc","getProcessList");
+	putRestParameter("fullName",escape(escape("<%=fullName%>")));
 	myData = restRequest();
-    var store = new Ext.data.ArrayStore({
+    var store = new Ext.data.JsonStore({
     proxy: new Ext.ux.data.PagingMemoryProxy(myData),
        remoteSort:true,
         fields: [
-           {name: '序号'},
-           {name: '案由'},
-           {name: '案件来源'},
-           {name: '当事人'},
-           {name: '受理日期'},
-           {name: '办案状态'},
-           {name: '移交时间'},
-           {name: '办理'},
-           {name: '核查'}
+           {name: 'AJBH'},
+           {name: 'AY'},
+           {name: 'AJLY'},
+           {name: 'DSR'},
+           {name: 'SLRQ'},
+           {name: 'BAZT'},
+           {name: 'JSSJ'},
+           {name: 'INDEX'}
         ]
     });
     
-    store.load({params:{start:0, limit:10}}); 
-    var width=document.body.clientWidth-20;
-    var height=document.body.clientHeight;//高度
+    store.load({params:{start:0, limit:15}}); 
+    width=document.body.clientWidth;
+    height=document.body.clientHeight;//高度
+    sm = new Ext.grid.CheckboxSelectionModel({handleMouseDown:Ext.emptyFn});
     grid = new Ext.grid.GridPanel({
         title:'案件任务待办列表',
         store: store,
         columns: [
-           {header: '序号',width: width*0.1, sortable: true},
-           {header: '案由',width: width*0.25, sortable: true},
-           {header: '案件来源',width: width*0.15, sortable: true},
-           {header: '当事人',width: width*0.1, sortable: true},
-           {header: '受理日期',width: width*0.1, sortable: true},
-           {header: '办案状态',width: width*0.1, sortable: true},
-           {header: '移交时间',width: width*0.15, sortable: true},
-           {header: '办理',dataIndex:'序号',width: width*0.05, sortable: false,renderer:pro}
+        	
+            //new Ext.grid.RowNumberer(),        
+           {header: '立案编号',dataIndex:'AJBH',width: width*0.15, sortable: true},
+           {header: '案由',dataIndex:'AY',width: width*0.25, sortable: true},
+           {header: '案件来源',dataIndex:'AJLY',width: width*0.05, sortable: true},
+           {header: '当事人',dataIndex:'DSR',width: width*0.1, sortable: true},
+           {header: '受理日期',dataIndex:'SLRQ',width: width*0.12, sortable: true},
+           {header: '办案状态',dataIndex:'BAZT',width: width*0.1, sortable: true},
+           {header: '接收时间',dataIndex:'JSSJ',width: width*0.12, sortable: true},
+           {header: '办理',dataIndex:'INDEX',width: width*0.08, sortable: false,renderer:pro}
         ],
         tbar:[
         	{xtype:'label',text:'快速查找:',width:60},
@@ -91,43 +80,48 @@ Ext.onReady(function(){
         	{xtype: 'button',text:'查询',handler: query}
         ],
         // stripeRows: true,
-        height:380, 
+        width:width,
+        height:height,  
         // config options for stateful behavior
         stateful: true,
         stateId: 'grid',
+        buttonAlign:'center',
         bbar: new Ext.PagingToolbar({
-        pageSize: 10,
+        pageSize: 15,
         store: store,
         displayInfo: true,
             displayMsg: '共{2}条，当前为：{0} - {1}条',
             emptyMsg: "无记录",
         plugins: new Ext.ux.ProgressBarPager()
         })
-   
     });
     
     grid.render('mygrid_container'); 
-    Ext.getCmp('keyword').setValue("<%=condition%>");
-	
+    
+   
 });
 
 
 function pro(id){
-id = id -1;
  return "<a href='#'onclick='process("+id+");return false;'><img src='<%=basePath%>web/default/lacc/image/view.png' alt='办理'></a>";
 }
 
 
 function process(id){
-    var wfInsTaskId=myData[id][9];
-	var activityName=myData[id][5];
-	var wfInsId=myData[id][10];
-	var yw_guid=myData[id][8];
+    var wfInsTaskId=myData[id].DBID_;
+	var activityName=myData[id].ACTIVITY_NAME_;
+	var isFirst;
+	if(activityName=="受理立案"){
+		isFirst='yes';
+	}
+	var wfInsId=myData[id].WFINSID;
+	var yw_guid=myData[id].YW_GUID;
+	var zfjcType="90";
 	var returnPath=window.location.href;
-	var url='<%=basePath%>model/workflow/wf.jsp?yw_guid='+yw_guid+'&wfInsTaskId='+wfInsTaskId+'&activityName='+escape(escape(activityName))+'&zfjcType=7&wfInsId='+wfInsId+'&zfjcName='+escape(escape('违法案件查处'))+'&wfId=ZFJC-1&returnPath='+returnPath;  
+	var buttonHien = "delete,la";
+	var url='<%=basePath%>web/xuzhouNW/lacc/laccWorkflow/wf.jsp?yw_guid='+yw_guid+'&wfInsId='+wfInsId+'&zfjcType='+zfjcType+'&returnPath='+returnPath+'&buttonHidden='+buttonHien;  
 	//window.open(url); 
 	document.location.href=url;
-	//window.open(url,'_blank','height=100, width=400, top=0, left=0, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=no, status=no, fullscreen=yes'); 
 }
 function viewDetail(){
 	var rowIndex = grid.store.indexOf(grid.getSelectionModel().getSelected());
@@ -146,13 +140,95 @@ return false;
 } 
 } 
 
-
-function query(){
-var condition=Ext.getCmp('keyword').getValue();
-condition=escape(escape(condition));
-document.location.href="<%=basePath%>web/default/lacc/todo.jsp?condition="+condition;
+        <!--查询方法 add by 赵伟 2012-9-7-->
+        function query(){
+           var keyWord=Ext.getCmp('keyword').getValue();
+           keyWord=keyWord.toUpperCase();
+           putClientCommond("lacc","getProcessList");
+           putRestParameter("fullName",escape(escape("<%=fullName%>")));
+           putRestParameter("keyWord",escape(escape(keyWord)));
+           var myData = restRequest(); 
+           var store = new Ext.data.JsonStore({
+                proxy: new Ext.ux.data.PagingMemoryProxy(myData),
+                remoteSort:true,
+                fields: [
+                  {name: 'AJBH'},
+                  {name: 'AY'},
+                  {name: 'AJLY'},
+                  {name: 'DSR'},
+                  {name: 'SLRQ'},
+                  {name: 'BAZT'},
+                  {name: 'JSSJ'},
+                  {name: 'INDEX'}
+                ]
+          });
+          grid.reconfigure(store, new Ext.grid.ColumnModel([
+               // sm,
+            //new Ext.grid.RowNumberer(),        
+           {header: '立案编号',dataIndex:'AJBH',width: width*0.15, sortable: true},
+           {header: '案由',dataIndex:'AY',width: width*0.25, sortable: true},
+           {header: '案件来源',dataIndex:'AJLY',width: width*0.05, sortable: true},
+           {header: '当事人',dataIndex:'DSR',width: width*0.1, sortable: true},
+           {header: '受理日期',dataIndex:'SLRQ',width: width*0.12, sortable: true},
+           {header: '办案状态',dataIndex:'BAZT',width: width*0.1, sortable: true},
+           {header: '接收时间',dataIndex:'JSSJ',width: width*0.12, sortable: true},
+           {header: '办理',dataIndex:'INDEX',width: width*0.08, sortable: false,renderer:pro}
+          ]));
+          grid.getBottomToolbar().bind(store);
+          store.load({params:{start:0,limit:10}});  
+        }
+         <!--改变关键字方法 add by 赵伟 2012-9-7-->
+         function changKeyword(val){
+            var key=Ext.getCmp('keyword').getValue().toUpperCase();
+            if(key!=''&& val!=null){
+              var temp=val.toUpperCase();
+              if(temp.indexOf(key)>=0){
+	             return val.substring(0,temp.indexOf(key))+"<B style='color:black;background-color:#CD8500;font-size:120%'>"+val.substring(temp.indexOf(key),temp.indexOf(key)+key.length)+"</B>"
+	               +temp.substring(temp.indexOf(key)+key.length,temp.length);
+              }else{
+                return val;
+              }
+           }else{
+             return val;
+           }
+         } 
+         
+function sendTask(){
+/*
+  var ids="";
+  var lys="";
+  if (grid.getSelectionModel().hasSelection()){
+     var records=grid.getSelectionModel().getSelections();
+	 for(var i=0;i<records.length;i++){
+	   if(i==records.length-1){
+	      lys=lys+records[i].get('案件来源');
+	      ids=ids+records[i].get('编号');
+	   }else{
+	      ids=ids+records[i].get('编号')+"@";
+	      lys=lys+records[i].get('案件来源')+"@";
+	   }
+     }
+     var lys=encodeURI(encodeURI(lys));
+     var path = "<%=basePath%>";
+     var actionName = "wyrwmanager";
+     var actionMethod = "downTask";
+     var parameter="ids="+ids+"&lys="+lys;
+	 var zipPath=ajaxRequest(path,actionName,actionMethod,parameter);
+     if(zipPath!=""){
+			window.open("<%=basePath%>web/default/wpzf/xiafa/expTask.jsp?file_path="+zipPath);
+			document.location.reload();
+	 } 
+  	}else{
+    	Ext.Msg.alert('提示','请选择任务！');
+  	} 
+  	*/
+  	window.showModalDialog("<%=basePath%>web/jinan/lacc/lb/xiafa/xiafa.jsp?userName=<%=userName%>","","dialogWidth=650px;dialogHeight=450px;status=no;scroll=no");
+    query();
 }
 
+function impResult(){
+	win.show();
+}
 
 </script>
 	</head>
@@ -162,5 +238,8 @@ document.location.href="<%=basePath%>web/default/lacc/todo.jsp?condition="+condi
 		<div id="win1" class="x-hidden">
 			<div id="import"></div>
 		</div>
+		<div id="importWin" class="x-hidden">
+			<div id="importForm"></div>
+		</div>	
 	</body>
 </html>
