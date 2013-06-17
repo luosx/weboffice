@@ -9,6 +9,7 @@ import com.klspta.base.util.api.IJSONUtil;
 import com.klspta.base.util.api.IShapeUtil;
 import com.klspta.base.util.api.IStrUtil;
 import com.klspta.base.util.api.IWKTUtil;
+import com.klspta.base.util.api.IXzqhUtil;
 import com.klspta.base.util.api.IZIPUtil;
 import com.klspta.base.util.impl.ConfigUtil;
 import com.klspta.base.util.impl.FileUtil;
@@ -17,6 +18,7 @@ import com.klspta.base.util.impl.JSONUtil;
 import com.klspta.base.util.impl.ShapeUtil;
 import com.klspta.base.util.impl.StrUtil;
 import com.klspta.base.util.impl.WKTUtil;
+import com.klspta.base.util.impl.XzqhUtil;
 import com.klspta.base.util.impl.ZIPUtil;
 
 /**
@@ -206,6 +208,24 @@ public final class UtilFactory {
 	public static ICoordinateChangeUtil getCoordinateChangeUtil() {
 		try {
 			return null;//CoordinateChangeUtil.getInstance("NEW WITH UTIL FACTORY!");
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	/**
+	 * 
+	 * <br>
+	 * Description:获取行政区划实例 <br>
+	 * Author:黎春行 <br>
+	 * Date:2013-6-16
+	 * 
+	 * @return
+	 */
+	public static IXzqhUtil getXzqhUtil(){
+		try {
+			return XzqhUtil.getInstance("NEW WITH UTIL FACTORY!");
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;

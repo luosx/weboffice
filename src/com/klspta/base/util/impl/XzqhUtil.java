@@ -2,12 +2,14 @@ package com.klspta.base.util.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Vector;
 
+import com.klspta.base.AbstractBaseBean;
 import com.klspta.base.util.api.IXzqhUtil;
 import com.klspta.base.util.bean.xzqhutil.XzqhBean;
 
-public class XzqhUtil implements IXzqhUtil {
+public class XzqhUtil extends AbstractBaseBean implements IXzqhUtil {
 	
 	private static Vector<XzqhBean> xzqhList = new Vector<XzqhBean>();
 	private static XzqhUtil instance;
@@ -21,7 +23,30 @@ public class XzqhUtil implements IXzqhUtil {
         }
         return instance;
     }
-	
+    /**
+     * 
+     * <br>Description:类初始化时将所有行政区划bean放入到Vector中。
+     * <br>Author:黎春行
+     * <br>Date:2012-5-24
+     */
+    private XzqhUtil(){
+    	String sql = "select t.* from  CODE_XZQH t order by qt_ctn_code asc";
+    	List<Map<String, Object>> rs = query(sql, CORE);
+			for(int i = 0; i < rs.size(); i++){
+				XzqhBean oneBean = new XzqhBean();
+				Map<String, Object> oneMap = rs.get(i);
+				oneBean.setCatoncode(String.valueOf(oneMap.get("qt_ctn_code")));
+				oneBean.setCatonname(String.valueOf(oneMap.get("na_ctn_name")));
+				oneBean.setCatonsimpleName(String.valueOf(oneMap.get("na_ctn_abb")));
+				oneBean.setFullname(String.valueOf(oneMap.get("na_full_name")));
+				oneBean.setGovname(String.valueOf(oneMap.get("na_gov_name")));
+				oneBean.setLandname(String.valueOf(oneMap.get("na_landdp_name")));
+				oneBean.setParentcode(String.valueOf(oneMap.get("qt_parent_code")));
+				oneBean.setStateflag(String.valueOf(oneMap.get("qt_state_flag")));
+				oneBean.setPostalcode(String.valueOf(oneMap.get("qt_postal_code")));
+				xzqhList.add(oneBean);
+			}
+    }
 	
 	
 	@Override
@@ -47,7 +72,6 @@ public class XzqhUtil implements IXzqhUtil {
 
 	@Override
 	public XzqhBean getBeanById(String id) {
-		List<XzqhBean> choseBean = new ArrayList<XzqhBean>();
 		for(int i = 0; i < xzqhList.size(); i++){
 			if(xzqhList.get(i).getCatoncode().equals(id)){
 				return xzqhList.get(i);
