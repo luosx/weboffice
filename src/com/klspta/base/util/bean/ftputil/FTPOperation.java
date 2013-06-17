@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import com.klspta.base.AbstractBaseBean;
+import com.klspta.base.util.UtilFactory;
 
 
 public class FTPOperation extends AbstractBaseBean implements IFTPOperation {
@@ -63,6 +64,14 @@ public class FTPOperation extends AbstractBaseBean implements IFTPOperation {
     @Override
     public FTPClient getFTPClient() {
         if (ftpConfig == null) {
+        	ftpConfig = new FTPServerConfigBean();
+        	//ftpConfig.setFtp_id(UtilFactory.getConfigUtil().getConfig(key));
+        	ftpConfig.setFtp_username(UtilFactory.getConfigUtil().getConfig("ftp.username"));
+        	ftpConfig.setFtp_password(UtilFactory.getConfigUtil().getConfig("ftp.password"));
+        	ftpConfig.setFtp_port(UtilFactory.getConfigUtil().getConfig("ftp.port"));
+        	ftpConfig.setFtp_host(UtilFactory.getConfigUtil().getConfig("ftp.host"));
+        	
+        	/*  20130608 change by lichunxing ,because the style of get config is change by from config.propertites
             String sql = "select t.* from core_ftpserverconfig t";
             List<Map<String,Object>> list = query(sql,CORE);
             if (list.size() == 1) {
@@ -79,6 +88,7 @@ public class FTPOperation extends AbstractBaseBean implements IFTPOperation {
                 System.out.println("FTPServerConfig配置错误....");
                 return null;
             }
+            */
         }
         try {
             FTPClient client = new FTPClient();
