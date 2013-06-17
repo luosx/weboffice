@@ -49,6 +49,6 @@ public interface IXzqhUtil {
 	 * <br>Date:2013-6-16
 	 * @return
 	 */
-	 List<XzqhBean> getNameById(String id);
+	 XzqhBean getBeanById(String id);
 	
 }
