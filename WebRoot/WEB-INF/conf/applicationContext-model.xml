@@ -10,8 +10,11 @@
     http://www.springframework.org/schema/jdbc   
     http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd">
     
-		<!-- accessory附件上传 -->
+	<!-- accessory附件上传 -->
 	<bean name="accessory" class="com.klspta.model.accessory.AccessoryUtil" scope="prototype"/>
+	<bean name="accessoryAction" class="com.klspta.model.accessory.dzfj.AccessoryAction" scope="prototype"/>
+	
+	
 	<!-- 文书管理 -->
 	<bean name="weboffice" class="com.klspta.model.webOffice.DynamicTreeOperation" scope="prototype"/>
     
