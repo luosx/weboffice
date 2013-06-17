@@ -37,7 +37,7 @@ html,body {
 		<script type="text/javascript">
 		var myData;
 Ext.onReady(function(){
-	putClientCommond("processMonitorList","getProcessMonitorList");
+	putClientCommond("processMonitor","getProcessMonitorList");
 	putRestParameter("wfInsId","<%=wfInsId%>");
 	putRestParameter("wfId","<%=wfId%>");
 	myData = restRequest();
