@@ -13,14 +13,15 @@ import com.klspta.base.util.UtilFactory;
 import com.klspta.console.ManagerFactory;
 import com.klspta.console.user.User;
 
-public class NodeOperation extends AbstractBaseBean{
+public class NodeOperation extends AbstractBaseBean {
 
 	/**
-	 * <br>Description:移交任务REST服务
-	 * <br>Author:赵伟
-	 * <br>Date:2013-3-27
+	 * <br>
+	 * Description:移交任务REST服务 <br>
+	 * Author:赵伟 <br>
+	 * Date:2013-3-27
 	 */
-	public void transferTask(){
+	public void transferTask() {
 		String nextNodeName = "";
 		String op = "";
 		String wfInsTaskId = "";
@@ -71,19 +72,23 @@ public class NodeOperation extends AbstractBaseBean{
 			}
 		}
 	}
-	
+
 	/**
-	 * <br>Description:回退任务REST服务
-	 * <br>Author:赵伟
-	 * <br>Date:2013-3-27
+	 * <br>
+	 * Description:回退任务REST服务 <br>
+	 * Author:赵伟 <br>
+	 * Date:2013-3-27
 	 */
-	public void backTask(){
+	public void backTask() {
 		try {
 			request.setCharacterEncoding("utf-8");
 			String wfInsId = request.getParameter("wfInsId");
-			String wfId = JBPMServices.getInstance().getExecutionService().findExecutionById(wfInsId).getProcessDefinitionId();
-			String wfInsTaskId = JBPMServices.getInstance().getTaskService().createTaskQuery().executionId(wfInsId).uniqueResult().getId();
-			String activityName = JBPMServices.getInstance().getTaskService().createTaskQuery().executionId(wfInsId).uniqueResult().getActivityName();
+			String wfId = JBPMServices.getInstance().getExecutionService().findExecutionById(wfInsId)
+					.getProcessDefinitionId();
+			String wfInsTaskId = JBPMServices.getInstance().getTaskService().createTaskQuery().executionId(wfInsId)
+					.uniqueResult().getId();
+			String activityName = JBPMServices.getInstance().getTaskService().createTaskQuery().executionId(wfInsId)
+					.uniqueResult().getActivityName();
 			boolean b = false;
 
 			// 当回退出现错误，捕捉到错误返回错误。
@@ -107,7 +112,22 @@ public class NodeOperation extends AbstractBaseBean{
 			e.printStackTrace();
 		}
 	}
-	
+
+	/**
+	 * <br>
+	 * Description:删除流程 <br>
+	 * Author:赵伟 <br>
+	 * Date:2013-6-17
+	 */
+	public void delTask() {
+		String wfInsID = request.getParameter("wfInsID");
+		String id = wfInsID.substring(wfInsID.indexOf('.')+1);
+		String sql1 = "delete JBPM4_VARIABLE t where t.execution_=?";
+		String sql2 = "delete JBPM4_HIST_VAR t where t.procinstid_=?";
+		update(sql1, WORKFLOW,new String[]{id});
+		update(sql2, WORKFLOW,new String[]{wfInsID});
+	}
+
 	/**
 	 * <br>
 	 * Description:根据角色获取人员 <br>
