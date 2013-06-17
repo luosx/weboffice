@@ -192,43 +192,7 @@ return false;
              return val;
            }
          } 
-         
-function sendTask(){
-/*
-  var ids="";
-  var lys="";
-  if (grid.getSelectionModel().hasSelection()){
-     var records=grid.getSelectionModel().getSelections();
-	 for(var i=0;i<records.length;i++){
-	   if(i==records.length-1){
-	      lys=lys+records[i].get('案件来源');
-	      ids=ids+records[i].get('编号');
-	   }else{
-	      ids=ids+records[i].get('编号')+"@";
-	      lys=lys+records[i].get('案件来源')+"@";
-	   }
-     }
-     var lys=encodeURI(encodeURI(lys));
-     var path = "<%=basePath%>";
-     var actionName = "wyrwmanager";
-     var actionMethod = "downTask";
-     var parameter="ids="+ids+"&lys="+lys;
-	 var zipPath=ajaxRequest(path,actionName,actionMethod,parameter);
-     if(zipPath!=""){
-			window.open("<%=basePath%>web/default/wpzf/xiafa/expTask.jsp?file_path="+zipPath);
-			document.location.reload();
-	 } 
-  	}else{
-    	Ext.Msg.alert('提示','请选择任务！');
-  	} 
-  	*/
-  	window.showModalDialog("<%=basePath%>web/jinan/lacc/lb/xiafa/xiafa.jsp?userName=<%=userName%>","","dialogWidth=650px;dialogHeight=450px;status=no;scroll=no");
-    query();
-}
-
-function impResult(){
-	win.show();
-}
+        
 
 </script>
 	</head>
