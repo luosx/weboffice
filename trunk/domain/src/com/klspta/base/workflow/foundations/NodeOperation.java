@@ -120,12 +120,21 @@ public class NodeOperation extends AbstractBaseBean {
 	 * Date:2013-6-17
 	 */
 	public void delTask() {
-		String wfInsID = request.getParameter("wfInsID");
-		String id = wfInsID.substring(wfInsID.indexOf('.')+1);
-		String sql1 = "delete JBPM4_VARIABLE t where t.execution_=?";
-		String sql2 = "delete JBPM4_HIST_VAR t where t.procinstid_=?";
-		update(sql1, WORKFLOW,new String[]{id});
-		update(sql2, WORKFLOW,new String[]{wfInsID});
+		try {
+			String wfInsID = request.getParameter("wfInsID");
+			String id = wfInsID.substring(wfInsID.indexOf('.') + 1);
+			String sql1 = "delete JBPM4_VARIABLE t where t.execution_=?";
+			String sql2 = "delete JBPM4_HIST_VAR t where t.procinstid_=?";
+			update(sql1, WORKFLOW, new String[] { id });
+			update(sql2, WORKFLOW, new String[] { wfInsID });
+			response.getWriter().write("true");
+		} catch (Exception e) {
+			try {
+				response.getWriter().write("false");
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+		}
 	}
 
 	/**
