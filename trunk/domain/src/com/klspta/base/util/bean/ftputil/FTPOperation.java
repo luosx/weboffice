@@ -4,7 +4,6 @@ import it.sauronsoftware.ftp4j.FTPClient;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.jdbc.core.JdbcTemplate;
 import com.klspta.base.AbstractBaseBean;
 import com.klspta.base.util.UtilFactory;
 
