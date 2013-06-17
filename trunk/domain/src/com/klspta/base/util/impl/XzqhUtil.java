@@ -46,12 +46,11 @@ public class XzqhUtil implements IXzqhUtil {
 	}
 
 	@Override
-	public List<XzqhBean> getNameById(String id) {
+	public XzqhBean getBeanById(String id) {
 		List<XzqhBean> choseBean = new ArrayList<XzqhBean>();
 		for(int i = 0; i < xzqhList.size(); i++){
 			if(xzqhList.get(i).getCatoncode().equals(id)){
-				choseBean.add(xzqhList.get(i));
-				return choseBean;
+				return xzqhList.get(i);
 			}
 		}
 		return null;
