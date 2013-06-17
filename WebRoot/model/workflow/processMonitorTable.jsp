@@ -1,5 +1,5 @@
 <%@ page language="java"  pageEncoding="utf-8"%>
-<%@page import="com.klspta.base.workflow.foundations.ProcessMonitorList"%>
+<%@page import="com.klspta.base.workflow.foundations.ProcessMonitor"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
@@ -8,7 +8,7 @@
 			
 	String wfInsId=request.getParameter("wfInsId");	
 	String wfId=request.getParameter("wfId");
-	ProcessMonitorList.isFlush=true;
+	ProcessMonitor.isFlush=true;
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
