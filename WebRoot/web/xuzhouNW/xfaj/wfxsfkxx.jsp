@@ -74,7 +74,7 @@ if(fixed!=null && fixed.equals("fixedPrint")){%>
 <div id="fixed" class="Noprn" style="position: fixed; top: 5px; left: 0px"></div>
 <% } %>
 <div style="margin:20px" class="tablestyle1" align="center" >
-<div align="center"><h1>违法案线索反馈信息</h1></div>
+<div align="center"><h1>违法案件线索反馈信息</h1></div>
 <form method="post">
 <div style="width:100%;"><span style="margin-left: 330px;">线索号：
  <%if(permission.equals("yes")){ %>					
