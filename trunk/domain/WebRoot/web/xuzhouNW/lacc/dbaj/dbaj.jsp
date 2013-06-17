@@ -119,7 +119,7 @@ function process(id){
 	var zfjcType="90";
 	var returnPath=window.location.href;
 	var buttonHien = "delete,la";
-	var url='<%=basePath%>model/workflow/wf.jsp?yw_guid='+yw_guid+'&wfInsId='+wfInsId+'&zfjcType='+zfjcType+'&returnPath='+returnPath+'&buttonHidden='+buttonHien;  
+	var url='<%=basePath%>model/workflow/wf.jsp?yw_guid='+yw_guid+'&wfInsId='+wfInsId+'&zfjcType='+zfjcType+'&returnPath='+returnPath+'&buttonHidden='+buttonHien+'&zfjcName=&activityName=';  
 	//window.open(url); 
 	document.location.href=url;
 }
