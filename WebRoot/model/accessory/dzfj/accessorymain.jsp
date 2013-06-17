@@ -182,7 +182,7 @@ var yw_guid='<%=yw_guid%>';
 	var result = ajaxRequest(path,actionName,actionMethod,parameter);
 	*/
 	putClientCommond("accessoryAction","createFolder");
-	putRestParameter("parent_file_id=",parent_file_id);
+	putRestParameter("parent_file_id",parent_file_id);
 	putRestParameter("file_name",file_name);
 	putRestParameter("file_type",file_type);
 	putRestParameter("yw_guid",yw_guid);
