@@ -15,4 +15,11 @@
 <bean name="startWorkflowLacc" class="com.klspta.web.xuzhouNW.lacc.workflow.StartWorkflowLacc" scope="prototype"/>
 <!-- 信访举报工作流启动 -->
 <bean name="startWorkflowXfjb" class="com.klspta.web.xuzhouNW.xfjb.workflow.StartWorkflowXfjb" scope="prototype"/>
+
+
+<!-- 信访举报管理类 -->
+<bean name="xfAction" class="com.klspta.web.xuzhouNW.xfjb.manager.XfAction" scope="prototype"/>
+
+
+
 </beans>
