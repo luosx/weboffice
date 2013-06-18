@@ -84,7 +84,7 @@ body {
         var name=encodeURI(encodeURI('<%=fullName%>'));  
         var parameter="op=donext&assignee="+assignee+"&wfInsTaskId=<%=wfInsTaskId%>&nextNodeName="+nextName
                        +"&nextFullName="+fullName+"&wfInsId=<%=wfInsId%>&yw_guid=<%=yw_guid%>&fullName="+name;
-        var result = ajaxRequest("<%=basePath%>","startWorkflow","transferTask",parameter);
+        var result = ajaxRequest("<%=basePath%>","workflowNodeOperation","transferTask",parameter);
         if(result=="true"){
               alert("已移交！");
               var MyArgs = new Array("1","2");
