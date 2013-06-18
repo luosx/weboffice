@@ -101,7 +101,7 @@ public class LaccManager extends AbstractBaseBean {
         }
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         // 获取数据
-        String sql = "select t.yw_guid,t.bh as ajbh,t.qy ,t.ay,t.dwmc,t.ajly,t.grxm ,to_char(t.slrq,'yyyy-MM-dd hh24:mi:ss') as slrq,j.activity_name_ as bazt,to_char(j.create_ ,'yyyy-MM-dd hh24:mi:ss') as jssj,j.assignee_,j.wfinsid from lacpb t join workflow.active_task j on t.yw_guid=j.yw_guid";
+        String sql = "select t.yw_guid,t.bh as ajbh,t.qy ,t.ay,t.dwmc,t.ajly,t.grxm ,to_char(t.slrq,'yyyy-MM-dd hh24:mi:ss') as slrq,j.activity_name_ as bazt,to_char(j.create_ ,'yyyy-MM-dd hh24:mi:ss') as jssj,j.assignee_,j.wfinsid from lacpb t join workflow.v_active_task j on t.yw_guid=j.yw_guid";
 
         if (!"徐州市".equals(name)) {
             sql += " where t.qy=?";
@@ -147,7 +147,7 @@ public class LaccManager extends AbstractBaseBean {
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 
         // 获取数据
-        String sql = "select t.yw_guid,t.bh as ajbh ,t.ay,t.dwmc,t.ajly,t.grxm ,to_char(t.slrq,'yyyy-MM-dd hh24:mi:ss') as slrq,j.activityname as bazt,j.wfInsId,to_char(j.create_ ,'yyyy-MM-dd hh24:mi:ss') as jssj,to_char(j.end_,'yyyy-MM-dd hh24:mi:ss') as yjsj,j.wfinsid from lacpb t join workflow.hist_task j on t.yw_guid=j.yw_guid where j.assignee_=?";
+        String sql = "select t.yw_guid,t.bh as ajbh ,t.ay,t.dwmc,t.ajly,t.grxm ,to_char(t.slrq,'yyyy-MM-dd hh24:mi:ss') as slrq,j.activityname as bazt,j.wfInsId,to_char(j.create_ ,'yyyy-MM-dd hh24:mi:ss') as jssj,to_char(j.end_,'yyyy-MM-dd hh24:mi:ss') as yjsj,j.wfinsid from lacpb t join workflow.v_hist_task j on t.yw_guid=j.yw_guid where j.assignee_=?";
         if (keyWord != null) {
             keyWord = UtilFactory.getStrUtil().unescape(keyWord);
             sql += " and (upper(t.bh)||upper(t.ay)||upper(t.ajly)||upper(t.grxm)||upper(t.slrq)||upper(j.create_)||upper(j.activityname)||upper(j.end_) like '%"
@@ -192,7 +192,7 @@ public class LaccManager extends AbstractBaseBean {
         }
         // 获取数据
         //String sql = "select  t.yw_guid,t.bh as ajbh,t.qy ,t.ay,t.dwmc,t.ajly,t.grxm ,to_char(t.slrq,'yyyy-MM-dd') as slrq,j.activityname as bazt,to_char(j.create_ ,'yyyy-MM-dd') as jssj,to_char(j.end_,'yyyy-MM-dd hh24:mi:ss') as yjsj,j.wfinsid from lacpb t join workflow.hist_task j on t.yw_guid=j.yw_guid and  j.outcome_='结束' ";
-        String sql = "select t.yw_guid,t.bh as ajbh ,t.ay,t.dwmc,t.ajly,t.grxm ,to_char(t.slrq,'yyyy-MM-dd hh24:mi:ss') as slrq,j.wfInsId,to_char(j.end_,'yyyy-MM-dd hh24:mi:ss') as yjsj,j.wfinsid from lacpb t join workflow.end_wfins j on t.yw_guid=j.yw_guid";
+        String sql = "select t.yw_guid,t.bh as ajbh ,t.ay,t.dwmc,t.ajly,t.grxm ,to_char(t.slrq,'yyyy-MM-dd hh24:mi:ss') as slrq,j.wfInsId,to_char(j.end_,'yyyy-MM-dd hh24:mi:ss') as yjsj,j.wfinsid from lacpb t join workflow.v_end_wfins j on t.yw_guid=j.yw_guid";
         if (!"徐州市".equals(name)) {
             sql += " where t.qy=?";
         }
