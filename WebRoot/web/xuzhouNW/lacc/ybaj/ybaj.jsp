@@ -98,7 +98,7 @@ Ext.onReady(function(){
 
 function pro(id){
  //id = id -1;
- return "<a href='#'onclick='process("+id+");return false;'><img src='<%=basePath%>web/default/lacc/image/view.png' alt='详细'></a>";
+ return "<a href='#'onclick='process("+id+");return false;'><img src='<%=basePath%>web/xuzhouNW/lacc/dbaj/images/view.png' alt='详细'></a>";
 }
 
 function process(id){
@@ -139,7 +139,7 @@ function viewDetail(){
                 proxy: new Ext.ux.data.PagingMemoryProxy(myData),
                 remoteSort:true,
                 fields: [
-                {name:'ajbh'},
+                {name:'AJBH'},
            {name: 'AY'},
            {name: 'AJLY'},
            {name: 'DSR'},
