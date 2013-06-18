@@ -107,7 +107,7 @@ function process(id){
 	var returnPath=window.location.href;
 	returnPath = returnPath.split("?")[0] + "&edit=false" ;
 	var buttonHidden = "delete,la,tran,back";
-	var url='<%=basePath%>web/xuzhouNW/lacc/laccWorkflow/wf.jsp?yw_guid='+yw_guid+'&zfjcType=90&wfInsId='+wfInsId+'&returnPath='+returnPath+'&buttonHidden='+buttonHidden;  
+	var url='<%=basePath%>model/workflow/wf.jsp?yw_guid='+yw_guid+'&zfjcName=立案查处&zfjcType=90&wfInsId='+wfInsId+'&returnPath='+returnPath+'&buttonHidden='+buttonHidden;  
 	//window.open(url); 
 	document.location.href=url;
 }
