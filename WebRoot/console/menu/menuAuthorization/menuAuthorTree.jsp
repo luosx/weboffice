@@ -116,12 +116,12 @@ scrollbar-3dlight-color:#D4D0C8;
 		   		    	var parameter="roleId=<%=roleId%>&treeIdList="+treeIdList;
 		   		        var result = ajaxRequest(path,beanName,method,parameter);
 						*/
-						putClientCommond("menuAction","menuAction");
+						putClientCommond("menuAction","saveMenuAuthor");
 		   		        putRestParameter("roleId", "<%=roleId%>");
 		   		        putRestParameter("treeIdList", treeIdList);
     					var result=restRequest();
 					
-					if(result=="{success:true}"){
+					if(result.success==true){
 						Ext.Msg.alert("提示","保存成功"); 
 					}else{
 						Ext.Msg.alert("提示","保存失败，请稍后重试或联系管理员。"); 
