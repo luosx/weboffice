@@ -100,7 +100,7 @@ if(fixed!=null && fixed.equals("fixedPrint")){%>
 <div style="margin:20px" class="tablestyle1" align="center" >
 <div align="center"><h1>违法案件立案呈批表</h1></div>
 <form method="post">
-<div style="width:100%;"><span style="margin-left: 330px;"><span style="vertical-align:5px">立案编号：</span>
+<div style="width:100%;"><span style="margin-left: 330px;">立案编号：
  <%if(permission.equals("yes")){ %>					
     						<input class="noborder" name="bh" id="bh" style="width: 97%"/>
    				        <%}else{ %>
@@ -268,7 +268,7 @@ if(fixed!=null && fixed.equals("fixedPrint")){%>
     
     <td colspan="6">
     	<textarea rows="5" name="ay2" id="ay2" style="width: 99%;border-bottom:0.5px #000 solid;"></textarea>
-    	<hr style="border:1px #000 solid;height:0.5px;">
+    	
     	<textarea rows="5" name="bz" id="bz" style="width: 99%" onfocus="writeBZ(this.value)" onblur="writeSM(this.value)">其他需备注的写在此处...</textarea>
     </td>
   </tr>
@@ -276,7 +276,7 @@ if(fixed!=null && fixed.equals("fixedPrint")){%>
 </table>
 	<input type="text"   class="noborder"  style="width: 70%;display:none;"  value="<%=name%>" name="qy" id="qy" />
 			</form>
-				  <div style="width:100%;"><span style="margin-left: 330px;"> <span style="vertical-align:5px">立案编号：</span><input type="text" name="bh" id="bh2" style="width:180px;background-color:transparent;border:0px;"></span></div>
+				  <div style="width:100%;"><span style="margin-left: 330px;"> 立案编号：<input type="text" name="bh" id="bh2" style="width:180px;background-color:transparent;border:0px;"></span></div>
 </body>
 <script>
 <%
