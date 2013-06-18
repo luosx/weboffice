@@ -110,8 +110,8 @@ Ext.onReady(function(){
         store: store,
         columns: [
         	new Ext.grid.RowNumberer(),
-        	{header: '立案编号',dataIndex:'AJBH',width: width*0.12, sortable: true},
-        	{header: '区域',dataIndex:'QY',width: width*0.05, sortable: true},
+           {header: '立案编号',dataIndex:'AJBH',width: width*0.12, sortable: true},
+           {header: '区域',dataIndex:'QY',width: width*0.05, sortable: true},
            {header: '案由',dataIndex:'AY',width: width*0.2, sortable: true},
            {header: '案件来源',dataIndex:'AJLY',width: width*0.05, sortable: true},
            {header: '办理人员',dataIndex:'ASSIGNEE_',width: width*0.12, sortable: true},
@@ -159,7 +159,7 @@ function process(id){
 	var zfjcType="90";
 	var returnPath=window.location.href;
 	var buttonHien = "delete,la,tran,back";
-	var url='<%=basePath%>web/xuzhouNW/lacc/laccWorkflow/wf.jsp?yw_guid='+yw_guid+'&wfInsId='+wfInsId+'&zfjcType='+zfjcType+'&returnPath='+returnPath+'&buttonHidden='+buttonHien;
+	var url='<%=basePath%>model/workflow/wf.jsp?yw_guid='+yw_guid+'&wfInsId='+wfInsId+'&zfjcType='+zfjcType+'&returnPath='+returnPath+'&buttonHidden='+buttonHien;
 	//window.open(url); 
 	document.location.href=url;
 }

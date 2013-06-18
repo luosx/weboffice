@@ -156,7 +156,7 @@ function process(id){
 	var yw_guid=myData[id].YW_GUID;
 	var returnPath=window.location.href;
 	var buttonHidden = "delete,la,tran,back";
-	var url='<%=basePath%>web/xuzhouNW/lacc/laccWorkflow/wf.jsp?yw_guid='+yw_guid+'&zfjcType=90&wfInsId='+wfInsId+'&returnPath='+returnPath+'&buttonHidden='+buttonHidden;
+	var url='<%=basePath%>model/workflow/wf.jsp?yw_guid='+yw_guid+'&zfjcType=90&wfInsId='+wfInsId+'&returnPath='+returnPath+'&buttonHidden='+buttonHidden;
 	//window.open(url); 
 	document.location.href=url;
 }
