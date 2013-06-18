@@ -30,7 +30,7 @@
 	String docNodeName = request.getParameter("docNodeName");	
 	//String tempFolder = UtilFactory.getConfigUtil().getConfig("SHAPEFILE_PATH");
 	String tem = new java.io.File(application.getRealPath(request.getRequestURI())).getParent();
-	String temp = (tem.substring(0,tem.lastIndexOf("reduce")-1)+tem.substring(tem.lastIndexOf("reduce")+6)+"/documents/documentTemporaryFolder/").replace("\\","/");
+	String temp = (tem.substring(0,tem.lastIndexOf(path.substring(1))-1)+tem.substring(tem.lastIndexOf(path.substring(1))+6)+"/documents/documentTemporaryFolder/").replace("\\","/");
 	UtilFactory.getFtpUtil().downloadFile(ftpFileName,temp+ftpFileName); //将ftp服务器中指定的文档下载到服务器临时文件夹下(weOffice模块下的documentTemporaryFolder)
 	String base = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort() + request.getRequestURI();
 	String tempFolder = base.substring(0,base.lastIndexOf("/")) + "/documents/documentTemporaryFolder/";
