@@ -227,14 +227,19 @@ abstract public class AbsDefaultFormRequest extends AbstractBaseBean {
 		String editFiles = request.getParameter("editFiles");
 		editFiles = editFiles.substring(0, editFiles.length() - 1);
 		Object[] args = { editFiles, activityName, zfjcType, formName };
+		int i = 0;
 		if (queryData(activityName, zfjcType, formName)) {
-			update("update FORM_AUTHORITY set editFiles=? where activityName=? and zfjcType=? and formName=?", CORE,
+			i = update("update FORM_AUTHORITY set editFiles=? where activityName=? and zfjcType=? and formName=?", CORE,
 					args);
 		} else {
-			update("insert into FORM_AUTHORITY(editFiles,activityName,zfjcType,formName) values(?,?,?,?)", CORE, args);
+			i = update("insert into FORM_AUTHORITY(editFiles,activityName,zfjcType,formName) values(?,?,?,?)", CORE, args);
 		}
-		// return new ActionForward("/supervisory/ajcc/" + formName +
-		// ".jsp?permission=yes&msg=success");
+		if(i ==1){
+		   response("success"); 
+		}else{
+		   response("failure"); 
+		}
+		
 	}
 
 	/**
