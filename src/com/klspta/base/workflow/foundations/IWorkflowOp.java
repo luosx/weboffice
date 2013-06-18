@@ -222,4 +222,13 @@ public interface IWorkflowOp {
 	 * @return
 	 */
 	Activity getPreActivity(String wfInsID,String activityName);
+	
+	/**
+	 * <br>Description:根据实例ID获取当前任务ID
+	 * <br>Author:赵伟
+	 * <br>Date:2013-6-18
+	 * @param wfInsID
+	 * @return
+	 */
+	String getWfInsTaskIdByWfInsID(String wfInsID);
 }
