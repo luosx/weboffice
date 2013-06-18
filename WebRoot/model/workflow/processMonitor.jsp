@@ -94,7 +94,7 @@
 	}
 	//获取数据
 	function getTipData(activityName){
-	  putClientCommond("processMonitorList","getImageTip");
+	  putClientCommond("processMonitor","getImageTip");
 	  putRestParameter("activityName",escape(escape(activityName)));
 	  putRestParameter("wfInsId",'<%=wfInsId%>');
 	  myData = restRequest();
