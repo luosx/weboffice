@@ -18,6 +18,8 @@ import org.jbpm.api.ProcessDefinition;
 import org.jbpm.api.ProcessInstance;
 import org.jbpm.api.RepositoryService;
 import org.jbpm.api.TaskService;
+import org.jbpm.api.history.HistoryTask;
+import org.jbpm.api.history.HistoryTaskQuery;
 import org.jbpm.api.model.Activity;
 import org.jbpm.api.model.ActivityCoordinates;
 import org.jbpm.api.task.Task;
@@ -85,7 +87,7 @@ public class WorkflowOp extends AbstractBaseBean implements IWorkflowOp {
 						String name = ((Element) firstChild.get(j)).getAttributeValue("name");
 						String assignee = ((Element) firstChild.get(j)).getAttributeValue("assignee");
 						String groups = ((Element) firstChild.get(j)).getAttributeValue("candidate-groups");
-						if(((Element) firstChild.get(j)).getAttributeValue("g")==null){
+						if (((Element) firstChild.get(j)).getAttributeValue("g") == null) {
 							continue;
 						}
 						String[] g = ((Element) firstChild.get(j)).getAttributeValue("g").split(",");
@@ -163,8 +165,9 @@ public class WorkflowOp extends AbstractBaseBean implements IWorkflowOp {
 
 	@Override
 	public String start(String wfID, Map<String, Object> parameters) {
-		wfID=getWorkflowName(wfID);
-		ProcessInstance wfIns = JBPMServices.getInstance().getExecutionService().startProcessInstanceById(wfID,parameters);
+		wfID = getWorkflowName(wfID);
+		ProcessInstance wfIns = JBPMServices.getInstance().getExecutionService().startProcessInstanceById(wfID,
+				parameters);
 		JBPMServices.getInstance().getExecutionService().createVariables(wfIns.getId(), parameters, true);
 		return wfIns.getId();
 	}
@@ -370,9 +373,12 @@ public class WorkflowOp extends AbstractBaseBean implements IWorkflowOp {
 	public String getActivityNameByWfInsID(String WfInsID) {
 		String activityName = JBPMServices.getInstance().getTaskService().createTaskQuery().executionId(WfInsID)
 				.uniqueResult().getActivityName();
+		if (activityName == null) {
+			activityName = JBPMServices.getInstance().getHistoryService().createHistoryTaskQuery().executionId(WfInsID)
+					.state("completed").orderDesc(HistoryTaskQuery.PROPERTY_ENDTIME).list().get(0).getOutcome();
+		}
 		return activityName;
 	}
-
 	@Override
 	public Object getVariableByWfInsID(String WfInsID, String key) {
 		Object value = JBPMServices.getInstance().getExecutionService().getVariable(WfInsID, key);
@@ -392,28 +398,33 @@ public class WorkflowOp extends AbstractBaseBean implements IWorkflowOp {
 
 	@Override
 	public Activity getPreActivity(String wfInsId, String activityName) {
-		String sql="select * from JBPM4_HIST_ACTINST t where t.transition_=? order by t.end_ desc";
-		List<Map<String,Object>> result=query(sql, WORKFLOW,new String[]{activityName});
-		String name=result.get(0).get("activity_name_").toString();
-		String wfId=getWfIdByWfInsID(wfInsId);
+		String sql = "select * from JBPM4_HIST_ACTINST t where t.transition_=? order by t.end_ desc";
+		List<Map<String, Object>> result = query(sql, WORKFLOW, new String[] { activityName });
+		String name = result.get(0).get("activity_name_").toString();
+		String wfId = getWfIdByWfInsID(wfInsId);
 		ProcessDefinitionImpl pd = (ProcessDefinitionImpl) JBPMServices.getInstance().getRepositoryService()
-		.createProcessDefinitionQuery().processDefinitionId(wfId).uniqueResult();
-        ActivityImpl currentActivity = pd.findActivity(name);
+				.createProcessDefinitionQuery().processDefinitionId(wfId).uniqueResult();
+		ActivityImpl currentActivity = pd.findActivity(name);
 		/*
-		ProcessDefinitionImpl pd = (ProcessDefinitionImpl) JBPMServices.getInstance().getRepositoryService()
-		.createProcessDefinitionQuery().processDefinitionId(wfId).uniqueResult();
-        ActivityImpl currentActivity = pd.findActivity(activityName);
-        TransitionImpl incomingTransition = (TransitionImpl) currentActivity.getIncomingTransitions().get(0);
-        ActivityImpl sourceActivity = incomingTransition.getSource();*/
+		 * ProcessDefinitionImpl pd = (ProcessDefinitionImpl)
+		 * JBPMServices.getInstance().getRepositoryService()
+		 * .createProcessDefinitionQuery().processDefinitionId(wfId).uniqueResult();
+		 * ActivityImpl currentActivity = pd.findActivity(activityName);
+		 * TransitionImpl incomingTransition = (TransitionImpl)
+		 * currentActivity.getIncomingTransitions().get(0); ActivityImpl
+		 * sourceActivity = incomingTransition.getSource();
+		 */
 		return currentActivity;
 	}
 
 	@Override
 	public String getWfIdByWfInsID(String wfInsId) {
-		String wfId = JBPMServices.getInstance().getExecutionService().findExecutionById(wfInsId).getProcessDefinitionId();
+		String wfId = JBPMServices.getInstance().getExecutionService().findExecutionById(wfInsId)
+				.getProcessDefinitionId();
 		return wfId;
 	}
-	private String getWorkflowName(String zfjcType){
+
+	private String getWorkflowName(String zfjcType) {
 		String sql1 = "select t.child_name from public_code t where t.id='WORKFLOW' and t.child_id=?";
 		List<Map<String, Object>> wfIdList = query(sql1, YW, new Object[] { zfjcType });
 		Map<String, Object> map1 = (Map<String, Object>) wfIdList.get(0);
