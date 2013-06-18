@@ -145,7 +145,7 @@ function check(){
 
 function pro(id){
  id=id-1;
- return "<a href='#'onclick='process("+id+");return false;'><img src='<%=basePath%>web/default/lacc/image/view.png' alt='办理'></a>";
+ return "<a href='#'onclick='process("+id+");return false;'><img src='<%=basePath%>web/xuzhouNW/lacc/dbaj/images/view.png' alt='办理'></a>";
 }
 
 
