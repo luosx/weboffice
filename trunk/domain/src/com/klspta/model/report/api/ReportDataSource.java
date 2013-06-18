@@ -208,6 +208,7 @@ public class ReportDataSource extends AbstractBaseBean implements JRDataSource {
 	 * Date:2012-8-20
 	 */
 	public void fillData() {
+		sql = getCustomSql(sql, condition);
 		if (fieldValue.equals("")) {
 			datas = query(sql, YW);
 		} else {
