@@ -19,7 +19,8 @@
 
 <!-- 信访举报管理类 -->
 <bean name="xfAction" class="com.klspta.web.xuzhouNW.xfjb.manager.XfAction" scope="prototype"/>
-
+<!-- 立案查处 -->
+<bean name="lacc" class="com.klspta.web.xuzhouNW.lacc.LaccManager" scope="prototype"/>
 
 
 </beans>
