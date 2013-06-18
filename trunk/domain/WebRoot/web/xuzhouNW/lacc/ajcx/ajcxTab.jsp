@@ -34,10 +34,10 @@
         items:[
         	{
                 title: '办理中',
-                html: "<iframe width='"+w+"' height='"+h+"' src='<%=basePath%>web/xuzhouNW/lacc/lb/ajdcblz.jsp?edit=false&*closeMenu*'/>" 
+                html: "<iframe width='"+w+"' height='"+h+"' src='<%=basePath%>web/xuzhouNW/lacc/ajcx/ajdcblz.jsp?edit=false&*closeMenu*'/>" 
             },{
                 title: '已办结',
-                html: "<iframe width='"+w+"' height='"+h+"' src='<%=basePath%>web/xuzhouNW/lacc/lb/ajdcybaj.jsp?edit=false&*closeMenu*'/>"
+                html: "<iframe width='"+w+"' height='"+h+"' src='<%=basePath%>web/xuzhouNW/lacc/ajcx/ajdcybaj.jsp?edit=false&*closeMenu*'/>"
             }
         ]
     })
