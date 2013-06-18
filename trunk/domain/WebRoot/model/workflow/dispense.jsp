@@ -109,7 +109,7 @@ html,body {
 	
 	function rollBack(){
 	        var path = "<%=basePath%>";
-		    var actionName = "startWorkflow";
+		    var actionName = "workflowNodeOperation";
 		    var actionMethod = "backTask";
 		    var parameter="wfInsTaskId=<%=wfInsTaskId%>&activityName=<%=activityName%>&wfId=<%=wfId%>&wfInsId=<%=wfInsId%>";
 		    parameter = encodeURI(encodeURI(decodeURI(decodeURI(parameter))));
@@ -127,7 +127,10 @@ html,body {
 	function stopTask(btn){
      if(btn=='yes'){
 	 var path = "<%=basePath%>";
-	    var actionName = "startWorkflow";
+	    var actionName="workflowNodeOperation";
+	    if('<%=zfjcType%>'==90){
+	    	actionName = "startWorkflowLacc";
+	    }
 	    var actionMethod = "deleteTask";
 	    var parameter="wfInsId=<%=wfInsId%>&yw_guid=<%=yw_guid%>";
 		var result = ajaxRequest(path,actionName,actionMethod,parameter);
@@ -152,7 +155,7 @@ html,body {
 		<table width="100%">
 			<tr>
 				<td valign="middle">
-					<font color="#804000" size="2"><b><%=zfjcName%><%=activityName%></b>
+					<font color="#804000" size="2"><b><%=zfjcName%>>><%=activityName%></b>
 					</font>
 				</td>
 				<td align="right" valign="middle">
