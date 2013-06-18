@@ -17,8 +17,6 @@
     String userid = ((User)userprincipal).getUserID();
     String edit = request.getParameter("edit");
     String name = UtilFactory.getXzqhUtil().getBeanById(ManagerFactory.getRoleManager().getRoleWithUserID(userid).get(0).getXzqh()).getCatonname();
-	System.out.println(name + "-------------------------------------------------------------");
-	System.out.println("edit:" + edit);
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
