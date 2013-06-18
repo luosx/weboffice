@@ -84,7 +84,7 @@ String _formName = request.getParameter("formName");
 	    //var url = encodeURI(encodeURI(basePath+"service/rest/startWorkflow/setEditFields?tableName=FORM_AUTHORITY&formName="+formName+"&zfjcType="+zfjcType+"&editFiles=" + msgs +"&activityName="+activityName))
 	    //myform.action = url
 	    //myform.submit();
-	    putClientCommond("startWorkflow","setEditFields");
+	    putClientCommond("formrequest","setEditFields");
 		putRestParameter("tableName","FORM_AUTHORITY");
 		putRestParameter("formName",formName);
 		putRestParameter("zfjcType",zfjcType);
