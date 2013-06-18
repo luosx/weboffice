@@ -159,7 +159,7 @@ function process(id){
 	var zfjcType="90";
 	var returnPath=window.location.href;
 	var buttonHien = "delete,la,tran,back";
-	var url='<%=basePath%>model/workflow/wf.jsp?yw_guid='+yw_guid+'&wfInsId='+wfInsId+'&zfjcType='+zfjcType+'&returnPath='+returnPath+'&buttonHidden='+buttonHien;
+	var url='<%=basePath%>model/workflow/wf.jsp?yw_guid='+yw_guid+'&zfjcName=立案查处&wfInsId='+wfInsId+'&zfjcType='+zfjcType+'&returnPath='+returnPath+'&buttonHidden='+buttonHien;
 	//window.open(url); 
 	document.location.href=url;
 }
