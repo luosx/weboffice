@@ -10,6 +10,7 @@
 <jsp:useBean id="mySmartUpload" scope="page" class="com.jspsmart.upload.SmartUpload" />
 
 <%
+String path = request.getContextPath();
 try{
 	 Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
      String userID;
@@ -39,7 +40,7 @@ try{
 	myFile = mySmartUpload.getFiles().getFile(0);
 	//FilePath = UtilFactory.getConfigUtil().getConfig("SHAPEFILE_PATH")+myFile.getFileName();
 	String tem = new java.io.File(application.getRealPath(request.getRequestURI())).getParent();
-	FilePath = (tem.substring(0,tem.lastIndexOf("reduce")-1)+tem.substring(tem.lastIndexOf("reduce")+6)+"/documents/documentTemporaryFolder/").replace("\\","/")+myFile.getFileName();;
+	FilePath = (tem.substring(0,tem.lastIndexOf(path.substring(1))-1)+tem.substring(tem.lastIndexOf(path.substring(1))+6)+"/documents/documentTemporaryFolder/").replace("\\","/")+myFile.getFileName();;
 	if (!myFile.isMissing()){
 		myFile.saveAs(FilePath,mySmartUpload.SAVE_PHYSICAL);	
 		File uploadedFile = new File(FilePath);
