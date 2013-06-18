@@ -16,7 +16,7 @@
     Object userprincipal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     String userid = ((User)userprincipal).getUserID();
     String edit = request.getParameter("edit");
-    String name = UtilFactory.getXzqhUtil().getNameByCode(ManagerFactory.getRoleManager().getRoleWithUserID(userid).get(0).getXzqh());
+    String name = "测试";//UtilFactory.getXzqhUtil().getNameByCode(ManagerFactory.getRoleManager().getRoleWithUserID(userid).get(0).getXzqh());
 	System.out.println(name + "-------------------------------------------------------------");
 	System.out.println("edit:" + edit);
 %>
@@ -48,6 +48,7 @@
 		function initEdit(){
 			init();
 			    document.getElementById("bh2").value=document.getElementById("bh").value
+			    document.getElementById("ay2").value="案由："+document.getElementById("ay").value
 				var singnames = "ddcbr01#ddcbr02#sjfgjz#fjld#zdsl#zdld";
 				signLoad(singnames);
 		}
@@ -70,7 +71,17 @@
 			}
 			
 			function changeay(check){
-				document.getElementById("bz").innerText = "案由："+check.innerText;
+				document.getElementById("ay2").innerText = "案由："+check.innerText;
+			}
+			function writeBZ(text){
+				if(text=='其他需备注的写在此处...'){
+					document.getElementById('bz').value='';
+				}
+			}
+			function writeSM(text){
+				if(text==''){
+					document.getElementById('bz').value='其他需备注的写在此处...';
+				}			
 			}
 		</script>
 		
@@ -89,11 +100,11 @@ if(fixed!=null && fixed.equals("fixedPrint")){%>
 <div style="margin:20px" class="tablestyle1" align="center" >
 <div align="center"><h1>违法案件立案呈批表</h1></div>
 <form method="post">
-<div style="width:100%;"><span style="margin-left: 330px;">立案编号：
+<div style="width:100%;"><span style="margin-left: 330px;"><span style="vertical-align:5px">立案编号：</span>
  <%if(permission.equals("yes")){ %>					
     						<input class="noborder" name="bh" id="bh" style="width: 97%"/>
    				        <%}else{ %>
-<input type="text" name="bh" id="bh" style="width:150px;background-color:transparent;border:0px;"></span>
+<input type="text" name="bh" id="bh" style="width:180px;background-color:transparent;border:0px;"></span>
 <%} %> 
 </div>
 <table class="lefttopborder1"  cellspacing="0" cellpadding="0" border="1"  bgcolor="#FFFFFF" bordercolor="#000000" width="600">
@@ -170,8 +181,8 @@ if(fixed!=null && fixed.equals("fixedPrint")){%>
 								<option  value="信访反映" >
 									信访反映
 								</option>
-								<option  value="卫星检测" >
-									卫星检测
+								<option  value="卫星执法" >
+									卫星执法
 								</option>
 								<option  value="媒体披露" >
 									媒体披露
@@ -254,13 +265,18 @@ if(fixed!=null && fixed.equals("fixedPrint")){%>
   </tr>
   <tr>
     <td colspan="2"><div align="center">备注</div></td>
-    <td colspan="6"><textarea rows="5" name="bz" id="bz" style="width: 99%"></textarea></td>
+    
+    <td colspan="6">
+    	<textarea rows="5" name="ay2" id="ay2" style="width: 99%;border-bottom:0.5px #000 solid;"></textarea>
+    	<hr style="border:1px #000 solid;height:0.5px;">
+    	<textarea rows="5" name="bz" id="bz" style="width: 99%" onfocus="writeBZ(this.value)" onblur="writeSM(this.value)">其他需备注的写在此处...</textarea>
+    </td>
   </tr>
 
 </table>
 	<input type="text"   class="noborder"  style="width: 70%;display:none;"  value="<%=name%>" name="qy" id="qy" />
 			</form>
-				  <div style="width:100%;"><span style="margin-left: 330px;"> 立案编号：<input type="text" name="bh" id="bh2" style="width:150px;background-color:transparent;border:0px;"></span></div>
+				  <div style="width:100%;"><span style="margin-left: 330px;"> <span style="vertical-align:5px">立案编号：</span><input type="text" name="bh" id="bh2" style="width:180px;background-color:transparent;border:0px;"></span></div>
 </body>
 <script>
 <%
