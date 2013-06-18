@@ -17,6 +17,7 @@ import org.jbpm.api.JbpmException;
 import org.jbpm.api.ProcessDefinition;
 import org.jbpm.api.ProcessInstance;
 import org.jbpm.api.RepositoryService;
+import org.jbpm.api.TaskQuery;
 import org.jbpm.api.TaskService;
 import org.jbpm.api.history.HistoryTask;
 import org.jbpm.api.history.HistoryTaskQuery;
@@ -430,5 +431,14 @@ public class WorkflowOp extends AbstractBaseBean implements IWorkflowOp {
 		Map<String, Object> map1 = (Map<String, Object>) wfIdList.get(0);
 		String wfId = (String) map1.get("child_name");
 		return wfId;
+	}
+
+	@Override
+	public String getWfInsTaskIdByWfInsID(String wfInsID) {
+		TaskQuery tq=JBPMServices.getInstance().getTaskService().createTaskQuery().executionId(wfInsID);
+		if(tq!=null){
+			return tq.uniqueResult().getId();
+		}
+		return null;
 	}
 }
