@@ -112,13 +112,13 @@ Ext.onReady(function(){
         	new Ext.grid.RowNumberer(),
            {header: '立案编号',dataIndex:'AJBH',width: width*0.12, sortable: true},
            {header: '区域',dataIndex:'QY',width: width*0.05, sortable: true},
-           {header: '案由',dataIndex:'AY',width: width*0.25, sortable: true},
+           {header: '案由',dataIndex:'AY',width: width*0.2, sortable: true},
            {header: '案件来源',dataIndex:'AJLY',width: width*0.05, sortable: true},
-           {header: '当事人',dataIndex:'DSR',width: width*0.15, sortable: true},
-           {header: '受理日期',dataIndex:'SLRQ',width: width*0.1, sortable: true},
-           {header: '接收时间',dataIndex:'CREATE_',width: width*0.1, sortable: true},
-           {header: '移交时间',dataIndex:'END_',width: width*0.12, sortable: true},
-           {header: '详细',dataIndex:'INDEX',width: width*0.05, sortable: false,renderer:pro}
+           {header: '当事人',dataIndex:'DSR',width: width*0.12, sortable: true},
+           {header: '受理日期',dataIndex:'SLRQ',width: width*0.12, sortable: true},
+           {header: '接收时间',dataIndex:'CREATE_',width: width*0.08, sortable: true},
+           {header: '移交时间',dataIndex:'END_',width: width*0.15, sortable: true},
+           {header: '详细',dataIndex:'INDEX',width: width*0.08, sortable: false,renderer:pro}
         ],
         tbar:[
         	{xtype:'label',text:'快速查找:',width:60},      
@@ -205,13 +205,13 @@ return false;
         	    new Ext.grid.RowNumberer(), 
         	    {header: '立案编号',dataIndex:'AJBH',width: width*0.12, sortable: true,renderer:changKeyword},   
         	    {header: '区域',dataIndex:'qy',width: width*0.05, sortable: true,renderer:changKeyword},    
-                {header: '案由',dataIndex:'AY',width: width*0.25, sortable: true,renderer:changKeyword},
+                {header: '案由',dataIndex:'AY',width: width*0.2, sortable: true,renderer:changKeyword},
                 {header: '案件来源',dataIndex:'AJLY',width: width*0.05, sortable: true,renderer:changKeyword},
-                {header: '当事人',dataIndex:'DSR',width: width*0.15, sortable: true,renderer:changKeyword},
-                {header: '受理日期',dataIndex:'SLRQ',width: width*0.1, sortable: true,renderer:changKeyword},
-                {header: '接收时间',dataIndex:'CREATE__',width: width*0.1, sortable: true,renderer:changKeyword},
-                {header: '移交时间',dataIndex:'END_',width: width*0.12, sortable: true,renderer:changKeyword},
-                {header: '详细',dataIndex:'INDEX',width: width*0.05, sortable: false,renderer:pro}
+                {header: '当事人',dataIndex:'DSR',width: width*0.12, sortable: true,renderer:changKeyword},
+                {header: '受理日期',dataIndex:'SLRQ',width: width*0.12, sortable: true,renderer:changKeyword},
+                {header: '接收时间',dataIndex:'CREATE__',width: width*0.08, sortable: true,renderer:changKeyword},
+                {header: '移交时间',dataIndex:'END_',width: width*0.15, sortable: true,renderer:changKeyword},
+                {header: '详细',dataIndex:'INDEX',width: width*0.08, sortable: false,renderer:pro}
           ]));
           grid.getBottomToolbar().bind(store);
           store.load({params:{start:0,limit:10}});  

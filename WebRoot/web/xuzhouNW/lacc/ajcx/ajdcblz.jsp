@@ -104,7 +104,7 @@ Ext.onReady(function(){
 		selectOnFocus:true
 	});
     
-    width=document.body.clientWidth-20;
+    width=document.body.clientWidth-10;
     var height=document.body.clientHeight;//高度
     grid = new Ext.grid.GridPanel({
         store: store,
