@@ -1,22 +1,18 @@
-<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<%@page import="com.klspta.base.util.UtilFactory"%>
-<%@ taglib prefix="sec"
-	uri="http://www.springframework.org/security/tags"%>
-<%@ taglib uri="/WEB-INF/taglib/queryLabel.tld" prefix="common"%>
+<%@ page language="java"  pageEncoding="utf-8"%>
+<%@page
+	import="org.springframework.security.core.context.SecurityContextHolder"%>
+<%@page import="com.klspta.console.user.User"%>
+
 <%
-    String path = request.getContextPath();
-    String basePath = request.getScheme() + "://" + request.getServerName() + ":"
-            + request.getServerPort() + path + "/";
-    String condition = request.getParameter("condition");
-    if (condition != null && !"".equals(condition)) {
-        condition = UtilFactory.getStrUtil().unescape(condition);
-    } else {
-        condition = "";
-    }
-    String accord = request.getParameter("accord");
-    String parameters = "&condition="
-            + UtilFactory.getStrUtil().escape(UtilFactory.getStrUtil().escape(condition))
-            + "&accord=" + accord;
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+
+
+	Object principal = SecurityContextHolder.getContext()
+			.getAuthentication().getPrincipal();
+	String fullName=((User) principal).getFullName();
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -24,138 +20,96 @@
 	<head>
 		<base href="<%=basePath%>">
 
-		<title>立案查处未查处</title>
+		<title>立案查处已查处</title>
 
 		<meta http-equiv="pragma" content="no-cache">
 		<meta http-equiv="cache-control" content="no-cache">
 		<meta http-equiv="expires" content="0">
-		<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-		<meta http-equiv="description" content="This is my page">
-		<script src="<%=basePath%>/base/include/ajax.js"></script>
 		<%@ include file="/base/include/ext.jspf"%>
-		<style type="text/css">
-html,body {
-	font: normal 12px verdana;
-	margin: 0;
-	padding: 0;
-	border: 0 none;
-	overflow: hidden;
-	height: 100%;
-	width: 100%;
-}
-
-input,img {
-	vertical-align: middle;
-}
-</style>
+		<%@ include file="/base/include/restRequest.jspf" %>
 		<script type="text/javascript">
- var myData;
- var grid;
+var myData;
+var grid;
+var width;
 Ext.onReady(function(){
-myData= ajaxRequest("<%=basePath%>", "lacc", "getYBAJdata", '<%=parameters%>');
-	myData=eval(myData);
-	//putClientCommond("lacc","getYBAJdata");
-	//myData = restRequest();
-    // create the data store
-    var store = new Ext.data.ArrayStore({
+	putClientCommond("lacc","getCompleteList");
+	putRestParameter("fullName",escape(escape("<%=fullName%>")));
+	myData = restRequest();
+    var store = new Ext.data.JsonStore({
     proxy: new Ext.ux.data.PagingMemoryProxy(myData),
-		remoteSort:true,
+       remoteSort:true,
         fields: [
-           {name: '序号'},
-           {name: '案件编号'},
-           {name: '案件类型'},
-           {name: '项目名称'},
-           {name: '单位名称'},
-           {name: '土地位置'},
-           {name: '巡查时间'},
-           {name: '巡查情况描述'},
-           {name: '巡查人员'},
-           {name: '立案时间'},
-           {name: '办理状态'},
-           {name: '查看'}
+           {name:'AJBH'},
+           {name: 'AY'},
+           {name: 'AJLY'},
+           {name: 'DSR'},
+           {name: 'SLRQ'},
+           {name: 'BAZT'},
+           {name: 'CREATE_'},
+           {name: 'YJSJ'},
+           {name: 'INDEX'}
         ]
     });
     
-    store.load({params:{start:0, limit:10}}); 
-    var width=document.body.clientWidth*0.98;
-    var height = document.body.clientHeight*0.80;
-    grid = new Ext.grid.EditorGridPanel({
-        title:"已办案件任务列表",
+    store.load({params:{start:0, limit:15}}); 
+     width=document.body.clientWidth;
+    var height=document.body.clientHeight*0.95;//高度
+    grid = new Ext.grid.GridPanel({
+        title:'已办案件',
         store: store,
         columns: [
-           {header: '序号',dataIndex:'序号',width: width*0.05, sortable: true},
-           {header: '案件编号',dataIndex:'案件编号',width: width*0.1, sortable: true},
-           {header: '案件来源类型',dataIndex:'案件来源类型',width: width*0.08, sortable: true},
-           {header: '项目名称',dataIndex:'项目名称',width: width*0.1, sortable: true},
-           {header: '土地位置',dataIndex:'土地位置',width: width*0.1, sortable: true},
-           {header: '巡查时间',dataIndex:'巡查时间',width: width*0.08, sortable: true},
-           {header: '巡查情况描述',dataIndex:'巡查情况描述',width: width*0.2, sortable: true},
-           {header: '巡查人员',dataIndex:'巡查人员',width: width*0.08, sortable: true},
-           {header: '立案时间',dataIndex:'立案时间',width: width*0.08, sortable: true},
-           {header: '办理状态',dataIndex:'办理状态',width: width*0.1, sortable: true,editor: 
-              new Ext.form.ComboBox({     
-              store:new Ext.data.SimpleStore({     
-              fields: ['TYPEID', 'TYPENAME'],data: [['调查取证', '调查取证'], ['处理意见', '处理意见'], ['移送', '移送'], ['听证', '听证'], ['处罚决定', '处罚决定'], ['执行', '执行'], ['结案备案', '结案备案'], ['归档', '归档']]}),
-              valueField: 'TYPEID', displayField: 'TYPENAME',      
-              editable: true,
-              forceSelection: true,
-              mode:'local',
-              width:150, 
-              listWidth:100,     
-              blankText:'选择', 
-              emptyText:'选择' ,
-              triggerAction: 'all'})   },
-           
-           {header: '详细',dataIndex:'序号',width: width*0.05, sortable: false,renderer:pro}
+        	//new Ext.grid.RowNumberer(),
+           {header: '立案编号',dataIndex:'AJBH',width: width*0.15, sortable: true,renderer:changKeyword},
+           {header: '案由',dataIndex:'AY',width: width*0.20, sortable: true,renderer:changKeyword},
+           {header: '案件来源',dataIndex:'AJLY',width: width*0.05, sortable: true,renderer:changKeyword},
+           {header: '当事人',dataIndex:'DSR',width: width*0.1, sortable: true,renderer:changKeyword},
+           {header: '受理日期',dataIndex:'SLRQ',width: width*0.08, sortable: true,renderer:changKeyword},
+           {header: '办案状态',dataIndex:'BAZT',width: width*0.12, sortable: true,renderer:changKeyword},
+           {header: '接收时间',dataIndex:'CREATE_',width: width*0.10, sortable: true,renderer:changKeyword},
+           {header: '移交时间',dataIndex:'YJSJ',width: width*0.10, sortable: true,renderer:changKeyword},
+           {header: '详细',dataIndex:'INDEX',width: width*0.05, sortable: false,renderer:pro}
         ],
         tbar:[
         	{xtype:'label',text:'快速查找:',width:60},
         	{xtype:'textfield',id:'keyword',width:450,emptyText:'请输入关键字进行查询'},
-        	{xtype: 'button',text:'查询',handler: query}
+        	{xtype: 'button',id:'query',text:'查询',handler: query}
         ],
         // stripeRows: true,
-        // height: 453,
-        height: height,
+        height:height+10,  
+        width:width,
         // config options for stateful behavior
         stateful: true,
         stateId: 'grid',
         bbar: new Ext.PagingToolbar({
-        pageSize: 10,
+        pageSize: 15,
         store: store,
         displayInfo: true,
             displayMsg: '共{2}条，当前为：{0} - {1}条',
             emptyMsg: "无记录",
         plugins: new Ext.ux.ProgressBarPager()
         })
+   
     });
     
     grid.render('mygrid_container'); 
-   
-//	Ext.getCmp('keyword').setValue("");
-});
-
-//立案功能
-function check(){
-   
-   return "<img src='<%=basePath%>web/default/lacc/image/lian.png'/>";
 	
-}
-
+});
 
 
 function pro(id){
- id=id-1;
- return "<a href='#'onclick='process("+id+");return false;'><img src='<%=basePath%>web/xuzhouNW/lacc/dbaj/images/view.png' alt='办理'></a>";
+ //id = id -1;
+ return "<a href='#'onclick='process("+id+");return false;'><img src='<%=basePath%>web/default/lacc/image/view.png' alt='详细'></a>";
 }
 
-
 function process(id){
-	var zfjcType=myData[id][12];
-	var yw_guid = "AJ201112211109";
-	//var url='<%=basePath%>common/pages/resourcetree/resourceTree.jsp?zfjcType=7&yw_guid='+myData[id][1]; 
-	
-	var url='<%=basePath%>common/pages/resourcetree/resourceTree.jsp?zfjcType=7&yw_guid='+yw_guid;
-	window.open(url,'_blank','height=100, width=400, top=0, left=0, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=no, status=no, fullscreen=yes'); 
+	var wfInsId=myData[id].WFINSID;
+	var yw_guid=myData[id].YW_GUID;
+	var returnPath=window.location.href;
+	returnPath = returnPath.split("?")[0] + "&edit=false" ;
+	var buttonHidden = "delete,la,tran,back";
+	var url='<%=basePath%>web/xuzhouNW/lacc/laccWorkflow/wf.jsp?yw_guid='+yw_guid+'&zfjcType=90&wfInsId='+wfInsId+'&returnPath='+returnPath+'&buttonHidden='+buttonHidden;  
+	//window.open(url); 
+	document.location.href=url;
 }
 function viewDetail(){
 	var rowIndex = grid.store.indexOf(grid.getSelectionModel().getSelected());
@@ -164,27 +118,75 @@ function viewDetail(){
 
 
 
-function document.onkeydown() 
-{ 
-var e=event.srcElement; 
-if(event.keyCode==13) 
-{ 
-document.getElementById("button").click(); 
-return false; 
-} 
-} 
+ function document.onkeydown(){ 
+     var e=event.srcElement; 
+     if(event.keyCode==13){ 
+        Ext.getCmp('keyword').click(); 
+        return false; 
+     } 
+ } 
 
-function query(){
-var condition=Ext.getCmp('keyword').getValue();
 
-condition=escape(escape(condition));
-document.location.href="<%=basePath%>web/default/lacc/finish.jsp?condition="+condition;
-}
+        <!--查询方法 add by 赵伟 2012-9-7-->
+        function query(){
+           var keyWord=Ext.getCmp('keyword').getValue();
+           keyWord=keyWord.toUpperCase();
+           putClientCommond("lacc","getCompleteList");
+           putRestParameter("fullName",escape(escape("<%=fullName%>")));
+           putRestParameter("keyWord",escape(escape(keyWord)));
+           var myData = restRequest(); 
+           var store = new Ext.data.JsonStore({
+                proxy: new Ext.ux.data.PagingMemoryProxy(myData),
+                remoteSort:true,
+                fields: [
+                {name:'ajbh'},
+           {name: 'AY'},
+           {name: 'AJLY'},
+           {name: 'DSR'},
+           {name: 'SLRQ'},
+           {name: 'BAZT'},
+           {name: 'CREATE_'},
+           {name: 'YJSJ'},
+           {name: 'INDEX'}
+                ]
+          });
+          grid.reconfigure(store, new Ext.grid.ColumnModel([
+        	//    new Ext.grid.RowNumberer(),
+           {header: '立案编号',dataIndex:'AJBH',width: width*0.15, sortable: true,renderer:changKeyword},
+           {header: '案由',dataIndex:'AY',width: width*0.20, sortable: true,renderer:changKeyword},
+           {header: '案件来源',dataIndex:'AJLY',width: width*0.05, sortable: true,renderer:changKeyword},
+           {header: '当事人',dataIndex:'DSR',width: width*0.1, sortable: true,renderer:changKeyword},
+           {header: '受理日期',dataIndex:'SLRQ',width: width*0.08, sortable: true,renderer:changKeyword},
+           {header: '办案状态',dataIndex:'BAZT',width: width*0.12, sortable: true,renderer:changKeyword},
+           {header: '接收时间',dataIndex:'CREATE_',width: width*0.10, sortable: true,renderer:changKeyword},
+           {header: '移交时间',dataIndex:'YJSJ',width: width*0.10, sortable: true,renderer:changKeyword},
+           {header: '详细',dataIndex:'INDEX',width: width*0.05, sortable: false,renderer:pro}
+          ]));
+          grid.getBottomToolbar().bind(store);
+          store.load({params:{start:0,limit:10}});  
+        }
+         <!--改变关键字方法 add by 赵伟 2012-9-7-->
+         function changKeyword(val){
+            var key=Ext.getCmp('keyword').getValue().toUpperCase();
+            if(key!=''&& val!=null){
+              var temp=val.toUpperCase();
+              if(temp.indexOf(key)>=0){
+	             return val.substring(0,temp.indexOf(key))+"<B style='color:black;background-color:#CD8500;font-size:120%'>"+val.substring(temp.indexOf(key),temp.indexOf(key)+key.length)+"</B>"
+	               +temp.substring(temp.indexOf(key)+key.length,temp.length);
+              }else{
+                return val;
+              }
+           }else{
+             return val;
+           }
+         } 
+
+
 </script>
 	</head>
 	<body bgcolor="#FFFFFF" topmargin="0" leftmargin="0">
-	
-		<div id="mygrid_container" style="width: 100%; height: 100%;"></div>
+
+		<div id="mygrid_container"></div>
 		<div id="win1" class="x-hidden">
 			<div id="import"></div>
 		</div>
