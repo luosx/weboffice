@@ -3,6 +3,8 @@
 <%@page import="com.klspta.console.user.User"%>
 <%@page import="org.springframework.security.core.context.SecurityContextHolder"%>
 <%@page import="java.net.URLEncoder"%>
+<%@page import="com.klspta.base.workflow.foundations.IWorkflowOp"%>
+<%@page import="com.klspta.base.workflow.foundations.WorkflowOp"%>
 
 <%
 	String path = request.getContextPath();
@@ -16,10 +18,9 @@
 	String wfInsTaskId = request.getParameter("wfInsTaskId");
 	String wfInsId = request.getParameter("wfInsId");
 	String wfId = request.getParameter("wfId");
-	String zfjcName = UtilFactory.getStrUtil().unescape(
-			request.getParameter("zfjcName"));
-	String activityName = UtilFactory.getStrUtil().unescape(
-			request.getParameter("activityName"));
+	String zfjcName = new String(request.getParameter("zfjcName").getBytes("ISO-8859-1"), "utf-8");
+    IWorkflowOp workflow = WorkflowOp.getInstance();
+	String activityName = workflow.getActivityNameByWfInsID(wfInsId);
 	String returnPath=request.getParameter("returnPath");
 	String edit=request.getParameter("edit");
 	String lyType = request.getParameter("lyType"); 
