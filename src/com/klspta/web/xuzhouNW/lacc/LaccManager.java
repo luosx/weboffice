@@ -1,14 +1,10 @@
 package com.klspta.web.xuzhouNW.lacc;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import com.klspta.base.AbstractBaseBean;
 import com.klspta.base.util.UtilFactory;
-import com.klspta.console.ManagerFactory;
 
 public class LaccManager extends AbstractBaseBean {
     /**
@@ -22,8 +18,6 @@ public class LaccManager extends AbstractBaseBean {
         // 获取参数
         String keyWord = request.getParameter("keyWord");
         String fullName = UtilFactory.getStrUtil().unescape(request.getParameter("fullName"));
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-
         String sql = "select t.yw_guid,t.bh as ajbh ,t.ay,t.dwmc,t.ajly,t.grxm ,to_char(t.slrq,'yyyy-MM-dd hh24:mi:ss') as slrq,j.activity_name_ as bazt,j.wfInsId,to_char(j.create_ ,'yyyy-MM-dd hh24:mi:ss') as jssj,j.wfinsid from lacpb t join workflow.v_active_task j on t.yw_guid=j.yw_guid where j.assignee_=?";
         if (keyWord != null) {
             keyWord = UtilFactory.getStrUtil().unescape(keyWord);
@@ -46,45 +40,10 @@ public class LaccManager extends AbstractBaseBean {
         response(result);
     }
 
-    /**
-     * 
-     * <br>
-     * Description:立案查处任务下发 <br>
-     * Author:陈强峰 <br>
-     * Date:2012-9-11
-     */
-    public void getProcessListXf() {
-        // 获取参数
-        String keyWord = request.getParameter("keyWord");
-        String userName = request.getParameter("userName");
-
-        // 获取指定用户的所有节点任务
-        String sql_tasklist = "select t1.* from jbpm4_task t1,JBPM4_EXECUTION t2 where t1.execution_id_=t2.id_ and t1.assignee_=?";
-        List<Map<String, Object>> taskList = query(sql_tasklist, WORKFLOW, new String[] { userName });
-        Map<String, Map<String, Object>> tasMapkList = new HashMap<String, Map<String, Object>>();
-        for (int i = 0; i < taskList.size(); i++) {
-            String key = taskList.get(i).get("execution_id_").toString();
-            tasMapkList.put(key, taskList.get(i));
-        }
-
-        String str = "'1'";
-        for (Map<String, Object> taskBean : taskList) {
-            str += ",'" + taskBean.get("execution_id_").toString() + "'";
-        }
-        // 从立案呈批表和案源登记表中获取数据的sql
-        String sql = "select  t2.ayzt ay, t2.ajly ajly,t1.yw_guid guid from lacpb t1, aydjb t2 where t1.yw_guid = t2.yw_guid and t1.checked='0'  and t1.wfinsid in ("
-                + str + ")";
-        if (keyWord != null) {
-            keyWord = UtilFactory.getStrUtil().unescape(keyWord);
-            sql += " and (upper(t2.ayzt)||upper(t2.ajly)||upper(t1.yw_guid)  like '%" + keyWord + "%')";
-        }
-        List<Map<String, Object>> caseList = query(sql, YW);
-        response(caseList);
-    }
 
     /**
      * <br>
-     * Description:获取案件督查待办案件列表 <br>
+     * Description:获取案件查询待办案件列表 <br>
      * Author:赵伟 <br>
      * Date:2012-9-8
      * 
@@ -93,7 +52,6 @@ public class LaccManager extends AbstractBaseBean {
     public void getajglProcessList() throws Exception {
         // 获取参数
         String keyWord = request.getParameter("keyWord");
-        String userid = request.getParameter("userid");
         // 获取数据
         String sql = "select t.yw_guid,t.bh as ajbh,t.qy ,t.ay,t.dwmc,t.ajly,t.grxm ,to_char(t.slrq,'yyyy-MM-dd hh24:mi:ss') as slrq,j.activity_name_ as bazt,to_char(j.create_ ,'yyyy-MM-dd hh24:mi:ss') as jssj,j.assignee_,j.wfinsid from lacpb t join workflow.v_active_task j on t.yw_guid=j.yw_guid";
         if (keyWord != null) {
@@ -130,8 +88,6 @@ public class LaccManager extends AbstractBaseBean {
         // 获取参数
         String keyWord = request.getParameter("keyWord");
         String fullName = UtilFactory.getStrUtil().unescape(request.getParameter("fullName"));
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-
         // 获取数据
         String sql = "select t.yw_guid,t.bh as ajbh ,t.ay,t.dwmc,t.ajly,t.grxm ,to_char(t.slrq,'yyyy-MM-dd hh24:mi:ss') as slrq,j.activityname as bazt,j.wfInsId,to_char(j.create_ ,'yyyy-MM-dd hh24:mi:ss') as jssj,to_char(j.end_,'yyyy-MM-dd hh24:mi:ss') as yjsj,j.wfinsid from lacpb t join workflow.v_hist_task j on t.yw_guid=j.yw_guid where j.assignee_=?";
         if (keyWord != null) {
@@ -195,23 +151,6 @@ public class LaccManager extends AbstractBaseBean {
         response(result);
     }
 
-    /**
-     * 
-     * <br>
-     * Description:获取节点和实例编号 <br>
-     * Author:陈强峰 <br>
-     * Date:2012-9-4
-     */
-    public void getNameAndId() {
-        String guid = request.getParameter("guid");
-        String sql = "select activityname,wfinsid,taskid from lacpb where yw_guid=?";
-        List<Map<String, Object>> list = query(sql, YW, new Object[] { guid });
-        if (list.size() > 0) {
-            response(list);
-        } else {
-            response("");
-        }
-    }
 
     /**
      * 
