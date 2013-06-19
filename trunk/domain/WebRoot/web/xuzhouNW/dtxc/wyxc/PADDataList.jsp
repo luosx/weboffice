@@ -56,7 +56,9 @@ Ext.onReady(function(){
            {name: 'XCRQ'},
            {name: 'CJZB'},
            {name: 'JWZB'},
-           {name: 'IMGNAME'}
+           {name: 'IMGNAME'},
+           {name: 'XIANGXI'},
+           {name: 'DELETE'}
         ]
     });
     
@@ -79,8 +81,8 @@ Ext.onReady(function(){
           {header: '采集坐标', dataIndex:'CJZB',width: width*0.1, hidden:true, sortable: false},
           {header: '经纬坐标', dataIndex:'JWZB',width: width*0.1, hidden:true, sortable: false},
           {header: '图片名称', dataIndex:'IMGNAME',width: width*0.1, hidden:true, sortable: false},
-          {header: '详细信息', dataIndex:'详细信息',width: width*0.1, sortable: false,renderer:view},
-          {header: '删除',dataIndex:'删除',width: width*0.05, sortable: false,renderer:del}
+          {header: '详细信息', dataIndex:'XIANGXI',width: width*0.1, sortable: false,renderer:view},
+          {header: '删除',dataIndex:'DELETE',width: width*0.05, sortable: false,renderer:del}
         ],
           tbar:[
 	    		 	 {xtype:'label',text:'快速查找:',width:60},
@@ -89,7 +91,10 @@ Ext.onReady(function(){
 	    ],
         stripeRows: true,
         listeners:{
-		       rowdblclick: showDetail
+		  rowdblclick : function(grid, rowIndex, e)
+				{
+				   showDetail(grid.getStore().getAt(rowIndex).data.XIANGXI);
+				}
         },
         height: height+40,
         width:width,
@@ -133,6 +138,7 @@ function delTask(id){
 	  if(btn=='yes'){
 	    var path = "<%=basePath%>";
 	    putClientCommond("padDataList","delPAD");
+	    putRestParameter("yw_guid",myData[id].GUID)
         var mes = restRequest(); 
 		document.location.reload();
 		}
@@ -144,7 +150,7 @@ function delTask(id){
 
 
 function showDetail(id){
-    var url = "<%=basePath%>web/xuzhouNW/dtxc/wyxc/xjclyjframe.jsp?zfjcType=11&yw_guid="+myData[id][0];     
+    var url = "<%=basePath%>web/xuzhouNW/dtxc/wyxc/xjclyjframe.jsp?zfjcType=11&yw_guid="+myData[id].GUID;     
 	document.location.href=url;
 }
 
@@ -169,7 +175,9 @@ function query(){
            {name: 'XCRQ'},
            {name: 'CJZB'},
            {name: 'JWZB'},
-           {name: 'IMGNAME'}
+           {name: 'IMGNAME'},
+           {name: 'XIANGXI'},
+           {name: 'DELETE'}
         ]
     });
     grid.reconfigure(store, new Ext.grid.ColumnModel([
@@ -183,8 +191,8 @@ function query(){
             {header: '采集坐标', dataIndex:'CJZB',width: width*0.1, hidden:true, sortable: false},
             {header: '经纬坐标', dataIndex:'JWZB',width: width*0.1, hidden:true, sortable: false},
             {header: '图片名称', dataIndex:'IMGNAME',width: width*0.1, hidden:true, sortable: false},
-            {header: '详细信息', dataIndex:'详细信息',width: width*0.1, sortable: false,renderer:view},
-            {header: '删除',dataIndex:'删除',width: width*0.05, sortable: false,renderer:del}
+            {header: '详细信息', dataIndex:'XIANGXI',width: width*0.1, sortable: false,renderer:view},
+            {header: '删除',dataIndex:'DELETE',width: width*0.05, sortable: false,renderer:del}
         ]));
 //重新绑定分页工具栏
  grid.getBottomToolbar().bind(store);
