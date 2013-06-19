@@ -19,38 +19,6 @@ public class WyrwManager extends AbstractBaseBean {
 
     /**
      * 
-     * <br>Description:下载任务
-     * <br>Author:陈强峰
-     * <br>Date:2012-8-14
-     */
-    public void downTask() {
-        WyrwDeal wyrw = new WyrwDeal();
-        wyrw.request = this.request;
-        wyrw.response = this.response;
-        wyrw.expTaskTxt();
-    }
-
-    public void downTasks() {
-        WyrwDeal wyrw = new WyrwDeal();
-        wyrw.request = this.request;
-        wyrw.response = this.response;
-        wyrw.expTasks();
-    }
-    /**
-     * 
-     * <br>Description:导出任务
-     * <br>Author:陈强峰
-     * <br>Date:2012-8-14
-     */
-    public void impTask() {
-        WyrwDeal wyrw = new WyrwDeal();
-        wyrw.request = this.request;
-        wyrw.response = this.response;
-        wyrw.impTaskTxt();
-    }
-
-    /**
-     * 
      * <br>Description:导出成果
      * <br>Author:陈强峰
      * <br>Date:2012-8-14
