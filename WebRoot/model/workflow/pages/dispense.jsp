@@ -12,7 +12,7 @@
 	String zfjcType = request.getParameter("zfjcType");
 	String edit = request.getParameter("edit");
 	IWorkflowOp workflow = WorkflowOp.getInstance();
-	String zfjcName = workflow.getWfDescriptionByWfID("lacc-1");
+	String zfjcName = workflow.getWfDescriptionByWfID(workflow.getWfIdByWfInsID(wfInsId));
 	
 	String activityName = workflow.getActivityNameByWfInsID(wfInsId);
 	String returnPath = request.getParameter("returnPath");
