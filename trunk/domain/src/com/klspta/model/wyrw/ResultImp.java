@@ -8,11 +8,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.rmi.server.UID;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -49,34 +45,6 @@ public class ResultImp extends AbstractBaseBean {
 
     public ResultImp() {
         tempPath = getTemp();
-    }
-
-    //获取任务
-    public void getTask() {
-        List allList = new ArrayList();
-        LinkedHashMap<String, Object> map = new LinkedHashMap<String, Object>();
-        map.put("任务编号", "21");
-        map.put("信访类型", "32");
-        map.put("信访日期", "43");
-        map.put("反映问题类型", "问题");
-        map.put("问题的详细类型", "类型");
-        map.put("反映问题摘要", "问题摘要");
-        allList.add(map);
-        map = new LinkedHashMap<String, Object>();
-        map.put("任务编号", "21");
-        map.put("信访类型", "32");
-        map.put("信访日期", "43");
-        map.put("反映问题类型", "问题");
-        map.put("问题的详细类型", "类型");
-        map.put("反映问题摘要", "问题摘要");
-        allList.add(map);
-        StringBuffer bf = new StringBuffer();
-        try {
-            bf = new StringBuffer(UtilFactory.getJSONUtil().objectToJSON(allList));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        response(bf.toString());
     }
 
     /**
@@ -208,7 +176,6 @@ public class ResultImp extends AbstractBaseBean {
                     String cjry = obj.get("CJRY").toString();
                     String xcqk = obj.get("XCQK").toString();
                     xcqk = xcqk.replace("#", "\n   ");
-                    //String xcqk = "";
                     String clyj = obj.get("CLYJ").toString();
                     String xcdw = gtzyj + gtzys;
                     String sqlhas = "select x.gtzys from PAD_XCRZ x  where yw_guid=?";
@@ -332,13 +299,13 @@ public class ResultImp extends AbstractBaseBean {
                                     objs = new Object[] { usetype, kczbh, cjmj, xcx, xcs, xcsj, xcdd, jsdw,
                                             jsxm, jsqk, pzwh, gdwh, tdzbh, sjclyj, jwzb, cjzb, sjbz, kcdd,
                                             kcdw, kckz, kcqk, xzjsyd, xjsyd, ytjjsq, xzjsq, jzjsq, zyjbnt,
-                                            zmj,nyd,gd,jsyd,wlyd,yw_guid };
+                                            zmj, nyd, gd, jsyd, wlyd, yw_guid };
                                 } else {
                                     sql = "insert into PAD_XCXCQKB(YW_GUID,CJMJ,XCX,XCS,XCSJ,XCDD,JSDW,JSXM,JSQK,PZWH,GDWH,TDZBH,SJCLYJ,JWZB,CJZB,SJBZ,USETYPE,KCZBH,KCDD,KCKZ,KCDW,KCQK,XZJSYD,XJSYD,YTJJSQ,XZJSQ,JZJSQ,ZYJBNT,ZMJ,NYD,GD,JSYD,WLYD) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
                                     objs = new Object[] { yw_guid, cjmj, xcx, xcs, xcsj, xcdd, jsdw, jsxm,
                                             jsqk, pzwh, gdwh, tdzbh, sjclyj, jwzb, cjzb, sjbz, usetype,
                                             kczbh, kcdd, kckz, kcdw, kcqk, xzjsyd, xjsyd, ytjjsq, xzjsq,
-                                            jzjsq, zyjbnt, zmj,nyd,gd,jsyd,wlyd};
+                                            jzjsq, zyjbnt, zmj, nyd, gd, jsyd, wlyd };
                                 }
                                 count += update(sql, YW, objs);
                                 //上图操作
@@ -370,31 +337,6 @@ public class ResultImp extends AbstractBaseBean {
 
     /**
      * 
-     * <br>Description:根据回传的类型  修改案件管理中的相应信息状态
-     * <br>Author:陈强峰
-     * <br>Date:2012-8-17
-     * @param rwlx
-     * @param guid
-     */
-    private void changeYwStatus(String rwlx, String guid) {
-        String sql = "";
-        if (rwlx.equals("立案查处")) {
-            sql = "update lacpb l set l.checked='2' where YW_GUID=?";
-            update(sql, YW, new Object[] { guid });
-        } else {
-            if (rwlx.equals("卫片")) {
-                sql = "update wpzf_tb t set  t.ajstatus=? where t.tbbh=?";
-            } else if (rwlx.equals("信访")) {
-                sql = "update wfxsdjbl t set t.ajstatus=? where t.xsh=?";
-            }
-            if (sql.length() > 0) {
-                update(sql, YW, new Object[] { "6", guid });
-            }
-        }
-    }
-
-    /**
-     * 
      * <br>Description:删除附件信息
      * <br>Author:陈强峰
      * <br>Date:2012-7-29
@@ -406,11 +348,9 @@ public class ResultImp extends AbstractBaseBean {
         for (int i = 0; i < list.size(); i++) {
             String ftpFileName = list.get(i).get("file_path").toString();
             String fileId = list.get(i).get("file_id").toString();
-            boolean delFlag = UtilFactory.getFtpUtil().deleteFile(ftpFileName);
-            // if (delFlag) {
+            UtilFactory.getFtpUtil().deleteFile(ftpFileName);
             sql = "delete from atta_accessory where file_id=?";
             update(sql, CORE, new Object[] { fileId });
-            // }
         }
     }
 
@@ -462,7 +402,6 @@ public class ResultImp extends AbstractBaseBean {
                 }
             }
         }
-        //sql = "update wy_device_data set imgname=? where guid=?";
         sql = "update PAD_XCXCQKB set ZPBH=? where yw_guid=?";
         update(sql, YW, new Object[] { sb.toString(), yw_guid });
     }
@@ -531,7 +470,6 @@ public class ResultImp extends AbstractBaseBean {
 
         } catch (Exception e) {
             System.out.println("采集坐标出错");
-            //e.printStackTrace();
         }
 
     }
