@@ -67,7 +67,7 @@ public class MenuAction extends AbstractBaseBean{
 		String[] menuIdList=treeIdList.split(",");
 		try {
 			ManagerFactory.getMenuManager().saveMenuRole(roleId, menuIdList);
-			response.getWriter().write("{success:true}");
+			response("success");
 		} catch (Exception e1) {
 			
 		}
