@@ -15,6 +15,7 @@
 	String wfInsId = request.getParameter("wfInsId");
 	String zfjcType = request.getParameter("zfjcType");
 	String returnPath=request.getParameter("returnPath");
+	returnPath = basePath + returnPath;
 	String buttonHidden = request.getParameter("buttonHidden");
 	String edit = request.getParameter("edit");
 	IWorkflowOp workflow = WorkflowOp.getInstance();
