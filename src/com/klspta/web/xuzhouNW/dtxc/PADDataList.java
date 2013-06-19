@@ -24,7 +24,7 @@ public class PADDataList extends AbstractBaseBean {
      */ 
     public void getQueryData() {
         String keyword = request.getParameter("keyWord");
-        if (keyword != null&&keyword.length()>0) {
+        if (keyword != null) {
             keyword = UtilFactory.getStrUtil().unescape(keyword);
             System.out.print(keyword);
             String sql = "select t.readflag,t.guid,t.xzqmc,t.xmmc,t.rwlx,t.sfwf,(select u.fullname from core.core_users u where u.username=t.xcr) xcr,t.xcrq,t.cjzb,t.jwzb,t.imgname from v_pad_data t where (upper(guid)||upper(xmmc)||upper(rwlx)||upper(sfwf)||upper(xcr)||upper(xcrq) like '%"
