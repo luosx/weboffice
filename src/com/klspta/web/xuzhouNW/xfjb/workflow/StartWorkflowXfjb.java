@@ -8,6 +8,8 @@ import java.util.Map;
 
 import com.klspta.base.AbstractBaseBean;
 import com.klspta.base.util.UtilFactory;
+import com.klspta.base.workflow.foundations.IWorkflowInsOp;
+import com.klspta.base.workflow.foundations.WorkflowInsOp;
 import com.klspta.base.workflow.foundations.WorkflowOp;
 import com.klspta.console.ManagerFactory;
 
@@ -93,5 +95,28 @@ public class StartWorkflowXfjb extends AbstractBaseBean {
             num = dateString + temp;
 		}
 		return num;
+	}
+	
+	
+	/**
+	 * 
+	 * <br>Description:工作流的中止方法
+	 * <br>Author:王雷
+	 * <br>Date:2013-6-17
+	 */
+	public void deleteTask(){
+	    String yw_guid = request.getParameter("yw_guid");
+	    String wfInsId = request.getParameter("wfInsId");
+	    //1.删除业务数据
+	    String []datasheets={"wfxsfkxx"};
+        String sql="";
+	    for(int i=0;i<datasheets.length;i++){
+	        sql="delete from "+datasheets[i]+" where yw_guid=?";
+	        update(sql,YW,new Object[]{yw_guid});   
+	    }
+	    //2.删除工作流实例
+	    IWorkflowInsOp workflowIns = WorkflowInsOp.getInstance();
+	    workflowIns.deleteWfIns(wfInsId);
+	    response("true");
 	}
 }
