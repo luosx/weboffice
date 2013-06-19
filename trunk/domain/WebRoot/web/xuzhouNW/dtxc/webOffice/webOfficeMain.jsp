@@ -1,5 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%@page import="com.klspta.web.xuzhouNW.dtxc.cgd.CgdManager"%>
+<%@page import="com.klspta.web.xuzhouNW.dtxc.DtxcManager"%>
 <%@page import="com.klspta.base.util.bean.ftputil.AccessoryBean"%>
 <%@page import="com.klspta.base.util.UtilFactory"%>
 <%
@@ -12,7 +12,7 @@ String flag = request.getParameter("flag");
 List<Map<String, Object>> showList = new DtxcManager().getXzrqbyYw_guid(yw_guid);
 String tempFolder = "";
 String ftpFileName = "";
-//文件已存在，打开已存在的文件
+//文件已存在，将文件从ftp中下载到缓冲区中打开已存在的文件
 if(flag.equals("false")){
 	ftpFileName = file_id+ ".doc";
 	AccessoryBean bean = new AccessoryBean();
@@ -84,7 +84,6 @@ if(flag.equals("false")){
 			document.all.WebOffice1.SetFieldValue("area", "<%=(String)showList.get(0).get(request.getParameter("area"))%>"); 
 			document.all.WebOffice1.SetFieldValue("buildDate", "<%=(String)showList.get(0).get(request.getParameter("buildDate"))%>"); 
 			document.all.WebOffice1.SetFieldValue("Date", "<%=(String)showList.get(0).get(request.getParameter("Date"))%>"); 	
-  			
   		
   			//将文档上传到ftp
   			uploadDoc();
