@@ -32,8 +32,8 @@ public class PADDataList extends AbstractBaseBean {
         }
         List<Map<String, Object>> query = query(sql, YW);
         for(int i=0;i<query.size();i++){
-            query.get(i).put("详细信息",i);
-            query.get(i).put("删除",i);
+            query.get(i).put("XIANGXI",i);
+            query.get(i).put("DELETE",i);
         }
         response(query);
     }
