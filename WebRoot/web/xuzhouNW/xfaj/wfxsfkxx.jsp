@@ -36,10 +36,14 @@
 		<%@ include file="/base/include/restRequest.jspf" %>
 		<link rel="stylesheet"
 			href="<%=basePath%>base/form/css/commonForm.css" type="text/css" />
-				<link rel="stylesheet"
-			href="<%=basePath%>web/default/ajgl/css/lacpb.css" type="text/css" />
 		<%@ include file="/base/include/formbase.jspf"%>
 		<%} %>
+		
+		<style>
+		   .textcls{
+		    	font-size: 14px
+		   }
+		</style>
 		<script>
 		function initEdit(){
 			init();
@@ -85,11 +89,11 @@ if(fixed!=null && fixed.equals("fixedPrint")){%>
 </div>
 <table class="lefttopborder1"  cellspacing="0" cellpadding="0" border="1"  bgcolor="#FFFFFF" bordercolor="#000000" width="600">
   <tr>
-    <td colspan="6"><div align="left">调查处理中务必做到保护举报人。</div></td>
+    <td colspan="6"><div align="left">&nbsp;调查处理中务必做到保护举报人。</div></td>
   </tr>
   <tr>
     <td width="35" rowspan="8"><p align="center">基<br/><br/>本<br/><br/>信<br/><br/>息</p></td>
-    <td width="92"><div align="left">线索类型</div></td>
+    <td width="92"><div align="center">线索类型</div></td>
     <td colspan="4">
      <div align="left">
      <%if(permission.equals("yes")){ %>					
@@ -102,7 +106,7 @@ if(fixed!=null && fixed.equals("fixedPrint")){%>
 						</td>										
   </tr>
   <tr>
-    <td><div align="left">办理方式</div></td>
+    <td><div align="center">办理方式</div></td>
     <td colspan="4">   <div align="left">
      <%if(permission.equals("yes")){ %>					
     						<input class="noborder" name="blfs" id="blfs" style="width: 98%"/>
@@ -115,13 +119,13 @@ if(fixed!=null && fixed.equals("fixedPrint")){%>
 							</div></td>
   </tr>
   <tr>
-    <td><div align="left">举报人</div></td>
-    <td colspan="2"><input type="text" class="noborder" name="jbr" id="jbr" style="width: 98%"/></td>
+    <td><div align="center">举报人</div></td>
+    <td colspan="2"><input type="text" class="textcls" name="jbr" id="jbr" style="width: 98%;"/></td>
     <td width="69"><div align="center">举报方式</div></td>
     <td width="160"><input type="text" class="noborder" name="jbfs" id="jbfs" style="width: 98%"/></td>
   </tr>
   <tr>
-    <td rowspan="2"><div align="left">举报联系方式</div></td>
+    <td rowspan="2"><div align="center">举报联系方式</div></td>
     <td width="75" height="16"><div align="center">联系地址</div></td>
     <td colspan="3"><input type="text" class="noborder" name="lxdz" id="lxdz" style="width: 98%"/></td>
   </tr>
@@ -132,15 +136,15 @@ if(fixed!=null && fixed.equals("fixedPrint")){%>
     <td><input type="text" class="noborder" name="lxdh" id="lxdh" style="width: 98%"/></td>
   </tr>
   <tr>
-    <td><div align="left">被举报单位</div></td>
+    <td><div align="center">被举报单位</div></td>
     <td colspan="4"><input type="text" class="noborder" name="bjbdw" id="bjbdw" style="width: 98%"/></td>
   </tr>
   <tr>
-    <td><div align="left">问题发生地</div></td>
+    <td><div align="center">问题发生地</div></td>
     <td colspan="4"><input type="text" class="noborder" name="wtfsd" id="wtfsd" style="width: 98%"/></td>
   </tr>
   <tr>
-    <td><div align="left">问题发生时间</div></td>
+    <td><div align="center">问题发生时间</div></td>
     <td colspan="2"><input type="text" class="noborder" id="wtfssj" name="wtfssj"
 								onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})" readonly style="width: 98%" /></td>
     <td><div align="center">登记时间</div></td>
@@ -154,7 +158,7 @@ if(fixed!=null && fixed.equals("fixedPrint")){%>
   
   <tr>
     <td rowspan="3"><div align="center">反<br/><br/>馈<br/><br/>信<br/><br/>息</div></td>
-    <td height="29"><div align="left">反馈单位</div></td>
+    <td height="29"><div align="center">反馈单位</div></td>
     <td colspan="4"><input type="text" class="noborder" name="fkdw" id="fkdw" style="width: 98%"/></td>
   </tr>
   <tr>
@@ -178,7 +182,7 @@ if(fixed!=null && fixed.equals("fixedPrint")){%>
 							</div></td>
   </tr>
   <tr>
-    <td height="89"><div align="left">线索情况说明</div></td>
+    <td height="89"><div align="center">线索情况说明</div></td>
     <td colspan="4"><textarea rows="8" name="xsqksm" id="xsqksm" style="width: 99%"></textarea></td>
   </tr>
   <tr>
