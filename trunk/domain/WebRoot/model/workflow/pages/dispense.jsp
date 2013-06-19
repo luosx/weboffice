@@ -122,6 +122,16 @@ html,body {
 			}
 	}
 	
+	//删除工作流实例确认	
+	function deleteTask() {
+		Ext.MessageBox.confirm('注意', '终止后不可恢复，是否继续?', function(btn) {
+			if (btn == 'yes') {
+				stopTask(btn);
+			}
+		})
+	}
+	
+	//删除工作流实例
 	function stopTask(btn){
      if(btn=='yes'){
 	 var path = "<%=basePath%>";
@@ -131,12 +141,12 @@ html,body {
 	    var parameter="wfInsId=<%=wfInsId%>&yw_guid=<%=yw_guid%>";
 		var result = ajaxRequest(path,actionName,actionMethod,parameter);
 		*/
-		putClientCommond("startWorkflow","deleteTask");
-		putRestParameter("wfInsId", "<%=wfInsId%>");
+		putClientCommond("workflowNodeOperation","delTask");
+		putRestParameter("wfInsID", "<%=wfInsId%>");
 		putRestParameter("yw_guid", "<%=yw_guid%>");
 		var result=restRequest();
-		if(result=="true"){
-              parent.show("已中止！");           
+		if(result){
+              // parent.show("已中止！");           
               back();
 		}else{		
 		      parent.show("操作出错了，请您稍后重试或联系管理员！");
