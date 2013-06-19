@@ -23,6 +23,6 @@
 <bean name="xfAction" class="com.klspta.web.xuzhouNW.xfjb.manager.XfAction" scope="prototype"/>
 <!-- 立案查处 -->
 <bean name="lacc" class="com.klspta.web.xuzhouNW.lacc.LaccManager" scope="prototype"/>
-
-
+<!-- 案件台账 -->
+<bean name="tjfxManager" class="com.klspta.web.xuzhouNW.lacc.TjfxManager" scope="prototype" /> 
 </beans>
