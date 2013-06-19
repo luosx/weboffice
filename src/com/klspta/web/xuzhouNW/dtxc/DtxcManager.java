@@ -60,6 +60,66 @@ public class DtxcManager extends AbstractBaseBean {
 	
 	public static void main(String[] args) {
 		DtxcManager dm = new DtxcManager();
-		System.out.println(dm.buildXcbh());
+		//System.out.println(dm.buildXcbh());
+		System.out.println(dm.arrayFlag("-77c524e9-13f5a0cd5ee--7ff3"));
 	}
+	
+	/**
+	 * 
+	 * <br>Title: 生成标示前台抄告单显示个数的标识字符串
+	 * <br>Description: 
+	 * <br>Author: 姚建林
+	 * <br>Date: 2013-6-19
+	 */
+	public String arrayFlag(String yw_guid){
+		//用五个抄告单的 建设项目 是否为空标示
+		String sql = "select jsxm1,jsxm2,jsxm3,jsxm4,jsxm5 from xcrz where yw_guid = '"+yw_guid+"'";
+		List<Map<String, Object>> result = query(sql, YW);
+		StringBuffer sb = new StringBuffer();
+		if(result.get(0).get("jsxm1") == null){
+			sb.append("0,");
+		}
+		if(result.get(0).get("jsxm1") != null){
+			sb.append("1,");
+		}
+		if(result.get(0).get("jsxm2") == null){
+			sb.append("0,");
+		}
+		if(result.get(0).get("jsxm2") != null){
+			sb.append("1,");
+		}
+		if(result.get(0).get("jsxm3") == null){
+			sb.append("0,");
+		}
+		if(result.get(0).get("jsxm3") != null){
+			sb.append("1,");
+		}
+		if(result.get(0).get("jsxm4") == null){
+			sb.append("0,");
+		}
+		if(result.get(0).get("jsxm4") != null){
+			sb.append("1,");
+		}
+		if(result.get(0).get("jsxm5") == null){
+			sb.append("0");
+		}
+		if(result.get(0).get("jsxm5") != null){
+			sb.append("1");
+		}
+		return sb.toString(); 
+	}
+	
+	/**
+	 * <br>
+	 * Description:根据yw_guid获取巡查日志 <br>
+	 * Author:黎春行 <br>
+	 * Date:2013-06-18
+	 * 
+	 * @return
+	 */
+	public List<Map<String, Object>> getXzrqbyYw_guid(String yw_guid){
+		String sql = "select * from xcrz t where t.yw_guid = ?";
+		return query(sql, YW, new Object[]{yw_guid});
+	}
+
 }
