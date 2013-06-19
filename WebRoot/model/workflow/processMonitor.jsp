@@ -14,13 +14,13 @@
     String basePath = request.getScheme() + "://" + request.getServerName() + ":"+ request.getServerPort() + path + "/";   
     
     //必需参数/////////////////////////////////////
-    String wfInsId = request.getParameter("wfInsId");//流程实例ID
-	
-	String wfInsTaskId = JBPMServices.getInstance().getTaskService().createTaskQuery().executionId(wfInsId).uniqueResult().getId();
-	String wfId = JBPMServices.getInstance().getExecutionService().findExecutionById(wfInsId).getProcessDefinitionId();
-	String activityName = JBPMServices.getInstance().getTaskService().createTaskQuery().executionId(wfInsId).uniqueResult().getActivityName();
+    String wfInsId =request.getParameter("wfInsID");
+	IWorkflowOp workflowOp = WorkflowOp.getInstance();
+	String wfInsTaskId = workflowOp.getWfInsTaskIdByWfInsID(wfInsId);
+	String wfId = workflowOp.getWfIdByWfInsID(wfInsId);
+	String activityName = workflowOp.getActivityNameByWfInsID(wfInsId);
         
-    IWorkflowOp workflowOp = WorkflowOp.getInstance();
+    
 	DoNextBean ac=workflowOp.getNextInfo(wfId,wfInsId,wfInsTaskId);
 		
     List<NodeDefineInfoBean> list=new ArrayList<NodeDefineInfoBean>();
@@ -31,6 +31,7 @@
     Map<String,Object> map_1 = list_.get(0);
     Map<String,Object> map_2 = list_.get(1);		
     		
+    String state=JBPMServices.getInstance().getHistoryService().createHistoryProcessInstanceQuery().processInstanceId(wfInsId).uniqueResult().getState();
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -112,7 +113,7 @@
 	<p>&nbsp;</p>
 			<table border="0" cellpadding="0" cellspacing="0" >
 				<tr>
-				<%if(!"办结".equals(activityName)){ %>
+				<%if(!state.equals("ended")){ %>
 					<td valign="top" >
 	 					<img src="<%=basePath%>model/workflow/flowChart.jsp?wfInsTaskId=<%=wfInsTaskId%>" />
 	 					<div id="kuang" style="position:absolute;display:none;border:1px solid red;left:<%=ac.getX()%>px;top:<%=ac.getY()+203%>px;width:<%=ac.getWidth()%>px;height:<%=ac.getHeight()%>px;"></div>
