@@ -34,7 +34,7 @@ String beanId=request.getParameter("beanId");
       putRestParameter("zfjcType","<%=zfjcType%>");
       putRestParameter("userId", "<%=userId%>");
       var path=restRequest();
-      document.location.href="<%=basePath%>"+path+"&edit=true&returnPath=<%=basePath%>web/xuzhouNW/lacc/lb/dbaj.jsp";
+      document.location.href="<%=basePath%>"+path+"&edit=true";
 	}  
 	</script>
   </head>
