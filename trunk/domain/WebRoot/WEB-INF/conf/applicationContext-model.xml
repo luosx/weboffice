@@ -25,8 +25,6 @@
 	<!-- 地图管理 -->
 	<bean name="mapAuthorOperation" class="com.klspta.model.mapconfig.MapAuthorOperation" scope="prototype"/>
 	
-	<!--外业任务总入口-->
-    <bean name="gpslocation" class="com.klspta.model.wyrw.GpsLocation" scope="prototype"/> 
 	<!-- anychart -->
 		<!--外业任务总入口-->
     <bean name="wyrwmanager" class="com.klspta.model.wyrw.WyrwManager" scope="prototype"/> 

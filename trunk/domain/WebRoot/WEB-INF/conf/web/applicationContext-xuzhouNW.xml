@@ -25,4 +25,7 @@
 <bean name="lacc" class="com.klspta.web.xuzhouNW.lacc.LaccManager" scope="prototype"/>
 <!-- 案件台账 -->
 <bean name="tjfxManager" class="com.klspta.web.xuzhouNW.lacc.TjfxManager" scope="prototype" /> 
+
+<!--回传成果-->
+	<bean name="pADDataList" class="com.klspta.web.xuzhouNW.dtxc..PADDataList" scope="prototype"/>
 </beans>
