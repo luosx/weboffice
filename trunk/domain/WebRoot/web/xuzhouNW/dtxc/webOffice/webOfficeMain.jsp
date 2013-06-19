@@ -90,7 +90,8 @@ if(flag.equals("false")){
   		}else{
   			//加载第二次时，直接从ftp中读取word文档
   			document.all.WebOffice1.LoadOriginalFile("<%=tempFolder%><%=ftpFileName%>", "doc");	
-  			document.all.WebOffice1.HideMenuArea("hideall","","","");  
+  			document.all.WebOffice1.HideMenuArea("hideall","","",""); 
+  			document.getElementById("save").disabled = false;  
   		}
   	}
   	
