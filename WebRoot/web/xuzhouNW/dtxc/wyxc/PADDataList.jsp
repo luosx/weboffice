@@ -42,23 +42,21 @@ var form;
 Ext.onReady(function(){
     putClientCommond("padDataList","getQueryData");
 	myData = restRequest();
-    store = new Ext.data.ArrayStore({
+ 	store = new Ext.data.JsonStore({
     proxy: new Ext.ux.data.PagingMemoryProxy(myData),
 		remoteSort:true,
         fields: [
-           {name: '任务编号'},
-           {name: '所在政区'},
-           {name: '项目名称'},
-           {name: '任务类型'},
-           {name: '是否违法'},
-           {name: '巡查人'},
-           {name: '巡查日期'},
-           {name: '采集坐标'},
-           {name: '经纬坐标'},
-           {name: '图片名称'},
-           {name: '详细信息'},
-           {name: '删除'},
-           {name: 'READFLAG'}
+           {name: 'READFLAG'},
+           {name: 'GUID'},
+           {name: 'XZQMC'},
+           {name: 'XMMC'},
+           {name: 'RWLX'},
+           {name: 'XCR'},
+           {name: 'SFWF'},
+           {name: 'XCRQ'},
+           {name: 'CJZB'},
+           {name: 'JWZB'},
+           {name: 'IMGNAME'}
         ]
     });
     
@@ -71,19 +69,18 @@ Ext.onReady(function(){
         sm:sm,
         columns: [
             //sm,
-            new Ext.grid.RowNumberer(),
-            {header: '任务编号', dataIndex:'任务编号', width: width*0.1, sortable: false},
-            {header: '所在政区', dataIndex:'所在政区', width: width*0.1, sortable: false},
-            {header: '项目名称', dataIndex:'项目名称',width: width*0.2, sortable: false},
-            {header: '任务类型', dataIndex:'任务类型',width: width*0.1, sortable: false},
-            {header: '是否违法', dataIndex:'是否违法',width: width*0.1, sortable: false},
-            {header: '巡查人', dataIndex:'巡查人',width: width*0.05, sortable: false},
-            {header: '巡查日期', dataIndex:'巡查日期',width: width*0.1, sortable: false},
-            {header: '采集坐标', dataIndex:'采集坐标',width: width*0.1, hidden:true, sortable: false},
-            {header: '经纬坐标', dataIndex:'经纬坐标',width: width*0.1, hidden:true, sortable: false},
-            {header: '图片名称', dataIndex:'图片名称',width: width*0.1, hidden:true, sortable: false},
-            {header: '详细信息', dataIndex:'详细信息',width: width*0.1, sortable: false,renderer:view},
-            {header: '删除',dataIndex:'删除',width: width*0.05, sortable: false,renderer:del}
+          {header: '任务编号', dataIndex:'GUID', width: width*0.1, sortable: false},
+          {header: '所在政区', dataIndex:'XZQMC', width: width*0.1, sortable: false},
+          {header: '项目名称', dataIndex:'XMMC',width: width*0.2, sortable: false},
+          {header: '任务类型', dataIndex:'RWLX',width: width*0.1, sortable: false},
+          {header: '是否违法', dataIndex:'SFWF',width: width*0.1, sortable: false},
+          {header: '巡查人', dataIndex:'XCR',width: width*0.05, sortable: false},
+          {header: '巡查日期', dataIndex:'XCRQ',width: width*0.1, sortable: false},
+          {header: '采集坐标', dataIndex:'CJZB',width: width*0.1, hidden:true, sortable: false},
+          {header: '经纬坐标', dataIndex:'JWZB',width: width*0.1, hidden:true, sortable: false},
+          {header: '图片名称', dataIndex:'IMGNAME',width: width*0.1, hidden:true, sortable: false},
+          {header: '详细信息', dataIndex:'详细信息',width: width*0.1, sortable: false,renderer:view},
+          {header: '删除',dataIndex:'删除',width: width*0.05, sortable: false,renderer:del}
         ],
           tbar:[
 	    		 	 {xtype:'label',text:'快速查找:',width:60},
@@ -125,21 +122,18 @@ Ext.onReady(function(){
 
 
 function view(id){
-	return "<a href='#' onclick='showDetail("+id+");return false;'><img src='base/gis/images/view.png' alt='详细信息'></a>";
+	return "<a href='#' onclick='showDetail("+id+");return false;'><img src='base/form/images/view.png' alt='详细信息'></a>";
 }
 function del(id){
- 	return "<a href='#' onclick='delTask("+id+");return false;'><img src='base/gis/images/delete.png' alt='删除'></a>";
+ 	return "<a href='#' onclick='delTask("+id+");return false;'><img src='base/form/images/delete.png' alt='删除'></a>";
 }
 
 function delTask(id){
 	Ext.MessageBox.confirm('注意', '删除后不能恢复，您确定吗？',function(btn){
 	  if(btn=='yes'){
 	    var path = "<%=basePath%>";
-	    var actionName ="pADDataList";
-	    var actionMethod ="delPAD";
-	    var yw_guid = myData[id][0].trim();
-	    var parameter="yw_guid="+yw_guid;
-		var result = ajaxRequest(path,actionName,actionMethod,parameter);
+	    putClientCommond("padDataList","delPAD");
+        var mes = restRequest(); 
 		document.location.reload();
 		}
 		else{
@@ -150,22 +144,7 @@ function delTask(id){
 
 
 function showDetail(id){
-    //alert(myData[id][0]);
-    var mes='任务编号：'+myData[id][0];
-    mes+='<br>项目名称：'+ myData[id][2];
-    mes+='<br>任务类型：'+ myData[id][3];
-    mes+='<br>是否违法：'+ myData[id][4];
-    mes+='<br>巡查人：'+ myData[id][5]; 
-    mes+='<br>巡查日期：'+ myData[id][6];
-    var info = mes;	
-    var coord = myData[id][8];
-    var imgurl = myData[id][9];
-	  var path = "<%=basePath%>";
-	  var actionName = "pADDataList";
-	  var actionMethod = "checkReadFlag";
-	  var parmeter="carId="+myData[id][0];
-	  var res = ajaxRequest(path,actionName,actionMethod,parmeter); 
-    var url = "<%=basePath%>web/xuzhouNW/dtxc/xccg/xjclyjframe.jsp?zfjcType=11&yw_guid="+myData[id][0];     
+    var url = "<%=basePath%>web/xuzhouNW/dtxc/wyxc/xjclyjframe.jsp?zfjcType=11&yw_guid="+myData[id][0];     
 	document.location.href=url;
 }
 
