@@ -11,26 +11,25 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.zip.ZipInputStream;
+
 import org.jbpm.api.Execution;
 import org.jbpm.api.ExecutionService;
 import org.jbpm.api.JbpmException;
 import org.jbpm.api.ProcessDefinition;
 import org.jbpm.api.ProcessInstance;
 import org.jbpm.api.RepositoryService;
-import org.jbpm.api.TaskQuery;
 import org.jbpm.api.TaskService;
-import org.jbpm.api.history.HistoryTask;
 import org.jbpm.api.history.HistoryTaskQuery;
 import org.jbpm.api.model.Activity;
 import org.jbpm.api.model.ActivityCoordinates;
 import org.jbpm.api.task.Task;
 import org.jbpm.pvm.internal.model.ActivityImpl;
 import org.jbpm.pvm.internal.model.ProcessDefinitionImpl;
-import org.jbpm.pvm.internal.model.TransitionImpl;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
+
 import com.klspta.base.AbstractBaseBean;
 import com.klspta.base.util.UtilFactory;
 import com.klspta.base.workflow.bean.DoNextBean;
@@ -372,14 +371,15 @@ public class WorkflowOp extends AbstractBaseBean implements IWorkflowOp {
 
 	@Override
 	public String getActivityNameByWfInsID(String WfInsID) {
-		String activityName = JBPMServices.getInstance().getTaskService().createTaskQuery().executionId(WfInsID)
-				.uniqueResult().getActivityName();
-		if (activityName == null) {
-			activityName = JBPMServices.getInstance().getHistoryService().createHistoryTaskQuery().executionId(WfInsID)
-					.state("completed").orderDesc(HistoryTaskQuery.PROPERTY_ENDTIME).list().get(0).getOutcome();
+		Task t = JBPMServices.getInstance().getTaskService().createTaskQuery().executionId(WfInsID)
+		.uniqueResult();
+		if(t!=null){
+			return t.getActivityName();
 		}
-		return activityName;
+		return JBPMServices.getInstance().getHistoryService().createHistoryTaskQuery().executionId(WfInsID).orderDesc(
+				HistoryTaskQuery.PROPERTY_ENDTIME).list().get(0).getOutcome();
 	}
+
 	@Override
 	public Object getVariableByWfInsID(String WfInsID, String key) {
 		Object value = JBPMServices.getInstance().getExecutionService().getVariable(WfInsID, key);
@@ -420,8 +420,8 @@ public class WorkflowOp extends AbstractBaseBean implements IWorkflowOp {
 
 	@Override
 	public String getWfIdByWfInsID(String wfInsId) {
-		String wfId = JBPMServices.getInstance().getExecutionService().findExecutionById(wfInsId)
-				.getProcessDefinitionId();
+		String wfId = JBPMServices.getInstance().getHistoryService().createHistoryProcessInstanceQuery()
+				.processInstanceId(wfInsId).uniqueResult().getProcessDefinitionId();
 		return wfId;
 	}
 
@@ -435,10 +435,21 @@ public class WorkflowOp extends AbstractBaseBean implements IWorkflowOp {
 
 	@Override
 	public String getWfInsTaskIdByWfInsID(String wfInsID) {
-		TaskQuery tq=JBPMServices.getInstance().getTaskService().createTaskQuery().executionId(wfInsID);
-		if(tq!=null){
-			return tq.uniqueResult().getId();
+		Task t = JBPMServices.getInstance().getTaskService().createTaskQuery().executionId(wfInsID).uniqueResult();
+		if (t != null) {
+			return t.getId();
 		}
 		return null;
+	}
+
+	@Override
+	public InputStream getImageByWfID(String wfID) {
+		RepositoryService repositoryService = JBPMServices.getInstance().getRepositoryService();
+		ProcessDefinition processDefinition = repositoryService.createProcessDefinitionQuery().processDefinitionId(
+				wfID).uniqueResult();
+		String name = processDefinition.getName();
+		InputStream inputStream = repositoryService.getResourceAsStream(processDefinition.getDeploymentId(), name
+				+ ".png");
+		return inputStream;
 	}
 }
