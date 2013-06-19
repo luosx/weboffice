@@ -69,7 +69,7 @@ function uploadDoc(){
 			flag = result.split(",")[1];
 			num = result.split(",")[0]; 
 			var myDate = new Date();
-			alert(num );
+			//alert(num );
 			alert(myDate.getFullYear());
 			webObj.HttpInit();			
 			webObj.HttpAddPostString("id", yw_guid);
