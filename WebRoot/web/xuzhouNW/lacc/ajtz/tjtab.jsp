@@ -165,20 +165,21 @@ function query()
 	  
        msgWait= Ext.Msg.wait('', '提示', 
         { 
-          text: '数据加载中......'   //进度条文字 
+       	 text: '数据加载中......'   //进度条文字 
        });
-        Ext.Ajax.request({                    
-        url: "http://" + window.location.href.split("/")[2] + "/reduce/service/rest/tjfxManager/getResult?treeList="+escape(escape(treeList))+"&beginDate="+beginDate+"&endDate="+endDate, 
-        callback:function(options,success,response){   
-        if(success)              
-          { 
-             document.getElementById("tab").innerHTML=response.responseText;
-             Ext.Msg.hide();    
-          }else{
+       // Ext.Ajax.request({                    
+       // url: "http://" + window.location.href.split("/")[2] + "/reduce/service/rest/tjfxManager/getResult?treeList="+escape(escape(treeList))+"&beginDate="+beginDate+"&endDate="+endDate, 
+       // callback:function(options,success,response){   
+       // if(success)              
+        //  { 
+        //     document.getElementById("tab").innerHTML=response.responseText;
+         //    Ext.Msg.hide();    
+        //  }else{
             //alert('出错了');   
-          }              
-        }
-      })
+        //  }              
+        //}
+      //})
+      query1();
 	}
 }
 var action="";
@@ -199,12 +200,12 @@ function query1(){
      
 	 var beginDate = document.getElementById("beginDate").value;
 	 var endDate = document.getElementById("endDate").value;
-	 var lx=document.getElementById("lx").value;
-	   putClientCommond("mxbaction","getResult");
+	 //var lx=document.getElementById("lx").value;
+	   putClientCommond("tjfxManager","getResult");
 	   putRestParameter("treeList",escape(escape(treeList)));
 	   putRestParameter("beginDate",beginDate);
        putRestParameter("endDate",endDate);
-       putRestParameter("lx",escape(escape(lx)));
+       //putRestParameter("lx",escape(escape(lx)));
 	   myData = restRequest();
 	   isShow=false;
        if(myData!=''){
