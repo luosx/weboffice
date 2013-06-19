@@ -231,4 +231,13 @@ public interface IWorkflowOp {
 	 * @return
 	 */
 	String getWfInsTaskIdByWfInsID(String wfInsID);
+	
+	/**
+	 * <br>Description:根据流程定义ID获取流程图片
+	 * <br>Author:赵伟
+	 * <br>Date:2013-6-19
+	 * @param wfID
+	 * @return
+	 */
+	InputStream getImageByWfID(String wfID);
 }
