@@ -1,4 +1,8 @@
 <%@page language="java" pageEncoding="utf-8"%>
+<%@page import="com.klspta.web.xuzhouNW.dtxc.DtxcManager"%>
+<%@page import="com.klspta.console.ManagerFactory"%>
+<%@page import="com.klspta.base.util.UtilFactory"%>
+<%@page import="com.klspta.base.util.bean.xzqhutil.XzqhBean"%>
 
 <%
 	String path = request.getContextPath();
@@ -8,6 +12,31 @@
 
 	Object principalUser = SecurityContextHolder.getContext()
 			.getAuthentication().getPrincipal();
+	//String writerId = request.getParameter("userId");
+	String writerId = "55ff44c9a20739f332d7b1f3e8a915f5";
+	User userBean = null;
+	XzqhBean xzqhBean = null;
+	String writerXzqh = "";//填表人行政区划
+	String writerName = "";//填表人全名
+	String strXcdw = "";//巡查单位
+	String strXcdwjc = "";//政区简称
+	try {
+		userBean = ManagerFactory.getUserManager().getUserWithId(writerId);
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+	writerXzqh = userBean.getXzqh();
+	writerName = userBean.getFullName();
+	if(!writerXzqh.equals("")){
+		xzqhBean = UtilFactory.getXzqhUtil().getBeanById(writerXzqh);
+		strXcdw = xzqhBean.getLandname();//巡查单位
+		strXcdwjc = xzqhBean.getCatonsimpleName();//政区简称
+	}
+	String strDate = UtilFactory.getDateUtil().getCurrentChineseDate();//中国式的时间####年##月##日
+	
+	String yw_guid = request.getParameter("yw_guid");
+	DtxcManager dm = new DtxcManager();
+	String[] stateCgd = dm.stateCgd(yw_guid);
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -16,15 +45,80 @@
 		<base href="<%=basePath%>" />
 		<TITLE>巡查日志</TITLE>
 		<%@ include file="/base/include/restRequest.jspf"%>
-		<link rel="stylesheet"
-			href="<%=basePath%>base/form/css/commonForm.css" type="text/css" />
+		<link rel="stylesheet" href="<%=basePath%>base/form/css/commonForm.css" type="text/css" />
 		<%@ include file="/base/include/formbase.jspf"%>
 		<script>
 		//用来计数抄告单,0表示抄告单隐藏，1表示抄告单显示
 		var count = new Array(0,0,0,0,0);
+		var countFlag = 0;
 		
 		//全部tr标签元素
 		var arr = document.getElementsByTagName("tr");
+		
+		//初始化xcrz表单
+		function initxcrz(){
+			init();
+			show();
+		}
+		
+		//用于控制初始化时页面显示控制
+		function show(){
+			var checkCgd1 = document.getElementById("jsxm1").value + document.getElementById("jsdw1").value + document.getElementById("dgsj1").value +
+							document.getElementById("jsqk1").value + document.getElementById("zdmj1").value + document.getElementById("zdwz1").value;
+			var checkCgd2 = document.getElementById("jsxm2").value + document.getElementById("jsdw2").value + document.getElementById("dgsj2").value +
+							document.getElementById("jsqk2").value + document.getElementById("zdmj2").value + document.getElementById("zdwz2").value;
+			var checkCgd3 = document.getElementById("jsxm3").value + document.getElementById("jsdw3").value + document.getElementById("dgsj3").value +
+							document.getElementById("jsqk3").value + document.getElementById("zdmj3").value + document.getElementById("zdwz3").value;
+			var checkCgd4 = document.getElementById("jsxm4").value + document.getElementById("jsdw4").value + document.getElementById("dgsj4").value +
+							document.getElementById("jsqk4").value + document.getElementById("zdmj4").value + document.getElementById("zdwz4").value;
+			var checkCgd5 = document.getElementById("jsxm5").value + document.getElementById("jsdw5").value + document.getElementById("dgsj5").value +
+							document.getElementById("jsqk5").value + document.getElementById("zdmj5").value + document.getElementById("zdwz5").value;
+			if(checkCgd1 != ""){
+				for(var i = 0; i < arr.length ; i++){
+					if(arr[i].name == "check1"){
+						arr[i].style.display = "block";
+					}
+				}
+				count[0] = 1;
+				countFlag++;
+			}
+			if(checkCgd2 != ""){
+				for(var i = 0; i < arr.length ; i++){
+					if(arr[i].name == "check2"){
+						arr[i].style.display = "block";
+					}
+				}
+				count[0] = 1;
+				countFlag++;
+			}
+			if(checkCgd3 != ""){
+				for(var i = 0; i < arr.length ; i++){
+					if(arr[i].name == "check3"){
+						arr[i].style.display = "block";
+					}
+				}
+				count[0] = 1;
+				countFlag++;
+			}
+			if(checkCgd4 != ""){
+				for(var i = 0; i < arr.length ; i++){
+					if(arr[i].name == "check4"){
+						arr[i].style.display = "block";
+					}
+				}
+				count[0] = 1;
+				countFlag++;
+			}
+			if(checkCgd5 != ""){
+				for(var i = 0; i < arr.length ; i++){
+					if(arr[i].name == "check5"){
+						arr[i].style.display = "block";
+					}
+				}
+				count[0] = 1;
+				countFlag++;
+			}
+		}
 		
 		//是否违法按钮的选择
 		function selectwf(sele){
@@ -42,6 +136,10 @@
 		
 		//添加抄告单
 		function addcgd(){
+			if(countFlag == 5){
+				alert("一个巡查日志最多添加5个抄告单！");
+				return;
+			}
 			//第一个抄告单
 			if(count[0] == 0){
 				for(var i = 0; i < arr.length ; i++){
@@ -50,6 +148,7 @@
 					}
 				}
 				count[0] = 1;
+				countFlag++;
 				return;
 			}
 			//第二个抄告单
@@ -60,6 +159,7 @@
 					}
 				}
 				count[1] = 1;
+				countFlag++;
 				return;
 			}
 			//第三个抄告单
@@ -70,6 +170,7 @@
 					}
 				}
 				count[2] = 1;
+				countFlag++;
 				return;
 			}
 			//第四个抄告单
@@ -80,6 +181,7 @@
 					}
 				}
 				count[3] = 1;
+				countFlag++;
 				return;
 			}
 			//第五个抄告单
@@ -90,11 +192,13 @@
 					}
 				}
 				count[4] = 1;
+				countFlag++;
 				return;
 			}
 		}
 		
-		//删除抄告单
+		//删除抄告单(控制标签的隐藏)
+		var k = 0;
 		function deletecgd(){
 			var checkbox = document.getElementsByName("checkbox");
 			for(var i = 0; i < checkbox.length ; i++){
@@ -103,26 +207,132 @@
 					for(var j = 0; j < arr.length ; j++){
 						if(arr[j].name == temp){
 							arr[j].style.display = "none";
-							//截取到表示抄告单位置的数字
-							var tempNum = new Number(temp.charAt(5));
-							//将相应位置修改状态
-							count[tempNum-1] = 0;
+							if(k == 3){ //这里对应4个tr标签 
+								//截取到表示抄告单位置的数字
+								var tempNum = new Number(temp.charAt(5));
+								//将相应位置修改状态
+								count[tempNum-1] = 0;
+								countFlag--;
+								deletedata(tempNum);
+								k = 0;
+							}
+							k ++;
 						}
 					}
 				}
 			}
 		}
 		
+		//删除表单数据(删除页面、数据库中相对应得数据，修改状态)
+		function deletedata(tenum){
+			for(var i = 0; i < 5; i++){
+				if(tenum == i){
+					document.getElementById("jsxm" + i).value = "";
+					document.getElementById("jsdw" + i).value = "";
+					document.getElementById("dgsj" + i).value = "";
+					document.getElementById("jsqk" + i).value = "";
+					document.getElementById("zdmj" + i).value = "";
+					document.getElementById("zdwz" + i).value = "";
+				}
+			}
+			putClientCommond("dtxcManager","deleteCgd");
+			putRestParameter("yw_guid","<%=yw_guid%>");
+      		putRestParameter("strFlag",tenum);
+      		restRequest();
+      		//页面中显示的相关操作
+      		document.getElementById("divcgd" + tenum).innerHTML = "<span style='color:red'>抄告单未生成</span>&nbsp;&nbsp;&nbsp;&nbsp;"+
+      																"<a href='javascript:void(0);' id='cgd"+tenum+"' "+
+      																"onclick='createCgd(this.id)' style='text-decoration:none'>生成抄告单</a>";
+      		document.getElementById("check" + tenum).checked = "";
+		}
+		
 		//保存表单方法
 		function save(){
 			document.forms[0].submit();
+		}
+		
+		//抄告单在wbeoffice中生成
+		function createCgd(createId){
+			isshowSave=false;
+			var tempNum = createId.charAt(3); 
+			var jsxm = document.getElementById("jsxm" + tempNum).value;
+			var jsdw = document.getElementById("jsdw" + tempNum).value;
+			var dgsj = document.getElementById("dgsj" + tempNum).value;
+			var jsqk = document.getElementById("jsqk" + tempNum).value;
+			var zdmj = document.getElementById("zdmj" + tempNum).value;
+			var zdwz = document.getElementById("zdwz" + tempNum).value;
+			if(jsxm == "" || jsdw == "" || dgsj =="" || jsqk== "" || zdmj == "" ||zdwz == ""){
+				alert("信息不完整，不能生成抄告单。请将信息填写完整！！");
+				return;
+			}
+			putClientCommond("dtxcManager","saveCgd");
+			putRestParameter("yw_guid","<%=yw_guid%>");
+      		putRestParameter("strFlag",createId);
+      		putRestParameter("jsxm",escape(escape(jsxm)));
+      		putRestParameter("jsdw",escape(escape(jsdw)));
+      		putRestParameter("dgsj",escape(escape(dgsj)));
+      		putRestParameter("jsqk",escape(escape(jsqk)));
+      		putRestParameter("zdmj",escape(escape(zdmj)));
+      		putRestParameter("zdwz",escape(escape(zdwz)));
+      		var cgdState = restRequest();
+      		if(cgdState == "1"){
+      			if(confirm('原抄告单将被替换，是否重新生成抄告单！！')){
+					
+				}else{
+					return;
+				}
+      		}
+      		
+			//巡查单位
+			var xcdw = document.getElementById("xcdw").value;
+			var yw_guid = "<%=yw_guid%>";
+			var flag = true;
+			//12个需要在抄告单.doc上面使用的参数
+			var subofficename = "subofficename=<%=strXcdwjc%>";
+			var number = "&number="+"";
+			var districtname = "&districtname=<%=strXcdwjc%>";
+			var townname = "&townname="+"";
+			var countyname = "&countyname="+"";
+			var projectname = "&projectname="+jsxm;
+			var location = "&location="+zdwz;
+			var area = "&area="+zdmj;
+			var buildYear = "&buildYear="+dgsj.substring(0,4);
+			var buildMonth  = "&buildMonth="+dgsj.substring(5,7);
+			var Date = "&Date=<%=strDate%>";
+			var district = "&district=<%=strXcdwjc%>";
+			//yw_guid等参数
+			var strId = "&yw_guid="+yw_guid+"&file_id="+createId+"&flag="+flag;
+			//拼接参数
+			var strData = subofficename + number + districtname + 
+							townname + countyname + projectname + 
+							location + area + buildYear + 
+							buildMonth + Date +  district;
+			var strUrl = strData + strId;
+			//打开抄告单
+			window.open("../webOffice/webOfficeMain.jsp?"+strUrl);
+			
+			document.getElementById("div" + createId).innerHTML = "<a href='javascript:void(0);' id='span"+createId+"' onclick='lookCgd(this.id)' style='text-decoration:none'>查看抄告单</a>&nbsp;&nbsp;&nbsp;&nbsp;"+
+																	"<a href='javascript:void(0);' id='"+createId+"' onclick='createCgd(this.id)' style='text-decoration:none'>重新生成抄告单</a>";
+		}
+		
+		//查看已经生成过的抄告单
+		function lookCgd(lookId){
+			isshowSave=false;
+			var strLookId = lookId.substring(4);
+			var yw_guid = "<%=yw_guid%>";
+			var flag = false;
+			var strUrl = "yw_guid="+yw_guid+"&file_id="+strLookId+"&flag="+flag;
+			window.open("../webOffice/webOfficeMain.jsp?"+strUrl);
 		}
 		</script>
 	</head>
 
 	<body bgcolor="#FFFFFF">
-		<!-- 用来放置保存、打印按钮图标 -->
-		<div id="fixed" class="Noprn" style="position: fixed; top: 5px; left: 0px"></div>
+		<!-- 用来放置保存、打印按钮图标(如果是市局人员将保存按钮隐藏) -->
+		<%if(writerXzqh.substring(4).equals("00")){ %>
+		<%}else{ %>
+			<div id="fixed" class="Noprn" style="position: fixed; top: 5px; left: 0px"></div>
+		<%} %>
 		<div style="margin: 20px" align="center">
 			<div align="center">
 				<h1>
@@ -145,7 +355,7 @@
 							</div>
 						</td>
 						<td width="166">
-							<input type="text" class="noborder" name="xcdw" id="xcdw" style="width: 97%" />
+							<input type="text" class="noborder" name="xcdw" id="xcdw" style="width: 97%" value="<%=strXcdw %>" readonly="readonly"/>
 						</td>
 						<td width="102">
 							<div align="center">
@@ -174,7 +384,7 @@
 							</div>
 						</td>
 						<td colspan="3">
-							<input type="text" class="noborder" name="xcry" id="xcry" style="width: 99%" />
+							<input type="text" class="noborder" name="xcry" id="xcry" style="width: 99%" value="<%=writerName %>"/>
 						</td>
 					</tr>
 					<tr>
@@ -278,7 +488,15 @@
 							</div>
 						</td>
 						<td colspan="3">
-							<div><span style="color:red">抄告单未生成</span>&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0);" style="text-decoration:none">生成抄告单</a></div>
+							<div id="divcgd1">
+								<%if(stateCgd[0].equals("0")){ %>
+									<span style="color:red">抄告单未生成</span>&nbsp;&nbsp;&nbsp;&nbsp;
+									<a href="javascript:void(0);" id="cgd1" onclick="createCgd(this.id)" style="text-decoration:none">生成抄告单</a>
+								<%}else{ %>
+									<a href="javascript:void(0);" id="spancgd1" onclick="lookCgd(this.id)" style="text-decoration:none">查看抄告单</a>&nbsp;&nbsp;&nbsp;&nbsp;
+									<a href="javascript:void(0);" id="cgd1" onclick="createCgd(this.id)" style="text-decoration:none">重新生成抄告单</a>
+								<%} %>
+							</div>
 						</td>
 					</tr>
 					
@@ -351,7 +569,15 @@
 							</div>
 						</td>
 						<td colspan="3">
-							<div><span style="color:red">抄告单未生成</span>&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0);" style="text-decoration:none">生成抄告单</a></div>
+							<div id="divcgd2">
+								<%if(stateCgd[1].equals("0")){ %>
+									<span style="color:red">抄告单未生成</span>&nbsp;&nbsp;&nbsp;&nbsp;
+									<a href="javascript:void(0);" id="cgd2" onclick="createCgd(this.id)" style="text-decoration:none">生成抄告单</a>
+								<%}else{ %>
+									<a href="javascript:void(0);" id="spancgd2" onclick="lookCgd(this.id)" style="text-decoration:none">查看抄告单</a>&nbsp;&nbsp;&nbsp;&nbsp;
+									<a href="javascript:void(0);" id="cgd2" onclick="createCgd(this.id)" style="text-decoration:none">重新生成抄告单</a>
+								<%} %>
+							</div>
 						</td>
 					</tr>
 					
@@ -424,7 +650,15 @@
 							</div>
 						</td>
 						<td colspan="3">
-							<div><span style="color:red">抄告单未生成</span>&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0);" style="text-decoration:none">生成抄告单</a></div>
+							<div id="divcgd3">
+								<%if(stateCgd[2].equals("0")){ %>
+									<span style="color:red">抄告单未生成</span>&nbsp;&nbsp;&nbsp;&nbsp;
+									<a href="javascript:void(0);" id="cgd3" onclick="createCgd(this.id)" style="text-decoration:none">生成抄告单</a>
+								<%}else{ %>
+									<a href="javascript:void(0);" id="spancgd3" onclick="lookCgd(this.id)" style="text-decoration:none">查看抄告单</a>&nbsp;&nbsp;&nbsp;&nbsp;
+									<a href="javascript:void(0);" id="cgd3" onclick="createCgd(this.id)" style="text-decoration:none">重新生成抄告单</a>
+								<%} %>
+							</div>
 						</td>
 					</tr>
 					
@@ -497,7 +731,15 @@
 							</div>
 						</td>
 						<td colspan="3">
-							<div><span style="color:red">抄告单未生成</span>&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0);" style="text-decoration:none">生成抄告单</a></div>
+							<div id="divcgd4">
+								<%if(stateCgd[3].equals("0")){ %>
+									<span style="color:red">抄告单未生成</span>&nbsp;&nbsp;&nbsp;&nbsp;
+									<a href="javascript:void(0);" id="cgd4" onclick="createCgd(this.id)" style="text-decoration:none">生成抄告单</a>
+								<%}else{ %>
+									<a href="javascript:void(0);" id="spancgd4" onclick="lookCgd(this.id)" style="text-decoration:none">查看抄告单</a>&nbsp;&nbsp;&nbsp;&nbsp;
+									<a href="javascript:void(0);" id="cgd4" onclick="createCgd(this.id)" style="text-decoration:none">重新生成抄告单</a>
+								<%} %>
+							</div>
 						</td>
 					</tr>
 					
@@ -570,7 +812,15 @@
 							</div>
 						</td>
 						<td colspan="3">
-							<div><span style="color:red">抄告单未生成</span>&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0);" style="text-decoration:none">生成抄告单</a></div>
+							<div id="divcgd5">
+								<%if(stateCgd[4].equals("0")){ %>
+									<span style="color:red">抄告单未生成</span>&nbsp;&nbsp;&nbsp;&nbsp;
+									<a href="javascript:void(0);" id="cgd5" onclick="createCgd(this.id)" style="text-decoration:none">生成抄告单</a>
+								<%}else{ %>
+									<a href="javascript:void(0);" id="spancgd5" onclick="lookCgd(this.id)" style="text-decoration:none">查看抄告单</a>&nbsp;&nbsp;&nbsp;&nbsp;
+									<a href="javascript:void(0);" id="cgd5" onclick="createCgd(this.id)" style="text-decoration:none">重新生成抄告单</a>
+								<%} %>
+							</div>
 						</td>
 					</tr>
 					
@@ -643,12 +893,13 @@
 						</td>
 					</tr>
 				</table>
-				<input type="text" value="" id="writerxzqh" name="writerxzqh" style="display: none" />
+				<input type="text" value="<%=writerId %>" id="userid" name="userid" style="display: none" />
+				<input type="text" value="<%=writerXzqh %>" id="writerxzqh" name="writerxzqh" style="display: none" />
 			</form>
 		</div>
 	</body>
 	<script>
-		document.body.onload = init;
+		document.body.onload = initxcrz;
 		<%
 		String msg = (String)request.getParameter("msg");
 		%>
