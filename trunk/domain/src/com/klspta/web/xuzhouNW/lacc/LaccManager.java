@@ -40,7 +40,6 @@ public class LaccManager extends AbstractBaseBean {
         response(result);
     }
 
-
     /**
      * <br>
      * Description:获取案件查询待办案件列表 <br>
@@ -151,7 +150,6 @@ public class LaccManager extends AbstractBaseBean {
         response(result);
     }
 
-
     /**
      * 
      * <br>
@@ -185,6 +183,20 @@ public class LaccManager extends AbstractBaseBean {
         String sql3 = "update flwscpb set ay=? where yw_guid = ?";
         update(sql3, YW, new Object[] { ay, yw_guid });
         response("true");
+    }
+
+    /**
+     * 
+     * <br>Description:获取指定表中相同guid的个数（法律文书呈批表）
+     * <br>Author:陈强峰
+     * <br>Date:2013-6-20
+     * @param yw_guid
+     * @param tableName
+     * @return
+     */
+    public int getNum(String yw_guid, String tableName) {
+        String sql = "select count(*) num from " + tableName + " where yw_guid =?";
+        return Integer.parseInt(String.valueOf(query(sql, YW, new Object[] { yw_guid }).get(0).get("num")));
     }
 
 }
