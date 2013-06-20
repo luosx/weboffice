@@ -48,8 +48,8 @@
 		           {name: 'BJBDW'},
 		           {name: 'LXCZ'},
 		           {name: 'WTFSD'},
-		           {name: 'WTFSSJ'},
 		           {name: 'SLRQ'},
+		           {name: 'AJBLZT'},
 		           {name: 'INDEX'}
 		        ]
 		    });
@@ -68,8 +68,8 @@
 		           {header: '举报方式',dataIndex:'JBFS',width: width*0.10, sortable: true},
 		           {header: '被举报单位',dataIndex:'BJBDW',width: width*0.15, sortable: true},
 		           {header: '问题发生地',dataIndex:'WTFSD',width: width*0.15, sortable: true},
-		           {header: '问题发生时间',dataIndex:'WTFSSJ',width: width*0.15, sortable: true},
 		           {header: '登记时间',dataIndex:'SLRQ',width: width*0.15, sortable: true},
+		           {header: '案件办理状态',dataIndex:'AJBLZT',width: width*0.15, sortable: true},
 		           {header: '查看',dataIndex:'INDEX',width: width*0.05, sortable: false,renderer:pro}
 		        ],
 		        tbar:[
