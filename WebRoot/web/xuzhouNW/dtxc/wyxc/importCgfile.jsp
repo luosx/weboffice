@@ -50,7 +50,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	  items: [{
 	            xtype: 'fileuploadfield',
-	            emptyText: '请选择...',
+	            emptyText: '请选择zip格式外业成果包..',
 	            fieldLabel: '文件路径',
 	            name: 'file',
 	            buttonText: '浏览&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',
