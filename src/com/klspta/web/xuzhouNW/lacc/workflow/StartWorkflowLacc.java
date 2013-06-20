@@ -38,7 +38,7 @@ public class StartWorkflowLacc extends AbstractBaseBean {
 		String insertSql="insert into lacpb(yw_guid,bh) values(?,?)";
 		update(insertSql,YW,new Object[]{yw_guid,bh});
 		//立案查处其他表初始化
-		String []datasheets={"cljdcpb","cfjdzysx","cfjdlsqk","flwscpb","jacpb"};
+		String []datasheets={"cljdcpb","cfjdzysx","cfjdlsqk","flwscpb","jacpb","ajjbxxdjb"};
 		String otherSql="";
 		for(int i=0;i<datasheets.length;i++){
 		    otherSql="insert into "+datasheets[i]+"(yw_guid) values(?)";
@@ -61,7 +61,7 @@ public class StartWorkflowLacc extends AbstractBaseBean {
 	    String yw_guid = request.getParameter("yw_guid");
 	    String wfInsId = request.getParameter("wfInsId");
 	    //1.删除业务数据
-	    String []datasheets={"lacpb","cljdcpb","cfjdzysx","cfjdlsqk","flwscpb","jacpb"};
+	    String []datasheets={"lacpb","cljdcpb","cfjdzysx","cfjdlsqk","flwscpb","jacpb","ajjbxxdjb"};
         String sql="";
 	    for(int i=0;i<datasheets.length;i++){
 	        sql="delete from "+datasheets[i]+" where yw_guid=?";
