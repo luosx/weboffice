@@ -38,12 +38,6 @@
 			href="<%=basePath%>base/form/css/commonForm.css" type="text/css" />
 		<%@ include file="/base/include/formbase.jspf"%>
 		<%} %>
-		
-		<style>
-		   .textcls{
-		    	font-size: 14px
-		   }
-		</style>
 		<script>
 		function initEdit(){
 			init();
@@ -56,6 +50,7 @@
              				formlist[i].disabled=true;
          		 }		
 			}
+			document.getElementById('bh2').value=document.getElementById('bh').value;
 		}
 			function save(){
 				document.forms[0].submit();
