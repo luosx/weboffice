@@ -6,7 +6,7 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 String yw_guid = request.getParameter("yw_guid");
-String file_id = request.getParameter("file_id");
+String file_id = yw_guid + request.getParameter("file_id");
 String flag = request.getParameter("flag");
 // String subofficename = request.getParameter("subofficename");
 List<Map<String, Object>> showList = new DtxcManager().getXzrqbyYw_guid(yw_guid);
@@ -74,16 +74,28 @@ if(flag.equals("false")){
 			document.all.WebOffice1.HideMenuArea("hideall","","","");  
 			
 			//添加标签值
+			/*
 			document.all.WebOffice1.SetFieldValue("subofficename", '<%=(String)showList.get(0).get(request.getParameter("subofficename"))%>', ""); 
-			document.all.WebOffice1.SetFieldValue("number", "<%=(String)showList.get(0).get(request.getParameter("number"))%>", ""); 
-			document.all.WebOffice1.SetFieldValue("districtname", "<%=(String)showList.get(0).get(request.getParameter("districtname"))%>", ""); 
-			document.all.WebOffice1.SetFieldValue("townname", "<%=(String)showList.get(0).get(request.getParameter("townname"))%>", ""); 
-			document.all.WebOffice1.SetFieldValue("countyname", "<%=(String)showList.get(0).get(request.getParameter("countyname"))%>", ""); 
-			document.all.WebOffice1.SetFieldValue("projectname", "<%=(String)showList.get(0).get(request.getParameter("projectname"))%>", ""); 
-			document.all.WebOffice1.SetFieldValue("location", "<%=(String)showList.get(0).get(request.getParameter("location"))%>", ""); 
-			document.all.WebOffice1.SetFieldValue("area", "<%=(String)showList.get(0).get(request.getParameter("area"))%>", ""); 
-			document.all.WebOffice1.SetFieldValue("buildDate", "<%=(String)showList.get(0).get(request.getParameter("buildDate"))%>", ""); 
-			document.all.WebOffice1.SetFieldValue("Date", "<%=(String)showList.get(0).get(request.getParameter("Date"))%>", ""); 	
+			document.all.WebOffice1.SetFieldValue("number", "<%=(String)showList.get(0).get(request.getParameter("number"))%>"); 
+			document.all.WebOffice1.SetFieldValue("districtname", "<%=(String)showList.get(0).get(request.getParameter("districtname"))%>"); 
+			document.all.WebOffice1.SetFieldValue("townname", "<%=(String)showList.get(0).get(request.getParameter("townname"))%>"); 
+			document.all.WebOffice1.SetFieldValue("countyname", "<%=(String)showList.get(0).get(request.getParameter("countyname"))%>"); 
+			document.all.WebOffice1.SetFieldValue("projectname", "<%=(String)showList.get(0).get(request.getParameter("projectname"))%>"); 
+			document.all.WebOffice1.SetFieldValue("location", "<%=(String)showList.get(0).get(request.getParameter("location"))%>"); 
+			document.all.WebOffice1.SetFieldValue("area", "<%=(String)showList.get(0).get(request.getParameter("area"))%>"); 
+			document.all.WebOffice1.SetFieldValue("buildDate", "<%=(String)showList.get(0).get(request.getParameter("buildDate"))%>"); 
+			document.all.WebOffice1.SetFieldValue("Date", "<%=(String)showList.get(0).get(request.getParameter("Date"))%>"); 	
+  			*/
+  			document.all.WebOffice1.SetFieldValue("subofficename", '<%=new String(request.getParameter("subofficename").getBytes("iso-8859-1"),"UTF-8")%>', ""); 
+			document.all.WebOffice1.SetFieldValue("number", "<%=new String(request.getParameter("number").getBytes("iso-8859-1"),"UTF-8")%>"); 
+			document.all.WebOffice1.SetFieldValue("districtname", "<%=new String(request.getParameter("districtname").getBytes("iso-8859-1"),"UTF-8")%>"); 
+			document.all.WebOffice1.SetFieldValue("townname", "<%=new String(request.getParameter("townname").getBytes("iso-8859-1"),"UTF-8")%>"); 
+			document.all.WebOffice1.SetFieldValue("countyname", "<%=new String(request.getParameter("countyname").getBytes("iso-8859-1"),"UTF-8")%>"); 
+			document.all.WebOffice1.SetFieldValue("projectname", "<%=new String(request.getParameter("projectname").getBytes("iso-8859-1"),"UTF-8")%>"); 
+			document.all.WebOffice1.SetFieldValue("location", "<%=new String(request.getParameter("location").getBytes("iso-8859-1"),"UTF-8")%>"); 
+			document.all.WebOffice1.SetFieldValue("area", "<%=new String(request.getParameter("area").getBytes("iso-8859-1"),"UTF-8")%>"); 
+			document.all.WebOffice1.SetFieldValue("buildDate", "<%=new String(request.getParameter("buildDate").getBytes("iso-8859-1"),"UTF-8")%>"); 
+			document.all.WebOffice1.SetFieldValue("Date", "<%=new String(request.getParameter("Date").getBytes("iso-8859-1"),"UTF-8")%>"); 
   		
   			//将文档上传到ftp
   			uploadDoc();
