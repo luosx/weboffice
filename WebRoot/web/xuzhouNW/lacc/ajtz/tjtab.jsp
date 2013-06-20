@@ -10,7 +10,7 @@
 <html>
 	<head>
 
-		<title>县审核中列表</title>
+		<title>案件台账</title>
 		<%@ include file="/base/include/ext.jspf" %>
 		<%@ include file="/base/include/restRequest.jspf" %>
 		<script type="text/javascript" src="<%=basePath%>base/thirdres/ext/examples/ux/PagingMemoryProxy.js"></script>
@@ -18,14 +18,14 @@
 	    <script src="<%=basePath%>/base/include/ajax.js"></script>
 		<script type="text/javascript" src="js/DatePicker.js"></script>
 		<link rel="stylesheet" type="text/css" href="<%=basePath%>base/thirdres/ext/examples/ux/fileuploadfield/css/fileuploadfield.css"/>
-	
+
 <style type="text/css">
 <!--
 body
 {
  
  font-size:12px;
- background:url(<%=basePath%>/base/form/images/menu_bg2.gif);
+
  
 }
 #tab table tr td
@@ -158,77 +158,29 @@ function query()
 		}
 	 }
 	 
-	  
- 
 	 //各个选项都不为空时
-	 if(treeList!="" && beginDate!="" && endDate!="" ){
-	  
-       msgWait= Ext.Msg.wait('', '提示', 
-        { 
-       	 text: '数据加载中......'   //进度条文字 
-       });
-       // Ext.Ajax.request({                    
-       // url: "http://" + window.location.href.split("/")[2] + "/reduce/service/rest/tjfxManager/getResult?treeList="+escape(escape(treeList))+"&beginDate="+beginDate+"&endDate="+endDate, 
-       // callback:function(options,success,response){   
-       // if(success)              
-        //  { 
-        //     document.getElementById("tab").innerHTML=response.responseText;
-         //    Ext.Msg.hide();    
-        //  }else{
-            //alert('出错了');   
-        //  }              
-        //}
-      //})
-      query1();
+	 if(treeList!="" && beginDate!="" && endDate!="" ){	
+	  var yqs=treeList.split(',');
+      var regions=new Array();
+      for(var i=0;i<yqs.length;i++){
+      	regions[i]="'"+yqs[i]+"'";
+      }
+      var region=regions.join(",");
+      region=escape(escape(region));
+      var condition=" qy in ("+region+") and to_char(aydjrq,'yyyy-mm') between '"+beginDate+"' and '"+endDate+"'";
+      document.getElementById('title').src="<%=basePath%>web/xuzhouNW/lacc/ajtz/title.jsp?beginDate="+beginDate+"&endDate="+endDate+"&region="+escape(escape(treeList));
+      document.getElementById('content').src="<%=basePath%>model/report/showReport.jsp?id=DBD6C6B1978D41808590EF04747C8600&condition="+condition;
 	}
 }
-var action="";
-function report(){
-	var beginDate = document.getElementById("beginDate").value;
-	var endDate = document.getElementById("endDate").value;
-	alert(treeList);
-	parameter="beginDate="+beginDate+"&endDate="+endDate+"&area="+treeList;
-	if(action=="")
-		action=	document.forms[0].action;
-	
-	document.forms[0].action=action+"/service/rest/reportAction/report?"+parameter;
-    document.forms[0].submit();
-			
-}
 
-function query1(){
-     
-	 var beginDate = document.getElementById("beginDate").value;
-	 var endDate = document.getElementById("endDate").value;
-	 //var lx=document.getElementById("lx").value;
-	   putClientCommond("tjfxManager","getResult");
-	   putRestParameter("treeList",escape(escape(treeList)));
-	   putRestParameter("beginDate",beginDate);
-       putRestParameter("endDate",endDate);
-       //putRestParameter("lx",escape(escape(lx)));
-	   myData = restRequest();
-	   isShow=false;
-       if(myData!=''){
-	      document.getElementById("tab").innerHTML=myData;
-	      isShow=true;
-	       //document.getElementById("backgroundDiv").style.display="none";
-       }
-       if(isShow){
-     	  msgWait.hide();
-       }
-}
 </script>
 </head>
     <form action="<%=basePath%>" method="post">
 		
 	</form>
-	<body  bgcolor="#FFFFFF" topmargin="0" leftmargin="0">
-		
+	<body  bgcolor="#FFFFFF" topmargin="0" leftmargin="0">		
 		<div id="tbarPanel" style="width: 100%; height: 10%;"></div>
-		
-		<div id="resultPanel" style="width: 100%; height: 70%;">
-		  <div id="backgroundDiv" class="backgroundDiv" style="font-weight:bold ;color:#000000;font-size:18;vertical-align:center;text-align:center;padding-top:200px;"><img src="<%=basePath%>/model/report/img/load.gif"/></div>
-		  <div id="tab" align="center" style="width: 100%; height: 90%;"></div>
-		</div>	
+		 <iframe frameborder="0" id="title" style="width:100%;height:30px;" ></iframe>
+		 <iframe frameborder="0" id="content" scrolling="auto" style="width:100%;height:100%;"></iframe>
 	</body>
 </html>
