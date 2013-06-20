@@ -12,6 +12,7 @@ String flag = request.getParameter("flag");
 List<Map<String, Object>> showList = new DtxcManager().getXzrqbyYw_guid(yw_guid);
 String tempFolder = "";
 String ftpFileName = "";
+String subofficename = "",number= "",districtname= "",townname= "",countyname= "",projectname= "",location= "",area= "",buildYear= "",buildMonth= "",Date= "",district= "";
 //文件已存在，将文件从ftp中下载到缓冲区中打开已存在的文件
 if(flag.equals("false")){
 	ftpFileName = file_id+ ".doc";
@@ -23,20 +24,20 @@ if(flag.equals("false")){
 	UtilFactory.getFtpUtil().downloadFile(ftpFileName,temp+ftpFileName); //将ftp服务器中指定的文档下载到服务器临时文件夹下(weOffice模块下的documentTemporaryFolder)
 	String base = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort() + request.getRequestURI();
 	tempFolder = base.substring(0,base.lastIndexOf("/")) + "/cache/";
+}else{
+	subofficename = new String(request.getParameter("subofficename").getBytes("iso-8859-1"),"UTF-8");
+	number = new String(request.getParameter("number").getBytes("iso-8859-1"),"UTF-8");
+	districtname = new String(request.getParameter("districtname").getBytes("iso-8859-1"),"UTF-8");
+	townname = new String(request.getParameter("townname").getBytes("iso-8859-1"),"UTF-8");
+	countyname = new String(request.getParameter("countyname").getBytes("iso-8859-1"),"UTF-8");
+	projectname = new String(request.getParameter("projectname").getBytes("iso-8859-1"),"UTF-8");
+	location = new String(request.getParameter("location").getBytes("iso-8859-1"),"UTF-8");
+	area = new String(request.getParameter("area").getBytes("iso-8859-1"),"UTF-8");
+	buildYear = new String(request.getParameter("buildYear").getBytes("iso-8859-1"),"UTF-8");
+	buildMonth = new String(request.getParameter("buildMonth").getBytes("iso-8859-1"),"UTF-8");
+	Date = new String(request.getParameter("Date").getBytes("iso-8859-1"),"UTF-8");
+	district = new String(request.getParameter("district").getBytes("iso-8859-1"),"UTF-8");
 }
-String subofficename = new String(request.getParameter("subofficename").getBytes("iso-8859-1"),"UTF-8");
-String number = new String(request.getParameter("number").getBytes("iso-8859-1"),"UTF-8");
-String districtname = new String(request.getParameter("districtname").getBytes("iso-8859-1"),"UTF-8");
-String townname = new String(request.getParameter("townname").getBytes("iso-8859-1"),"UTF-8");
-String countyname = new String(request.getParameter("countyname").getBytes("iso-8859-1"),"UTF-8");
-String projectname = new String(request.getParameter("projectname").getBytes("iso-8859-1"),"UTF-8");
-String location = new String(request.getParameter("location").getBytes("iso-8859-1"),"UTF-8");
-String area = new String(request.getParameter("area").getBytes("iso-8859-1"),"UTF-8");
-String buildYear = new String(request.getParameter("buildYear").getBytes("iso-8859-1"),"UTF-8");
-String buildMonth = new String(request.getParameter("buildMonth").getBytes("iso-8859-1"),"UTF-8");
-String Date = new String(request.getParameter("Date").getBytes("iso-8859-1"),"UTF-8");
-String district = new String(request.getParameter("district").getBytes("iso-8859-1"),"UTF-8");
-
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
