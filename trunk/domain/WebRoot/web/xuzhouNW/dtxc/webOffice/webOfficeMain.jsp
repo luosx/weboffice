@@ -94,8 +94,10 @@ if(flag.equals("false")){
 			document.all.WebOffice1.SetFieldValue("projectname", "<%=new String(request.getParameter("projectname").getBytes("iso-8859-1"),"UTF-8")%>"); 
 			document.all.WebOffice1.SetFieldValue("location", "<%=new String(request.getParameter("location").getBytes("iso-8859-1"),"UTF-8")%>"); 
 			document.all.WebOffice1.SetFieldValue("area", "<%=new String(request.getParameter("area").getBytes("iso-8859-1"),"UTF-8")%>"); 
-			document.all.WebOffice1.SetFieldValue("buildDate", "<%=new String(request.getParameter("buildDate").getBytes("iso-8859-1"),"UTF-8")%>"); 
+			document.all.WebOffice1.SetFieldValue("buildYear", "<%=new String(request.getParameter("buildYear").getBytes("iso-8859-1"),"UTF-8")%>"); 
+			document.all.WebOffice1.SetFieldValue("buildMonth", "<%=new String(request.getParameter("buildMonth").getBytes("iso-8859-1"),"UTF-8")%>"); 
 			document.all.WebOffice1.SetFieldValue("Date", "<%=new String(request.getParameter("Date").getBytes("iso-8859-1"),"UTF-8")%>"); 
+			document.all.WebOffice1.SetFieldValue("district", "<%=new String(request.getParameter("district").getBytes("iso-8859-1"),"UTF-8")%>"); 
   		
   			//将文档上传到ftp
   			uploadDoc();
