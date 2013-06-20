@@ -178,9 +178,13 @@ body {
 			</tr>
 			<tr>
 				<td rowspan="3">
-					用地批准
+					用&nbsp;&nbsp;地
 					<br />
-					文&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;件
+					<br />
+					批&nbsp;&nbsp;准
+					<br />
+					<br />
+					文&nbsp;&nbsp;件
 				</td>
 				<td width="17%">
 					批准文号
@@ -213,7 +217,7 @@ body {
 				<td>
 					国&nbsp;&nbsp;土&nbsp;&nbsp;所
 					<br />
-					处理意见
+					处&nbsp;理&nbsp;意&nbsp;见
 				</td>
 				<td colspan="4" align="left">
 					<input type="text" class="noborder" readonly
@@ -225,7 +229,7 @@ body {
 				<td>
 					国&nbsp;&nbsp;土&nbsp;&nbsp;所
 					<br />
-					备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注
+					备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注
 				</td>
 				<td colspan="4" height=60px align="left">
 					<textarea class="noborder" readonly><%=map.get("SJBZ") == null ? "" : map.get("SJBZ")%></textarea>
