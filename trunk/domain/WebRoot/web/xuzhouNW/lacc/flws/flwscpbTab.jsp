@@ -1,11 +1,11 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@page import="com.klspta.base.util.UtilFactory"%>
-<%@page import="com.klspta.web.xuzhouNW.lacc.laccWorkflow.LaccWFManager"%>
+<%@page import="com.klspta.web.xuzhouNW.lacc.LaccManager"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 	String yw_guid = request.getParameter("yw_guid");
-	int num = new LaccWFManager().getNum(yw_guid, "flwscpb");
+	int num = new LaccManager().getNum(yw_guid, "flwscpb");
 	String wfInsId = request.getParameter("wfInsId");
 %>
 
