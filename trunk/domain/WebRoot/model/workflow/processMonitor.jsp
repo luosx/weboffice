@@ -14,7 +14,7 @@
     String basePath = request.getScheme() + "://" + request.getServerName() + ":"+ request.getServerPort() + path + "/";   
     
     //必需参数/////////////////////////////////////
-    String wfInsId =request.getParameter("wfInsID");
+    String wfInsId =request.getParameter("wfInsId");
 	IWorkflowOp workflowOp = WorkflowOp.getInstance();
 	String wfInsTaskId = workflowOp.getWfInsTaskIdByWfInsID(wfInsId);
 	String wfId = workflowOp.getWfIdByWfInsID(wfInsId);
