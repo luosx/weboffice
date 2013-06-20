@@ -1,7 +1,8 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<%@page import="com.klspta.model.giscomponents.pad.PADDataList"%>
+<%@page import="com.klspta.web.xuzhouNW.dtxc.PADDataManager"%>
+
 <%
-String path = request.getContextPath();
+    String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 String flag=request.getParameter("flag");
 String yw_guid=request.getParameter("yw_guid");
@@ -10,7 +11,7 @@ String pra;
 if(yw_guid==null||"null".equals(yw_guid)){
 	pra="dolocation=true&p={\"rings\":[[[38688372,4431495],[38688350,4431440],[38688372,4431390],[38688402,4431431],[38688430,4431431],[38688414,4431494],[38688372,4431495]]],\"spatialReference\":{\"wkid\":2362}}";
 }else{
-	PADDataList pDataList=new PADDataList();
+	PADDataManager pDataList=new PADDataManager();
 	pra="dolocation=true&p="+pDataList.getCjzb(yw_guid);
 }
 String url=basePath+"base/fxgis/fx/FxGIS.html?debug=true";
