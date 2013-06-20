@@ -8,17 +8,12 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.rmi.server.UID;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileItemFactory;
-import org.apache.commons.fileupload.FileUpload;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Component;
 
@@ -27,7 +22,6 @@ import com.klspta.base.util.UtilFactory;
 import com.klspta.base.wkt.Point;
 import com.klspta.base.wkt.Polygon;
 import com.klspta.base.wkt.Ring;
-import com.scand.fileupload.ProgressMonitorFileItemFactory;
 
 /**
  * 
@@ -79,54 +73,10 @@ public class ResultImp extends AbstractBaseBean {
      */
     private String tempFile() {
         try {
-            boolean ismulti = FileUpload.isMultipartContent(request);
-            if (!ismulti) {
-            } else {
-                //取得临时文件夹
-                String uploadFolder = tempPath;
-                String file_id = new UID().toString().replaceAll(":", "-");
-                String fileSuffix;
-                String fileFullPath;
-                //String fileId = request.getParameter("sessionId").toString().trim();
-                //创建上传句柄
-                FileItemFactory factory = new ProgressMonitorFileItemFactory(request, "");
-                ServletFileUpload upload = new ServletFileUpload(factory);
-                upload.setHeaderEncoding("utf-8");
-                List items = upload.parseRequest(request);
-                //处理上传文件
-                Iterator iter = items.iterator();
-                while (iter.hasNext()) {
-                    FileItem item = (FileItem) iter.next();
-                    if (item.isFormField()) {
-                    } else {
-                        String fileName = item.getName();
-                        fileSuffix = fileName.substring(fileName.lastIndexOf(".")); //获取文件后缀
-                        int i2 = fileName.lastIndexOf("\\");
-                        if (i2 > -1)
-                            fileName = fileName.substring(i2 + 1);
-                        File dirs = new File(uploadFolder);
-                        if (!dirs.isFile()) {
-                            dirs.mkdirs();
-                        }
-                        int flag = fileName.lastIndexOf(".");
-                        String temp = fileName.replaceFirst(fileName, file_id);
-                        if (flag >= 0) {
-                            temp = fileName.replaceFirst(fileName.substring(0, fileName.lastIndexOf(".")),
-                                    file_id);
-                        }
-                        temp = file_id + fileSuffix; //转换上传的文件名称
-                        File uploadedFile = new File(dirs, temp);
-                        item.write(uploadedFile);
-                        fileFullPath = uploadFolder + temp;
-                        return fileFullPath;
-                    }
-                }
-
-            }
-
+            List<String> list = UtilFactory.getFileUtil().upload(request, 0, 0);
+            return list.get(0);
         } catch (Exception e) {
             e.printStackTrace();
-            return null;
         }
         return null;
     }
