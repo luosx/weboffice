@@ -75,15 +75,15 @@ if(flag.equals("false")){
 			
 			//添加标签值
 			document.all.WebOffice1.SetFieldValue("subofficename", '<%=(String)showList.get(0).get(request.getParameter("subofficename"))%>', ""); 
-			document.all.WebOffice1.SetFieldValue("number", "<%=(String)showList.get(0).get(request.getParameter("number"))%>"); 
-			document.all.WebOffice1.SetFieldValue("districtname", "<%=(String)showList.get(0).get(request.getParameter("districtname"))%>"); 
-			document.all.WebOffice1.SetFieldValue("townname", "<%=(String)showList.get(0).get(request.getParameter("townname"))%>"); 
-			document.all.WebOffice1.SetFieldValue("countyname", "<%=(String)showList.get(0).get(request.getParameter("countyname"))%>"); 
-			document.all.WebOffice1.SetFieldValue("projectname", "<%=(String)showList.get(0).get(request.getParameter("projectname"))%>"); 
-			document.all.WebOffice1.SetFieldValue("location", "<%=(String)showList.get(0).get(request.getParameter("location"))%>"); 
-			document.all.WebOffice1.SetFieldValue("area", "<%=(String)showList.get(0).get(request.getParameter("area"))%>"); 
-			document.all.WebOffice1.SetFieldValue("buildDate", "<%=(String)showList.get(0).get(request.getParameter("buildDate"))%>"); 
-			document.all.WebOffice1.SetFieldValue("Date", "<%=(String)showList.get(0).get(request.getParameter("Date"))%>"); 	
+			document.all.WebOffice1.SetFieldValue("number", "<%=(String)showList.get(0).get(request.getParameter("number"))%>", ""); 
+			document.all.WebOffice1.SetFieldValue("districtname", "<%=(String)showList.get(0).get(request.getParameter("districtname"))%>", ""); 
+			document.all.WebOffice1.SetFieldValue("townname", "<%=(String)showList.get(0).get(request.getParameter("townname"))%>", ""); 
+			document.all.WebOffice1.SetFieldValue("countyname", "<%=(String)showList.get(0).get(request.getParameter("countyname"))%>", ""); 
+			document.all.WebOffice1.SetFieldValue("projectname", "<%=(String)showList.get(0).get(request.getParameter("projectname"))%>", ""); 
+			document.all.WebOffice1.SetFieldValue("location", "<%=(String)showList.get(0).get(request.getParameter("location"))%>", ""); 
+			document.all.WebOffice1.SetFieldValue("area", "<%=(String)showList.get(0).get(request.getParameter("area"))%>", ""); 
+			document.all.WebOffice1.SetFieldValue("buildDate", "<%=(String)showList.get(0).get(request.getParameter("buildDate"))%>", ""); 
+			document.all.WebOffice1.SetFieldValue("Date", "<%=(String)showList.get(0).get(request.getParameter("Date"))%>", ""); 	
   		
   			//将文档上传到ftp
   			uploadDoc();
@@ -124,7 +124,6 @@ if(flag.equals("false")){
   <body leftmargin="0" bottommargin="0" rightmargin="0" topmargin="0"  onload="webofficeInit();return false;"> 
     <div style="width:100%; height:25px;float:left;background-color: gray">
     	<input style="width:150" value="抄告单:<%=yw_guid%>"/>
-    	
     	<input id="save" style="width:50" type="button" value="保存" onclick="save()" disabled="disabled"/>
     </div>
 	<div>
