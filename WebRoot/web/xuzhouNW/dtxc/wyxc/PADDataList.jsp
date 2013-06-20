@@ -40,7 +40,7 @@ var grid;
 var expWin;
 var form;
 Ext.onReady(function(){
-    putClientCommond("padDataList","getQueryData");
+    putClientCommond("padDataManager","getQueryData");
 	myData = restRequest();
  	store = new Ext.data.JsonStore({
     proxy: new Ext.ux.data.PagingMemoryProxy(myData),
@@ -137,7 +137,7 @@ function delTask(id){
 	Ext.MessageBox.confirm('注意', '删除后不能恢复，您确定吗？',function(btn){
 	  if(btn=='yes'){
 	    var path = "<%=basePath%>";
-	    putClientCommond("padDataList","delPAD");
+	    putClientCommond("padDataManager","delPAD");
 	    putRestParameter("yw_guid",myData[id].GUID)
         var mes = restRequest(); 
 		document.location.reload();
@@ -157,7 +157,7 @@ function showDetail(id){
 function query(){
   var keyWord = Ext.getCmp('keyword').getValue();
     keyWord=escape(escape(keyWord));
-    putClientCommond("padDataList","getQueryData");
+    putClientCommond("padDataManager","getQueryData");
     putRestParameter("keyWord",keyWord);
     var myData1 = restRequest(); 
     var width=document.body.clientWidth;
