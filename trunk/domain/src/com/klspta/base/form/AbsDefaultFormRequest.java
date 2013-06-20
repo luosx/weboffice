@@ -1,5 +1,6 @@
 package com.klspta.base.form;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.sql.Timestamp;
@@ -241,7 +242,36 @@ abstract public class AbsDefaultFormRequest extends AbstractBaseBean {
 		}
 		
 	}
-
+	
+	/**
+	 * 
+	 * <br>Description:工作节点资源树授权
+	 * <br>Author:王雷
+	 * <br>Date:2013-6-20
+	 */
+   public void saveWorkflowTree() {
+        try {
+            String treeIdList = request.getParameter("treeIdList");
+            String wfID = request.getParameter("wfID");
+            String treeName = request.getParameter("treeName");
+            String nodeName = URLDecoder.decode(request.getParameter("nodeName"), "utf-8");
+            String sql = "select nodeName from map_workflow_tree where wfid='" + wfID + "' and nodeName='" + nodeName
+                    + "'";
+            List<Map<String, Object>> list = query(sql, CORE);
+            if (list.size() == 0) {
+                sql = "insert into map_workflow_tree(nodeids,wfid,nodename,treename) values(?,?,?,?)";
+            } else {
+                sql = "update map_workflow_tree set nodeids=? where wfid=? and nodename=? and treename=?";
+            }
+            Object[] args = { treeIdList, wfID, nodeName, treeName };
+            update(sql, CORE, args);
+            response.getWriter().write("{success:true}");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 	/**
 	 * 
 	 * <br>
