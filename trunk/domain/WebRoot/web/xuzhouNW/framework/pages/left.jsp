@@ -53,7 +53,14 @@ function openPage(url){
     {
         parent.partline.turn();
     }
-    parent.right.location.href='<%=basePath%>'+url + "?userId=<%=userId%>"; 
+    if(url.indexOf("?") != -1){
+    	parent.right.location.href='<%=basePath%>'+url + "&userId=<%=userId%>";
+    }else{
+    	parent.right.location.href='<%=basePath%>'+url + "?userId=<%=userId%>";
+    }
+    
+    
+     
     var  autoExtend = url.indexOf("autoExtend");
     if(autoExtend != -1){
         var isAuto = url.substring(autoExtend+11,autoExtend+15);
