@@ -31,8 +31,8 @@ public class StartWorkflowLacc extends AbstractBaseBean {
 	    //立案呈批表编号生成规则 执立徐国土资【2013】128号
 		Calendar cal = Calendar.getInstance();
 		int year = cal.get(Calendar.YEAR);
-		String selectSql="select count(*) count from lacpb";
-		List<Map<String,Object>> list=query(selectSql,YW);
+		String selectSql="select count(*) count from lacpb t where Extract(year from t.dateflag)=?";
+		List<Map<String,Object>> list=query(selectSql,YW,new Object[]{year});
 		int count=Integer.parseInt((list.get(0)).get("count").toString());		
 		String bh = "执立徐国土资【"+year+"】"+(count+1)+"号";
 		String insertSql="insert into lacpb(yw_guid,bh) values(?,?)";
@@ -47,7 +47,7 @@ public class StartWorkflowLacc extends AbstractBaseBean {
 		
 		//3、response参数封装及跳转
 		String urlPath = "/model/workflow/wf.jsp?yw_guid="
-				+ yw_guid + "&zfjcType=" + zfjcType + "&wfInsId=" + wfinsId+ "&zfjcName=立案查处";
+				+ yw_guid + "&zfjcType=" + zfjcType + "&wfInsId=" + wfinsId+ "&buttonHidden=la,back&zfjcName=立案查处&returnPath=web/xuzhouNW/lacc/lb/dbaj.jsp";
 		response(urlPath);
 	}
 	
