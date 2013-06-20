@@ -189,6 +189,10 @@ scrollbar-3dlight-color:#D4D0C8;
 		    			formName = "wfxsfkxx";
 		    			urlName="web/xuzhouNW/xfaj/wfxsfkxx.jsp";
 		    			break;
+		    		case "案件基本信息登记表":
+		    			formName = "ajjbxxdjb";
+		    			urlName="web/xuzhouNW/lacc/lacp/ajjbxxdjb";
+		    			break;		    			
 		    		default:
 		    			flag = false;
 		    	}
@@ -277,7 +281,7 @@ scrollbar-3dlight-color:#D4D0C8;
                 		}
                 		
                 		var path = "<%=basePath%>";
-		   		    	var actionName="startWorkflow";
+		   		    	var actionName="formrequest";
 		   		    	var actionMethod="saveWorkflowTree";
 		   		    	var nodeName=encodeURI(encodeURI('<%=nodeName%>'));
 		   		    	var parameter="treeName=<%=treeName%>&wfID=<%=wfID%>&nodeName="+nodeName+"&treeIdList="+treeIdList;		   		        
