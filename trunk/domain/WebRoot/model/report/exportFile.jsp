@@ -17,8 +17,15 @@
 <%@ page import="java.io.OutputStream"%>
 <%@page import="com.klspta.base.util.UtilFactory"%>
 <%@page import="com.klspta.model.report.api.ReportDataSource"%>
+<%@page import="net.sf.jasperreports.engine.export.JRPdfExporterParameter"%>
 <%
-	String sty = request.getParameter("sty");//导出类型
+   //使用方法
+   //必须传在数据库里面配置的ID和导出类型type type可供选择格式：excel pdf html
+   //如：exportFile.jsp?id=123321&type=excle
+   //condition filedValue 也可以进行添加，添加方法和ireport一样
+   //
+
+	String sty = request.getParameter("type");//导出类型
 	//获取必要参数
 	String id = request.getParameter("id");//报表ID
 	String condition = request.getParameter("condition");//定制查询条件
@@ -36,7 +43,7 @@
 	//初始化数据源类
 	ReportDataSource report = new ReportDataSource();
 	report.loadReportParameter(condition, fieldValue, pathIndex);
-	String type = report.getReportType(id);
+	report.getReportType(id);
 
 	String jasperPath = report.configPath;
 	String reportFileName = application.getRealPath(jasperPath);
@@ -67,7 +74,7 @@
 		exporter.setParameter(JRXlsExporterParameter.IS_ONE_PAGE_PER_SHEET, Boolean.FALSE);
 		exporter.setParameter(JRXlsExporterParameter.IS_WHITE_PAGE_BACKGROUND, Boolean.FALSE);
 		// 告诉浏览器执行导出Xls操作
-		response.setHeader("Content-Disposition", "attachment;filename=gdbylfx.xls");
+		response.setHeader("Content-Disposition", "attachment;filename=export.xls");
 		response.setContentType("application/vnd.ms-excel");
 		// 下面2个out的方法是为了解决tomcat输入流和输出流冲突，若不设置会报异常
 		out.clear();
@@ -77,13 +84,13 @@
 
 		OutputStream outputStream = response.getOutputStream();
 		//发送文件类型及编码
+		JRPdfExporter exporter = new JRPdfExporter();
+		session.setAttribute(ImageServlet.DEFAULT_JASPER_PRINT_SESSION_ATTRIBUTE, jasperPrint);
+		exporter.setParameter(JRPdfExporterParameter.JASPER_PRINT, jasperPrint);
+		exporter.setParameter(JRPdfExporterParameter.OUTPUT_STREAM, outputStream);
 		response.setContentType("application/pdf");
 		response.setCharacterEncoding("UTF-8");
-		response.setHeader("Content-Disposition", "attachment;filename=gdbylfx.pdf");
-		JRPdfExporter exporter = new JRPdfExporter();
-		exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
-		exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, outputStream);
-		outputStream.flush();
+		response.setHeader("Content-Disposition", "attachment;filename=export.pdf");
 		out.clear();
 		out = pageContext.pushBody();
 		exporter.exportReport();
@@ -103,7 +110,7 @@
 		response.setCharacterEncoding("utf-8");
 		//导出：
 		response.setContentType("application/html");
-		response.setHeader("Content-Disposition", "attachment;filename=gdbylfx.html");
+		response.setHeader("Content-Disposition", "attachment;filename=export.html");
 		// 下面2个out的方法是为了解决tomcat输入流和输出流冲突，若不设置会报异常
 		out.clear();
 		out = pageContext.pushBody();
