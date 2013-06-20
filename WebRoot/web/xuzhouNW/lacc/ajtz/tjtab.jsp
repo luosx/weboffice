@@ -91,6 +91,8 @@ input,img{vertical-align:middle;cursor:hand;}
 -->
 </style>
 <script type="text/javascript">
+	var basePath="<%=basePath%>";
+	var condition;
 	var grid;
 	var tbarPanel;
 	var width;
@@ -108,8 +110,21 @@ Ext.onReady(function(){
 	        id:'gridId',
 	        tbar:[
 		        '年度违法案件：<input id="beginDate" type="text" name="beginDate" class="dateText"  readonly="true" onClick="setmonth(this)"/>&nbsp;——&nbsp;<input id="endDate" type="endDate" name="QZZXSJ"  class="dateText"   readonly="true" onClick="setmonth(this)"/>&nbsp;&nbsp;&nbsp;&nbsp;'+
-		        '<input type="button" value="查 询" onclick="query();">&nbsp;&nbsp;&nbsp;&nbsp;'+
-		        '<input type="button" value="导 出" onclick="report();">'
+		        '<input type="button" value="查 询" onclick="query();">&nbsp;&nbsp;&nbsp;&nbsp;',
+		         {
+							text : '导出',
+							iconCls : 'blist',
+							menu : [{
+										text : '导出EXCEL',
+										handler:exportExcel
+									}, {
+										text : '导出HTML',
+										handler:exportHtml
+									}, {
+										text : '导出PDF',
+										handler:exportPdf
+									}]
+						}
 			  ],
 	        stripeRows: true,
 	        width: width,
@@ -121,7 +136,15 @@ Ext.onReady(function(){
       	tbarPanel.render('tbarPanel');
 })
 
-
+function exportExcel() {
+    window.open(basePath+'model/report/exportFile.jsp?id=DBD6C6B1978D41808590EF04747C8600&type=excel&condition='+condition);
+}
+function exportHtml(){
+	window.open(basePath+'model/report/exportFile.jsp?id=DBD6C6B1978D41808590EF04747C8600&type=html&condition='+condition);
+}
+function exportPdf(){
+	window.open(basePath+'model/report/exportFile.jsp?id=DBD6C6B1978D41808590EF04747C8600&type=pdf&condition='+condition);
+}
 
 //查询
 var isShow=false;
@@ -167,7 +190,7 @@ function query()
       }
       var region=regions.join(",");
       region=escape(escape(region));
-      var condition=" qy in ("+region+") and to_char(aydjrq,'yyyy-mm') between '"+beginDate+"' and '"+endDate+"'";
+      condition =" qy in ("+region+") and to_char(aydjrq,'yyyy-mm') between '"+beginDate+"' and '"+endDate+"'";
       document.getElementById('title').src="<%=basePath%>web/xuzhouNW/lacc/ajtz/title.jsp?beginDate="+beginDate+"&endDate="+endDate+"&region="+escape(escape(treeList));
       document.getElementById('content').src="<%=basePath%>model/report/showReport.jsp?id=DBD6C6B1978D41808590EF04747C8600&condition="+condition;
 	}
@@ -180,7 +203,7 @@ function query()
 	</form>
 	<body  bgcolor="#FFFFFF" topmargin="0" leftmargin="0">		
 		<div id="tbarPanel" style="width: 100%; height: 10%;"></div>
-		 <iframe frameborder="0" id="title" style="width:100%;height:30px;" ></iframe>
+		 <iframe frameborder="0" id="title" style="width:100%;height:30px;" scrolling="no"></iframe>
 		 <iframe frameborder="0" id="content" scrolling="auto" style="width:100%;height:100%;"></iframe>
 	</body>
 </html>
