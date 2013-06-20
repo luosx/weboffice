@@ -22,6 +22,7 @@
 	if (principal instanceof User) {
 		userBean = (User) principal;
 	} 
+	String userId = userBean.getUserID();
 	session.setAttribute("docName", null);
 %>
 
@@ -51,8 +52,8 @@ function openPage(url){
     if(url.indexOf("*closeMenu*")!=-1)
     {
         parent.partline.turn();
-       }
-    parent.right.location.href='<%=basePath%>'+url; 
+    }
+    parent.right.location.href='<%=basePath%>'+url + "?userId=<%=userId%>"; 
     var  autoExtend = url.indexOf("autoExtend");
     if(autoExtend != -1){
         var isAuto = url.substring(autoExtend+11,autoExtend+15);
