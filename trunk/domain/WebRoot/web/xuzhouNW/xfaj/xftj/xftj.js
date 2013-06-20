@@ -81,10 +81,10 @@ function initComponent() {
 										text : '导出PDF',
 										handler:exportPdf
 									}]
-						}, {}],
+						}],
 				items : [{
-					html : "<iframe id='report' width=" + width + " height="
-							+ height + " src=" + url + "></iframe>"
+					html : "<iframe id='report' width=" + (width-50) + " height="
+							+ (height-80) + " src=" + url + "></iframe>"
 				}]
 			});
 	simple.render(document.body);
