@@ -32,13 +32,24 @@ public class XfAction extends AbstractBaseBean {
 	
 	/**
 	 * 
-	 * <br>Description:获取所有案件，案件查询时使用
-	 * <br>Author:黎春行
-	 * <br>Date:2013-5-22
+	 * <br>Description:获取所有信访办理中案件，案件查询时使用
+	 * <br>Author:王峰
+	 * <br>Date:2013-6-20
 	 */
-	public void getAllList(){
+	public void getXFblzList(){
 		String keyWord = request.getParameter("keyWord");
-		response(new XfManager().getAllList(keyWord));
+		response(new XfManager().getXFblzList(keyWord));
+	}
+	
+	/**
+	 * 
+	 * <br>Description:获取所有信访已办结案件，案件查询时使用
+	 * <br>Author:王峰
+	 * <br>Date:2013-6-20
+	 */
+	public void getXFEndList(){
+		String keyWord = request.getParameter("keyWord");
+		response(new XfManager().getXFEndList(keyWord));
 	}
 	
 }
