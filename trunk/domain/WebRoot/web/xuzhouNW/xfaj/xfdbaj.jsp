@@ -111,7 +111,7 @@
 			var wfInsId=myData[id].WFINSID;
 			var yw_guid=myData[id].YW_GUID;
 			var zfjcType="91";
-			var returnPath=window.location.href;
+			var returnPath="web/xuzhouNW/xfaj/xfdbaj.jsp";
 			var buttonHien = "la";
 			var url='<%=basePath%>model/workflow/pages/wf.jsp?yw_guid='+yw_guid+'&wfInsId='+wfInsId+'&zfjcType='+zfjcType+'&returnPath='+returnPath+'&zfjcName=信访举报&buttonHidden='+buttonHien;  
 			//window.open(url); 
