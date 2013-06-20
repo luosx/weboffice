@@ -79,7 +79,8 @@ public class XfManager extends AbstractBaseBean {
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 
 		// 获取数据
-		String sql = "select distinct t.yw_guid,t.bh ,t.xslx,t.jbr, t.jbfs, t.bjbdw, t.lxdz, t.wtfsd, to_char(t.djsj,'yyyy-MM-dd') as slrq, j.activityname as ajblzt, j.wfinsid from wfxsfkxx t join workflow.v_hist_task j on t.yw_guid=j.yw_guid where j.assignee_=?";
+		//String sql = "select distinct t.yw_guid,t.bh ,t.xslx,t.jbr, t.jbfs, t.bjbdw, t.lxdz, t.wtfsd, to_char(t.djsj,'yyyy-MM-dd') as slrq, j.activityname as ajblzt, j.wfinsid from wfxsfkxx t join workflow.v_hist_task j on t.yw_guid=j.yw_guid where j.assignee_=?";
+		String sql = "select distinct t.yw_guid,t.bh ,t.xslx,t.jbr, t.jbfs, t.bjbdw, t.lxdz, t.wtfsd, to_char(t.djsj,'yyyy-MM-dd') as slrq, j.activityname as ajblzt, j.wfinsid from wfxsfkxx t ,(select t2.activityname, t2.assignee_, t2.wfinsid  from  workflow.v_hist_task t2 where  t2.yw_guid = yw_guid and rownum = 1) j where j.wfinsid like 'xfjb%' and j.assignee_=?";
 		if (keyWord != null) {
 			keyWord = UtilFactory.getStrUtil().unescape(keyWord);
 			sql += " and (upper(t.bh)||upper(t.xslx)||upper(t.jbr)||upper(t.lxdz)||upper(t.wtfsd)||upper(j.create_)||upper(j.activityname) like '%"
@@ -113,7 +114,8 @@ public class XfManager extends AbstractBaseBean {
 		// 获取参数
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 		// 获取数据
-		String sql = "select t.yw_guid,t.bh ,t.xslx,t.jbr, t.jbfs, t.bjbdw, t.lxdz, t.wtfsd, to_char(t.djsj,'yyyy-MM-dd') as slrq,j.activity_name_ ajblzt, j.wfinsid from wfxsfkxx t join workflow.v_active_task j on t.yw_guid=j.yw_guid ";
+		//String sql = "select t.yw_guid,t.bh ,t.xslx,t.jbr, t.jbfs, t.bjbdw, t.lxdz, t.wtfsd, to_char(t.djsj,'yyyy-MM-dd') as slrq,j.activity_name_ ajblzt, j.wfinsid from wfxsfkxx t join workflow.v_active_task j on t.yw_guid=j.yw_guid ";
+		String sql = "select distinct t.yw_guid,t.bh ,t.xslx,t.jbr, t.jbfs, t.bjbdw, t.lxdz, t.wtfsd, to_char(t.djsj,'yyyy-MM-dd') as slrq, j.activityname as ajblzt, j.wfinsid from wfxsfkxx t ,(select t2.activityname, t2.assignee_, t2.wfinsid  from  workflow.v_hist_task t2 where  t2.yw_guid = yw_guid and rownum = 1) j where j.wfinsid like 'xfjb%' ";
 		if (keyWord != null) {
 			keyWord = UtilFactory.getStrUtil().unescape(keyWord);
 			sql += " where (upper(t.bh)||upper(t.xslx)||upper(t.jbfs)||upper(t.jbr)||upper(t.lxdz)||upper(t.wtfsd)||upper(j.create_)||upper(j.activity_name_) like '%"
