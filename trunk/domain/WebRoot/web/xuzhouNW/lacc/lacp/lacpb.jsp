@@ -34,8 +34,6 @@
 		<%@ include file="/base/include/restRequest.jspf" %>
 		<link rel="stylesheet"
 			href="<%=basePath%>base/form/css/commonForm.css" type="text/css" />
-				<link rel="stylesheet"
-			href="<%=basePath%>web/default/ajgl/css/lacpb.css" type="text/css" />
 		<%@ include file="/base/include/formbase.jspf"%>
 		<%} %>
 		<script type="text/javascript" src="<%=basePath%>/web/xuzhouNW/lacc/js/sign.js"></script>
@@ -87,8 +85,6 @@
 	
 <body bgcolor="#FFFFFF">
 <% 
-System.out.println("打印：" + (fixed!=null && fixed.equals("fixedPrint")) );
-System.out.println("保存：" + !"false".equals(edit));
 if(fixed!=null && fixed.equals("fixedPrint")){%>
 <div id="fixed class="Noprn" style="position: fixed; top: 5px; left: 0px"></div>
 <%	
@@ -180,7 +176,7 @@ if(fixed!=null && fixed.equals("fixedPrint")){%>
 									信访反映
 								</option>
 								<option  value="卫星执法" >
-									卫星执法
+									卫片执法
 								</option>
 								<option  value="媒体披露" >
 									媒体披露
