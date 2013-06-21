@@ -57,15 +57,20 @@
 		//用于控制初始化时页面显示控制
 		function show(){
 			var checkCgd1 = document.getElementById("jsxm1").value + document.getElementById("jsdw1").value + document.getElementById("dgsj1").value +
-							document.getElementById("jsqk1").value + document.getElementById("zdmj1").value + document.getElementById("zdwz1").value;
+							document.getElementById("jsqk1").value + document.getElementById("zdmj1").value + document.getElementById("zdwz1").value + 
+							document.getElementById("townname1").value + document.getElementById("countyname1").value;
 			var checkCgd2 = document.getElementById("jsxm2").value + document.getElementById("jsdw2").value + document.getElementById("dgsj2").value +
-							document.getElementById("jsqk2").value + document.getElementById("zdmj2").value + document.getElementById("zdwz2").value;
+							document.getElementById("jsqk2").value + document.getElementById("zdmj2").value + document.getElementById("zdwz2").value + 
+							document.getElementById("townname2").value + document.getElementById("countyname2").value;;
 			var checkCgd3 = document.getElementById("jsxm3").value + document.getElementById("jsdw3").value + document.getElementById("dgsj3").value +
-							document.getElementById("jsqk3").value + document.getElementById("zdmj3").value + document.getElementById("zdwz3").value;
+							document.getElementById("jsqk3").value + document.getElementById("zdmj3").value + document.getElementById("zdwz3").value + 
+							document.getElementById("townname3").value + document.getElementById("countyname3").value;;
 			var checkCgd4 = document.getElementById("jsxm4").value + document.getElementById("jsdw4").value + document.getElementById("dgsj4").value +
-							document.getElementById("jsqk4").value + document.getElementById("zdmj4").value + document.getElementById("zdwz4").value;
+							document.getElementById("jsqk4").value + document.getElementById("zdmj4").value + document.getElementById("zdwz4").value + 
+							document.getElementById("townname4").value + document.getElementById("countyname4").value;;
 			var checkCgd5 = document.getElementById("jsxm5").value + document.getElementById("jsdw5").value + document.getElementById("dgsj5").value +
-							document.getElementById("jsqk5").value + document.getElementById("zdmj5").value + document.getElementById("zdwz5").value;
+							document.getElementById("jsqk5").value + document.getElementById("zdmj5").value + document.getElementById("zdwz5").value + 
+							document.getElementById("townname5").value + document.getElementById("countyname5").value;;
 			if(checkCgd1 != ""){
 				for(var i = 0; i < arr.length ; i++){
 					if(arr[i].name == "check1"){
@@ -200,7 +205,7 @@
 					for(var j = 0; j < arr.length ; j++){
 						if(arr[j].name == temp){
 							arr[j].style.display = "none";
-							if(k == 3){ //这里对应4个tr标签 
+							if(k == 4){ //这里对应5个tr标签 
 								//截取到表示抄告单位置的数字
 								var tempNum = new Number(temp.charAt(5));
 								//将相应位置修改状态
@@ -226,6 +231,8 @@
 					document.getElementById("jsqk" + i).value = "";
 					document.getElementById("zdmj" + i).value = "";
 					document.getElementById("zdwz" + i).value = "";
+					document.getElementById("townname" + i).value = "";
+					document.getElementById("countyname" + i).value = "";
 				}
 			}
 			putClientCommond("dtxcManager","deleteCgd");
@@ -254,7 +261,9 @@
 			var jsqk = document.getElementById("jsqk" + tempNum).value;
 			var zdmj = document.getElementById("zdmj" + tempNum).value;
 			var zdwz = document.getElementById("zdwz" + tempNum).value;
-			if(jsxm == "" || jsdw == "" || dgsj =="" || jsqk== "" || zdmj == "" ||zdwz == ""){
+			var townname = document.getElementById("townname" + tempNum).value;
+			var countyname = document.getElementById("countyname" + tempNum).value;
+			if(jsxm == "" || jsdw == "" || dgsj =="" || jsqk== "" || zdmj == "" ||zdwz == ""|| townname == "" ||countyname == ""){
 				alert("信息不完整，不能生成抄告单。请将信息填写完整！！");
 				return;
 			}
@@ -267,6 +276,8 @@
       		putRestParameter("jsqk",escape(escape(jsqk)));
       		putRestParameter("zdmj",escape(escape(zdmj)));
       		putRestParameter("zdwz",escape(escape(zdwz)));
+      		putRestParameter("townname",escape(escape(townname)));
+      		putRestParameter("countyname",escape(escape(countyname)));
       		var cgdState = restRequest();
       		if(cgdState == "1"){
       			if(confirm('原抄告单将被替换，是否重新生成抄告单！！')){
@@ -284,8 +295,8 @@
 			var subofficename = "subofficename=<%=strXcdwjc%>";
 			var number = "&number="+"";
 			var districtname = "&districtname=<%=strXcdwjc%>";
-			var townname = "&townname="+"";
-			var countyname = "&countyname="+"";
+			var townname = "&townname="+townname;
+			var countyname = "&countyname="+countyname;
 			var projectname = "&projectname="+jsxm;
 			var location = "&location="+zdwz;
 			var area = "&area="+zdmj;
@@ -415,7 +426,7 @@
 					 -->
 					<!-- 第一个 -->
 					<tr name="check1" style="display:none;">
-						<td rowspan="4">
+						<td rowspan="5">
 							<div align="center">
 								<input type="checkbox" id="check1" name="checkbox"/>
 							</div>
@@ -477,6 +488,24 @@
 					<tr name="check1" style="display:none;">
 						<td>
 							<div align="center">
+								镇
+							</div>
+						</td>
+						<td>
+							<input type="text" class="noborder" name="townname1" id="townname1" style="width: 97%" />
+						</td>
+						<td>
+							<div align="center">
+								村
+							</div>
+						</td>
+						<td>
+							<input type="text" class="noborder" name="countyname1" id="countyname1" style="width: 97%" />
+						</td>
+					</tr>
+					<tr name="check1" style="display:none;">
+						<td>
+							<div align="center">
 								抄告单状态
 							</div>
 						</td>
@@ -496,7 +525,7 @@
 					<!-- 第二个 -->
 					
 					<tr name="check2" style="display:none;">
-						<td rowspan="4">
+						<td rowspan="5">
 							<div align="center">
 								<input type="checkbox" id="check2" name="checkbox"/>
 							</div>
@@ -558,6 +587,24 @@
 					<tr name="check2" style="display:none;">
 						<td>
 							<div align="center">
+								镇
+							</div>
+						</td>
+						<td>
+							<input type="text" class="noborder" name="townname2" id="townname2" style="width: 97%" />
+						</td>
+						<td>
+							<div align="center">
+								村
+							</div>
+						</td>
+						<td>
+							<input type="text" class="noborder" name="countyname2" id="countyname2" style="width: 97%" />
+						</td>
+					</tr>
+					<tr name="check2" style="display:none;">
+						<td>
+							<div align="center">
 								抄告单状态
 							</div>
 						</td>
@@ -577,7 +624,7 @@
 					<!-- 第三个 -->
 					
 					<tr name="check3" style="display:none;">
-						<td rowspan="4">
+						<td rowspan="5">
 							<div align="center">
 								<input type="checkbox" id="check3" name="checkbox"/>
 							</div>
@@ -639,6 +686,24 @@
 					<tr name="check3" style="display:none;">
 						<td>
 							<div align="center">
+								镇
+							</div>
+						</td>
+						<td>
+							<input type="text" class="noborder" name="townname3" id="townname3" style="width: 97%" />
+						</td>
+						<td>
+							<div align="center">
+								村
+							</div>
+						</td>
+						<td>
+							<input type="text" class="noborder" name="countyname3" id="countyname3" style="width: 97%" />
+						</td>
+					</tr>
+					<tr name="check3" style="display:none;">
+						<td>
+							<div align="center">
 								抄告单状态
 							</div>
 						</td>
@@ -658,7 +723,7 @@
 					<!-- 第四个 -->
 					
 					<tr name="check4" style="display:none;">
-						<td rowspan="4">
+						<td rowspan="5">
 							<div align="center">
 								<input type="checkbox" id="check4" name="checkbox"/>
 							</div>
@@ -720,6 +785,24 @@
 					<tr name="check4" style="display:none;">
 						<td>
 							<div align="center">
+								镇
+							</div>
+						</td>
+						<td>
+							<input type="text" class="noborder" name="townname4" id="townname4" style="width: 97%" />
+						</td>
+						<td>
+							<div align="center">
+								村
+							</div>
+						</td>
+						<td>
+							<input type="text" class="noborder" name="countyname4" id="countyname4" style="width: 97%" />
+						</td>
+					</tr>
+					<tr name="check4" style="display:none;">
+						<td>
+							<div align="center">
 								抄告单状态
 							</div>
 						</td>
@@ -739,7 +822,7 @@
 					<!-- 第五个 -->
 					
 					<tr name="check5" style="display:none;">
-						<td rowspan="4">
+						<td rowspan="5">
 							<div align="center">
 								<input type="checkbox" id="check5" name="checkbox"/>
 							</div>
@@ -796,6 +879,24 @@
 						</td>
 						<td>
 							<input type="text" class="noborder" name="zdwz5" id="zdwz5" style="width: 97%" />
+						</td>
+					</tr>
+					<tr name="check5" style="display:none;">
+						<td>
+							<div align="center">
+								镇
+							</div>
+						</td>
+						<td>
+							<input type="text" class="noborder" name="townname5" id="townname5" style="width: 97%" />
+						</td>
+						<td>
+							<div align="center">
+								村
+							</div>
+						</td>
+						<td>
+							<input type="text" class="noborder" name="countyname5" id="countyname5" style="width: 97%" />
 						</td>
 					</tr>
 					<tr name="check5" style="display:none;">
