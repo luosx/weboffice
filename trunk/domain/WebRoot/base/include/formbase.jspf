@@ -191,18 +191,20 @@ function init(){
 }
 /* 校验信访人年龄 add by 尹宇星 2011-12-06 */
 function isRegisterNl(){
-	document.getElementById("nianling").onblur = registerNl;
+	document.getElementById("grnl").onblur = registerNl;
 }
 function registerNl(){
-	var obj = document.getElementById("nianling");
+	var obj = document.getElementById("grnl");
 	var nl = obj.value;
 	var reg = /^\d{1,2}$/;
 	if(nl!=""){
 		if(!reg.test(nl)){
 			alert("年龄为1到99的数字");
+			obj.value='';
 			obj.focus();
 		}else if(nl==0){
 			alert("年龄不能为0");
+			obj.value='';
 			obj.focus();
 		}
 	}
@@ -244,18 +246,26 @@ function registerSfzhm(){
 }
 /* 校验信访人电话 add by 尹宇星 2011-12-06 */
 function isRegisterDh(){
-	document.getElementById("dianhua").onblur = registerDh;
+	document.getElementById("grdh").onblur = registerDh;
 }
 function registerDh(){
-	var obj = document.getElementById("dianhua");
-	var dh = obj.value;
+	var grdh = document.getElementById("grdh");
+	var dwdh = document.getElementById("dwdh");
 	var reg = /^(\d{3,4}?[-]\d{7,8}?)|(\d{11})$/;
-	if(dh!=""){
-		if(!reg.test(dh)){
+	if(grdh.value!=""){
+		if(!reg.test(grdh.value)){
 			alert("电话格式不正确。（例如010-12345678或者13812345678）");
-			obj.focus();
+			grdh.value='';
+			grdh.focus();
 		}
 	}
+	if(dwdh.value!=""){
+		if(!reg.test(dwdh.value)){
+			alert("电话格式不正确。（例如010-12345678或者13812345678）");
+			dwdh.value='';
+			dwdh.focus();
+		}
+	}	
 }
 
 function underwrite(obj){
