@@ -98,7 +98,7 @@ public class LaccManager extends AbstractBaseBean {
         String sql = "select t.yw_guid,t.bh as ajbh ,t.ay,t.dwmc,t.ajly,t.grxm ,to_char(t.slrq,'yyyy-MM-dd hh24:mi:ss') as slrq,j.activityname as bazt,j.wfInsId,to_char(j.create_ ,'yyyy-MM-dd hh24:mi:ss') as jssj,to_char(j.end_,'yyyy-MM-dd hh24:mi:ss') as yjsj,j.wfinsid from lacpb t join workflow.v_hist_task j on t.yw_guid=j.yw_guid where j.assignee_=?";
         if (keyWord != null) {
             keyWord = UtilFactory.getStrUtil().unescape(keyWord);
-            sql += " and (upper(t.bh)||upper(t.qy)||upper(t.ay)||upper(t.ajly)||upper(t.grxm)||upper(t.slrq)||upper(j.create_)||upper(j.activityname)||upper(j.end_) like '%"
+            sql += " and (upper(t.bh)||upper(t.qy)||upper(t.ay)||upper(t.ajly)||upper(t.grxm)||upper(t.slrq)||upper(j.activityname)||upper(j.end_) like '%"
                     + keyWord + "%')";
         }
         sql += " order by t.slrq desc";
@@ -112,7 +112,6 @@ public class LaccManager extends AbstractBaseBean {
             } else {
                 map.put("DSR", map.get("dwmc"));
             }
-            map.remove("create_");
             map.put("CREATE_", map.get("jssj"));
             map.put("SLRQ", map.get("slrq"));
             map.put("INDEX", i++);
