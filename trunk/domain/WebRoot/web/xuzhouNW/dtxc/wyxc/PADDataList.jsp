@@ -137,7 +137,7 @@ function delTask(id){
 	Ext.MessageBox.confirm('注意', '删除后不能恢复，您确定吗？',function(btn){
 	  if(btn=='yes'){
 	    var path = "<%=basePath%>";
-	    putClientCommond("padDataManager","delPAD");
+	    putClientCommond("padDataManager","delData");
 	    putRestParameter("yw_guid",myData[id].GUID)
         var mes = restRequest(); 
 		document.location.reload();
