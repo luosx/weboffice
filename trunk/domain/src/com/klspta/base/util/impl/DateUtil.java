@@ -42,10 +42,8 @@ public class DateUtil implements IDateUtil {
 
     @Override
     public String getSimpleDate(Date d) {
-        SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd", new DateFormatSymbols());
-        String dtrDate = df.format(d);
-        return dtrDate.substring(0, 4) + "-" + Integer.parseInt(dtrDate.substring(4, 6)) + "-"
-                + Integer.parseInt(dtrDate.substring(6, 8)) + "-";
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd", new DateFormatSymbols());
+        return df.format(d);
     }
 
 }
