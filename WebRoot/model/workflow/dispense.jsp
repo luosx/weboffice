@@ -130,8 +130,10 @@ html,body {
 	    var actionName="workflowNodeOperation";
 	    if('<%=zfjcType%>'==90){
 	    	actionName = "startWorkflowLacc";
+	    }else if("<%=zfjcType%>" == 91){
+	    	actionName = "startWorkflowXfjb";
 	    }
-	    var actionMethod = "deleteTask";
+	    var actionMethod = "deleteWorkflow";
 	    var parameter="wfInsId=<%=wfInsId%>&yw_guid=<%=yw_guid%>";
 		var result = ajaxRequest(path,actionName,actionMethod,parameter);
 		if(result=="true"){
