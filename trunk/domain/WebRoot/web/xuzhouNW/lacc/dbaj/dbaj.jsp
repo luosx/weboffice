@@ -65,10 +65,10 @@ Ext.onReady(function(){
         columns: [
         	
             //new Ext.grid.RowNumberer(),        
-           {header: '立案编号',dataIndex:'AJBH',width: width*0.15, sortable: true},
+           {header: '立案编号',dataIndex:'AJBH',width: width*0.16, sortable: true},
            {header: '案由',dataIndex:'AY',width: width*0.25, sortable: true},
-           {header: '案件来源',dataIndex:'AJLY',width: width*0.05, sortable: true},
-           {header: '当事人',dataIndex:'DSR',width: width*0.1, sortable: true},
+           {header: '案件来源',dataIndex:'AJLY',width: width*0.08, sortable: true},
+           {header: '当事人',dataIndex:'DSR',width: width*0.07, sortable: true},
            {header: '受理日期',dataIndex:'SLRQ',width: width*0.12, sortable: true},
            {header: '办案状态',dataIndex:'BAZT',width: width*0.1, sortable: true},
            {header: '接收时间',dataIndex:'JSSJ',width: width*0.12, sortable: true},
@@ -165,10 +165,10 @@ return false;
           grid.reconfigure(store, new Ext.grid.ColumnModel([
                // sm,
             //new Ext.grid.RowNumberer(),        
-           {header: '立案编号',dataIndex:'AJBH',width: width*0.15, sortable: true},
+           {header: '立案编号',dataIndex:'AJBH',width: width*0.16, sortable: true},
            {header: '案由',dataIndex:'AY',width: width*0.25, sortable: true},
-           {header: '案件来源',dataIndex:'AJLY',width: width*0.05, sortable: true},
-           {header: '当事人',dataIndex:'DSR',width: width*0.1, sortable: true},
+           {header: '案件来源',dataIndex:'AJLY',width: width*0.08, sortable: true},
+           {header: '当事人',dataIndex:'DSR',width: width*0.07, sortable: true},
            {header: '受理日期',dataIndex:'SLRQ',width: width*0.12, sortable: true},
            {header: '办案状态',dataIndex:'BAZT',width: width*0.1, sortable: true},
            {header: '接收时间',dataIndex:'JSSJ',width: width*0.12, sortable: true},
