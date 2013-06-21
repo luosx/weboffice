@@ -204,6 +204,6 @@ function query()
 	<body  bgcolor="#FFFFFF" topmargin="0" leftmargin="0">		
 		<div id="tbarPanel" style="width: 100%; height: 10%;"></div>
 		 <iframe frameborder="0" id="title" style="width:100%;height:30px;" scrolling="no"></iframe>
-		 <iframe frameborder="0" id="content" scrolling="auto" style="width:100%;height:100%;"></iframe>
+		 <iframe frameborder="0" id="content" scrolling="auto" style="width:100%;height:80%;"></iframe>
 	</body>
 </html>
