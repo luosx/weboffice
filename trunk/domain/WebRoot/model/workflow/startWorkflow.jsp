@@ -30,7 +30,7 @@ String beanId=request.getParameter("beanId");
 	//初始化
 	function firstInit()
 	{
-	  putClientCommond("<%=beanId%>","buildWorkflow");
+	  putClientCommond("<%=beanId%>","initWorkflow");
       putRestParameter("zfjcType","<%=zfjcType%>");
       putRestParameter("userId", "<%=userId%>");
       var path=restRequest();
