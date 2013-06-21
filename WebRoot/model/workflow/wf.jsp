@@ -22,6 +22,7 @@
     IWorkflowOp workflow = WorkflowOp.getInstance();
 	String activityName = workflow.getActivityNameByWfInsID(wfInsId);
 	String returnPath=request.getParameter("returnPath");
+	returnPath = basePath + returnPath;
 	String edit=request.getParameter("edit");
 	String lyType = request.getParameter("lyType"); 
 	String buttonHidden = request.getParameter("buttonHidden"); 
