@@ -109,8 +109,12 @@ Ext.onReady(function(){
 	    tbarPanel = new Ext.form.FormPanel({
 	        id:'gridId',
 	        tbar:[
-		        '年度违法案件：<input id="beginDate" type="text" name="beginDate" class="dateText"  readonly="true" onClick="setmonth(this)"/>&nbsp;——&nbsp;<input id="endDate" type="endDate" name="QZZXSJ"  class="dateText"   readonly="true" onClick="setmonth(this)"/>&nbsp;&nbsp;&nbsp;&nbsp;'+
-		        '<input type="button" value="查 询" onclick="query();">&nbsp;&nbsp;&nbsp;&nbsp;',
+		        '年度违法案件：<input id="beginDate" type="text" name="beginDate" class="dateText"  readonly="true" onClick="setmonth(this)"/>&nbsp;——&nbsp;<input id="endDate" type="endDate" name="QZZXSJ"  class="dateText"   readonly="true" onClick="setmonth(this)"/>&nbsp;&nbsp;&nbsp;&nbsp;',
+				{
+							xtype : 'button',
+							text : '查询',
+							handler : query
+				},
 		         {
 							text : '导出',
 							iconCls : 'blist',
