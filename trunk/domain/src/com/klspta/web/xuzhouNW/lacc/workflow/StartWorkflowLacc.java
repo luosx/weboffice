@@ -1,6 +1,7 @@
 package com.klspta.web.xuzhouNW.lacc.workflow;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import com.klspta.base.AbstractBaseBean;
@@ -50,8 +51,9 @@ public class StartWorkflowLacc extends AbstractBaseBean {
         }
         bb.append(aa);
 		String bh = "执立徐国土资【"+year+"】"+bb.toString()+"号";
-		String insertSql="insert into lacpb(yw_guid,bh) values(?,?)";
-		update(insertSql,YW,new Object[]{yw_guid,bh});
+		Date date=cal.getTime();
+		String insertSql="insert into lacpb(yw_guid,bh,slrq) values(?,?,?)";
+		update(insertSql,YW,new Object[]{yw_guid,bh,date});
 		//立案查处其他表初始化
 		String []datasheets={"cljdcpb","cfjdzysx","cfjdlsqk","flwscpb","jacpb","ajjbxxdjb"};
 		String otherSql="";
