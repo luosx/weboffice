@@ -154,7 +154,12 @@ public class LaccManager extends AbstractBaseBean {
         }
         response(result);
     }
-
+    /**
+     * 
+     * <br>Description:保存立案呈批表的案由到其他表单中
+     * <br>Author:王雷
+     * <br>Date:2013-6-21
+     */
     public void saveBhAy() {
         String yw_guid = request.getParameter("yw_guid");
         String sjfgjzrq = request.getParameter("sjfgjzrq");
