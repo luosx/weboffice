@@ -119,7 +119,7 @@ function process(id){
 	var wfInsId=myData[id].WFINSID;
 	var yw_guid=myData[id].YW_GUID;
 	var zfjcType="90";
-	var returnPath=window.location.href;
+	var returnPath="web/xuzhouNW/lacc/dbaj/dbaj.jsp";
 	var url='<%=basePath%>model/workflow/wf.jsp?yw_guid='+yw_guid+'&wfInsId='+wfInsId+'&zfjcType='+zfjcType+'&returnPath='+returnPath+'&buttonHidden='+buttonHien+'&zfjcName=立案查处&activityName=';  
 	//window.open(url); 
 	document.location.href=url;
