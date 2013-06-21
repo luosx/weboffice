@@ -12,21 +12,14 @@
 
 	Object principalUser = SecurityContextHolder.getContext()
 			.getAuthentication().getPrincipal();
-	//String writerId = request.getParameter("userId");
-	String writerId = "55ff44c9a20739f332d7b1f3e8a915f5";
-	User userBean = null;
+	User userBean = ((User)principalUser);//得到用户bean
+	
 	XzqhBean xzqhBean = null;
-	String writerXzqh = "";//填表人行政区划
-	String writerName = "";//填表人全名
 	String strXcdw = "";//巡查单位
 	String strXcdwjc = "";//政区简称
-	try {
-		userBean = ManagerFactory.getUserManager().getUserWithId(writerId);
-	} catch (Exception e) {
-		e.printStackTrace();
-	}
-	writerXzqh = userBean.getXzqh();
-	writerName = userBean.getFullName();
+	String writerId = userBean.getUserID();//填表人userid
+	String writerXzqh = userBean.getXzqh();//填表人行政区划
+	String writerName = userBean.getFullName();//填表人全名
 	if(!writerXzqh.equals("")){
 		xzqhBean = UtilFactory.getXzqhUtil().getBeanById(writerXzqh);
 		strXcdw = xzqhBean.getLandname();//巡查单位
