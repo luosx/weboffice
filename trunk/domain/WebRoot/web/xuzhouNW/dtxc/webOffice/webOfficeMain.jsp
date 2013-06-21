@@ -9,7 +9,6 @@ String yw_guid = request.getParameter("yw_guid");
 String file_id = yw_guid + request.getParameter("file_id");
 String flag = request.getParameter("flag");
 // String subofficename = request.getParameter("subofficename");
-List<Map<String, Object>> showList = new DtxcManager().getXzrqbyYw_guid(yw_guid);
 String tempFolder = "";
 String ftpFileName = "";
 String subofficename = "",number= "",districtname= "",townname= "",countyname= "",projectname= "",location= "",area= "",buildYear= "",buildMonth= "",Date= "",district= "";
