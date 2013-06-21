@@ -94,7 +94,7 @@ if(fixed!=null && fixed.equals("fixedPrint")){%>
 <div style="margin:20px" class="tablestyle1" align="center" >
 <div align="center"><h1>违法案件立案呈批表</h1></div>
 <form method="post">
-<div style="width:100%;"><span style="margin-left: 330px;">立案编号：
+<div style="width:600px;text-align:right;"><span style="font-size:14px;">立案编号：
  <%if(permission.equals("yes")){ %>					
     						<input class="noborder" name="bh" id="bh" style="width: 97%"/>
    				        <%}else{ %>
@@ -104,7 +104,7 @@ if(fixed!=null && fixed.equals("fixedPrint")){%>
 <table class="lefttopborder1"  cellspacing="0" cellpadding="0" border="1"  bgcolor="#FFFFFF" bordercolor="#000000" width="600">
   <tr>
     <td colspan="2"><div align="center">案由</div></td>
-    <td colspan="6"><textarea class="noborder" rows="5" style="width: 99%" name="ay" onkeyup="changeay(this)" id="ay"></textarea></td>
+    <td colspan="6"><textarea class="noborder" rows="5" style="width: 99%;font-size:14px;" name="ay" onkeyup="changeay(this)" id="ay"></textarea></td>
   </tr>
   <tr>
     <td width="30" rowspan="5"><div align="center">当<br/>
@@ -120,7 +120,7 @@ if(fixed!=null && fixed.equals("fixedPrint")){%>
     <td><div align="center">地址</div></td>
     <td colspan="3"><input type="text" class="noborder" name="dwdz" id="dwdz" style="width: 98%"/></td>
     <td><div align="center">电话</div></td>
-    <td><input type="text" class="noborder" name="dwdh" id="dwdh" style="width: 97%"/></td>
+    <td><input type="text" class="noborder" name="dwdh" id="dwdh" style="width: 97%" onblur="registerDh()"/></td>
   </tr>
   <tr>
     <td rowspan="3"><div align="center">个人</div></td>
@@ -139,7 +139,7 @@ if(fixed!=null && fixed.equals("fixedPrint")){%>
 							</select>
 							<%} %>    </td>
     <td><div align="center">年龄</div></td>
-    <td><input type="text" class="noborder" name="grnl" id="grnl" style="width: 97%"/></td>
+    <td><input type="text" class="noborder" name="grnl" id="grnl" style="width: 97%" onblur="registerNl()"/></td>
   </tr>
   <tr>
     <td><div align="center">单位</div></td>
@@ -151,7 +151,7 @@ if(fixed!=null && fixed.equals("fixedPrint")){%>
     <td><div align="center">地址</div></td>
     <td colspan="3"><input type="text" class="noborder" name="grdz" id="grdz" style="width: 98%"/></td>
     <td><div align="center">电话</div></td>
-    <td><input type="text" class="noborder" name="grdh" id="grdh" style="width: 97%"/></td>
+    <td><input type="text" class="noborder" name="grdh" id="grdh" style="width: 97%" onblur="registerDh()"/></td>
   </tr>
   <tr>
     <td colspan="2"><div align="center">案件来源</div></td>
@@ -261,16 +261,17 @@ if(fixed!=null && fixed.equals("fixedPrint")){%>
     <td colspan="2"><div align="center">备注</div></td>
     
     <td colspan="6">
-    	<textarea rows="5" name="ay2" id="ay2" style="width: 99%;border-bottom:0.5px #000 solid;"></textarea>
+    	<textarea rows="5" name="ay2" id="ay2" style="width: 99%;border-bottom:0.5px #000 solid;font-size:14px;"></textarea>
     	
-    	<textarea rows="5" name="bz" id="bz" style="width: 99%" onfocus="writeBZ(this.value)" onblur="writeSM(this.value)">其他需备注的写在此处...</textarea>
+    	<textarea rows="5" name="bz" id="bz" style="width: 99%;font-size:14px;" onfocus="writeBZ(this.value)" onblur="writeSM(this.value)">其他需备注的写在此处...</textarea>
     </td>
   </tr>
 
 </table>
 	<input type="text"   class="noborder"  style="width: 70%;display:none;"  value="<%=name%>" name="qy" id="qy" />
 			</form>
-				  <div style="width:100%;"><span style="margin-left: 330px;"> 立案编号：<input type="text" name="bh" id="bh2" style="width:180px;background-color:transparent;border:0px;"></span></div>
+				  <div style="width:600px;text-align:right;"><span style="font-size:14px;"> 立案编号：<input type="text" name="bh" id="bh2" style="width:180px;background-color:transparent;border:0px;"></span></div>
+</div>
 </body>
 <script>
 <%
