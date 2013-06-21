@@ -6,6 +6,13 @@ import java.util.Map;
 import com.klspta.base.AbstractBaseBean;
 import com.klspta.base.util.UtilFactory;
 
+/**
+ * 
+ * <br>Title:立案查处管理类
+ * <br>Description:处理立案查处相关信息
+ * <br>Author:陈强峰
+ * <br>Date:2013-6-21
+ */
 public class LaccManager extends AbstractBaseBean {
     /**
      * <br>
@@ -147,22 +154,6 @@ public class LaccManager extends AbstractBaseBean {
             map.put("INDEX", i++);
         }
         response(result);
-    }
-
-    /**
-     * 
-     * <br>
-     * Description:获取当前案件对应的案件调查处理审批表的个数 <br>
-     * Author:黎春行 <br>
-     * Date:2012-10-8
-     */
-    public int getNumAjdccl(String guid) {
-        String sql = "Select count(*) num from ajsccpb where yw_guid like ?";
-        String yw_guid = guid + "v02";
-        Object[] argsObjects = { yw_guid };
-        List<Map<String, Object>> resuList = query(sql, YW, argsObjects);
-        int i = Integer.parseInt(String.valueOf(resuList.get(0).get("num")));
-        return i + 1;
     }
 
     public void saveBhAy() {
