@@ -3,55 +3,78 @@
 <%@page import="com.klspta.base.util.bean.ftputil.AccessoryBean"%>
 <%@page import="com.klspta.base.util.UtilFactory"%>
 <%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-String yw_guid = request.getParameter("yw_guid");
-String file_id = yw_guid + request.getParameter("file_id");
-String flag = request.getParameter("flag");
-// String subofficename = request.getParameter("subofficename");
-String tempFolder = "";
-String ftpFileName = "";
-String subofficename = "",number= "",districtname= "",townname= "",countyname= "",projectname= "",location= "",area= "",buildYear= "",buildMonth= "",Date= "",district= "";
-//文件已存在，将文件从ftp中下载到缓冲区中打开已存在的文件
-if(flag.equals("false")){
-	ftpFileName = file_id+ ".doc";
-	AccessoryBean bean = new AccessoryBean();
-	bean.setFile_id(file_id);
-	bean.setFile_type("file");
-	String tem = new java.io.File(application.getRealPath(request.getRequestURI())).getParent();
-	String temp = (tem.substring(0,tem.lastIndexOf(path.substring(1))-1)+tem.substring(tem.lastIndexOf(path.substring(1))+6)+"/cache/").replace("\\","/");
-	UtilFactory.getFtpUtil().downloadFile(ftpFileName,temp+ftpFileName); //将ftp服务器中指定的文档下载到服务器临时文件夹下(weOffice模块下的documentTemporaryFolder)
-	String base = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort() + request.getRequestURI();
-	tempFolder = base.substring(0,base.lastIndexOf("/")) + "/cache/";
-}else{
-	subofficename = new String(request.getParameter("subofficename").getBytes("iso-8859-1"),"UTF-8");
-	number = new String(request.getParameter("number").getBytes("iso-8859-1"),"UTF-8");
-	districtname = new String(request.getParameter("districtname").getBytes("iso-8859-1"),"UTF-8");
-	townname = new String(request.getParameter("townname").getBytes("iso-8859-1"),"UTF-8");
-	countyname = new String(request.getParameter("countyname").getBytes("iso-8859-1"),"UTF-8");
-	projectname = new String(request.getParameter("projectname").getBytes("iso-8859-1"),"UTF-8");
-	location = new String(request.getParameter("location").getBytes("iso-8859-1"),"UTF-8");
-	area = new String(request.getParameter("area").getBytes("iso-8859-1"),"UTF-8");
-	buildYear = new String(request.getParameter("buildYear").getBytes("iso-8859-1"),"UTF-8");
-	buildMonth = new String(request.getParameter("buildMonth").getBytes("iso-8859-1"),"UTF-8");
-	Date = new String(request.getParameter("Date").getBytes("iso-8859-1"),"UTF-8");
-	district = new String(request.getParameter("district").getBytes("iso-8859-1"),"UTF-8");
-}
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+	String yw_guid = request.getParameter("yw_guid");
+	String file_id = yw_guid + request.getParameter("file_id");
+	String flag = request.getParameter("flag");
+	// String subofficename = request.getParameter("subofficename");
+	String tempFolder = "";
+	String ftpFileName = "";
+	String subofficename = "", number = "", districtname = "", townname = "", countyname = "", projectname = "", location = "", area = "", buildYear = "", buildMonth = "", Date = "", district = "";
+	//文件已存在，将文件从ftp中下载到缓冲区中打开已存在的文件
+	if (flag.equals("false")) {
+		ftpFileName = file_id + ".doc";
+		AccessoryBean bean = new AccessoryBean();
+		bean.setFile_id(file_id);
+		bean.setFile_type("file");
+		String tem = new java.io.File(application.getRealPath(request
+				.getRequestURI())).getParent();
+		String temp = (tem.substring(0, tem.lastIndexOf(path
+				.substring(1)) - 1)
+				+ tem.substring(tem.lastIndexOf(path.substring(1)) + 6) + "/cache/")
+				.replace("\\", "/");
+		UtilFactory.getFtpUtil().downloadFile(ftpFileName,
+				temp + ftpFileName); //将ftp服务器中指定的文档下载到服务器临时文件夹下(weOffice模块下的documentTemporaryFolder)
+		String base = request.getScheme() + "://"
+				+ request.getServerName() + ":"
+				+ request.getServerPort() + request.getRequestURI();
+		tempFolder = base.substring(0, base.lastIndexOf("/"))
+				+ "/cache/";
+	} else {
+		subofficename = new String(request
+				.getParameter("subofficename").getBytes("iso-8859-1"),
+				"UTF-8");
+		number = new String(request.getParameter("number").getBytes(
+				"iso-8859-1"), "UTF-8");
+		districtname = new String(request.getParameter("districtname")
+				.getBytes("iso-8859-1"), "UTF-8");
+		townname = new String(request.getParameter("townname")
+				.getBytes("iso-8859-1"), "UTF-8");
+		countyname = new String(request.getParameter("countyname")
+				.getBytes("iso-8859-1"), "UTF-8");
+		projectname = new String(request.getParameter("projectname")
+				.getBytes("iso-8859-1"), "UTF-8");
+		location = new String(request.getParameter("location")
+				.getBytes("iso-8859-1"), "UTF-8");
+		area = new String(request.getParameter("area").getBytes(
+				"iso-8859-1"), "UTF-8");
+		buildYear = new String(request.getParameter("buildYear")
+				.getBytes("iso-8859-1"), "UTF-8");
+		buildMonth = new String(request.getParameter("buildMonth")
+				.getBytes("iso-8859-1"), "UTF-8");
+		Date = new String(request.getParameter("Date").getBytes(
+				"iso-8859-1"), "UTF-8");
+		district = new String(request.getParameter("district")
+				.getBytes("iso-8859-1"), "UTF-8");
+	}
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
-  <head>
-    <title>文书加载</title>
-	<meta http-equiv="pragma" content="no-cache">
-	<meta http-equiv="cache-control" content="no-cache">
-	<meta http-equiv="expires" content="0">    
-	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-	<meta http-equiv="description" content="This is my page">
-	<script src="<%=basePath%>/base/include/ajax.js"></script> 
-  </head>
-  
-  <script type="text/javascript">
+	<head>
+		<title>文书加载</title>
+		<meta http-equiv="pragma" content="no-cache">
+		<meta http-equiv="cache-control" content="no-cache">
+		<meta http-equiv="expires" content="0">
+		<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+		<meta http-equiv="description" content="This is my page">
+		<script src="<%=basePath%>/base/include/ajax.js"></script>
+	</head>
+
+	<script type="text/javascript">
   	var path = "<%=basePath%>";
   
   	function webofficeInit(){
@@ -136,16 +159,25 @@ if(flag.equals("false")){
   	}
   
   </script>
-  
-  <body leftmargin="0" bottommargin="0" rightmargin="0" topmargin="0"  onload="webofficeInit();return false;"> 
-    <div style="width:100%; height:25px;float:left;background-color: gray">
-    	<input style="width:150" value="抄告单:<%=yw_guid%>"/>
-    	<input id="save" style="width:50" type="button" value="保存" onclick="save()" disabled="disabled"/>
-    </div>
-	<div>
-		<TABLE class=TableBlock width="100%">
-		  <TBODY><TR><TD class=TableData vAlign=top width="100%"><SCRIPT src="LoadWebOffice.js"></SCRIPT></TD></TR></TBODY>
-		</TABLE>
-	</div>
- </body>
+
+	<body leftmargin="0" bottommargin="0" rightmargin="0" topmargin="0"
+		onload="webofficeInit();return false;">
+		<div
+			style="width: 100%; height: 25px; float: left; background-color: gray">
+			<input style="width: 150" value="抄告单:<%=yw_guid%>" />
+			<input id="save" style="width: 50" type="button" value="保存"
+				onclick="save()" disabled="disabled" />
+		</div>
+		<div>
+			<TABLE class=TableBlock width="100%">
+				<TBODY>
+					<TR>
+						<TD class=TableData vAlign=top width="100%">
+							<SCRIPT src="LoadWebOffice.js"></SCRIPT>
+						</TD>
+					</TR>
+				</TBODY>
+			</TABLE>
+		</div>
+	</body>
 </html>
