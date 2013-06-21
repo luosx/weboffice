@@ -194,7 +194,7 @@ return false;
                 proxy: new Ext.ux.data.PagingMemoryProxy(myData),
                 remoteSort:true,
                 fields: [
-                  {name: 'ajbh'},
+                  {name: 'AJBH'},
                   {name: 'QY'},
            {name: 'AY'},
            {name: 'AJLY'},
@@ -207,7 +207,7 @@ return false;
           });
           grid.reconfigure(store, new Ext.grid.ColumnModel([
         	    new Ext.grid.RowNumberer(),
-        	{header: '立案编号',dataIndex:'ajbh',width: width*0.13, sortable: true},
+        	{header: '立案编号',dataIndex:'AJBH',width: width*0.13, sortable: true},
         	{header: '区域',dataIndex:'QY',width: width*0.05, sortable: true},
            {header: '案由',dataIndex:'AY',width: width*0.2, sortable: true},
            {header: '案件来源',dataIndex:'AJLY',width: width*0.05, sortable: true},
