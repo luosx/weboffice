@@ -187,7 +187,7 @@ scrollbar-3dlight-color:#D4D0C8;
 		    			break;
 		    		case "违法线索反馈信息":
 		    			formName = "wfxsfkxx";
-		    			urlName="web/xuzhouNW/xfaj/wfxsfkxx.jsp";
+		    			urlName="web/xuzhouNW/xfaj/wfxsfkxx";
 		    			break;
 		    		case "案件基本信息登记表":
 		    			formName = "ajjbxxdjb";
@@ -200,7 +200,9 @@ scrollbar-3dlight-color:#D4D0C8;
 		    	 var activityName = "<%=nodeName%>"
 		    	 //alert(flag)
 		    	if(flag){
+		    		
 		    		var url = encodeURI(encodeURI("<%=basePath%>"+urlName+".jsp?permission=yes&zfjcType=<%=zfjcType%>&activityName=<%=nodeName%>&formName="+formName));
+		    		alert(url);
 		    		window.showModalDialog(url,"","dialogWidth=1000px;dialogHeight=800px");
 		        	//window.open(url);
 		           //alert("treeName=<%=zfjcType%>&wfID="+tree.getNodeById(n.attributes.id).text+"&nodeName=<%=nodeName%>&treeIdList="+treeIdList);
