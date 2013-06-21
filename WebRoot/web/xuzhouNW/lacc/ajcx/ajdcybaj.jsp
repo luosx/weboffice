@@ -154,7 +154,7 @@ function pro(id){
 function process(id){
     var wfInsId=myData[id].WFINSID;
 	var yw_guid=myData[id].YW_GUID;
-	var returnPath=window.location.href;
+	var returnPath="web/xuzhouNW/lacc/ajcx/ajdcybaj.jsp";
 	var buttonHidden = "delete,la,tran,back";
 	var url='<%=basePath%>model/workflow/wf.jsp?yw_guid='+yw_guid+'&zfjcName=立案查处&zfjcType=90&wfInsId='+wfInsId+'&returnPath='+returnPath+'&buttonHidden='+buttonHidden;
 	//window.open(url); 
