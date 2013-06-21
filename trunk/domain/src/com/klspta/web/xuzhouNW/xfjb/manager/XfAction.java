@@ -1,7 +1,13 @@
 package com.klspta.web.xuzhouNW.xfjb.manager;
 
 import com.klspta.base.AbstractBaseBean;
-
+/**
+ * 
+ * <br>Title:信访举报服务
+ * <br>Description:提供信访举报各个状态实例
+ * <br>Author:黎春行
+ * <br>Date:2013-6-21
+ */
 public class XfAction extends AbstractBaseBean {
 	
 	/**
