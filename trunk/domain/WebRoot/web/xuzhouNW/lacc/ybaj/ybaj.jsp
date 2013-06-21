@@ -63,8 +63,8 @@ Ext.onReady(function(){
            {header: '案由',dataIndex:'AY',width: width*0.20, sortable: true,renderer:changKeyword},
            {header: '案件来源',dataIndex:'AJLY',width: width*0.08, sortable: true,renderer:changKeyword},
            {header: '当事人',dataIndex:'DSR',width: width*0.07, sortable: true,renderer:changKeyword},
-           {header: '受理日期',dataIndex:'SLRQ',width: width*0.08, sortable: true,renderer:changKeyword},
            {header: '办案状态',dataIndex:'BAZT',width: width*0.12, sortable: true,renderer:changKeyword},
+           {header: '受理日期',dataIndex:'SLRQ',width: width*0.08, sortable: true,renderer:changKeyword},
            {header: '接收时间',dataIndex:'CREATE_',width: width*0.1, sortable: true,renderer:changKeyword},
            {header: '移交时间',dataIndex:'YJSJ',width: width*0.1, sortable: true,renderer:changKeyword},
            {header: '详细',dataIndex:'INDEX',width: width*0.08, sortable: false,renderer:pro}
@@ -156,8 +156,8 @@ function viewDetail(){
            {header: '案由',dataIndex:'AY',width: width*0.20, sortable: true,renderer:changKeyword},
            {header: '案件来源',dataIndex:'AJLY',width: width*0.08, sortable: true,renderer:changKeyword},
            {header: '当事人',dataIndex:'DSR',width: width*0.07, sortable: true,renderer:changKeyword},
-           {header: '受理日期',dataIndex:'SLRQ',width: width*0.08, sortable: true,renderer:changKeyword},
            {header: '办案状态',dataIndex:'BAZT',width: width*0.12, sortable: true,renderer:changKeyword},
+           {header: '受理日期',dataIndex:'SLRQ',width: width*0.08, sortable: true,renderer:changKeyword},
            {header: '接收时间',dataIndex:'CREATE_',width: width*0.10, sortable: true,renderer:changKeyword},
            {header: '移交时间',dataIndex:'YJSJ',width: width*0.10, sortable: true,renderer:changKeyword},
            {header: '详细',dataIndex:'INDEX',width: width*0.08, sortable: false,renderer:pro}
