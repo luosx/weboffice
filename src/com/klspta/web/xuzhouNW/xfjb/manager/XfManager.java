@@ -69,18 +69,12 @@ public class XfManager extends AbstractBaseBean {
 				.getFullName();
 		// 获取数据
 		String sql = "select distinct t.yw_guid,t.bh ,t.xslx,t.jbr, t.jbfs, t.bjbdw, t.lxdz, t.wtfsd, to_char(t.djsj,'yyyy-MM-dd') as slrq, j.activityname as ajblzt, j.wfinsid from wfxsfkxx t left join workflow.v_hist_task j on t.yw_guid=j.yw_guid where j.assignee_=?";
-		// String sql = "select distinct t.yw_guid,t.bh ,t.xslx,t.jbr, t.jbfs,
-		// t.bjbdw, t.lxdz, t.wtfsd, to_char(t.djsj,'yyyy-MM-dd') as slrq,
-		// j.activityname as ajblzt, j.wfinsid from wfxsfkxx t ,(select
-		// t2.activityname, t2.assignee_, t2.wfinsid from workflow.v_hist_task
-		// t2 where t2.yw_guid = yw_guid and rownum = 1) j where j.wfinsid like
-		// 'xfjb%' and j.assignee_=?";
 		if (keyWord != null) {
 			keyWord = UtilFactory.getStrUtil().unescape(keyWord);
 			sql += " and (upper(t.bh)||upper(t.xslx)||upper(t.jbr)||upper(t.lxdz)||upper(t.wtfsd)||upper(j.create_)||upper(j.activityname) like '%"
 					+ keyWord + "%')";
 		}
-		sql += " order by j.create_ desc";
+		sql += " order by slrq desc";
 		List<Map<String, Object>> result = query(sql, YW,
 				new String[] { fullName });
 
