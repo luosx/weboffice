@@ -9,9 +9,16 @@ import com.klspta.base.workflow.foundations.IWorkflowInsOp;
 import com.klspta.base.workflow.foundations.WorkflowInsOp;
 import com.klspta.base.workflow.foundations.WorkflowOp;
 import com.klspta.console.ManagerFactory;
-
+/**
+ * 
+ * <br>Title:立案查处工作流类
+ * <br>Description:立案查处工作流类
+ * <br>Author:王雷
+ * <br>Date:2013-6-21
+ */
 public class StartWorkflowLacc extends AbstractBaseBean {
-	public String yw_guid = "";
+    //业务编号
+	private String yw_guid = "";
 
 	/**
 	 * 
@@ -20,7 +27,7 @@ public class StartWorkflowLacc extends AbstractBaseBean {
 	 * <br>Date:2013-6-17
 	 * @throws Exception
 	 */
-	public void buildWorkflow() throws Exception {
+	public void initWorkflow() throws Exception {
 		//1、获取参数 启动流程
 		yw_guid = UtilFactory.getStrUtil().getGuid();
 		String userId = request.getParameter("userId");
@@ -31,10 +38,18 @@ public class StartWorkflowLacc extends AbstractBaseBean {
 	    //立案呈批表编号生成规则 执立徐国土资【2013】128号
 		Calendar cal = Calendar.getInstance();
 		int year = cal.get(Calendar.YEAR);
-		String selectSql="select count(*) count from lacpb t where Extract(year from t.dateflag)=?";
-		List<Map<String,Object>> list=query(selectSql,YW,new Object[]{year});
-		int count=Integer.parseInt((list.get(0)).get("count").toString());		
-		String bh = "执立徐国土资【"+year+"】"+(count+1)+"号";
+		String selectSql="select bh from( select substr(t.bh,13,3) bh from lacpb t order by t.dateflag desc) where rownum=1";
+		List<Map<String,Object>> list=query(selectSql,YW);
+		int count=Integer.parseInt((list.get(0)).get("bh").toString());
+		count=count+1;
+		int number=3;
+        StringBuffer aa=new StringBuffer(count+"");
+        StringBuffer bb=new StringBuffer("");
+        for(int i=aa.length();i<number;i++){
+            bb.append("0");
+        }
+        bb.append(aa);
+		String bh = "执立徐国土资【"+year+"】"+bb.toString()+"号";
 		String insertSql="insert into lacpb(yw_guid,bh) values(?,?)";
 		update(insertSql,YW,new Object[]{yw_guid,bh});
 		//立案查处其他表初始化
@@ -47,7 +62,7 @@ public class StartWorkflowLacc extends AbstractBaseBean {
 		
 		//3、response参数封装及跳转
 		String urlPath = "/model/workflow/wf.jsp?yw_guid="
-				+ yw_guid + "&zfjcType=" + zfjcType + "&wfInsId=" + wfinsId+ "&buttonHidden=la,back&zfjcName=立案查处&returnPath=web/xuzhouNW/lacc/lb/dbaj.jsp";
+				+ yw_guid + "&zfjcType=" + zfjcType + "&wfInsId=" + wfinsId+ "&buttonHidden=la,back&zfjcName=立案查处&returnPath=web/xuzhouNW/lacc/dbaj/dbaj.jsp";
 		response(urlPath);
 	}
 	
@@ -57,7 +72,7 @@ public class StartWorkflowLacc extends AbstractBaseBean {
 	 * <br>Author:王雷
 	 * <br>Date:2013-6-17
 	 */
-	public void deleteTask(){
+	public void deleteWorkflow(){
 	    String yw_guid = request.getParameter("yw_guid");
 	    String wfInsId = request.getParameter("wfInsId");
 	    //1.删除业务数据
@@ -72,4 +87,5 @@ public class StartWorkflowLacc extends AbstractBaseBean {
 	    workflowIns.deleteWfIns(wfInsId);
 	    response("true");
 	}
+	
 }
