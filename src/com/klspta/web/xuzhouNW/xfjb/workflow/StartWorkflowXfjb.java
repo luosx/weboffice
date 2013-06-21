@@ -13,9 +13,14 @@ import com.klspta.base.workflow.foundations.WorkflowInsOp;
 import com.klspta.base.workflow.foundations.WorkflowOp;
 import com.klspta.console.ManagerFactory;
 
+/**
+ * 
+ * <br>Title:信访举报处理类
+ * <br>Description:信访举报工作流处理类
+ * <br>Author:黎春行
+ * <br>Date:2013-5-21
+ */
 public class StartWorkflowXfjb extends AbstractBaseBean {
-	public String yw_guid = "";
-
 	/**
 	 * 
 	 * <br>
@@ -25,9 +30,9 @@ public class StartWorkflowXfjb extends AbstractBaseBean {
 	 * 
 	 * @throws Exception
 	 */
-	public void buildWorkflow() throws Exception {
+	public void initWorkflow() throws Exception {
 		//1、获取参数 启动流程
-		yw_guid = UtilFactory.getStrUtil().getGuid();
+		String yw_guid = UtilFactory.getStrUtil().getGuid();
 		String userId = request.getParameter("userId");
 		String zfjcType = request.getParameter("zfjcType");
 		String wfinsId = WorkflowOp.getInstance().start(
@@ -36,31 +41,16 @@ public class StartWorkflowXfjb extends AbstractBaseBean {
 						.getFullName(), yw_guid);
 		
 		//2、处理业务相关初始化
-		insertForm("wfxsfkxx", yw_guid);
+		String bh = buildID();
+		String sql = "insert into wfxsfkxx(yw_guid, bh) values(? , ?)";
+		update(sql, YW, new Object[] { yw_guid, bh});
 		
 		//3、response参数封装及跳转
-		String urlPath = "model/workflow/pages/wf.jsp?yw_guid="
+		String urlPath = "model/workflow/wf.jsp?yw_guid="
 				+ yw_guid + "&zfjcType=" + zfjcType + "&wfInsId=" + wfinsId
 				+ "&buttonHidden=la,return,back&zfjcName=信访举报&returnPath=web/xuzhouNW/xfaj/xfybaj.jsp";
 		response(urlPath);
 	}
-	
-	/**
-	 * 
-	 * <br>Description:相关业务表单初始化
-	 * <br>Author:黎春行
-	 * <br>Date:2013-6-17
-	 */
-	private void insertForm(String formname, String yw_guid){
-		String[] formsName = formname.split("#");
-		String  bh = buildID();
-		for(int i = 0; i < formsName.length; i++){
-			String sql = "insert into ";
-			sql = sql + formsName[i] + "(yw_guid, bh) values (?, ?)";
-			update(sql, YW, new Object[] { yw_guid, bh});
-		}
-	}
-	
 	
 	/**
 	 * 
@@ -71,7 +61,9 @@ public class StartWorkflowXfjb extends AbstractBaseBean {
 	private String buildID(){
 		SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd", new DateFormatSymbols());
 		String dateString = df.format(Calendar.getInstance().getTime());
-		String numsql = "select t.bh num from wfxsfkxx t where t.bh like '" + dateString + "%' order by t.bh desc";
+				
+		//目前所有人共用测试数据库，不能用内存记录流水号
+		String numsql = "select max(t.bh) num from wfxsfkxx t where t.bh like '" + dateString + "%'";
 		String num;
 		List<Map<String, Object>> result = query(numsql, YW);
 		if(result.size() < 1){
@@ -79,32 +71,22 @@ public class StartWorkflowXfjb extends AbstractBaseBean {
 		}else{
 			String nestNum = (String)result.get(0).get("num");
 			String temp = nestNum.substring(nestNum.length() - 3, nestNum.length());
-            if(Integer.parseInt(temp)>=1&&Integer.parseInt(temp)<999){   
-                temp=String.valueOf(Integer.parseInt(temp)+1);   
-            }   
-            switch (temp.length()) {   
-            case 1:   
-                temp="00"+temp;   
-                break;   
-            case 2:   
-                temp="0"+temp;   
-                break;   
-            default:   
-                break;   
-            }  
-            num = dateString + temp;
+            temp=String.valueOf(Integer.parseInt(temp)+1);   
+            temp = "00" + temp;
+            num = dateString + temp.substring(temp.length() - 3);
 		}
 		return num;
+		
 	}
 	
 	
 	/**
 	 * 
 	 * <br>Description:工作流的中止方法
-	 * <br>Author:王雷
-	 * <br>Date:2013-6-17
+	 * <br>Author:黎春行
+	 * <br>Date:2013-6-21
 	 */
-	public void deleteTask(){
+	public void deleteWorkflow(){
 	    String yw_guid = request.getParameter("yw_guid");
 	    String wfInsId = request.getParameter("wfInsId");
 	    //1.删除业务数据
