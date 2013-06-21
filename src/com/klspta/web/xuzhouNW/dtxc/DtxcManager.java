@@ -9,6 +9,11 @@ import com.klspta.base.AbstractBaseBean;
 import com.klspta.base.util.UtilFactory;
 import com.klspta.console.ManagerFactory;
 
+/**
+ * 
+ * @author Administrator
+ *
+ */
 public class DtxcManager extends AbstractBaseBean {
 	static String[] strSta = new String[]{"0","0","0","0","0"};
 	/**
@@ -71,19 +76,6 @@ public class DtxcManager extends AbstractBaseBean {
 	}
 	
 	/**
-	 * <br>
-	 * Description:根据yw_guid获取巡查日志 <br>
-	 * Author:黎春行 <br>
-	 * Date:2013-06-18
-	 * 
-	 * @return
-	 */
-	public List<Map<String, Object>> getXzrqbyYw_guid(String yw_guid){
-		String sql = "select * from xcrz t where t.yw_guid = ?";
-		return query(sql, YW, new Object[]{yw_guid});
-	}
-	
-	/**
 	 * 
 	 * <br>Title: 异步保存抄告单
 	 * <br>Description: 
@@ -99,15 +91,17 @@ public class DtxcManager extends AbstractBaseBean {
 		String jsqk = UtilFactory.getStrUtil().unescape(request.getParameter("jsqk"));
 		String zdmj = UtilFactory.getStrUtil().unescape(request.getParameter("zdmj"));
 		String zdwz = UtilFactory.getStrUtil().unescape(request.getParameter("zdwz"));
+		String townname = UtilFactory.getStrUtil().unescape(request.getParameter("townname"));
+		String countyname = UtilFactory.getStrUtil().unescape(request.getParameter("countyname"));
 		String sql = "";
 		int temp = 0;
-		for (int i = 1; i < 6; i++) {
+		for (int i = 1; i < 6; i++) {//五个抄告单
 			if(strFlag.contains(i+"")){
 				temp = i;
-				sql = "update xcrz set jsxm"+i+" = ?,jsdw"+i+" = ?,dgsj"+i+" = ?,jsqk"+i+" = ?,zdmj"+i+" = ?,zdwz"+i+" = ?,cgdqk"+i+" = ? where yw_guid = ?";
+				sql = "update xcrz set jsxm"+i+" = ?,jsdw"+i+" = ?,dgsj"+i+" = ?,jsqk"+i+" = ?,zdmj"+i+" = ?,zdwz"+i+" = ?,townname"+i+" = ?,countyname"+i+" = ?,cgdqk"+i+" = ? where yw_guid = ?";
 			}
 		}
-		update(sql, YW, new Object[]{jsxm,jsdw,dgsj,jsqk,zdmj,zdwz,1,yw_guid});
+		update(sql, YW, new Object[]{jsxm,jsdw,dgsj,jsqk,zdmj,zdwz,townname,countyname,1,yw_guid});
 		response(strSta[temp - 1]);
 		stateCgd(yw_guid);
 	}
@@ -125,10 +119,10 @@ public class DtxcManager extends AbstractBaseBean {
 		String sql = "";
 		for (int i = 1; i < 6; i++) {
 			if(strFlag.contains(i+"")){
-				sql = "update xcrz set jsxm"+i+" = ?,jsdw"+i+" = ?,dgsj"+i+" = ?,jsqk"+i+" = ?,zdmj"+i+" = ?,zdwz"+i+" = ?,cgdqk"+i+" = ? where yw_guid = ?";
+				sql = "update xcrz set jsxm"+i+" = ?,jsdw"+i+" = ?,dgsj"+i+" = ?,jsqk"+i+" = ?,zdmj"+i+" = ?,zdwz"+i+" = ?,townname"+i+" = ?,countyname"+i+" = ?,cgdqk"+i+" = ? where yw_guid = ?";
 			}
 		}
-		update(sql, YW, new Object[]{"","","","","","",0,yw_guid});
+		update(sql, YW, new Object[]{"","","","","","","","",0,yw_guid});
 	}
 	
 	/**
