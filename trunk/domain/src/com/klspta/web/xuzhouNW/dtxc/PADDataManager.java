@@ -21,7 +21,7 @@ public class PADDataManager extends AbstractBaseBean {
 
     /**
      * 
-     * <br>Description:获取成果列表
+     * <br>Description:获取外业成果列表
      * <br>Author:陈强峰
      * <br>Date:2013-6-19
      */
@@ -43,12 +43,12 @@ public class PADDataManager extends AbstractBaseBean {
 
     /**
      * 
-     * <br>Description: 删除指定的外业设备回传信息
+     * <br>Description: 删除指定的编号的成果信息
      * <br>Author:姚建林
      * <br>Date:2012-11-19
      * @return
      */
-    public String delPAD() {
+    public String delData() {
         String guid = request.getParameter("yw_guid");
         if (guid != null) {
             String sql = "delete from pad_xcxcqkb where yw_guid='" + guid + "'";
@@ -59,7 +59,7 @@ public class PADDataManager extends AbstractBaseBean {
 
     /**
      * 
-     * <br>Description:获取80坐标
+     * <br>Description:获取指定编号的80坐标wkt串
      * <br>Author:陈强峰
      * <br>Date:2012-8-16
      * @param rwbh
