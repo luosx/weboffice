@@ -109,16 +109,17 @@ function pro(id){
 
 function process(id){
     var wfInsTaskId=myData[id].DBID_;
-	var activityName=myData[id].ACTIVITY_NAME_;
+	var activityName=myData[id].BAZT;
 	var isFirst;
-	if(activityName=="受理立案"){
+	var buttonHien = "la";
+	if(activityName.indexOf("受理立案")>=0){
 		isFirst='yes';
+		buttonHien = "la,back";
 	}
 	var wfInsId=myData[id].WFINSID;
 	var yw_guid=myData[id].YW_GUID;
 	var zfjcType="90";
 	var returnPath=window.location.href;
-	var buttonHien = "la";
 	var url='<%=basePath%>model/workflow/wf.jsp?yw_guid='+yw_guid+'&wfInsId='+wfInsId+'&zfjcType='+zfjcType+'&returnPath='+returnPath+'&buttonHidden='+buttonHien+'&zfjcName=立案查处&activityName=';  
 	//window.open(url); 
 	document.location.href=url;
