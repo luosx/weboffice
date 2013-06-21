@@ -20,15 +20,23 @@ function initComponent() {
 						}, {
 							name : '泉山区'
 						}, {
-							name : '云龙'
+							name : '云龙区'
 						}, {
-							name : '全部'
+							name : '鼓楼区'
 						}, {
-							name : '全部'
+							name : '贾汪区'
 						}, {
-							name : '全部'
+							name : '同山区'
 						}, {
-							name : '全部'
+							name : '邳州市'
+						}, {
+							name : '新沂市'
+						}, {
+							name : '丰县'
+						}, {
+							name : '沛县'
+						}, {
+							name : '睢宁县'
 						}]
 			});
 
