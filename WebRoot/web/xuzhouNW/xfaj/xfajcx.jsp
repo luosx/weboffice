@@ -136,7 +136,7 @@
         
         grid.reconfigure(store, new Ext.grid.ColumnModel([
           //new Ext.grid.RowNumberer(),        
-         {header: '编号',dataIndex:'BH',width: width*0.16, sortable: true},
+         {header: '编号',dataIndex:'BH',width: width*0.12, sortable: true},
          {header: '举报人',dataIndex:'JBR',width: width*0.08, sortable: true},
          {header: '举报方式',dataIndex:'JBFS',width: width*0.10, sortable: true},
          {header: '被举报单位',dataIndex:'BJBDW',width: width*0.15, sortable: true},
