@@ -52,7 +52,7 @@
 		    height=document.body.clientHeight;//高度
 		    sm = new Ext.grid.CheckboxSelectionModel({handleMouseDown:Ext.emptyFn});
 		    grid = new Ext.grid.GridPanel({
-		        title:'案件任务待办列表',
+		        title:'信访已办结列表',
 		        store: store,
 		        columns: [
 		            //new Ext.grid.RowNumberer(),        
@@ -61,7 +61,7 @@
 		           {header: '举报方式',dataIndex:'JBFS',width: width*0.10, sortable: true},
 		           {header: '被举报单位',dataIndex:'BJBDW',width: width*0.15, sortable: true},
 		           {header: '问题发生地',dataIndex:'WTFSD',width: width*0.15, sortable: true},
-		           {header: '登记时间',dataIndex:'SLRQ',width: width*0.15, sortable: true},
+		           {header: '登记时间',dataIndex:'SLRQ',width: width*0.12, sortable: true},
 		           {header: '案件办理状态',dataIndex:'AJBLZT',width: width*0.15, sortable: true},
 		           {header: '查看',dataIndex:'INDEX',width: width*0.05, sortable: false,renderer:pro}
 		        ],
@@ -106,7 +106,7 @@
 			var zfjcType="91";
 			var returnPath="web/xuzhouNW/xfaj/xfajcx.jsp";;
 			var buttonHien = "delete,la,back,tran";
-			var url='<%=basePath%>model/workflow/wf.jsp?yw_guid='+yw_guid+'&wfInsId='+wfInsId+'&zfjcType='+zfjcType+'&returnPath='+returnPath+'&zfjcName=信访举报&buttonHidden='+buttonHien;  
+			var url='<%=basePath%>model/workflow/pages/wf.jsp?yw_guid='+yw_guid+'&wfInsId='+wfInsId+'&zfjcType='+zfjcType+'&returnPath='+returnPath+'&zfjcName=信访举报&buttonHidden='+buttonHien;  
 			//window.open(url); 
 			document.location.href=url;
 		}
