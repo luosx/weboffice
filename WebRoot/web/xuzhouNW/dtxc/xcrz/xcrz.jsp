@@ -1,8 +1,9 @@
 <%@page language="java" pageEncoding="utf-8"%>
 <%@page import="com.klspta.web.xuzhouNW.dtxc.DtxcManager"%>
-<%@page import="com.klspta.console.ManagerFactory"%>
 <%@page import="com.klspta.base.util.UtilFactory"%>
 <%@page import="com.klspta.base.util.bean.xzqhutil.XzqhBean"%>
+<%@page import="org.springframework.security.core.context.SecurityContextHolder"%>
+<%@page import="com.klspta.console.user.User"%>
 
 <%
 	String path = request.getContextPath();
@@ -41,6 +42,8 @@
 		<link rel="stylesheet" href="<%=basePath%>base/form/css/commonForm.css" type="text/css" />
 		<%@ include file="/base/include/formbase.jspf"%>
 		<script>
+		//抄告单编号
+		var cgdbh = "";
 		//用来计数抄告单,0表示抄告单隐藏，1表示抄告单显示
 		var count = new Array(0,0,0,0,0);
 		var countFlag = 0;
@@ -77,7 +80,7 @@
 						arr[i].style.display = "block";
 					}
 				}
-				count[0] = 1;
+				count[0] = 1;//维护count
 				countFlag++;
 			}
 			if(checkCgd2 != ""){
@@ -86,7 +89,7 @@
 						arr[i].style.display = "block";
 					}
 				}
-				count[0] = 1;
+				count[1] = 1;//维护count
 				countFlag++;
 			}
 			if(checkCgd3 != ""){
@@ -95,7 +98,7 @@
 						arr[i].style.display = "block";
 					}
 				}
-				count[0] = 1;
+				count[2] = 1;//维护count
 				countFlag++;
 			}
 			if(checkCgd4 != ""){
@@ -104,7 +107,7 @@
 						arr[i].style.display = "block";
 					}
 				}
-				count[0] = 1;
+				count[3] = 1;//维护count
 				countFlag++;
 			}
 			if(checkCgd5 != ""){
@@ -113,7 +116,7 @@
 						arr[i].style.display = "block";
 					}
 				}
-				count[0] = 1;
+				count[4] = 1;//维护count
 				countFlag++;
 			}
 		}
@@ -145,7 +148,7 @@
 						arr[i].style.display = "block";
 					}
 				}
-				count[0] = 1;
+				count[0] = 1;//维护count
 				countFlag++;
 				return;
 			}
@@ -156,7 +159,7 @@
 						arr[i].style.display = "block";
 					}
 				}
-				count[1] = 1;
+				count[1] = 1;//维护count
 				countFlag++;
 				return;
 			}
@@ -167,7 +170,7 @@
 						arr[i].style.display = "block";
 					}
 				}
-				count[2] = 1;
+				count[2] = 1;//维护count
 				countFlag++;
 				return;
 			}
@@ -178,7 +181,7 @@
 						arr[i].style.display = "block";
 					}
 				}
-				count[3] = 1;
+				count[3] = 1;//维护count
 				countFlag++;
 				return;
 			}
@@ -189,7 +192,7 @@
 						arr[i].style.display = "block";
 					}
 				}
-				count[4] = 1;
+				count[4] = 1;//维护count
 				countFlag++;
 				return;
 			}
@@ -291,12 +294,17 @@
 			var xcdw = document.getElementById("xcdw").value;
 			var yw_guid = "<%=yw_guid%>";
 			var flag = true;
+			//获得抄告单编号
+			putClientCommond("dtxcManager","buildCgdbh");
+			putRestParameter("yw_guid","<%=yw_guid%>");
+			putRestParameter("cgdid",createId);
+			cgdbh = restRequest();
 			//12个需要在抄告单.doc上面使用的参数
 			var subofficename = "subofficename=<%=strXcdwjc%>";
-			var number = "&number="+"";
+			var number = "&number="+cgdbh;
 			var districtname = "&districtname=<%=strXcdwjc%>";
-			var townname = "&townname="+townname;
-			var countyname = "&countyname="+countyname;
+			var vartownname = "&townname="+townname;
+			var varcountyname = "&countyname="+countyname;
 			var projectname = "&projectname="+jsxm;
 			var location = "&location="+zdwz;
 			var area = "&area="+zdmj;
@@ -308,7 +316,7 @@
 			var strId = "&yw_guid="+yw_guid+"&file_id="+createId+"&flag="+flag;
 			//拼接参数
 			var strData = subofficename + number + districtname + 
-							townname + countyname + projectname + 
+							vartownname + varcountyname + projectname + 
 							location + area + buildYear + 
 							buildMonth + Date +  district;
 			var strUrl = strData + strId;
@@ -317,6 +325,13 @@
 			
 			document.getElementById("div" + createId).innerHTML = "<a href='javascript:void(0);' id='span"+createId+"' onclick='lookCgd(this.id)' style='text-decoration:none'>查看抄告单</a>&nbsp;&nbsp;&nbsp;&nbsp;"+
 																	"<a href='javascript:void(0);' id='"+createId+"' onclick='createCgd(this.id)' style='text-decoration:none'>重新生成抄告单</a>";
+			//保存抄告单编号
+			putClientCommond("dtxcManager","saveCgdbh");
+			putRestParameter("yw_guid","<%=yw_guid%>");
+			putRestParameter("cgdid",createId);
+      		putRestParameter("cgdbh",escape(escape(cgdbh)));
+      		putRestParameter("userid","<%=writerId %>");
+			restRequest();
 		}
 		
 		//查看已经生成过的抄告单
@@ -488,7 +503,7 @@
 					<tr name="check1" style="display:none;">
 						<td>
 							<div align="center">
-								镇
+								镇(办事处)
 							</div>
 						</td>
 						<td>
@@ -496,7 +511,7 @@
 						</td>
 						<td>
 							<div align="center">
-								村
+								村辖区
 							</div>
 						</td>
 						<td>
@@ -587,7 +602,7 @@
 					<tr name="check2" style="display:none;">
 						<td>
 							<div align="center">
-								镇
+								镇(办事处)
 							</div>
 						</td>
 						<td>
@@ -595,7 +610,7 @@
 						</td>
 						<td>
 							<div align="center">
-								村
+								村辖区
 							</div>
 						</td>
 						<td>
@@ -686,7 +701,7 @@
 					<tr name="check3" style="display:none;">
 						<td>
 							<div align="center">
-								镇
+								镇(办事处)
 							</div>
 						</td>
 						<td>
@@ -694,7 +709,7 @@
 						</td>
 						<td>
 							<div align="center">
-								村
+								村辖区
 							</div>
 						</td>
 						<td>
@@ -785,7 +800,7 @@
 					<tr name="check4" style="display:none;">
 						<td>
 							<div align="center">
-								镇
+								镇(办事处)
 							</div>
 						</td>
 						<td>
@@ -793,7 +808,7 @@
 						</td>
 						<td>
 							<div align="center">
-								村
+								村辖区
 							</div>
 						</td>
 						<td>
@@ -884,7 +899,7 @@
 					<tr name="check5" style="display:none;">
 						<td>
 							<div align="center">
-								镇
+								镇(办事处)
 							</div>
 						</td>
 						<td>
@@ -892,7 +907,7 @@
 						</td>
 						<td>
 							<div align="center">
-								村
+								村辖区
 							</div>
 						</td>
 						<td>
