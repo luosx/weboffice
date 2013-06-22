@@ -41,16 +41,21 @@ public class StartWorkflowLacc extends AbstractBaseBean {
 		int year = cal.get(Calendar.YEAR);
 		String selectSql="select bh from( select substr(t.bh,13,3) bh from lacpb t order by t.dateflag desc) where rownum=1";
 		List<Map<String,Object>> list=query(selectSql,YW);
-		int count=Integer.parseInt((list.get(0)).get("bh").toString());
-		count=count+1;
-		int number=3;
-        StringBuffer aa=new StringBuffer(count+"");
-        StringBuffer bb=new StringBuffer("");
-        for(int i=aa.length();i<number;i++){
-            bb.append("0");
-        }
-        bb.append(aa);
-		String bh = "执立徐国土资【"+year+"】"+bb.toString()+"号";
+		String bh = "";
+		if(list!=null && list.size()>0){
+			int count=Integer.parseInt((list.get(0)).get("bh").toString());
+			count=count+1;
+			int number=3;
+	        StringBuffer aa=new StringBuffer(count+"");
+	        StringBuffer bb=new StringBuffer("");
+	        for(int i=aa.length();i<number;i++){
+	            bb.append("0");
+	        }
+	        bb.append(aa);
+			bh="执立徐国土资【"+year+"】"+bb.toString()+"号";
+		}else{
+			bh="执立徐国土资【"+year+"】001号";
+		}
 		Date date=cal.getTime();
 		String insertSql="insert into lacpb(yw_guid,bh,slrq) values(?,?,?)";
 		update(insertSql,YW,new Object[]{yw_guid,bh,date});
