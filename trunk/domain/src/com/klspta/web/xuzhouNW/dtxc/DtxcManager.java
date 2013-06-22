@@ -11,11 +11,16 @@ import com.klspta.console.ManagerFactory;
 
 /**
  * 
- * @author Administrator
- *
+ * <br>Title: 动态巡查管理类
+ * <br>Description: 
+ * <br>Author: 姚建林
+ * <br>Date: 2013-6-18
  */
 public class DtxcManager extends AbstractBaseBean {
+	
+	//静态变量，用于标志抄告单是否生成
 	static String[] strSta = new String[]{"0","0","0","0","0"};
+	
 	/**
 	 * 
 	 * <br>Title: 生成巡查日志
@@ -23,7 +28,7 @@ public class DtxcManager extends AbstractBaseBean {
 	 * <br>Author: 姚建林
 	 * <br>Date: 2013-6-18
 	 */
-	public void buildXcrq() {
+	public void buildXcrz() {
 		//生成yw_guid
 		String yw_guid= UtilFactory.getStrUtil().getGuid();
 		//生成xcbh巡查编号
@@ -51,6 +56,7 @@ public class DtxcManager extends AbstractBaseBean {
 	 */
 	public String buildXcbh(){
 		StringBuffer xcbh = new StringBuffer();
+		String strCou = "";
 		//添加编号头"XC"
 		xcbh.append("XC");
 		//添加日期
@@ -59,10 +65,13 @@ public class DtxcManager extends AbstractBaseBean {
 		String strDate = sdf.format(date);
 		xcbh.append(strDate);
 		//添加流水号
-		String strSqlYear = strDate.substring(0,4);
-		String sql = "select count(yw_guid) cou from xcrz t where Extract(year from t.writedate) = ? and userid <> '1'";
-		List<Map<String, Object>> result = query(sql, YW ,new Object[]{strSqlYear});
-		String strCou = result.get(0).get("cou").toString();//数据库中日志条数
+		String sql = "select xcbh from( select substr(t.xcbh,11,5) xcbh from xcrz t where userid <> '1' order by t.writedate desc) where rownum=1";
+		List<Map<String, Object>> result = query(sql, YW);
+		if(result != null && result.size() > 0){
+			strCou = result.get(0).get("xcbh").toString();//数据库中日志条数
+		}else{
+			strCou = "0";
+		}
 		int intCou = Integer.parseInt(strCou) + 1;//新生成日志是数据库中日志条数+1
 		String strtemp = intCou + "";
 		int i = strtemp.length();
@@ -117,12 +126,15 @@ public class DtxcManager extends AbstractBaseBean {
 		String yw_guid = request.getParameter("yw_guid");
 		String strFlag = request.getParameter("strFlag");
 		String sql = "";
+		String sqldel = "delete from xcrzcgd where yw_guid = ? and cgdid = ?";;
 		for (int i = 1; i < 6; i++) {
 			if(strFlag.contains(i+"")){
 				sql = "update xcrz set jsxm"+i+" = ?,jsdw"+i+" = ?,dgsj"+i+" = ?,jsqk"+i+" = ?,zdmj"+i+" = ?,zdwz"+i+" = ?,townname"+i+" = ?,countyname"+i+" = ?,cgdqk"+i+" = ? where yw_guid = ?";
+				strSta[i - 1] = "0";
 			}
 		}
 		update(sql, YW, new Object[]{"","","","","","","","",0,yw_guid});
+		update(sqldel, YW, new Object[]{yw_guid,"cgd"+strFlag});
 	}
 	
 	/**
@@ -175,5 +187,77 @@ public class DtxcManager extends AbstractBaseBean {
 		}
 		List<Map<String, Object>> result = query(sql, YW);
 		response(result);
+	}
+	
+	/**
+	 * 
+	 * <br>Title: 生成抄告单统一编号
+	 * <br>Description: 
+	 * <br>Author: 姚建林
+	 * <br>Date: 2013-6-22
+	 */
+	public void buildCgdbh(){
+		//获得前台参数
+		String yw_guid = request.getParameter("yw_guid");
+		String cgdid = request.getParameter("cgdid");
+		String sql = "select cgdbh from xcrzcgd where yw_guid = ? and cgdid = ?";
+		List<Map<String, Object>> result = query(sql, YW, new Object[]{yw_guid,cgdid});
+		if(result.size() == 1){
+			response(result.get(0).get("cgdbh").toString());
+		}
+		if(result.size() == 0){
+			StringBuffer cgdbh = new StringBuffer();
+			String strCou = "";
+			//年份
+			Date date = new Date();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+			String strDate = sdf.format(date);
+			cgdbh.append("〔");
+			cgdbh.append(strDate.substring(0,4));
+			cgdbh.append("〕");
+			//添加流水号
+			sql = "select cgdbh from( select substr(t.cgdbh,7,3) cgdbh from xcrzcgd t where userid <> '1' order by t.createdate desc) where rownum=1";
+			result = query(sql, YW);
+			if(result != null && result.size() > 0){
+				strCou = result.get(0).get("cgdbh").toString();//数据库中日志条数
+			}else{
+				strCou = "0";
+			}
+			int intCou = Integer.parseInt(strCou) + 1;//新生成日志是数据库中日志条数+1
+			String strtemp = intCou + "";
+			int i = strtemp.length();
+			int j = 3 - i;//3位流水号
+			for (int n = 0; n < j; n++) {
+				cgdbh.append("0");
+			}
+			cgdbh.append(strtemp);
+			cgdbh.append("号");
+			
+			//返回生成好的巡查日志编号
+			response(cgdbh.toString());
+		}
+	}
+	
+	/**
+	 * 
+	 * <br>Title: 保存抄告单编号
+	 * <br>Description: 
+	 * <br>Author: 姚建林
+	 * <br>Date: 2013-6-22
+	 */
+	public void saveCgdbh(){
+		//获得前台参数
+		String yw_guid = request.getParameter("yw_guid");
+		String cgdid = request.getParameter("cgdid");
+		String sql = "select * from xcrzcgd where yw_guid = ? and cgdid = ?";
+		List<Map<String, Object>> result = query(sql, YW, new Object[]{yw_guid,cgdid});
+		//如果数据库中之前没有这条记录，执行插入
+		if(result.size() == 0){
+			String cgdbh = UtilFactory.getStrUtil().unescape(request.getParameter("cgdbh"));
+			String userid = request.getParameter("userid");
+			//向数据库中插入数据
+			sql = "insert into xcrzcgd (yw_guid,cgdid,cgdbh,userid) values (?,?,?,?)";
+			update(sql, YW, new Object[]{yw_guid,cgdid,cgdbh,userid});
+		}
 	}
 }
