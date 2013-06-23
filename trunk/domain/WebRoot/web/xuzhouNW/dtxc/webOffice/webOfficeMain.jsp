@@ -34,31 +34,19 @@
 		tempFolder = base.substring(0, base.lastIndexOf("/"))
 				+ "/cache/";
 	} else {
-		subofficename = new String(request
-				.getParameter("subofficename").getBytes("iso-8859-1"),
-				"UTF-8");
-		number = new String(request.getParameter("number").getBytes(
-				"iso-8859-1"), "UTF-8");
-		districtname = new String(request.getParameter("districtname")
-				.getBytes("iso-8859-1"), "UTF-8");
-		townname = new String(request.getParameter("townname")
-				.getBytes("iso-8859-1"), "UTF-8");
-		countyname = new String(request.getParameter("countyname")
-				.getBytes("iso-8859-1"), "UTF-8");
-		projectname = new String(request.getParameter("projectname")
-				.getBytes("iso-8859-1"), "UTF-8");
-		location = new String(request.getParameter("location")
-				.getBytes("iso-8859-1"), "UTF-8");
-		area = new String(request.getParameter("area").getBytes(
-				"iso-8859-1"), "UTF-8");
-		buildYear = new String(request.getParameter("buildYear")
-				.getBytes("iso-8859-1"), "UTF-8");
-		buildMonth = new String(request.getParameter("buildMonth")
-				.getBytes("iso-8859-1"), "UTF-8");
-		Date = new String(request.getParameter("Date").getBytes(
-				"iso-8859-1"), "UTF-8");
-		district = new String(request.getParameter("district")
-				.getBytes("iso-8859-1"), "UTF-8");
+		subofficename = java.net.URLDecoder.decode(request.getParameter("subofficename"),"UTF-8");
+		System.out.println(subofficename);
+		number = new String(request.getParameter("number").getBytes("iso-8859-1"), "UTF-8");
+		districtname = java.net.URLDecoder.decode(request.getParameter("districtname"),"UTF-8");
+		townname = java.net.URLDecoder.decode(request.getParameter("townname"),"UTF-8");
+		countyname = java.net.URLDecoder.decode(request.getParameter("countyname"),"UTF-8");
+		projectname = java.net.URLDecoder.decode(request.getParameter("projectname"),"UTF-8");
+		location = java.net.URLDecoder.decode(request.getParameter("location"),"UTF-8");
+		area = java.net.URLDecoder.decode(request.getParameter("area"),"UTF-8");
+		buildYear = request.getParameter("buildYear");
+		buildMonth = request.getParameter("buildMonth");
+		Date = java.net.URLDecoder.decode(request.getParameter("Date"),"UTF-8");
+		district = java.net.URLDecoder.decode(request.getParameter("district"),"UTF-8");
 	}
 %>
 
