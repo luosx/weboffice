@@ -616,18 +616,18 @@
     <project_chart>
         <auto_summary enabled="True" real_time_update="False" progress_update="True"/>
         <tasks>
-            <task id="1" name="土地变更调查" parent="" progress="100%" actual_start="2012.01.01" actual_end="2012.05.01"/>
-            <task id="2" name="部下发年度卫片" parent="1" progress="100%" actual_start="2012.01.01" actual_end="2012.04.30"/>
-            <task id="3" name="市、县卫片核查" parent="" progress="100%" actual_start="2012.04.01" actual_end="2012.07.01"/>
-            <task id="5" name="对所辖区县督查" parent="3" progress="100%" actual_start="2012.04.01" actual_end="2012.06.01"/>
-            <task id="6" name="向国土部初报数据成果" parent="3" progress="100%" actual_start="2012.04.01" actual_end="2012.06.30"/>
-            <task id="7" name="意见整改" parent="" progress="100%" actual_start="2012.07.01" actual_end="2012.07.31"/>
-			<task id="8" name="初报审核提出意见整改" parent="7" progress="100%" actual_start="2012.07.01" actual_end="2012.07.31"/>
-			<task id="9" name="验收工作" parent="" progress="60%" actual_start="2012.08.01" actual_end="2012.09.15"/>
-            <task id="10" name="完成省级验收" parent="9" progress="60%" actual_start="2012.08.01" actual_end="2012.08.15"/>
-            <task id="11" name="部完成验收工作" parent="9" progress="0%" actual_start="2012.08.15" actual_end="2012.09.15"/>
-			<task id="12" name="验收后期工作" parent="" progress="0%" actual_start="2012.08.15" actual_end="2012.09.30"/>
-            <task id="13" name="向部报送工作情况" parent="12" progress="0%" actual_start="2012.08.15" actual_end="2012.09.30"/>
+            <task id="1" name="土地变更调查" parent="" progress="100%" actual_start="2013.01.01" actual_end="2013.05.01"/>
+            <task id="2" name="部下发年度卫片" parent="1" progress="100%" actual_start="2013.01.01" actual_end="2013.04.30"/>
+            <task id="3" name="市、县卫片核查" parent="" progress="100%" actual_start="2013.04.01" actual_end="2013.07.01"/>
+            <task id="5" name="对所辖区县督查" parent="3" progress="100%" actual_start="2013.04.01" actual_end="2013.06.01"/>
+            <task id="6" name="向国土部初报数据成果" parent="3" progress="100%" actual_start="2013.04.01" actual_end="2013.06.30"/>
+            <task id="7" name="意见整改" parent="" progress="100%" actual_start="2013.07.01" actual_end="2013.07.31"/>
+			<task id="8" name="初报审核提出意见整改" parent="7" progress="100%" actual_start="2013.07.01" actual_end="2013.07.31"/>
+			<task id="9" name="验收工作" parent="" progress="60%" actual_start="2013.08.01" actual_end="2013.09.15"/>
+            <task id="10" name="完成省级验收" parent="9" progress="60%" actual_start="2013.08.01" actual_end="2013.08.15"/>
+            <task id="11" name="部完成验收工作" parent="9" progress="0%" actual_start="2013.08.15" actual_end="2013.09.15"/>
+			<task id="12" name="验收后期工作" parent="" progress="0%" actual_start="2013.08.15" actual_end="2013.09.30"/>
+            <task id="13" name="向部报送工作情况" parent="12" progress="0%" actual_start="2013.08.15" actual_end="2013.09.30"/>
              
             
         </tasks>
