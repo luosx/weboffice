@@ -90,9 +90,9 @@ body {
 				<td width="100%"  background="<%=resourcePath%>images/top/bg_w.png">
 			
 					<%out.print(ManagerFactory.getMenuManager().getMenuCode(user,"",1));%>
-			
+					<span style="font-size:12px;position:relative;top:5px;width:98%;text-align:right"><%=fullName%>,<%=today%>,星期<%=day%></span>
 				</td>
-		     <!-- <%=fullName%>,<%=today%>,星期<%=day%>  -->
+				
 				<td width=1950" align="left" style="background:url(<%=resourcePath%>images/top/bg_w.png);cursor:pointer;">			
 					<div style="border:1px soild black;background:url(<%=resourcePath%>images/top/navrightbc.png);width:195px;height:25px;margin-top:1px;">
 						<span style="color:#285290;font-size:12px;margin-top:5px;display:block;margin-left:26px;">
