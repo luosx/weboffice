@@ -300,18 +300,18 @@
 			putRestParameter("cgdid",createId);
 			cgdbh = restRequest();
 			//12个需要在抄告单.doc上面使用的参数
-			var subofficename = "subofficename=<%=strXcdwjc%>";
+			var subofficename = "subofficename=" + encodeURI(encodeURI("<%=strXcdwjc%>"));
 			var number = "&number="+cgdbh;
-			var districtname = "&districtname=<%=strXcdwjc%>";
-			var vartownname = "&townname="+townname;
-			var varcountyname = "&countyname="+countyname;
-			var projectname = "&projectname="+jsxm;
-			var location = "&location="+zdwz;
-			var area = "&area="+zdmj;
+			var districtname = "&districtname=" + encodeURI(encodeURI("<%=strXcdwjc%>"));
+			var vartownname = "&townname="+encodeURI(encodeURI(townname));
+			var varcountyname = "&countyname="+encodeURI(encodeURI(countyname));
+			var projectname = "&projectname="+encodeURI(encodeURI(jsxm));
+			var location = "&location="+encodeURI(encodeURI(zdwz));
+			var area = "&area="+encodeURI(encodeURI(zdmj));
 			var buildYear = "&buildYear="+dgsj.substring(0,4);
 			var buildMonth  = "&buildMonth="+dgsj.substring(5,7);
-			var Date = "&Date=<%=strDate%>";
-			var district = "&district=<%=strXcdwjc%>";
+			var Date = "&Date=" + encodeURI(encodeURI("<%=strDate%>"));
+			var district = "&district=" + encodeURI(encodeURI("<%=strXcdwjc%>"));
 			//yw_guid等参数
 			var strId = "&yw_guid="+yw_guid+"&file_id="+createId+"&flag="+flag;
 			//拼接参数
