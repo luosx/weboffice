@@ -874,31 +874,28 @@ public class WpzfListManager extends AbstractBaseBean {
      * @return
      */
     
-    public String getZBByTbbh(String tbbh) {
-    	String sqlPolygon = "select sde.ST_AsText(t.shape) polygon from giser.jctb t where t.objectid = ?";
-    	List<Map<String, Object>> polygonList = query(sqlPolygon, GIS, new Object[]{tbbh});
-    	String polygonString = (String)polygonList.get(0).get("polygon");
-    	String points = polygonString.replace("POLYGON", "");
-    	points = points.replace("((", "");
-    	points = points.replace("))", "");
-    	points.trim();
-    	String[] formats = points.split(",");
-    	String x="", y="";
-    	List<String> zbs = new ArrayList<String>();
-    	for(int i = 0; i < formats.length; i++){
-    		formats[i] = formats[i].trim();
-    		x = formats[i].split(" ")[0];
-    		y = formats[i].split(" ")[1];
-    		zbs.add(x + "," + y);
-    		//Point point = UtilFactory.getChangeCoordsSysUtil().changeMe(new Point(x, y), ChangeCoordsSysUtil.GPS84_TO_BALIN80);
-    		//zbs.add(point.getX() + "," + point.getY());
-    		
-    	}
-    	String sqlExtent = "select t.*, t.rowid from gis_extent t where t.flag = '1'";
-    	List<Map<String, Object>> mapConfigList = query(sqlExtent, CORE);
-    	BigDecimal wkid =(BigDecimal)mapConfigList.get(0).get("wkid");
-    	Polygon polygon = new Polygon(zbs, wkid.intValue(), true);
-    	return polygon.toJson();
+    public String getXmzb(String rwbh) {
+        String sql = "select jwzb from dtjg.gd_ba where yw_guid=?";
+        List<Map<String, Object>> list = query(sql, DTJG, new Object[] { rwbh });
+        if (list.size() > 0) {
+            String zb = list.get(0).get("jwzb").toString();
+            if (zb == null) {
+                return null;
+            } else {
+                String[] zbs = zb.split(";");
+                List<String> listzb = new ArrayList<String>();
+                for(int i=0 ; i< zbs.length ; i++){
+                	listzb.add(zbs[i]);                	
+                }
+                sql = "select t.*, t.rowid from gis_extent t where t.flag = '1'";
+                List<Map<String, Object>> mapConfigList = query(sql, CORE);
+                BigDecimal wkid = (BigDecimal) mapConfigList.get(0).get("wkid");
+                Polygon polygon = new Polygon(listzb,wkid.intValue(),true);
+                return polygon.toJson();
+            }
+        } else {
+            return null;
+        }
     }
 
 }
