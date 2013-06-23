@@ -124,7 +124,6 @@ Ext.onReady(function(){
         listeners:{
 		       rowdblclick: viewDetail1
          }, 
-           
         stripeRows: true,
         width:width,
         height: height+40,

@@ -201,14 +201,14 @@ if(fixed!=null && fixed.equals("fixedPrint")){%>
     <td colspan="2"><div align="center">大&nbsp;&nbsp;&nbsp;&nbsp;队<br/>
       承&nbsp;办&nbsp;人<br/>
     建&nbsp;&nbsp;&nbsp;&nbsp;议</div></td>
-    <td colspan="6">
+    <td colspan="6" >
 	<textarea rows="5"  cols="70" name="ddcbrjy" id="ddcbrjy" style="width: 99%"></textarea>
     	 <div class="div80">
-		  	<div class="divLeftFloat">签名：<input class="underline" type="text" name="ddcbr01" id="ddcbr01" onfocus="underwrite(this)" onClick="sign(this);"    style="width:50px" />
-									<img  width="60" height="25" id="ddcbr01Sign" style="display:none" /></div>
+		  	<div  class="divLeftFloat">签名：<input class="underline" type="text" name="ddcbr01" id="ddcbr01" onfocus="underwrite(this)" onClick="sign(this);"    style="width:50px" />
+									<img  id="ddcbr01Sign" style="display:none;" /></div>
 		    <div>日期：<input type="text" class="underline" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})" name="ddcbrrq01" id="ddcbrrq01" readonly  style="width: 80px"/></div>
-			<div class="divLeftFloat">签名：<input class="underline" type="text" name="ddcbr02" id="ddcbr02" onfocus="underwrite(this)" onClick="sign(this);"    style="width:50px" />
-									<img  width="60" height="25" id="ddcbr02Sign" style="display:none" /></div>
+			<br/><br/><div class="divLeftFloat">签名：<input class="underline" type="text" name="ddcbr02" id="ddcbr02" onfocus="underwrite(this)" onClick="sign(this);"    style="width:50px" />
+									<img  width="50px" height="20" id="ddcbr02Sign" style="display:none" /></div>
 		    <div>日期：<input type="text" class="underline" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})" name="ddcbrrq02" id="ddcbrrq02" readonly  style="width: 80px"/></div>
 		 </div>	</td>
   </tr>

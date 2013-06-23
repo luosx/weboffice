@@ -70,6 +70,13 @@
 		        	{xtype:'textfield',id:'keyword',width:450,emptyText:'请输入关键字进行查询'},
 		        	{xtype: 'button',text:'查询',handler: query}
 		        ],
+		        listeners:{
+		  			rowdblclick : function(grid, rowIndex, e)
+					{
+				   		// showDetail(grid.getStore().getAt(rowIndex).data.XIANGXI);
+				   		process(grid.getStore().getAt(rowIndex).data.INDEX);
+					}
+        		},
 		        // stripeRows: true,
 		        width:width,
 		        height:height,  
@@ -85,6 +92,7 @@
 		            emptyMsg: "无记录",
 		        plugins: new Ext.ux.ProgressBarPager()
 		        })
+		        
 		    });
 		    
 		    grid.render('mygrid_container'); 
