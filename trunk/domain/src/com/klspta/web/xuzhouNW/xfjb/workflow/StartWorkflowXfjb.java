@@ -66,10 +66,11 @@ public class StartWorkflowXfjb extends AbstractBaseBean {
 		String numsql = "select max(t.bh) num from wfxsfkxx t where t.bh like '" + dateString + "%'";
 		String num;
 		List<Map<String, Object>> result = query(numsql, YW);
-		if(result.size() < 1){
+		String nestNum = String.valueOf(result.get(0).get("num"));
+		if(nestNum.equals(null) || nestNum.equals("")){
 			num = dateString + "001";
 		}else{
-			String nestNum = (String)result.get(0).get("num");
+			//String nestNum = (String)result.get(0).get("num");
 			String temp = nestNum.substring(nestNum.length() - 3, nestNum.length());
             temp=String.valueOf(Integer.parseInt(temp)+1);   
             temp = "00" + temp;
