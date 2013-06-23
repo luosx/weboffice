@@ -33,6 +33,17 @@
 		<listener>
 		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
 	</listener>
+	
+	<!-- 添加电子签章servlet -->
+	<servlet>
+		<servlet-name>signservice</servlet-name>
+		<servlet-class>com.klspta.web.xuzhouNW.importSign.SignServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>signservice</servlet-name>
+		<url-pattern>/signservice</url-pattern>
+	</servlet-mapping>
+	
 	    <!--Spring的ApplicationContext 载入 -->
     <listener>
         <listener-class>com.klspta.base.MyContextLoaderListener</listener-class>
