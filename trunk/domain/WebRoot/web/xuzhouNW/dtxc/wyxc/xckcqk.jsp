@@ -5,6 +5,7 @@
 <%@page import="com.klspta.console.user.User"%>
 <%@page import="com.klspta.console.ManagerFactory"%>
 <%@page import="com.klspta.web.xuzhouNW.dtxc.DtxcManager"%>
+<%@page import="com.klspta.web.xuzhouNW.dtxc.PADDataManager"%>
 <%
     String path = request.getContextPath();
 String basePath = request.getScheme() + "://"
@@ -20,7 +21,7 @@ if(type!=null&&"td".equals(type)){
 	type="矿产";
 }
 
-Map<String, Object> map = new DtxcManager().getXckcqkData(yw_guid);
+Map<String, Object> map = new PADDataManager().getXckcqkData(yw_guid);
 String returnPath = request.getParameter("returnPath");
 String edit = request.getParameter("edit");
 if (edit == null || !edit.equals("false")) {
