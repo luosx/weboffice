@@ -61,8 +61,13 @@ public class TjfxManager extends AbstractBaseBean{
 								"	{text:'鼓楼区',checked:false,leaf:1,id:'320302',parentId:'3200'},"+
 								"	{text:'云龙区',checked:false,leaf:1,id:'320303',parentId:'3200'},"+
 								"	{text:'泉山区',checked:false,leaf:1,id:'320311',parentId:'3200'},"+
-								"	{text:'开发区',checked:false,leaf:1,id:'320313',parentId:'3200'},"+
-								"	{text:'新城区',checked:false,leaf:1,id:'320314',parentId:'3200'}"+
+								"	{text:'贾汪区',checked:false,leaf:1,id:'320313',parentId:'3200'},"+
+								"	{text:'铜山区',checked:false,leaf:1,id:'320314',parentId:'3200'},"+
+							    "   {text:'邳州市',checked:false,leaf:1,id:'320310',parentId:'3200'},"+
+                                "   {text:'新沂市',checked:false,leaf:1,id:'320309',parentId:'3200'},"+
+                                "   {text:'睢宁县',checked:false,leaf:1,id:'320308',parentId:'3200'},"+
+                                "   {text:'沛 县',checked:false,leaf:1,id:'320307',parentId:'3200'},"+
+                                "   {text:'丰 县',checked:false,leaf:1,id:'320306',parentId:'3200'}"+
 							"]}]";		
 			}
 		} catch (Exception e) {
