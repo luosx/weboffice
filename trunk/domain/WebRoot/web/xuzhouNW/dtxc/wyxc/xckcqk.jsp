@@ -174,7 +174,7 @@ body {
 					建设面积
 				</td>
 				<td colspan="4" align="left">
-					<textarea align="left" cols="45" class="noborder" readonly><%=map.get("CJMJ") == null ? "" : map.get("CJMJ")%></textarea>
+					<input type="text" class="noborder" readonly value=<%=map.get("CJMJ") == null ? "" : map.get("CJMJ")%>>
 				</td>
 			</tr>
 			<tr>
@@ -233,7 +233,7 @@ body {
 					备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注
 				</td>
 				<td colspan="4" height=60px align="left">
-					<textarea class="noborder" readonly><%=map.get("SJBZ") == null ? "" : map.get("SJBZ")%></textarea>
+					<textarea class="noborder" style=";font-size:14px;" readonly><%=map.get("SJBZ") == null ? "" : map.get("SJBZ")%></textarea>
 				</td>
 			</tr>
 			<tr>
