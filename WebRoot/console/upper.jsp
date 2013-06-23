@@ -3,7 +3,7 @@
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
-    String proName=ProjectInfo.getInstance().PROJECT_NAME;
+    String name = ProjectInfo.getInstance().PROJECT_NAME;
     		
 %>
 
@@ -32,24 +32,22 @@ body {
     <body>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
-    <td width="607"><img src="<%=basePath%>web/<%=proName %>/framework/images/logo_bak.gif" width="607" height="106" /></td>
-    <td background="<%=basePath%>web/hotline/framework/images/webbj.jpg">&nbsp;</td>
-    <td width="397"  background="<%=basePath%>web/hotline/framework/images/banner_bk.gif">
+    <td width="607"><img src="<%=basePath%>web/<%=name%>/framework/images/logo_bak.gif" width="607" height="106" /></td>
+    <td background="<%=basePath%>web/<%=name%>/framework/images/webbj.jpg">&nbsp;</td>
+    <td width="397"  background="<%=basePath%>web/<%=name%>/framework/images/banner_bk.gif">
     <object id="FlashID" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="397" height="106">
-      <param name="movie" value="<%=basePath%>web/hotline/framework/images/banner.swf" />
+      <param name="movie" value="<%=basePath%>web/<%=name%>/framework/images/banner.swf" />
       <param name="quality" value="high" />
-      <param name="wmode" value="transparent" />
       <param name="swfversion" value="8.0.35.0" />
       <!-- 此 param 标签提示使用 Flash Player 6.0 r65 和更高版本的用户下载最新版本的 Flash Player。如果您不想让用户看到该提示，请将其删除。 -->
-      <param name="expressinstall" value="<%=basePath%>web/hotline/framework/js/expressInstall.swf" />
+      <param name="expressinstall" value="<%=basePath%>web/<%=name%>/framework/js/expressInstall.swf" />
       <!-- 下一个对象标签用于非 IE 浏览器。所以使用 IECC 将其从 IE 隐藏。 -->
       <!--[if !IE]>-->
-      <object type="application/x-shockwave-flash" data="<%=basePath%>web/hotline/framework/images/banner.swf" width="476" height="106">
+      <object type="application/x-shockwave-flash" data="<%=basePath%>web/<%=name%>/framework/images/banner.swf" width="476" height="106">
         <!--<![endif]-->
         <param name="quality" value="high" />
-        <param name="wmode" value="transparent" />
         <param name="swfversion" value="8.0.35.0" />
-        <param name="expressinstall" value="<%=basePath%>web/hotline/framework/js/expressInstall.swf" />
+        <param name="expressinstall" value="<%=basePath%>web/<%=name%>/framework/js/expressInstall.swf" />
         <!-- 浏览器将以下替代内容显示给使用 Flash Player 6.0 和更低版本的用户。 -->
         <div>
           <h4>此页面上的内容需要较新版本的 Adobe Flash Player。</h4>
