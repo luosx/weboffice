@@ -70,6 +70,13 @@
 		        	{xtype:'textfield',id:'keyword',width:450,emptyText:'请输入关键字进行查询'},
 		        	{xtype: 'button',text:'查询',handler: query}
 		        ],
+                listeners:{
+		  			rowdblclick : function(grid, rowIndex, e)
+					{
+				   		// showDetail(grid.getStore().getAt(rowIndex).data.XIANGXI);
+				   		process(grid.getStore().getAt(rowIndex).data.INDEX);
+					}
+        		},
 		        // stripeRows: true,
 		        width:width,
 		        height:height,  
@@ -104,9 +111,9 @@
 			var wfInsId=myData[id].WFINSID;
 			var yw_guid=myData[id].YW_GUID;
 			var zfjcType="91";
-			var returnPath="web/xuzhouNW/xfaj/xfajcx.jsp";;
+			var returnPath="web/xuzhouNW/xfaj/xfajend.jsp";;
 			var buttonHien = "delete,la,back,tran";
-			var url='<%=basePath%>model/workflow/pages/wf.jsp?yw_guid='+yw_guid+'&wfInsId='+wfInsId+'&zfjcType='+zfjcType+'&returnPath='+returnPath+'&zfjcName=信访举报&buttonHidden='+buttonHien;  
+			var url='<%=basePath%>model/workflow/wf.jsp?yw_guid='+yw_guid+'&wfInsId='+wfInsId+'&zfjcType='+zfjcType+'&returnPath='+returnPath+'&zfjcName=信访举报&buttonHidden='+buttonHien;  
 			//window.open(url); 
 			document.location.href=url;
 		}
