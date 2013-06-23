@@ -67,7 +67,7 @@ public class StartWorkflowXfjb extends AbstractBaseBean {
 		String num;
 		List<Map<String, Object>> result = query(numsql, YW);
 		String nestNum = String.valueOf(result.get(0).get("num"));
-		if(nestNum.equals(null) || nestNum.equals("")){
+		if(nestNum.equals("null") || nestNum.equals("")){
 			num = dateString + "001";
 		}else{
 			//String nestNum = (String)result.get(0).get("num");
