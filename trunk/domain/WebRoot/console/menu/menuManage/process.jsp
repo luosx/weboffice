@@ -124,7 +124,7 @@
 }) 
 
 function del(){
-  return "<a href='#' onclick='delInfo();return false;'><img src='base/gis/images/delete.png' alt='删除'></a>";
+  return "<a href='#' onclick='delInfo();return false;'><img src='base/form/images/delete.png' alt='删除'></a>";
 }
 
 /*删除 add by 王峰 2011-4-20*/
@@ -166,7 +166,7 @@ Ext.MessageBox.confirm('注意', '将删除工作流模板，并且所有运行�
  }
  
 function view(id){
- return "<a href='#' onclick='viewDetail("+id+");return false;'><img src='base/gis/images/view.png' alt='查看'></a>";
+ return "<a href='#' onclick='viewDetail("+id+");return false;'><img src='base/form/images/view.png' alt='查看'></a>";
 }
 function viewDetail(id){
 var wfID=myData[id][0]
