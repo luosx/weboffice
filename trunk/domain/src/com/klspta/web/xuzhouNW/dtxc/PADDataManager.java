@@ -89,4 +89,18 @@ public class PADDataManager extends AbstractBaseBean {
             return null;
         }
     }
+
+    /**
+     * 
+     * <br>Description:根据yw_guid查询单个成果填写信息
+     * <br>Author:陈强峰
+     * <br>Date:2013-6-23
+     * @param yw_guid
+     * @return
+     */
+    public Map<String, Object> getXckcqkData(String yw_guid) {
+        String sql = "select * from pad_xcxcqkb t where t.yw_guid=?";
+        List<Map<String, Object>> result = query(sql, YW, new String[] { yw_guid });
+        return result.get(0);
+    }
 }
