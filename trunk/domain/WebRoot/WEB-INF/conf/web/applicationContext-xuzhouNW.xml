@@ -31,4 +31,8 @@
 	
 <!-- 卫片执法 -->
 <bean name="wpzfList" class="com.klspta.web.xuzhouNW.wpzf.WpzfListManager" scope="prototype"/>
+
+<!-- 添加签章-->
+<bean id="sign" class="com.klspta.web.xuzhouNW.importSign.Sign"/>
+
 </beans>
