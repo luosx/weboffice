@@ -144,9 +144,7 @@ Ext.MessageBox.confirm('注意', '将删除工作流模板，并且所有运行�
         putClientCommond("importProcess","delProcess");
         putRestParameter("deploymentId", deploymentId);
 		var result=restRequest();
-		
-		
-		if(result=="true"){ 
+		if(result){ 
 			//服务器端数据成功删除后，同步删除客户端列表中的数据
 			 var ds =  grid.getStore(); 
 			 var selectedRow = grid.getSelectionModel().getSelected(); 

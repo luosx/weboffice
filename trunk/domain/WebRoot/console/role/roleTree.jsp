@@ -114,7 +114,7 @@ Ext.onReady(function(){
 	   		    	*/
 	   		        putClientCommond("userAction","deleteRole");
 	   		        putRestParameter("selectRoleId",selectRoleId);
-	   		        putRestParameter("parentTreeId", selectMapTreeId);
+	   		       // putRestParameter("parentTreeId", selectMapTreeId);
    					var result=restRequest();
 	   		    	
 	   		    	//页面刷新

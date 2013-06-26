@@ -85,11 +85,11 @@ Ext.onReady(function(){
 )
 /*处理删除操作 add by 郭 2011-1-20*/
 function del(id){
- return "<span style='cursor:pointer;' onclick='delteUser(\""+id+"\")'><img src='base/gis/images/delete.png' alt='删除'/></span>";
+ return "<span style='cursor:pointer;' onclick='delteUser(\""+id+"\")'><img src='base/form/images/delete.png' alt='删除'/></span>";
 }
 /*处理查看操作 add by 郭 2011-1-20*/
 function modify(id){
- return "<span style='cursor:pointer;' onclick='modifyUser(\""+id+"\")'><img src='base/gis/images/conf.png' alt='修改'/></span>";
+ return "<span style='cursor:pointer;' onclick='modifyUser(\""+id+"\")'><img src='base/form/images/conf.png' alt='修改'/></span>";
 }
 function createUser(){
 parent.info.location.href="userInfo.jsp?userId="+newGuid();
