@@ -15,6 +15,7 @@ public class TjfxManager extends AbstractBaseBean{
     */
 	public String getQyTreeByXzqh(String userID){
 		String qyTree = "";
+		/*
 		String xzqhNames="";
 		//根据用户id得到角色列表（一个用户可能有多个角色）
 	    List<Role> roleList;
@@ -56,6 +57,7 @@ public class TjfxManager extends AbstractBaseBean{
 			 qyTree=sbuff.toString();
 		}
 		if(flag.equals("xuzhou")){
+		*/
 			qyTree="[{text:'徐州市',src:'sxq',checked:false,leaf:0,id:'3200',"+
 							 "children:["+
 								"	{text:'鼓楼区',checked:false,leaf:1,id:'320302',parentId:'3200'},"+
@@ -69,10 +71,10 @@ public class TjfxManager extends AbstractBaseBean{
                                 "   {text:'沛 县',checked:false,leaf:1,id:'320307',parentId:'3200'},"+
                                 "   {text:'丰 县',checked:false,leaf:1,id:'320306',parentId:'3200'}"+
 							"]}]";		
-			}
+		/*	}
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
+		}*/
 		return qyTree;
 	}
 
