@@ -121,7 +121,7 @@ scrollbar-3dlight-color:#D4D0C8;
 		   		        putRestParameter("treeIdList", treeIdList);
     					var result=restRequest();
 					
-					if(result.success==true){
+					if(result=="success"){
 						Ext.Msg.alert("提示","保存成功"); 
 					}else{
 						Ext.Msg.alert("提示","保存失败，请稍后重试或联系管理员。"); 
