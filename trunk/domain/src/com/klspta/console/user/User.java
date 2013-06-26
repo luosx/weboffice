@@ -98,9 +98,7 @@ public class User implements UserDetails,org.jbpm.api.identity.User {
 
     @Override
     public String getPassword() {
-    	//密码解密
-        String password2 = UserPasswordVerify.decryptMode(this.password);
-        return password2;
+        return password;
     }
 
     @Override
@@ -185,8 +183,6 @@ public class User implements UserDetails,org.jbpm.api.identity.User {
     }
 
     public void setPassword(String password) {
-    	//密码加密
-    	password =UserPasswordVerify.encryptMode(password);
          this.password = password;
     }
 
