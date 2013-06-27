@@ -29,15 +29,12 @@ public class UserManager extends AbstractBaseBean{
     	rolemap.clear();
         String sql = "select t.id,t.username,t.password,t.fullname,t.enabled,t.xzqh,t.sort,t.emailaddress,t.officephone,t.mobilephone from core_users t";
         List<Map<String, Object>> list = query(sql, CORE);
-        //密码重新解密
         ArrayList<Map<String, Object>> arrayList = new ArrayList<Map<String, Object>>();
         for(int j=0;j<list.size();j++){
         	 HashMap<String, Object> hashMap = new HashMap<String,Object>();
         	 hashMap.put("id",list.get(j).get("id"));
         	 hashMap.put("username",list.get(j).get("username"));
         	 String password = list.get(j).get("password").toString();
-        	// System.out.println(list.get(j).get("password").toString());
-        	// password = UserPasswordVerify.decryptMode(password);
         	 hashMap.put("password",password);
         	 hashMap.put("fullname",list.get(j).get("fullname"));
         	 hashMap.put("enabled",list.get(j).get("enabled"));
