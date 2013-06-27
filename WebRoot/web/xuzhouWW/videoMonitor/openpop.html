@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>open pop-simple-window</title>
+</head>
+<script type="text/javascript">
+function openPop(flag)
+{
+	var url = typeof flag != "undefined" && flag == 0 ? "pop.html" : "pop-modify.html";
+	var paramStr = "";
+	
+	var _$ = document.getElementById;
+	
+	// 设备PUID，必须
+	var puid = _$("puid") ? _$("puid").value.toString() : "";  
+	// 视频头索引，必须
+	var ivIndex = _$("ivIndex") ? _$("ivIndex").value.toString() : "0";
+	// 是否播放音频，默认为true
+	var playAudio = _$("playAudio") && _$("playAudio").checked ? true : false;
+	// 窗口宽度，默认为352
+	var width = _$("width") ? _$("width").value.toString() : "352"; 
+	// 窗口高度，默认为288
+	var height = _$("height") ? _$("height").value.toString() : "288"; 
+ 
+	var paramStr = "puid=" + puid + "&ivIndex=" + ivIndex + "&playAudio=" + playAudio + "&width=" + width + "&height=" + height;
+	//paramStr = "puid=" + puid + "&ivIndex=" + ivIndex;
+	
+	url = url + "?" + paramStr; 
+	
+	 window.open(url, "popwindow", "width="+width+",height="+height+",toolbar=no,menubar=no,scrollbars=no,resizable=no,location=no,status=no");  	
+	
+	//window.open(url, "popwindow", "width=352,height=288,top=100,left=300,toolbar=no,menubar=no,scrollbars=no,resizable=no,location=no,status=no");  
+}
+
+</script>
+	
+<body> 
+	<span>PUID：<input type=text id="puid" value="151000001947205736" style="width:160px;"></span>
+	<span>视频索引：<input type=text id="ivIndex" value="1" style="width:50px;"></span>
+	<span>是否播放音频：<input type=checkbox id="playAudio" checked style="width:16px;"></span>
+	<span>窗口宽度：<input type=text id="width" value="352" style="width:50px;"></span>
+	<span>窗口高度：<input type=text id="height" value="288" style="width:50px;"></span>
+	
+	<br /><br />
+    <span onclick = "javascript:openPop(0);" style = "cursor:pointer;text-decoration:underline;">打开pop.html</span>
+	<span>&nbsp;&nbsp;</span>
+    <span onclick = "javascript:openPop(1);" style = "cursor:pointer;text-decoration:underline;">打开pop-modify.html</span>
+	
+</body>
+</html>
