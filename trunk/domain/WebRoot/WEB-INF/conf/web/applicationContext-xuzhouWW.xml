@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+ xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:p="http://www.springframework.org/schema/p"
+ xsi:schemaLocation="http://www.springframework.org/schema/beans   
+ http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+ http://www.springframework.org/schema/context
+ http://www.springframework.org/schema/context/spring-context-3.0.xsd
+ http://www.springframework.org/schema/tx
+ http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+ http://www.springframework.org/schema/jdbc
+ http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd ">
+ 	
+
+<!-- 车辆管理 -->
+<bean name="carManager" class="com.klspta.web.xuzhouWW.CarManager" scope="prototype"/>
+<!-- 平板回传 -->
+<bean name="pADDataList" class="com.klspta.web.xuzhouWW.PADDataList" scope="prototype"/>
+<!-- GPS信息处理 -->
+<bean name="hander" class="com.klspta.web.xuzhouWW.wyrw.GPSDeviceManager" scope="prototype"/>
+<!-- 12336信访 -->
+<bean name="Xfxs_12336Manager" class="com.klspta.web.xuzhouWW.Xfxs_12336Manager" scope="prototype"/>
+
+
+
+
+
+</beans>
