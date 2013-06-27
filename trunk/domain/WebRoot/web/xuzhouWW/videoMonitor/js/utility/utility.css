@@ -1,0 +1,21 @@
+﻿/* pad */
+.pad{z-index:1; position:absolute;width:360px;top:100px; left:300px; background:transparent; border:2px outset; border:0px solid #C0C0C0;}
+.padtitle{ height:27px; line-height:27px; padding:0px 0px 0px 0px; font-size:12px; border:0px solid #C0C0C0; border-width:0px 0px 1px;font-weight:bold;  position:relative;text-align:left;color:#fff;}
+.padtitle .titleleft{ background:url(pad_title_left.gif) no-repeat left; height:27px;width:6px; float:left;}
+.padtitle .titlecontent{background:url(pad_title_bg.gif) repeat-x left; height:27px;width:330px; float:left;cursor:move; }
+.padtitle .titleclose1{ background:url(pad_titleclose1.gif) no-repeat left; height:27px;width:24px; float:left;}
+.padtitle .titleclose4{ background:url(pad_titleclose4.gif) no-repeat left; height:27px;width:24px; float:left;}
+.padcontent{padding:15px 0px 15px 0px;background:#E3FCFD;border:1px solid #385b79; border-width:0px 1px; border-bottom:1px solid #B0B0C0; height:100%;width:auto}
+.padcontent div{ height:auto; line-height:30px;width:100%;text-align:left;}
+.padbottom{background:#BCF7FF; border:1px solid #385b79;text-align:center;border-top:0px;}
+
+
+/* ie firefox heigth auto */
+.padcontent:after {
+    content: "."; 
+    display: block; 
+    height: 0; 
+    clear: both; 
+    visibility: hidden;
+} 
+
