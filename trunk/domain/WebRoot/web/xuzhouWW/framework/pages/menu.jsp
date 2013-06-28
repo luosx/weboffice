@@ -112,7 +112,6 @@ body {
    	 	<img  class="menuicon" src="<%=basePath%>web/<%=name%>/framework/images/menu/home.png" />
     	<span class="menutitle">首页</span>
     </li>
-        </li>  
        <li onClick='tdMapJb()' style="width:105px;">
 	    <img class="menuseparate"  src="<%=basePath%>web/<%=name%>/framework/images/menu/split.png" />
 	    <img class="menuicon"  src="<%=basePath%>web/<%=name%>/framework/images/menu/call.png" />
