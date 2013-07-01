@@ -76,6 +76,7 @@ function initComponent(){
 			    });
 			    	
 store = new Ext.data.JsonStore({
+
         proxy: new Ext.ux.data.PagingMemoryProxy(myData),
 		remoteSort:true,
         fields: [
