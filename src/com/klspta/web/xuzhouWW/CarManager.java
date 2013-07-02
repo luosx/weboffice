@@ -41,7 +41,7 @@ public class CarManager extends AbstractBaseBean {
 				+ car_info_xzqh_name + "'and qt_parent_code='320300'";
 		List<Map<String, Object>> query = query(sql_xzqh, CORE);
 		String car_cantoncode = query.get(0).get("qt_ctn_code").toString();
-		//增加
+		// 增加
 		if (car_id.equals("") | car_id == null) {
 			String sql = " insert into car_info (car_name,car_number,car_unit,car_person,car_person_phone,car_cantoncode,car_info_xzqh_name,car_style,car_gmrq) values ('"
 					+ car_name
@@ -63,8 +63,9 @@ public class CarManager extends AbstractBaseBean {
 			response("{success:true}");
 
 		} else {
-			String sql3="select car_number from car_info where car_id='"+car_id+"'";
-			List<Map<String, Object>> query3 = query(sql3,YW);
+			//String sql3 = "select car_number from car_info where car_id='"
+			//		+ car_id + "'";
+		//	List<Map<String, Object>> query3 = query(sql3, YW);
 			String sql = "UPDATE car_info SET car_name='" + car_name
 					+ "',car_unit ='" + car_unit + "' ,car_person='"
 					+ car_person + "', " + "car_person_phone='"
@@ -77,13 +78,15 @@ public class CarManager extends AbstractBaseBean {
 			update(sql, YW);
 			response("{success:true}");
 		}
-}
-public void getxzqhData(){
-	String sql="select QT_CTN_CODE,NA_CTN_NAME from CODE_XZQH where QT_PARENT_CODE='320300'";
-	List<Map<String, Object>> query = query(sql, CORE);
-	response(query);
-	
-}
+	}
+
+	public void getxzqhData() {
+		String sql = "select QT_CTN_CODE,NA_CTN_NAME from CODE_XZQH where QT_PARENT_CODE='320300'";
+		List<Map<String, Object>> query = query(sql, CORE);
+		response(query);
+
+	}
+
 	/***************************************************************************
 	 * 
 	 * <br>
@@ -94,8 +97,7 @@ public void getxzqhData(){
 	public void deleteCarData() {
 		String car_id = request.getParameter("car_id");
 		car_id = UtilFactory.getStrUtil().unescape(car_id);
-		String sql = " Delete from car_info where car_id='" + car_id
-				+ "'";
+		String sql = " Delete from car_info where car_id='" + car_id + "'";
 		update(sql, YW);
 		response("success");
 	}
@@ -110,21 +112,22 @@ public void getxzqhData(){
 	public void queryCarData() {
 		String keyworld = request.getParameter("keyWord");
 		String xzqh = request.getParameter("xzqh");
-		if (keyworld != ""&xzqh!="") {
+		if (keyworld != "" & xzqh != "") {
 			keyworld = UtilFactory.getStrUtil().unescape(keyworld);
 			String sql = "select CAR_NAME,CAR_UNIT,CAR_PERSON,CAR_PERSON_PHONE,CAR_CANTONCODE,CAR_NUMBER,CAR_INFO_XZQH_NAME ,CAR_STYLE,to_char(CAR_GMRQ,'yyyy-MM-dd') as CAR_GMRQ from car_info t where (t.CAR_NUMBER||t.CAR_NAME||t.CAR_STYLE ||t.CAR_PERSON like '%"
-					+ keyworld + "%') and CAR_CANTONCODE='"+xzqh+"'";
+					+ keyworld + "%') and CAR_CANTONCODE='" + xzqh + "'";
 			List<Map<String, Object>> query = query(sql, YW);
 			response(query);
-		}else if(xzqh!=""){
-			String sql = "select CAR_NAME,CAR_UNIT,CAR_PERSON,CAR_PERSON_PHONE,CAR_CANTONCODE,CAR_NUMBER,CAR_INFO_XZQH_NAME ,CAR_STYLE,to_char(CAR_GMRQ,'yyyy-MM-dd') as CAR_GMRQ from car_info t where  CAR_CANTONCODE='"+xzqh+"'";
-		List<Map<String, Object>> query = query(sql, YW);
-		response(query);
-			
-		}else if(xzqh==""&keyworld != ""){
+		} else if (xzqh != "") {
+			String sql = "select CAR_NAME,CAR_UNIT,CAR_PERSON,CAR_PERSON_PHONE,CAR_CANTONCODE,CAR_NUMBER,CAR_INFO_XZQH_NAME ,CAR_STYLE,to_char(CAR_GMRQ,'yyyy-MM-dd') as CAR_GMRQ from car_info t where  CAR_CANTONCODE='"
+					+ xzqh + "'";
+			List<Map<String, Object>> query = query(sql, YW);
+			response(query);
+
+		} else if (xzqh == "" & keyworld != "") {
 			keyworld = UtilFactory.getStrUtil().unescape(keyworld);
 			String sql = "select CAR_NAME,CAR_UNIT,CAR_PERSON,CAR_PERSON_PHONE,CAR_CANTONCODE,CAR_NUMBER,CAR_INFO_XZQH_NAME ,CAR_STYLE,to_char(CAR_GMRQ,'yyyy-MM-dd') as CAR_GMRQ from car_info t where (t.CAR_NUMBER||t.CAR_NAME||t.CAR_STYLE||t.CAR_PERSON  like '%"
-				+ keyworld + "%')";
+					+ keyworld + "%')";
 			List<Map<String, Object>> query = query(sql, YW);
 			response(query);
 		}
