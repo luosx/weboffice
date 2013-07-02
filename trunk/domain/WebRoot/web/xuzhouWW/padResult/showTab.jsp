@@ -1,12 +1,12 @@
-﻿<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ page import="java.net.URLDecoder" %>
 <%@page import="java.text.SimpleDateFormat"%>
-<%@page import="com.klspta.web.xuzhouWW.PADDataList"%>
+<%@page import="com.klspta.web.xuzhouWW.PadDatalist"%>
 <%
-    String path = request.getContextPath();
+	String path = request.getContextPath();
     String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
     String yw_guid = request.getParameter("yw_guid"); 
-    PADDataList padlist=new PADDataList();
+    PadDatalist padlist=new PadDatalist();
 	List list = padlist.getPADDataByYwguid(yw_guid); 
     Map map = (Map)list.get(0);
    	String xmmc = (String)map.get("XMMC")==null?"":(String)map.get("XMMC");

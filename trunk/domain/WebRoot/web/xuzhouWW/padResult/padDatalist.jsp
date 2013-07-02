@@ -1,14 +1,14 @@
-﻿<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@page import="com.klspta.model.projectinfo.ProjectInfo"%>
-<%@page import="com.klspta.web.xuzhouWW.PADDataList"%>
+<%@page import="com.klspta.web.xuzhouWW.PadDatalist"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
-			+ request.getServerName() + ":" + request.getServerPort()
-			+ path + "/";
-			String name = ProjectInfo.getInstance().PROJECT_NAME;
+	+ request.getServerName() + ":" + request.getServerPort()
+	+ path + "/";
+	String name = ProjectInfo.getInstance().PROJECT_NAME;
 	String extPath = basePath + "ext/";
-	PADDataList padlist = new PADDataList();
+	PadDatalist padlist = new PadDatalist();
 	List list = new ArrayList();
 	String rows = padlist.getPADDataList(list);
 %>
