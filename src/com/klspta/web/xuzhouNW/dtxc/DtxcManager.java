@@ -260,4 +260,88 @@ public class DtxcManager extends AbstractBaseBean {
 			update(sql, YW, new Object[]{yw_guid,cgdid,cgdbh,userid});
 		}
 	}
+	
+
+	/**
+	 * 
+	 * <br>Title: 根据当前巡查日志获取上一笔巡查日志
+	 * <br>Description: 
+	 * <br>Author: 黎春行
+	 * <br>Date: 2013-6-24
+	 */	
+	public void getPreXcrz(){
+		String num = request.getParameter("num");
+		String userId = request.getParameter("userId");
+		String keyWord = request.getParameter("keyWord");
+		
+		int preNum = Integer.parseInt(num) - 1;
+		if(preNum < 0){
+			response("error");
+			return ;
+		}
+		
+		String userXzqh = "";
+		String sql = "";
+		try {
+			userXzqh = ManagerFactory.getUserManager().getUserWithId(userId).getXzqh();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		if(userXzqh.length() == 6){
+			if(userXzqh.substring(4).equals("00")){//市级
+				sql = "select (rownum-1) RUNNUM1,YW_GUID,XCBH,XCRQ,XCDW,XCQY,XCRY,SFYWF,SPQK,CLYJ from xcrz where writerxzqh like '"+userXzqh.substring(0,4)+"%'";
+			}else{//县级
+				sql = "select (rownum-1) RUNNUM1,YW_GUID,XCBH,XCRQ,XCDW,XCQY,XCRY,SFYWF,SPQK,CLYJ from xcrz where writerxzqh like '"+userXzqh+"%'";
+			}
+		}else{//乡镇级
+			sql = "select (rownum-1) RUNNUM1,YW_GUID,XCBH,XCRQ,XCDW,XCQY,XCRY,SFYWF,SPQK,CLYJ from xcrz where writerxzqh = "+userXzqh;
+		}
+		if (keyWord != null) {
+			keyWord = UtilFactory.getStrUtil().unescape(keyWord);
+			sql += " and XCBH||XCDW||XCRQ||XCQY||XCRY||XCLX||SFYWF||CLYJ||SPQK like '%"+keyWord+"%'";
+		}
+		List<Map<String, Object>> result = query(sql, YW);
+		response((String)result.get(preNum).get("YW_GUID"));
+	}
+	
+	/**
+	 * 
+	 * <br>Title: 根据当前巡查日志获取下一笔巡查日志
+	 * <br>Description: 
+	 * <br>Author: 黎春行
+	 * <br>Date: 2013-6-24
+	 */	
+	public void getNextXcrz(){
+		
+		String num = request.getParameter("num");
+		String userId = request.getParameter("userId");
+		String keyWord = request.getParameter("keyWord");
+		String userXzqh = "";
+		String sql = "";
+		try {
+			userXzqh = ManagerFactory.getUserManager().getUserWithId(userId).getXzqh();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		if(userXzqh.length() == 6){
+			if(userXzqh.substring(4).equals("00")){//市级
+				sql = "select (rownum-1) RUNNUM1,YW_GUID,XCBH,XCRQ,XCDW,XCQY,XCRY,SFYWF,SPQK,CLYJ from xcrz where writerxzqh like '"+userXzqh.substring(0,4)+"%'";
+			}else{//县级
+				sql = "select (rownum-1) RUNNUM1,YW_GUID,XCBH,XCRQ,XCDW,XCQY,XCRY,SFYWF,SPQK,CLYJ from xcrz where writerxzqh like '"+userXzqh+"%'";
+			}
+		}else{//乡镇级
+			sql = "select (rownum-1) RUNNUM1,YW_GUID,XCBH,XCRQ,XCDW,XCQY,XCRY,SFYWF,SPQK,CLYJ from xcrz where writerxzqh = "+userXzqh;
+		}
+		if (keyWord != null) {
+			keyWord = UtilFactory.getStrUtil().unescape(keyWord);
+			sql += " and XCBH||XCDW||XCRQ||XCQY||XCRY||XCLX||SFYWF||CLYJ||SPQK like '%"+keyWord+"%'";
+		}
+		List<Map<String, Object>> result = query(sql, YW);
+		int nextNum = Integer.parseInt(num) + 1;
+		if(nextNum >= result.size()){
+			response("error");
+		}else{
+			response((String)result.get(nextNum).get("YW_GUID"));
+		}
+	}
 }
