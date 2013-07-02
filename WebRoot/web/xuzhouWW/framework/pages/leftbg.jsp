@@ -19,7 +19,7 @@
         <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
         <meta http-equiv="description" content="This is my page">
         <style type="text/css">
-<!--
+
 body {
     margin-left: 0px;
     margin-top: 0px;
@@ -27,7 +27,7 @@ body {
     margin-bottom: 0px;
     background-image: URL("<%=basePath%>web/<%=name%>/framework/images/bk.jpg");
 }
--->
+
 .Font9Black {
 	font-family: "宋体";
 	font-size: 9pt;
