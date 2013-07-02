@@ -1,12 +1,12 @@
-﻿<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@page import="com.klspta.model.projectinfo.ProjectInfo"%>
-<%@page import="com.klspta.web.xuzhouWW.XuzhouWWmanager"%>
+<%@page import="com.klspta.web.xuzhouWW.XuzhouWWmanager2"%>
 <%
-    String path = request.getContextPath();
+	String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
    
     String name = ProjectInfo.getInstance().PROJECT_NAME;
-     String weather= new XuzhouWWmanager().getWeather();
+     String weather= new XuzhouWWmanager2().getWeather();
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
