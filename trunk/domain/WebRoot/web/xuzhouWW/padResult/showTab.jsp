@@ -23,7 +23,7 @@
    	String jwzb = (String)map.get("JWZB")==null?"":(String)map.get("JWZB");	//经纬度坐标，外网服务器采集成果展现使用
    	String jwzbPolygon=padlist.getPolygon(jwzb);
    	jwzbPolygon=jwzbPolygon.replaceAll("\"","\\\\\"");
-   	String url=basePath+"web/xuzhouWW/tdmap/fxgis/FxGIS.html?dolocation=true&p="+jwzbPolygon;
+   	String url=basePath+"web/xuzhouWW/tdMap/fxgis/FxGIS.html?dolocation=true&p="+jwzbPolygon;
    	String xcqkms = (String)map.get("XCQKMC")==null?"":(String)map.get("XCQKMC");
        	System.out.println(url);
     String[] points = null;
@@ -67,13 +67,13 @@
 		height:700,
         items:[{
                 title: '现场核查情况',
-				html: "<iframe style='height:100%;width:100%' src='showDetialinfo.jsp?yw_guid=<%=yw_guid%>&xmmc=<%=xmmc%>&xzqmc=<%=xzqmc%>&rwlx=<%=rwlx%>&sfwf=<%=sfwf%>&xcr=<%=xcr%>&xcrq=<%=xcrq%>&xz=<%=xz%>&zmj=<%=zmj%>&imgname=<%=imgname%>&xcqkms=<%=xcqkms%>'/>"   
+				html: "<iframe style='height:100%;width:100%' src='xchcqk.jsp?yw_guid=<%=yw_guid%>&xmmc=<%=xmmc%>&xzqmc=<%=xzqmc%>&rwlx=<%=rwlx%>&sfwf=<%=sfwf%>&xcr=<%=xcr%>&xcrq=<%=xcrq%>&xz=<%=xz%>&zmj=<%=zmj%>&imgname=<%=imgname%>&xcqkms=<%=xcqkms%>'/>"   
             },{
                 title: '核查位置', 
                 html: "<iframe style='height:100%;width:100%' src='<%=url%>' />" 
             },{
                 title: '系统比对分析结果', 
-                html: "<iframe style='height:100%;width:100%' src='compareAnalysis.jsp?yw_guid=<%=yw_guid%>'/>"  
+                html: "<iframe style='height:100%;width:100%' src='bdfxResult.jsp?yw_guid=<%=yw_guid%>'/>"  
             }
         ]
     })
