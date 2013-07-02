@@ -1,12 +1,11 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<%@page import="com.klspta.web.xuzhouWW.TaskList"%>
+<%@page import="com.klspta.web.xuzhouWW.TjAnalyse"%>
 <%@ taglib uri="/WEB-INF/taglib/queryLabel.tld" prefix="common"%>
 <%
-    String path = request.getContextPath();
+	String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":"
     + request.getServerPort() + path + "/";
-    String extPath = basePath + "ext/";
-    TaskList taskList=new TaskList();
+    TjAnalyse taskList=new TjAnalyse();
     String rows=taskList.getWptbList("320111");
 %>
 
