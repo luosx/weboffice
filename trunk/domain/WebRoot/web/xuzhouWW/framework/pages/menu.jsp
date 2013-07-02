@@ -2,7 +2,6 @@
 <%@page import="com.klspta.model.projectinfo.ProjectInfo"%>
 <%@page import="com.klspta.console.user.User"%>
 <%@page import="org.springframework.security.core.context.SecurityContextHolder"%>
-<%@page import="com.klspta.web.xuzhouWW.PADDataList"%>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
@@ -25,8 +24,82 @@
         <%@ include file="/base/include/ext.jspf"%>
 		<script src="<%=basePath%>/base/include/ajax.js"></script>
 		<script src="<%=basePath%>/base/fxgis/framework/js/toJson.js"></script>
-        <style type="text/css">
-<!--
+	 <script>
+ var number;
+  var t;  
+  function timedCount()  
+  {  
+    var result = ajaxRequest("<%=basePath%>","pADDataList","getNotReadNumber","");
+    number = eval('(' + result + ')');
+    number = "&nbsp;"+number;
+  }  
+  
+  //车辆管理
+ function carManage(){
+	 top.center.mapView.openURL("<%=basePath%>web/<%=name%>/carManager/carManager.jsp",1);
+	 packUpLeft();
+ }
+  //平板回传
+ function padResult(){
+	 top.center.mapView.openURL("<%=basePath%>web/<%=name%>/padResult/padDatalist.jsp",1);
+	 packUpLeft();
+ }
+  //信访举报
+ function letterVisit(){
+	 top.center.mapView.openURL("<%=basePath%>web/<%=name%>/xsjb/xfxsList.jsp",1);
+	 packUpLeft();
+ }
+   //天地图举报信息
+ function tdMapJb(){
+	 top.center.mapView.openURL("<%=basePath%>web/<%=name%>/tdMapjb/jblist.jsp",1);
+	 packUpLeft();
+ }
+  //首页
+ function gohome(){
+	 top.center.mapView.openMap();
+	 spreadLeft();
+	 
+	 
+ }
+  //车辆跟踪
+ function carMonitor(){
+	 top.center.left.location.href="<%=basePath%>web/<%=name%>/carMonitor/carMonitor.jsp";
+         top.center.mapView.frames["lower"].swfobject.getObjectById("FxGIS").clear();
+	 spreadLeft();
+ }
+  //轨迹回放
+ function carHistory(){
+	 top.center.left.location.href="<%=basePath%>web/<%=name%>/carHistory/carHistory.jsp";
+         top.center.mapView.frames["lower"].swfobject.getObjectById("FxGIS").clear();
+	 spreadLeft();
+ }
+  //分析
+ function carAnalyse(){
+	 top.center.mapView.openURL("<%=basePath%>web/<%=name%>/tjAnalyse/tjfxTree.jsp",1);
+	 packUpLeft();
+ }
+  
+ function packUpLeft()
+ {	
+  	 if(top.center.content.cols=='261,7,*'){
+    	 top.center.partline.turn();
+	 }
+ }
+ function spreadLeft()
+ {
+  	 if(top.center.content.cols=='0,7,*'){
+    	 top.center.partline.turn();
+	 }
+ }
+ function vidoesC(){
+ window.open("<%=basePath%>web/<%=name%>/videoMonitor/index.jsp");
+ }
+ function showkuangshan(){
+  window.open("http://218.3.204.222:8008");
+ }
+ </script>	
+		
+<style type="text/css">
 body {
     margin-left: 0px;
     margin-top: 0px;
@@ -34,7 +107,6 @@ body {
     margin-bottom: 0px;
     background:url("<%=basePath%>web/<%=name%>/framework/images/menu/menu_bk.jpg");
    }
--->
 
 .menutitle
 {
@@ -178,77 +250,3 @@ body {
 
     </body>
 </html>
- <script>
- var number;
-  var t;  
-  function timedCount()  
-  {  
-    var result = ajaxRequest("<%=basePath%>","pADDataList","getNotReadNumber","");
-    number = eval('(' + result + ')');
-    number = "&nbsp;"+number;
-  }  
-  
-  //车辆管理
- function carManage(){
-	 top.center.mapView.openURL("<%=basePath%>web/<%=name%>/carManager/carList.jsp",1);
-	 packUpLeft();
- }
-  //平板回传
- function padResult(){
-	 top.center.mapView.openURL("<%=basePath%>web/<%=name%>/padResult/PADDataList.jsp",1);
-	 packUpLeft();
- }
-  //信访举报
- function letterVisit(){
-	 top.center.mapView.openURL("<%=basePath%>web/<%=name%>/xfxs_12336/xfxs_list.jsp",1);
-	 packUpLeft();
- }
-   //天地图举报信息
- function tdMapJb(){
-	 top.center.mapView.openURL("<%=basePath%>web/<%=name%>/tdmapjb/jblist.jsp",1);
-	 packUpLeft();
- }
-  //首页
- function gohome(){
-	 top.center.mapView.openMap();
-	 spreadLeft();
-	 
-	 
- }
-  //车辆跟踪
- function carMonitor(){
-	 top.center.left.location.href="<%=basePath%>web/<%=name%>/carMonitor/carMonitor.jsp";
-         top.center.mapView.frames["lower"].swfobject.getObjectById("FxGIS").clear();
-	 spreadLeft();
- }
-  //轨迹回放
- function carHistory(){
-	 top.center.left.location.href="<%=basePath%>web/<%=name%>/carHistory/carHistory.jsp";
-         top.center.mapView.frames["lower"].swfobject.getObjectById("FxGIS").clear();
-	 spreadLeft();
- }
-  //分析
- function carAnalyse(){
-	 top.center.mapView.openURL("<%=basePath%>web/<%=name%>/analyse/tjfxTree.jsp",1);
-	 packUpLeft();
- }
-  
- function packUpLeft()
- {	
-  	 if(top.center.content.cols=='261,7,*'){
-    	 top.center.partline.turn();
-	 }
- }
- function spreadLeft()
- {
-  	 if(top.center.content.cols=='0,7,*'){
-    	 top.center.partline.turn();
-	 }
- }
- function vidoesC(){
- window.open("<%=basePath%>web/<%=name%>/videoMonitor/index.jsp");
- }
- function showkuangshan(){
-  window.open("http://218.3.204.222:8008");
- }
- </script>

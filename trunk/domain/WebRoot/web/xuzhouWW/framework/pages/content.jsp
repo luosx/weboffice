@@ -13,6 +13,6 @@ String name = ProjectInfo.getInstance().PROJECT_NAME;
   <frameset id="content" name="content" cols="261,7,*" frameborder="no" border="0" framespacing="0">
     <frame id="leftv" name="left"  src="<%=basePath%>web/<%=name%>/carMonitor/carMonitor.jsp" scrolling="auto" noresize="noresize" />
     <frame id="partline" name="partline" src="<%=basePath%>web/<%=name%>/framework/pages/partline.jsp"  scrolling="no" noresize="noresize" />
-     <frame id="mapView" name="mapView"  src="<%=basePath%>web/<%=name%>/tdmap/mapView.jsp" scrolling="no" noresize="noresize" />
+     <frame id="mapView" name="mapView"  src="<%=basePath%>web/<%=name%>/tdMap/mapView.jsp" scrolling="no" noresize="noresize" />
   </frameset>
 </html>
