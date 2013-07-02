@@ -38,7 +38,7 @@ public class XfManager extends AbstractBaseBean {
 			sql += " and (upper(t.bh)||upper(t.xslx)||upper(t.jbr)||upper(t.lxdz)||upper(t.wtfsd)||upper(j.create_)||upper(j.activity_name_) like '%"
 					+ keyWord + "%')";
 		}
-		sql += " order by j.create_ desc";
+		sql += " order by slrq desc";
 		List<Map<String, Object>> result = query(sql, YW,
 				new String[] { fullName });
 
@@ -103,7 +103,7 @@ public class XfManager extends AbstractBaseBean {
 			sql += " where (upper(t.bh)||upper(t.xslx)||upper(t.jbfs)||upper(t.jbr)||upper(t.lxdz)||upper(t.wtfsd)||upper(j.create_)||upper(j.activity_name_) like '%"
 					+ keyWord + "%')";
 		}
-		sql += " order by j.create_ desc";
+		sql += " order by slrq desc";
 		List<Map<String, Object>> result = query(sql, YW);
 		// 调整数据格式
 		int i = 0;
