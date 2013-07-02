@@ -1,15 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="utf-8"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.Map"%>
-<%@page import="com.klspta.web.xuzhouWW.PADDataList"%>
+<%@page import="com.klspta.web.xuzhouWW.PadDatalist"%>
 <%@page import="java.text.DecimalFormat"%>
 <%
-    String path = request.getContextPath();
+	String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 %>
 <%
 	String yw_guid = request.getParameter("yw_guid"); 
-    PADDataList padlist=new PADDataList();
+    PadDatalist padlist=new PadDatalist();
 	List list = padlist.getPADCompareAnalysisDataByYwguid(yw_guid); 
 	String zmj="";
 	String nyd="";
@@ -50,7 +50,6 @@
 		jzjsq = String.format("%.2f",Double.parseDouble(jzjsq));
 		zyjbnt =String.format("%.2f",Double.parseDouble(zyjbnt));
 	}
-
 %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
