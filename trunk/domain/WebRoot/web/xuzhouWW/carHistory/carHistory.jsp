@@ -1,27 +1,12 @@
 ﻿<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@page import="com.klspta.model.projectinfo.ProjectInfo"%>
-<%@page
-	import="org.springframework.security.core.context.SecurityContextHolder"%>
-<%@page import="com.klspta.console.user.User"%>
-<%
-	String path = request.getContextPath();
+<% 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
-
 	String name = ProjectInfo.getInstance().PROJECT_NAME;
-	String extPath = basePath + "thirdres/ext/";
-
-	Object principal = SecurityContextHolder.getContext()
-			.getAuthentication().getPrincipal();
-	String userId = null;
-	if (principal instanceof User) {
-		userId = ((User) principal).getUserID();
-	} else {
-		userId = null;
-	}
-%>
-
+	%>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 	<head>
 		<title>执法监察系统</title>
@@ -35,7 +20,6 @@
 		<script src="<%=basePath%>/base/include/ajax.js"></script>
 		<script src="<%=basePath%>/base/fxgis/framework/js/toJson.js"></script>
 		<style type="text/css">
-<!--
 body {
 	margin-left: 0px;
 	margin-top: 0px;
@@ -46,24 +30,6 @@ body {
 	background: #DFE8F6;
 }
 
--->
-.Font9Black {
-	font-family: "宋体";
-	font-size: 9pt;
-	color: #444444;
-}
-
-.Font9Blue {
-	font-family: "宋体";
-	font-size: 9pt;
-	color: #001F6D;
-}
-
-.Font9BlueInfo {
-	font-family: "宋体";
-	font-size: 9pt;
-	color: #2C5DA5;
-}
 
 body,td,div,span,li {
 	font-family: "仿宋";
@@ -105,11 +71,8 @@ div.unSelected {
 	
 }
 </style>
-		<script type="text/javascript">
+<script type="text/javascript">
 var path = "<%=basePath%>";
-var actionName = "mapAuthorOperation";
-var actionMethod = "getExtTreeByUserid";
-var parameter = "userid=<%=userId%>";
 var tree;
 var loadFlag=true;
 /*********树形菜单展开收缩功能**add by 李如意 2011-07-13****/	  
@@ -130,85 +93,6 @@ var loadFlag=true;
 		}
 	}
 
-</script>
-	</head>
-	<body onload="selectCode()">
-		<table cellpadding="0" cellspacing="0" border="0" width='106%'
-			style='vertical-align: middle; text-align: center; border: 0px solid #8E8E8E;'>
-			<tr>
-				<td style='text-align: left;' ; colspan=4 height="40"
-					style="background-image:url('<%=basePath%>web/<%=name%>/framework/images/left/top_bk.PNG')">
-					<img style="position: absolute; left: 10; top: 7;"
-						src="<%=basePath%>web/<%=name%>/framework/images/left/blank.png"
-						width="16" height="16" />
-					<font style="position: absolute; left: 10; top: 7;"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;选择政区</strong>
-					</font>
-				</td>
-			</tr>
-
-			<tr>
-				<td>
-				<div id="320301" onclick="changeStyle(this);selectCode();"
-						class='selected'>
-						市&nbsp;局
-					</div>
-				</td>
-				<td>
-					<div id="320382" onclick="changeStyle(this);selectCode();"
-						class='unSelected'>
-						邳州市
-					</div>
-				</td>
-				<td>
-					<div id="320324" onclick="changeStyle(this);selectCode();"
-						class='unSelected'>
-						睢宁县
-					</div>
-				</td>
-				<td>
-					<div id="320381" onclick="changeStyle(this);selectCode();"
-						class='unSelected'>
-						新沂市
-					</div>
-				</td>
-
-			</tr>
-			<tr>
-				<td>
-					<div id="320321" onclick="changeStyle(this);selectCode();"
-						class='unSelected'>
-						丰&nbsp;县
-					</div>
-				</td>
-				<td>
-					<div id="320305" onclick="changeStyle(this);selectCode();"
-						class='unSelected'>
-						贾汪区
-					</div>
-				</td>
-				<td>
-				       <div id="320322" onclick="changeStyle(this);selectCode();"
-						class='unSelected'>
-						沛&nbsp;县
-					</div>
-				</td>
-				<td>
-					<div id="320312" onclick="changeStyle(this);selectCode();"
-						class='unSelected'>
-						铜山区
-					</div>
-				</td>
-			</tr>
-		</table>
-		<div id="mapTree" style="margin-Left: 0px; height:250px; width:259px; margin-Right: -14px; margin-Top: 0px; overflow: auto;" ></div>
-		<div id="times"
-			style="margin-Left: 0px; margin-Right: -14px; margin-Top: 0px">
-		</div>
-		<br>
-
-	</body>
-</html>
-<script>
 var path = "<%=basePath%>";
 var loadFlag=true;
 var tree;
@@ -272,9 +156,7 @@ var mapTree;
    		 }
          tree=tree.substring(0,tree.length-1);	
          tree+="]";
-        //////////////////////////////////////////////// 	
          var mapTree = eval(tree);
-         /////////////////	//加载树
          	
     Ext.onReady(function(){
     tree = new Ext.tree.TreePanel({ 
@@ -444,5 +326,83 @@ var mapTree;
       return result;
 	}
 	
-	
+
+
 </script>
+	</head>
+	<body onload="selectCode()">
+		<table cellpadding="0" cellspacing="0" border="0" width='106%'
+			style='vertical-align: middle; text-align: center; border: 0px solid #8E8E8E;'>
+			<tr>
+				<td style='text-align: left;' ; colspan=4 height="40"
+					style="background-image:url('<%=basePath%>web/<%=name%>/framework/images/left/top_bk.PNG')">
+					<img style="position: absolute; left: 10; top: 7;"
+						src="<%=basePath%>web/<%=name%>/framework/images/left/blank.png"
+						width="16" height="16" />
+					<font style="position: absolute; left: 10; top: 7;"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;选择政区</strong>
+					</font>
+				</td>
+			</tr>
+
+			<tr>
+				<td>
+				<div id="320301" onclick="changeStyle(this);selectCode();"
+						class='selected'>
+						市&nbsp;局
+					</div>
+				</td>
+				<td>
+					<div id="320382" onclick="changeStyle(this);selectCode();"
+						class='unSelected'>
+						邳州市
+					</div>
+				</td>
+				<td>
+					<div id="320324" onclick="changeStyle(this);selectCode();"
+						class='unSelected'>
+						睢宁县
+					</div>
+				</td>
+				<td>
+					<div id="320381" onclick="changeStyle(this);selectCode();"
+						class='unSelected'>
+						新沂市
+					</div>
+				</td>
+
+			</tr>
+			<tr>
+				<td>
+					<div id="320321" onclick="changeStyle(this);selectCode();"
+						class='unSelected'>
+						丰&nbsp;县
+					</div>
+				</td>
+				<td>
+					<div id="320305" onclick="changeStyle(this);selectCode();"
+						class='unSelected'>
+						贾汪区
+					</div>
+				</td>
+				<td>
+				       <div id="320322" onclick="changeStyle(this);selectCode();"
+						class='unSelected'>
+						沛&nbsp;县
+					</div>
+				</td>
+				<td>
+					<div id="320312" onclick="changeStyle(this);selectCode();"
+						class='unSelected'>
+						铜山区
+					</div>
+				</td>
+			</tr>
+		</table>
+		<div id="mapTree" style="margin-Left: 0px; height:250px; width:259px; margin-Right: -14px; margin-Top: 0px; overflow: auto;" ></div>
+		<div id="times"
+			style="margin-Left: 0px; margin-Right: -14px; margin-Top: 0px">
+		</div>
+		<br>
+
+	</body>
+</html>
