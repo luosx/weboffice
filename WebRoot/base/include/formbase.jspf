@@ -80,9 +80,9 @@ function requestData(){
     var path = "<%=_$basePath%>";
     if("<%=flag%>" != 1){
     	//parameter = parameter; 
-    	parameter = encodeURI(encodeURI(decodeURI(decodeURI(parameter)))); 
+    	// parameter = encodeURI(encodeURI(decodeURI(decodeURI(parameter)))); 
     }else{
-   		parameter = encodeURI(encodeURI(decodeURI(decodeURI(parameter)))); 
+   		// parameter = encodeURI(encodeURI(decodeURI(decodeURI(parameter)))); 
     }
     json = ajaxRequest(path,"<%=_$personalJSPath%>","loadData",parameter);
     if(json.indexOf("Error report") >= 0 || json.indexOf("no rest") >= 0){
