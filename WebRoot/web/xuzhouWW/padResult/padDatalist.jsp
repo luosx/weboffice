@@ -171,7 +171,7 @@ function showDetail(id){
 	  var actionMethod = "checkReadFlag";
 	  var parmeter="carId="+myData[id][0];
 	  var res = ajaxRequest(path,actionName,actionMethod,parmeter); 
-    var url = "showDetial.jsp?yw_guid="+myData[id][0];     
+    var url = "showTab.jsp?yw_guid="+myData[id][0];     
     var scrWidth = 700;
     var scrHeight = 700;
     var parameter = "dialogWidth="+scrWidth+"px;dialogHeight="+scrHeight+"px;status=no;scroll=yes;";   
