@@ -14,11 +14,11 @@
 <!-- 车辆管理 -->
 <bean name="carManager" class="com.klspta.web.xuzhouWW.CarManager" scope="prototype"/>
 <!-- 平板回传 -->
-<bean name="pADDataList" class="com.klspta.web.xuzhouWW.PADDataList" scope="prototype"/>
+<bean name="pADDataList" class="com.klspta.web.xuzhouWW.PadDatalist" scope="prototype"/>
 <!-- GPS信息处理 -->
 <bean name="hander" class="com.klspta.web.xuzhouWW.wyrw.GPSDeviceManager" scope="prototype"/>
 <!-- 12336信访 -->
-<bean name="Xfxs_12336Manager" class="com.klspta.web.xuzhouWW.Xfxs_12336Manager" scope="prototype"/>
+<bean name="Xfxs_12336Manager" class="com.klspta.web.xuzhouWW.Xsjb12336" scope="prototype"/>
 
 
 
