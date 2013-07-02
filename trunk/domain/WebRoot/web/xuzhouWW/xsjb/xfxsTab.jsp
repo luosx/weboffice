@@ -1,5 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<%@page import="com.klspta.web.xuzhouWW.Xfxs_12336Manager"%>
+<%@page import="com.klspta.web.xuzhouWW.Xsjb12336"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
@@ -9,7 +9,7 @@
 	String x="123";
 	String y="345";
 	if(style.equals("1")){
-	String point=new Xfxs_12336Manager().getPoint(yw_guid);
+	String point=new Xsjb12336().getPoint(yw_guid);
 	if(point.length()>3){
 	  String [] xy=point.split(",");
 	  x=xy[0];
