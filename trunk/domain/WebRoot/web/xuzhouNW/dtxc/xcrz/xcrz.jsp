@@ -31,6 +31,21 @@
 	String yw_guid = request.getParameter("yw_guid");
 	DtxcManager dm = new DtxcManager();
 	String[] stateCgd = dm.stateCgd(yw_guid);
+	String num = "0";
+	String keyWord = "";
+	String returnPath = "";
+	String user = userBean.getUserID();
+	//
+	String isView = request.getParameter("isView");
+	if("false".equals(isView)){
+		num = request.getParameter("num");
+		keyWord = request.getParameter("choseWord");
+		if(keyWord!=null){
+			keyWord=UtilFactory.getStrUtil().unescape(keyWord);
+		}
+		returnPath = request.getParameter("returnPath");
+	
+	}
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -343,6 +358,37 @@
 			var strUrl = "yw_guid="+yw_guid+"&file_id="+strLookId+"&flag="+flag;
 			window.open("../webOffice/webOfficeMain.jsp?"+strUrl);
 		}
+		
+		function toreturn(){
+			document.location.href="<%=basePath%><%=returnPath%>";
+		}
+		
+		function toNext(){
+			putClientCommond("dtxcManager","getNextXcrz");
+			putRestParameter("num","<%=num%>");
+			putRestParameter("userId","<%=user%>");
+      		putRestParameter("keyWord",escape(escape("<%=keyWord%>")));
+			var result = restRequest();
+			if(result == "error"){
+				alert("当前页已是最后一条");
+				return ; 
+			}
+			document.location.href="<%=basePath%>/web/xuzhouNW/dtxc/xcrz/xcrz.jsp?jdbcname=YWTemplate&yw_guid=" + result + "&isView=false&num=<%=(Integer.parseInt(num)+1)%>&keyWord="+escape(escape("<%=keyWord%>"))+"&returnPath=web/xuzhouNW/dtxc/xcrz/xcrzList.jsp"; 
+		
+		}
+		function toPre(){
+			if("<%=num%>" == "0"){
+				alert("当前页是第一条，无法获取前一条");
+				return;
+			}
+			putClientCommond("dtxcManager","getPreXcrz");
+			putRestParameter("num","<%=num%>");
+			putRestParameter("userId","<%=user%>");
+      		putRestParameter("keyWord",escape(escape("<%=keyWord%>")));
+			var result = restRequest();
+			document.location.href="<%=basePath%>/web/xuzhouNW/dtxc/xcrz/xcrz.jsp?jdbcname=YWTemplate&yw_guid=" + result + "&isView=false&num=<%=(Integer.parseInt(num)-1)%>&keyWord="+escape(escape("<%=keyWord%>"))+"&returnPath=web/xuzhouNW/dtxc/xcrz/xcrzList.jsp"; 
+		}
+		
 		</script>
 	</head>
 
@@ -352,6 +398,15 @@
 		<%}else{ %>
 			<div id="fixed" class="Noprn" style="position: fixed; top: 5px; left: 0px"></div>
 		<%} %>
+		<%if("false".equals(isView)){ %>
+		<div align="right" style="margin-top:15px;margin-right:20px;">
+			<input type="button" value="返回"  onclick="toreturn();return false;"/>&nbsp;&nbsp;&nbsp;
+			<%if(!"0".equals(num)){%>
+				<input type="button" value="上一条" onclick="toPre();return false;"/>&nbsp;&nbsp;&nbsp;
+			<%}%>
+			<input type="button" value="下一条" onclick="toNext();return false;"/>
+		</div>
+		<% }%>
 		<div style="margin: 20px" align="center">
 			<div align="center">
 				<h1>
@@ -360,8 +415,9 @@
 			</div>
 			<form method="post">
 				<div style="width: 100%;">
+
 					<span style="margin-left: 330px;">巡查编号：<input type="text" name="xcbh" id="xcbh" readonly="readonly"
-							style="width: 150px; background-color: transparent; border: 0px;">
+							style="width: 150px; background-color: transparent; border: 0px;"></input>
 					</span>
 				</div>
 				<table id="xcrztable" class="lefttopborder1" cellspacing="0"
@@ -919,8 +975,8 @@
 							<div align="center">
 								抄告单状态
 							</div>
-						</td>
-						<td colspan="3">
+						<br /></td>
+						<td colspan="3">b
 							<div id="divcgd5">
 								<%if(stateCgd[4].equals("0")){ %>
 									<span style="color:red">抄告单未生成</span>&nbsp;&nbsp;&nbsp;&nbsp;
