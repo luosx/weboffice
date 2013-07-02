@@ -16,7 +16,8 @@
     Object userprincipal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     String userid = ((User)userprincipal).getUserID();
     String edit = request.getParameter("edit");
-    String name = UtilFactory.getXzqhUtil().getBeanById(ManagerFactory.getRoleManager().getRoleWithUserID(userid).get(0).getXzqh()).getCatonname();
+    String xzqh = ManagerFactory.getUserManager().getUserWithId(userid).getXzqh();
+    String name = UtilFactory.getXzqhUtil().getBeanById(xzqh).getCatonname();
 	System.out.println(name + "-------------------------------------------------------------");
 	System.out.println("edit:" + edit);
 %>
