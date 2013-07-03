@@ -75,45 +75,7 @@ div.unSelected {
 var path = "<%=basePath%>";
 var tree;
 var loadFlag=true;
-/*********树形菜单展开收缩功能**add by 李如意 2011-07-13****/	  
-	function closeOrOpenNode(){
-		var str = document.getElementById("closeOrOpenNode").value; 
-		if(str == "op"){ 
-			tree.getRootNode().expand(true); 
-			document.getElementById("closeOrOpenNode").src = "<%=basePath%>/common/images/collapse-all.gif";
-			document.getElementById("closeOrOpenNode").alt = "收起";   
-			document.getElementById("closeOrOpenNode").value = "cl";
-			return;
-		}else{ 
-			tree.getRootNode().collapse(true);  
-			document.getElementById("closeOrOpenNode").src = "<%=basePath%>/common/images/expand-all.gif";
-			document.getElementById("closeOrOpenNode").alt = "展开";    	  
-			document.getElementById("closeOrOpenNode").value = "op";
-			return;		 
-		}
-	}
 
-var path = "<%=basePath%>";
-var loadFlag=true;
-var tree;
-var mapTree;
-//动态树收起。展开
-	function closeOrOpenNode(){;
-		var str = document.getElementById("closeOrOpenNode").value; 
-		if(str == "op"){ 
-			tree.getRootNode().expand(true); 
-			document.getElementById("closeOrOpenNode").src = "<%=basePath%>/common/images/collapse-all.gif";
-			document.getElementById("closeOrOpenNode").alt = "收起";   
-			document.getElementById("closeOrOpenNode").value = "cl";
-			return;
-		}else{ 
-			tree.getRootNode().collapse(true);  
-			document.getElementById("closeOrOpenNode").src = "<%=basePath%>/common/images/expand-all.gif";
-			document.getElementById("closeOrOpenNode").alt = "展开";    	  
-			document.getElementById("closeOrOpenNode").value = "op";
-			return;		 
-		}
-	}
 //选择判断
 	function changeStyle(obj) {
 	var arr = document.getElementsByTagName('div');
