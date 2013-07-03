@@ -216,7 +216,7 @@ body,td,div,span,li{
  }
    function closeInfo(){
     document.getElementById("info").style.display='none';
-    openURL("<%=basePath%>web/<%=name%>/padResult/padDatalist.jsp",1);  
+    openURL("<%=basePath%>web/<%=name%>/padResult/PADDataList.jsp",1);  
   }
   function showInfo(){
     document.getElementById("info").style.display='block';
