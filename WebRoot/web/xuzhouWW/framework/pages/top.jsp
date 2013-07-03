@@ -1,12 +1,12 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@page import="com.klspta.model.projectinfo.ProjectInfo"%>
-<%@page import="com.klspta.web.xuzhouWW.XuzhouWWmanager2"%>
+<%@page import="com.klspta.web.xuzhouWW.UtilTool"%>
 <%
 	String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
    
     String name = ProjectInfo.getInstance().PROJECT_NAME;
-     String weather= new XuzhouWWmanager2().getWeather();
+     String weather= new UtilTool().getWeather();
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -59,31 +59,6 @@ body,td,div,span,li{
 	}
 </style>
 <script language="javascript" type="text/javascript"> 
-	function getid(id){
-	return document.getElementById(id);
-	}
-</script>
-
-</head>
-    <body  onload="onload();onlineCar()">
-<table width="100%" border="0" cellspacing="0" cellpadding="0">
-  <tr>
-    <td width="417"><img src="<%=basePath%>web/<%=name%>/framework/images/top/logo.jpg" width="417" height="53" /></td>
-    <td></td>
-    <td width="332" style="background-position:bottom left;background-repeat:no-repeat;background-image:url('<%=basePath%>web/<%=name%>/framework/images/top/notice.png')">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img style="position:absolute;bottom:2;" src="<%=basePath%>web/<%=name%>/framework/images/top/announce.png" width="24" height="24" />
-     <div class="d1" id="div1">
-       <span class="div2" id="div2"><b>&nbsp&nbsp&nbsp&nbsp当前在线执法监察车：<a id='online' style="color: red; ">23台&nbsp&nbsp&nbsp&nbsp</a></b></span><span id="div3" class="div2"></span>
-    </div>
-    </td>
-     <td align="right" style="padding-right: 5px"><img id="img" src="<%=basePath%>web/<%=name%>/framework/images/weather/001.png" width="32" height="32" /></td>
-     <td  id='weather'  width="70"  align='right'  style="padding-right: 10px"> 徐州12℃ </td>
-  </tr>
-</table>
-<div  id='toollip'></div>
-<div  id='updateForm'></div>
-    </body>
-</html>
-<script type="text/javascript">
 var  temp1="1℃";
 var  temp2="12℃";
 var image="001";
@@ -114,8 +89,6 @@ document.getElementById("img").src='<%=basePath%>web/<%=name%>/framework/images/
  }
 }
 
-
-
 function onlineCar(){
   var result = ajaxRequest("<%=basePath%>","hander","countAllCar","");
   result=eval(result);
@@ -133,5 +106,30 @@ function onlineCar(){
 
 }
 
+	function getid(id){
+	return document.getElementById(id);
+	}
+	
+	
 </script>
+
+</head>
+    <body  onload="onload();onlineCar()">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="417"><img src="<%=basePath%>web/<%=name%>/framework/images/top/logo.jpg" width="417" height="53" /></td>
+    <td></td>
+    <td width="332" style="background-position:bottom left;background-repeat:no-repeat;background-image:url('<%=basePath%>web/<%=name%>/framework/images/top/notice.png')">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img style="position:absolute;bottom:2;" src="<%=basePath%>web/<%=name%>/framework/images/top/announce.png" width="24" height="24" />
+     <div class="d1" id="div1">
+       <span class="div2" id="div2"><b>&nbsp;&nbsp;&nbsp;&nbsp;当前在线执法监察车：<a id='online' style="color: red; ">23台&nbsp;&nbsp;&nbsp;&nbsp;</a></b></span><span id="div3" class="div2"></span>
+    </div>
+    </td>
+     <td align="right" style="padding-right: 5px"><img id="img" src="<%=basePath%>web/<%=name%>/framework/images/weather/001.png" width="32" height="32" /></td>
+     <td  id='weather'  width="80"  align='right'  style="padding-right: 10px"> 徐州12℃ </td>
+  </tr>
+</table>
+<div  id='toollip'></div>
+<div  id='updateForm'></div>
+    </body>
+</html>
 
