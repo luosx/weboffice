@@ -130,7 +130,7 @@ body,td,div,span,li{
 <td width=99 height=38 style="cursor: hand;" onClick="openMap()">
 <img id='mapImg' name='mapImg' style="position:absolute;left:-5;top:6;"  src="images/tab_1.png" width="99" height="26" />
 </td>
-<td width=99 height=38 style="cursor: hand;" onClick="openURL('<%=basePath%>web/xuzhouWW/padResult/PADDataList.jsp',0)">
+<td width=99 height=38 style="cursor: hand;" onClick="openURL('<%=basePath%>web/xuzhouWW/padResult/padDatalist.jsp',0)">
 <img id='urlImg' name='urlImg' style="position:absolute;left:94;top:6;"  src="images/tab_2.png" width="99" height="26" />
 </td>
 <td width='100%'></td>
