@@ -21,7 +21,7 @@ import org.apache.commons.lang.StringUtils;
 import com.klspta.base.AbstractBaseBean;
 
 public class GpsLocation extends AbstractBaseBean {
-    private Map<String, GPSDeviceBean> GPSBean = new HashMap<String, GPSDeviceBean>();
+    private Map<String, GpsDeviceBean> GPSBean = new HashMap<String, GpsDeviceBean>();
 
     public GpsLocation() {
         String sql = "select t.*, c.gps_x x, c.gps_y y from wy_device_info t, WY_GPS_CURRENT_LOCATION c where t.gps_id = c.gps_id";
@@ -29,7 +29,7 @@ public class GpsLocation extends AbstractBaseBean {
         Iterator<?> it = list.iterator();
         while (it.hasNext()) {
             Map<String, String> map = (HashMap<String, String>) it.next();
-            GPSBean.put(map.get("GPS_ID"), new GPSDeviceBean());
+            GPSBean.put(map.get("GPS_ID"), new GpsDeviceBean());
         }
     }
 
@@ -94,7 +94,7 @@ public class GpsLocation extends AbstractBaseBean {
                 update(sql, YW, new Object[] { id, xy[0], xy[1] });
             }
             sql = "update WY_GPS_CURRENT_LOCATION t set t.gps_x = ?, t.gps_y = ?,t.timestamp = sysdate where t.gps_id = ?";
-            int num = update(sql, YW, new Object[] { xy[0], xy[1], id });
+           update(sql, YW, new Object[] { xy[0], xy[1], id });
             response("true");
             System.out.println("获取外业设备位置:" + id + ":" + xy[0] + "," + xy[1]);
         } catch (UnsupportedEncodingException e2) {
@@ -108,7 +108,7 @@ public class GpsLocation extends AbstractBaseBean {
     }
 
     private boolean updateMemoLocation(String GPSID, String x, String y) {
-        GPSDeviceBean gdb = GPSBean.get(GPSID);
+        GpsDeviceBean gdb = GPSBean.get(GPSID);
         if (gdb == null) {
             System.out.println(GPSID + ":未在数据库中进行配置。");
             return false;
