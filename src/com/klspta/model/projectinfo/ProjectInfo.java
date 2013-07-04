@@ -7,7 +7,7 @@ import com.klspta.base.AbstractBaseBean;
 
 public class ProjectInfo extends AbstractBaseBean{
     
-    public static String PROJECT_NAME = "";
+    public static  String PROJECT_NAME = "";
     private static ProjectInfo instance=new ProjectInfo();
     private ProjectInfo(){
         init();
@@ -22,5 +22,7 @@ public class ProjectInfo extends AbstractBaseBean{
         List<Map<String, Object>> list = query(sql, CORE);
         PROJECT_NAME = list.get(0).get("flag").toString();
     }
-
+public String getProjectName(){
+	return PROJECT_NAME;
+}
 }
