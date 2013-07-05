@@ -37,7 +37,7 @@
     	var scrHeight=screen.availHeight; 
     	var flag;
 Ext.onReady(function(){
-    var myData = ajaxRequest("<%=basePath%>","Xfxs_12336Manager","getAllData","");
+    var myData = ajaxRequest("<%=basePath%>","xfxs12336","getAllData","");
      myData=eval(myData);
     store = new Ext.data.JsonStore({
 	    proxy: new Ext.ux.data.PagingMemoryProxy(myData),
@@ -111,7 +111,7 @@ function viewDetail(){
     window.location.href="<%=basePath%>web/xuzhouWW/xsjb/xfxsTab.jsp?jdbcname=YWTemplate&style=1&yw_guid="+yw_guid;
 }
 function xzxs(){
-    var yw_guid = ajaxRequest("<%=basePath%>","Xfxs_12336Manager","getXzxsYW_GUID","");
+    var yw_guid = ajaxRequest("<%=basePath%>","xfxs12336","getXzxsYW_GUID","");
     window.location.href("<%=basePath%>web/xuzhouWW/xsjb/xfxsTab.jsp?jdbcname=YWTemplate&style=0&yw_guid="+yw_guid); 
 }
 </script>

@@ -1,13 +1,12 @@
 ﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@page import="com.klspta.base.util.impl.FtpUtil"%>
 <%@page import="com.klspta.base.util.UtilFactory"%>
 <%@page import="java.util.Map"%>
 <%
     String image = request.getParameter("image");
     String[] images = image.split(",");
-    String width = request.getParameter("width");
-    String height = request.getParameter("height");
-    Map map=UtilFactory.getFtpUtil().getFtpConfig();
+ //   String width = request.getParameter("width");
+  //  String height = request.getParameter("height");
+    Map<String ,Object> map=UtilFactory.getFtpUtil().getFtpConfig();
     String host = (String)map.get("FTP_HOST");
     String port = (String)map.get("FTP_PORT");
     String username = (String)map.get("FTP_USERNAME");
@@ -49,7 +48,7 @@ height:400px;
         <%}}
 		else
 		{%>
-		未拍摄照片
+		<li>未拍摄照片</li>
 		<%
 		}
 		%>

@@ -19,12 +19,10 @@
         <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
         <script src="<%=basePath%>/base/include/ajax.js"></script>
 		<%@ include file="/base/include/ext.jspf"%>
-		<%@ include file="/base/include/restRequest.jspf"%>
 		<script src="<%=basePath%>/base/include/ajax.js"></script>
         <meta http-equiv="description" content="This is my page">
         <style type="text/css">
         
-<!--
 body {
     margin-left: 0px;
     margin-top: 0px;
@@ -32,7 +30,6 @@ body {
     margin-bottom: 0px;
     background-image: URL("<%=basePath%>web/<%=name%>/framework/images/top/top_bk.jpg");
 }
--->
 body,td,div,span,li{
  font-size:12px;
   color:#fff;
@@ -106,7 +103,7 @@ function onlineCar(){
 
 }
 
-	function getid(id){
+ function getid(id){
 	return document.getElementById(id);
 	}
 	

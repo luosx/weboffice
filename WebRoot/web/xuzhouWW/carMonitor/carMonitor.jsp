@@ -1,11 +1,11 @@
-﻿<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+﻿<%@ page language="java"  pageEncoding="utf-8"%>
 <%@page import="com.klspta.model.projectinfo.ProjectInfo"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
-	String name = ProjectInfo.getInstance().PROJECT_NAME;
+	String name = ProjectInfo.getInstance().getProjectName();
 %>
 
 <html>
@@ -18,177 +18,10 @@
 		<meta http-equiv="description" content="This is my page">
 		<link href="demo.css" rel="stylesheet" type="text/css" />
 		<%@ include file="/base/include/ext.jspf"%>
-		<%@ include file="/base/include/restRequest.jspf"%>
 		<script src="<%=basePath%>/base/include/ajax.js"></script>
 		<script src="<%=basePath%>/base/fxgis/framework/js/toJson.js"></script>
-		<style type="text/css">
-body {
-	margin-left: 0px;
-	margin-top: 0px;
-	margin-right: 0px;
-	margin-bottom: 0px;
-	height: 100%;
-	width: 100%;
-	background: #DFE8F6;
-}
-
-
-body,td,div,span,li {
-	font-family: "宋体";
-	font-size: 10pt;
-	color: #065587;
-}
-
-.hand {
-	cursor: hand;
-	height: 20px;
-}
-
-div.c {
-	width: 100%;
-	overflow: hidden;
-}
-
-div.selected {
-	cursor: hand;
-	float: left;
-	width: 120px;
-	height: 20px;
-	margin-top: 0px;
-	border: 0px solid #333;
-	line-height: 31px;;
-	background:
-		url("<%=basePath%>web/<%=name%>/framework/images/left/select.PNG")
-		no-repeat 36 5;
-}
-
-div.ZQselected {
-	cursor: hand;
-	float: left;
-	width: 120px;
-	height: 20px;
-	margin-top: 0px;
-	border: 0px solid #333;
-	line-height: 31px;;
-	background:
-		url("<%=basePath%>web/<%=name%>/framework/images/left/xzqh_bk.png")
-		no-repeat 15 5;
-}
-
-div.unSelected {
-	cursor: hand;
-	float: left;
-	width: 120px;
-	height: 20px;
-	margin-top: 0px;
-	border: 0px solid #333;
-	line-height: 31px;;
-	
-}
-</style>
-</head>
-	<body  onload="lineLoad();selectCode();" >
-		<table cellpadding="0" cellspacing="0" border="0" width='106%'
-			style='vertical-align: middle; text-align: center; border: 0px solid #8E8E8E;'>
-			<tr>
-				<td style='text-align: left;' ; colspan=4 height="40"
-					style="background-image:url('<%=basePath%>web/<%=name%>/framework/images/left/top_bk.PNG')">
-					<img style="position: absolute; left: 10; top: 7;"
-						src="<%=basePath%>web/<%=name%>/framework/images/left/blank.png"
-						width="16" height="16" />
-					<font style="position: absolute; left: 10; top: 7;"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;执法监察车选择</strong>
-					</font>
-					<img onclick="reload_carMonitor()" class='hand' style="position:absolute;right:16;top:5;" src="<%=basePath%>web/<%=name%>/framework/images/left/reload.png" width="16" height="16" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<div id="320300" onclick="changeStyle(this);selectCode();"
-						class='unSelected'>
-						全&nbsp;市(103/103)
-					</div>
-				</td>
-				<td>
-					<div id="320301" onclick="changeStyle(this);selectCode();"
-						class='ZQselected'>
-						市&nbsp;局(103/103)
-					</div>
-				</td>
-
-			</tr>
-			<tr>
-				<td>
-					<div id="320305" onclick="changeStyle(this);selectCode();"
-						class='unSelected'>
-						贾汪区(103/103)
-					</div>
-				</td>
-				<td>
-					<div id="320321" onclick="changeStyle(this);selectCode();"
-						class='unSelected'>
-						丰&nbsp;县(103/103)
-					</div>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<div id="320312" onclick="changeStyle(this);selectCode();"
-						class='unSelected'>
-						铜山区(103/103)
-					</div>
-				</td>
-				<td>
-					<div id="320322" onclick="changeStyle(this);selectCode();"
-						class='unSelected'>
-						沛&nbsp;县(103/103)
-					</div>
-				</td>
-			</tr>
-			<tr>
-				<td>
-				<div id="320382" onclick="changeStyle(this);selectCode();"
-						class='unSelected'>
-						邳州市(103/103)
-					</div>
-				</td>
-				<td>
-					<div id="320324" onclick="changeStyle(this);selectCode();"
-						class='unSelected'>
-						睢宁县(103/103)
-					</div>
-				</td>
-			</tr>
-			<tr>
-			<tr>
-				<td>
-					<div id="320381" onclick="changeStyle(this);selectCode();"
-						class='unSelected'>
-						新沂市(103/103)
-					</div>
-				</td>
-				<td>
-	                             &nbsp;
-				</td>
-			</tr>
-			<td>
-				<div id="xs" onclick="changeStyle(this);selectCode()"
-					class='selected'>
-					行驶
-				</div>
-			</td>
-			<td>
-				<div id="tz" onclick="changeStyle(this);selectCode()"
-					class='selected'>
-					停车
-				</div>
-			</td>
-			<td>
-			</td>
-		</table>
-		<div id="mapTree" style="margin-Left: 0px; height:260px; width:259px; margin-Right: -14px; margin-Top: 0px; overflow: auto;" ></div>
-	</body>
-</html>
-<script>
+		
+		<script>
 var path = "<%=basePath%>";
 var loadFlag=true;
 var tree;
@@ -598,3 +431,169 @@ window.showModalDialog("<%=basePath%>web/<%=name%>/videoMonitor/pop.jsp?puid="+p
 	    }
   }
 </script>
+<style type="text/css">
+body {
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	height: 100%;
+	width: 100%;
+	background: #DFE8F6;
+}
+
+
+body,td,div,span,li {
+	font-family: "宋体";
+	font-size: 10pt;
+	color: #065587;
+}
+
+.hand {
+	cursor: hand;
+	height: 20px;
+}
+
+div.c {
+	width: 100%;
+	overflow: hidden;
+}
+
+div.selected {
+	cursor: hand;
+	float: left;
+	width: 120px;
+	height: 20px;
+	margin-top: 0px;
+	border: 0px solid #333;
+	line-height: 31px;;
+	background:
+		url("<%=basePath%>web/<%=name%>/framework/images/left/select.PNG")
+		no-repeat 36 5;
+}
+
+div.ZQselected {
+	cursor: hand;
+	float: left;
+	width: 120px;
+	height: 20px;
+	margin-top: 0px;
+	border: 0px solid #333;
+	line-height: 31px;;
+	background:
+		url("<%=basePath%>web/<%=name%>/framework/images/left/xzqh_bk.png")
+		no-repeat 15 5;
+}
+
+div.unSelected {
+	cursor: hand;
+	float: left;
+	width: 120px;
+	height: 20px;
+	margin-top: 0px;
+	border: 0px solid #333;
+	line-height: 31px;;
+	
+}
+</style>
+</head>
+	<body  onload="lineLoad();selectCode();" >
+		<table cellpadding="0" cellspacing="0" border="0" width='106%'
+			style='vertical-align: middle; text-align: center; border: 0px solid #8E8E8E;'>
+			<tr>
+				<td style='text-align: left;' ; colspan=4 height="40"
+					style="background-image:url('<%=basePath%>web/<%=name%>/framework/images/left/top_bk.PNG')">
+					<img style="position: absolute; left: 10; top: 7;"
+						src="<%=basePath%>web/<%=name%>/framework/images/left/blank.png"
+						width="16" height="16" />
+					<font style="position: absolute; left: 10; top: 7;"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;执法监察车选择</strong>
+					</font>
+					<img onclick="reload_carMonitor()" class='hand' style="position:absolute;right:16;top:5;" src="<%=basePath%>web/<%=name%>/framework/images/left/reload.png" width="16" height="16" />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<div id="320300" onclick="changeStyle(this);selectCode();"
+						class='unSelected'>
+						全&nbsp;市(103/103)
+					</div>
+				</td>
+				<td>
+					<div id="320301" onclick="changeStyle(this);selectCode();"
+						class='ZQselected'>
+						市&nbsp;局(103/103)
+					</div>
+				</td>
+
+			</tr>
+			<tr>
+				<td>
+					<div id="320305" onclick="changeStyle(this);selectCode();"
+						class='unSelected'>
+						贾汪区(103/103)
+					</div>
+				</td>
+				<td>
+					<div id="320321" onclick="changeStyle(this);selectCode();"
+						class='unSelected'>
+						丰&nbsp;县(103/103)
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<div id="320312" onclick="changeStyle(this);selectCode();"
+						class='unSelected'>
+						铜山区(103/103)
+					</div>
+				</td>
+				<td>
+					<div id="320322" onclick="changeStyle(this);selectCode();"
+						class='unSelected'>
+						沛&nbsp;县(103/103)
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+				<div id="320382" onclick="changeStyle(this);selectCode();"
+						class='unSelected'>
+						邳州市(103/103)
+					</div>
+				</td>
+				<td>
+					<div id="320324" onclick="changeStyle(this);selectCode();"
+						class='unSelected'>
+						睢宁县(103/103)
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<div id="320381" onclick="changeStyle(this);selectCode();"
+						class='unSelected'>
+						新沂市(103/103)
+					</div>
+				</td>
+				<td>
+	                             &nbsp;
+				</td>
+			</tr>
+			<tr>
+			<td>
+				<div id="xs" onclick="changeStyle(this);selectCode()"
+					class='selected'>
+					行驶
+				</div>
+			</td>
+			<td>
+				<div id="tz" onclick="changeStyle(this);selectCode()"
+					class='selected'>
+					停车
+				</div>
+			</td>
+			</tr>
+		</table>
+		<div id="mapTree" style="margin-Left: 0px; height:260px; width:259px; margin-Right: -14px; margin-Top: 0px; overflow: auto;" ></div>
+	</body>
+</html>
