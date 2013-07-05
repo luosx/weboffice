@@ -1,4 +1,4 @@
-﻿<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+﻿<%@ page language="java"  pageEncoding="utf-8"%>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":"
@@ -20,7 +20,7 @@
 		<meta http-equiv="description" content="This is my page">
 	</head>
 	
-	<frameset id="qbtb" name="qbtb" rows="27,*" frameborder="no" border="0" framespacing="0" >
+	<frameset id="qbtb"  rows="27,*" frameborder="no" border="0" framespacing="0" >
 		<frame id="toolbar" name="toolbar" noresize 
 			src="<%=basePath%>web/xuzhouWW/tjAnalyse/fxjg.jsp" />
 		<frame id="view" name="view" noresize 

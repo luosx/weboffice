@@ -76,10 +76,9 @@
 
 		<base href="<%=basePath%>">
 
-		<title id="title">违法违规登记</title>
+		<title >违法违规登记</title>
 	
 		<link rel="stylesheet" type="text/css" href="<%=basePath%>base/form/css/formStyleDefault.css">
-		<!-- <script type="text/javascript" src="<%=basePath%>base/form/formStyleInit.js"></script> -->
 		<style type="text/css">
 			td{border-right:1px solid  #2C2B29; border-bottom:1px solid  #2C2B29; padding-right:10px}
 		</style>

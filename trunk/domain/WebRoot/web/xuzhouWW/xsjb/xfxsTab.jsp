@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ page language="java"  pageEncoding="utf-8"%>
 <%@page import="com.klspta.web.xuzhouWW.Xsjb12336"%>
 <%
 	String path = request.getContextPath();
@@ -154,9 +154,9 @@
 		<ul>
 		  <li><input id="searchContent" type="text"></li>
 		  <li><span id="save" style="margin-top: 2px" onClick='search()'>搜索</span></li>
-		  <li><span id="point" onClick='setPoint()'><div style='width:45px;padding-left:5px;padding-top: 2px'>点标注</div></span></li>
-		  <li><span id="areas" onClick='drawLine()' ><div style='width:45px;padding-left:5px;padding-top: 2px'>面标注</div></span></li>
-	     <li><span id="vector" onClick='changeMap("vector")'><div style='background-color:#99D9EA;width:33px;padding-left:5px;padding-top: 2px'>地图</div></span></li>
+		  <li><span id="point" onClick='setPoint()'> 点标注</span></li>
+		  <li><span id="areas" onClick='drawLine()' >面标注</span></li>
+	     <li><span id="vector" onClick='changeMap("vector")'>地图</span></li>
 	     <li><span id="image"  style="margin-top:1px " onClick='changeMap("image")'>影像</span></li>
 	     <li><span id="save" style="margin-top:2px "  onClick='save()'>保存</span></li>
            </ul>
