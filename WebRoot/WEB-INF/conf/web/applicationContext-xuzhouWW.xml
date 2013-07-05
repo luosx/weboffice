@@ -1,4 +1,4 @@
-ï»¿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0"  encoding="gbk"?>
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
  xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:p="http://www.springframework.org/schema/p"
  xsi:schemaLocation="http://www.springframework.org/schema/beans   
@@ -11,17 +11,16 @@
  http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd ">
  	
 
-<!-- è½¦è¾†ç®¡ç† -->
-<bean name="carManager" class="com.klspta.web.xuzhouWW.CarManager" scope="prototype"/>
-<!-- å¹³æ¿å›žä¼  -->
-<bean name="pADDataList" class="com.klspta.web.xuzhouWW.PadDatalist" scope="prototype"/>
-<!-- GPSä¿¡æ¯å¤„ç† -->
-<bean name="hander" class="com.klspta.web.xuzhouWW.gps.GpsDeviceManager" scope="prototype"/>
-<!-- 12336ä¿¡è®¿ -->
-<bean name="Xfxs_12336Manager" class="com.klspta.web.xuzhouWW.Xsjb12336" scope="prototype"/>
-
-
-
+<!-- ³µÁ¾¹ÜÀí -->
+<bean name="carManager" class="com.klspta.web.xuzhouWW.carmanager.CarManager" scope="prototype"/>
+<!-- Æ½°å»Ø´« -->
+<bean name="pADDataList" class="com.klspta.web.xuzhouWW.paddata.PadDatalist" scope="prototype"/>
+<!-- GPSÐÅÏ¢´¦Àí -->
+<bean name="hander" class="com.klspta.web.xuzhouWW.carmonitor.GpsDeviceManager" scope="prototype"/>
+<!-- 12336ÐÅ·Ã -->
+<bean name="xfxs12336" class="com.klspta.web.xuzhouWW.xsjb.Xsjb12336" scope="prototype"/>
+<!-- ¹ì¼£»Ø·Å -->
+<bean name="location" class="com.klspta.web.xuzhouWW.carhistory.CarHistory" scope="prototype"/>
 
 
 </beans>
