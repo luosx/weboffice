@@ -1,20 +1,14 @@
 package com.klspta.model.wyrw;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.rmi.server.UID;
 import java.util.List;
 import java.util.Map;
 
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
-
-import org.springframework.dao.DataAccessException;
+import org.dom4j.Document;
+import org.dom4j.DocumentException;
+import org.dom4j.Element;
+import org.dom4j.io.SAXReader;
 import org.springframework.stereotype.Component;
 
 import com.klspta.base.AbstractBaseBean;
@@ -51,10 +45,10 @@ public class ResultImp extends AbstractBaseBean {
         String zipPath = tempFile();
         if (zipPath != null) {
             File zipFile = new File(zipPath);
-            String folderpath = tempPath + zipFile.getName().substring(0, zipFile.getName().length() - 4);
+            String folderpath = tempPath + zipFile.getParentFile().getName();
             //解压缩
             UtilFactory.getZIPUtil().unZip(zipPath, folderpath);
-            //json信息读取
+            //xml读取
             int count = importData(folderpath + "//exp");
             //上传附件
             importAccessoryField(folderpath + "//exp");
@@ -98,78 +92,6 @@ public class ResultImp extends AbstractBaseBean {
 
     /**
      * 
-     * <br>Description:巡查日志保存
-     * <br>Author:陈强峰
-     * <br>Date:2012-9-24
-     * @param path
-     */
-    private void xcrzImport(String path) {
-        InputStreamReader read = null;
-        BufferedReader reader = null;
-        try {
-            read = new InputStreamReader(new FileInputStream(path), "UTF-8");
-            reader = new BufferedReader(read);
-            String jsonText = null;
-            while ((jsonText = reader.readLine()) != null) {
-                JSONArray jsonArray = UtilFactory.getJSONUtil().jsonToObjects(
-                        jsonText.substring(jsonText.indexOf('[')));
-                for (int m = 0; m < jsonArray.size(); m++) {
-                    JSONObject obj = jsonArray.getJSONObject(m);
-                    System.out.println("巡查日志：" + obj);
-                    //入库操作   先删除  (数据删除   附件删除？)
-                    String yw_guid = obj.get("YW_GUID").toString();
-                    String gtzyj = obj.get("GTZYJ").toString();
-                    String gtzys = obj.get("GTZYS").toString();
-                    String xcsj = obj.get("XCSJ").toString();
-                    String xcqy = obj.get("XCQY").toString();
-                    String djr = obj.get("DJR").toString();
-                    String cjry = obj.get("CJRY").toString();
-                    String xcqk = obj.get("XCQK").toString();
-                    xcqk = xcqk.replace("#", "\n   ");
-                    String clyj = obj.get("CLYJ").toString();
-                    String xcdw = gtzyj + gtzys;
-                    String sqlhas = "select x.gtzys from PAD_XCRZ x  where yw_guid=?";
-                    List<Map<String, Object>> list = query(sqlhas, YW, new Object[] { yw_guid });
-                    String sql = "";
-                    Object[] objs = null;
-                    if (list.size() > 0) {
-                        sql = "update PAD_XCRZ x set XSH=?, XCDW=?,GTZYJ=?,XCQY=?,DJR=?,CJRY=?,XCQK=?,CLYJ=?,GTZYS=?,XCSJ=to_date(?,'yyyy-mm-dd') where yw_guid=?";
-                        objs = new Object[] { yw_guid, xcdw, gtzyj, xcqy, djr, cjry, xcqk, clyj, gtzys, xcsj,
-                                yw_guid };
-                    } else {
-                        sql = "insert into PAD_XCRZ(XSH,XCDW,GTZYS,XCSJ,GTZYJ,XCQY,DJR,CJRY,XCQK,CLYJ,YW_GUID) values(?,?,?,to_date(?,'yyyy-mm-dd'),?,?,?,?,?,?,?)";
-                        objs = new Object[] { yw_guid, xcdw, gtzys, xcsj, gtzyj, xcqy, djr, cjry, xcqk, clyj,
-                                yw_guid };
-                    }
-                    update(sql, YW, objs);
-                }
-            }
-        } catch (DataAccessException e) {
-            e.printStackTrace();
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (reader != null) {
-                    reader.close();
-                }
-                if (read != null) {
-                    read.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    /**
-     * 
      * <br>Description:文本信息入库 附件上传
      * <br>Author:陈强峰
      * <br>Date:2012-7-4
@@ -181,106 +103,163 @@ public class ResultImp extends AbstractBaseBean {
         File[] files = f.listFiles();
         for (int i = 0; i < files.length; i++) {
             File file = new File(files[i].getAbsolutePath());
-            if (file.getName().endsWith("xcrz.txt")) {
-                xcrzImport(file.getAbsolutePath());
-                continue;
-            }
             File[] childList = file.listFiles();
             for (int j = 0; j < childList.length; j++) {
                 String str = childList[j].getAbsolutePath();
-                if (str.toLowerCase().endsWith("txt")) {
-                    InputStreamReader read = null;
-                    BufferedReader reader = null;
-                    try {
-                        read = new InputStreamReader(new FileInputStream(str), "UTF-8");
-                        reader = new BufferedReader(read);
-                        String jsonText = null;
-                        while ((jsonText = reader.readLine()) != null) {
-                            JSONArray jsonArray = UtilFactory.getJSONUtil().jsonToObjects(
-                                    jsonText.substring(jsonText.indexOf('[')));
-                            for (int m = 0; m < jsonArray.size(); m++) {
-                                JSONObject obj = jsonArray.getJSONObject(m);
-                                System.out.println("数据：" + obj);
-                                String yw_guid = obj.get("YW_GUID").toString();
-                                String xcx = obj.get("XCX").toString();
-                                String xcs = obj.get("XCS").toString();
-                                String xcsj = obj.get("XCSJ").toString();
-                                String xcdd = obj.get("XCDD").toString();
-                                String jsdw = obj.get("JSDW").toString();
-                                String jsxm = obj.get("JSXM").toString();
-                                String jsqk = obj.get("JSQK").toString();
-                                String pzwh = obj.get("PZWH").toString();
-                                String gdwh = obj.get("GDWH").toString();
-                                String tdzbh = obj.get("TDZBH").toString();
-                                String sjclyj = obj.get("SJCLYJ").toString();
-                                String sjbz = obj.get("SJBZ").toString();
-                                String usetype = obj.get("USETYPE").toString();
-                                String kczbh = obj.get("KCZBH").toString();
-                                String cjzb = obj.get("CJZB").toString();
-                                String jwzb = obj.get("JWZB").toString();
-                                String cjmj = obj.get("ZMJ").toString();
-                                String kcdd = obj.get("KCDD").toString();
-                                String kcdw = obj.get("KCDW").toString();
-                                String kckz = obj.get("KCKZ").toString();
-                                String kcqk = obj.get("KCQK").toString();
-                                //String cjmj = obj.get("CJMJ").toString();
-                                //...wf
-                                String nyd = obj.get("NYD").toString();
-                                String gd = obj.get("GD").toString();
-                                String jsyd = obj.get("JSYD").toString();
-                                String wlyd = obj.get("WLYD").toString();
-                                String xzjsyd = obj.get("XZJSYD").toString();
-                                String xjsyd = obj.get("XJSYD").toString();
-                                String ytjjsq = obj.get("YTJJSQ").toString();
-                                String xzjsq = obj.get("XZJSQ").toString();
-                                String jzjsq = obj.get("JZJSQ").toString();
-                                String zyjbnt = obj.get("ZYJBNT").toString();
-                                String zmj = obj.get("ZMJ").toString();
-                                String location = obj.get("LOCATION").toString();
-                                //...
-
-                                String sqlhas = "select yw_guid from PAD_XCXCQKB where yw_guid=?";
-                                List<Map<String, Object>> list = query(sqlhas, YW, new Object[] { yw_guid });
-                                String sql = "";
-                                Object[] objs = null;
-                                if (list.size() > 0) {
-                                    sql = "update PAD_XCXCQKB set USETYPE=?,KCZBH=?,CJMJ=?,XCX=?,XCS=?,XCSJ=?,XCDD=?,JSDW=?,JSXM=?,JSQK=?,PZWH=?,GDWH=?,TDZBH=?,SJCLYJ=?,JWZB=?,CJZB=?,SJBZ=?,KCDD=?,KCDW=?, KCKZ=?, KCQK=?, XZJSYD=? , XJSYD=? , YTJJSQ=? , XZJSQ=? , JZJSQ=? , ZYJBNT=? , ZMJ=? , NYD=? , GD=? , JSYD=? , WLYD=?  where YW_GUID=?";
-                                    delAcc(yw_guid);
-                                    objs = new Object[] { usetype, kczbh, cjmj, xcx, xcs, xcsj, xcdd, jsdw,
-                                            jsxm, jsqk, pzwh, gdwh, tdzbh, sjclyj, jwzb, cjzb, sjbz, kcdd,
-                                            kcdw, kckz, kcqk, xzjsyd, xjsyd, ytjjsq, xzjsq, jzjsq, zyjbnt,
-                                            zmj, nyd, gd, jsyd, wlyd, yw_guid };
-                                } else {
-                                    sql = "insert into PAD_XCXCQKB(YW_GUID,CJMJ,XCX,XCS,XCSJ,XCDD,JSDW,JSXM,JSQK,PZWH,GDWH,TDZBH,SJCLYJ,JWZB,CJZB,SJBZ,USETYPE,KCZBH,KCDD,KCKZ,KCDW,KCQK,XZJSYD,XJSYD,YTJJSQ,XZJSQ,JZJSQ,ZYJBNT,ZMJ,NYD,GD,JSYD,WLYD) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-                                    objs = new Object[] { yw_guid, cjmj, xcx, xcs, xcsj, xcdd, jsdw, jsxm,
-                                            jsqk, pzwh, gdwh, tdzbh, sjclyj, jwzb, cjzb, sjbz, usetype,
-                                            kczbh, kcdd, kckz, kcdw, kcqk, xzjsyd, xjsyd, ytjjsq, xzjsq,
-                                            jzjsq, zyjbnt, zmj, nyd, gd, jsyd, wlyd };
-                                }
-                                count += update(sql, YW, objs);
-                                //上图操作
-                                // savePolygon(cjzb,yw_guid);
-                                //保存图层属性
-                                // saveProperties(yw_guid);
-
-                            }
-                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    } finally {
-                        try {
-                            if (reader != null) {
-                                reader.close();
-                            }
-                            if (read != null) {
-                                read.close();
-                            }
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    }
+                if (str.toLowerCase().endsWith("xml")) {
+                    count += parseXml(str);
                 }
             }
+        }
+        return count;
+    }
+
+    /**
+     * 
+     * <br>Description:解析xml信息入库
+     * <br>Author:陈强峰
+     * <br>Date:2013-7-5
+     */
+    private int parseXml(String xmlPath) {
+        int count = 0;
+        try {
+            File f = new File(xmlPath);
+            SAXReader sax = new SAXReader();
+            Document document = sax.read(f);
+            Element root = document.getRootElement();
+            Element baselist = (Element) root.selectNodes("/WYHC/base").get(0);
+            String yw_guid = baselist.element("YW_GUID").getText();
+            String ydsj = baselist.element("YDSJ").getText();
+            String yddw = baselist.element("YDDW").getText();
+            String mj = baselist.element("MJ").getText();
+            String zb = baselist.element("ZB").getText();
+            String jsqk = baselist.element("JSQK").getText();
+            String wfwglx = baselist.element("WFWGLX").getText();
+            String dfccqk = baselist.element("DFCCQK").getText();
+            String xcms = baselist.element("XCMS").getText();
+            String hcrq = baselist.element("HCRQ").getText();
+            String spsj = baselist.element("SPSJ").getText();
+            String spxmmc = baselist.element("SPXMMC").getText();
+            String spwh = baselist.element("SPWH").getText();
+            String gdsj = baselist.element("GDSJ").getText();
+            String gdxmmc = baselist.element("GDXMMC").getText();
+            String gdwh = baselist.element("GDWH").getText();
+            String ydqk = baselist.element("YDQK").getText();
+            String status = baselist.element("STATUS").getText();
+            String ygspmj = baselist.element("YGSPMJ").getText();
+            String ygspbl = baselist.element("YGSPBL").getText();
+            String yggdmj = baselist.element("YGGDMJ").getText();
+            String yggdbl = baselist.element("YGGDBL").getText();
+            String nyd = baselist.element("NYD").getText();
+            String gengd = baselist.element("GENGD").getText();
+            String jsyd = baselist.element("JSYD").getText();
+            String wlyd = baselist.element("WLYD").getText();
+            String fhgh = baselist.element("FHGH").getText();
+            String bfhgh = baselist.element("BFHGH").getText();
+            String zyjbnt = baselist.element("ZYJBNT").getText();
+            String xmmc = baselist.element("XMMC").getText();
+            String pfwh = baselist.element("PFWH").getText();
+            String pzsj = baselist.element("PZSJ").getText();
+            String yxjsq = baselist.element("YXJSQ").getText();
+            String ytjjsq = baselist.element("YTJJSQ").getText();
+            String xzjsq = baselist.element("XZJSQ").getText();
+            String jzjsq = baselist.element("JZJSQ").getText();
+            String xcr = baselist.element("XCR").getText();
+            String xcdw = baselist.element("XCDW").getText();
+            String ordertime = baselist.element("ORDERTIME").getText();
+
+            //坐标
+            Element zblist = (Element) root.selectNodes("/WYHC/zb").get(0);
+            String jwzb = zblist.element("JWZB").getText();
+            String pmzb = zblist.element("PMZB").getText();
+            String padid = root.element("pad").getText();
+            String shi = root.element("shi").getText();
+            String xian = root.element("xian").getText();
+            //入库
+            String sql = "select yw_guid from dc_ydqkdcb where yw_guid=?";
+            List<Map<String, Object>> list = query(sql, YW, new Object[] { yw_guid });
+            if (list.size() == 0) {
+                sql = "insert into dc_ydqkdcb values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                count = update(sql, YW, new Object[] { yw_guid, ydsj, yddw, mj, zb, jsqk, wfwglx, dfccqk,
+                        xcms, hcrq, spsj, spxmmc, spwh, gdsj, gdxmmc, gdwh, ydqk, status, ygspmj, ygspbl,
+                        yggdmj, yggdbl, nyd, gengd, jsyd, wlyd, fhgh, bfhgh, zyjbnt, xmmc, pfwh, pzsj, yxjsq,
+                        ytjjsq, xzjsq, jzjsq, xcr, xcdw, ordertime, jwzb, pmzb, shi, xian, padid });
+            } else {
+                delAcc(yw_guid);
+                sql = "update dc_ydqkdcb set ydsj=?,yddw=?,mj=?,zb=?,jsqk=?,wfwglx=?,dfccqk=?,"
+                        + "xcms=?,hcrq=?,spsj=?,spxmmc=?,spwh=?,gdsj=?,gdxmmc=?,gdwh=?,ydqk=?,status=?,ygspmj=?,ygspbl=?,"
+                        + "yggdmj=?,yggdbl=?,nyd=?,gengd=?,jsyd=?,wlyd=?,fhgh=?,bfhgh=?,zyjbnt=?,xmmc=?,pfwh=?,pzsj=?,yxjsq=?,"
+                        + "ytjjsq=?,xzjsq=?,jzjsq=?,xcr=?,xcdw=?,ordertime=?,jwzb=?,pmzb=?,shi=?,xian=?,padid=? where yw_guid=?";
+                count = update(sql, YW, new Object[] { ydsj, yddw, mj, zb, jsqk, wfwglx, dfccqk, xcms, hcrq,
+                        spsj, spxmmc, spwh, gdsj, gdxmmc, gdwh, ydqk, status, ygspmj, ygspbl, yggdmj, yggdbl,
+                        nyd, gengd, jsyd, wlyd, fhgh, bfhgh, zyjbnt, xmmc, pfwh, pzsj, yxjsq, ytjjsq, xzjsq,
+                        jzjsq, xcr, xcdw, ordertime, jwzb, pmzb, shi, xian, padid, yw_guid });
+            }
+            //现状
+            sql = "delete from xz_xxdl where yw_guid=?";
+            update(sql, YW, new Object[] { yw_guid });
+            Element xzs = root.element("xz");
+            for (int i = 0; i < xzs.nodeCount(); i++) {
+                Element xz = xzs.element("num" + i);
+                String xzGuid = xz.element("YW_GUID").getText();
+                String xztbbh = xz.element("TBBH").getText();
+                String xzqsdwmc = xz.element("QSDWMC").getText();
+                String xzdlmc = xz.element("DLMC").getText();
+                String xzmj = xz.element("MJ").getText();
+                //插入数据库       
+                sql = "insert into  xz_xxdl  values(?,?,?,?,?)";
+                update(sql, YW, new Object[] { xzGuid, xztbbh, xzqsdwmc, xzdlmc, xzmj });
+            }
+            //规划
+            sql = "delete from gh_xxdl where yw_guid=?";
+            update(sql, YW, new Object[] { yw_guid });
+            Element ghs = root.element("gh");
+            for (int i = 0; i < ghs.nodeCount(); i++) {
+                Element gh = ghs.element("num" + i);
+                String ghGuid = gh.element("YW_GUID").getText();
+                String ghtdytfqdm = gh.element("TDYTFQDM").getText();
+                String ghdlmc = gh.element("GHDLMC").getText();
+                String ghxzqmc = gh.element("XZQMC").getText();
+                String ghmj = gh.element("MJ").getText();
+                //插入数据库
+                sql = "insert into  gh_xxdl  values(?,?,?,?,?)";
+                update(sql, YW, new Object[] { ghGuid, ghtdytfqdm, ghdlmc, ghxzqmc, ghmj });
+            }
+            //审批
+            sql = "delete from sp_xxxm where yw_guid=?";
+            update(sql, YW, new Object[] { yw_guid });
+            Element sps = root.element("sp");
+            for (int i = 0; i < sps.nodeCount(); i++) {
+                Element sp = ghs.element("num" + i);
+                String spGuid = sp.element("YW_GUID").getText();
+                String spXmmc = sp.element("SPXMMC").getText();
+                String spWh = sp.element("SPWH").getText();
+                String spSj = sp.element("SPSJ").getText();
+                String spYgbl = sp.element("SPYGBL").getText();
+                String spYgmj = sp.element("SPYGMJ").getText();
+                //插入数据库
+                sql = "insert into  sp_xxxm  values(?,?,?,?,?,?)";
+                update(sql, YW, new Object[] { spGuid, spXmmc, spWh, spSj, spYgbl, spYgmj });
+            }
+            //供地
+            sql = "delete from gd_xxxm where yw_guid=?";
+            update(sql, YW, new Object[] { yw_guid });
+            Element gds = root.element("gd");
+            for (int i = 0; i < gds.nodeCount(); i++) {
+                Element gd = gds.element("num" + i);
+                String gdGuid = gd.element("YW_GUID").getText();
+                String gdXmmc = gd.element("GDXMMC").getText();
+                String gdWh = gd.element("GDWH").getText();
+                String gdSj = gd.element("GDSJ").getText();
+                String gdYgbl = gd.element("GDYGBL").getText();
+                String gdYgmj = gd.element("GDYGMJ").getText();
+                //插入数据库
+                sql = "insert into  gd_xxxm  values(?,?,?,?,?,?)";
+                update(sql, YW, new Object[] { gdGuid, gdXmmc, gdWh, gdSj, gdYgbl, gdYgmj });
+            }
+
+        } catch (DocumentException e) {
+            System.out.println(e.toString());
         }
         return count;
     }
