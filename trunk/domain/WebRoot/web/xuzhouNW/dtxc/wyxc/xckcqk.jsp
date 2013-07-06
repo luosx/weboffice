@@ -36,7 +36,7 @@ String password = UtilFactory.getConfigUtil().getConfig("ftp.password");
 		
 Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 String fullName = ((User) principal).getFullName();
-String roleName = ManagerFactory.getRoleManager().getRoleWithUserID(((User)principal).getId()).get(0).getRolename();
+//String roleName = ManagerFactory.getRoleManager().getRoleWithUserID(((User)principal).getId()).get(0).getRolename();
 System.out.println(map.get("XCDD") + "---------------------------");
 %>
 
@@ -126,40 +126,41 @@ body {
 				</td>
 				<td colspan="2" align="left">
 					<input type="text" class="noborder" readonly
-						value="<%=map.get("XCX") == null ? "" : map.get("XCX")%> <%=map.get("XCS") == null ? "" : map.get("XCS")%> ">
+						value="<%=map.get("SHI") == null ? "" : map.get("SHI")%> <%=map.get("XIAN") == null ? "" : map.get("XIAN")%> ">
 				</td>
 				<td width="16%">
 					巡查时间
 				</td>
 				<td width="32%">
 					<input type="text" class="noborder" readonly
-						value="<%=map.get("XCSJ") == null ? "" : map.get("XCSJ")%> ">
+						value="<%=map.get("HCRQ") == null ? "" : map.get("HCRQ")%> ">
 				</td>
 			</tr>
 			<tr>
 				<td>
-					巡查地点
-				</td>
-				<td colspan="4" align="left">
-					<input type="text" class="noborder" readonly
-						value="<%=map.get("XCDD") == null ? "" : map.get("XCDD")%> ">
-				</td>
-			</tr>
-			<tr>
-				<td>
-					建设单位
+					用地单位
 				</td>
 				<td colspan="2" align="left">
 					<input type="text" class="noborder" readonly
-						value="<%=map.get("JSDW") == null ? "" : map.get("JSDW")%>">
+						value="<%=map.get("YDDW") == null ? "" : map.get("YDDW")%>">
 				</td>
 				<td>
+					用地时间
+				</td>
+				<td colspan="2">
+					<input type="text" class="noborder" readonly
+						value="<%=map.get("YDDW") == null ? "" : map.get("YDDW")%>">
+				</td>
+			</tr>
+		     <tr>
+		     				<td>
 					建设项目
 				</td>
-				<td>
+				<td colspan="4">
 					<input type="text" class="noborder" readonly
-						value="<%=map.get("jsxm") == null ? "" : map.get("jsxm")%>">
+						value="<%=map.get("XMMC") == null ? "" : map.get("XMMC")%>">
 				</td>
+
 			</tr>
 			<tr>
 				<td>
@@ -174,130 +175,25 @@ body {
 					建设面积
 				</td>
 				<td colspan="4" align="left">
-					<input type="text" class="noborder" readonly value=<%=map.get("CJMJ") == null ? "" : map.get("CJMJ")%>>
-				</td>
-			</tr>
-			<tr>
-				<td rowspan="3">
-					用&nbsp;&nbsp;地
-					<br />
-					<br />
-					批&nbsp;&nbsp;准
-					<br />
-					<br />
-					文&nbsp;&nbsp;件
-				</td>
-				<td width="17%">
-					批准文号
-				</td>
-				<td colspan="3">
-					<input type="text" class="noborder" readonly
-						value="<%=map.get("PZWH") == null ? "" : map.get("PZWH")%> ">
+					<input type="text" class="noborder" readonly value=<%=map.get("MJ") == null ? "" : map.get("MJ")%>亩>
 				</td>
 			</tr>
 			<tr>
 				<td>
-					供地文号
-				</td>
-				<td colspan="3">
-					<input type="text" class="noborder" readonly
-						value="<%=map.get("GDWH") == null ? "" : map.get("GDWH")%> ">
-				</td>
-			</tr>
-			<tr>
-				<td>
-					土地证编号
-				</td>
-				<td colspan="3">
-					<input type="text" class="noborder" readonly
-						value="<%=map.get("TDZBH") == null ? "" : map
-								.get("TDZBH")%> ">
-				</td>
-			</tr>
-			<tr>
-				<td>
-					国&nbsp;&nbsp;土&nbsp;&nbsp;所
-					<br />
-					处&nbsp;理&nbsp;意&nbsp;见
+					现场情况描述
 				</td>
 				<td colspan="4" align="left">
 					<input type="text" class="noborder" readonly
-						value="<%=map.get("SJCLYJ") == null ? "" : map
-						.get("SJCLYJ")%> ">
+						value="<%=map.get("DFCCQK") == null ? "" : map.get("DFCCQK")%> ">
 				</td>
 			</tr>
 			<tr>
-				<td>
-					国&nbsp;&nbsp;土&nbsp;&nbsp;所
-					<br />
-					备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注
+		     	<td>
+				违法违规类型
 				</td>
-				<td colspan="4" height=60px align="left">
-					<textarea class="noborder" style=";font-size:14px;" readonly><%=map.get("SJBZ") == null ? "" : map.get("SJBZ")%></textarea>
-				</td>
-			</tr>
-			<tr>
-				<td style="display:none">
-					处理意见
-				</td>
-				<td colspan="4" align="left" style="display:none">
-					<input type="radio" name="xjclyj" value="建议立案" />
-					建议立案
-					<input type="radio" name="xjclyj" value="合法" />
-					合法
-					<input type="radio" name="xjclyj" value="上报" />
-					上报
-					<input type="radio" name="xjclyj" value="不予立案" />
-					不予立案
-				</td>
-			</tr>
-			<tr>
-				<td style="display:none">
-					备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注
-				</td>
-				<td colspan="4" height=60px align="left" style="display:none">
-					<textarea class="noborder" id="xjbz"
-						<%=edit.equals("false") ? "readonly" : ""%>><%=map.get("XJBZ") == null ? "" : map.get("XJBZ")%></textarea>
-				</td>
-			</tr>
-			<tr>
-				<td style="display:none">
-					领导批示
-				</td>
-				<td colspan="4" height=60px align="left" style="display:none">
-					<textarea class="noborder" id="xjldps"
-						<%=edit.equals("false") ? "readonly" : ""%>><%=map.get("XJLDPS") == null ? "" : map.get("XJLDPS")%></textarea>
-				</td>
-			</tr>
-				<tr>
-				<td style="display:none">
-					市级处理
-					<br />
-					意&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;见
-				</td>
-				<td colspan="4" align="left" style="display:none">
-					<input type="radio" name="shiclyj" value="建议立案" />
-					建议立案
-					<input type="radio" name="shiclyj" value="合法" />
-					合法
-				</td>
-			</tr>
-			<tr>
-				<td style="display:none">
-					市级备注
-				</td>
-				<td colspan="4" height=60px align="left" style="display:none">
-					<textarea class="noborder" id="SHIBZ"
-						<%=edit.equals("false") ? "readonly" : ""%>><%=map.get("SHIBZ") == null ? "" : map.get("SHIBZ")%></textarea>
-				</td>
-			</tr>
-			<tr>
-				<td style="display:none">
-					市级领导批示
-				</td>
-				<td colspan="4" height=60px align="left" style="display:none">
-					<textarea class="noborder" id="shildps"
-						<%=edit.equals("false") ? "readonly" : ""%>><%=map.get("SHILDPS") == null ? "" : map.get("SHILDPS")%></textarea>
+				<td colspan="4">
+					<input type="text" class="noborder" readonly
+						value="<%=map.get("WFWGLX") == null ? "" : map.get("WFWGLX")%>">
 				</td>
 			</tr>
 		</table>
