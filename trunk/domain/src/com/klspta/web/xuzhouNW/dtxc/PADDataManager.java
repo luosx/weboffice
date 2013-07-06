@@ -27,10 +27,10 @@ public class PADDataManager extends AbstractBaseBean {
      */
     public void getQueryData() {
         String keyword = request.getParameter("keyWord");
-        String sql = "select t.readflag,t.guid,t.xzqmc,t.xmmc,t.rwlx,t.sfwf,(select u.fullname from core.core_users u where u.username=t.xcr) xcr,t.xcrq,t.cjzb,t.jwzb,t.imgname from v_pad_data t";
+        String sql = "select t.readflag,t.guid,t.xzqmc,t.xmmc,t.rwlx,t.sfwf,(select u.fullname from core.core_users u where u.username=t.xcr) xcr,t.xcrq,t.cjzb,t.jwzb,t.imgname from v_pad_data_xml t";
         if (keyword != null) {
             keyword = UtilFactory.getStrUtil().unescape(keyword);
-            sql = "select t.readflag,t.guid,t.xzqmc,t.xmmc,t.rwlx,t.sfwf,(select u.fullname from core.core_users u where u.username=t.xcr) xcr,t.xcrq,t.cjzb,t.jwzb,t.imgname from v_pad_data t where (upper(guid)||upper(xzqmc)||upper(xmmc)||upper(rwlx)||upper(sfwf)||upper(xcr)||upper(xcrq) like '%"
+            sql = "select t.readflag,t.guid,t.xzqmc,t.xmmc,t.rwlx,t.sfwf,(select u.fullname from core.core_users u where u.username=t.xcr) xcr,t.xcrq,t.cjzb,t.jwzb,t.imgname from v_pad_data_xml t where (upper(guid)||upper(xzqmc)||upper(xmmc)||upper(rwlx)||upper(sfwf)||upper(xcr)||upper(xcrq) like '%"
                     + keyword + "%')";
         }
         List<Map<String, Object>> query = query(sql, YW);
@@ -51,7 +51,7 @@ public class PADDataManager extends AbstractBaseBean {
     public String delData() {
         String guid = request.getParameter("yw_guid");
         if (guid != null) {
-            String sql = "delete from pad_xcxcqkb where yw_guid='" + guid + "'";
+            String sql = "delete from dc_ydqkdcb where yw_guid='" + guid + "'";
             update(sql, YW);
         }
         return null;
@@ -66,7 +66,7 @@ public class PADDataManager extends AbstractBaseBean {
      * @return
      */
     public String getCjzb(String rwbh) {
-        String sql = "select cjzb from pad_xcxcqkb where yw_guid=?";
+        String sql = "select jwzb from dc_ydqkdcb where yw_guid=?";
         List<Map<String, Object>> list = query(sql, YW, new Object[] { rwbh });
         if (list.size() > 0) {
             Object zb = list.get(0).get("cjzb");
@@ -99,7 +99,7 @@ public class PADDataManager extends AbstractBaseBean {
      * @return
      */
     public Map<String, Object> getXckcqkData(String yw_guid) {
-        String sql = "select * from pad_xcxcqkb t where t.yw_guid=?";
+        String sql = "select * from dc_ydqkdcb t where t.yw_guid=?";
         List<Map<String, Object>> result = query(sql, YW, new String[] { yw_guid });
         return result.get(0);
     }
