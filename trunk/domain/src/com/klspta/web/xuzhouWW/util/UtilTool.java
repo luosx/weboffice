@@ -19,8 +19,8 @@ import com.klspta.base.AbstractBaseBean;
 /*******************************************************************************
  * 
  * <br>
- * Title:外网处理类 <br>
- * Description: 徐州外网处理类 <br>
+ * Title:外网工具类
+ * Description: 在工程util包中未涉及到的工具，暂时写在此类里，根据需要在进行迁移到工程util
  * Author:朱波海 <br>
  * Date:2012-11-10
  */
