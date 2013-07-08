@@ -53,6 +53,15 @@ public class PADDataManager extends AbstractBaseBean {
         if (guid != null) {
             String sql = "delete from dc_ydqkdcb where yw_guid='" + guid + "'";
             update(sql, YW);
+            sql = "select file_id,file_path from atta_accessory where yw_guid=? ";
+            List<Map<String, Object>> list = query(sql, CORE, new Object[] { guid });
+            for (int i = 0; i < list.size(); i++) {
+                String ftpFileName = list.get(i).get("file_path").toString();
+                String fileId = list.get(i).get("file_id").toString();
+                UtilFactory.getFtpUtil().deleteFile(ftpFileName);
+                sql = "delete from atta_accessory where file_id=?";
+                update(sql, CORE, new Object[] { fileId });
+            }
         }
         return null;
     }
