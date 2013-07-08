@@ -1,13 +1,12 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@page import="com.klspta.model.projectinfo.ProjectInfo"%>
-<%@page import="com.klspta.web.xuzhouWW.PadDatalist"%>
+<%@page import="com.klspta.web.xuzhouWW.paddata.PadDatalist"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
 	+ request.getServerName() + ":" + request.getServerPort()
 	+ path + "/";
-	String name = ProjectInfo.getInstance().PROJECT_NAME;
-	String extPath = basePath + "ext/";
+	String name = ProjectInfo.getInstance().getProjectName();
 	PadDatalist padlist = new PadDatalist();
 	List list = new ArrayList();
 	String rows = padlist.getPADDataList(list);
@@ -47,7 +46,7 @@ var expWin;
 var form;
 Ext.onReady(function(){
 	myData= <%=rows%>;//采用json格式存储的数组
-    // create the data store
+	//alert(myData);
     store = new Ext.data.ArrayStore({
     proxy: new Ext.ux.data.PagingMemoryProxy(myData),
 		remoteSort:true,
