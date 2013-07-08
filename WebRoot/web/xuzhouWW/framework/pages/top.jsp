@@ -1,11 +1,11 @@
-<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ page language="java"  pageEncoding="utf-8"%>
 <%@page import="com.klspta.model.projectinfo.ProjectInfo"%>
-<%@page import="com.klspta.web.xuzhouWW.UtilTool"%>
+<%@page import="com.klspta.web.xuzhouWW.util.UtilTool"%>
 <%
 	String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
    
-    String name = ProjectInfo.getInstance().PROJECT_NAME;
+    String name = ProjectInfo.getInstance().getProjectName();
      String weather= new UtilTool().getWeather();
 %>
 
