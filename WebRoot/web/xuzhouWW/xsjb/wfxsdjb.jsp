@@ -730,8 +730,8 @@
 			</DIV>
 			<div id="savess" class="Noprn"
 	style="position: absolute; top: 5px; left: 10px">
-			<img src="web/xuzhouWW/xfxs_12336/images/save.png" alt="保存" onclick="save(this,'1')" /><br/>
-			<img src="web/xuzhouWW/xfxs_12336/images/issued.png" alt="下发" onclick="showReport()"  width=24 height=24/>
+			<img src="web/xuzhouWW/xsjb/images/save.png" alt="保存" onclick="save(this,'1')" /><br/>
+			<img src="web/xuzhouWW/xsjb/images/issued.png" alt="下发" onclick="showReport()"  width=24 height=24/>
 			</div>
 			<TABLE  align="center" cellPadding="0" cellSpacing="0" class="tableBorder" id="table" style="WIDTH: 700; font-size:12px">
 				<TBODY>
@@ -788,7 +788,7 @@
 											邮政编码										
 										</TD>
 										<TD width="24%"  style="border-bottom:0px; font-size:12px;border-right:1px;" >
-									  		<INPUT id="JBRYZBM" with="100px" name="jbryzbm" >			
+									  		<INPUT id="JBRYZBM" width="100px" name="jbryzbm" >			
 									  	</TD>
 										<TD align=right  bgcolor="#f6f8f9" style="border-bottom:0px;border-left:1px solid #2C2B29; font-size:12px;width:18%">
 											联系电话										
@@ -808,7 +808,7 @@
 							<input id="DJBM" name="djbm" style="border: 0px" >						</TD>
 						<TD style=" border-top:0px" align="right" bgcolor="#f6f8f9"> 
 							登记人						</TD>
-						<TD style=" border-top:0px" clospan="4">
+						<TD style=" border-top:0px" colspan="4" >
 							<input type="text" align="right" style="width:75%; border:0px" id="DJR" name="djr" value=<%=username %> >						</TD>
 					</TR>
 					<TR style=" BACKGROUND-COLOR: white;height:25px;">
@@ -863,7 +863,7 @@
 						<TD id=jubaotd1 align=right bgcolor="#f6f8f9">
 							<SPAN style="COLOR: red">*</SPAN>被举报单位						</TD>
 						<TD colSpan=3>
-							<INPUT dataFld=reflectobject id="BJBDW" style="WIDTH:100%"
+							<INPUT   dataFld=reflectobject id="BJBDW" style="WIDTH:100%"
 								name="bjbdw">						</TD>
 					</TR>
 					<TR style=" BACKGROUND-COLOR: white;height:25px;">
@@ -936,7 +936,7 @@
 				<!--信息办理到时候使用-->
 				<TBODY>
 					<TR>
-						<TD align=middle style="border-width:0">
+						<TD align="center" style="border-width:0">
 							&nbsp;&nbsp;
 							<!-- <input type="button" value="下发" onclick="showReport()"/> -->
 							&nbsp;&nbsp;
