@@ -33,11 +33,6 @@ String host = UtilFactory.getConfigUtil().getConfig("ftp.host");
 int port = Integer.parseInt(UtilFactory.getConfigUtil().getConfig("ftp.port"));
 String username = UtilFactory.getConfigUtil().getConfig("ftp.username");
 String password = UtilFactory.getConfigUtil().getConfig("ftp.password");
-		
-Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-String fullName = ((User) principal).getFullName();
-//String roleName = ManagerFactory.getRoleManager().getRoleWithUserID(((User)principal).getId()).get(0).getRolename();
-System.out.println(map.get("XCDD") + "---------------------------");
 %>
 
 <!DOCTYPE html>
@@ -180,11 +175,20 @@ body {
 			</tr>
 			<tr>
 				<td>
-					现场情况描述
+					地方查处情况
 				</td>
 				<td colspan="4" align="left">
 					<input type="text" class="noborder" readonly
 						value="<%=map.get("DFCCQK") == null ? "" : map.get("DFCCQK")%> ">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					现场情况描述
+				</td>
+				<td colspan="4" align="left">
+					<input type="text" class="noborder" readonly
+						value="<%=map.get("XCMS") == null ? "" : map.get("XCMS")%> ">
 				</td>
 			</tr>
 			<tr>
