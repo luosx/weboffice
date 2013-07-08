@@ -320,7 +320,7 @@ function checkNodes(){
   function timedCount()  
   {  
     checkNodes();
-    t=setTimeout("timedCount()",10000);  
+    t=setTimeout("timedCount()",100000);  
   }
   
 
