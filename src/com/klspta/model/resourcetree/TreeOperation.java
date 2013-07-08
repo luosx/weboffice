@@ -39,10 +39,6 @@ public class TreeOperation extends AbstractBaseBean  implements ITreeOperation {
         String zfjcType = map.get("zfjcType").toString();
         String tree_name = TreeOperation.getInstance().getTreeNameByYwType(zfjcType);
         String yw_guid=map.get("yw_guid");
-        String ywHead="";
-        if(yw_guid!=null&yw_guid!=""){
-        	ywHead=yw_guid.substring(0, 2);
-        }
         String sql = "select * from core_resourcetree where tree_name=?";
         Object[] args_tree_name = { tree_name };
         List<Object> resultList = query(sql, AbstractBaseBean.CORE, args_tree_name, new TreeRowMapper());
