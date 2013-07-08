@@ -5,7 +5,13 @@ import java.util.Map;
 
 import com.klspta.base.AbstractBaseBean;
 import com.klspta.base.util.UtilFactory;
-
+/**
+ * 
+ * <br>Title:车辆管理
+ * <br>Description:关于车辆增删改查等操作处理
+ * <br>Author:朱波海
+ * <br>Date:2013-7-8
+ */
 public class CarManager extends AbstractBaseBean {
 	/***************************************************************************
 	 * 
