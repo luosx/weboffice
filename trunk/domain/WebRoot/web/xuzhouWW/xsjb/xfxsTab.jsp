@@ -1,5 +1,5 @@
 <%@ page language="java"  pageEncoding="utf-8"%>
-<%@page import="com.klspta.web.xuzhouWW.Xsjb12336"%>
+<%@page import="com.klspta.web.xuzhouWW.xsjb.Xsjb12336"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
@@ -62,7 +62,7 @@
 		                }     
             },{
                 title: '地图标注',
-                html: "<div><iframe id='map' name='map' width='"+w+"' height='"+h+"' src='<%=basePath%>web/xuzhouWW/tdmap/fxgis/FxGIS.html?debug=true&dolocation=true&p={\"rings\":[[[117.18292351612803,34.30403479680317],[117.18652840511129,34.3035199126627],[117.18626909059827,34.3014262745128],[117.18355469502457, 34.30170522425556],[117.18292351612803,34.30403479680317]]],\"spatialReference\":{\"wkid\":2364}}&initFunction=[{\"name\":\"setCenterAt\",\"parameters\":\"117.18473531014112,34.30273489468256\"}]'/>" ,
+                html: "<div><iframe id='map' name='map' width='"+w+"' height='"+h+"' src='<%=basePath%>web/xuzhouWW/tdMap/fxgis/FxGIS.html?debug=true&dolocation=true&p={\"rings\":[[[117.18292351612803,34.30403479680317],[117.18652840511129,34.3035199126627],[117.18626909059827,34.3014262745128],[117.18355469502457, 34.30170522425556],[117.18292351612803,34.30403479680317]]],\"spatialReference\":{\"wkid\":2364}}&initFunction=[{\"name\":\"setCenterAt\",\"parameters\":\"117.18473531014112,34.30273489468256\"}]'/>" ,
                 listeners :{
 		                    activate: {
                             fn: view
