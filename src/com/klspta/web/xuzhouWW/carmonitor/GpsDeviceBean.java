@@ -2,6 +2,15 @@ package com.klspta.web.xuzhouWW.carmonitor;
 
 import com.klspta.base.AbstractBaseBean;
 
+
+/***
+ * 
+ * <br>Title:GPS信息
+ * <br>Description:GPS信息bean
+ * <br>Author:朱波海
+ * <br>Date:2013-7-8
+ */
+
 public class GpsDeviceBean extends AbstractBaseBean{
     
     private static String sql = "insert into car_location_history t values ( ?,  ?,  ?,  sysdate)";

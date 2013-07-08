@@ -9,10 +9,18 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import com.klspta.base.AbstractBaseBean;
 import com.klspta.web.xuzhouWW.util.UtilTool;
 
+/***
+ * 
+ * <br>Title:GPS处理类
+ * <br>Description:车载GPS信息处理类
+ * <br>Author:朱波海
+ * <br>Date:2013-7-8
+ */
 public class GpsDeviceManager extends AbstractBaseBean{
     
     private static Map<String, GpsDeviceBean> GPSBeanMap = new HashMap<String, GpsDeviceBean>();
@@ -24,7 +32,7 @@ public class GpsDeviceManager extends AbstractBaseBean{
     }
     /****
      * 
-     * <br>Description:对gpsben进行初始化
+     * <br>Description:对gpsbean进行初始化
      * <br>Author:朱波海
      * <br>Date:2013-7-4
      */
@@ -104,16 +112,15 @@ public class GpsDeviceManager extends AbstractBaseBean{
      * <br>Author:朱波海
      * <br>Date:2013-7-4
      */
-	@SuppressWarnings("unchecked")
 	public void getCarInfo() {
 		String ids =request.getParameter("carids");
 		String []carid=ids.split(",");
-		List list =new ArrayList();
+		List<Map<String,Object>> list =new ArrayList<Map<String,Object>>();
 		for(int i=0;i<carid.length;i++){
-	     Map map=new HashMap();
-		 Iterator it = GPSBeanMap.entrySet().iterator();
+	     Map<String,Object> map=new HashMap<String,Object>();
+		 Iterator<?> it = GPSBeanMap.entrySet().iterator();
     	 while (it.hasNext()){
-    	  Map.Entry entry = (Map.Entry) it.next();
+    	  Map.Entry<?,?> entry = (Entry<?,?>) it.next();
     	  String  key = (String)entry.getKey();
     	  GpsDeviceBean value = (GpsDeviceBean)entry.getValue();
     	  if(key.equals(carid[i])){		  
@@ -148,23 +155,23 @@ public class GpsDeviceManager extends AbstractBaseBean{
 	 * <br>Author:朱波海
 	 * <br>Date:2013-7-4
 	 */
-    @SuppressWarnings("unchecked")
+    
 	public void countAllCar(){
     	String sql="select distinct(t.car_cantoncode) as xzqh,t.car_info_xzqh_name as xzqmc from car_info t";
-    	List list=query(sql,YW);
-    	List resList=new ArrayList();
+    	List<Map<String, Object>> list = query(sql,YW);
+    	List<Map<String,Object>> resList=new ArrayList<Map<String,Object>>();
     	int onlineCount=0;
     	int allCount=0;
     	for(int i=0;i<list.size();i++){
-    		Map map=(Map)list.get(i);
+    		Map<String, Object> map=(Map<String, Object>)list.get(i);
     		String xzqh=(String)map.get("xzqh");
     		String xzqmc=(String)map.get("xzqmc");
     		int childCount=0;
     		int parentCount=0;
-    	    Map resmap=new HashMap();
-    		Iterator it = GPSBeanMap.entrySet().iterator();
+    	    Map<String, Object> resmap=new HashMap<String, Object>();
+    		Iterator<?> it = GPSBeanMap.entrySet().iterator();
     		while (it.hasNext()){
-    		Map.Entry entry = (Map.Entry) it.next();
+    		Map.Entry<?,?> entry = (Map.Entry<?,?>) it.next();
     		  //String  key = (String)entry.getKey();
     		  GpsDeviceBean value = (GpsDeviceBean)entry.getValue();
     		  if(xzqh.equals(value.getCantoncode())){
@@ -197,7 +204,6 @@ public class GpsDeviceManager extends AbstractBaseBean{
      * <br>Author:朱波海
      * <br>Date:2013-7-4
      */
-    @SuppressWarnings("unchecked")
 	public void getCarTree(){
       String xzqdm=request.getParameter("xzqdm");
       if("".equals(xzqdm)){
@@ -207,11 +213,11 @@ public class GpsDeviceManager extends AbstractBaseBean{
       String status=request.getParameter("status");
       List list=new ArrayList();
       for(int i=0;i<xzqs.length;i++){
-    	List oneList=new ArrayList();
-  		Iterator it = GPSBeanMap.entrySet().iterator();
+    	List<Map<String, Object>> oneList=new ArrayList<Map<String, Object>>();
+  		Iterator<?> it = GPSBeanMap.entrySet().iterator();
 		while (it.hasNext()){
-		  Map map=new HashMap();
-		  Map.Entry entry = (Map.Entry) it.next();
+		  Map<String, Object> map=new HashMap<String, Object>();
+		  Map.Entry<?,?> entry = (Map.Entry<?,?>) it.next();
 		  GpsDeviceBean value = (GpsDeviceBean)entry.getValue();
 		  if(xzqs[i].equals(value.getCantoncode())||xzqs[i].equals("320300")){
 			  if(xzqs[i].equals("320300")){
