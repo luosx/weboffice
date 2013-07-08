@@ -179,7 +179,10 @@ public class ResultImp extends AbstractBaseBean {
             String sql = "select yw_guid from dc_ydqkdcb where yw_guid=?";
             List<Map<String, Object>> list = query(sql, YW, new Object[] { yw_guid });
             if (list.size() == 0) {
-                sql = "insert into dc_ydqkdcb values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                sql = "insert into dc_ydqkdcb(yw_guid, ydsj, yddw, mj, zb, jsqk, wfwglx, dfccqk,"
+                        + "xcms, hcrq, spsj, spxmmc, spwh, gdsj, gdxmmc, gdwh, ydqk, status, ygspmj, ygspbl,"
+                        + "yggdmj, yggdbl, nyd, gengd, jsyd, wlyd, fhgh, bfhgh, zyjbnt, xmmc, pfwh, pzsj, yxjsq,"
+                        + "ytjjsq, xzjsq, jzjsq, xcr, xcdw, ordertime, jwzb, pmzb, shi, xian, padid) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
                 count = update(sql, YW, new Object[] { yw_guid, ydsj, yddw, mj, zb, jsqk, wfwglx, dfccqk,
                         xcms, hcrq, spsj, spxmmc, spwh, gdsj, gdxmmc, gdwh, ydqk, status, ygspmj, ygspbl,
                         yggdmj, yggdbl, nyd, gengd, jsyd, wlyd, fhgh, bfhgh, zyjbnt, xmmc, pfwh, pzsj, yxjsq,
@@ -199,8 +202,9 @@ public class ResultImp extends AbstractBaseBean {
             sql = "delete from xz_xxdl where yw_guid=?";
             update(sql, YW, new Object[] { yw_guid });
             Element xzs = root.element("xz");
-            for (int i = 0; i < xzs.nodeCount(); i++) {
-                Element xz = xzs.element("num" + i);
+            int index=0;
+            Element xz = xzs.element("num" + index);
+            while(xz!=null){
                 String xzGuid = xz.element("YW_GUID").getText();
                 String xztbbh = xz.element("TBBH").getText();
                 String xzqsdwmc = xz.element("QSDWMC").getText();
@@ -209,13 +213,16 @@ public class ResultImp extends AbstractBaseBean {
                 //插入数据库       
                 sql = "insert into  xz_xxdl  values(?,?,?,?,?)";
                 update(sql, YW, new Object[] { xzGuid, xztbbh, xzqsdwmc, xzdlmc, xzmj });
+                index++;
+                xz = xzs.element("num" + index);
             }
             //规划
             sql = "delete from gh_xxdl where yw_guid=?";
             update(sql, YW, new Object[] { yw_guid });
             Element ghs = root.element("gh");
-            for (int i = 0; i < ghs.nodeCount(); i++) {
-                Element gh = ghs.element("num" + i);
+            index=0;
+            Element gh = ghs.element("num" + index);
+            while(gh!=null){
                 String ghGuid = gh.element("YW_GUID").getText();
                 String ghtdytfqdm = gh.element("TDYTFQDM").getText();
                 String ghdlmc = gh.element("GHDLMC").getText();
@@ -224,13 +231,16 @@ public class ResultImp extends AbstractBaseBean {
                 //插入数据库
                 sql = "insert into  gh_xxdl  values(?,?,?,?,?)";
                 update(sql, YW, new Object[] { ghGuid, ghtdytfqdm, ghdlmc, ghxzqmc, ghmj });
+                index++;
+                gh = ghs.element("num" + index);
             }
             //审批
             sql = "delete from sp_xxxm where yw_guid=?";
             update(sql, YW, new Object[] { yw_guid });
             Element sps = root.element("sp");
-            for (int i = 0; i < sps.nodeCount(); i++) {
-                Element sp = ghs.element("num" + i);
+            index=0;
+            Element sp = sps.element("num" + index);
+            while(sp!=null){
                 String spGuid = sp.element("YW_GUID").getText();
                 String spXmmc = sp.element("SPXMMC").getText();
                 String spWh = sp.element("SPWH").getText();
@@ -240,13 +250,16 @@ public class ResultImp extends AbstractBaseBean {
                 //插入数据库
                 sql = "insert into  sp_xxxm  values(?,?,?,?,?,?)";
                 update(sql, YW, new Object[] { spGuid, spXmmc, spWh, spSj, spYgbl, spYgmj });
+                index++;
+                sp = sps.element("num" + index);
             }
             //供地
             sql = "delete from gd_xxxm where yw_guid=?";
             update(sql, YW, new Object[] { yw_guid });
             Element gds = root.element("gd");
-            for (int i = 0; i < gds.nodeCount(); i++) {
-                Element gd = gds.element("num" + i);
+            index=0;
+            Element gd = gds.element("num" + index);
+            while(gd!=null){
                 String gdGuid = gd.element("YW_GUID").getText();
                 String gdXmmc = gd.element("GDXMMC").getText();
                 String gdWh = gd.element("GDWH").getText();
@@ -256,6 +269,8 @@ public class ResultImp extends AbstractBaseBean {
                 //插入数据库
                 sql = "insert into  gd_xxxm  values(?,?,?,?,?,?)";
                 update(sql, YW, new Object[] { gdGuid, gdXmmc, gdWh, gdSj, gdYgbl, gdYgmj });
+                index++;
+                gd = gds.element("num" + index);
             }
 
         } catch (DocumentException e) {
@@ -312,7 +327,7 @@ public class ResultImp extends AbstractBaseBean {
         File[] files = file.listFiles();
         String ywguid = file.getName();
         for (int i = 0; i < files.length; i++) {
-            if (files[i].getAbsolutePath().endsWith(".txt")) {
+            if (files[i].getAbsolutePath().endsWith(".xml")) {
                 continue;
             }
             dealAcc(files[i], ywguid);
@@ -331,7 +346,7 @@ public class ResultImp extends AbstractBaseBean {
                 }
             }
         }
-        sql = "update PAD_XCXCQKB set ZPBH=? where yw_guid=?";
+        sql = "update dc_ydqkdcb set ZPBH=? where yw_guid=?";
         update(sql, YW, new Object[] { sb.toString(), yw_guid });
     }
 
