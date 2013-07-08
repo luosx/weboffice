@@ -2,16 +2,26 @@ package com.klspta.web.xuzhouWW.carhistory;
 
 import java.util.List;
 import java.util.Map;
-import org.springframework.stereotype.Component;
 import com.klspta.base.AbstractBaseBean;
 import com.klspta.base.util.UtilFactory;
 
-@Component
+/***
+ * 
+ * <br>Title:车辆轨迹
+ * <br>Description:车辆历史轨迹处理类
+ * <br>Author:朱波海
+ * <br>Date:2013-7-8
+ */
 public class CarHistory extends AbstractBaseBean {
 
 	public CarHistory() {
 	}
-
+/***
+ * 
+ * <br>Description:根据车辆id、时间等信息获取车辆历史坐标点
+ * <br>Author:朱波海
+ * <br>Date:2013-7-8
+ */
 	public void getHistoryById() {
 		String carId = request.getParameter("carId");
 		String startDate = request.getParameter("startDate");
