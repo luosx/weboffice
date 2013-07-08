@@ -1,10 +1,10 @@
-﻿<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+﻿<%@ page language="java" pageEncoding="utf-8"%>
 <%@page import="com.klspta.model.projectinfo.ProjectInfo"%>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
    
-    String name = ProjectInfo.getInstance().PROJECT_NAME;
+    String name = ProjectInfo.getInstance().getProjectName();
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -199,8 +199,8 @@ body,td,div,span,li{
 			</div>
 
 
-<iframe frameborder="no" id="lower"  name="lower"  style="width: 100%;height:100%; overflow: auto;" src="fxgis/FxGIS.html?debug=true"></iframe>
-<iframe frameborder="no" id="operation"  style="display:none;" name="operation"  style="width: 100%;height:100%; overflow: auto;" src="<%=basePath%>web/xuzhouWW/padResult/PADDataList.jsp"></iframe>
+<iframe frameborder="0" id="lower"  name="lower"  style="width: 100%;height:100%; overflow: auto;" src="fxgis/FxGIS.html?debug=true"></iframe>
+<iframe frameborder="0" id="operation"  style="display:none;" name="operation"  style="width: 100%;height:100%; overflow: auto;" src="<%=basePath%>web/xuzhouWW/padResult/PADDataList.jsp"></iframe>
     </body>
 </html>
  <script>
