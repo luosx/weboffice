@@ -3,7 +3,13 @@ package com.klspta.model.projectinfo;
 import java.util.List;
 import java.util.Map;
 import com.klspta.base.AbstractBaseBean;
-
+/***
+ * 
+ * <br>Title:配置类
+ * <br>Description:系统相关信息动态配置
+ * <br>Author:朱波海
+ * <br>Date:2013-7-9
+ */
 public class ProjectInfo extends AbstractBaseBean{
     
     public static  String PROJECT_NAME = "";
