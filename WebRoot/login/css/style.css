@@ -1,7 +1,8 @@
 @charset "utf-8";
 /*============= 公共样式 =============*/
 * {padding:0; margin:0; outline:0;}
-body { margin:0; padding: 0px; font-family: "宋体"; font-size:12px; font-family:Verdana; lline-height:1.5;  	
+body { 	
+	overflow-y:hidden;
 	scrollbar-3dlight-color:#D4D0C8; 
   	scrollbar-highlight-color:#fff; 
   	scrollbar-face-color:#E4E4E4; 
