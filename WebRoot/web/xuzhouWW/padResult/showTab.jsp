@@ -1,7 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ page import="java.net.URLDecoder" %>
 <%@page import="java.text.SimpleDateFormat"%>
-<%@page import="com.klspta.web.xuzhouWW.PadDatalist"%>
+<%@page import="com.klspta.web.xuzhouWW.paddata.PadDatalist"%>
 <%
 	String path = request.getContextPath();
     String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
