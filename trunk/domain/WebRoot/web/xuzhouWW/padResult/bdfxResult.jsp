@@ -1,8 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="utf-8"%>
+<%@ page language="java"  pageEncoding="utf-8"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.Map"%>
-<%@page import="com.klspta.web.xuzhouWW.PadDatalist"%>
-<%@page import="java.text.DecimalFormat"%>
+<%@page import="com.klspta.web.xuzhouWW.paddata.PadDatalist"%>
 <%
 	String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
