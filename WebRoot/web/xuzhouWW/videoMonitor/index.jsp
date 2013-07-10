@@ -16,7 +16,7 @@ function openURL(url){
 </script>
 </head>
   	<frameset id="index"  rows="53,*" frameborder="no" border="0"  framespacing="0" >
-		<frame id="flash" name="flash" scrolling="NO" noresize src="<%=basePath%>web/<%=name%>/framework/pages/flash.jsp" />
+		<frame id="flash" name="flash" scrolling="NO" noresize src="<%=basePath%>web/<%=name%>/framework/pages/top.jsp" />
 		<frame id="menu" name="menu" scrolling="yes" noresize src="<%=basePath%>web/<%=name%>/videoMonitor/index.html" />
 	</frameset>
 </html>
