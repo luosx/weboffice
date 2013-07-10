@@ -15,20 +15,12 @@ String basePath = request.getScheme() + "://"
 String yw_guid = request.getParameter("yw_guid");
 
 String type=request.getParameter("type");
-if(type!=null&&"td".equals(type)){
-	type="土地";
-}else if(type!=null&&"kc".equals(type)){
-	type="矿产";
-}
-
 Map<String, Object> map = new PADDataManager().getXckcqkData(yw_guid);
 String returnPath = request.getParameter("returnPath");
 String edit = request.getParameter("edit");
 if (edit == null || !edit.equals("false")) {
 	edit = "true";
 }
-String hiddenSave = request.getParameter("hiddenSave");
-
 String host = UtilFactory.getConfigUtil().getConfig("ftp.host");
 int port = Integer.parseInt(UtilFactory.getConfigUtil().getConfig("ftp.port"));
 String username = UtilFactory.getConfigUtil().getConfig("ftp.username");
