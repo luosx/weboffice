@@ -1,10 +1,12 @@
-<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ page language="java"  pageEncoding="utf-8"%>
 <%@page import="com.klspta.model.projectinfo.ProjectInfo"%>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
-   
-    String name = ProjectInfo.getInstance().PROJECT_NAME;
+     ProjectInfo project=ProjectInfo.getInstance();
+    String name = project.getProjectName();
+    String loginname1=project.getProjectLoginName1();
+    String loginname2=project.getProjectLoginName2();
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -17,14 +19,24 @@
         <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
         <meta http-equiv="description" content="This is my page">
         <style type="text/css">
-<!--
+
 body {
     margin-left: 0px;
     margin-top: 0px;
     margin-right: 0px;
     margin-bottom: 0px;
 }
--->
+    font.style1 {
+    font-family: "微软雅黑";
+    color: #FFFFFF;
+    font-size:26px;
+    font-weight: bolder;
+  }
+  font.style2 {
+    color: #BAF7FF;
+    font-size:15px;
+    font-weight: bolder;
+   }
 </style>
         <link href="web/<%=name%>/framework/css/style.css" rel="stylesheet"
             type="text/css" />
@@ -32,7 +44,10 @@ body {
     <body>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
-    <td width="607"><img src="<%=basePath%>web/<%=name%>/framework/images/logo_bak.gif" width="607" height="106" /></td>
+    <td width="607" background="<%=basePath%>web/<%=name%>/framework/images/logo_bak.gif">
+    <div  style="margin-top: 2%;margin-left: 20%"><font class="style1"><%=loginname1 %></font></div>
+    <div  style="margin-top: 0.5%;margin-left: 21%"><font class="style2"><%=loginname2 %></font></div>
+    </td>
     <td background="<%=basePath%>web/<%=name%>/framework/images/webbj.jpg">&nbsp;</td>
     <td width="397"  background="<%=basePath%>web/<%=name%>/framework/images/banner_bk.gif">
     <object id="FlashID" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="397" height="106">
