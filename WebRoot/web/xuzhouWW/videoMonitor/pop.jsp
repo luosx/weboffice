@@ -1,6 +1,6 @@
 ﻿<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@page import="com.klspta.model.projectinfo.ProjectInfo"%>
-<%@page import="com.klspta.web.xuzhouWW.XuzhouWWmanager"%>
+<%@page import="com.klspta.web.xuzhouWW.carmonitor.GpsDeviceManager"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -10,7 +10,7 @@ String puid=request.getParameter("puid");
 String carname=request.getParameter("carname");
 if(carname!=null){
    carname=new String(carname.getBytes("ISO-8859-1"), "gbk");
-   List<Map<String,Object>> rs=new XuzhouWWmanager().getCarInfoByCarName(carname);
+   List<Map<String,Object>> rs=new GpsDeviceManager().getCarInfoByCarName(carname);
    puid=rs.get(0).get("CAR_FLAG").toString();
 }
 %>
