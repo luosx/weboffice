@@ -82,7 +82,8 @@ public class PADDataManager extends AbstractBaseBean {
             if (zb == null) {
                 return null;
             } else {
-                String[] zbs = zb.toString().split(";");
+                String allzb = zb.toString();
+                String[] zbs =allzb.split(";");
                 List<String> listzb = new ArrayList<String>();
                 for (int i = 0; i < zbs.length; i++) {
                     listzb.add(zbs[i]);
