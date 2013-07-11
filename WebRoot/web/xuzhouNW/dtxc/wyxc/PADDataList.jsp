@@ -151,7 +151,10 @@ function delTask(id){
 
 function showDetail(id){
     var url = "<%=basePath%>web/xuzhouNW/dtxc/wyxc/xjclyjframe.jsp?zfjcType=11&yw_guid="+myData[id].GUID;     
-	document.location.href=url;
+	//document.location.href=url;
+	var height = window.screen.availHeight;
+	var width = window.screen.availWidth;
+	window.showModalDialog(url,"","dialogWidth="+width+";dialogHeight="+height);
 }
 
 function query(){
