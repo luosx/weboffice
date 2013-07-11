@@ -78,16 +78,18 @@ public class PADDataManager extends AbstractBaseBean {
         String sql = "select jwzb from dc_ydqkdcb where yw_guid=?";
         List<Map<String, Object>> list = query(sql, YW, new Object[] { rwbh });
         if (list.size() > 0) {
-            Object zb = list.get(0).get("cjzb");
+            Object zb = list.get(0).get("jwzb");
             if (zb == null) {
                 return null;
             } else {
-                String[] zbs = zb.toString().split(",");
+                String[] zbs = zb.toString().split(";");
                 List<String> listzb = new ArrayList<String>();
-                for (int i = 0; i < zbs.length / 2; i++) {
-                    listzb.add(zbs[i * 2] + "," + zbs[i * 2 + 1]);
+                for (int i = 0; i < zbs.length; i++) {
+                    listzb.add(zbs[i]);
                 }
+                if(!listzb.get(0).equals(listzb.get(listzb.size()-1))){    
                 listzb.add(zbs[0] + "," + zbs[1]);
+                }
                 sql = "select t.*, t.rowid from gis_extent t where t.flag = '1'";
                 List<Map<String, Object>> mapConfigList = query(sql, CORE);
                 BigDecimal wkid = (BigDecimal) mapConfigList.get(0).get("wkid");
