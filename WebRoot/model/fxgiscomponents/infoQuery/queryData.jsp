@@ -37,7 +37,6 @@
 	var d;
     Ext.onReady(function(){
         var width=document.body.clientWidth;
-        
      d=eval(parent.rr);
      var fieldsArray = new Array();
      var columnArray = new Array();
@@ -151,53 +150,53 @@ function biaoZhu(value, cellmeta, record, rowIndex){
    if(rowIndex%10==0){  
       var a='a';
       hqzb(rowIndex ,a);
-      return "<a href='#' onclick='biaozhu();return false;' ><img src='base/gis/images/a.png'></a>";
+      return "<a href='#' onclick='biaozhu();return false;' ><img src='base/fxgis/framework/images/marks/a.png'></a>";
     
    }
    if(rowIndex%10==1){
      var a='b';
      hqzb(rowIndex ,a);
-      return "<a href='#' onclick='biaozhu();return false;'><img src='base/gis/images/b.png'></a>";
+      return "<a href='#' onclick='biaozhu();return false;'><img src='base/fxgis/framework/images/marks/b.png'></a>";
    }
    if(rowIndex%10==2){
       var a='c';
     hqzb(rowIndex ,a);
-      return "<a href='#' onclick='biaozhu();return false;'><img src='base/gis/images/c.png'></a>";
+      return "<a href='#' onclick='biaozhu();return false;'><img src='base/fxgis/framework/images/marks/c.png'></a>";
    }
    if(rowIndex%10==3){
        var a='d';
    hqzb(rowIndex ,a);
-      return "<a href='#' onclick='biaozhu();return false;'><img src='base/gis/images/d.png'></a>";
+      return "<a href='#' onclick='biaozhu();return false;'><img src='base/fxgis/framework/images/marks/d.png'></a>";
    }
    if(rowIndex%10==4){
         var a='e';
    hqzb(rowIndex ,a);
-      return "<a href='#' onclick='biaozhu();return false;'><img src='base/gis/images/e.png'></a>";
+      return "<a href='#' onclick='biaozhu();return false;'><img src='base/fxgis/framework/images/marks/e.png'></a>";
    }
    if(rowIndex%10==5){
       var a='f';
    hqzb(rowIndex,a);
-      return "<a href='#' onclick='biaozhu();return false;'><img src='base/gis/images/f.png'></a>";
+      return "<a href='#' onclick='biaozhu();return false;'><img src='base/fxgis/framework/images/marks/f.png'></a>";
    }
    if(rowIndex%10==6){
        var a='g';
     hqzb(rowIndex ,a);
-      return "<a href='#' onclick='biaozhu();return false;'><img src='base/gis/images/g.png'></a>";
+      return "<a href='#' onclick='biaozhu();return false;'><img src='base/fxgis/framework/images/marks/g.png'></a>";
    }
    if(rowIndex%10==7){
       var a='h';
    hqzb(rowIndex ,a);
-      return "<a href='#' onclick='biaozhu();return false;'><img src='base/gis/images/h.png'></a>";
+      return "<a href='#' onclick='biaozhu();return false;'><img src='base/fxgis/framework/images/marks/h.png'></a>";
    }
    if(rowIndex%10==8){
        var a='i';
      hqzb(rowIndex ,a);
-      return "<a href='#' onclick='biaozhu();return false;'><img src='base/gis/images/i.png'></a>";
+      return "<a href='#' onclick='biaozhu();return false;'><img src='base/fxgis/framework/images/marks/i.png'></a>";
    }
    if(rowIndex%10==9){
       var a='j';
    hqzb(rowIndex ,a);
-      return "<a href='#' onclick='biaozhu();return false;'><img src='base/gis/images/j.png'></a>";
+      return "<a href='#' onclick='biaozhu();return false;'><img src='base/fxgis/framework/images/marks/j.png'></a>";
    }
 }
 
