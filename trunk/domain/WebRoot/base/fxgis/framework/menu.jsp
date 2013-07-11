@@ -185,6 +185,20 @@ Ext.onReady(function(){
 											icon : '<%=basePath%>base/fxgis/framework/images/printer.png',
 											tooltip : '打印',
 											handler : mapPrint
+										},{
+									    	text : '点标记',
+											id : 'drawPoint',
+											cls : 'x-btn-text-icon',
+											icon : '',
+											tooltip : '点标记',
+											handler : drawPoint
+										},{
+									    	text : '面标记',
+											id : 'drawPolygon',
+											cls : 'x-btn-text-icon',
+											icon : '',
+											tooltip : '面标记',
+											handler : drawPolygon
 										}]
 							           },{
 									    	text : '全屏',
