@@ -31,7 +31,7 @@ input,img {
 		<div id="mygrid_container"></div>
 		<div id="update" class="x-hidden">
 			<div id="updateForm"
-				style="width: 102%; height: 90%; margin-left: 10px; margin-top: 5px"></div>
+				style="width: 100%; height: 90%; margin-left: 10px; margin-top: 5px"></div>
 		</div>
 	</body>
 </html>
