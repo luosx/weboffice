@@ -16,7 +16,10 @@
     Object userprincipal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     String userid = ((User)userprincipal).getUserID();
     String edit = request.getParameter("edit");
-    String name = UtilFactory.getXzqhUtil().getBeanById(ManagerFactory.getRoleManager().getRoleWithUserID(userid).get(0).getXzqh()).getCatonname();
+    //String name = UtilFactory.getXzqhUtil().getBeanById(ManagerFactory.getRoleManager().getRoleWithUserID(userid).get(0).getXzqh()).getCatonname();
+    String xzqh = ManagerFactory.getUserManager().getUserWithId(userid).getXzqh();
+   	String name = UtilFactory.getXzqhUtil().getBeanById(xzqh).getCatonname();
+   	String wfInsId1 = request.getParameter("wfInsId");
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -79,11 +82,22 @@
 					document.getElementById('bz').value='其他需备注的写在此处...';
 				}			
 			}
+			//删除冗余数据
+			function deleteData(){
+				var ay = document.getElementById('ay').value;
+				var zywfss = document.getElementById('zywfss').value;
+				if(ay == ''&& zywfss == ''){
+				  putClientCommond("startWorkflowLacc","deleteWorkflow");
+     			  putRestParameter("yw_guid","<%=yw_guid%>");
+     			  putRestParameter("wfInsId", "<%=wfInsId1%>");
+      			  restRequest();
+				}
+			}			
 		</script>
 		
 	</head>
 	
-<body bgcolor="#FFFFFF">
+<body bgcolor="#FFFFFF" onbeforeunload="deleteData()">
 <% 
 if(fixed!=null && fixed.equals("fixedPrint")){%>
 <div id="fixed class="Noprn" style="position: fixed; top: 5px; left: 0px"></div>
