@@ -105,7 +105,7 @@ Ext.onReady(function(){
         /* 添加图层树控制 add by 郭润沛 2011-1-30*/
         listeners: {
             'checkchange': function(node, checked){
-				changeMap();
+				changeLayer(node,checked);
             },
               'beforecollapsenode': function(node,deep,anim){
 if(deep && loadFlag){
@@ -141,6 +141,11 @@ checked[j].disable();
                     	}
                     }
 //alert(serviceid+"取消")
+}
+
+function changeLayer(node,checked){
+  var attr=node.attributes;
+  parent.frames["center"].frames["lower"].swfobject.getObjectById("FxGIS").setLayerVisiableById(attr.serverid,checked,parseInt(attr.layerid));
 }
 
 /*根据图层树的选中情况，控制图层的显示*/

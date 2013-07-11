@@ -195,6 +195,16 @@ parent.Ext.getCmp('east-panel').setTitle('标注查看');
 parent.document.getElementById("east").src="/reduce/model/fxgiscomponents/analysisPoint/analysisPoint.jsp?x='"+x+"'&y='"+y+"'";
 }
 
+/*点标记*/
+function drawPoint(){
+frames["lower"].swfobject.getObjectById("FxGIS").drawPoint("");
+}
+
+/*面标记*/
+function drawPolygon(){
+frames["lower"].swfobject.getObjectById("FxGIS").drawPolygon();
+}
+
 //按ESC退出全屏
 function enterAndEsc() 
 { 
