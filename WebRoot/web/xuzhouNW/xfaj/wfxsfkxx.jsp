@@ -18,11 +18,6 @@
     String edit = request.getParameter("edit");
     String xzqh = ManagerFactory.getUserManager().getUserWithId(userid).getXzqh();
     String name = UtilFactory.getXzqhUtil().getBeanById(xzqh).getCatonname();
-	System.out.println(name + "-------------------------------------------------------------");
-	System.out.println("edit:" + edit);
-	String wfInsId1 = request.getParameter("wfInsId");
-	IWorkflowOp workflow1 = WorkflowOp.getInstance();
-	String activityName1 = workflow1.getActivityNameByWfInsID(wfInsId1);
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -55,42 +50,22 @@
          		 }		
 			}
 			document.getElementById('bh2').value=document.getElementById('bh').value;
-			//当流程节点是支队审核，表单是否立案选择是的时候，启动立案查处流程
-			startLaccWorkflow();
 		}
-			function startLaccWorkflow(){
-				var activityName="<%=activityName1%>";
-				var sfla=document.getElementById('sfla1');
-				if(activityName == '支队审核' && sfla.checked){
-						  putClientCommond("startWorkflowLacc","initWorkflow");
-					      putRestParameter("zfjcType","90");
-					      putRestParameter("userId", "<%=userid%>");
-					      restRequest();
-				}
-			}
-			
 			function save(){
 				document.forms[0].submit();
 			}
 			function refresh(){
 				document.location.refresh();
 			}
-			//删除冗余数据
-			function deleteData(){
-				var jbr = document.getElementById('jbr').value;
-				var bjbdw = document.getElementById('bjbdw').value;
-				if(jbr == '' && bjbdw == ''){
-				  putClientCommond("startWorkflowXfjb","deleteWorkflow");
-     			  putRestParameter("yw_guid","<%=yw_guid%>");
-     			  putRestParameter("wfInsId", "<%=wfInsId1%>");
-      			  restRequest();
-				}							
-			}
+		//添加、查看地图标注
+		function createbz(){
+			window.open("<%=basePath%>web/xuzhouNW/xfaj/xfbz/xfbz.jsp?yw_guid=<%=yw_guid%>",'','width='+(window.screen.availWidth-10)+',height='+(window.screen.availHeight-30));
+		}
 		</script>
 		
 	</head>
 	
-<body bgcolor="#FFFFFF" onbeforeunload="deleteData()">
+<body bgcolor="#FFFFFF">
 <% 
 System.out.println("打印：" + (fixed!=null && fixed.equals("fixedPrint")) );
 System.out.println("保存：" + !"false".equals(edit));
@@ -164,7 +139,10 @@ if(fixed!=null && fixed.equals("fixedPrint")){%>
   </tr>
   <tr>
     <td><div align="center">问题发生地</div></td>
-    <td colspan="4"><input type="text" class="noborder" name="wtfsd" id="wtfsd" style="width: 98%"/></td>
+    <td colspan="4">
+    	<input type="text" class="noborder" name="wtfsd" id="wtfsd" style="width: 82%"/>
+    	<a href="javascript:void(0);" id="dtbz" onclick="createbz()" style="text-decoration:none">地图标注</a>
+    </td>
   </tr>
   <tr>
     <td><div align="center">问题发生时间</div></td>
@@ -199,8 +177,8 @@ if(fixed!=null && fixed.equals("fixedPrint")){%>
      <%if(permission.equals("yes")){ %>					
     						<input class="noborder" name="sfla" id="sfla" style="width: 98%"/>
    				        <%}else{ %>
-						&nbsp;&nbsp;&nbsp;<input type="radio" name='sfla' id='sfla1' value="是"/>是&nbsp;&nbsp;&nbsp;&nbsp;
-					     <input type="radio" name='sfla' id='sfla2' value="否"/>否
+						&nbsp;&nbsp;&nbsp;<input type="radio" name='sfla' id='sfla' value="是"/>是&nbsp;&nbsp;&nbsp;&nbsp;
+					     <input type="radio" name='sfla' id='sfla' value="否"/>否
 							<%} %>
 							</div></td>
   </tr>
