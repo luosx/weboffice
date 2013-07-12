@@ -1,5 +1,8 @@
 package com.klspta.web.xuzhouNW.xfjb.manager;
 
+import java.util.List;
+import java.util.Map;
+
 import com.klspta.base.AbstractBaseBean;
 /**
  * 
@@ -58,4 +61,48 @@ public class XfAction extends AbstractBaseBean {
 		response(new XfManager().getXFEndList(keyWord));
 	}
 	
+	/**
+	 * 
+	 * <br>Title: 保存标注坐标
+	 * <br>Description: 
+	 * <br>Author: 姚建林
+	 * <br>Date: 2013-7-11
+	 */
+	public void saveBiaozhu(){
+		String strzb = request.getParameter("strzb");
+		String yw_guid = request.getParameter("yw_guid");
+		String sql = "update wfxsfkxx set bzzb = ? where yw_guid = ?";
+		int i = update(sql, YW, new Object[]{strzb,yw_guid});
+		response(i+"");
+	}
+	
+	/**
+	 * 
+	 * <br>Title: 取出标注坐标
+	 * <br>Description: 
+	 * <br>Author: 姚建林
+	 * <br>Date: 2013-7-11
+	 */
+	public String getBiaozhu(String yw_guid){
+		String sql = "select t.bzzb from wfxsfkxx t where t.yw_guid = ?";
+		List<Map<String, Object>> result = query(sql, YW, new Object[]{yw_guid});
+		if(result.get(0).get("bzzb") == null){
+			return "null";
+		}
+		return result.get(0).get("bzzb").toString();
+	}
+	
+	/**
+	 * 
+	 * <br>Title: 删除标注信息
+	 * <br>Description: 
+	 * <br>Author: 姚建林
+	 * <br>Date: 2013-7-12
+	 */
+	public void deleteBiaozhu(){
+		String yw_guid = request.getParameter("yw_guid");
+		String sql = "update wfxsfkxx set bzzb = '' where yw_guid = ?";
+		int i = update(sql, YW, new Object[]{yw_guid});
+		response(i+"");
+	}
 }
