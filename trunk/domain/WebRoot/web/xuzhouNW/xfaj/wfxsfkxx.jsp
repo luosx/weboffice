@@ -2,6 +2,7 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="com.klspta.base.util.UtilFactory"%>
 <%@page import="com.klspta.console.ManagerFactory"%>
+<%@page import="com.klspta.web.xuzhouNW.xfjb.manager.XfAction"%>
 
 <%
     String path = request.getContextPath();
@@ -18,6 +19,7 @@
     String edit = request.getParameter("edit");
     String xzqh = ManagerFactory.getUserManager().getUserWithId(userid).getXzqh();
     String name = UtilFactory.getXzqhUtil().getBeanById(xzqh).getCatonname();
+    String dtbzFlag = new XfAction().getBiaozhu(yw_guid);
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -140,8 +142,13 @@ if(fixed!=null && fixed.equals("fixedPrint")){%>
   <tr>
     <td><div align="center">问题发生地</div></td>
     <td colspan="4">
-    	<input type="text" class="noborder" name="wtfsd" id="wtfsd" style="width: 82%"/>
-    	<a href="javascript:void(0);" id="dtbz" onclick="createbz()" style="text-decoration:none">地图标注</a>
+    	<%if(dtbzFlag.equals("null")){ %>
+    		<input type="text" class="noborder" name="wtfsd" id="wtfsd" style="width: 82%"/>
+			<a href="javascript:void(0);" id="dtbz" onclick="createbz()" style="text-decoration:none">地图标注</a>
+		<%}else{ %>
+			<input type="text" class="noborder" name="wtfsd" id="wtfsd" style="width: 70%"/>
+			<a href="javascript:void(0);" id="dtbz" onclick="createbz()" style="text-decoration:none">地图标注(已标注)</a>
+		<%} %>
     </td>
   </tr>
   <tr>
