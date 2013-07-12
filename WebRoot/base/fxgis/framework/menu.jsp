@@ -1,26 +1,35 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@page import="com.klspta.web.xuzhouNW.dtxc.PADDataManager"%>
+<%@page import="com.klspta.web.xuzhouNW.xfjb.manager.XfAction"%>
 
 <%
-    String path = request.getContextPath();
+String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+//用来标识是不是信访中的地图标注
+String dtbzflag=request.getParameter("dtbzflag");
+//用来标识是不是外业巡查成果展现
 String flag=request.getParameter("flag");
 String yw_guid=request.getParameter("yw_guid");
-System.out.print(yw_guid);
-String pra;
+String pra = "";
 if(yw_guid==null||"null".equals(yw_guid)){
 	pra="dolocation=true&p={\"rings\":[[[38688372,4431495],[38688350,4431440],[38688372,4431390],[38688402,4431431],[38688430,4431431],[38688414,4431494],[38688372,4431495]]],\"spatialReference\":{\"wkid\":2362}}";
 }else{
-	PADDataManager pDataList=new PADDataManager();
-	pra="dolocation=true&p="+pDataList.getCjzb(yw_guid);
+	if(dtbzflag != null && "true".equals(dtbzflag)){
+		XfAction xfAction = new XfAction();
+		if("null".equals(xfAction.getBiaozhu(yw_guid))){
+			
+		}else{
+			pra = "dolocation=true&p="+xfAction.getBiaozhu(yw_guid);
+		}
+	}else{
+		PADDataManager pDataList=new PADDataManager();
+		pra="dolocation=true&p="+pDataList.getCjzb(yw_guid);
+	}
 }
 String url=basePath+"base/fxgis/fx/FxGIS.html?debug=true";
-System.out.print(flag);
-if(flag!=null&&!flag.equals("null")){
-  //System.out.print("1");
-  //url=basePath+"base/fxgis/fx/FxGIS.html?debug=true";
+if(flag!=null&&!flag.equals("null")||dtbzflag!=null&&!dtbzflag.equals("null")){
   url=basePath+"base/fxgis/fx/FxGIS.html?"+pra;
-  }
+}
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
