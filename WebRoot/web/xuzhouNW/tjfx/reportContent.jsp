@@ -78,11 +78,7 @@
         		{header:'数据生成时间',dataIndex:'data_generarion_time',width: 200,sortable: false},
         		{header:'',dataIndex:'id',sortable: false,hidden:true}
         	],
-        	tbar:[
-        	{xtype:'label',text:'快速查找:',width:60},
-        	{xtype:'textfield',id:'keyword',width:450,emptyText:'请输入关键字进行查询'},
-        	{xtype: 'button',text:'查询',handler: queryReport1}
-        ],
+  
            listeners: {
          	'click': function(node, e){
                 var id=node.attributes.id;
