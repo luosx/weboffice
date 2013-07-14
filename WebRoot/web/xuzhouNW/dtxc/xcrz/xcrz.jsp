@@ -70,6 +70,17 @@
 		function initxcrz(){
 			init();
 			show();
+			//判断此日志是否有巡查成果
+			isHaveCG();
+		}
+		
+		function isHaveCG(){
+			putClientCommond("dtxcManager","isHaveCG");
+			putRestParameter("yw_guid","<%=yw_guid%>");
+      		var res = restRequest();
+			if(res=='0'){
+				document.getElementById('viewCgButton').style.display="none";
+			}
 		}
 		
 		//用于控制初始化时页面显示控制
@@ -1062,8 +1073,18 @@
 				<input type="text" value="<%=writerXzqh %>" id="writerxzqh" name="writerxzqh" style="display: none" />
 			</form>
 		</div>
+		<%if("false".equals(isView)){ %>
+		<div id="viewCgButton" style="margin-top:20px;"><button style="cursor:hand;" onclick="viewCG()">点击查看巡查成果</button></div>
+		<% }%>
 	</body>
 	<script>
+		function viewCG(){
+			var yw_guid = "<%=yw_guid%>";
+			var height=window.screen.availHeight;
+			var width=window.screen.availWidth;
+			window.showModalDialog("<%=basePath%>web/xuzhouNW/dtxc/wyxc/xjclyjframe.jsp?zfjcType=13&yw_guid="+yw_guid,obj,"dialogWidth="+width+";dialogHeight="+height);
+		}
+		
 		document.body.onload = initxcrz;
 		<%
 		String msg = (String)request.getParameter("msg");
