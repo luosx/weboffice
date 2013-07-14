@@ -36,7 +36,7 @@
 	<head>
 		<base href="<%=basePath%>">
 
-		<title>待办任务处理</title>
+		<title>动态巡查成果</title>
 
 		<meta http-equiv="pragma" content="no-cache">
 		<meta http-equiv="cache-control" content="no-cache">
