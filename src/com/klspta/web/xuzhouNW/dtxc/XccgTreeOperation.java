@@ -38,7 +38,7 @@ public class XccgTreeOperation extends AbstractBaseBean{
 			for(int i=0;i<list2.size();i++){
 			  Map<String,Object> map2 = list2.get(i);  
 					children+="{text:'巡查成果编号:"+(map2.get("yw_guid"))+"',leaf:1,id:'"+i+"',src:'web/xuzhouNW/dtxc/wyxc/xccgTab.jsp?yw_guid="+map2.get("yw_guid")+"'}";
-					if(i!=(list.size()-1)){
+					if(i!=(list2.size()-1)){
 						children+=",";
 					}
 			}
