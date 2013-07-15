@@ -202,7 +202,7 @@ scrollbar-3dlight-color:#D4D0C8;
 		    	if(flag){
 		    		
 		    		var url = encodeURI(encodeURI("<%=basePath%>"+urlName+".jsp?permission=yes&zfjcType=<%=zfjcType%>&activityName=<%=nodeName%>&formName="+formName));
-		    		alert(url);
+		    		//alert(url);
 		    		window.showModalDialog(url,"","dialogWidth=1000px;dialogHeight=800px");
 		        	//window.open(url);
 		           //alert("treeName=<%=zfjcType%>&wfID="+tree.getNodeById(n.attributes.id).text+"&nodeName=<%=nodeName%>&treeIdList="+treeIdList);
