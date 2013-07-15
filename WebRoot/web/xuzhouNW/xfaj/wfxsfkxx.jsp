@@ -11,8 +11,14 @@
     String permission = request.getParameter("permission");
     String yw_guid = request.getParameter("yw_guid");
     String fixed=request.getParameter("fixed");//显示打印按钮的标识符
+    String wfInsId1 = "";
+    IWorkflowOp workflow1 = null;
+    String activityName1 ="";
     if(permission==null){
         permission = "no";
+        wfInsId1 = request.getParameter("wfInsId");
+		workflow1 = WorkflowOp.getInstance();
+	    activityName1 = workflow1.getActivityNameByWfInsID(wfInsId1);
     }
     Object userprincipal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     String userid = ((User)userprincipal).getUserID();
@@ -52,7 +58,20 @@
          		 }		
 			}
 			document.getElementById('bh2').value=document.getElementById('bh').value;
+			//当流程节点是支队审核，表单是否立案选择是的时候，启动立案查处流程
+			startLaccWorkflow();
 		}
+			function startLaccWorkflow(){
+				var activityName="<%=activityName1%>";
+				var sfla=document.getElementById('sfla1');
+				if(activityName == '支队审核' && sfla.checked){
+						  putClientCommond("startWorkflowLacc","initWorkflow");
+					      putRestParameter("zfjcType","90");
+					      putRestParameter("userId", "<%=userid%>");
+					      restRequest();
+				}
+			}	
+				
 			function save(){
 				document.forms[0].submit();
 			}
@@ -184,8 +203,8 @@ if(fixed!=null && fixed.equals("fixedPrint")){%>
      <%if(permission.equals("yes")){ %>					
     						<input class="noborder" name="sfla" id="sfla" style="width: 98%"/>
    				        <%}else{ %>
-						&nbsp;&nbsp;&nbsp;<input type="radio" name='sfla' id='sfla' value="是"/>是&nbsp;&nbsp;&nbsp;&nbsp;
-					     <input type="radio" name='sfla' id='sfla' value="否"/>否
+						&nbsp;&nbsp;&nbsp;<input type="radio" name='sfla' id='sfla1' value="是"/>是&nbsp;&nbsp;&nbsp;&nbsp;
+					     <input type="radio" name='sfla' id='sfla1' value="否"/>否
 							<%} %>
 							</div></td>
   </tr>
