@@ -2,7 +2,7 @@ var data;
 var simple;
 var url = basePath
 		+ 'model/report/showReport.jsp?id=A8A2D88812384234B6DA4D89931C7A06';
-var condition;
+var condition="";
 		
 Ext.onReady(function() {
 			width = document.body.clientWidth;
