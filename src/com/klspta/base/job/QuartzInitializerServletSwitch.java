@@ -1,6 +1,10 @@
 package com.klspta.base.job;
 
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -9,8 +13,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.quartz.Scheduler;
+import org.quartz.SchedulerException;
 import org.quartz.impl.StdSchedulerFactory;
 
+import com.klspta.base.rest.ProjectInfo;
 import com.klspta.base.util.UtilFactory;
 
 public class QuartzInitializerServletSwitch extends HttpServlet {
@@ -43,7 +49,7 @@ public class QuartzInitializerServletSwitch extends HttpServlet {
             }
             StdSchedulerFactory factory;
             if (configFile != null){
-                factory = new StdSchedulerFactory(configFile);
+                factory = new StdSchedulerFactory(initProp(configFile));
             }else{
                 factory = new StdSchedulerFactory();
             }
@@ -82,5 +88,24 @@ public class QuartzInitializerServletSwitch extends HttpServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException,IOException {
         response.sendError(403);
+    }
+     
+    //自定义属性读取
+    private Properties initProp(String fileName){
+        InputStream is = null;
+        Properties props = new Properties();
+        is = Thread.currentThread().getContextClassLoader().getResourceAsStream(fileName);
+        try{
+          if (is != null) {
+              is = new BufferedInputStream(is);
+          } else {
+              is = new BufferedInputStream(new FileInputStream(fileName));
+          }
+          props.load(is);
+          props.put("org.quartz.plugin.jobInitializer.fileName", "/com/klspta/web/"+ProjectInfo.PROJECT_NAME+"/job/job.xml");
+          return props;
+        } catch (IOException ioe) {
+        	return null;
+        }
     }
 }
