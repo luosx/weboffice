@@ -1,9 +1,11 @@
 var plainCode = "sorry!数据库连接失败，请重新操作！";
 var secretCode = "/com/klspta/base/util/impl/ExceptionCodeUtil";
 var _window;
+var _windowDel;
 
 function showDetail() {
 	viewDel();
+
 }
 function viewCompare(result) {
 	var json = eval(result);
@@ -13,7 +15,7 @@ function viewCompare(result) {
 			plainCode = json[0].rough;
 			secretCode = json[0].detailed;
 			viewException();
-			return "YES";
+			return "YS";
 		} else {
 			return "NO";
 		}
