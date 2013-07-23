@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.quartz.Scheduler;
-import org.quartz.SchedulerException;
 import org.quartz.impl.StdSchedulerFactory;
 
 import com.klspta.base.rest.ProjectInfo;

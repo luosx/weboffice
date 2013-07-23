@@ -112,7 +112,7 @@ public class RestRequest extends ApplicationObjectSupport{
         	}else{
         	    if(factory == null){
                     String s = UtilFactory.getConfigUtil().getApppath() + "../conf/web";
-                    String name = ProjectInfo.getInstance().PROJECT_NAME;
+                    String name = ProjectInfo.PROJECT_NAME;
                     System.out.println(s + "/applicationContext-" + name + ".xml");
                     factory = new FileSystemXmlApplicationContext(s + "/applicationContext-" + name + ".xml"); 
         	    }

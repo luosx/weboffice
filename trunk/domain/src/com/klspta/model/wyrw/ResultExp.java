@@ -95,9 +95,8 @@ public class ResultExp extends AbstractBaseBean {
                     e.printStackTrace();
                 }
             }
-            Map<String, Object> ftpmap = UtilFactory.getFtpUtil().getFtpConfig();
             //附件下载
-            downloadByGuid(guids[i], ftpmap, folder + "//");
+            downloadByGuid(guids[i], folder + "//");
         }
     }
 
@@ -110,7 +109,7 @@ public class ResultExp extends AbstractBaseBean {
      * @param ftpmap
      * @param folder
      */
-    private void downloadByGuid(String guid, Map<String, Object> ftpmap, String folder) {
+    private void downloadByGuid(String guid, String folder) {
         String sql = "select file_id,file_name,file_path from atta_accessory where yw_guid=?";
         List<Map<String, Object>> list = query(sql, CORE, new Object[] { guid });
         for (int i = 0; i < list.size(); i++) {

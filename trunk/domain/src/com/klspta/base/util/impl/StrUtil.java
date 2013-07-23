@@ -47,10 +47,9 @@ public class StrUtil implements IStrUtil {
             throw new Exception("请从UtilFacory获取工具实例.");
         }
         if (instance == null) {
-            return new StrUtil();
-        } else {
-            return instance;
-        }
+        	instance = new StrUtil();
+        } 
+        return instance;
     }
 
     /**
