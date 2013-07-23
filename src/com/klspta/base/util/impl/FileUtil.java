@@ -1,7 +1,6 @@
 package com.klspta.base.util.impl;
 
 import java.io.File;
-import java.rmi.server.UID;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -12,9 +11,13 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
+import com.klspta.base.util.UtilFactory;
 import com.klspta.base.util.api.IFileUtil;
 
 public class FileUtil implements IFileUtil {
+	
+	private FileUtil(){}
+	
     private static FileUtil instance;
 
     /**
@@ -32,15 +35,14 @@ public class FileUtil implements IFileUtil {
     private static int SIZEMAXKB = 1024 * 1024;
 
     @Override
-    public List<String> upload(HttpServletRequest request, int sizeMaxKb, int sizeThresholdKb)
-            throws Exception {
+    public List<String> upload(HttpServletRequest request, int sizeMaxKb, int sizeThresholdKb) throws Exception {
         // 判断是否为文件上传的请求
         boolean isMultipart = ServletFileUpload.isMultipartContent(request);
         if (!isMultipart) {
             throw new Exception("非文件上传request，不能调用当前方法");
         }
         try {
-            String uploadPath = "d://temp//" + new UID().toString().replaceAll(":", "-") + "//";
+            String uploadPath = UtilFactory.getConfigUtil().getApppath() + UtilFactory.getStrUtil().getGuid() + "//";
             File uploadFile = new File(uploadPath);
             if (!uploadFile.exists()) {
                 uploadFile.mkdirs();
@@ -62,7 +64,6 @@ public class FileUtil implements IFileUtil {
             List<String> list = new ArrayList<String>();
             while (i.hasNext()) {
                 FileItem fi = (FileItem) i.next();
-
                 String fileName = fi.getName();
                 if (fileName != null) {
                     fileName = fileName.substring(fileName.lastIndexOf("\\") + 1);
@@ -71,7 +72,7 @@ public class FileUtil implements IFileUtil {
                     list.add(uploadPath + fileName);
                 }
             }
-            System.out.println("上传成功，文件保存在：" + uploadPath);
+            //System.out.println("上传成功，文件保存在：" + uploadPath);
             return list;
         } catch (Exception e) {
             return null;
@@ -84,10 +85,9 @@ public class FileUtil implements IFileUtil {
             throw new Exception("请通过UtilFactory获取实例.");
         }
         if (instance == null) {
-            return new FileUtil();
-        } else {
-            return instance;
+        	instance = new FileUtil();
         }
+        return instance;
     }
 
     @Override

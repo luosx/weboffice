@@ -100,24 +100,20 @@ public abstract class AbstractDataBaseSupport {
 		return opTemplate.update(sql, args);
 	}
 
-	public void excute(String sql, String type, final InputStream inputstream) {
+	public void updateBlob(String sql, String type, final InputStream inputstream) {
 		final LobHandler lobHandler = new DefaultLobHandler();
 		opTemplate = findTemplate(type);
-		opTemplate.execute(sql,
-				new AbstractLobCreatingPreparedStatementCallback(lobHandler) {
-					@Override
-					protected void setValues(PreparedStatement ps,
-							LobCreator lobCreator) throws SQLException {
-						try {
-							lobCreator.setClobAsAsciiStream(ps, 3, inputstream,
-									inputstream.available());
-							lobCreator.setClobAsAsciiStream(ps, 4, inputstream,
-									inputstream.available());
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-					}
-				});
+		opTemplate.execute(sql, new AbstractLobCreatingPreparedStatementCallback(lobHandler) {
+		    @Override
+			protected void setValues(PreparedStatement ps, LobCreator lobCreator) throws SQLException {
+				try {
+					lobCreator.setClobAsAsciiStream(ps, 3, inputstream, inputstream.available());
+					lobCreator.setClobAsAsciiStream(ps, 4, inputstream, inputstream.available());
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		});
 	}
 
 	private boolean checkDeleteSQL(String sql) {

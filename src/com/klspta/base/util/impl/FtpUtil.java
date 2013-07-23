@@ -4,8 +4,6 @@ import it.sauronsoftware.ftp4j.FTPClient;
 
 import java.io.File;
 import java.io.InputStream;
-import java.util.HashMap;
-import java.util.Map;
 
 import com.klspta.base.AbstractBaseBean;
 import com.klspta.base.util.UtilFactory;
@@ -16,8 +14,6 @@ public class FtpUtil extends AbstractBaseBean implements IFtpUtil {
 
     private static FtpUtil ftpUtil;
 
-    private static Map<String, Object> ftpConfigMap = new HashMap<String, Object>();
-
     private FtpUtil() {
 
     }
@@ -27,7 +23,7 @@ public class FtpUtil extends AbstractBaseBean implements IFtpUtil {
             throw new Exception("请通过UtilFactory获取实例.");
         }
         if (ftpUtil == null) {
-            return new FtpUtil();
+        	ftpUtil = new FtpUtil();
         }
         return ftpUtil;
     }
@@ -40,45 +36,16 @@ public class FtpUtil extends AbstractBaseBean implements IFtpUtil {
      */
     public String downloadFile(String ip, int port, String username, String password, String ftpFileId) {
         StringBuffer sb = new StringBuffer("ftp://");
-        sb.append(username).append(":").append(password).append("@").append(ip).append(":").append(port)
-                .append("/").append(ftpFileId);
+        sb.append(username).append(":").append(password).append("@").append(ip).append(":").append(port).append("/").append(ftpFileId);
         return sb.toString();
     }
 
-    /**
-     * <br>Description: 获取ftp配置信息
-     * <br>Author:李如意
-     * <br>DateTime:2012-8-23 下午03:07:18
-     * @see com.klspta.base.util.api.IFtpUtil#getFtpConfig()
-     */
-    @Override
-    public Map<String, Object> getFtpConfig() {
-        String host = UtilFactory.getConfigUtil().getConfig("ftp.host");
-        String port = UtilFactory.getConfigUtil().getConfig("ftp.port");
-        String username = UtilFactory.getConfigUtil().getConfig("ftp.username");
-        String password = UtilFactory.getConfigUtil().getConfig("ftp.password");
-        ftpConfigMap.put("FTP_HOST", host);
-        ftpConfigMap.put("FTP_PORT", port);
-        ftpConfigMap.put("FTP_USERNAME", username);
-        ftpConfigMap.put("FTP_PASSWORD", password);
-        return ftpConfigMap;
-    }
 
-    /**
-     * <br>Description:获取ftpClient
-     * <br>Author:李如意
-     * <br>Date:2012-8-16
-     * @see com.klspta.base.util.api.IFtpUtil#getFtpClient()
-     */
-    @Override
-    public FTPClient getFtpClient() {
-        Map<String, Object> ftpConfigMap = getFtpConfig();
+    private FTPClient getFtpClient() {
         FTPClient ftpClient = new FTPClient();
         try {
-            ftpClient.connect((String) ftpConfigMap.get("FTP_HOST"), Integer.parseInt((String) ftpConfigMap
-                    .get("FTP_PORT")));
-            ftpClient.login((String) ftpConfigMap.get("FTP_USERNAME"), (String) ftpConfigMap
-                    .get("FTP_PASSWORD"));
+            ftpClient.connect(UtilFactory.getConfigUtil().getConfig("ftp.host"), Integer.parseInt(UtilFactory.getConfigUtil().getConfig("ftp.port")));
+            ftpClient.login(UtilFactory.getConfigUtil().getConfig("ftp.username"), UtilFactory.getConfigUtil().getConfig("ftp.password"));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -93,13 +60,20 @@ public class FtpUtil extends AbstractBaseBean implements IFtpUtil {
      */
     @Override
     public boolean uploadFile(InputStream input, String ftpFileName) {
+    	FTPClient client = getFtpClient();
         try {
-            FTPClient client = UtilFactory.getFtpUtil().getFtpClient();
+            
             client.upload(ftpFileName, input, 0L, 0L, null);
-            client.disconnect(false);
+            
         } catch (Exception e) {
             e.printStackTrace();
             return false;
+        }finally{
+        	try {
+				client.disconnect(false);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
         }
         return true;
     }
@@ -112,13 +86,18 @@ public class FtpUtil extends AbstractBaseBean implements IFtpUtil {
      */
     @Override
     public boolean uploadFile(String file_path) {
+    	FTPClient client = getFtpClient();
         try {
-            FTPClient client = UtilFactory.getFtpUtil().getFtpClient();
             client.upload(new File(file_path));
-            client.disconnect(false);
         } catch (Exception e) {
             e.printStackTrace();
             return false;
+        }finally{
+        	try {
+				client.disconnect(false);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
         }
         return true;
     }
@@ -130,7 +109,7 @@ public class FtpUtil extends AbstractBaseBean implements IFtpUtil {
      * @see com.klspta.base.util.api.IFtpUtil#downloadFile(java.lang.String, java.lang.String)
      */
     public boolean downloadFile(String remoteFileName, String localFilePosition) {
-        FTPClient client = UtilFactory.getFtpUtil().getFtpClient();
+        FTPClient client = getFtpClient();
         try {
             client.download(remoteFileName, new File(localFilePosition));
             client.disconnect(false);
@@ -148,7 +127,7 @@ public class FtpUtil extends AbstractBaseBean implements IFtpUtil {
      * @see com.klspta.base.util.api.IFtpUtil#deleteFTPFile(java.lang.String)
      */
     public boolean deleteFile(String ftpFileName) {
-        FTPClient client = UtilFactory.getFtpUtil().getFtpClient();
+        FTPClient client = getFtpClient();
         try {
             client.deleteFile(ftpFileName);
             client.disconnect(false);

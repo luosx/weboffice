@@ -45,10 +45,6 @@ public final class ConfigUtil extends AbstractBaseBean implements IConfigUtil {
             SECURITY_verifyURL = props.getProperty("SECURITY_verifyURL");
             SECURITY_passIPs = props.getProperty("SECURITY_passIPs");
 
-            //InputStream sqlbasepath = getClass().getResourceAsStream("/com/klspta/base/sql/sql.properties");
-            //sqlprops = new Properties();
-            //sqlprops.load(sqlbasepath);
-
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
