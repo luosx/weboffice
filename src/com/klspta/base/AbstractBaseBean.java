@@ -22,23 +22,19 @@ public abstract class AbstractBaseBean extends AbstractRestRequestSupport {
     	List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
     	Map<String, Object> map = new HashMap<String, Object>();
 		StringBuffer buffer = new StringBuffer();
-		// 异常日志记录
-		Logger logger = Logger.getLogger(obj.getClass().getName());
-		logger.error(e);
 		// 错误编码库信息获取
 		StackTraceElement[] stackTrace = e.getStackTrace();
 		for(int i=0;i<stackTrace.length;i++){
 			buffer.append(" \n "+stackTrace[i]);
 			
 		}
-	e.printStackTrace();
-	String plainCode = UtilFactory.getConfigUtil().getExceptionDescribe(exceptionCode);
+	String plain = UtilFactory.getConfigUtil().getExceptionDescribe(exceptionCode);
 	// 异常详细信息
-	String classSite = obj.getClass().getName() + "/" + methodName;
-	String secretCode = classSite + "\n" + e+buffer.toString();
+	String classSite = obj.getClass().getName() + "." + methodName;
+	String secret = classSite + "\n" + e.getMessage()+buffer.toString();
 	map.put("Exception", "error");
-	map.put("rough", plainCode);
-	map.put("detailed", secretCode);
+	map.put("plain", plain);
+	map.put("secret", secret);
 	list.add(map);
 	response(list);
     }
