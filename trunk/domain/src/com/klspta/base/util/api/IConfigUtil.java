@@ -59,7 +59,17 @@ public interface IConfigUtil {
      * @param key
      * @return
      */
+    
     public double getConfigDouble(String key);
+    
+    /**
+     * <br>Description:根据异常码获取中文描述
+     * <br>Author:陈强峰
+     * <br>Date:2013-6-5
+     * @param key
+     * @return
+     */
+    public String getExceptionDescribe(String key);
 
     /**
      * <br>Description:获取URL路径

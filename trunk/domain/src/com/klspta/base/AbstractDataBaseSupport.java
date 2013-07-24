@@ -26,7 +26,7 @@ import org.springframework.stereotype.Component;
  * Date:2011-5-3
  */
 @Component
-public abstract class AbstractDataBaseSupport {
+public abstract class AbstractDataBaseSupport extends BaseLogSupport{
 
 	public static final String GIS = "GISTemplate";
 	public static final String YW = "YWTemplate";
