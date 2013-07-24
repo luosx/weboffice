@@ -4,22 +4,21 @@ var _window;
 var _windowDel;
 
 function viewCompare(json) {
-	if (json!=null&& typeof(json)!="undefined" && json!=0)
-	{
-	var json = eval(json);
-	if (json.length > 0) {
-		var res = json[0].Exception;
-		if ("error" == res) {
-			plainCode = json[0].rough;
-			secretCode = json[0].detailed;
-			viewException();
-			return "YS";
+	if (json != null && typeof(json) != "undefined" && json != 0) {
+		var json = eval(json);
+		if (json.length > 0) {
+			var res = json[0].Exception;
+			if ("error" == res) {
+				plainCode = json[0].plain;
+				secretCode = json[0].secret;
+				viewException();
+				return "YS";
+			} else {
+				return "NO";
+			}
 		} else {
 			return "NO";
 		}
-	} else {
-		return "NO";
-	}
 	}
 	return "NO";
 }
@@ -136,6 +135,8 @@ function ajaxRequest(path, beanname, method, parameters) {
 	var msg = viewCompare(result);
 	if (msg == 'NO') {
 		return result;
+	}else{
+	return "isException";
 	}
 
 }
