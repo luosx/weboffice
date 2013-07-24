@@ -36,3 +36,5 @@ function pjsonAjax(URL){
     var result = objXMLReq.responseText;            
     return result;
 }
+
+

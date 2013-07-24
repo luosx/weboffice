@@ -4,8 +4,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
-import java.util.Map;
 import java.util.Properties;
 
 import com.klspta.base.AbstractBaseBean;
@@ -26,25 +24,42 @@ public final class ConfigUtil extends AbstractBaseBean implements IConfigUtil {
         return app_path;
     }
 
-    Properties props = null;
+    Properties confprops = null;
 
-    Properties sqlprops = null;
+    Properties codeprops = null;
 
     private ConfigUtil() {
+    	initConfig();
+    	initExceptionCode();
+    }
+    
+    private void initConfig(){
         try {
             InputStream basepath = getClass().getResourceAsStream("/config.properties");
             app_path = getClass().getResource("/").getPath();
-            props = new Properties();
-            props.load(basepath);
-            SHAPE_FILE_TEMP_FLODER = props.getProperty("SHAPEFILE_PATH");
+            confprops = new Properties();
+            confprops.load(basepath);
+            SHAPE_FILE_TEMP_FLODER = confprops.getProperty("SHAPEFILE_PATH");
             File file = new File(SHAPE_FILE_TEMP_FLODER);
             if (!file.exists()) {
                 file.mkdirs();
             }
-            SECURITY_USEABLE = props.getProperty("SECURITY_USEABLE");
-            SECURITY_verifyURL = props.getProperty("SECURITY_verifyURL");
-            SECURITY_passIPs = props.getProperty("SECURITY_passIPs");
+            SECURITY_USEABLE = confprops.getProperty("SECURITY_USEABLE");
+            SECURITY_verifyURL = confprops.getProperty("SECURITY_verifyURL");
+            SECURITY_passIPs = confprops.getProperty("SECURITY_passIPs");
 
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    private void initExceptionCode(){
+        try {
+            InputStream basepath = getClass().getResourceAsStream("/exceptioncode.properties");
+            app_path = getClass().getResource("/").getPath();
+            codeprops = new Properties();
+            codeprops.load(basepath);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -81,36 +96,20 @@ public final class ConfigUtil extends AbstractBaseBean implements IConfigUtil {
         return SECURITY_passIPs;
     }
 
-    public String getSQL(String key) {
-        return this.getSqlValue(sqlprops.getProperty(key));
+    public String getExceptionDescribe(String code) {
+        return codeprops.getProperty(code);
     }
 
     public String getConfig(String key) {
-        return props.getProperty(key);
+        return confprops.getProperty(key);
     }
 
     public double getConfigDouble(String key) {
         try {
-            return Double.parseDouble(props.getProperty(key));
+            return Double.parseDouble(confprops.getProperty(key));
         } catch (Exception e) {
             e.printStackTrace();
         }
         return 0.0;
     }
-
-    public String getSqlValue(String sqlporperties) {
-        String[] value = sqlporperties.split("@");
-        String sql = value[0];
-        if (value.length == 2) {
-            String querySrid = sqlprops.getProperty("querySrid");
-            Object[] arg = { value[1].toUpperCase() };
-            List<Map<String, Object>> list = query(querySrid, SDE, arg);
-            if (list.size() > 0) {
-                Map<String, Object> map = list.get(0);
-                sql = sql.replace("#srid", (String) map.get("srid"));
-            }
-        }
-        return sql;
-    }
-
 }
