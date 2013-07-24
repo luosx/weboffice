@@ -4,6 +4,8 @@ var _window;
 var _windowDel;
 
 function viewCompare(json) {
+	if (json!=null&& typeof(json)!="undefined" && json!=0)
+	{
 	var json = eval(json);
 	if (json.length > 0) {
 		var res = json[0].Exception;
@@ -18,7 +20,8 @@ function viewCompare(json) {
 	} else {
 		return "NO";
 	}
-
+	}
+	return "NO";
 }
 viewException = function() {
 	_window = new Ext.Window({
@@ -156,5 +159,3 @@ function pjsonAjax(URL) {
 	var result = objXMLReq.responseText;
 	return result;
 }
-
-
