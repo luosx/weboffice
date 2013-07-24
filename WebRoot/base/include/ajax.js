@@ -86,8 +86,6 @@ viewDel = function() {
 							xtype : 'textarea',
 							width : 640,
 							height : 540,
-
-							// maxLength :50,
 							value : secretCode,
 							id : "meg2"
 						}],
