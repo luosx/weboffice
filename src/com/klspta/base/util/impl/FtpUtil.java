@@ -47,6 +47,7 @@ public class FtpUtil extends AbstractBaseBean implements IFtpUtil {
             ftpClient.connect(UtilFactory.getConfigUtil().getConfig("ftp.host"), Integer.parseInt(UtilFactory.getConfigUtil().getConfig("ftp.port")));
             ftpClient.login(UtilFactory.getConfigUtil().getConfig("ftp.username"), UtilFactory.getConfigUtil().getConfig("ftp.password"));
         } catch (Exception e) {
+        	responseException(this, "getFtpClient", "100006", e);
             e.printStackTrace();
         }
         return ftpClient;
@@ -67,6 +68,7 @@ public class FtpUtil extends AbstractBaseBean implements IFtpUtil {
             
         } catch (Exception e) {
             e.printStackTrace();
+            responseException(this, "uploadFile", "100003", e);
             return false;
         }finally{
         	try {
@@ -90,6 +92,7 @@ public class FtpUtil extends AbstractBaseBean implements IFtpUtil {
         try {
             client.upload(new File(file_path));
         } catch (Exception e) {
+        	responseException(this, "uploadFile", "100003", e);
             e.printStackTrace();
             return false;
         }finally{
@@ -114,6 +117,7 @@ public class FtpUtil extends AbstractBaseBean implements IFtpUtil {
             client.download(remoteFileName, new File(localFilePosition));
             client.disconnect(false);
         } catch (Exception e) {
+        	responseException(this, "downloadFile", "100007", e);
             e.printStackTrace();
             return false;
         }
