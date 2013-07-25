@@ -84,12 +84,7 @@ public class Role implements Group{
 		this.xzqh = xzqh;
 	}
 	public List<User> getUserList(){
-        try {
             return ManagerFactory.getUserManager().getUserWithRoleID(this.roleid);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
     }
     public static String getDeleteSQL(){
         return "delete from core_roles t where t.id = ?";
@@ -112,12 +107,10 @@ public class Role implements Group{
 	}
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
 		return this.rolename;
 	}
 	@Override
 	public String getType() {
-		// TODO Auto-generated method stub
 		return null;
 	}
     
