@@ -68,7 +68,7 @@
     <script type="text/javascript" src="framework/frameworkInterface.js"></script>
     <script type="text/javascript" src="framework/frameworkInterfaceimpl.js"></script>
     <script type="text/javascript" src="framework/frameworkHttpRequest.js"></script>
-    <script type="text/javascript" src="<%=basePath%>/common/js/ajax.js"></script>
+    <%@ include file="/base/include/restRequest.jspf" %>
     <%@ include file="/base/include/ext.jspf" %>
     
     
