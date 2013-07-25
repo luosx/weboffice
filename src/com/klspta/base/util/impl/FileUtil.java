@@ -60,8 +60,8 @@ public class FileUtil extends AbstractBaseBean  implements IFileUtil {
             }
             upload.setSizeMax(sizeMaxKb * 1024);
             upload.setHeaderEncoding("utf-8");
-            List fileItems = upload.parseRequest(request);
-            Iterator i = fileItems.iterator();
+            List<?> fileItems = upload.parseRequest(request);
+            Iterator<?> i = fileItems.iterator();
             List<String> list = new ArrayList<String>();
             while (i.hasNext()) {
                 FileItem fi = (FileItem) i.next();
