@@ -3,12 +3,13 @@ package com.klspta.base.util.impl;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
+import com.klspta.base.AbstractBaseBean;
 import com.klspta.base.util.UtilFactory;
 import com.klspta.base.util.api.IWKTUtil;
 import com.klspta.base.wkt.Polygon;
 import com.klspta.base.wkt.Ring;
 
-public final class WKTUtil implements IWKTUtil {
+public final class WKTUtil extends AbstractBaseBean   implements IWKTUtil {
 
     private WKTUtil() {
     }
@@ -36,6 +37,7 @@ public final class WKTUtil implements IWKTUtil {
                 plgon.addRing(ring);
             }
         } catch (Exception e) {
+        	  responseException(this,"stringToWKTObject", "300004", e);
             e.printStackTrace();
         }
         return plgon;
