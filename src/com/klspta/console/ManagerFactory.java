@@ -17,8 +17,8 @@ public class ManagerFactory {
         return instance;
     }
     
-    public static UserManager getUserManager() throws Exception {
-        return UserManager.getInstance("NEW WITH MANAGER FACTORY!");
+    public static UserManager getUserManager(){
+        return UserManager.getInstance();
     }
     
     public static RoleManager getRoleManager() throws Exception {
