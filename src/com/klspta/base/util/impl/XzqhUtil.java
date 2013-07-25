@@ -148,6 +148,7 @@ public class XzqhUtil extends AbstractBaseBean implements IXzqhUtil {
         try {
             msgString = UtilFactory.getJSONUtil().objectToJSON(province);
         } catch (Exception e) {
+        	responseException(this, "generateOptionByList","100002", e);
             e.printStackTrace();
         }
         return msgString;
