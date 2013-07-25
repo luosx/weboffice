@@ -221,7 +221,7 @@ public class MapServiceManager extends AbstractBaseBean {
     	List<MapServiceBean> allRows = new ArrayList<MapServiceBean>();
     	String sql = "select * from GIS_MAPSERVICES";
     	List<Map<String, Object>> resultList = query(sql, CORE);
-    	for(Map<String, Object> resultMap : resultList){
+    	for(int i=0;i<resultList.size();i++){
     		MapServiceBean mapServiceBean = new MapServiceBean();
     		
     		allRows.add(mapServiceBean);
