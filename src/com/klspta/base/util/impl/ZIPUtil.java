@@ -12,9 +12,10 @@ import org.apache.tools.ant.types.FileSet;
 import org.apache.tools.zip.ZipEntry;
 import org.apache.tools.zip.ZipFile;
 
+import com.klspta.base.AbstractBaseBean;
 import com.klspta.base.util.api.IZIPUtil;
 
-public final class ZIPUtil implements IZIPUtil {
+public final class ZIPUtil extends AbstractBaseBean implements IZIPUtil {
 
     private ZIPUtil() {
     }
@@ -81,6 +82,7 @@ public final class ZIPUtil implements IZIPUtil {
             zipFile.close();
 
         } catch (Exception ex) {
+        	responseException(this, "unZip", "100011", ex);
             ex.printStackTrace();
         }
     }
