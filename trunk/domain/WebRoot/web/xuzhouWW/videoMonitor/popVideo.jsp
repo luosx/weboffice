@@ -23,7 +23,8 @@ String carid=new String(request.getParameter("carid").getBytes("ISO-8859-1"), "u
 	</style>
     <script type="text/javascript" src="carvideojs/prototype.js"></script>
     <script type="text/javascript" src="carvideojs/nrcap2sdk.js" ></script>    
-    <script src="<%=basePath%>/base/include/ajax.js"></script>
+        <%@ include file="/base/include/restRequest.jspf" %>
+    <%@ include file="/base/include/ext.jspf" %>
     <script type="text/javascript">
     var Debug = null;
     //var carid='<%=carid%>';
