@@ -35,7 +35,7 @@
 		<meta http-equiv="pragma" content="no-cache">
 		<meta http-equiv="cache-control" content="no-cache">
 		<meta http-equiv="expires" content="0">
-		<script src="<%=basePath%>/common/js/ajax.js"></script>
+		<%@ include file="/base/include/restRequest.jspf" %>
 		<%@ include file="/common/include/ext.jspf"%>
 		<script
 			src="<%=basePath%>ext/examples/ux/fileuploadfield/FileUploadField.js"
