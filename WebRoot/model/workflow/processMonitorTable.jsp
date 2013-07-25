@@ -22,7 +22,6 @@
 		<meta http-equiv="cache-control" content="no-cache">
 		<meta http-equiv="expires" content="0">
 		<%@ include file="/base/include/restRequest.jspf" %>
-		<script src="<%=basePath%>/base/include/ajax.js"></script>
 		<%@ include file="/base/include/ext.jspf"%>
 		<style type="text/css">
 html,body {

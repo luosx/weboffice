@@ -49,8 +49,9 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>任务移交窗口</title>
-		<script src="<%=basePath%>/base/include/ajax.js"></script>
-		<style type="text/css">
+    <%@ include file="/base/include/restRequest.jspf" %>
+    <%@ include file="/base/include/ext.jspf" %>
+    		<style type="text/css">
 body {
 	background-image: url(images/main_bk.gif);
 	margin: 0px;

@@ -31,7 +31,7 @@
 		<meta http-equiv="cache-control" content="no-cache">
 		<meta http-equiv="expires" content="0">
 
-		<script src="<%=basePath%>/base/include/ajax.js"></script>
+	    <%@ include file="/base/include/restRequest.jspf" %>
 		<%@ include file="/base/include/ext.jspf"%>
 	</head>
 	<style>
