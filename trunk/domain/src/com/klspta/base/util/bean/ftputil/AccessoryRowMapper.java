@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-public class AccessoryRowMapper implements RowMapper {
+public class AccessoryRowMapper implements RowMapper<AccessoryBean> {
 
     @Override
     public AccessoryBean mapRow(ResultSet rs, int i) throws SQLException {
