@@ -17,7 +17,6 @@
 		<meta http-equiv="expires" content="0">
 		<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 		<meta http-equiv="description" content="This is my page">
-		<script src="<%=basePath%>/base/include/ajax.js"></script>
 		 <%@ include file="/base/include/ext.jspf" %>
 		 <%@ include file="/base/include/restRequest.jspf" %>
 		<script type="text/javascript" src="<%=basePath%>base/thirdres/ext/examples/ux/PagingMemoryProxy.js"></script>
