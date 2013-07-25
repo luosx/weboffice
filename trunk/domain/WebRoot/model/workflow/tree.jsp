@@ -24,7 +24,7 @@
 <title>content</title>
 <link href="<%=basePath %>/console/css/style.css" rel="stylesheet" type="text/css" />
 		<%@ include file="/base/include/ext.jspf" %>
-	<script src="<%=basePath%>/common/js/ajax.js"></script>
+	    <%@ include file="/base/include/restRequest.jspf" %>
 		<style>
 body {
 	font-family: helvetica, tahoma, verdana, sans-serif;
