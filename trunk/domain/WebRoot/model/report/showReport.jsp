@@ -100,7 +100,6 @@
 		%>
 		<script
 			src="<%=basePath%>/base/thirdres/anyChart/binaries/js/AnyChart.js"></script>
-		<script src="<%=basePath%>/base/include/ajax.js"></script>
 		<%@ include file="/base/include/ext.jspf"%>
 		<%@ include file="/base/include/restRequest.jspf"%>
 		<style type="text/css">
