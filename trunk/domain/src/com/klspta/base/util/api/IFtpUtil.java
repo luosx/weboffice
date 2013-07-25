@@ -1,7 +1,5 @@
 package com.klspta.base.util.api;
 
-import it.sauronsoftware.ftp4j.FTPClient;
-
 import java.io.InputStream;
 
 public interface IFtpUtil {
