@@ -18,7 +18,8 @@
 %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
-<script type="text/javascript" src="<%=basePath%>/common/js/ajax.js"></script>  
+    <%@ include file="/base/include/restRequest.jspf" %>
+    <%@ include file="/base/include/ext.jspf" %>
 <script language="javascript">
 window.onload=function(){
 	document.getElementById("taskid").value="<%=yw_guid%>"; 
