@@ -323,7 +323,7 @@ public class MapTreeManager extends AbstractBaseBean {
             List<MapTreeBean> cMapTreeList = getMapTreeListByRoleList(roleidList);
             return cMapTreeList;
         } catch (Exception e) {
-            // TODO Auto-generated catch block
+        	responseException(this, "getMemoMapTreeBeanListByUserId", "100002", e);
             e.printStackTrace();
         }
         return null;

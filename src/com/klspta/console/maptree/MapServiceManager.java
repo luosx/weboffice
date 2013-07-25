@@ -72,6 +72,7 @@ public class MapServiceManager extends AbstractBaseBean {
             str = str.replaceAll("\\'", " ");
             return str;
         } catch (Exception e) {
+        	responseException(this, "getHtml", "100002", e);
             e.printStackTrace();
             return null;
         }
