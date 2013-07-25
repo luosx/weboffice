@@ -4,6 +4,7 @@ import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import net.sf.json.util.JSONUtils;
 
+import com.klspta.base.AbstractBaseBean;
 import com.klspta.base.util.api.IJSONUtil;
 
 /**
@@ -13,7 +14,7 @@ import com.klspta.base.util.api.IJSONUtil;
  * <br>Author:王瑛博
  * <br>Date:2011-5-3
  */
-public final class JSONUtil implements IJSONUtil {
+public final class JSONUtil extends AbstractBaseBean implements IJSONUtil {
     /**
      * '('
      */
@@ -121,6 +122,7 @@ public final class JSONUtil implements IJSONUtil {
         try {
             return JSONObject.fromObject(json);
         } catch (Exception e) {
+        	responseException(this, "jsonToObject","100008", e);
             throw e;
         }
     }
@@ -136,6 +138,7 @@ public final class JSONUtil implements IJSONUtil {
         try {
             return JSONArray.fromObject(json);
         } catch (Exception e) {
+        	responseException(this, "jsonToObject","100008", e);
             throw e;
         }
     }
@@ -155,6 +158,7 @@ public final class JSONUtil implements IJSONUtil {
                 return JSONObject.fromObject(object).toString();
             }
         } catch (Exception e) {
+        	responseException(this, "objectToJSON", "100008", e);
             throw e;
         }
     }
@@ -253,7 +257,7 @@ public final class JSONUtil implements IJSONUtil {
                 }
             }
         } catch (IndexOutOfBoundsException e) {
-            ;
+            responseException(this,"format", "300004", e);
         }
         return doc.toString();
     }
