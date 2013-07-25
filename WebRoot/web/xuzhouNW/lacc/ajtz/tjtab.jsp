@@ -15,7 +15,6 @@
 		<%@ include file="/base/include/restRequest.jspf" %>
 		<script type="text/javascript" src="<%=basePath%>base/thirdres/ext/examples/ux/PagingMemoryProxy.js"></script>
 		<script type="text/javascript" src="<%=basePath%>base/thirdres/ext/examples/ux/ProgressBarPager.js"></script>
-	    <script src="<%=basePath%>/base/include/ajax.js"></script>
 		<script type="text/javascript" src="js/DatePicker.js"></script>
 		<link rel="stylesheet" type="text/css" href="<%=basePath%>base/thirdres/ext/examples/ux/fileuploadfield/css/fileuploadfield.css"/>
 
