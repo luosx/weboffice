@@ -50,20 +50,24 @@ public final class ConfigUtil extends AbstractBaseBean implements IConfigUtil {
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+            responseException(this,"initConfig","100002",e);
         } catch (IOException e) {
+           responseException(this,"initConfig","100002",e);
             e.printStackTrace();
         }
     }
     private void initExceptionCode(){
         try {
-            InputStream basepath = getClass().getResourceAsStream("/exceptioncode.properties");
+            InputStream basepath = getClass().getResourceAsStream("/exceptionCode.properties");
             app_path = getClass().getResource("/").getPath();
             codeprops = new Properties();
             codeprops.load(basepath);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+            responseException(this,"initExceptionCode","100002",e);
         } catch (IOException e) {
             e.printStackTrace();
+            responseException(this,"initExceptionCode","100002",e);
         }
     }
 
@@ -108,6 +112,7 @@ public final class ConfigUtil extends AbstractBaseBean implements IConfigUtil {
         try {
             return Double.parseDouble(confprops.getProperty(key));
         } catch (Exception e) {
+        	 responseException(this,"getConfigDouble","100002",e);
             e.printStackTrace();
         }
         return 0.0;
