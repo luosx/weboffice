@@ -44,7 +44,6 @@
 		<meta http-equiv="expires" content="0">
 		<%@ include file="/base/include/ext.jspf" %>
 		<%@ include file="/base/include/restRequest.jspf"%>
-		<script src="<%=basePath%>/base/include/ajax.js"></script>
    <style type="text/css">
     html,body {
 	    font: normal 12px verdana;
