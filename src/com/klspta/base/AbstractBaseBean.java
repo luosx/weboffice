@@ -29,6 +29,9 @@ public abstract class AbstractBaseBean extends AbstractRestRequestSupport {
 			
 		}
 	String plain = UtilFactory.getConfigUtil().getExceptionDescribe(exceptionCode);
+	if(plain==null||plain.equals("")){
+		plain="系统出错！请重试或联系管理员";
+	}
 	// 异常详细信息
 	String classSite = obj.getClass().getName() + "." + methodName;
 	String secret = classSite + "\n" + e.getMessage()+buffer.toString();
