@@ -25,12 +25,13 @@ import org.geotools.feature.simple.SimpleFeatureBuilder;
 import org.geotools.geometry.jts.WKTReader2;
 import org.opengis.feature.simple.SimpleFeatureType;
 
+import com.klspta.base.AbstractBaseBean;
 import com.klspta.base.util.UtilFactory;
 import com.klspta.base.util.api.IShapeUtil;
 import com.klspta.base.util.bean.shapeutil.DbfParameters;
 import com.klspta.base.util.bean.shapeutil.ShpParameters;
 
-public final class ShapeUtil implements IShapeUtil {
+public final class ShapeUtil extends AbstractBaseBean   implements IShapeUtil {
 
     public static IShapeUtil getInstance(String key) throws Exception {
         if (!key.equals("NEW WITH UTIL FACTORY!")) {
@@ -94,12 +95,14 @@ public final class ShapeUtil implements IShapeUtil {
             featureStore.addFeatures(ff);
             t.commit();
         } catch (IOException e) {
+        	responseException(this,"expShpFile", "100009", e);
             e.printStackTrace();
             try {
                 t.rollback();
             } catch (IOException ioe) {
             }
         } catch (Exception e) {
+        	responseException(this,"expShpFile", "100009", e);
             e.printStackTrace();
         } finally {
             try {
