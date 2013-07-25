@@ -26,7 +26,8 @@
 	<!--
 		<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-	<script src="<%=basePath%>/base/include/ajax.js"></script> 
+    <%@ include file="/base/include/restRequest.jspf" %>
+    <%@ include file="/base/include/ext.jspf" %>
 	<script src="<%=basePath%>/base/form/DatePicker/WdatePicker.js"></script> 
 	
   </head>
