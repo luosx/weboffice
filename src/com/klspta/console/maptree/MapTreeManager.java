@@ -128,7 +128,7 @@ public class MapTreeManager extends AbstractBaseBean {
      * @return
      */
     public List<MapTreeBean> getMapTreeBeanListByRoleId(String roleId) {
-        List<MapTreeBean> maptreeList = MapTreeManager.getInstance().maptreeList;
+        List<MapTreeBean> maptreeList = MapTreeManager.getInstance().getMaptreeList();
         List<MapTreeBean> list = new ArrayList<MapTreeBean>();
         String sql = "select p.treeid from map_role_maptree p where p.roleid=? order by treeid";
         String args[] = { roleId };
@@ -170,7 +170,7 @@ public class MapTreeManager extends AbstractBaseBean {
      * @return
      */
     public List<MapTreeBean> getAllMapTreeBeanListByRoleId(String roleId) {
-        List<MapTreeBean> maptreeList = MapTreeManager.getInstance().maptreeList;
+        List<MapTreeBean> maptreeList = MapTreeManager.getInstance().getMaptreeList();
         List<MapTreeBean> list = new ArrayList<MapTreeBean>();
         String sql = "select p.treeid from map_role_maptree p where p.roleid=?";
         String args[] = { roleId };
@@ -386,7 +386,7 @@ public class MapTreeManager extends AbstractBaseBean {
     public void save(String roleId, String mapTreeIds) {
         //MapTreeManager.getInstance().save(roleId, mapTreeIds);
         //RoleMapAuthorManager.getInstance().save(roleId, mapTreeIds);
-        String[] treeIdArray = this.getArrayByStr(mapTreeIds);
+        String[] treeIdArray = MapTreeManager.getArrayByStr(mapTreeIds);
         //先全部删除roleId相关的记录，
         String sql = "delete map_role_maptree t where  t.roleid=?";
         Object[] args = { roleId };
@@ -426,7 +426,7 @@ public class MapTreeManager extends AbstractBaseBean {
      */
     public MapTreeBean getMapTreeBeanByTreeid(String treeId) {
         treeId = this.treeIdFilter(treeId);
-        List<MapTreeBean> mapTreeBeanList = MapTreeManager.getInstance().maptreeList;
+        List<MapTreeBean> mapTreeBeanList = MapTreeManager.getInstance().getMaptreeList();
         MapTreeBean mapTreeBean = null;
         for (int i = 0; i < mapTreeBeanList.size(); i++) {
             if (mapTreeBeanList.get(i).getTreeId().equals(treeId)) {
@@ -470,5 +470,7 @@ public class MapTreeManager extends AbstractBaseBean {
         }
         return strs;
     }
-
+public List<MapTreeBean> getMaptreeList(){
+	return maptreeList;
+}
 }
