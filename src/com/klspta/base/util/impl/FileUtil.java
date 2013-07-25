@@ -11,10 +11,11 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
+import com.klspta.base.AbstractBaseBean;
 import com.klspta.base.util.UtilFactory;
 import com.klspta.base.util.api.IFileUtil;
 
-public class FileUtil implements IFileUtil {
+public class FileUtil extends AbstractBaseBean  implements IFileUtil {
 	
 	private FileUtil(){}
 	
@@ -75,6 +76,7 @@ public class FileUtil implements IFileUtil {
             //System.out.println("上传成功，文件保存在：" + uploadPath);
             return list;
         } catch (Exception e) {
+        	responseException(this,"upload","100005",e);
             return null;
         } finally {
         }
