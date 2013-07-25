@@ -10,7 +10,7 @@
 		<title>location</title>
 		<%@ include file="/base/include/ext.jspf" %>
 		<!--  <script type="text/javascript" src="<%=basePath%>/model/giscomponents/shutter/location.js"></script> -->
-		<script src="<%=basePath%>/base/include/ajax.js"></script>
+		<%@ include file="/base/include/restRequest.jspf" %>
 		<!-- <script type="text/javascript" src="<%=basePath %>console/mapManage/mapTreeInfo.js"></script> -->
 		<style type="text/css">
 html,body {
