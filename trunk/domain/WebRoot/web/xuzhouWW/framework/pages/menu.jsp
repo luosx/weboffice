@@ -22,7 +22,7 @@
         <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
         <meta http-equiv="description" content="This is my page">
         <%@ include file="/base/include/ext.jspf"%>
-		<script src="<%=basePath%>/base/include/ajax.js"></script>
+		    <%@ include file="/base/include/restRequest.jspf" %>
 		<script src="<%=basePath%>/base/fxgis/framework/js/toJson.js"></script>
 	 <script>
  var number;

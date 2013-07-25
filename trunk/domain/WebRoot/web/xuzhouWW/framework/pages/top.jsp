@@ -18,9 +18,8 @@
         <meta http-equiv="cache-control" content="no-cache">
         <meta http-equiv="expires" content="0">
         <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-        <script src="<%=basePath%>/base/include/ajax.js"></script>
 		<%@ include file="/base/include/ext.jspf"%>
-		<script src="<%=basePath%>/base/include/ajax.js"></script>
+		    <%@ include file="/base/include/restRequest.jspf" %>
         <meta http-equiv="description" content="This is my page">
         <style type="text/css">
         
