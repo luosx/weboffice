@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
 
 import com.klspta.base.util.UtilFactory;
 
@@ -17,7 +16,7 @@ import com.klspta.base.util.UtilFactory;
  * <br>Date:2011-5-3
  */
 public abstract class AbstractBaseBean extends AbstractRestRequestSupport {
-    public void responseException(Object obj, String methodName,String  exceptionCode, Exception e){
+    public  void responseException(Object obj, String methodName,String  exceptionCode, Exception e){
     	error(obj, e.getMessage());
     	List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
     	Map<String, Object> map = new HashMap<String, Object>();
@@ -29,6 +28,7 @@ public abstract class AbstractBaseBean extends AbstractRestRequestSupport {
 			
 		}
 	String plain = UtilFactory.getConfigUtil().getExceptionDescribe(exceptionCode);
+	System.out.print(plain);
 	if(plain==null||plain.equals("")){
 		plain="系统出错，请重试！如果重试不成功，请联系管理员！";
 	}
