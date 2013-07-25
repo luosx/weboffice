@@ -78,7 +78,7 @@ String yw_guid = request.getParameter("yw_guid");
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
   </head>
-  <script src="<%=basePath%>/base/include/ajax.js"></script> 
+      <%@ include file="/base/include/restRequest.jspf" %>
     
 	<%@ include file="/base/include/ext.jspf" %>
 	<script src="<%=basePath%>base/thirdres/ext/examples/ux/fileuploadfield/FileUploadField.js" type="text/javascript"></script>
