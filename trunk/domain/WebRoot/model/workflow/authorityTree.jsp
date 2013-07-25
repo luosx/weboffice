@@ -23,7 +23,7 @@
 <title>content</title>
 <link href="<%=basePath %>/common/pages/homepage/css/style.css" rel="stylesheet" type="text/css" />
 		<%@ include file="/base/include/ext.jspf" %>
-	<script src="<%=basePath%>/base/include/ajax.js"></script>
+	    <%@ include file="/base/include/restRequest.jspf" %>
 		<style>
 body {
 	font-family: helvetica, tahoma, verdana, sans-serif;
