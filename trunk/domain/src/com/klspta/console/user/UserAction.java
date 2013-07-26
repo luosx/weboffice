@@ -45,7 +45,7 @@ public class UserAction extends AbstractBaseBean {
 					response.getWriter().write("{success:true,msg:true}");
 			}
 		} catch (Exception e) {
-			responseException(this, "saveUser", "100012", e);
+			responseException(this, "saveUser", "200002", e);
 			try {
 				response.getWriter().write("{failure:true,msg:true}");
 			} catch (IOException e1) {
@@ -97,7 +97,7 @@ public class UserAction extends AbstractBaseBean {
 					userNames);
 			response.getWriter().write("{success:true,msg:true}");
 		} catch (Exception e) {
-			responseException(this, "saveUser", "100012", e);
+			responseException(this, "saveUser", "200002", e);
 			e.printStackTrace();
 			try {
 				response.getWriter().write("{failure:true,msg:true}");
@@ -113,7 +113,7 @@ public class UserAction extends AbstractBaseBean {
 			ManagerFactory.getUserManager().clearRoleMap();
 			response.getWriter().write("{success:true,msg:true}");
 		} catch (Exception e) {
-			responseException(this, "saveUser", "100012", e);
+			responseException(this, "saveUser", "200002", e);
 			try {
 				response.getWriter().write("{failure:true,msg:true}");
 			} catch (IOException e1) {
@@ -137,7 +137,7 @@ public class UserAction extends AbstractBaseBean {
 				response.getWriter().write("{failure:true,msg:true}");
 
 		} catch (Exception e) {
-			responseException(this, "saveUser", "100012", e);
+			responseException(this, "saveUser", "200002", e);
 			try {
 				response.getWriter().write("{failure:true,msg:true}");
 			} catch (IOException e1) {
@@ -172,7 +172,7 @@ public class UserAction extends AbstractBaseBean {
 			}
 
 		} catch (Exception e) {
-			responseException(this, "login", "100013", e);
+			responseException(this, "login", "200003", e);
 		}
 		response("error");
 	}
