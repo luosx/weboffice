@@ -184,7 +184,7 @@ public class PadDatalist extends AbstractBaseBean {
             sun.misc.BASE64Decoder decoder = new sun.misc.BASE64Decoder();
             bt = decoder.decodeBuffer(str);
         } catch (IOException e) {
-            e.printStackTrace();
+        	responseException(this,"decode", "500003", e);
         }
 
         return bt;
@@ -212,8 +212,10 @@ public class PadDatalist extends AbstractBaseBean {
                 reader.close();
             }
         } catch (URIException e) {
+        	responseException(this, "doGet", "500004", e);
             e.printStackTrace();
         } catch (IOException e) {
+        	responseException(this, "doGet", "500001", e);
             e.printStackTrace();
         } finally {
             method.releaseConnection();
