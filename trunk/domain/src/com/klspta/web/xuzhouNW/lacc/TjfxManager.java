@@ -1,10 +1,6 @@
 package com.klspta.web.xuzhouNW.lacc;
 
-import java.util.HashSet;
-import java.util.List;
 import com.klspta.base.AbstractBaseBean;
-import com.klspta.console.role.Role;
-import com.klspta.console.role.RoleManager;
 
 public class TjfxManager extends AbstractBaseBean{
 
