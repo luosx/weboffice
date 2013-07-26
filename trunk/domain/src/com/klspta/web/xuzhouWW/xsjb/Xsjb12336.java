@@ -38,6 +38,7 @@ public class Xsjb12336 extends AbstractBaseBean{
 					response.getWriter().write("{yw_guid:null}");
 				}
 			} catch (IOException e) {
+				responseException(this, "getXzxsYW_GUID","500003", e);
 				e.printStackTrace();
 		}
 	  }
