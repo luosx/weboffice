@@ -172,9 +172,9 @@ public class WpzfListManager extends AbstractBaseBean {
 							+ "  like '%")) + "%')";// 查询条件
 		}
 		String sql = null;
-		String sqlsp = "select * from wpzf_analyse_sp t2,WPZF_TB t1 where t1.tbbh=t2.tbbh and "
-				+ addsql;
-		List<Map<String, Object>> resultsp = query(sqlsp, YW);
+		//String sqlsp = "select * from wpzf_analyse_sp t2,WPZF_TB t1 where t1.tbbh=t2.tbbh and "
+		//		+ addsql;
+		//List<Map<String, Object>> resultsp = query(sqlsp, YW);
 
 		sql = "select t1.tbbh,t1.xzqhmc,to_char(t1.tbmj) tbmj,to_char(t1.TIME,'yyyy-MM-dd') year,to_char(t2.ygmj) ygmj,t2.ygbl,t2.xmmc,t2.pzwh,"
 				+ "decode(t1.ajstatus,'1','未下发','已下发') xiafa from wpzf_tb t1,wpzf_analyse_sp t2 "
