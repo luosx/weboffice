@@ -170,6 +170,7 @@ public class DtxcManager extends AbstractBaseBean {
 		try {
 			userXzqh = ManagerFactory.getUserManager().getUserWithId(userId).getXzqh();
 		} catch (Exception e) {
+			responseException(this, "getXcrzListByUserId", "400001", e);
 			e.printStackTrace();
 		}
 		if(userXzqh.length() == 6){
@@ -285,6 +286,7 @@ public class DtxcManager extends AbstractBaseBean {
 		try {
 			userXzqh = ManagerFactory.getUserManager().getUserWithId(userId).getXzqh();
 		} catch (Exception e) {
+			responseException(this, "getPreXcrz", "400001", e);
 			e.printStackTrace();
 		}
 		if(userXzqh.length() == 6){
@@ -321,6 +323,7 @@ public class DtxcManager extends AbstractBaseBean {
 		try {
 			userXzqh = ManagerFactory.getUserManager().getUserWithId(userId).getXzqh();
 		} catch (Exception e) {
+			responseException(this, "getNextXcrz", "400001", e);
 			e.printStackTrace();
 		}
 		if(userXzqh.length() == 6){
