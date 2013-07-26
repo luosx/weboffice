@@ -1,5 +1,5 @@
-<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<%@page import="com.klspta.web.xuzhouWW.TjAnalyse"%>
+<%@ page language="java"  pageEncoding="utf-8"%>
+<%@page import="com.klspta.web.xuzhouWW.tjanalyse.TjAnalyse"%>
 <%@ taglib uri="/WEB-INF/taglib/queryLabel.tld" prefix="common"%>
 <%
 	String path = request.getContextPath();
