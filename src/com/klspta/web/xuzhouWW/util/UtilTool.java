@@ -16,6 +16,7 @@ import org.apache.commons.lang.StringUtils;
 
 import com.klspta.base.AbstractBaseBean;
 
+
 /*******************************************************************************
  * 
  * <br>
@@ -24,7 +25,7 @@ import com.klspta.base.AbstractBaseBean;
  * Author:朱波海 <br>
  * Date:2012-11-10
  */
-public class UtilTool extends AbstractBaseBean {
+public class UtilTool extends AbstractBaseBean  {
 
 	
 	public static Map<String, Object> cacheMap = new HashMap<String, Object>();
@@ -87,7 +88,7 @@ public class UtilTool extends AbstractBaseBean {
 	 *            是否美化
 	 * @return 返回请求响应的HTML
 	 */
-	private static String doGet(String url, String queryString, String charset,
+	private  String doGet(String url, String queryString, String charset,
 			boolean pretty) {
 		StringBuffer response = new StringBuffer();
 		HttpClient client = new HttpClient();
@@ -112,8 +113,10 @@ public class UtilTool extends AbstractBaseBean {
 				reader.close();
 			}
 		} catch (URIException e) {
+			responseException(this, "doGet", "500003", e);
 			e.printStackTrace();
 		} catch (IOException e) {
+			responseException(this, "doGet", "500003", e);
 			e.printStackTrace();
 		} finally {
 			method.releaseConnection();
