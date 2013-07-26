@@ -80,6 +80,7 @@ public class GpsDeviceManager extends AbstractBaseBean{
 		try {
 			carname = URLDecoder.decode(request.getParameter("carname"), "utf-8");
 		} catch (UnsupportedEncodingException e) {
+			responseException(this,"getCarInfoByCarName", "500001", e);
 			e.printStackTrace();
 		}
     	String sql="select * from car_info where car_name='"+carname+"'";
@@ -324,5 +325,17 @@ public class GpsDeviceManager extends AbstractBaseBean{
         }
         return null;
     }
- 
+
+    /**
+     * <br>Description:根据车牌号获取车辆信息
+     * <br>Author:赵伟
+     * <br>Date:2012-12-17
+     * @return
+     */
+    public List<Map<String,Object>> getCarInfoByCarName(String carname){
+    	String sql="select * from car_info where car_name='"+carname+"'";
+    	List<Map<String,Object>> list=query(sql,YW);
+    	return list;
+    }
+   
 }

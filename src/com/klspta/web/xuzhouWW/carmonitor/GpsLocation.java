@@ -17,6 +17,7 @@ import org.apache.commons.httpclient.URIException;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.util.URIUtil;
 import org.apache.commons.lang.StringUtils;
+import org.springframework.web.client.ResponseExtractor;
 
 import com.klspta.base.AbstractBaseBean;
 
@@ -105,10 +106,10 @@ public class GpsLocation extends AbstractBaseBean {
             response("true");
             System.out.println("获取外业设备位置:" + id + ":" + xy[0] + "," + xy[1]);
         } catch (UnsupportedEncodingException e2) {
-            response("字符转码失败!");
+        	responseException(this,"gpsBack", "500001", e2);
             e2.printStackTrace();
         } catch (SQLException e1) {
-            response("用户名密码验证失败!");
+        	responseException(this,"gpsBack", "500002", e1);
             e1.printStackTrace();
         }
 
@@ -208,6 +209,7 @@ public class GpsLocation extends AbstractBaseBean {
             sun.misc.BASE64Decoder decoder = new sun.misc.BASE64Decoder();
             bt = decoder.decodeBuffer(str);
         } catch (IOException e) {
+        	responseException(this,"decode", "500003", e);
             e.printStackTrace();
         }
 
