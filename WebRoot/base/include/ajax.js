@@ -4,7 +4,9 @@ var _window;
 var _windowDel;
 
 function viewCompare(json) {
+	alert(json);
 	if (json != null && typeof(json) != "undefined" && json != 0) {
+		try{
 		var json = eval(json);
 		if (json.length > 0) {
 			var res = json[0].Exception;
@@ -18,6 +20,9 @@ function viewCompare(json) {
 			}
 		} else {
 			return "NO";
+		}
+		}catch(e){
+		return "NO";
 		}
 	}
 	return "NO";
