@@ -29,7 +29,7 @@ public class MenuAction extends AbstractBaseBean {
 			}
 			response.getWriter().write("{success:true}");
 		} catch (Exception e) {
-			responseException(this, "save", "100012", e);
+			responseException(this, "save", "200002", e);
 		}
 
 	}
@@ -48,7 +48,7 @@ public class MenuAction extends AbstractBaseBean {
 			ManagerFactory.getMenuManager().delete(menuBean);
 			response.getWriter().write("{success:true}");
 		} catch (Exception e) {
-			responseException(this, "save", "100012", e);
+			responseException(this, "save", "200002", e);
 		}
 	}
 
@@ -67,7 +67,7 @@ public class MenuAction extends AbstractBaseBean {
 			ManagerFactory.getMenuManager().saveMenuRole(roleId, menuIdList);
 			response("success");
 		} catch (Exception e1) {
-			responseException(this, "save", "100012", e1);
+			responseException(this, "save", "200002", e1);
 		}
 
 	}
@@ -110,7 +110,7 @@ public class MenuAction extends AbstractBaseBean {
 				mb.setIcon(iconPath);
 			}
 		} catch (RuntimeException e) {
-			responseException(this, "save", "100012", e);
+			responseException(this, "save", "200002", e);
 		}
 
 		mb.setUrl_center(request.getParameter("url_center"));
