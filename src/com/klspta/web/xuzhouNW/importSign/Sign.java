@@ -1,7 +1,6 @@
 package com.klspta.web.xuzhouNW.importSign;
 
 import java.io.File;
-import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import org.apache.commons.fileupload.FileItem;
