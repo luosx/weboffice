@@ -17,11 +17,12 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 
+import com.klspta.base.AbstractBaseBean;
 import com.klspta.base.util.UtilFactory;
 
-public class SignManager implements ISignManager {
+public class SignManager extends AbstractBaseBean  implements ISignManager {
 	/**
-	 * <br>Description:TODO 方法功能描述
+	 * <br>Description: 方法功能描述
 	 * <br>Author:黎春行
 	 * <br>Date:2013-3-25
 	 * @see com.klspta.web.xuzhouNW.importSign.ISignManager#setSign(java.lang.String, java.lang.String)
@@ -59,10 +60,13 @@ public class SignManager implements ISignManager {
 				return "success";
 			}
 		} catch (FileNotFoundException e) {
+			responseException(this, "setSign", "400002", e);
 			e.printStackTrace();
 		} catch (SQLException e) {
+			responseException(this, "setSign", "400003", e);
 			e.printStackTrace();
 		} catch (IOException e) {
+			responseException(this, "setSign", "400001", e);
 			e.printStackTrace();
 		}
 		
@@ -71,7 +75,7 @@ public class SignManager implements ISignManager {
 	}
 	
 	/**
-	 * <br>Description:TODO 方法功能描述
+	 * <br>Description: 方法功能描述
 	 * <br>Author:黎春行
 	 * <br>Date:2013-3-25
 	 * @see com.klspta.web.xuzhouNW.importSign.ISignManager#getSign(java.lang.String)
@@ -105,8 +109,10 @@ public class SignManager implements ISignManager {
 			}
 			
 		} catch (SQLException e) {
+			responseException(this, "getSign", "400004", e);
 			e.printStackTrace();
 		} catch (IOException e) {
+			responseException(this, "getSign", "400003", e);
 			e.printStackTrace();
 		}
 		return "error";
@@ -118,8 +124,10 @@ public class SignManager implements ISignManager {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			conn = DriverManager.getConnection(UtilFactory.getConfigUtil().getConfig("jdbc.url"), "core", "core");
 		} catch (ClassNotFoundException e) {
+			responseException(this, "getSign", "400003", e);
 			e.printStackTrace();
 		} catch (SQLException e) {
+			responseException(this, "getSign", "400004", e);
 			e.printStackTrace();
 		}
 		
