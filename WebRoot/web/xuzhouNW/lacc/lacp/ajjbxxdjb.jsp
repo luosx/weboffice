@@ -23,7 +23,6 @@
 		<%@ include file="/base/form/PermissionControl.jspf"%>
 		
 		<%}else{ %>
-		<%@ include file="/base/include/restRequest.jspf" %>
 		<link rel="stylesheet"
 			href="<%=basePath%>base/form/css/commonForm.css" type="text/css" />
 				<link rel="stylesheet"
