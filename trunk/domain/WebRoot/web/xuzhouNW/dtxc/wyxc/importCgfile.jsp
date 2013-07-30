@@ -81,8 +81,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	      form.getForm().submit({  
 	      	waitMsg: '数据处理中...',
 	        success: function(form, action){  
-	           alert('文件导入成功！,共导入'+action.result.msg+'条核查成果！');  
-	           document.location.reload();
+	             Ext.Msg.alert('提示','文件导入成功！,共导入'+action.result.msg+'条核查成果！',function(btn){document.location.reload();});  
 	        },  
 	        failure: function(){  
 	           Ext.Msg.alert('错误', '文件导入失败');  
