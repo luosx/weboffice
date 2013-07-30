@@ -27,10 +27,10 @@ public class PADDataManager extends AbstractBaseBean {
      */
     public void getQueryData() {
         String keyword = request.getParameter("keyWord");
-        String sql = "select t.readflag,t.guid,t.xzqmc,t.xmmc,t.rwlx,t.sfwf,(select u.fullname from core.core_users u where u.username=t.xcr) xcr,t.xcrq,t.cjzb,t.jwzb,t.imgname from v_pad_data_xml t";
+        String sql = "select t.readflag,t.guid,t.xzqmc,t.xmmc,t.rwlx,t.sfwf,t.impuser xcr,t.xcrq,t.cjzb,t.jwzb,t.imgname from v_pad_data_xml t";
         if (keyword != null) {
             keyword = UtilFactory.getStrUtil().unescape(keyword);
-            sql = "select t.readflag,t.guid,t.xzqmc,t.xmmc,t.rwlx,t.sfwf,(select u.fullname from core.core_users u where u.username=t.xcr) xcr,t.xcrq,t.cjzb,t.jwzb,t.imgname from v_pad_data_xml t where (upper(guid)||upper(xzqmc)||upper(xmmc)||upper(rwlx)||upper(sfwf)||upper(xcr)||upper(xcrq) like '%"
+            sql = "select t.readflag,t.guid,t.xzqmc,t.xmmc,t.rwlx,t.sfwf,t.impuser xcr,t.xcrq,t.cjzb,t.jwzb,t.imgname from v_pad_data_xml t where (upper(guid)||upper(xzqmc)||upper(xmmc)||upper(rwlx)||upper(sfwf)||upper(xcr)||upper(xcrq) like '%"
                     + keyword + "%')";
         }
         List<Map<String, Object>> query = query(sql, YW);
