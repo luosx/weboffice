@@ -1,7 +1,11 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@page import="org.springframework.security.core.context.SecurityContextHolder"%>
+<%@page import="com.klspta.console.user.User"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+Object userprincipal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+String userid = ((User)userprincipal).getUserID();
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -36,7 +40,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  labelAlign: 'right',    
 	  labelWidth: 60,  
 	  frame:true,
-      url:  "http://" + window.location.href.split("/")[2] + '/domain/service/rest/wyrwmanager/uploadResult',
+      url:  "http://" + window.location.href.split("/")[2] + '/domain/service/rest/wyrwmanager/uploadResult?userid=<%=userid%>',
 	  width: 500, 
 	  fileUpload: true,
 	  autoHeight: true,
