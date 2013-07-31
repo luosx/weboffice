@@ -9,6 +9,7 @@ import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 import com.klspta.base.AbstractBaseBean;
@@ -16,6 +17,10 @@ import com.klspta.base.util.UtilFactory;
 import com.klspta.base.wkt.Point;
 import com.klspta.base.wkt.Polygon;
 import com.klspta.base.wkt.Ring;
+import com.klspta.console.ManagerFactory;
+import com.klspta.console.role.Role;
+import com.klspta.console.role.RoleManager;
+import com.klspta.console.user.User;
 
 /**
  * 
@@ -30,7 +35,9 @@ public class ResultImp extends AbstractBaseBean {
      * 临时位置
      */
     private String tempPath;
-
+    private String userName;
+    private String userXzq;
+    
     public ResultImp() {
         tempPath = getTemp();
     }
@@ -42,6 +49,14 @@ public class ResultImp extends AbstractBaseBean {
      * <br>Date:2012-7-2
      */
     public void saveData() {
+        String uid=request.getParameter("userid");
+        try {
+            userName=ManagerFactory.getUserManager().getUserWithId(uid).getFullName();
+            String xzqh = ManagerFactory.getUserManager().getUserWithId(uid).getXzqh();
+            userXzq = UtilFactory.getXzqhUtil().getBeanById(xzqh).getCatonname();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         String zipPath = tempFile();
         if (zipPath != null) {
             File zipFile = new File(zipPath);
@@ -182,21 +197,21 @@ public class ResultImp extends AbstractBaseBean {
                 sql = "insert into dc_ydqkdcb(yw_guid, ydsj, yddw, mj, zb, jsqk, wfwglx, dfccqk,"
                         + "xcms, hcrq, spsj, spxmmc, spwh, gdsj, gdxmmc, gdwh, ydqk, status, ygspmj, ygspbl,"
                         + "yggdmj, yggdbl, nyd, gengd, jsyd, wlyd, fhgh, bfhgh, zyjbnt, xmmc, pfwh, pzsj, yxjsq,"
-                        + "ytjjsq, xzjsq, jzjsq, xcr, xcdw, ordertime, jwzb, pmzb, shi, xian, padid) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                        + "ytjjsq, xzjsq, jzjsq, xcr, xcdw, ordertime, jwzb, pmzb, shi, xian, padid,impuser,impxzq) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
                 count = update(sql, YW, new Object[] { yw_guid, ydsj, yddw, mj, zb, jsqk, wfwglx, dfccqk,
                         xcms, hcrq, spsj, spxmmc, spwh, gdsj, gdxmmc, gdwh, ydqk, status, ygspmj, ygspbl,
                         yggdmj, yggdbl, nyd, gengd, jsyd, wlyd, fhgh, bfhgh, zyjbnt, xmmc, pfwh, pzsj, yxjsq,
-                        ytjjsq, xzjsq, jzjsq, xcr, xcdw, ordertime, jwzb, pmzb, shi, xian, padid });
+                        ytjjsq, xzjsq, jzjsq, xcr, xcdw, ordertime, jwzb, pmzb, shi, xian, padid,userName,userXzq});
             } else {
                 delAcc(yw_guid);
                 sql = "update dc_ydqkdcb set ydsj=?,yddw=?,mj=?,zb=?,jsqk=?,wfwglx=?,dfccqk=?,"
                         + "xcms=?,hcrq=?,spsj=?,spxmmc=?,spwh=?,gdsj=?,gdxmmc=?,gdwh=?,ydqk=?,status=?,ygspmj=?,ygspbl=?,"
                         + "yggdmj=?,yggdbl=?,nyd=?,gengd=?,jsyd=?,wlyd=?,fhgh=?,bfhgh=?,zyjbnt=?,xmmc=?,pfwh=?,pzsj=?,yxjsq=?,"
-                        + "ytjjsq=?,xzjsq=?,jzjsq=?,xcr=?,xcdw=?,ordertime=?,jwzb=?,pmzb=?,shi=?,xian=?,padid=? where yw_guid=?";
+                        + "ytjjsq=?,xzjsq=?,jzjsq=?,xcr=?,xcdw=?,ordertime=?,jwzb=?,pmzb=?,shi=?,xian=?,padid=?,impuser=?,impxzq=?  where yw_guid=?";
                 count = update(sql, YW, new Object[] { ydsj, yddw, mj, zb, jsqk, wfwglx, dfccqk, xcms, hcrq,
                         spsj, spxmmc, spwh, gdsj, gdxmmc, gdwh, ydqk, status, ygspmj, ygspbl, yggdmj, yggdbl,
                         nyd, gengd, jsyd, wlyd, fhgh, bfhgh, zyjbnt, xmmc, pfwh, pzsj, yxjsq, ytjjsq, xzjsq,
-                        jzjsq, xcr, xcdw, ordertime, jwzb, pmzb, shi, xian, padid, yw_guid });
+                        jzjsq, xcr, xcdw, ordertime, jwzb, pmzb, shi, xian, padid,userName,userXzq,yw_guid });
             }
             //现状
             sql = "delete from xz_xxdl where yw_guid=?";
