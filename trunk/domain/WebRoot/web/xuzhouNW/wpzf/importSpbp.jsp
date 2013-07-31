@@ -33,7 +33,7 @@ Ext.onReady(function(){
   title: '卫片批量导入（请导入以ZIP为后缀名的文件）',  
   labelWidth: 60,  
   frame:true,
-  url: '<%=basePath%>importSpbp.do?method=uploadFile',
+  url: '<%=basePath%>/service/rest/wpzf/importWp',
   width: 500,  
   fileUpload: true,
   autoHeight: true,
@@ -72,12 +72,11 @@ Ext.onReady(function(){
 	//获取截取的最后一个字符串，即为后缀名
 	var last=three[three.length-1];
 	//添加需要判断的后缀名类型
-	var tp ="ZIP"; 
+	var tp ="zip"; 
 	//返回符合条件的后缀名在字符串中的位置
 	var rs=tp.indexOf(last); 
 	//如果返回的结果大于或等于0，说明包含允许上传的文件类型
-	if(rs>=0&&filePath!=""){ 
-	  alert(rs);  
+	if(rs>=0&&filePath!=""){  
       form.getForm().submit({  
         success: function(form, action){  
            Ext.Msg.alert('信息', '文件导入成功！');  
