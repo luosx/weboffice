@@ -71,7 +71,7 @@ public class ImportWp extends AbstractBaseBean {
     			update(deleteSql, GIS, new Object[]{objectid});
     		}
     		//写入新的shape数据
-    		String[] name = {"OBJECTID", "XZQDM", "XMC", "JCBH", "TBLX", "TZ", "QSX", "HSX", "XZB", "YZB", "JCMJ", "BGDL", "BGFW", "WBGLX", "SHAPE_LENG"};
+    		String[] name = {"OBJECTID", "XZQDM", "XMC", "JCBH", "TBLX", "TZ", "QSX", "HSX", "XZB", "YZB", "JCMJ", "BGDL", "BGFW", "WBGLX", "SHAPE_Leng"};
     		StringBuffer nameBuffer = new StringBuffer();
     		StringBuffer valueBuffer = new StringBuffer();
     		for(int j = 0; j < name.length; j++){
