@@ -5,7 +5,7 @@
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
-    String extPath = basePath + "thirdres/ext/";
+
 	String  expanded = "";
 	expanded = request.getParameter("expanded");
     	Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -62,13 +62,13 @@ var loadFlag=true;
 		var str = document.getElementById("closeOrOpenNode").value; 
 		if(str == "op"){ 
 			tree.getRootNode().expand(true); 
-			document.getElementById("closeOrOpenNode").src = "<%=basePath%>/common/images/collapse-all.gif";
+			document.getElementById("closeOrOpenNode").src = "<%=basePath%>/base/thirdres/ext/examples/docs/resources/collapse-all.gif";
 			document.getElementById("closeOrOpenNode").alt = "收起";   
 			document.getElementById("closeOrOpenNode").value = "cl";
 			return;
 		}else{ 
 			tree.getRootNode().collapse(true);  
-			document.getElementById("closeOrOpenNode").src = "<%=basePath%>/common/images/expand-all.gif";
+			document.getElementById("closeOrOpenNode").src = "<%=basePath%>/base/thirdres/ext/examples/docs/resources/expand-all.gif";
 			document.getElementById("closeOrOpenNode").alt = "展开";    	  
 			document.getElementById("closeOrOpenNode").value = "op";
 			return;		 
@@ -162,7 +162,8 @@ for(var j=0;j<parentnodes.length;j++){
       for(var z=0;z<chilenodesinner.length;z++){
         jsonData.put(chilenodesinner[t].attributes.serverid,chilenodesinner[t].attributes.layerid,chilenodesinner[t].attributes.type,chilenodesinner[t].attributes.checked);
       }
-     }
+     }jsonData.put("test",1);
+     alert(jsonData.toStr());
      jsonData.put(chilenodes[t].attributes.serverid,chilenodes[t].attributes.layerid,chilenodes[t].attributes.type,chilenodes[t].attributes.checked);
      }
 }
