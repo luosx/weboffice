@@ -109,11 +109,11 @@ body {
 			style="text-align: center; border-left:1px solid #2C2B29; border-top:1px solid #2C2B29">
 			<tr>
 				<td width="15%">
-					巡查单位
+					任务编号
 				</td>
 				<td colspan="2" align="left">
 					<input type="text" class="noborder" readonly
-						value="<%=map.get("SHI") == null ? "" : map.get("SHI")%> <%=map.get("XIAN") == null ? "" : map.get("XIAN")%> ">
+						value="<%=map.get("yw_guid") == null ? "" : map.get("yw_guid")%>">
 				</td>
 				<td width="16%">
 					巡查时间
@@ -137,6 +137,22 @@ body {
 				<td colspan="2">
 					<input type="text" class="noborder" readonly
 						value="<%=map.get("YDDW") == null ? "" : map.get("YDDW")%>">
+				</td>
+			</tr>
+						<tr>
+				<td>
+					巡查人
+				</td>
+				<td colspan="2" align="left">
+					<input type="text" class="noborder" readonly
+						value="<%=map.get("IMPUSER") == null ? "" : map.get("IMPUSER")%>">
+				</td>
+				<td>
+					所在政区
+				</td>
+				<td colspan="2">
+					<input type="text" class="noborder" readonly
+						value="<%=map.get("IMPXZQ") == null ? "" : map.get("IMPXZQ")%>">
 				</td>
 			</tr>
 		     <tr>
