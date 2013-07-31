@@ -12,7 +12,7 @@
 	<head>
 		<base href="<%=basePath%>">
 
-		<title>审批报盘导入</title>
+		<title>年度监测图斑导入</title>
 
 		<meta http-equiv="pragma" content="no-cache">
 		<meta http-equiv="cache-control" content="no-cache">
@@ -114,6 +114,8 @@ Ext.onReady(function(){
 	</font>
         <div id='import' style=" margin-left:50px; width:100px; height:100px;text-align: left;">
         </div>
+        <br>
+        <p style="font-size:14px;">说明：导入之前先将每年下发的卫片监测图斑文件打包成zip格式的压缩文件。压缩文件包含后缀名为shp、shx、dbf等文件。</p>
         </center>
 		</body>
 </html>
