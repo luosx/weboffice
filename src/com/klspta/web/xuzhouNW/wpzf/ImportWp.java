@@ -1,19 +1,30 @@
 package com.klspta.web.xuzhouNW.wpzf;
 
 import java.io.File;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
-
-import org.opengis.geometry.Geometry;
-
 import com.klspta.base.AbstractBaseBean;
 import com.klspta.base.util.UtilFactory;
 import com.klspta.web.xuzhouNW.wpzf.shape.Shpreader;
 
+/**
+ * 
+ * <br>Title:导入卫片监测图斑类
+ * <br>Description:导入卫片监测图斑
+ * <br>Author:王雷
+ * <br>Date:2013-8-1
+ */
 public class ImportWp extends AbstractBaseBean {
     //临时文件路径
     private String tempPath = getTempPath();
     
+    /**
+     * 
+     * <br>Description:导入卫片监测图斑入口
+     * <br>Author:王雷
+     * <br>Date:2013-8-1
+     */
     public void importWp(){
         String zipPath = getTempFile();
         if(zipPath!=null){
@@ -23,7 +34,7 @@ public class ImportWp extends AbstractBaseBean {
             UtilFactory.getZIPUtil().unZip(zipPath, folderpath);
             //实现上图
             upload(folderpath);
-            
+            response("{success:true}");
         }
         
     }
@@ -37,7 +48,9 @@ public class ImportWp extends AbstractBaseBean {
      */
     private void upload(String folderpath){
     	File file = new File(folderpath);
-    	File[] files = file.listFiles()[0].listFiles();
+    	File[] files = file.listFiles();
+    	Calendar calender= Calendar.getInstance();
+    	int year = calender.get(Calendar.YEAR);
     	String shpfilePath = "";
     	String dbffilePath = "";
     	for(int i = 0; i < files.length; i++){
@@ -71,7 +84,7 @@ public class ImportWp extends AbstractBaseBean {
     			update(deleteSql, GIS, new Object[]{objectid});
     		}
     		//写入新的shape数据
-    		String[] name = {"OBJECTID", "XZQDM", "XMC", "JCBH", "TBLX", "TZ", "QSX", "HSX", "XZB", "YZB", "JCMJ", "BGDL", "BGFW", "WBGLX", "SHAPE_Leng"};
+    		String[] name = {"OBJECTID", "XZQDM", "XMC", "JCBH", "TBLX", "TZ", "QSX", "HSX", "XZB", "YZB", "JCMJ", "BGDL", "BGFW", "WBGLX", "SHAPE_Length"};
     		StringBuffer nameBuffer = new StringBuffer();
     		StringBuffer valueBuffer = new StringBuffer();
     		for(int j = 0; j < name.length; j++){
@@ -82,15 +95,26 @@ public class ImportWp extends AbstractBaseBean {
     			nameBuffer.append(name[j] + ",");
     			valueBuffer.append("'" + value + "',");
     		}
+    		nameBuffer.append("YW_GUID,");
+    		nameBuffer.append("YEAR,");
     		nameBuffer.append("SHAPE");
+    		valueBuffer.append(String.valueOf(shapeList.get(i).get("JCBH")) + ",");
+    		valueBuffer.append(year+",");
     		valueBuffer.append("sde.st_geometry ('" + String.valueOf(shapeList.get(i).get("geometry")) + "', '" + srid + "')");
     		String insertSql = "insert into " + upLoadName + "(" + nameBuffer.toString() + ") values ("+ valueBuffer.toString() +")"; 
-    		System.out.println(insertSql);
+    		//System.out.println(insertSql);
     		update(insertSql, GIS);
     	}
     	
     }
     
+    /**
+     * 
+     * <br>Description:获取上传的压缩包
+     * <br>Author:王雷
+     * <br>Date:2013-8-1
+     * @return
+     */
     private String getTempFile(){
        try {
            List<String> list = UtilFactory.getFileUtil().upload(request, 0, 0);
@@ -101,6 +125,13 @@ public class ImportWp extends AbstractBaseBean {
        return null;      
     }
     
+    /**
+     * 
+     * <br>Description:获取文件临时路径
+     * <br>Author:王雷
+     * <br>Date:2013-8-1
+     * @return
+     */
     private String getTempPath(){
         String tempPath="";
         tempPath = UtilFactory.getConfigUtil().getShapefileTempPathFloder();
@@ -108,9 +139,4 @@ public class ImportWp extends AbstractBaseBean {
         
     }
     
-    
-    private void parseDbfFile(String filePath){
-        
-        
-    }
 }

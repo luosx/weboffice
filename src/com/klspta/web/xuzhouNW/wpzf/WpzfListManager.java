@@ -897,5 +897,34 @@ public class WpzfListManager extends AbstractBaseBean {
             return null;
         }
     }
+    
+   /**
+    * 
+    * <br>Description:获取卫片监测图斑
+    * <br>Author:王雷
+    * <br>Date:2013-7-31
+    */
+    public void getWpJctbList(){
+        String keyWord = request.getParameter("keyWord");
+        String strColumnName = "t.yw_guid || t.xmc || jcbh|| t.qsx || t.hsx || t.year || t.jcmj ||t.xzb || t.yzb";
+        String where = "";
+        if (keyWord != null && !"".equals(keyWord)) {
+            keyWord = keyWord.trim();
+            while (keyWord.indexOf("  ") > 0) {// 循环去掉多个空格，所有字符中间只用一个空格间隔
+                keyWord = keyWord.replace("  ", " ");
+            }
+            keyWord = UtilFactory.getStrUtil().unescape(keyWord);
+            keyWord = keyWord.toUpperCase();
+            where += " and ("
+                    + strColumnName
+                    + " like '%"
+                    + (keyWord.replaceAll(" ", "%' and " + strColumnName
+                            + "  like '%")) + "%')";// 查询条件
+        }
 
+        String sql="select t.yw_guid,t.xmc,t.jcbh,t.year,t.jcmj,t.qsx,t.hsx,t.xzb,t.yzb from xz_wp t where 1=1 ";
+        sql += where;
+        List<Map<String,Object>> list = query(sql,AbstractBaseBean.GIS);
+        response(list);      
+    }
 }
