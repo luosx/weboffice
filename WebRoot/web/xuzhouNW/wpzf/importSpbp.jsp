@@ -78,6 +78,7 @@ Ext.onReady(function(){
 	//如果返回的结果大于或等于0，说明包含允许上传的文件类型
 	if(rs>=0&&filePath!=""){  
       form.getForm().submit({  
+      	waitMsg: '数据处理中...',
         success: function(form, action){  
            Ext.Msg.alert('信息', '文件导入成功！');  
         },  
