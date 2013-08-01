@@ -43,7 +43,7 @@ public class FileUtil extends AbstractBaseBean  implements IFileUtil {
             throw new Exception("非文件上传request，不能调用当前方法");
         }
         try {
-            String uploadPath = UtilFactory.getConfigUtil().getApppath() + UtilFactory.getStrUtil().getGuid() + "//";
+            String uploadPath = UtilFactory.getConfigUtil().getShapefileTempPathFloder() + UtilFactory.getStrUtil().getGuid() + "//";
             File uploadFile = new File(uploadPath);
             if (!uploadFile.exists()) {
                 uploadFile.mkdirs();
