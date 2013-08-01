@@ -267,7 +267,7 @@ public class MapTreeManager extends AbstractBaseBean {
                             + "',layerid:'" + t.getLayerId() + "',type:'" + t.getType() + "',checked:"
                             + checked + ", leaf: 1,id:'" + t.getTreeId() + "@" + t.getServerId() + "@"
                             + t.getLayerId() + "',parentId:'" + t.getParentTreeId() + "'}";
-                    sb.insert(sb.indexOf("}", prositon_child_folder) + 1, sb_child);
+                    sb.insert(sb.indexOf("}]}", prositon_child_folder) + 3, sb_child);
                     continue;
                 }
 
