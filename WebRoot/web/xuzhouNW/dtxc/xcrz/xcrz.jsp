@@ -1072,10 +1072,8 @@
 				<input type="text" value="<%=writerId %>" id="userid" name="userid" style="display: none" />
 				<input type="text" value="<%=writerXzqh %>" id="writerxzqh" name="writerxzqh" style="display: none" />
 			</form>
-		</div>
-		<%if("false".equals(isView)){ %>
+		</div>	
 		<div id="viewCgButton" style="margin-top:20px;"><button style="cursor:hand;" onclick="viewCG()">点击查看巡查成果</button></div>
-		<% }%>
 	</body>
 	<script>
 		function viewCG(){
