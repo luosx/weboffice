@@ -36,12 +36,14 @@
 		<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 		<meta http-equiv="description" content="This is my page">
 		<%@ include file="/base/include/ext.jspf" %>
+		<%@ include file="/base/include/restRequest.jspf" %>
 	<script type="text/javascript" src="<%=extPath%>examples/ux/MultiSelect.js"></script>
 <script type="text/javascript" src="<%=extPath%>examples/ux/ItemSelector.js"></script>
 			 <link rel="stylesheet" type="text/css" href="<%=extPath%>examples/ux/css/MultiSelect.css"/>
 
 
 		<script>
+		var winForm;
  Ext.onReady(function() {
     Ext.QuickTips.init();
     var win;
@@ -96,7 +98,7 @@
 				                title: '请选择人员列表',
 				                closeAction: 'hide',
 				                width:600,
-				                height:400,
+				                height:440,
 				                x: 40,
 				                y: 110,
 				                items:winForm
@@ -159,13 +161,27 @@
 	       }
 	   	}); 
     //window中的formPanel
-       	var winForm = new Ext.form.FormPanel({
+			winForm = new Ext.form.FormPanel({
 		        //title: 'ItemSelector Test',
 		        width:600,
 		        //url:"<%=basePath%>formOperationAC.do?method=",
 		        bodyStyle: 'padding:10px;',
 		        region: 'center',//定位
 		        items:[
+			        {
+		                xtype: 'textfield',
+		                id: 'findusers',
+		                value:'',
+		                emptyText:'利用username(用户名)首字母快速查询',
+		                maxLength:1,
+		                maxLengthText: '只能输入一个字符',
+		                width:250,
+		                fieldLabel: '快速查找',
+		                enableKeyEvents : true,
+		                listeners:{
+		                		'keyup':findusers
+                       	}             
+	            	},
 		       		 //多选
 		        	{
 			            xtype: 'itemselector',
@@ -204,6 +220,16 @@
 		       });
 		       
         });
+        
+        function findusers(){
+        	var keyWord = Ext.getCmp('findusers').getValue();
+            putClientCommond("userAction","getUserInfoArrayJsonByRoleId");
+            putRestParameter("roleId","<%=roleId%>");
+            putRestParameter("keyWord",escape(escape(keyWord)));
+            var myData = restRequest(); 
+	   		
+	   		winForm.getForm().findField('itemselector').restore(myData);
+        }
    </script>
 </head>
 	<body>
