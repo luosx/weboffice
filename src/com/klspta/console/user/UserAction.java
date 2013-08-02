@@ -201,4 +201,38 @@ public class UserAction extends AbstractBaseBean {
 		} else
 			user.setSort(new BigDecimal(0));
 	}
+	
+	/**
+	 * 
+	 * <br>Title: 用于角色添加人员
+	 * <br>Description: 快速查询
+	 * <br>Author: 姚建林
+	 * <br>Date: 2013-8-2
+	 */
+	public void getUserInfoArrayJsonByRoleId(){
+		//从页面中传来的参数
+		String keyWord = request.getParameter("keyWord");
+		String roleId = request.getParameter("roleId");
+		//当关键字为空时，将所有人员查出
+		if(keyWord == null || "".equals(keyWord)){
+			response(ManagerFactory.getUserManager().getUserInfoArrayJsonByRoleId(roleId));
+		}else{
+			User tempUser = null;
+			//得到所有人员
+			List<User> allUserList = ManagerFactory.getUserManager().getAllUser();
+			List<User> allUserListTemp = new ArrayList<User>();
+			//用关键字过滤
+			for (int i = 0; i < allUserList.size(); i++) {
+				tempUser = (User)allUserList.get(i);
+				if(keyWord.equals(tempUser.getUsername().charAt(0)+"")){
+					allUserListTemp.add(tempUser);
+				}
+			}
+			//根据roleId过滤
+			List<User> list = ManagerFactory.getUserManager().getUserWithRoleID(roleId);
+			allUserListTemp.removeAll(list);
+			String returnString = ManagerFactory.getUserManager().getUserJsonByList(allUserListTemp);
+			response(returnString);
+		}
+	}
 }

@@ -313,9 +313,9 @@ public class UserManager extends AbstractBaseBean {
 	/**
 	 * 
 	 * <br>
-	 * Description:根据sort列表排序 <br>
-	 * Author:任宝龙 <br>
-	 * Date:2012-6-14
+	 * Description:根据username用户名排序 <br>
+	 * Author:姚建林 <br>
+	 * Date:2013-8-2
 	 * 
 	 * @param list
 	 */
