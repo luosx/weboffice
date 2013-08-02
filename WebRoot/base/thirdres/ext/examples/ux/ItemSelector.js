@@ -326,7 +326,13 @@ Ext.ux.form.ItemSelector = Ext.extend(Ext.form.Field,  {
             this.fromMultiselect.store.sort(si.field, si.direction);
         }
         this.valueChanged(this.toMultiselect.store);
-    }
+    },
+    
+    //为了动态添加数据添加的代码
+    //姚建林2013-8-2
+    restore: function(store){   
+      this.fromMultiselect.store.loadData(store);   
+	} 
 });
 
 Ext.override(Ext.ux.form.ItemSelector, {
