@@ -34,6 +34,9 @@ public class PADDataManager extends AbstractBaseBean {
         try {
             xzqh = ManagerFactory.getUserManager().getUserWithId(userid).getXzqh();
             String xzqbm = UtilFactory.getXzqhUtil().getBeanById(xzqh).getCatoncode();
+            if(xzqbm.endsWith("00")){
+                xzqbm=xzqbm.substring(0,xzqbm.lastIndexOf("00"));
+            }
             likeCondition = " t.impxzqbm like '" + xzqbm + "%'";
         } catch (Exception e) {
             e.printStackTrace();
