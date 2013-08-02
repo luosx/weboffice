@@ -326,8 +326,7 @@ public class UserManager extends AbstractBaseBean {
 			for (int j = i + 1; j < list.size(); j++) {
 				userA = list.get(i);
 				userB = list.get(j);
-
-				if (userA.getSort().intValue() > userB.getSort().intValue()) {
+				if (userA.getUsername().charAt(0) > userB.getUsername().charAt(0)){
 					list.set(i, userB);
 					list.set(j, userA);
 				}
