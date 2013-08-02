@@ -8,6 +8,7 @@ import java.util.Map;
 import com.klspta.base.AbstractBaseBean;
 import com.klspta.base.util.UtilFactory;
 import com.klspta.base.wkt.Polygon;
+import com.klspta.console.ManagerFactory;
 
 /**
  * 
@@ -26,12 +27,23 @@ public class PADDataManager extends AbstractBaseBean {
      * <br>Date:2013-6-19
      */
     public void getQueryData() {
+        String userid = request.getParameter("userId");
         String keyword = request.getParameter("keyWord");
-        String sql = "select t.readflag,t.guid,t.xzqmc,t.xmmc,t.rwlx,t.sfwf,t.impuser xcr,t.xcrq,t.cjzb,t.jwzb,t.imgname from v_pad_data_xml t";
+        String likeCondition = " 1=1";
+        String xzqh;
+        try {
+            xzqh = ManagerFactory.getUserManager().getUserWithId(userid).getXzqh();
+            String xzqbm = UtilFactory.getXzqhUtil().getBeanById(xzqh).getCatoncode();
+            likeCondition = " t.impxzqbm like '" + xzqbm + "%'";
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        String sql = "select t.readflag,t.guid,t.xzqmc,t.xmmc,t.rwlx,t.sfwf,t.xcr,t.xcrq,t.cjzb,t.jwzb,t.imgname from v_pad_data_xml t where "
+                + likeCondition;
         if (keyword != null) {
             keyword = UtilFactory.getStrUtil().unescape(keyword);
-            sql = "select t.readflag,t.guid,t.xzqmc,t.xmmc,t.rwlx,t.sfwf,t.impuser xcr,t.xcrq,t.cjzb,t.jwzb,t.imgname from v_pad_data_xml t where (upper(guid)||upper(xzqmc)||upper(xmmc)||upper(rwlx)||upper(sfwf)||upper(xcr)||upper(xcrq) like '%"
-                    + keyword + "%')";
+            sql = "select t.readflag,t.guid,t.xzqmc,t.xmmc,t.rwlx,t.sfwf,t.xcr,t.xcrq,t.cjzb,t.jwzb,t.imgname from v_pad_data_xml t where (upper(guid)||upper(xzqmc)||upper(xmmc)||upper(rwlx)||upper(sfwf)||upper(xcr)||upper(xcrq) like '%"
+                    + keyword + "%') and" + likeCondition;
         }
         List<Map<String, Object>> query = query(sql, YW);
         for (int i = 0; i < query.size(); i++) {
@@ -83,13 +95,13 @@ public class PADDataManager extends AbstractBaseBean {
                 return null;
             } else {
                 String allzb = zb.toString();
-                String[] zbs =allzb.split(";");
+                String[] zbs = allzb.split(";");
                 List<String> listzb = new ArrayList<String>();
                 for (int i = 0; i < zbs.length; i++) {
                     listzb.add(zbs[i]);
                 }
-                if(!listzb.get(0).equals(listzb.get(listzb.size()-1))){    
-                listzb.add(zbs[0] + "," + zbs[1]);
+                if (!listzb.get(0).equals(listzb.get(listzb.size() - 1))) {
+                    listzb.add(zbs[0] + "," + zbs[1]);
                 }
                 sql = "select t.*, t.rowid from gis_extent t where t.flag = '1'";
                 List<Map<String, Object>> mapConfigList = query(sql, CORE);
