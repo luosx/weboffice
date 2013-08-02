@@ -148,11 +148,7 @@
      //用于多选的用户信息 
 	  var leftDs = new Ext.data.ArrayStore({
 	       data: <%=userInfoArray%>,
-	       fields: ['value','text'],
-	       sortInfo: {
-	           field: 'value',
-	           direction: 'ASC'
-	       }
+	       fields: ['value','text']
 	   	}); 
 	  var rightDs = new Ext.data.ArrayStore({ 
 	       data:<%=users%>,
