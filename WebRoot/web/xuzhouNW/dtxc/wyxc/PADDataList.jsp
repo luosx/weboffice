@@ -1,11 +1,15 @@
 ﻿<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@page import="com.klspta.base.util.UtilFactory"%>
+<%@page import="org.springframework.security.core.context.SecurityContextHolder"%>
+<%@page import="com.klspta.console.user.User"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 	String extPath = basePath + "ext/";
+    Object userprincipal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    String userid = ((User)userprincipal).getUserID();
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -41,6 +45,7 @@ var expWin;
 var form;
 Ext.onReady(function(){
     putClientCommond("padDataManager","getQueryData");
+    putRestParameter("userId",'<%=userid%>')
 	myData = restRequest();
  	store = new Ext.data.JsonStore({
     proxy: new Ext.ux.data.PagingMemoryProxy(myData),
@@ -151,16 +156,17 @@ function delTask(id){
 
 function showDetail(id){
     var url = "<%=basePath%>web/xuzhouNW/dtxc/wyxc/xjclyjframe.jsp?zfjcType=11&yw_guid="+myData[id].GUID;     
-	document.location.href=url;
-	//var height = window.screen.availHeight;
-	//var width = window.screen.availWidth;
-	//window.showModalDialog(url,"","dialogWidth="+width+";dialogHeight="+height);
+	//document.location.href=url;
+	var height = window.screen.availHeight;
+	var width = window.screen.availWidth;
+	window.showModalDialog(url,"","dialogWidth="+width+";dialogHeight="+height);
 }
 
 function query(){
   var keyWord = Ext.getCmp('keyword').getValue();
     keyWord=escape(escape(keyWord));
     putClientCommond("padDataManager","getQueryData");
+    putRestParameter("userId",'<%=userid%>')
     putRestParameter("keyWord",keyWord);
     var myData1 = restRequest(); 
     var width=document.body.clientWidth;
