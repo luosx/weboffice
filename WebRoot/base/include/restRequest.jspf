@@ -1,10 +1,12 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%
 	String _$path1 = request.getContextPath();
-	String _$basePath1 = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + _$path1 + "/";
+	String _$basePath1 = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ _$path1 + "/";
 %>
 
-    <script type="text/javascript">
+<script type="text/javascript">
 		   var restUrl = "";
 		
 		   if(restUrl == null || restUrl == ""){
@@ -101,23 +103,27 @@
 			
 			function viewCompare(json) {
 				if (json != null && typeof(json) != "undefined" && json != 0) {
-					var json = eval(json);
-					if (json.length > 0) {
-						var res = json[0].Exception;
-						if ("error" == res) {
-							plainCode = json[0].plain;
-							secretCode = json[0].secret;
-							viewException();
-							return "YS";
-						} else {
-							return "NO";
-						}
-					} else {
-						return "NO";
-					}
-				}
+		try{
+		var json = eval(json);
+		if (json.length > 0) {
+			var res = json[0].Exception;
+			if ("error" == res) {
+				plainCode = json[0].plain;
+				secretCode = json[0].secret;
+				viewException();
+				return "YS";
+			} else {
 				return "NO";
 			}
+		} else {
+			return "NO";
+		}
+		}catch(e){
+		return "NO";
+		}
+	}
+				return "NO";
+	}
 			viewException = function() {
 				_window = new Ext.Window({
 			
@@ -255,4 +261,4 @@
 				return result;
 			}
     </script>
-							
+
