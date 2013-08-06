@@ -4,7 +4,6 @@ var _window;
 var _windowDel;
 
 function viewCompare(json) {
-	alert(json);
 	if (json != null && typeof(json) != "undefined" && json != 0) {
 		try{
 		var json = eval(json);
