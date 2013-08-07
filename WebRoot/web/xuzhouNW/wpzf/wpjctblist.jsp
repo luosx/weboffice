@@ -128,7 +128,7 @@ function lian(id){
 
 function startLian(id){
 	//alert(id);
-	if(confirm("确定要立案么")){
+	if(confirm("确定要立案吗")){
 		putClientCommond("startWorkflowLacc","initWorkflow");
 	    putRestParameter("zfjcType","90");
 	    putRestParameter("userId", "<%=userId%>");
