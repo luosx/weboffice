@@ -1,4 +1,4 @@
-package com.klspta.web.xuzhouNW.lacc;
+package com.klspta.web.sanya.lacc;
 
 import com.klspta.base.AbstractBaseBean;
 
