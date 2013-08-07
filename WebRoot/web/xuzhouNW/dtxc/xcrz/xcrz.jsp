@@ -53,7 +53,6 @@
 	<head>
 		<base href="<%=basePath%>" />
 		<TITLE>巡查日志</TITLE>
-		<%@ include file="/base/include/restRequest.jspf"%>
 		<link rel="stylesheet" href="<%=basePath%>base/form/css/commonForm.css" type="text/css" />
 		<%@ include file="/base/include/formbase.jspf"%>
 		<script>
