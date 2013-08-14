@@ -9,7 +9,7 @@
     String loginname1=project.getProjectLoginName1();
     String loginname2=project.getProjectLoginName2();
     if(type != null && "logout".equals(type)){
-        type = "已登出!";
+        type = "已登出！";
     }else if(type != null && "error".equals(type)){
     	type="用户名或密码错误！";
     }else{
@@ -78,7 +78,7 @@
         <td height="53">&nbsp;</td>
         <td><table width="" border="0" cellspacing="0" cellpadding="0">
           <tr>
-            <td style="width:150px;text-align: left"><span style="margin-left:-10px;color:red;"><%=type%></span></td>
+            <td style="width:150px;text-align: left"><span style="margin-left:-10px;color:red;font-size:12px;"><%=type%></span></td>
             <td width="93" ><a href="#" style="margin-left:-49px;" onclick='login();return false;' target="_parent" onmouseover="MM_swapImage('Image1','','../../images/dl_btnB.gif',1)" onmouseout="MM_swapImgRestore()"><img src="../../images/dl_btnA.gif" name="Image1" width="51" height="22" border="0" id="Image1" /></a></td>
           </tr>
         </table></td>
