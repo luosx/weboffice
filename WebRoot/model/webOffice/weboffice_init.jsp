@@ -71,7 +71,7 @@ function uploadDoc(){
 			num = result.split(",")[0]; 
 			var myDate = new Date();
 			//alert(num );
-			alert(myDate.getFullYear());
+			//alert(myDate.getFullYear());
 			webObj.HttpInit();			
 			webObj.HttpAddPostString("id", yw_guid);
 			webObj.HttpAddPostString("DocTitle",docName+"【第"+num+"次】.doc");      
