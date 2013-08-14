@@ -206,7 +206,7 @@ public class User implements UserDetails,org.jbpm.api.identity.User {
         return "insert into core_users t (t.ID, USERNAME, PASSWORD, FULLNAME, EMAILADDRESS, ENABLED, SORT, OFFICEPHONE, MOBILEPHONE, XZQH) values(?,?,?,?,?,?,?,?,?,?)";
     }
     public Object[] getInsertArgs(){
-        return new Object[] {this.userID, this.userName,  UserPasswordVerify.encryptMode( this.password), this.fullName, this.email, this.enabled==true?1:0, this.sort, this.officephone, this.mobilephone, this.xzqh};
+        return new Object[] {this.userID, this.userName,  this.password, this.fullName, this.email, this.enabled==true?1:0, this.sort, this.officephone, this.mobilephone, this.xzqh};
     }
     
     public static String getUpdateSQL(){
