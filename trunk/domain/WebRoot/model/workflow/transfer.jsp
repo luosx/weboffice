@@ -124,7 +124,8 @@ body {
          var userArray = new Array();
          for(var i = 0; i < roles.length; i++){
          	var rolename = roles[i].ROLENAME;
-         	role.options.add(new Option(rolename, rolename));
+         	var roleid=roles[i].roleid;
+         	role.options.add(new Option(rolename, roleid));
          	users = getUsers(roles[i].roleid);
          	userArray = users.split(",");
          	for(var j = 0; j < userArray.length; j++){
