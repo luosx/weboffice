@@ -143,7 +143,7 @@ function init(){
     if(dianhua != null){
     	dianhua.onfocus = isRegisterDh;
     }
-    var json = requestData();
+    json = requestData();
     setupSaveButton();
     if(json!='error'){
     json = unescape(json);
@@ -151,7 +151,11 @@ function init(){
     }else{
     return;
     }
-    var input = null;
+   	insertData(json);
+}
+
+function insertData(json){
+ var input = null;
     for(var i in json){
         try{
             if (typeof (i) == "function") continue;  
@@ -194,7 +198,9 @@ function init(){
         }
     }
     
+
 }
+
 /* 校验信访人年龄 add by 尹宇星 2011-12-06 */
 function isRegisterNl(){
 	document.getElementById("grnl").onblur = registerNl;
