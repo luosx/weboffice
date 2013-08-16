@@ -56,6 +56,9 @@ public class BasicInfo extends AbstractBaseBean {
 			yw_guid = UtilFactory.getStrUtil().getGuid();
 			url = url + "&yw_guid=" + yw_guid; 
 		}
+		//删除表中旧数据
+		String deleSql = "delete from basicinof t where t.yw_guid=?";
+		update(deleSql, YW, new Object[]{yw_guid});
 		
 		String fieldSql = "select * from  propertyconfig t where t.fangshi='录入'";
 		List<Map<String, Object>> fieldList = query(fieldSql, YW);
