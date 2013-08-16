@@ -1,5 +1,6 @@
 package com.klspta.web.cbd.cbsycs.jbxxlr;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -7,6 +8,9 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import javax.management.Query;
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
 
 import com.klspta.base.AbstractBaseBean;
 import com.klspta.base.util.UtilFactory;
@@ -47,10 +51,13 @@ public class BasicInfo extends AbstractBaseBean {
 	 */
 	public void saveData(){
 		String yw_guid = request.getParameter("yw_guid");
+		String url = request.getHeader("referer");
 		if(yw_guid != null && yw_guid != ""){
 			yw_guid = UtilFactory.getStrUtil().getGuid();
+			url = url + "?yw_guid=" + yw_guid; 
 		}
-		String fieldSql = "select * from  propertyconfig t where t.status='1' and t.fangshi='1'";
+		
+		String fieldSql = "select * from  propertyconfig t where t.fangshi='录入'";
 		List<Map<String, Object>> fieldList = query(fieldSql, YW);
 		
 		//将基础数据保存到数据库中
@@ -66,8 +73,19 @@ public class BasicInfo extends AbstractBaseBean {
 		
 		//计算公式数据
 		//获取所需计算字段
-		String formulaSql = "select * form propertconfig t where t.status='1' and t.fangshi='2'";
+		String formulaSql = "select * form propertconfig t where  t.fangshi='公式'";
+		String insertCaculate = "insert into basicifo(name, value, yw_guid) values (?, ?, ?)";
 		List<Map<String, Object>> formulaList = query(formulaSql, YW);
+		for(int i = 0; i < formulaList.size(); i++){
+			String fieldName = String.valueOf(formulaList.get(i).get("bieming"));
+			String calculate = calculateData(yw_guid, fieldName); 
+			update(insertCaculate, YW, new Object[]{fieldName, calculate, yw_guid});
+		}
+		try {
+			response.sendRedirect(url + "&msg=success");
+		} catch (IOException e) {
+			response("error:保存失败");
+		}
 	}
 	
 	/**
@@ -80,26 +98,49 @@ public class BasicInfo extends AbstractBaseBean {
 	 */
 	private String calculateData(String yw_guid, String fieldName){
 		//获取公式
-		String valueSql = "select * form propertconfig t where t.status='1' and t.bieming ='" + fieldName + "'";
+		String valueSql = "select * form propertconfig t where  t.bieming ='" + fieldName + "'";
 		List<Map<String, Object>> resultList = query(valueSql, YW);
 		String formulaName = String.valueOf(resultList.get(0).get("gongshi"));
 		String formulaValue = String.valueOf(formula.get(formulaName));
+		String countValue = "";
 		//获取所有表格中字段
 		for(int i = 0; i < formField.size(); i++){
 			String formFieldName = String.valueOf(formField.get(i).get("bieming"));
-			//if(formulaValue)
-			
-			
+			if(formulaValue.contains(formFieldName)){
+				String value = "";
+				value = String.valueOf(basic.get(formFieldName));
+				if(value == "" || value == null){
+					countValue =  calculateData(yw_guid, formFieldName);
+				}
+				value = countValue;
+				basic.put(formFieldName, value);
+				formulaValue = formulaValue.replaceAll(formFieldName, value);
+			}
 		}
+		ScriptEngine jse = new ScriptEngineManager().getEngineByName("JavaScript");
+		String caculateValue = "";
+		try {
+			 caculateValue = String.valueOf(jse.eval(formulaValue));
+		} catch (ScriptException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			error(this, "计算失败");
+		}
+		return caculateValue;
 		
-
-		
-		
-		
-		
-		
-		return null;
 	}
 	
 
+	public static void main(String[] args) {
+		ScriptEngine jse = new ScriptEngineManager().getEngineByName("JavaScript");
+		String caculateValue = "";
+		try {
+			 caculateValue = String.valueOf(jse.eval("1+2+3+4*5"));
+		} catch (ScriptException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println(caculateValue + "-----------------------------");
+	}
+	
 }
