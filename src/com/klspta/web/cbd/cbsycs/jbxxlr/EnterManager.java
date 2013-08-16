@@ -23,8 +23,8 @@ public class EnterManager extends AbstractBaseBean {
 	 */
 	public List<List<Map<String, Object>>> getNeedFields(){
 		//取得类型种类sql
-		String sqlString = "select distinct(t.shuxing) from propertyconfig t";
-		String sqlQuery = "select t.*, t.rowid from propertyconfig t where t.shuxing = ? order by sort";
+		String sqlString = "select distinct(t.shuxing) from propertyconfig t where t.fangshi = '录入'";
+		String sqlQuery = "select t.*, t.rowid from propertyconfig t where t.shuxing = ? and t.fangshi = '录入' order by sort";
 		List<Map<String, Object>> result;
 		List<Map<String, Object>> resultString = query(sqlString, YW);
 		//用于封装返回结果

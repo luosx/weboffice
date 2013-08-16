@@ -24,9 +24,9 @@ import com.klspta.base.util.UtilFactory;
  */
 public class BasicInfo extends AbstractBaseBean {
 	//将所有的公式缓存
-	private Map<String, Object> formula = new HashMap<String, Object>();
-	Map<String, Object> basic = new HashMap<String, Object>();
-	List<Map<String,Object>> formField = new ArrayList<Map<String, Object>>();
+	private static Map<String, Object>  formula = new HashMap<String, Object>();
+	private static Map<String, Object> basic = new HashMap<String, Object>();
+	private static List<Map<String,Object>> formField = new ArrayList<Map<String, Object>>();
 	/**
 	 * 
 	 * <br>Description:初始化，将公式存入缓存。
@@ -37,9 +37,9 @@ public class BasicInfo extends AbstractBaseBean {
 		String formulaSql = "select * from formulaconfig where yw_guid = 'cbdqyjcb'";
 		List<Map<String, Object>> formulaList = query(formulaSql, YW);
 		for(int i = 0; i < formulaList.size(); i++){
-			formula.put(String.valueOf(formulaList.get(i).get("fulaname")), String.valueOf("fulavalue"));
+			formula.put(String.valueOf(formulaList.get(i).get("fulaname")), String.valueOf(formulaList.get(i).get("fulavalue")));
 		}
-		formulaSql = "select * from  propertyconfig t where t.status='1'";
+		formulaSql = "select * from  propertyconfig t";
 		formField = query(formulaSql, YW);
 	}
 
@@ -52,9 +52,9 @@ public class BasicInfo extends AbstractBaseBean {
 	public void saveData(){
 		String yw_guid = request.getParameter("yw_guid");
 		String url = request.getHeader("referer");
-		if(yw_guid != null && yw_guid != ""){
+		if(yw_guid == null || yw_guid == ""){
 			yw_guid = UtilFactory.getStrUtil().getGuid();
-			url = url + "?yw_guid=" + yw_guid; 
+			url = url + "&yw_guid=" + yw_guid; 
 		}
 		
 		String fieldSql = "select * from  propertyconfig t where t.fangshi='录入'";
@@ -73,8 +73,8 @@ public class BasicInfo extends AbstractBaseBean {
 		
 		//计算公式数据
 		//获取所需计算字段
-		String formulaSql = "select * form propertconfig t where  t.fangshi='公式'";
-		String insertCaculate = "insert into basicifo(name, value, yw_guid) values (?, ?, ?)";
+		String formulaSql = "select * from propertyconfig t where t.fangshi='公式'";
+		String insertCaculate = "insert into basicinfo(name, value, yw_guid) values (?, ?, ?)";
 		List<Map<String, Object>> formulaList = query(formulaSql, YW);
 		for(int i = 0; i < formulaList.size(); i++){
 			String fieldName = String.valueOf(formulaList.get(i).get("bieming"));
@@ -98,7 +98,7 @@ public class BasicInfo extends AbstractBaseBean {
 	 */
 	private String calculateData(String yw_guid, String fieldName){
 		//获取公式
-		String valueSql = "select * form propertconfig t where  t.bieming ='" + fieldName + "'";
+		String valueSql = "select * from propertyconfig t where  t.bieming ='" + fieldName + "'";
 		List<Map<String, Object>> resultList = query(valueSql, YW);
 		String formulaName = String.valueOf(resultList.get(0).get("gongshi"));
 		String formulaValue = String.valueOf(formula.get(formulaName));
