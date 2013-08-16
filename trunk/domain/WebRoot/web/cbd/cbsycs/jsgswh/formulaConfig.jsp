@@ -69,6 +69,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			}
 	</style>
    <script>
+    var flusdown;
   	function save(){
 		document.forms[0].submit();
 	}
@@ -81,7 +82,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		var newContent = new Array();
 		newContent.push("<div><input type=\"checkbox\" id=\"check" + num + "\" /> </div>");
 		newContent.push("<input type=\"text\" id='fulaname_" + num +"' name=\"fulaname_" + num + "\" />");
-		newContent.push("<textarea id=\"fulavalue_" + num + "\"name=\"fulavalue_" + num +"\" style=\"width:100%; height:100%\" ></textarea>");
+		newContent.push("<textarea id=\"fulavalue_" + num + "\"name=\"fulavalue_" + num +"\" style=\"width:100%; height:100%\" onKeyUp=\"wirteDown(this)\" onMouseUp=\"wirteDown(this)\"></textarea>");
 		
 		//添加一个新行
 		var addtable = document.getElementById("configtable");
@@ -128,8 +129,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			var newfieldname = document.getElementById(fieldname + newnum);
 			oldfieldname.value = newfieldname.value;
 		}
-	
-	
 	}
 	
 	//表单初始化
@@ -143,11 +142,33 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				if(num == 1){
 					num++;
 				}else{
+					num++;
 					addformula();
 				}
 			}
 		}
 		insertData(json);
+		
+		//添加可用字段
+		var variable = document.getElementById("variable");
+		putClientCommond("property","getAllAlias");
+		myData = restRequest();
+		var content = "";
+		for(var i = 0; i < myData.length; i++){
+			content = content + "&nbsp;<input type=\"button\" id=\""+ myData[i].BIEMING +"\"  value=\""+ myData[i].ZIDUANMING+"\"  onClick=\"addflus(this)\" style=\"margin-bottom:5px; margin-top:5px\"/>";
+		}
+		variable.innerHTML = content;
+		
+	}
+	//记录光标所在Dom
+	function wirteDown(check){
+		flusdown = check;
+	}
+	//添加字段
+	function addflus(check){
+		if(flusdown != undefined){
+			flusdown.value = flusdown.value + check.id;
+		}
 	}
   </script>
   <body onLoad="onInit()">
@@ -156,8 +177,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<h1>计算公式配置</h1>
 	</div>
   	<form method="post">
+	<div>
   	<table align="center" cellpadding="0" cellspacing="0" style="margin-top:30px" id="configtable">
-		<tr align="center" bgcolor="#66CCFF">
+		<tr align="center" bgcolor="#E6F0FD">
 		  <td colspan="3">
 				<div style="font-size:18px; margin-top:5px">计算公式配置</div>
 				<div align="right" style="margin-bottom:5px">
@@ -183,10 +205,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</td>
 			<td class="value">
 				<!-- <input type="text" id="fulavalue_1" name="fulavalue_1" style="width:100%"/> -->
-				<textarea id="fulavalue_1" name="fulavalue_1" style="width:100%; height:100%" ></textarea>		
+				<textarea id="fulavalue_1" name="fulavalue_1" style="width:100%; height:100%" onKeyUp="wirteDown(this)" onMouseUp="wirteDown(this)" ></textarea>		
+			</td>
+		</tr>
+		<tr>
+			<td colspan="3" id="variable" style="margin-bottom:10px; margin-top:10px">
+				<input type="button" value="占地"  onClick="addflus(this)"/>
 			</td>
 		</tr>
 	</table>
+	</div>
+	
 	</form>
   </body>
 </html>
