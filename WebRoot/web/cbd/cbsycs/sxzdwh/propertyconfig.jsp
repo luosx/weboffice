@@ -22,9 +22,8 @@
 		<%@ include file="/base/form/PermissionControl.jspf"%>
 		
 		<%}else{ %>
-		<link rel="stylesheet"
-			href="<%=basePath%>base/form/css/commonForm.css" type="text/css" />
-			<%@ include file="/base/include/restRequest.jspf" %>
+		<link rel="stylesheet" href="<%=basePath%>base/form/css/commonForm.css" type="text/css" />
+		<%@ include file="/base/include/restRequest.jspf" %>
 		<%@ include file="/base/include/newformbase.jspf"%>
 		<%} %>
 	
@@ -36,8 +35,8 @@
 				fieldname = new Array();
 				fieldname.push("<input type='checkbox' id='check" + num + "'  />");
 				fieldname.push("<select id='shuxing_" +num+ "' name='shuxing_" +num+ "' style='width:95%'><option value='规划数据（公顷、万㎡）'>规划数据</option><option value='拆迁数据（万㎡、户）'>拆迁数据</option><option value='成本及收益情况(亿元、元/㎡)'>成本及收益情况</option><option value='其他（拆迁强度（万㎡/公顷）、成本覆盖率）'>其他（拆迁强度等）</option></select>");
-				fieldname.push("<input type='text' id='ziduanming_" + num +"' name='ziduanming_" +num + "'  style='width:95%;' />");
-				fieldname.push("<input type='text' id='bieming_" + num + "' name='bieming_" + num +  "' style='width:95%;' />");				
+				fieldname.push("<input type='text' id='ziduanming_" + num +"' name='ziduanming_" +num + "'  style='width:95%;border:0px;'/>");
+				fieldname.push("<input type='text' id='bieming_" + num + "' name='bieming_" + num +  "' style='width:95%;border:0px;' onblur='checkUnique(this.value)'/>");				
 				fieldname.push("<select id='fangshi_" + num + "' name='fangshi_" + num + "' style='width:90%;'><option value='录入'>录入</option><option value='公式'>公式</option></select>");				
 				fieldname.push("<select id='gongshi_" + num + "' name='gongshi_" + num + "' style='width:95%;' ><option value='0'>无</option></select>");
 				fieldname.push("<select id='sort_" + num + "' name='sort_" + num + "' style='width:90%;' ></select>");
@@ -52,8 +51,10 @@
 				newRow.align = "center";
 				recordnum.value = parseInt(num) + 1;
 				addnewRow(newRow, newfield);
-				//初始化下拉框
+				//初始化顺序下拉框
 				initSelect(allnum);
+				//初始化公式下拉框
+				initGongshiselect();
 			}
 			
 			function addnewRow(newRow, newfield){
@@ -116,11 +117,24 @@
 						addrow('table1','allnum1');					
 					}									
 				}	
+				//统一样式
+				initStyle();
+				//初始化顺序下拉框
 				initSelect('allnum1');
-				
+				//初始化公式下拉框
+				initGongshiselect();
 				//绑定数据
 				bindData(res);
 			}
+			
+			//统一样式
+			function initStyle(){
+				var selects = document.getElementsByTagName('select');
+				for(var i=0;i<selects.length;i++){
+					selects[i].style.border-color='#7F9DB9';
+				}			
+			}
+			
 			
 			function initSelect(allnum){
 				var array = new Array();
@@ -134,8 +148,23 @@
 					for(var k=1;k<=array.length;k++){
 						select.options.add(new Option(k,k));
 					}
-					
 				}	
+			}
+			
+			function initGongshiselect(){
+				putClientCommond("prohandle","initGsselect");
+				var message = restRequest();
+				if(message){
+					var num = document.getElementById('allnum1').value;
+					for(var j=1;j<=num;j++){
+						var select = document.getElementById('gongshi_'+j);
+						select.options.length = 1;
+						for(var k=1;k<=message.length;k++){
+							select.options.add(new Option(message[k-1].FULANAME,message[k-1].FULANAME));
+						}
+					}	
+				}
+				
 			}
 			
 			function bindData(res){
@@ -151,9 +180,67 @@
 				}			
 			}
 			
+			//保存表单
 			function save(){
-				 document.forms[0].submit(); 			  
+				 if(checkNotNull()){
+				 	document.forms[0].submit(); 
+				 }			  
 			}	
+			
+			//字段非空验证
+			function checkNotNull(){
+				var num = document.getElementById('allnum1').value;
+				for(var i=1;i<=num;i++){
+					if(document.getElementById('ziduanming_'+i).value==''){
+						alert('第'+i+'个字段名为空！');
+						return false;
+					}else if(document.getElementById('bieming_'+i).value==''){
+						alert('第'+i+'个别名为空！');
+						return false;						
+					}
+				}		
+				return true;
+			}
+			
+			function checkUnique(text){
+				var reg = new RegExp("^[0-9]*$");
+			    if(text!='' && reg.test(text)){
+       				alert("请输入非数字!");
+       				return;
+  				}
+  				//if(text!='' && checkIsNum(text)){
+       			//	alert("请输入非数字组合!");
+       			//	return;  				
+  				//}
+				var number = document.getElementById('allnum1').value;
+				//冒泡排序算法
+				for(var i=1;i<=number-1;i++){
+					for(var j=i+1;j<=number;j++){
+						var a = document.getElementById('bieming_'+i).value;
+						var b = document.getElementById('bieming_'+j).value;
+						if(a!='' && b!='' && a == b){
+							alert('第'+i+'个别名和第'+j+'个别名相同！');
+							return;
+						}
+					}
+				}
+				
+			}
+			
+		  //检查是否为数字   
+ 		  function checkIsNum(String){
+            var Letters = "1234567890";
+            var i;
+            var c;
+            for( i = 0; i < String.length; i ++ ){
+                c = String.charAt( i );
+                if (Letters.indexOf( c ) ==-1){
+                    return false;
+                }
+            }
+            return true;
+        }
+		
 </script>
 <style>
 	td{
@@ -214,10 +301,10 @@
 						</select>
 					</td>	
 					<td style="width:150px">
-						<input type="text" name="ziduanming_1" id="ziduanming_1"  style="width:95%;height:18px;border:1px solid #7F9DB9;" />
+						<input type="text" name="ziduanming_1" id="ziduanming_1"  style="width:95%;" />
 					</td>
 					<td style="width:100px">
-						<input type="text" name="bieming_1" id="bieming_1" style="width:95%;height:18px;border:1px solid #7F9DB9;" />
+						<input type="text" name="bieming_1" id="bieming_1" style="width:95%;" onblur="checkUnique(this.value)"/>
 					</td>
 					<td style="width:100px">
 						<select id="fangshi_1" name="fangshi_1"  style="width:90%;border-color:#7F9DB9;">
@@ -252,7 +339,7 @@
 if(!permission.equals("yes")){%>
 	document.body.onload = initEdit;
 <%}else if(permission.equals("yes")){%>
-	addBorders();
+	//addBorders();
 <%}%>
 <%
 	String msg = (String)request.getParameter("msg");
