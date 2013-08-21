@@ -117,8 +117,7 @@
 						addrow('table1','allnum1');					
 					}									
 				}	
-				//统一样式
-				initStyle();
+		
 				//初始化顺序下拉框
 				initSelect('allnum1');
 				//初始化公式下拉框
@@ -127,13 +126,7 @@
 				bindData(res);
 			}
 			
-			//统一样式
-			function initStyle(){
-				var selects = document.getElementsByTagName('select');
-				for(var i=0;i<selects.length;i++){
-					selects[i].style.border-color='#7F9DB9';
-				}			
-			}
+
 			
 			
 			function initSelect(allnum){
