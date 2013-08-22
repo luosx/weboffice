@@ -10,8 +10,12 @@
  http://www.springframework.org/schema/jdbc
  http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd ">
     <!-- 属性字段维护 -->
-	<bean name="prohandle" class="com.klspta.web.cbd.cbsycs.sxzdwh.PropertyHandle" scope="prototype"/>    
-	<!-- 表单测试（实现一对多）-->
-	<bean name="form" class="com.klspta.base.form.FormHandler" scope="prototype"/>
+	<bean name="prohandle" class="com.klspta.web.cbd.cbsycs.sxzdwh.PropertyHandle" scope="prototype"/>  
+	<!-- 基础数据管理你类 -->
+	<bean name="jcsjHandler" class="com.klspta.web.cbd.jcsj.JcsjHandler" scope="prototype"/>
+	
+	<!-- 计划表管理类 -->
+	<bean name="planHandle" class="com.klspta.web.cbd.plan.PlanHandle" scope="prototype"/> 
+
 
 </beans>
