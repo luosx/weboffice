@@ -13,6 +13,11 @@
 <bean name="info" class="com.klspta.base.rest.ProjectInfo" scope="prototype"/>
 <!--表单 -->
 <bean name="formrequest" class="com.klspta.base.form.DefaultFormRequest" scope="prototype"/>
+
+<!-- 表单测试（实现一对多）-->
+<bean name="form" class="com.klspta.base.form.FormHandler" />
+
+
 <!-- 工作流管理 -->
 <bean id="importProcess" class="com.klspta.base.workflow.foundations.deploy.ProcessAction"/>
 <!-- 工作流流程节点监控 -->
