@@ -1,6 +1,7 @@
 package com.klspta.base.form;
 
 import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
@@ -196,8 +197,12 @@ public class FormHandler extends AbstractBaseBean {
 				update(updatesql, CORE);
 				
 			}else if ("m".equals(String.valueOf(getSqlList.get(i).get("mapping")))) {
+				
 				//查询结果关系是一对多时
 				String oracleName = String.valueOf(getSqlList.get(i).get("ORACLENAME"));
+				//首先删除表中旧数据
+				String deleteSql = "delete from " + oracleName + " t where t." + keyField + "='" + keyValue + "'";
+				update(deleteSql, CORE);
 				//获取表单中字段名称
 				List<Map<String, Object>> formFields = getFormFields(oracleName);
 				//获取所有前台传过来的字段名称
@@ -236,10 +241,16 @@ public class FormHandler extends AbstractBaseBean {
 							}else if ("num".equals(fieldString.toLowerCase())) {
 								continue;
 							}else{
+								
 								valueString = request.getParameter(fieldString.toLowerCase() + "_" + num);
+								//没有对应列时，区公用数据
+								if(valueString == null){
+									valueString = request.getParameter(fieldString.toLowerCase());
+								}
 								if(valueString != null){
 									try {
-										valueString = new String(valueString.getBytes("iso-8859-1"), "UTF-8");
+										// valueString = new String(valueString.getBytes("iso-8859-1"),"UTF-8");
+										valueString = URLDecoder.decode(valueString, "utf-8");
 									} catch (UnsupportedEncodingException e) {
 										responseException(this, "setToData", "100050", e);
 									}
@@ -248,18 +259,21 @@ public class FormHandler extends AbstractBaseBean {
 								if(valueString == null || "null".equals(valueString)){
 									valueString = "";
 								}else{
+									/*
 									if(valueStrings.length > 1){
 										valueString = "";
 										for(String s : valueStrings){
 											valueString = valueString + "!" + s;
 										}
 									}
+									*/
 								}
 							}
 							values.put(fieldString, valueString);
 						}
 						values.put("NUM", num);
-						String updateSql = buildSQL(oracleName, formFields, values, isExist);
+
+						String updateSql = buildSQL(oracleName, formFields, values, false);
 						update(updateSql, CORE);
 					}else{
 						continue;
@@ -362,4 +376,5 @@ public class FormHandler extends AbstractBaseBean {
 		}
 		return sql;
 	}
+	
 }
