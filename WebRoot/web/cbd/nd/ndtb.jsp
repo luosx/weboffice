@@ -138,8 +138,8 @@ font-size:0px;
 		style="text-align: center; font: normal 13px verdana;" width='100%'>
 		<tr
 			style='background: #C0C0C0; text-align: center; font: normal 18px verdana;'>
-			<td colspan=2 width="10%">序号</td>
-			<td width="10%">时序（年）</td>
+			<td colspan=2 width="8%">序号</td>
+			<td width="8%">时序（年）</td>
 			<td >2012年度</td>
 			<td >2013年度</td>
 			<td >2014年度</td>
@@ -149,22 +149,22 @@ font-size:0px;
 			<td >2018年度</td>
 			<td >2019年度</td>
 			<td >2020年度</td>
-			<td>合计</td>
+			<td width="8%">合计</td>
 		</tr>
 		<tr style='background: #FFFF99;' id='kftl1'>
 			<td rowspan=3>开<br>发<br>体<br>量</td>
 			<td>1</td>
-			<td>征收户数<br>&nbsp;   </td>
-		<td width=30><%=kftlTable[0][0] %></td>
-			<td width=30><%=kftlTable[0][1] %></td>
-			<td width=30><%=kftlTable[0][2] %></td>
-			<td width=30><%=kftlTable[0][3] %></td>
-			<td width=30><%=kftlTable[0][4] %></td>
-			<td width=30><%=kftlTable[0][5] %></td>
-			<td width=30><%=kftlTable[0][6] %></td>
-			<td width=30><%=kftlTable[0][7] %></td>
-			<td width=30><%=kftlTable[0][8] %></td>
-			<td width=30><%=kftlTable[0][9] %></td>
+			<td>征收户数<br>&nbsp;</td>
+			<td><%=kftlTable[0][0] %></td>
+			<td><%=kftlTable[0][1] %></td>
+			<td><%=kftlTable[0][2] %></td>
+			<td><%=kftlTable[0][3] %></td>
+			<td><%=kftlTable[0][4] %></td>
+			<td><%=kftlTable[0][5] %></td>
+			<td><%=kftlTable[0][6] %></td>
+			<td ><%=kftlTable[0][7] %></td>
+			<td><%=kftlTable[0][8] %></td>
+			<td><%=kftlTable[0][9] %></td>
 		</tr>
 		<tr style='background: #FFFF99;' id='kftl2'>
 			<td>2</td>
@@ -233,16 +233,16 @@ font-size:0px;
 			<td rowspan=2>安<br>置<br>房</td>
 			<td>5</td>
 			<td>开工量<br>（万㎡）   </td>
-			<td width=30><%=anfjsTable[0][0] %></td>
-			<td width=30><%=anfjsTable[0][1] %></td>
-			<td width=30><%=anfjsTable[0][2] %></td>
-			<td width=30><%=anfjsTable[0][3] %></td>
-			<td width=30><%=anfjsTable[0][4] %></td>
-			<td width=30><%=anfjsTable[0][5] %></td>
-			<td width=30><%=anfjsTable[0][6] %></td>
-			<td width=30><%=anfjsTable[0][7] %></td>
-			<td width=30><%=anfjsTable[0][8] %></td>
-			<td width=30><%=anfjsTable[0][9] %></td>
+			<td><%=anfjsTable[0][0] %></td>
+			<td><%=anfjsTable[0][1] %></td>
+			<td><%=anfjsTable[0][2] %></td>
+			<td><%=anfjsTable[0][3] %></td>
+			<td><%=anfjsTable[0][4] %></td>
+			<td><%=anfjsTable[0][5] %></td>
+			<td><%=anfjsTable[0][6] %></td>
+			<td><%=anfjsTable[0][7] %></td>
+			<td><%=anfjsTable[0][8] %></td>
+			<td><%=anfjsTable[0][9] %></td>
 		</tr>
 		<tr style='background:#CCFFFF' id='azfjs2'>
 			<td>6</td>
@@ -263,16 +263,16 @@ font-size:0px;
 			<td rowspan=3>供<br>地<br>体<br>量</td>
 			<td>9</td>
 			<td>供应土地<br>（公顷） </td>
-			<td width=30><%=gdtlTable[0][0] %></td>
-			<td width=30><%=gdtlTable[0][1] %></td>
-			<td width=30><%=gdtlTable[0][2] %></td>
-			<td width=30><%=gdtlTable[0][3] %></td>
-			<td width=30><%=gdtlTable[0][4] %></td>
-			<td width=30><%=gdtlTable[0][5] %></td>
-			<td width=30><%=gdtlTable[0][6] %></td>
-			<td width=30><%=gdtlTable[0][7] %></td>
-			<td width=30><%=gdtlTable[0][8] %></td>
-			<td width=30><%=gdtlTable[0][9] %></td>
+			<td><%=gdtlTable[0][0] %></td>
+			<td><%=gdtlTable[0][1] %></td>
+			<td><%=gdtlTable[0][2] %></td>
+			<td><%=gdtlTable[0][3] %></td>
+			<td><%=gdtlTable[0][4] %></td>
+			<td><%=gdtlTable[0][5] %></td>
+			<td><%=gdtlTable[0][6] %></td>
+			<td><%=gdtlTable[0][7] %></td>
+			<td><%=gdtlTable[0][8] %></td>
+			<td><%=gdtlTable[0][9] %></td>
 		</tr>
 		<tr style='background:#99CC00' id='gdtl2'>
 			<td>10</td>
@@ -341,16 +341,16 @@ font-size:0px;
 			<td rowspan=8>投<br>融<br>资<br>情<br>况</td>
 			<td>13</td>
 			<td>年度投资需求<br>（亿元） </td>
-			<td width=30><%=trzqkTable[0][0] %></td>
-			<td width=30><%=trzqkTable[0][1] %></td>
-			<td width=30><%=trzqkTable[0][2] %></td>
-			<td width=30><%=trzqkTable[0][3] %></td>
-			<td width=30><%=trzqkTable[0][4] %></td>
-			<td width=30><%=trzqkTable[0][5] %></td>
-			<td width=30><%=trzqkTable[0][6] %></td>
-			<td width=30><%=trzqkTable[0][7] %></td>
-			<td width=30><%=trzqkTable[0][8] %></td>
-			<td width=30><%=trzqkTable[0][9] %></td>
+			<td><%=trzqkTable[0][0] %></td>
+			<td><%=trzqkTable[0][1] %></td>
+			<td><%=trzqkTable[0][2] %></td>
+			<td><%=trzqkTable[0][3] %></td>
+			<td><%=trzqkTable[0][4] %></td>
+			<td><%=trzqkTable[0][5] %></td>
+			<td><%=trzqkTable[0][6] %></td>
+			<td><%=trzqkTable[0][7] %></td>
+			<td><%=trzqkTable[0][8] %></td>
+			<td><%=trzqkTable[0][9] %></td>
 		</tr>
 		<tr style='background:#FFCC99' id='trzqk2'>
 			<td>14</td>
