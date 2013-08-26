@@ -42,6 +42,7 @@ table {
 
 td {
 	border: solid #000 1px;
+	font-size:12px;
 }
 #leftright, #topdown{
 position:absolute;
@@ -72,8 +73,6 @@ font-size:0px;
 	
 	//页面初始化
 	function onInit(){
-	
-	
 		//获取基础数据
 		putClientCommond("jcsjHandler", "getjcsjList");
 		baseInformation = restRequest();
@@ -88,10 +87,8 @@ font-size:0px;
 			baseTable.rows[hang].insertCell(lie++).innerHTML = i + 1;
 			// baseTable.rows[hang].insertCell(lie++).innerHTML = format(baseInformation[i].XMNAME);
 			//baseTable.rows[hang].insertCell(lie++).innerHTML = "<label onClick=\"changeXM(\""+ format(baseInformation[i].XMNAME) +"\")\">" + format(baseInformation[i].XMNAME) + "</label>";
-			var xmvalue = "xmmcvalue";
-			xmmcvalue = format(baseInformation[i].XMNAME);
 			baseTable.rows[hang].insertCell(lie++).innerHTML = "<label id='"+ format(baseInformation[i].XMNAME) +"' onClick='changeXM(this);return false;'>"+ format(baseInformation[i].XMNAME) +"</label>";
-			baseTable.rows[hang].cells[lie - 1].bgColor = "#FFCC99";
+			baseTable.rows[hang].cells[lie - 1].bgColor = "#C0C0C0";
 			baseTable.rows[hang].insertCell(lie++).innerHTML = format(baseInformation[i].ZD);
 			baseTable.rows[hang].cells[lie - 1].bgColor = "#FFCC99";
 			baseTable.rows[hang].insertCell(lie++).innerHTML = format(baseInformation[i].GM);
@@ -107,13 +104,13 @@ font-size:0px;
 			baseTable.rows[hang].insertCell(lie++).innerHTML = format(baseInformation[i].QTFY);
 			baseTable.rows[hang].cells[lie - 1].bgColor = "#CCFFFF";
 			baseTable.rows[hang].insertCell(lie++).innerHTML = format(baseInformation[i].AZFTZCB);
-			baseTable.rows[hang].cells[lie - 1].bgColor = "##FFFF99";
+			baseTable.rows[hang].cells[lie - 1].bgColor = "#FFFF99";
 			baseTable.rows[hang].insertCell(lie++).innerHTML = format(baseInformation[i].ZZHBTZCB);
-			baseTable.rows[hang].cells[lie - 1].bgColor = "##FFFF99";
+			baseTable.rows[hang].cells[lie - 1].bgColor = "#FFFF99";
 			baseTable.rows[hang].insertCell(lie++).innerHTML = format(baseInformation[i].CQHBTZ);
-			baseTable.rows[hang].cells[lie - 1].bgColor = "##FFFF99";
+			baseTable.rows[hang].cells[lie - 1].bgColor = "#FFFF99";
 			baseTable.rows[hang].insertCell(lie++).innerHTML = format(baseInformation[i].QTFYZB);
-			baseTable.rows[hang].cells[lie - 1].bgColor = "##FFFF99";
+			baseTable.rows[hang].cells[lie - 1].bgColor = "#FFFF99";
 			baseTable.rows[hang].insertCell(lie++).innerHTML = format(baseInformation[i].LMCB);
 			baseTable.rows[hang].cells[lie - 1].bgColor = "#CCFFCC";
 			baseTable.rows[hang].insertCell(lie++).innerHTML = format(baseInformation[i].LMCJJ);
@@ -138,10 +135,10 @@ font-size:0px;
 			baseTable.rows[1].cells[i-1].innerHTML = count;
 		}
 		//计算其他费用占比
-		baseTable.rows[1].cells[11].innerHTML = (parseFloat(baseTable.rows[1].cells[7].innerHTML)/parseFloat(baseTable.rows[1].cells[4].innerHTML)) * 100 + "%";
+		baseTable.rows[1].cells[11].innerHTML = toDecimal((parseFloat(baseTable.rows[1].cells[7].innerHTML)/parseFloat(baseTable.rows[1].cells[4].innerHTML)) * 100) + "%";
 		
 		//计算楼面成本
-		baseTable.rows[1].cells[12].innerHTML = (parseFloat(baseTable.rows[1].cells[4].innerHTML)/parseFloat(baseTable.rows[1].cells[2].innerHTML));
+		baseTable.rows[1].cells[12].innerHTML = toDecimal((parseFloat(baseTable.rows[1].cells[4].innerHTML)/parseFloat(baseTable.rows[1].cells[2].innerHTML)));
 	}
 	
 	//数据格式化
@@ -158,10 +155,11 @@ font-size:0px;
 		// window.showModalDialog (, "600", "no"); 
 		//window.open("/domain/web/cbd/cbxmjbsj/jbxmxxlr.jsp");
 		//window.showModalDialog ("/domain/web/cbd/cbxmjbsj/jbxmxxlr.jsp","10000", "8000", "no");
-		var feature="dialogWidth:800px;dialogHeight:560px;status:no;help:no";  
-		window.showModalDialog("/domain/web/cbd/cbxmjbsj/jbxmxxlr.jsp",null,feature); 
-		window.location.reload();
-		
+		//var feature="dialogWidth:800px;dialogHeight:560px;status:no;help:no";  
+		//window.showModalDialog("/domain/web/cbd/cbxmjbsj/jbxmxxlr.jsp",null,feature); 
+		//window.location.reload();
+		window.open("/domain/web/cbd/cbxmjbsj/jbxmxxlr.jsp");
+		window.locaiton.reload();
 	}
 	
 	function changeXM(check){
@@ -171,48 +169,56 @@ font-size:0px;
 		yw_guid = restRequest();
 		yw_guid = eval(yw_guid);
 		yw_guid = yw_guid[0].YW_GUID;
-		var url = "/domain/web/cbd/cbxmjbsj/jbxmxxlr.jsp?yw_guid=" + yw_guid;
-		var feature="dialogWidth:800px;dialogHeight:560px;status:no;help:no";  
-		window.showModalDialog(url,null,feature); 
+		//var url = "/domain/web/cbd/cbxmjbsj/jbxmxxlr.jsp?yw_guid=" + yw_guid;
+		//var feature="dialogWidth:800px;dialogHeight:560px;status:no;help:no";  
+		//window.showModalDialog(url,null,feature); 
+		window.open(url);
 		window.location.reload();
 	}
 	
+	//去两位有效数字
+	     function toDecimal(x) {    
+            var f = parseFloat(x);    
+            if (isNaN(f)) {    
+                return;    
+            }    
+            f = Math.round(x*100)/100;    
+            return f;    
+        } 
+	
 </script>
-<body bgcolor="#FFFFFF" topmargin="0" leftmargin="0" onLoad="onInit(); return false;">
-	<div align="center">
-		<h1>CBD区域储备项目基础数据一览表</h1>
-	</div>
-	<p>
+<body bgcolor="#CCE8CF" topmargin="0" leftmargin="0" onLoad="onInit(); return false;">
+	<p align="left" style="font-size:12px">
 		显示内容： 
 			 <input type="checkbox"
-			name="content" id="table5" checked='true' onClick="showCross()">十字标尺
+			name="content" id="table5" checked='true' onClick="showCross()" style="font-size:12px;">十字标尺
 			&nbsp;&nbsp; 
-			<button onClick="add(); return false;">增加</button>
+			<button onClick="add(); return false;" style="margin-top:5px; font-size:12px; ">增加</button>
 	</p>
 	<table id='planTable' border=1
-		style="text-align: center; font: normal 13px verdana;" width='130%'>
+		style="text-align: center; font: normal 13px verdana;" width='130%' >
 		<tr
 			style='background: #C0C0C0; text-align: center; font: normal 18px verdana;'>
-			<td>序号</td>
-			<td style="width:100px">项目名称</td>
-			<td>占地(公顷)</td>
-			<td>规模(万㎡)</td>
-			<td>户数(户)</td>
-			<td>成本(亿元)</td>
-			<td>住宅拆迁费用(亿元)</td>
-			<td>企业拆迁费用(亿元)</td>
-			<td>其他费用(亿元)</td>
-			<td>安置房投资成本(亿元)</td>
-			<td>住宅货币投资成本(亿元)</td>
-			<td>拆迁货币投资(亿元)</td>
-			<td>其他费用占比</td>
-			<td>楼面成本(万元/㎡)</td>
-			<td>楼面成交价（万元/㎡）</td>
-			<td>房屋售价（万元/㎡）</td>
-			<td>租金（元/㎡/天）</td>
-			<td>评估土地价值</td>
-			<td>抵押率</td>
-			<td>融资损失</td>
+			<td style="width:30px">序号</td>
+			<td style="width:150px">项目名称</td>
+			<td style="width:50px">占地<br>(公顷)</td>
+			<td style="width:50px">规模<br>(万㎡)</td>
+			<td style="width:50px">户数(户)</td>
+			<td style="width:50px">成本<br>(亿元)</td>
+			<td style="width:80px">住宅拆迁<br>费用(亿元)</td>
+			<td style="width:80px">企业拆迁<br>费用(亿元)</td>
+			<td style="width:60px">其他费用<br>(亿元)</td>
+			<td style="width:80px">安置房投资<br>成本(亿元)</td>
+			<td style="width:80px">住宅货币投资<br>成本(亿元)</td>
+			<td style="width:80px">拆迁货币投资<br>(亿元)</td>
+			<td style="width:50px">其他费用占比</td>
+			<td style="width:60px">楼面成本<br>(万元/㎡)</td>
+			<td style="width:80px">楼面成交价<br>(万元/㎡)</td>
+			<td style="width:60px">房屋售价<br>(万元/㎡)</td>
+			<td style="width:70px">租金<br>(元/㎡/天)</td>
+			<td style="width:60px">评估土地价值</td>
+			<td style="width:50px">抵押率</td>
+			<td style="width:60px">融资损失</td>
 		</tr>
 		
 		<tr align="center" style='background: #C0C0C0;' id='kftl4'>
