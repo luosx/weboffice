@@ -133,12 +133,16 @@ font-size:0px;
 <body bgcolor="#FFFFFF" topmargin="0" leftmargin="0">
 <h2 align="center">北京商务中心区土地储备规划——年度实施计划动态决策</h2>
 	<p>
-	显示内容：    <input type="checkbox" name="content" id="table1" checked="checked" onclick="showTable()">开发体量
+	            <img  align="right" src="<%=basePath%>base/form/images/print.png" onclick="print()" style="cursor:hand" title="打印"/>
+               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	显示内容：  
+              <input type="checkbox" name="content" id="table1" checked="checked" onclick="showTable()">开发体量
 		       <input type="checkbox" name="content" id="table2"  checked='checked' onclick="showTable()">安置房建设
 		       <input type="checkbox" name="content" id="table3"  checked="checked" onclick="showTable()">供地体量
 		        <input type="checkbox" name="content" id="table4" checked="checked" onclick="showTable()">投融资情况
 			   <input type="checkbox" name="content" id="table5" checked='checked' onclick="showCross()">十字标尺
+		     
 	</p>
+
 	<table id='planTable' border=1  style="text-align: center; font: normal 13px verdana;" width='100%'>
 		<tr style='background: #C0C0C0; text-align: center; font: normal 18px verdana;'>
 			<td colspan=2 width="10%">序号</td>
