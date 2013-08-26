@@ -128,14 +128,14 @@ public  String[][] KFTLsql_2(){
 	for(int f=0;f<kftlCenter.length;f++){
 		for(int k=0;k<11;k++){
 			if(kftlCenter[f][k]==null||kftlCenter[f][k].equals("")||kftlCenter[f][k].equals("null")){
-				kftlCenter[f][k]=" ";
+				kftlCenter[f][k]="<td></td> ";
 			}else{
 				String str=kftlCenter[f][k];
 				int length = cole.length;
 				if(length>=kftlCenter.length){
-					kftlCenter[f][k]="<div style='background-color:"+cole[f]+"'>"+str+"</div>";
+					kftlCenter[f][k]="<td style='background-color:"+cole[f]+"'>"+str+"</td>";
 				}else{
-				kftlCenter[f][k]="<div style='background-color:#"+(cole[kftlCenter.length%length])+"'>"+str+"</div>";
+				kftlCenter[f][k]="<td style='background-color:#"+(cole[kftlCenter.length%length])+"'>"+str+"</td>";
 				}
 			}
 		}
@@ -260,14 +260,14 @@ public String[][] GDTLsql_2(){
 	for(int f=0;f<kftlCenter.length;f++){
 		for(int k=0;k<11;k++){
 			if(kftlCenter[f][k]==null||kftlCenter[f][k].equals("")||kftlCenter[f][k].equals("null")){
-				kftlCenter[f][k]=" ";
+				kftlCenter[f][k]=" <td></td>";
 			}else{
 				String str=kftlCenter[f][k];
 				int length = cole.length;
 				if(length>=kftlCenter.length){
-					kftlCenter[f][k]="<div style='background-color:"+cole[f]+"'>"+str+"</div>";
+					kftlCenter[f][k]="<td style='background-color:"+cole[f]+"'>"+str+"</td>";
 				}else{
-				kftlCenter[f][k]="<div style='background-color:#"+(cole[kftlCenter.length%length])+"'>"+str+"</div>";
+				kftlCenter[f][k]="<td style='background-color:#"+(cole[kftlCenter.length%length])+"'>"+str+"</td>";
 				}
 			}
 		}
