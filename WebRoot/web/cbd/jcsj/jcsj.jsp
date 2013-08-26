@@ -43,6 +43,7 @@ table {
 td {
 	border: solid #000 1px;
 	font-size:12px;
+	height:30px;
 }
 #leftright, #topdown{
 position:absolute;
@@ -169,7 +170,7 @@ font-size:0px;
 		yw_guid = restRequest();
 		yw_guid = eval(yw_guid);
 		yw_guid = yw_guid[0].YW_GUID;
-		//var url = "/domain/web/cbd/cbxmjbsj/jbxmxxlr.jsp?yw_guid=" + yw_guid;
+		var url = "/domain/web/cbd/cbxmjbsj/jbxmxxlr.jsp?yw_guid=" + yw_guid;
 		//var feature="dialogWidth:800px;dialogHeight:560px;status:no;help:no";  
 		//window.showModalDialog(url,null,feature); 
 		window.open(url);
@@ -199,26 +200,26 @@ font-size:0px;
 		style="text-align: center; font: normal 13px verdana;" width='130%' >
 		<tr
 			style='background: #C0C0C0; text-align: center; font: normal 18px verdana;'>
-			<td style="width:30px">序号</td>
-			<td style="width:150px">项目名称</td>
-			<td style="width:50px">占地<br>(公顷)</td>
-			<td style="width:50px">规模<br>(万㎡)</td>
-			<td style="width:50px">户数(户)</td>
-			<td style="width:50px">成本<br>(亿元)</td>
-			<td style="width:80px">住宅拆迁<br>费用(亿元)</td>
-			<td style="width:80px">企业拆迁<br>费用(亿元)</td>
-			<td style="width:60px">其他费用<br>(亿元)</td>
-			<td style="width:80px">安置房投资<br>成本(亿元)</td>
-			<td style="width:80px">住宅货币投资<br>成本(亿元)</td>
-			<td style="width:80px">拆迁货币投资<br>(亿元)</td>
-			<td style="width:50px">其他费用占比</td>
-			<td style="width:60px">楼面成本<br>(万元/㎡)</td>
-			<td style="width:80px">楼面成交价<br>(万元/㎡)</td>
-			<td style="width:60px">房屋售价<br>(万元/㎡)</td>
-			<td style="width:70px">租金<br>(元/㎡/天)</td>
-			<td style="width:60px">评估土地价值</td>
-			<td style="width:50px">抵押率</td>
-			<td style="width:60px">融资损失</td>
+			<td style="width:30px; font-size:14px;">序号</td>
+			<td style="width:150px;font-size:14px;">项目名称</td>
+			<td style="width:60px;font-size:14px;">占地<br>(公顷)</td>
+			<td style="width:60px;font-size:14px;">规模<br>(万㎡)</td>
+			<td style="width:50px;font-size:14px;">户数(户)</td>
+			<td style="width:50px;font-size:14px;">成本<br>(亿元)</td>
+			<td style="width:100px;font-size:14px;">住宅拆迁<br>费用(亿元)</td>
+			<td style="width:100px;font-size:14px;">企业拆迁<br>费用(亿元)</td>
+			<td style="width:80px;font-size:14px;">其他费用<br>(亿元)</td>
+			<td style="width:100px;font-size:14px;">安置房投资<br>成本(亿元)</td>
+			<td style="width:120px;font-size:14px;">住宅货币投资<br>成本(亿元)</td>
+			<td style="width:120px;font-size:14px;">拆迁货币投资<br>(亿元)</td>
+			<td style="width:50px;font-size:14px;">其他费用占比</td>
+			<td style="width:90px;font-size:14px;">楼面成本<br>(万元/㎡)</td>
+			<td style="width:100px;font-size:14px;">楼面成交价<br>(万元/㎡)</td>
+			<td style="width:90px;font-size:14px;">房屋售价<br>(万元/㎡)</td>
+			<td style="width:90px;font-size:14px;">租金<br>(元/㎡/天)</td>
+			<td style="width:60px;font-size:14px;">评估土地价值</td>
+			<td style="width:80px;font-size:14px;">抵押率</td>
+			<td style="width:90px;font-size:14px;">融资损失</td>
 		</tr>
 		
 		<tr align="center" style='background: #C0C0C0;' id='kftl4'>
