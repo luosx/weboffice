@@ -134,10 +134,16 @@ public class ProData extends AbstractBaseBean {
 		String[] temp = new String[36];
 		// 将各个季度的数值填入到数组temp中
 		for (int j = 0; j < result.size(); j++) {
-			int nd = (result.get(j).get("年度") != null) ? Integer.parseInt(result.get(j).get("年度").toString()) : Integer
-					.parseInt(result.get(j).get("nd").toString());
-			int jd = (result.get(j).get("季度") != null) ? Integer.parseInt(result.get(j).get("季度").toString()) : Integer
-					.parseInt(result.get(j).get("jd").toString());
+			int nd;
+			int jd;
+			try {
+				nd = (result.get(j).get("年度") != null) ? Integer.parseInt(result.get(j).get("年度").toString()) : Integer
+						.parseInt(result.get(j).get("nd").toString());
+				jd = (result.get(j).get("季度") != null) ? Integer.parseInt(result.get(j).get("季度").toString()) : Integer
+						.parseInt(result.get(j).get("jd").toString());
+			} catch (Exception e) {
+				continue;
+			}
 			Object value = result.get(j).get(filed);
 			if (value != null && value.toString() != "") {
 				int position = (nd - 2012) * 4 + jd - 1;
