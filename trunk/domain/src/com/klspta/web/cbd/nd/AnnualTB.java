@@ -127,16 +127,23 @@ public  String[][] KFTLsql_2(){
 	}
 	for(int f=0;f<kftlCenter.length;f++){
 		for(int k=0;k<11;k++){
+			String str=kftlCenter[f][k];
+			if(k==0||k==10){
+				if(kftlCenter[f][k]==null||kftlCenter[f][k].equals("")||kftlCenter[f][k].equals("null")){
+					kftlCenter[f][k]=" <td style='background-color:#C0C0C0'></td>";
+				}else{ kftlCenter[f][k]="<td style='background-color:#C0C0C0'>"+str+"</td>";}
+			}else{
 			if(kftlCenter[f][k]==null||kftlCenter[f][k].equals("")||kftlCenter[f][k].equals("null")){
 				kftlCenter[f][k]="<td></td> ";
 			}else{
-				String str=kftlCenter[f][k];
+			
 				int length = cole.length;
 				if(length>=kftlCenter.length){
 					kftlCenter[f][k]="<td style='background-color:"+cole[f]+"'>"+str+"</td>";
 				}else{
 				kftlCenter[f][k]="<td style='background-color:#"+(cole[kftlCenter.length%length])+"'>"+str+"</td>";
 				}
+			}
 			}
 		}
 	}
@@ -259,10 +266,16 @@ public String[][] GDTLsql_2(){
 	}
 	for(int f=0;f<kftlCenter.length;f++){
 		for(int k=0;k<11;k++){
+			String str=kftlCenter[f][k];
+			if(k==0||k==10){
+				if(kftlCenter[f][k]==null||kftlCenter[f][k].equals("")||kftlCenter[f][k].equals("null")){
+					kftlCenter[f][k]=" <td style='background-color:#C0C0C0'></td>";
+				}else{ kftlCenter[f][k]="<td style='background-color:#C0C0C0'>"+str+"</td>";}
+			}else{
 			if(kftlCenter[f][k]==null||kftlCenter[f][k].equals("")||kftlCenter[f][k].equals("null")){
 				kftlCenter[f][k]=" <td></td>";
 			}else{
-				String str=kftlCenter[f][k];
+			
 				int length = cole.length;
 				if(length>=kftlCenter.length){
 					kftlCenter[f][k]="<td style='background-color:"+cole[f]+"'>"+str+"</td>";
@@ -270,7 +283,7 @@ public String[][] GDTLsql_2(){
 				kftlCenter[f][k]="<td style='background-color:#"+(cole[kftlCenter.length%length])+"'>"+str+"</td>";
 				}
 			}
-		}
+		}}
 	}
 	return kftlCenter;
 }
