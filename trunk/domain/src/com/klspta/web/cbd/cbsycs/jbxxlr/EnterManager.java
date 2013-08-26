@@ -37,22 +37,6 @@ public class EnterManager extends AbstractBaseBean {
 		return resultList;
 	}
 	
-	public static void main(String[] args) {
-		EnterManager em = new EnterManager();
-		em.getSavedFields("zhandi");
-	}
-	
-	/**
-	 * 
-	 * <br>Description:TODO 保存填写的基本信息
-	 * <br>Author:姚建林
-	 * <br>Date:2013-8-15
-	 */
-	public void saveData(){
-		String tString = request.getParameter("zhandi");
-		System.out.println(tString);
-	}
-	
 	/**
 	 * 
 	 * <br>Description:TODO 获得保存的字段
@@ -81,12 +65,36 @@ public class EnterManager extends AbstractBaseBean {
 			for (int j = 0; j < result.size(); j++) {//向result中添加一个map用于存放value
 				for (int k = 0; k < resultDataQuery.size(); k++) {
 					if (result.get(j).get("bieming").toString().equals(resultDataQuery.get(k).get("name").toString())) {
-						result.get(j).put("value", resultDataQuery.get(k).get("value").toString());
+						if(resultDataQuery.get(k).get("value") == null){
+							result.get(j).put("value", "");
+						}else {
+							result.get(j).put("value", resultDataQuery.get(k).get("value").toString());
+						}
 					}
 				}
 			}
 			resultList.add(result);
 		}
 		return resultList;
+	}
+	
+	/**
+	 * 
+	 * <br>Description:TODO 得到基本信息列表
+	 * <br>Author:姚建林
+	 * <br>Date:2013-8-19
+	 */
+	public void getJbxxlrList(){
+		String sql = "select t.yw_guid," + 
+					  "sum(decode(t.name, 'ceshi1', value,null)) as ceshi1," + 
+					  "sum(decode(t.name, 'ceshi2', value,null)) as ceshi2," + 
+					  "sum(decode(t.name, 'ceshi3', value,null)) as ceshi3," +
+					  "sum(decode(t.name, 'ceshi4', value,null)) as ceshi4," + 
+					  "sum(decode(t.name, 'ceshi5', value,null)) as ceshi5" +
+					" from basicinfo t" +
+					" group by t.yw_guid" +
+					" order by t.yw_guid";
+		List<Map<String, Object>> result = query(sql, YW);
+		response(result);
 	}
 }
