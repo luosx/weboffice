@@ -154,7 +154,6 @@ public class UserManager extends AbstractBaseBean {
 			args[i + 1] = usermap.get(userNames.get(i)).getUserID();
 		}
 		String sql2 = sqlBuf.substring(0, sqlBuf.length() - 1) + "))";
-		System.out.println(sql2);
 		update(sql2, CORE, args);
 
 		// 刷新内存
