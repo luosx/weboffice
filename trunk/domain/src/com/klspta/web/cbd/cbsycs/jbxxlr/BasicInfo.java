@@ -5,9 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 
-import javax.management.Query;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
@@ -18,7 +16,7 @@ import com.klspta.base.util.UtilFactory;
 /**
  * 
  * <br>Title:成本及收益测算基本信息
- * <br>Description:对成本及手机测算基本信息数据管理
+ * <br>Description:对成本及收益测算基本信息数据管理
  * <br>Author:黎春行
  * <br>Date:2013-8-15
  */
@@ -27,6 +25,7 @@ public class BasicInfo extends AbstractBaseBean {
 	private static Map<String, Object>  formula = new HashMap<String, Object>();
 	private static Map<String, Object> basic = new HashMap<String, Object>();
 	private static List<Map<String,Object>> formField = new ArrayList<Map<String, Object>>();
+	
 	/**
 	 * 
 	 * <br>Description:初始化，将公式存入缓存。
@@ -51,13 +50,16 @@ public class BasicInfo extends AbstractBaseBean {
 	 */
 	public void saveData(){
 		String yw_guid = request.getParameter("yw_guid");
-		String url = request.getHeader("referer");
+		String basePath = request.getScheme() + "://" + request.getServerName()
+							+ ":" + request.getServerPort() + request.getContextPath()
+							+ "/";
+		String url = basePath + "web/cbd/cbsycs/jbxxlr/jbxxlrSaved.jsp?";
 		if(yw_guid == null || yw_guid == ""){
 			yw_guid = UtilFactory.getStrUtil().getGuid();
-			url = url + "&yw_guid=" + yw_guid; 
 		}
+		url = url + "yw_guid=" + yw_guid; 
 		//删除表中旧数据
-		String deleSql = "delete from basicinof t where t.yw_guid=?";
+		String deleSql = "delete from basicinfo t where t.yw_guid=?";
 		update(deleSql, YW, new Object[]{yw_guid});
 		
 		String fieldSql = "select * from  propertyconfig t where t.fangshi='录入'";
@@ -66,7 +68,7 @@ public class BasicInfo extends AbstractBaseBean {
 		//将基础数据保存到数据库中
 		for(int i = 0; i < fieldList.size(); i++){
 			String aliasName = String.valueOf(fieldList.get(i).get("bieming"));
-			String aliasValue = request.getParameter(aliasName.toLowerCase());
+			String aliasValue = request.getParameter(aliasName);
 			StringBuffer insertSql = new StringBuffer();
 			basic.put(aliasName, aliasValue);
 			insertSql.append("insert into basicinfo(name, value, yw_guid ) values ('").append(aliasName).append("','");
@@ -125,7 +127,6 @@ public class BasicInfo extends AbstractBaseBean {
 		try {
 			 caculateValue = String.valueOf(jse.eval(formulaValue));
 		} catch (ScriptException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			error(this, "计算失败");
 		}
@@ -133,17 +134,14 @@ public class BasicInfo extends AbstractBaseBean {
 		
 	}
 	
-
 	public static void main(String[] args) {
 		ScriptEngine jse = new ScriptEngineManager().getEngineByName("JavaScript");
 		String caculateValue = "";
 		try {
 			 caculateValue = String.valueOf(jse.eval("1+2+3+4*5"));
 		} catch (ScriptException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		System.out.println(caculateValue + "-----------------------------");
 	}
-	
 }
