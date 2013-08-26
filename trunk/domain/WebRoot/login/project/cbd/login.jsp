@@ -5,7 +5,7 @@
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
     String type = request.getParameter("type");
     ProjectInfo project=ProjectInfo.getInstance();
-  //  String name = project.getProjectName();
+	String name = project.getProjectName();
     String loginname1=project.getProjectLoginName1();
     String loginname2=project.getProjectLoginName2();
     if(type != null && "logout".equals(type)){
@@ -27,7 +27,7 @@
     <script src="<%=basePath%>/login/js/cookies.js" type="text/javascript"></script>
     <style type="text/css">
     body {
-	    background-image: url(../../images/login_bk.jpg);
+	    background-image: url(../../images/<%=name%>/login_bk.jpg);
     }
     font.style1 {
     font-family: "微软雅黑";
@@ -47,7 +47,7 @@
 <form id='loginForm' method="post" action='<%=basePath %>j_spring_security_check'>
 <table width="1000" border="0" align="center" cellpadding="0" cellspacing="0">
   <tr>
-    <td height="595" valign="top" background="../../images/login.jpg">
+    <td height="595" valign="top" background="../../images/<%=name%>/login.jpg">
     <table width="1000" border="0" cellspacing="0" cellpadding="0">
       <tr>
       <td  colspan="2"><div style="margin-top: 6%;margin-left: 25%"><font class="style1"><%=loginname1 %></font></div></td>
