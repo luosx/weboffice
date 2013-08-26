@@ -57,26 +57,9 @@ td {
 	<script type="text/javascript">
 	function showTable() {
 		if (document.getElementById('table1').checked) {
-			document.getElementById('kftl4').style.display = '';
-			document.getElementById('kftl3').style.display = '';
-			document.getElementById('kftl2').style.display = '';
-			document.getElementById('kftl1').style.display = '';
+			document.getElementById('kftl').style.display = '';
 		} else {
-			document.getElementById('kftl4').style.display = 'none';
-			document.getElementById('kftl3').style.display = 'none';
-			document.getElementById('kftl2').style.display = 'none';
-			document.getElementById('kftl1').style.display = 'none';
-		}
-		if (document.getElementById('table2').checked) {
-			document.getElementById('azfjs4').style.display = '';
-			document.getElementById('azfjs3').style.display = '';
-			document.getElementById('azfjs2').style.display = '';
-			document.getElementById('azfjs1').style.display = '';
-		} else {
-			document.getElementById('azfjs4').style.display = 'none';
-			document.getElementById('azfjs3').style.display = 'none';
-			document.getElementById('azfjs2').style.display = 'none';
-			document.getElementById('azfjs1').style.display = 'none';
+			document.getElementById('kftl').style.display = 'none';
 		}
 
 	}
@@ -150,10 +133,12 @@ td {
 					合计
 				</td>
 			</tr>
-			<!-- 开发体量综合数据 -->
-			<%=proData.getKFTLData()%>
-			<!-- 开发体量项目具体数据 -->
-			<%=proDeatail.getKFTLDetail()%>
+			<tbody id='kftl'>
+				<!-- 开发体量综合数据 -->
+				<%=proData.getKFTLData()%>
+				<!-- 开发体量项目具体数据 -->
+				<%=proDeatail.getKFTLDetail()%>
+			</tbody>
 
 			<!-- 安置房建设综合数据 -->
 			<%=proData.getAZFJSData()%>
@@ -165,13 +150,13 @@ td {
 
 			<!-- 投融资情况综合数据 -->
 			<%=proData.getTRZQKData()%>
-			
+
 
 		</table>
 		<div id="leftright"
-			style="width: expression(document .   body .   clientWidth)"></div>
+			style="width: expression(document .     body .     clientWidth)"></div>
 		<div id="topdown"
-			style="height: expression(document .   body .   clientHeight)"></div>
+			style="height: expression(document .     body .     clientHeight)"></div>
 	</body>
 </html>
 <script>
