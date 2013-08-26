@@ -12,7 +12,7 @@ import com.klspta.base.AbstractBaseBean;
  * Author:赵伟 <br>
  * Date:2013-8-26
  */
-public class ProDetail extends AbstractBaseBean{
+public class ProDetail extends AbstractBaseBean {
 	/**
 	 * <br>
 	 * Description:获取具体项目的年度计划信息 <br>
@@ -32,7 +32,7 @@ public class ProDetail extends AbstractBaseBean{
 			String proName = proKinds.get(i).get("xmname").toString();
 			String tempSql = "select * from PLAN开发体量 t where t.xmmc=? order by t.nd,t.jd";
 			List<Map<String, Object>> result = query(tempSql, YW, new String[] { proName });
-			code += getKindsCode(proKinds.get(i).get("xmname").toString(), result, kinds, fileds);
+			code += getKindsCode(proKinds.get(i).get("xmname").toString(), result, kinds, fileds, i + 1);
 		}
 		return code;
 	}
@@ -58,11 +58,12 @@ public class ProDetail extends AbstractBaseBean{
 			String proName = proKinds.get(i).get("xmname").toString();
 			String tempSql = "select * from PLAN供地体量 t where t.xmmc=? order by t.nd,t.jd";
 			List<Map<String, Object>> result = query(tempSql, YW, new String[] { proName });
-			code += getKindsCode(proKinds.get(i).get("xmname").toString(), result, kinds, fileds);
+			code += getKindsCode(proKinds.get(i).get("xmname").toString(), result, kinds, fileds, i + 1);
 		}
 		return code;
 	}
 
+	// //////////////////////////////////////////////////////////////////
 	/**
 	 * <br>
 	 * Description:生成各个字段各个季度的代码 <br>
@@ -79,11 +80,12 @@ public class ProDetail extends AbstractBaseBean{
 	 *            所要显示的字段数据库字段名[cj][cjz]
 	 * @return
 	 */
-	private String getKindsCode(String proName, List<Map<String, Object>> result, String[] kinds, String[][] fileds) {
+	private String getKindsCode(String proName, List<Map<String, Object>> result, String[] kinds, String[][] fileds,
+			int index) {
 		String code = "";
 		// 生成第一行td的代码时，要额外加上序号以及当前项目的名称
-		code = "<tr><td rowspan=" + kinds.length + ">1</td><td>" + kinds[0] + "</td><td rowspan=" + kinds.length
-				+ " style='background: #FFCC00;'>" + proName + "</td>";
+		code = "<tr><td rowspan=" + kinds.length + ">" + index + "</td><td>" + kinds[0] + "</td><td rowspan="
+				+ kinds.length + " style='background: #FFCC00;' onclick=window.open('web/cbd/plan/kftl/kftlmodel.jsp?xmmc="+proName+"')>" + proName + "</td>";
 		code += getDeatailCode(result, fileds[0][0], fileds[0][1]);
 		code += "<td></td></tr>";
 
