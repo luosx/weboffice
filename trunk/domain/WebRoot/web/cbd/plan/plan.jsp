@@ -19,6 +19,7 @@
 		<meta http-equiv="cache-control" content="no-cache">
 		<meta http-equiv="expires" content="0">
 		<%@ include file="/base/include/restRequest.jspf"%>
+		<script type="text/javascript" src="web/cbd/plan/plan.js"></script>
 		<style>
 input,img {
 	vertical-align: middle;
@@ -54,42 +55,25 @@ td {
 }
 </style>
 	</head>
-	<script type="text/javascript">
-	function showTable() {
-		if (document.getElementById('table1').checked) {
-			document.getElementById('kftl').style.display = '';
-		} else {
-			document.getElementById('kftl').style.display = 'none';
-		}
+	<script type="text/javascript">}
 
-	}
-	function showCross(){
-		if (document.getElementById('table5').checked) {
-			document.getElementById('leftright').style.display = '';
-			document.getElementById('topdown').style.display = '';
-		}else{
-			document.getElementById('leftright').style.display = 'none';
-			document.getElementById('topdown').style.display = 'none';
-		}
-	}
 </script>
 	<body bgcolor="#FFFFFF" topmargin="0" leftmargin="0">
 		<p>
 			显示内容：
-			<input type="checkbox" name="content" id="table1" checked='true'
+			<input type="checkbox" name="content" id="table1" checked='checked'
 				onclick="showTable()">
 			开发体量
-			<input type="checkbox" name="content" id="table2" checked='true'
+			<input type="checkbox" name="content" id="table2" checked='checked'
 				onClick="showTable()">
 			安置房建设
-			<input type="checkbox" name="content" id="table3" checked='true'
+			<input type="checkbox" name="content" id="table3" checked='checked'
 				onclick="showTable()">
 			供地体量
-			<input type="checkbox" name="content" id="table4" checked='true'
+			<input type="checkbox" name="content" id="table4" checked='checked'
 				onClick="showTable()">
 			投融资情况
-			<input type="checkbox" name="content" id="table5" checked='true'
-				onClick="showCross()">
+			<input type="checkbox" name="content" id="table5" onClick="showCross()">
 			十字标尺
 		</p>
 		<table id='planTable' border=1
@@ -140,23 +124,28 @@ td {
 				<%=proDeatail.getKFTLDetail()%>
 			</tbody>
 
-			<!-- 安置房建设综合数据 -->
-			<%=proData.getAZFJSData()%>
+			<tbody id='azfjs'>
+				<!-- 安置房建设综合数据 -->
+				<%=proData.getAZFJSData()%>
+			</tbody>
 
-			<!-- 供地体量综合数据 -->
-			<%=proData.getGDTLData()%>
-			<!-- 供地体量项目具体数据 -->
-			<%=proDeatail.getGDTLDetail()%>
+			<tbody id='gdtl'>
+				<!-- 供地体量综合数据 -->
+				<%=proData.getGDTLData()%>
+				<!-- 供地体量项目具体数据 -->
+				<%=proDeatail.getGDTLDetail()%>
+			</tbody>
 
-			<!-- 投融资情况综合数据 -->
-			<%=proData.getTRZQKData()%>
-
+			<tbody id='trzqk'>
+				<!-- 投融资情况综合数据 -->
+				<%=proData.getTRZQKData()%>
+			</tbody>
 
 		</table>
 		<div id="leftright"
-			style="width: expression(document .     body .     clientWidth)"></div>
+			style="width: expression(document .                 body .                 clientWidth)"></div>
 		<div id="topdown"
-			style="height: expression(document .     body .     clientHeight)"></div>
+			style="height: expression(document .                 body .                 clientHeight)"></div>
 	</body>
 </html>
 <script>
