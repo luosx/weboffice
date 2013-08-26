@@ -214,19 +214,19 @@ font-size:0px;
 		<!-- 开发体量循环 -->
 		<% if(s>0){for(int i=0;i<s;i++){%>
 		<tr id='kf1'>
-		<td ><%=i+1%></td>
+		<td ><%=i+1 %></td>
 			<td>投资</td>
-			<td><%=kftlTable1[i][0] %></td>
-			<td><%=kftlTable1[i][1] %></td>
-			<td><%=kftlTable1[i][2] %></td>
-			<td><%=kftlTable1[i][3] %></td>
-			<td><%=kftlTable1[i][4] %></td>
-			<td><%=kftlTable1[i][5] %></td>
-			<td><%=kftlTable1[i][6] %></td>
-			<td><%=kftlTable1[i][7] %></td>
-			<td><%=kftlTable1[i][8] %></td>
-			<td><%=kftlTable1[i][9] %></td>
-			<td><%=kftlTable1[i][10] %></td>
+			<%=kftlTable1[i][0] %>
+			<%=kftlTable1[i][1] %>
+			<%=kftlTable1[i][2] %>
+			<%=kftlTable1[i][3] %>
+			<%=kftlTable1[i][4] %>
+			<%=kftlTable1[i][5] %>
+			<%=kftlTable1[i][6] %>
+			<%=kftlTable1[i][7] %>
+			<%=kftlTable1[i][8] %>
+			<%=kftlTable1[i][9] %>
+			<%=kftlTable1[i][10]%>
 		</tr>
 		<%}}  %>
 	<!-- 安置房建设 -->
@@ -350,17 +350,17 @@ font-size:0px;
 		<tr id='kf1'>
 		<td ><%=i+1%></td>
 			<td>规模</td>
-			<td ><%=gdtlTable1[i][0] %></td>
-			<td><%=gdtlTable1[i][1] %></td>
-			<td><%=gdtlTable1[i][2] %></td>
-			<td><%=gdtlTable1[i][3] %></td>
-			<td><%=gdtlTable1[i][4] %></td>
-			<td><%=gdtlTable1[i][5] %></td>
-			<td><%=gdtlTable1[i][6] %></td>
-			<td><%=gdtlTable1[i][7] %></td>
-			<td><%=gdtlTable1[i][8] %></td>
-			<td><%=gdtlTable1[i][9] %></td>
-			<td><%=gdtlTable1[i][10] %></td>
+			<%=gdtlTable1[i][0] %>
+			<%=gdtlTable1[i][1] %>
+			<%=gdtlTable1[i][2] %>
+			<%=gdtlTable1[i][3] %>
+			<%=gdtlTable1[i][4] %>
+			<%=gdtlTable1[i][5] %>
+			<%=gdtlTable1[i][6] %>
+			<%=gdtlTable1[i][7] %>
+			<%=gdtlTable1[i][8] %>
+			<%=gdtlTable1[i][9] %>
+			<%=gdtlTable1[i][10] %>
 		</tr>
 		<%}} %>
 		<!-- 投融资情况 -->
