@@ -81,7 +81,7 @@
                 var left=(screen.width-900)/2;
             	var top=(screen.height-600)/2;
             	if(id!='0'){
-					window.open("<%=basePath%>web/cbd/cbsycs/tjbb/chart.jsp?xml="+id,'chart','height=600,width=900,left='+left+',top='+top+',toolbar=no,menubar=no,scrollbars=no,resizable=no,location=no,status=no');
+					window.open("<%=basePath%>web/cbd/tjbb/chart.jsp?xml="+id,'chart','height=600,width=900,left='+left+',top='+top+',toolbar=no,menubar=no,scrollbars=no,resizable=no,location=no,status=no');
 				}
              }
          }
