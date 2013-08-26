@@ -3,9 +3,10 @@
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-//String yw_guid = request.getParameter("yw_guid");
+String yw_guid = request.getParameter("yw_guid");
+String strMsg = request.getParameter("msg");
 EnterManager enterManager = new EnterManager();
-List<List<Map<String, Object>>> resultList = enterManager.getSavedFields("zhandi");
+List<List<Map<String, Object>>> resultList = enterManager.getSavedFields(yw_guid);
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -26,7 +27,17 @@ List<List<Map<String, Object>>> resultList = enterManager.getSavedFields("zhandi
 	<link rel="stylesheet" href="/base/form/css/commonForm.css" type="text/css" />
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"></head>
   <script type="text/javascript">
-  
+  	//保存表单方法
+	function formSave(){
+		document.forms[0].submit();
+	}
+	
+	//提示信息
+	function alertMsg(){
+		if("<%=strMsg%>" == "success"){
+			alert("数据保存成功");
+		}
+	}
   </script>
   <style type="text/css">
 	table{
@@ -47,13 +58,17 @@ List<List<Map<String, Object>>> resultList = enterManager.getSavedFields("zhandi
 		}
   
   </style>
-  <body>
+  <body onload = "alertMsg()">
+  	<div id="fixed" class="Noprn" style="position: fixed; top: 5px; left: 0px">
+  		<img src="base/form/images/save.png" onclick="formSave()" style="cursor:hand" title="保存"/><br/>
+  		<img src="base/form/images/print.png" onclick="print()" style="cursor:hand" title="打印"/>
+  	</div>
   	<div align="center">
 		<h1>
 			基本地块数据登记表
 		</h1>
 	</div>
-	<form method="post" action="<%=basePath%>service/rest/enterManager/saveData">
+	<form method="post" action="<%=basePath%>service/rest/basicInfo/saveData?yw_guid=<%=yw_guid %>">
 		<table cellpadding="0" cellspacing="0" align="center" style="border:1px, #000000, solid">
 			<tr>
 				<td>
@@ -75,6 +90,7 @@ List<List<Map<String, Object>>> resultList = enterManager.getSavedFields("zhandi
 				</td>
 			</tr>
 			<%
+				String strControl = "disabled";
 				int temp = 0;//用于控制一个td显示两个字段
 				for (int i = 0; i < resultList.size(); i++) {
 					%>
@@ -85,23 +101,20 @@ List<List<Map<String, Object>>> resultList = enterManager.getSavedFields("zhandi
 						%>
 						<tr>
 							<td><label><%=resultList.get(i).get(j).get("ziduanming") %></label></td>
-							<td><input type="text" id="<%=resultList.get(i).get(j).get("bieming") %>" name="<%=resultList.get(i).get(j).get("bieming") %>" value="<%=resultList.get(i).get(j).get("value")==null?"":resultList.get(i).get(j).get("value") %>"></td>
+							<td><input type="text" id="<%=resultList.get(i).get(j).get("bieming") %>" name="<%=resultList.get(i).get(j).get("bieming") %>" value="<%=resultList.get(i).get(j).get("value")==null || resultList.get(i).get(j).get("value").equals("null")?"":resultList.get(i).get(j).get("value") %>" <%=resultList.get(i).get(j).get("fangshi").equals("公式")?"disabled":"" %>></td>
 							<%
 								if(j+1 == temp){//用于规避数组越界
 									break;
 								}
 							%>
 							<td><label><%=resultList.get(i).get(j+1).get("ziduanming") %></label></td>
-							<td><input type="text" id="<%=resultList.get(i).get(j+1).get("bieming") %>" name="<%=resultList.get(i).get(j+1).get("bieming") %>" value="<%=resultList.get(i).get(j+1).get("value")==null?"":resultList.get(i).get(j+1).get("value") %>"></td>
+							<td><input type="text" id="<%=resultList.get(i).get(j+1).get("bieming") %>" name="<%=resultList.get(i).get(j+1).get("bieming") %>" value="<%=resultList.get(i).get(j+1).get("value")==null || resultList.get(i).get(j+1).get("value").equals("null")?"":resultList.get(i).get(j+1).get("value") %>" <%=resultList.get(i).get(j+1).get("fangshi").equals("公式")?"disabled":"" %>></td>
 						</tr>
 						<%
 						j = j + 2;
 					}
 				}
 			%>
-			<tr>
-				<input type="submit" value="按钮" />
-			</tr>
 		</table>
 	</form>
   </body>
