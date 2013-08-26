@@ -86,8 +86,8 @@ public class ProDetail extends AbstractBaseBean {
 		// 生成第一行td的代码时，要额外加上序号以及当前项目的名称
 		code = "<tr><td rowspan=" + kinds.length + ">" + index + "</td><td>" + kinds[0] + "</td><td rowspan="
 				+ kinds.length
-				+ " style='background: #C0C0C0;' onclick=window.open('kftl/kftlmodel.jsp?xmmc=" + proName
-				+ "')>" + proName + "</td>";
+				+ " style='background: #C0C0C0;' onclick=window.open('kftl/kftlmodel.jsp?xmmc="
+				+ proName + "')>" + proName + "</td>";
 		code += getDeatailCode(result, fileds[0][0], fileds[0][1]);
 		code += "<td></td></tr>";
 
@@ -117,8 +117,14 @@ public class ProDetail extends AbstractBaseBean {
 		String[] temp = new String[36];
 		// 将各个季度的数值填入到数组temp中
 		for (int j = 0; j < result.size(); j++) {
-			int nd = Integer.parseInt(result.get(j).get("ND").toString());
-			int jd = Integer.parseInt(result.get(j).get("JD").toString());
+			int nd;
+			int jd;
+			try {
+				nd = Integer.parseInt(result.get(j).get("ND").toString());
+				jd = Integer.parseInt(result.get(j).get("JD").toString());
+			} catch (Exception e) {
+				continue;
+			}
 			Object value1 = result.get(j).get(filed1);
 			Object value2 = result.get(j).get(filed2);
 			if (value2 != null && value2.toString() != "") {
