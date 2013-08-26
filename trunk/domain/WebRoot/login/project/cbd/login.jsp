@@ -5,7 +5,7 @@
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
     String type = request.getParameter("type");
     ProjectInfo project=ProjectInfo.getInstance();
-	String name = project.getProjectName();
+  //  String name = project.getProjectName();
     String loginname1=project.getProjectLoginName1();
     String loginname2=project.getProjectLoginName2();
     if(type != null && "logout".equals(type)){
@@ -27,7 +27,7 @@
     <script src="<%=basePath%>/login/js/cookies.js" type="text/javascript"></script>
     <style type="text/css">
     body {
-	    background-image: url(../../images/<%=name%>/login_bk.jpg);
+	    background-image: url(../../images/login_bk.jpg);
     }
     font.style1 {
     font-family: "微软雅黑";
@@ -45,15 +45,15 @@
 
 <body onload="MM_preloadImages()">
 <form id='loginForm' method="post" action='<%=basePath %>j_spring_security_check'>
-<table width="1000" border="0" align="center" cellpadding="0" cellspacing="0">
+<table border="0" align="center" cellpadding="0" cellspacing="0">
   <tr>
-    <td height="595" valign="top" background="../../images/<%=name%>/login.jpg">
-    <table width="1000" border="0" cellspacing="0" cellpadding="0">
+    <td height="648" valign="top" background="../../images/cbd.jpg">
+    <table width="1020" border="0" cellspacing="0" cellpadding="0">
       <tr>
-      <td  colspan="2"><div style="margin-top: 6%;margin-left: 25%"><font class="style1"><%=loginname1 %></font></div></td>
+      <td  colspan="2"><div style="margin-top: 6%;margin-left: 25%; display:none"><font class="style1"><%=loginname1 %></font></div></td>
       </tr>
       <tr>
-      <td colspan="2" ><div style="margin-top: 1%;margin-left: 26%" ><font class="style2"><%=loginname2 %></font></div></td>
+      <td colspan="2" ><div style="margin-top: 1%;margin-left: 26%; display:none" ><font class="style2"><%=loginname2 %></font></div></td>
       </tr>
       <tr>
         <td width="707" height="134">&nbsp;</td>
@@ -62,7 +62,7 @@
      
       <tr>
         <td height="16">&nbsp;</td>
-        <td style="padding-left:55px;padding-top:1px;"><label>
+        <td style="padding-left:5px;padding-top:120px;"><label>
           <input name="j_username" type="text" class="input" id="j_username" />
         </label></td>
       </tr>
@@ -72,13 +72,13 @@
       </tr>
       <tr>
         <td height="16">&nbsp;</td>
-        <td style="padding-left:55px;padding-top:2px;"><input name="j_password" type="password" class="input" id="j_password" /></td>
+        <td style="padding-left:5px;padding-top:1px;"><input name="j_password" type="password" class="input" id="j_password" /></td>
       </tr>
       <tr>
         <td height="53">&nbsp;</td>
         <td><table width="" border="0" cellspacing="0" cellpadding="0">
           <tr>
-            <td style="width:150px;text-align: left"><span style="margin-left:-10px;color:red;"><%=type%></span></td>
+            <td style="width:110px;text-align: left"><span style="margin-left:-10px;color:red;"><%=type%></span></td>
             <td width="93" ><a href="#" style="margin-left:-49px;" onclick='login();return false;' target="_parent" onmouseover="MM_swapImage('Image1','','../../images/dl_btnB.gif',1)" onmouseout="MM_swapImgRestore()"><img src="../../images/dl_btnA.gif" name="Image1" width="51" height="22" border="0" id="Image1" /></a></td>
           </tr>
         </table></td>
