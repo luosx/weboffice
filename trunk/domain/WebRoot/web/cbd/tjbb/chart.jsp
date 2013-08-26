@@ -28,7 +28,7 @@ String xml=request.getParameter("xml");
     <script type="text/javascript" language="javascript"> 
     var chart = new AnyChart('<%=basePath%>/base/thirdres/anyChart/binaries/swf/AnyChart.swf');
     chart.initText ="加载中........." 
-    chart.setXMLFile('<%=basePath%>web/cbd/cbsycs/tjbb/xml/<%=xml%>'); 
+    chart.setXMLFile('<%=basePath%>web/cbd/tjbb/xml/<%=xml%>'); 
 		chart.width = '100%';
 		chart.height = '100%';
     chart.write(); 
