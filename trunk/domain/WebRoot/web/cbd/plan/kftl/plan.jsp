@@ -126,8 +126,6 @@ font-size:0px;
 				}
 			}
 		}
-	
-	
 	}
 	
 </script>
@@ -148,7 +146,7 @@ font-size:0px;
 			style='background: #C0C0C0; text-align: center; font: normal 18px verdana;'>
 			<td colspan=2>序号</td>
 			<td>时序（年）</td>
-			<td colspan=4>2012年度<br>1&nbsp;&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3&nbsp;&nbsp;4</td>
+			<td colspan=4>2012年度</td>
 			<td colspan=4>2013年度</td>
 			<td colspan=4>2014年度</td>
 			<td colspan=4>2015年度</td>
