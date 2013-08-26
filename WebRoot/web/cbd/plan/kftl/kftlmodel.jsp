@@ -58,14 +58,18 @@ String xmmc = "联合大学商学院";
   </style>
   <script type="text/javascript">
   	function save(){
+  		//保存之前，删除数据库中已经存在的数据
+  		for(var i = 0; i < document.getElementById("num").value; i++){
+  			putClientCommond("kftlHandle", "deleteExist");
+			putRestParameter("year", document.getElementById("nd_" + i));
+			putRestParameter("quarter", document.getElementById("jd_" + i));
+			putRestParameter("xmmc","<%=xmmc%>");
+			baseInformation = restRequest();
+  		}
 		document.forms[0].submit();
 	}
 	
-	//获取相同年份和季节数据
-	function getSameData(check){
-	
-	
-	}
+
 	
 	//初始化,获取相同项目名称的基本数据
 	function onInit(){
@@ -104,8 +108,8 @@ String xmmc = "联合大学商学院";
 		for(var i = 1; i < 5; i++){
 			var loumName = document.getElementById("lm_" + i);
 			var cjName = document.getElementById("cj_" + i);
-			loumName.value = lmj;
-			cjName.value = cjj;
+			loumName.value = format(lmj);
+			cjName.value = format(cjj);
 		}
 		
 	}
@@ -114,8 +118,8 @@ String xmmc = "联合大学商学院";
 	function Addopt(selectname, value){
 		var name = document.getElementById(selectname);
 		var opt = document.createElement('option');
-		opt.text = value;
-		opt.value = value;
+		opt.text = format(value);
+		opt.value = format(value);
 		name.options.add(opt);
 	}
 	
@@ -126,7 +130,8 @@ String xmmc = "联合大学商学院";
 		var name = check.name;
 		name = name.replace(/hs/,"hsz");
 		value = parseFloat(zhs)*parseFloat(value)* 0.01;
-		document.getElementById(name).value = value;
+		document.getElementById(name).value = format(value);
+		countTotal();
 	}
 	
 	//计算地量的值
@@ -135,7 +140,8 @@ String xmmc = "联合大学商学院";
 		var name = check.name;
 		name = name.replace(/dl/,"dlz");
 		value = parseFloat(zdl)*parseFloat(value)* 0.01;
-		document.getElementById(name).value = value;
+		document.getElementById(name).value = format(value);
+		countTotal();
 	}
 	
 	//计算规模的值
@@ -144,7 +150,8 @@ String xmmc = "联合大学商学院";
 		var name = check.name;
 		name = name.replace(/gm/,"gmz");
 		value = parseFloat(zgm)*parseFloat(value)* 0.01;
-		document.getElementById(name).value = value;
+		document.getElementById(name).value = format(value);
+		countTotal();
 	}
 	
 	//计算住的值
@@ -156,7 +163,7 @@ String xmmc = "联合大学商学院";
 		if(value == "" || isNaN(value)){
 			value = 0;
 		}
-		document.getElementById(name).value = value;
+		document.getElementById(name).value = format(value);
 		
 		//计算投资值
 		var tzzname = name.replace(/zhu/, "tz");
@@ -170,12 +177,13 @@ String xmmc = "联合大学商学院";
 			value = 0;
 		}
 		var tzzvalue = parseFloat(qivalue)+parseFloat(value);
-		document.getElementById(tzzname).value = tzzvalue;
+		document.getElementById(tzzname).value = format(tzzvalue);
 		
 		var tzvalue = (parseFloat(tzzvalue)*100)/parseFloat(cqhbtz);
 		tzvalue = tzvalue + '%';
 		
-		document.getElementById(tzname).value = tzvalue;	
+		document.getElementById(tzname).value = format(tzvalue);
+		countTotal();	
 	}
 	
 	function qi(check){
@@ -186,7 +194,7 @@ String xmmc = "联合大学商学院";
 		if(value == "" || isNaN(value)){
 			value = 0;
 		}
-		document.getElementById(name).value = value;
+		document.getElementById(name).value = format(value);
 		
 				//计算投资值
 		var tzzname = name.replace(/qi/, "tz");
@@ -198,14 +206,72 @@ String xmmc = "联合大学商学院";
 		}
 
 		var tzzvalue = parseFloat(qivalue)+parseFloat(value);
-		document.getElementById(tzzname).value = tzzvalue;
+		document.getElementById(tzzname).value = format(tzzvalue);
 		
 		var tzvalue = (parseFloat(tzzvalue)* 100)/parseFloat(cqhbtz);
-		tzvalue = tzvalue + '%';
+		tzvalue = tzvalue;
 		
-		document.getElementById(tzname).value = tzvalue;	
+		document.getElementById(tzname).value = format(tzvalue);	
+		countTotal();
 	}
   
+  	//选择年度和季度时，查询是否有历史数据
+	function changeQuarter(check){
+		var value = check.value;
+		var name = check.name;
+		var yearname = name.replace(/jd/,"nd");
+		var yearValue = document.getElementById(yearname).value;
+		//当年度和季度不确定时，不做处理
+		if(yearValue == "" || value == ""){
+			return;
+		}
+		putClientCommond("kftlHandle", "getKftlByQuarter");
+		putRestParameter("year", yearValue);
+		putRestParameter("quarter", value);
+		putRestParameter("xmmc","<%=xmmc%>");
+		baseInformation = restRequest();
+		baseInformation = eval(baseInformation);
+		
+		if(baseInformation.length > 0){
+			document.getElementById(name.replace(/jd/, "hs")).value = format(baseInformation[0].HS);
+			document.getElementById(name.replace(/jd/, "dl")).value = format(baseInformation[0].DL);
+			document.getElementById(name.replace(/jd/, "gm")).value = format(baseInformation[0].GM);
+			document.getElementById(name.replace(/jd/, "tz")).value = format(baseInformation[0].TZ);
+			document.getElementById(name.replace(/jd/, "zhu")).value = format(baseInformation[0].ZHU);
+			document.getElementById(name.replace(/jd/, "qi")).value = format(baseInformation[0].QI);
+			document.getElementById(name.replace(/jd/, "hsz")).value = format(baseInformation[0].HSZ);
+			document.getElementById(name.replace(/jd/, "dlz")).value = format(baseInformation[0].DLZ);
+			document.getElementById(name.replace(/jd/, "gmz")).value = format(baseInformation[0].GMZ);
+			document.getElementById(name.replace(/jd/, "tzz")).value = format(baseInformation[0].TZZ);
+			document.getElementById(name.replace(/jd/, "zhuz")).value = format(baseInformation[0].ZHUZ);
+			document.getElementById(name.replace(/jd/, "qiz")).value = format(baseInformation[0].QIZ);
+		}
+		countTotal();		
+	}
+	
+		//数据格式化
+	function format(value){
+		if(value == null || value == "" || value == undefined || isNaN(value)){
+			return "";
+		}else{
+			return value;
+		}
+	}
+	//计算合计百分比
+	function countTotal(){
+		var countname = new Array("hs", "dl", "gm", "zhu", "qi", "tz");
+		for(var i = 0; i < countname.length; i++){
+			var value = 0;
+			for(var j = 0; j < document.getElementById("num").value; j++){
+				 var chosevalue = format(document.getElementById(countname[i] + "_" + (j + 1)).value);
+				 if(chosevalue == ""){
+				 }else{
+				 	value = parseFloat(value) + parseFloat(chosevalue);
+				}
+			}
+			document.getElementById(countname[i]).value = format(value);
+		}
+	}
   </script>
   <body onLoad="onInit();">
   	<div id="fixed" class="Noprn" style="position: fixed; top: 5px; left: 0px"></div>
@@ -214,11 +280,11 @@ String xmmc = "联合大学商学院";
   	    <table align="center" cellpadding="0" cellspacing="0">
           <tr>
             <td><label>项目名称</label>            </td>
-            <td id="xmmctd" colspan="4"><input type="text" id="xmmc" name="xmmc" value="<%=xmmc%>" style="width:100px">
+            <td id="xmmctd" colspan="5"><input type="text" id="xmmc" name="xmmc" value="<%=xmmc%>" style="width:100px">
               &nbsp;&nbsp;
-              <button>增加</button>
-  				
-      <button>删除</button></td>
+              <button style="display:none">增加</button>
+  				<input type="text" id="num" value="4" style="display:none" />
+      <button style="display:none">删除</button></td>
           </tr>
           <tr>
             <td><label>属性名\年度</label>            </td>
@@ -226,135 +292,242 @@ String xmmc = "联合大学商学院";
                 <option ></option>
                  </select>
               &nbsp;
-              <select name="jd_1">
+              <select name="jd_1" onChange="changeQuarter(this);return false;">
               	<option checked></option>
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
               </select>            </td>
             <td><select name="nd_2">
                 <option checked></option>
               </select>
               &nbsp;
-              <select name="jd_2">
+              <select name="jd_2" onChange="changeQuarter(this);return false;">
               	<option checked></option>
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
               </select>            </td>
             <td><select name="nd_3" >
                 <option checked></option>
               </select>
               &nbsp;
-              <select name="jd_3" >
+              <select name="jd_3" onChange="changeQuarter(this);return false;" >
               	<option checked></option>
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
               </select>            </td>
             <td><select name="nd_4">
                 <option checked></option>
               </select>
               &nbsp;
-              <select name="jd_4">
+              <select name="jd_4" onChange="changeQuarter(this);return false;">
               	<option checked></option>
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
               </select>            </td>
+			  
+			 <td align="center">
+			 	<label>合计</label>
+			 </td>
           </tr>
           <tr>
             <td><label>户数(百分比)</label>            </td>
-            <td><input type="text" id="hs_1" name="hs_1" onBlur="hushu(this)" style="width:80px" />
-                <input type="text" id="hsz_1" name="hsz_1" style="width:80px" /></td>
-            <td><input type="text" id="hs_2" name="hs_2" style="width:80px" />
-                <input type="text" id="hsz_2" name="hsz_2" style="width:80px" /></td>
-            <td><input type="text" id="hs_3" name="hs_3" style="width:80px" />
-                <input type="text" id="hsz_3" name="hsz_3" style="width:80px" /></td>
-            <td><input type="text" id="hs_4" name="hs_4" style="width:80px" />
-                <input type="text" id="hsz_4" name="hsz_42" style="width:80px" /></td>
+            <td>
+			<input type="text" id="hsz_1" name="hsz_1" readonly="true" style="width:60px" />
+			<input type="text" id="hs_1" name="hs_1" onBlur="hushu(this)" style="width:50px; text-align:right; padding-right:5px" />
+				<label>%</label>
+                </td>
+            <td>
+				<input type="text" id="hsz_2" name="hsz_2" readonly="true" style="width:60px" />
+				<input type="text" id="hs_2" name="hs_2" onBlur="hushu(this)" style="width:50px; text-align:right; padding-right:5px" />
+				<label>%</label>
+                </td>
+            <td>
+				<input type="text" id="hsz_3" name="hsz_3" readonly="true" style="width:60px" />
+				<input type="text" id="hs_3" name="hs_3" onBlur="hushu(this)" style="width:50px; text-align:right; padding-right:5px" />
+				<label>%</label>
+                </td>
+            <td>
+				<input type="text" id="hsz_4" name="hsz_42" readonly="true" style="width:60px" />
+				<input type="text" id="hs_4" name="hs_4" onBlur="hushu(this)" style="width:50px; text-align:right; padding-right:5px" />
+				<label>%</label>
+                </td>
+			<td>
+				<input type="text" id="hs" name="hs" style="width:50px; text-align:right; padding-right:5px" />
+				%
+			</td>
           </tr>
           <tr>
             <td><label>地量(百分比)</label>            </td>
-            <td><input type="text" id="dl_1" name="dl_1" onBlur="diliang(this)" style="width:80px" />   
-			    <input type="text" id="dlz_1" name="dlz_1" style="width:80px" />       </td>
-            <td><input type="text" id="dl_2" name="dl_2" style="width:80px" />
-                <input type="text" id="dlz_2" name="dlz_2" style="width:80px" /></td>
-            <td><input type="text" id="dl_3" name="dl_3" style="width:80px" />
-                <input type="text" id="dlz_3" name="dlz_3" style="width:80px" /></td>
-            <td><input type="text" id="dl_4" name="dl_4" style="width:80px" />
-                <input type="text" id="dlz_4" name="dlz_4" style="width:80px" /></td>
+            <td>
+				<input type="text" id="dlz_1" name="dlz_1" readonly="true" style="width:60px" />
+				<input type="text" id="dl_1" name="dl_1" onBlur="diliang(this)" style="width:50px; text-align:right; padding-right:5px" />  
+				<label>%</label> 
+			           </td>
+            <td>
+				<input type="text" id="dlz_2" name="dlz_2" readonly="true" style="width:60px" />
+				<input type="text" id="dl_2" name="dl_2" onBlur="diliang(this)" style="width:50px; text-align:right; padding-right:5px" />
+				<label>%</label>
+                
+            <td>
+				<input type="text" id="dlz_3" name="dlz_3" readonly="true" style="width:60px" />
+				<input type="text" id="dl_3" name="dl_3" onBlur="diliang(this)" style="width:50px; text-align:right; padding-right:5px" />
+				<label>%</label>
+                </td>
+            <td>
+				<input type="text" id="dlz_4" name="dlz_4" readonly="true" style="width:60px" />
+				<input type="text" id="dl_4" name="dl_4" onBlur="diliang(this)" style="width:50px; text-align:right; padding-right:5px" />
+				<label>%</label>
+                </td>
+			<td>
+				<input type="text" id="dl" name="dl" style="width:50px; text-align:right; padding-right:5px" />
+				%
+			</td>
           </tr>
           <tr>
             <td><label>规模(百分比)</label>            </td>
-            <td><input type="text" id="gm_1" name="gm_1" onBlur="guimo(this)" style="width:80px" />
-                <input type="text" id="gmz_1" name="gmz_1" style="width:80px" />            </td>
-            <td><input type="text" id="gm_2" name="gm_2" style="width:80px" />
-                <input type="text" id="gmz_2" name="gmz_2" style="width:80px" />            </td>
-            <td><input type="text" id="gm_3" name="gm_3" style="width:80px" />
-                <input type="text" id="gmz_3" name="gmz_3" style="width:80px" />            </td>
-            <td><input type="text" id="gm_4" name="gm_4" style="width:80px" />
-                <input type="text" id="gmz_4" name="gmz_4" style="width:80px" />            </td>
+            <td>
+				<input type="text" id="gmz_1" name="gmz_1" readonly="true" style="width:60px" />
+				<input type="text" id="gm_1" name="gm_1" onBlur="guimo(this)" style="width:50px; text-align:right; padding-right:5px" />
+				<label>%</label>
+            </td>
+            <td>
+				<input type="text" id="gmz_2" name="gmz_2" readonly="true" style="width:60px" />
+				<input type="text" id="gm_2" name="gm_2" onBlur="guimo(this)" style="width:50px; text-align:right; padding-right:5px" />
+				<label>%</label>
+                            </td>
+            <td>
+				<input type="text" id="gmz_3" name="gmz_3" readonly="true" style="width:60px" />
+				<input type="text" id="gm_3" name="gm_3" onBlur="guimo(this)" style="width:50px; text-align:right; padding-right:5px" />
+				<label>%</label>
+             </td>
+            <td>
+				<input type="text" id="gmz_4" name="gmz_4" readonly="true" style="width:60px" />            
+				<input type="text" id="gm_4" name="gm_4" onBlur="guimo(this)" style="width:50px; text-align:right; padding-right:5px" />
+				<label>%</label>
+             </td>
+			<td>
+				<input type="text" id="gm" name="gm" style="width:50px; text-align:right; padding-right:5px" />
+				%
+			</td>
           </tr>
           <tr>
             <td><label>住(百分比)</label>            </td>
-            <td><input type="text" name="zhu_1" onBlur="zhu(this)" style="width:80px" />
-                <input type="text" name="zhuz_1" style="width:80px" /></td>
-            <td><input type="text" name="zhu_2" style="width:80px" />
-                <input type="text" name="zhuz_2" style="width:80px" /></td>
-            <td><input type="text" name="zhu_3" style="width:80px" />
-                <input type="text" name="zhuz_3" style="width:80px" /></td>
-            <td><input type="text" name="zhu_4" style="width:80px" />
-                <input type="text" name="zhuz_4" style="width:80px" /></td>
+            <td>
+				<input type="text" name="zhuz_1" readonly="true" style="width:60px" />
+				<input type="text" name="zhu_1" onBlur="zhu(this)" style="width:50px; text-align:right; padding-right:5px" />
+				<label>%</label>
+            </td>
+            <td>
+				<input type="text" name="zhuz_2" readonly="true" style="width:60px" />
+				<input type="text" name="zhu_2" onBlur="zhu(this)" style="width:50px; text-align:right; padding-right:5px" />
+				<label>%</label>
+            </td>
+            <td>
+				<input type="text" name="zhuz_3" readonly="true" style="width:60px" />
+				<input type="text" name="zhu_3" onBlur="zhu(this)" style="width:50px; text-align:right; padding-right:5px" />
+				<label>%</label>
+            </td>
+            <td>
+				<input type="text" name="zhuz_4" readonly="true" style="width:60px" />
+				<input type="text" name="zhu_4" onBlur="zhu(this)" style="width:50px; text-align:right; padding-right:5px" />
+				<label>%</label>
+            </td>
+			<td>
+				<input type="text" name="zhu" style="width:50px; text-align:right; padding-right:5px" />
+				%
+			</td>
           </tr>
           <tr>
             <td><label>企(百分比)</label>            </td>
-            <td><input type="text" id="qi_1" name="qi_1" onBlur="qi(this)" style="width:80px" />
-              <input type="text" id="qiz_1" name="qiz_1" style="width:80px" /></td>
-            <td><input type="text" id="qi_2" name="qi_2" style="width:80px" />
-              <input type="text" id="qiz_2" name="qiz_2" style="width:80px" /></td>
-            <td><input type="text" id="qi_3" name="qi_3" style="width:80px" />
-              <input type="text" id="qiz_3" name="qiz_3" style="width:80px" /></td>
-            <td><input type="text" id="qi_4" name="qi_4" style="width:80px" />
-              <input type="text" id="qiz_4" name="qiz_4" style="width:80px" /></td>
+            <td>
+				<input type="text" id="qiz_1" name="qiz_1" readonly="true" style="width:60px" />
+				<input type="text" id="qi_1" name="qi_1" onBlur="qi(this)" style="width:50px; text-align:right; padding-right:5px" />
+				<label>%</label>
+              </td>
+            <td>
+				<input type="text" id="qiz_2" name="qiz_2" readonly="true" style="width:60px" />
+				<input type="text" id="qi_2" name="qi_2" onBlur="qi(this)" style="width:50px; text-align:right; padding-right:5px" />
+				<label>%</label>
+            </td>
+            <td>
+				<input type="text" id="qiz_3" name="qiz_3" readonly="true" style="width:60px" />
+				<input type="text" id="qi_3" name="qi_3" onBlur="qi(this)" style="width:50px; text-align:right; padding-right:5px" />
+				<label>%</label>
+            </td>
+            <td>
+				<input type="text" id="qiz_4" name="qiz_4" readonly="true" style="width:60px" />
+				<input type="text" id="qi_4" name="qi_4" onBlur="qi(this)" style="width:50px; text-align:right; padding-right:5px" />
+				<label>%</label>
+            </td>
+			<td>
+				<input type="text" id="qi" name="qi" style="width:50px; text-align:right; padding-right:5px" />
+				%
+			</td>
           </tr>
 		  <tr>
             <td><label>投资</label>            </td>
-            <td><input type="text" id="tz_1" name="tz_1" style="width:80px" />
-              <input type="text" id="tzz_1" name="tzz_1" style="width:80px" /></td>
-            <td><input type="text" id="tz_2" name="tz_2" style="width:80px" />
-              <input type="text" id="tzz_2" name="tzz_2" style="width:80px" /></td>
-            <td><input type="text" id="tz_3" name="tz_3" style="width:80px" />
-              <input type="text" id="tzz_3" name="tzz_3" style="width:80px" /></td>
-            <td><input type="text" id="tz_4" name="tz_4" style="width:80px" />
-              <input type="text" id="tzz_4" name="tzz_4" style="width:80px" /></td>
+            <td>
+				<input type="text" id="tzz_1" name="tzz_1" readonly="true" style="width:60px" />
+				<input type="text" id="tz_1" name="tz_1" style="width:50px; text-align:right; padding-right:5px" />
+				<label>%</label>
+            </td>
+            <td>
+			<input type="text" id="tzz_2" name="tzz_2" readonly="true" style="width:60px" />
+			<input type="text" id="tz_2" name="tz_2" style="width:50px; text-align:right; padding-right:5px" />
+			<label>%</label>
+              </td>
+            <td>
+			<input type="text" id="tzz_3" name="tzz_3" readonly="true" style="width:60px" />
+			<input type="text" id="tz_3" name="tz_3" style="width:50px; text-align:right; padding-right:5px" />
+			<label>%</label>
+              </td>
+            <td>
+				<input type="text" id="tzz_4" name="tzz_4" readonly="true" style="width:60px" />
+				<input type="text" id="tz_4" name="tz_4" style="width:50px; text-align:right; padding-right:5px" />
+				<label>%</label>
+              </td>
+			<td>
+				<input type="text" id="tz" name="tz" style="width:50px; text-align:right; padding-right:5px" />
+				%
+			</td>
           </tr>
 		  
 		  <tr>
             <td><label>楼面价</label>            </td>
-            <td><input type="text" id="lm_1" name="lm_1" style="width:80px" />
+            <td><input type="text" id="lm_1" name="lm_1" readonly="true" style="width:60px" />
              </td>
-            <td><input type="text" id="lm_2" name="lm_2" style="width:80px" />
+            <td><input type="text" id="lm_2" name="lm_2" readonly="true" style="width:60px" />
               </td>
-            <td><input type="text" id="lm_3" name="lm_3" style="width:80px" />
+            <td><input type="text" id="lm_3" name="lm_3" readonly="true" style="width:60px" />
               </td>
-            <td><input type="text" id="lm_4" name="lm_4" style="width:80px" />
+            <td><input type="text" id="lm_4" name="lm_4" readonly="true" style="width:60px" />
+				
               </td>
+			 <td>
+			 	<input type="text" style="display:none" />
+			</td>
           </tr>
 		  		  <tr>
             <td><label>成交价</label>            </td>
-            <td><input type="text" id="cj_1" name="cj_1" style="width:80px" />
+            <td><input type="text" id="cj_1" name="cj_1" readonly="true" style="width:60px" />
              </td>
-            <td><input type="text" id="cj_2" name="cj_2" style="width:80px" />
+            <td><input type="text" id="cj_2" name="cj_2" readonly="true" style="width:60px" />
               </td>
-            <td><input type="text" id="cj_3" name="cj_3" style="width:80px" />
+            <td><input type="text" id="cj_3" name="cj_3" readonly="true" style="width:60px" />
               </td>
-            <td><input type="text" id="cj_4" name="cj_4" style="width:80px" />
+            <td><input type="text" id="cj_4" name="cj_4" readonly="true" style="width:60px" />
               </td>
+			 <td>
+			 	<input type="text" style="display:none" />
+			 </td>
           </tr>
         </table>
   	</form>
