@@ -201,7 +201,7 @@ String notSelectDkInfo = projectManager.getDkInfoArrayJsonByProjectID();
   		<img src="base/form/images/print.png" onclick="print()" style="cursor:hand" title="打印"/>
   	</div>
   	<div align="center">
-		<h1>
+		<h1  style="font-size: 30">
 			储备项目基础数据登记表
 		</h1>
 	</div>

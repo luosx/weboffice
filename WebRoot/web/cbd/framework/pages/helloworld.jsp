@@ -76,7 +76,7 @@ String userId = ((User) principal).getUserID();
 		document.body.appendChild(divTip);
 		//根据有没有超期案件判断要不要显示提示框
 		if(myData!=""){
-			show();
+			//show();
 		}else{
 			
 		}
