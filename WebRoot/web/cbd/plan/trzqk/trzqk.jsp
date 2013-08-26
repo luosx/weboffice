@@ -3,7 +3,6 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 //String xmmc = new String(request.getParameter("xmmc").getBytes("iso-8859-1"), "UTF-8");
-String xmmc = "联合大学商学院";
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -63,7 +62,6 @@ String xmmc = "联合大学商学院";
   			putClientCommond("azfjsHandle", "deleteExist");
 			putRestParameter("year", document.getElementById("nd_" + i));
 			putRestParameter("quarter", document.getElementById("jd_" + i));
-			putRestParameter("xmmc","<%=xmmc%>");
 			baseInformation = restRequest();
   		}
 		document.forms[0].submit();
