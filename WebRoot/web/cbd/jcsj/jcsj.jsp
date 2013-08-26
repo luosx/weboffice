@@ -86,7 +86,11 @@ font-size:0px;
 		for(var i = 0; i < baseInformation.length; i++){
 			baseTable.insertRow(hang); 
 			baseTable.rows[hang].insertCell(lie++).innerHTML = i + 1;
-			baseTable.rows[hang].insertCell(lie++).innerHTML = format(baseInformation[i].XMNAME);
+			// baseTable.rows[hang].insertCell(lie++).innerHTML = format(baseInformation[i].XMNAME);
+			//baseTable.rows[hang].insertCell(lie++).innerHTML = "<label onClick=\"changeXM(\""+ format(baseInformation[i].XMNAME) +"\")\">" + format(baseInformation[i].XMNAME) + "</label>";
+			var xmvalue = "xmmcvalue";
+			xmmcvalue = format(baseInformation[i].XMNAME);
+			baseTable.rows[hang].insertCell(lie++).innerHTML = "<label id='"+ format(baseInformation[i].XMNAME) +"' onClick='changeXM(this);return false;'>"+ format(baseInformation[i].XMNAME) +"</label>";
 			baseTable.rows[hang].cells[lie - 1].bgColor = "#FFCC99";
 			baseTable.rows[hang].insertCell(lie++).innerHTML = format(baseInformation[i].ZD);
 			baseTable.rows[hang].cells[lie - 1].bgColor = "#FFCC99";
@@ -122,6 +126,7 @@ font-size:0px;
 			baseTable.rows[hang].insertCell(lie++).innerHTML = format(baseInformation[i].TYL);
 			baseTable.rows[hang].insertCell(lie++).innerHTML = format(baseInformation[i].RZSS);
 			hang++;
+			lie = 0;
 		}
 		
 		//计算数据总和
@@ -147,8 +152,30 @@ font-size:0px;
 			return value;
 		}
 	}
+			
+	//添加一笔基础数据
+	function add(){
+		// window.showModalDialog (, "600", "no"); 
+		//window.open("/domain/web/cbd/cbxmjbsj/jbxmxxlr.jsp");
+		//window.showModalDialog ("/domain/web/cbd/cbxmjbsj/jbxmxxlr.jsp","10000", "8000", "no");
+		var feature="dialogWidth:800px;dialogHeight:560px;status:no;help:no";  
+		window.showModalDialog("/domain/web/cbd/cbxmjbsj/jbxmxxlr.jsp",null,feature); 
+		window.location.reload();
+		
+	}
 	
-	
+	function changeXM(check){
+		var xmmc = check.id;
+		putClientCommond("projectManager", "getYw_guidbymc");
+		putRestParameter("xmmc", xmmc);
+		yw_guid = restRequest();
+		yw_guid = eval(yw_guid);
+		yw_guid = yw_guid[0].YW_GUID;
+		var url = "/domain/web/cbd/cbxmjbsj/jbxmxxlr.jsp?yw_guid=" + yw_guid;
+		var feature="dialogWidth:800px;dialogHeight:560px;status:no;help:no";  
+		window.showModalDialog(url,null,feature); 
+		window.location.reload();
+	}
 	
 </script>
 <body bgcolor="#FFFFFF" topmargin="0" leftmargin="0" onLoad="onInit(); return false;">
@@ -159,6 +186,8 @@ font-size:0px;
 		显示内容： 
 			 <input type="checkbox"
 			name="content" id="table5" checked='true' onClick="showCross()">十字标尺
+			&nbsp;&nbsp; 
+			<button onClick="add(); return false;">增加</button>
 	</p>
 	<table id='planTable' border=1
 		style="text-align: center; font: normal 13px verdana;" width='130%'>
