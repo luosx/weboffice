@@ -197,33 +197,33 @@ font-size:0px;
 		<tr>
 		<td >1</td>
 		<td rowspan=<%=kftlTable1.length%>>项<br>目<br>年<br>度<br>投<br>资<br>规<br>模</td>
-			<td><%=kftlTable1[0][0] %></td>
-			<td><%=kftlTable1[0][1] %></td>
-			<td><%=kftlTable1[0][2] %></td>
-			<td><%=kftlTable1[0][3] %></td>
-			<td><%=kftlTable1[0][4] %></td>
-			<td><%=kftlTable1[0][5] %></td>
-			<td><%=kftlTable1[0][6] %></td>
-			<td><%=kftlTable1[0][7] %></td>
-			<td><%=kftlTable1[0][8] %></td>
-			<td><%=kftlTable1[0][9] %></td>
-			<td><%=kftlTable1[0][10] %></td>
+			<%=kftlTable1[0][0] %>
+			<%=kftlTable1[0][1] %>
+			<%=kftlTable1[0][2] %>
+			<%=kftlTable1[0][3] %>
+			<%=kftlTable1[0][4] %>
+			<%=kftlTable1[0][5] %>
+			<%=kftlTable1[0][6] %>
+			<%=kftlTable1[0][7] %>
+			<%=kftlTable1[0][8] %>
+			<%=kftlTable1[0][9] %>
+			<%=kftlTable1[0][10] %>
 		</tr>
 		<!-- 开发体量循环 -->
 		<% for(int i=1;i<kftlTable1.length;i++){%>
 		<tr id='kf1'>
 		    <td ><%=i+1%></td>
-			<td ><%=kftlTable1[i][0] %></td>
-			<td><%=kftlTable1[i][1] %></td>
-			<td><%=kftlTable1[i][2] %></td>
-			<td><%=kftlTable1[i][3] %></td>
-			<td><%=kftlTable1[i][4] %></td>
-			<td><%=kftlTable1[i][5] %></td>
-			<td><%=kftlTable1[i][6] %></td>
-			<td><%=kftlTable1[i][7] %></td>
-			<td><%=kftlTable1[i][8] %></td>
-			<td><%=kftlTable1[i][9] %></td>
-			<td><%=kftlTable1[i][10] %></td>
+			<%=kftlTable1[i][0] %>
+			<%=kftlTable1[i][1] %>
+			<%=kftlTable1[i][2] %>
+			<%=kftlTable1[i][3] %>
+			<%=kftlTable1[i][4] %>
+			<%=kftlTable1[i][5] %>
+			<%=kftlTable1[i][6] %>
+			<%=kftlTable1[i][7] %>
+			<%=kftlTable1[i][8] %>
+			<%=kftlTable1[i][9] %>
+			<%=kftlTable1[i][10] %>
 		</tr>
 		<%}} %>
 	<!-- 安置房 -->
@@ -305,33 +305,33 @@ font-size:0px;
  	<tr>
 		<td >1</td>
 		<td rowspan=<%=gdtlTable1.length%>>项<br>目<br>年<br>度<br>供<br>应<br>规<br>模</td>
-			<td><%=gdtlTable1[0][0] %></td>
-			<td><%=gdtlTable1[0][1] %></td>
-			<td><%=gdtlTable1[0][2] %></td>
-			<td><%=gdtlTable1[0][3] %></td>
-			<td><%=gdtlTable1[0][4] %></td>
-			<td><%=gdtlTable1[0][5] %></td>
-			<td><%=gdtlTable1[0][6] %></td>
-			<td><%=gdtlTable1[0][7] %></td>
-			<td><%=gdtlTable1[0][8] %></td>
-			<td><%=gdtlTable1[0][9] %></td>
-			<td><%=gdtlTable1[0][10] %></td>
+			<%=gdtlTable1[0][0] %>
+			<%=gdtlTable1[0][1] %>
+			<%=gdtlTable1[0][2] %>
+			<%=gdtlTable1[0][3] %>
+			<%=gdtlTable1[0][4] %>
+     		<%=gdtlTable1[0][5] %>
+			<%=gdtlTable1[0][6] %>
+			<%=gdtlTable1[0][7] %>
+			<%=gdtlTable1[0][8] %>
+			<%=gdtlTable1[0][9] %>
+			<%=gdtlTable1[0][10] %>
 		</tr>
 		<!-- 开发体量循环 -->
 		<%for(int i=1;i<gdtlTable1.length;i++){%>
 		<tr id='kf1'>
 		<td ><%=i+1%></td>
-			<td><%=gdtlTable1[i][0] %></td>
-			<td><%=gdtlTable1[i][1] %></td>
-			<td><%=gdtlTable1[i][2] %></td>
-			<td><%=gdtlTable1[i][3] %></td>
-			<td><%=gdtlTable1[i][4] %></td>
-			<td><%=gdtlTable1[i][5] %></td>
-			<td><%=gdtlTable1[i][6] %></td>
-			<td><%=gdtlTable1[i][7] %></td>
-			<td><%=gdtlTable1[i][8] %></td>
-			<td><%=gdtlTable1[i][9] %></td>
-			<td><%=gdtlTable1[i][10] %></td>
+			<%=gdtlTable1[i][0] %>
+			<%=gdtlTable1[i][1] %>
+			<%=gdtlTable1[i][2] %>
+			<%=gdtlTable1[i][3] %>
+			<%=gdtlTable1[i][4] %>
+			<%=gdtlTable1[i][5] %>
+			<%=gdtlTable1[i][6] %>
+			<%=gdtlTable1[i][7] %>
+			<%=gdtlTable1[i][8] %>
+			<%=gdtlTable1[i][9] %>
+			<%=gdtlTable1[i][10] %>
 		</tr>
 		<%} }%>
 		<!-- 投融资情况 -->
