@@ -6,15 +6,16 @@
 					+ request.getServerName() + ":" + request.getServerPort()
 					+ path + "/";
 					
- AnnualTB annual=new AnnualTB();
+  //获取实例
+     AnnualTB annual= AnnualTB.getAnnualTB();
       //开发体量
-     String [][] kftlTable=annual.getKFTLtop();
-     String [][]kftlTable1=  annual.getKFTLcenter();
+    String [][] kftlTable= annual.getKFTL();
+    String [][]kftlTable1= annual.getKFTL_D();
      //安置房
-     String [][] anfjsTable= annual.getAZFJS();
+    String [][] anfjsTable=annual.getAZFJS();
     //供地体量
-    String [][] gdtlTable=  annual.getGDTL();
-     String [][] gdtlTable1=annual. getGDTLtable();
+    String [][] gdtlTable=annual.getGDTL();
+    String [][] gdtlTable1=annual.getGDTL_D();
    //投融资情况
     String [][] trzqkTable=  annual.getTRZQK();
 %>
@@ -304,7 +305,7 @@ font-size:0px;
  	<tr>
 		<td >1</td>
 		<td rowspan=<%=gdtlTable1.length%>>项<br>目<br>年<br>度<br>供<br>应<br>规<br>模</td>
-			<td  style='background: #FFCC00;'><%=gdtlTable1[0][0] %></td>
+			<td><%=gdtlTable1[0][0] %></td>
 			<td><%=gdtlTable1[0][1] %></td>
 			<td><%=gdtlTable1[0][2] %></td>
 			<td><%=gdtlTable1[0][3] %></td>
@@ -320,7 +321,7 @@ font-size:0px;
 		<%for(int i=1;i<gdtlTable1.length;i++){%>
 		<tr id='kf1'>
 		<td ><%=i+1%></td>
-			<td  style='background: #FFCC00;'><%=gdtlTable1[i][0] %></td>
+			<td><%=gdtlTable1[i][0] %></td>
 			<td><%=gdtlTable1[i][1] %></td>
 			<td><%=gdtlTable1[i][2] %></td>
 			<td><%=gdtlTable1[i][3] %></td>

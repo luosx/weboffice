@@ -3,16 +3,17 @@
 <%
     String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"+ request.getServerName() + ":" + request.getServerPort()+ path + "/";
-      Annual annual=new Annual();
+    //获取实例
+     Annual annual= Annual.getAnnual();
       //开发体量
-     String [][] kftlTable=annual.getKFTLtop();
-     String [][]kftlTable1=  annual.getKFTLcenter();
+    String [][] kftlTable= annual.getKFTL();
+    String [][]kftlTable1= annual.getKFTL_D();
      int s= kftlTable1.length;
      //安置房
-     String [][] anfjsTable= annual.getAZFJS();
+    String [][] anfjsTable=annual.getAZFJS();
     //供地体量
-     String [][] gdtlTable=  annual.getGDTL();
-     String [][] gdtlTable1=annual. getGDTLtable();
+    String [][] gdtlTable=annual.getGDTL();
+    String [][] gdtlTable1=annual.getGDTL_D();
    //投融资情况
     String [][] trzqkTable=  annual.getTRZQK();
 
@@ -132,11 +133,11 @@ font-size:0px;
 <body bgcolor="#FFFFFF" topmargin="0" leftmargin="0">
 <h2 align="center">北京商务中心区土地储备规划——年度实施计划动态决策</h2>
 	<p>
-	显示内容： <input type="checkbox" name="content" id="table1" checked='true' onclick="showTable()">开发体量
-		       <input type="checkbox" name="content" id="table2" checked='true' onclick="showTable()">安置房建设
-		       <input type="checkbox" name="content" id="table3" checked='true' onclick="showTable()">供地体量
-		        <input type="checkbox" name="content" id="table4" checked='true' onclick="showTable()">投融资情况
-			   <input type="checkbox" name="content" id="table5" checked='false' onclick="showCross()">十字标尺
+	显示内容：    <input type="checkbox" name="content" id="table1" checked="checked" onclick="showTable()">开发体量
+		       <input type="checkbox" name="content" id="table2"  checked='checked' onclick="showTable()">安置房建设
+		       <input type="checkbox" name="content" id="table3"  checked="checked" onclick="showTable()">供地体量
+		        <input type="checkbox" name="content" id="table4" checked="checked" onclick="showTable()">投融资情况
+			   <input type="checkbox" name="content" id="table5" checked='checked' onclick="showCross()">十字标尺
 	</p>
 	<table id='planTable' border=1  style="text-align: center; font: normal 13px verdana;" width='100%'>
 		<tr style='background: #C0C0C0; text-align: center; font: normal 18px verdana;'>
