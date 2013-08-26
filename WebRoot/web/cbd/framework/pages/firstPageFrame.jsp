@@ -74,15 +74,14 @@ window.onload=function()
 	width=obj.scrollWidth-obj.offsetWidth;
 	}
 </script>
-<body style="background-color:#D6F3FC;">
-<img id="icon" onclick="clickImage()"  src="<%=resourcePath%>/images/go.png" style="display:block;float:right;width:26px;height:26px;"/> 
+<body style="background-color:#D6F9FA;">
+<!--<img id="icon" onclick="clickImage()"  src="<%=resourcePath%>/images/go.png" style="display:block;float:right;width:26px;height:26px;"/>--> 
 
-<div style="width:100%;text-align:center;float:right;padding:0;margin:0;">
-	<div  id="showimage" style="width:800px;text-align:center;padding:0;margin:0;overflow:hidden;">
-		<table cellpadding="0" cellspacing="0">
+<div style="width:100%;">
+	<div id="showimage" style="width:100%;">
+		<table cellpadding="0" cellspacing="0" align="center">
 			<tr>
-				<td width="790"><img id="img1"  class="image" src="<%=resourcePath%>/images/index3.png" style="border:none;"><td>
-				<td width="790"><img id="img2" class="image" src="<%=resourcePath%>/images/ldjc1.png" style="border:none;"></td>
+				<td><img src="<%=resourcePath%>/images/index3.png"><td>
 			</tr>
 		</table>	
 	</div>
