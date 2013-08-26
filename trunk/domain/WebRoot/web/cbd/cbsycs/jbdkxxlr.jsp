@@ -130,7 +130,7 @@ String yw_guid = request.getParameter("yw_guid");
   <body bgcolor="#FFFFFF" style="margin:0 0;padding:0 0;">
   	<div align="left" id="fixed" class="Noprn" style="position: fixed; top: 5px; left:0px"></div>
   	<div align="center">
-		<h1>
+		<h1 style="font-size: 30">
 			基本地块数据登记表
 		</h1>
 	</div>

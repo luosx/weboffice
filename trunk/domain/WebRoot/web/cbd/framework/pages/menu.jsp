@@ -180,10 +180,22 @@ window.onload=function()
 	isLoad=false;
 
 	}
-function openPage(url){
-
-	top.content.document.getElementById("content").cols="0,9,*";
- 
+function openPage(obj,url){
+	top.content.document.getElementById("content").cols="0,0,*";
+	
+	if(openObj!=obj)
+	{		
+		obj.style.background="url('<%=resourcePath%>/images/top/bg_w_hc.png')";	
+		obj.style.color="white";
+		isChange=false;	
+		if(openObj!=undefined)
+		{
+			openObj.style.background="none";
+			openObj.style.color="#444444";
+					
+		}	
+		openObj=obj;
+	} 
 		
 	parent.content.right.location.href='<%=basePath%>'+url; 
     var  autoExtend = url.indexOf("autoExtend");
