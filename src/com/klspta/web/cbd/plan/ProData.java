@@ -71,9 +71,9 @@ public class ProData extends AbstractBaseBean {
 		String sql = "select * from PLAN投融资情况 t";
 		List<Map<String, Object>> result = query(sql, YW);
 
-		String[] kinds = { "政府土地收益<br>（亿元）", "本期回笼成本<br>（亿元）", "政府土地收益<br>（亿元）", "本期融资需求<br>（亿元）", "本期还款需求<br>（亿元）",
-				"权益性资金注入<br>（亿元）", "负债余额<br>（亿元）", "储备库融资缺口<br>（亿元）", "资金风险<br>（亿元）", "本期账面余额<br>（亿元）" };
-		String[] fileds = { "ZFTDSY", "BQHLCB", "ZFTDSY", "BQRZXQ", "BQHKXQ", "QYXZJZR", "FZJE", "CBKRZQK", "ZJFX",
+		String[] kinds = { "本期回笼成本<br>（亿元）", "政府土地收益<br>（亿元）", "本期投资需求<br>（亿元）", "本期还款需求<br>（亿元）", "权益性资金注入<br>（亿元）",
+				"本期融资需求<br>（亿元）", "负债余额<br>（亿元）", "储备库融资缺口<br>（亿元）", "资金风险<br>（亿元）", "本期账面余额<br>（亿元）" };
+		String[] fileds = { "BQHLCB", "ZFTDSY", "BQTZXQ", "BQHKXQ", "QYXZJZR", "BQRZXQ", "FZYE", "CBKRZQK", "ZJFX",
 				"BQZMYE" };
 		String color = "#FFCC99";
 		code = getKindsCode(result, "投<br>融<br>资<br>情<br>况", color, 13, kinds, fileds);
