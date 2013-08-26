@@ -2,8 +2,8 @@
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-//String xmmc = new String(request.getParameter("xmmc").getBytes("iso-8859-1"), "UTF-8");
-String xmmc = "联合大学商学院";
+String xmmc = new String(request.getParameter("xmmc").getBytes("iso-8859-1"), "UTF-8");
+//String xmmc = "联合大学商学院";
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -61,8 +61,8 @@ String xmmc = "联合大学商学院";
   		//保存之前，删除数据库中已经存在的数据
   		for(var i = 0; i < document.getElementById("num").value; i++){
   			putClientCommond("kftlHandle", "deleteExist");
-			putRestParameter("year", document.getElementById("nd_" + i));
-			putRestParameter("quarter", document.getElementById("jd_" + i));
+			putRestParameter("year", document.getElementById("nd_" + (i + 1)));
+			putRestParameter("quarter", document.getElementById("jd_" + (i + 1)));
 			putRestParameter("xmmc","<%=xmmc%>");
 			baseInformation = restRequest();
   		}
@@ -282,9 +282,9 @@ String xmmc = "联合大学商学院";
             <td><label>项目名称</label>            </td>
             <td id="xmmctd" colspan="5"><input type="text" id="xmmc" name="xmmc" value="<%=xmmc%>" style="width:100px">
               &nbsp;&nbsp;
-              <button style="display:none">增加</button>
+              <button>增加</button>
   				<input type="text" id="num" value="4" style="display:none" />
-      <button style="display:none">删除</button></td>
+      <button>删除</button></td>
           </tr>
           <tr>
             <td><label>属性名\年度</label>            </td>
@@ -339,26 +339,18 @@ String xmmc = "联合大学商学院";
           </tr>
           <tr>
             <td><label>户数(百分比)</label>            </td>
-            <td>
-			<input type="text" id="hsz_1" name="hsz_1" readonly="true" style="width:60px" />
-			<input type="text" id="hs_1" name="hs_1" onBlur="hushu(this)" style="width:50px; text-align:right; padding-right:5px" />
+            <td><input type="text" id="hs_1" name="hs_1" onBlur="hushu(this)" style="width:50px; text-align:right; padding-right:5px" />
 				<label>%</label>
-                </td>
-            <td>
-				<input type="text" id="hsz_2" name="hsz_2" readonly="true" style="width:60px" />
-				<input type="text" id="hs_2" name="hs_2" onBlur="hushu(this)" style="width:50px; text-align:right; padding-right:5px" />
+                <input type="text" id="hsz_1" name="hsz_1" style="width:80px" /></td>
+            <td><input type="text" id="hs_2" name="hs_2" onBlur="hushu(this)" style="width:50px; text-align:right; padding-right:5px" />
 				<label>%</label>
-                </td>
-            <td>
-				<input type="text" id="hsz_3" name="hsz_3" readonly="true" style="width:60px" />
-				<input type="text" id="hs_3" name="hs_3" onBlur="hushu(this)" style="width:50px; text-align:right; padding-right:5px" />
+                <input type="text" id="hsz_2" name="hsz_2" style="width:80px" /></td>
+            <td><input type="text" id="hs_3" name="hs_3" onBlur="hushu(this)" style="width:50px; text-align:right; padding-right:5px" />
 				<label>%</label>
-                </td>
-            <td>
-				<input type="text" id="hsz_4" name="hsz_42" readonly="true" style="width:60px" />
-				<input type="text" id="hs_4" name="hs_4" onBlur="hushu(this)" style="width:50px; text-align:right; padding-right:5px" />
+                <input type="text" id="hsz_3" name="hsz_3" style="width:80px" /></td>
+            <td><input type="text" id="hs_4" name="hs_4" onBlur="hushu(this)" style="width:50px; text-align:right; padding-right:5px" />
 				<label>%</label>
-                </td>
+                <input type="text" id="hsz_4" name="hsz_42" style="width:80px" /></td>
 			<td>
 				<input type="text" id="hs" name="hs" style="width:50px; text-align:right; padding-right:5px" />
 				%
@@ -366,26 +358,18 @@ String xmmc = "联合大学商学院";
           </tr>
           <tr>
             <td><label>地量(百分比)</label>            </td>
-            <td>
-				<input type="text" id="dlz_1" name="dlz_1" readonly="true" style="width:60px" />
-				<input type="text" id="dl_1" name="dl_1" onBlur="diliang(this)" style="width:50px; text-align:right; padding-right:5px" />  
+            <td><input type="text" id="dl_1" name="dl_1" onBlur="diliang(this)" style="width:50px; text-align:right; padding-right:5px" />  
 				<label>%</label> 
-			           </td>
-            <td>
-				<input type="text" id="dlz_2" name="dlz_2" readonly="true" style="width:60px" />
-				<input type="text" id="dl_2" name="dl_2" onBlur="diliang(this)" style="width:50px; text-align:right; padding-right:5px" />
+			    <input type="text" id="dlz_1" name="dlz_1" style="width:80px" />       </td>
+            <td><input type="text" id="dl_2" name="dl_2" onBlur="diliang(this)" style="width:50px; text-align:right; padding-right:5px" />
 				<label>%</label>
-                
-            <td>
-				<input type="text" id="dlz_3" name="dlz_3" readonly="true" style="width:60px" />
-				<input type="text" id="dl_3" name="dl_3" onBlur="diliang(this)" style="width:50px; text-align:right; padding-right:5px" />
+                <input type="text" id="dlz_2" name="dlz_2" style="width:80px" /></td>
+            <td><input type="text" id="dl_3" name="dl_3" onBlur="diliang(this)" style="width:50px; text-align:right; padding-right:5px" />
 				<label>%</label>
-                </td>
-            <td>
-				<input type="text" id="dlz_4" name="dlz_4" readonly="true" style="width:60px" />
-				<input type="text" id="dl_4" name="dl_4" onBlur="diliang(this)" style="width:50px; text-align:right; padding-right:5px" />
+                <input type="text" id="dlz_3" name="dlz_3" style="width:80px" /></td>
+            <td><input type="text" id="dl_4" name="dl_4" onBlur="diliang(this)" style="width:50px; text-align:right; padding-right:5px" />
 				<label>%</label>
-                </td>
+                <input type="text" id="dlz_4" name="dlz_4" style="width:80px" /></td>
 			<td>
 				<input type="text" id="dl" name="dl" style="width:50px; text-align:right; padding-right:5px" />
 				%
@@ -393,26 +377,18 @@ String xmmc = "联合大学商学院";
           </tr>
           <tr>
             <td><label>规模(百分比)</label>            </td>
-            <td>
-				<input type="text" id="gmz_1" name="gmz_1" readonly="true" style="width:60px" />
-				<input type="text" id="gm_1" name="gm_1" onBlur="guimo(this)" style="width:50px; text-align:right; padding-right:5px" />
+            <td><input type="text" id="gm_1" name="gm_1" onBlur="guimo(this)" style="width:50px; text-align:right; padding-right:5px" />
 				<label>%</label>
-            </td>
-            <td>
-				<input type="text" id="gmz_2" name="gmz_2" readonly="true" style="width:60px" />
-				<input type="text" id="gm_2" name="gm_2" onBlur="guimo(this)" style="width:50px; text-align:right; padding-right:5px" />
+                <input type="text" id="gmz_1" name="gmz_1" style="width:80px" />            </td>
+            <td><input type="text" id="gm_2" name="gm_2" onBlur="guimo(this)" style="width:50px; text-align:right; padding-right:5px" />
 				<label>%</label>
-                            </td>
-            <td>
-				<input type="text" id="gmz_3" name="gmz_3" readonly="true" style="width:60px" />
-				<input type="text" id="gm_3" name="gm_3" onBlur="guimo(this)" style="width:50px; text-align:right; padding-right:5px" />
+                <input type="text" id="gmz_2" name="gmz_2" style="width:80px" />            </td>
+            <td><input type="text" id="gm_3" name="gm_3" onBlur="guimo(this)" style="width:50px; text-align:right; padding-right:5px" />
 				<label>%</label>
-             </td>
-            <td>
-				<input type="text" id="gmz_4" name="gmz_4" readonly="true" style="width:60px" />            
-				<input type="text" id="gm_4" name="gm_4" onBlur="guimo(this)" style="width:50px; text-align:right; padding-right:5px" />
+                <input type="text" id="gmz_3" name="gmz_3" style="width:80px" />            </td>
+            <td><input type="text" id="gm_4" name="gm_4" onBlur="guimo(this)" style="width:50px; text-align:right; padding-right:5px" />
 				<label>%</label>
-             </td>
+                <input type="text" id="gmz_4" name="gmz_4" style="width:80px" />            </td>
 			<td>
 				<input type="text" id="gm" name="gm" style="width:50px; text-align:right; padding-right:5px" />
 				%
@@ -420,26 +396,18 @@ String xmmc = "联合大学商学院";
           </tr>
           <tr>
             <td><label>住(百分比)</label>            </td>
-            <td>
-				<input type="text" name="zhuz_1" readonly="true" style="width:60px" />
-				<input type="text" name="zhu_1" onBlur="zhu(this)" style="width:50px; text-align:right; padding-right:5px" />
+            <td><input type="text" name="zhu_1" onBlur="zhu(this)" style="width:50px; text-align:right; padding-right:5px" />
 				<label>%</label>
-            </td>
-            <td>
-				<input type="text" name="zhuz_2" readonly="true" style="width:60px" />
-				<input type="text" name="zhu_2" onBlur="zhu(this)" style="width:50px; text-align:right; padding-right:5px" />
+                <input type="text" name="zhuz_1" style="width:80px" /></td>
+            <td><input type="text" name="zhu_2" onBlur="zhu(this)" style="width:50px; text-align:right; padding-right:5px" />
 				<label>%</label>
-            </td>
-            <td>
-				<input type="text" name="zhuz_3" readonly="true" style="width:60px" />
-				<input type="text" name="zhu_3" onBlur="zhu(this)" style="width:50px; text-align:right; padding-right:5px" />
+                <input type="text" name="zhuz_2" style="width:80px" /></td>
+            <td><input type="text" name="zhu_3" onBlur="zhu(this)" style="width:50px; text-align:right; padding-right:5px" />
 				<label>%</label>
-            </td>
-            <td>
-				<input type="text" name="zhuz_4" readonly="true" style="width:60px" />
-				<input type="text" name="zhu_4" onBlur="zhu(this)" style="width:50px; text-align:right; padding-right:5px" />
+                <input type="text" name="zhuz_3" style="width:80px" /></td>
+            <td><input type="text" name="zhu_4" onBlur="zhu(this)" style="width:50px; text-align:right; padding-right:5px" />
 				<label>%</label>
-            </td>
+                <input type="text" name="zhuz_4" style="width:80px" /></td>
 			<td>
 				<input type="text" name="zhu" style="width:50px; text-align:right; padding-right:5px" />
 				%
@@ -447,26 +415,18 @@ String xmmc = "联合大学商学院";
           </tr>
           <tr>
             <td><label>企(百分比)</label>            </td>
-            <td>
-				<input type="text" id="qiz_1" name="qiz_1" readonly="true" style="width:60px" />
-				<input type="text" id="qi_1" name="qi_1" onBlur="qi(this)" style="width:50px; text-align:right; padding-right:5px" />
+            <td><input type="text" id="qi_1" name="qi_1" onBlur="qi(this)" style="width:50px; text-align:right; padding-right:5px" />
 				<label>%</label>
-              </td>
-            <td>
-				<input type="text" id="qiz_2" name="qiz_2" readonly="true" style="width:60px" />
-				<input type="text" id="qi_2" name="qi_2" onBlur="qi(this)" style="width:50px; text-align:right; padding-right:5px" />
+              <input type="text" id="qiz_1" name="qiz_1" style="width:80px" /></td>
+            <td><input type="text" id="qi_2" name="qi_2" onBlur="qi(this)" style="width:50px; text-align:right; padding-right:5px" />
 				<label>%</label>
-            </td>
-            <td>
-				<input type="text" id="qiz_3" name="qiz_3" readonly="true" style="width:60px" />
-				<input type="text" id="qi_3" name="qi_3" onBlur="qi(this)" style="width:50px; text-align:right; padding-right:5px" />
+              <input type="text" id="qiz_2" name="qiz_2" style="width:80px" /></td>
+            <td><input type="text" id="qi_3" name="qi_3" onBlur="qi(this)" style="width:50px; text-align:right; padding-right:5px" />
 				<label>%</label>
-            </td>
-            <td>
-				<input type="text" id="qiz_4" name="qiz_4" readonly="true" style="width:60px" />
-				<input type="text" id="qi_4" name="qi_4" onBlur="qi(this)" style="width:50px; text-align:right; padding-right:5px" />
+              <input type="text" id="qiz_3" name="qiz_3" style="width:80px" /></td>
+            <td><input type="text" id="qi_4" name="qi_4" onBlur="qi(this)" style="width:50px; text-align:right; padding-right:5px" />
 				<label>%</label>
-            </td>
+              <input type="text" id="qiz_4" name="qiz_4" style="width:80px" /></td>
 			<td>
 				<input type="text" id="qi" name="qi" style="width:50px; text-align:right; padding-right:5px" />
 				%
@@ -474,26 +434,18 @@ String xmmc = "联合大学商学院";
           </tr>
 		  <tr>
             <td><label>投资</label>            </td>
-            <td>
-				<input type="text" id="tzz_1" name="tzz_1" readonly="true" style="width:60px" />
-				<input type="text" id="tz_1" name="tz_1" style="width:50px; text-align:right; padding-right:5px" />
+            <td><input type="text" id="tz_1" name="tz_1" style="width:50px; text-align:right; padding-right:5px" />
 				<label>%</label>
-            </td>
-            <td>
-			<input type="text" id="tzz_2" name="tzz_2" readonly="true" style="width:60px" />
-			<input type="text" id="tz_2" name="tz_2" style="width:50px; text-align:right; padding-right:5px" />
+              <input type="text" id="tzz_1" name="tzz_1" style="width:80px" /></td>
+            <td><input type="text" id="tz_2" name="tz_2" style="width:50px; text-align:right; padding-right:5px" />
 			<label>%</label>
-              </td>
-            <td>
-			<input type="text" id="tzz_3" name="tzz_3" readonly="true" style="width:60px" />
-			<input type="text" id="tz_3" name="tz_3" style="width:50px; text-align:right; padding-right:5px" />
+              <input type="text" id="tzz_2" name="tzz_2" style="width:80px" /></td>
+            <td><input type="text" id="tz_3" name="tz_3" style="width:50px; text-align:right; padding-right:5px" />
 			<label>%</label>
-              </td>
-            <td>
-				<input type="text" id="tzz_4" name="tzz_4" readonly="true" style="width:60px" />
-				<input type="text" id="tz_4" name="tz_4" style="width:50px; text-align:right; padding-right:5px" />
+              <input type="text" id="tzz_3" name="tzz_3" style="width:80px" /></td>
+            <td><input type="text" id="tz_4" name="tz_4" style="width:50px; text-align:right; padding-right:5px" />
 				<label>%</label>
-              </td>
+              <input type="text" id="tzz_4" name="tzz_4" style="width:80px" /></td>
 			<td>
 				<input type="text" id="tz" name="tz" style="width:50px; text-align:right; padding-right:5px" />
 				%
@@ -502,13 +454,13 @@ String xmmc = "联合大学商学院";
 		  
 		  <tr>
             <td><label>楼面价</label>            </td>
-            <td><input type="text" id="lm_1" name="lm_1" readonly="true" style="width:60px" />
+            <td><input type="text" id="lm_1" name="lm_1" style="width:80px" />
              </td>
-            <td><input type="text" id="lm_2" name="lm_2" readonly="true" style="width:60px" />
+            <td><input type="text" id="lm_2" name="lm_2" style="width:80px" />
               </td>
-            <td><input type="text" id="lm_3" name="lm_3" readonly="true" style="width:60px" />
+            <td><input type="text" id="lm_3" name="lm_3" style="width:80px" />
               </td>
-            <td><input type="text" id="lm_4" name="lm_4" readonly="true" style="width:60px" />
+            <td><input type="text" id="lm_4" name="lm_4" style="width:80px" />
 				
               </td>
 			 <td>
@@ -517,13 +469,13 @@ String xmmc = "联合大学商学院";
           </tr>
 		  		  <tr>
             <td><label>成交价</label>            </td>
-            <td><input type="text" id="cj_1" name="cj_1" readonly="true" style="width:60px" />
+            <td><input type="text" id="cj_1" name="cj_1" style="width:80px" />
              </td>
-            <td><input type="text" id="cj_2" name="cj_2" readonly="true" style="width:60px" />
+            <td><input type="text" id="cj_2" name="cj_2" style="width:80px" />
               </td>
-            <td><input type="text" id="cj_3" name="cj_3" readonly="true" style="width:60px" />
+            <td><input type="text" id="cj_3" name="cj_3" style="width:80px" />
               </td>
-            <td><input type="text" id="cj_4" name="cj_4" readonly="true" style="width:60px" />
+            <td><input type="text" id="cj_4" name="cj_4" style="width:80px" />
               </td>
 			 <td>
 			 	<input type="text" style="display:none" />
