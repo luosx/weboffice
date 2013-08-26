@@ -22,6 +22,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		table{
 			text-align: center;
 		}
+		table tr td{
+			height:25px;
+		}
 		.kftl{
 			background-color: #FFFF99;
 		}
@@ -123,15 +126,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  				}	
  			}		
 			//合计
-			var array = new Array('hs','kz','dl','gm','kgl','touz','ksygm','syl','azfcl','jdkcrgm','gygm','cbkc','cbkrznl','cbkzrznl','ndzc','ndsr','qyxzjgm','ndtzxq','ndhlcb','zftdsy','ndrzxq','ndhkxq','zwzjsygm','zyzjsygm','qyxzjzr','fzye','cbkrzqk','ndzmye');
+			var array = new Array('hs','kz','dl','gm','kgl','touz','ksygm','syl','azfcl','jdkcrgm','gygm','cbkc','cbkrznl','cbkzrznl','ndzc','ndsr','qyxzjgm','ndtzxq','ndhlcb','zftdsy','ndrzxq','ndhkxq','zwzjsygm','zyzjsygm','qyxzjzr','fzye','cbkrzqk','ndzmye');			
 			for(var i=1;i<=array.length;i++){
-				for(var j=1;j<=9;j++){
-					if(array[i-1]=='kz'){
-						//document.getElementById(array[i-1]+'hj').innerHTML =9000;
-						continue;
-					}
-					document.getElementById(array[i-1]+'hj').innerHTML += filterNull(parseFloat(document.getElementById(array[i-1]+j).innerHTML));
-				}
+			    var hj=0;
+				for(var j=1;j<=9;j++){			
+					hj += filterNull(parseFloat(document.getElementById(array[i-1]+j).innerHTML));	
+					document.getElementById(array[i-1]+'hj').innerHTML = filterNull(parseFloat(hj));				
+				}			
 			}
  		} 		
   	}
