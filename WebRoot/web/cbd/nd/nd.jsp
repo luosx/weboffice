@@ -143,25 +143,25 @@ font-size:0px;
 		<tr style='background: #C0C0C0; text-align: center; font: normal 18px verdana;'>
 			<td colspan=2 width="10%">序号</td>
 			<td width="10%">时序（年）</td>
-			<td >2012年度</td>
-			<td >2013年度</td>
-			<td >2014年度</td>
-			<td >2015年度</td>
-			<td >2016年度</td>
-			<td >2017年度</td>
-			<td >2018年度</td>
-			<td >2019年度</td>
-			<td >2020年度</td>
-			<td>合计</td>
+			<td width="8%">2012年度</td>
+			<td width="8%">2013年度</td>
+			<td width="8%">2014年度</td>
+			<td width="8%">2015年度</td>
+			<td width="8%">2016年度</td>
+			<td width="8%">2017年度</td>
+			<td width="8%">2018年度</td>
+			<td width="8%">2019年度</td>
+			<td width="8%">2020年度</td>
+			<td width="8%">合计</td>
 		</tr>
 		<tr style='background: #FFFF99;' id='kftl1'>
 			<td rowspan=4>开<br>发<br>体<br>量</td>
 			<td>1</td>
 			<td>征收户数<br>&nbsp;   </td>
-			<td width=30><%=kftlTable[0][0] %></td>
-			<td width=30><%=kftlTable[0][1] %></td>
-			<td width=30><%=kftlTable[0][2] %></td>
-			<td width=30><%=kftlTable[0][3] %></td>
+			<td width=30 ><%=kftlTable[0][0] %></td>
+			<td width=30 ><%=kftlTable[0][1] %></td>
+			<td width=30 ><%=kftlTable[0][2] %></td>
+			<td width=30 ><%=kftlTable[0][3] %></td>
 			<td width=30><%=kftlTable[0][4] %></td>
 			<td width=30><%=kftlTable[0][5] %></td>
 			<td width=30><%=kftlTable[0][6] %></td>
