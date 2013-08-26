@@ -27,18 +27,60 @@ public class ProData extends AbstractBaseBean {
 		String sql = "select * from V_开发体量 t ";
 		List<Map<String, Object>> result = query(sql, YW);
 
-		String[] kinds = { "征收户数", "完成开发体量<br/>(公顷)", "完成开发规模<br/>（万㎡）", "储备红线投资<br>（亿元）" };
-		String[] fileds = { "征收户数", "完成开发体量", "完成开发规模", "储备红线投资" };
+		String[] kinds = { "征收户数", "完成开发地量<br/>(公顷)", "完成开发规模<br/>（万㎡）", "储备红线投资<br>（亿元）" };
+		String[] fileds = { "征收户数", "完成开发地量", "完成开发规模", "储备红线投资" };
 		String color = "#FFFF99";
 		code = getKindsCode(result, "开<br>发<br>体<br>量", color, 1, kinds, fileds);
 		return code;
 	}
 
+	/**
+	 * <br>
+	 * Description:生成安置房建设综合信息 <br>
+	 * Author:赵伟 <br>
+	 * Date:2013-8-26
+	 * 
+	 * @return
+	 */
 	public String getAZFJSData() {
 		String code = "";
+		String sql = "select * from V_安置房 t";
+		List<Map<String, Object>> result = query(sql, YW);
+
+		String[] kinds = { "开工及购房量<br>(万㎡）", "投资<br>(亿元）", "使用量<br>(万㎡）", "安置房存量<br>(万㎡）" };
+		String[] fileds = { "开工及购房量", "投资", "使用量", "安置房存量" };
+		String color = "#CCFFFF";
+		code = getKindsCode(result, "安<br>置<br>房<br>建	<br>设", color, 5, kinds, fileds);
 		return code;
 	}
 
+	public String getGDTLData() {
+		String code = "";
+		String sql = "select * from V_供地体量 t";
+		List<Map<String, Object>> result = query(sql, YW);
+
+		String[] kinds = { "供应土地<br>（公顷）", "供应规模<br>（万㎡）", "储备库库存<br>（万㎡）", "储备库融资能力<br>（亿元）" };
+		String[] fileds = { "供应土地", "供应规模", "储备库库存", "储备库融资能力" };
+		String color = "#99CC00";
+		code = getKindsCode(result, "供<br>地<br>体<br>量", color, 9, kinds, fileds);
+		return code;
+	}
+
+	public String getTRZQKData() {
+		String code = "";
+		String sql = "select * from PLAN投融资情况 t";
+		List<Map<String, Object>> result = query(sql, YW);
+
+		String[] kinds = { "政府土地收益<br>（亿元）", "本期回笼成本<br>（亿元）", "政府土地收益<br>（亿元）", "本期融资需求<br>（亿元）", "本期还款需求<br>（亿元）",
+				"权益性资金注入<br>（亿元）", "负债余额<br>（亿元）", "储备库融资缺口<br>（亿元）", "资金风险<br>（亿元）", "本期账面余额<br>（亿元）" };
+		String[] fileds = { "ZFTDSY", "BQHLCB", "ZFTDSY", "BQRZXQ", "BQHKXQ", "QYXZJZR", "FZJE", "CBKRZQK", "ZJFX",
+				"BQZMYE" };
+		String color = "#FFCC99";
+		code = getKindsCode(result, "投<br>融<br>资<br>情<br>况", color, 13, kinds, fileds);
+		return code;
+	}
+
+	// //////////////////////////////////////////////////////
 	/**
 	 * <br>
 	 * Description:生成各个字段各个季度的代码 <br>
@@ -92,8 +134,10 @@ public class ProData extends AbstractBaseBean {
 		String[] temp = new String[36];
 		// 将各个季度的数值填入到数组temp中
 		for (int j = 0; j < result.size(); j++) {
-			int nd = Integer.parseInt(result.get(j).get("年度").toString());
-			int jd = Integer.parseInt(result.get(j).get("季度").toString());
+			int nd = (result.get(j).get("年度") != null) ? Integer.parseInt(result.get(j).get("年度").toString()) : Integer
+					.parseInt(result.get(j).get("nd").toString());
+			int jd = (result.get(j).get("季度") != null) ? Integer.parseInt(result.get(j).get("季度").toString()) : Integer
+					.parseInt(result.get(j).get("jd").toString());
 			Object value = result.get(j).get(filed);
 			if (value != null && value.toString() != "") {
 				int position = (nd - 2012) * 4 + jd - 1;
