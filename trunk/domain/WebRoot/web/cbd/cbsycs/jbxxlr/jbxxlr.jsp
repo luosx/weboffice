@@ -25,7 +25,10 @@ List<List<Map<String, Object>>> resultList = enterManager.getNeedFields();
 	<link rel="stylesheet" href="/base/form/css/commonForm.css" type="text/css" />
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"></head>
   <script type="text/javascript">
-  
+  	//保存表单方法
+	function formSave(){
+		document.forms[0].submit();
+	}
   </script>
   <style type="text/css">
 	table{
@@ -47,12 +50,16 @@ List<List<Map<String, Object>>> resultList = enterManager.getNeedFields();
   
   </style>
   <body>
+  	<div id="fixed" class="Noprn" style="position: fixed; top: 5px; left: 0px">
+  		<img src="base/form/images/save.png" onclick="formSave()" style="cursor:hand" title="保存"/><br/>
+  		<img src="base/form/images/print.png" onclick="print()" style="cursor:hand" title="打印"/>
+  	</div>
   	<div align="center">
 		<h1>
 			基本地块数据登记表
 		</h1>
 	</div>
-	<form method="post" action="<%=basePath%>service/rest/enterManager/saveData">
+	<form method="post" action="<%=basePath%>service/rest/basicInfo/saveData">
 		<table cellpadding="0" cellspacing="0" align="center" style="border:1px, #000000, solid">
 			<tr>
 				<td>
@@ -98,9 +105,6 @@ List<List<Map<String, Object>>> resultList = enterManager.getNeedFields();
 					}
 				}
 			%>
-			<tr>
-				<input type="submit" value="按钮" />
-			</tr>
 		</table>
 	</form>
   </body>
