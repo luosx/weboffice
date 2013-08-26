@@ -64,38 +64,38 @@
                 </bar_series>
             </data_plot_settings>
             <data>
-                <series name="年度供应规模(流)" type="Line" color="yellow">
-                    <point name="2013年" y="0"/>
-                    <point name="2014年" y="2"/>
-                    <point name="2015年" y="0"/>
-                    <point name="2016年" y="2"/>
-                    <point name="2017年" y="1"/>
+                <series name="非债务资金流入规模(流)" type="Line" color="yellow">
+                    <point name="2013年" y="40"/>
+                    <point name="2014年" y="47"/>
+                    <point name="2015年" y="28"/>
+                    <point name="2016年" y="0"/>
+                    <point name="2017年" y="5"/>
                     <point name="2018年" y="0"/>
-                    <point name="2019年" y="1"/>
+                    <point name="2019年" y="3"/>
                     <point name="2020年" y="0"/>
-                    <point name="2021年" y="0"/>
+                    <point name="2021年" y="2"/>
                 </series>
                 
-                <series name="净地可出让规模(存)" type="Line" color="red">
+                <series name="债务性资金还款规模(流)" type="Line" color="red">
                     <point name="2013年" y="0"/>
-                    <point name="2014年" y="2"/>
-                    <point name="2015年" y="1"/>
-                    <point name="2016年" y="4"/>
-                    <point name="2017年" y="2"/>
-                    <point name="2018年" y="1"/>
-                    <point name="2019年" y="1"/>
-                    <point name="2020年" y="0"/>
-                    <point name="2021年" y="0"/>
+                    <point name="2014年" y="0"/>
+                    <point name="2015年" y="50"/>
+                    <point name="2016年" y="0"/>
+                    <point name="2017年" y="45"/>
+                    <point name="2018年" y="21"/>
+                    <point name="2019年" y="61"/>
+                    <point name="2020年" y="29"/>
+                    <point name="2021年" y="84"/>
                 </series>
 				
-                <series name="完成开发规模(流)" type="Line" color="blue">
-                    <point name="2013年" y="0"/>
-                    <point name="2014年" y="2"/>
-                    <point name="2015年" y="1"/>
-                    <point name="2016年" y="3"/>
-                    <point name="2017年" y="0"/>
-                    <point name="2018年" y="0"/>
-                    <point name="2019年" y="0"/>
+                <series name="年度投资规模(流)" type="Line" color="blue">
+                    <point name="2013年" y="44"/>
+                    <point name="2014年" y="22"/>
+                    <point name="2015年" y="21"/>
+                    <point name="2016年" y="22"/>
+                    <point name="2017年" y="21"/>
+                    <point name="2018年" y="8"/>
+                    <point name="2019年" y="23"/>
                     <point name="2020年" y="0"/>
                     <point name="2021年" y="0"/>
                 </series>				

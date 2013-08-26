@@ -64,41 +64,29 @@
                 </bar_series>
             </data_plot_settings>
             <data>
-                <series name="年度供应规模(流)" type="Bar" color="yellow">
-                    <point name="2013年" y="0"/>
-                    <point name="2014年" y="2"/>
+                <series name="自有资金使用规模" type="Bar" color="yellow">
+                    <point name="2013年" y="45"/>
+                    <point name="2014年" y="0"/>
                     <point name="2015年" y="0"/>
-                    <point name="2016年" y="2"/>
-                    <point name="2017年" y="1"/>
-                    <point name="2018年" y="0"/>
-                    <point name="2019年" y="1"/>
-                    <point name="2020年" y="0"/>
-                    <point name="2021年" y="0"/>
-                </series>
-                
-                <series name="净地可出让规模(存)" type="Bar" color="red">
-                    <point name="2013年" y="0"/>
-                    <point name="2014年" y="2"/>
-                    <point name="2015年" y="1"/>
-                    <point name="2016年" y="4"/>
-                    <point name="2017年" y="2"/>
-                    <point name="2018年" y="1"/>
-                    <point name="2019年" y="1"/>
-                    <point name="2020年" y="0"/>
-                    <point name="2021年" y="0"/>
-                </series>
-				
-                <series name="完成开发规模(流)" type="Bar" color="blue">
-                    <point name="2013年" y="0"/>
-                    <point name="2014年" y="2"/>
-                    <point name="2015年" y="1"/>
-                    <point name="2016年" y="3"/>
+                    <point name="2016年" y="23"/>
                     <point name="2017年" y="0"/>
                     <point name="2018年" y="0"/>
                     <point name="2019年" y="0"/>
                     <point name="2020年" y="0"/>
                     <point name="2021年" y="0"/>
-                </series>				
+                </series>
+                
+                <series name="债务资金使用规模" type="Bar" color="red">
+                    <point name="2013年" y="3"/>
+                    <point name="2014年" y="47"/>
+                    <point name="2015年" y="45"/>
+                    <point name="2016年" y="22"/>
+                    <point name="2017年" y="61"/>
+                    <point name="2018年" y="29"/>
+                    <point name="2019年" y="83"/>
+                    <point name="2020年" y="29"/>
+                    <point name="2021年" y="83"/>
+                </series>			
 				
             </data>
             
