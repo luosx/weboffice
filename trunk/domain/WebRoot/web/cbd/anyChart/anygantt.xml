@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<anygantt>
+  <settings>
+	<navigation enabled="True" position="Top" size="45">
+	    <buttons align="Far" />
+	    <text align="center">
+	         CBD区域储备项目开发工作航道图
+	    </text>
+	    <font face="微软雅黑" size="18" bold="true" color="White" />
+	    <background>
+	        <fill type="Gradient">
+	            <gradient>                              
+	                        <key color="rgb(35,110,177)" position="0" />
+	                        <key color="rgb(27,106,175)" position="0.2" />
+	                        <key color="rgb(21,107,184)" position="0.5" />
+							<key color="rgb(0,95,179)" position="0.7" />
+	                        <key color="rgb(7,98,179)" position="0.9" />
+	                        <key color="rgb(26,104,170)" position="1" />
+	            </gradient>
+	        </fill>
+	        
+	        <border type="Solid" color="#494949" />
+	    </background>
+	</navigation>
+	<locale>
+	    <date_time_format>
+	        <week_days>
+	            <names>
+	                星期日,星期一,星期二,星期三,星期四,星期五,星期六
+	            </names>
+	            <short_names>
+	                星期日,星期一,星期二,星期三,星期四,星期五,星期六
+	            </short_names>
+	        </week_days>
+	        <months>
+	            <names>
+	                一月,二月,三月,四月,五月,六月,七月,八月,九月,十月,十一月,十二月
+	            </names>
+	            <short_names>
+	                一月,二月,三月,四月,五月,六月,七月,八月,九月,十月,十一月,十二月
+	            </short_names>
+	        </months>
+	        <format>
+	            <date>
+	                YYYY/MM/dd
+	            </date>
+	        </format>
+	    </date_time_format>
+	</locale>
+  </settings>
+
+  <datagrid width="250">
+    <columns>
+      <column attribute_name="RowNum" width="50">
+        <header>
+          <text>序号</text>
+        </header>
+      </column> 
+      <column attribute_name="Name" width="200" cell_align="LEFTLEVELPADDING" padding="0">
+        <header>
+          <text>项目名称</text>
+        </header>
+      </column>
+    </columns>
+  </datagrid>
+  <timeline>
+    <scale show_start="2012/01/01" show_end="2020/12/31" />
+  </timeline>
+  <styles>
+    <period_styles>
+      <period_style name="green">
+        <bar_style>
+          <middle shape="Full">
+            <fill enabled="true" type="Gradient">
+              <gradient angle="-90">
+                <key color="#689663" position="0" />
+                <key color="#6B9866" position="0.38" />
+                <key color="#B4FFAB" position="1" />
+              </gradient>
+            </fill>
+          </middle>
+          <states>
+            <hover>
+              <middle>
+                <border enabled="true" type="Solid" color="Yellow" />
+                <fill enabled="true" type="Gradient">
+                  <gradient angle="-90">
+                    <key color="#689663" position="0" />
+                    <key color="#6B9866" position="0.38" />
+                    <key color="#B4FFAB" position="1" />
+                  </gradient>
+                </fill>
+              </middle>
+            </hover>
+          </states>
+        </bar_style>
+      </period_style>
+      <period_style name="yellow">
+        <bar_style>
+          <middle shape="Full">
+            <fill enabled="true" type="Gradient">
+              <gradient angle="-90">
+                <key color="#959663" position="0" />
+                <key color="#989967" position="0.38" />
+                <key color="#FEFFAB" position="1" />
+              </gradient>
+            </fill>
+          </middle>
+          <states>
+            <hover>
+              <middle>
+                <border enabled="true" type="Solid" color="Yellow" />
+                <fill enabled="true" type="Gradient">
+                  <gradient angle="-90">
+                    <key color="#959663" position="0" />
+                    <key color="#989967" position="0.38" />
+                    <key color="#FEFFAB" position="1" />
+                  </gradient>
+                </fill>
+              </middle>
+            </hover>
+          </states>
+        </bar_style>
+      </period_style>
+      <period_style name="red">
+        <bar_style>
+          <middle shape="Full">
+            <fill enabled="true" type="Gradient">
+              <gradient angle="-90">
+                <key color="#963E3E" position="0" />
+                <key color="#994949" position="0.38" />
+                <key color="#FF9191" position="1" />
+              </gradient>
+            </fill>
+          </middle>
+          <states>
+            <hover>
+              <middle>
+                <border enabled="true" type="Solid" color="Yellow" />
+                <fill enabled="true" type="Gradient">
+                  <gradient angle="-90">
+                    <key color="#963E3E" position="0" />
+                    <key color="#994949" position="0.38" />
+                    <key color="#FF9191" position="1" />
+                  </gradient>
+                </fill>
+              </middle>
+            </hover>
+          </states>
+        </bar_style>
+      </period_style>
+    </period_styles>
+  </styles>
+  <resource_chart>
+    <resources><resource id="1" name="首经贸项目" /><resource id="2" name="东扩B启项目" /><resource id="3" name="请求权全球" /><resource id="4" name="联合大学商学院" /></resources>
+    <periods><period resource_id="1" start="2013/10/01" end="2014/07/01" style="yellow" /><period resource_id="1" start="2014/07/01" end="2015/07/01" style="red" /><period resource_id="1" start="2015/07/01" end="2017/07/01" style="blue" /><period resource_id="2" start="2012/01/01" end="2012/10/01" style="yellow" /><period resource_id="2" start="2012/10/01" end="2014/01/01" style="red" /><period resource_id="2" start="2014/01/01" end="2016/01/01" style="blue" /><period resource_id="3" start="2012/04/01" end="2013/01/01" style="yellow" /><period resource_id="3" start="2013/01/01" end="2014/01/01" style="red" /><period resource_id="3" start="2014/01/01" end="2016/01/01" style="blue" /><period resource_id="4" start="2012/01/01" end="2012/10/01" style="yellow" /><period resource_id="4" start="2012/10/01" end="2013/10/01" style="red" /><period resource_id="4" start="2013/10/01" end="2015/10/01" style="blue" /></periods>
+  </resource_chart>
+</anygantt>
