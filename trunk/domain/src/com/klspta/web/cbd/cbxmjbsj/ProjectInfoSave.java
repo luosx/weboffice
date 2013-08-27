@@ -405,4 +405,18 @@ public class ProjectInfoSave extends AbstractBaseBean {
 		
 		return values;
 	}
+	
+	/**
+	 * 
+	 * <br>Description:根据项目名称获取项目的yw_guid
+	 * <br>Author:黎春行
+	 * <br>Date:2013-8-26
+	 * @throws UnsupportedEncodingException 
+	 */
+	public void getYw_guidbymc() throws UnsupportedEncodingException{
+		String xmmc = new String(request.getParameter("xmmc").getBytes("iso-8859-1"), "utf-8");
+		String sql = "select t.yw_guid from xminfo t where t.xmname=?";
+		List<Map<String, Object>> returnList = query(sql, YW, new Object[]{xmmc});
+		response(returnList);
+	}
 }
