@@ -140,9 +140,9 @@ td {
 
 		</table>
 		<div id="leftright"
-			style="width: expression(document .                 body .                 clientWidth)"></div>
+			style="width: expression(document.body.clientWidth);display:none;"></div>
 		<div id="topdown"
-			style="height: expression(document .                 body .                 clientHeight)"></div>
+			style="height: expression(document.body.clientHeight);display:none;"></div>
 	</body>
 </html>
 <script>
