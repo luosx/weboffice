@@ -36,13 +36,13 @@ var preColor;
 function overEvent() {
 	var object = window.event.srcElement;
 	preParentColor = object.parentElement.style.background;
-	preColor = object.style.background;
+	//preColor = object.style.background;
 	object.parentElement.style.background = "#00C5CD";
-	object.style.background = "#76EE00";
+	//object.style.background = "#76EE00";
 }
 function outEvent() {
 	var object = window.event.srcElement;
-	object.style.background = preColor;
+	//object.style.background = preColor;
 	object.parentElement.style.background = preParentColor;
 }
 
