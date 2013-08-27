@@ -86,8 +86,7 @@ public class ProDetail extends AbstractBaseBean {
 		// 生成第一行td的代码时，要额外加上序号以及当前项目的名称
 		code = "<tr><td rowspan=" + kinds.length + ">" + index + "</td><td>" + kinds[0] + "</td><td rowspan="
 				+ kinds.length
-				+ " style='background: #C0C0C0;' onclick=window.open('kftl/kftlmodel.jsp?xmmc="
-				+ proName + "')>" + proName + "</td>";
+				+ " style='background: #C0C0C0;cursor:hand'>" + proName + "</td>";
 		code += getDeatailCode(result, fileds[0][0], fileds[0][1]);
 		code += "<td></td></tr>";
 
