@@ -216,3 +216,25 @@ function enterAndEsc()
     }
 }
 document.onkeydown = enterAndEsc; 	
+//切换电子地图和遥感地图
+var ISImage=false;
+function changeBaseMap(){
+if(!ISImage){
+	
+ISImage=true;
+//切换到电子地图
+frames["lower"].swfobject.getObjectById("FxGIS").setLayerVisiableById('VECTOR',false);
+     frames["lower"].swfobject.getObjectById("FxGIS").setLayerVisiableById('V_ANNO',false);
+     frames["lower"].swfobject.getObjectById("FxGIS").setLayerVisiableById('IMAGE',true);
+     frames["lower"].swfobject.getObjectById("FxGIS").setLayerVisiableById('I_ANNO',true);
+}else{
+	
+ISImage=false;
+//切换到遥感影像地图
+frames["lower"].swfobject.getObjectById("FxGIS").setLayerVisiableById('VECTOR',true);
+     frames["lower"].swfobject.getObjectById("FxGIS").setLayerVisiableById('V_ANNO',true);
+     frames["lower"].swfobject.getObjectById("FxGIS").setLayerVisiableById('IMAGE',false);
+     frames["lower"].swfobject.getObjectById("FxGIS").setLayerVisiableById('I_ANNO',false);
+
+}
+}
