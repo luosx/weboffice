@@ -124,7 +124,7 @@ font-size:0px;
 	
 </script>
 <body bgcolor="#FFFFFF" topmargin="0" leftmargin="0">
-<h2 align="center">北京商务中心区土地储备规划——年度实施计划动态决策</h2>
+<h2 align="center" style="display:none">北京商务中心区土地储备规划——年度实施计划动态决策</h2>
 		<p>
 		  <img  align="right" src="<%=basePath%>base/form/images/print.png" onclick="print()" style="cursor:hand" title="打印"/>
 	      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	显示内容：   
