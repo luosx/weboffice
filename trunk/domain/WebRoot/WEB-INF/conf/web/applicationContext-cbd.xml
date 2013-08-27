@@ -31,11 +31,14 @@
 	<bean name="staticData" class="com.klspta.web.cbd.cbsycs.tjsj.StatisData" scope="prototype"/>
 	
 	<!-- 开发体量管理类 -->
-	<bean name="kftlHandle" class="com.klspta.web.cbd.plan.KftlHandler" scope="prototype"/> 
+	<bean name="kftlHandle" class=" com.klspta.web.cbd.plan.KftlHandler" scope="prototype"/> 
 	
 	<!-- 供地体量管理类 -->
 	<bean name="gdtlHandle" class="com.klspta.web.cbd.plan.GdtlHandler" scope="prototype"/> 
 	
 	<!-- 安置房建设 -->
-	<bean name="azfjsHandle" class="com.klspta.web.cbd.plan.AzfjsHandler" scope="prototype"/> 	
+	<bean name="azfjsHandle" class="com.klspta.web.cbd.plan.AzfjsHandler" scope="prototype"/> 
+	
+	<!-- 投融资情况 -->
+	<bean name="trzqkHandle" class="com.klspta.web.cbd.plan.TrzqkHandler" scope="prototype"/>	
 </beans>
