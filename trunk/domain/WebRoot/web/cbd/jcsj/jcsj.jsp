@@ -156,11 +156,11 @@ font-size:0px;
 		// window.showModalDialog (, "600", "no"); 
 		//window.open("/domain/web/cbd/cbxmjbsj/jbxmxxlr.jsp");
 		//window.showModalDialog ("/domain/web/cbd/cbxmjbsj/jbxmxxlr.jsp","10000", "8000", "no");
-		//var feature="dialogWidth:800px;dialogHeight:560px;status:no;help:no";  
-		//window.showModalDialog("/domain/web/cbd/cbxmjbsj/jbxmxxlr.jsp",null,feature); 
+		var feature="dialogWidth:700px;dialogHeight:550px;status:no;help:no";  
+		window.showModalDialog("/domain/web/cbd/cbxmjbsj/jbxmxxlr.jsp",null,feature); 
 		//window.location.reload();
-		window.open("/domain/web/cbd/cbxmjbsj/jbxmxxlr.jsp");
-		window.locaiton.reload();
+		//window.open("/domain/web/cbd/cbxmjbsj/jbxmxxlr.jsp");
+		window.location.reload();
 	}
 	
 	function changeXM(check){
@@ -192,7 +192,7 @@ font-size:0px;
 	<p align="left" style="font-size:12px">
 		显示内容： 
 			 <input type="checkbox"
-			name="content" id="table5" checked='true' onClick="showCross()" style="font-size:12px;">十字标尺
+			name="content" id="table5"  onClick="showCross()" style="font-size:12px;">十字标尺
 			&nbsp;&nbsp; 
 			<button onClick="add(); return false;" style="margin-top:5px; font-size:12px; ">增加</button>
 	</p>
@@ -245,8 +245,8 @@ font-size:0px;
 		</tr>
 		
 	</table>
-	<div id="leftright" style="width:expression(document.body.clientWidth)"></div>
-<div id="topdown" style="height:expression(document.body.clientHeight)"></div>
+	<div id="leftright" style="width:expression(document.body.clientWidth);display:none;"></div>
+<div id="topdown" style="height:expression(document.body.clientHeight);display:none;"></div>
 </body>
 </html>
 <script>
