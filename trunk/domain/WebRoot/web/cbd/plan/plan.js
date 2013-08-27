@@ -71,6 +71,7 @@ function addEvent() {
 	}
 	//gdtl
 	var gdtl = document.getElementById("gdtl");
+	
 	if (gdtl.children.length > 4) {
 		for (var i = 0; i < (gdtl.children.length - 4) / 6; i++) {
 			gdtl.children[(6 * i + 4)].cells[2].addEventListener("click",
