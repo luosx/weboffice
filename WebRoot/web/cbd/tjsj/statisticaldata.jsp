@@ -74,55 +74,55 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  		if(res){
  			//开发体量
  			for(var i=1;i<=9;i++){
- 				document.getElementById('hs'+i).innerHTML=filterNull(res[i-1][0].HS);
- 				document.getElementById('kz'+i).innerHTML=filterNull(res[i-1][0].KZ);
- 				document.getElementById('dl'+i).innerHTML=filterNull(res[i-1][0].DL);
- 				document.getElementById('gm'+i).innerHTML=filterNull(res[i-1][0].GM);
+ 				document.getElementById('hs'+i).innerHTML=filterNull(filterFixed(res[i-1][0].HS));
+ 				document.getElementById('kz'+i).innerHTML=filterNull(filterFixed(res[i-1][0].KZ));
+ 				document.getElementById('dl'+i).innerHTML=filterNull(filterFixed(res[i-1][0].DL));
+ 				document.getElementById('gm'+i).innerHTML=filterNull(filterFixed(res[i-1][0].GM));
  			}
  			//安置房建设
  			for(var i=10;i<=18;i++){
- 				document.getElementById('kgl'+(i-9)).innerHTML=filterNull(res[i-1][0].KGL);
- 				document.getElementById('touz'+(i-9)).innerHTML=filterNull(res[i-1][0].TOUZ);
- 				document.getElementById('ksygm'+(i-9)).innerHTML=filterNull(res[i-1][0].KSYGM);
- 				document.getElementById('syl'+(i-9)).innerHTML=filterNull(res[i-1][0].SYL); 
- 				document.getElementById('azfcl'+(i-9)).innerHTML=filterNull(res[i-1][0].AZFCL); 				
+ 				document.getElementById('kgl'+(i-9)).innerHTML=filterNull(filterFixed(res[i-1][0].KGL));
+ 				document.getElementById('touz'+(i-9)).innerHTML=filterNull(filterFixed(res[i-1][0].TOUZ));
+ 				document.getElementById('ksygm'+(i-9)).innerHTML=filterNull(filterFixed(res[i-1][0].KSYGM));
+ 				document.getElementById('syl'+(i-9)).innerHTML=filterNull(filterFixed(res[i-1][0].SYL)); 
+ 				document.getElementById('azfcl'+(i-9)).innerHTML=filterNull(filterFixed(res[i-1][0].AZFCL)); 				
  			}
  			//供地体量
  			for(var i=19;i<=27;i++){
- 				document.getElementById('jdkcrgm'+(i-18)).innerHTML=filterNull(res[i-1][0].JDKCRGM);
- 				document.getElementById('gygm'+(i-18)).innerHTML=filterNull(res[i-1][0].GYGM);
- 				document.getElementById('cbkc'+(i-18)).innerHTML=filterNull(res[i-1][0].CBKC);
- 				document.getElementById('cbkrznl'+(i-18)).innerHTML=filterNull(res[i-1][0].CBKRZNL); 
+ 				document.getElementById('jdkcrgm'+(i-18)).innerHTML=filterNull(filterFixed(res[i-1][0].JDKCRGM));
+ 				document.getElementById('gygm'+(i-18)).innerHTML=filterNull(filterFixed(res[i-1][0].GYGM));
+ 				document.getElementById('cbkc'+(i-18)).innerHTML=filterNull(filterFixed(res[i-1][0].CBKC));
+ 				document.getElementById('cbkrznl'+(i-18)).innerHTML=filterNull(filterFixed(res[i-1][0].CBKRZNL)); 
  				//document.getElementById('cbkzrznl'+(i-18)).innerHTML=filterNull(res[i-1][0].AZFCL);  				
  			}
  			//投融资情况
  			for(var i=28;i<=36;i++){
- 				document.getElementById('ndzc'+(i-27)).innerHTML=filterNull(res[i-1][0].NDZC);
- 				document.getElementById('ndsr'+(i-27)).innerHTML=filterNull(res[i-1][0].NDSR);
+ 				document.getElementById('ndzc'+(i-27)).innerHTML=filterNull(filterFixed(res[i-1][0].NDZC));
+ 				document.getElementById('ndsr'+(i-27)).innerHTML=filterNull(filterFixed(res[i-1][0].NDSR));
  				//document.getElementById('cbkc'+(i-27)).innerHTML=filterNull(res[i-1][0].CBKC);
- 				document.getElementById('ndtzxq'+(i-27)).innerHTML=filterNull(res[i-1][0].NDTZXQ); 
- 				document.getElementById('ndhlcb'+(i-27)).innerHTML=filterNull(res[i-1][0].NDHLCB);   			
- 				document.getElementById('zftdsy'+(i-27)).innerHTML=filterNull(res[i-1][0].ZFTDSY);
- 				document.getElementById('ndrzxq'+(i-27)).innerHTML=filterNull(res[i-1][0].NDRZXQ);
- 				document.getElementById('ndhkxq'+(i-27)).innerHTML=filterNull(res[i-1][0].NDHKXQ);
- 				document.getElementById('zwzjsygm'+(i-27)).innerHTML=filterNull(res[i-1][0].ZWZJSYGM); 
- 				document.getElementById('zyzjsygm'+(i-27)).innerHTML=filterNull(res[i-1][0].ZYZJSYGM);  
- 				document.getElementById('qyxzjzr'+(i-27)).innerHTML=filterNull(res[i-1][0].QYXZJZR);
- 				document.getElementById('fzye'+(i-27)).innerHTML=filterNull(res[i-1][0].FZYE);
+ 				document.getElementById('ndtzxq'+(i-27)).innerHTML=filterNull(filterFixed(res[i-1][0].NDTZXQ)); 
+ 				document.getElementById('ndhlcb'+(i-27)).innerHTML=filterNull(filterFixed(res[i-1][0].NDHLCB));   			
+ 				document.getElementById('zftdsy'+(i-27)).innerHTML=filterNull(filterFixed(res[i-1][0].ZFTDSY));
+ 				document.getElementById('ndrzxq'+(i-27)).innerHTML=filterNull(filterFixed(res[i-1][0].NDRZXQ));
+ 				document.getElementById('ndhkxq'+(i-27)).innerHTML=filterNull(filterFixed(res[i-1][0].NDHKXQ));
+ 				document.getElementById('zwzjsygm'+(i-27)).innerHTML=filterNull(filterFixed(res[i-1][0].ZWZJSYGM)); 
+ 				document.getElementById('zyzjsygm'+(i-27)).innerHTML=filterNull(filterFixed(res[i-1][0].ZYZJSYGM));  
+ 				document.getElementById('qyxzjzr'+(i-27)).innerHTML=filterNull(filterFixed(res[i-1][0].QYXZJZR));
+ 				document.getElementById('fzye'+(i-27)).innerHTML=filterNull(filterFixed(res[i-1][0].FZYE));
  				//document.getElementById('cbkc'+(i-27)).innerHTML=filterNull(res[i-1][0].CBKC);
- 				document.getElementById('ndzmye'+(i-27)).innerHTML=filterNull(res[i-1][0].NDZMYE);   				 			
+ 				document.getElementById('ndzmye'+(i-27)).innerHTML=filterNull(filterFixed(res[i-1][0].NDZMYE));   				 			
  			}
  			
  			for(var i=1;i<=9;i++){
  				//另算 储备库再融资能力=储备库融资能力-负债余额（投融资情况） 储备库融资缺口=储备库融资能力（供地体量）-负债余额 
- 				document.getElementById('cbkzrznl'+i).innerHTML = filterNull(parseFloat(document.getElementById('cbkrznl'+i).innerHTML)-parseFloat(document.getElementById('fzye'+i).innerHTML));
+ 				document.getElementById('cbkzrznl'+i).innerHTML = filterNull(filterFixed(parseFloat(document.getElementById('cbkrznl'+i).innerHTML)-parseFloat(document.getElementById('fzye'+i).innerHTML)));
  				document.getElementById('cbkrzqk'+i).innerHTML = document.getElementById('cbkzrznl'+i).innerHTML;
  				
  				//权益性资金规模=年度回笼成本+权益性资金注入+年度账面余额（上一年）
  				if(i==1){
- 					document.getElementById('qyxzjgm1').innerHTML = filterNull(parseFloat(document.getElementById('ndhlcb1').innerHTML)+ parseFloat(document.getElementById('qyxzjzr1').innerHTML));
+ 					document.getElementById('qyxzjgm1').innerHTML = filterNull(filterFixed(parseFloat(document.getElementById('ndhlcb1').innerHTML)+ parseFloat(document.getElementById('qyxzjzr1').innerHTML)));
  				}else{
- 					document.getElementById('qyxzjgm'+i).innerHTML = filterNull(parseFloat(document.getElementById('ndhlcb'+i).innerHTML)+ parseFloat(document.getElementById('qyxzjzr'+i).innerHTML)+ parseFloat(document.getElementById('ndzmye'+(i-1)).innerHTML));
+ 					document.getElementById('qyxzjgm'+i).innerHTML = filterNull(filterFixed(parseFloat(document.getElementById('ndhlcb'+i).innerHTML)+ parseFloat(document.getElementById('qyxzjzr'+i).innerHTML)+ parseFloat(document.getElementById('ndzmye'+(i-1)).innerHTML)));
  				}	
  			}		
 			//合计
@@ -131,7 +131,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			    var hj=0;
 				for(var j=1;j<=9;j++){			
 					hj += filterNull(parseFloat(document.getElementById(array[i-1]+j).innerHTML));	
-					document.getElementById(array[i-1]+'hj').innerHTML = filterNull(parseFloat(hj));				
+					document.getElementById(array[i-1]+'hj').innerHTML = filterNull(parseFloat(hj).toFixed(2));				
 				}			
 			}
  		} 		
@@ -144,8 +144,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   		}
   		if(text=="null"||!text){
   			return "&nbsp;";
-  		} 
-  		return text;
+  		}
+		return text;	   		
+  	}
+  	
+  	function filterFixed(value){
+		var reg = new RegExp("^([0-9]*[.0-9])$");
+		if(reg.test(value))
+		  return value.toFixed(2);
+		else
+		  return value;
   	}
   	
   	function hideInfo(obj){
