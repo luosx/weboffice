@@ -55,7 +55,7 @@ td {
 }
 </style>
 	</head>
-	<body bgcolor="#FFFFFF" topmargin="0" leftmargin="0" onload="addEvent()">
+	<body bgcolor="#FFFFFF" topmargin="0" leftmargin="0" ">
 		<p>
 			显示内容：
 			<input type="checkbox" name="content" id="table1" checked='checked'
