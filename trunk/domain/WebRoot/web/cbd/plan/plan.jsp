@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ page language="java" pageEncoding="utf-8"%>
 <%@page import="com.klspta.web.cbd.plan.ProData"%>
 <%@page import="com.klspta.web.cbd.plan.ProDetail"%>
 <%
@@ -55,10 +55,7 @@ td {
 }
 </style>
 	</head>
-	<script type="text/javascript">}
-
-</script>
-	<body bgcolor="#FFFFFF" topmargin="0" leftmargin="0">
+	<body bgcolor="#FFFFFF" topmargin="0" leftmargin="0" onload="addEvent()">
 		<p>
 			显示内容：
 			<input type="checkbox" name="content" id="table1" checked='checked'
@@ -77,7 +74,7 @@ td {
 			十字标尺
 		</p>
 		<table id='planTable' border=1
-			style="text-align: center; font: normal 13px verdana;" width='130%'>
+			style="text-align: center; font: normal 13px verdana;" width='130%' onmouseover=overEvent() onmouseout=outEvent()>
 			<tr
 				style='background: #C0C0C0; text-align: center; font: normal 18px verdana;'>
 				<td colspan=2>
@@ -86,7 +83,7 @@ td {
 				<td>
 					时序（年）
 				</td>
-				<td colspan=4>
+				<td colspan=4 >
 					2012年度
 				</td>
 				<td colspan=4>
@@ -117,7 +114,7 @@ td {
 					合计
 				</td>
 			</tr>
-			<tbody id='kftl'>
+			<tbody id='kftl' >
 				<!-- 开发体量综合数据 -->
 				<%=proData.getKFTLData()%>
 				<!-- 开发体量项目具体数据 -->
