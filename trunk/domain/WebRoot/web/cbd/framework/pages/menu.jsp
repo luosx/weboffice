@@ -225,11 +225,11 @@ function openPage(obj,url){
 	//点击首页时，进入首页
 	function returnFirst(){
 		//top.location.href="<%=basePath%>login/login.jsp";
-		parent.location.href="<%=basePath%>web/xuzhouNW/main.jsp";
+		parent.location.href="<%=basePath%>web/cbd/main.jsp";
 	}
 	//打开地图
 	function openMap(){
-		parent.content.right.location.href="<%=basePath%>base/fxgis/framework/gisViewFrame.jsp?closemenu=*closeMenu*";
+		parent.content.right.location.href="<%=basePath%>web/cbd/map/map.jsp?closemenu=*closeMenu*";
 		top.content.content.cols="0,9,*"; 
 	}
 </script>
