@@ -36,6 +36,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			font-family:"宋体";
 			font-size:16px;
 			}
+		input{
+			font-size:16px;
+			font-family:"宋体";
+		}
 		td{
 			border-bottom-color:#000000;
 			border-bottom-style:solid;
@@ -59,7 +63,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	function save(){
 				 //保存之前，删除数据库中已经存在的数据
   		for(var i = 0; i < document.getElementById("num").value; i++){
-  			putClientCommond("azfjsHandle", "deleteExist");
+  			putClientCommond("trzqkHandle", "deleteExist");
 			putRestParameter("year", document.getElementById("nd_" + i));
 			putRestParameter("quarter", document.getElementById("jd_" + i));
 			baseInformation = restRequest();
@@ -117,7 +121,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			document.getElementById(name.replace(/jd/, "bqhkxq")).value = format(baseInformation[0].BQHKXQ);
 			document.getElementById(name.replace(/jd/, "qyxzjzr")).value = format(baseInformation[0].QYXZJZR);
 			document.getElementById(name.replace(/jd/, "fzye")).value = format(baseInformation[0].FZYE);
-			document.getElementById(name.replace(/jd/, "cbrzqk")).value = format(baseInformation[0].CBRZQK);
+			document.getElementById(name.replace(/jd/, "cbkrzqk")).value = format(baseInformation[0].CBRZQK);
 			document.getElementById(name.replace(/jd/, "zjfx")).value = format(baseInformation[0].ZJFX);
 			document.getElementById(name.replace(/jd/, "bqzmye")).value = format(baseInformation[0].BQZMYE);
 		}		
@@ -134,6 +138,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </script>
   <body onLoad="onInit();">
   	<div id="fixed" class="Noprn" style="position: fixed; top: 5px; left: 0px"></div>
+	<div align="center"><h1 style="font-size: 25">投融资情况</h1></div>
   	<form method="post">
 		
   	    <table align="center" cellpadding="0" cellspacing="0">
@@ -242,7 +247,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <td><label>储备库融资缺口(亿元)</label>            </td>
             <td><input type="text" id="cbkrzqk_1" name="cbkrzqk_1" style="width:80px" />
              </td>
-            <td><input type="text" id="ccbkrzqk_2" name="cbkrzqk_2" style="width:80px" />
+            <td><input type="text" id="cbkrzqk_2" name="cbkrzqk_2" style="width:80px" />
               </td>
             <td><input type="text" id="cbkrzqk_3" name="cbkrzqk_3" style="width:80px" />
               </td>
