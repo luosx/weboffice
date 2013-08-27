@@ -1,6 +1,7 @@
 package com.klspta.web.cbd.jcsj;
 
 import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.List;
 import java.util.Map;
 
@@ -37,6 +38,7 @@ public class JcsjHandler extends AbstractBaseBean{
 		String xmmc = "";
 		try {
 			xmmc = new String(request.getParameter("xmmc").getBytes("iso-8859-1"),"UTF-8");
+			//xmmc = URLEncoder.encode(request.getParameter("xmmc"), "UTF-8");
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
