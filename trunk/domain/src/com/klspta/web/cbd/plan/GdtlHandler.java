@@ -36,8 +36,8 @@ public class GdtlHandler extends AbstractBaseBean {
 		String year = request.getParameter("year");
 		String quarter = request.getParameter("quarter");
 		String xmmc = new String(request.getParameter("xmmc").getBytes("iso-8859-1"), "utf-8");
-		String sql = "delete from plan供地体量 t where t.nd = ? and t.jd= ? and t.xmmc=?";
-		update(sql, YW, new Object[]{year, quarter, xmmc});
+		String sql = "delete from plan供地体量 t where (t.nd = ? and t.jd= ? and t.xmmc='" + xmmc + "') or t.nd=''";
+		update(sql, YW, new Object[]{year, quarter});
 		response("success");
 	}
 	
