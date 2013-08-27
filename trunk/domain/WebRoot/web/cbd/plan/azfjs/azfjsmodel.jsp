@@ -2,8 +2,8 @@
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-String xmmc = new String(request.getParameter("xmmc").getBytes("iso-8859-1"), "UTF-8");
-//String xmmc = "联合大学商学院";
+//String xmmc = new String(request.getParameter("xmmc").getBytes("iso-8859-1"), "UTF-8");
+String xmmc = "联合大学商学院项目";
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -37,6 +37,10 @@ String xmmc = new String(request.getParameter("xmmc").getBytes("iso-8859-1"), "U
 			font-family:"宋体";
 			font-size:16px;
 			}
+		input{
+			font-size:16px;
+			font-family:"宋体";
+		}
 		td{
 			border-bottom-color:#000000;
 			border-bottom-style:solid;
@@ -106,6 +110,7 @@ String xmmc = new String(request.getParameter("xmmc").getBytes("iso-8859-1"), "U
 		}
 		
 		init();
+		countTotal();
 	}
 	
 	
@@ -124,11 +129,12 @@ String xmmc = new String(request.getParameter("xmmc").getBytes("iso-8859-1"), "U
 		var value = check.value;
 		var name = check.name;
 		name = name.replace(/kgbfb/,"kg");
-		value = 50*parseFloat(value)* 0.01;
+		value = 40*parseFloat(value)* 0.01;
 		if(value == "" || isNaN(value)){
 			value = 0;
 		}
 		document.getElementById(name).value = format(value);
+		countTotal();
 	}
 
   	  	//选择年度和季度时，查询是否有历史数据
@@ -151,10 +157,11 @@ String xmmc = new String(request.getParameter("xmmc").getBytes("iso-8859-1"), "U
 			document.getElementById(name.replace(/jd/, "kgbfb")).value = format(baseInformation[0].KGBFB);
 			document.getElementById(name.replace(/jd/, "kg")).value = format(baseInformation[0].KG);
 			document.getElementById(name.replace(/jd/, "tz")).value = format(baseInformation[0].TZ);
-		}		
+		}	
+		countTotal();	
 	}
 	
-			//数据格式化
+	//数据格式化
 	function format(value){
 		if(value == null || value == "" || value == undefined || isNaN(value)){
 			return "";
@@ -162,19 +169,36 @@ String xmmc = new String(request.getParameter("xmmc").getBytes("iso-8859-1"), "U
 			return value;
 		}
 	}
+	
+		//计算合计百分比
+	function countTotal(){
+		var countname = new Array("kgbfb","tz");
+		for(var i = 0; i < countname.length; i++){
+			var value = 0;
+			for(var j = 0; j < document.getElementById("num").value; j++){
+				 var chosevalue = format(document.getElementById(countname[i] + "_" + (j + 1)).value);
+				 if(chosevalue == ""){
+				 }else{
+				 	value = parseFloat(value) + parseFloat(chosevalue);
+				}
+			}
+			document.getElementById(countname[i]).value = format(value);
+		}
+	}
   </script>
   <body onLoad="onInit();">
   	<div id="fixed" class="Noprn" style="position: fixed; top: 5px; left: 0px"></div>
+	<div align="center"><h1 style="font-size: 25">安置房建设计划表</h1></div>
   	<form method="post">
 		
   	    <table align="center" cellpadding="0" cellspacing="0">
           <tr>
             <td><label>项目名称</label>            </td>
-            <td id="xmmctd" colspan="4"><input type="text" id="xmmc" name="xmmc" value="<%=xmmc%>" style="width:100px">
+            <td id="xmmctd" colspan="5"><input type="text" id="xmmc" name="xmmc" value="<%=xmmc%>" style="width:100px">
               &nbsp;&nbsp;
-              <button>增加</button>
+              <button style="display:none;">增加</button>
   				<input type="text" id="num" value="4" style="display:none" />
-      <button>删除</button></td>
+      <button style="display:none;">删除</button></td>
           </tr>
           <tr>
             <td><label>属性名\年度</label>            </td>
@@ -221,29 +245,46 @@ String xmmc = new String(request.getParameter("xmmc").getBytes("iso-8859-1"), "U
                 <option value="2">2</option>
                 <option value="3">3</option>
                 <option value="4">4</option>
-              </select>            </td>
+              </select>
+			 </td>
+			<td align="center">
+			 	<label>合计</label>
+		   	</td>
           </tr>
+	
           <tr>
             <td><label>开工(百分比)</label>            </td>
-            <td><input type="text" id="kgbfb_1" name="kgbfb_1" onBlur="kg(this)" style="width:50px; text-align:right; padding-right:5px" />
+            <td>
+				<input type="text" id="kg_1" name="kg_1" style="width:50px" />
+				<input type="text" id="kgbfb_1" name="kgbfb_1" onBlur="kg(this)" style="width:40px; text-align:right; padding-right:5px" />
 				<label>%</label>
-                <input type="text" id="kg_1" name="kg_1" style="width:80px" /></td> 
-            <td><input type="text" id="kgbfb_2" name="kgbfb_2" onBlur="kg(this)" style="width:50px; text-align:right; padding-right:5px" />
+                </td> 
+            <td>
+				<input type="text" id="kg_2" name="kg_2"  style="width:50px" />
+				<input type="text" id="kgbfb_2" name="kgbfb_2" onBlur="kg(this)" style="width:40px; text-align:right; padding-right:5px" />
 				<label>%</label>
-                <input type="text" id="kg_2" name="kg_2"  style="width:80px" /></td>
-            <td><input type="text" id="kgbfb_3" name="kgbfb_3" onBlur="kg(this)" style="width:50px; text-align:right; padding-right:5px" />
+                </td>
+            <td>
+				<input type="text" id="kg_3" name="kg_3"  style="width:50px" />
+				<input type="text" id="kgbfb_3" name="kgbfb_3" onBlur="kg(this)" style="width:40px; text-align:right; padding-right:5px" />
 				<label>%</label>
-                <input type="text" id="kg_3" name="kg_3"  style="width:80px" /></td>
-            <td><input type="text" id="kgbfb_4" name="kgbfb_4" onBlur="kg(this)" style="width:50px; text-align:right; padding-right:5px" />
+                </td>
+            <td>
+				<input type="text" id="kg_4" name="kg_42" style="width:50px" />
+				<input type="text" id="kgbfb_4" name="kgbfb_4" onBlur="kg(this)" style="width:40px; text-align:right; padding-right:5px" />
 				<label>%</label>
-                <input type="text" id="kg_4" name="kg_42" style="width:80px" /></td>
+                </td>
+			<td>
+				<input type="text" id="kgbfb" name="kgbfb" style="width:35px; text-align:right; padding-right:5px" />%
+			</td>
           </tr>
           <tr>
             <td><label>投资</label>            </td>
-            <td><input type="text" id="tz_1" name="tz_1"  style="width:80px" /></td>
-            <td><input type="text" id="tz_2" name="tz_2"  style="width:80px" /></td>
-            <td><input type="text" id="tz_3" name="tz_3"  style="width:80px" /></td>
-            <td><input type="text" id="tz_4" name="tz_4"  style="width:80px" /></td>
+            <td><input type="text" id="tz_1" name="tz_1" onBlur="countTotal();"  style="width:50px" /></td>
+            <td><input type="text" id="tz_2" name="tz_2" onBlur="countTotal();"  style="width:50px" /></td>
+            <td><input type="text" id="tz_3" name="tz_3" onBlur="countTotal();"  style="width:50px" /></td>
+            <td><input type="text" id="tz_4" name="tz_4" onBlur="countTotal();"  style="width:50px" /></td>
+			<td><input type="text" id="tz" name="tz"  style="width:50px" /></td>
           </tr>
         </table>
   	</form>
