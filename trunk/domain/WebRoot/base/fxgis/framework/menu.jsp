@@ -210,6 +210,13 @@ Ext.onReady(function(){
 											handler : drawPolygon
 										}]
 							           },{
+									    	text : '切换',
+											id:'image',
+											cls : 'x-btn-text-icon',
+											icon : '<%=basePath%>base/fxgis/framework/images/layers.png',
+											tooltip : '切换',
+											handler : changeBaseMap
+										},{
 									    	text : '全屏',
 											id:'full_screen',
 											cls : 'x-btn-text-icon',
