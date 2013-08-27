@@ -145,9 +145,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   		if(text=="null"||!text){
   			return "&nbsp;";
   		}
-		return text;	   		
+  		else{
+  		return toDecimal(text);
+  		}
   	}
-  	
+  		//去两位有效数字
+	     function toDecimal(x) {    
+            var f = parseFloat(x);    
+            if (isNaN(f)) {    
+                return;    
+            }    
+            f = Math.round(x*100)/100;    
+            return f;    
+        }
   	function filterFixed(value){
 		var reg = new RegExp("^([0-9]*[.0-9])$");
 		if(reg.test(value))
@@ -180,7 +190,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	}
   </script>
   <body onload="init();">
-  	 <div style="font-size:14px;cursor: hand;">显示内容：<label><input type="checkbox" id="kf" name="info" onclick="hideInfo(this)"/>开发体量</label>&nbsp;&nbsp;&nbsp; <label><input type="checkbox" id="az" name="info" onclick="hideInfo(this)"/>安置房建设</label>&nbsp;&nbsp;&nbsp;  <label><input type="checkbox" id="gd" name="info" onclick="hideInfo(this)"/>供地体量</label>&nbsp;&nbsp;&nbsp; <label><input type="checkbox" id="tr" name="info" onclick="hideInfo(this)"/>投融资情况</label></div>
+  	 <div  align="left" style="font-size:14px;cursor: hand;">显示内容：<label><input type="checkbox" id="kf" name="info" onclick="hideInfo(this)"/>开发体量</label>&nbsp;&nbsp;&nbsp; <label><input type="checkbox" id="az" name="info" onclick="hideInfo(this)"/>安置房建设</label>&nbsp;&nbsp;&nbsp;  <label><input type="checkbox" id="gd" name="info" onclick="hideInfo(this)"/>供地体量</label>&nbsp;&nbsp;&nbsp; <label><input type="checkbox" id="tr" name="info" onclick="hideInfo(this)"/>投融资情况</label></div>
      <table width="100%" cellpadding="0" cellspacing="0" border="1">
      	<thead style="background-color:#C0C0C0;font-weight:bold;height:30px;">
      		<tr>
