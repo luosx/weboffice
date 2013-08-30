@@ -58,29 +58,6 @@ String userId = ((User) principal).getUserID();
 </head>
 
   <script type="text/javascript">
-	// 获取提示框中的内容
-	putClientCommond("overTime", "getCaseByUserId");
-	putRestParameter("userId", "<%=userId%>");
-	myData = restRequest();
-	
-	window.onload=function()
-	{
-		divTip = document.createElement("div");
-		divTip.id="tip"; 
-		divTip.innerHTML="<div id='tixing' class='winTitle' style='width: 100%; height: 10%;'><span class='title_left'>事件提醒</span><span class='title_right'><a href='javascript:closeWindow()' id='closeButton' >关闭</a></span></div><div id='jicui' style='width: 100%; height: 90%;'></div>";; 
-		divTip.style.height='0px';
-		divTip.style.bottom='0px';
-		divTip.style.width = '300px'; 
-		divTip.style.position='absolute';
-		   
-		document.body.appendChild(divTip);
-		//根据有没有超期案件判断要不要显示提示框
-		if(myData!=""){
-			show();
-		}else{
-			
-		}
-	}
 	
 	//展现左侧的菜单页面
 	var t;
