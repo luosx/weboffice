@@ -140,7 +140,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</tr>
 			<tr>
 				<td align="center">
-					<label>办理科室</label>
+					<label>受理科室</label>
 				</td>
 				<td>
 					<select style="font-family:'宋体'; font-size:14px;" id="blks" name="blks">
