@@ -18,7 +18,6 @@
 <!-- 动态巡查 -->
 <bean name="dtxcManager" class="com.klspta.web.sanya.dtxc.DtxcManager" scope="prototype"/>
 
-
 <!-- 信访举报管理类 -->
 <bean name="xfAction" class="com.klspta.web.sanya.xfjb.manager.XfAction" scope="prototype"/>
 <!-- 立案查处 -->
@@ -35,5 +34,9 @@
 
 <!-- 添加签章-->
 <bean id="sign" class="com.klspta.web.sanya.importSign.Sign"/>
+<!-- 信访类型管理类 -->
+<bean id="xflxHandler" class="com.klspta.web.sanya.xfjb.XflxHandler"/>
+<!-- 信访类型登记管理类 -->
+<bean id="xfajHandler" class="com.klspta.web.sanya.xfjb.XfajHandler"/>
 
 </beans>
