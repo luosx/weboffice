@@ -62,7 +62,7 @@ html, body {
     		store.load({params:{start:0, limit:13}});
     		var sm = new Ext.grid.CheckboxSelectionModel({handleMouseDown:Ext.emptyFn});  
     		var width=document.body.clientWidth  ;
-    		var height=document.body.clientHeight - 10;
+    		var height=document.body.clientHeight;
         	grid = new Ext.grid.GridPanel({
           		title:'信访案件已办理',
         		store: store,
@@ -72,7 +72,7 @@ html, body {
 		        	{header: '信访事项', dataIndex:'XFSX', width: (width - 427)* 0.6 , sortable: true,renderer:changKeyword},
 		            {header: '信访类型', dataIndex:'XFLX', width: 60, sortable: true,renderer:changKeyword},
 		            {header: '办理时限', dataIndex:'BLSX', width: 80, sortable: true,renderer:changKeyword},
-		            {header: '办理科室', dataIndex:'BLKS', width: 80, sortable: true,renderer:changKeyword},
+		            {header: '受理科室', dataIndex:'BLKS', width: 80, sortable: true,renderer:changKeyword},
 		            {header: '办理状态', dataIndex:'BLZT', width: 60, sortable: true,renderer:changKeyword},
 		            {header: '登记时间', dataIndex:'CREATEDATE', width: 80, sortable: true,renderer:changKeyword},
 		            {header: '办理情况', dataIndex:'BLQK', width: (width - 427)* 0.4, sortable: true,renderer:changKeyword},
@@ -87,7 +87,7 @@ html, body {
          		},   
         		stripeRows: true,
         		width:width,
-        		height: height-50,
+        		height: height,
         		stateful: true,
         		stateId: 'grid',
         		buttonAlign:'center',
@@ -142,7 +142,7 @@ function query(){
     	{header: '信访事项', dataIndex:'XFSX', width: (width - 427)* 0.6 , sortable: true,renderer:changKeyword},
         {header: '信访类型', dataIndex:'XFLX', width: 60, sortable: true,renderer:changKeyword},
         {header: '办理时限', dataIndex:'BLSX', width: 80, sortable: true,renderer:changKeyword},
-        {header: '办理科室', dataIndex:'BLKS', width: 80, sortable: true,renderer:changKeyword},
+        {header: '受理科室', dataIndex:'BLKS', width: 80, sortable: true,renderer:changKeyword},
         {header: '办理状态', dataIndex:'BLZT', width: 60, sortable: true,renderer:changKeyword},
         {header: '登记时间', dataIndex:'CREATEDATE', width: 80, sortable: true,renderer:changKeyword},
         {header: '办理情况', dataIndex:'BLQK', width: (width - 427)* 0.4, sortable: true,renderer:changKeyword},
