@@ -52,15 +52,15 @@ public class StartWorkflowLacc extends AbstractBaseBean {
 	            bb.append("0");
 	        }
 	        bb.append(aa);
-			bh="执立徐国土资【"+year+"】"+bb.toString()+"号";
+			bh="三土环资察立【"+year+"】"+bb.toString()+"号";
 		}else{
-			bh="执立徐国土资【"+year+"】001号";
+			bh="三土环资察立【"+year+"】001号";
 		}
 		Date date=cal.getTime();
-		String insertSql="insert into lacpb(yw_guid,bh,slrq) values(?,?,?)";
-		update(insertSql,YW,new Object[]{yw_guid,bh,date});
+		String insertSql="insert into lacpb(yw_guid,bh) values(?,?)";
+		update(insertSql,YW,new Object[]{yw_guid,bh});
 		//立案查处其他表初始化
-		String []datasheets={"cljdcpb","cfjdzysx","cfjdlsqk","flwscpb","jacpb","ajjbxxdjb"};
+		String []datasheets={"jacpb"};
 		String otherSql="";
 		for(int i=0;i<datasheets.length;i++){
 		    otherSql="insert into "+datasheets[i]+"(yw_guid) values(?)";
@@ -69,7 +69,7 @@ public class StartWorkflowLacc extends AbstractBaseBean {
 		
 		//3、response参数封装及跳转
 		String urlPath = "/model/workflow/wf.jsp?yw_guid="
-				+ yw_guid + "&zfjcType=" + zfjcType + "&wfInsId=" + wfinsId+ "&buttonHidden=la,back&zfjcName=立案查处&returnPath=web/xuzhouNW/lacc/dbaj/dbaj.jsp";
+				+ yw_guid + "&zfjcType=" + zfjcType + "&wfInsId=" + wfinsId+ "&buttonHidden=la,back&zfjcName=立案查处&returnPath=web/sanya/lacc/dbaj/dbaj.jsp";
 		response(urlPath);
 	}
 	
@@ -83,7 +83,7 @@ public class StartWorkflowLacc extends AbstractBaseBean {
 	    String yw_guid = request.getParameter("yw_guid");
 	    String wfInsId = request.getParameter("wfInsId");
 	    //1.删除业务数据
-	    String []datasheets={"lacpb","cljdcpb","cfjdzysx","cfjdlsqk","flwscpb","jacpb","ajjbxxdjb"};
+	    String []datasheets={"lacpb","jacpb"};
         String sql="";
 	    for(int i=0;i<datasheets.length;i++){
 	        sql="delete from "+datasheets[i]+" where yw_guid=?";
