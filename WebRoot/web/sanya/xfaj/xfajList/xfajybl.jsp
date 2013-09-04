@@ -71,7 +71,7 @@ html, body {
         			new Ext.grid.RowNumberer(),
 		        	{header: '信访事项', dataIndex:'XFSX', width: (width - 427)* 0.6 , sortable: true,renderer:changKeyword},
 		            {header: '信访类型', dataIndex:'XFLX', width: 60, sortable: true,renderer:changKeyword},
-		            {header: '办理时限', dataIndex:'BLSX', width: 80, sortable: true,renderer:changKeyword},
+		            {header: '办理日期', dataIndex:'BLSX', width: 80, sortable: true,renderer:changKeyword},
 		            {header: '受理科室', dataIndex:'BLKS', width: 80, sortable: true,renderer:changKeyword},
 		            {header: '办理状态', dataIndex:'BLZT', width: 60, sortable: true,renderer:changKeyword},
 		            {header: '登记时间', dataIndex:'CREATEDATE', width: 80, sortable: true,renderer:changKeyword},
@@ -110,7 +110,7 @@ function pro(id){
 
 //点击查看时，查看详细信息
 function process(id){
-	var url = "<%=basePath%>/web/sanya/xfaj/xfajdj/xfajTab.jsp?yw_guid=" + id;
+	var url = "<%=basePath%>/web/sanya/xfaj/xfajdj/xfajFrame.jsp?type=ybl&yw_guid=" + id;
 	document.location.href = url;
 	//window.open(url);
 }
@@ -141,7 +141,7 @@ function query(){
 		new Ext.grid.RowNumberer(),
     	{header: '信访事项', dataIndex:'XFSX', width: (width - 427)* 0.6 , sortable: true,renderer:changKeyword},
         {header: '信访类型', dataIndex:'XFLX', width: 60, sortable: true,renderer:changKeyword},
-        {header: '办理时限', dataIndex:'BLSX', width: 80, sortable: true,renderer:changKeyword},
+        {header: '办理日期', dataIndex:'BLSX', width: 80, sortable: true,renderer:changKeyword},
         {header: '受理科室', dataIndex:'BLKS', width: 80, sortable: true,renderer:changKeyword},
         {header: '办理状态', dataIndex:'BLZT', width: 60, sortable: true,renderer:changKeyword},
         {header: '登记时间', dataIndex:'CREATEDATE', width: 80, sortable: true,renderer:changKeyword},
