@@ -38,5 +38,7 @@
 <bean id="xflxHandler" class="com.klspta.web.sanya.xfjb.XflxHandler"/>
 <!-- 信访类型登记管理类 -->
 <bean id="xfajHandler" class="com.klspta.web.sanya.xfjb.XfajHandler"/>
+<!-- 文件审批管理类 -->
+<bean id="wjspHandler" class="com.klspta.web.sanya.zhbg.WjspHandler"/>
 
 </beans>
