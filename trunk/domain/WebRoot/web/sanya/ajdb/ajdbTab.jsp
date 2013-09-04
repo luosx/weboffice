@@ -25,19 +25,22 @@
    <script>
    Ext.onReady(function(){
    	Ext.QuickTips.init();
-    var w=document.body.clientWidth;
-	var h=document.body.clientHeight - 30; 
+    var height=document.body.clientHeight-30;
     var tabs = new Ext.TabPanel({
         renderTo:'statusTab',
-        activeTab: 0,            
+        activeTab: 0,     
         frame:true,
-        items:[
-        	{
-                title: '办理中',
-                html: "<iframe width='"+w+"' height='"+h+"' src='<%=basePath%>web/sanya/lacc/ajcx/ajdcblz.jsp?edit=false&*closeMenu*'/>" 
-            },{
-                title: '已办结',
-                html: "<iframe width='"+w+"' height='"+h+"' src='<%=basePath%>web/sanya/lacc/ajcx/ajdcybaj.jsp?edit=false&*closeMenu*'/>"
+        items:[{
+                title: '信访',
+                html: "<iframe style='height:"+height+"px;width:100%' src='xf.jsp'/>"
+            },
+            {
+                title: '文件',
+                html: "<iframe style='height:"+height+"px;width:100%' src=''/>"
+            },
+            {
+                title: '立案',
+                html: "<iframe style='height:"+height+"px;width:100%' src='la.jsp'/>"
             }
         ]
     })
@@ -46,6 +49,6 @@
    </script>
   </head>
 	<body bgcolor="#FFFFFF">
-		<div id="statusTab" style="width:100%"></div>
+		<div id="statusTab" style="width:100%;"></div>
 	</body>
 </html>

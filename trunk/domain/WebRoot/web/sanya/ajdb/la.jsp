@@ -1,18 +1,9 @@
 <%@ page language="java" pageEncoding="utf-8"%>
-<%@page
-	import="org.springframework.security.core.context.SecurityContextHolder"%>
-<%@page import="com.klspta.console.user.User"%>
-
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
-
-
-	Object principal = SecurityContextHolder.getContext()
-			.getAuthentication().getPrincipal();
-	String fullName = ((User) principal).getFullName();
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -27,8 +18,6 @@
 		<meta http-equiv="expires" content="0">
 		<%@ include file="/base/include/restRequest.jspf" %>
 		<%@ include file="/base/include/ext.jspf"%>
-		<script src="<%=basePath%>base/thirdres/ext/examples/ux/fileuploadfield/FileUploadField.js" type="text/javascript"></script>
-		<link rel="stylesheet" type="text/css" href="<%=basePath%>base/thirdres/ext/examples/ux/fileuploadfield/css/fileuploadfield.css"/>
 		<script type="text/javascript">
 var myData;
 var grid;
@@ -36,53 +25,51 @@ var sm;
 var width;
 var height;
 Ext.onReady(function(){
-	putClientCommond("lacc","getProcessList");
-	putRestParameter("fullName",escape(escape("<%=fullName%>")));
+	putClientCommond("caseSupervision","getLadbList");
 	myData = restRequest();
     var store = new Ext.data.JsonStore({
     proxy: new Ext.ux.data.PagingMemoryProxy(myData),
        remoteSort:true,
         fields: [
-           {name: 'YJ'},
-           {name: 'AJBH'},
-           {name: 'AY'},
-           {name: 'AJLY'},
-           {name: 'DSR'},
-           {name: 'SLRQ'},
-           {name: 'BAZT'},
-           {name: 'JSSJ'},
-           {name: 'INDEX'}
+	     {name: 'YJ'},
+	     {name: 'SYTS'},
+	     {name: 'BH'},
+	     {name: 'AY'},
+	     {name: 'WFDW'},
+	     {name: 'AJLY'},
+	     {name: 'SLRQ'},
+	     {name: 'JZRQ'},
+	     {name: 'BLZT'},          
+	     {name: 'INDEX'}
         ]
     });
     
     store.load({params:{start:0, limit:10}}); 
     width=document.body.clientWidth;
     height=document.body.clientHeight;//高度
-    sm = new Ext.grid.CheckboxSelectionModel({handleMouseDown:Ext.emptyFn});
     grid = new Ext.grid.GridPanel({
-        title:'案件任务待办列表',
         store: store,
         columns: [
-           {header: '预警',dataIndex:'YJ',width: width*0.05, sortable: true,renderer:warn},
-           {header: '立案编号',dataIndex:'AJBH',width: width*0.16, sortable: true},
-           {header: '案由',dataIndex:'AY',width: width*0.20, sortable: true},
+           {header: '预警',dataIndex:'YJ',width:width*0.05, sortable:false,renderer:warn},  
+           {header: '剩余天数',dataIndex:'SYTS',width: width*0.05, sortable: true},   
+           {header: '立案编号',dataIndex:'BH',width: width*0.15, sortable: true},
+           {header: '案由',dataIndex:'AY',width: width*0.23, sortable: true},
+           {header: '违法单位(人)',dataIndex:'WFDW',width: width*0.10, sortable: true},
            {header: '案件来源',dataIndex:'AJLY',width: width*0.08, sortable: true},
-           {header: '当事人',dataIndex:'DSR',width: width*0.07, sortable: true},
-           {header: '办案状态',dataIndex:'BAZT',width: width*0.1, sortable: true},
-           {header: '受理日期',dataIndex:'SLRQ',width: width*0.12, sortable: true},
-           {header: '接收时间',dataIndex:'JSSJ',width: width*0.12, sortable: true},
-           {header: '办理',dataIndex:'INDEX',width: width*0.08, sortable: false,renderer:pro}
+           {header: '受理日期',dataIndex:'SLRQ',width: width*0.08, sortable: true},
+           {header: '截止日期',dataIndex:'JZRQ',width: width*0.08, sortable: true},
+           {header: '办理状态',dataIndex:'BLZT',width: width*0.10, sortable: true},
+           {header: '查看',dataIndex:'INDEX',width: width*0.07, sortable: false,renderer:view}
         ],
         tbar:[
         	{xtype:'label',text:'快速查找:',width:60},
         	{xtype:'textfield',id:'keyword',width:450,emptyText:'请输入关键字进行查询'},
-        	{xtype: 'button',text:'查询',handler: query}
+        	{xtype: 'button',text:'查询',id:'button',handler: query}
         ],
         listeners:{
 		  			rowdblclick : function(grid, rowIndex, e)
 					{
-				   		// showDetail(grid.getStore().getAt(rowIndex).data.XIANGXI);
-				   		process(grid.getStore().getAt(rowIndex).data.INDEX);
+				   		viewDetail(rowIndex);
 					}
         },        
         // stripeRows: true,
@@ -107,6 +94,7 @@ Ext.onReady(function(){
    
 });
 
+
 function warn(XZSJ){
 	   var syts=XZSJ;//剩余办理天数
 	    if(syts<0){
@@ -120,34 +108,19 @@ function warn(XZSJ){
 	    }
 }
 
-function pro(id){
- return "<a href='#'onclick='process("+id+");return false;'><img src='<%=basePath%>web/xuzhouNW/lacc/dbaj/images/view.png' alt='办理'></a>";
+
+function view(id){
+	 return "<a href='#'onclick='viewDetail("+id+");return false;'><img src='<%=basePath%>base/form/images/view.png' alt='查看'></a>";
 }
 
-
-function process(id){
-    var wfInsTaskId=myData[id].DBID_;
-	var activityName=myData[id].BAZT;
-	var isFirst;
-	var buttonHien = "la";
-	if(activityName.indexOf("受理立案")>=0){
-		isFirst='yes';
-		buttonHien = "la,back";
-	}
-	var wfInsId=myData[id].WFINSID;
+function viewDetail(id){
+    var wfInsId=myData[id].WFINSID;
 	var yw_guid=myData[id].YW_GUID;
-	var zfjcType="90";
-	var returnPath="web/sanya/lacc/dbaj/dbaj.jsp";
-	var url='<%=basePath%>model/workflow/wf.jsp?yw_guid='+yw_guid+'&wfInsId='+wfInsId+'&zfjcType='+zfjcType+'&returnPath='+returnPath+'&buttonHidden='+buttonHien+'&zfjcName=立案查处&activityName=';  
-	//window.open(url); 
-	document.location.href=url;
+	var returnPath="web/sanya/ajdb/la.jsp";
+	var buttonHidden = "delete,la,tran,back";
+	var url='<%=basePath%>model/workflow/wf.jsp?yw_guid='+yw_guid+'&zfjcName=立案查处&zfjcType=90&wfInsId='+wfInsId+'&returnPath='+returnPath+'&buttonHidden='+buttonHidden; 
+	document.location.href=url;		
 }
-function viewDetail(){
-	var rowIndex = grid.store.indexOf(grid.getSelectionModel().getSelected());
-	process(grid.getSelectionModel().getSelected().json[0]-1);  
-}
-
-
 
 function document.onkeydown() 
 { 
@@ -159,48 +132,50 @@ return false;
 } 
 } 
 
-  
+
 function query(){
    var keyWord=Ext.getCmp('keyword').getValue();
    keyWord=keyWord.toUpperCase();
-   putClientCommond("lacc","getProcessList");
-   putRestParameter("fullName",escape(escape("<%=fullName%>")));
+   putClientCommond("caseSupervision","getLadbList"); 
    putRestParameter("keyWord",escape(escape(keyWord)));
    var myData = restRequest(); 
    var store = new Ext.data.JsonStore({
         proxy: new Ext.ux.data.PagingMemoryProxy(myData),
         remoteSort:true,
         fields: [
-           {name: 'YJ'},
-           {name: 'AJBH'},
-           {name: 'AY'},
-           {name: 'AJLY'},
-           {name: 'DSR'},
-           {name: 'SLRQ'},
-           {name: 'BAZT'},
-           {name: 'JSSJ'},
-           {name: 'INDEX'}
+	     {name: 'YJ'},
+	     {name: 'SYTS'},
+	     {name: 'BH'},
+	     {name: 'AY'},
+	     {name: 'WFDW'},
+	     {name: 'AJLY'},
+	     {name: 'SLRQ'},
+	     {name: 'JZRQ'},
+	     {name: 'BLZT'},          
+	     {name: 'INDEX'}
         ]
   });
   grid.reconfigure(store, new Ext.grid.ColumnModel([
-         {header: '预警',dataIndex:'YJ',width: width*0.05, sortable: true,renderer:warn},
-         {header: '立案编号',dataIndex:'AJBH',width: width*0.16, sortable: true},
-         {header: '案由',dataIndex:'AY',width: width*0.20, sortable: true},
-         {header: '案件来源',dataIndex:'AJLY',width: width*0.08, sortable: true},
-         {header: '当事人',dataIndex:'DSR',width: width*0.07, sortable: true},
-         {header: '办案状态',dataIndex:'BAZT',width: width*0.1, sortable: true},
-         {header: '受理日期',dataIndex:'SLRQ',width: width*0.12, sortable: true},
-         {header: '接收时间',dataIndex:'JSSJ',width: width*0.12, sortable: true},
-         {header: '办理',dataIndex:'INDEX',width: width*0.08, sortable: false,renderer:pro}
+   {header: '预警',dataIndex:'YJ',width:width*0.05, sortable:false,renderer:warn},  
+   {header: '剩余天数',dataIndex:'SYTS',width: width*0.05, sortable: true,renderer:changKeyword},    
+   {header: '立案编号',dataIndex:'BH',width: width*0.15, sortable: true,renderer:changKeyword},
+   {header: '案由',dataIndex:'AY',width: width*0.23, sortable: true,renderer:changKeyword},
+   {header: '违法单位(人)',dataIndex:'WFDW',width: width*0.10, sortable: true,renderer:changKeyword},
+   {header: '案件来源',dataIndex:'AJLY',width: width*0.08, sortable: true,renderer:changKeyword},
+   {header: '受理日期',dataIndex:'SLRQ',width: width*0.08, sortable: true,renderer:changKeyword},
+   {header: '截止日期',dataIndex:'JZRQ',width: width*0.08, sortable: true,renderer:changKeyword},
+   {header: '办理状态',dataIndex:'BLZT',width: width*0.10, sortable: true,renderer:changKeyword},
+   {header: '查看',dataIndex:'INDEX',width: width*0.07, sortable: false,renderer:view}
   ]));
   grid.getBottomToolbar().bind(store);
-  store.load({params:{start:0,limit:15}});  
+  store.load({params:{start:0,limit:10}});  
 }
- <!--改变关键字方法 add by 赵伟 2012-9-7-->
+     
  function changKeyword(val){
-    var key=Ext.getCmp('keyword').getValue().toUpperCase();
+    var key=Ext.getCmp('keyword').getValue();
     if(key!=''&& val!=null){
-      var temp=val.toUpperCase();
+      var val=val+'';
+      var temp=val+'';
       if(temp.indexOf(key)>=0){
       return val.substring(0,temp.indexOf(key))+"<B style='color:black;background-color:#CD8500;font-size:120%'>"+val.substring(temp.indexOf(key),temp.indexOf(key)+key.length)+"</B>"
         +temp.substring(temp.indexOf(key)+key.length,temp.length);
