@@ -96,7 +96,7 @@
 		
 	</head>
 	
-<body bgcolor="#FFFFFF" onbeforeunload="deleteData()">
+<body bgcolor="#FFFFFF">
 <% 
 if(fixed!=null && fixed.equals("fixedPrint")){%>
 <div id="fixed class="Noprn" style="position: fixed; top: 5px; left: 0px"></div>
