@@ -41,4 +41,7 @@
 <!-- 文件审批管理类 -->
 <bean id="wjspHandler" class="com.klspta.web.sanya.zhbg.WjspHandler"/>
 
+<!-- 案件督办-->
+<bean id="caseSupervision" class="com.klspta.web.sanya.ajdb.CaseSupervision"/>
+
 </beans>
