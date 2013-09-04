@@ -89,8 +89,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			}
 		}catch(e){
 		
-		}
-		
+		}		
 		init();
 		
 	}
@@ -126,12 +125,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</td>
 				<td>
 					<select style="font-family:'宋体'; font-size:14px;" id="xflx" name="xflx">
-						<option value="土地">土地</option>
-						<option value="矿产类型">矿产类型</option>
 					</select>
 				</td>
 				<td align="center">
-					<label>办理时限</label>
+					<label>办理日期</label>
 				</td>
 				<td>
 					<input type="text" class="noborder" id="blsx" name="blsx" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})" style="width:98%" />
@@ -147,6 +144,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<option value="综合科">综合科</option>
 						<option value="国土资源监察科">国土资源监察科</option>
 						<option value="环境监察科">环境监察科</option>
+						<option value="河东执法大队">河东执法大队</option>
+						<option value="河西执法大队">河西执法大队</option>
 					</select>
 				</td>
 				<td align="center">
