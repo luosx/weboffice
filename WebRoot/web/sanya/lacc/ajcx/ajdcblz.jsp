@@ -164,7 +164,7 @@ function process(id){
     var wfInsId=myData[id].WFINSID;
 	var yw_guid=myData[id].YW_GUID;
 	var zfjcType="90";
-	var returnPath="web/xuzhouNW/lacc/ajcx/ajdcblz.jsp";
+	var returnPath="web/sanya/lacc/ajcx/ajdcblz.jsp";
 	var buttonHien = "delete,la,tran,back";
 	var url='<%=basePath%>model/workflow/wf.jsp?yw_guid='+yw_guid+'&zfjcName=立案查处&wfInsId='+wfInsId+'&zfjcType='+zfjcType+'&returnPath='+returnPath+'&buttonHidden='+buttonHien;
 	//window.open(url); 
