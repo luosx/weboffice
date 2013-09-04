@@ -83,7 +83,7 @@ html, body {
 	    			{xtype:'label',text:'快速查找:',width:60},
 	    			{xtype:'textfield',id:'keyword',width:300,emptyText:'请输入关键字进行查询'},
 	    			{xtype: 'button',text:'查询',width:50,handler: query},
-	    			{xtype: 'button',text:'新增信访',width:60,handler: add}
+	    			{xtype: 'button',text:'添加文件',width:60,handler: add}
 	    		],
         		listeners:{
          		},   
