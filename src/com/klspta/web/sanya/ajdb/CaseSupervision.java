@@ -44,14 +44,37 @@ public class CaseSupervision extends AbstractBaseBean {
         if(list!=null && list.size()>0){
             int i=0;
             for(Map<String, Object> map : list){
-                map.put("YJ", getWorkaDayAmount(map.get("jzrq").toString()));
-                map.put("SYTS", getWorkaDayAmount(map.get("jzrq").toString())+"天");
-                map.put("INDEX", i++);
+                if(map.get("jzrq")==null){
+                    continue;
+                }else{
+                    map.put("YJ", getWorkaDayAmount(map.get("jzrq").toString()));
+                    map.put("SYTS", getWorkaDayAmount(map.get("jzrq").toString())+"天");
+                    map.put("INDEX", i++);
+                }
             }
         }
         
         
         response(list);        
+    }
+    
+    public void getWjdbList(){
+        String keyWord = request.getParameter("keyWord");
+        String sql = "select t.yw_guid,t.wjspsx,t.wjlx,t.blsx,t.wjsq,t.blqk,t.createdate from wjspdjb t where t.blqk='未处理'";
+        if(keyWord!=null){
+            keyWord = UtilFactory.getStrUtil().unescape(keyWord);
+            sql += " and upper(t.yw_guid)||upper(t.wjspsx)||upper(t.wjlx)||upper(t.blsx)||upper(t.wjsq)||upper(t.blqk)||upper(t.createdate) like '%"+keyWord+"%'";
+        }  
+        List<Map<String,Object>> list = query(sql,YW);
+        if(list!=null && list.size()>0){
+            int i=1;
+            for(Map<String, Object> map : list){
+                    map.put("YJ", getWorkaDayAmount(map.get("blsx").toString()));
+                    map.put("SYTS", getWorkaDayAmount(map.get("blsx").toString())+"天");
+                    map.put("INDEX", i++);               
+            }
+        }
+        response(list);             
     }
     
     
