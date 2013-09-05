@@ -1,0 +1,657 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>pop-simple-window</title>
+ 
+<link rel="stylesheet" href="js/utility/utility.css" ></link> 
+<link rel="stylesheet" href="images/blue.css" ></link>
+
+<script src="js/prototype.js" type="text/javascript"></script> 
+<script src="js/utility/utility.js" type="text/javascript"></script>
+<script src="js/nrcap2sdk.js" type="text/javascript"></script>
+
+<script type="text/javascript" language="javascript">
+// alert(window.location.search);
+
+var WebPopClient = {
+	type: "pop",
+	debug: false, //是否打开调试状态 
+	agt: navigator.userAgent.toLowerCase(), 
+	Debug: null,
+	connectId: null,
+	time: new Date(),
+	
+	loginDefaultParams: {  
+		path:"58.218.50.172:8866", 
+		epId:"system",
+		username:"admin",
+		password:"a.xuzhouzfjc",  
+		areaCode:"",
+		clientType:"",
+		userCustomData:"",
+		bFixCUIAddress:"1" 
+	},
+	
+	Load: function(){ 
+		WebPopClient.URL.Init();
+		
+		/* 开启自定义时钟事件 */
+		Utility.Clock.Start();
+		
+		//开始侦测时间更新  
+		Utility.Clock.EventCallback.Set(
+			new Utility.Struct.ClockEventStruct(
+				"updateCurrentTime",
+				1000,
+				function(t){ 
+					WebPopClient.time = t;
+				}
+			)
+		);
+		
+		/* 清除页面所有元素 */
+        WebPopClient.ClearBody();  
+		
+		/* 创建调试窗口信息对象 */
+		WebPopClient.Debug = new Utility.Debug(new Utility.Struct.DebugParamStruct(WebPopClient.debug,"watch",{top:200,left:650}));
+		
+		/* 初始化Nrcap2对象 */
+		Nrcap2.Init(new Nrcap2.Struct.InitParamStruct(true,function(msg){WebPopClient.Debug.Note(msg);}));
+		 
+		/* 初始化Nrcap2成功 */
+		if(Nrcap2.Plug.inited == true)
+		{ 
+			if(typeof WebPopClient.loginParams == "undefined" || WebPopClient.loginParams instanceof Nrcap2.Struct.ConnParamStruct != true)
+			{
+				WebPopClient.loginParams = new Nrcap2.Struct.ConnParamStruct();
+			} 
+			
+			WebPopClient.loginParams.style = WebPopClient.loginDefaultParams.style; 
+			WebPopClient.loginParams.path = WebPopClient.loginDefaultParams.path; 
+			WebPopClient.loginParams.epId = WebPopClient.loginDefaultParams.epId;
+			WebPopClient.loginParams.username = WebPopClient.loginDefaultParams.username;
+			WebPopClient.loginParams.password = WebPopClient.loginDefaultParams.password;
+			WebPopClient.loginParams.areaCode = WebPopClient.loginDefaultParams.areaCode; 
+			WebPopClient.loginParams.clientType = WebPopClient.loginDefaultParams.clientType;
+			WebPopClient.loginParams.userCustomData = WebPopClient.loginDefaultParams.userCustomData;
+			WebPopClient.loginParams.bFixCUIAddress = WebPopClient.loginDefaultParams.bFixCUIAddress;
+			WebPopClient.loginParams.callbackFun = WebPopClient.Login.Connect_callback; //回调函数
+		}
+		else
+		{
+			return;	
+		}
+	 
+		WebPopClient.Init();
+	},
+	
+	Init: function(){ 
+		 WebPopClient.Frame.Init();
+		 WebPopClient.Video.Init();
+		 WebPopClient.Login.Init();
+	},
+	
+	Login: {
+		status: false,
+		
+		Init: function(){
+			if(WebPopClient.loginParams)
+			{
+				var connParams = WebPopClient.loginParams;
+				WebPopClient.connectId = Nrcap2.CreateConnect(connParams, true);
+			} 
+		},
+		
+		Connect_callback: function(rv){
+			// 登录成功,初始化资源列表
+			if(rv == Nrcap2.NrcapError.NRCAP_SUCCESS)
+			{  
+				if(WebPopClient.connectId && Nrcap2.Connections.get(WebPopClient.connectId))
+				{ 
+					WebPopClient.Login.status = true;
+					WebPopClient.Resource.Init(); 
+				}			
+			}	 
+		},
+		
+		end: true
+	},
+	
+	UnLoad: function(){
+		Nrcap2.WindowContainers.each(
+			function(item){
+				if(item.key)
+				{
+					WebPopClient.Video.StopVideo(item.key);
+				} 
+			}
+		);
+		
+		Utility.Clock.Stop(); 
+		Nrcap2.UnLoad(); 
+		WebPopClient.connectId = "";
+		WebPopClient.Login.status = false; 
+	},
+	
+	URL: {
+		params: {
+			puid: "",
+			ivIndex: "",
+			playAudio: true,
+			width: 352,
+			height: 288	
+		},
+		
+		Init: function(){
+			var url = window.location.search;
+			if(url && typeof url != "undefined")
+			{
+				var params = url.substr(1).split("&");
+				// alert(Object.toJSON(params));
+				for(var i = 0; i < params.length; i++)
+				{
+					var param = params[i];
+					if(param && typeof param != "undefined")
+					{
+						var node = param.split("=");
+						switch(node[0])
+						{	
+							case "puid": this.params.puid = node[1]; break;
+							case "ivIndex": this.params.ivIndex = node[1]; break;
+							case "playAudio": this.params.playAudio = node[1]; break;
+							case "width": this.params.width = node[1]; break;
+							case "height": this.params.height = node[1]; break;
+							default: break;
+						} 
+					} 
+				}
+				
+				if(!this.params.puid || this.params.ivIndex == "" || this.params.ivIndex == null)
+				{
+					parent.alert("所传参数错误!设备PUID或视频头索引未知!");parent.window.close();
+					return false;
+				}
+				
+				this.Resize(); // 调整窗口大小
+			}
+			else
+			{
+				parent.alert("所传参数错误!");parent.window.close();
+			}
+		},
+		
+		Resize: function(){ 
+			try
+			{
+				if(typeof this.params.width != "undefined" && typeof this.params.height != "undefined" )
+				{
+					w = parseInt(this.params.width);
+					h = parseInt(this.params.height); 
+					window.resizeTo(w + 11, h + 36); 
+				}
+			}
+			catch(e)
+			{ 
+			} 
+		},
+ 		
+		CheckIV: function(){
+			if(!this.params.puid || this.params.ivIndex == "" || this.params.ivIndex == null)
+			{
+				parent.alert("所传参数错误!设备PUID或视频头索引未知!");parent.window.close();
+				return false;
+			}
+			
+			// alert(Object.toJSON(WebPopClient.Resource.resource));
+			
+			var puid = this.params.puid;
+			var ivIndex = this.params.ivIndex;
+			
+			var matchFlag = false;
+			
+			WebPopClient.Resource.resource.each(
+				function(item){
+					var node = item.value;
+					if(node && node.puid == puid)
+					{
+						if(node.childResource && typeof node.childResource == "object" && Object.isArray(node.childResource))
+						{
+							for(var i = 0; i < node.childResource.length; i++)
+							{
+								var childRes = node.childResource[i];
+								if(childRes && typeof childRes == "object")
+								{
+									// alert(Object.toJSON(childRes));
+									if(childRes.type == Nrcap2.Enum.PuResourceType.VideoIn && childRes.idx == ivIndex)
+									{
+										matchFlag = true;
+									} 
+								}
+							}
+						}
+					}
+				}
+			);
+			
+			if(matchFlag == false)
+			{
+				// 未找到匹配项
+				parent.alert("视频匹配不成功！设备PUID或视频头索引未知！");parent.window.close();
+				return false;
+			}
+			
+			WebPopClient.Video.PlayVideo(puid, ivIndex); // 播放
+		},
+		
+		end : true
+	},
+	
+	Video: {
+		Init: function(){
+			WebPopClient.Video.InitWindowContainers();
+		},
+		
+		InitWindowContainers: function(){
+			Nrcap2.InitWindows();
+			Nrcap2.WindowContainers.set("playWindowContainer",{container:$("playWindowContainer"),active:true,windwow:null,description:null});
+		},
+		
+		PlayVideo: function(puid, ivIndex){
+			// alert(puid + "," + ivIndex);
+			var resource = WebPopClient.Resource.resource; // alert(Object.toJSON(resource));  
+			if(!resource.get(puid)) return false;
+			if(!resource.get(puid).childResource) return false;
+		  
+			var pu = resource.get(puid);
+			var childResource = pu.childResource;
+		     
+			if(!Object.isArray(childResource))
+			{
+				return;
+			}
+			
+			for(var i = 0; i < childResource.length;i++)
+			{
+				var puResourceInfos = childResource[i];
+				// alert(Object.toJSON(puResourceInfos));
+				if(puResourceInfos.idx == ivIndex && puResourceInfos.type == Nrcap2.Enum.PuResourceType.VideoIn)
+				{
+					if(pu.online != "1")
+					{
+						parent.alert("设备不在线");parent.window.close();
+						WebPopClient.Debug.Note({time:WebPopClient.time.format("yyyy-MM-dd HH:mm:ss"),fn:"WebPopClient.Video.PlayVideo",msg:"设备"+puid+"不在线!"});
+						return false;
+					}
+					if(pu.enable != "1")
+					{
+						parent.alert("设备没有使能");parent.window.close();
+						WebPopClient.Debug.Note({time:WebPopClient.time.format("yyyy-MM-dd HH:mm:ss"),fn:"WebPopClient.Video.PlayVideo",msg:"设备"+puid+"没有使能!"});
+						return false;
+					}
+					if(puResourceInfos.enable != "1")
+					{
+						parent.alert("摄像机没有使能");parent.window.close();
+						WebPopClient.Debug.Note({time:WebPopClient.time.format("yyyy-MM-dd HH:mm:ss"),fn:"WebPopClient.Video.PlayVideo",msg:"摄像机"+puResourceInfos.idx+"没有使能!"});
+						return false;
+					} 
+					
+					Nrcap2.WindowContainers.each(
+						function(item){
+							var node = item.value;
+							if(node.active)
+							{
+								var create = true;
+								if(node.window != null)
+								{
+									create = false;
+									if(node.window.status.playvideoing)
+									{
+										WebPopClient.Video.StopVideo(item.key);
+									}
+								}
+								
+								node.description = puResourceInfos; 
+								 
+								if(create)
+								{
+									var windowEvent = new Nrcap2.Struct.WindowEventStruct();
+									windowEvent.onStop.status = true;
+									windowEvent.onStop.callback = function(){WebPopClient.Video.StopVideo(item.key);};
+									windowEvent.onClick.status = true;
+									windowEvent.onClick.callback = function(){};
+									windowEvent.onStartRecord.status = true;
+									windowEvent.onStartRecord.callback = function(){WebPopClient.Video.Record(item.key);};
+									windowEvent.onStopRecord.status = true;
+									windowEvent.onStopRecord.callback = function(){WebPopClient.Video.Record(item.key);};
+									
+									windowEvent.onSnapshot.status = true; 	
+									windowEvent.onSnapshot.callback = function(){WebPopClient.Video.SnapShot(item.key);}; 	
+									
+									windowEvent.onPTZControl.status = true;
+									windowEvent.onRestore.status = true;							
+									windowEvent.onFullScreen.status = true;	
+								  
+									// 初始化一个窗口 
+									node.window = Nrcap2.CreateWindow(WebPopClient.connectId, item.key, windowEvent);
+								}
+							    // alert(Object.toJSON(node.window));  
+								// 设置窗口样式
+								node.window.SetStyle({enableFullScreen:true, enableMainPopMenu:false});
+								node.window.wnd.style.visibility = "visible"; //使窗体可见  
+								
+								// 开始播放 
+								var rv = Nrcap2.PlayVideo(WebPopClient.connectId,node.window,puid,ivIndex); //alert(rv); // 摄像头索引idx<=3
+								
+								//if(rv.split(#)[0] != 0x0000) return;
+								
+								var params = WebPopClient.URL.params; 
+								var playAudio = true;
+								if(params.playAudio != null && typeof params.playAudio != "undefined")
+								{
+									playAudio = params.playAudio == false ? false : true;
+								}
+								 
+								if(playAudio == true)
+								{
+									WebPopClient.Video.PlayAudio(item.key);
+								}
+								
+							}
+						}
+					);
+					
+				}//end if
+			}//end for 
+		},
+		
+		StopVideo:function(windowKey){
+			try
+			{
+				if(windowKey)
+				{
+					var node = Nrcap2.WindowContainers.get(windowKey);
+					if(node && node.window && node.window.status.playvideoing)
+					{
+						  Nrcap2.StopVideo(node.window);
+						  node.window.wnd.style.visibility = "hidden";
+						  
+					}
+				}
+			}
+			catch(e)
+			{
+				WebPopClient.Debug.Note({time:WebPopClient.time.format("yyyy-MM-dd HH:mm:ss"),fn:"WebPopClient.Video.StopVideo",msg:"停止视频异常,error="+e.message+","+e.name});  	
+			}
+		},
+		
+		/*
+		*	函数名		：PlayAudio
+		*	函数功能		：播放音频 
+		*	备注			： 
+		*	作者			：huzw
+		*	时间			：2011.02.23 
+		*/
+		PlayAudio:function(windowKey)
+		{
+			try
+			{
+				if(windowKey)
+				{
+					if (Nrcap2.WindowContainers.get(windowKey))
+					{
+						var playaudioed = false; 
+						Nrcap2.WindowContainers.each
+						(
+							function(item)
+							{
+								if(item.value.window != null)
+								{
+									if(item.value.window.status.playvideoing && item.value.window.status.playaudioing)
+									{
+										if (item.key == windowKey)	// 当前选择要播放的音频,已经在播放了
+										{
+											playaudioed = true;
+										}
+										else
+										{ 
+											Nrcap2.PlayAudio(item.value.window); // 关闭非当前需要的其它所有播放音 
+										}
+										throw $break;
+									}
+								}
+							}
+						);
+						
+						if(playaudioed == false)
+						{
+							var node = Nrcap2.WindowContainers.get(windowKey);					
+							// 播放音频
+							var rv = Nrcap2.PlayAudio(node.window); // alert("playAudio:" + rv); 
+						}
+						 
+						return rv;
+					}
+				}            
+			}
+			catch(e)
+			{ 
+				WebPopClient.Debug.Note({time:WebPopClient.time.format("yyyy-MM-dd HH:mm:ss"),fn:"WebPopClient.Video.PlayAudio",msg:"播放音频异常,error="+e.message+","+e.name}); 
+				return false;
+			}
+		},
+		
+		end: true
+	}, 
+	
+	/*
+	* 函数名		：ClearBody
+	* 函数功能	：删除整个页面所有元素 
+	* 备注		：无
+	* 作者		：huzw
+	* 时间		：2011.02.16
+	*/
+	ClearBody:function(){
+		/* 先删除原body里所有元素 */	
+		var childsBody = $$("DIV");
+		for(var i = 0;i < childsBody.length;i++)
+		{
+			if(childsBody[i]) childsBody[i].remove();
+		}
+	},
+	
+	Frame: {
+		Init: function(){
+			if(!$("mainframe"))
+			{
+				var WebPopClientFrame = document.createElement("DIV");
+				WebPopClientFrame.setAttribute("id", "mainframe"); 
+				WebPopClientFrame.style.width = "100%";
+				WebPopClientFrame.style.height = "100%"; 
+				WebPopClientFrame.style.top = "0px"; 
+				WebPopClientFrame.style.left = "0px";  
+				WebPopClientFrame.style.position = "absolute"; 
+				WebPopClientFrame.style.border = "0px red solid"; 
+				WebPopClientFrame.style.overflow = "hidden"; 
+				
+				$$("body")[0].appendChild(WebPopClientFrame); 
+			}
+			
+			this.Html();
+		},
+		
+		Html: function(){
+			try
+			{
+				var params = WebPopClient.URL.params;
+				if(typeof params.width != "undefined" && typeof params.height != "undefined" )
+				{
+					w = parseInt(params.width);
+					h = parseInt(params.height);  
+				}
+				else
+				{
+					var w = 352, h = 288;
+				}
+			 
+				var bg_url = "images/playwindow1.png";
+				
+				if(w <= 230 && h <= 182)
+				{
+					bg_url = "images/playwindow9.png";
+				}
+				else if(w <= 352 && h <= 288)
+				{
+					bg_url = "images/playwindow4.png";
+				}
+				else if(w <= 710 && h <= 594)
+				{
+					bg_url = "images/playwindow1.png";
+				}
+				else
+				{
+					bg_url = "";
+				}
+					
+				var htmlstr = "";
+				htmlstr += "<div id=\"playWindowContainer\" style=\"width:"+w+"px;height:"+h+"px;float:left;margin-left:0px;background:url("+bg_url+") no-repeat left center;border:0px red solid;\">"; 
+				htmlstr += "</div>";
+				
+				$("mainframe").innerHTML = htmlstr;
+			}
+			catch(e)
+			{
+				parent.alert("创建视频窗口容器异常！");parent.window.close();
+			}
+			
+			
+		},
+		
+		end :true	
+	},
+	 
+	Resource: {
+		resource: new Hash(),
+		
+		Init: function(){
+			WebPopClient.Resource.FetchAllResource(); 
+			// alert(Object.toJSON( WebPopClient.Resource.resource));    
+			
+			WebPopClient.URL.CheckIV(); // 匹配IV
+			
+		},
+		
+		// 获取资源
+		FetchAllResource: function(){
+			WebPopClient.Resource.resource = new Hash();
+			 
+			// ---分页循环获取存储文件
+			var flag = true, offset = 0, count = 200;
+			var puResTotalInfos = new Array(); // 设备资源总信息 
+			while(flag)
+			{  
+				var puInfos = Nrcap2.FetchResource(WebPopClient.connectId,Nrcap2.Enum.FetchResourceLevel.Nrcap2_GetPUInfo, offset, count, ""); // alert(Object.toJSON(puInfos));  //new Array();  
+			
+				if(puInfos && typeof puInfos == "object" && Object.isArray(puInfos))
+				{	 
+					if(puInfos.length > 0)
+					{
+						puResTotalInfos = puResTotalInfos.concat(puInfos); // alert(puInfos.length);
+						offset = parseInt(offset + count);
+						if(puInfos.length < count)
+						{ 
+							flag = false;
+						} 
+					}
+					else
+					{
+						flag = false;
+					}	
+				} 
+				else
+				{
+					flag = false;
+				}
+			} // end while ---
+			 
+			// alert(puResTotalInfos.toJSON());  //new Array();  
+			
+			if(typeof puResTotalInfos == "object" && puResTotalInfos.constructor == Array)
+			{
+				puResTotalInfos.each(
+					function(node,i){ 
+						WebPopClient.Resource.resource.set(node.puid,node);	
+					 
+						if(WebPopClient.Resource.resource.get(node.puid) && typeof WebPopClient.Resource.resource.get(node.puid) == "object")
+						{
+							WebPopClient.Resource.resource.get(node.puid).childResource = Nrcap2.FetchResource(WebPopClient.connectId,Nrcap2.Enum.FetchResourceLevel.Nrcap2_GetPUResourceInfo,0,200,"",{PUID:node.puid});	
+						}						
+						
+						/*var puResourceInfos = Nrcap2.FetchResource(WebPopClient.connectId,Nrcap2.Enum.FetchResourceLevel.Nrcap2_GetPUResourceInfo,0,200,"",{PUID:node.puid});		
+						 // alert(Object.toJSON(puResourceInfos));   
+						 if(puResourceInfos && typeof puResourceInfos == "object" && puResourceInfos.length > 0)
+                   		 {	 
+							 if(WebPopClient.Resource.resource.get(node.puid) && typeof WebPopClient.Resource.resource.get(node.puid) == "object")
+							 {
+								 WebPopClient.Resource.resource.get(node.puid).childResource = puResourceInfos;	
+							 } 
+						 	
+						 }
+*/						 
+					}
+				);
+			} 
+			
+			// alert(Object.toJSON(WebPopClient.Resource.resource));   
+		}, 
+		
+		end: true
+	},
+	
+	end: true
+
+};
+
+/* 页面加载 */
+if(window.attachEvent){
+	window.attachEvent(
+		"onload",
+		function(){
+			if(WebPopClient && typeof WebPopClient == "object" && typeof WebPopClient.Load == "function")
+			{			
+				WebPopClient.Load();
+			}
+		} 
+	); 		   
+	window.attachEvent(
+		"onunload",
+		function(){
+			if(WebPopClient && typeof WebPopClient == "object" && typeof WebPopClient.UnLoad == "function")
+			{
+				WebPopClient.UnLoad();
+			}			
+		} 
+	); 
+}
+else
+{
+	 window.addEventListener(
+        "load",
+        function(){
+            if (WebPopClient && typeof WebPopClient == "object" && typeof WebPopClient.Load == "function")
+            {
+                WebPopClient.Load();
+            } 
+        },
+        false
+    );	
+}
+
+</script>
+
+</head>
+
+<body>
+</body>
+</html>
