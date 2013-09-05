@@ -1,4 +1,4 @@
-package com.klspta.web.xuzhouNW.importSign;
+package com.klspta.web.jizeNW.importSign;
 
 import java.io.BufferedInputStream;
 import java.io.DataOutputStream;

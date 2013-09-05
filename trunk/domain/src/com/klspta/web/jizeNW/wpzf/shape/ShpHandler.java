@@ -1,4 +1,4 @@
-package com.klspta.web.xuzhouNW.wpzf.shape;
+package com.klspta.web.jizeNW.wpzf.shape;
 
 import java.io.File;
 import java.util.Iterator;

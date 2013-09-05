@@ -1,4 +1,4 @@
-package com.klspta.web.xuzhouNW.wpzf.shape;
+package com.klspta.web.jizeNW.wpzf.shape;
 
 public class mainTest {
 	public static void main(String[] args) {

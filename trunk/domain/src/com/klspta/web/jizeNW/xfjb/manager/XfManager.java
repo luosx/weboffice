@@ -1,4 +1,4 @@
-package com.klspta.web.xuzhouNW.xfjb.manager;
+package com.klspta.web.jizeNW.xfjb.manager;
 
 import java.util.List;
 import java.util.Map;

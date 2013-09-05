@@ -1,4 +1,4 @@
-package com.klspta.web.xuzhouNW.lacc;
+package com.klspta.web.jizeNW.lacc;
 
 import com.klspta.base.AbstractBaseBean;
 

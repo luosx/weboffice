@@ -1,4 +1,4 @@
-package com.klspta.web.xuzhouNW.wpzf;
+package com.klspta.web.jizeNW.wpzf;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
