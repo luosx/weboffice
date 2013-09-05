@@ -124,8 +124,7 @@
   </tr>
   <tr>
     <td colspan="2"><div align="center">立案编号</div></td>
-    <td colspan="2"><input type="text" class="noborder" id="bh" name="bh"
-								onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})"    readonly style="width: 98%" /></td>
+    <td colspan="2"><input type="text" class="noborder" id="bh" name="bh"   readonly style="width: 98%" /></td>
     <td colspan="2"><div align="center">立案日期</div></td>
     <td colspan="2"><input type="text" class="noborder" id="lasj" name="lasj"
 								onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})"    readonly style="width: 98%" /></td>	
