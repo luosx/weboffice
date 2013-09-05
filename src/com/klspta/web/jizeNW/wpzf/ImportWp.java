@@ -1,4 +1,4 @@
-package com.klspta.web.xuzhouNW.wpzf;
+package com.klspta.web.jizeNW.wpzf;
 
 import java.io.File;
 import java.util.Calendar;

@@ -1,4 +1,4 @@
-﻿package com.klspta.web.xuzhouNW.dtxc;
+﻿package com.klspta.web.jizeNW.dtxc;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
