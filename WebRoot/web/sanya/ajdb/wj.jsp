@@ -11,7 +11,7 @@
 	<head>
 		<base href="<%=basePath%>">
 
-		<title>信访</title>
+		<title>文件</title>
 
 		<meta http-equiv="pragma" content="no-cache">
 		<meta http-equiv="cache-control" content="no-cache">
@@ -25,7 +25,7 @@ var sm;
 var width;
 var height;
 Ext.onReady(function(){
-	putClientCommond("caseSupervision","getXfdbList");
+	putClientCommond("caseSupervision","getWjdbList");
 	myData = restRequest();
     var store = new Ext.data.JsonStore({
     proxy: new Ext.ux.data.PagingMemoryProxy(myData),
@@ -34,12 +34,12 @@ Ext.onReady(function(){
            {name: 'YJ'},
            {name: 'SYTS'},
            {name: 'YW_GUID'},
-           {name: 'XFSX'},
-           {name: 'XFLX'},
+           {name: 'WJSPSX'},
+           {name: 'WJLX'},
            {name: 'BLSX'},
-           {name: 'BLKS'},
-           {name: 'BLZT'},
+           {name: 'WJSQ'},
            {name: 'BLQK'},
+           {name: 'CREATEDATE'},		
            {name: 'INDEX'}
         ]
     });
@@ -53,12 +53,12 @@ Ext.onReady(function(){
            {header: '预警',dataIndex:'YJ',width:width*0.05, sortable:false,renderer:warn},   
            {header: '剩余天数',dataIndex:'SYTS',width: width*0.05, sortable: true}, 
            {header: '编号',dataIndex:'INDEX',width: width*0.05, sortable: true},
-           {header: '信访事项',dataIndex:'XFSX',width: width*0.20, sortable: true},
-           {header: '信访类型',dataIndex:'XFLX',width: width*0.10, sortable: true},
+           {header: '文件审批事项',dataIndex:'WJSPSX',width: width*0.20, sortable: true},
+           {header: '文件类型',dataIndex:'WJLX',width: width*0.10, sortable: true},
            {header: '截止日期',dataIndex:'BLSX',width: width*0.10, sortable: true},
-           {header: '办理科室',dataIndex:'BLKS',width: width*0.12, sortable: true},
-           {header: '办理状态',dataIndex:'BLZT',width: width*0.12, sortable: true},
+           {header: '文件申请',dataIndex:'WJSQ',width: width*0.12, sortable: true},
            {header: '办理情况',dataIndex:'BLQK',width: width*0.12, sortable: true},
+           {header: '创建时间',dataIndex:'CREATEDATE',width: width*0.12, sortable: true},
            {header: '查看',dataIndex:'INDEX',width: width*0.08, sortable: false,renderer:view}
         ],
         tbar:[
@@ -114,7 +114,7 @@ function view(id){
 }
 
 function viewDetail(id){	
-	var url = "<%=basePath%>/web/sanya/xfaj/xfajdj/xfajTab.jsp?yw_guid=" + myData[id-1].YW_GUID;
+	var url = "<%=basePath%>/web/sanya/zhbg/zhbgdj/wjspTab.jsp?yw_guid=" + myData[id-1].YW_GUID;
 	document.location.href = url;	
 }
 
@@ -132,35 +132,35 @@ return false;
 function query(){
    var keyWord=Ext.getCmp('keyword').getValue();
    keyWord=keyWord.toUpperCase();
-   putClientCommond("caseSupervision","getXfdbList");           
+   putClientCommond("caseSupervision","getWjdbList");           
    putRestParameter("keyWord",escape(escape(keyWord)));
    var myData = restRequest(); 
    var store = new Ext.data.JsonStore({
         proxy: new Ext.ux.data.PagingMemoryProxy(myData),
         remoteSort:true,
         fields: [
-	     {name: 'YJ'},
-	     {name: 'SYTS'},
-	     {name: 'YW_GUID'},
-	     {name: 'XFSX'},
-	     {name: 'XFLX'},
-	     {name: 'BLSX'},
-	     {name: 'BLKS'},
-	     {name: 'BLZT'},
-	     {name: 'BLQK'},
-	     {name: 'INDEX'}
+           {name: 'YJ'},
+           {name: 'SYTS'},
+           {name: 'YW_GUID'},
+           {name: 'WJSPSX'},
+           {name: 'WJLX'},
+           {name: 'BLSX'},
+           {name: 'WJSQ'},
+           {name: 'BLQK'},
+           {name: 'CREATEDATE'},		
+           {name: 'INDEX'}
         ]
   });
   grid.reconfigure(store, new Ext.grid.ColumnModel([
    {header: '预警',dataIndex:'YJ',width:width*0.05, sortable:false,renderer:warn},  
    {header: '剩余天数',dataIndex:'SYTS',width: width*0.05, sortable: true,renderer:changKeyword},  
    {header: '编号',dataIndex:'INDEX',width: width*0.05, sortable: true,renderer:changKeyword},
-   {header: '信访事项',dataIndex:'XFSX',width: width*0.20, sortable: true,renderer:changKeyword},
-   {header: '信访类型',dataIndex:'XFLX',width: width*0.10, sortable: true,renderer:changKeyword},
+   {header: '文件审批事项',dataIndex:'WJSPSX',width: width*0.20, sortable: true,renderer:changKeyword},
+   {header: '文件类型',dataIndex:'WJLX',width: width*0.10, sortable: true,renderer:changKeyword},
    {header: '截止日期',dataIndex:'BLSX',width: width*0.10, sortable: true,renderer:changKeyword},
-   {header: '办理科室',dataIndex:'BLKS',width: width*0.12, sortable: true,renderer:changKeyword},
-   {header: '办理状态',dataIndex:'BLZT',width: width*0.12, sortable: true,renderer:changKeyword},
+   {header: '文件申请',dataIndex:'WJSQ',width: width*0.12, sortable: true,renderer:changKeyword},
    {header: '办理情况',dataIndex:'BLQK',width: width*0.12, sortable: true,renderer:changKeyword},
+   {header: '创建时间',dataIndex:'CREATEDATE',width: width*0.12, sortable: true,renderer:changKeyword},
    {header: '查看',dataIndex:'INDEX',width: width*0.08, sortable: false,renderer:view}
   ]));
   grid.getBottomToolbar().bind(store);
