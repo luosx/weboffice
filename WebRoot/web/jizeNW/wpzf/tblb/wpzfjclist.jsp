@@ -144,17 +144,17 @@ function view(id){
 
 function viewDetail(id){
 	var tbbh=myData[id].TBBH;
-	window.open("<%=basePath%>web/xuzhouNW/wpzf/analysis/pdaStatus.jsp?yw_guid=" + tbbh);
+	window.open("<%=basePath%>web/jizeNW/wpzf/analysis/pdaStatus.jsp?yw_guid=" + tbbh);
 }
 
 function viewDetail1(id1,id2,id3){ 
 var tbbh=store.getAt(id2).get('TBBH');
 
-window.open("<%=basePath%>web/xuzhouNW/wpzf/analysis/pdaStatus.jsp?yw_guid=" + tbbh);
+window.open("<%=basePath%>web/jizeNW/wpzf/analysis/pdaStatus.jsp?yw_guid=" + tbbh);
 }
 
 function analysis(){
-   document.location.href="<%=basePath%>web/xuzhouNW/wpzf/qbtb_table/qbtb_main.jsp";
+   document.location.href="<%=basePath%>web/jizeNW/wpzf/qbtb_table/qbtb_main.jsp";
 } 
 
 function changKeyword(val){

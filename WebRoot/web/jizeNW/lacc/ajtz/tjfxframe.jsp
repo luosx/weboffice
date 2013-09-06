@@ -1,7 +1,7 @@
 <%@page language="java" pageEncoding="utf-8"%>
 <%@page import="org.springframework.security.core.context.SecurityContextHolder"%>
 <%@page import="com.klspta.console.user.User"%>
-<%@page import="com.klspta.web.xuzhouNW.lacc.TjfxManager"%>
+<%@page import="com.klspta.web.jizeNW.lacc.TjfxManager"%>
 <%
 	String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":"
@@ -130,7 +130,7 @@ function analy(){
 	<body>
          <div id="west" class="x-hide-display"></div>
         <div id="center1" >
-        	<iframe id="xxtj" name="xxtj" style="width: 100%;height:100%; overflow: auto;" src="web/xuzhouNW/lacc/ajtz/tjtab.jsp"></iframe>
+        	<iframe id="xxtj" name="xxtj" style="width: 100%;height:100%; overflow: auto;" src="web/jizeNW/lacc/ajtz/tjtab.jsp"></iframe>
         </div>
         
 	</body>

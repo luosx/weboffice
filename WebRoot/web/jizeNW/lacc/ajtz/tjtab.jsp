@@ -194,7 +194,7 @@ function query()
       var region=regions.join(",");
       region=escape(escape(region));
       condition =" qy in ("+region+") and to_char(aydjrq,'yyyy-mm') between '"+beginDate+"' and '"+endDate+"'";
-      document.getElementById('title').src="<%=basePath%>web/xuzhouNW/lacc/ajtz/title.jsp?beginDate="+beginDate+"&endDate="+endDate+"&region="+escape(escape(treeList));
+      document.getElementById('title').src="<%=basePath%>web/jizeNW/lacc/ajtz/title.jsp?beginDate="+beginDate+"&endDate="+endDate+"&region="+escape(escape(treeList));
       document.getElementById('content').src="<%=basePath%>model/report/showReport.jsp?id=DBD6C6B1978D41808590EF04747C8600&condition="+condition;
 	}
 }

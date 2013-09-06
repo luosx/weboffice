@@ -212,7 +212,7 @@ function openPage(url){
 	//点击首页时，进入首页
 	function returnFirst(){
 		//top.location.href="<%=basePath%>login/login.jsp";
-		parent.location.href="<%=basePath%>web/xuzhouNW/main.jsp";
+		parent.location.href="<%=basePath%>web/jizeNW/main.jsp";
 	}
 	//打开地图
 	function openMap(){

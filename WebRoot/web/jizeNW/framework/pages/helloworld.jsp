@@ -98,7 +98,7 @@ String userId = ((User) principal).getUserID();
 			//alert(top.content.left.document.getElementById("menuLeftDiv").children[0].innerHTML);
 			//alert(top.content.left.document.getElementById("img_"+menu23).parentNode.outerHTML);
 			//直接显示待办案件页面
-			top.content.right.location.href = '<%=basePath%>' + 'web/xuzhouNW/lacc/lb/dbaj.jsp';
+			top.content.right.location.href = '<%=basePath%>' + 'web/jizeNW/lacc/lb/dbaj.jsp';
 			
 			var obj=top.content.left.document.getElementById("img_"+menu23).parentNode;
 			if(obj.parentNode.parentNode.id!="menuLeftDiv")

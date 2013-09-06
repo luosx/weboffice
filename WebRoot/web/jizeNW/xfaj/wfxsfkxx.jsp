@@ -2,7 +2,7 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="com.klspta.base.util.UtilFactory"%>
 <%@page import="com.klspta.console.ManagerFactory"%>
-<%@page import="com.klspta.web.xuzhouNW.xfjb.manager.XfAction"%>
+<%@page import="com.klspta.web.jizeNW.xfjb.manager.XfAction"%>
 
 <%
     String path = request.getContextPath();
@@ -79,7 +79,7 @@
 			}
 		//添加、查看地图标注
 		function createbz(){
-			window.open("<%=basePath%>web/xuzhouNW/xfaj/xfbz/xfbz.jsp?yw_guid=<%=yw_guid%>",'','width='+(window.screen.availWidth-10)+',height='+(window.screen.availHeight-30));
+			window.open("<%=basePath%>web/jizeNW/xfaj/xfbz/xfbz.jsp?yw_guid=<%=yw_guid%>",'','width='+(window.screen.availWidth-10)+',height='+(window.screen.availHeight-30));
 		}
 		</script>
 		

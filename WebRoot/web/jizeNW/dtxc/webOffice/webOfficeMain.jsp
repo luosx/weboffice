@@ -1,5 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%@page import="com.klspta.web.xuzhouNW.dtxc.DtxcManager"%>
+<%@page import="com.klspta.web.jizeNW.dtxc.DtxcManager"%>
 <%@page import="com.klspta.base.util.bean.ftputil.AccessoryBean"%>
 <%@page import="com.klspta.base.util.UtilFactory"%>
 <%
@@ -94,7 +94,7 @@
 			webObj.Close();  
   			
   			//当对应的抄告单不存在时
-			document.all.WebOffice1.LoadOriginalFile('<%=basePath%>web/xuzhouNW/dtxc/webOffice/'+encodeURI(unescape("抄告单"))+'.doc', "doc");
+			document.all.WebOffice1.LoadOriginalFile('<%=basePath%>web/jizeNW/dtxc/webOffice/'+encodeURI(unescape("抄告单"))+'.doc', "doc");
 			document.getElementById("save").disabled = false; 
 			document.all.WebOffice1.HideMenuArea("hideall","","","");  
 			

@@ -29,7 +29,7 @@
 			href="<%=basePath%>web/default/ajgl/css/lacpb.css" type="text/css" />
 		<%@ include file="/base/include/formbase.jspf"%>
 		<%} %>
-		<script type="text/javascript" src="<%=basePath%>/web/xuzhouNW/lacc/js/sign.js"></script>
+		<script type="text/javascript" src="<%=basePath%>/web/jizeNW/lacc/js/sign.js"></script>
 		<script>
 		
 		function initEdit(){

@@ -37,10 +37,10 @@ var tabs;
         frame:true,
         items:[{
                 title: '现状叠加',
-               html: "<iframe width='"+w+"' height='"+h+"' src='<%=basePath%>/web/xuzhouNW/wpzf/analysis/xzList.jsp?yw_guid=<%=yw_guid %>' />" 
+               html: "<iframe width='"+w+"' height='"+h+"' src='<%=basePath%>/web/jizeNW/wpzf/analysis/xzList.jsp?yw_guid=<%=yw_guid %>' />" 
            },{
                 title: '详细地类',
-               html: "<iframe width='"+w+"' height='"+h+"' src='<%=basePath%>/web/xuzhouNW/wpzf/analysis/xzdlList.jsp?yw_guid=<%=yw_guid %>' />" 
+               html: "<iframe width='"+w+"' height='"+h+"' src='<%=basePath%>/web/jizeNW/wpzf/analysis/xzdlList.jsp?yw_guid=<%=yw_guid %>' />" 
            }
         ]
     })

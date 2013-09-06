@@ -38,7 +38,7 @@
 			href="<%=basePath%>base/form/css/commonForm.css" type="text/css" />
 		<%@ include file="/base/include/formbase.jspf"%>
 		<%} %>
-		<script type="text/javascript" src="<%=basePath%>/web/xuzhouNW/lacc/js/sign.js"></script>
+		<script type="text/javascript" src="<%=basePath%>/web/jizeNW/lacc/js/sign.js"></script>
 		<script>
 		var userId = "<%=userid%>";
 			var basePath = "<%=basePath%>";

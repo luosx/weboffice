@@ -154,13 +154,13 @@ Ext.onReady(function(){
 
 function pro(id){
  //id = id -1;
- return "<a href='#'onclick='process("+id+");return false;'><img src='<%=basePath%>web/xuzhouNW/lacc/dbaj/images/view.png' alt='详细'></a>";
+ return "<a href='#'onclick='process("+id+");return false;'><img src='<%=basePath%>web/jizeNW/lacc/dbaj/images/view.png' alt='详细'></a>";
 }
 
 function process(id){
     var wfInsId=myData[id].WFINSID;
 	var yw_guid=myData[id].YW_GUID;
-	var returnPath="web/xuzhouNW/lacc/ajcx/ajdcybaj.jsp";
+	var returnPath="web/jizeNW/lacc/ajcx/ajdcybaj.jsp";
 	var buttonHidden = "delete,la,tran,back";
 	var url='<%=basePath%>model/workflow/wf.jsp?yw_guid='+yw_guid+'&zfjcName=立案查处&zfjcType=90&wfInsId='+wfInsId+'&returnPath='+returnPath+'&buttonHidden='+buttonHidden;
 	//window.open(url); 
