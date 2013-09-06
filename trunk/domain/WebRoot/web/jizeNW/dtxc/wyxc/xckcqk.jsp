@@ -4,8 +4,8 @@
 <%@page import="org.springframework.security.core.context.SecurityContextHolder"%>
 <%@page import="com.klspta.console.user.User"%>
 <%@page import="com.klspta.console.ManagerFactory"%>
-<%@page import="com.klspta.web.xuzhouNW.dtxc.DtxcManager"%>
-<%@page import="com.klspta.web.xuzhouNW.dtxc.PADDataManager"%>
+<%@page import="com.klspta.web.jizeNW.dtxc.DtxcManager"%>
+<%@page import="com.klspta.web.jizeNW.dtxc.PADDataManager"%>
 <%
     String path = request.getContextPath();
 String basePath = request.getScheme() + "://"

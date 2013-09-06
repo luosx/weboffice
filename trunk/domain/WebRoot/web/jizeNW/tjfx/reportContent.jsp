@@ -88,7 +88,7 @@
                if(parentid=='14'){
             	  setTimeout(function()
             			  {
-            				  window.open("<%=basePath%>web/xuzhouNW/tjfx/chart.jsp?xml="+id,'chart','height=600,width=900,left='+left+',top='+top+',toolbar=no,menubar=no,scrollbars=no,resizable=no,location=no,status=no');
+            				  window.open("<%=basePath%>web/jizeNW/tjfx/chart.jsp?xml="+id,'chart','height=600,width=900,left='+left+',top='+top+',toolbar=no,menubar=no,scrollbars=no,resizable=no,location=no,status=no');
             			  }
             			  ,10);
                    

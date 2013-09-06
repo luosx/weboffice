@@ -174,7 +174,7 @@ function whc(id){
 	               // window.open("<%=basePath%>"+path.urlPath);
 	               // document.location.reload(); 
 	               var url=path.urlPath;
-	               location.href="<%=basePath%>"+url+"&returnPath=<%=basePath%>/web/xuzhouNW/wpzf/wfTB/wpzfjcyswflist.jsp";
+	               location.href="<%=basePath%>"+url+"&returnPath=<%=basePath%>/web/jizeNW/wpzf/wfTB/wpzfjcyswflist.jsp";
                 } 
             });  
 }
@@ -182,12 +182,12 @@ function whc(id){
 
 function viewDetail(id){
 	var tbbh=myData[id].TBBH;
-	window.open("<%=basePath%>web/xuzhouNW/wpzf/analysis/pdaStatus.jsp?yw_guid=" + tbbh);
+	window.open("<%=basePath%>web/jizeNW/wpzf/analysis/pdaStatus.jsp?yw_guid=" + tbbh);
 }
 
 function viewDetail1(id1,id2,id3){ 
 var tbbh=store.getAt(id2).get('TBBH');
-window.open("<%=basePath%>web/xuzhouNW/wpzf/pdaStatus.jsp?yw_guid=" + tbbh);
+window.open("<%=basePath%>web/jizeNW/wpzf/pdaStatus.jsp?yw_guid=" + tbbh);
 }
 
 function changKeyword(val){

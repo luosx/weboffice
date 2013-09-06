@@ -105,7 +105,7 @@
 		});
 
 		function pro(id){
-		 return "<a href='#'onclick='process("+id+");return false;'><img src='<%=basePath%>web/xuzhouNW/xfaj/images/view.png' alt='办理'></a>";
+		 return "<a href='#'onclick='process("+id+");return false;'><img src='<%=basePath%>web/jizeNW/xfaj/images/view.png' alt='办理'></a>";
 		}
 
 		function process(id){
@@ -118,7 +118,7 @@
 			var wfInsId=myData[id].WFINSID;
 			var yw_guid=myData[id].YW_GUID;
 			var zfjcType="91";
-			var returnPath="web/xuzhouNW/xfaj/xfdbaj.jsp";
+			var returnPath="web/jizeNW/xfaj/xfdbaj.jsp";
 			var buttonHien = "la";
 			var url='<%=basePath%>model/workflow/wf.jsp?yw_guid='+yw_guid+'&wfInsId='+wfInsId+'&zfjcType='+zfjcType+'&returnPath='+returnPath+'&zfjcName=信访举报&buttonHidden='+buttonHien;  
 			//window.open(url); 

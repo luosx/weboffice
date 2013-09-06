@@ -1,5 +1,5 @@
 <%@page language="java" pageEncoding="utf-8"%>
-<%@page import="com.klspta.web.xuzhouNW.dtxc.DtxcManager"%>
+<%@page import="com.klspta.web.jizeNW.dtxc.DtxcManager"%>
 <%@page import="com.klspta.base.util.UtilFactory"%>
 <%@page import="com.klspta.base.util.bean.xzqhutil.XzqhBean"%>
 <%@page import="org.springframework.security.core.context.SecurityContextHolder"%>
@@ -383,7 +383,7 @@
 				alert("当前页已是最后一条");
 				return ; 
 			}
-			document.location.href="<%=basePath%>/web/xuzhouNW/dtxc/xcrz/xcrz.jsp?jdbcname=YWTemplate&yw_guid=" + result + "&isView=false&num=<%=(Integer.parseInt(num)+1)%>&keyWord="+escape(escape("<%=keyWord%>"))+"&returnPath=web/xuzhouNW/dtxc/xcrz/xcrzList.jsp"; 
+			document.location.href="<%=basePath%>/web/jizeNW/dtxc/xcrz/xcrz.jsp?jdbcname=YWTemplate&yw_guid=" + result + "&isView=false&num=<%=(Integer.parseInt(num)+1)%>&keyWord="+escape(escape("<%=keyWord%>"))+"&returnPath=web/jizeNW/dtxc/xcrz/xcrzList.jsp"; 
 		
 		}
 		function toPre(){
@@ -396,7 +396,7 @@
 			putRestParameter("userId","<%=user%>");
       		putRestParameter("keyWord",escape(escape("<%=keyWord%>")));
 			var result = restRequest();
-			document.location.href="<%=basePath%>/web/xuzhouNW/dtxc/xcrz/xcrz.jsp?jdbcname=YWTemplate&yw_guid=" + result + "&isView=false&num=<%=(Integer.parseInt(num)-1)%>&keyWord="+escape(escape("<%=keyWord%>"))+"&returnPath=web/xuzhouNW/dtxc/xcrz/xcrzList.jsp"; 
+			document.location.href="<%=basePath%>/web/jizeNW/dtxc/xcrz/xcrz.jsp?jdbcname=YWTemplate&yw_guid=" + result + "&isView=false&num=<%=(Integer.parseInt(num)-1)%>&keyWord="+escape(escape("<%=keyWord%>"))+"&returnPath=web/jizeNW/dtxc/xcrz/xcrzList.jsp"; 
 		}
 		
 		</script>
@@ -1079,7 +1079,7 @@
 			var yw_guid = "<%=yw_guid%>";
 			var height=window.screen.availHeight;
 			var width=window.screen.availWidth;
-			window.showModalDialog("<%=basePath%>web/xuzhouNW/dtxc/wyxc/xjclyjframe.jsp?zfjcType=13&yw_guid="+yw_guid,obj,"dialogWidth="+width+";dialogHeight="+height);
+			window.showModalDialog("<%=basePath%>web/jizeNW/dtxc/wyxc/xjclyjframe.jsp?zfjcType=13&yw_guid="+yw_guid,obj,"dialogWidth="+width+";dialogHeight="+height);
 		}
 		
 		document.body.onload = initxcrz;

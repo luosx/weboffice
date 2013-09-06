@@ -35,7 +35,7 @@
         items:[
         	{
                 title: '实地巡查情况表',
-                html: "<iframe width='"+w+"' height='"+h+"' src='<%=basePath%>web/xuzhouNW/dtxc/wyxc/xckcqk.jsp?yw_guid=<%=yw_guid%>'/>" 
+                html: "<iframe width='"+w+"' height='"+h+"' src='<%=basePath%>web/jizeNW/dtxc/wyxc/xckcqk.jsp?yw_guid=<%=yw_guid%>'/>" 
             },{
                 title: '巡查位置查看',
                 html: "<iframe width='"+w+"' height='"+h+"' src='<%=basePath%>base/fxgis/framework/gisViewFrame.jsp?flag=1&yw_guid=<%=yw_guid%>'/>"

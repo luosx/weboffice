@@ -1,6 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@page import="com.klspta.base.util.UtilFactory"%>
-<%@page import="com.klspta.web.xuzhouNW.lacc.LaccManager"%>
+<%@page import="com.klspta.web.jizeNW.lacc.LaccManager"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
@@ -32,8 +32,8 @@
    	Ext.QuickTips.init();
     var w=document.body.clientWidth;
 	var h=document.body.clientHeight - 30; 
-	var showPathN = "<%=basePath%>web/xuzhouNW/lacc/flws/flwscpb.jsp?jdbcname=YWTemplate&yw_guid=<%=yw_guid%>v02";
-	var showPathF = "<%=basePath%>web/xuzhouNW/lacc/flws/flwscpb.jsp?jdbcname=YWTemplate&yw_guid=<%=yw_guid%>";
+	var showPathN = "<%=basePath%>web/jizeNW/lacc/flws/flwscpb.jsp?jdbcname=YWTemplate&yw_guid=<%=yw_guid%>v02";
+	var showPathF = "<%=basePath%>web/jizeNW/lacc/flws/flwscpb.jsp?jdbcname=YWTemplate&yw_guid=<%=yw_guid%>";
     var tabs = new Ext.TabPanel({
         renderTo:'statusTab',
        	<% if(num == 2){ %>

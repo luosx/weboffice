@@ -40,10 +40,10 @@ input,img {
         frame:true,
         items:[{
                 title: '审批叠加',
-               html: "<iframe width='"+w+"' height='"+h+"' src='<%=basePath%>/web/xuzhouNW/wpzf/analysis/spList.jsp?yw_guid=<%=yw_guid%>' />" 
+               html: "<iframe width='"+w+"' height='"+h+"' src='<%=basePath%>/web/jizeNW/wpzf/analysis/spList.jsp?yw_guid=<%=yw_guid%>' />" 
            },{
                 title: '供地叠加',
-               html: "<iframe width='"+w+"' height='"+h+"' src='<%=basePath%>/web/xuzhouNW/wpzf/analysis/gdList.jsp?yw_guid=<%=yw_guid%>' />" 
+               html: "<iframe width='"+w+"' height='"+h+"' src='<%=basePath%>/web/jizeNW/wpzf/analysis/gdList.jsp?yw_guid=<%=yw_guid%>' />" 
            }
         ]
     })

@@ -146,7 +146,7 @@ function view(id){
 
 function viewDetail(id){
 	var tbbh=myData[id].TBBH;
-	window.open("<%=basePath%>web/xuzhouNW/wpzf/analysis/pdaStatus.jsp?yw_guid=" + tbbh);
+	window.open("<%=basePath%>web/jizeNW/wpzf/analysis/pdaStatus.jsp?yw_guid=" + tbbh);
 }
 //下发按钮
 function toXiafa(){
@@ -185,7 +185,7 @@ function toXiafa(){
 
 function viewDetail1(id1,id2,id3){ 
 var tbbh=store.getAt(id2).get('TBBH');
-window.open("<%=basePath%>web/xuzhouNW/wpzf/pdaStatus.jsp?yw_guid=" + tbbh);
+window.open("<%=basePath%>web/jizeNW/wpzf/pdaStatus.jsp?yw_guid=" + tbbh);
 }
 
 

@@ -43,7 +43,7 @@
 
 
 function openAdd(){
- var returnValues=window.showModalDialog('<%=basePath%>web/xuzhouNW/lacc/cfjd/changePersonNumber.jsp',window,'dialogWidth=300px;dialogHeight=200px;status=no;scroll=no');
+ var returnValues=window.showModalDialog('<%=basePath%>web/jizeNW/lacc/cfjd/changePersonNumber.jsp',window,'dialogWidth=300px;dialogHeight=200px;status=no;scroll=no');
  if(returnValues&&returnValues[0]){
  	document.getElementById('lszrrxm').value+=(returnValues[0]+'\n');
  	document.getElementById('lszrrsex').value+=(returnValues[1]+'\n');
@@ -60,7 +60,7 @@ var array=new Array(4);
 	array[1]=document.getElementById('lszrrsex').value;
 	array[2]=document.getElementById('lszrrzw').value;
 	array[3]=document.getElementById('lszrrjb').value;
-var returnValues=window.showModalDialog('<%=basePath%>web/xuzhouNW/lacc/cfjd/changePersonNumber.jsp?type=delete',array,'dialogWidth=300px;dialogHeight=200px;status=no;scroll=no');
+var returnValues=window.showModalDialog('<%=basePath%>web/jizeNW/lacc/cfjd/changePersonNumber.jsp?type=delete',array,'dialogWidth=300px;dialogHeight=200px;status=no;scroll=no');
  if(returnValues&&returnValues[0]){
  	document.getElementById('lszrrxm').value=(document.getElementById('lszrrxm').value).replace(returnValues[0]+'\n','');
  	document.getElementById('lszrrsex').value=(document.getElementById('lszrrsex').value).replace(returnValues[1]+'\n','');

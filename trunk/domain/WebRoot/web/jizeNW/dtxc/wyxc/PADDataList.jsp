@@ -155,7 +155,7 @@ function delTask(id){
 
 
 function showDetail(id){
-    var url = "<%=basePath%>web/xuzhouNW/dtxc/wyxc/xjclyjframe.jsp?zfjcType=11&yw_guid="+myData[id].GUID;     
+    var url = "<%=basePath%>web/jizeNW/dtxc/wyxc/xjclyjframe.jsp?zfjcType=11&yw_guid="+myData[id].GUID;     
 	//document.location.href=url;
 	var height = window.screen.availHeight;
 	var width = window.screen.availWidth;

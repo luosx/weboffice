@@ -1,5 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<%@page import="com.klspta.web.xuzhouNW.wpzf.WpzfListManager"%>
+<%@page import="com.klspta.web.jizeNW.wpzf.WpzfListManager"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";

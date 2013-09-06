@@ -97,13 +97,13 @@
 	});
 	
 	function view(id){
-		return "<a href='#' onclick='viewDetail("+id+");return false;'><img src='web/xuzhouNW/dtxc/images/view.png' alt='查看'></a>";
+		return "<a href='#' onclick='viewDetail("+id+");return false;'><img src='web/jizeNW/dtxc/images/view.png' alt='查看'></a>";
 	}
 	
 	function viewDetail(id){
 		var keyWord=Ext.getCmp('keyword').getValue();
 		var yw_guid = myData[id].YW_GUID;
-		var url = "<%=basePath%>web/xuzhouNW/dtxc/xcrz/xcrz.jsp?jdbcname=YWTemplate&yw_guid=" + yw_guid + "&num=" + myData[id].RUNNUM1 + "&isView=false&choseWord=" + escape(escape(keyWord)) + "&returnPath=web/xuzhouNW/dtxc/xcrz/xcrzList.jsp";
+		var url = "<%=basePath%>web/jizeNW/dtxc/xcrz/xcrz.jsp?jdbcname=YWTemplate&yw_guid=" + yw_guid + "&num=" + myData[id].RUNNUM1 + "&isView=false&choseWord=" + escape(escape(keyWord)) + "&returnPath=web/jizeNW/dtxc/xcrz/xcrzList.jsp";
 		document.location.href = url;
 	}
 		<!--查询方法 add by 姚建林 2013-6-20-->
