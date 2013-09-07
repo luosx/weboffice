@@ -73,7 +73,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			var datestring = date.getFullYear() + "-" + (parseInt(date.getMonth()) + 1 ) + "-" + date.getDay();
 			writedate.value = datestring;
 		}
-		
+		var blsx = document.getElementById("blsx");
+		if("" == blsx.value || null == blsx.value){
+		Ext.MessageBox.alert("警告", "办理时限不能为空！！！");  
+			//alert("办理时限不能为空！！！");  
+  			return false; 
+		}
 		document.forms[0].submit();
 	}
 	
@@ -176,7 +181,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	%>
 
 	if("<%=msg%>" == "success"){
-		alert("表单保存成功");  
+		Ext.MessageBox.alert("", "表单保存成功");  
 	}
   </script>
 </html>
