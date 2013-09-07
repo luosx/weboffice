@@ -45,7 +45,7 @@ html, body {
 	    var form;
 	    var _$ID = '';
 		Ext.onReady(function(){
-		   	putClientCommond("wjspHandler","getAllYCLList");
+		   	putClientCommond("wjspHandler","getSGTHJZYTYCLList");
 			myData = restRequest();
 			store = new Ext.data.JsonStore({
 				proxy:new Ext.ux.data.PagingMemoryProxy(myData),
@@ -118,7 +118,7 @@ function process(id){
 //模糊查询
 function query(){
 	var keyWord=Ext.getCmp('keyword').getValue();
-   	putClientCommond("wjspHandler","getYCLListByKeyWords");
+   	putClientCommond("wjspHandler","getSGTHJZYTYCLListByKeyWords");
    	putRestParameter("keyword",escape(escape(keyWord)));
 	var myData = restRequest();
 	store = new Ext.data.JsonStore({

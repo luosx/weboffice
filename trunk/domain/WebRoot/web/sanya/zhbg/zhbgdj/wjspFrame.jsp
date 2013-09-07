@@ -11,7 +11,7 @@ String yw_guid = request.getParameter("yw_guid");
   <head>
     <base href="<%=basePath%>">
     
-    <title>信访案件</title>
+    <title>综合办公</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">

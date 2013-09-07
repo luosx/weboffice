@@ -12,7 +12,7 @@
 <html>
 	<head>
 		<base href="<%=basePath%>">
-		<title>综合办公文件管理管理</title>
+		<title>综合办公文件管理</title>
 		<meta http-equiv="pragma" content="no-cache">
 		<meta http-equiv="cache-control" content="no-cache">
 		<meta http-equiv="expires" content="0">
@@ -65,7 +65,7 @@ html, body {
     		var width=document.body.clientWidth  ;
     		var height=document.body.clientHeight - 10;
         	grid = new Ext.grid.GridPanel({
-          		title:'信访案件办理中列表',
+          		title:'办理中案件列表',
         		store: store,
         		sm:sm,
         		columns: [
@@ -141,7 +141,7 @@ function pro(id){
 
 //点击查看时，查看详细信息
 function process(id){
-	var url = "<%=basePath%>web/sanya/zhbg/zhbgdj/wjspFrame.jsp?type=blz&yw_guid=" + id;
+	var url = "<%=basePath%>web/sanya/zhbg/zhbgdj/wjspTab.jsp?type=blz&yw_guid=" + id;
 	document.location.href = url;
 	//window.open(url);
 }

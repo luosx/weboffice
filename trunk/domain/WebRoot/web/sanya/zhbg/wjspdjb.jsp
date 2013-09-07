@@ -73,23 +73,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			var datestring = date.getFullYear() + "-" + (parseInt(date.getMonth()) + 1 ) + "-" + date.getDay();
 			writedate.value = datestring;
 		}
+		var blsx = document.getElementById("blsx");
+		if("" == blsx.value || null == blsx.value){
+		Ext.MessageBox.alert("警告", "办理时限不能为空！！！");  
+			//alert("办理时限不能为空！！！");  
+  			return false; 
+		}
 		
 		document.forms[0].submit();
 	}
 	
 	//页面加载初始化
 	function onInit(){
-		//填写信访类型(一级)
-		putClientCommond("xflxHandler", "getfirstList");
-		var xflxList = restRequest();
-		try{
-			xflxList = eval(xflxList);
-			for(var i = 0; i < xflxList.length; i++){
-				Addopt("xflx", xflxList[i].LXBM, xflxList[i].LXMC);
-			}
-		}catch(e){
-		
-		}
 		
 		init();
 		
@@ -117,7 +112,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					文件审批事项
 				</td>
 				<td colspan="3">
-					<textarea id="xfsx" name="xfsx" style="width:100%; overflow:hidden" rows="5" ></textarea>
+					<textarea id="wjspsx" name="wjspsx" style="width:99%; overflow:hidden" rows="5" ></textarea>
 				</td>
 			</tr>
 			<tr>
@@ -125,11 +120,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<label>文件类型</label>
 				</td>
 				<td>
-					<select style="font-family:'宋体'; font-size:14px;" id="xflx" name="xflx">
+					<select style="font-family:'宋体'; font-size:14px;" id="wjlx" name="wjlx">
 						<option value="省国土环境资源厅">省国土环境资源厅</option>
 						<option value="省国土环境监察总队">省国土环境监察总队</option>
 						<option value="市委市政府">市委市政府</option>
-						<option value="三亚过他环境资源局">三亚过他环境资源局</option>
+						<option value="三亚环境资源局">三亚国土资源局</option>
 						<option value="其他">其他</option>
 					</select>
 				</td>
@@ -138,37 +133,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</td>
 				<td>
 					<input type="text" class="noborder" id="blsx" name="blsx" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})" style="width:98%" />
-					<input type="text" id="createdate" name="createdate" style="display:none" />
-				</td>
+					<input type="text" id="createdate" name="createdate" style="display:none" /></td>
 			</tr>
 			<tr>
 				<td align="center">
 					<label>文件申请</label>
 				</td>
 				<td>
-					<select style="font-family:'宋体'; font-size:14px;" id="blks" name="blks">
+					<select style="font-family:'宋体'; font-size:14px;" id="wjsq" name="wjsq">
 						<option value="阅">阅</option>
 						<option value="督办">督办</option>
 					</select>
 				</td>
 				<td align="center">
-					<label>办理状态</label>
+					<label>办理情况</label>
 				</td>
 				<td>
-					<select  style="font-family:'宋体'; font-size:14px;" id="blzt" name="blzt">
+					<select  style="font-family:'宋体'; font-size:14px;" id="blqk" name="blqk">
 						<option value="未处理" selected="selected" >未处理</option>
 						<option value="已处理">已处理</option>
 					</select>
 				</td>
-			</tr>
-			<tr>
-				<td align="center">
-					<label>办理情况</label>
-				</td> 
-				<td colspan="3">
-					<textarea id="blqk" name="blqk" style="width:100%; overflow:hidden" rows="5"></textarea>
-				</td>
-			
 			</tr>
         </table>
   	</form>
@@ -179,7 +164,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	%>
 
 	if("<%=msg%>" == "success"){
-		alert("表单保存成功");  
+		Ext.MessageBox.alert("", "表单保存成功"); 
 	}
   </script>
 </html>
