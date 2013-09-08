@@ -17,10 +17,11 @@
 		<meta http-equiv="expires" content="0">
 		<%@ include file="/base/include/ext.jspf"%>
 		<%@ include file="/base/include/restRequest.jspf"%>
-		<script type="text/javascript" src=<%=basePath%>web/sanya/noticeset/noticeset.js></script>
 	</head>
 	<script type="text/javascript">
+	var basePath='<%=basePath%>';
 	</script>
+		<script type="text/javascript" src=<%=basePath%>web/sanya/noticeset/noticeset.js></script>
 	<body>
 	</body>
 </html>
