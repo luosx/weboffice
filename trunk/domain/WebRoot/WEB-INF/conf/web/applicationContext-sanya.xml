@@ -43,5 +43,7 @@
 
 <!-- 案件督办-->
 <bean id="caseSupervision" class="com.klspta.web.sanya.ajdb.CaseSupervision"/>
+<!-- 督办配置-->
+<bean id="noticeSet" class="com.klspta.web.sanya.noticeset.NoticeSet"/>
 
 </beans>
