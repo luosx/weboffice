@@ -45,10 +45,10 @@ public class CaseSupervision extends AbstractBaseBean {
      */
     public void getLadbList() {
         String keyWord = request.getParameter("keyWord");
-        String sql = "select t.yw_guid,t.bh,t.ay,(case when t.dwmc is not null then t.dwmc when t.grxm is not null then t.grxm end) wfdw,t.ajly,to_char(t.slrq,'yyyy-mm-dd') slrq,to_char(t.jzrq,'yyyy-mm-dd') jzrq,t.zywfss,j.activity_name_ blzt,j.wfInsId from lacpb t join workflow.v_active_task j on t.yw_guid=j.yw_guid";
+        String sql = "select t.yw_guid,t.bh,t.ay,(case when t.dwmc is not null then t.dwmc when t.grxm is not null then t.grxm end) wfdw,t.ajly,to_char(t.tbrq,'yyyy-mm-dd') tbrq,to_char(t.jzrq,'yyyy-mm-dd') jzrq,t.zywfss,j.activity_name_ blzt,j.wfInsId from lacpb t join workflow.v_active_task j on t.yw_guid=j.yw_guid";
         if (keyWord != null) {
             keyWord = UtilFactory.getStrUtil().unescape(keyWord);
-            sql += " where upper(t.yw_guid)||upper(t.bh)||upper(t.ay)||upper(t.dwmc)||upper(t.grxm)||upper(t.ajly)||upper(t.slrq)||upper(t.zywfss) like '%"
+            sql += " where upper(t.yw_guid)||upper(t.bh)||upper(t.ay)||upper(t.dwmc)||upper(t.grxm)||upper(t.ajly)||upper(t.tbrq)||upper(t.zywfss) like '%"
                     + keyWord + "%'";
         }
         List<Map<String, Object>> list = query(sql, YW);
