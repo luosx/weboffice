@@ -38,10 +38,10 @@ Ext.onReady(function(){
 	     {name: 'BH'},
 	     {name: 'AY'},
 	     {name: 'WFDW'},
-	     {name: 'AJLY'},
-	     {name: 'SLRQ'},
+	     {name: 'AJLY'},	   
 	     {name: 'JZRQ'},
-	     {name: 'BLZT'},          
+	     {name: 'BLZT'},
+	     {name: 'TBRQ'},          
 	     {name: 'INDEX'}
         ]
     });
@@ -57,10 +57,10 @@ Ext.onReady(function(){
            {header: '立案编号',dataIndex:'BH',width: width*0.15, sortable: true},
            {header: '案由',dataIndex:'AY',width: width*0.23, sortable: true},
            {header: '违法单位(人)',dataIndex:'WFDW',width: width*0.10, sortable: true},
-           {header: '案件来源',dataIndex:'AJLY',width: width*0.08, sortable: true},
-           {header: '受理日期',dataIndex:'SLRQ',width: width*0.08, sortable: true},
+           {header: '案件来源',dataIndex:'AJLY',width: width*0.08, sortable: true},        
            {header: '截止日期',dataIndex:'JZRQ',width: width*0.08, sortable: true},
-           {header: '办理状态',dataIndex:'BLZT',width: width*0.10, sortable: true},
+           {header: '办理状态',dataIndex:'BLZT',width: width*0.08, sortable: true},
+           {header: '创建时间',dataIndex:'TBRQ',width: width*0.10, sortable: true},
            {header: '查看',dataIndex:'INDEX',width: width*0.07, sortable: false,renderer:view}
         ],
         tbar:[
@@ -150,9 +150,9 @@ function query(){
 	     {name: 'AY'},
 	     {name: 'WFDW'},
 	     {name: 'AJLY'},
-	     {name: 'SLRQ'},
 	     {name: 'JZRQ'},
-	     {name: 'BLZT'},          
+	     {name: 'BLZT'},  
+	     {name: 'TBRQ'},         
 	     {name: 'INDEX'}
         ]
   });
@@ -163,9 +163,9 @@ function query(){
    {header: '案由',dataIndex:'AY',width: width*0.23, sortable: true,renderer:changKeyword},
    {header: '违法单位(人)',dataIndex:'WFDW',width: width*0.10, sortable: true,renderer:changKeyword},
    {header: '案件来源',dataIndex:'AJLY',width: width*0.08, sortable: true,renderer:changKeyword},
-   {header: '受理日期',dataIndex:'SLRQ',width: width*0.08, sortable: true,renderer:changKeyword},
    {header: '截止日期',dataIndex:'JZRQ',width: width*0.08, sortable: true,renderer:changKeyword},
-   {header: '办理状态',dataIndex:'BLZT',width: width*0.10, sortable: true,renderer:changKeyword},
+   {header: '办理状态',dataIndex:'BLZT',width: width*0.08, sortable: true,renderer:changKeyword},
+   {header: '创建时间',dataIndex:'TBRQ',width: width*0.10, sortable: true,renderer:changKeyword},
    {header: '查看',dataIndex:'INDEX',width: width*0.07, sortable: false,renderer:view}
   ]));
   grid.getBottomToolbar().bind(store);
