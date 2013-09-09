@@ -1,9 +1,11 @@
 <%@ page language="java" pageEncoding="utf-8"%>
+<%@page import="com.klspta.web.sanya.ajdb.CaseSupervision"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
+	String dbts = new CaseSupervision().getDbDateByType("立案");			
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -69,7 +71,7 @@ Ext.onReady(function(){
         listeners:{
 		  			rowdblclick : function(grid, rowIndex, e)
 					{
-				   		viewDetail(rowIndex);
+				   		viewDetail(rowIndex+1);
 					}
         },        
         // stripeRows: true,
@@ -88,7 +90,7 @@ Ext.onReady(function(){
         plugins: new Ext.ux.ProgressBarPager()
         })
     });
-    
+    //grid.store.sort('SYTS','ASC');
     grid.render('mygrid_container'); 
     
    
@@ -100,7 +102,7 @@ function warn(XZSJ){
 	    if(syts<0){
 	    	return "<img src='<%=basePath%>web/sanya/framework/images/red.png'>";
 	    }
-	    else if(syts>=0 && syts <=4 ){
+	    else if(syts>=0 && syts <="<%=dbts%>" ){
 	       return "<img src='<%=basePath%>web/sanya/framework/images/yellow.png'>";
 	    }
 	    else {
@@ -114,8 +116,8 @@ function view(id){
 }
 
 function viewDetail(id){
-    var wfInsId=myData[id].WFINSID;
-	var yw_guid=myData[id].YW_GUID;
+    var wfInsId=myData[id-1].WFINSID;
+	var yw_guid=myData[id-1].YW_GUID;
 	var returnPath="web/sanya/ajdb/la.jsp";
 	var buttonHidden = "delete,la,tran,back";
 	var url='<%=basePath%>model/workflow/wf.jsp?yw_guid='+yw_guid+'&zfjcName=立案查处&zfjcType=90&wfInsId='+wfInsId+'&returnPath='+returnPath+'&buttonHidden='+buttonHidden; 
@@ -131,14 +133,13 @@ document.getElementById("button").click();
 return false; 
 } 
 } 
-
-
+	
 function query(){
    var keyWord=Ext.getCmp('keyword').getValue();
    keyWord=keyWord.toUpperCase();
    putClientCommond("caseSupervision","getLadbList"); 
    putRestParameter("keyWord",escape(escape(keyWord)));
-   var myData = restRequest(); 
+   myData = restRequest(); 
    var store = new Ext.data.JsonStore({
         proxy: new Ext.ux.data.PagingMemoryProxy(myData),
         remoteSort:true,
@@ -197,9 +198,9 @@ function query(){
 			<img src='<%=basePath%>web/sanya/framework/images/red.png'>
 			已超时&nbsp;&nbsp;&nbsp;
 			<img src='<%=basePath%>web/sanya/framework/images/yellow.png'>
-			不足4个工作日&nbsp;&nbsp;&nbsp;
+			不足<%=dbts%>个工作日&nbsp;&nbsp;&nbsp;
 			<img src='<%=basePath%>web/sanya/framework/images/green.png'>
-			超过4个工作日 &nbsp;&nbsp;&nbsp;
+			超过<%=dbts%>个工作日 &nbsp;&nbsp;&nbsp;
 			<br />
 			<br />
 			<!-- 督办案件将会红色高亮显示&nbsp;&nbsp;&nbsp; -->
