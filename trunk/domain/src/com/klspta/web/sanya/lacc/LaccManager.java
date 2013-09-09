@@ -45,7 +45,11 @@ public class LaccManager extends AbstractBaseBean {
             } else {
                 map.put("DSR", map.get("dwmc"));
             }
-            map.put("YJ", getWorkaDayAmount(map.get("jzrq").toString()));
+            if(map.get("jzrq") == null){
+                map.put("YJ", "365");
+            }else{
+                map.put("YJ", getWorkaDayAmount(map.get("jzrq").toString()));
+            }         
             map.put("INDEX", i++);
         }
         response(result);
@@ -149,7 +153,7 @@ public class LaccManager extends AbstractBaseBean {
             sql += " and (upper(t.bh)||upper(t.qy)||upper(t.ay)||upper(t.ajly)||upper(j.assignee_)||upper(t.slrq)||upper(j.create_)||upper(j.activity_name_) like '%"
                     + keyWord + "%')";
         }
-        sql += " order by j.create_";
+        sql += " order by j.create_ desc";
         List<Map<String, Object>> result = null;
         result = query(sql, YW);
 
@@ -185,7 +189,7 @@ public class LaccManager extends AbstractBaseBean {
             sql += " and (upper(t.bh)||upper(t.qy)||upper(t.ay)||upper(t.ajly)||upper(t.grxm)||upper(t.slrq)||upper(j.activityname)||upper(j.end_) like '%"
                     + keyWord + "%')";
         }
-        sql += " order by t.slrq desc";
+        sql += " order by j.create_ desc";
         List<Map<String, Object>> result = query(sql, YW, new String[] { fullName });
 
         // 调整数据格式
@@ -220,7 +224,7 @@ public class LaccManager extends AbstractBaseBean {
             sql += " and (upper(t.bh)||upper(t.ay)||upper(t.ajly)||upper(t.grxm)||upper(t.slrq)||upper(j.end_) like '%"
                     + keyWord + "%')";
         }
-        sql += " order by t.slrq";
+        sql += " order by t.slrq desc";
         List<Map<String, Object>> result = null;
         result = query(sql, YW);
 
