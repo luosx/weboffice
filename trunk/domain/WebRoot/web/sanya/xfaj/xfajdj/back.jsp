@@ -43,6 +43,8 @@ html,body {
 		function back(){
 			if("blz" == "<%=type%>"){
 				parent.location.href = "/domain/web/sanya/xfaj/xfajList/xfajblz.jsp";
+			}else if("dbxf" == "<%=type%>"){
+				parent.location.href = "/domain/web/sanya/ajdb/xf.jsp";
 			}else{
 				parent.location.href = "/domain/web/sanya/xfaj/xfajList/xfajybl.jsp";
 			}

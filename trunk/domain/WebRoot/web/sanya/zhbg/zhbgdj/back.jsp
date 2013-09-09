@@ -43,6 +43,8 @@ html,body {
 		function back(){
 			if("blz" == "<%=type%>"){
 				parent.location.href = "/domain/web/sanya/zhbg/zhbgList/zhbgblz.jsp";
+			}else if("dbwj" == "<%=type%>"){ 
+				parent.location.href = "/domain/web/sanya/ajdb/wj.jsp";
 			}else{
 				parent.location.href = "/domain/web/sanya/zhbg/zhbgList/zhbgybl.jsp";
 			}

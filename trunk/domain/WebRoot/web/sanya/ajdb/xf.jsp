@@ -1,9 +1,11 @@
 <%@ page language="java" pageEncoding="utf-8"%>
+<%@page import="com.klspta.web.sanya.ajdb.CaseSupervision"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
+	String dbts = new CaseSupervision().getDbDateByType("信访");				
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -36,8 +38,9 @@ Ext.onReady(function(){
            {name: 'YW_GUID'},
            {name: 'XFSX'},
            {name: 'XFLX'},
+           {name: 'CJRQ'},
            {name: 'BLSX'},
-           {name: 'BLKS'},
+           //{name: 'BLKS'},
            {name: 'BLZT'},
            {name: 'BLQK'},
            {name: 'INDEX'}
@@ -55,8 +58,9 @@ Ext.onReady(function(){
            {header: '编号',dataIndex:'INDEX',width: width*0.05, sortable: true},
            {header: '信访事项',dataIndex:'XFSX',width: width*0.20, sortable: true},
            {header: '信访类型',dataIndex:'XFLX',width: width*0.10, sortable: true},
+           {header: '创建日期',dataIndex:'CJRQ',width: width*0.12, sortable: true},
            {header: '截止日期',dataIndex:'BLSX',width: width*0.10, sortable: true},
-           {header: '办理科室',dataIndex:'BLKS',width: width*0.12, sortable: true},
+           //{header: '办理科室',dataIndex:'BLKS',width: width*0.12, sortable: true},
            {header: '办理状态',dataIndex:'BLZT',width: width*0.12, sortable: true},
            {header: '办理情况',dataIndex:'BLQK',width: width*0.12, sortable: true},
            {header: '查看',dataIndex:'INDEX',width: width*0.08, sortable: false,renderer:view}
@@ -88,7 +92,7 @@ Ext.onReady(function(){
         plugins: new Ext.ux.ProgressBarPager()
         })
     });
-    
+    //grid.store.sort('SYTS','ASC');
     grid.render('mygrid_container'); 
     
    
@@ -100,7 +104,7 @@ function warn(XZSJ){
 	    if(syts<0){
 	    	return "<img src='<%=basePath%>web/sanya/framework/images/red.png'>";
 	    }
-	    else if(syts>=0 && syts <=4 ){
+	    else if(syts>=0 && syts <="<%=dbts%>" ){
 	       return "<img src='<%=basePath%>web/sanya/framework/images/yellow.png'>";
 	    }
 	    else {
@@ -114,7 +118,7 @@ function view(id){
 }
 
 function viewDetail(id){	
-	var url = "<%=basePath%>/web/sanya/xfaj/xfajdj/xfajTab.jsp?yw_guid=" + myData[id-1].YW_GUID;
+	var url = "<%=basePath%>/web/sanya/xfaj/xfajdj/xfajFrame.jsp?type=dbxf&yw_guid=" + myData[id-1].YW_GUID;
 	document.location.href = url;	
 }
 
@@ -134,7 +138,7 @@ function query(){
    keyWord=keyWord.toUpperCase();
    putClientCommond("caseSupervision","getXfdbList");           
    putRestParameter("keyWord",escape(escape(keyWord)));
-   var myData = restRequest(); 
+   myData = restRequest(); 
    var store = new Ext.data.JsonStore({
         proxy: new Ext.ux.data.PagingMemoryProxy(myData),
         remoteSort:true,
@@ -193,9 +197,9 @@ function query(){
 			<img src='<%=basePath%>web/sanya/framework/images/red.png'>
 			已超时&nbsp;&nbsp;&nbsp;
 			<img src='<%=basePath%>web/sanya/framework/images/yellow.png'>
-			不足4个工作日&nbsp;&nbsp;&nbsp;
+			不足<%=dbts%>个工作日&nbsp;&nbsp;&nbsp;
 			<img src='<%=basePath%>web/sanya/framework/images/green.png'>
-			超过4个工作日 &nbsp;&nbsp;&nbsp;
+			超过<%=dbts%>个工作日 &nbsp;&nbsp;&nbsp;
 			<br />
 			<br />
 			<!-- 督办案件将会红色高亮显示&nbsp;&nbsp;&nbsp; -->
