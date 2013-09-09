@@ -74,7 +74,7 @@ html, body {
 		        	{header: '文件审批事项', dataIndex:'WJSPSX', width: (width - 550), sortable: true,renderer:changKeyword},
 		            {header: '文件类型', dataIndex:'WJLX', width: 130, sortable: true,renderer:changKeyword},
 		            {header: '办理时限', dataIndex:'BLSX', width: 80, sortable: true,renderer:changKeyword},
-		            {header: '文件申请', dataIndex:'WJSQ', width: 80, sortable: true,renderer:changKeyword},
+		            {header: '文件申请', dataIndex:'WJSQ', width: 70, sortable: true,renderer:changKeyword},
 		            {header: '办理情况', dataIndex:'BLQK', width: 70, sortable: true,renderer:changKeyword},
 		            {header: '创建时间', dataIndex:'CREATEDATE', width:80, sortable: true,renderer:changKeyword},
 		            {header: '查看', dataIndex:'YW_GUID', width: 40, sortable: true,renderer:pro}

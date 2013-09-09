@@ -63,7 +63,7 @@ html, body {
     		store.load({params:{start:0, limit:13}});
     		var sm = new Ext.grid.CheckboxSelectionModel({handleMouseDown:Ext.emptyFn});  
     		var width=document.body.clientWidth  ;
-    		var height=document.body.clientHeight - 10;
+    		var height=document.body.clientHeight - 15;
         	grid = new Ext.grid.GridPanel({
           		title:'已办理案件列表',
         		store: store,
