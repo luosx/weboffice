@@ -62,15 +62,15 @@ html, body {
 			});
     		store.load({params:{start:0, limit:13}});
     		var sm = new Ext.grid.CheckboxSelectionModel({handleMouseDown:Ext.emptyFn});  
-    		var width=document.body.clientWidth  ;
-    		var height=document.body.clientHeight - 10;
+    		var width=document.body.clientWidth ;
+    		var height=document.body.clientHeight - 15;
         	grid = new Ext.grid.GridPanel({
           		title:'已办理案件列表',
         		store: store,
         		sm:sm,
         		columns: [
         			new Ext.grid.RowNumberer(),
-		        	{header: '文件审批事项', dataIndex:'WJSPSX', width: (width - 550), sortable: true,renderer:changKeyword},
+		        	{header: '文件审批事项', dataIndex:'WJSPSX', width: (width - 510), sortable: true,renderer:changKeyword},
 		            {header: '文件类型', dataIndex:'WJLX', width: 130, sortable: true,renderer:changKeyword},
 		            {header: '办理时限', dataIndex:'BLSX', width: 80, sortable: true,renderer:changKeyword},
 		            {header: '文件申请', dataIndex:'WJSQ', width: 80, sortable: true,renderer:changKeyword},
