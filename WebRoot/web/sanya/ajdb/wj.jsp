@@ -98,7 +98,7 @@ Ext.onReady(function(){
 
 
 function warn(XZSJ){
-	   var syts=XZSJ;//剩余办理天数
+	   var syts=parseInt(XZSJ);//剩余办理天数
 	    if(syts<0){
 	    	return "<img src='<%=basePath%>web/sanya/framework/images/red.png'>";
 	    }
