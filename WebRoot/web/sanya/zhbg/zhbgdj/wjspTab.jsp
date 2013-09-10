@@ -4,6 +4,7 @@
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 	String yw_guid = request.getParameter("yw_guid");
+	String type = request.getParameter("type");
 	if(yw_guid == null || "".equals(yw_guid)){
 		yw_guid = UtilFactory.getStrUtil().getGuid();
 	}
