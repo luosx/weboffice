@@ -252,7 +252,7 @@ public class LaccManager extends AbstractBaseBean {
         String yw_guid = request.getParameter("yw_guid");
         
         String sql="update jacpb j set (j.bh,j.ay,j.lasj,j.dwmc,j.fddbr,j.dwdz,j.dwdh,j.grxm,j.grxb,j.grnl,j.grdw,j.grzw,j.grdz,j.grdh,j.ajly,j.zywfss)= "
-                  +" (select t.bh,t.ay,t.slrq,t.dwmc,t.fddbr,t.dwdz,t.dwdh,t.grxm,t.grxb,t.grnl,t.grdw,t.grzw,t.grdz,t.grdh,t.ajly,t.zywfss from lacpb t where t.yw_guid=j.yw_guid and t.yw_guid=?)"
+                  +" (select t.bh,t.ay,t.zgldqmrq,t.dwmc,t.fddbr,t.dwdz,t.dwdh,t.grxm,t.grxb,t.grnl,t.grdw,t.grzw,t.grdz,t.grdh,t.ajly,t.zywfss from lacpb t where t.yw_guid=j.yw_guid and t.yw_guid=?)"
                   +" where j.yw_guid=?";  
         int i=update(sql,YW,new Object[]{yw_guid,yw_guid});
         if(i==1){
