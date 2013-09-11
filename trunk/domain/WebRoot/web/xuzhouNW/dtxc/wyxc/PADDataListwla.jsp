@@ -45,7 +45,8 @@ var expWin;
 var form;
 Ext.onReady(function(){
     putClientCommond("padDataManager","getQueryData");
-    putRestParameter("userId",'<%=userid%>')
+    putRestParameter("userId",'<%=userid%>');
+    putRestParameter("status", '0');
 	myData = restRequest();
  	store = new Ext.data.JsonStore({
     proxy: new Ext.ux.data.PagingMemoryProxy(myData),
@@ -87,6 +88,7 @@ Ext.onReady(function(){
           {header: '经纬坐标', dataIndex:'JWZB',width: width*0.1, hidden:true, sortable: false},
           {header: '图片名称', dataIndex:'IMGNAME',width: width*0.1, hidden:true, sortable: false},
           {header: '详细信息', dataIndex:'XIANGXI',width: width*0.1, sortable: false,renderer:view},
+          {header: '立案', dataIndex:'GUID', width: width*0.08, sortable: false, renderer:lian},
           {header: '删除',dataIndex:'DELETE',width: width*0.05, sortable: false,renderer:del}
         ],
           tbar:[
@@ -131,6 +133,23 @@ Ext.onReady(function(){
 })
 
 
+//点击立案时触发
+function lian(id){
+	
+	return "<a href='#' onclick='lianDetail(\""+id+"\");return false;'><img src='web/xuzhouNW/dtxc/images/lian.png' ></a>";
+}
+function lianDetail(id){
+	Ext.MessageBox.confirm('确认框', '当前案件将立案处理,确定？',function (btn){
+		if(btn == 'yes'){
+		    putClientCommond("padDataManager","setStatus");
+    		putRestParameter("yw_guid",id);
+			myData = restRequest();		
+			//做立案处理
+			parent.location.href="<%=basePath%>/model/workflow/startWorkflow.jsp?beanId=startWorkflowLacc&zfjcType=90&returnPath=/web/xuzhouNW/dtxc/wyxc/PADDataListTab.jsp";
+		}
+	});
+}
+
 function view(id){
 	return "<a href='#' onclick='showDetail("+id+");return false;'><img src='base/form/images/view.png' alt='详细信息'></a>";
 }
@@ -166,7 +185,8 @@ function query(){
   var keyWord = Ext.getCmp('keyword').getValue();
     keyWord=escape(escape(keyWord));
     putClientCommond("padDataManager","getQueryData");
-    putRestParameter("userId",'<%=userid%>')
+    putRestParameter("userId",'<%=userid%>');
+    putRestParameter("status", '0');
     putRestParameter("keyWord",keyWord);
     var myData1 = restRequest(); 
     var width=document.body.clientWidth;
@@ -201,6 +221,7 @@ function query(){
             {header: '经纬坐标', dataIndex:'JWZB',width: width*0.1, hidden:true, sortable: false},
             {header: '图片名称', dataIndex:'IMGNAME',width: width*0.1, hidden:true, sortable: false},
             {header: '详细信息', dataIndex:'XIANGXI',width: width*0.1, sortable: false,renderer:view},
+            {header: '立案', dataIndex:'GUID', width: width*0.08, sortable: false, renderer:lianButton},
             {header: '删除',dataIndex:'DELETE',width: width*0.05, sortable: false,renderer:del}
         ]));
 //重新绑定分页工具栏
