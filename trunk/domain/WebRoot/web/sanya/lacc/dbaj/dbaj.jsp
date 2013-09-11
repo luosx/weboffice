@@ -2,6 +2,7 @@
 <%@page
 	import="org.springframework.security.core.context.SecurityContextHolder"%>
 <%@page import="com.klspta.console.user.User"%>
+<%@page import="com.klspta.web.sanya.ajdb.CaseSupervision"%>
 
 <%
 	String path = request.getContextPath();
@@ -13,6 +14,7 @@
 	Object principal = SecurityContextHolder.getContext()
 			.getAuthentication().getPrincipal();
 	String fullName = ((User) principal).getFullName();
+	String dbts = new CaseSupervision().getDbDateByType("立案");	
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -112,7 +114,7 @@ function warn(XZSJ){
 	    if(syts<0){
 	    	return "<img src='<%=basePath%>web/sanya/framework/images/red.png'>";
 	    }
-	    else if(syts>=0 && syts <=4 ){
+	    else if(syts>=0 && syts <="<%=dbts%>" ){
 	       return "<img src='<%=basePath%>web/sanya/framework/images/yellow.png'>";
 	    }
 	    else {
@@ -222,9 +224,9 @@ function query(){
 			<img src='<%=basePath%>web/sanya/framework/images/red.png'>
 			已超时&nbsp;&nbsp;&nbsp;
 			<img src='<%=basePath%>web/sanya/framework/images/yellow.png'>
-			不足4个工作日&nbsp;&nbsp;&nbsp;
+			不足<%=dbts%>个工作日&nbsp;&nbsp;&nbsp;
 			<img src='<%=basePath%>web/sanya/framework/images/green.png'>
-			超过4个工作日 &nbsp;&nbsp;&nbsp;
+			超过<%=dbts%>个工作日 &nbsp;&nbsp;&nbsp;
 			<br />
 			<br />
 			<!-- 督办案件将会红色高亮显示&nbsp;&nbsp;&nbsp; -->
