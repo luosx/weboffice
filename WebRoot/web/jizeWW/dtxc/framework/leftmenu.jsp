@@ -12,7 +12,7 @@ String name = ProjectInfo.getInstance().PROJECT_NAME;
 <script>
  //巡查日志填写
  function xcrzWrite(){
-	 parent.rightview.location.href="<%=basePath%>service/rest/dtxcManager/buildXcrz";
+	 parent.rightview.location.href="<%=basePath%>web/<%=name%>/dtxc/xcrz/xcrz.jsp";
  }
  //巡查日志列表
  function xcrzList(){
@@ -73,12 +73,12 @@ String name = ProjectInfo.getInstance().PROJECT_NAME;
 		    <img class="menuicon" src="<%=basePath%>web/<%=name%>/framework/images/menu/calendar.png"/>
 		    <span class="menutitle">巡查日志列表</span>
 	    </li>
-	    
-	    <li onClick='xccgImport()'>
-		    <img  class="menuicon" src="<%=basePath%>web/<%=name%>/framework/images/menu/viewC1.png"/>
-		    <span class="menutitle">巡查成果导入</span>
-	    </li>
-	
+	    <!-- 
+		    <li onClick='xccgImport()'>
+			    <img  class="menuicon" src="<%=basePath%>web/<%=name%>/framework/images/menu/viewC1.png"/>
+			    <span class="menutitle">巡查成果导入</span>
+		    </li>
+		 -->
 	    <li onClick='xccgList()'>
 		    <img  class="menuicon" src="<%=basePath%>web/<%=name%>/framework/images/menu/mail.png"/>
 		    <span class="menutitle">巡查成果列表</span>
