@@ -54,6 +54,8 @@ script.onreadystatechange = function() {
     
 }; 
 var isshowSave=false;
+//页面卸载事件
+/*
 window.onbeforeunload = function()
 {  
 	if(isshowSave)
@@ -68,6 +70,7 @@ window.onbeforeunload = function()
 	}
 	
 }
+*/
 function loadAlert(msg)
 {
 	setTimeout(function(){
