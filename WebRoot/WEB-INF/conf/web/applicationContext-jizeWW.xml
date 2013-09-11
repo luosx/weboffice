@@ -24,6 +24,8 @@
 <bean name="location" class="com.klspta.web.jizeWW.carhistory.CarHistory" />
 <!-- 动态巡查 -->
 <bean name="dtxcManager" class="com.klspta.web.jizeWW.dtxc.DtxcManager" scope="prototype"/>
+<!-- 巡查成果导入（为实现巡查日志与巡查成果的关联，修改部分强峰成果导入代码） -->
+<bean name="cgdrManager" class="com.klspta.web.jizeWW.dtxc.cgdr.WyrwManager" scope="prototype"/>
 <!--回传成果-->
 <bean name="padDataManager" class="com.klspta.web.jizeWW.dtxc.PADDataManager" scope="prototype"/>
 
