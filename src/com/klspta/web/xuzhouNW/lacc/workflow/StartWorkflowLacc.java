@@ -33,6 +33,7 @@ public class StartWorkflowLacc extends AbstractBaseBean {
 		yw_guid = UtilFactory.getStrUtil().getGuid();
 		String userId = request.getParameter("userId");
 		String zfjcType = request.getParameter("zfjcType");
+		String returnPath = request.getParameter("returnPath");
 		String wfinsId = WorkflowOp.getInstance().start(zfjcType,ManagerFactory.getUserManager().getUserWithId(userId).getFullName(), yw_guid);
 				
 		//2、处理业务相关初始化
@@ -68,8 +69,14 @@ public class StartWorkflowLacc extends AbstractBaseBean {
 		}
 		
 		//3、response参数封装及跳转
-		String urlPath = "/model/workflow/wf.jsp?yw_guid="
+		String urlPath = "";
+		if(returnPath != null && (!"null".equals(returnPath))){
+			urlPath = "/model/workflow/wf.jsp?yw_guid="
+				+ yw_guid + "&zfjcType=" + zfjcType + "&wfInsId=" + wfinsId+ "&buttonHidden=la,back&zfjcName=立案查处&returnPath=" + returnPath;
+		}else{
+			urlPath = "/model/workflow/wf.jsp?yw_guid="
 				+ yw_guid + "&zfjcType=" + zfjcType + "&wfInsId=" + wfinsId+ "&buttonHidden=la,back&zfjcName=立案查处&returnPath=web/xuzhouNW/lacc/dbaj/dbaj.jsp";
+		}
 		response(urlPath);
 	}
 	
