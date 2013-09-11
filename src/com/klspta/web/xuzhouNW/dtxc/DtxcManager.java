@@ -364,7 +364,7 @@ public class DtxcManager extends AbstractBaseBean {
 			Map<String,Object> map = list.get(0);
 			xcq = (String)map.get("xcq");
 			xcrq = (String)map.get("xcrq");
-			String selectCgSQL="select t.yw_guid from dc_ydqkdcb t where to_char(to_date(t.hcrq,'yyyy-mm-dd hh24:mi:ss'),'yyyy-mm-dd') = to_char(to_date(?,'yyyy-mm-dd hh24:mi:ss'),'yyyy-mm-dd') and t.xian=?";
+			String selectCgSQL="select t.guid from v_pad_data_xml t where to_char(to_date(t.xcrq,'yyyy-mm-dd hh24:mi:ss'),'yyyy-mm-dd') = to_char(to_date(?,'yyyy-mm-dd hh24:mi:ss'),'yyyy-mm-dd') and t.xzqmc=?";
 			List<Map<String,Object>> list2 = query(selectCgSQL,YW,new Object[]{xcrq,xcq});
 			if(list2!=null && list2.size()>0){
 				response("1");				

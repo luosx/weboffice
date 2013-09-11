@@ -10,7 +10,7 @@ public class XccgTreeOperation extends AbstractBaseBean{
 	
 	String selectSQL="select substr(t.xcdw,0,3) xcq,t.xcrq from xcrz t where t.yw_guid=?";
 	
-	String selectCgSQL="select t.yw_guid from dc_ydqkdcb t where to_char(to_date(t.hcrq,'yyyy-mm-dd hh24:mi:ss'),'yyyy-mm-dd') = to_char(to_date(?,'yyyy-mm-dd hh24:mi:ss'),'yyyy-mm-dd') and t.xian=?";
+	String selectCgSQL="select t.guid from v_pad_data_xml t where to_char(to_date(t.xcrq,'yyyy-mm-dd hh24:mi:ss'),'yyyy-mm-dd') = to_char(to_date(?,'yyyy-mm-dd hh24:mi:ss'),'yyyy-mm-dd') and t.xzqmc=?";
 	
 	
 	public static XccgTreeOperation getInstance(){
@@ -37,7 +37,7 @@ public class XccgTreeOperation extends AbstractBaseBean{
 		if(list2!=null && list2.size()>0){
 			for(int i=0;i<list2.size();i++){
 			  Map<String,Object> map2 = list2.get(i);  
-					children+="{text:'巡查成果编号:"+(map2.get("yw_guid"))+"',leaf:1,id:'"+i+"',src:'web/xuzhouNW/dtxc/wyxc/xccgTab.jsp?yw_guid="+map2.get("yw_guid")+"'}";
+					children+="{text:'巡查成果编号:"+(map2.get("guid"))+"',leaf:1,id:'"+i+"',src:'web/xuzhouNW/dtxc/wyxc/xccgTab.jsp?yw_guid="+map2.get("guid")+"'}";
 					if(i!=(list2.size()-1)){
 						children+=",";
 					}
