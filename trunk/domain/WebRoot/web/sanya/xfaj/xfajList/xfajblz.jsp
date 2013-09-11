@@ -1,10 +1,11 @@
 <%@page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@page import="org.springframework.security.core.context.SecurityContextHolder"%>
 <%@page import="com.klspta.base.util.UtilFactory"%>
+<%@page import="com.klspta.web.sanya.ajdb.CaseSupervision"%>
 <%
 	String path = request.getContextPath();
    String basePath = request.getScheme() + "://"+ request.getServerName() + ":" + request.getServerPort()+ path + "/";
-   String dbts = UtilFactory.getConfigUtil().getConfig("sanyadb");
+   String dbts = new CaseSupervision().getDbDateByType("信访");
    Object principal = SecurityContextHolder.getContext()
 			.getAuthentication().getPrincipal();
 %>
