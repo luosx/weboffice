@@ -10,6 +10,7 @@ Object principal = SecurityContextHolder.getContext().getAuthentication().getPri
 String userId = ((User)principal).getUserID();
 String zfjcType=request.getParameter("zfjcType");
 String beanId=request.getParameter("beanId");
+String returnPath = request.getParameter("returnPath");
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -34,6 +35,7 @@ String beanId=request.getParameter("beanId");
 	  putClientCommond("<%=beanId%>","initWorkflow");
       putRestParameter("zfjcType","<%=zfjcType%>");
       putRestParameter("userId", "<%=userId%>");
+      putRestParameter("returnPath","<%=returnPath%>");
       var path=restRequest();
       document.location.href="<%=basePath%>"+path+"&edit=true";
 	}  
