@@ -29,6 +29,7 @@ public class PADDataManager extends AbstractBaseBean {
     public void getQueryData() {
         String userid = request.getParameter("userId");
         String keyword = request.getParameter("keyWord");
+        String status = request.getParameter("status");
         String likeCondition = " 1=1";
         String xzqh;
         try {
@@ -48,6 +49,7 @@ public class PADDataManager extends AbstractBaseBean {
             sql = "select t.readflag,t.guid,t.xzqmc,t.xmmc,t.rwlx,t.sfwf,t.xcr,t.xcrq,t.cjzb,t.jwzb,t.imgname from v_pad_data_xml t where (upper(guid)||upper(xzqmc)||upper(xmmc)||upper(rwlx)||upper(sfwf)||upper(xcr)||upper(xcrq) like '%"
                     + keyword + "%') and" + likeCondition;
         }
+        sql += "and t.guid like 'XC%' and t.islian = '" + status + "'";
         List<Map<String, Object>> query = query(sql, YW);
         for (int i = 0; i < query.size(); i++) {
             query.get(i).put("XIANGXI", i);
@@ -130,4 +132,16 @@ public class PADDataManager extends AbstractBaseBean {
         List<Map<String, Object>> result = query(sql, YW, new String[] { yw_guid });
         return result.get(0);
     }
+    
+    /**
+     * 
+     * <br>Description:将对应任务编号的巡查成果设为立案
+     * <br>Author:黎春行
+     * <br>Date:2013-9-9
+     */
+    public void setStatus(){
+    	String yw_guid = request.getParameter("yw_guid");
+    	String sql = "update dc_ydqkdcb t set t.islian = '1' where t.yw_guid = ?";
+    	update(sql, YW, new Object[]{yw_guid});
+    }   
 }

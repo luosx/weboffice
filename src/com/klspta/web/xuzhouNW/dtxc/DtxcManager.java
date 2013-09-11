@@ -298,7 +298,7 @@ public class DtxcManager extends AbstractBaseBean {
 		}else{//乡镇级
 			sql = "select (rownum-1) RUNNUM1,YW_GUID,XCBH,XCRQ,XCDW,XCQY,XCRY,SFYWF,SPQK,CLYJ from xcrz where writerxzqh = "+userXzqh;
 		}
-		if (keyWord != null) {
+		if (keyWord != null && (!"".equals(keyWord)) && (!"null".equals(keyWord))) {
 			keyWord = UtilFactory.getStrUtil().unescape(keyWord);
 			sql += " and XCBH||XCDW||XCRQ||XCQY||XCRY||XCLX||SFYWF||CLYJ||SPQK like '%"+keyWord+"%'";
 		}
@@ -335,7 +335,7 @@ public class DtxcManager extends AbstractBaseBean {
 		}else{//乡镇级
 			sql = "select (rownum-1) RUNNUM1,YW_GUID,XCBH,XCRQ,XCDW,XCQY,XCRY,SFYWF,SPQK,CLYJ from xcrz where writerxzqh = "+userXzqh;
 		}
-		if (keyWord != null) {
+		if (keyWord != null && (!"".equals(keyWord)) && (!"null".equals(keyWord))) {
 			keyWord = UtilFactory.getStrUtil().unescape(keyWord);
 			sql += " and XCBH||XCDW||XCRQ||XCQY||XCRY||XCLX||SFYWF||CLYJ||SPQK like '%"+keyWord+"%'";
 		}
