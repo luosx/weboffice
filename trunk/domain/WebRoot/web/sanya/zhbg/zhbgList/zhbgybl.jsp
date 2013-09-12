@@ -47,18 +47,18 @@ html, body {
 	    var _$ID = '';
 	    var flag='<%=flag%>';
 		Ext.onReady(function(){
-		var fangfa;
-		if(flag=='1'){
-			fangfa = "getSGTHJZYTYCLList";
-		}else if(flag=='2'){
-			fangfa = "getSGTHJJCZDYCLList";
-		}else if(flag=='3'){
-			fangfa = "getSWSZFYCLList";
-		}else if(flag=='4'){
-			fangfa = "getSYHJZYJYCLList";
-		}else{
-			fangfa = "getQTYCLList";
-		}		
+			var fangfa;
+			if(flag=='1'){
+				fangfa = "getSGTHJZYTYCLList";
+			}else if(flag=='2'){
+				fangfa = "getSGTHJJCZDYCLList";
+			}else if(flag=='3'){
+				fangfa = "getSWSZFYCLList";
+			}else if(flag=='4'){
+				fangfa = "getSYHJZYJYCLList";
+			}else{
+				fangfa = "getQTYCLList";
+			}		
 		   	putClientCommond("wjspHandler",fangfa);
 			myData = restRequest();
 			store = new Ext.data.JsonStore({
