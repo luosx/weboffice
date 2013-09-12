@@ -1,10 +1,11 @@
 <%@page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@page import="org.springframework.security.core.context.SecurityContextHolder"%>
 <%@page import="com.klspta.base.util.UtilFactory"%>
+<%@page import="com.klspta.web.sanya.ajdb.CaseSupervision"%>
 <%
 	String path = request.getContextPath();
    String basePath = request.getScheme() + "://"+ request.getServerName() + ":" + request.getServerPort()+ path + "/";
-   String dbts = UtilFactory.getConfigUtil().getConfig("sanyadb");
+   String dbts = new CaseSupervision().getDbDateByType("文件审批");
    Object principal = SecurityContextHolder.getContext()
 			.getAuthentication().getPrincipal();
 %>
@@ -86,6 +87,10 @@ html, body {
 	    			{xtype: 'button',text:'添加文件',width:60,handler: add}
 	    		],
         		listeners:{
+	        		rowdblclick : function(grid, rowIndex, e)
+						{
+					   		viewDetail(rowIndex+1);
+						}
          		},   
         		stripeRows: true,
         		width:width,
@@ -133,6 +138,11 @@ function view(date){
     else {
     	return "<img src='web/sanya/framework/images/green.png'>";
     }
+}
+
+function viewDetail(id){	
+	var url = "<%=basePath%>web/sanya/zhbg/zhbgdj/wjspTab.jsp?type=dbwj&yw_guid=" + myData[id-1].YW_GUID;
+	document.location.href = url;	
 }
 
 function pro(id){

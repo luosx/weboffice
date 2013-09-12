@@ -84,7 +84,11 @@ html, body {
 	    			{xtype: 'button',text:'查询',width:50,handler: query}
 	    		],
         		listeners:{
-         		},   
+	        		rowdblclick : function(grid, rowIndex, e)
+						{
+					   		viewDetail(rowIndex+1);
+						}
+         		},  
         		stripeRows: true,
         		width:width,
         		height: height,
@@ -108,9 +112,14 @@ function pro(id){
  	return "<a href='#'onclick='process(\""+id+"\");return false;'><img src='base/form/images/view.png' alt='办理'></a>";
 }
 
+function viewDetail(id){	
+	var url = "<%=basePath%>web/sanya/zhbg/zhbgdj/wjspTab.jsp?type=swszf&yw_guid=" + myData[id-1].YW_GUID;
+	document.location.href = url;	
+}
+
 //点击查看时，查看详细信息
 function process(id){
-	var url = "<%=basePath%>web/sanya/zhbg/zhbgdj/wjspTab.jsp?type=blz&yw_guid=" + id;
+	var url = "<%=basePath%>web/sanya/zhbg/zhbgdj/wjspTab.jsp?type=swszf&yw_guid=" + id;
 	document.location.href = url;
 	//window.open(url);
 }
