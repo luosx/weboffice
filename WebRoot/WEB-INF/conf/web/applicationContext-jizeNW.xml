@@ -11,19 +11,17 @@
  http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd ">
  	
 	<!-- 卫片执法 -->
-	<bean name="wphandle" class="com.klspta.web.jizeNW.wpzf.WpHandle" scope="prototype"/>    
-
+	<bean name="wphandle" class="com.klspta.web.jizeNW.wpzf.WpHandle" scope="prototype"/>
+	    
 	<!-- 立案查处工作流启动 -->
 	<bean name="startWorkflowLacc" class="com.klspta.web.jizeNW.lacc.workflow.StartWorkflowLacc" scope="prototype"/>
-	<!-- 信访举报工作流启动 -->
-	<bean name="startWorkflowXfjb" class="com.klspta.web.jizeNW.xfjb.workflow.StartWorkflowXfjb" scope="prototype"/>
+	
 	<!-- 动态巡查 -->
 	<bean name="dtxcManager" class="com.klspta.web.jizeNW.dtxc.DtxcManager" scope="prototype"/>
 	
-	<!-- 信访举报管理类 -->
-	<bean name="xfAction" class="com.klspta.web.jizeNW.xfjb.manager.XfAction" scope="prototype"/>
 	<!-- 立案查处 -->
 	<bean name="lacc" class="com.klspta.web.jizeNW.lacc.LaccManager" scope="prototype"/>
+	
 	<!-- 案件台账 -->
 	<bean name="tjfxManager" class="com.klspta.web.jizeNW.lacc.TjfxManager" scope="prototype" /> 
 	
@@ -35,4 +33,8 @@
 	
 	<!-- 添加签章-->
 	<bean id="sign" class="com.klspta.web.jizeNW.importSign.Sign"/>
+	
+	<!-- 信访类型管理类 -->
+	<bean id="xfjbManager" class="com.klspta.web.jizeNW.xfjb.XfjbManager"/>
+	
 </beans>
