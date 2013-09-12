@@ -40,10 +40,10 @@
         items:[
         	{
                 title: '<font size="2">登记表</font>',
-                html: "<iframe width='"+w+"' height='"+h+"' src='wjspdjb.jsp?yw_guid=<%=yw_guid%>'/>" 
+                html: "<iframe width='"+w+"' height='"+h+"' src='wjspdjb.jsp?yw_guid=<%=yw_guid%>&type=<%=type%>'/>" 
             },{
                 title: '<font size="2">附件管理</font>',
-                html: "<iframe width='"+w+"' height='"+h+"' src='/domain/model/accessory/dzfj/accessorymain.jsp?yw_guid=<%=yw_guid%>''/>" 
+                html: "<iframe width='"+w+"' height='"+h+"' src='/domain/model/accessory/dzfj/accessorymain.jsp?yw_guid=<%=yw_guid%>'/>" 
             }
         ]
     })

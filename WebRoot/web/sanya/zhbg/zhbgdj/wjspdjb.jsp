@@ -3,6 +3,8 @@
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+String returnPath = request.getParameter("returnPath");
+String type = request.getParameter("type");
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -25,6 +27,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
   </head>
   <style type="text/css">
+		  .btn {
+			background: url('<%=basePath%>/base/form/images/button.png');
+			height: 23;
+			width: 73;
+			CURSOR: hand;
+			FONT-SIZE: 12px;
+			color: #CC3300;
+			BORDER-RIGHT: #002D96 0px solid;
+			BORDER-TOP: #002D96 0px solid;
+			BORDER-LEFT: #002D96 0px solid;
+			BORDER-BOTTOM: #002D96 0px solid
+		}
   		table{
 			border-left-color:#000000;
 			border-left-style:solid;
@@ -89,6 +103,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		init();
 		
 	}
+	function back(){
+			if("qtybl" == "<%=type%>"){
+				parent.location.href = "/domain/web/sanya/zhbg/zhbgList/zhbgqtybl.jsp";
+			}else if("sgthjjczd" == "<%=type%>"){ 
+				parent.location.href = "/domain/web/sanya/zhbg/zhbgList/zhbgsgthjjczdybl.jsp";
+			}else if("sgthjzyt" == "<%=type%>"){ 
+				parent.location.href = "/domain/web/sanya/zhbg/zhbgList/zhbgsgthjzytybl.jsp";
+			}else if("swszf" == "<%=type%>"){ 
+				parent.location.href = "/domain/web/sanya/zhbg/zhbgList/zhbgswszfybl.jsp";
+			}else if("syhjzyj" == "<%=type%>"){ 
+				parent.location.href = "/domain/web/sanya/zhbg/zhbgList/zhbgsyhjzyjybl.jsp";
+			}else if("dbwj" == "<%=type%>"){ 
+				parent.location.href = "/domain/web/sanya/zhbg/zhbgList/zhbgblz.jsp";
+			}else{
+			}
+		}
 	
 	//添加选项
 	function Addopt(selectname, value, name){
@@ -105,7 +135,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body onLoad="onInit(); return false;">
   	<div id="fixed" class="Noprn" style="position: fixed; top: 5px; left: 0px"></div>
   	<div align="center" style="margin-bottom:20px"><h1 style="font-size: 25">文件审批登记表</h1></div>
+  	<div id="return" align="right">
+	  		<button class='btn' id="return" style="position: absolute; top: 5px; right: 5px" onclick="back()">
+						返 回
+			</button>
+	  	</div>
   	<form method="post">
+	  	
   	    <table align="center" cellpadding="0" cellspacing="0" width="600px">
 			<tr>
 				<td align="center">
