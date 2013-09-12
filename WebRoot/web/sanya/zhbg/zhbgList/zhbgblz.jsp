@@ -141,7 +141,7 @@ function view(date){
 }
 
 function viewDetail(id){	
-	var url = "<%=basePath%>web/sanya/zhbg/zhbgdj/wjspTab.jsp?type=dbwj&yw_guid=" + myData[id-1].YW_GUID;
+	var url = "<%=basePath%>web/sanya/zhbg/zhbgdj/wjspTab.jsp?type=blz&yw_guid=" + myData[id-1].YW_GUID;
 	document.location.href = url;	
 }
 

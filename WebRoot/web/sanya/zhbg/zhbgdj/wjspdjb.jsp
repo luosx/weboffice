@@ -114,7 +114,7 @@ String type = request.getParameter("type");
 				parent.location.href = "/domain/web/sanya/zhbg/zhbgList/zhbgswszfybl.jsp";
 			}else if("syhjzyj" == "<%=type%>"){ 
 				parent.location.href = "/domain/web/sanya/zhbg/zhbgList/zhbgsyhjzyjybl.jsp";
-			}else if("dbwj" == "<%=type%>"){ 
+			}else if("blz" == "<%=type%>"){ 
 				parent.location.href = "/domain/web/sanya/zhbg/zhbgList/zhbgblz.jsp";
 			}else{
 			}
