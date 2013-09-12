@@ -5,6 +5,7 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 String returnPath = request.getParameter("returnPath");
 String type = request.getParameter("type");
+String flag1 = request.getParameter("flag");
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -104,16 +105,8 @@ String type = request.getParameter("type");
 		
 	}
 	function back(){
-			if("qtybl" == "<%=type%>"){
-				parent.location.href = "/domain/web/sanya/zhbg/zhbgList/zhbgqtybl.jsp";
-			}else if("sgthjjczd" == "<%=type%>"){ 
-				parent.location.href = "/domain/web/sanya/zhbg/zhbgList/zhbgsgthjjczdybl.jsp";
-			}else if("sgthjzyt" == "<%=type%>"){ 
-				parent.location.href = "/domain/web/sanya/zhbg/zhbgList/zhbgsgthjzytybl.jsp";
-			}else if("swszf" == "<%=type%>"){ 
-				parent.location.href = "/domain/web/sanya/zhbg/zhbgList/zhbgswszfybl.jsp";
-			}else if("syhjzyj" == "<%=type%>"){ 
-				parent.location.href = "/domain/web/sanya/zhbg/zhbgList/zhbgsyhjzyjybl.jsp";
+			if("ybl" == "<%=type%>"){
+				parent.location.href = "/domain/web/sanya/zhbg/zhbgList/zhbgybl.jsp?flag=<%=flag1%>";
 			}else if("blz" == "<%=type%>"){ 
 				parent.location.href = "/domain/web/sanya/zhbg/zhbgList/zhbgblz.jsp";
 			}else{

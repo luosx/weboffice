@@ -7,6 +7,7 @@
    String dbts = UtilFactory.getConfigUtil().getConfig("sanyadb");
    Object principal = SecurityContextHolder.getContext()
 			.getAuthentication().getPrincipal();
+   String flag = request.getParameter("flag");
 %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -44,8 +45,21 @@ html, body {
 	    var win;
 	    var form;
 	    var _$ID = '';
+	    var flag='<%=flag%>';
 		Ext.onReady(function(){
-		   	putClientCommond("wjspHandler","getAllYCLList");
+		var fangfa;
+		if(flag=='1'){
+			fangfa = "getSGTHJZYTYCLList";
+		}else if(flag=='2'){
+			fangfa = "getSGTHJJCZDYCLList";
+		}else if(flag=='3'){
+			fangfa = "getSWSZFYCLList";
+		}else if(flag=='4'){
+			fangfa = "getSYHJZYJYCLList";
+		}else{
+			fangfa = "getQTYCLList";
+		}		
+		   	putClientCommond("wjspHandler",fangfa);
 			myData = restRequest();
 			store = new Ext.data.JsonStore({
 				proxy:new Ext.ux.data.PagingMemoryProxy(myData),
@@ -84,6 +98,10 @@ html, body {
 	    			{xtype: 'button',text:'查询',width:50,handler: query}
 	    		],
         		listeners:{
+	        		rowdblclick : function(grid, rowIndex, e)
+						{
+					   		viewDetail(rowIndex+1);
+						}
          		},   
         		stripeRows: true,
         		width:width,
@@ -110,15 +128,32 @@ function pro(id){
 
 //点击查看时，查看详细信息
 function process(id){
-	var url = "<%=basePath%>web/sanya/zhbg/zhbgdj/wjspTab.jsp?type=blz&yw_guid=" + id;
+	var url = "<%=basePath%>web/sanya/zhbg/zhbgdj/wjspTab.jsp?type=ybl&yw_guid=" + id+"&flag=<%=flag%>";
 	document.location.href = url;
 	//window.open(url);
+}
+
+function viewDetail(id){	
+	var url = "<%=basePath%>web/sanya/zhbg/zhbgdj/wjspTab.jsp?type=ybl&yw_guid=" + myData[id-1].YW_GUID+"&flag=<%=flag%>";
+	document.location.href = url;	
 }
 
 //模糊查询
 function query(){
 	var keyWord=Ext.getCmp('keyword').getValue();
-   	putClientCommond("wjspHandler","getYCLListByKeyWords");
+	var fangfa;
+	if(flag=='1'){
+			fangfa = "getSGTHJZYTYCLListByKeyWords";
+		}else if(flag=='2'){
+			fangfa = "getSGTHJJCZDYCLListByKeyWords";
+		}else if(flag=='3'){
+			fangfa = "getSWSZFYCLListByKeyWords";
+		}else if(flag=='4'){
+			fangfa = "getSYHJZYJYCLListByKeyWords";
+		}else{
+			fangfa = "getQTYCLListByKeyWords";
+		}
+   	putClientCommond("wjspHandler",fangfa);
    	putRestParameter("keyword",escape(escape(keyWord)));
 	var myData = restRequest();
 	store = new Ext.data.JsonStore({
