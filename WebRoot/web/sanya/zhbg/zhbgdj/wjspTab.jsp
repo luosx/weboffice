@@ -27,7 +27,20 @@
 	    border: 0 none;
 	    overflow: hidden;
 	    height: 100%;
+	    
     }
+    .btn {
+			background: url('<%=basePath%>/base/form/images/button.png');
+			height: 23;
+			width: 73;
+			CURSOR: hand;
+			FONT-SIZE: 12px;
+			color: #CC3300;
+			BORDER-RIGHT: #002D96 0px solid;
+			BORDER-TOP: #002D96 0px solid;
+			BORDER-LEFT: #002D96 0px solid;
+			BORDER-BOTTOM: #002D96 0px solid
+		}
    </style>
    <script>
    Ext.onReady(function(){
@@ -49,10 +62,23 @@
         ]
     })
   });
+  function back(){
+			if("ybl" == "<%=type%>"){
+				document.location.href = "/domain/web/sanya/zhbg/zhbgList/zhbgybl.jsp?flag=<%=flag%>";
+			}else if("blz" == "<%=type%>"){ 
+				document.location.href = "/domain/web/sanya/zhbg/zhbgList/zhbgblz.jsp";
+			}else{
+			}
+		}
   
    </script>
   </head>
 	<body bgcolor="#FFFFFF">
+		<div id="return" align="right">
+		  		<button class='btn' id="return" style="position: absolute; top: 3px; right: 5px" onclick="back()">
+							返 回
+				</button>
+		  </div>
 		<div id="statusTab" style="width:100%"></div>
 		<div id="graphwin" class="x-hidden">
 			<div id="updateForm" style="margin-left:10px; margin-top:5px"></div>

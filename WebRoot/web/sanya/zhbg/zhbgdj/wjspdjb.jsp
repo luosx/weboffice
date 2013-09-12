@@ -28,18 +28,6 @@ String flag1 = request.getParameter("flag");
 	
   </head>
   <style type="text/css">
-		  .btn {
-			background: url('<%=basePath%>/base/form/images/button.png');
-			height: 23;
-			width: 73;
-			CURSOR: hand;
-			FONT-SIZE: 12px;
-			color: #CC3300;
-			BORDER-RIGHT: #002D96 0px solid;
-			BORDER-TOP: #002D96 0px solid;
-			BORDER-LEFT: #002D96 0px solid;
-			BORDER-BOTTOM: #002D96 0px solid
-		}
   		table{
 			border-left-color:#000000;
 			border-left-style:solid;
@@ -104,14 +92,6 @@ String flag1 = request.getParameter("flag");
 		init();
 		
 	}
-	function back(){
-			if("ybl" == "<%=type%>"){
-				parent.location.href = "/domain/web/sanya/zhbg/zhbgList/zhbgybl.jsp?flag=<%=flag1%>";
-			}else if("blz" == "<%=type%>"){ 
-				parent.location.href = "/domain/web/sanya/zhbg/zhbgList/zhbgblz.jsp";
-			}else{
-			}
-		}
 	
 	//添加选项
 	function Addopt(selectname, value, name){
@@ -128,11 +108,6 @@ String flag1 = request.getParameter("flag");
   <body onLoad="onInit(); return false;">
   	<div id="fixed" class="Noprn" style="position: fixed; top: 5px; left: 0px"></div>
   	<div align="center" style="margin-bottom:20px"><h1 style="font-size: 25">文件审批登记表</h1></div>
-  	<div id="return" align="right">
-	  		<button class='btn' id="return" style="position: absolute; top: 5px; right: 5px" onclick="back()">
-						返 回
-			</button>
-	  	</div>
   	<form method="post">
 	  	
   	    <table align="center" cellpadding="0" cellspacing="0" width="600px">
