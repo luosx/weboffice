@@ -84,7 +84,7 @@ html, body {
         		sm:sm,
         		columns: [
         			new Ext.grid.RowNumberer(),
-		        	{header: '文件审批事项', dataIndex:'WJSPSX', width: (width - 550), sortable: true,renderer:changKeyword},
+		        	{header: '文件审批事项', dataIndex:'WJSPSX', width: (width - 510), sortable: true,renderer:changKeyword},
 		            {header: '文件类型', dataIndex:'WJLX', width: 130, sortable: true,renderer:changKeyword},
 		            {header: '办理时限', dataIndex:'BLSX', width: 80, sortable: true,renderer:changKeyword},
 		            {header: '文件申请', dataIndex:'WJSQ', width: 80, sortable: true,renderer:changKeyword},
