@@ -249,8 +249,8 @@ public class FormHandler extends AbstractBaseBean {
 								}
 								if(valueString != null){
 									try {
-										// valueString = new String(valueString.getBytes("iso-8859-1"),"UTF-8");
-										valueString = URLDecoder.decode(valueString, "utf-8");
+										valueString = new String(valueString.getBytes("iso-8859-1"),"UTF-8");
+										//valueString = URLDecoder.decode(valueString, "utf-8");
 									} catch (UnsupportedEncodingException e) {
 										responseException(this, "setToData", "100050", e);
 									}
