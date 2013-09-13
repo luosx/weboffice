@@ -38,24 +38,20 @@ public class FTPOperation extends AbstractBaseBean implements IFTPOperation {
         return FTPOp;
     }
     
+    /**
+     * 
+     * <br>Description:ftp配置
+     * <br>Author:黎春行
+     * <br>Date:2013-9-2
+     * @see com.klspta.base.util.bean.ftputil.IFTPOperation#getFtpConfig()
+     */
     public FTPServerConfigBean getFtpConfig(){
         if (ftpConfig == null) {
-            String sql = "select t.* from core_ftpserverconfig t";
-            List<Map<String,Object>> list = query(sql,CORE);
-            if (list.size() == 1) {
-            	Map<String,Object> map=list.get(0);
-            	ftpConfig=new FTPServerConfigBean();
-            	ftpConfig.setFtp_id((String)map.get("ftp_id"));
-            	ftpConfig.setFtp_username((String)map.get("ftp_username"));
-            	ftpConfig.setFtp_password((String)map.get("ftp_password"));
-            	ftpConfig.setFtp_port((String)map.get("ftp_port"));
-            	ftpConfig.setFtp_host((String)map.get("ftp_host"));
-            	ftpConfig.setFtp_description((String)map.get("ftp_description"));
-                //ftpConfig = (FTPServerConfigBean) list.get(0);
-            } else {
-                System.out.println("FTPServerConfig配置错误....");
-                return null;
-            }
+        	ftpConfig=new FTPServerConfigBean();
+        	ftpConfig.setFtp_username(UtilFactory.getConfigUtil().getConfig("ftp.username"));
+        	ftpConfig.setFtp_password(UtilFactory.getConfigUtil().getConfig("ftp.password"));
+        	ftpConfig.setFtp_port(UtilFactory.getConfigUtil().getConfig("ftp.port"));
+        	ftpConfig.setFtp_host(UtilFactory.getConfigUtil().getConfig("ftp.host"));
         }
         return ftpConfig;
     }
