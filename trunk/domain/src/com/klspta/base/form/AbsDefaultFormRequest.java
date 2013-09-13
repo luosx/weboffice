@@ -226,7 +226,11 @@ abstract public class AbsDefaultFormRequest extends AbstractBaseBean {
 		activityName = URLDecoder.decode(request.getParameter("activityName"), "utf-8");
 		String zfjcType = request.getParameter("zfjcType");
 		String editFiles = request.getParameter("editFiles");
-		editFiles = editFiles.substring(0, editFiles.length() - 1);
+		if(!"".equals(editFiles)){
+		    editFiles = editFiles.substring(0, editFiles.length() - 1);
+		}else{
+		    editFiles = "no";
+		}
 		Object[] args = { editFiles, activityName, zfjcType, formName };
 		int i = 0;
 		if (queryData(activityName, zfjcType, formName)) {
