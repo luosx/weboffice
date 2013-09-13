@@ -15,6 +15,7 @@ public class ProjectInfo extends AbstractBaseBean{
     public static  String PROJECT_NAME = "";
     public static  String PROJECT_LOGINNAME1 = "";
     public static  String PROJECT_LOGINNAME2 = "";
+    public static  String FLAG = "";
     private static ProjectInfo instance=new ProjectInfo();
     private ProjectInfo(){
         init();
@@ -30,6 +31,7 @@ public class ProjectInfo extends AbstractBaseBean{
         PROJECT_NAME = list.get(0).get("flag").toString();
         PROJECT_LOGINNAME1 = list.get(0).get("loginname1").toString();
         PROJECT_LOGINNAME2 = list.get(0).get("loginname2").toString();
+        FLAG = list.get(0).get("flag").toString();
     }
 public String getProjectName(){
 	return PROJECT_NAME;
@@ -39,5 +41,9 @@ public String getProjectLoginName1(){
 }
 public String getProjectLoginName2(){
 	return PROJECT_LOGINNAME2;
+}
+
+public String getFlag(){
+    return FLAG;
 }
 }
