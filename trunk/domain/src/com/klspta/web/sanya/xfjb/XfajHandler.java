@@ -66,10 +66,10 @@ public class XfajHandler extends AbstractBaseBean{
 	
 	private List<Map<String, Object>> getList(String status, String keywords){
 		StringBuffer sqlBuffer = new StringBuffer();
-		sqlBuffer.append("select t.xfsx,t.xflx,t.blsx, t.blks, t.blzt, t.blqk, t.yw_guid, t.createdate  from xfajdjb t where t.blzt ='").append(status).append("'");
+		sqlBuffer.append("select t.xfsx,t.xflx,t.blsx, t.blks, t.blzt, t.blqk, t.yw_guid, t.createdate,t.zhblr  from xfajdjb t where t.blzt ='").append(status).append("'");
 		//添加关键字查询
 		if((!"".equals(keywords)) || keywords != null){
-			sqlBuffer.append(" and (t.xfsx||t.xflx||t.blsx||t.blks||t.blzt||t.blqk like '%");
+			sqlBuffer.append(" and (t.zhblr||t.xfsx||t.xflx||t.blsx||t.blks||t.blzt||t.blqk like '%");
 			sqlBuffer.append(keywords);
 			sqlBuffer.append("%')");
 		}

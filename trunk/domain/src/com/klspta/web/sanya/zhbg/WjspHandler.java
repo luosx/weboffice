@@ -123,10 +123,10 @@ public class WjspHandler extends AbstractBaseBean{
 	
 	private List<Map<String, Object>> getList(String status, String type){
 		StringBuffer sqlBuffer = new StringBuffer();
-		sqlBuffer.append("select t.wjspsx,t.wjlx,t.blsx, t.wjsq, t.blqk, t.yw_guid, t.createdate  from wjspdjb t where t.blqk ='").append(status).append("'");
+		sqlBuffer.append("select t.wjspsx,t.wjlx,t.blsx, t.wjsq, t.blqk, t.yw_guid, t.createdate,t.zhblr  from wjspdjb t where t.blqk ='").append(status).append("'");
 		//添加关键字查询
 		if((!"".equals(type)) || type != null){
-			sqlBuffer.append(" and (t.wjspsx||t.wjlx||t.blsx||t.wjsq||t.blqk||t.createdate like '%");
+			sqlBuffer.append(" and (t.wjspsx||t.wjlx||t.blsx||t.wjsq||t.zhblr||t.blqk||t.createdate like '%");
 			sqlBuffer.append(type);
 			sqlBuffer.append("%')");
 		}
@@ -136,10 +136,10 @@ public class WjspHandler extends AbstractBaseBean{
 	}
 	private List<Map<String, Object>> getList(String status,String type,String keywords){
 		StringBuffer sqlBuffer = new StringBuffer();
-		sqlBuffer.append("select t.wjspsx,t.wjlx,t.blsx, t.wjsq, t.blqk, t.yw_guid, t.createdate  from wjspdjb t where t.blqk ='").append(status).append("'").append(" and wjlx ='").append(type).append("'");
+		sqlBuffer.append("select t.wjspsx,t.wjlx,t.blsx, t.wjsq, t.blqk, t.yw_guid, t.createdate,t.zhblr  from wjspdjb t where t.blqk ='").append(status).append("'").append(" and wjlx ='").append(type).append("'");
 		//添加关键字查询
 		if((!"".equals(keywords)) || keywords != null){
-			sqlBuffer.append(" and (t.wjspsx||t.wjlx||t.blsx||t.wjsq||t.blqk||t.createdate like '%");
+			sqlBuffer.append(" and (t.wjspsx||t.wjlx||t.blsx||t.wjsq||t.zhblr||t.blqk||t.createdate like '%");
 			sqlBuffer.append(keywords);
 			sqlBuffer.append("%')");
 		}
