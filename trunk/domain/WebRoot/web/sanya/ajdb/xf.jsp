@@ -39,7 +39,7 @@ Ext.onReady(function(){
            {name: 'XFSX'},
            {name: 'XFLX'},         
            {name: 'BLSX'},
-           {name: 'BLZT'},
+           {name: 'ZHBLR'},
            {name: 'BLQK'},
            {name: 'CJRQ'},
            {name: 'INDEX'}
@@ -52,16 +52,16 @@ Ext.onReady(function(){
     grid = new Ext.grid.GridPanel({
         store: store,
         columns: [
-           {header: '预警',dataIndex:'YJ',width:width*0.05, sortable:false,renderer:warn},   
-           {header: '剩余天数',dataIndex:'SYTS',width: width*0.05, sortable: true}, 
-           {header: '编号',dataIndex:'INDEX',width: width*0.05, sortable: true},
-           {header: '信访事项',dataIndex:'XFSX',width: width*0.20, sortable: true},
-           {header: '信访类型',dataIndex:'XFLX',width: width*0.10, sortable: true},      
-           {header: '截止日期',dataIndex:'BLSX',width: width*0.10, sortable: true},
-           {header: '办理状态',dataIndex:'BLZT',width: width*0.12, sortable: true},
-           {header: '办理情况',dataIndex:'BLQK',width: width*0.12, sortable: true},
-           {header: '创建时间',dataIndex:'CJRQ',width: width*0.12, sortable: true},
-           {header: '查看',dataIndex:'INDEX',width: width*0.08, sortable: false,renderer:view}
+           {header: '预警',dataIndex:'YJ',width:30, sortable:false,renderer:warn},   
+           {header: '剩余天数',dataIndex:'SYTS',width: 60, sortable: true}, 
+           {header: '编号',dataIndex:'INDEX',width: 30, sortable: true},
+           {header: '信访事项',dataIndex:'XFSX',width: width-510, sortable: true},
+           {header: '信访类型',dataIndex:'XFLX',width: 60, sortable: true},      
+           {header: '截止日期',dataIndex:'BLSX',width: 70, sortable: true},
+           {header: '最后办理人',dataIndex:'ZHBLR',width: 70, sortable: true},
+           {header: '办理情况',dataIndex:'BLQK',width: 80, sortable: true},
+           {header: '创建时间',dataIndex:'CJRQ',width: 70, sortable: true},
+           {header: '查看',dataIndex:'INDEX',width: 30, sortable: false,renderer:view}
         ],
         tbar:[
         	{xtype:'label',text:'快速查找:',width:60},
@@ -147,23 +147,23 @@ function query(){
            {name: 'XFSX'},
            {name: 'XFLX'},         
            {name: 'BLSX'},
-           {name: 'BLZT'},
+           {name: 'ZHBLR'},
            {name: 'BLQK'},
            {name: 'CJRQ'},
            {name: 'INDEX'}
         ]
   });
   grid.reconfigure(store, new Ext.grid.ColumnModel([
-   {header: '预警',dataIndex:'YJ',width:width*0.05, sortable:false,renderer:warn},  
-   {header: '剩余天数',dataIndex:'SYTS',width: width*0.05, sortable: true,renderer:changKeyword},  
-   {header: '编号',dataIndex:'INDEX',width: width*0.05, sortable: true,renderer:changKeyword},
-   {header: '信访事项',dataIndex:'XFSX',width: width*0.20, sortable: true,renderer:changKeyword},
-   {header: '信访类型',dataIndex:'XFLX',width: width*0.10, sortable: true,renderer:changKeyword},
-   {header: '截止日期',dataIndex:'BLSX',width: width*0.10, sortable: true,renderer:changKeyword},
-   {header: '办理状态',dataIndex:'BLZT',width: width*0.12, sortable: true,renderer:changKeyword},
-   {header: '办理情况',dataIndex:'BLQK',width: width*0.12, sortable: true,renderer:changKeyword},
-   {header: '创建时间',dataIndex:'CJRQ',width: width*0.12, sortable: true,renderer:changKeyword},
-   {header: '查看',dataIndex:'INDEX',width: width*0.08, sortable: false,renderer:view}
+   {header: '预警',dataIndex:'YJ',width:30, sortable:false,renderer:warn},  
+   {header: '剩余天数',dataIndex:'SYTS',width: 60, sortable: true,renderer:changKeyword},  
+   {header: '编号',dataIndex:'INDEX',width: 30, sortable: true,renderer:changKeyword},
+   {header: '信访事项',dataIndex:'XFSX',width: width-510, sortable: true,renderer:changKeyword},
+   {header: '信访类型',dataIndex:'XFLX',width: 60, sortable: true,renderer:changKeyword},
+   {header: '截止日期',dataIndex:'BLSX',width: 70, sortable: true,renderer:changKeyword},
+   {header: '最后办理人',dataIndex:'ZHBLR',width: 70, sortable: true,renderer:changKeyword},
+   {header: '办理情况',dataIndex:'BLQK',width: 80, sortable: true,renderer:changKeyword},
+   {header: '创建时间',dataIndex:'CJRQ',width: 70, sortable: true,renderer:changKeyword},
+   {header: '查看',dataIndex:'INDEX',width: 30, sortable: false,renderer:view}
   ]));
   grid.getBottomToolbar().bind(store);
   store.load({params:{start:0,limit:10}});  

@@ -73,6 +73,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			var datestring = date.getFullYear() + "-" + (parseInt(date.getMonth()) + 1 ) + "-" + date.getDay();
 			writedate.value = datestring;
 		}
+		document.getElementById("zhblr").value="<%=fullName%>";
 		var blsx = document.getElementById("blsx");
 		if("" == blsx.value || null == blsx.value){
 		Ext.MessageBox.alert("警告", "办理时限不能为空！！！");  
@@ -133,7 +134,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</td>
 				<td>
 					<input type="text" class="noborder" id="blsx" name="blsx" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})" style="width:98%" />
-					<input type="text" id="createdate" name="createdate" style="display:none" /></td>
+					<input type="text" id="createdate" name="createdate" style="display:none" />
+					<input type="text" style="display: none;" name="zhblr" id="zhblr" value="<%=fullName%>" />
+					</td>
 			</tr>
 			<tr>
 				<td align="center">
