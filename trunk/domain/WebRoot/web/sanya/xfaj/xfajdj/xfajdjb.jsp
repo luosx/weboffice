@@ -2,7 +2,7 @@
 <%@page import="java.net.URLDecoder"%>
 <%
 String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";			
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -73,9 +73,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			var datestring = date.getFullYear() + "-" + (parseInt(date.getMonth()) + 1 ) + "-" + date.getDay();
 			writedate.value = datestring;
 		}
+		document.getElementById("zhblr").value="<%=fullName%>";
 		var blsx = document.getElementById("blsx");
 		if("" == blsx.value || null == blsx.value){
-		Ext.MessageBox.alert("警告", "办理时限不能为空！！！");  
+		alert( "办理时限不能为空！！！");  
 			//alert("办理时限不能为空！！！");  
   			return false; 
 		}
@@ -133,11 +134,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</select>
 				</td>
 				<td align="center">
-					<label>办理日期</label>
+					<label>截止日期</label>
 				</td>
 				<td>
 					<input type="text" class="noborder" id="blsx" name="blsx" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})" style="width:98%" />
 					<input type="text" id="createdate" name="createdate" style="display:none" />
+					<input type="text" style="display: none;" name="zhblr" id="zhblr" value="<%=fullName%>" />
 				</td>
 			</tr>
 			<tr>
@@ -181,7 +183,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	%>
 
 	if("<%=msg%>" == "success"){
-		Ext.MessageBox.alert("", "表单保存成功");  
+		alert( "表单保存成功");  
 	}
   </script>
 </html>
