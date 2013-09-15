@@ -56,7 +56,7 @@ html, body {
 		           {name: 'WJLX'},
 		           {name: 'BLSX'},
 		           {name: 'WJSQ'},
-		           {name: 'BLQK'},
+		           {name: 'ZHBLR'},
 		           {name: 'YW_GUID'},
 		           {name: 'CREATEDATE'}				
 				]
@@ -76,7 +76,7 @@ html, body {
 		            {header: '文件类型', dataIndex:'WJLX', width: 130, sortable: true,renderer:changKeyword},
 		            {header: '办理时限', dataIndex:'BLSX', width: 80, sortable: true,renderer:changKeyword},
 		            {header: '文件申请', dataIndex:'WJSQ', width: 70, sortable: true,renderer:changKeyword},
-		            {header: '办理情况', dataIndex:'BLQK', width: 70, sortable: true,renderer:changKeyword},
+		            {header: '最后办理人', dataIndex:'ZHBLR', width: 70, sortable: true,renderer:changKeyword},
 		            {header: '创建时间', dataIndex:'CREATEDATE', width:80, sortable: true,renderer:changKeyword},
 		            {header: '查看', dataIndex:'YW_GUID', width: 40, sortable: true,renderer:pro}
         		], 
@@ -170,7 +170,7 @@ function query(){
            {name: 'WJLX'},
            {name: 'BLSX'},
            {name: 'WJSQ'},
-           {name: 'BLQK'},
+           {name: 'ZHBLR'},
            {name: 'YW_GUID'},
            {name: 'CREATEDATE'}					
 		]
@@ -184,7 +184,7 @@ function query(){
             {header: '文件类型', dataIndex:'WJLX', width: 130, sortable: true,renderer:changKeyword},
             {header: '办理时限', dataIndex:'BLSX', width: 80, sortable: true,renderer:changKeyword},
             {header: '文件申请', dataIndex:'WJSQ', width: 80, sortable: true,renderer:changKeyword},
-            {header: '办理情况', dataIndex:'BLQK', width: 70, sortable: true,renderer:changKeyword},
+            {header: '最后办理人', dataIndex:'ZHBLR', width: 70, sortable: true,renderer:changKeyword},
             {header: '创建时间', dataIndex:'CREATEDATE', width:80, sortable: true,renderer:changKeyword},
             {header: '查看', dataIndex:'YW_GUID', width: 40, sortable: true,renderer:pro}
         ]));    

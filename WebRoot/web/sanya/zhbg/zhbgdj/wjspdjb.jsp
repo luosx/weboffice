@@ -133,7 +133,7 @@ String flag1 = request.getParameter("flag");
 					</select>
 				</td>
 				<td align="center">
-					<label>办理时限</label>
+					<label>截止日期</label>
 				</td>
 				<td>
 					<input type="text" class="noborder" id="blsx" name="blsx" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})" style="width:98%" />

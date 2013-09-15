@@ -69,7 +69,7 @@ html, body {
 		           {name: 'WJLX'},
 		           {name: 'BLSX'},
 		           {name: 'WJSQ'},
-		           {name: 'BLQK'},
+		           {name: 'ZHBLR'},
 		           {name: 'YW_GUID'},
 		           {name: 'CREATEDATE'}				
 				]
@@ -88,7 +88,7 @@ html, body {
 		            {header: '文件类型', dataIndex:'WJLX', width: 130, sortable: true,renderer:changKeyword},
 		            {header: '办理时限', dataIndex:'BLSX', width: 80, sortable: true,renderer:changKeyword},
 		            {header: '文件申请', dataIndex:'WJSQ', width: 80, sortable: true,renderer:changKeyword},
-		            {header: '办理情况', dataIndex:'BLQK', width: 70, sortable: true,renderer:changKeyword},
+		            {header: '最后办理人', dataIndex:'ZHBLR', width: 70, sortable: true,renderer:changKeyword},
 		            {header: '创建时间', dataIndex:'CREATEDATE', width:80, sortable: true,renderer:changKeyword},
 		            {header: '查看', dataIndex:'YW_GUID', width: 40, sortable: true,renderer:pro}
         		], 
@@ -164,7 +164,7 @@ function query(){
            {name: 'WJLX'},
            {name: 'BLSX'},
            {name: 'WJSQ'},
-           {name: 'BLQK'},
+           {name: 'ZHBLR'},
            {name: 'YW_GUID'},
            {name: 'CREATEDATE'}					
 		]
@@ -173,11 +173,11 @@ function query(){
 	var height=document.body.clientHeight - 10;
 	grid.reconfigure(store, new Ext.grid.ColumnModel([
 		new Ext.grid.RowNumberer(),
-        	{header: '文件审批事项', dataIndex:'WJSPSX', width: (width - 550), sortable: true,renderer:changKeyword},
+        	{header: '文件审批事项', dataIndex:'WJSPSX', width: (width - 510), sortable: true,renderer:changKeyword},
             {header: '文件类型', dataIndex:'WJLX', width: 130, sortable: true,renderer:changKeyword},
             {header: '办理时限', dataIndex:'BLSX', width: 80, sortable: true,renderer:changKeyword},
             {header: '文件申请', dataIndex:'WJSQ', width: 80, sortable: true,renderer:changKeyword},
-            {header: '办理情况', dataIndex:'BLQK', width: 70, sortable: true,renderer:changKeyword},
+            {header: '最后办理人', dataIndex:'ZHBLR', width: 70, sortable: true,renderer:changKeyword},
             {header: '创建时间', dataIndex:'CREATEDATE', width:80, sortable: true,renderer:changKeyword},
             {header: '查看', dataIndex:'YW_GUID', width: 40, sortable: true,renderer:pro}
         ]));    
