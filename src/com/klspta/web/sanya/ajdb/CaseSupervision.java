@@ -18,10 +18,10 @@ public class CaseSupervision extends AbstractBaseBean {
      */
     public void getXfdbList() {
         String keyWord = request.getParameter("keyWord");
-        String sql = "select t.yw_guid,t.xfsx,t.createdate cjrq,t.xflx,t.blsx,t.blks,t.blzt,t.blqk from xfajdjb t where t.blzt='未处理'";
+        String sql = "select t.yw_guid,t.xfsx,t.createdate cjrq,t.xflx,t.blsx,t.blks,t.blzt,t.blqk,t.zhblr from xfajdjb t where t.blzt='未处理'";
         if (keyWord != null) {
             keyWord = UtilFactory.getStrUtil().unescape(keyWord);
-            sql += " and upper(t.yw_guid)||upper(t.xfsx)||upper(t.xflx)||upper(t.blsx)||upper(t.blks)||upper(t.blzt)||upper(t.blqk) like '%"
+            sql += " and upper(t.yw_guid)||upper(t.xfsx)||upper(t.xflx)||upper(t.zhblr)||upper(t.blsx)||upper(t.blks)||upper(t.blzt)||upper(t.blqk) like '%"
                     + keyWord + "%'";
         }
 
@@ -76,10 +76,10 @@ public class CaseSupervision extends AbstractBaseBean {
      */
     public void getWjdbList() {
         String keyWord = request.getParameter("keyWord");
-        String sql = "select t.yw_guid,t.wjspsx,t.wjlx,t.blsx,t.wjsq,t.blqk,t.createdate from wjspdjb t where t.blqk='未处理'";
+        String sql = "select t.yw_guid,t.wjspsx,t.wjlx,t.blsx,t.wjsq,t.blqk,t.createdate,t.zhblr from wjspdjb t where t.blqk='未处理'";
         if (keyWord != null) {
             keyWord = UtilFactory.getStrUtil().unescape(keyWord);
-            sql += " and upper(t.yw_guid)||upper(t.wjspsx)||upper(t.wjlx)||upper(t.blsx)||upper(t.wjsq)||upper(t.blqk)||upper(t.createdate) like '%"
+            sql += " and upper(t.yw_guid)||upper(t.wjspsx)||upper(t.zhblr)||upper(t.wjlx)||upper(t.blsx)||upper(t.wjsq)||upper(t.blqk)||upper(t.createdate) like '%"
                     + keyWord + "%'";
         }
         List<Map<String, Object>> list = query(sql, YW);
