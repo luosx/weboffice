@@ -4,8 +4,6 @@
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":"
     + request.getServerPort() + path + "/"; 
-   // String tree =ManagerFactory.getReportManage().getReportListExtJson();
-   //  System.out.println(tree);
 %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -45,20 +43,10 @@
         Ext.QuickTips.init();
         	    myData =[
 {name:'信访举报',children:[
-{name:'处理状态统计',reportid:'RPT11',data_type:'实时数据',remark:'处理状态统计',data_generarion_time:'2012-07-08',parentid:'14',id:'blzt_bing.xml'},
-{name:'案件合法性统计',reportid:'RPT10',data_type:'实时数据',remark:'案件合法性统计',data_generarion_time:'2012-07-08',parentid:'14',id:'xfhfxtj.xml'},
-{name:'立案率统计',reportid:'RPT18',data_type:'实时数据',remark:'立案率统计',data_generarion_time:'2012-07-08',parentid:'14',id:'xflal.xml'},
-{name:'立案率同比统计',reportid:'RPT19',data_type:'实时数据',remark:'立案率同比统计',data_generarion_time:'2012-07-08',parentid:'14',id:'xflaltb.xml'},
-{name:'案件查处率',reportid:'RPT14',data_type:'实时数据',remark:'案件查处率',data_generarion_time:'2012-07-08',parentid:'14',id:'xfccltj.xml'},
-{name:'案件结案率',reportid:'RPT15',data_type:'实时数据',remark:'案件结案率',data_generarion_time:'2012-07-08',parentid:'14',id:'xfjaltj.xml'},
-{name:'挽回损失率',reportid:'RPT16',data_type:'实时数据',remark:'挽回损失率',data_generarion_time:'2012-07-08',parentid:'14',id:'xfwhssltj.xml'},
-{name:'案件制止率',reportid:'RPT17',data_type:'实时数据',remark:'案件制止率',data_generarion_time:'2012-07-08',parentid:'14',id:'xfzzltj.xml'}]},
-{name:'卫片执法',children:[
-{name:'卫片执法处理状态统计',reportid:'RPT3',data_type:'实时数据',remark:'卫片执法处理状态统计',data_generarion_time:'2012-07-08',parentid:'13',id:'987B27EABFD14EC5AE85F55D075E601B'},
-{name:'卫片执法立案率',reportid:'RPT2',data_type:'实时数据',remark:'卫片执法立案率',data_generarion_time:'2012-07-08',parentid:'13',id:'6384891BD938466CBCA0B135B70D5BAA'}]},
-{name:'巡查发现',children:[
-{name:'巡查发现处理状态立案率',reportid:'RPT11',data_type:'实时数据',remark:'巡查发现处理状态立案率',data_generarion_time:'2012-07-08',parentid:'13',id:'239031CD3A4A4C2DB3244393B67B7C74'},
-{name:'巡查发现立案率',reportid:'RPT6',data_type:'实时数据',remark:'巡查发现立案率',data_generarion_time:'2012-07-08',parentid:'13',id:'239031CD3A4A4C2DB3244393B67B7C75'}]}
+{name:'信访处理状态统计',reportid:'RPT1',data_type:'实时数据',remark:'处理状态统计',data_generarion_time:'2013-09-15',parentid:'14',id:'xf_clzt.xml'}]},
+{name:'综合办公',children:[
+{name:'文件处理状态统计',reportid:'RPT2',data_type:'实时数据',remark:'文件处理状态统计',data_generarion_time:'2013-09-15',parentid:'12',id:'zh_clzt.xml'},
+{name:'文件登记分类统计',reportid:'RPT3',data_type:'实时数据',remark:'文件登记分类统计',data_generarion_time:'2013-09-15',parentid:'12',id:'zh_djzl.xml'}]}
 ];
       
         //创建treeGrid
@@ -85,16 +73,11 @@
                 var parentid=node.attributes.parentid;
                 var left=(screen.width-900)/2;
             	var top=(screen.height-600)/2;
-               if(parentid=='14'){
             	  setTimeout(function()
             			  {
-            				  window.open("<%=basePath%>web/xuzhouNW/tjfx/chart.jsp?xml="+id,'chart','height=600,width=900,left='+left+',top='+top+',toolbar=no,menubar=no,scrollbars=no,resizable=no,location=no,status=no');
+            				  window.open("<%=basePath%>web/sanya/tjfx/chart.jsp?xml="+id,'chart','height=600,width=900,left='+left+',top='+top+',toolbar=no,menubar=no,scrollbars=no,resizable=no,location=no,status=no');
             			  }
             			  ,10);
-                   
-                }else if(parentid=='13'){
-                		 window.open("<%=basePath%>model/report/showReport.jsp?id="+id,'chart', 'height=600, width=900, left='+left+', top='+top+', toolbar=no, menubar=no, scrollbars=no, resizable=no,location=no, status=no');
-                }
              }
          }
         });

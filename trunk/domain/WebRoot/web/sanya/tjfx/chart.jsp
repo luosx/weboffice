@@ -1,16 +1,18 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@page import="com.klspta.web.sanya.tjfx.TJFX"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 String xml=request.getParameter("xml");
+new TJFX().init(xml);
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
-    <base href="<%=basePath%>">
     
-    <title>chart</title>
+    
+    <title>统计分析</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -28,7 +30,7 @@ String xml=request.getParameter("xml");
     <script type="text/javascript" language="javascript"> 
     var chart = new AnyChart('<%=basePath%>/base/thirdres/anyChart/binaries/swf/AnyChart.swf');
     chart.initText ="加载中........." 
-    chart.setXMLFile('<%=basePath%>web/xuzhouNW/tjfx/chartxml/<%=xml%>'); 
+    chart.setXMLFile('<%=basePath%>web/sanya/tjfx/chartxml/<%=xml%>'); 
 		chart.width = '100%';
 		chart.height = '100%';
     chart.write(); 

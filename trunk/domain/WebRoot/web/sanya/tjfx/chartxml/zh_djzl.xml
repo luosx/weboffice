@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<anychart>
+    <settings>
+        <animation enabled="True" />
+    </settings>
+    <charts>
+        <chart plot_type="Pie">
+            <data_plot_settings enable_3d_mode="false">
+                <pie_series>
+                    <tooltip_settings enabled="true">
+                        <format>
+                            <![CDATA[{%Name}
+数量: {%Value}
+百分比: {%YPercentOfSeries}{numDecimals: 2}%]]>
+                        </format>
+                        <background>
+                            <corners type="Rounded" all="3" />
+                        </background>
+                    </tooltip_settings>
+                    
+                    <label_settings enabled="true" mode="Outside" multi_line_align="Center">
+                        <background enabled="false" />
+                        <position anchor="Center" valign="Center" halign="Center" padding="20" />
+                        <format>
+                            <![CDATA[{%Name}
+数量：({%Value}{numDecimals:0}) 百分比：({%YPercentOfSeries}{numDecimals:1}%)]]>
+                        </format>
+                        <font bold="False" />
+                        <states>
+                            <hover>
+                                <font underline="true" />
+                            </hover>
+                        </states>
+                    </label_settings>
+                    <connector color="Black" opacity="0.4" />
+                </pie_series>
+            </data_plot_settings>
+            <data>
+                <series name="Series 1">
+                    <point name="市委市政府" y="7" />
+                    <point name="省国土环境资源厅" y="4" />
+                    <point name="省国土环境监察总队" y="3" />
+                    <point name="三亚环境资源局" y="4" />
+                    <point name="其他" y="3" />
+                </series>
+            </data>
+            
+            <chart_settings>
+                <title enabled="true" padding="15">
+                    <text>
+                        文件登记分类统计
+                    </text>
+                </title>
+            </chart_settings>
+        </chart>
+    </charts>
+</anychart>
