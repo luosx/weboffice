@@ -29,7 +29,7 @@ public class WpzfHandler extends AbstractBaseBean {
 	public void getwclTb(){		
 		String keyword = request.getParameter("keyword");
 		StringBuffer sqlBuffer = new StringBuffer();
-		sqlBuffer.append("select to_char(t.objectid) objectid, to_char(t.jcbh) jcbh, t.xmc, to_char(trunc(t.shape.area, 2)) as area, to_char(substr(t.hsx, 0, 4)) as year, to_char(t.tblx) tblx from ");
+		sqlBuffer.append("select distinct to_char(t.objectid) objectid, to_char(t.jcbh) jcbh, t.xmc, to_char(trunc(t.shape.area, 2)) as area, to_char(substr(t.hsx, 0, 4)) as year, to_char(t.tblx) tblx from ");
 		sqlBuffer.append(WP_FORM).append(" t, zfjc.wphcqkdjk j");
 		sqlBuffer.append("where t.objectid != j.yw_guid ");
 		if (keyword != null) {
