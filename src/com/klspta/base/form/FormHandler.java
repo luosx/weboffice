@@ -1,7 +1,6 @@
 package com.klspta.base.form;
 
 import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
@@ -25,6 +24,10 @@ public class FormHandler extends AbstractBaseBean {
 	private String formName = "";
 	private String url = "";
 	
+	public static final String EXIST_YW_GUID = "0";
+	private static Map<String, List<Map<String, Object>>> formFieldsCache = new HashMap<String, List<Map<String,Object>>>();
+	private static final String SQL = "select * from form_sql t where t.formName = ?";
+	
 	/**
 	 * 
 	 * <br>Description:根据guid获取表单内容json串
@@ -47,8 +50,7 @@ public class FormHandler extends AbstractBaseBean {
 	 * @return
 	 */
 	private String  query(String formName, String keyField, String keyValue){
-		String sql = "select * from form_sql t where t.formName = ?";
-		List<Map<String, Object>> getSqlList = query(sql, CORE, new Object[]{formName});
+		List<Map<String, Object>> getSqlList = query(SQL, CORE, new Object[]{formName});
 		
 		//对查询到的处理结果做处理
 		Map<String, Object> responseMap = new TreeMap<String, Object>();
@@ -56,16 +58,17 @@ public class FormHandler extends AbstractBaseBean {
 			if("s".equals(String.valueOf(getSqlList.get(i).get("mapping")))){
 				//查询结果关系是一对一时
 				String oracleName = String.valueOf(getSqlList.get(i).get("ORACLENAME"));
-				String selectSql = "select * from " + oracleName + " t where t." + keyField + "='" + keyValue + "'";
-				List<Map<String, Object>> signleList = query(selectSql, CORE);
+				// String selectSql = "select * from " + oracleName + " t where t." + keyField + "='" + keyValue + "'";
+				String selectSql = "select * from " + oracleName + " t where t." + keyField + "=?";
+				List<Map<String, Object>> signleList = query(selectSql, CORE, new Object[]{keyValue});
 				if(signleList.size() > 0){
 					responseMap.putAll(signleList.get(0));
 				}
 			}else if ("m".equals(String.valueOf(getSqlList.get(i).get("mapping")))) {
 				//查询结果关系是一对多时
 				String oracleName = String.valueOf(getSqlList.get(i).get("ORACLENAME"));
-				String selectSql = "select * from " + oracleName + " t where t." + keyField + "='" + keyValue + "' order by t.num";
-				List<Map<String, Object>> multiList = query(selectSql, CORE);
+				String selectSql = "select * from " + oracleName + " t where t." + keyField + "=? order by t.num";
+				List<Map<String, Object>> multiList = query(selectSql, CORE, new Object[]{keyValue});
 				//获取表单中字段名称
 				List<Map<String, Object>> formFields = getFormFields(oracleName);
 				//修改字段名称
@@ -101,14 +104,16 @@ public class FormHandler extends AbstractBaseBean {
 	 * @return
 	 */
 	private List<Map<String, Object>> getFormFields(String tableName){
-		tableName = tableName.substring(5);
-		tableName = tableName.toUpperCase();
-		//formName = formName.split(".")[1];
-		String sql = "select distinct(t.column_name), t.data_type from dba_tab_columns t where t.table_name=?";
-		Object[] args = {tableName};
-		String jdbcName = "CORETemplate";
-		List<Map<String, Object>> list = query(sql, jdbcName, args);
-		return list; 
+		if(!formFieldsCache.containsKey(tableName)){
+			tableName = tableName.substring(5);
+			tableName = tableName.toUpperCase();
+			String sql = "select distinct(t.column_name), t.data_type from dba_tab_columns t where t.table_name=?";
+			Object[] args = {tableName};
+			String jdbcName = "CORETemplate";
+			List<Map<String, Object>> list = query(sql, jdbcName, args);
+			formFieldsCache.put(tableName, list);
+		}
+		return formFieldsCache.get(tableName); 
 	}
 	
 	/**
@@ -139,10 +144,9 @@ public class FormHandler extends AbstractBaseBean {
 	 */
 	private void setToData(String formName, String keyField, String keyValue) throws Exception{
 		boolean isExist = true;
-		String sql = "select * from form_sql t where t.formName = ?";
-		List<Map<String, Object>> getSqlList = query(sql, CORE, new Object[]{formName});
+		List<Map<String, Object>> getSqlList = query(SQL, CORE, new Object[]{formName});
 		//主键不存在时，生成主键
-		if("0".equals(keyValue)){
+		if(EXIST_YW_GUID.equals(keyValue)){
 			isExist = false;
 			keyValue = UtilFactory.getStrUtil().getGuid();
 			this.keyValue = keyValue;
@@ -243,7 +247,7 @@ public class FormHandler extends AbstractBaseBean {
 							}else{
 								
 								valueString = request.getParameter(fieldString.toLowerCase() + "_" + num);
-								//没有对应列时，区公用数据
+								//没有对应列时，取公用数据
 								if(valueString == null){
 									valueString = request.getParameter(fieldString.toLowerCase());
 								}
@@ -255,18 +259,8 @@ public class FormHandler extends AbstractBaseBean {
 										responseException(this, "setToData", "100050", e);
 									}
 								}
-								String[] valueStrings = request.getParameterValues(fieldString.toLowerCase() + "_" + num);
 								if(valueString == null || "null".equals(valueString)){
 									valueString = "";
-								}else{
-									/*
-									if(valueStrings.length > 1){
-										valueString = "";
-										for(String s : valueStrings){
-											valueString = valueString + "!" + s;
-										}
-									}
-									*/
 								}
 							}
 							values.put(fieldString, valueString);
