@@ -18,6 +18,7 @@ public class WpzfHandler extends AbstractBaseBean {
 	public static final String HCQK_HF = "1";
 	public static final String HCQK_WF = "2";
 	public static final String HCQK_SSNYD = "3";
+	public static final String WP_FORM = "WP_TEST";
 	
 	/**
 	 * 
@@ -38,9 +39,8 @@ public class WpzfHandler extends AbstractBaseBean {
 		//获取所有未处理的卫片
 		String keyword = request.getParameter("keyword");
 		StringBuffer sqlBuffer = new StringBuffer();
-		String wpFormName = UtilFactory.getConfigUtil().getConfig("wpname");
 		sqlBuffer.append("select to_char(t.objectid) objectid, to_char(t.jcbh) jcbh, t.xmc, to_char(trunc(t.shape.area, 2)) as area, to_char(substr(t.hsx, 0, 4)) as year, to_char(t.tblx) tblx from ");
-		sqlBuffer.append(wpFormName).append(" t ");
+		sqlBuffer.append(WP_FORM).append(" t ");
 		sqlBuffer.append("where (not ( t.objectid in ").append(yhc.toString()).append("))");
 		if (keyword != null) {
             keyword = UtilFactory.getStrUtil().unescape(keyword);
@@ -72,9 +72,8 @@ public class WpzfHandler extends AbstractBaseBean {
 		//获取所有未处理的卫片
 		String keyword = request.getParameter("keyword");
 		StringBuffer sqlBuffer = new StringBuffer();
-		String wpFormName = UtilFactory.getConfigUtil().getConfig("wpname");
 		sqlBuffer.append("select to_char(t.objectid) objectid, to_char(t.jcbh) jcbh, t.xmc, to_char(trunc(t.shape.area, 2)) as area, to_char(substr(t.hsx, 0, 4)) as year, to_char(t.tblx) tblx from ");
-		sqlBuffer.append(wpFormName).append(" t ");
+		sqlBuffer.append(WP_FORM).append(" t ");
 		sqlBuffer.append("where  ( t.objectid in ").append(yhc.toString()).append(")");
 		if (keyword != null) {
             keyword = UtilFactory.getStrUtil().unescape(keyword);
@@ -112,9 +111,8 @@ public class WpzfHandler extends AbstractBaseBean {
 		//获取所有未处理的卫片
 		String keyword = request.getParameter("keyword");
 		StringBuffer sqlBuffer = new StringBuffer();
-		String wpFormName = UtilFactory.getConfigUtil().getConfig("wpname");
 		sqlBuffer.append("select to_char(t.objectid) objectid, to_char(t.jcbh) jcbh, t.xmc, to_char(trunc(t.shape.area, 2)) as area, to_char(substr(t.hsx, 0, 4)) as year, to_char(t.tblx) tblx from ");
-		sqlBuffer.append(wpFormName).append(" t ");
+		sqlBuffer.append(WP_FORM).append(" t ");
 		sqlBuffer.append("where  ( t.objectid in ").append(yhc.toString()).append(")");
 		if (keyword != null) {
             keyword = UtilFactory.getStrUtil().unescape(keyword);
