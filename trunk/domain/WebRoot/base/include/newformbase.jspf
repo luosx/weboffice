@@ -181,7 +181,7 @@ function insertData(json){
 	                }
 	              for(var  t=0;t<input.options.length;t++) 
 						{ 
-						if(input.options[t].text==json[i].toString()) 
+						if(input.options[t].value==json[i].toString()) 
 						{ 
 						input.selectedIndex=t; 
 						} 
