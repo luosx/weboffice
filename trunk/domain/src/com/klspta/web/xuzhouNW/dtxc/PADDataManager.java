@@ -9,6 +9,7 @@ import com.klspta.base.AbstractBaseBean;
 import com.klspta.base.util.UtilFactory;
 import com.klspta.base.wkt.Polygon;
 import com.klspta.console.ManagerFactory;
+import com.klspta.web.xuzhouNW.wpzf.WpzfHandler;
 
 /**
  * 
@@ -155,7 +156,7 @@ public class PADDataManager extends AbstractBaseBean {
      */
     public Map<String, Object> getWphcData(String yw_guid){
     	//根据卫片的objectid获取jctb
-    	String wpName = UtilFactory.getConfigUtil().getConfig("wpname");
+    	String wpName = WpzfHandler.WP_FORM;
     	String jcbhsql = "select t.jcbh from "+ wpName+" t where t.objectid=?";
     	List<Map<String, Object>> resultList = query(jcbhsql, GIS, new Object[]{yw_guid});	
     	String wpyw_guid = "%/_" + resultList.get(0).get("jcbh");
