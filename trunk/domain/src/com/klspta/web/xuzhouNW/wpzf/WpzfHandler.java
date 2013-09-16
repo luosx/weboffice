@@ -27,11 +27,21 @@ public class WpzfHandler extends AbstractBaseBean {
 	 * <br>Date:2013-9-10
 	 */
 	public void getwclTb(){		
+		String sql = "select distinct yw_guid from wphcqkdjk ";
+		List<Map<String, Object>> hcList = query(sql, YW);
+		StringBuffer yhc = new StringBuffer();
+		yhc.append(" (");
+		for(int i = 0; i < hcList.size(); i++){
+			yhc.append("'").append(String.valueOf(hcList.get(i).get("yw_guid"))).append("',");
+		}
+		yhc.append("'0')");
+		
+		//获取所有未处理的卫片
 		String keyword = request.getParameter("keyword");
 		StringBuffer sqlBuffer = new StringBuffer();
-		sqlBuffer.append("select distinct to_char(t.objectid) objectid, to_char(t.jcbh) jcbh, t.xmc, to_char(trunc(t.shape.area, 2)) as area, to_char(substr(t.hsx, 0, 4)) as year, to_char(t.tblx) tblx from ");
-		sqlBuffer.append(WP_FORM).append(" t, zfjc.wphcqkdjk j");
-		sqlBuffer.append("where t.objectid != j.yw_guid ");
+		sqlBuffer.append("select to_char(t.objectid) objectid, to_char(t.jcbh) jcbh, t.xmc, to_char(trunc(t.shape.area, 2)) as area, to_char(substr(t.hsx, 0, 4)) as year, to_char(t.tblx) tblx from ");
+		sqlBuffer.append(WP_FORM).append(" t ");
+		sqlBuffer.append("where (not ( t.objectid in ").append(yhc.toString()).append("))");
 		if (keyword != null) {
             keyword = UtilFactory.getStrUtil().unescape(keyword);
              sqlBuffer.append(" and (upper(t.jcbh)||upper(t.xmc)||upper(t.shape.area)||upper(t.hsx)||upper(t.tblx) like '%");
@@ -79,8 +89,8 @@ public class WpzfHandler extends AbstractBaseBean {
 		String keyword = request.getParameter("keyword");
 		StringBuffer sqlBuffer = new StringBuffer();
 		sqlBuffer.append("select to_char(t.objectid) objectid, to_char(t.jcbh) jcbh, t.xmc, to_char(trunc(t.shape.area, 2)) as area, to_char(substr(t.hsx, 0, 4)) as year, to_char(t.tblx) tblx from ");
-		sqlBuffer.append(WP_FORM).append(" t , zfjc.wphcqkdjk j");
-		sqlBuffer.append("where j.chqk=? ");
+		sqlBuffer.append(WP_FORM).append(" t , zfjc.wphcqkdjk j ");
+		sqlBuffer.append("where t.objectid = j.yw_guid and j.hcqk=? ");
 		if(type.equals(HCQK_WF)){
 			sqlBuffer.append(" and j.status = '1'");
 		}
