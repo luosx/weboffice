@@ -2,6 +2,7 @@
 <%@page import="org.springframework.security.core.context.SecurityContextHolder"%>
 <%@page import="com.klspta.base.util.UtilFactory"%>
 <%@page import="com.klspta.web.sanya.ajdb.CaseSupervision"%>
+<%@page import="com.klspta.web.xuzhouNW.wpzf.WpzfHandler"%>
 <%
 	String path = request.getContextPath();
    String basePath = request.getScheme() + "://"+ request.getServerName() + ":" + request.getServerPort()+ path + "/";
@@ -42,8 +43,7 @@ html, body {
 	    var store;
 		Ext.onReady(function(){
  			putClientCommond("wpzfHandler","getyclTab");
-		   	putRestParameter("status", "0");
-		   	putRestParameter("type", "涉施农用地");
+		   	putRestParameter("type", "<%=WpzfHandler.HCQK_SSNYD%>");
 			var myData = restRequest();
 			store = new Ext.data.JsonStore({
 				proxy:new Ext.ux.data.PagingMemoryProxy(myData),
@@ -67,11 +67,12 @@ html, body {
         		sm:sm,
         		columns: [
         			new Ext.grid.RowNumberer(),
-		        	{header: '图斑编号', dataIndex:'JCBH', width: width * 0.2 - 30, sortable: true,renderer:changKeyword},
-		            {header: '图斑位置', dataIndex:'XMC', width: width * 0.2, sortable: true,renderer:changKeyword},
-		            {header: '图斑类型', dataIndex:'TBLX', width: width * 0.2, sortable: true,renderer:changKeyword},
+		        	{header: '图斑编号', dataIndex:'JCBH', width: width * 0.15 - 30, sortable: true,renderer:changKeyword},
+		            {header: '图斑位置', dataIndex:'XMC', width: width * 0.15, sortable: true,renderer:changKeyword},
+		            {header: '图斑类型', dataIndex:'TBLX', width: width * 0.15, sortable: true,renderer:changKeyword},
 		            {header: '图斑年度', dataIndex:'YEAR', width: width * 0.15, sortable: true,renderer:changKeyword},
 		            {header: '图斑面积', dataIndex:'AREA', width: width * 0.15, sortable: true,renderer:changKeyword},
+		            {header: '核查情况', dataIndex:'OBJECTID', width: width * 0.15, sortable: true,renderer:hcqk},
 		            {header: '查看', dataIndex:'OBJECTID', width: width * 0.1, sortable: true,renderer:pro}
         		], 
         		tbar:[
@@ -100,7 +101,18 @@ html, body {
 }
 );
 
-
+//检查卫片的核查情况
+function hcqk(id){
+	var objectid = id;
+   	putClientCommond("padDataManager","getIsExist");
+   	putRestParameter("objectid",id);
+	var myData = restRequest();
+	if(myData == "no"){
+		return "未核查";
+	}else{
+		return "已核查";
+	}
+}
 
 function pro(id){
  	return "<a href='#'onclick='process(\""+id+"\");return false;'><img src='base/form/images/view.png' alt='办理'></a>";
@@ -108,7 +120,7 @@ function pro(id){
 
 //点击查看时，查看详细信息
 function process(id){
-	var url = "<%=basePath%>/web/sanya/xfaj/xfajdj/xfajFrame.jsp?type=blz&yw_guid=" + id;
+	var url = "<%=basePath%>/web/xuzhouNW/wpzf/wpxxqk/wpTab.jsp?type=blz&yw_guid=" + id;
 	document.location.href = url;
 	//window.open(url);
 }
@@ -117,8 +129,7 @@ function process(id){
 function query(){
 	var keyWord=Ext.getCmp('keyword').getValue();
 	putClientCommond("wpzfHandler","getyclTab");
-   	putRestParameter("status", "0");
-   	putRestParameter("type", "涉施农用地");
+   	putRestParameter("type", "<%=WpzfHandler.HCQK_SSNYD%>");
    	putRestParameter("keyword",escape(escape(keyWord)));
 	var myData = restRequest();
 	store = new Ext.data.JsonStore({
@@ -137,11 +148,12 @@ function query(){
 	var height=document.body.clientHeight - 10;
 	grid.reconfigure(store, new Ext.grid.ColumnModel([
       		new Ext.grid.RowNumberer(),
-        	{header: '图斑编号', dataIndex:'JCBH', width: width * 0.2 - 30, sortable: true,renderer:changKeyword},
-            {header: '图斑位置', dataIndex:'XMC', width: width * 0.2, sortable: true,renderer:changKeyword},
-            {header: '图斑类型', dataIndex:'TBLX', width: width * 0.2, sortable: true,renderer:changKeyword},
+        	{header: '图斑编号', dataIndex:'JCBH', width: width * 0.15 - 30, sortable: true,renderer:changKeyword},
+            {header: '图斑位置', dataIndex:'XMC', width: width * 0.15, sortable: true,renderer:changKeyword},
+            {header: '图斑类型', dataIndex:'TBLX', width: width * 0.15, sortable: true,renderer:changKeyword},
             {header: '图斑年度', dataIndex:'YEAR', width: width * 0.15, sortable: true,renderer:changKeyword},
             {header: '图斑面积', dataIndex:'AREA', width: width * 0.15, sortable: true,renderer:changKeyword},
+            {header: '核查情况', dataIndex:'OBJECTID', width: width * 0.15, sortable: true,renderer:hcqk},
             {header: '查看', dataIndex:'OBJECTID', width: width * 0.1, sortable: true,renderer:pro}
     ]));
         
