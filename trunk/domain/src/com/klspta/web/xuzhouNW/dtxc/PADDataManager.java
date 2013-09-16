@@ -19,7 +19,7 @@ import com.klspta.console.ManagerFactory;
  * Date:2011-7-22
  */
 public class PADDataManager extends AbstractBaseBean {
-
+	
     /**
      * 
      * <br>Description:获取外业成果列表
@@ -143,5 +143,44 @@ public class PADDataManager extends AbstractBaseBean {
     	String yw_guid = request.getParameter("yw_guid");
     	String sql = "update dc_ydqkdcb t set t.islian = '1' where t.yw_guid = ?";
     	update(sql, YW, new Object[]{yw_guid});
-    }   
+    }
+    
+    /**
+     * 
+     * <br>Description:根据卫片图斑编号获取卫片核查成果
+     * <br>Author:黎春行
+     * <br>Date:2013-9-15
+     * @param yw_guid
+     * @return
+     */
+    public Map<String, Object> getWphcData(String yw_guid){
+    	//根据卫片的objectid获取jctb
+    	String wpName = UtilFactory.getConfigUtil().getConfig("wpname");
+    	String jcbhsql = "select t.jcbh from "+ wpName+" t where t.objectid=?";
+    	List<Map<String, Object>> resultList = query(jcbhsql, GIS, new Object[]{yw_guid});	
+    	String wpyw_guid = "%/_" + resultList.get(0).get("jcbh");
+    	String sql = "select * from dc_ydqkdcb t where t.yw_guid like ? escape '/'";
+    	List<Map<String, Object>> result = query(sql, YW, new Object[]{wpyw_guid});
+    	if(result.size() > 0){
+    		return result.get(0);
+    	}else{
+    		return null;
+    	}
+    }
+    
+    /**
+     * 
+     * <br>Description:判断卫片编号是否有卫片核查成果
+     * <br>Author:黎春行
+     * <br>Date:2013-9-16
+     */
+    public void getIsExist(){
+    	String objectId = request.getParameter("objectid");
+    	Map<String, Object> wphcMap = getWphcData(objectId);
+    	if(null == wphcMap){
+    		response("no");
+    	}else{
+    		response("yes");
+    	}
+    }
 }
