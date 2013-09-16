@@ -3,6 +3,7 @@
 <%@page import="com.klspta.console.user.User"%>
 <%@page import="com.klspta.base.workflow.foundations.WorkflowOp"%>
 <%@page import="com.klspta.base.workflow.foundations.IWorkflowOp"%>
+<%@page import="com.klspta.base.form.FormHandler"%>
 <%
 	String _$path = request.getContextPath();
 	String _$basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + _$path + "/";
@@ -16,7 +17,7 @@
 	String _$key = "0";
 	_$key = request.getParameter(_$keyfield);
 	if(_$key == null || _$key.equals("")){
-		_$key = "0";
+		_$key = FormHandler.EXIST_YW_GUID;
 	}
 	String _$jdbcname = request.getParameter("jdbcname");
 	String wfInsId = request.getParameter("wfInsId");
