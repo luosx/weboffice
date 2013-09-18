@@ -1,7 +1,21 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@page import="com.klspta.base.util.bean.xzqhutil.XzqhBean"%>
+<%@page import="com.klspta.base.util.UtilFactory"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+Object principalUser = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+User userBean = ((User)principalUser);//得到用户bean
+XzqhBean xzqhBean = null;
+String strXcdwjc = "";//政区简称
+String writerId = userBean.getUserID();//填表人userid
+String writerXzqh = userBean.getXzqh();//填表人行政区划
+if(!writerXzqh.equals("")){
+	xzqhBean = UtilFactory.getXzqhUtil().getBeanById(writerXzqh);
+	strXcdwjc = xzqhBean.getCatonsimpleName();//政区简称
+}
+String strDate = UtilFactory.getDateUtil().getCurrentChineseDate();//中国式的时间####年##月##日
+String simInfo = request.getParameter("simInfo");
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -15,7 +29,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
 	<%@ include file="/base/include/newformbase.jspf"%>
-	<script type="text/javascript" src="web/jizeNW/dtxc/js/xcrz.js"></script>
+	<script type="text/javascript" src="<%=basePath%>web/jizeWW/dtxc/xcrz/js/xcrz.js"></script>
 	<link rel="stylesheet" href="/base/form/css/commonForm.css" type="text/css" />
   </head>
   <style type="text/css">
@@ -60,7 +74,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </style>
   <script type="text/javascript">
   	var isInput = true;
-  	
+  	var yw_guid;
+  	var simInfo;
   	function save(){		
 		document.forms[0].submit();
 	}
@@ -68,14 +83,54 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	//页面加载初始化
 	function onInit(){	
 		init();
-				
+		yw_guid = document.getElementById('yw_guid').value;	
+		simInfo = '<%=simInfo%>';
+		
+		initRadio();
+		
 		var allnum = document.getElementById("allnum");
-		var num = parseInt(allnum.value)/3;
-		allnum.value = "3";
+		var num = parseInt(allnum.value)/5;
+		allnum.value = "5";
+		if(simInfo!='null'){
+			num = num-1;
+			drxccg();
+		}	
 		for(var i = 1; i < num; i++){
 			addcgd();
-		}
+		}		
+		
 		insertData(json);
+		
+	    bingCgdState();
+	    
+	    
+	}
+	
+	function initRadio(){
+		if(document.getElementById('sfywf1').checked){
+			showtbody();
+		}else if(document.getElementById('sfywf2').checked){
+			hidetbody();
+		}
+	}
+	
+	function bingCgdState(){
+		putClientCommond("dtxcManager", "getCgdState");
+		putRestParameter("yw_guid", yw_guid);
+		var result = restRequest();		
+		if(result){
+			for(var i=0;i<result.length;i++){
+			 if(result[i].CGDQK=='1'){
+				document.getElementById("divcgd_" +(i+1)).innerHTML = "<a href='javascript:void(0);' id='spancgd_"+(i+1)+"' onclick='lookCgd(this.id)' style='text-decoration:none'>查看抄告单</a>&nbsp;&nbsp;&nbsp;&nbsp;"+																
+																			"<a href='javascript:void(0);' id='cgd_"+(i+1)+"' onclick='createCgd(this.id,1)' style='text-decoration:none'>重新生成抄告单</a>"+
+																			"<input type='hidden' name='cgdqk_"+(i+1)+"' id='cgdqk_"+(i+1)+"' value='1'>";
+				}else{
+				document.getElementById("divcgd_" +(i+1)).innerHTML = '<span style="color:red">抄告单未生成</span>&nbsp;&nbsp;&nbsp;&nbsp;'+
+																		'<a href="javascript:void(0);" id="cgd_'+(i+1)+'" onclick="createCgd(this.id,0)" style="text-decoration:none">生成抄告单</a>'+
+																		'<input type="hidden" name="cgdqk_'+(i+1)+'" id="cgdqk_'+(i+1)+'" value="0">';
+				}
+			}
+		}
 	}
 	
 	//添加选项
@@ -89,41 +144,123 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	//导入巡查成果
 	function drxccg(){
-		var feature="dialogWidth:650px;dialogHeight:300px;status:no;help:no;scroll:no;location=no"; 
-		//显示成果导入模态对话框，并将导入的成果的yw_guid返回 
-		var simInfo =  window.showModalDialog("/domain/web/jizeNW/dtxc/dtxccg/dtxccg.jsp",null,feature); 
-		//将导入的巡查成果的基本违法信息写到巡查日志当中
 		putClientCommond("cgdrManager", "getSimInfo");
-		putRestParameter("simInfo", simInfo);
+		putRestParameter("simInfo", "<%=simInfo%>");
 		baseInformation = restRequest();
-		
-		//将导入的巡查成果写入违法项目当中
-		for(var i = 0; i < baseInformation.length; i++){
-				document.getElementById("jsdw_" + (i + 1)).value = baseInformation[i].YDDW;
-				document.getElementById("dgsj_" + (i + 1)).value = baseInformation[i].YDSJ;
-				document.getElementById("jsqk_" + (i + 1)).value = baseInformation[i].JSQK;
-				document.getElementById("zdmj_" + (i + 1)).value = baseInformation[i].MJ;
-				//document.getElementById("ywguid_" + (i + 1)).value = baseInformation[i].YW_GUID;	
+		if(baseInformation){
+			for(var i = 0; i < baseInformation.length-1; i++){
 				addcgd();
-		/*
-			}else{
-				addcgd();
-				var num = document.getElementById("allnum").value;
-				num = String(parseInt(num)/3);
-				document.getElementById("jsdw_" + num).value = baseInformation[i].YDDW;
-				document.getElementById("dgsj_" + num).value = baseInformation[i].YDSJ;
-				document.getElementById("jsqk_" + num).value = baseInformation[i].JSQK;
-				document.getElementById("zdmj_" + num).value = baseInformation[i].MJ;
+				document.getElementById('xcrq').value=baseInformation[0].HCRQ;
 			}
-		*/
-		}		
+			
+			//将导入的巡查成果写入违法项目当中
+			for(var i = 0; i < baseInformation.length; i++){
+					document.getElementById("jsdw_" + (i + 1)).value = baseInformation[i].YDDW;
+					document.getElementById("dgsj_" + (i + 1)).value = baseInformation[i].YDSJ;
+					document.getElementById("jsqk_" + (i + 1)).value = baseInformation[i].JSQK;
+					document.getElementById("zdmj_" + (i + 1)).value = baseInformation[i].MJ;
+					//document.getElementById("ywguid_" + (i + 1)).value = baseInformation[i].YW_GUID;						
+			}				
+		}
 	}
 
+
+		//抄告单在wbeoffice中生成
+		function createCgd(createId,flag){
+			isshowSave=false;
+			var tempNum = createId.charAt(4); 
+			var jsxm = document.getElementById("jsxm_" + tempNum).value;
+			var jsdw = document.getElementById("jsdw_" + tempNum).value;
+			var dgsj = document.getElementById("dgsj_" + tempNum).value;
+			var jsqk = document.getElementById("jsqk_" + tempNum).value;
+			var zdmj = document.getElementById("zdmj_" + tempNum).value;
+			var zdwz = document.getElementById("zdwz_" + tempNum).value;
+			var townname = document.getElementById("townname_" + tempNum).value;
+			var countyname = document.getElementById("countyname_" + tempNum).value;
+			if(jsxm == "" || jsdw == "" || dgsj =="" || jsqk== "" || zdmj == "" ||zdwz == ""|| townname == "" ||countyname == ""){
+				alert("信息不完整，不能生成抄告单。请将信息填写完整！！");
+				return;
+			}
+			
+			if(flag==1){
+			   if(confirm('原抄告单将被替换，是否重新生成抄告单！！')){
+			   		
+			   }else{
+			   		return;
+			   }
+			}
+      		
+			//巡查单位
+			var xcdw = document.getElementById("xcdw").value;
+			//var yw_guid = "";
+			var flag = true;
+			//获得抄告单编号
+			putClientCommond("dtxcManager","buildCgdbh");
+			putRestParameter("yw_guid",yw_guid);
+			putRestParameter("cgdid",createId);
+			cgdbh = restRequest();
+			//12个需要在抄告单.doc上面使用的参数
+			var subofficename = "subofficename=" + encodeURI(encodeURI("<%=strXcdwjc%>"));
+			var number = "&number="+cgdbh;
+			var districtname = "&districtname=" + encodeURI(encodeURI("<%=strXcdwjc%>"));
+			var vartownname = "&townname="+encodeURI(encodeURI(townname));
+			var varcountyname = "&countyname="+encodeURI(encodeURI(countyname));
+			var projectname = "&projectname="+encodeURI(encodeURI(jsxm));
+			var location = "&location="+encodeURI(encodeURI(zdwz));
+			var area = "&area="+encodeURI(encodeURI(zdmj));
+			var buildYear = "&buildYear="+dgsj.substring(0,4);
+			var buildMonth  = "&buildMonth="+dgsj.substring(5,7);
+			var Date = "&Date=" + encodeURI(encodeURI("<%=strDate%>"));
+			var district = "&district=" + encodeURI(encodeURI("<%=strXcdwjc%>"));
+			//yw_guid等参数
+			var strId = "&yw_guid="+yw_guid+"&file_id="+createId+"&flag="+flag;
+			//拼接参数
+			var strData = subofficename + number + districtname + 
+							vartownname + varcountyname + projectname + 
+							location + area + buildYear + 
+							buildMonth + Date +  district;
+			var strUrl = strData + strId;
+			//打开抄告单
+			window.open("../webOffice/webOfficeMain.jsp?"+strUrl);
+			
+			document.getElementById("div" + createId).innerHTML = "<a href='javascript:void(0);' id='span"+createId+"' onclick='lookCgd(this.id)' style='text-decoration:none'>查看抄告单</a>&nbsp;&nbsp;&nbsp;&nbsp;"+
+																	"<a href='javascript:void(0);' id='"+createId+"' onclick='createCgd(this.id,1)' style='text-decoration:none'>重新生成抄告单</a>"+
+																	"<input type='hidden' name='cgdqk_"+tempNum+"' id='cgdqk_"+tempNum+"' value='1'>";
+			//保存抄告单编号
+			putClientCommond("dtxcManager","saveCgdbh");
+			putRestParameter("yw_guid",yw_guid);
+			putRestParameter("cgdid",createId);
+      		putRestParameter("cgdbh",escape(escape(cgdbh)));
+      		putRestParameter("userid","<%=writerId %>");
+			restRequest();
+		}
+		
+		//查看已经生成过的抄告单
+		function lookCgd(lookId){
+			isshowSave=false;
+			var strLookId = lookId.substring(4);
+			//var yw_guid = "";
+			var flag = false;
+			var strUrl = "yw_guid="+yw_guid+"&file_id="+strLookId+"&flag="+flag;
+			window.open("../webOffice/webOfficeMain.jsp?"+strUrl);
+		}
+		
+		function showtbody(){
+			document.getElementById('add').style.display='';
+			document.getElementById('delete').style.display='';		
+			document.getElementById('info').style.display='block';
+		}
+		function hidetbody(){
+			document.getElementById('add').style.display='none';
+			document.getElementById('delete').style.display='none';
+			document.getElementById('info').style.display='none';
+		}
   </script>
   <body onLoad="onInit(); return false;">
   	<div id="fixed" class="Noprn" style="position: fixed; top: 5px; left: 0px"></div>
   	<div align="center" style="margin-bottom:20px"><h1 style="font-size: 25">国土资源执法监察巡查日志</h1></div>
   	<form method="post">
+  		<input type="hidden" name="yw_guid" id="yw_guid">
   	    <table align="center" cellpadding="0" cellspacing="0" width="600px" id="xcrztable">
 			<tr>
     			<td height="16" colspan="2"><div align="center">巡查单位</div></td>
@@ -146,18 +283,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<tr>
 				<td colspan="2"><div align="center">是否有违法</div></td>
 				<td colspan="3">
-					<input type="radio" name="sfywf" id="sfywf" value="是" />是
-					<input type="radio" name="sfywf" id="sfywf" value="否" />
+					<input type="radio" name="sfywf" id="sfywf1" value="是" onclick="showtbody()"/>是
+					<input type="radio" name="sfywf" id="sfywf2" value="否" onclick="hidetbody()"/>
 					否
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<input type="button" class="button" id="add" value="增加" onClick="addcgd(); return false;" />
 					<input type="button" class="button" id="delete" value="删除" onClick="deletecgd();return false;" />
+					<!--  
 					&nbsp;&nbsp;&nbsp;
 					<input type="button" class="button" id="imp" value="导入巡查成果" onClick="drxccg();return false;" />
-					<input type="text" id="allnum" name="allnum" value="3" style="display:none" />				</td>
+					-->
+					<input type="text" id="allnum" name="allnum" value="5" style="display:none" />				</td>
 			</tr>
+			<tbody id="info">
 			<tr>
-				<td rowspan="3"><div align="center"><input type="checkbox" id="check_1" /> </td>
+				<td rowspan="5"><div align="center"><input type="checkbox" id="check_1" /> </td>
 				<td><div align="center">建设项目</div></td>
 				<td>
 					<input type="text" class="noborder" name="jsxm_1" id="jsxm_1" style="width:97%" />				</td>
@@ -189,8 +329,37 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<td>
 					<input type="text" class="noborder" name="zdwz_1" id="zdwz_1" style="width:97%" />
 					<input type="text" style="display:none" id="ywguid_1" name="ywguid_1" />
-				</td>
+				</td>				
 			</tr>
+			<tr>
+				<td>
+					<div align="center">镇(办事处)</div>
+				</td>
+				<td>
+					<input type="text" class="noborder" name="townname_1" id="townname_1" style="width:97%" />
+				</td>	
+				<td>
+					<div align="center">村辖区</div>
+				</td>
+				<td>
+					<input type="text" class="noborder" name="countyname_1" id="countyname_1" style="width:97%" />
+				</td>						
+			</tr>
+			<tr>
+						<td>
+							<div align="center">
+								抄告单状态
+							</div>
+						</td>
+						<td colspan="3">
+							<div id="divcgd_1" align="center">
+								<span style="color:red">抄告单未生成</span>&nbsp;&nbsp;&nbsp;&nbsp;
+								<a href="javascript:void(0);" id="cgd_1" onclick="createCgd(this.id,0)" style="text-decoration:none">生成抄告单</a>
+								<input type="hidden" name="cgdqk_1" id="cgdqk_1" value="0">
+							</div>
+						</td>
+			</tr>
+			</tbody>			
 			<tr>
 				<td width="40" rowspan="2">
 					<p align="center">巡</p>
