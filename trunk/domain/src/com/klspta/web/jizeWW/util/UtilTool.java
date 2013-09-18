@@ -69,7 +69,7 @@ public class UtilTool extends AbstractBaseBean  {
 	 * @return
 	 */
 	public String getWeather() {
-		String url = "http://www.weather.com.cn/data/cityinfo/101190801.html";
+		String url = "http://www.weather.com.cn/data/cityinfo/101091011.html";
 		String result = doGet(url, null, "UTF-8", false);
 		return result;
 
