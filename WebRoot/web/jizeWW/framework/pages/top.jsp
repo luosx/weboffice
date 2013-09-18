@@ -88,7 +88,7 @@ document.getElementById("img").src='<%=basePath%>web/<%=name%>/framework/images/
 if("雪"==temp_image.substring(i,i+1)){
 document.getElementById("img").src='<%=basePath%>web/<%=name%>/framework/images/weather/004.png';
 }
- document.getElementById("weather").innerHTML="徐州"+temp;
+ document.getElementById("weather").innerHTML="鸡泽"+temp;
  }
 }
 
