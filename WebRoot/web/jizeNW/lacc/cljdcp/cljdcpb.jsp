@@ -43,9 +43,8 @@
 			var basePath = "<%=basePath%>";
 	
 		function initEdit(){
-			init();
-			document.getElementById("bh2").value=document.getElementById("bh").value
-				var singnames = "cbr01#fjldqz#zdldqz#hsyjqz#fgc#sjfgjzqz"  ;
+				init();
+				var singnames = "cbr01#cbdwqm#scqm#zgldqm"  ;
 				signLoad(singnames);
 		}
 			function save(){
@@ -68,7 +67,7 @@
 <div id="fixed" class="Noprn" style="position: fixed; top: 5px; left: 0px"></div>
 <% } %>
 <div style="margin:20px" class="tablestyle1" align="center" >
-<div align="center"><h1>违法案件处理决定呈批表</h1></div>
+<div align="center"><h1 style="font-size:20px;">违法案件处理决定呈批表</h1></div><br>
 <form method="post">
 <table class="lefttopborder1"  cellspacing="0" cellpadding="0" border="1"  bgcolor="#FFFFFF" bordercolor="#000000" width="600">
   <tr>
@@ -92,8 +91,7 @@
   <tr height="120">
     <td><div align="center">
       <p>主要违法</p>
-      <p>事实及处理</p>
-      <p>结&nbsp;&nbsp;&nbsp;果</p>
+      <p>事实及性质</p>
     </div></td>
     <td colspan="3"><textarea rows="5" name="zywfss" id="zywfss" style="width: 99%"></textarea></td>
   </tr>
@@ -102,7 +100,7 @@
     <td colspan="3"><textarea rows="5"  name="cbrjy" id="cbrjy" style="width: 99%"></textarea>
     	 <div class="div80">
 		  	<div class="divLeftFloat">签名：<input class="underline" type="text" name="cbr01" id="cbr01" onfocus="underwrite(this)"  onClick="sign(this);" style="width: 50px"/>
-		     <img  width="60" height="25" id="cbr01Sign" style="display:none" />
+		     <img  width="60" height="25" id="cbr01Sign" style="display:none" onclick="delSign(this)"/>
 		  	</div>
 		    <div>日期：<input type="text" class="underline" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})" name="cbrrq01" id="cbrrqQ01" readonly  style="width: 80px"/></div>
 		 </div>   
@@ -111,87 +109,49 @@
 
   <tr>
     <td><div align="center">
-      <p>分局领导</p>
-      <p>审查</p>
+      <p>承办单位</p>
       <p>意&nbsp;&nbsp;&nbsp;&nbsp;见</p>
     </div></td>
-    <td colspan="3"><textarea rows="5" name="fjldsc" id="fjldsc" style="width: 99%"></textarea>  
+    <td colspan="3"><textarea rows="5" name="cbdwyj" id="cbdwyj" style="width: 99%"></textarea>  
     	 <div class="div80">
-		  	<div class="divLeftFloat">签名：<input class="underline" type="text" name="fjldqz" id="fjldqz" onfocus="underwrite(this)" onClick="sign(this);" style="width: 50px"/>
-		  	<img  width="60" height="25" id="fjldqzSign" style="display:none" /></div>
-		    <div>日期：<input type="text" class="underline" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})" name="fjldrq" id="fjldrq" readonly style="width: 80px"/></div>
+		  	<div class="divLeftFloat">签名：<input class="underline" type="text" name="cbdwqm" id="cbdwqm" onfocus="underwrite(this)" onClick="sign(this);" style="width: 50px"/>
+		  	<img  width="60" height="25" id="cbdwqmSign" style="display:none" onclick="delSign(this)"/></div>
+		    <div>日期：<input type="text" class="underline" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})" name="cbdwqmrq" id="cbdwqmrq" readonly style="width: 80px"/></div>
 		 </div>	   
     </td>
   </tr>
   <tr>
     <td><div align="center">
-      <p>支队领导</p>
-      <p>审核</p>
+      <p>审&nbsp;&nbsp;&nbsp;&nbsp;查</p>
       <p>意&nbsp;&nbsp;&nbsp;&nbsp;见</p>
     </div></td>
-    <td colspan="3"><textarea rows="5" name="zdld" id="zdld" style="width: 99%"></textarea>   
+    <td colspan="3"><textarea rows="5" name="scyj" id="scyj" style="width: 99%"></textarea>   
     	 <div class="div80">
-		  	<div class="divLeftFloat">签名：<input class="underline" type="text" name="zdldqz" id="zdldqz" onfocus="underwrite(this)" onClick="sign(this);" style="width: 50px"/>
-		  	<img  width="60" height="25" id="zdldqzSign" style="display:none" /></div>
-		    <div >日期：<input type="text" class="underline" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})" name="zdldrq" id="zdldrq" readonly style="width: 80px"/></div>
-		 </div>	
-    </td>
-  </tr>
-      <tr>
-    <td><div align="center">
-      <p>会审意见</p>
-    </div></td>
-    <td colspan="3"><textarea rows="5" name="hsyj" id="hsyj" style="width: 99%"></textarea>   
-    	 <div class="div80">
-		  	<div class="divLeftFloat">签名：<input class="underline" type="text" name="hsyjqz" id="hsyjqz" onfocus="underwrite(this)" onClick="sign(this);" style="width: 50px"/>
-		  	<img  width="60" height="25" id="hsyjqzSign" style="display:none" /></div>
-		    <div >日期：<input type="text" class="underline" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})" name="hsyjsj" id="hsyjsj" readonly style="width: 80px"/></div>
+		  	<div class="divLeftFloat">签名：<input class="underline" type="text" name="scqm" id="scqm" onfocus="underwrite(this)" onClick="sign(this);" style="width: 50px"/>
+		  	<img  width="60" height="25" id="scqmSign" style="display:none" onclick="delSign(this)"/></div>
+		    <div >日期：<input type="text" class="underline" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})" name="scqmrq" id="scqmrq" readonly style="width: 80px"/></div>
 		 </div>	
     </td>
   </tr>
     <tr>
     <td><div align="center">
-      <p>法规处</p>
-       <p>审理</p>
+      <p>主管领导</p>
       <p>意&nbsp;&nbsp;&nbsp;见</p>
     </div></td>
-    <td colspan="3"><textarea rows="5" name="fgcsl" id="fgcsl" style="width: 99%"></textarea>   
+    <td colspan="3"><textarea rows="5" name="zgldyj" id="zgldyj" style="width: 99%"></textarea>   
     	 <div class="div80">
-		  	<div class="divLeftFloat">签名：<input class="underline" type="text" name="fgc" id="fgc" onfocus="underwrite(this)" onClick="sign(this);" style="width: 50px"/>
-		  	<img  width="60" height="25" id="fgcSign" style="display:none" /></div>
-		    <div >日期：<input type="text" class="underline" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})" name="fgcrq" id="fgcrq" readonly style="width: 80px"/></div>
+		  	<div class="divLeftFloat">签名：<input class="underline" type="text" name="zgldqm" id="zgldqm" onfocus="underwrite(this)" onClick="sign(this);" style="width: 50px"/>
+		  	<img  width="60" height="25" id="zgldqmSign" style="display:none" onclick="delSign(this)"/></div>
+		    <div >日期：<input type="text" class="underline" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})" name="zgldqmrq" id="zgldqmrq" readonly style="width: 80px"/></div>
 		 </div>	
     </td>
   </tr>
-    <tr>
-    <td><div align="center">
-      <p>市局分管局</p>
-      <p>长签批意见</p>
-     </div></td>
-    <td colspan="3"><textarea rows="5" name="sjfgjz" id="sjfgjz" style="width: 99%"></textarea>   
-    	 <div class="div80">
-		  	<div class="divLeftFloat">签名：<input class="underline" type="text" name="sjfgjzqz" id="sjfgjzqz" onfocus="underwrite(this)" onClick="sign(this);" style="width: 50px"/>
-		  	<img  width="60" height="25" id="sjfgjzqzSign" style="display:none" /></div>
-		    <div >日期：<input type="text" class="underline" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})" name="sjfgjzrq" id="sjfgjzrq" readonly style="width: 80px"/></div>
-		 </div>	
-    </td>
-  </tr>
-
   <tr>  
     <td><div align="center">备&nbsp;&nbsp;&nbsp;注</div></td>
     <td colspan="3"><textarea rows="5" name="bz" id="bz" style="width: 99%"></textarea></td>
   </tr>
 </table>
 </form>
-<table class="lefttoprightborder0" cellspacing="0" cellpadding="0" border="0"  bordercolor="#C2D6F0" width="600">
-  <tr>
-    <td class="lefttoprightborder0">&nbsp;</td>
-    <td width="79" class="lefttoprightborder0"><div align="center">立案编号:</div></td>
-    <td width="177" class="lefttoprightborder0">
-    <input class="noborder" name="bh" id="bh2" style="width: 98%;background-color:transparent;border:0px;font-size:11pt"/></td>
-  </tr>
-</table>
-
 </div>
 </body>
 <script>

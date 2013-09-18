@@ -22,3 +22,11 @@ function sign(check){
 	sign.src = URL;
 	sign.style.display = "";
 }
+
+function delSign(check){
+	check.style.display = "none";
+	var name = check.id;
+	var sign = name.substring(0,name.length-4);
+	document.getElementById(sign).style.display = "";
+	document.getElementById(sign).value = "";
+}
