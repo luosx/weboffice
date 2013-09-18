@@ -1,15 +1,19 @@
-﻿<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+﻿<%@page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@page import="com.klspta.model.projectinfo.ProjectInfo"%>
 <%@page import="com.klspta.console.user.User"%>
 <%@page import="org.springframework.security.core.context.SecurityContextHolder"%>
+<%@page import="com.klspta.console.ManagerFactory"%>
 <%
-    String path = request.getContextPath();
-    String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
- //获取当前登录用户
-	Object user = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+	//获取当前登录用户
+	Object user = SecurityContextHolder.getContext()
+			.getAuthentication().getPrincipal();
 	User userBean = (User) user;
-	String username=userBean.getFullName();
-    String name = ProjectInfo.getInstance().PROJECT_NAME;
+	String username = userBean.getFullName();
+	String name = ProjectInfo.getInstance().PROJECT_NAME;
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -22,87 +26,63 @@
         <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
         <meta http-equiv="description" content="This is my page">
         <%@ include file="/base/include/ext.jspf"%>
-		    <%@ include file="/base/include/restRequest.jspf" %>
+		<%@ include file="/base/include/restRequest.jspf" %>
 		<script src="<%=basePath%>/base/fxgis/framework/js/toJson.js"></script>
-	 <script>
- var number;
-  var t;  
-  function timedCount()  
-  {  
-    var result = ajaxRequest("<%=basePath%>","pADDataList","getNotReadNumber","");
-    number = eval('(' + result + ')');
-    number = "&nbsp;"+number;
-  }  
+	<script>
+	var var_flag;  
   
-  //车辆管理
- function carManage(){
-	 top.center.mapView.openURL("<%=basePath%>web/<%=name%>/carManager/carManager.jsp",1);
-	 packUpLeft();
- }
-  //平板回传
- function padResult(){
-	 top.center.mapView.openURL("<%=basePath%>web/<%=name%>/padResult/padDatalist.jsp",1);
-	 packUpLeft();
- }
-  //信访举报
- function letterVisit(){
-	 top.center.mapView.openURL("<%=basePath%>web/<%=name%>/xsjb/xfxsList.jsp",1);
-	 packUpLeft();
- }
-   //天地图举报信息
- function tdMapJb(){
-	 top.center.mapView.openURL("<%=basePath%>web/<%=name%>/tdMapjb/jblist.jsp",1);
-	 packUpLeft();
- }
-  //首页
- function gohome(){
-	 top.center.mapView.openMap();
-	 spreadLeft();
-	 
-	 
- }
-  //车辆跟踪
- function carMonitor(){
-	 top.center.left.location.href="<%=basePath%>web/<%=name%>/carMonitor/carMonitor.jsp";
-         top.center.mapView.frames["lower"].swfobject.getObjectById("FxGIS").clear();
-	 spreadLeft();
- }
-  //轨迹回放
- function carHistory(){
-	 top.center.left.location.href="<%=basePath%>web/<%=name%>/carHistory/carHistory.jsp";
-         top.center.mapView.frames["lower"].swfobject.getObjectById("FxGIS").clear();
-	 spreadLeft();
- }
-  //分析
- function carAnalyse(){
-	 top.center.mapView.openURL("<%=basePath%>web/<%=name%>/tjAnalyse/tjfxTree.jsp",1);
-	 packUpLeft();
- }
-  //动态巡查
- function showxuncha(){
-	 //top.center.mapView.openURL("<%=basePath%>service/rest/dtxcManager/buildXcrz",1);
-	 top.center.mapView.openURL("<%=basePath%>web/<%=name%>/dtxc/framework/content.jsp",1);
-	 packUpLeft();
- }
- function packUpLeft()
- {	
-  	 if(top.center.content.cols=='261,7,*'){
-    	 top.center.partline.turn();
-	 }
- }
- function spreadLeft()
- {
-  	 if(top.center.content.cols=='0,7,*'){
-    	 top.center.partline.turn();
-	 }
- }
- function vidoesC(){
- window.open("<%=basePath%>web/<%=name%>/videoMonitor/index.jsp");
- }
- function showkuangshan(){
-  window.open("http://218.3.204.222:8008");
- }
- </script>	
+	function openPage(url){
+		var_flag = url.split("/")[url.split("/").length - 1];//得到jsp页面名称
+		if(var_flag == "carMonitor.jsp"){
+			carMonitor();
+		}else if(var_flag == "carHistory.jsp"){
+			carHistory();
+		}else if(var_flag == "index.jsp"){
+			vidoesC();
+		}else{
+	  		top.center.mapView.openURL("<%=basePath%>web/<%=name%>/" + url,1);
+	  		packUpLeft();
+  		}
+	}
+  
+  	//首页
+	function gohome(){
+		top.center.mapView.openMap();
+		spreadLeft();
+	}
+	
+	//车辆跟踪
+	function carMonitor(){
+		top.center.left.location.href="<%=basePath%>web/<%=name%>/carMonitor/carMonitor.jsp";
+		top.center.mapView.frames["lower"].swfobject.getObjectById("FxGIS").clear();
+		spreadLeft();
+	}
+	
+	//轨迹回放
+	function carHistory(){
+		top.center.left.location.href="<%=basePath%>web/<%=name%>/carHistory/carHistory.jsp";
+		top.center.mapView.frames["lower"].swfobject.getObjectById("FxGIS").clear();
+		spreadLeft();
+	}
+	
+	//视频监控
+	function vidoesC(){
+		window.open("<%=basePath%>web/<%=name%>/videoMonitor/index.jsp");
+	}
+	
+	function packUpLeft()
+	{	
+		if(top.center.content.cols=='261,7,*'){
+			top.center.partline.turn();
+		}
+	}
+	
+	function spreadLeft(){
+		if(top.center.content.cols=='0,7,*'){
+			top.center.partline.turn();
+		}
+	}
+	</script>	
 		
 <style type="text/css">
 body {
@@ -174,90 +154,33 @@ body {
 	vertical-align:middle;
 	cursor:hand;
 }
-
-
 </style>
 
 </head>
-    <body onload="timedCount();">
+    <body>
 
-<ul class="menu">
-    <li style="width:12px;margin:0;">
-    	<img src="<%=basePath%>web/<%=name%>/framework/images/menu/menu_left.jpg"/>
-    </li>
-    <li onClick='gohome()' style="width:50px;">
-   	 	<img  class="menuicon" src="<%=basePath%>web/<%=name%>/framework/images/menu/home.png" />
-    	<span class="menutitle">首页</span>
-    </li>
-       <li onClick='tdMapJb()' style="width:105px;">
-	    <img class="menuseparate"  src="<%=basePath%>web/<%=name%>/framework/images/menu/split.png" />
-	    <img class="menuicon"  src="<%=basePath%>web/<%=name%>/framework/images/menu/call.png" />
-	    <span class="menutitle">天地图举报</span>
-    </li> 
-    <li onClick='letterVisit()' style="width:94px;">
-	    <img class="menuseparate"  src="<%=basePath%>web/<%=name%>/framework/images/menu/split.png" />
-	    <img class="menuicon"  src="<%=basePath%>web/<%=name%>/framework/images/menu/phone.png" />
-	    <span class="menutitle">12336举报</span>
-  
-    <li onClick='carMonitor()'>
-	    <img class="menuseparate" src="<%=basePath%>web/<%=name%>/framework/images/menu/split.png" />
-	    <img class="menuicon" src="<%=basePath%>web/<%=name%>/framework/images/menu/calendar.png" />
-	    <span class="menutitle">车辆跟踪</span>
-    </li>
-    
-    <li onClick='vidoesC()'>
-	    <img class="menuseparate"    src="<%=basePath%>web/<%=name%>/framework/images/menu/split.png" />
-	    <img  class="menuicon"  src="<%=basePath%>web/<%=name%>/framework/images/menu/viewC1.png" />
-	    <span class="menutitle">视频监控</span>
-    </li>
+		<ul class="menu">
+			<li style="width: 12px; margin: 0;">
+				<img src="<%=basePath%>web/<%=name%>/framework/images/menu/menu_left.jpg" />
+			</li>
+			<li onClick='gohome()' style="width: 50px;">
+				<img class="menuicon" src="<%=basePath%>web/<%=name%>/framework/images/menu/home.png" />
+				<span class="menutitle">首页</span>
+			</li>
+			<%out.print(ManagerFactory.getMenuManager().getWWMenuCode(userBean,"",1));%>
+		</ul>
+		<ul class="menuright">
+			<li style="width: 120; text-align: right; margin-right: 10px; cursor: auto;">
+				<span class="menutitle">欢迎您：<%=username%></span>
+			</li>
+			<li onclick="top.location.href='<%=basePath%>j_spring_security_logout';return false;">
+				<img src="<%=basePath%>web/<%=name%>/framework/images/menu/exit.png" class="menuicon" />
+				<span class="menutitle">退出</span>
+			</li>
+			<li style="width: 12px; margin: 0;">
+				<img src="<%=basePath%>web/<%=name%>/framework/images/menu/menu_right.jpg" />
+			</li>
+		</ul>
 
-    <li onClick='padResult()'>
-	    <img class="menuseparate"    src="<%=basePath%>web/<%=name%>/framework/images/menu/split.png"  />
-	    <img  class="menuicon"   src="<%=basePath%>web/<%=name%>/framework/images/menu/mail.png" />
-	    <span class="menutitle">平板回传</span>
-    </li>
-
-
-    <li onClick='carHistory()'>
-	    <img class="menuseparate"    src="<%=basePath%>web/<%=name%>/framework/images/menu/split.png" />
-	    <img class="menuicon"  src="<%=basePath%>web/<%=name%>/framework/images/menu/history.png"  />
-	    <span class="menutitle">轨迹回放</span>
-    </li>
-    
-    <li onClick='carAnalyse()'>
-	    <img  class="menuseparate"   src="<%=basePath%>web/<%=name%>/framework/images/menu/split.png"  />
-	    <img  class="menuicon"   src="<%=basePath%>web/<%=name%>/framework/images/menu/statistics3.png" />
-	    <span class="menutitle">统计分析</span>
-    </li>
-    
-    <li onClick='carManage()'>
-	    <img class="menuseparate"   src="<%=basePath%>web/<%=name%>/framework/images/menu/split.png" />
-	    <img  class="menuicon"  src="<%=basePath%>web/<%=name%>/framework/images/menu/preferences.png"  />
-	    <span class="menutitle">车辆管理</span>
-    </li>
-    
-    <li style="width:120px;"  onClick='showkuangshan()'>
-	    <img class="menuseparate"   src="<%=basePath%>web/<%=name%>/framework/images/menu/split.png" />
-	    <img  class="menuicon" src="<%=basePath%>web/<%=name%>/framework/images/menu/mineral.png"  />
-	    <span class="menutitle">矿产执法监察</span>
-    </li>
-    
-    <li style="width:120px;"  onClick='showxuncha()'>
-	    <img class="menuseparate"   src="<%=basePath%>web/<%=name%>/framework/images/menu/split.png" />
-	    <img  class="menuicon" src="<%=basePath%>web/<%=name%>/framework/images/menu/mineral.png"  />
-	    <span class="menutitle">动态巡查</span>
-    </li>
-    </ul>
-	<ul class="menuright" >
-    	<li style="width:120;text-align:right;margin-right:10px;cursor:auto;"><span class="menutitle">欢迎您：<%=username %></span></li>
-	    	<li onclick="top.location.href='<%=basePath %>j_spring_security_logout';return false;" >
-	    	<img  src="<%=basePath%>web/<%=name%>/framework/images/menu/exit.png"  class="menuicon"/>
-	    	<span class="menutitle">退出</span>
-    	</li>
-    	<li style="width:12px;margin:0;">
-    		<img src="<%=basePath%>web/<%=name%>/framework/images/menu/menu_right.jpg"/>
-    	</li>
-    </ul>
-
-    </body>
+	</body>
 </html>
