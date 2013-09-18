@@ -100,9 +100,9 @@
 			
 			//添加标签值
 
-  			document.all.WebOffice1.SetFieldValue("subofficename", '<%=subofficename%>', ""); 
+  			document.all.WebOffice1.SetFieldValue("subofficename", '', ""); 
 			document.all.WebOffice1.SetFieldValue("number", "<%=number%>", ""); 
-			document.all.WebOffice1.SetFieldValue("districtname", "<%=districtname%>", ""); 
+			document.all.WebOffice1.SetFieldValue("districtname", "", ""); 
 			document.all.WebOffice1.SetFieldValue("townname", "<%=townname%>", ""); 
 			document.all.WebOffice1.SetFieldValue("countyname", "<%=countyname%>", ""); 
 			document.all.WebOffice1.SetFieldValue("projectname", "<%=projectname%>", ""); 
@@ -111,7 +111,7 @@
 			document.all.WebOffice1.SetFieldValue("buildYear", "<%=buildYear%>", ""); 
 			document.all.WebOffice1.SetFieldValue("buildMonth", "<%=buildMonth%>", ""); 
 			document.all.WebOffice1.SetFieldValue("Date", "<%=Date%>", ""); 
-			document.all.WebOffice1.SetFieldValue("district", "<%=district%>", ""); 
+			document.all.WebOffice1.SetFieldValue("district", "", ""); 
   		
   			//将文档上传到ftp
   			uploadDoc();
