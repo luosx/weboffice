@@ -1,36 +1,40 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<%@page import="org.springframework.security.core.context.SecurityContextHolder"%>
+<%@page
+	import="org.springframework.security.core.context.SecurityContextHolder"%>
 <%@page import="com.klspta.console.user.User"%>
 <%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-Object userprincipal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-String userid = ((User)userprincipal).getUserID();
+    String path = request.getContextPath();
+    String basePath = request.getScheme() + "://" + request.getServerName() + ":"
+            + request.getServerPort() + path + "/";
+    Object userprincipal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    String userid = ((User) userprincipal).getUserID();
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
-  <head>
-    <base href="<%=basePath%>">
-    
-    <title>外业成果导入</title>
-    
-	<meta http-equiv="pragma" content="no-cache">
-	<meta http-equiv="cache-control" content="no-cache">
-	<meta http-equiv="expires" content="0">    
-	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-	<meta http-equiv="description" content="This is my page">
-	<%@ include file="/base/include/ext.jspf" %>
-	<%@ include file="/base/include/restRequest.jspf" %>
-	<script src="<%=basePath%>base/thirdres/ext/examples/ux/fileuploadfield/FileUploadField.js" type="text/javascript"></script>
-	<link rel="stylesheet" type="text/css" href="<%=basePath%>base/thirdres/ext/examples/ux/fileuploadfield/css/fileuploadfield.css"/>
+	<head>
+		<base href="<%=basePath%>">
 
-  </head>
-  <style type="text/css">
+		<title>外业成果导入</title>
 
-  </style>
-  
-  <script type="text/javascript">
+		<meta http-equiv="pragma" content="no-cache">
+		<meta http-equiv="cache-control" content="no-cache">
+		<meta http-equiv="expires" content="0">
+		<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+		<meta http-equiv="description" content="This is my page">
+		<%@ include file="/base/include/ext.jspf"%>
+		<%@ include file="/base/include/restRequest.jspf"%>
+		<script
+			src="<%=basePath%>base/thirdres/ext/examples/ux/fileuploadfield/FileUploadField.js"
+			type="text/javascript"></script>
+		<link rel="stylesheet" type="text/css"
+			href="<%=basePath%>base/thirdres/ext/examples/ux/fileuploadfield/css/fileuploadfield.css" />
+
+	</head>
+	<style type="text/css">
+</style>
+
+	<script type="text/javascript">
   
   var form;
   var win;
@@ -40,7 +44,7 @@ String userid = ((User)userprincipal).getUserID();
 	  labelAlign: 'right',    
 	  labelWidth: 60,  
 	  frame:true,
-      url:  "http://" + window.location.href.split("/")[2] + '/domain/service/rest/wyrwmanager/uploadResult?userid=<%=userid%>',
+      url:  "http://" + window.location.href.split("/")[2] + '/domain/service/rest/cgdrManager/uploadResult?userid=<%=userid%>',
 	  width: 500, 
 	  fileUpload: true,
 	  autoHeight: true,
@@ -85,7 +89,21 @@ String userid = ((User)userprincipal).getUserID();
 	      form.getForm().submit({  
 	      	waitMsg: '数据处理中...',
 	        success: function(form, action){  
-	             Ext.Msg.alert('提示','文件导入成功！,共导入'+action.result.msg+'条核查成果！',function(btn){document.location.reload();});  
+	        	 var result = action.result.msg;
+	        	 var array = result.split('@');
+	             Ext.Msg.alert('提示','文件导入成功！,共导入'+array[0]+'条核查成果！',function(btn){
+		             if(array[1].indexOf('XC')!=-1){
+				          Ext.MessageBox.confirm('提示','是否填写巡查日志？',function(btn){ 
+			              if(btn=='yes'){ 
+			              array[1] = array[1].replace(/#/g,'@');
+			              alert(array[1]); 
+			                 document.location.href='<%=basePath%>web/jizeWW/dtxc/xcrz/xcrz.jsp?simInfo='+array[1];
+			              }else{
+			              	 return;
+			              }    
+			             }); 
+			         }	             	             
+	             });  
 	        },  
 	        failure: function(){  
 	           Ext.Msg.alert('错误', '文件导入失败');  
@@ -121,9 +139,9 @@ String userid = ((User)userprincipal).getUserID();
    
   
   </script>
-  <body>
-   <div id="importWin" class="x-hidden">
-		<div id="importForm"></div>		
-   </div>
-  </body>
+	<body>
+		<div id="importWin" class="x-hidden">
+			<div id="importForm"></div>
+		</div>
+	</body>
 </html>
