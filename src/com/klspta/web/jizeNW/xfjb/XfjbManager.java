@@ -1,5 +1,6 @@
 package com.klspta.web.jizeNW.xfjb;
 
+import java.io.UnsupportedEncodingException;
 import java.text.DateFormatSymbols;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -115,5 +116,41 @@ public class XfjbManager extends AbstractBaseBean{
 		sqlBuffer.append(" order by t.BUILDYEAR DESC"); 
 		List<Map<String, Object>> returnList = query(sqlBuffer.toString(), YW);
 		return returnList;
+	}
+	
+	/**
+	 * 
+	 * <br>Description:得到前一条或者后一条的YW_GUID
+	 * <br>Author:姚建林
+	 * <br>Date:2013-9-12
+	 */
+	public void getPreOrNext(){
+		String preOrNext = request.getParameter("preOrNext");
+		String yw_guid = request.getParameter("yw_guid");
+		String keywords = request.getParameter("keyWord");
+		String status = request.getParameter("status");
+		String sql = "";
+		if("pre".equals(preOrNext)){
+			sql = "select yw_guid from wgwfxsdjb t where yw_guid = (select c.p from (select yw_guid,lag(yw_guid,1,0)"+
+					" over (order by BUILDYEAR) as p from wgwfxsdjb) c where c.yw_guid = ?) and t.status = " + status;
+		}else{
+			sql = "select yw_guid from wgwfxsdjb t where yw_guid = (select c.p from (select yw_guid,lead(yw_guid,1,0)"+
+					" over (order by BUILDYEAR) as p from wgwfxsdjb) c where c.yw_guid = ?) and t.status = " + status;
+		}
+		//添加关键字查询
+		if((keywords != null && !"".equals(keywords))){
+			try {
+				keywords = new String(keywords.getBytes("ISO8859-1"),"UTF-8");
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
+			sql = sql + " and (t.XSH||t.XSLX||t.BLFS||t.JBR||t.BJBDW like '%" + keywords + "%')";
+		}
+		List<Map<String, Object>> result = query(sql, YW, new Object[]{yw_guid});
+		if(result.size() == 0){
+			response("error");
+		}else{
+			response((String)result.get(0).get("yw_guid"));
+		}
 	}
 }
