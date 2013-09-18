@@ -2,18 +2,13 @@ package com.klspta.web.jizeWW.dtxc.cgdr;
 
 import java.io.File;
 import java.rmi.server.UID;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
-
 import com.klspta.base.AbstractBaseBean;
 import com.klspta.base.util.UtilFactory;
 import com.klspta.base.util.bean.xzqhutil.XzqhBean;
@@ -21,8 +16,6 @@ import com.klspta.base.wkt.Point;
 import com.klspta.base.wkt.Polygon;
 import com.klspta.base.wkt.Ring;
 import com.klspta.console.ManagerFactory;
-import com.klspta.console.role.Role;
-import com.klspta.console.role.RoleManager;
 import com.klspta.console.user.User;
 
 /**
@@ -73,11 +66,11 @@ public class ResultImp extends AbstractBaseBean {
             //解压缩
             UtilFactory.getZIPUtil().unZip(zipPath, folderpath);
             //xml读取,并返回成果精简信息
-            String impyw_guid = importData(folderpath + "//exp");
+            String returnVal = importData(folderpath + "//exp");
             //上传附件
             importAccessoryField(folderpath + "//exp");
             try {
-				response("{success:true,msg:\"" + impyw_guid + "\"}");
+				response("{success:true,msg:\"" + returnVal + "\"}");
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -129,18 +122,22 @@ public class ResultImp extends AbstractBaseBean {
     private String importData(String path) {
         File f = new File(path);
         File[] files = f.listFiles();
-        String impyw_guid = "";
+        int count = 0;
+        String yw_guid = "";
         for (int i = 0; i < files.length; i++) {
             File file = new File(files[i].getAbsolutePath());
             File[] childList = file.listFiles();
             for (int j = 0; j < childList.length; j++) {
                 String str = childList[j].getAbsolutePath();
                 if (str.toLowerCase().endsWith("xml")) {
-                    impyw_guid = impyw_guid + "##" + parseXml(str);
+                    String returnVal = parseXml(str);
+                    String[] array = returnVal.split("@");
+                    count += Integer.parseInt(array[0]);
+                    yw_guid += array[1]+"#";
                 }
             }
         }
-        return impyw_guid;
+        return count+"@"+yw_guid;
     }
 
     /**
@@ -306,7 +303,7 @@ public class ResultImp extends AbstractBaseBean {
         } catch (DocumentException e) {
             System.out.println(e.toString());
         }
-        return yw_guid;
+        return count+"@"+yw_guid;
     }
 
     /**
