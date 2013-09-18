@@ -48,21 +48,40 @@ public class WyrwManager extends AbstractBaseBean {
     
     /**
      * 
-     * <br>Description:根据巡查成果的主键（yw_guid）,返回巡查成果的简略信息
-     * <br>Author:黎春行
-     * <br>Date:2013-9-6
+     * <br>Description:TODO 方法功能描述
+     * <br>Author:王雷
+     * <br>Date:2013-9-17
      */
     public void getSimInfo(){
     	String simInfo = request.getParameter("simInfo");
-    	String[] simArray = simInfo.split("##");
-    	StringBuffer yw_guidBuffer = new StringBuffer();
-    	yw_guidBuffer.append("('");
-    	for(int i = 1; i < simArray.length; i++){
-    		yw_guidBuffer.append(simArray[i]).append("',");
+        if(simInfo!=null && !"".equals(simInfo)){
+        	String[] simArray = simInfo.split("@");
+        	StringBuffer yw_guidBuffer = new StringBuffer();
+        	yw_guidBuffer.append("(");
+        	for(int i = 0; i < simArray.length; i++){
+        		yw_guidBuffer.append("'").append(simArray[i]).append("',");
+        	}
+        	yw_guidBuffer.deleteCharAt(yw_guidBuffer.length()-1);
+        	yw_guidBuffer.append(")");
+        	String simsql = "select t.yw_guid, t.yddw, substr(replace(replace(t.ydsj,'年','-'),'月','-'),0,length(t.ydsj) - 5) ydsj,to_char(to_date(t.hcrq,'yyyy-MM-dd hh24:mi;ss'),'yyyy-MM-dd') hcrq, t.jsqk, t.mj from DC_YDQKDCB t where t.yw_guid in " + yw_guidBuffer.toString();
+        	List<Map<String, Object>> simList = query(simsql, YW);
+        	if(simList!=null && simList.size()>0){
+            	for(Map<String,Object> map:simList){
+            	    if(map.get("YDSJ")==null){
+            	        map.put("YDSJ", "");
+            	    }
+            	}
+        	}
+        	response(simList);
     	}
-    	yw_guidBuffer.append("null)");
-    	String simsql = "select t.yw_guid, t.yddw, substr(replace(replace(t.ydsj,'年','-'),'月','-'),0,length(t.ydsj) - 5) ydsj, t.jsqk, t.mj from DC_YDQKDCB t where t.yw_guid in " + yw_guidBuffer.toString();
-    	List<Map<String, Object>> simList = query(simsql, YW);
-    	response(simList);
+    }
+    
+    public static void main(String[] args){
+        String aaa="WP120130806160134_4@XC120130806155320@";
+        String[] bbb=aaa.split("@");
+        for(String ccc:bbb){
+            System.out.println(ccc);
+        }
+        System.out.println(bbb.length);
     }
 }

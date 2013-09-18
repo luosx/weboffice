@@ -155,6 +155,9 @@ public class DtxcManager extends AbstractBaseBean {
 		return strSta;
 	}
 	
+	
+	
+	
 	/**
 	 * 
 	 * <br>Title: 根据userid获得巡查日志列表
@@ -258,10 +261,16 @@ public class DtxcManager extends AbstractBaseBean {
 			String userid = request.getParameter("userid");
 			//向数据库中插入数据
 			sql = "insert into xcrzcgd (yw_guid,cgdid,cgdbh,userid) values (?,?,?,?)";
-			update(sql, YW, new Object[]{yw_guid,cgdid,cgdbh,userid});
-		}
+			update(sql, YW, new Object[]{yw_guid,cgdid,cgdbh,userid});		
+		}	
 	}
 	
+	public void getCgdState(){
+	    String yw_guid = request.getParameter("yw_guid");
+	    String sql = "select t.cgdqk from xcrz_cg t where t.yw_guid=? order by t.num asc";
+	    List<Map<String,Object>> list = query(sql,YW,new Object[]{yw_guid});
+	    response(list);
+	}
 
 	/**
 	 * 
