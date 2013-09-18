@@ -266,7 +266,7 @@ public class MenuManager extends AbstractBaseBean
 	 * @param userBean
 	 * @return
 	 */
-	private List<MenuBean> getMenuList(User userBean)
+	public  List<MenuBean> getMenuList(User userBean)
 	{
 		if (userBean == null)
 			return null;
@@ -299,7 +299,7 @@ public class MenuManager extends AbstractBaseBean
 	 * @param list
 	 * @return
 	 */
-	private Map<String, List<MenuBean>> getMenuMap(List<MenuBean> list)
+	public Map<String, List<MenuBean>> getMenuMap(List<MenuBean> list)
 	{
 		Map<String, List<MenuBean>> menuMap = new HashMap<String, List<MenuBean>>();
 
@@ -534,13 +534,12 @@ public class MenuManager extends AbstractBaseBean
 	 * @param maxLevel
 	 * @return
 	 */
-	private String buildMenuCode(List<MenuBean> list, Map<String, List<MenuBean>> menuMap, String parentId, int menuLevel, int maxLevel)
+	public String buildMenuCode(List<MenuBean> list, Map<String, List<MenuBean>> menuMap, String parentId, int menuLevel, int maxLevel)
 	{
 		listSort(list);
 		StringBuffer menuCode = new StringBuffer();
 		if (maxLevel != 0 && maxLevel < menuLevel)
 			return "";
-
 		menuCode.append("<span id='menu");
 		menuCode.append(parentId);
 		menuCode.append("_cm' class='menuDiv_");
@@ -1015,7 +1014,7 @@ public class MenuManager extends AbstractBaseBean
 	 * 
 	 * @param list
 	 */
-	private void listSort(List<MenuBean> list)
+	public void listSort(List<MenuBean> list)
 	{
 		MenuBean mbA;
 		MenuBean mbB;
@@ -1044,7 +1043,7 @@ public class MenuManager extends AbstractBaseBean
 	 * @param iconPath
 	 * @return
 	 */
-	private String getIconPath(String iconPath)
+	public String getIconPath(String iconPath)
 	{
 		if (iconPath != null && !("".equals(iconPath)))
 		{
