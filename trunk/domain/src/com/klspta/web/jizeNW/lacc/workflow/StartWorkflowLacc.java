@@ -36,7 +36,7 @@ public class StartWorkflowLacc extends AbstractBaseBean {
 		String wfinsId = WorkflowOp.getInstance().start(zfjcType,ManagerFactory.getUserManager().getUserWithId(userId).getFullName(), yw_guid);
 				
 		//2、处理业务相关初始化
-	    //立案呈批表编号生成规则 执立徐国土资【2013】128号
+	    //立案呈批表编号生成规则 鸡国土罚字【2013】第128号
 		Calendar cal = Calendar.getInstance();
 		int year = cal.get(Calendar.YEAR);
 		String selectSql="select bh from( select substr(t.bh,13,3) bh from lacpb t order by t.dateflag desc) where rownum=1";
@@ -52,9 +52,9 @@ public class StartWorkflowLacc extends AbstractBaseBean {
 	            bb.append("0");
 	        }
 	        bb.append(aa);
-			bh="执立徐国土资【"+year+"】"+bb.toString()+"号";
+			bh="鸡国土罚字【"+year+"】第"+bb.toString()+"号";
 		}else{
-			bh="执立徐国土资【"+year+"】001号";
+			bh="鸡国土罚字【"+year+"】第001号";
 		}
 		Date date=cal.getTime();
 		String insertSql="insert into lacpb(yw_guid,bh,slrq) values(?,?,?)";
@@ -69,7 +69,7 @@ public class StartWorkflowLacc extends AbstractBaseBean {
 		
 		//3、response参数封装及跳转
 		String urlPath = "/model/workflow/wf.jsp?yw_guid="
-				+ yw_guid + "&zfjcType=" + zfjcType + "&wfInsId=" + wfinsId+ "&buttonHidden=la,back&zfjcName=立案查处&returnPath=web/xuzhouNW/lacc/dbaj/dbaj.jsp";
+				+ yw_guid + "&zfjcType=" + zfjcType + "&wfInsId=" + wfinsId+ "&buttonHidden=la,back&zfjcName=立案查处&returnPath=web/jizeNW/lacc/dbaj/dbaj.jsp";
 		response(urlPath);
 	}
 	
