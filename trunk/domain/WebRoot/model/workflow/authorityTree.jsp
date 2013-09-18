@@ -2,6 +2,7 @@
 <%@page import="com.klspta.base.workflow.foundations.IWorkflowOp"%>
 <%@page import="com.klspta.base.workflow.foundations.WorkflowOp"%>
 <%@page import="com.klspta.model.resourcetree.TreeOperation"%>
+<%@page import="com.klspta.model.projectinfo.ProjectInfo"%>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":"
@@ -16,6 +17,8 @@
     map.put("zfjcType",zfjcType);
     String tree=TreeOperation.getInstance().getTree(map).getContent();
     String[] nodes=TreeOperation.getInstance().getWFTree(wfID,nodeName);
+    ProjectInfo project=ProjectInfo.getInstance();
+    String name = project.getFlag();
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -163,35 +166,35 @@ scrollbar-3dlight-color:#D4D0C8;
 		    			break;
 		    		case "立案呈批表":
 		    			formName = "lacpb";
-		    			urlName="web/xuzhouNW/lacc/lacp/lacpb";
+		    			urlName="web/<%=name%>/lacc/lacp/lacpb";
 		    			break;
 		    		case "违法案件处理决定呈批表":
 		    			formName = "cljdcpb";
-		    			urlName="web/xuzhouNW/lacc/cljdcp/cljdcpb";
+		    			urlName="web/<%=name%>/lacc/cljdcp/cljdcpb";
 		    			break;
 		    		case "处罚决定主要事项":
 		    			formName = "cfjdzysx";
-		    			urlName="web/xuzhouNW/lacc/cfjd/cfjdzysx";
+		    			urlName="web/<%=name%>/lacc/cfjd/cfjdzysx";
 		    			break;
 		    		case "处罚决定落实情况":
 		    			formName = "cfjdlsqk";
-		    			urlName="web/xuzhouNW/lacc/cfjd/cfjdlsqk";
+		    			urlName="web/<%=name%>/lacc/cfjd/cfjdlsqk";
 		    			break;
 		    		case "法律文书呈批表":
 		    			formName = "flwscpb";
-		    			urlName="web/xuzhouNW/lacc/flws/flwscpb";
+		    			urlName="web/<%=name%>/lacc/flws/flwscpb";
 		    			break;
 		    		case "违法案件结案呈批表":
 		    			formName = "jacpb";
-		    			urlName="web/xuzhouNW/lacc/jacp/jacpb";
+		    			urlName="web/<%=name%>/lacc/jacp/jacpb";
 		    			break;
 		    		case "违法线索反馈信息":
 		    			formName = "wfxsfkxx";
-		    			urlName="web/xuzhouNW/xfaj/wfxsfkxx";
+		    			urlName="web/<%=name%>/xfaj/wfxsfkxx";
 		    			break;
 		    		case "案件基本信息登记表":
 		    			formName = "ajjbxxdjb";
-		    			urlName="web/xuzhouNW/lacc/lacp/ajjbxxdjb";
+		    			urlName="web/<%=name%>/lacc/lacp/ajjbxxdjb";
 		    			break;		    			
 		    		default:
 		    			flag = false;

@@ -132,11 +132,13 @@ body {
          		user.options.add(new Option(userArray[j], userArray[j]));
          	}
          }
-         
+         document.getElementById('roleDiv').style.display="block";
        }else{
+		 document.getElementById('roleDiv').style.display="none";
          users=getUsers(null);
          user.options.length = 0;
          user.options.add(new Option(users,users));
+         assignee="true";
        }
    }
   
@@ -222,6 +224,7 @@ body {
 						List<Map<String, Object>> Roles = workflowOp.getAllRoles(currentNode, wfId);
 						if (Roles != null) {
 				%>
+				<div id="roleDiv">
 				<font color="#804000"><b>移交机构：</b> </font>
 				<select id="roles" onchange="changeUser()" style="width: 130px">
 					<%
@@ -236,6 +239,7 @@ body {
 						}
 					%>
 				</select>
+				</div>
 				<br />
 				<br />
 				<font color="#804000"><b>移&nbsp&nbsp交&nbsp&nbsp给：</b> </font>
@@ -255,6 +259,7 @@ body {
 							String owner = JBPMServices.getInstance().getExecutionService().getVariable(wfInsId, "owner")
 									.toString();
 				%>
+				<div id="roleDiv"></div>
 				<br />
 				<br />
 				<font color="#804000"><b>移&nbsp&nbsp交&nbsp&nbsp给：</b> </font>
