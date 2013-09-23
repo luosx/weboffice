@@ -2,8 +2,13 @@
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+	
 	String type = request.getParameter("type");
 	String yw_guid = request.getParameter("yw_guid");
+	String keyWord = request.getParameter("keyWord");
+	if(keyWord != null){
+		keyWord = new String(keyWord.getBytes("ISO8859-1"),"UTF-8");
+	}
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -25,6 +30,6 @@
 		<frame id="upper" name="upper" scrolling="NO" noresize
 			src="web/jizeNW/xfjb/xfdj/back.jsp?type=<%=type%>" />
 		<frame id="lower" name="lower" scrolling="NO" noresize
-			src="web/jizeNW/xfjb/xfdj/xfajTab.jsp?enterFlag=flag&yw_guid=<%=yw_guid%>" /><!-- 这里添加的enterFlag=flag是为了标识表单是从待办或已办中进入，不是从新增中进入 -->
+			src="web/jizeNW/xfjb/xfdj/xfajTab.jsp?enterFlag=flag&yw_guid=<%=yw_guid%>&keyWord=<%=keyWord%>" /><!-- 这里添加的enterFlag=flag是为了标识表单是从待办或已办中进入，不是从新增中进入 -->
 	</frameset>
 </html>

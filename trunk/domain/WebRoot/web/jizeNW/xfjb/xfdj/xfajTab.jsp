@@ -6,8 +6,12 @@
 	
 	String yw_guid = request.getParameter("yw_guid");
 	String enterFlag = request.getParameter("enterFlag");
+	String keyWord = request.getParameter("keyWord");
 	if(yw_guid == null || "".equals(yw_guid)){
 		yw_guid = UtilFactory.getStrUtil().getGuid();
+	}
+	if(keyWord != null){
+		keyWord = new String(keyWord.getBytes("ISO8859-1"),"UTF-8");
 	}
 %>
 
@@ -45,7 +49,7 @@
 	        items:[
 	        	{
 	                title: '<font size="2">线索登记表</font>',
-	                html: "<iframe width='"+w+"' height='"+h+"' src='wgwfxsdjb.jsp?enterFlag=<%=enterFlag%>&yw_guid=<%=yw_guid%>'/>" 
+	                html: "<iframe width='"+w+"' height='"+h+"' src='wgwfxsdjb.jsp?enterFlag=<%=enterFlag%>&yw_guid=<%=yw_guid%>&keyWord=<%=keyWord%>'/>" 
 	            },{
 	                title: '<font size="2">附件管理</font>',
 	                html: "<iframe width='"+w+"' height='"+h+"' src='/domain/model/accessory/dzfj/accessorymain.jsp?yw_guid=<%=yw_guid%>'/>" 
