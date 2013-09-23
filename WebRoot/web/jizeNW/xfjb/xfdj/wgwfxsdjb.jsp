@@ -11,15 +11,23 @@
     //用于生成表单创建时间和表单登记时间        
 	String strDate = UtilFactory.getDateUtil().getFormatDate("yyyy-MM-dd HH:mm:ss",new Date());
 	
-	//生成信访编号
 	XfjbManager xfjbManager = new XfjbManager();
-	String strXSH = xfjbManager.buildXSH();
 	
 	//当newForm为"true"时，表示表单是新建表单；当newForm为"false"时表示是保存之后的表单
 	String newForm = xfjbManager.checkGuid(yw_guid);
 	
+	//生成信访编号
+	String strXSH = "";
+	if("true".equals(newForm)){
+		strXSH = xfjbManager.buildXSH();
+	}
+	
 	//用来标志表单是从新增信访、待办信访、已办信访中打开；其中新增信访为null、其他两个为flag
 	String enterFlag = request.getParameter("enterFlag");
+	String keyWord = request.getParameter("keyWord");
+	if(keyWord != null){
+		keyWord = new String(keyWord.getBytes("ISO8859-1"),"UTF-8");
+	}
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -110,11 +118,49 @@
 					}
 				}
 			}
+			
+			//下一条
+			function toNext(){
+				var var_status = document.getElementById("status").value;
+				putClientCommond("xfjbManager","getPreOrNext");
+				putRestParameter("preOrNext","next");
+				putRestParameter("yw_guid","<%=yw_guid%>");
+				putRestParameter("keyWord","<%=keyWord%>");
+				putRestParameter("status",var_status);
+				var result = restRequest();
+				if(result == "error"){
+					alert("当前页已是最后一条");
+					return ; 
+				}
+				document.location.href="<%=basePath%>/web/jizeNW/xfjb/xfdj/wgwfxsdjb.jsp?enterFlag=<%=enterFlag%>&yw_guid=" + result +"&keyWord=<%=keyWord%>"; 
+			}
+			
+			//上一条
+			function toPre(){
+				var var_status = document.getElementById("status").value;
+				putClientCommond("xfjbManager","getPreOrNext");
+				putRestParameter("preOrNext","pre");
+				putRestParameter("yw_guid","<%=yw_guid%>");
+				putRestParameter("keyWord","<%=keyWord%>");
+				putRestParameter("status",var_status);
+				var result = restRequest();
+				if(result == "error"){
+					alert("当前页已是第一条");
+					return ; 
+				}
+				document.location.href="<%=basePath%>/web/jizeNW/xfjb/xfdj/wgwfxsdjb.jsp?enterFlag=<%=enterFlag%>&yw_guid=" + result +"&keyWord=<%=keyWord%>"; 
+			}
 		</script>
 	</head>
 
 	<body bgcolor="#FFFFFF">
 		<div id="fixed" class="Noprn" style="position: fixed; top: 5px; left: 0px"></div>
+		<%if("flag".equals(enterFlag)){ %>
+			<div align="right" style="margin-top:15px;margin-right:20px;">
+				<input type="button" value="上一条" onclick="toPre();return false;"/>&nbsp;&nbsp;&nbsp;
+				<input type="button" value="下一条" onclick="toNext();return false;"/>
+			</div>
+		<% }%>
 		<div style="margin: 20px" class="tablestyle1" align="center">
 			<div align="center">
 				<font size="6">

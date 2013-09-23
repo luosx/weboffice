@@ -120,7 +120,8 @@ function pro(id){
 
 //点击查看时，查看详细信息
 function process(id){
-	var url = "<%=basePath%>web/jizeNW/xfjb/xfdj/xfajFrame.jsp?type=blz&yw_guid=" + id;
+	var keyWord=Ext.getCmp('keyword').getValue();
+	var url = "<%=basePath%>web/jizeNW/xfjb/xfdj/xfajFrame.jsp?type=blz&yw_guid=" + id +"&keyWord=" + keyWord;
 	document.location.href = url;
 }
 
