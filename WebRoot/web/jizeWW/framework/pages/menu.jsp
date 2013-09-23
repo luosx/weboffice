@@ -2,18 +2,16 @@
 <%@page import="com.klspta.model.projectinfo.ProjectInfo"%>
 <%@page import="com.klspta.console.user.User"%>
 <%@page import="org.springframework.security.core.context.SecurityContextHolder"%>
-<%@page import="com.klspta.console.ManagerFactory"%>
+<%@page import="com.klspta.web.jizeWW.framework.WWmenuManager"%>
 <%
 	String path = request.getContextPath();
-	String basePath = request.getScheme() + "://"
-			+ request.getServerName() + ":" + request.getServerPort()
-			+ path + "/";
+	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 	//获取当前登录用户
-	Object user = SecurityContextHolder.getContext()
-			.getAuthentication().getPrincipal();
+	Object user = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 	User userBean = (User) user;
 	String username = userBean.getFullName();
 	String name = ProjectInfo.getInstance().PROJECT_NAME;
+	WWmenuManager wwmenuManager = new WWmenuManager();
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -25,8 +23,6 @@
         <meta http-equiv="expires" content="0">
         <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
         <meta http-equiv="description" content="This is my page">
-        <%@ include file="/base/include/ext.jspf"%>
-		<%@ include file="/base/include/restRequest.jspf" %>
 		<script src="<%=basePath%>/base/fxgis/framework/js/toJson.js"></script>
 	<script>
 	var var_flag;  
@@ -34,15 +30,24 @@
 	function openPage(url){
 		var_flag = url.split("/")[url.split("/").length - 1];//得到jsp页面名称
 		if(var_flag == "carMonitor.jsp"){
-			carMonitor();
+			carMonitor(url);
 		}else if(var_flag == "carHistory.jsp"){
-			carHistory();
+			carHistory(url);
 		}else if(var_flag == "index.jsp"){
-			vidoesC();
+			vidoesC(url);
 		}else{
 	  		top.center.mapView.openURL("<%=basePath%>web/<%=name%>/" + url,1);
 	  		packUpLeft();
   		}
+	}
+	
+	function openMenu(menuId){
+		top.center.left.location.href="<%=basePath%>web/<%=name%>/framework/pages/leftmenu.jsp?menuId="+menuId;
+		spreadLeft();
+	}
+	
+	function clickMenu(obj,menuId){	
+		openMenu(menuId);
 	}
   
   	//首页
@@ -52,22 +57,24 @@
 	}
 	
 	//车辆跟踪
-	function carMonitor(){
-		top.center.left.location.href="<%=basePath%>web/<%=name%>/carMonitor/carMonitor.jsp";
-		top.center.mapView.frames["lower"].swfobject.getObjectById("FxGIS").clear();
+	function carMonitor(url){
 		spreadLeft();
+		top.center.left.location.href="<%=basePath%>web/<%=name%>/" + url;
+		top.center.mapView.openMap();
+		top.center.mapView.frames["lower"].swfobject.getObjectById("FxGIS").clear();
 	}
 	
 	//轨迹回放
-	function carHistory(){
-		top.center.left.location.href="<%=basePath%>web/<%=name%>/carHistory/carHistory.jsp";
-		top.center.mapView.frames["lower"].swfobject.getObjectById("FxGIS").clear();
+	function carHistory(url){
 		spreadLeft();
+		top.center.left.location.href="<%=basePath%>web/<%=name%>/" + url;
+		top.center.mapView.openMap();
+		top.center.mapView.frames["lower"].swfobject.getObjectById("FxGIS").clear();
 	}
 	
 	//视频监控
-	function vidoesC(){
-		window.open("<%=basePath%>web/<%=name%>/videoMonitor/index.jsp");
+	function vidoesC(url){
+		window.open("<%=basePath%>web/<%=name%>/" + url);
 	}
 	
 	function packUpLeft()
@@ -167,7 +174,7 @@ body {
 				<img class="menuicon" src="<%=basePath%>web/<%=name%>/framework/images/menu/home.png" />
 				<span class="menutitle">首页</span>
 			</li>
-			<%out.print(ManagerFactory.getMenuManager().getWWMenuCode(userBean,"",1));%>
+			<%out.print(wwmenuManager.getWWMenuCode(userBean,"",1));%>
 		</ul>
 		<ul class="menuright">
 			<li style="width: 120; text-align: right; margin-right: 10px; cursor: auto;">
