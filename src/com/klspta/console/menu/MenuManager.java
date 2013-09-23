@@ -1,4 +1,4 @@
-package com.klspta.console.menu;
+﻿package com.klspta.console.menu;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,7 +13,6 @@ import com.klspta.console.user.User;
 
 public class MenuManager extends AbstractBaseBean
 {
-
 	private static MenuManager instance = new MenuManager();
 
 	private Map<String, MenuBean> menuBeanMap;
@@ -22,7 +21,6 @@ public class MenuManager extends AbstractBaseBean
 	private MenuManager()
 	{
 		flush();
-
 	}
 
 	public static MenuManager getInstance(String key) throws Exception
@@ -87,7 +85,6 @@ public class MenuManager extends AbstractBaseBean
 	 */
 	public void delete(MenuBean menuBean)
 	{
-
 		StringBuffer sqlBuffer = new StringBuffer("delete core_menu t where  t.menuid in (");
 		List<MenuBean> list = getChildMenuList(menuBean);
 		Object[] args = new Object[list.size()];
@@ -100,7 +97,6 @@ public class MenuManager extends AbstractBaseBean
 		}
 		String sql = sqlBuffer.substring(0, sqlBuffer.length() - 1) + ")";
 
-		// System.out.println(sql);
 		update(sql, CORE, args);
 		flush();
 	}
@@ -359,7 +355,6 @@ public class MenuManager extends AbstractBaseBean
 		List<MenuBean> childList = null;
 		for (MenuBean mb : list)
 		{
-
 			if (extJsonCode.length() > 1)
 			{
 				extJsonCode.append(",");
@@ -414,7 +409,6 @@ public class MenuManager extends AbstractBaseBean
 		{
 			for (MenuBean mb : list)
 			{
-
 				mb.setChecked("true");
 				set.add(mb);
 			}
@@ -424,7 +418,6 @@ public class MenuManager extends AbstractBaseBean
 		Map<String, List<MenuBean>> menuMap = getMenuMap(roleMenuList);
 
 		List<MenuBean> rootList = menuMap.get("0");
-		// System.out.println(menuMap.get("2_"+list.get(1).getMenuId()).get(1).getMenuName());
 		String jsonCore = addExtMenuItemJsonCore(rootList, menuMap, "false");
 		return jsonCore;
 	}
@@ -447,7 +440,6 @@ public class MenuManager extends AbstractBaseBean
 		listSort(list);
 		for (MenuBean mb : list)
 		{
-
 			if (extJsonCore.length() > 1)
 			{
 				extJsonCore.append(",");
@@ -461,7 +453,6 @@ public class MenuManager extends AbstractBaseBean
 			String checkedsStr = "true";
 			if ("false".equals(checked))
 			{
-
 				checkedsStr = "true".equals(mb.getChecked()) ? "true" : "false";
 			}
 			extJsonCore.append(checkedsStr);
@@ -683,8 +674,125 @@ public class MenuManager extends AbstractBaseBean
 		return menuItemCode;
 	}
 	
-
+	public String getMenuOACode(User user, String parentId, int maxLevel)
+	{
+		List<MenuBean> list = getMenuList(user);
 	
+		Map<String, List<MenuBean>> menuMap = getMenuMap(list);
+	
+		if ("".equals(parentId))
+		{
+			parentId = "0";
+		}
+		list = menuMap.get(parentId);
+
+		if (list == null)
+			return "&nbsp;";
+		return buildMenuOACode(list, menuMap, parentId, 1, maxLevel);
+	}
+	
+	private String buildMenuOACode(List<MenuBean> list, Map<String, List<MenuBean>> menuMap, String parentId, int menuLevel, int maxLevel)
+	{
+		listSort(list);
+		StringBuffer menuCode = new StringBuffer();
+		if (maxLevel != 0 && maxLevel < menuLevel)
+			return "";
+
+		menuCode.append("<span id='menu");
+		menuCode.append(parentId);
+		menuCode.append("_cm' class='menuDiv_");
+		menuCode.append(menuLevel);
+		menuCode.append("' ");
+		menuCode.append("name='menu");
+		menuCode.append(menuLevel);
+		menuCode.append("'>");
+
+		List<MenuBean> childMenuList;
+		boolean isLeaf = true;
+	
+		for (MenuBean mb : list)
+		{
+			childMenuList = menuMap.get(mb.getMenuId());
+			if (childMenuList != null)
+			{
+				isLeaf = false;
+			}
+
+			menuCode.append(getMenuOAItemCode(mb, isLeaf, menuLevel).toString());
+
+			if (!isLeaf)
+			{
+				menuCode.append(buildMenuOACode(childMenuList, menuMap, mb.getMenuId(), menuLevel + 1, maxLevel));
+			}
+			isLeaf = true;
+		}
+		if(menuLevel==2)
+		{
+			menuCode.append("<div id='"+parentId+"_bottom' class='bottomline'></div>");
+		}
+		menuCode.append("</span>");
+
+		return menuCode.toString();
+	}
+
+	/**
+	 * 
+	 * <br>
+	 * Description:菜单模板 <br>
+	 * Author:任宝龙 <br>
+	 * Date:2012-6-12
+	 * 
+	 * @param menuBean
+	 * @param isLeaf
+	 * @param menuLevel
+	 * @return
+	 */
+	private StringBuffer getMenuOAItemCode(MenuBean menuBean, boolean isLeaf, int menuLevel)
+	{
+		StringBuffer menuItemCode = new StringBuffer();
+		String mouseOver = "red";
+		String mouseOut = "black";
+
+		if (menuLevel == 1)
+		{
+			mouseOver = getIconPath(menuBean.getIcon());// "#0B6DDA";//
+			mouseOut = menuBean.getIcon();// "#0C4B8E";
+		}
+		menuItemCode.append("<div class='menu_" + menuLevel);
+		if (!isLeaf)
+		{
+			menuItemCode.append("' onclick='openMenu(\"");
+			menuItemCode.append( menuBean.getMenuId());
+			menuItemCode.append( "\")'");
+		} else
+		{
+			menuItemCode.append("' onclick='openPage(\"" );
+			menuItemCode.append(menuBean.getUrl_center());
+			menuItemCode.append("\")'");
+		}
+
+		String iconPath = menuBean.getIcon();
+		if (!isLeaf && menuLevel == 2)
+		{
+			iconPath = getIconPath(iconPath);
+		}
+
+		menuItemCode.append(" onmouseover=\" mouserMenuMoveOnOrOut(this,'" + mouseOver + "')\"");
+		menuItemCode.append(" onmouseout=\" mouserMenuMoveOnOrOut(this,'" + mouseOut + "')\"");
+		menuItemCode.append(">");
+		
+		menuItemCode.append("<img id='img_" + menuBean.getMenuId() + "' class='img_" + menuLevel + "'  src='../images/left/" + iconPath + "'/>");
+		menuItemCode.append("<span class='worldStyle_" + menuLevel + "'>");
+		menuItemCode.append(menuBean.getMenuName());
+		menuItemCode.append("</span>");
+		if (menuLevel == 3)
+		{
+			menuItemCode.append("<span class='line'></span>");
+		}	
+		menuItemCode.append("</div>");
+		return menuItemCode;
+	}
+
 	/**
 	 * 
 	 * <br>
@@ -744,11 +852,7 @@ public class MenuManager extends AbstractBaseBean
 	 */
 	public String getPerConfig()
 	{
-		// JdbcTemplate jt = Globals.getCoreJdbcTemplate();
-		// List
-		// list=jt.queryForList("select t.menuid from menu t where t.flag='1' and t.east='1'");
 		String sql = "select t.menuid from core_menu t where t.flag='1' and t.east='1'";
-		// List list = new ArrayList();
 		List<Map<String, Object>> list = query(sql, AbstractBaseBean.CORE);
 		StringBuffer sb = new StringBuffer();
 		if (list != null && list.size() > 0)
@@ -773,9 +877,6 @@ public class MenuManager extends AbstractBaseBean
 	 */
 	public String getTabConfig()
 	{
-		// JdbcTemplate jt = Globals.getCoreJdbcTemplate();
-		// List
-		// list=jt.queryForList("select t.menuid from menu t where t.flag='1' and  t.center='1'");
 		String sql = "select t.menuid from core_menu t where t.flag='1' and  t.center='1'";
 		List<Map<String, Object>> list = query(sql, AbstractBaseBean.CORE);
 		StringBuffer sb = new StringBuffer();
@@ -801,9 +902,6 @@ public class MenuManager extends AbstractBaseBean
 	 */
 	public String getLocalConfig()
 	{
-		// JdbcTemplate jt = Globals.getCoreJdbcTemplate();
-		// List
-		// list=jt.queryForList("select t.menuid from menu t where t.flag='1' and t.local='1'");
 		String sql = "select t.menuid from core_menu t where t.flag='1' and t.local='1'";
 		List<Map<String, Object>> list = query(sql, AbstractBaseBean.CORE);
 		StringBuffer sb = new StringBuffer();
@@ -817,6 +915,4 @@ public class MenuManager extends AbstractBaseBean
 		}
 		return sb.toString();
 	}
-
-
 }
