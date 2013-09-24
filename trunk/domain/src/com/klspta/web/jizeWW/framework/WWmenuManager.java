@@ -26,8 +26,7 @@ public class WWmenuManager extends AbstractBaseBean{
 		List<MenuBean> list = ManagerFactory.getMenuManager().getMenuList(user);
 		Map<String, List<MenuBean>> menuMap = ManagerFactory.getMenuManager().getMenuMap(list);
 
-		if ("".equals(parentId))
-		{
+		if ("".equals(parentId)){
 			parentId = "0";
 		}
 		list = menuMap.get(parentId);
@@ -36,7 +35,6 @@ public class WWmenuManager extends AbstractBaseBean{
 			return "&nbsp;";
 		}
 		return buildWWMenuCode(list, menuMap, parentId, 1, maxLevel);
-
 	}
 
 	/**
@@ -62,27 +60,21 @@ public class WWmenuManager extends AbstractBaseBean{
 
 		List<MenuBean> childMenuList;
 		boolean isLeaf = true;
-		for (MenuBean mb : list)
-		{
+		for (MenuBean mb : list){
 			childMenuList = menuMap.get(mb.getMenuId());
-			if (childMenuList != null)
-			{
+			if (childMenuList != null){
 				isLeaf = false;
 			}
-			if (maxLevel == 0)
-			{
+			if (maxLevel == 0){
 				menuCode.append(getWWMenuItemCode(mb, isLeaf, menuLevel).toString());
-			} else
-			{
+			} else {
 				menuCode.append(getWWNavMenuItemCode(mb, isLeaf)).toString();
 			}
 
-			if (!isLeaf)
-			{
+			if (!isLeaf){
 				menuCode.append(ManagerFactory.getMenuManager().buildMenuCode(childMenuList, menuMap, mb.getMenuId(), menuLevel + 1, maxLevel));
 			}
 			isLeaf = true;
-
 		}
 
 		return menuCode.toString();
@@ -104,62 +96,21 @@ public class WWmenuManager extends AbstractBaseBean{
 	private StringBuffer getWWMenuItemCode(MenuBean menuBean, boolean isLeaf, int menuLevel) throws Exception
 	{
 		StringBuffer menuItemCode = new StringBuffer();
-		String mouseOver = "red";
-		String mouseOut = "black";
 
-		if (menuLevel == 1)
-		{
-			mouseOver = ManagerFactory.getMenuManager().getIconPath(menuBean.getIcon());// "#0B6DDA";//
-														// "#46A3FF";
-			mouseOut = menuBean.getIcon();// "#0C4B8E";
-		}
-
-		menuItemCode.append("<div class='menu_" + menuLevel);
-		if (!isLeaf)
-		{
-			menuItemCode.append("' onclick='openMenu(\"");
-			menuItemCode.append( menuBean.getMenuId());
-			menuItemCode.append( "\")'");
-		} else
-		{
-			menuItemCode.append("' onclick='openPage(\"" );
-			menuItemCode.append(menuBean.getUrl_center());
-			menuItemCode.append("\")'");
-		}
-
-		String iconPath = menuBean.getIcon();
-		if (!isLeaf && menuLevel != 1)
-		{
-			iconPath = ManagerFactory.getMenuManager().getIconPath(iconPath);
-		}
-
-		menuItemCode.append(" onmouseover=\" mouserMenuMoveOnOrOut(this,'" + mouseOver + "')\"");
-		menuItemCode.append(" onmouseout=\" mouserMenuMoveOnOrOut(this,'" + mouseOut + "')\"");
-		menuItemCode.append(">");
-		if (menuLevel == 1)
-		{
-			if (iconPath != "")
-				menuItemCode.append("<img id='img_" + menuBean.getMenuId() + "' class='img_" + menuLevel + "'  src='../images/menu/" + iconPath + "'/>");
-			else
-			{
-				menuItemCode.append("<span class='worldStyle_" + menuLevel + "'>");
-				menuItemCode.append(menuBean.getMenuName());
-				menuItemCode.append("</span>");
-			}
-		} else
-		{
-			menuItemCode.append("<img id='img_" + menuBean.getMenuId() + "' class='img_" + menuLevel + "'  src='../images/left/" + iconPath + "'/>");
-			menuItemCode.append("<span class='worldStyle_" + menuLevel + "'>");
-			menuItemCode.append(menuBean.getMenuName());
-			menuItemCode.append("</span>");
-		}
-		if (isLeaf)
-		{
-			menuItemCode.append("<img id='sel_" + menuBean.getUrl_center() + "' class='selectImg_" + menuLevel + "' src='../images/left/selectImg.png' />");
-		}
-		menuItemCode.append("</div>");
+		menuItemCode.append("<li class='menu_" + menuLevel);
+		menuItemCode.append("' onclick='openPage(\"" );
+		menuItemCode.append(menuBean.getUrl_center());
+		menuItemCode.append("\")'>");
+		
+		menuItemCode.append("<img class=\"menuicon\" src=\"../images/menu/");
+		menuItemCode.append(menuBean.getIcon());
+		menuItemCode.append("\" />&nbsp;&nbsp;");
+		menuItemCode.append("<span class=\"menutitle\">");
+		menuItemCode.append(menuBean.getMenuName());
+		menuItemCode.append("</span>");
+		
+		menuItemCode.append("</li>");
 		return menuItemCode;
-
 	}
 	
 	/**
@@ -177,12 +128,9 @@ public class WWmenuManager extends AbstractBaseBean{
 	{
 		StringBuffer menuItemCode = new StringBuffer();
 		menuItemCode.append("<li ");
-		if (isLeaf)
-		{
+		if (isLeaf){
 			menuItemCode.append("onclick='openPage(\"" + menuBean.getUrl_center() + "\")'\" />");
-		} 
-		else
-		{
+		}else{
 			menuItemCode.append("onclick='clickMenu(this,\"" + menuBean.getMenuId() + "\");return false;' ");
 		}
 
@@ -197,5 +145,4 @@ public class WWmenuManager extends AbstractBaseBean{
 
 		return menuItemCode;
 	}
-
 }
