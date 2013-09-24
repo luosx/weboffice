@@ -83,5 +83,8 @@ public class WyrwManager extends AbstractBaseBean {
             System.out.println(ccc);
         }
         System.out.println(bbb.length);
+        
+        String a="yw_guid";
+        System.out.println(a.toUpperCase());
     }
 }
