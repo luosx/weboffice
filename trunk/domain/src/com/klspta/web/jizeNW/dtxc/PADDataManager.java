@@ -9,6 +9,7 @@ import com.klspta.base.AbstractBaseBean;
 import com.klspta.base.util.UtilFactory;
 import com.klspta.base.wkt.Polygon;
 import com.klspta.console.ManagerFactory;
+import com.klspta.web.jizeNW.wpzf.WpzfHandler;
 
 /**
  * 
@@ -115,6 +116,29 @@ public class PADDataManager extends AbstractBaseBean {
         } else {
             return null;
         }
+    }
+    
+    /**
+     * 
+     * <br>Description:根据卫片图斑编号获取卫片核查成果
+     * <br>Author:黎春行
+     * <br>Date:2013-9-15
+     * @param yw_guid
+     * @return
+     */
+    public Map<String, Object> getWphcData(String yw_guid, String year){
+    	//根据卫片的objectid获取jctb
+    	String wpName = WpzfHandler.WP_NAME + year;
+    	String jcbhsql = "select t.jcbh from "+ wpName+" t where t.objectid=?";
+    	List<Map<String, Object>> resultList = query(jcbhsql, GIS, new Object[]{yw_guid});	
+    	String wpyw_guid = "%/_" + resultList.get(0).get("jcbh");
+    	String sql = "select * from dc_ydqkdcb t where t.yw_guid like ? escape '/'";
+    	List<Map<String, Object>> result = query(sql, YW, new Object[]{wpyw_guid});
+    	if(result.size() > 0){
+    		return result.get(0);
+    	}else{
+    		return null;
+    	}
     }
 
     /**
