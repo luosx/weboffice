@@ -103,7 +103,8 @@ String simInfo = request.getParameter("simInfo");
 		
 	    bingCgdState();
 	    
-	    
+	    //判断此日志是否有巡查成果
+	    isHaveCG();
 	}
 	
 	function initRadio(){
@@ -131,6 +132,15 @@ String simInfo = request.getParameter("simInfo");
 				}
 			}
 		}
+	}
+	
+	function isHaveCG(){
+			putClientCommond("dtxcManager","isHaveCG");
+			putRestParameter("yw_guid",yw_guid);
+      		var res = restRequest();
+			if(res=='0'){
+				document.getElementById('viewCgButton').style.display="none";
+			}
 	}
 	
 	//添加选项
@@ -164,6 +174,30 @@ String simInfo = request.getParameter("simInfo");
 		}
 	}
 
+	function impxccg(){
+		var feature="dialogWidth:650px;dialogHeight:300px;status:no;help:no;scroll:no;location=no"; 
+		//显示成果导入模态对话框，并将导入的成果的yw_guid返回 
+		var simInfo =  window.showModalDialog("<%=basePath%>web/jizeWW/dtxc/wyxc/dtxccg.jsp",null,feature); 
+		//将导入的巡查成果的基本违法信息写到巡查日志当中
+		putClientCommond("cgdrManager", "getSimInfo");
+		putRestParameter("simInfo", simInfo);
+		baseInformation = restRequest();
+		if(baseInformation){
+			for(var i = 0; i < baseInformation.length-1; i++){
+				addcgd();
+				document.getElementById('xcrq').value=baseInformation[0].HCRQ;
+			}
+			
+			//将导入的巡查成果写入违法项目当中
+			for(var i = 0; i < baseInformation.length; i++){
+					document.getElementById("jsdw_" + (i + 1)).value = baseInformation[i].YDDW;
+					document.getElementById("dgsj_" + (i + 1)).value = baseInformation[i].YDSJ;
+					document.getElementById("jsqk_" + (i + 1)).value = baseInformation[i].JSQK;
+					document.getElementById("zdmj_" + (i + 1)).value = baseInformation[i].MJ;
+					//document.getElementById("ywguid_" + (i + 1)).value = baseInformation[i].YW_GUID;						
+			}				
+		}
+	}
 
 		//抄告单在wbeoffice中生成
 		function createCgd(createId,flag){
@@ -288,11 +322,10 @@ String simInfo = request.getParameter("simInfo");
 					否
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<input type="button" class="button" id="add" value="增加" onClick="addcgd(); return false;" />
-					<input type="button" class="button" id="delete" value="删除" onClick="deletecgd();return false;" />
-					<!--  
+					<input type="button" class="button" id="delete" value="删除" onClick="deletecgd();return false;" />				
 					&nbsp;&nbsp;&nbsp;
-					<input type="button" class="button" id="imp" value="导入巡查成果" onClick="drxccg();return false;" />
-					-->
+					<input type="button" class="button" id="imp" value="导入巡查成果" onClick="impxccg();return false;" />
+				
 					<input type="text" id="allnum" name="allnum" value="5" style="display:none" />				</td>
 			</tr>
 			<tbody id="info">
@@ -378,7 +411,7 @@ String simInfo = request.getParameter("simInfo");
 					况</div>
 				</td>
 				<td colspan="3">
-					<textarea rows="15" name="spqk" id="spqk" style="width:99%"></textarea>
+					<textarea rows="12" name="spqk" id="spqk" style="width:99%"></textarea>
 				</td>
 			</tr>
 			<tr>
@@ -392,7 +425,7 @@ String simInfo = request.getParameter("simInfo");
 					</div>
 				</td>
 				<td colspan="3">
-					<textarea rows="10" name="clyj" id="clyj" style="width:99%"></textarea>
+					<textarea rows="8" name="clyj" id="clyj" style="width:99%"></textarea>
 				</td>
 			</tr>
 			<tr>
@@ -400,13 +433,19 @@ String simInfo = request.getParameter("simInfo");
 					<div align="center">备注</div>
 				</td>
 				<td colspan="3">
-					<textarea rows="6" name="bz" id="bz" style="width:99%"></textarea>
+					<textarea rows="4" name="bz" id="bz" style="width:99%"></textarea>
 				</td>
 			</tr>
         </table>
   	</form>
+  	<div id="viewCgButton" style="margin-top:10px;text-align: center"><button style="cursor:hand;" onclick="viewCG()">点击查看巡查成果</button></div>
   </body>
   <script type="text/javascript">
+ 	function viewCG(){
+		var height=window.screen.availHeight;
+		var width=window.screen.availWidth;
+		window.showModalDialog("<%=basePath%>web/jizeWW/dtxc/wyxc/xjclyjframe.jsp?zfjcType=13&yw_guid="+yw_guid,obj,"dialogWidth="+width+";dialogHeight="+height);
+	}
   	<%
 		String msg = (String)request.getParameter("msg");
 	%>
