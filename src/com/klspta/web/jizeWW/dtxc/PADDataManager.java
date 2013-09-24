@@ -29,6 +29,7 @@ public class PADDataManager extends AbstractBaseBean {
     public void getQueryData() {
         String userid = request.getParameter("userId");
         String keyword = request.getParameter("keyWord");
+        String isExp = request.getParameter("isExp");
         String likeCondition = " 1=1";
         String xzqh;
         try {
@@ -37,7 +38,7 @@ public class PADDataManager extends AbstractBaseBean {
             if(xzqbm.endsWith("00")){
                 xzqbm=xzqbm.substring(0,xzqbm.lastIndexOf("00"));
             }
-            likeCondition = " t.impxzqbm like '" + xzqbm + "%'";
+            likeCondition = " t.impxzqbm like '" + xzqbm + "%' and t.isexp = "+isExp;
         } catch (Exception e) {
             e.printStackTrace();
         }
