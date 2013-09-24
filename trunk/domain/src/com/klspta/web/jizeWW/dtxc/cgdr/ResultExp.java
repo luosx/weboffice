@@ -54,53 +54,9 @@ public class ResultExp extends AbstractBaseBean {
         if (!dirs.isFile()) {
             dirs.mkdirs();
         }
-        //resultToTemp(filepath, ywids);
         generateXML(filepath, ywids);
         resultToZip(tempPath + file_id, tempPath + file_id);
         response(tempPath + file_id + ".zip");
-    }
-
-    /**
-     * 
-     * <br>Description:数据信息写入临时位置
-     * <br>Author:陈强峰
-     * <br>Date:2012-8-13
-     * @param filepath
-     * @param guids
-     */
-    private void resultToTemp(String filepath, String[] guids) {
-        for (int i = 0; i < guids.length; i++) {
-            //写入文本
-            String folder = filepath + "//" + guids[i];
-            File dir = new File(folder);
-            dir.mkdirs();
-            String sql = "select * from dc_ydqkdcb t where t.yw_guid=?";
-            List<Map<String, Object>> list = query(sql, YW, new Object[] { guids[i] });
-            OutputStreamWriter writer = null;
-            try {
-                writer = new OutputStreamWriter(new FileOutputStream(folder + "//" + guids[i] + ".txt"),
-                        "UTF-8");
-                writer.write(new String(UtilFactory.getJSONUtil().objectToJSON(list).getBytes("UTF-8"),
-                        "UTF-8"));
-                writer.flush();
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (Exception e) {
-                e.printStackTrace();
-            } finally {
-                try {
-                    writer.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            //附件下载
-            downloadByGuid(guids[i], folder + "//");
-        }
     }
     
     /**
@@ -248,13 +204,54 @@ public class ResultExp extends AbstractBaseBean {
             } catch (IOException e) {
                 e.printStackTrace();
             }   
+            //生成对应的巡查日志xml文件
+            generateXCRZXML(folder,guids[i]);
             //附件下载
             downloadByGuid(guids[i], folder + "//");   
             //改变状态
-            changeStatus(guids[i]);
+            changeStatus(guids[i]); 
         }
         
     }
+    
+    /**
+     * 
+     * <br>Description:生成对应的巡查日志xml文件
+     * <br>Author:王雷
+     * <br>Date:2013-9-24
+     * @param folder
+     * @param yw_guid
+     */
+    private void generateXCRZXML(String folder,String yw_guid){        
+        String sql = "select x.yw_guid,x.xcbh,x.xcdw,x.xcrq,x.xcqy,x.xcry,x.xclx,x.sfywf,x.clyj,x.bz,x.writerxzqh,x.userid,to_char(x.writedate) writedate,x.spqk,x.allnum from xcrz x where x.yw_guid=(select t.yw_guid from xcrz_cg t where t.ywguid=?)";
+        String[] elements = {"yw_guid","xcbh","xcdw","xcrq","xcqy","xcry","xclx","sfywf","clyj","bz","writerxzqh","userid","writedate","spqk","allnum"};
+        List<Map<String,Object>> list = query(sql,YW,new Object[]{yw_guid});
+        if(list.size()>0){
+            Map<String,Object> map = list.get(0);
+            Element root = new Element("XCRZ");    
+            Document Doc = new Document(root); 
+            //base节点
+            Element base = new Element("base");             
+            for(int i=0;i<elements.length;i++){
+               Element e = new Element(elements[i].toUpperCase());
+               e.setText((String)map.get(elements[i])); 
+               base.addContent(e);
+            }            
+            root.addContent(base);
+            try {
+                Format format = Format.getPrettyFormat(); 
+                XMLOutputter XMLOut = new XMLOutputter(format); 
+                XMLOut.output(Doc, new FileOutputStream(folder + "//" + map.get("yw_guid") + ".xml"));
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }              
+            
+        }
+        
+    }
+    
     
     /**
      * 
