@@ -29,7 +29,7 @@
 	<bean name="padDataManager" class="com.klspta.web.jizeNW.dtxc.PADDataManager" scope="prototype"/>
 		
 	<!-- 卫片执法 -->
-	<bean name="wpzfList" class="com.klspta.web.jizeNW.wpzf.WpzfListManager" scope="prototype"/>
+	<bean name="wpzfHandler" class="com.klspta.web.jizeNW.wpzf.WpzfHandler" scope="prototype"/>
 	
 	<!-- 添加签章-->
 	<bean id="sign" class="com.klspta.web.jizeNW.importSign.Sign"/>
