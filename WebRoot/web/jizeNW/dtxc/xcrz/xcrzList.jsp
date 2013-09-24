@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+﻿<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@page import="org.springframework.security.core.context.SecurityContextHolder"%>
 <%@page import="com.klspta.console.user.User"%>
 <%
@@ -147,6 +147,7 @@
 			store.load({params:{start:0,limit:15}}); 
         }
 </script>
+
 </head>
 <body bgcolor="#FFFFFF" topmargin="0" leftmargin="0">
 	<div id="mygrid_container" style="width: 100%; height: 85%;"></div>	
