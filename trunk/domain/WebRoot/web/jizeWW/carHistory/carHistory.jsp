@@ -77,9 +77,8 @@ var tree;
 var loadFlag=true;
 
 //选择判断
-	function changeStyle(obj) {
+function changeStyle(obj) {
 	var arr = document.getElementsByTagName('div');
-
 		    if(obj.className=="unSelected"){
 		    arr[0].className="unSelected";
 			obj.className='selected';
@@ -90,10 +89,10 @@ var loadFlag=true;
 	
 //点击选择事件处理动态树
  function selectCode(){
-   var xzqh_all=  document.getElementsByTagName('div');//div数组
+   var xzqh_all =  document.getElementsByTagName('div');//div数组
    var  xzqh_select='';
    for(var i=0;i<8;i++){
-        if(xzqh_all[i].className=="selected"& xzqh_all[i].id.length==6){
+     if(xzqh_all[i].className=="selected"& xzqh_all[i].id.length==6){
        xzqh_select+=xzqh_all[i].id+"/";
      }
    }
@@ -288,12 +287,32 @@ var loadFlag=true;
       return result;
 	}
 	
-
+	//页面加载时初始化
+	function Init(){
+		var row = 1;
+		var cell = 3;
+		var rows;
+		var cells;
+		var table = document.getElementById("nametree");
+        putClientCommond("hander","getAllCarInfoName");
+		var myDate = eval(restRequest());
+		for(var i = 0; i < myDate.length; i++){
+			if(3 == cell){
+				rows = table.insertRow(row++);
+				cells = rows.insertCell(0);
+				cell=1;
+			}else{
+				cells = rows.insertCell(cell++);
+			}
+			cells.innerHTML = "<div id='" +myDate[i].CODE + "' onclick=\"changeStyle(this);selectCode();\" class='unSelected'>"+myDate[i].NAME+"</div>"
+		}
+		selectCode();
+	}
 
 </script>
 	</head>
-	<body onload="selectCode()">
-		<table cellpadding="0" cellspacing="0" border="0" width='106%'
+	<body onload="Init();return false;">
+		<table id="nametree" cellpadding="0" cellspacing="0" border="0" width='106%'
 			style='vertical-align: middle; text-align: center; border: 0px solid #8E8E8E;'>
 			<tr>
 				<td style='text-align: left;' ; colspan=4 height="40"
@@ -306,59 +325,7 @@ var loadFlag=true;
 				</td>
 			</tr>
 
-			<tr>
-				<td>
-				<div id="320301" onclick="changeStyle(this);selectCode();"
-						class='selected'>
-						市&nbsp;局
-					</div>
-				</td>
-				<td>
-					<div id="320382" onclick="changeStyle(this);selectCode();"
-						class='unSelected'>
-						邳州市
-					</div>
-				</td>
-				<td>
-					<div id="320324" onclick="changeStyle(this);selectCode();"
-						class='unSelected'>
-						睢宁县
-					</div>
-				</td>
-				<td>
-					<div id="320381" onclick="changeStyle(this);selectCode();"
-						class='unSelected'>
-						新沂市
-					</div>
-				</td>
-
-			</tr>
-			<tr>
-				<td>
-					<div id="320321" onclick="changeStyle(this);selectCode();"
-						class='unSelected'>
-						丰&nbsp;县
-					</div>
-				</td>
-				<td>
-					<div id="320305" onclick="changeStyle(this);selectCode();"
-						class='unSelected'>
-						贾汪区
-					</div>
-				</td>
-				<td>
-				       <div id="320322" onclick="changeStyle(this);selectCode();"
-						class='unSelected'>
-						沛&nbsp;县
-					</div>
-				</td>
-				<td>
-					<div id="320312" onclick="changeStyle(this);selectCode();"
-						class='unSelected'>
-						铜山区
-					</div>
-				</td>
-			</tr>
+			
 		</table>
 		<div id="mapTree" style="margin-Left: 0px; height:250px; width:259px; margin-Right: -14px; margin-Top: 0px; overflow: auto;" ></div>
 		<div id="times"
