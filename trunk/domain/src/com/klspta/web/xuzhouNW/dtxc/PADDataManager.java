@@ -157,11 +157,11 @@ public class PADDataManager extends AbstractBaseBean {
     public Map<String, Object> getWphcData(String yw_guid){
     	//根据卫片的objectid获取jctb
     	String wpName = WpzfHandler.WP_FORM;
-    	String jcbhsql = "select t.jcbh from "+ wpName+" t where t.objectid=?";
+    	String jcbhsql = "select ( xzb ||','|| yzb ) as zb  from "+ wpName+" t where t.objectid=?";
     	List<Map<String, Object>> resultList = query(jcbhsql, GIS, new Object[]{yw_guid});	
-    	String wpyw_guid = "%/_" + resultList.get(0).get("jcbh");
-    	String sql = "select * from dc_ydqkdcb t where t.yw_guid like ? escape '/'";
-    	List<Map<String, Object>> result = query(sql, YW, new Object[]{wpyw_guid});
+    	String zb = resultList.get(0).get("zb").toString();
+    	String sql = "select * from dc_ydqkdcb t where t.zb =? and yw_guid like 'WP%'";
+    	List<Map<String, Object>> result = query(sql, YW, new Object[]{zb});
     	if(result.size() > 0){
     		return result.get(0);
     	}else{
