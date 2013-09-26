@@ -29,7 +29,6 @@
 			putClientCommond("dtxcManager", "getXcrzListByUserId");
 			putRestParameter("userId", "<%=userId%>");
 			myData = restRequest();
-			
 			store = new Ext.data.JsonStore({
 				proxy:new Ext.ux.data.PagingMemoryProxy(myData),
 					remoteSort:true,
