@@ -95,29 +95,21 @@ body,td,div,span,li{
     var y=0;
     var l=11;
     if(v=='all'){
-      x=117.18663909744221;y=34.26500415501963;l=10;
-    }else if(v=='fx'){
-      x=116.59446374898812;y=34.700881348087;
-    }else if(v=='gl'){
-      x=117.1916809455685;y=34.29039515229628;
-    }else if(v=='jw'){
-      x=117.44408386417675;y=34.44561614658974;
-    }else if(v=='jl'){
-      x=117.18243991225604;y=34.291425586586;
-    }else if(v=='px'){
-      x=116.93266906571385;y=34.73643053202867;
-    }else if(v=='pz'){
-      x=117.95496823498142;y=34.311187695291245;
-    }else if(v=='qs'){
-      x=117.18919165160911;y=34.244554327755054;
-    }else if(v=='sn'){
-      x=117.94396841799774;y=33.90063671367958;
-    }else if(v=='ts'){
-      x=117.18566205248635;y=34.20140980939015;
-    }else if(v=='xx'){
-      x=118.3456383680233;y=34.37878607582653;
-    }else if(v=='yl'){
-      x=117.224244278158;y=34.25374422148691;
+      x=114.88525629043579;y=36.914695664722224;l=10;
+    }else if(v=='jzz'){
+      x=114.87846594303846;y=36.909628023342925;
+    }else if(v=='xzz'){
+      x=114.89895399659872;y=36.84818801502515;
+    }else if(v=='stz'){
+      x=114.8037701100111;y=36.80846812280434;
+    }else if(v=='ftdx'){
+      x=114.78028200566769;y=36.884189029832505;
+    }else if(v=='wgyx'){
+      x=114.92770291864872;y=36.921927943980286;
+    }else if(v=='fzx'){
+      x=114.86494794487953;y=36.87426794609517;
+    }else if(v=='czz'){
+      x= 114.88146800547838;y=36.76259095138669;
     }
     frames["lower"].swfobject.getObjectById("FxGIS").setCenterAtAndZoom(x,y,l,false);
   }
@@ -134,8 +126,10 @@ body,td,div,span,li{
 <img id='urlImg' name='urlImg' style="position:absolute;left:94;top:6;"  src="images/tab_2.png" width="99" height="26" />
 </td>
 <td width='100%'></td>
+<!-- 
 <td   id='type' align="center" valign="top"  style="cursor: hand;"><input type='text' style="vertical-align: middle;border:0;height:24px;margin-top:2px;line-height:24px;margin-right:2px;color:white;font-weight:blod;background-color:#6fcbf8;"/></td>
 <td   id='map_selec'   align="center" valign="top"  style="cursor: hand;"><img src="images/search.png" title="搜索" width="27" height="27" /></td>
+-->
 <td  id='zoomin' nowrap  align="center" valign="top"  style="cursor: hand;" onClick='zoomIn()'><img src="images/zoom-in.png" title="放大" width="27" height="27" /></td>
 <td  id='zoomout' nowrap  align="center" valign="top"  style="cursor: hand;" onClick='zoomOut()'><img src="images/zoom-out.png" title="缩小" width="27" height="27" /></td>
 <td  id='zoomToFullExtent'  nowrap  align="center" valign="top"  style="cursor: hand;" onClick='zoomToFullExtent()'><img src="images/Full_Extent.png" title="初始视图" width="27" height="27" /></td>
@@ -146,19 +140,15 @@ body,td,div,span,li{
 <td  id='print' nowrap  align="center" valign="top"  style="cursor: hand;" onClick='showInfo()'><img src="images/print.png" title="打印" width="27" height="27" /></td>
 
 <td width=100 >
-    <SELECT id="c"  name="c" onchange="locator()" style="vertical-align: middle;padding:0;margin:0;margin-bottom:10px;">
-      <OPTION value='all' selected>徐州市</OPTION>
-		<option value='gl'>鼓楼区</option>
-		<option value='yl'>云龙区</option>
-		<option value='jl'>九里区</option>
-		<option value='jw'>贾汪区</option>
-		<option value='qs'>泉山区</option>
-		<option value='fx'>丰县</option>
-		<option value='px'>沛县</option>
-		<option value='ts'>铜山区</option>
-		<option value='sn'>睢宁县</option>
-		<option value='xx'>新沂市</option>
-		<option value='pz'>邳州市</option>
+    <SELECT id="c"  name="c" onChange="locator()" style="vertical-align: middle;padding:0;margin:0;margin-bottom:10px;">
+      <OPTION value='all' selected>鸡泽县</OPTION>
+		<option value='jzz'>鸡泽镇</option>
+		<option value='xzz'>小寨镇</option>
+		<option value='stz'>双塔镇</option>
+		<option value='ftdx'>浮图店乡</option>
+		<option value='wgyx'>吴官营乡</option>
+		<option value='fzx'>风正乡</option>
+		<option value='czz'>曹庄镇</option>
     </SELECT>
 </td>
 </tr>
@@ -172,13 +162,13 @@ body,td,div,span,li{
 </div>
 <%--!add by zhaow 操作图层的几个按钮--%>
 <div id="map_nav" class="map_nav">
-<ul>
-    <li><img id="full_screen" width="36" height="19" border="0" onclick="changeScreen()" src="images/fullScreen.png" title="显示全屏" /></li>
+<ul id="mapchose">
+    <li><img id="full_screen" width="36" height="19" border="0" onClick="changeScreen()" src="images/fullScreen.png" title="显示全屏" /></li>
 	<li><span id="vector" onClick='changeMap("vector")'><div style='background-color:#217EC8;width:32px;padding-left:3px'><font color='#FAF9F9'>地图</font></div></span></li>
 	<li><span id="image" onClick='changeMap("image")'>影像</span></li>
 </ul>
 </div>
-<div id="map_nav2" class="map_nav2" style="z-index: 10000;top:50px;" onmouseover="document.getElementById('layerDiv').style.display='inline'" onmouseout="document.getElementById('layerDiv').style.display='none'">
+<div id="map_nav2" class="map_nav2" style="z-index: 10000;top:50px;" onMouseOver="document.getElementById('layerDiv').style.display='inline'" onMouseOut="document.getElementById('layerDiv').style.display='none'">
 				<div><ul>
 					<li id="layer"><span id="map_layer_control"><img src="images/tuc_s.png" width="11" height="9" style="display:inline; margin-left:3px; margin-top:4px; margin-right:3px;"/>图层<img src="images/tuc_j.png" width="9" height="7" style="display:inline; margin-left:2px;" /></span></li>
 				</ul>
@@ -186,7 +176,7 @@ body,td,div,span,li{
 				<div id="layerDiv">
 					<div id="cnItem" class="layer-item" title="显示巡查路线">
 						<div id="cnCheckbox" class="layer-checkbox"></div>
-						<div class="layer-word" id='route' style="background: #FFFFFF" onclick="showRoute()"><span>巡查路线</span></div>
+						<div class="layer-word" id='route' style="background: #FFFFFF" onClick="showRoute()"><span>巡查路线</span></div>
 						<input type="hidden" id="cnLayer" />
 					</div>
 					<%--!
