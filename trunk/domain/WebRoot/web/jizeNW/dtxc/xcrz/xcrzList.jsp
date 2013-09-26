@@ -57,13 +57,13 @@
 		        	new Ext.grid.RowNumberer(),
 					{header: '巡查编号', dataIndex:'XCBH', width: 110, sortable: true},
             		{header: '巡查日期', dataIndex:'XCRQ', width: width*0.15, sortable: true},
-            		{header: '巡查单位', dataIndex:'XCDW', width: 70, sortable: true},
+            		{header: '巡查单位', dataIndex:'XCDW', width: 60, sortable: true},
             		{header: '巡查区域', dataIndex:'XCQY', width: width*0.2, sortable: true},
 					{header: '巡查人员', dataIndex:'XCRY', width: width*0.2, sortable: true},
             		{header: '是否违法', dataIndex:'SFYWF', width: 60, sortable: true},
             		{header: '审批情况', dataIndex:'SPQK', width: width*0.2, sortable: true},
             		{header: '处理意见', dataIndex:'CLYJ', width: width*0.2, sortable: true},
-            		{header:'查看', dataIndex:'RUNNUM1', width:50, renderer:view }
+            		{header:'查看', dataIndex:'RUNNUM1', width:40, renderer:view }
 		        ], 
 		        tbar:[
 	    			{xtype:'label',text:'快速查询:',width:60},
@@ -79,7 +79,7 @@
         		},
 		        stripeRows: true,
 		        width:width + 280,
-		        height: height,
+		        height: height ,
 		        stateful: true,
 		        stateId: 'grid',
 		        buttonAlign:'center',
@@ -131,14 +131,14 @@
           grid.reconfigure(store, new Ext.grid.ColumnModel([
             new Ext.grid.RowNumberer(),
 			{header: '巡查编号', dataIndex:'XCBH', width: 110, sortable: true},
-         	{header: '巡查日期', dataIndex:'XCRQ', width: width*0.15, sortable: true},
-         	{header: '巡查单位', dataIndex:'XCDW', width: 70, sortable: true},
-         	{header: '巡查区域', dataIndex:'XCQY', width: width*0.2, sortable: true},
+            {header: '巡查日期', dataIndex:'XCRQ', width: width*0.15, sortable: true},
+            {header: '巡查单位', dataIndex:'XCDW', width: 60, sortable: true},
+            {header: '巡查区域', dataIndex:'XCQY', width: width*0.2, sortable: true},
 			{header: '巡查人员', dataIndex:'XCRY', width: width*0.2, sortable: true},
-          	{header: '是否违法', dataIndex:'SFYWF', width: 60, sortable: true},
-          	{header: '审批情况', dataIndex:'SPQK', width: width*0.2, sortable: true},
-          	{header: '处理意见', dataIndex:'CLYJ', width: width*0.2, sortable: true},
-          	{header:'查看', dataIndex:'RUNNUM1', width:50, renderer:view }
+            {header: '是否违法', dataIndex:'SFYWF', width: 60, sortable: true},
+            {header: '审批情况', dataIndex:'SPQK', width: width*0.2, sortable: true},
+            {header: '处理意见', dataIndex:'CLYJ', width: width*0.2, sortable: true},
+            {header:'查看', dataIndex:'RUNNUM1', width:40, renderer:view }
           ]));
           	//重新绑定分页工具栏
 			grid.getBottomToolbar().bind(store);
@@ -146,7 +146,6 @@
 			store.load({params:{start:0,limit:15}}); 
         }
 </script>
-
 </head>
 <body bgcolor="#FFFFFF" topmargin="0" leftmargin="0">
 	<div id="mygrid_container" style="width: 100%; height: 85%;"></div>	
