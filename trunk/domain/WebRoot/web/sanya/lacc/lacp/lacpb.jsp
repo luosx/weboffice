@@ -120,7 +120,7 @@ if(fixed!=null && fixed.equals("fixedPrint")){%>
     <td colspan="6"><textarea class="noborder" rows="5" style="width: 99%;font-size:14px;" name="ay"  id="ay"></textarea></td>
   </tr>
   <tr>
-    <td width="50" rowspan="2" colspan="2"><div align="center">违法单位</div></td>
+    <td rowspan="2" colspan="2"><div style="text-align:center;">违法单位</div></td>
     <td width="34"><div align="center">名称</div></td>
     <td colspan="3"><input type="text" class="noborder" name="dwmc" id="dwmc" style="width: 98%"/></td>
     <td width="80"><div align="center">法定代表人</div></td>
