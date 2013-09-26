@@ -108,7 +108,7 @@ String flag1 = request.getParameter("flag");
   </script>
   <body onLoad="onInit(); return false;">
   	<div id="fixed" class="Noprn" style="position: fixed; top: 5px; left: 0px"></div>
-  	<div align="center" style="margin-bottom:20px"><h1 style="font-size: 25">文件审批登记表</h1></div>
+  	<div align="center" style="margin-bottom:20px"><h1 style="font-size: 25">文件登记表</h1></div>
   	<form method="post">
 	  	
   	    <table align="center" cellpadding="0" cellspacing="0" width="600px">
@@ -122,7 +122,7 @@ String flag1 = request.getParameter("flag");
 			</tr>
 			<tr>
 				<td align="center">
-					<label>文件类型</label>
+					<label>来文单位</label>
 				</td>
 				<td>
 					<select style="font-family:'宋体'; font-size:14px;" id="wjlx" name="wjlx">
@@ -144,7 +144,7 @@ String flag1 = request.getParameter("flag");
 			</tr>
 			<tr>
 				<td align="center">
-					<label>文件申请</label>
+					<label>文件类型</label>
 				</td>
 				<td>
 					<select style="font-family:'宋体'; font-size:14px;" id="wjsq" name="wjsq">
@@ -158,6 +158,7 @@ String flag1 = request.getParameter("flag");
 				<td>
 					<select  style="font-family:'宋体'; font-size:14px;" id="blqk" name="blqk">
 						<option value="未处理" selected="selected" >未处理</option>
+						<option value="已处理">处理中</option>
 						<option value="已处理">已处理</option>
 					</select>
 				</td>
