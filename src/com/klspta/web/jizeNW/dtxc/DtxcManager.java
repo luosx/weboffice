@@ -1,4 +1,4 @@
-﻿package com.klspta.web.jizeNW.dtxc;
+package com.klspta.web.jizeNW.dtxc;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -304,6 +304,19 @@ public class DtxcManager extends AbstractBaseBean {
 		}
 		List<Map<String, Object>> result = query(sql, YW);
 		response((String)result.get(preNum).get("YW_GUID"));
+	}
+	
+	/**
+	 * 
+	 * <br>Description:获取抄告单状态
+	 * <br>Author:王雷
+	 * <br>Date:2013-9-18
+	 */
+	public void getCgdState(){
+	    String yw_guid = request.getParameter("yw_guid");
+	    String sql = "select t.cgdqk from xcrz_cg t where t.yw_guid=? order by t.num asc";
+	    List<Map<String,Object>> list = query(sql,YW,new Object[]{yw_guid});
+	    response(list);
 	}
 	
 	/**
