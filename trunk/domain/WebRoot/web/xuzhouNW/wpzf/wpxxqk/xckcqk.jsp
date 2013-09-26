@@ -136,7 +136,7 @@ body {
 				</td>
 				<td colspan="2">
 					<input type="text" class="noborder" readonly
-						value="<%=map.get("YDDW") == null ? "" : map.get("YDDW")%>">
+						value="<%=map.get("YDSJ") == null ? "" : map.get("YDSJ")%>">
 				</td>
 			</tr>
 						<tr>
