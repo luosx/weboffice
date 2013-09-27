@@ -150,7 +150,12 @@ public class CaseSupervision extends AbstractBaseBean {
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm");//设置日期格式
 
         String systemDate = df.format(new Date());//系统时间
-
+        
+        if(blqx.length() < 13){
+        	blqx += " 00:00";
+        }
+        
+        
         Calendar startTime = Calendar.getInstance();
 
         Calendar endTime = Calendar.getInstance();
