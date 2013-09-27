@@ -72,13 +72,14 @@ html, body {
         		columns: [
         			new Ext.grid.RowNumberer(),
         			{header: '督办', dataIndex:'BLSX', width:40, sortable: true,renderer:view},
-		        	{header: '文件审批事项', dataIndex:'WJSPSX', width: (width - 550), sortable: true,renderer:changKeyword},
+		        	{header: '文件审批事项', dataIndex:'WJSPSX', width: (width - 650), sortable: true,renderer:changKeyword},
 		            {header: '文件类型', dataIndex:'WJLX', width: 130, sortable: true,renderer:changKeyword},
 		            {header: '办理时限', dataIndex:'BLSX', width: 80, sortable: true,renderer:changKeyword},
 		            {header: '文件申请', dataIndex:'WJSQ', width: 70, sortable: true,renderer:changKeyword},
 		            {header: '最后办理人', dataIndex:'ZHBLR', width: 70, sortable: true,renderer:changKeyword},
 		            {header: '创建时间', dataIndex:'CREATEDATE', width:80, sortable: true,renderer:changKeyword},
-		            {header: '查看', dataIndex:'YW_GUID', width: 40, sortable: true,renderer:pro}
+		            {header: '查看', dataIndex:'YW_GUID', width: 40, sortable: true,renderer:pro},
+		            {header: '删除', dataIndex:'YW_GUID',width: width*0.1,  ortable: false, renderer: del}
         		], 
         		tbar:[
 	    			{xtype:'label',text:'快速查找:',width:60},
@@ -155,6 +156,24 @@ function process(id){
 	document.location.href = url;
 	//window.open(url);
 }
+//删除功能
+function del(id){
+          return "<a href='#' onclick='delTask(\""+id+"\");return false;'><img src='base/form/images/delete.png' alt='删除'></a>";
+         }
+function delTask(id){
+    var  id=id;
+	putClientCommond("wjspHandler","delete");
+	putRestParameter("yw_guid",id);
+    var result = restRequest();
+    if(result=="success"){
+    alert("删除成功！");
+    document.location.reload();
+    }else{
+    alert("删除失败！");
+    document.location.reload();
+    }
+}
+
 
 //模糊查询
 function query(){
@@ -180,13 +199,14 @@ function query(){
 	grid.reconfigure(store, new Ext.grid.ColumnModel([
 		new Ext.grid.RowNumberer(),
     		{header: '督办', dataIndex:'BLSX', width:40, sortable: true,renderer:view},
-        	{header: '文件审批事项', dataIndex:'WJSPSX', width: (width - 550), sortable: true,renderer:changKeyword},
+        	{header: '文件审批事项', dataIndex:'WJSPSX', width: (width - 650), sortable: true,renderer:changKeyword},
             {header: '文件类型', dataIndex:'WJLX', width: 130, sortable: true,renderer:changKeyword},
             {header: '办理时限', dataIndex:'BLSX', width: 80, sortable: true,renderer:changKeyword},
             {header: '文件申请', dataIndex:'WJSQ', width: 80, sortable: true,renderer:changKeyword},
             {header: '最后办理人', dataIndex:'ZHBLR', width: 70, sortable: true,renderer:changKeyword},
             {header: '创建时间', dataIndex:'CREATEDATE', width:80, sortable: true,renderer:changKeyword},
-            {header: '查看', dataIndex:'YW_GUID', width: 40, sortable: true,renderer:pro}
+            {header: '查看', dataIndex:'YW_GUID', width: 40, sortable: true,renderer:pro},
+            {header: '删除', dataIndex:'YW_GUID',width: width*0.1,  ortable: false, renderer: del}
         ]));    
     //重新绑定分页工具栏
 	grid.getBottomToolbar().bind(store);//
