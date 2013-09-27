@@ -40,7 +40,7 @@ String userid = ((User)userprincipal).getUserID();
 	  labelAlign: 'right',    
 	  labelWidth: 60,  
 	  frame:true,
-      url:  "http://" + window.location.href.split("/")[2] + '/domain/service/rest/wyrwmanager/uploadResult?userid=<%=userid%>',
+      url:  "http://" + window.location.href.split("/")[2] + '/domain/service/rest/cgdrManager/uploadResult?userid=<%=userid%>',
 	  width: 500, 
 	  fileUpload: true,
 	  autoHeight: true,

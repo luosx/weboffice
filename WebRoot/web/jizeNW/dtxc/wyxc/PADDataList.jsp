@@ -1,5 +1,4 @@
 ﻿<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<%@page import="com.klspta.base.util.UtilFactory"%>
 <%@page import="org.springframework.security.core.context.SecurityContextHolder"%>
 <%@page import="com.klspta.console.user.User"%>
 <%
@@ -7,9 +6,9 @@
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
-	String extPath = basePath + "ext/";
     Object userprincipal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     String userid = ((User)userprincipal).getUserID();
+    String flag = request.getParameter("flag");
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -46,6 +45,7 @@ var form;
 Ext.onReady(function(){
     putClientCommond("padDataManager","getQueryData");
     putRestParameter("userId",'<%=userid%>')
+    putRestParameter("flag",'<%=flag%>')
 	myData = restRequest();
  	store = new Ext.data.JsonStore({
     proxy: new Ext.ux.data.PagingMemoryProxy(myData),
@@ -167,6 +167,7 @@ function query(){
     keyWord=escape(escape(keyWord));
     putClientCommond("padDataManager","getQueryData");
     putRestParameter("userId",'<%=userid%>')
+    putRestParameter("flag",'<%=flag%>')
     putRestParameter("keyWord",keyWord);
     var myData1 = restRequest(); 
     var width=document.body.clientWidth;
