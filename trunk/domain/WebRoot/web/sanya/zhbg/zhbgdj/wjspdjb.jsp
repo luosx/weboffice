@@ -137,7 +137,7 @@ String flag1 = request.getParameter("flag");
 					<label>截止日期</label>
 				</td>
 				<td>
-					<input type="text" class="noborder" id="blsx" name="blsx" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})" style="width:98%" />
+					<input type="text" class="noborder" id="blsx" name="blsx" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm'})" style="width:98%" />
 					<input type="text" id="createdate" name="createdate" style="display:none" />
 					<input type="text" style="display: none;" name="zhblr" id="zhblr" value="<%=fullName%>" />
 					</td>
