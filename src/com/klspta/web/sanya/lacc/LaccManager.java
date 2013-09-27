@@ -1,9 +1,5 @@
 package com.klspta.web.sanya.lacc;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import com.klspta.base.AbstractBaseBean;
@@ -28,7 +24,7 @@ public class LaccManager extends AbstractBaseBean {
         // 获取参数
         String keyWord = request.getParameter("keyWord");
         String fullName = UtilFactory.getStrUtil().unescape(request.getParameter("fullName"));
-        String sql = "select t.yw_guid,t.bh as ajbh ,t.ay,t.dwmc,t.ajly,t.grxm ,to_char(t.slrq,'yyyy-MM-dd') as slrq,to_char(t.jzrq,'yyyy-MM-dd') as jzrq,j.activity_name_ as bazt,j.wfInsId,to_char(j.create_ ,'yyyy-MM-dd') as jssj,j.wfinsid from lacpb t join workflow.v_active_task j on t.yw_guid=j.yw_guid where j.assignee_=?";
+        String sql = "select t.yw_guid,t.bh as ajbh ,t.ay,t.dwmc,t.ajly,t.grxm ,to_char(t.slrq,'yyyy-MM-dd') as slrq,j.activity_name_ as bazt,j.wfInsId,to_char(j.create_ ,'yyyy-MM-dd') as jssj,j.wfinsid from lacpb t join workflow.v_active_task j on t.yw_guid=j.yw_guid where j.assignee_=?";
         if (keyWord != null) {
             keyWord = UtilFactory.getStrUtil().unescape(keyWord);
             sql += " and (upper(t.bh)||upper(t.ay)||upper(t.ajly)||upper(t.grxm)||upper(t.slrq)||upper(j.create_)||upper(j.activity_name_) like '%"
@@ -44,96 +40,11 @@ public class LaccManager extends AbstractBaseBean {
                 map.put("DSR", map.get("grxm"));
             } else {
                 map.put("DSR", map.get("dwmc"));
-            }
-            if(map.get("jzrq") == null){
-                map.put("YJ", "365");
-            }else{
-                map.put("YJ", getWorkaDayAmount(map.get("jzrq").toString()));
             }         
             map.put("INDEX", i++);
         }
         response(result);
     }
-    
-     private String getWorkaDayAmount(String blqx){
-            
-            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");//设置日期格式
-            
-            String systemDate= df.format(new Date());//系统时间
-            
-            Calendar startTime=Calendar.getInstance();
-            
-            Calendar endTime=Calendar.getInstance();
-           
-            
-            try {
-                
-               startTime.setTime(df.parse(systemDate));
-               endTime.setTime(df.parse(blqx));
-               
-           } catch (ParseException e) {
-               
-               e.printStackTrace();
-               
-           }
-            
-            int xzsj=getWorkingDay(startTime,endTime);
-            
-            return String.valueOf(xzsj);
-            
-        }
-    
-      public int getWorkingDay(java.util.Calendar d1, java.util.Calendar d2) {
-         int result = -1;
-         if (d1.after(d2)) { 
-         }else{
-             int charge_start_date = 0;//开始日期的日期偏移量
-             int charge_end_date = 0;//结束日期的日期偏移量
-             // 日期不在同一个日期内
-             int stmp;
-             int etmp;
-             stmp = 7 - d1.get(Calendar.DAY_OF_WEEK);
-             etmp = 7 - d2.get(Calendar.DAY_OF_WEEK);
-             if (stmp != 0 && stmp != 6) {// 开始日期为星期六和星期日时偏移量为0
-                 charge_start_date = stmp - 1;
-             }
-             if (etmp != 0 && etmp != 6) {// 结束日期为星期六和星期日时偏移量为0
-                 charge_end_date = etmp - 1;
-             }
-             result = (getDaysBetween(this.getNextMonday(d1), this.getNextMonday(d2)) / 7)
-             * 5 + charge_start_date - charge_end_date;
-           }
-           return result;
-        }
-  
-        private int getDaysBetween(java.util.Calendar d1, java.util.Calendar d2) {
-             if (d1.after(d2)) { 
-              java.util.Calendar swap = d1;
-              d1 = d2;
-              d2 = swap;
-             }
-             int days = d2.get(java.util.Calendar.DAY_OF_YEAR)
-               - d1.get(java.util.Calendar.DAY_OF_YEAR);
-             int y2 = d2.get(java.util.Calendar.YEAR);
-             if (d1.get(java.util.Calendar.YEAR) != y2) {
-              d1 = (java.util.Calendar) d1.clone();
-              do {
-               days += d1.getActualMaximum(java.util.Calendar.DAY_OF_YEAR);
-               d1.add(java.util.Calendar.YEAR, 1);
-              } while (d1.get(java.util.Calendar.YEAR) != y2);
-             }
-             return days;
-       }
-      
-        private Calendar getNextMonday(Calendar date) {
-         Calendar result = null;
-         result = date;
-         do {
-          result = (Calendar) result.clone();
-          result.add(Calendar.DATE, 1);
-         } while (result.get(Calendar.DAY_OF_WEEK) != 2);
-         return result;
-        }  
         
     /**
      * <br>
@@ -183,13 +94,16 @@ public class LaccManager extends AbstractBaseBean {
         String keyWord = request.getParameter("keyWord");
         String fullName = UtilFactory.getStrUtil().unescape(request.getParameter("fullName"));
         // 获取数据
-        String sql = "select t.yw_guid,t.bh as ajbh ,t.ay,t.dwmc,t.ajly,t.grxm ,to_char(t.slrq,'yyyy-MM-dd') as slrq,j.activityname as bazt,j.wfInsId,to_char(j.create_ ,'yyyy-MM-dd') as jssj,to_char(j.end_,'yyyy-MM-dd') as yjsj,j.wfinsid from lacpb t join workflow.v_hist_task j on t.yw_guid=j.yw_guid where j.assignee_=?";
+        String sql = "select t.yw_guid,t.bh as ajbh ,t.qy,t.ay,t.dwmc,t.ajly,t.grxm ,to_char(t.slrq,'yyyy-MM-dd') as slrq,a.wfInsId,to_char(a.end_,'yyyy-MM-dd') as yjsj from zfjc.lacpb t join "  
+                    +" (select (select t1.value_ from workflow.JBPM4_HIST_PROCINST t,workflow.JBPM4_HIST_VAR t1 where t.state_='ended' and t.id_=t1.procinstid_ and t1.varname_='receiveid') yw_guid,"
+                    +" (select t1.value_ owner from workflow.JBPM4_HIST_PROCINST t,workflow.JBPM4_HIST_VAR t1 where t.state_='ended' and t.id_=t1.procinstid_ and t1.varname_='owner') owner,"
+                    +" t.id_ wfinsid,t.procdefid_,t.start_,t.end_,t.duration_,t.endactivity_ from workflow.JBPM4_HIST_PROCINST t,workflow.JBPM4_HIST_VAR t1 where t.state_='ended' and t.id_=t1.procinstid_)  a  on t.yw_guid=a.yw_guid and a.owner=?";
         if (keyWord != null) {
             keyWord = UtilFactory.getStrUtil().unescape(keyWord);
-            sql += " and (upper(t.bh)||upper(t.qy)||upper(t.ay)||upper(t.ajly)||upper(t.grxm)||upper(t.slrq)||upper(j.activityname)||upper(j.end_) like '%"
+            sql += " and (upper(t.bh)||upper(t.qy)||upper(t.ay)||upper(t.ajly)||upper(t.grxm)||upper(t.slrq)||upper(a.end_) like '%"
                     + keyWord + "%')";
         }
-        sql += " order by j.create_ desc";
+        sql += " order by t.slrq desc";
         List<Map<String, Object>> result = query(sql, YW, new String[] { fullName });
 
         // 调整数据格式
@@ -200,7 +114,7 @@ public class LaccManager extends AbstractBaseBean {
             } else {
                 map.put("DSR", map.get("dwmc"));
             }
-            map.put("CREATE_", map.get("jssj"));
+            map.put("END_", map.get("yjsj"));
             map.put("SLRQ", map.get("slrq"));
             map.put("INDEX", i++);
         }
@@ -218,10 +132,10 @@ public class LaccManager extends AbstractBaseBean {
         String keyWord = request.getParameter("keyWord");
 
         // 获取数据
-        String sql = "select t.yw_guid,t.bh as ajbh ,t.ay,t.dwmc,t.ajly,t.grxm ,to_char(t.slrq,'yyyy-MM-dd') as slrq,j.wfInsId,to_char(j.end_,'yyyy-MM-dd') as yjsj,j.wfinsid from lacpb t join workflow.v_end_wfins j on t.yw_guid=j.yw_guid";
+        String sql = "select t.yw_guid,t.bh as ajbh ,t.qy ,t.ay,t.dwmc,t.ajly,t.grxm ,to_char(t.slrq,'yyyy-MM-dd') as slrq,j.wfInsId,to_char(j.end_,'yyyy-MM-dd') as yjsj,j.wfinsid from lacpb t join workflow.v_end_wfins j on t.yw_guid=j.yw_guid";
         if (keyWord != null) {
             keyWord = UtilFactory.getStrUtil().unescape(keyWord);
-            sql += " and (upper(t.bh)||upper(t.ay)||upper(t.ajly)||upper(t.grxm)||upper(t.slrq)||upper(j.end_) like '%"
+            sql += " and (upper(t.bh)||upper(t.qy)||upper(t.ay)||upper(t.ajly)||upper(t.grxm)||upper(t.slrq)||upper(j.end_) like '%"
                     + keyWord + "%')";
         }
         sql += " order by t.slrq desc";
