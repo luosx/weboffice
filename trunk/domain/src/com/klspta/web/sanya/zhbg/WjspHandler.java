@@ -151,7 +151,10 @@ public class WjspHandler extends AbstractBaseBean{
 	public void delete(){
 		String yw_guid=request.getParameter("yw_guid");
 		String sql = " Delete from wjspdjb where yw_guid=?";
-		update(sql, YW ,new Object[]{yw_guid});
-		response("success");
+		int i = update(sql, YW ,new Object[]{yw_guid});
+		if(i==1){response("success");}else{
+			response("false");
+		}
+		
 	}
 }
