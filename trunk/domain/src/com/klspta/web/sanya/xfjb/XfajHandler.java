@@ -66,10 +66,10 @@ public class XfajHandler extends AbstractBaseBean{
 	
 	private List<Map<String, Object>> getList(String status, String keywords){
 		StringBuffer sqlBuffer = new StringBuffer();
-		sqlBuffer.append("select t.xfsx,t.xflx,t.blsx, t.blks, t.blzt, t.blqk, t.yw_guid, t.createdate,t.zhblr  from xfajdjb t where t.blzt ='").append(status).append("'");
+		sqlBuffer.append("select t.xfsx,t.xflx,t.blsx, t.blks, t.blzt, t.yw_guid, t.createdate,t.zhblr  from xfajdjb t where t.blzt ='").append(status).append("'");
 		//添加关键字查询
 		if((!"".equals(keywords)) || keywords != null){
-			sqlBuffer.append(" and (t.zhblr||t.xfsx||t.xflx||t.blsx||t.blks||t.blzt||t.blqk like '%");
+			sqlBuffer.append(" and (t.zhblr||t.xfsx||t.xflx||t.blsx||t.blks||t.blzt like '%");
 			sqlBuffer.append(keywords);
 			sqlBuffer.append("%')");
 		}
@@ -86,13 +86,11 @@ public class XfajHandler extends AbstractBaseBean{
      */
     public void delete() {
     	String yw_guid=request.getParameter("yw_guid");
-		String sql = " Delete from xfajdjb where yw_guid=?";
+		String sql = "Delete from xfajdjb where yw_guid=?";
 		int i = update(sql, YW ,new Object[]{yw_guid});
 		if(i==1){response("success");}else{
 			response("false");
 		}
-		
-
     }
 	
 	
