@@ -95,7 +95,7 @@ public class LaccManager extends AbstractBaseBean {
         String fullName = UtilFactory.getStrUtil().unescape(request.getParameter("fullName"));
         // 获取数据
         String sql = "select t.yw_guid,t.bh as ajbh ,t.qy,t.ay,t.dwmc,t.ajly,t.grxm ,to_char(t.slrq,'yyyy-MM-dd') as slrq,a.wfInsId,to_char(a.end_,'yyyy-MM-dd') as yjsj from zfjc.lacpb t join "  
-                    +" (select (select t1.value_ from workflow.JBPM4_HIST_PROCINST t,workflow.JBPM4_HIST_VAR t1 where t.state_='ended' and t.id_=t1.procinstid_ and t1.varname_='receiveid') yw_guid,"
+                    +" (select distinct(select t1.value_ from workflow.JBPM4_HIST_PROCINST t,workflow.JBPM4_HIST_VAR t1 where t.state_='ended' and t.id_=t1.procinstid_ and t1.varname_='receiveid') yw_guid,"
                     +" (select t1.value_ owner from workflow.JBPM4_HIST_PROCINST t,workflow.JBPM4_HIST_VAR t1 where t.state_='ended' and t.id_=t1.procinstid_ and t1.varname_='owner') owner,"
                     +" t.id_ wfinsid,t.procdefid_,t.start_,t.end_,t.duration_,t.endactivity_ from workflow.JBPM4_HIST_PROCINST t,workflow.JBPM4_HIST_VAR t1 where t.state_='ended' and t.id_=t1.procinstid_)  a  on t.yw_guid=a.yw_guid and a.owner=?";
         if (keyWord != null) {
