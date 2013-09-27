@@ -91,7 +91,7 @@ String flag1 = request.getParameter("flag");
 	function onInit(){
 		
 		init();
-		
+		View();
 	}
 	
 	//添加选项
@@ -125,12 +125,12 @@ String flag1 = request.getParameter("flag");
 					<label>来文单位</label>
 				</td>
 				<td>
-					<select onchange=check(this.value) ;style="font-family:'宋体'; font-size:14px;" id="wjlx" name="wjlx" >
+					<select style="font-family:'宋体'; font-size:14px;" id="wjlx" name="wjlx" >
 						<option value="省国土环境资源厅">省国土环境资源厅</option>
 						<option value="省国土环境监察总队">省国土环境监察总队</option>
 						<option value="市委市政府">市委市政府</option>
 						<option value="三亚环境资源局">三亚国土资源局</option>
-						<option value="其他" >其他</option>
+						<option   value="其它" >其它</option>
 					</select>
 				</td>
 				<td align="center">
@@ -147,11 +147,13 @@ String flag1 = request.getParameter("flag");
 					<label>文件类型</label>
 				</td>
 				<td>
-					<select style="font-family:'宋体'; font-size:14px;" id="wjsq" name="wjsq">
+					<select onchange=View(this.value) ; style="font-family:'宋体'; font-size:14px;" id="wjsq" name="wjsq">
 						<option value="阅">阅</option>
 						<option value="督办">督办</option>
-						<option id="qt" style="display:block;" value="其他" ></option>
+						<option id="qt" style="display:block;" value="其它" >其它</option>
 					</select>
+					<div id=viewText  style="margin-left: 90px;margin-top: -20px;display:none ">
+					 <input type="text" id="qtlx" name="qtlx" style="border:1px solid #7364E0;width: 150; height: 20px "></div>
 				</td>
 				<td align="center">
 					<label>办理情况</label>
@@ -176,11 +178,13 @@ String flag1 = request.getParameter("flag");
 		alert( "表单保存成功"); 
 	}
 	
-	function check(value){
-	if(value=="其他"){
-	document.getElementById("qt").innerHTML="其他";
+	function View(){
+	var index=document.getElementById("wjsq").selectedIndex;
+	var value=document.getElementById("wjsq").options[index].value;
+	if(value=="其它"){
+	document.getElementById("viewText").style.display="";
 	}else{
-	document.getElementById("qt").innerHTML="";
+	document.getElementById("viewText").style.display="none";
 	}
 	}
   </script>
