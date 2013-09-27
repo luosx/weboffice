@@ -53,9 +53,9 @@ Ext.onReady(function(){
         store: store,
         columns: [
            {header: '预警',dataIndex:'YJ',width:30, sortable:false,renderer:warn},   
-           {header: '剩余天数',dataIndex:'SYTS',width: 60, sortable: true}, 
+           {header: '剩余天数',dataIndex:'SYTS',width: 100, sortable: true}, 
            {header: '编号',dataIndex:'INDEX',width: 30, sortable: true},
-           {header: '信访事项',dataIndex:'XFSX',width: width-510, sortable: true},
+           {header: '信访事项',dataIndex:'XFSX',width: width-550, sortable: true},
            {header: '信访类型',dataIndex:'XFLX',width: 60, sortable: true},      
            {header: '截止日期',dataIndex:'BLSX',width: 70, sortable: true},
            {header: '最后办理人',dataIndex:'ZHBLR',width: 70, sortable: true},
@@ -99,14 +99,14 @@ Ext.onReady(function(){
 
 function warn(XZSJ){
 	   	var syts=parseInt(XZSJ);//剩余办理天数
-	    if(syts<0){
-	    	return "<img src='<%=basePath%>web/sanya/framework/images/red.png'>";
+	    if(syts>"<%=dbts%>"){
+	    	return "<img src='<%=basePath%>web/sanya/framework/images/green.png'>";
 	    }
-	    else if(syts>=0 && syts <="<%=dbts%>" ){
+	    else if(syts>=0 && syts <= "<%=dbts%>"){
 	       return "<img src='<%=basePath%>web/sanya/framework/images/yellow.png'>";
 	    }
 	    else {
-	    	return "<img src='<%=basePath%>web/sanya/framework/images/green.png'>";
+	    	return "<img src='<%=basePath%>web/sanya/framework/images/red.png'>";
 	    }
 }
 
