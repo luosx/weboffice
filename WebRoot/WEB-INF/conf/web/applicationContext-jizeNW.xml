@@ -27,7 +27,8 @@
 	
 	<!--回传成果-->
 	<bean name="padDataManager" class="com.klspta.web.jizeNW.dtxc.PADDataManager" scope="prototype"/>
-		
+	<!--成果导入-->
+    <bean name="cgdrManager" class="com.klspta.web.jizeNW.dtxc.cgdr.WyrwManager" scope="prototype"/>		
 	<!-- 卫片执法 -->
 	<bean name="wpzfHandler" class="com.klspta.web.jizeNW.wpzf.WpzfHandler" scope="prototype"/>
 	
