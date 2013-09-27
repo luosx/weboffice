@@ -122,13 +122,13 @@ function delTask(id){
 		putRestParameter("yw_guid",id);
 	    var result = restRequest();
 	    if(result=="success"){
-	     alert("删除成功！");
-	    document.location.reload();
+		    alert("删除成功！");
+		    document.location.reload();
+	  	}else{
+		    alert("删除失败！");
+		    document.location.reload();
 		}
-	  }else{
-	     alert("删除失败！");
-	    document.location.reload();
-	    }
+	  }
 	});
 }
 //新增信访
