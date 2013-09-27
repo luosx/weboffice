@@ -27,7 +27,7 @@ Ext.onReady(function() {
 								}, {
 									title : '时限配置',
 									xtype : 'fieldset',
-									width : 350,
+									width : 400,
 									items : [{
 												xtype : 'compositefield',
 												fieldLabel : '提醒时限',
@@ -41,6 +41,12 @@ Ext.onReady(function() {
 														}, {
 															xtype : 'displayfield',
 															value : '天'
+														}, getHoursComoBox(), {
+															xtype : 'displayfield',
+															value : '时'
+														}, getMinComoBox(), {
+															xtype : 'displayfield',
+															value : '分'
 														}, {
 															xtype : 'displayfield',
 															hidden : true,
@@ -75,6 +81,8 @@ function save(type) {
 	putClientCommond("noticeSet", "setConfigByType");
 	putRestParameter("type", escape(escape(type)));
 	putRestParameter("limit", Ext.getCmp("g").items.items[0].getValue());
+	putRestParameter("shi", Ext.getCmp("g").items.items[2].value);
+	putRestParameter("fen", Ext.getCmp("g").items.items[4].value);
 	var result = restRequest();
 	if (result == true) {
 		Ext.MessageBox.alert('提示', '保存成功');
