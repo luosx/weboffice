@@ -115,17 +115,21 @@ function del(id){
           return "<a href='#' onclick='delTask(\""+id+"\");return false;'><img src='base/form/images/delete.png' alt='删除'></a>";
          }
 function delTask(id){
-    var  id=id;
-	putClientCommond("xfajHandler","delete");
-	putRestParameter("yw_guid",id);
-    var result = restRequest();
-    if(result=="success"){
-    alert("删除成功！");
-    document.location.reload();
-    }else{
-    alert("删除失败！");
-    document.location.reload();
-    }
+	var  id=id;
+    Ext.MessageBox.confirm('注意', '删除后不能恢复，您确定吗？',function(btn){
+	  if(btn=='yes'){
+		putClientCommond("xfajHandler","delete");
+		putRestParameter("yw_guid",id);
+	    var result = restRequest();
+	    if(result=="success"){
+	     alert("删除成功！");
+	    document.location.reload();
+		}
+	  }else{
+	     alert("删除失败！");
+	    document.location.reload();
+	    }
+	});
 }
 //新增信访
 function add(){
