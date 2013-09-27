@@ -52,12 +52,12 @@ Ext.onReady(function(){
     grid = new Ext.grid.GridPanel({
         store: store,
         columns: [
-           {header: '预警',dataIndex:'YJ',width:30, sortable:false,renderer:warn},   
-           {header: '剩余天数',dataIndex:'SYTS',width: 60, sortable: true}, 
-           {header: '编号',dataIndex:'INDEX',width: 30, sortable: true},
-           {header: '文件审批事项',dataIndex:'WJSPSX',width: width-550, sortable: true},
+           {header: '预警',dataIndex:'BLSX',width:30, sortable:false,renderer:warn},   
+           {header: '剩余天数',dataIndex:'SYTS',width: 100, sortable: true}, 
+           {header: '编号',dataIndex:'INDEX',width: 50, sortable: true},
+           {header: '文件审批事项',dataIndex:'WJSPSX',width: width-640, sortable: true},
            {header: '文件类型',dataIndex:'WJLX',width: 120, sortable: true},
-           {header: '截止日期',dataIndex:'BLSX',width: 70, sortable: true},
+           {header: '截止日期',dataIndex:'BLSX',width: 100, sortable: true},
            {header: '文件申请',dataIndex:'WJSQ',width: 60, sortable: true},
            {header: '最后办理人',dataIndex:'ZHBLR',width: 70, sortable: true},
            {header: '创建时间',dataIndex:'CREATEDATE',width: 70, sortable: true},
@@ -97,17 +97,36 @@ Ext.onReady(function(){
 });
 
 
-function warn(XZSJ){
-	   var syts=parseInt(XZSJ);//剩余办理天数
-	    if(syts>"<%=dbts%>"){
-	    	return "<img src='<%=basePath%>web/sanya/framework/images/green.png'>";
-	    }
-	    else if(syts>=0 && syts <="<%=dbts%>" ){
-	       return "<img src='<%=basePath%>web/sanya/framework/images/yellow.png'>";
-	    }
-	    else {
-	    	return "<img src='<%=basePath%>web/sanya/framework/images/red.png'>";
-	    }
+function warn(date){
+	//计算剩余天数
+	var endTime = new Date();
+	var dates = date.split("-");
+	endTime.setFullYear(dates[0]);
+	endTime.setMonth(dates[1]);
+	endTime.setMonth(parseInt(endTime.getMonth()) - 1);
+	var time = dates[2].split(" ");
+	endTime.setDate(time[0]);
+	var times = time[1].split(":");
+	endTime.setHours(times[0]);
+	endTime.setMinutes(times[1]);
+	var startTime = new Date();
+	var syts = parseFloat((endTime.getTime() - startTime.getTime()));
+	//计算时间限制
+	var limit = "<%=dbts%>";
+	var limitDay = limit.substring(0, limit.indexOf("天"));
+	var limitHour = limit.substring(limit.indexOf("天") + 1,limit.indexOf("时"));
+	var limitMinuts = limit.substring(limit.indexOf("时") + 1, limit.indexOf("分"));
+	var limits = parseInt(limitDay)*24*3600 + parseInt(limitHour)*3600 + parseInt(limitMinuts*60); 
+	limits = limits * 1000;
+    if(syts<0){
+    	return "<img src='web/sanya/framework/images/red.png'>";
+    }
+    else if(syts>=0 && syts <= limits ){
+       return "<img src='web/sanya/framework/images/yellow.png'>";
+    }
+    else {
+    	return "<img src='web/sanya/framework/images/green.png'>";
+    }
 }
 
 
@@ -155,11 +174,11 @@ function query(){
   });
   grid.reconfigure(store, new Ext.grid.ColumnModel([
    {header: '预警',dataIndex:'YJ',width:30, sortable:false,renderer:warn},  
-   {header: '剩余天数',dataIndex:'SYTS',width: 60, sortable: true,renderer:changKeyword},  
-   {header: '编号',dataIndex:'INDEX',width: 30, sortable: true,renderer:changKeyword},
-   {header: '文件审批事项',dataIndex:'WJSPSX',width: width-550, sortable: true,renderer:changKeyword},
+   {header: '剩余天数',dataIndex:'SYTS',width: 100, sortable: true,renderer:changKeyword},  
+   {header: '编号',dataIndex:'INDEX',width: 50, sortable: true,renderer:changKeyword},
+   {header: '文件审批事项',dataIndex:'WJSPSX',width: width-640, sortable: true,renderer:changKeyword},
    {header: '文件类型',dataIndex:'WJLX',width: 120, sortable: true,renderer:changKeyword},
-   {header: '截止日期',dataIndex:'BLSX',width: 70, sortable: true,renderer:changKeyword},
+   {header: '截止日期',dataIndex:'BLSX',width: 100, sortable: true,renderer:changKeyword},
    {header: '文件申请',dataIndex:'WJSQ',width: 60, sortable: true,renderer:changKeyword},
    {header: '最后办理人',dataIndex:'ZHBLR',width: 70, sortable: true,renderer:changKeyword},
    {header: '创建时间',dataIndex:'CREATEDATE',width: 70, sortable: true,renderer:changKeyword},
