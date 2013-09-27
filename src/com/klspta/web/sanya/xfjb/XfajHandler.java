@@ -77,6 +77,23 @@ public class XfajHandler extends AbstractBaseBean{
 		List<Map<String, Object>> returnList = query(sqlBuffer.toString(), YW);
 		return returnList;
 	}
+	/**
+     * 
+     * <br>Description: 删除指定的编号的信访案件
+     * <br>Author:侯文超
+     * <br>Date:2013-09-27
+     * @return
+     */
+    public void delete() {
+    	String yw_guid=request.getParameter("yw_guid");
+		String sql = " Delete from xfajdjb where yw_guid=?";
+		int i = update(sql, YW ,new Object[]{yw_guid});
+		if(i==1){response("success");}else{
+			response("false");
+		}
+		
+
+    }
 	
 	
 }
