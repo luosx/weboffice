@@ -144,13 +144,26 @@ function view(date){
 	endTime.setFullYear(dates[0]);
 	endTime.setMonth(dates[1]);
 	endTime.setMonth(parseInt(endTime.getMonth()) - 1);
-	endTime.setDate(dates[2]);
+	var time = dates[2].split(" ");
+	endTime.setDate(time[0]);
+	var times = time[1].split(":");
+	endTime.setHours(times[0]);
+	endTime.setMinutes(times[1]);
 	var startTime = new Date();
-	var syts = parseInt((endTime.getTime() - startTime.getTime())/(1000*3600*24));
+	var syts = parseFloat((endTime.getTime() - startTime.getTime()));
+	
+	//计算时间限制
+	var limit = "<%=dbts%>";
+	var limitDay = limit.substring(0, limit.indexOf("天"));
+	var limitHour = limit.substring(limit.indexOf("天") + 1,limit.indexOf("时"));
+	var limitMinuts = limit.substring(limit.indexOf("时") + 1, limit.indexOf("分"));
+	var limits = parseInt(limitDay)*24*3600 + parseInt(limitHour)*3600 + parseInt(limitMinuts*60); 
+	limits = limits * 1000;
+	
     if(syts<0){
     	return "<img src='web/sanya/framework/images/red.png'>";
     }
-    else if(syts>=0 && syts <=parseInt("<%=dbts%>") ){
+    else if(syts>=0 && syts <= limits ){
        return "<img src='web/sanya/framework/images/yellow.png'>";
     }
     else {
@@ -240,9 +253,9 @@ function changKeyword(val){
 			<img src='web/sanya/framework/images/red.png'>
 			已超时&nbsp;&nbsp;&nbsp;
 			<img src='web/sanya/framework/images/yellow.png'>
-			不足<%=dbts%>个工作日&nbsp;&nbsp;&nbsp;
+			不足<%=dbts%>&nbsp;&nbsp;&nbsp;
 			<img src='web/sanya/framework/images/green.png'>
-			超过<%=dbts%>个工作日 &nbsp;&nbsp;&nbsp;
+			超过<%=dbts%> &nbsp;&nbsp;&nbsp;
 			<br />
 			<br />
 			<!-- 督办案件将会红色高亮显示&nbsp;&nbsp;&nbsp; -->
