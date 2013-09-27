@@ -9,10 +9,12 @@ Object principalUser = SecurityContextHolder.getContext().getAuthentication().ge
 User userBean = ((User)principalUser);//得到用户bean
 XzqhBean xzqhBean = null;
 String strXcdwjc = "";//政区简称
+String strXcdw = "";//巡查单位
 String writerId = userBean.getUserID();//填表人userid
 String writerXzqh = userBean.getXzqh();//填表人行政区划
 if(!writerXzqh.equals("")){
 	xzqhBean = UtilFactory.getXzqhUtil().getBeanById(writerXzqh);
+	strXcdw = xzqhBean.getLandname();//巡查单位
 	strXcdwjc = xzqhBean.getCatonsimpleName();//政区简称
 }
 String strDate = UtilFactory.getDateUtil().getCurrentChineseDate();//中国式的时间####年##月##日
@@ -297,18 +299,19 @@ String xcbh = dtxc.buildXcbh();
   </script>
   <body onLoad="onInit(); return false;">
   	<div id="fixed" class="Noprn" style="position: fixed; top: 5px; left: 0px"></div>
-  	<div align="center" style="margin-bottom:20px"><h1 style="font-size: 25">国土资源执法监察巡查日志</h1></div>
+  	<div align="center" style="margin-bottom:20px">
+  	<h1 style="font-size: 25">国土资源执法监察巡查日志</h1></div>
   	<form method="post">
-  		<div style="width: 100%;">
-			<span style="margin-left: 270px;font-size:14px;">巡查编号：<input type="text" name="xcbh" id="xcbh" readonly="readonly" value="<%=xcbh%>"
-					style="width: 150px; background-color: transparent; border: 0px;"></input>
+  		<div align="center" style="width: 600px;margin-left:65px">
+			<span style="font-size:14px;">巡查编号：<input type="text" name="xcbh" id="xcbh" readonly="readonly" value="<%=xcbh%>"
+					style="width: 120px; background-color: transparent; border: 0px;"></input>
 			</span>
 		</div>
   		<input type="hidden" name="yw_guid" id="yw_guid">
   	    <table align="center" cellpadding="0" cellspacing="0" width="600px" id="xcrztable">
 			<tr>
     			<td height="16" colspan="2"><div align="center">巡查单位</div></td>
-    			<td width="166"><input type="text" class="noborder" name="xcdw" id="xcdw" style="width: 97%"/></td>
+    			<td width="166"><input type="text" class="noborder" name="xcdw" id="xcdw" value="<%=strXcdw %>" style="width: 97%"/></td>
     			<td width="102"><div align="center">巡查日期</div></td>
     			<td width="211"><input type="text" class="underline" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})" name="xcrq" id="xcrq" readonly style="width: 97%"/></td>
   			</tr>
@@ -338,7 +341,7 @@ String xcbh = dtxc.buildXcbh();
 				
 					<input type="text" id="allnum" name="allnum" value="5" style="display:none" />				</td>
 			</tr>
-			<tbody id="info">
+			<tbody id="info" style="display:none;">
 			<tr>
 				<td rowspan="5"><div align="center"><input type="checkbox" id="check_1" /> </td>
 				<td><div align="center">建设项目</div></td>
