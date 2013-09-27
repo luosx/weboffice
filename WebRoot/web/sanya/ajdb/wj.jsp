@@ -99,14 +99,14 @@ Ext.onReady(function(){
 
 function warn(XZSJ){
 	   var syts=parseInt(XZSJ);//剩余办理天数
-	    if(syts<0){
-	    	return "<img src='<%=basePath%>web/sanya/framework/images/red.png'>";
+	    if(syts>"<%=dbts%>"){
+	    	return "<img src='<%=basePath%>web/sanya/framework/images/green.png'>";
 	    }
 	    else if(syts>=0 && syts <="<%=dbts%>" ){
 	       return "<img src='<%=basePath%>web/sanya/framework/images/yellow.png'>";
 	    }
 	    else {
-	    	return "<img src='<%=basePath%>web/sanya/framework/images/green.png'>";
+	    	return "<img src='<%=basePath%>web/sanya/framework/images/red.png'>";
 	    }
 }
 
