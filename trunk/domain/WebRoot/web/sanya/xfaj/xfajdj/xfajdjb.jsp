@@ -117,15 +117,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	<div align="center" style="margin-bottom:20px"><h1 style="font-size: 25">信访案件登记表</h1></div>
   	<form method="post">
   	    <table align="center" cellpadding="0" cellspacing="0" width="600px">
-			<tr>
-				<td align="center">
+			<tr style="height:95px">
+				<td align="center" style="width:110px">
 					信访事项
 				</td>
-				<td colspan="3">
-					<textarea id="xfsx" name="xfsx" style="width:100%; overflow:hidden" rows="5" ></textarea>
+				<td colspan="3" style="width:485px">
+					<textarea id="xfsx" name="xfsx" style="width:100%; overflow:auto;" rows="5" ></textarea>
 				</td>
 			</tr>
-			<tr>
+			<tr style="height:30px">
 				<td align="center">
 					<label>信访类型</label>
 				</td>
@@ -142,7 +142,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<input type="text" style="display: none;" name="zhblr" id="zhblr" value="<%=fullName%>" />
 				</td>
 			</tr>
-			<tr>
+			<tr style="height:30px">
 				<td align="center">
 					<label>受理科室</label>
 				</td>
@@ -164,15 +164,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<option value="已处理">已处理</option>
 					</select>
 				</td>
-			</tr>
-			<tr>
-				<td align="center">
-					<label>办理情况</label>
-				</td> 
-				<td colspan="3">
-					<textarea id="blqk" name="blqk" style="width:100%; overflow:hidden" rows="5"></textarea>
-				</td>
-			
 			</tr>
         </table>
   	</form>
