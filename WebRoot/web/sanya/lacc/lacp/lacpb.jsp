@@ -165,20 +165,17 @@ if(fixed!=null && fixed.equals("fixedPrint")){%>
   </tr>
   <tr>
     <td colspan="2"><div align="center">案件来源</div></td>
-    <td colspan="2" align="left">				
+    <td colspan="6" align="left">				
     	<input class="noborder" name="ajly" id="ajly" style="width: 98%"/>  				       
     </td>
-    <td colspan="2"><div align="center">填表日期</div></td>
-    <td colspan="2"><input type="text" class="noborder" id="tbrq" name="tbrq"
-								onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})"    readonly style="width: 98%" /></td>    
   </tr>
   <tr>
     <td colspan="2"><div align="center">受理日期</div></td>
     <td colspan="2"><input type="text" class="noborder" id="slrq" name="slrq"
 								onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})"    readonly style="width: 98%" /></td>
-    <td colspan="2"><div align="center">截止日期</div></td>
-    <td colspan="2"><input type="text" class="noborder" id="jzrq" name="jzrq"
-								onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})"    readonly style="width: 98%" /></td>	
+    <td colspan="2"><div align="center">填表日期</div></td>
+    <td colspan="2"><input type="text" class="noborder" id="tbrq" name="tbrq"
+								onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})"    readonly style="width: 98%" /></td> 	
   </tr>
   <tr>
     <td colspan="2"><div align="center">主要违法<br/>

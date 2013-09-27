@@ -37,10 +37,6 @@
             {
                 title: '文件',
                 html: "<iframe style='height:"+height+"px;width:100%' src='wj.jsp'/>"
-            },
-            {
-                title: '立案',
-                html: "<iframe style='height:"+height+"px;width:100%' src='la.jsp'/>"
             }
         ]
     })

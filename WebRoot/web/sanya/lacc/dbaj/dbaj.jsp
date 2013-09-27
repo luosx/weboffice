@@ -2,19 +2,14 @@
 <%@page
 	import="org.springframework.security.core.context.SecurityContextHolder"%>
 <%@page import="com.klspta.console.user.User"%>
-<%@page import="com.klspta.web.sanya.ajdb.CaseSupervision"%>
-
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
-
-
 	Object principal = SecurityContextHolder.getContext()
 			.getAuthentication().getPrincipal();
 	String fullName = ((User) principal).getFullName();
-	String dbts = new CaseSupervision().getDbDateByType("立案");	
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -45,7 +40,6 @@ Ext.onReady(function(){
     proxy: new Ext.ux.data.PagingMemoryProxy(myData),
        remoteSort:true,
         fields: [
-           {name: 'YJ'},
            {name: 'AJBH'},
            {name: 'AY'},
            {name: 'AJLY'},
@@ -65,9 +59,8 @@ Ext.onReady(function(){
         title:'案件任务待办列表',
         store: store,
         columns: [
-           {header: '预警',dataIndex:'YJ',width: width*0.05, sortable: true,renderer:warn},
            {header: '立案编号',dataIndex:'AJBH',width: width*0.16, sortable: true},
-           {header: '案由',dataIndex:'AY',width: width*0.20, sortable: true},
+           {header: '案由',dataIndex:'AY',width: width*0.25, sortable: true},
            {header: '案件来源',dataIndex:'AJLY',width: width*0.08, sortable: true},
            {header: '当事人',dataIndex:'DSR',width: width*0.07, sortable: true},
            {header: '办案状态',dataIndex:'BAZT',width: width*0.1, sortable: true},
@@ -108,19 +101,6 @@ Ext.onReady(function(){
     
    
 });
-
-function warn(XZSJ){
-	   var syts=XZSJ;//剩余办理天数
-	    if(syts<0){
-	    	return "<img src='<%=basePath%>web/sanya/framework/images/red.png'>";
-	    }
-	    else if(syts>=0 && syts <="<%=dbts%>" ){
-	       return "<img src='<%=basePath%>web/sanya/framework/images/yellow.png'>";
-	    }
-	    else {
-	    	return "<img src='<%=basePath%>web/sanya/framework/images/green.png'>";
-	    }
-}
 
 function pro(id){
  return "<a href='#'onclick='process("+id+");return false;'><img src='<%=basePath%>web/xuzhouNW/lacc/dbaj/images/view.png' alt='办理'></a>";
@@ -173,7 +153,6 @@ function query(){
         proxy: new Ext.ux.data.PagingMemoryProxy(myData),
         remoteSort:true,
         fields: [
-           {name: 'YJ'},
            {name: 'AJBH'},
            {name: 'AY'},
            {name: 'AJLY'},
@@ -185,9 +164,8 @@ function query(){
         ]
   });
   grid.reconfigure(store, new Ext.grid.ColumnModel([
-         {header: '预警',dataIndex:'YJ',width: width*0.05, sortable: true,renderer:warn},
          {header: '立案编号',dataIndex:'AJBH',width: width*0.16, sortable: true},
-         {header: '案由',dataIndex:'AY',width: width*0.20, sortable: true},
+         {header: '案由',dataIndex:'AY',width: width*0.25, sortable: true},
          {header: '案件来源',dataIndex:'AJLY',width: width*0.08, sortable: true},
          {header: '当事人',dataIndex:'DSR',width: width*0.07, sortable: true},
          {header: '办案状态',dataIndex:'BAZT',width: width*0.1, sortable: true},
@@ -218,18 +196,6 @@ function query(){
 </script>
 	</head>
 	<body bgcolor="#FFFFFF" topmargin="0" leftmargin="0">
-		<div id="mygrid_container" style="width: 100%; height: 80%;"></div>
-		<div align="center" style="margin:10px 0 0 0;padding:0;">
-		    剩余期限：
-			<img src='<%=basePath%>web/sanya/framework/images/red.png'>
-			已超时&nbsp;&nbsp;&nbsp;
-			<img src='<%=basePath%>web/sanya/framework/images/yellow.png'>
-			不足<%=dbts%>个工作日&nbsp;&nbsp;&nbsp;
-			<img src='<%=basePath%>web/sanya/framework/images/green.png'>
-			超过<%=dbts%>个工作日 &nbsp;&nbsp;&nbsp;
-			<br />
-			<br />
-			<!-- 督办案件将会红色高亮显示&nbsp;&nbsp;&nbsp; -->
-		</div>		
+		<div id="mygrid_container" style="width: 100%; height: 80%;"></div>		
 	</body>
 </html>
