@@ -53,7 +53,7 @@ Ext.onReady(function(){
         store: store,
         columns: [
            {header: '预警',dataIndex:'BLSX',width:30, sortable:false,renderer:warn},   
-           {header: '剩余天数',dataIndex:'SYTS',width: 100, sortable: true}, 
+           {header: '剩余时间',dataIndex:'SYTS',width: 100, sortable: true}, 
            {header: '编号',dataIndex:'INDEX',width: 50, sortable: true},
            {header: '文件审批事项',dataIndex:'WJSPSX',width: width-640, sortable: true},
            {header: '文件类型',dataIndex:'WJLX',width: 120, sortable: true},
@@ -174,7 +174,7 @@ function query(){
   });
   grid.reconfigure(store, new Ext.grid.ColumnModel([
    {header: '预警',dataIndex:'YJ',width:30, sortable:false,renderer:warn},  
-   {header: '剩余天数',dataIndex:'SYTS',width: 100, sortable: true,renderer:changKeyword},  
+   {header: '剩余时间',dataIndex:'SYTS',width: 100, sortable: true,renderer:changKeyword},  
    {header: '编号',dataIndex:'INDEX',width: 50, sortable: true,renderer:changKeyword},
    {header: '文件审批事项',dataIndex:'WJSPSX',width: width-640, sortable: true,renderer:changKeyword},
    {header: '文件类型',dataIndex:'WJLX',width: 120, sortable: true,renderer:changKeyword},
