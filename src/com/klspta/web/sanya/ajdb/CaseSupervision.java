@@ -29,9 +29,9 @@ public class CaseSupervision extends AbstractBaseBean {
         if (list != null && list.size() > 0) {
             for (Map<String, Object> map : list) {
                 map.put("YJ", getWorkaDayAmount((String) map.get("blsx")));
-                map.put("SYTS", getWorkaDayAmount((String) map.get("blsx")) + "天");
+                map.put("SYTS", getWorkaDayAmount((String) map.get("blsx")));
             }
-            list = sortBySYTS(list);
+            //list = sortBySYTS(list);
             list = setIndex(list);
         }
         response(list);
@@ -62,7 +62,7 @@ public class CaseSupervision extends AbstractBaseBean {
                     map.put("SYTS", getWorkaDayAmount(map.get("jzrq").toString()) + "天");
                 }
             }
-            list = sortBySYTS(list);
+            //list = sortBySYTS(list);
             list = setIndex(list);
         }
         response(list);
@@ -86,9 +86,9 @@ public class CaseSupervision extends AbstractBaseBean {
         if (list != null && list.size() > 0) {
             for (Map<String, Object> map : list) {
                 map.put("YJ", getWorkaDayAmount(map.get("blsx").toString()));
-                map.put("SYTS", getWorkaDayAmount(map.get("blsx").toString()) + "天");
+                map.put("SYTS", getWorkaDayAmount(map.get("blsx").toString()));
             }
-            list = sortBySYTS(list);
+           // list = sortBySYTS(list);
             list = setIndex(list);
         }
         response(list);
@@ -103,6 +103,7 @@ public class CaseSupervision extends AbstractBaseBean {
      * @return
      */
     private List<Map<String, Object>> sortBySYTS(List<Map<String, Object>> list) {
+    	
         for (int i = 0; i < list.size() - 1; i++) {
             for (int j = i + 1; j < list.size(); j++) {
                 Map<String, Object> map1 = list.get(i);
@@ -146,7 +147,7 @@ public class CaseSupervision extends AbstractBaseBean {
      */
     private String getWorkaDayAmount(String blqx) {
 
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");//设置日期格式
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm");//设置日期格式
 
         String systemDate = df.format(new Date());//系统时间
 
@@ -155,8 +156,8 @@ public class CaseSupervision extends AbstractBaseBean {
         Calendar endTime = Calendar.getInstance();
 
         try {
-
             startTime.setTime(df.parse(systemDate));
+            
             endTime.setTime(df.parse(blqx));
 
         } catch (ParseException e) {
@@ -165,9 +166,15 @@ public class CaseSupervision extends AbstractBaseBean {
 
         }
 
-        int xzsj = getWorkingDay(startTime, endTime);
-
-        return String.valueOf(xzsj);
+        long xzsj = getDaysBetween(startTime, endTime);
+        if(xzsj < 0){
+        	return "已超时";
+        }
+        long days = xzsj/(1000*24*60*60);
+        long hour = xzsj%(1000*24*60*60)/(1000*60*60);
+        long min = xzsj%(1000*24*60*60)%(1000*60*60)/(1000*60);
+        String diffTime = days + "天" + hour + "时" + min + "分";
+        return diffTime;
 
     }
     
@@ -180,10 +187,11 @@ public class CaseSupervision extends AbstractBaseBean {
      * @param d2
      * @return
      */
-    public int getWorkingDay(java.util.Calendar d1, java.util.Calendar d2) {
-        int result = -1;
+    public long getWorkingDay(java.util.Calendar d1, java.util.Calendar d2) {
+        long result = -1;
         if (d1.after(d2)) {
         } else {
+        	/*
             int charge_start_date = 0;//开始日期的日期偏移量
             int charge_end_date = 0;//结束日期的日期偏移量
             // 日期不在同一个日期内
@@ -197,28 +205,27 @@ public class CaseSupervision extends AbstractBaseBean {
             if (etmp != 0 && etmp != 6) {// 结束日期为星期六和星期日时偏移量为0
                 charge_end_date = etmp - 1;
             }
-            result = (getDaysBetween(this.getNextMonday(d1), this.getNextMonday(d2)) / 7) * 5
-                    + charge_start_date - charge_end_date;
+            */
+            result = getDaysBetween(this.getNextMonday(d1), this.getNextMonday(d2)); 
         }
         return result;
     }
     
     /**
      * 
-     * <br>Description:获取两个日期之间的天数
+     * <br>Description:获取两个日期之间的间隔
      * <br>Author:王雷
      * <br>Date:2013-9-9
      * @param d1
      * @param d2
      * @return
      */
-    private int getDaysBetween(java.util.Calendar d1, java.util.Calendar d2) {
-        if (d1.after(d2)) {
-            java.util.Calendar swap = d1;
-            d1 = d2;
-            d2 = swap;
-        }
-        int days = d2.get(java.util.Calendar.DAY_OF_YEAR) - d1.get(java.util.Calendar.DAY_OF_YEAR);
+    private long getDaysBetween(java.util.Calendar d1, java.util.Calendar d2) {
+        //int days = d2.get(java.util.Calendar.DAY_OF_YEAR) - d1.get(java.util.Calendar.DAY_OF_YEAR); 
+        //int hours = d2.get(java.util.Calendar.HOUR_OF_DAY) - d1.get(java.util.Calendar.HOUR_OF_DAY);
+        //int minutes = d2.get(java.util.Calendar.MINUTE) - d1.get(java.util.Calendar.MINUTE);
+ 
+        long days = 0;
         int y2 = d2.get(java.util.Calendar.YEAR);
         if (d1.get(java.util.Calendar.YEAR) != y2) {
             d1 = (java.util.Calendar) d1.clone();
@@ -227,7 +234,13 @@ public class CaseSupervision extends AbstractBaseBean {
                 d1.add(java.util.Calendar.YEAR, 1);
             } while (d1.get(java.util.Calendar.YEAR) != y2);
         }
-        return days;
+        long diff = d2.getTimeInMillis() - d1.getTimeInMillis();
+        diff += days*1000*24*60*60;
+       // days += diff/(1000*24*60*60);
+       // long hour = diff%(1000*24*60*60)/(1000*60*60);
+       // long min = diff%(1000*24*60*60)%(1000*60*60)/(1000*60);
+       // String diffTime = days + "天" + hour + "时" + min + "分";
+        return diff;
     }
     
     /**
