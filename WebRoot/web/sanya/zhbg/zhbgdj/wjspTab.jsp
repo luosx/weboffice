@@ -69,13 +69,21 @@
 				document.location.href = "/domain/web/sanya/zhbg/zhbgList/zhbgblz.jsp";
 			}else if("dbwj" == "<%=type%>"){
 				document.location.href = "/domain/web/sanya/ajdb/wj.jsp";
+			}else{
+				document.getElementById("return").style.display="none";
 			}
 		}
-  
+  function disp(){
+  	if("ybl" == "<%=type%>"||"blz" == "<%=type%>"||"dbwj" == "<%=type%>"){
+  		document.getElementById("return").style.display="";
+  	}else{
+ 		document.getElementById("return").style.display="none";
+  	}
+  }
    </script>
   </head>
-	<body bgcolor="#FFFFFF">
-		<div id="return" align="right">
+	<body bgcolor="#FFFFFF" onload="disp()" >
+		<div id="return" style="display:" align="right" >
 		  		<button class='btn' id="return" style="position: absolute; top: 3px; right: 5px" onclick="back()">
 							返 回
 				</button>
