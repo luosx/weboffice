@@ -133,7 +133,7 @@ String flag1 = request.getParameter("flag");
 						<option value="三亚环境资源局">三亚国土资源局</option>
 						<option   value="其它" >其它</option>
 					</select>
-					<div id=checkText  style="margin-left: 100px;margin-top: -20px;display:none ">
+					<div id=checkText  style="margin-left: 180px;margin-top: -20px;display:none ">
 					 <input type="text" id="qtdw" name="qtdw" style="border:1px solid #7364E0;width: 150; height: 20px "></div>
 				</td>
 				<td align="center">
@@ -155,7 +155,7 @@ String flag1 = request.getParameter("flag");
 						<option value="督办">督办</option>
 						<option id="qt" style="display:block;" value="其它" >其它</option>
 					</select>
-					<div id=viewText  style="margin-left: 100px;margin-top: -20px;display:none ">
+					<div id=viewText  style="margin-left: 180px;margin-top: -20px;display:none ">
 					 <input type="text" id="qtlx" name="qtlx" style="border:1px solid #7364E0;width: 150; height: 20px "></div>
 				</td>
 				<td align="center">
