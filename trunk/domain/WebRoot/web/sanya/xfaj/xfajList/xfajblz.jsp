@@ -89,6 +89,10 @@ html, body {
 	    			{xtype: 'button',text:'新增信访',width:60,handler: add}
 	    		],
         		listeners:{
+        			rowdblclick : function(grid, rowIndex, e)
+							{
+						   		viewDetail(rowIndex+1);
+							}
          		},   
         		stripeRows: true,
         		width:width,
@@ -128,6 +132,10 @@ function delTask(id){
 		}
 	  }
 	});
+}
+function viewDetail(id){	
+	var url = "<%=basePath%>web/sanya/xfaj/xfajdj/xfajFrame.jsp?type=blz&yw_guid=" + myData[id-1].YW_GUID;
+	document.location.href = url;	
 }
 //新增信访
 function add(){

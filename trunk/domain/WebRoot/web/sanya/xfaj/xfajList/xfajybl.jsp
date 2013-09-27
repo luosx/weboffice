@@ -83,6 +83,10 @@ html, body {
 	    			{xtype: 'button',text:'查询',width:50,handler: query}
 	    		],
         		listeners:{
+        			rowdblclick : function(grid, rowIndex, e)
+							{
+						   		viewDetail(rowIndex+1);
+							}
          		},   
         		stripeRows: true,
         		width:width,
@@ -168,6 +172,10 @@ function changKeyword(val){
        return val;
      }
 } 
+function viewDetail(id){	
+	var url = "<%=basePath%>web/sanya/xfaj/xfajdj/xfajFrame.jsp?type=ybl&yw_guid=" + myData[id-1].YW_GUID;
+	document.location.href = url;	
+}
 //删除功能
 function del(id){
           return "<a href='#' onclick='delTask(\""+id+"\");return false;'><img src='base/form/images/delete.png' alt='删除'></a>";
