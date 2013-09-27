@@ -183,6 +183,10 @@ String flag1 = request.getParameter("flag");
 	var value=document.getElementById("wjsq").options[index].value;
 	if(value=="其它"){
 	document.getElementById("viewText").style.display="";
+	var range = document.getElementById("qtlx").createTextRange(); 
+        range.moveStart('character', 0); 
+        range.collapse(true); 
+         range.select(); 
 	}else{
 	document.getElementById("viewText").style.display="none";
 	}
