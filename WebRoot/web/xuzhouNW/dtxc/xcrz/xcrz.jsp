@@ -52,6 +52,7 @@
 <html>
 	<head>
 		<base href="<%=basePath%>" />
+			<div id="fixed" class="Noprn" style="position: fixed; top: 5px; left: 0px"></div>
 		<TITLE>巡查日志</TITLE>
 		<link rel="stylesheet" href="<%=basePath%>base/form/css/commonForm.css" type="text/css" />
 		<%@ include file="/base/include/formbase.jspf"%>
