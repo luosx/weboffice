@@ -33,9 +33,10 @@ public class NoticeSet extends AbstractBaseBean {
 			type = (type.equals("")) ? "信访" : type;
 			String t = request.getParameter("limit");
 			int limit=Integer.parseInt(t);
-
-			String sql = "update noticeset_ t set t.limit=? where t.type=?";
-			update(sql, YW, new String[] { t, type });
+			String shi = request.getParameter("shi");
+			String fen = request.getParameter("fen");
+			String sql = "update noticeset_ t set t.limit=?, t.hour=?, t.minuts=? where t.type=?";
+			update(sql, YW, new String[] { t,shi, fen, type });
 			response("true");
 		} catch (Exception e) {
 			System.out.println(e);
