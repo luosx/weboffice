@@ -53,7 +53,7 @@ Ext.onReady(function(){
         store: store,
         columns: [
            {header: '预警',dataIndex:'BLSX',width:30, sortable:false,renderer:warn},   
-           {header: '剩余天数',dataIndex:'SYTS',width: 100, sortable: true}, 
+           {header: '剩余时间',dataIndex:'SYTS',width: 100, sortable: true}, 
            {header: '编号',dataIndex:'INDEX',width: 50, sortable: true},
            {header: '信访事项',dataIndex:'XFSX',width: width-600, sortable: true},
            {header: '信访类型',dataIndex:'XFLX',width: 60, sortable: true},      
@@ -176,7 +176,7 @@ function query(){
   });
   grid.reconfigure(store, new Ext.grid.ColumnModel([
    {header: '预警',dataIndex:'YJ',width:30, sortable:false,renderer:warn},  
-   {header: '剩余天数',dataIndex:'SYTS',width: 100, sortable: true,renderer:changKeyword},  
+   {header: '剩余时间',dataIndex:'SYTS',width: 100, sortable: true,renderer:changKeyword},  
    {header: '编号',dataIndex:'INDEX',width: 50, sortable: true,renderer:changKeyword},
    {header: '信访事项',dataIndex:'XFSX',width: width-600, sortable: true,renderer:changKeyword},
    {header: '信访类型',dataIndex:'XFLX',width: 60, sortable: true,renderer:changKeyword},
