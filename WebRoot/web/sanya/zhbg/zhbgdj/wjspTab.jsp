@@ -67,7 +67,8 @@
 				document.location.href = "/domain/web/sanya/zhbg/zhbgList/zhbgybl.jsp?flag=<%=flag%>";
 			}else if("blz" == "<%=type%>"){ 
 				document.location.href = "/domain/web/sanya/zhbg/zhbgList/zhbgblz.jsp";
-			}else{
+			}else if("dbwj" == "<%=type%>"){
+				document.location.href = "/domain/web/sanya/ajdb/wj.jsp";
 			}
 		}
   
