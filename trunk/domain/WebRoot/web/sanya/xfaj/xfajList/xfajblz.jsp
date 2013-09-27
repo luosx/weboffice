@@ -59,7 +59,8 @@ html, body {
 		           {name: 'ZHBLR'},
 		           {name: 'BLQK'},
 		           {name: 'YW_GUID'},
-		           {name: 'CREATEDATE'}				
+		           {name: 'CREATEDATE'},
+		           {name: 'DELETE'}				
 				]
 			});
     		store.load({params:{start:0, limit:13}});
@@ -73,14 +74,15 @@ html, body {
         		columns: [
         			new Ext.grid.RowNumberer(),
         			{header: '督办', dataIndex:'BLSX', width:40, sortable: true,renderer:view},
-		        	{header: '信访事项', dataIndex:'XFSX', width: (width - 560), sortable: true,renderer:changKeyword},
+		        	{header: '信访事项', dataIndex:'XFSX', width: (width - 600), sortable: true,renderer:changKeyword},
 		            {header: '信访类型', dataIndex:'XFLX', width: 60, sortable: true,renderer:changKeyword},
 		            {header: '截止日期', dataIndex:'BLSX', width: 80, sortable: true,renderer:changKeyword},
 		            {header: '受理科室', dataIndex:'BLKS', width: 80, sortable: true,renderer:changKeyword},
 		            {header: '最后办理人', dataIndex:'ZHBLR', width: 70, sortable: true,renderer:changKeyword},
 		            {header: '登记时间', dataIndex:'CREATEDATE', width: 80, sortable: true,renderer:changKeyword},
 		            {header: '办理情况', dataIndex:'BLQK', width: 80, sortable: true,renderer:changKeyword},
-		            {header: '查看', dataIndex:'YW_GUID', width: 40, sortable: true,renderer:pro}
+		            {header: '查看', dataIndex:'YW_GUID', width: 40, sortable: true,renderer:pro},
+		            {header: '删除',dataIndex:'YW_GUID',width:40, sortable: false,renderer:del}
         		], 
         		tbar:[
 	    			{xtype:'label',text:'快速查找:',width:60},
@@ -108,7 +110,23 @@ html, body {
     		grid.render('mygrid_container');
 }
 );
-
+//删除功能
+function del(id){
+          return "<a href='#' onclick='delTask(\""+id+"\");return false;'><img src='base/form/images/delete.png' alt='删除'></a>";
+         }
+function delTask(id){
+    var  id=id;
+	putClientCommond("xfajHandler","delete");
+	putRestParameter("yw_guid",id);
+    var result = restRequest();
+    if(result=="success"){
+    alert("删除成功！");
+    document.location.reload();
+    }else{
+    alert("删除失败！");
+    document.location.reload();
+    }
+}
 //新增信访
 function add(){
 	var url = "<%=basePath%>/web/sanya/xfaj/xfajdj/xfajTab.jsp";
@@ -166,7 +184,8 @@ function query(){
 	          {name: 'ZHBLR'},
 	          {name: 'BLQK'},
 	          {name: 'YW_GUID'},
-	          {name: 'CREATEDATE'}				
+	          {name: 'CREATEDATE'},
+	          {name: 'DELETE'}				
 		]
 	});
     var width=document.body.clientWidth  ;
@@ -174,14 +193,15 @@ function query(){
 	grid.reconfigure(store, new Ext.grid.ColumnModel([
 		new Ext.grid.RowNumberer(),
    		{header: '督办', dataIndex:'BLSX', width:40, sortable: true,renderer:view},
-    	{header: '信访事项', dataIndex:'XFSX', width: (width - 560) , sortable: true,renderer:changKeyword},
+    	{header: '信访事项', dataIndex:'XFSX', width: (width - 600) , sortable: true,renderer:changKeyword},
         {header: '信访类型', dataIndex:'XFLX', width: 60, sortable: true,renderer:changKeyword},
         {header: '截止日期', dataIndex:'BLSX', width: 80, sortable: true,renderer:changKeyword},
         {header: '受理科室', dataIndex:'BLKS', width: 80, sortable: true,renderer:changKeyword},
         {header: '最后办理人', dataIndex:'ZHBLR', width: 70, sortable: true,renderer:changKeyword},
         {header: '登记时间', dataIndex:'CREATEDATE', width: 80, sortable: true,renderer:changKeyword},
         {header: '办理情况', dataIndex:'BLQK', width: 80, sortable: true,renderer:changKeyword},
-        {header: '查看', dataIndex:'YW_GUID', width: 40, sortable: true,renderer:pro}
+        {header: '查看', dataIndex:'YW_GUID', width: 40, sortable: true,renderer:pro},
+        {header: '删除',dataIndex:'YW_GUID',width:40, sortable: false,renderer:del}
         ]));
         
     //重新绑定分页工具栏
