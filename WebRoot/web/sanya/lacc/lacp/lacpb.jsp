@@ -62,7 +62,6 @@
 			var grxm = document.getElementById('grxm').value;
 			var ajly = document.getElementById('ajly').value;
 			var slrq = document.getElementById('slrq').value;
-			var jzrq = document.getElementById('jzrq').value;
 			if(ay == ''){
 				alert('案由为空!');
 				return false;
@@ -78,10 +77,6 @@
 			if(slrq == ''){
 				alert('受理日期为空！');
 				return false;					
-			}
-			if(jzrq == ''){
-				alert('截止日期为空！');
-				return false;
 			}
 			return true;
 		}
