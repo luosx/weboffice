@@ -139,16 +139,20 @@ function del(id){
          }
 function delTask(id){
     var  id=id;
-	putClientCommond("wjspHandler","delete");
-	putRestParameter("yw_guid",id);
-    var result = restRequest();
-    if(result=="success"){
-    alert("删除成功！");
-    document.location.reload();
-    }else{
-    alert("删除失败！");
-    document.location.reload();
+    Ext.MessageBox.confirm('注意', '删除后不能恢复，您确定吗？',function(btn){
+	  if(btn=='yes'){
+						putClientCommond("wjspHandler","delete");
+						putRestParameter("yw_guid",id);
+					    var result = restRequest();
+					    if(result=="success"){
+					    alert("删除成功！");
+					    document.location.reload();
+					    }else{
+					    alert("删除失败！");
+					    document.location.reload();
+					    }
     }
+});
 }
 function viewDetail(id){	
 	var url = "<%=basePath%>web/sanya/zhbg/zhbgdj/wjspTab.jsp?type=ybl&yw_guid=" + myData[id-1].YW_GUID+"&flag=<%=flag%>";
