@@ -214,9 +214,9 @@ function query(){
 			<img src='<%=basePath%>web/sanya/framework/images/red.png'>
 			已超时&nbsp;&nbsp;&nbsp;
 			<img src='<%=basePath%>web/sanya/framework/images/yellow.png'>
-			不足<%=dbts%>个工作日&nbsp;&nbsp;&nbsp;
+			不足<%=dbts%>&nbsp;&nbsp;&nbsp;
 			<img src='<%=basePath%>web/sanya/framework/images/green.png'>
-			超过<%=dbts%>个工作日 &nbsp;&nbsp;&nbsp;
+			超过<%=dbts%> &nbsp;&nbsp;&nbsp;
 			<br />
 			<br />
 			<!-- 督办案件将会红色高亮显示&nbsp;&nbsp;&nbsp; -->
