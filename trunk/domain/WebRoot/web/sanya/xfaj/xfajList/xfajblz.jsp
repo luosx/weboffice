@@ -57,7 +57,6 @@ html, body {
 		           {name: 'BLSX'},
 		           {name: 'BLKS'},
 		           {name: 'ZHBLR'},
-		           {name: 'BLQK'},
 		           {name: 'YW_GUID'},
 		           {name: 'CREATEDATE'},
 		           {name: 'DELETE'}				
@@ -74,13 +73,12 @@ html, body {
         		columns: [
         			new Ext.grid.RowNumberer(),
         			{header: '督办', dataIndex:'BLSX', width:40, sortable: true,renderer:view},
-		        	{header: '信访事项', dataIndex:'XFSX', width: (width - 600), sortable: true,renderer:changKeyword},
-		            {header: '信访类型', dataIndex:'XFLX', width: 60, sortable: true,renderer:changKeyword},
+		        	{header: '信访事项', dataIndex:'XFSX', width: (width - 530), sortable: true,renderer:changKeyword},
+		            {header: '信访类型', dataIndex:'XFLX', width: 70, sortable: true,renderer:changKeyword},
 		            {header: '截止日期', dataIndex:'BLSX', width: 80, sortable: true,renderer:changKeyword},
 		            {header: '受理科室', dataIndex:'BLKS', width: 80, sortable: true,renderer:changKeyword},
 		            {header: '最后办理人', dataIndex:'ZHBLR', width: 70, sortable: true,renderer:changKeyword},
 		            {header: '登记时间', dataIndex:'CREATEDATE', width: 80, sortable: true,renderer:changKeyword},
-		            {header: '办理情况', dataIndex:'BLQK', width: 80, sortable: true,renderer:changKeyword},
 		            {header: '查看', dataIndex:'YW_GUID', width: 40, sortable: true,renderer:pro},
 		            {header: '删除',dataIndex:'YW_GUID',width:40, sortable: false,renderer:del}
         		], 
@@ -186,7 +184,6 @@ function query(){
 	          {name: 'BLSX'},
 	          {name: 'BLKS'},
 	          {name: 'ZHBLR'},
-	          {name: 'BLQK'},
 	          {name: 'YW_GUID'},
 	          {name: 'CREATEDATE'},
 	          {name: 'DELETE'}				
@@ -197,13 +194,12 @@ function query(){
 	grid.reconfigure(store, new Ext.grid.ColumnModel([
 		new Ext.grid.RowNumberer(),
    		{header: '督办', dataIndex:'BLSX', width:40, sortable: true,renderer:view},
-    	{header: '信访事项', dataIndex:'XFSX', width: (width - 600) , sortable: true,renderer:changKeyword},
-        {header: '信访类型', dataIndex:'XFLX', width: 60, sortable: true,renderer:changKeyword},
+    	{header: '信访事项', dataIndex:'XFSX', width: (width - 530) , sortable: true,renderer:changKeyword},
+        {header: '信访类型', dataIndex:'XFLX', width: 70, sortable: true,renderer:changKeyword},
         {header: '截止日期', dataIndex:'BLSX', width: 80, sortable: true,renderer:changKeyword},
         {header: '受理科室', dataIndex:'BLKS', width: 80, sortable: true,renderer:changKeyword},
         {header: '最后办理人', dataIndex:'ZHBLR', width: 70, sortable: true,renderer:changKeyword},
         {header: '登记时间', dataIndex:'CREATEDATE', width: 80, sortable: true,renderer:changKeyword},
-        {header: '办理情况', dataIndex:'BLQK', width: 80, sortable: true,renderer:changKeyword},
         {header: '查看', dataIndex:'YW_GUID', width: 40, sortable: true,renderer:pro},
         {header: '删除',dataIndex:'YW_GUID',width:40, sortable: false,renderer:del}
         ]));
