@@ -147,7 +147,7 @@ public class CaseSupervision extends AbstractBaseBean {
      */
     private String getWorkaDayAmount(String blqx) {
 
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm");//设置日期格式
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");//设置日期格式
 
         String systemDate = df.format(new Date());//系统时间
         
@@ -275,12 +275,12 @@ public class CaseSupervision extends AbstractBaseBean {
      * @return
      */
     public  String getDbDateByType(String type){
-        String sql = "select t.limit from noticeset_ t where t.type = ?";
+        String sql = "select t.limit, t.hour, t.minuts from noticeset_ t where t.type = ?";
         List<Map<String, Object>> dateLimit = query(sql, YW, new Object[]{type});
         if(dateLimit.size() < 1){
             return "0";
         }else{
-            return String.valueOf(dateLimit.get(0).get("limit"));
+            return String.valueOf(dateLimit.get(0).get("limit") + "天" + dateLimit.get(0).get("hour") + "时" + dateLimit.get(0).get("minuts") + "分");
         }
     }
 }
