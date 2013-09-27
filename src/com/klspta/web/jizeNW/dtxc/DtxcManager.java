@@ -42,7 +42,7 @@ public class DtxcManager extends AbstractBaseBean {
 				+ "/";
 		StringBuffer url = new StringBuffer();
 		url.append(basePath);
-		url.append("/web/xuzhouNW/dtxc/xcrz/xcrz.jsp?jdbcname=YWTemplate&yw_guid=");
+		url.append("/web/jizeNW/dtxc/xcrz/xcrz.jsp?jdbcname=YWTemplate&yw_guid=");
 		url.append(yw_guid);
 		redirect(url.toString());
 	}
