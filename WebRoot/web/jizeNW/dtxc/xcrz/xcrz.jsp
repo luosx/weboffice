@@ -296,6 +296,7 @@ String xcbh = dtxc.buildXcbh();
 		}
   </script>
   <body onLoad="onInit(); return false;">
+  	<!-- <div id="fixed" class="Noprn" style="position: fixed; top: 5px; left: 0px"></div> -->
   	<div align="center" style="margin-bottom:20px"><h1 style="font-size: 25">国土资源执法监察巡查日志</h1></div>
   	<form method="post">
   		<div style="width: 100%;">
