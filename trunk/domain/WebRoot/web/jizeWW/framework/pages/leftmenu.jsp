@@ -27,7 +27,12 @@ function openPage(url){
 	}
  </script>
  <style type="text/css">
- .menutitle
+body {
+	height: 100%;
+	width: 100%;
+	background: #DFE8F6;
+}
+.menutitle
 {
 	font-family:"宋体";
 	font-size: 12pt;
@@ -45,8 +50,8 @@ function openPage(url){
 	list-style:none;
 	display:block;
 	height:28px;
-	margin:0;
-	padding:0;
+	margin:2px;
+	padding:1px;
 	float:center;
 }
 .menu li
@@ -55,7 +60,7 @@ function openPage(url){
 	display:block;
 	list-style:none;
 	vertical-align:middle;
-	margin-top:5px;
+	margin-top:10px;
 	width:160px;
 	cursor:hand;
 }
