@@ -333,12 +333,12 @@ String xcbh = dtxc.buildXcbh();
 					<input type="radio" name="sfywf" id="sfywf1" value="是" onclick="showtbody()"/>是
 					<input type="radio" name="sfywf" id="sfywf2" value="否" onclick="hidetbody()"/>
 					否
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<input type="button" class="button" id="add" value="增加" onClick="addcgd(); return false;" />
-					<input type="button" class="button" id="delete" value="删除" onClick="deletecgd();return false;" />				
-					&nbsp;&nbsp;&nbsp;
+					<input type="button" class="button" id="delete" value="删除" onClick="deletecgd();return false;" />
 					<input type="button" class="button" id="imp" value="导入巡查成果" onClick="impxccg();return false;" />
-				
+					&nbsp;
+					<button id="viewCgButton" style="cursor:hand;width:120px;height:20px;" onclick="viewCG()">点击查看巡查成果</button>					
 					<input type="text" id="allnum" name="allnum" value="5" style="display:none" />				</td>
 			</tr>
 			<tbody id="info" style="display:none;">
@@ -454,7 +454,6 @@ String xcbh = dtxc.buildXcbh();
 		<input type="text" value="<%=writerXzqh %>" id="writerxzqh" name="writerxzqh" style="display: none" />
 		<input type="text" value="<%=writeDate %>" id="writerdate" name="writerdate" style="display: none" />
   	</form>
-  	<div id="viewCgButton" style="margin-top:10px;text-align: center"><button style="cursor:hand;" onclick="viewCG()">点击查看巡查成果</button></div>
   </body>
   <script type="text/javascript">
  	function viewCG(){
