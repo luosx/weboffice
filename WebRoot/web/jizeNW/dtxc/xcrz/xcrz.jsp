@@ -296,7 +296,6 @@ String xcbh = dtxc.buildXcbh();
 		}
   </script>
   <body onLoad="onInit(); return false;">
-  	<div id="fixed" class="Noprn" style="position: fixed; top: 5px; left: 0px"></div>
   	<div align="center" style="margin-bottom:20px"><h1 style="font-size: 25">国土资源执法监察巡查日志</h1></div>
   	<form method="post">
   		<div style="width: 100%;">
@@ -327,15 +326,16 @@ String xcbh = dtxc.buildXcbh();
 			<tr>
 				<td colspan="2"><div align="center">是否有违法</div></td>
 				<td colspan="3">
-					<input type="radio" name="sfywf" id="sfywf1" value="是" onclick="showtbody()"/>是
-					<input type="radio" name="sfywf" id="sfywf2" value="否" onclick="hidetbody()"/>
+					<input type="radio" name="sfywf" id="sfywf1" value="是" />是
+					<input type="radio" name="sfywf" id="sfywf2" value="否" />
 					否
+					<!-- 
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<input type="button" class="button" id="add" value="增加" onClick="addcgd(); return false;" />
 					<input type="button" class="button" id="delete" value="删除" onClick="deletecgd();return false;" />				
 					&nbsp;&nbsp;&nbsp;
 					<input type="button" class="button" id="imp" value="导入巡查成果" onClick="impxccg();return false;" />
-				
+				    -->
 					<input type="text" id="allnum" name="allnum" value="5" style="display:none" />				</td>
 			</tr>
 			<tbody id="info">
