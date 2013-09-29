@@ -168,7 +168,7 @@ body,td,div,span,li{
 	<li><span id="image" onClick='changeMap("image")'>影像</span></li>
 </ul>
 </div>
-<div id="map_nav2" class="map_nav2" style="z-index: 10000;top:50px;" onMouseOver="document.getElementById('layerDiv').style.display='inline'" onMouseOut="document.getElementById('layerDiv').style.display='none'">
+<!--<div id="map_nav2" class="map_nav2" style="z-index: 10000;top:50px;" onMouseOver="document.getElementById('layerDiv').style.display='inline'" onMouseOut="document.getElementById('layerDiv').style.display='none'">
 				<div><ul>
 					<li id="layer"><span id="map_layer_control"><img src="images/tuc_s.png" width="11" height="9" style="display:inline; margin-left:3px; margin-top:4px; margin-right:3px;"/>图层<img src="images/tuc_j.png" width="9" height="7" style="display:inline; margin-left:2px;" /></span></li>
 				</ul>
@@ -187,7 +187,7 @@ body,td,div,span,li{
 					</div>--%>
 				</div>
 			</div>
-
+-->
 
 <iframe frameborder="0" id="lower"  name="lower"  style="width: 100%;height:100%; overflow: auto;" src="fxgis/FxGIS.html?debug=true"></iframe>
 <iframe frameborder="0" id="operation"  style="display:none;" name="operation"  style="width: 100%;height:100%; overflow: auto;" src="<%=basePath%>web/jizeWW/padResult/PADDataList.jsp"></iframe>
