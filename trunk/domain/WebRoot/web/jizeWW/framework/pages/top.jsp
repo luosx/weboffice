@@ -69,12 +69,13 @@ var temp=temp1+"~"+temp2;
 var temp_image;
 var weather=<%=weather%>;
  weather=eval(weather);
+ 
+ 
  function onload(){
   temp1=weather.weatherinfo.temp1;
   temp2=weather.weatherinfo.temp2;
   temp_image=weather.weatherinfo.weather;
   temp=temp1+"-"+temp2;
-  
 for(var i=0;i<temp_image.length;i++){
 if("晴"==temp_image.substring(i,i+1)){
 document.getElementById("img").src='<%=basePath%>web/<%=name%>/framework/images/weather/001.png';
@@ -96,16 +97,28 @@ function onlineCar(){
   var result = ajaxRequest("<%=basePath%>","hander","countAllCar","");
   result=eval(result);
   var onlineCar=0;
+  var parent=0;
+  var viewonline="";
   for(var i=0;i<result.length;i++){
    var xzqcode=result[i].xzqcode;
    var xzqname=result[i].xzqname;
    var child=result[i].child;
-   var parent=result[i].parent;
+   parent=result[i].parent;
    if(xzqcode=='320300'){
      onlineCar=child;
    }
   }
-  document.getElementById("online").innerHTML=onlineCar+"&nbsp&nbsp台";
+  if(parent==1){
+  	if(onlineCar==1){
+  		viewonline = "<b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;执法监察车状态：<a id='online' style=\"color: green; \">在线&nbsp;&nbsp;&nbsp;&nbsp;</a></b>";
+  	}else{
+  		viewonline="<b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;执法监察车状态：<a id='online' style=\"color: red; \">离线&nbsp;&nbsp;&nbsp;&nbsp;</a></b>";
+  	}
+  }else{
+  	viewonline = "<b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;当前在线执法监察车：<a id='online' style=\"color: red; \">"+onlineCar+"&nbsp&nbsp台&nbsp;&nbsp;&nbsp;&nbsp;</a></b>";
+  }
+  
+  document.getElementById("div2").innerHTML=viewonline;
 
 }
 
@@ -125,8 +138,9 @@ function onlineCar(){
     <div style="margin-left: 5%"><font class="style1"><%=loginname1 %></font></div>
     </td>
     <td width="332" style="background-position:bottom left;background-repeat:no-repeat;background-image:url('<%=basePath%>web/<%=name%>/framework/images/top/notice.png')">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img style="position:absolute;bottom:2;" src="<%=basePath%>web/<%=name%>/framework/images/top/announce.png" width="24" height="24" />
-     <div class="d1" id="div1">
-       <span class="div2" id="div2"><b>&nbsp;&nbsp;&nbsp;&nbsp;当前在线执法监察车：<a id='online' style="color: red; ">23台&nbsp;&nbsp;&nbsp;&nbsp;</a></b></span><span id="div3" class="div2"></span>
+     <div class="d1" id="div1" >
+       <span class="div2" id="div2">
+       </span><span id="div3" class="div2"></span>
     </div>
     </td>
      <td align="right" style="padding-right: 2px"><img id="img" src="<%=basePath%>web/<%=name%>/framework/images/weather/001.png" width="32" height="32" /></td>
