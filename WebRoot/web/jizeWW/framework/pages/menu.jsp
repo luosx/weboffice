@@ -10,6 +10,7 @@
 	Object user = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 	User userBean = (User) user;
 	String username = userBean.getFullName();
+	String userid = userBean.getUserID();
 	String name = ProjectInfo.getInstance().PROJECT_NAME;
 	WWmenuManager wwmenuManager = new WWmenuManager();
 %>
@@ -36,14 +37,23 @@
 		}else if(var_flag == "index.jsp"){
 			vidoesC(url);
 		}else{
-	  		top.center.mapView.openURL("<%=basePath%>web/<%=name%>/" + url,1);
-	  		packUpLeft();
+	  		top.mapView.openURL("<%=basePath%>web/<%=name%>/" + url,1);
+	  		//packUpLeft();
   		}
 	}
 	
 	function openMenu(menuId){
-		top.center.left.location.href="<%=basePath%>web/<%=name%>/framework/pages/leftmenu.jsp?menuId="+menuId;
-		spreadLeft();
+		//top.mapView.location.href="<%=basePath%>web/<%=name%>/framework/pages/leftmenu.jsp?menuId="+menuId;
+		//spreadLeft();
+		//document.location.href = document.location.href+"?menuId="+menuId;
+		
+	    //putClientCommond("menuManager","getChildMenu");
+	    //putRestParameter("userid",'<%=userid%>');
+	    //putRestParameter("parentMenuId",menuId);
+		//var result = restRequest();		
+		//document.getElementById('childmenu').innerHTML = result;
+		top.mapView.showChildMenu(menuId);
+		
 	}
 	
 	function clickMenu(obj,menuId){	
@@ -52,29 +62,32 @@
   
   	//首页
 	function gohome(){
-		top.center.mapView.openMap();
-		spreadLeft();
+		top.mapView.openMap();
+		//spreadLeft();
 	}
 	
 	//车辆跟踪
 	function carMonitor(url){
-		spreadLeft();
-		top.center.left.location.href="<%=basePath%>web/<%=name%>/" + url;
-		top.center.mapView.openMap();
-		top.center.mapView.frames["lower"].swfobject.getObjectById("FxGIS").clear();
+		//spreadLeft();
+		top.mapView.location.href="<%=basePath%>web/jizeWW/tdMap/mapView.jsp?flag=map";
+		top.mapView.openMap();
+		top.mapView.frames["lower"].swfobject.getObjectById("FxGIS").clear();
 	}
 	
 	//轨迹回放
 	function carHistory(url){
-		spreadLeft();
-		top.center.left.location.href="<%=basePath%>web/<%=name%>/" + url;
-		top.center.mapView.openMap();
-		top.center.mapView.frames["lower"].swfobject.getObjectById("FxGIS").clear();
+		//spreadLeft();
+		top.mapView.location.href="<%=basePath%>web/jizeWW/tdMap/mapView.jsp?flag=map"; //"<%=basePath%>web/<%=name%>/" + url
+		top.mapView.openMap();
+		top.mapView.frames["lower"].swfobject.getObjectById("FxGIS").clear();
 	}
 	
 	//视频监控
 	function vidoesC(url){
-		window.open("<%=basePath%>web/<%=name%>/" + url);
+		var width = window.screen.availWidth;
+		var height = window.screen.availHeight;
+		var parameter = "width="+width+",height="+height;
+		window.open("<%=basePath%>web/<%=name%>/" + url,"",parameter);
 	}
 	
 	function packUpLeft()
@@ -161,6 +174,11 @@ body {
 	vertical-align:middle;
 	cursor:hand;
 }
+
+
+
+
+
 </style>
 
 </head>
@@ -176,6 +194,7 @@ body {
 			</li>
 			<%out.print(wwmenuManager.getWWMenuCode(userBean,"",1));%>
 		</ul>
+
 		<ul class="menuright">
 			<li style="width: 120; text-align: right; margin-right: 10px; cursor: auto;">
 				<span class="menutitle">欢迎您：<%=username%></span>

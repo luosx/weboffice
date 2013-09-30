@@ -1,10 +1,18 @@
 ﻿<%@ page language="java" pageEncoding="utf-8"%>
 <%@page import="com.klspta.model.projectinfo.ProjectInfo"%>
+<%@page import="org.springframework.security.core.context.SecurityContextHolder"%>
+<%@page import="com.klspta.console.user.User"%>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
    
     String name = ProjectInfo.getInstance().getProjectName();
+    String flag = request.getParameter("flag");
+    //String flag = "wss";
+	//获取当前登录用户
+	Object user = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+	User userBean = (User) user;   
+	String userid = userBean.getUserID(); 
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -16,6 +24,7 @@
         <meta http-equiv="expires" content="0">
         <LINK href="css/index.css" type=text/css rel=stylesheet>
 		<SCRIPT src="js/jquery.js" type=text/javascript></SCRIPT>
+		<%@ include file="/base/include/restRequest.jspf"%>
 		<script type="text/javascript" src="<%=basePath%>base/fxgis/framework/js/menu.js"></script>
 <style type="text/css">
 body{
@@ -43,8 +52,51 @@ body,td,div,span,li{
 #layerDiv span, #layerDiv label { font-family: "宋体",arial,sans-serif;font-size: 13px;cursor: pointer; }
 .layer-checkbox { display: inline;float: left;font-size: 0;height: 11px;line-height: 8px;margin-left: 6px;margin-right: 5px;margin-top: 7px;width: 13px; }
 .layer-word { line-height: 26px;overflow: hidden;background-color: #EBEBEB;white-space: nowrap; }
+
+#childDiv
+{
+	position: relative;
+	left: 300px;
+	top: -3px;
+}
+.menuicon
+{	
+	width:17px;
+	height:17px;
+	vertical-align: middle;	
+
+}
+.childmenu
+{
+	list-style-type:none; 
+	margin:0;
+	width:100%;
+}
+
+.childmenu li
+{
+	 width:120px; 
+	 float:left;	
+	 cursor: hand;
+}
+
+.childmenutitle
+{	
+	font-family:"宋体";
+	font-size: 10pt;
+	color: white;
+	vertical-align: middle;	
+}
 </style>
 <SCRIPT type=text/javascript>
+ function showChildMenu(menuId){
+    putClientCommond("menuManager","getChildMenu");
+	putRestParameter("userid",'<%=userid%>');
+	putRestParameter("parentMenuId",menuId);
+	var result = restRequest();	
+    document.getElementById('childmenu').innerHTML = result;
+ }
+ 
   function clearLayer(){
     frames["lower"].swfobject.getObjectById("FxGIS").clear();
   }
@@ -80,12 +132,12 @@ body,td,div,span,li{
   }
   
   function changeScreen(){
-     if(parent.content.cols=="0,9,*"){
-       parent.content.cols="261,7,*";
-       parent.parent.index.rows="53,28,*"
+     if(parent.parent.index.rows=="53,28,*"){
+        parent.parent.index.rows="0,28,*";
+        document.getElementById('full_screen').title="退出全屏";
      }else{
-       parent.content.cols="0,9,*";
-       parent.parent.index.rows="0,0,*";
+		parent.parent.index.rows="53,28,*"
+		document.getElementById('full_screen').title="显示全屏";   
      }
   }
   
@@ -119,17 +171,25 @@ body,td,div,span,li{
 
 <table background="images/menu_bk.PNG" height=38 width=100%>
 <tr>
+<%if("map".equals(flag)){ %>
 <td width=99 height=38 style="cursor: hand;" onClick="openMap()">
 <img id='mapImg' name='mapImg' style="position:absolute;left:-5;top:6;"  src="images/tab_1.png" width="99" height="26" />
 </td>
+<%}else{ %>
 <td width=99 height=38 style="cursor: hand;" onClick="openURL('<%=basePath%>web/jizeWW/padResult/padDatalist.jsp',0)">
-<img id='urlImg' name='urlImg' style="position:absolute;left:94;top:6;"  src="images/tab_2.png" width="99" height="26" />
+<img id='urlImg' name='urlImg' style="position:absolute;left:-5;top:6;"  src="images/tab_4.png" width="99" height="26" />
 </td>
-<td width='100%'></td>
+<%} %>
+<td width='100%'><div id="childDiv">
+			<ul class="childmenu" id="childmenu">
+			   
+	        </ul>
+		</div></td>
 <!-- 
 <td   id='type' align="center" valign="top"  style="cursor: hand;"><input type='text' style="vertical-align: middle;border:0;height:24px;margin-top:2px;line-height:24px;margin-right:2px;color:white;font-weight:blod;background-color:#6fcbf8;"/></td>
 <td   id='map_selec'   align="center" valign="top"  style="cursor: hand;"><img src="images/search.png" title="搜索" width="27" height="27" /></td>
 -->
+
 <td  id='zoomin' nowrap  align="center" valign="top"  style="cursor: hand;" onClick='zoomIn()'><img src="images/zoom-in.png" title="放大" width="27" height="27" /></td>
 <td  id='zoomout' nowrap  align="center" valign="top"  style="cursor: hand;" onClick='zoomOut()'><img src="images/zoom-out.png" title="缩小" width="27" height="27" /></td>
 <td  id='zoomToFullExtent'  nowrap  align="center" valign="top"  style="cursor: hand;" onClick='zoomToFullExtent()'><img src="images/Full_Extent.png" title="初始视图" width="27" height="27" /></td>
@@ -190,7 +250,7 @@ body,td,div,span,li{
 -->
 
 <iframe frameborder="0" id="lower"  name="lower"  style="width: 100%;height:100%; overflow: auto;" src="fxgis/FxGIS.html?debug=true"></iframe>
-<iframe frameborder="0" id="operation"  style="display:none;" name="operation"  style="width: 100%;height:100%; overflow: auto;" src="<%=basePath%>web/jizeWW/padResult/PADDataList.jsp"></iframe>
+<iframe frameborder="0" id="operation"  style="display:none;" name="operation"  style="width: 100%;height:92%; overflow: auto;" ></iframe>
     </body>
 </html>
  <script>
@@ -215,17 +275,17 @@ function openMap(){
 	 if(openFlag!="map"){
 	 openFlag="map";
 	  document.getElementById('mapImg').src='images/tab_1.png';
-	 document.getElementById('urlImg').src='images/tab_2.png';
+	 //document.getElementById('urlImg').src='images/tab_2.png';
 	 document.getElementById('operation').style.display="none";
 	 document.getElementById('lower').style.display="";
 	 }
 	 
-	  var div_obj =document.getElementById("type");
-		div_obj.style.display="block";
-		var div_obj =document.getElementById("map_selec");
-		div_obj.style.display="block";
-	 var div_obj =document.getElementById("map_nav2");
-		div_obj.style.display="block";
+	  //var div_obj =document.getElementById("type");
+		//div_obj.style.display="block";
+		//var div_obj =document.getElementById("map_selec");
+		//div_obj.style.display="block";
+	// var div_obj =document.getElementById("map_nav2");
+	//	div_obj.style.display="block";
 		var div_obj =document.getElementById("map_nav");
 		div_obj.style.display="block";
 		 var div_obj =document.getElementById("c");
@@ -250,21 +310,25 @@ function openMap(){
  function openURL(url,flag){
   	 if(openFlag!="url"||flag==1){
  	 openFlag="url";
-	 document.getElementById('mapImg').src='images/tab_3.png';
-     document.getElementById('urlImg').src='images/tab_4.png';
+ 	 if(url.indexOf('flag=map')!=-1){
+ 	    document.getElementById('mapImg').src='images/tab_1.png';
+ 	 }else{
+	 	document.getElementById('mapImg').src='images/tab_4.png';
+	 }
+     //document.getElementById('urlImg').src='images/tab_4.png';
 	 document.getElementById('operation').style.display="";
 	 document.getElementById('lower').style.display="none";
 	 document.getElementById('operation').src=url;
 	 }
-	 var div_obj =document.getElementById("type");
-		div_obj.style.display="none";
-		var div_obj =document.getElementById("map_selec");
-		div_obj.style.display="none";
+	// var div_obj =document.getElementById("type");
+	//	div_obj.style.display="none";
+	//	var div_obj =document.getElementById("map_selec");
+	//	div_obj.style.display="none";
 		
 	 	var div_obj =document.getElementById("map_nav");
 		div_obj.style.display="none";
-		var div_obj =document.getElementById("map_nav2");
-		div_obj.style.display="none";
+	//	var div_obj =document.getElementById("map_nav2");
+	//	div_obj.style.display="none";
 		 var div_obj =document.getElementById("c");
 		div_obj.style.display="none";
 		var div_obj =document.getElementById("zoomin");
@@ -284,4 +348,8 @@ function openMap(){
 		var div_obj =document.getElementById("print");
 		div_obj.style.display="none";
  }
+ 
+function openPage(url){
+	 openURL("<%=basePath%>web/<%=name%>/" + url,1);
+}
  </script>
