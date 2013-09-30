@@ -29,5 +29,6 @@
 <!--回传成果-->
 <bean name="padDataManager" class="com.klspta.web.jizeWW.dtxc.PADDataManager" scope="prototype"/>
 
-
+<!--获取子菜单-->
+<bean name="menuManager" class="com.klspta.web.jizeWW.framework.WWmenuManager" scope="prototype"/>
 </beans>
