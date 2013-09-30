@@ -2,7 +2,6 @@ package com.klspta.web.jizeWW.framework;
 
 import java.util.List;
 import java.util.Map;
-
 import com.klspta.base.AbstractBaseBean;
 import com.klspta.console.ManagerFactory;
 import com.klspta.console.menu.MenuBean;
@@ -102,10 +101,10 @@ public class WWmenuManager extends AbstractBaseBean{
 		menuItemCode.append(menuBean.getUrl_center());
 		menuItemCode.append("\")'>");
 		
-		menuItemCode.append("<img class=\"menuicon\" src=\"../images/menu/");
+		menuItemCode.append("<img class=\"menuicon\" src=\"../framework/images/menu/");
 		menuItemCode.append(menuBean.getIcon());
 		menuItemCode.append("\" />&nbsp;&nbsp;");
-		menuItemCode.append("<span class=\"menutitle\">");
+		menuItemCode.append("<span class=\"childmenutitle\">");
 		menuItemCode.append(menuBean.getMenuName());
 		menuItemCode.append("</span>");
 		
@@ -133,7 +132,7 @@ public class WWmenuManager extends AbstractBaseBean{
 		}else{
 			menuItemCode.append("onclick='clickMenu(this,\"" + menuBean.getMenuId() + "\");return false;' ");
 		}
-
+		
 		menuItemCode.append("<img class=\"menuseparate\" src=\"../images/menu/split.png\" />&nbsp;");
 		menuItemCode.append("<img class=\"menuicon\" src=\"../images/menu/");
 		menuItemCode.append(menuBean.getIcon());
@@ -142,7 +141,28 @@ public class WWmenuManager extends AbstractBaseBean{
 		menuItemCode.append(menuBean.getMenuName());
 		menuItemCode.append("</span>");
 		menuItemCode.append("</li>");
-
+		
 		return menuItemCode;
+	}
+	
+	/**
+	 * 
+	 * <br>Description:获取二级菜单
+	 * <br>Author:王雷
+	 * <br>Date:2013-9-30
+	 */
+	public void getChildMenu(){
+	    String userid = request.getParameter("userid");
+	    User user = null ;
+	    String parentId = "";
+	    String message = "";
+	    try {
+	        user = ManagerFactory.getUserManager().getUserWithId(userid);
+	        parentId = request.getParameter("parentMenuId");        
+	        message = getWWMenuCode(user,parentId,0);  
+	        response(message);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }	    
 	}
 }
