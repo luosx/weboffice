@@ -55,7 +55,12 @@ var actionName = "mapAuthorOperation";
 var actionMethod = "getExtTreeByUserid";
 var parameter = "userid=<%=userId%>";
 var myData = ajaxRequest(path, actionName, actionMethod, parameter);
-var treeData= eval('(' + myData + ')');
+var treeData;
+if(myData!=''){
+	treeData = eval('(' + myData + ')');
+}else{
+    treeData = '';
+}
 var loadFlag=true;
 /*********树形菜单展开收缩功能**add by 李如意 2011-07-13****/	  
 	function closeOrOpenNode(){
