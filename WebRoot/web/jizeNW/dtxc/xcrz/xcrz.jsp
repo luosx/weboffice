@@ -299,11 +299,13 @@ String xcbh = dtxc.buildXcbh();
   	<!-- <div id="fixed" class="Noprn" style="position: fixed; top: 5px; left: 0px"></div> -->
   	<div align="center" style="margin-bottom:20px"><h1 style="font-size: 25">国土资源执法监察巡查日志</h1></div>
   	<form method="post">
-  		<div style="width: 100%;">
-			<span style="margin-left: 270px;font-size:14px;">巡查编号：<input type="text" name="xcbh" id="xcbh" readonly="readonly" value="<%=xcbh%>"
+  		<center>
+  		<div style="width: 100%;text-align:left;">
+			<span style="font-size:14px;">巡查编号：<input type="text" name="xcbh" id="xcbh" readonly="readonly" value="<%=xcbh%>"
 					style="width: 150px; background-color: transparent; border: 0px;"></input>
 			</span>
 		</div>
+		</center>
   		<input type="hidden" name="yw_guid" id="yw_guid">
   	    <table align="center" cellpadding="0" cellspacing="0" width="600px" id="xcrztable">
 			<tr>
