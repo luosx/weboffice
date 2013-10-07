@@ -24,6 +24,7 @@
         <meta http-equiv="expires" content="0">
         <LINK href="css/index.css" type=text/css rel=stylesheet>
 		<SCRIPT src="js/jquery.js" type=text/javascript></SCRIPT>
+		<%@ include file="/base/include/ext.jspf"%>
 		<%@ include file="/base/include/restRequest.jspf"%>
 		<script type="text/javascript" src="<%=basePath%>base/fxgis/framework/js/menu.js"></script>
 <style type="text/css">
@@ -193,7 +194,7 @@ body,td,div,span,li{
 <td  id='zoomin' nowrap  align="center" valign="top"  style="cursor: hand;" onClick='zoomIn()'><img src="images/zoom-in.png" title="放大" width="27" height="27" /></td>
 <td  id='zoomout' nowrap  align="center" valign="top"  style="cursor: hand;" onClick='zoomOut()'><img src="images/zoom-out.png" title="缩小" width="27" height="27" /></td>
 <td  id='zoomToFullExtent'  nowrap  align="center" valign="top"  style="cursor: hand;" onClick='zoomToFullExtent()'><img src="images/Full_Extent.png" title="初始视图" width="27" height="27" /></td>
-<td  id='pan' nowrap  align="center" valign="top"  style="cursor: hand;" onClick='pan()'><img src="images/pan.png" width="27" title="漫游" title="直线长度量算" height="27" /></td>
+<td  id='pan'  nowrap  align="center" valign="top"  style="cursor: hand;" onClick='pan()'><img src="images/pan.png" title="漫游" width="27" height="27" /></td>
 <td  id='rule'  nowrap  align="center" valign="top"  style="cursor: hand;" onClick='measureLengths()'><img src="images/rule.png" width="27" height="27" /></td>
 <td  id='clear' nowrap  align="center" valign="top"  style="cursor: hand;" onClick='clearLayer()'><img src="images/clear.png" title="清除" width="27" height="27" /></td>
 <td  id='legend'  nowrap  align="center" valign="top"  style="cursor: hand;" onClick='legend()'><img src="images/legend.png" title="图例" width="27" height="27" /></td>
@@ -213,7 +214,14 @@ body,td,div,span,li{
 </td>
 </tr>
 </table>
-
+<div id="showCar" style="width:100px;height:80px; position:absolute; left:101px; top:61px; background:#E2EAF3; filter:alpha(opacity=80); display:none;">
+	
+</div>
+<div id="showHistory" style="width:150px; height:200px; position:absolute; left:110px; top:80px; background:#E2EAF3; filter:alpha(opacity=80); display:none;">
+	<table id="tables">
+	</table>
+	<div id="times" style="margin-Left: 0px; margin-Right: -14px; margin-bottom:0px; margin-top:50px;"></div>
+</div>
 <div onClick='legend()' style="width:280px;height:404px;position:absolute; right:0px; top:132px;display:none; " id='legend1'>
 <img src="images/legendInfo.png" width="280" height="404" />
 </div>
@@ -250,12 +258,17 @@ body,td,div,span,li{
 -->
 
 <iframe frameborder="0" id="lower"  name="lower"  style="width: 100%;height:100%; overflow: auto;" src="fxgis/FxGIS.html?debug=true"></iframe>
+<!-- 
+<iframe frameborder="0" id="operation"  style="display:none;" name="operation"  style="width: 100%;height:100%; overflow: auto;" src="<%=basePath%>web/jizeWW/padResult/PADDataList.jsp"></iframe>
 <iframe frameborder="0" id="operation"  style="display:none;" name="operation"  style="width: 100%;height:92%; overflow: auto;" ></iframe>
+-->
     </body>
 </html>
  <script>
+ var carList;
  var openFlag="map";
- var url=document.getElementById("operation").src;
+ //var url=document.getElementById("operation").src;
+ url = "";
  function legend(){
 	 var legend=document.getElementById('legend1');
 	 if(legend.style.display==""){
@@ -271,7 +284,142 @@ body,td,div,span,li{
   function showInfo(){
     document.getElementById("info").style.display='block';
   }
+  //显示所有车辆列表
+
+  function showCarList(result){
+  			hiddlenListAndHistory();
+  			carList = result;
+  			var showModel = document.getElementById("showCar");
+  			var showTable = "<table style='border:none'>"
+			for(var i = 0; i < result.length; i++){
+				if(result[i].carstatus == "going"){
+					showTable += "<tr><td width=\"30px\"><input type=\"checkbox\" value = '"+ i +"' onclick=\"choseCar(this)\" ></td><td style=\"color: #FFFF33\"><label>"+result[i].carname+"</label></td></tr>";
+				}else{
+					showTable += "<tr><td width=\"30px\"><input type=\"checkbox\" value = '"+ i +"' onclick=\"choseCar(this)\" ></td><td style=\"color: #FF3300\"><label>"+result[i].carname+"</label></td></tr>";
+				}
+			
+			}
+			showTable += "</table>";
+			showModel.innerHTML = showTable;
+			showModel.style.display = "";
+  }
+  //对所选的车辆进行定位
+  function choseCar(check){
+        if(carList[check.value].carstatus == "going"){	
+  			parent.parent.menu.doLocation(carList[check.value].carid, carList[check.value].carname, "1");
+  		}else{
+  			parent.parent.menu.doLocation(carList[check.value].carid, carList[check.value].carname, "0");
+  		}
+  }
+  
+  //隐藏车辆定位和轨迹回放选择层
+  function hiddlenListAndHistory(){
+  	document.getElementById("showCar").style.display = "none";
+  	document.getElementById("showHistory").style.display = "none";
+  }
+  
+  //显示轨迹回放对话框
+  var panel;
+  function showCarHistory(result){
+  		carList = result;
+  		hiddlenListAndHistory();
+  		document.getElementById("showHistory").style.display = "";
+  		var carList = document.getElementById("tables");
+  		var showTable = "";
+  		var rows;
+  		var cells;
+  		carList.innerText = "";
+  		for(var i = 0; i < result.length; i++){
+  			rows = carList.insertRow(i);
+  			cells = rows.insertCell(0);
+  			cells.style.width = "30px";
+  			cells.innerHTML = "<input type=\"checkbox\" id='" + result[i].carname +"'  >";
+  			cells = rows.insertCell(1);
+  			cells.style.color = "#FF3300";
+  			cells.innerHTML = "<label>"+result[i].carname+"</label>";
+			//showTable += "<tr><td width=\"30px\"><input type=\"checkbox\" value = '"+ i +"' onclick=\"choseCar(this)\" ></td><td style=\"color: #FFFF33\"><label>"+result[i].carname+"</label></td></tr>";
+		}
+  		document.getElementById("times").innerHTML = "";
+   		var panel=new Ext.Panel({
+			preventBodyReset: true,
+		 	labelWidth:60,	
+		 	width:259,
+		 	layout:'form',
+			frame:true,
+			defaults:{xtype:"datetimefield",anchor:'90%'},   
+	    	items: [ {  
+		    		fieldLabel:'开始时间', 
+            		id:'sater_time',   
+            		format:'H:i'  
+            	},{  
+            		fieldLabel:'结束时间',  
+            		id:'over_time',   
+            		format:'H:i'  
+            	}
+			],
+        	buttons: [{
+            	id:'showTrajectory',
+            	disabled:false,
+         		text:'显示轨迹',
+         		handler: showTrajectory 
+          	},{
+            	id:'playback',
+            	disabled:false,
+         		text:'回放轨迹',
+         		handler: playback
+          	}],
+  			renderTo:'times'
+  		});
+  }
+  
+  //显示轨迹
+  function showTrajectory(){
+  	var para = gjhf();	
+  	if(para!=null){
+		var arrs=para.split("@");
+		var carids=arrs[0].split(",");
+		frames["lower"].swfobject.getObjectById("FxGIS").showTrack(escape(arrs[0]),arrs[1],arrs[2]);
+		     // alert("车辆编号"+carids[i]+arrs[1]+arrs[2]);
+	}
+  }
+  //回放轨迹
+  function playback(){
+  	var para = gjhf();
+   if(para!=null){
+	   var arrs=para.split("@");
+	   var carids=arrs[0].split(",");
+	  frames["lower"].swfobject.getObjectById("FxGIS").playBack(escape(carids[0]),arrs[1],arrs[2]);
+   }
+  }
+  
+  function gjhf(){
+    var  sater_time=Ext.getCmp("sater_time").getValue();
+    var  startdate = Ext.util.Format.date(sater_time, 'Y-m-d H:i');
+    var  over_time=Ext.getCmp("over_time").getValue();
+    var  overdate = Ext.util.Format.date(over_time, 'Y-m-d H:i');
+    var result;
+   if(sater_time!=''&over_time!=''){
+	  var carnumber='';
+	  //获取已选择的车牌号
+	  ajaxRequest("<%=basePath%>","hander","flushGps","");
+	  var result = ajaxRequest("<%=basePath%>","hander","getAllCarInf","");
+	  result=eval(result);
+      for(var i = 0; i < result.length; i++){
+      		if(document.getElementById(result[i].carname).checked){
+      			carnumber += result[i].carid + ","
+      		}
+	  }
+       
+      if(carnumber!=''){
+        result=carnumber+"@"+startdate+"@"+overdate;
+       }else{alert("请选择车辆")}
+
+   }else{alert("请填写时间")}
+      return result;
+	}
+  
 function openMap(){
+	/*
 	 if(openFlag!="map"){
 	 openFlag="map";
 	  document.getElementById('mapImg').src='images/tab_1.png';
@@ -306,8 +454,10 @@ function openMap(){
 		div_obj.style.display="block";
 		var div_obj =document.getElementById("print");
 		div_obj.style.display="block";
+	*/
  }
  function openURL(url,flag){
+ 	/*
   	 if(openFlag!="url"||flag==1){
  	 openFlag="url";
  	 if(url.indexOf('flag=map')!=-1){
@@ -347,6 +497,7 @@ function openMap(){
 		div_obj.style.display="none";
 		var div_obj =document.getElementById("print");
 		div_obj.style.display="none";
+		*/
  }
  
 function openPage(url){
