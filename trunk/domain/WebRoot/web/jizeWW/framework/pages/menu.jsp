@@ -72,7 +72,7 @@
 
 		top.mapView.frames["lower"].swfobject.getObjectById("FxGIS").clear();
 		//spreadLeft();
-		top.mapView.location.href="<%=basePath%>web/jizeWW/tdMap/mapView.jsp?flag=map";
+		//top.mapView.location.href="<%=basePath%>web/jizeWW/tdMap/mapView.jsp?flag=map";
 		top.mapView.openMap();
 		top.mapView.frames["lower"].swfobject.getObjectById("FxGIS").clear();
 		//根据车辆的情况判定车辆的显示样式
@@ -115,7 +115,7 @@
 		parent.mapView.showCarHistory(result);
 		top.mapView.frames["lower"].swfobject.getObjectById("FxGIS").clear();
 		//spreadLeft();
-		top.mapView.location.href="<%=basePath%>web/jizeWW/tdMap/mapView.jsp?flag=map"; //"<%=basePath%>web/<%=name%>/" + url
+		//top.mapView.location.href="<%=basePath%>web/jizeWW/tdMap/mapView.jsp?flag=map"; //"<%=basePath%>web/<%=name%>/" + url
 		top.mapView.openMap();
 		top.mapView.frames["lower"].swfobject.getObjectById("FxGIS").clear();
 	}
