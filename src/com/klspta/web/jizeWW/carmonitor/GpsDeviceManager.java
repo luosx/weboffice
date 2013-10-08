@@ -23,6 +23,10 @@ import com.klspta.web.jizeWW.util.UtilTool;
  */
 public class GpsDeviceManager extends AbstractBaseBean{
     
+	//车辆无坐标信息时，默认初始化车辆位置
+	private static final String defaultX = "114.88525629043579";
+	private static final String defaultY = "36.914695664722224";
+	
     private static Map<String, GpsDeviceBean> GPSBeanMap = new HashMap<String, GpsDeviceBean>();
     public static Map<String, Object> cacheMap=new HashMap<String,Object>();
 	SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -62,8 +66,8 @@ public class GpsDeviceManager extends AbstractBaseBean{
             		bean.setX((String)his.get("x"));
             		bean.setY((String)his.get("y"));
             	}else{
-            		bean.setX("117.181688333333");
-            		bean.setY("34.1625683333333");
+            		bean.setX(defaultX);
+            		bean.setY(defaultY);
             	}
               	GPSBeanMap.put((String)rs.get("car_id"), bean);
     		}
@@ -208,7 +212,7 @@ public class GpsDeviceManager extends AbstractBaseBean{
 	public void getCarTree(){
       String xzqdm=request.getParameter("xzqdm");
       if("".equals(xzqdm)){
-    	  xzqdm="320300/";
+    	  xzqdm="320301/";
       }
       String[] xzqs=xzqdm.split("/");
       String status=request.getParameter("status");
@@ -336,6 +340,45 @@ public class GpsDeviceManager extends AbstractBaseBean{
     	String sql="select * from car_info where car_name='"+carname+"'";
     	List<Map<String,Object>> list=query(sql,YW);
     	return list;
+    }
+    
+    /**
+     * 
+     * <br>Description:获取所有车辆的行政区名称
+     * <br>Author:黎春行
+     * <br>Date:2013-9-25
+     */
+    public void getAllCarInfoName(){
+    	String sql = "select t.car_info_xzqh_name as name, t.car_cantoncode as code from car_info t group by t.car_info_xzqh_name, t.car_cantoncode order by t.car_cantoncode";
+    	List<Map<String, Object>> list = query(sql, YW);
+    	response(list);
+    }
+    
+    /**
+     * 
+     * <br>Description:获取所有的车辆信息
+     * <br>Author:黎春行
+     * <br>Date:2013-9-29
+     */
+    public void getAllCarInf(){
+    	Iterator<?> it = GPSBeanMap.entrySet().iterator();
+    	List<Map<String, Object>> oneList=new ArrayList<Map<String, Object>>();
+    	while (it.hasNext()) {
+    		Map<String, Object> map = new HashMap<String, Object>();
+    		Map.Entry<?, ?> entry = (Map.Entry<?, ?>) it.next();
+    		GpsDeviceBean value = (GpsDeviceBean)entry.getValue();
+    		map.put("carid", value.getId());
+    		map.put("carname", value.getname());
+    		map.put("carlx", value.getLx());
+    		boolean engine = value.isEngine();
+    		if(engine){
+    			map.put("carstatus", "going");	
+    		}else{
+    			map.put("carstatus", "stop");
+    		}
+    		oneList.add(map);
+		}
+    	response(oneList);
     }
    
 }
