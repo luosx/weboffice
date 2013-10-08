@@ -258,8 +258,9 @@ body,td,div,span,li{
 -->
 
 <iframe frameborder="0" id="lower"  name="lower"  style="width: 100%;height:100%; overflow: auto;" src="fxgis/FxGIS.html?debug=true"></iframe>
+
+<iframe frameborder="0" id="operation"  style="display:none;" name="operation"  style="width: 100%;height:92%; overflow: auto;" ></iframe>
 <!-- 
-<iframe frameborder="0" id="operation"  style="display:none;" name="operation"  style="width: 100%;height:100%; overflow: auto;" src="<%=basePath%>web/jizeWW/padResult/PADDataList.jsp"></iframe>
 <iframe frameborder="0" id="operation"  style="display:none;" name="operation"  style="width: 100%;height:92%; overflow: auto;" ></iframe>
 -->
     </body>
@@ -419,7 +420,7 @@ body,td,div,span,li{
 	}
   
 function openMap(){
-	/*
+	
 	 if(openFlag!="map"){
 	 openFlag="map";
 	  document.getElementById('mapImg').src='images/tab_1.png';
@@ -454,10 +455,10 @@ function openMap(){
 		div_obj.style.display="block";
 		var div_obj =document.getElementById("print");
 		div_obj.style.display="block";
-	*/
+	
  }
  function openURL(url,flag){
- 	/*
+ 	
   	 if(openFlag!="url"||flag==1){
  	 openFlag="url";
  	 if(url.indexOf('flag=map')!=-1){
@@ -497,7 +498,7 @@ function openMap(){
 		div_obj.style.display="none";
 		var div_obj =document.getElementById("print");
 		div_obj.style.display="none";
-		*/
+		
  }
  
 function openPage(url){
