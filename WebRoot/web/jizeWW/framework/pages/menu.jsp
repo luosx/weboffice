@@ -69,9 +69,8 @@
 	
 	//车辆跟踪
 	function carMonitor(url){
-		spreadLeft();
 
-		top.center.mapView.frames["lower"].swfobject.getObjectById("FxGIS").clear();
+		top.mapView.frames["lower"].swfobject.getObjectById("FxGIS").clear();
 		//spreadLeft();
 		top.mapView.location.href="<%=basePath%>web/jizeWW/tdMap/mapView.jsp?flag=map";
 		top.mapView.openMap();
@@ -89,7 +88,7 @@
 			}		
 		}else if(result.length > 1){
 			// var showModel = parent.frames["center"].frames["mapView"].getElementById("showCar");
-			parent.center.mapView.showCarList(result);
+			parent.mapView.showCarList(result);
 		}
 		
 	}
@@ -102,20 +101,19 @@
 	    var parmeter="carids="+id;
 	    var res = ajaxRequest(path,actionName,actionMethod,parmeter); 
 	    res=eval(res);
-	    parent.frames["center"].frames["mapView"].frames["lower"].swfobject.getObjectById("FxGIS").carMonitor('locate',name,res[0].carX,res[0].carY,status,res[0].CARFLAG);
-	    parent.frames["center"].frames["mapView"].frames["lower"].swfobject.getObjectById("FxGIS").setCenterAtAndZoom(res[0].carX,res[0].carY,10,false);
+	    parent.frames["mapView"].frames["lower"].swfobject.getObjectById("FxGIS").carMonitor('locate',name,res[0].carX,res[0].carY,status,res[0].CARFLAG);
+	    parent.frames["mapView"].frames["lower"].swfobject.getObjectById("FxGIS").setCenterAtAndZoom(res[0].carX,res[0].carY,10,false);
 	} 	
 	
 	//轨迹回放
 	function carHistory(url){
-		spreadLeft();
 		// top.center.left.location.href="<%=basePath%>web/<%=name%>/" + url;
 		// top.center.mapView.openMap();
 	  	ajaxRequest("<%=basePath%>","hander","flushGps","");
 	  	var result = ajaxRequest("<%=basePath%>","hander","getAllCarInf","");
 	  	result=eval(result);
-		parent.center.mapView.showCarHistory(result);
-		top.center.mapView.frames["lower"].swfobject.getObjectById("FxGIS").clear();
+		parent.mapView.showCarHistory(result);
+		top.mapView.frames["lower"].swfobject.getObjectById("FxGIS").clear();
 		//spreadLeft();
 		top.mapView.location.href="<%=basePath%>web/jizeWW/tdMap/mapView.jsp?flag=map"; //"<%=basePath%>web/<%=name%>/" + url
 		top.mapView.openMap();
