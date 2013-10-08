@@ -24,6 +24,7 @@
         <meta http-equiv="expires" content="0">
         <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
         <meta http-equiv="description" content="This is my page">
+        <%@ include file="/base/include/restRequest.jspf" %>
 		<script src="<%=basePath%>/base/fxgis/framework/js/toJson.js"></script>
 	<script>
 	var var_flag;  
@@ -68,14 +69,53 @@
 	
 	//车辆跟踪
 	function carMonitor(url){
+		spreadLeft();
+
+		top.center.mapView.frames["lower"].swfobject.getObjectById("FxGIS").clear();
 		//spreadLeft();
 		top.mapView.location.href="<%=basePath%>web/jizeWW/tdMap/mapView.jsp?flag=map";
 		top.mapView.openMap();
 		top.mapView.frames["lower"].swfobject.getObjectById("FxGIS").clear();
+		//根据车辆的情况判定车辆的显示样式
+	  	ajaxRequest("<%=basePath%>","hander","flushGps","");
+	  	var result = ajaxRequest("<%=basePath%>","hander","getAllCarInf","");
+	  	result=eval(result);
+		//当整个外网只有一辆车的时候
+		if(result.length == 1){
+			if(result[0].carstatus == "going"){		
+				doLocation(result[0].carid, result[0].carname, "1");
+			}else{
+				doLocation(result[0].carid, result[0].carname, "0");
+			}		
+		}else if(result.length > 1){
+			// var showModel = parent.frames["center"].frames["mapView"].getElementById("showCar");
+			parent.center.mapView.showCarList(result);
+		}
+		
 	}
+	
+	//车辆定位
+	function doLocation(id,name,status){
+	    var path = "<%=basePath%>";
+	    var actionName = "hander";
+	    var actionMethod = "getCarInfo";
+	    var parmeter="carids="+id;
+	    var res = ajaxRequest(path,actionName,actionMethod,parmeter); 
+	    res=eval(res);
+	    parent.frames["center"].frames["mapView"].frames["lower"].swfobject.getObjectById("FxGIS").carMonitor('locate',name,res[0].carX,res[0].carY,status,res[0].CARFLAG);
+	    parent.frames["center"].frames["mapView"].frames["lower"].swfobject.getObjectById("FxGIS").setCenterAtAndZoom(res[0].carX,res[0].carY,10,false);
+	} 	
 	
 	//轨迹回放
 	function carHistory(url){
+		spreadLeft();
+		// top.center.left.location.href="<%=basePath%>web/<%=name%>/" + url;
+		// top.center.mapView.openMap();
+	  	ajaxRequest("<%=basePath%>","hander","flushGps","");
+	  	var result = ajaxRequest("<%=basePath%>","hander","getAllCarInf","");
+	  	result=eval(result);
+		parent.center.mapView.showCarHistory(result);
+		top.center.mapView.frames["lower"].swfobject.getObjectById("FxGIS").clear();
 		//spreadLeft();
 		top.mapView.location.href="<%=basePath%>web/jizeWW/tdMap/mapView.jsp?flag=map"; //"<%=basePath%>web/<%=name%>/" + url
 		top.mapView.openMap();
@@ -183,7 +223,6 @@ body {
 
 </head>
     <body>
-
 		<ul class="menu">
 			<li style="width: 12px; margin: 0;">
 				<img src="<%=basePath%>web/<%=name%>/framework/images/menu/menu_left.jpg" />
@@ -199,7 +238,7 @@ body {
 			<li style="width: 120; text-align: right; margin-right: 10px; cursor: auto;">
 				<span class="menutitle">欢迎您：<%=username%></span>
 			</li>
-			<li onclick="top.location.href='<%=basePath%>j_spring_security_logout';return false;">
+			<li onClick="top.location.href='<%=basePath%>j_spring_security_logout';return false;">
 				<img src="<%=basePath%>web/<%=name%>/framework/images/menu/exit.png" class="menuicon" />
 				<span class="menutitle">退出</span>
 			</li>
