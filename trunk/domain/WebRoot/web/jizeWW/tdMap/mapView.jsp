@@ -502,6 +502,8 @@ function openMap(){
  }
  
 function openPage(url){
+	 document.getElementById("showCar").style.display="none";
+	 document.getElementById("showHistory").style.display="none";
 	 openURL("<%=basePath%>web/<%=name%>/" + url,1);
 }
  </script>
