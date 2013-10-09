@@ -21,6 +21,8 @@
 	
 	<!-- 立案查处 -->
 	<bean name="lacc" class="com.klspta.web.jizeNW.lacc.LaccManager" scope="prototype"/>
+	<!--卷宗归档-->
+	<bean name="jzgd" class="com.klspta.web.jizeNW.lacc.JzgdManager" scope="prototype"/>
 	
 	<!-- 案件台账 -->
 	<bean name="tjfxManager" class="com.klspta.web.jizeNW.lacc.TjfxManager" scope="prototype" /> 
