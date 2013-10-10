@@ -41,4 +41,7 @@
 	
 	<!-- 投融资情况 -->
 	<bean name="trzqkHandle" class="com.klspta.web.cbd.plan.TrzqkHandler" scope="prototype"/>	
+	
+		<!-- 红线项目管理-->
+	<bean name="hxxmManager" class="com.klspta.web.cbd.hxxm.HxxmManager" scope="prototype"/>	
 </beans>
