@@ -182,7 +182,7 @@ window.onload=function()
 
 	}
 function openPage(obj,url){
-	top.content.document.getElementById("content").cols="0,0,*";
+	top.content.document.getElementById("content").cols="0,9,*";
 	
 	if(openObj!=obj)
 	{		
