@@ -128,9 +128,9 @@ public class WWmenuManager extends AbstractBaseBean{
 		StringBuffer menuItemCode = new StringBuffer();
 		menuItemCode.append("<li ");
 		if (isLeaf){
-			menuItemCode.append("onclick='openPage(\"" + menuBean.getUrl_center() + "\")'\" />");
+			menuItemCode.append("onclick='openPage(\"" + menuBean.getUrl_center() + "\")' >");
 		}else{
-			menuItemCode.append("onclick='clickMenu(this,\"" + menuBean.getMenuId() + "\");return false;' ");
+			menuItemCode.append("onclick='clickMenu(this,\"" + menuBean.getMenuId() + "\");return false;' >");
 		}
 		
 		menuItemCode.append("<img class=\"menuseparate\" src=\"../images/menu/split.png\" />&nbsp;");
