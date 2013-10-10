@@ -64,6 +64,7 @@
   	//首页
 	function gohome(){
 		top.mapView.openMap();
+		top.mapView.childmenu.innerHTML = "";
 		//spreadLeft();
 	}
 	
@@ -90,6 +91,7 @@
 			// var showModel = parent.frames["center"].frames["mapView"].getElementById("showCar");
 			parent.mapView.showCarList(result);
 		}
+		top.mapView.childmenu.innerHTML = "";
 		
 	}
 	
@@ -118,6 +120,8 @@
 		//top.mapView.location.href="<%=basePath%>web/jizeWW/tdMap/mapView.jsp?flag=map"; //"<%=basePath%>web/<%=name%>/" + url
 		top.mapView.openMap();
 		top.mapView.frames["lower"].swfobject.getObjectById("FxGIS").clear();
+		
+		top.mapView.childmenu.innerHTML = "";
 	}
 	
 	//视频监控
@@ -126,6 +130,8 @@
 		var height = window.screen.availHeight;
 		var parameter = "width="+width+",height="+height;
 		window.open("<%=basePath%>web/<%=name%>/" + url,"",parameter);
+		
+		top.mapView.childmenu.innerHTML = "";
 	}
 	
 	function packUpLeft()
