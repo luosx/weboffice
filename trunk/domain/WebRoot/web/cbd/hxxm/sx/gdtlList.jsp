@@ -129,6 +129,7 @@ Ext.onReady(function(){
              });
     var combobox = new Ext.form.ComboBox({
                 fieldLabel: '时序年份',
+                 id      : 'year',
                  store: combostore,
                  displayField: 'name',
                  valueField: 'name',
@@ -145,7 +146,8 @@ Ext.onReady(function(){
              });
     var comboboxS = new Ext.form.ComboBox({
                 fieldLabel: '时序季度',
-                 store: combostore,
+                 id      : 'season',
+                 store: combostoreS,
                  displayField: 'name',
                  valueField: 'id',
                  triggerAction: 'all',

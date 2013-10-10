@@ -78,13 +78,13 @@ Ext.onReady(function(){
            {header: '时历', dataIndex:'SL', width: width*0.1, sortable: false},
            {header: '户数', dataIndex:'HS', width: width*0.15, sortable: false},
            {header: '地量', dataIndex:'DL',width: width*0.1, sortable: false},
-            {header: '规模', dataIndex:'GM',width: width*0.1, sortable: false},
-            {header: '投资', dataIndex:'TZ',width: width*0.1, sortable: false},
-            {header: '住', dataIndex:'Z',width: width*0.05, sortable: false},
+           {header: '规模', dataIndex:'GM',width: width*0.1, sortable: false},
+           {header: '投资', dataIndex:'TZ',width: width*0.1, sortable: false},
+           {header: '住', dataIndex:'Z',width: width*0.05, sortable: false},
            {header: '企', dataIndex:'Q',width: width*0.05, sortable: false},
-            {header: '楼面', dataIndex:'LM',width: width*0.1, hidden:true, sortable: false},
-            {header: '成交', dataIndex:'CJ',width: width*0.1, hidden:true, sortable: false},
-            {header: '删除',dataIndex:'DELETE',width: width*0.05, sortable: false,renderer:del}
+           {header: '楼面', dataIndex:'LM',width: width*0.1, hidden:true, sortable: false},
+           {header: '成交', dataIndex:'CJ',width: width*0.1, hidden:true, sortable: false},
+           {header: '删除',dataIndex:'DELETE',width: width*0.05, sortable: false,renderer:del}
         ],
           tbar:[
         			
@@ -133,6 +133,7 @@ Ext.onReady(function(){
              });
     var combobox = new Ext.form.ComboBox({
                 fieldLabel: '时序年份',
+                  id      : 'year',
                  store: combostore,
                  displayField: 'name',
                  valueField: 'name',
@@ -149,7 +150,8 @@ Ext.onReady(function(){
              });
     var comboboxS = new Ext.form.ComboBox({
                 fieldLabel: '时序季度',
-                 store: combostore,
+                  id      : 'season',
+                 store: combostoreS,
                  displayField: 'name',
                  valueField: 'id',
                  triggerAction: 'all',
