@@ -214,7 +214,7 @@ body,td,div,span,li{
 </td>
 </tr>
 </table>
-<div id="showCar" style="width:100px;height:80px; position:absolute; left:101px; top:61px; background:#E2EAF3; filter:alpha(opacity=80); display:none;">
+<div id="showCar" style="width:150px;height:80px; position:absolute; left:101px; top:61px; background:#E2EAF3; filter:alpha(opacity=80); display:none;">
 	
 </div>
 <div id="showHistory" style="width:150px; height:200px; position:absolute; left:110px; top:80px; background:#E2EAF3; filter:alpha(opacity=80); display:none;">
@@ -257,7 +257,7 @@ body,td,div,span,li{
 			</div>
 -->
 
-<iframe frameborder="0" id="lower"  name="lower"  style="width: 100%;height:100%; overflow: auto;" src="fxgis/FxGIS.html?debug=true"></iframe>
+<iframe frameborder="0" id="lower"  name="lower"  style="width: 100%;height:100%; overflow: auto;" src="<%=basePath%>base/fxgis/fx/FxGIS.html"></iframe>
 
 <iframe frameborder="0" id="operation"  style="display:none;" name="operation"  style="width: 100%;height:92%; overflow: auto;" ></iframe>
 <!-- 
@@ -294,9 +294,17 @@ body,td,div,span,li{
   			var showTable = "<table style='border:none'>"
 			for(var i = 0; i < result.length; i++){
 				if(result[i].carstatus == "going"){
-					showTable += "<tr><td width=\"30px\"><input type=\"checkbox\" value = '"+ i +"' onclick=\"choseCar(this)\" ></td><td style=\"color: #FFFF33\"><label>"+result[i].carname+"</label></td></tr>";
+					if(result[i].carlx!="0"){
+						showTable += "<tr><td width=\"30px\"><input type=\"checkbox\" value = '"+ i +"' name='"+ result[i].carname +"' onclick=\"choseCar(this)\" ></td><td style=\"color: #FFFF33\"><label><font color=green>"+result[i].carname+"(行驶)</font><img onclick=\"showVideo("+result[i].carlx+")\" src=\"<%=basePath%>web/<%=name%>/framework/images/menu/viewC1.png\" width=\"16\" height=\"16\" /></label></td></tr>";
+					}else{
+						showTable += "<tr><td width=\"30px\"><input type=\"checkbox\" value = '"+ i +"' name='"+ result[i].carname +"' onclick=\"choseCar(this)\" ></td><td style=\"color: #FFFF33\"><label><font color=green>"+result[i].carname+"(行驶)</font></label></td></tr>";
+					}
 				}else{
-					showTable += "<tr><td width=\"30px\"><input type=\"checkbox\" value = '"+ i +"' onclick=\"choseCar(this)\" ></td><td style=\"color: #FF3300\"><label>"+result[i].carname+"</label></td></tr>";
+					if(result[i].carlx!="0"){
+						showTable += "<tr><td width=\"30px\"><input type=\"checkbox\" value = '"+ i +"' name='"+ result[i].carname +"' onclick=\"choseCar(this)\" ></td><td style=\"color: #FFFF33\"><label><font color=red>"+result[i].carname+"(停止)</font><img onclick=\"showVideo("+result[i].carlx+")\" src=\"<%=basePath%>web/<%=name%>/framework/images/menu/viewC1.png\" width=\"16\" height=\"16\" /></label></td></tr>";
+					}else{
+						showTable += "<tr><td width=\"30px\"><input type=\"checkbox\" value = '"+ i +"' name='"+ result[i].carname +"' onclick=\"choseCar(this)\" ></td><td style=\"color: #FFFF33\"><label><font color=red>"+result[i].carname+"(停止)</font></label></td></tr>";
+					}
 				}
 			
 			}
@@ -306,11 +314,15 @@ body,td,div,span,li{
   }
   //对所选的车辆进行定位
   function choseCar(check){
-        if(carList[check.value].carstatus == "going"){	
+  	if(check.checked){
+  		if(carList[check.value].carstatus == "going"){	
   			parent.parent.menu.doLocation(carList[check.value].carid, carList[check.value].carname, "1");
   		}else{
   			parent.parent.menu.doLocation(carList[check.value].carid, carList[check.value].carname, "0");
   		}
+  	}else{
+  		parent.frames["mapView"].frames["lower"].swfobject.getObjectById("FxGIS").carMonitor('remove',check.name);
+  	}
   }
   
   //隐藏车辆定位和轨迹回放选择层
@@ -466,21 +478,13 @@ function openMap(){
  	 }else{
 	 	document.getElementById('mapImg').src='images/tab_4.png';
 	 }
-     //document.getElementById('urlImg').src='images/tab_4.png';
 	 document.getElementById('operation').style.display="";
 	 document.getElementById('lower').style.display="none";
 	 document.getElementById('operation').src=url;
 	 }
-	// var div_obj =document.getElementById("type");
-	//	div_obj.style.display="none";
-	//	var div_obj =document.getElementById("map_selec");
-	//	div_obj.style.display="none";
-		
 	 	var div_obj =document.getElementById("map_nav");
 		div_obj.style.display="none";
-	//	var div_obj =document.getElementById("map_nav2");
-	//	div_obj.style.display="none";
-		 var div_obj =document.getElementById("c");
+		var div_obj =document.getElementById("c");
 		div_obj.style.display="none";
 		var div_obj =document.getElementById("zoomin");
 		div_obj.style.display="none";
@@ -506,4 +510,8 @@ function openPage(url){
 	 document.getElementById("showHistory").style.display="none";
 	 openURL("<%=basePath%>web/<%=name%>/" + url,1);
 }
+
+function showVideo(puid){
+window.showModalDialog("<%=basePath%>web/<%=name%>/videoMonitor/pop.jsp?puid="+puid,window,"dialogWidth=704px;dialogHeight=288px;status=no;scroll=no");
+  }
  </script>
