@@ -9,6 +9,7 @@
     Object userprincipal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     String userid = ((User)userprincipal).getUserID();
     String flag = request.getParameter("flag");
+    String yw_guid= request.getParameter("yw_guid").toString();
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -43,24 +44,23 @@ var grid;
 var expWin;
 var form;
 Ext.onReady(function(){
-    putClientCommond("padDataManager","getQueryData");
-    putRestParameter("userId",'<%=userid%>')
-    putRestParameter("flag",'<%=flag%>')
+    putClientCommond("hxxmManager","queryGdtl");
+    putRestParameter("xmbh",'<%=yw_guid%>')
 	myData = restRequest();
  	store = new Ext.data.JsonStore({
     proxy: new Ext.ux.data.PagingMemoryProxy(myData),
 		remoteSort:true,
         fields: [
-           {name: 'READFLAG'},
            {name: 'XMMC'},
-           {name: 'SL'},
-           {name: 'DJ'},
+           {name: 'SX'},
+           {name: 'DL'},
            {name: 'GM'},
            {name: 'CB'},
            {name: 'SY'},
            {name: 'ZJ'},
            {name: 'ZUJIN'},
-           {name: 'DELETE'}
+           {name: 'MOD'},
+           {name: 'DEL'}
         ]
     });
     
@@ -73,14 +73,15 @@ Ext.onReady(function(){
         sm:sm,
         columns: [
            {header: '项目名称', dataIndex:'XMMC', width: width*0.1, sortable: false},
-           {header: '时历', dataIndex:'SL', width: width*0.1, sortable: false},
+           {header: '时序', dataIndex:'SX', width: width*0.1, sortable: false},
            {header: '地量', dataIndex:'DL', width: width*0.15, sortable: false},
            {header: '规模', dataIndex:'GM',width: width*0.1, sortable: false},
-            {header: '成本', dataIndex:'CB',width: width*0.15, sortable: false},
-            {header: '收益', dataIndex:'SY',width: width*0.1, sortable: false},
-            {header: '总价', dataIndex:'ZJ',width: width*0.1, sortable: false},
-           {header: '租金', dataIndex:'ZJ',width: width*0.15, sortable: false},
-            {header: '删除',dataIndex:'DELETE',width: width*0.05, sortable: false,renderer:del}
+           {header: '成本', dataIndex:'CB',width: width*0.15, sortable: false},
+           {header: '收益', dataIndex:'SY',width: width*0.1, sortable: false},
+           {header: '总价', dataIndex:'ZJ',width: width*0.1, sortable: false},
+           {header: '租金', dataIndex:'ZJ',width: width*0.1, sortable: false},
+           {header: '修改', dataIndex:'MOD',width: width*0.05, sortable: false, renderer: modify}, 
+           {header: '删除',dataIndex:'DEL',width: width*0.05, sortable: false,renderer:del}
         ],
           tbar:[
         			
@@ -163,7 +164,7 @@ Ext.onReady(function(){
         frame:true,
         bodyStyle:'padding:5px 0px 0',
         width: 300,
-        url:"<%=basePath%>service/rest/taskdeal/addTask",
+        url:"<%=basePath%>service/rest/hxxmManager/addGdtl?xmbh=<%=yw_guid%>",
         defaults: {
             anchor: '0'
         },
@@ -172,7 +173,8 @@ Ext.onReady(function(){
                 xtype: 'textfield',
                 id      : 'xmmc',
                 value:'',
-                fieldLabel: '项目名称'
+                fieldLabel: '项目名称',
+                readOnly:true
             },
             combobox,
     		comboboxS,
@@ -247,7 +249,11 @@ Ext.onReady(function(){
                 height:330,
                 closeAction:'hide',
 				items:form2
-    }); 	    
+    });
+    putClientCommond("hxxmManager","getXmmc");
+    putRestParameter("xmbh",'<%=yw_guid%>')
+	var info = restRequest();
+    Ext.getCmp("xmmc").setValue(info[0].XMNAME);	    
  /////////////////////////////////////
      grid.render('mygrid_container'); 				      
 })
@@ -255,11 +261,23 @@ Ext.onReady(function(){
   win2.show();
  }
 
-function view(id){
-	return "<a href='#' onclick='showDetail("+id+");return false;'><img src='base/form/images/view.png' alt='详细信息'></a>";
+function modifyConten(id){
+    //初始化数据
+    var sinData=myData[id];
+    Ext.getCmp("year").setValue(sinData.SX.split('-')[0]);
+    win2.items.items[0].form.findField('season').setValue(sinData.SX.split('-')[1]);
+
+    
+    win2.items.items[0].form.url='<%=basePath%>service/rest/hxxmManager/updateKftl?xmbh=<%=yw_guid%>&&gdbh='+sinData.GDBH;
+    win2.setTitle("开发体量修改")
+    win2.show();
+}
+
+function modify(id){
+ return "<span style='cursor:pointer;' onclick='modifyConten(\""+id+"\")'><img src='base/form/images/conf.png' alt='修改'/></span>";
 }
 function del(id){
- 	return "<a href='#' onclick='delTask("+id+");return false;'><img src='base/form/images/delete.png' alt='删除'></a>";
+ 	return "<span href='#' onclick='delTask("+id+");return false;'><img src='base/form/images/delete.png' alt='删除'></span>";
 }
 
 function delTask(id){
@@ -269,58 +287,50 @@ function delTask(id){
 	    putClientCommond("padDataManager","delData");
 	    putRestParameter("yw_guid",myData[id].GUID)
         var mes = restRequest(); 
-		document.location.reload();
-		}
-		else{
-		return false;
+   		if(mes.success){
+          query();
+        }
+        }else{
+			return false;
 		}
 	});
-}
-
-
-function showDetail(id){
-    var url = "<%=basePath%>web/jizeNW/dtxc/wyxc/xjclyjframe.jsp?zfjcType=11&yw_guid="+myData[id].GUID;     
-	//document.location.href=url;
-	var height = window.screen.availHeight;
-	var width = window.screen.availWidth;
-	window.showModalDialog(url,"","dialogWidth="+width+";dialogHeight="+height);
 }
 
 function query(){
   var keyWord = Ext.getCmp('keyword').getValue();
     keyWord=escape(escape(keyWord));
-    putClientCommond("padDataManager","getQueryData");
-    putRestParameter("userId",'<%=userid%>')
-    putRestParameter("flag",'<%=flag%>')
+    putClientCommond("hxxmManager","queryGdtl");
+    putRestParameter("xmbh",'<%=yw_guid%>')
     putRestParameter("keyWord",keyWord);
-    var myData1 = restRequest(); 
+    myData = restRequest(); 
     var width=document.body.clientWidth;
- store = new Ext.data.JsonStore({
+	 store = new Ext.data.JsonStore({
      proxy: new Ext.ux.data.PagingMemoryProxy(myData1),
 		remoteSort:true,
         fields: [
-           {name: 'READFLAG'},
            {name: 'XMMC'},
-           {name: 'SL'},
-           {name: 'DJ'},
+           {name: 'SX'},
+           {name: 'DL'},
            {name: 'GM'},
            {name: 'CB'},
            {name: 'SY'},
            {name: 'ZJ'},
            {name: 'ZUJIN'},
-           {name: 'DELETE'}
+           {name: 'MOD'},
+           {name: 'DEL'}
         ]
     });
     grid.reconfigure(store, new Ext.grid.ColumnModel([
            {header: '项目名称', dataIndex:'XMMC', width: width*0.1, sortable: false},
-           {header: '时历', dataIndex:'SL', width: width*0.1, sortable: false},
+           {header: '时序', dataIndex:'SX', width: width*0.1, sortable: false},
            {header: '地量', dataIndex:'DL', width: width*0.15, sortable: false},
            {header: '规模', dataIndex:'GM',width: width*0.1, sortable: false},
-            {header: '成本', dataIndex:'CB',width: width*0.15, sortable: false},
-            {header: '收益', dataIndex:'SY',width: width*0.1, sortable: false},
-            {header: '总价', dataIndex:'ZJ',width: width*0.1, sortable: false},
-           {header: '租金', dataIndex:'ZJ',width: width*0.15, sortable: false},
-            {header: '删除',dataIndex:'DELETE',width: width*0.05, sortable: false,renderer:del}
+           {header: '成本', dataIndex:'CB',width: width*0.15, sortable: false},
+           {header: '收益', dataIndex:'SY',width: width*0.1, sortable: false},
+           {header: '总价', dataIndex:'ZJ',width: width*0.1, sortable: false},
+           {header: '租金', dataIndex:'ZJ',width: width*0.1, sortable: false},
+           {header: '修改', dataIndex:'MOD',width: width*0.05, sortable: false, renderer: modify}, 
+           {header: '删除',dataIndex:'DEL',width: width*0.05, sortable: false,renderer:del}
         ]));
 //重新绑定分页工具栏
  grid.getBottomToolbar().bind(store);
