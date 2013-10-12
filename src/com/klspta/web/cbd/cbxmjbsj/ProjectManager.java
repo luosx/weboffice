@@ -26,7 +26,7 @@ public class ProjectManager extends AbstractBaseBean {
 	 * <br>Date:2013-8-20
 	 */
 	public List<Map<String, Object>> getLandsByProjectID(String projectid){
-		String sql = "select t.dkname,t.yw_guid from dkinfo t where t.projectid = ?";
+		String sql = "select t.dkname,t.yw_guid from HX_DKSJ t where t.projectid = ?";
 		List<Map<String, Object>> result = query(sql, YW, new Object[]{projectid});
 		return result;
 	}
@@ -79,7 +79,7 @@ public class ProjectManager extends AbstractBaseBean {
 	 */
 	public String getDkInfoArrayJsonByProjectID() {
 		//得到所有的地块信息
-		String sql = "select t.dkname,t.yw_guid from dkinfo t where t.projectid is null";
+		String sql = "select t.dkname,t.yw_guid from HX_DKSJ t where t.projectid is null";
 		List<Map<String, Object>> result = query(sql, YW);
 		return getDkJsonByList(result);
 	}
@@ -99,7 +99,7 @@ public class ProjectManager extends AbstractBaseBean {
 		String[] strvalues = values.split(",");
 		if(yw_guid == null || "null".equals(yw_guid)){
 			yw_guid= UtilFactory.getStrUtil().getGuid();
-			String insertSql = "insert into xminfo(yw_guid,xmname) values(?,?)";
+			String insertSql = "insert into hx_jcsj(yw_guid,xmname) values(?,?)";
 			update(insertSql, YW, new Object[]{yw_guid,xmname});
 		}
 		addDkProjectMap(yw_guid,strvalues);
@@ -108,22 +108,22 @@ public class ProjectManager extends AbstractBaseBean {
 	
 	public boolean addDkProjectMap(String projectid, String[] values){
 		// 删除原有的项目、地块关系
-		String sqldel = "update dkinfo t set t.projectid = '' where t.projectid = ?";
+		String sqldel = "update HX_DKSJ t set t.projectid = '' where t.projectid = ?";
 		update(sqldel, YW, new Object[]{projectid});
 		// 添加新的项目、地块关系
-		String sqladd = "update dkinfo t set t.projectid = ? where t.yw_guid = ?";
+		String sqladd = "update HX_DKSJ t set t.projectid = ? where t.yw_guid = ?";
 		for (int i = 0; i < values.length; i++) {
 			update(sqladd, YW, new Object[]{projectid,values[i]});
 		}
 		//更新重新确定项目、地块关系后的项目表
 		String sqlupd = null;
 		if(values.length == 1 && "".equals(values[0])){
-			sqlupd = "update xminfo t set t.zd = '',t.gm = '',t.hs = '',t.cb = '',t.zzcqfy = '',t.qycqfy = '',t.qtfy = '',t.azftzcb = '',t.zzhbtzcb = '',t.cqhbtz = '',t.qtfyzb = '',t.lmcb = '',t.lmcjj = '',t.fwsj = '',t.zj = '',t.pgtdjz = '',t.tyl = '',t.rzss = ''where t.yw_guid = ?";
+			sqlupd = "update hx_jcsj t set t.zd = '',t.gm = '',t.hs = '',t.cb = '',t.zzcqfy = '',t.qycqfy = '',t.qtfy = '',t.azftzcb = '',t.zzhbtzcb = '',t.cqhbtz = '',t.qtfyzb = '',t.lmcb = '',t.lmcjj = '',t.fwsj = '',t.zj = '',t.pgtdjz = '',t.tyl = '',t.rzss = ''where t.yw_guid = ?";
 			update(sqlupd,YW,new Object[]{projectid});
 		}else{
-			sqlupd = "update xminfo x"+
-						" set (x.zd,x.gm,x.hs,x.cb) = (select sum(t.ghzd),sum(t.ghjzgm),sum(t.cqzzzshs),sum(t.cbsykfcb) from dkinfo t where x.yw_guid = t.projectid)"+
-						" where x.yw_guid in(select projectid from dkinfo)";
+			sqlupd = "update hx_jcsj x"+
+						" set (x.zd,x.gm,x.hs,x.cb) = (select sum(t.ghzd),sum(t.ghjzgm),sum(t.cqzzzshs),sum(t.cbsykfcb) from HX_DKSJ t where x.yw_guid = t.projectid)"+
+						" where x.yw_guid in(select projectid from HX_DKSJ)";
 			update(sqlupd,YW);
 		}
 		return true;
@@ -138,8 +138,59 @@ public class ProjectManager extends AbstractBaseBean {
 	 */
 	public void getYw_guidbymc() throws UnsupportedEncodingException{
 		String xmmc = new String(request.getParameter("xmmc").getBytes("iso-8859-1"), "utf-8");
-		String sql = "select t.yw_guid from xminfo t where t.xmname=?";
+		String sql = "select t.yw_guid from hx_jcsj t where t.xmname=?";
 		List<Map<String, Object>> returnList = query(sql, YW, new Object[]{xmmc});
 		response(returnList);
 	}
+	
+	/**
+	 * 
+	 * <br>Description:获取所有项目的基本信息
+	 * <br>Author:黎春行
+	 * <br>Date:2013-8-21
+	 */
+	public void getjcsjList(){
+		String sql = "select t.* from hx_jcsj t";
+		List<Map<String, Object>> projectList = query(sql, YW);
+		response(projectList);
+	}
+	
+	/**
+	 * 
+	 * <br>Description:获取给定项目名称的基本数据
+	 * <br>Author:黎春行
+	 * <br>Date:2013-8-21
+	 */
+	public void getProjectList(){
+		String sql = "select t.* from hx_jcsj t where t.xmname=?";
+		String xmmc = "";
+		try {
+			xmmc = new String(request.getParameter("xmmc").getBytes("iso-8859-1"),"UTF-8");
+			//xmmc = URLEncoder.encode(request.getParameter("xmmc"), "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		List<Map<String, Object>> projectList = query(sql, YW, new Object[]{xmmc});
+		response(projectList);
+	}
+
+	/**
+	 * 
+	 * <br>Description:删除当前项目
+	 * <br>Author:黎春行
+	 * <br>Date:2013-10-11
+	 */
+	public void deleteProject(){
+		String yw_guid = request.getParameter("yw_guid");
+		String[] forms = new String[]{"HX_GDTL","HX_KFTL"};
+		String deleteSql = "delete hx_jcsj t where t.yw_guid = ?";
+		update(deleteSql, YW, new Object[]{yw_guid});
+		for(int i = 0; i < forms.length; i++){
+			String sql = "delete " + forms[i] + " t where t.xmguid = ?" ;
+			update(sql, YW, new Object[]{yw_guid});
+		}
+		response("success");
+	}
+	
 }
