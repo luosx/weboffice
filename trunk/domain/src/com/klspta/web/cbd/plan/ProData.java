@@ -1,5 +1,6 @@
 package com.klspta.web.cbd.plan;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -133,28 +134,30 @@ public class ProData extends AbstractBaseBean {
 		String code = "";
 		String[] temp = new String[36];
 		// 将各个季度的数值填入到数组temp中
-		for (int j = 0; j < result.size(); j++) {
-			int nd;
-			int jd;
-			try {
-				nd = (result.get(j).get("年度") != null) ? Integer.parseInt(result.get(j).get("年度").toString()) : Integer
-						.parseInt(result.get(j).get("nd").toString());
-				jd = (result.get(j).get("季度") != null) ? Integer.parseInt(result.get(j).get("季度").toString()) : Integer
-						.parseInt(result.get(j).get("jd").toString());
-			} catch (Exception e) {
-				continue;
-			}
-			Object value = result.get(j).get(filed);
-			if (value != null && value.toString() != "") {
-				int position = (nd - 2012) * 4 + jd - 1;
-				temp[position] = value.toString();
-			}
-		}
+		
 		// 根据数组temp中的值来构成html <td>代码
 		for (int k = 0; k < temp.length; k++) {
 			String subcode = (temp[k] == null || temp[k] == "") ? ("<td></td>") : ("<td>" + temp[k] + "</td>");
 			code += subcode;
 		}
 		return code;
+	}
+	
+	/**
+	 * 
+	 * <br>Description:获取具有实施时序计划的年度区间
+	 * <br>Author:黎春行
+	 * <br>Date:2013-10-11
+	 * @return
+	 */
+	public Map<String, Object> getPlanYear(){
+		String sql = "select min(t.nd) as minyear, max(t.nd) as maxyear from hx_sssx t";
+		Map<String, Object> planYearMap = new HashMap<String, Object>();
+		List<Map<String, Object>> resultList = query(sql, YW);
+		if(resultList.size() > 0){
+			planYearMap = resultList.get(0);
+		}
+		return planYearMap;
+		
 	}
 }
