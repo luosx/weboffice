@@ -100,8 +100,8 @@ public class Kftl extends AbstractBaseBean {
                 seasonChange=judgeCount(year,season,xmbh);
             }
         }
-        sql = "update hx_kftl set nd=?,jd=?,hs=?,dl=?,gm=?,tz=?,zhu=?,qi=?,hsz=?,dlz=?,gmz=?,tzz=?,zhuz=?,qiz=?,lm=?,cj=? where yw_guid=?";
-        int flag = update(sql, YW, new Object[] { year, season, hs, dl, gm, tz, z, q,hsz,dlz,gmz,tzz,zhuz,qiz, lm, cj, kfbh });
+        sql = "update hx_kftl set nd=?,jd=?,hs=?,dl=?,gm=?,tz=?,zhu=?,qi=?,hsz=?,dlz=?,gmz=?,tzz=?,zhuz=?,qiz=?,lm=?,cj=?,yf=? where yw_guid=?";
+        int flag = update(sql, YW, new Object[] { year, season, hs, dl, gm, tz, z, q,hsz,dlz,gmz,tzz,zhuz,qiz, lm, cj,month, kfbh});
         if (flag == 0) {
             response("{success:false}");
         } else {
@@ -154,10 +154,10 @@ public class Kftl extends AbstractBaseBean {
     public void query() {
         String xmbh = request.getParameter("xmbh");
         String keyWord=request.getParameter("keyWord");
-        String sql = "select xmmc,nd||'-'||jd as sx,dl,hs,gm,tz,zhu as z,qi as q,lm,cj,rownum-1 as mod,rownum-1 as del,yw_guid  as kfbh,hsz,dlz,gmz,tzz,zhuz,qiz from hx_kftl where xmguid=?";
+        String sql = "select xmmc,nd||'-'||yf as sx,dl,hs,gm,tz,zhu as z,qi as q,lm,cj,rownum-1 as mod,rownum-1 as del,yw_guid  as kfbh,hsz,dlz,gmz,tzz,zhuz,qiz,yf from hx_kftl where xmguid=?";
         if (keyWord != null) {
             keyWord = UtilFactory.getStrUtil().unescape(keyWord);
-            sql+=" and nd||'-'||jd like '%"+keyWord+"%'";
+            sql+=" and nd||'-'||yf like '%"+keyWord+"%'";
         }
         List<Map<String, Object>> list = query(sql, YW, new Object[] { xmbh });
         response(list);
@@ -247,7 +247,7 @@ public class Kftl extends AbstractBaseBean {
      * @return
      */
     private boolean judgeCount(String nd, String jd, String xmbh) {
-        String sql = "select yw_guid from kftl where nd=? and jd=? and xmguid=?";
+        String sql = "select yw_guid from hx_kftl where nd=? and jd=? and xmguid=?";
         List<Map<String, Object>> listCount = query(sql, YW, new Object[] { nd, jd, xmbh });
         if (listCount.size() == 1) {
             return true;
