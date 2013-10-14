@@ -19,13 +19,13 @@ import com.klspta.base.AbstractBaseBean;
 public class HxxmManager extends AbstractBaseBean {
     /**
      * 
-     * <br>Description:获取项目名称
+     * <br>Description:获取项目信息
      * <br>Author:陈强峰
      * <br>Date:2013-10-11
      */
     public void getXmmc(){
         String xmbh=request.getParameter("xmbh").toString();
-        String sql="select xmname from hx_jcsj where yw_guid=?";
+        String sql="select xmname,zd,hs,gm,zzcqfy,qycqfy,cqhbtz,lmcb,lmcjj from jc_xiangmu where yw_guid=?";
         List<Map<String,Object>> list=query(sql,YW,new Object[]{xmbh});
         response(list);
     }
