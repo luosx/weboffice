@@ -130,6 +130,7 @@ Ext.onReady(function(){
              });
     var combobox = new Ext.form.ComboBox({
                 fieldLabel: '时序年份',
+                  width:120,
                  id      : 'year',
                  store: combostore,
                  displayField: 'name',
@@ -147,6 +148,7 @@ Ext.onReady(function(){
              });
     var comboboxS = new Ext.form.ComboBox({
                 fieldLabel: '时序季度',
+                  width:120,
                  id      : 'season',
                  store: combostoreS,
                  displayField: 'name',
@@ -163,7 +165,9 @@ Ext.onReady(function(){
         autoHeight: true,
         frame:true,
         bodyStyle:'padding:5px 0px 0',
-        width: 300,
+        width: 400,
+        labelWidth :60,   
+  		labelAlign : "right",
         url:"<%=basePath%>service/rest/hxxmManager/addGdtl?xmbh=<%=yw_guid%>",
         defaults: {
             anchor: '0'
@@ -176,43 +180,172 @@ Ext.onReady(function(){
                 fieldLabel: '项目名称',
                 readOnly:true
             },
-            combobox,
-    		comboboxS,
+			{
+   			 layout : "column", 
+           	 items:[{
+           	    columnWidth: .5, 
+           	  	layout : "form",   
+           	  	items :combobox},
+	            {
+	            columnWidth: .5, 
+           	  	layout : "form",
+           	  	items :comboboxS 
+            }]},
+   			{
+   			 layout : "column", 
+           	 items:[{
+           	    columnWidth: .33, 
+           	  	layout : "form",   
+           	  	items : [{
+	                xtype: 'textfield',
+	                id      : 'xmdl',
+	                value:'',
+	                fieldLabel: '项目地量',
+	                width :60
+	                }]},{
+           	    columnWidth: .33, 
+           	  	layout : "form",
+           	  	items : [{
+	                xtype: 'textfield',
+	                id      : 'dl',
+	                value:'',
+	                fieldLabel: '地量',
+	                 width :60
+	                }]}, 
+	                {
+           	    columnWidth: .33, 
+           	  	layout : "form",
+           	  	items : [{
+	                xtype: 'textfield',
+	                id      : 'dlbl',
+	                value:'',
+	                fieldLabel: '地量比例',
+	                  width : 60
+	                
+                }]
+            }]},
+   			{
+   			 layout : "column", 
+           	 items:[{
+           	    columnWidth: .33, 
+           	  	layout : "form",   
+           	  	items : [{
+	                xtype: 'textfield',
+	                id      : 'xmgm',
+	                value:'',
+	                fieldLabel: '项目规模',
+	                width :60
+	                }]},{
+           	    columnWidth: .33, 
+           	  	layout : "form",
+           	  	items : [{
+	                xtype: 'textfield',
+	                id      : 'gm',
+	                value:'',
+	                fieldLabel: '规模',
+	                 width :60
+	                }]}, 
+	                {
+           	    columnWidth: .33, 
+           	  	layout : "form",
+           	  	items : [{
+	                xtype: 'textfield',
+	                id      : 'gmbl',
+	                value:'',
+	                fieldLabel: '规模比例',
+	                  width : 60
+	                
+                }]
+            }]}, 
+   			{
+   			 layout : "column", 
+           	 items:[{
+           	    columnWidth: .33, 
+           	  	layout : "form",   
+           	  	items : [{
+	                xtype: 'textfield',
+	                id      : 'xmcb',
+	                value:'',
+	                fieldLabel: '项目成本',
+	                width :60
+	                }]},{
+           	    columnWidth: .33, 
+           	  	layout : "form",
+           	  	items : [{
+	                xtype: 'textfield',
+	                id      : 'cb',
+	                value:'',
+	                fieldLabel: '成本',
+	                 width :60
+	                }]}, 
+	                {
+           	    columnWidth: .33, 
+           	  	layout : "form",
+           	  	items : [{
+	                xtype: 'textfield',
+	                id      : 'cbbl',
+	                value:'',
+	                fieldLabel: '成本比例',
+	                  width : 60
+	                
+                }]
+            }]},
+   			{
+   			 layout : "column", 
+           	 items:[{
+           	    columnWidth: .33, 
+           	  	layout : "form",   
+           	  	items : [{
+	                xtype: 'textfield',
+	                id      : 'xmsy',
+	                value:'',
+	                fieldLabel: '项目收益',
+	                width :60
+	                }]},{
+           	    columnWidth: .33, 
+           	  	layout : "form",
+           	  	items : [{
+	                xtype: 'textfield',
+	                id      : 'sy',
+	                value:'',
+	                fieldLabel: '收益',
+	                 width :60
+	                }]}, 
+	                {
+           	    columnWidth: .33, 
+           	  	layout : "form",
+           	  	items : [{
+	                xtype: 'textfield',
+	                id      : 'sybl',
+	                value:'',
+	                fieldLabel: '收益比例',
+	                  width : 60
+	                
+                }]
+            }]},
             {
-                xtype     : 'textfield',
-           		id:'dl',
-                value:'',
-                fieldLabel: '地量'            
-            },
-             {
-                xtype: 'textfield',
-                id      : 'gm',
-                value:'',
-                fieldLabel: '规模'
-            }, 
-            {
-                xtype: 'textfield',
-                id      : 'cb',
-                value:'',
-                fieldLabel: '成本'
-            },{
-                xtype: 'textfield',
-                id      : 'sy',
-                value:'',
-                fieldLabel: '收益'
-            },
-            {
+   			 layout : "column", 
+           	 items:[{
+           	    columnWidth: .33, 
+           	  	layout : "form",   
+           	  	items :[     {
                 xtype: 'textfield',
                 id      : 'zj',
                 value:'',
-                fieldLabel: '总价'
-            },
-            {
+                fieldLabel: '总价',
+                 width : 60
+            }]},
+	            {
+	            columnWidth: .33, 
+           	  	layout : "form",
+           	  	items :[  {
                 xtype: 'textfield',
                 id      : 'zujin',
                 value:'',
-                fieldLabel: '租金'
-            }        
+                fieldLabel: '租金',
+                 width : 60
+          		  }]}
+            ]}          
         ],
         buttons: [
             {
@@ -245,8 +378,8 @@ Ext.onReady(function(){
    win2=new Ext.Window({
                 applyTo:'addWin',
                 title:'供地体量录入',
-                width:310,
-                height:330,
+                width:410,
+                height:280,
                 closeAction:'hide',
 				items:form2
     });
