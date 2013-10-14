@@ -112,7 +112,7 @@ public class Gdtl extends AbstractBaseBean {
      */
     public void query() {
         String xmbh = request.getParameter("xmbh");  
-        String sql="select xmmc,nd||jd as sx,dl,gm,cb,sy,zj,zuj as zujin,rownum-1 as mod,yw_guid as del,gdbh from hx_gdtl where xmguid=?";
+        String sql="select xmmc,nd||jd as sx,dl,gm,cb,sy,zj,zuj as zujin,rownum-1 as mod,yw_guid as del,yw_guid  as gdbh from hx_gdtl where xmguid=?";
         List<Map<String,Object>> list=query(sql,YW,new Object[]{xmbh});
         response(list);
     }
