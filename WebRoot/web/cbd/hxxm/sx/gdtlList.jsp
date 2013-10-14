@@ -54,10 +54,15 @@ Ext.onReady(function(){
            {name: 'XMMC'},
            {name: 'SX'},
            {name: 'DL'},
+           {name: 'DLZ'},
            {name: 'GM'},
+           {name: 'GMZ'},
            {name: 'CB'},
+           {name: 'CBZ'},
            {name: 'SY'},
+           {name: 'SYZ'},
            {name: 'ZJ'},
+           {name: 'ZJZ'},
            {name: 'ZUJIN'},
            {name: 'MOD'},
            {name: 'DEL'}
@@ -73,12 +78,17 @@ Ext.onReady(function(){
         sm:sm,
         columns: [
            {header: '项目名称', dataIndex:'XMMC', width: width*0.1, sortable: false},
-           {header: '时序', dataIndex:'SX', width: width*0.1, sortable: false},
-           {header: '地量', dataIndex:'DL', width: width*0.15, sortable: false},
+           {header: '时序', dataIndex:'SX', width: width*0.1, sortable: false,renderer:changKeyword},
+           {header: '地量', dataIndex:'DL', width: width*0.05, sortable: false},
+           {header: '地量%', dataIndex:'DLZ', width: width*0.05, sortable: false},
            {header: '规模', dataIndex:'GM',width: width*0.1, sortable: false},
-           {header: '成本', dataIndex:'CB',width: width*0.15, sortable: false},
-           {header: '收益', dataIndex:'SY',width: width*0.1, sortable: false},
-           {header: '总价', dataIndex:'ZJ',width: width*0.1, sortable: false},
+           {header: '规模%', dataIndex:'GMZ',width: width*0.05, sortable: false},
+           {header: '成本', dataIndex:'CB',width: width*0.1, sortable: false},
+           {header: '成本%', dataIndex:'GMZ',width: width*0.05, sortable: false},
+           {header: '收益', dataIndex:'SY',width: width*0.05, sortable: false},
+           {header: '收益%', dataIndex:'SYZ',width: width*0.05, sortable: false},
+           {header: '总价', dataIndex:'ZJ',width: width*0.05, sortable: false},
+           {header: '总价%', dataIndex:'ZJZ',width: width*0.05, sortable: false},
            {header: '租金', dataIndex:'ZJ',width: width*0.1, sortable: false},
            {header: '修改', dataIndex:'MOD',width: width*0.05, sortable: false, renderer: modify}, 
            {header: '删除',dataIndex:'DEL',width: width*0.05, sortable: false,renderer:del}
@@ -144,19 +154,20 @@ Ext.onReady(function(){
              });
       var combostoreS = new Ext.data.ArrayStore({
                 fields: ['id','name'],
-                 data: [[1,'第一季度'], [2,'第二季度'], [3,'第三季度'], [4,'第四季度']]
+                 data: [[1,'一月份'], [2,'二月份'], [3,'三月份'], [4,'四月份'], [5,'五月份'], [6,'六月份'], [7,'七月份'], [8,'八月份'], [9,'九月份'], [10,'十月份'], [11,'十一月份'], [12,'十二月份']]
              });
     var comboboxS = new Ext.form.ComboBox({
-                fieldLabel: '时序季度',
+       			 name     : 'month',
+                 fieldLabel: '时序月份',
                   width:120,
-                 id      : 'season',
                  store: combostoreS,
                  displayField: 'name',
-                 valueField: 'id',
+                 valueField: 'month',
+                 hiddenName:'month',
                  triggerAction: 'all',
-                 emptyText: '请选择季度...',
+                 emptyText: '请选择月份...',
                  allowBlank: false,
-                 blankText: '请选择季度',
+                 blankText: '请选择月份',
                  editable: false,
                  mode: 'local'
              });           
@@ -197,29 +208,33 @@ Ext.onReady(function(){
            	    columnWidth: .33, 
            	  	layout : "form",   
            	  	items : [{
-	                xtype: 'textfield',
+	                xtype: 'numberfield',
 	                id      : 'xmdl',
 	                value:'',
 	                fieldLabel: '项目地量',
+	                 readOnly:true,
 	                width :60
 	                }]},{
            	    columnWidth: .33, 
            	  	layout : "form",
            	  	items : [{
-	                xtype: 'textfield',
+	                xtype: 'numberfield',
 	                id      : 'dl',
 	                value:'',
 	                fieldLabel: '地量',
+	                 readOnly:true,
 	                 width :60
 	                }]}, 
 	                {
            	    columnWidth: .33, 
            	  	layout : "form",
            	  	items : [{
-	                xtype: 'textfield',
+	                xtype: 'numberfield',
 	                id      : 'dlbl',
 	                value:'',
-	                fieldLabel: '地量比例',
+	                minValue:0,
+	                maxValue:100,
+	                fieldLabel: '地量%',
 	                  width : 60
 	                
                 }]
@@ -230,31 +245,34 @@ Ext.onReady(function(){
            	    columnWidth: .33, 
            	  	layout : "form",   
            	  	items : [{
-	                xtype: 'textfield',
+	                xtype: 'numberfield',
 	                id      : 'xmgm',
 	                value:'',
 	                fieldLabel: '项目规模',
+	                 readOnly:true,
 	                width :60
 	                }]},{
            	    columnWidth: .33, 
            	  	layout : "form",
            	  	items : [{
-	                xtype: 'textfield',
+	                xtype: 'numberfield',
 	                id      : 'gm',
 	                value:'',
 	                fieldLabel: '规模',
+	                 readOnly:true,
 	                 width :60
 	                }]}, 
 	                {
            	    columnWidth: .33, 
            	  	layout : "form",
            	  	items : [{
-	                xtype: 'textfield',
+	                xtype: 'numberfield',
 	                id      : 'gmbl',
 	                value:'',
-	                fieldLabel: '规模比例',
-	                  width : 60
-	                
+	               	minValue:0,
+	                maxValue:100,
+	                fieldLabel: '规模%',
+	                width : 60
                 }]
             }]}, 
    			{
@@ -263,29 +281,34 @@ Ext.onReady(function(){
            	    columnWidth: .33, 
            	  	layout : "form",   
            	  	items : [{
-	                xtype: 'textfield',
-	                id      : 'xmcb',
+	                xtype: 'numberfield',
+	                id      : 'lmcb',
 	                value:'',
-	                fieldLabel: '项目成本',
+	                fieldLabel: '楼面成本',
+	                 readOnly:true,
 	                width :60
 	                }]},{
            	    columnWidth: .33, 
            	  	layout : "form",
            	  	items : [{
-	                xtype: 'textfield',
+	                xtype: 'numberfield',
 	                id      : 'cb',
 	                value:'',
 	                fieldLabel: '成本',
+	                   readOnly:true,
 	                 width :60
 	                }]}, 
 	                {
            	    columnWidth: .33, 
            	  	layout : "form",
            	  	items : [{
-	                xtype: 'textfield',
+	                xtype: 'numberfield',
 	                id      : 'cbbl',
 	                value:'',
-	                fieldLabel: '成本比例',
+	                minValue:0,
+	                maxValue:100,
+	                fieldLabel: '成本%',
+	                   readOnly:true,
 	                  width : 60
 	                
                 }]
@@ -296,56 +319,96 @@ Ext.onReady(function(){
            	    columnWidth: .33, 
            	  	layout : "form",   
            	  	items : [{
-	                xtype: 'textfield',
-	                id      : 'xmsy',
+	                xtype: 'numberfield',
+	                id      : 'cjj',
 	                value:'',
-	                fieldLabel: '项目收益',
+	                fieldLabel: '楼面成交价',
+	                readOnly:true,
 	                width :60
 	                }]},{
            	    columnWidth: .33, 
            	  	layout : "form",
            	  	items : [{
-	                xtype: 'textfield',
+	                xtype: 'numberfield',
 	                id      : 'sy',
 	                value:'',
 	                fieldLabel: '收益',
+	                   readOnly:true,
 	                 width :60
 	                }]}, 
 	                {
            	    columnWidth: .33, 
            	  	layout : "form",
            	  	items : [{
-	                xtype: 'textfield',
+	                xtype: 'numberfield',
 	                id      : 'sybl',
 	                value:'',
-	                fieldLabel: '收益比例',
+	                minValue:0,
+	                maxValue:100,
+	                fieldLabel: '收益%',
+	                  readOnly:true,
 	                  width : 60
 	                
                 }]
             }]},
             {
    			 layout : "column", 
-           	 items:[{
+           	 items:[
+	            {
+	            columnWidth: .33, 
+           	  	layout : "form",
+           	  	items :[  {
+                xtype: 'numberfield',
+                id      : 'zujin',
+                value:'',
+                fieldLabel: '租金',
+                 width : 60
+          		  }]},
+           	 {
            	    columnWidth: .33, 
            	  	layout : "form",   
            	  	items :[     {
-                xtype: 'textfield',
+                xtype: 'numberfield',
                 id      : 'zj',
                 value:'',
                 fieldLabel: '总价',
+                   readOnly:true,
                  width : 60
             }]},
 	            {
 	            columnWidth: .33, 
            	  	layout : "form",
            	  	items :[  {
-                xtype: 'textfield',
-                id      : 'zujin',
+                xtype: 'numberfield',
+                id      : 'zjbl',
                 value:'',
-                fieldLabel: '租金',
+                minValue:0,
+	            maxValue:100,
+                fieldLabel: '总价%',
+                   readOnly:true,
                  width : 60
           		  }]}
-            ]}          
+            ]},{
+   			 layout : "column", 
+           	 items:[{
+           	    columnWidth: .33, 
+           	  	layout : "form",   
+           	  	items : [{
+	                xtype: 'numberfield',
+	                id      : 'fwsj',
+	                value:'',
+	                fieldLabel: '房屋售价',
+	                readOnly:true,
+	                width :60
+	                }]}]
+              },{
+	                xtype: 'label',
+	                id      : 'sm',
+	                value:'',
+	                fieldLabel: '',
+	                html:'<div style="color:red">&nbsp&nbsp&nbsp&nbsp&nbsp地量:公顷&nbsp&nbsp&nbsp规模:万m2&nbsp&nbsp&nbsp成本收益:亿元&nbsp&nbsp&nbsp总价:万元/m2&nbsp&nbsp&nbsp租金:元/m2/天</div>',
+	                readOnly:true
+           		 }            
         ],
         buttons: [
             {
@@ -366,20 +429,43 @@ Ext.onReady(function(){
                 	}
             	},   
             {
-                text   : '重置',
+                text   : '关闭',
                 handler: function() {
-
-                  //Ext.getCmp('rwlx').reset();
+                     win2.hide();
                 }
             }
         ]
   });		
+  	 Ext.getCmp("dlbl").addListener('change',function(){   
+	 	Ext.getCmp("dl").setValue(Ext.getCmp("xmdl").getValue()*Ext.getCmp("dlbl").getValue()/100);
+	 });
+	Ext.getCmp("gmbl").addListener('change',function(){   
+	 	Ext.getCmp("gm").setValue(Ext.getCmp("xmgm").getValue()*Ext.getCmp("gmbl").getValue()/100);
+	 	Ext.getCmp("cb").setValue(Ext.getCmp("gm").getValue()*Ext.getCmp("lmcb").getValue());
+	 	Ext.getCmp("cbbl").setValue(Ext.getCmp("gmbl").getValue());
+	 	Ext.getCmp("sybl").setValue(Ext.getCmp("gmbl").getValue());
+	 	Ext.getCmp("zjbl").setValue(Ext.getCmp("gmbl").getValue());
+	 });
+  
+    putClientCommond("hxxmManager","getXmmc");
+    putRestParameter("xmbh",'<%=yw_guid%>')
+	var info = restRequest();
+	if(info[0]!=null){
+	  Ext.getCmp("xmdl").setValue(info[0].ZD);
+	  Ext.getCmp("xmgm").setValue(info[0].GM);
+	  Ext.getCmp("lmcb").setValue(info[0].LMCB);
+	  Ext.getCmp("zujin").setValue(info[0].ZJ); 
+	  Ext.getCmp("cjj").setValue(info[0].LMCJJ);
+	  Ext.getCmp("fwsj").setValue(info[0].FWSJ); 
+	  Ext.getCmp("sy").setValue(Ext.getCmp("cjj").getValue()-Ext.getCmp("lmcb").getValue()); 
+	  Ext.getCmp("zj").setValue(info[0].ZJ);   	 
+    }
   
    win2=new Ext.Window({
                 applyTo:'addWin',
                 title:'供地体量录入',
                 width:410,
-                height:280,
+                height:320,
                 closeAction:'hide',
 				items:form2
     });
@@ -394,20 +480,18 @@ Ext.onReady(function(){
   win2.show();
  }
 
-function modifyConten(id){
+function modifyContent(id){
     //初始化数据
     var sinData=myData[id];
     Ext.getCmp("year").setValue(sinData.SX.split('-')[0]);
-    win2.items.items[0].form.findField('season').setValue(sinData.SX.split('-')[1]);
-
-    
+    win2.items.items[0].form.findField('month').setValue(sinData.YF.split('-')[1]);
     win2.items.items[0].form.url='<%=basePath%>service/rest/hxxmManager/updateKftl?xmbh=<%=yw_guid%>&&gdbh='+sinData.GDBH;
     win2.setTitle("开发体量修改")
     win2.show();
 }
 
 function modify(id){
- return "<span style='cursor:pointer;' onclick='modifyConten(\""+id+"\")'><img src='base/form/images/conf.png' alt='修改'/></span>";
+ return "<span style='cursor:pointer;' onclick='modifyContent(\""+id+"\")'><img src='base/form/images/conf.png' alt='修改'/></span>";
 }
 function del(id){
  	return "<span href='#' onclick='delTask("+id+");return false;'><img src='base/form/images/delete.png' alt='删除'></span>";
@@ -417,8 +501,8 @@ function delTask(id){
 	Ext.MessageBox.confirm('注意', '删除后不能恢复，您确定吗？',function(btn){
 	  if(btn=='yes'){
 	    var path = "<%=basePath%>";
-	    putClientCommond("padDataManager","delData");
-	    putRestParameter("yw_guid",myData[id].GUID)
+	    putClientCommond("hxxmManager","delGdtl");
+	    putRestParameter("gdbh",myData[id].GDBH)
         var mes = restRequest(); 
    		if(mes.success){
           query();
@@ -444,10 +528,15 @@ function query(){
            {name: 'XMMC'},
            {name: 'SX'},
            {name: 'DL'},
+           {name: 'DLZ'},
            {name: 'GM'},
+           {name: 'GMZ'},
            {name: 'CB'},
+           {name: 'CBZ'},
            {name: 'SY'},
+           {name: 'SYZ'},
            {name: 'ZJ'},
+           {name: 'ZJZ'},
            {name: 'ZUJIN'},
            {name: 'MOD'},
            {name: 'DEL'}
@@ -455,12 +544,17 @@ function query(){
     });
     grid.reconfigure(store, new Ext.grid.ColumnModel([
            {header: '项目名称', dataIndex:'XMMC', width: width*0.1, sortable: false},
-           {header: '时序', dataIndex:'SX', width: width*0.1, sortable: false},
-           {header: '地量', dataIndex:'DL', width: width*0.15, sortable: false},
+           {header: '时序', dataIndex:'SX', width: width*0.1, sortable: false,renderer:changKeyword},
+           {header: '地量', dataIndex:'DL', width: width*0.05, sortable: false},
+           {header: '地量%', dataIndex:'DLZ', width: width*0.05, sortable: false},
            {header: '规模', dataIndex:'GM',width: width*0.1, sortable: false},
-           {header: '成本', dataIndex:'CB',width: width*0.15, sortable: false},
-           {header: '收益', dataIndex:'SY',width: width*0.1, sortable: false},
-           {header: '总价', dataIndex:'ZJ',width: width*0.1, sortable: false},
+           {header: '规模%', dataIndex:'GMZ',width: width*0.05, sortable: false},
+           {header: '成本', dataIndex:'CB',width: width*0.1, sortable: false},
+           {header: '成本%', dataIndex:'GMZ',width: width*0.05, sortable: false},
+           {header: '收益', dataIndex:'SY',width: width*0.05, sortable: false},
+           {header: '收益%', dataIndex:'SYZ',width: width*0.05, sortable: false},
+           {header: '总价', dataIndex:'ZJ',width: width*0.05, sortable: false},
+           {header: '总价%', dataIndex:'ZJZ',width: width*0.05, sortable: false},
            {header: '租金', dataIndex:'ZJ',width: width*0.1, sortable: false},
            {header: '修改', dataIndex:'MOD',width: width*0.05, sortable: false, renderer: modify}, 
            {header: '删除',dataIndex:'DEL',width: width*0.05, sortable: false,renderer:del}

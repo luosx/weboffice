@@ -267,7 +267,7 @@ Ext.onReady(function(){
 	                value:'',
 	                fieldLabel: '地量',
 	                readOnly:true,
-	                 width :60
+	                width :60
 	                }]}, 
 	                {
            	    columnWidth: .33, 
