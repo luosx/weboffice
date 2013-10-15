@@ -69,7 +69,7 @@ font-size:0px;
 	//页面初始化
 	function onInit(){
 		//获取基础数据
-		putClientCommond("jcsjHandler", "getjcsjList");
+		putClientCommond("projectManager", "getjcsjList");
 		baseInformation = restRequest();
 		baseInformation = eval(baseInformation);
 		
@@ -157,11 +157,6 @@ font-size:0px;
 		yw_guid = restRequest();
 		yw_guid = eval(yw_guid);
 		yw_guid = yw_guid[0].YW_GUID;
-		//var url = "/domain/web/cbd/cbxmjbsj/jbxmxxlr.jsp?yw_guid=" + yw_guid;
-		//var feature="dialogWidth:800px;dialogHeight:560px;status:no;help:no";  
-		//window.showModalDialog(url,null,feature); 
-		//window.open(url);
-		//window.location.reload();
 		window.location.href = "/domain/web/cbd/hxxm/jcsj/hxxmTree.jsp?zfjcType=1&yw_guid="+yw_guid+"&returnPath=" + window.location.href;
 	}
 	
@@ -276,7 +271,6 @@ if (document.all&&!window.print){
 	setTimeout("window.onresize=regenerate",400)
 	}
 	if ((document.all&&!window.print)||document.layers)
-	//if the user is using IE 4 or NS 4, both NOT IE 5+
 	window.onload=regenerate2
 
 </script>
