@@ -44,11 +44,11 @@ public class Kftl extends AbstractBaseBean {
         String cj = request.getParameter("cj");
         String season = getSeason(month);
         //删除已存在同月信息
-        String sql="delete from hx_kftl where nd=? and yf=? and xmguid=?";
-        update(sql, YW, new Object[]{year,month,xmbh});
+        String sql = "delete from hx_kftl where nd=? and yf=? and xmguid=?";
+        update(sql, YW, new Object[] { year, month, xmbh });
         sql = "insert into hx_kftl(xmmc,nd,jd,hs,dl,gm,tz,zhu,qi,lm,cj,xmguid,yf,hsz,dlz,gmz,tzz,zhuz,qiz) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         int flag = update(sql, YW, new Object[] { xmmc, year, season, hs, dl, gm, tz, z, q, lm, cj, xmbh,
-                month,hsz,dlz,gmz,tzz,zhuz,qiz });
+                month, hsz, dlz, gmz, tzz, zhuz, qiz });
         if (flag == 1) {
             insertToSx(year, season, xmbh);
         }
@@ -97,11 +97,12 @@ public class Kftl extends AbstractBaseBean {
             if (oldYear.equals(year) && oldSeason.equals(season)) {
 
             } else {
-                seasonChange=judgeCount(year,season,xmbh);
+                seasonChange = judgeCount(year, season, xmbh);
             }
         }
         sql = "update hx_kftl set nd=?,jd=?,hs=?,dl=?,gm=?,tz=?,zhu=?,qi=?,hsz=?,dlz=?,gmz=?,tzz=?,zhuz=?,qiz=?,lm=?,cj=?,yf=? where yw_guid=?";
-        int flag = update(sql, YW, new Object[] { year, season, hs, dl, gm, tz, z, q,hsz,dlz,gmz,tzz,zhuz,qiz, lm, cj,month, kfbh});
+        int flag = update(sql, YW, new Object[] { year, season, hs, dl, gm, tz, z, q, hsz, dlz, gmz, tzz,
+                zhuz, qiz, lm, cj, month, kfbh });
         if (flag == 0) {
             response("{success:false}");
         } else {
@@ -123,20 +124,20 @@ public class Kftl extends AbstractBaseBean {
      */
     public void delete() {
         String kfbh = request.getParameter("kfbh");
-        String sql="select nd,jd,xmguid from hx_kftl where yw_guid=?";
-        List<Map<String,Object>> list=query(sql,YW,new Object[]{kfbh});
-        if(list.size()>0){
-            Map<String,Object> map=list.get(0);
-            String nd=map.get("nd").toString();
-            String jd=map.get("jd").toString();
-            String xmbh=map.get("xmbh").toString();
+        String sql = "select nd,jd,xmguid from hx_kftl where yw_guid=?";
+        List<Map<String, Object>> list = query(sql, YW, new Object[] { kfbh });
+        if (list.size() > 0) {
+            Map<String, Object> map = list.get(0);
+            String nd = map.get("nd").toString();
+            String jd = map.get("jd").toString();
+            String xmbh = map.get("xmguid").toString();
+            boolean isSingle = judgeCount(nd, jd, xmbh);
             sql = "delete from hx_kftl where yw_guid=?";
             int flag = update(sql, YW, new Object[] { kfbh });
             if (flag == 0) {
                 response("{success:false}");
             } else {
-                boolean isSingle=judgeCount(nd, jd, xmbh);
-                if(isSingle){
+                if (isSingle) {
                     removeFromSx(nd, jd, xmbh);
                 }
                 response("{success:true}");
@@ -153,11 +154,11 @@ public class Kftl extends AbstractBaseBean {
      */
     public void query() {
         String xmbh = request.getParameter("xmbh");
-        String keyWord=request.getParameter("keyWord");
+        String keyWord = request.getParameter("keyWord");
         String sql = "select xmmc,nd||'-'||yf as sx,dl,hs,gm,tz,zhu as z,qi as q,lm,cj,rownum-1 as mod,rownum-1 as del,yw_guid  as kfbh,hsz,dlz,gmz,tzz,zhuz,qiz,yf from hx_kftl where xmguid=?";
         if (keyWord != null) {
             keyWord = UtilFactory.getStrUtil().unescape(keyWord);
-            sql+=" and nd||'-'||yf like '%"+keyWord+"%'";
+            sql += " and nd||'-'||yf like '%" + keyWord + "%'";
         }
         List<Map<String, Object>> list = query(sql, YW, new Object[] { xmbh });
         response(list);
@@ -199,10 +200,11 @@ public class Kftl extends AbstractBaseBean {
         String sql = "select kftl from hx_sx where nd=? and jd=?";
         List<Map<String, Object>> list = query(sql, YW, new Object[] { nd, jd });
         if (list.size() > 0) {
-            String kftls = list.get(0).get("kftl").toString();
+            Object obj = list.get(0).get("kftl");
+            String kftls = obj == null ? "" : obj.toString();
             if (kftls.indexOf(xmbh) < 0) {
                 StringBuffer sb = new StringBuffer(kftls);
-                sql = "update hx_sx set kftl =? where nd=?,jd=?";
+                sql = "update hx_sx set kftl =? where nd=? and jd=?";
                 if (sb.length() > 0) {
                     sb.append(",").append(xmbh);
                 } else {
@@ -228,11 +230,14 @@ public class Kftl extends AbstractBaseBean {
     private void removeFromSx(String nd, String jd, String xmbh) {
         String sql = "select kftl from hx_sx where nd=? and jd=?";
         List<Map<String, Object>> listKftl = query(sql, YW, new Object[] { nd, jd });
-        String kftls = listKftl.get(0).get("kftl").toString();
-        if (kftls.indexOf(xmbh) >= 0) {
-            kftls = kftls.replace(xmbh + ",", "").replace(xmbh, "");
-            sql = "update hx_sssx set kftl =? where nd=?,jd=?";
-            update(sql, YW, new Object[] { kftls, nd, jd });
+        if (listKftl.size() > 0) {
+            Object obj = listKftl.get(0).get("kftl");
+            String kftls = obj == null ? "" : obj.toString();
+            if (kftls.indexOf(xmbh) >= 0) {
+                kftls = kftls.replace(xmbh + ",", "").replace(xmbh, "");
+                sql = "update hx_sx set kftl =? where nd=? and jd=?";
+                update(sql, YW, new Object[] { kftls, nd, jd });
+            }
         }
     }
 
