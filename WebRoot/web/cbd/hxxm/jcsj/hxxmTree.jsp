@@ -85,6 +85,15 @@ html,body {
 	tree.on('click', function(n){
 		var str = n.attributes.src;	
     	if(n.attributes.src!=null){
+    	    if(str.indexOf("kftlList")>0||str.indexOf("gdtlList")>0){
+    	       putClientCommond("hxxmManager","getXmmc");
+    		   putRestParameter("xmbh",'<%=yw_guid%>')
+	           var info = restRequest(); 
+	           if(info[0]==null){
+    	        Ext.Msg.alert("提示","请先录入项目基本信息");
+    	        return;
+    	       }
+    	    }
     		frames['center'].location='<%=basePath%>'+n.attributes.src + "?yw_guid=<%=yw_guid%>";	
      	}
     });
