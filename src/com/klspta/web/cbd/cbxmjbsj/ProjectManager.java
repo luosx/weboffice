@@ -99,7 +99,7 @@ public class ProjectManager extends AbstractBaseBean {
 		String[] strvalues = values.split(",");
 		if(yw_guid == null || "null".equals(yw_guid)){
 			yw_guid= UtilFactory.getStrUtil().getGuid();
-			String insertSql = "insert into hx_jcsj(yw_guid,xmname) values(?,?)";
+			String insertSql = "insert into JC_XIANGMU(yw_guid,xmname) values(?,?)";
 			update(insertSql, YW, new Object[]{yw_guid,xmname});
 		}
 		addDkProjectMap(yw_guid,strvalues);
@@ -118,10 +118,10 @@ public class ProjectManager extends AbstractBaseBean {
 		//更新重新确定项目、地块关系后的项目表
 		String sqlupd = null;
 		if(values.length == 1 && "".equals(values[0])){
-			sqlupd = "update hx_jcsj t set t.zd = '',t.gm = '',t.hs = '',t.cb = '',t.zzcqfy = '',t.qycqfy = '',t.qtfy = '',t.azftzcb = '',t.zzhbtzcb = '',t.cqhbtz = '',t.qtfyzb = '',t.lmcb = '',t.lmcjj = '',t.fwsj = '',t.zj = '',t.pgtdjz = '',t.tyl = '',t.rzss = ''where t.yw_guid = ?";
+			sqlupd = "update JC_XIANGMU t set t.zd = '',t.gm = '',t.hs = '',t.cb = '',t.zzcqfy = '',t.qycqfy = '',t.qtfy = '',t.azftzcb = '',t.zzhbtzcb = '',t.cqhbtz = '',t.qtfyzb = '',t.lmcb = '',t.lmcjj = '',t.fwsj = '',t.zj = '',t.pgtdjz = '',t.tyl = '',t.rzss = ''where t.yw_guid = ?";
 			update(sqlupd,YW,new Object[]{projectid});
 		}else{
-			sqlupd = "update hx_jcsj x"+
+			sqlupd = "update JC_XIANGMU x"+
 						" set (x.zd,x.gm,x.hs,x.cb) = (select sum(t.ghzd),sum(t.ghjzgm),sum(t.cqzzzshs),sum(t.cbsykfcb) from HX_DKSJ t where x.yw_guid = t.projectid)"+
 						" where x.yw_guid in(select projectid from HX_DKSJ)";
 			update(sqlupd,YW);
@@ -138,7 +138,7 @@ public class ProjectManager extends AbstractBaseBean {
 	 */
 	public void getYw_guidbymc() throws UnsupportedEncodingException{
 		String xmmc = new String(request.getParameter("xmmc").getBytes("iso-8859-1"), "utf-8");
-		String sql = "select t.yw_guid from hx_jcsj t where t.xmname=?";
+		String sql = "select t.yw_guid from JC_XIANGMU t where t.xmname=?";
 		List<Map<String, Object>> returnList = query(sql, YW, new Object[]{xmmc});
 		response(returnList);
 	}
@@ -150,7 +150,7 @@ public class ProjectManager extends AbstractBaseBean {
 	 * <br>Date:2013-8-21
 	 */
 	public void getjcsjList(){
-		String sql = "select t.* from hx_jcsj t";
+		String sql = "select t.* from JC_XIANGMU t";
 		List<Map<String, Object>> projectList = query(sql, YW);
 		response(projectList);
 	}
@@ -162,7 +162,7 @@ public class ProjectManager extends AbstractBaseBean {
 	 * <br>Date:2013-8-21
 	 */
 	public void getProjectList(){
-		String sql = "select t.* from hx_jcsj t where t.xmname=?";
+		String sql = "select t.* from JC_XIANGMU t where t.xmname=?";
 		String xmmc = "";
 		try {
 			xmmc = new String(request.getParameter("xmmc").getBytes("iso-8859-1"),"UTF-8");
@@ -184,7 +184,7 @@ public class ProjectManager extends AbstractBaseBean {
 	public void deleteProject(){
 		String yw_guid = request.getParameter("yw_guid");
 		String[] forms = new String[]{"HX_GDTL","HX_KFTL"};
-		String deleteSql = "delete hx_jcsj t where t.yw_guid = ?";
+		String deleteSql = "delete JC_XIANGMU t where t.yw_guid = ?";
 		update(deleteSql, YW, new Object[]{yw_guid});
 		for(int i = 0; i < forms.length; i++){
 			String sql = "delete " + forms[i] + " t where t.xmguid = ?" ;
