@@ -1,14 +1,9 @@
 ﻿<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<%@page import="org.springframework.security.core.context.SecurityContextHolder"%>
-<%@page import="com.klspta.console.user.User"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
-    Object userprincipal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-    String userid = ((User)userprincipal).getUserID();
-    String flag = request.getParameter("flag");
     String yw_guid= request.getParameter("yw_guid").toString();
 %>
 
