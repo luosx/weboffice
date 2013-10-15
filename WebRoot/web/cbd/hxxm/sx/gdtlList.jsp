@@ -153,7 +153,7 @@ Ext.onReady(function(){
                  mode: 'local'
              });
       var combostoreS = new Ext.data.ArrayStore({
-                fields: ['id','name'],
+                fields: ['month','name'],
                  data: [[1,'一月份'], [2,'二月份'], [3,'三月份'], [4,'四月份'], [5,'五月份'], [6,'六月份'], [7,'七月份'], [8,'八月份'], [9,'九月份'], [10,'十月份'], [11,'十一月份'], [12,'十二月份']]
              });
     var comboboxS = new Ext.form.ComboBox({
@@ -354,16 +354,19 @@ Ext.onReady(function(){
             {
    			 layout : "column", 
            	 items:[
-	            {
-	            columnWidth: .33, 
-           	  	layout : "form",
-           	  	items :[  {
-                xtype: 'numberfield',
-                id      : 'zujin',
-                value:'',
-                fieldLabel: '租金',
-                 width : 60
-          		  }]},
+           	 {  
+           	 columnWidth: .33, 
+           	  	layout : "form",   
+           	  	items :[  
+           	  	{
+	                xtype: 'numberfield',
+	                id      : 'fwsj',
+	                value:'',
+	                fieldLabel: '房屋售价',
+	                readOnly:true,
+	                width :60
+	                }]}
+	            ,
            	 {
            	    columnWidth: .33, 
            	  	layout : "form",   
@@ -391,22 +394,30 @@ Ext.onReady(function(){
             ]},{
    			 layout : "column", 
            	 items:[{
-           	    columnWidth: .33, 
-           	  	layout : "form",   
-           	  	items : [{
-	                xtype: 'numberfield',
-	                id      : 'fwsj',
-	                value:'',
-	                fieldLabel: '房屋售价',
-	                readOnly:true,
-	                width :60
-	                }]}]
+	            columnWidth: .33, 
+           	  	layout : "form",
+           	  	items :[  {
+                xtype: 'numberfield',
+                id      : 'xmzujin',
+                value:'',
+                fieldLabel: '项目租金',
+                 width : 60
+          		  }]},{
+	            columnWidth: .33, 
+           	  	layout : "form",
+           	  	items :[{
+                xtype: 'numberfield',
+                id      : 'zujin',
+                value:'',
+                fieldLabel: '租金',
+                 width : 60
+          		  }]}]
               },{
 	                xtype: 'label',
 	                id      : 'sm',
 	                value:'',
 	                fieldLabel: '',
-	                html:'<div style="color:red">&nbsp&nbsp&nbsp&nbsp&nbsp地量:公顷&nbsp&nbsp&nbsp规模:万m2&nbsp&nbsp&nbsp成本收益:亿元&nbsp&nbsp&nbsp总价:万元/m2&nbsp&nbsp&nbsp租金:元/m2/天</div>',
+	                html:'<div style="color:red">&nbsp&nbsp地量:公顷&nbsp&nbsp规模:万m2&nbsp&nbsp成本收益:亿元&nbsp&nbsp&nbsp总价:万元/m2&nbsp&nbsp&nbsp租金:元/m2/天</div>',
 	                readOnly:true
            		 }            
         ],
@@ -418,7 +429,7 @@ Ext.onReady(function(){
 							waitMsg: '正在保存,请稍候... ', 		
 							success:function(){ 
 							 Ext.Msg.alert('提示','保存成功。',function(){
-							  document.location.reload();
+							   query();
 							 });
 							
 							}, 
@@ -455,17 +466,18 @@ Ext.onReady(function(){
 	  Ext.getCmp("xmgm").setValue(info[0].GM);
 	  Ext.getCmp("lmcb").setValue(info[0].LMCB);
 	  Ext.getCmp("zujin").setValue(info[0].ZJ); 
+	  Ext.getCmp("xmzujin").setValue(info[0].ZJ); 
 	  Ext.getCmp("cjj").setValue(info[0].LMCJJ);
 	  Ext.getCmp("fwsj").setValue(info[0].FWSJ); 
 	  Ext.getCmp("sy").setValue(Ext.getCmp("cjj").getValue()-Ext.getCmp("lmcb").getValue()); 
-	  Ext.getCmp("zj").setValue(info[0].ZJ);   	 
+	  Ext.getCmp("zj").setValue(info[0].FWSJ);   	 
     }
   
    win2=new Ext.Window({
                 applyTo:'addWin',
                 title:'供地体量录入',
                 width:410,
-                height:320,
+                height:330,
                 closeAction:'hide',
 				items:form2
     });
@@ -484,9 +496,17 @@ function modifyContent(id){
     //初始化数据
     var sinData=myData[id];
     Ext.getCmp("year").setValue(sinData.SX.split('-')[0]);
-    win2.items.items[0].form.findField('month').setValue(sinData.YF.split('-')[1]);
-    win2.items.items[0].form.url='<%=basePath%>service/rest/hxxmManager/updateKftl?xmbh=<%=yw_guid%>&&gdbh='+sinData.GDBH;
-    win2.setTitle("开发体量修改")
+    win2.items.items[0].form.findField('month').setValue(sinData.YF);
+    Ext.getCmp("dl").setValue(sinData.DL);
+    Ext.getCmp("dlbl").setValue(sinData.DLZ);
+    Ext.getCmp("gm").setValue(sinData.GM);
+    Ext.getCmp("gmbl").setValue(sinData.GMZ);
+    Ext.getCmp("cb").setValue(sinData.CB);
+    Ext.getCmp("cbbl").setValue(sinData.CBZ);
+    Ext.getCmp("sybl").setValue(sinData.SYZ);
+    Ext.getCmp("zjbl").setValue(sinData.ZJZ);
+    win2.items.items[0].form.url='<%=basePath%>service/rest/hxxmManager/updateGdtl?xmbh=<%=yw_guid%>&&gdbh='+sinData.GDBH;
+    win2.setTitle("供地体量修改")
     win2.show();
 }
 
@@ -505,9 +525,11 @@ function delTask(id){
 	    putRestParameter("gdbh",myData[id].GDBH)
         var mes = restRequest(); 
    		if(mes.success){
-          query();
-        }
+           query();
         }else{
+        Ext.MessageBox.alert("提示","删除失败");
+        }
+      }else{
 			return false;
 		}
 	});
@@ -522,7 +544,7 @@ function query(){
     myData = restRequest(); 
     var width=document.body.clientWidth;
 	 store = new Ext.data.JsonStore({
-     proxy: new Ext.ux.data.PagingMemoryProxy(myData1),
+     proxy: new Ext.ux.data.PagingMemoryProxy(myData),
 		remoteSort:true,
         fields: [
            {name: 'XMMC'},
