@@ -106,7 +106,7 @@ Ext.onReady(function(){
 	    		 	 {xtype:'label',text:'快速查找:',width:60},
 	    			 {xtype:'textfield',id:'keyword',width:240,emptyText:'请输入查询字段'},
 	    			 {xtype: 'button',id:'button',text:'查询',handler: query},
-	    			  {xtype:'button',text:'新增开发体量',width:60,handler: addTask}
+	    			 {xtype:'button',text:'新增开发体量',width:60,handler: addTask}
 	    ],
         stripeRows: true,
         listeners:{
@@ -556,7 +556,7 @@ function modifyContent(id){
     //初始化数据
     var sinData=myData[id];
     Ext.getCmp("year").setValue(sinData.SX.split('-')[0]);
-    win2.items.items[0].form.findField('month').setValue(sinData.SX.split('-')[1]);
+    win2.items.items[0].form.findField('month').setValue(sinData.YF);
     Ext.getCmp("hs").setValue(sinData.HS);
     Ext.getCmp("dl").setValue(sinData.DL);
     Ext.getCmp("gm").setValue(sinData.GM);
