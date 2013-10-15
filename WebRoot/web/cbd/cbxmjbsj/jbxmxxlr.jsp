@@ -15,7 +15,7 @@ String notSelectDkInfo = projectManager.getDkInfoArrayJsonByProjectID();
   <head>
     <base href="<%=basePath%>">
     
-    <title>基本项目信息录入</title>
+    <title>项目基本信息录入</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -23,7 +23,6 @@ String notSelectDkInfo = projectManager.getDkInfoArrayJsonByProjectID();
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	
 	<%@ include file="/base/include/newformbase.jspf"%>
 	<script type="text/javascript" src="<%=extPath%>examples/ux/MultiSelect.js"></script>
 	<script type="text/javascript" src="<%=extPath%>examples/ux/ItemSelector.js"></script>
