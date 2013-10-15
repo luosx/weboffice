@@ -25,7 +25,7 @@ public class HxxmManager extends AbstractBaseBean {
      */
     public void getXmmc(){
         String xmbh=request.getParameter("xmbh").toString();
-        String sql="select xmname,zd,hs,gm,zzcqfy,qycqfy,cqhbtz,lmcb,lmcjj from jc_xiangmu where yw_guid=?";
+        String sql="select xmname,zd,hs,gm,zzcqfy,qycqfy,cqhbtz,lmcb,lmcjj,zj,lmcjj,fwsj from jc_xiangmu where yw_guid=?";
         List<Map<String,Object>> list=query(sql,YW,new Object[]{xmbh});
         response(list);
     }
