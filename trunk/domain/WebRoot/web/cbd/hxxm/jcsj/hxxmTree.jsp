@@ -31,6 +31,7 @@
 		<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 		<meta http-equiv="description" content="This is my page">
 		<%@ include file="/base/include/ext.jspf"%>
+		<%@ include file="/base/include/restRequest.jspf" %>
 		<style>
 html,body {
 	font: normal 12px verdana;
@@ -110,6 +111,18 @@ html,body {
 	function returnPage(){
 		window.location.href = "<%=returnPath%>" ;
 	}
+	
+	//删除当前项目
+	function deletePage(){
+		Ext.MessageBox.confirm("确认","当前项目将被删除，确定?", function(id){
+			if(id == "yes"){
+				putClientCommond("projectManager", "deleteProject");
+				putRestParameter("yw_guid", "<%=yw_guid%>");
+				restRequest();
+				window.location.href = "<%=returnPath%>" ;
+			};
+		});
+	}
 </script>
 
 	</head>
@@ -117,6 +130,7 @@ html,body {
 		<iframe id="center" name="center" style="width: 100%; height: 100%;" src=""></iframe>
 		<div style="width:75px;height:25px; position:absolute; right:20px; top:10px; background:#E2EAF3; filter:alpha(opacity=100);">
 			<input type="button" onClick="returnPage();return false;" style="width:75px; height:25px;" value="返  回" />
+			<input type="button" onClick="deletePage();return false;" style="width:75px; height:25px;" value="删  除" />
 		</div>
 	</body>
 </html>
