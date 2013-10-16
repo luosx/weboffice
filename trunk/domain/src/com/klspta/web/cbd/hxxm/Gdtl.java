@@ -17,6 +17,21 @@ import com.klspta.base.util.UtilFactory;
  */
 @Component
 public class Gdtl extends AbstractBaseBean {
+    
+    /**
+     * 评估土地价值
+     */
+    private double pgtdjz=2;
+    /**
+     * 抵押率
+     */
+    private double dyl=0.2;
+     /**
+      * 融资损失
+      */
+    private double rzss=0;
+    
+    
     /**
      * 
      * <br>Description:新增供地体量
@@ -47,6 +62,7 @@ public class Gdtl extends AbstractBaseBean {
         int flag = update(sql, YW, new Object[] { xmmc, year, season, dl, gm, cb, sy, zj, zujin,xmbh,month,dlz,gmz,cbz,syz,zjz});
         if (flag == 1) {
             insertToSx(year, season, xmbh);
+            updateTj(year, season);
         }
         if (flag == 0) {
             response("{success:false}");
@@ -80,8 +96,8 @@ public class Gdtl extends AbstractBaseBean {
         String sql = "select nd,jd from hx_gdtl where yw_guid=?";
         List<Map<String, Object>> list = query(sql, YW, new Object[] { gdbh });
         boolean seasonChange = false;
-        String oldYear;
-        String oldSeason;
+        String oldYear="";
+        String oldSeason="";
         if (list.size() > 0) {
             Map<String, Object> map = list.get(0);
             oldYear = map.get("nd").toString();
@@ -99,10 +115,12 @@ public class Gdtl extends AbstractBaseBean {
         } else {
             if (seasonChange) {
                 //删除旧的时序关联
-                removeFromSx(year, season, gdbh);
+                removeFromSx(oldYear, oldSeason, gdbh);
                 //插入新的时序关联
                 insertToSx(year, season, gdbh);
+                updateTj(oldYear, oldSeason);           
             }
+            updateTj(year, season);
             response("{success:true}");
         }
     }
@@ -131,6 +149,7 @@ public class Gdtl extends AbstractBaseBean {
                 if(isSingle){
                     removeFromSx(nd, jd, xmbh);
                 }
+                updateTj(nd,jd);
                 response("{success:true}");
             }
         }
@@ -249,5 +268,53 @@ public class Gdtl extends AbstractBaseBean {
             return true;
         }
         return false;
+    }
+    
+    
+    /**
+     * 
+     * <br>Description:根据年度季度更新相应的供地体量统计
+     * <br>Author:陈强峰
+     * <br>Date:2013-10-16
+     * @param nd
+     * @param jd
+     */
+    private void updateTj(String nd, String jd){
+      String sql="select sum(dl) as gydl,sum(gm) as gygm  from hx_gdtl t where  nd=? and jd=? ";
+      List<Map<String,Object>> list=query(sql,YW,new Object[]{nd,jd});
+      if(list.size()>0){
+          Map<String,Object> map=list.get(0);
+          Object gytd=map.get("gydl");
+          Object gygm=map.get("gygm");
+          String lastNd=nd;
+          String lastJd=jd;
+          if(jd.indexOf("1")==0){
+              lastNd=Integer.parseInt(nd)-1+"";
+              lastJd="4";
+          }else{
+              lastJd=Integer.parseInt(jd)-1+"";
+          }
+        //获取上季度的储备库库存
+          sql="select cbkkc fom hx_sx where nd=? and jd=?";
+          List<Map<String,Object>> lastSeasonList=query(sql,YW,new Object[]{lastNd,lastJd});
+          double lastCbkkc=0;
+          if(lastSeasonList.size()>0){
+              Object obj=lastSeasonList.get(0).get("cbkkc");
+              lastCbkkc=obj==null?0:Double.parseDouble(obj.toString());
+          }
+          //获取本季度的完成开发规模
+          sql="select wckfgm from hx_sx where nd=? and jd=?";
+          List<Map<String,Object>> seasonList=query(sql,YW,new Object[]{lastNd,lastJd});
+          double wckfgm=0;
+          if(seasonList.size()>0){
+              Object obj=lastSeasonList.get(0).get("wckfgm");
+              wckfgm=obj==null?0:Double.parseDouble(obj.toString());
+          }
+          //更新储备库库存
+          double cbkkc=lastCbkkc+wckfgm-Double.parseDouble(gygm.toString());
+          double cbkrznl=cbkkc*pgtdjz*dyl*(1-rzss);
+          sql="update hx_sx set gytd=?,gygm=?,cbkkc=?,cbkrznl=? where nd=?,jd=?";
+          update(sql,YW,new Object[]{gytd,gygm,String.valueOf(cbkkc),String.valueOf(cbkrznl),nd,jd});
+      }
     }
 }
