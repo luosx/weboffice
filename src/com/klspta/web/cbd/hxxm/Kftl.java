@@ -17,6 +17,21 @@ import com.klspta.base.util.UtilFactory;
  */
 @Component
 public class Kftl extends AbstractBaseBean {
+    
+    /**
+     * 评估土地价值
+     */
+    private double pgtdjz=2;
+    /**
+     * 抵押率
+     */
+    private double dyl=0.2;
+     /**
+      * 融资损失
+      */
+    private double rzss=0;
+    
+    
     /**
      * 
      * <br>Description:新增开发体量
@@ -51,6 +66,7 @@ public class Kftl extends AbstractBaseBean {
                 month, hsz, dlz, gmz, tzz, zhuz, qiz });
         if (flag == 1) {
             insertToSx(year, season, xmbh);
+            updateTj(year, season);
         }
         if (flag == 0) {
             response("{success:false}");
@@ -88,8 +104,8 @@ public class Kftl extends AbstractBaseBean {
         String sql = "select nd,jd from hx_kftl where yw_guid=?";
         List<Map<String, Object>> list = query(sql, YW, new Object[] { kfbh });
         boolean seasonChange = false;
-        String oldYear;
-        String oldSeason;
+        String oldYear="";
+        String oldSeason="";
         if (list.size() > 0) {
             Map<String, Object> map = list.get(0);
             oldYear = map.get("nd").toString();
@@ -108,10 +124,12 @@ public class Kftl extends AbstractBaseBean {
         } else {
             if (seasonChange) {
                 //删除旧的时序关联
-                removeFromSx(year, season, xmbh);
+                removeFromSx(oldYear, oldSeason, xmbh);
                 //插入新的时序关联
                 insertToSx(year, season, xmbh);
+                updateTj(oldYear, oldSeason);
             }
+            updateTj(year, season);
             response("{success:true}");
         }
     }
@@ -140,6 +158,7 @@ public class Kftl extends AbstractBaseBean {
                 if (isSingle) {
                     removeFromSx(nd, jd, xmbh);
                 }
+                updateTj(nd, jd);
                 response("{success:true}");
             }
         }
@@ -258,5 +277,53 @@ public class Kftl extends AbstractBaseBean {
             return true;
         }
         return false;
+    }
+    
+    /**
+     * 
+     * <br>Description:根据年度季度更新相应的开发体量统计
+     * <br>Author:陈强峰
+     * <br>Date:2013-10-16
+     * @param nd
+     * @param jd
+     */
+    private void updateTj(String nd, String jd){
+      String sql="select sum(t.hs) as zshs,sum(dl) as kfdl,sum(gm) as kfgm,sum(tz) as hxtz from hx_kftl t where  nd=? and jd=? ";
+      List<Map<String,Object>> list=query(sql,YW,new Object[]{nd,jd});
+      if(list.size()>0){
+          Map<String,Object> map=list.get(0);
+          sql="update hx_sx set zshs=?,wckfdl=?,wckfgm=?,cbhxtz=?  where nd=? and jd=?";
+          update(sql,YW,new Object[]{map.get("zshs"),map.get("kfdl"),map.get("kfgm"),map.get("hxtz"),nd,jd});
+          //供地相关若存在
+          //获取上季度的储备库库存
+          String lastNd=nd;
+          String lastJd=jd;
+          if(jd.indexOf("1")==0){
+              lastNd=String.valueOf(Integer.parseInt(nd)-1);
+              lastJd="4";
+          }else{
+              lastJd=String.valueOf(Integer.parseInt(jd)-1);
+          }
+          sql="select cbkkc fom hx_sx where nd=? and jd=?";
+          List<Map<String,Object>> lastSeasonList=query(sql,YW,new Object[]{lastNd,lastJd});
+          double lastCbkkc=0;
+          if(lastSeasonList.size()>0){
+              Object obj=lastSeasonList.get(0).get("cbkkc");
+              lastCbkkc=obj==null?0:Double.parseDouble(obj.toString());
+          }
+          //获取当前季度的供应规模
+          sql="select gygm from hx_sx where  nd=? and jd=?";
+          List<Map<String,Object>> seasonList=query(sql,YW,new Object[]{lastNd,lastJd});
+          double gygm=0;
+          if(lastSeasonList.size()>0){
+              Object obj=lastSeasonList.get(0).get("cbkkc");
+              lastCbkkc=obj==null?0:Double.parseDouble(obj.toString());
+          }
+          //更新储备库库存
+          double cbkkc=lastCbkkc+Double.parseDouble(map.get("kfgm").toString())-gygm;
+          double cbkrznl=cbkkc*pgtdjz*dyl*(1-rzss);
+          sql="update hx_sx set cbkkc=?,cbkrznl=? where nd=?,jd=?";
+          update(sql,YW,new Object[]{String.valueOf(cbkkc),String.valueOf(cbkrznl),nd,jd});
+      }
     }
 }
