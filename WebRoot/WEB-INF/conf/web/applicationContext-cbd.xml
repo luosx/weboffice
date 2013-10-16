@@ -44,4 +44,7 @@
 	
 		<!-- 红线项目管理-->
 	<bean name="hxxmManager" class="com.klspta.web.cbd.hxxm.HxxmManager" scope="prototype"/>	
+		<!-- 安置房-->
+	<bean name="azfjs" class="com.klspta.web.cbd.hxxm.Anzfjs" scope="prototype"/>	
+
 </beans>
