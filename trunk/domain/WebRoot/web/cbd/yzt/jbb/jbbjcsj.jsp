@@ -134,8 +134,8 @@ String notSelectDkInfo = projectManager.getDkInfoArrayJsonByProjectID();
 				<td class="stytd">
 					<label>&nbsp;包含自然斑</label>
 				</td>
-				<td width="200" class="stytd">
-					&nbsp;<input type="button" onclick="openWinForm()" value="添加自然斑">
+				<td width="200" class="stytd" style="text-align: center">
+					<input type="button" onclick="openWinForm()" value="添加自然斑">
 				</td>
 			</tr>
 			
