@@ -113,35 +113,40 @@ String notSelectDkInfo = projectManager.getDkInfoArrayJsonByProjectID();
 		<table cellpadding="0" cellspacing="0" align="center" class="stytable">
 			<tr>
 				<td  width="120"  class="stytd"><label>&nbsp;自然斑编号</label></td>
-				<td  width="200"  class="stytd"><input type="text" id="zrbbh" name="zrbbh"></td>
-				<td  width="120" class="stytd"><label>&nbsp;占地面积（㎡）</label></td>
-				<td  width="200"  class="stytd"><input type="text" id="zdmj" name="zdmj"></td>
+				<td  colspan="3"  class="stytd"><input type="text" id="zrbbh" name="zrbbh"></td>
 			</tr>
 			<tr>
-				<td class="stytd"><label>&nbsp;楼座面积</label></td>
-				<td class="stytd"><input type="text" id="lzmj" name="lzmj"></td>
+				<td  width="120" class="stytd"><label>&nbsp;占地面积（㎡）</label></td>
+				<td  width="200" class="stytd"><input type="text" id="zdmj" name="zdmj"></td>
+				<td  width="120" class="stytd"><label>&nbsp;楼座面积</label></td>
+				<td  width="200" class="stytd"><input type="text" id="lzmj" name="lzmj"></td>
+			</tr>
+			<tr>
 				<td class="stytd"><label>&nbsp;拆迁规模</label></td>
 				<td class="stytd"><input type="text" id="cqgm" name="cqgm"></td>
-			</tr>
-			<tr>
+
 				<td class="stytd"><label>&nbsp;住宅楼座面积</label></td>
 				<td class="stytd"><input type="text" id="zzlzmj" name="zzlzmj"></td>
+			</tr>
+			<tr>
 				<td class="stytd"><label>&nbsp;住宅拆迁规模</label></td>
 				<td class="stytd"><input type="text" id="zzcqgm" name="zzcqgm"></td>
-			</tr>
-			<tr>
+
 				<td class="stytd"><label>&nbsp;预计户数</label></td>
 				<td class="stytd"><input type="text" id="yjhs" name="yjhs"></td>
+			</tr>
+			<tr>
 				<td class="stytd"><label>&nbsp;非住宅楼座面积</label></td>
 				<td class="stytd"><input type="text" id="fzzlzmj" name="fzzlzmj"></td>
-			</tr>
-			
-			<tr>
+
 				<td class="stytd"><label>&nbsp;非住宅拆迁规模</label></td>
 				<td class="stytd"><input type="text" id="fzzcqgm" name="fzzcqgm"></td> 
+		    </tr>
+		    <tr >
 				<td class="stytd"><label>&nbsp;备注</label></td>
-				<td class="stytd"><input type="text" id="bz" name="bz"></td>
+				<td class="stytd" colspan="3"><textarea style="font-size: 14px" rows="5" id="bz" name="bz" style="width: 99%">12311231</textarea></td>
 			</tr>
+
 		</table>
 	</form>
 	<div id="jbdkInfo" />
