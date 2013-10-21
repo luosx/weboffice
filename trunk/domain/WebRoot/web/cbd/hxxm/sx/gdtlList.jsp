@@ -19,18 +19,14 @@
 		<meta http-equiv="description" content="This is my page">
 		<%@ include file="/base/include/restRequest.jspf"%>
 		<%@ include file="/base/include/ext.jspf"%>
-
+ 		<script type="text/javascript" src="cell-editing.js"></script>
 		<!-- 根据办理时限不同修改数据的显示颜色 -->
 		<style type="text/css">
-.my_row_Green table {
-	color: green
-}
+  	.list_title_c{height:30px; text-align:center; margin-top:3px;border-bottom:1px solid #bddafe;}
+.tableheader{color:#000000;font-size: 12px;height:30px;width:100%;margin-bottom:0px;border-bottom:1px solid #8DB2E3;}
 
-.my_row_Gray table {
-	color: gray
-}
+
 </style>
-
 		<script type="text/javascript">
 var myData;
 var win;
@@ -42,6 +38,10 @@ Ext.onReady(function(){
     putClientCommond("hxxmManager","queryGdtl");
     putRestParameter("xmbh",'<%=yw_guid%>')
 	myData = restRequest();
+	var tbar1 = new Ext.Toolbar([ 
+     {text:'添加按钮'},{text:'修改按钮'},{text:'删除按钮'}]); 
+	
+	
  	store = new Ext.data.JsonStore({
     proxy: new Ext.ux.data.PagingMemoryProxy(myData),
 		remoteSort:true,
@@ -67,14 +67,58 @@ Ext.onReady(function(){
     store.load({params:{start:0, limit:15}});
     var width=document.body.clientWidth;
     var height=document.body.clientHeight*0.9;
+    //base/thirdres/ext/resources/images/default/tabs/tab-btm-inactive-right-bg.gif
+    //base/thirdres/ext/examples/chart/bar.gif
+    //base/thirdres/ext/examples/image-organizer/images/selected.gif
+   // var ht="<div style='height:60;background:url(base/thirdres/ext/examples/image-organizer/images/selected.gif)'>adad a d</div>"
+	var con='<div style=" height:60; background:url(base/thirdres/ext/examples/image-organizer/images/selected.gif)"><table  cellpadding="0" cellspacing="0" style="border-top: 0px #2d8ade solid;" align="center" width="100%" ><tr  class="tableheader" ><td rowspan="2" class="list_title_c" style="border-left:1px solid #bddafe; border-right:1px solid #bddafe;"><label>序号</label></td><td rowspan="2" class="list_title_c"  style="border-right:1px solid #bddafe;"><label>编号</label></td><td class="list_title_c" rowspan="2"  style="border-right:1px solid #bddafe;"><label>占地<br/>面积</label></td><td class="list_title_c" colspan="2"  style="border-right:1px solid #bddafe; border-bottom:1px solid #bddafe;"><label>总计</label></td><td  class="list_title_c"  colspan="3"  style="border-right:1px solid #bddafe; border-bottom:1px solid #bddafe;"><label>住宅拆迁(户、人、㎡)</label></td><td class="list_title_c" colspan="2"  style="border-right:1px solid #bddafe; border-bottom:1px solid #bddafe;"><label>非住宅拆迁(㎡)</label></td><td class="list_title_c" rowspan="2"  style="border-right:1px solid #bddafe; width:200px;"><label>备注</label></td><td class="list_title_c" rowspan="2"  style="border-right:1px solid #bddafe;"><label>删除</label></td></tr><tr  class="tableheader" ><td class="list_title_c" style="border-right:1px solid #bddafe; "><label>楼座面积</label></td><td class="list_title_c" style="border-right:1px solid #bddafe; "><label>拆迁规模</label></td><td class="list_title_c" style="border-right:1px solid #bddafe; "><label>住宅楼座<br/>面积</label></td><td class="list_title_c" style="border-right:1px solid #bddafe; "><label>住宅拆迁<br/>规模</label></td><td class="list_title_c" style="border-right:1px solid #bddafe; "><label>预计户数</label></td><td class="list_title_c" style="border-right:1px solid #bddafe; "><label>非住宅<br/>楼座面积</label></td><td class="list_title_c" style="border-right:1px solid #bddafe; "><label>非住宅<br/>拆迁规模</label></td></tr></table>'
+	var ht=con;
+	var table = new Ext.Panel({
+    layout:'table',
+     height:60,
+    layoutConfig: {
+        // 这里指定总列数The total column count must be specified here
+        columns: 3
+    },
+    items: [{
+                id      : 'xmmc',
+                height:60,
+                html:ht,
+                width:width
+    }
+    /**,{
+       xtype: 'button',
+       id      : 'xmmc1',
+       text:'总计',
+       height:30,
+       width:width*0.1,
+       colspan: 2
+    },{
+ 		xtype: 'button',
+       id      : 'xmmc2',
+       text:'楼盘面积',
+       height:30,
+       width:width*0.05
+    },{
+ 	   xtype: 'button',
+       id      : 'xmmc3',
+       text:'拆迁规模',
+       height:30,
+       width:width*0.05
+    }**/]
+});
     var sm = new Ext.grid.CheckboxSelectionModel({handleMouseDown:Ext.emptyFn});  
-        grid = new Ext.grid.GridPanel({
+        grid = new Ext.grid.EditorGridPanel({
         store: store,
         sm:sm,
+        hideHeaders: true,
         columns: [
-           {header: '项目名称', dataIndex:'XMMC', width: width*0.1, sortable: false},
+           {header: '项目名称', dataIndex:'XMMC',width: width*0.1, sortable: false,       
+           editor:new Ext.form.TextField({   
+               allowBlank:false  
+            }) },
            {header: '时序', dataIndex:'SX', width: width*0.1, sortable: false,renderer:changKeyword},
-           {header: '地量', dataIndex:'DL', width: width*0.05, sortable: false},
+           {header: '地量', dataIndex:'DL', width: width*0.05, sortable: false },
            {header: '地量%', dataIndex:'DLZ', width: width*0.05, sortable: false},
            {header: '规模', dataIndex:'GM',width: width*0.1, sortable: false},
            {header: '规模%', dataIndex:'GMZ',width: width*0.05, sortable: false},
@@ -93,14 +137,15 @@ Ext.onReady(function(){
 	    		 	 {xtype:'label',text:'快速查找:',width:60},
 	    			 {xtype:'textfield',id:'keyword',width:240,emptyText:'请输入查询字段'},
 	    			 {xtype: 'button',id:'button',text:'查询',handler: query},
-	    			  {xtype:'button',text:'供地开发体量',width:60,handler: addTask}
+	    			 {xtype:'button',text:'供地开发体量',width:60,handler: addTask}
 	    ],
         stripeRows: true,
         listeners:{
-		  rowdblclick : function(grid, rowIndex, e)
-				{
-				   showDetail(grid.getStore().getAt(rowIndex).data.XIANGXI);
-				}
+
+		'render': function(){ 
+            table.render(grid.tbar); 
+        } 
+		
         },
         height: height+40,
         width:width,
@@ -479,7 +524,7 @@ Ext.onReady(function(){
     putClientCommond("hxxmManager","getXmmc");
     putRestParameter("xmbh",'<%=yw_guid%>')
 	var info = restRequest();
-    Ext.getCmp("xmmc").setValue(info[0].XMNAME);	    
+  //  Ext.getCmp("xmmc").setValue(info[0].XMNAME);	    
  /////////////////////////////////////
      grid.render('mygrid_container'); 				      
 })
