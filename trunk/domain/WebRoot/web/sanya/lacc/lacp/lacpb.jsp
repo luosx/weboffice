@@ -105,7 +105,7 @@ if(fixed!=null && fixed.equals("fixedPrint")){%>
  <%if(permission.equals("yes")){ %>					
     						<input class="noborder" name="bh" id="bh" style="width: 97%"/>
    				        <%}else{ %>
-<input type="text" name="bh" id="bh" readonly="readonly" style="width:180px;background-color:transparent;border:0px;"></span>
+<input type="text" name="bh" id="bh"  style="width:180px;background-color:transparent;border:0px;"></span>
 <%} %> 
 </div>
 <br>
