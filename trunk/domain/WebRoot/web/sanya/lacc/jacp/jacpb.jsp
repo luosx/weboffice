@@ -63,13 +63,21 @@
 <div align="center"><h1 style="font-size:16px;">违法案件结案呈批表</h1></div>
 <br>
 <form method="post">
+<div style="width:600px;text-align:center;"><span style="font-size:14px;">
+ 	<%if(permission.equals("yes")){ %>					
+ 		<input class="noborder" name="bh" id="bh" style="width: 97%"/>
+   	<%}else{ %>
+		<input type="text" name="bh" id="bh"  style="width:180px;background-color:transparent;border:0px;"></span>
+	<%} %> 
+</div>
+<br/>
 <table class="lefttopborder1"  cellspacing="0" cellpadding="0" border="1"  bgcolor="#FFFFFF" bordercolor="#000000" width="700">
   <tr>
     <td colspan="2"><div align="center">案&nbsp;&nbsp;由</div></td>
     <td colspan="6"><textarea class="noborder" rows="5" style="width: 99%;font-size:14px;" name="ay"  id="ay"></textarea></td>
   </tr>
   <tr>
-    <td width="50" rowspan="2" colspan="2"><div align="center">违法单位</div></td>
+    <td rowspan="2" colspan="2"><div align="center">违法单位</div></td>
     <td width="34"><div align="center">名称</div></td>
     <td colspan="3"><input type="text" class="noborder" name="dwmc" id="dwmc" style="width: 98%"/></td>
     <td width="80"><div align="center">法定代表人</div></td>
@@ -82,7 +90,7 @@
     <td><input type="text" class="noborder" name="dwdh" id="dwdh" style="width: 97%" onblur="registerDh()"/></td>
   </tr>
   <tr>
-    <td rowspan="3" colspan="2"><div align="center">违法人或直<br>接责任人</div></td>
+    <td rowspan="3" colspan="2"><div align="center">违法人或直<br/>接责任人</div></td>
     <td><div align="center">姓名</div></td>
     <td width="140"><input type="text" class="noborder" name="grxm" id="grxm" style="width: 98%"/></td>
     <td width="40"><div align="center">性别</div></td>
