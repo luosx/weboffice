@@ -35,17 +35,20 @@ public class CBDReportManager {
         return getReport(reportId, where, tableStyleDefault, null);
     }
     
+    public StringBuffer getReport(String reportId, ITableStyle its, String tableWidth){
+        return getReport(reportId, null, tableStyleDefault, tableWidth);
+    }
+    
     public StringBuffer getReport(String reportId, Object[] where, ITableStyle its, String tableWidth){
         TableBuilder tableBuilder = new TableBuilder();
         try{
             Map<String, TRBean> c = firstWorker.build(reportId, where);
-            
             if(tableWidth == null){
                 tableWidth = firstWorker.getBean(reportId).getTableWidth();
             }
             return tableBuilder.prase(tableWidth, c, its);
         }catch(Exception e){
-            return new StringBuffer(tableBuilder.getErrorMsg(e, its));
+            return tableBuilder.getErrorMsg(e, its);
         }
     }
 }
