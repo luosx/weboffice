@@ -44,7 +44,7 @@ public class SecondWorker extends AbstractBaseBean {
 		Map<String, SecondBean> map = getSecondBeans(firstBean.getYWGuid());
 		ThirdWorker thirdWorker = new ThirdWorker();
 		Map<String, TRBean> trBeans = new LinkedHashMap<String, TRBean>();
-		for (int i = 0; i < map.size() + 3; i++) {
+		for (int i = 0; i < map.size(); i++) {
 		    Map<String, TRBean> c = thirdWorker.build(map.get(i + ""), where);
 			trBeans.putAll(c);
 		}

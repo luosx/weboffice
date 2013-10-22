@@ -1,6 +1,6 @@
 package com.klspta.model.CBDReport.tablestyle;
 
-public class TableStyleDefault implements ITableStyle {
+public class TableStyleDefault extends ITableStyle {
 
     @Override
     public String getTD1() {
@@ -31,16 +31,4 @@ public class TableStyleDefault implements ITableStyle {
     public String getTable2() {
         return "</table>";
     }
-    
-    public String getErrorMsg(Exception e){
-
-        String s = "<font size='5' color='#990900'>数据生成失败，请稍后重试或联系管理员！</font><br>------<br>";
-        StackTraceElement[] ele = e.getStackTrace();
-        for(int i = 0; i < ele.length; i++){
-            s = s + "<font size='1' color='#000001'><input style='display:none' value='aaa'><br>" + ele[i].getClassName() + "." + ele[i].getMethodName() + "&nbsp&nbsp&nbsp" + ele[i].getLineNumber() +"</font>";
-        }
-        s = s+ "</input>";
-        return s;
-    }
-
 }

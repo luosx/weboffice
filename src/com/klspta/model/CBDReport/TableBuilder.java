@@ -56,7 +56,7 @@ public class TableBuilder {
         }
     }
     
-    public String getErrorMsg(Exception e, ITableStyle its){
+    public StringBuffer getErrorMsg(Exception e, ITableStyle its){
         return its.getErrorMsg(e);
     }
 }
