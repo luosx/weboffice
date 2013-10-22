@@ -13,6 +13,8 @@ public class ThirdBean {
 	private String rowsPan = "";
 	private String dataType = "";
 	private String data = "";
+	private String height = "";
+	private String width = "";
 
 	public ThirdBean(Map<String, Object> map) {
 		this.YWGuid = (String) map.get("YW_GUID");
@@ -21,6 +23,8 @@ public class ThirdBean {
 		this.rowsPan = (String) map.get("ROWSPAN_COUNT");
 		this.dataType = (String) map.get("DATA_TYPE");
 		this.data = (String) map.get("DATA");
+		this.height = null2Str(map.get("HEIGHT"));
+		this.width = null2Str(map.get("WIDTH"));
 	}
 
 	public String getYWGuid() {
@@ -46,5 +50,22 @@ public class ThirdBean {
 	public String getData() {
 		return data;
 	}
+	
+    public String getHeight() {
+        return height;
+    }
+
+    public String getWidth() {
+        return width;
+    }
+
+	private String null2Str(Object str){
+	    if(str == null){
+	        return "";
+	    }else{
+	        return str.toString();
+	    }
+	}
+
 
 }

@@ -40,5 +40,9 @@ public class FirstWorker extends AbstractBaseBean{
         SecondWorker secondWorker = new SecondWorker();
         return secondWorker.build(firstBean, where);
     }
+    
+    public FirstBean getBean(String key){
+        return getFirstBean(key);
+    }
 
 }
