@@ -16,7 +16,7 @@ public class JbbData extends AbstractBaseBean implements IData  {
 	@Override
 	public List<Map<String, Object>> getAllList(HttpServletRequest request) {
 		StringBuffer sql = new StringBuffer();
-		sql.append("select * from ").append(formName).append(" t order by t.dkmc");
+		sql.append("select rownum xh,t.* from ").append(formName).append(" t") ;
 		List<Map<String, Object>> resultList = query(sql.toString(), YW);
 		return addZrb(resultList);
 	}
@@ -25,13 +25,12 @@ public class JbbData extends AbstractBaseBean implements IData  {
 	public List<Map<String, Object>> getQuery(HttpServletRequest request) {
 		String keyWord = request.getParameter("keyWord");
 		StringBuffer querySql = new StringBuffer();
-		querySql.append("select * from ").append(formName).append(" t");
+		querySql.append("select  rownum xh,t.* from ").append(formName).append(" t");
 		if(keyWord != null){
 			keyWord = UtilFactory.getStrUtil().unescape(keyWord);
-			querySql.append("where t.yw_guid||t.zrbbh||t.zdmj||t.lzmj||t.cqgm||t.zzlzmj||t.zzcqgm||t.yjhs||t.fzzlzmj||t.fzzcqgm||t.bz like '%");
+			querySql.append(" where dkmc like '%");
 			querySql.append(keyWord).append("%'");
 		}
-		querySql.append(" order by t.dkmc");
 		List<Map<String, Object>> resultList = query(querySql.toString(), YW);
 		return addZrb(resultList);
 	}
