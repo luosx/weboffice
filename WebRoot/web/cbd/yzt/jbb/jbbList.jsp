@@ -270,11 +270,11 @@
          
          
   function view(bh){
- 		return "<span style='cursor:pointer;' onclick='showLocation("+bh+");return false;'><img src='base/form/images/view.png' alt='地图位置'></span>";		
+ 		return "<span style='cursor:pointer;'return false;'><img src='base/form/images/view.png' alt='地图位置'></span>";		
  		}
  
  function showLocation(bh){
-   var url="<%=basePath%>"+"base/fxgis/fx/FxGIS.html?initFunction=[{\"name\":\"findFeature\",\"parameters\":\"CBD,1,"+id+",TBBH\"}]";
+   var url="<%=basePath%>"+"base/fxgis/fx/FxGIS.html?initFunction=[{\"name\":\"findFeature\",\"parameters\":\"CBD,1,"+bh+",TBBH\"}]";
    window.open(url);
  }		
  		
