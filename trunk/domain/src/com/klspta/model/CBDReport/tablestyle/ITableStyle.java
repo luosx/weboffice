@@ -7,4 +7,5 @@ public interface ITableStyle {
     String getTR2();
     String getTD1();
     String getTD2();
+    String getErrorMsg(Exception e);
 }

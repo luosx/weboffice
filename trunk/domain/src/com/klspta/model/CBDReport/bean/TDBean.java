@@ -8,8 +8,8 @@ public class TDBean {
 	private String text = "";
 	private String thirdKey = "";
 	private String YWGuid = "";
-	private String Width = "";
-	private String height = "";
+	private String width = "10";
+	private String height = "10";
 	
     public TDBean(ThirdBean tb) {
         this.colspan = tb.getColsPan();
@@ -19,6 +19,10 @@ public class TDBean {
         this.thirdKey = tb.getThirdKey();
         this.YWGuid = tb.getYWGuid();
         this.text = tb.getData();
+        this.width = tb.getWidth();
+        this.height = tb.getHeight();
+        width = width.equals("") ? "10": width;
+        height = height.equals("") ? "10": height;
 	}
 	
 	public TDBean(String text){
@@ -54,7 +58,7 @@ public class TDBean {
     }
     
     public String getWidth() {
-        return Width;
+        return width;
     }
 
     public String getHeight() {

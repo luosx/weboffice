@@ -11,33 +11,31 @@ import com.klspta.model.CBDReport.tablestyle.TableStyleDefault;
 
 public class TableBuilder {
     
-    public String prase(Map<String, TRBean> c, ITableStyle its) {
-        String html = its.getTable1();
+    public StringBuffer prase(String tableWidth, Map<String, TRBean> c, ITableStyle its) {
+        StringBuffer html = new StringBuffer(its.getTable1().replace("#TABLEWIDTH", tableWidth));
         Iterator<Map.Entry<String, TRBean>> iter = c.entrySet().iterator();
         while (iter.hasNext()) {
             Map.Entry<String, TRBean> entry = (Map.Entry<String, TRBean>) iter.next();
             TRBean val = (TRBean) entry.getValue();
-            html = html + buildTR(val, its);
+            html.append(buildTR(val, its));
         }
-        return html + its.getTable2();
+        return html.append(its.getTable2());
     }
 
-    public String prase(Map<String, TRBean> c) {
-        return prase(c, new TableStyleDefault());
+    public StringBuffer prase(String tableWidth, Map<String, TRBean> c) {
+        return prase(tableWidth, c, new TableStyleDefault());
     }
 
-    private String buildTR(TRBean trBean, ITableStyle its) {
+    private StringBuffer buildTR(TRBean trBean, ITableStyle its) {
         if (trBean != null) {
             Vector<TDBean> tdBeans = trBean.getTDBeans();
-            String tds = its.getTR1();
+            StringBuffer tds = new StringBuffer(its.getTR1().replace("#TRCSS", trBean.getCssStyle()));
             for (int j = 0; j < tdBeans.size(); j++) {
-                String s = buildTD(tdBeans.get(j), its);
-                tds = tds + s;
+                tds.append(buildTD(tdBeans.get(j), its));
             }
-            tds = tds.replace("#TRCSS", trBean.getCssStyle());
-            return tds + its.getTR2();
+            return tds.append(its.getTR2());
         }
-        return "";
+        return null;
     }
 
     private String buildTD(TDBean tdBean, ITableStyle its) {
@@ -56,5 +54,9 @@ public class TableBuilder {
         }else{
             return input;
         }
+    }
+    
+    public String getErrorMsg(Exception e, ITableStyle its){
+        return its.getErrorMsg(e);
     }
 }
