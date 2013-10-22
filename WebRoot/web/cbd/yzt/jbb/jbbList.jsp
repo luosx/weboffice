@@ -114,7 +114,7 @@
 		        store: store,
 		        region:'center',
                 margins: '0 5 5 5',
-        		//hideHeaders: true,
+        	    hideHeaders: true,
 		        columns: [
 		           {header: '序号', dataIndex:'XH',width:width*0.05-2, sortable: false},       
 		           {header: '基本地块编号', dataIndex:'DKMC', width:width*0.1-6, sortable: false,renderer:changKeyword},
@@ -149,16 +149,23 @@
 	    			{xtype: 'button',text:'查询',handler: query}
 			    ],  
 			    listeners:{
+			    	
 					'render': function(){ 
-            			table.render(grid.tbar); 
+                    	table.render(grid.tbar); 
+        			}, 
+        			'cellmousedown':function(grid,r,c,e){
+        			  if(c==24){
+        			  	 var bh=grid.getStore().getAt(r).data.DKBH;
+        			 	  showLocation(bh);
+        			   }
         			} 
         		},  
         		viewConfig: {
         		},      
 		        stripeRows: true,
 		        forceFit:false,
-		        width:width*2.07-105,
-		        height: height-100 ,
+		        width:width*2.07-100,
+		        height: height-60 ,
 		        stateful: true,
 		        stateId: 'grid',
 		        buttonAlign:'center',
@@ -171,9 +178,8 @@
 			            emptyMsg: "无记录",
 			        plugins: new Ext.ux.ProgressBarPager()
 		        })
-		       
-		        
-        	});
+        	});    
+        	   
     	grid.render('mygrid_container');
 	});
 	
@@ -264,11 +270,11 @@
          
          
   function view(bh){
- 		return "<span style='cursor:pointer;' onclick='showLocation("+bh+");return false;'><img src='base/form/images/view.png' alt='详细信息'></span>";		
+ 		return "<span style='cursor:pointer;' onclick='showLocation("+bh+");return false;'><img src='base/form/images/view.png' alt='地图位置'></span>";		
  		}
  
  function showLocation(bh){
-   var url=basePath+"base/fxgis/fx/FxGIS.html?initFunction=[{\"name\":\"findFeature\",\"parameters\":\"CBD,1,"+id+",TBBH\"}]";
+   var url="<%=basePath%>"+"base/fxgis/fx/FxGIS.html?initFunction=[{\"name\":\"findFeature\",\"parameters\":\"CBD,1,"+id+",TBBH\"}]";
    window.open(url);
  }		
  		
