@@ -29,7 +29,7 @@ body {
     font.style1 {
     font-family: "微软雅黑";
     color: #FFFFFF;
-    font-size:26px;
+    font-size:20px;
     font-weight: bolder;
   }
   font.style2 {
