@@ -21,7 +21,7 @@ public class ZrbManager extends AbstractBaseBean {
 	 */
 	public void getZrb(){
 		HttpServletRequest request = this.request;
-		response(new ZrbData().getAllZrb(request));
+		response(new ZrbData().getAllList(request));
 	}
 	
 	/**
@@ -32,9 +32,15 @@ public class ZrbManager extends AbstractBaseBean {
 	 */
 	public void getQuery(){
 		HttpServletRequest request = this.request;
-		response(new ZrbData().getQueryZrb(request));
+		response(new ZrbData().getQuery(request));
 	}
 
+	/**
+	 * 
+	 * <br>Description:更新自然斑
+	 * <br>Author:黎春行
+	 * <br>Date:2013-10-22
+	 */
 	public void updateZrb(){
 		HttpServletRequest request = this.request;
 		
