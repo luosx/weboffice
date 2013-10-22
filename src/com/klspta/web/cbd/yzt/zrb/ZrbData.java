@@ -7,8 +7,9 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.klspta.base.AbstractBaseBean;
 import com.klspta.base.util.UtilFactory;
+import com.klspta.web.cbd.yzt.utilList.IData;
 
-public class ZrbData extends AbstractBaseBean {
+public class ZrbData extends AbstractBaseBean implements IData {
 	private static final String formName = "JC_ZIRAN";
 	/**
 	 * 
@@ -17,7 +18,7 @@ public class ZrbData extends AbstractBaseBean {
 	 * <br>Date:2013-10-18
 	 * @param request
 	 */
-	public List<Map<String, Object>> getAllZrb(HttpServletRequest request){
+	public List<Map<String, Object>> getAllList(HttpServletRequest request){
 		String sql = "select * from " + formName + " t order by to_number(t.yw_guid)";
 		return query(sql, YW);
 	}
@@ -30,7 +31,8 @@ public class ZrbData extends AbstractBaseBean {
 	 * @param request
 	 * @return
 	 */
-	public List<Map<String, Object>> getQueryZrb(HttpServletRequest request){
+	@Override
+	public List<Map<String, Object>> getQuery(HttpServletRequest request){
 		String keyWord = request.getParameter("keyWord");
 		StringBuffer querySql = new StringBuffer();
 		querySql.append("select * from ").append(formName).append(" t ");
