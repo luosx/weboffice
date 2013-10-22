@@ -47,7 +47,7 @@
 <form id='loginForm' method="post" action='<%=basePath %>j_spring_security_check'>
 <table border="0" align="center" cellpadding="0" cellspacing="0">
   <tr>
-    <td height="648" valign="top" background="../../images/cbd.jpg">
+    <td height="648" valign="top" background="../../images/cbd1.jpg">
     <table width="1020" border="0" cellspacing="0" cellpadding="0">
       <tr>
       <td  colspan="2"><div style="margin-top: 6%;margin-left: 25%; display:none"><font class="style1"><%=loginname1 %></font></div></td>
@@ -66,20 +66,20 @@
           <input name="j_username" type="text" class="input" id="j_username" />
         </label></td>
       </tr>
-      <tr>
+      <tr height="15">
         <td>&nbsp;</td>
         <td>&nbsp;</td>
       </tr>
       <tr>
         <td height="16">&nbsp;</td>
-        <td style="padding-left:5px;padding-top:1px;"><input name="j_password" type="password" class="input" id="j_password" /></td>
+        <td style="padding-left:0px;padding-top:0px;"><input name="j_password" type="password" class="input" id="j_password" /></td>
       </tr>
       <tr>
         <td height="53">&nbsp;</td>
         <td><table width="" border="0" cellspacing="0" cellpadding="0">
           <tr>
-            <td style="width:110px;text-align: left"><span style="margin-left:-10px;color:red;"><%=type%></span></td>
-            <td width="93" ><a href="#" style="margin-left:-49px;" onclick='login();return false;' target="_parent" onmouseover="MM_swapImage('Image1','','../../images/dl_btnB.gif',1)" onmouseout="MM_swapImgRestore()"><img src="../../images/dl_btnA.gif" name="Image1" width="51" height="22" border="0" id="Image1" /></a></td>
+            <td style="width:40px;text-align: left"><span style="margin-left:-10px;color:red;"><%=type%></span></td>
+            <td width="93" ><a href="#" style="margin-left:0px;" onclick='login();return false;' target="_parent" onmouseover="MM_swapImage('Image1','','../../images/dl_btnB.gif',1)" onmouseout="MM_swapImgRestore()"><img src="../../images/dl_btnA.gif" name="Image1" width="51" height="22" border="0" id="Image1" /></a></td>
           </tr>
         </table></td>
       </tr>
