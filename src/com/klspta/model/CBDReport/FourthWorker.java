@@ -50,7 +50,7 @@ public class FourthWorker extends AbstractBaseBean{
 		    fourthBean = map.get("" + i);
 		    Map<String, TRBean> c = null;
 		    if(fourthBean.getDataFrom().equals("SQL")){
-		        c = localQuery(fourthBean.getWyGuid(), fourthBean.getDataFrom(), fourthBean.getSql(), where, trBean);
+		        c = localQuery(i+fourthBean.getWyGuid(), fourthBean.getDataFrom(), fourthBean.getSql(), where, trBean);
 		    }else if(fourthBean.getDataFrom().equals("CLASS")){
 		        c = invokeClass(fourthBean, where);
 		    }
