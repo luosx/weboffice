@@ -84,6 +84,7 @@
 		        columns: [
 		           {header: '序号', dataIndex:'XH',width: width*0.05, sortable: false,renderer:changKeyword},       
 		           {header: '项目名称', dataIndex:'XMNAME', width: width*0.15, sortable: false,renderer:changKeyword},
+		           {header: '位置查看', dataIndex:'XMBH',width:width*0.07, sortable: false,renderer:view}	,
 		           {header: '占地', dataIndex:'ZD', width: width*0.05, sortable: false, editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
 		           {header: '规模', dataIndex:'GM',width: width*0.05, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
 		           {header: '户数', dataIndex:'HS',width: width*0.05, sortable: false, editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
@@ -102,8 +103,7 @@
 		     	   {header: '评估土地价值', dataIndex:'PGTDJZ',width:width*0.1, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
 		     	   {header: '抵押率', dataIndex:'DYL',width:width*0.05, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
 		     	   {header: '融资损失', dataIndex:'RZSS',width:width*0.07, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
-		     	   {header: '包含地块', dataIndex:'BHDK',width:width*0.07, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
-		     	   {header: '位置查看', dataIndex:'XMBH',width:width*0.07, sortable: false,renderer:view}	
+		     	   {header: '包含地块', dataIndex:'BHDK',width:width*0.07, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword}
 		        ], 
 		        tbar:[
 	    			{xtype:'label',text:'快速查询:',width:60},
@@ -112,7 +112,7 @@
 			    ],  
 			    listeners:{
         			'cellmousedown':function(grid,r,c,e){
-        			  if(c==21){
+        			  if(c==2){
         			  	 var bh=grid.getStore().getAt(r).data.XMBH;
         			 	  showLocation(bh);
         			   }
@@ -178,6 +178,7 @@
           grid.reconfigure(store, new Ext.grid.ColumnModel([
 		           {header: '序号', dataIndex:'XH',width: width*0.05, sortable: false,renderer:changKeyword},       
 		           {header: '项目名称', dataIndex:'XMNAME', width: width*0.15, sortable: false,renderer:changKeyword},
+		           		           {header: '位置查看', dataIndex:'XMBH',width:width*0.07, sortable: false,renderer:view}	,
 		           {header: '占地', dataIndex:'ZD', width: width*0.05, sortable: false, editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
 		           {header: '规模', dataIndex:'GM',width: width*0.05, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
 		           {header: '户数', dataIndex:'HS',width: width*0.05, sortable: false, editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
@@ -196,8 +197,7 @@
 		     	   {header: '评估土地价值', dataIndex:'PGTDJZ',width:width*0.1, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
 		     	   {header: '抵押率', dataIndex:'DYL',width:width*0.05, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
 		     	   {header: '融资损失', dataIndex:'RZSS',width:width*0.05, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
-		     	   {header: '包含地块', dataIndex:'BHDK',width:width*0.05, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
-		     	   {header: '位置查看', dataIndex:'XMBH',width:width*0.05, sortable: false,renderer:view}		
+		     	   {header: '包含地块', dataIndex:'BHDK',width:width*0.05, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword}
           ]));
           	//重新绑定分页工具栏
 			grid.getBottomToolbar().bind(store);
