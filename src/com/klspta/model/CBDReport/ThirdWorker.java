@@ -14,6 +14,9 @@ public class ThirdWorker extends AbstractBaseBean {
     private static Map<String, LinkedHashMap<String, ThirdBean>> thirdBeansMap = new LinkedHashMap<String, LinkedHashMap<String, ThirdBean>>();
 
     private Map<String, ThirdBean> getThirdBeans(String id) {
+        if(!CBDReportManager.USE_CACHE){
+            createBeans(id);
+        }
         if (thirdBeansMap.containsKey(id)) {
             return thirdBeansMap.get(id);
         } else {

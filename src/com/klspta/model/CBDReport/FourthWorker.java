@@ -16,6 +16,9 @@ public class FourthWorker extends AbstractBaseBean{
 	private static Map<String, LinkedHashMap<String, FourthBean>> fourthBeansMap = new LinkedHashMap<String, LinkedHashMap<String, FourthBean>>();
 
 	private Map<String, FourthBean> getFourthBeans(String id) {
+        if(!CBDReportManager.USE_CACHE){
+            createBeans(id);
+        }
 		if (fourthBeansMap.containsKey(id)) {
 			return fourthBeansMap.get(id);
 		} else {
