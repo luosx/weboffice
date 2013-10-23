@@ -53,7 +53,7 @@ public class FourthWorker extends AbstractBaseBean{
 		    fourthBean = map.get("" + i);
 		    Map<String, TRBean> c = null;
 		    if(fourthBean.getDataFrom().equals("SQL")){
-		        c = localQuery(i+fourthBean.getWyGuid(), fourthBean.getDataFrom(), fourthBean.getSql(), where, trBean);
+		        c = localQuery(i+fourthBean.getWyGuid(), fourthBean.getDataFrom(), fourthBean.getSql(),thirdBean.getWidth(), thirdBean.getHeight(), where, trBean);
 		    }else if(fourthBean.getDataFrom().equals("CLASS")){
 		        c = invokeClass(fourthBean, where);
 		    }
@@ -62,7 +62,7 @@ public class FourthWorker extends AbstractBaseBean{
 		return trBeans;
 	}
 	
-	private Map<String, TRBean> localQuery(String ywGuid, String from, String sql, Object[] where, TRBean trBean){
+	private Map<String, TRBean> localQuery(String ywGuid, String from, String sql, String width, String height,Object[] where, TRBean trBean){
 	    List<Map<String, Object>> rets = null;
 	    if(where != null){
 	        rets = query(sql, YW, where);
@@ -72,7 +72,7 @@ public class FourthWorker extends AbstractBaseBean{
 	    Map<String, TRBean> trBeans = new LinkedHashMap<String, TRBean>();
 	    for(int i = 0; i < rets.size(); i++){
 	        TRBean trCopy = trBean.copyStatic();
-	        trCopy.addTDBeans(rets.get(i));
+	        trCopy.addTDBeans(rets.get(i), width, height);
 	        trBeans.put(ywGuid + i, trCopy);
 	    }
 	    return trBeans;

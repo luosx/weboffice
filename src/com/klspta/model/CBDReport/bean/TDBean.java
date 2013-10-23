@@ -21,12 +21,21 @@ public class TDBean {
         this.text = tb.getData();
         this.width = tb.getWidth();
         this.height = tb.getHeight();
-        width = width.equals("") ? "10": width;
-        height = height.equals("") ? "10": height;
+        setWidth(width);
+        setHeight(height);
 	}
 	
-	public TDBean(String text){
+	public TDBean(String text, String width, String height){
 	    this.text = text;
+	    setWidth(width);
+	    setHeight(height);
+	}
+	
+	private void setWidth(String width){
+	    this.width = width.equals("") ? "10": width;
+	}
+	private void setHeight(String height){
+	    this.height = height.equals("") ? "10": height;
 	}
 
     public String getColspan() {
