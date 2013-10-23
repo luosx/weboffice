@@ -74,15 +74,17 @@
         	],
   
            listeners: {
-         	'click': function(node, e){
+         	click: function(node, e){
                 var id=node.attributes.id;
                 var reportid=node.attributes.reportid;
                 var parentid=node.attributes.parentid;
                 var left=(screen.width-900)/2;
             	var top=(screen.height-600)/2;
             	if(id!='0'){
-					window.open("<%=basePath%>web/cbd/tjbb/chart.jsp?xml="+id,'chart','height=600,width=900,left='+left+',top='+top+',toolbar=no,menubar=no,scrollbars=no,resizable=no,location=no,status=no');
-				}
+                setTimeout(function() {
+		          window.open("<%=basePath%>web/cbd/tjbb/chart.jsp?xml="+id,'chart','height=600,width=900,left='+left+',top='+top+',toolbar=no,menubar=no,scrollbars=no,resizable=no,location=no,status=no');
+					},300);
+				} 
              }
          }
         });
