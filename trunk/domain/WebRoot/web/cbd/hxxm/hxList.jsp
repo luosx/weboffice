@@ -91,7 +91,7 @@
 		           {header: '住宅拆迁费用', dataIndex:'ZZCQFY',width: width*0.1, sortable: false, editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
 		           {header: '企业拆迁费用', dataIndex:'QYCQFY',width: width*0.1, sortable: false, editor: {xtype: 'textfield',allowBlank:true},renderer:changKeyword},
 		           {header: '其他费用', dataIndex:'QTFY',width: width*0.07, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
-		           {header: '安置房货币投资成本', dataIndex:'AZFTZCB',width: width*0.12, sortable: false, editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
+		           {header: '安置房货币投资成本', dataIndex:'AZFTZCB',width: width*0.14, sortable: false, editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
 		           {header: '住宅货币投资成本', dataIndex:'ZZHBTZCB',width:width*0.12, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
 		           {header: '拆迁货币投资', dataIndex:'CQHBTZ',width:width*0.1, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
 		           {header: '其他费用占比', dataIndex:'QTFYZB',width:width*0.1, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},  
@@ -101,9 +101,9 @@
 		     	   {header: '租金', dataIndex:'ZJ',width:width*0.05, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword}, 
 		     	   {header: '评估土地价值', dataIndex:'PGTDJZ',width:width*0.1, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
 		     	   {header: '抵押率', dataIndex:'DYL',width:width*0.05, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
-		     	   {header: '融资损失', dataIndex:'RZSS',width:width*0.05, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
-		     	   {header: '包含地块', dataIndex:'BHDK',width:width*0.05, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
-		     	   {header: '位置查看', dataIndex:'XMBH',width:width*0.05, sortable: false,renderer:view}	
+		     	   {header: '融资损失', dataIndex:'RZSS',width:width*0.07, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
+		     	   {header: '包含地块', dataIndex:'BHDK',width:width*0.07, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
+		     	   {header: '位置查看', dataIndex:'XMBH',width:width*0.07, sortable: false,renderer:view}	
 		        ], 
 		        tbar:[
 	    			{xtype:'label',text:'快速查询:',width:60},
@@ -121,7 +121,7 @@
         		viewConfig: {
         		},      
 		        stripeRows: true,
-		        width:width*1.62+15,
+		        width:width*1.72,
 		        height: height-20 ,
 		        stateful: true,
 		        stateId: 'grid',
