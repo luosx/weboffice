@@ -44,7 +44,7 @@
 
     	
 			//获取数据
-			putClientCommond("zrbHandle", "getZrb");
+			putClientCommond("hxxmHandle", "getHxxm");
 			myData = restRequest();
 			store = new Ext.data.JsonStore({
 				proxy:new Ext.ux.data.PagingMemoryProxy(myData),
@@ -83,7 +83,7 @@
         		//hideHeaders: true,
 		        columns: [
 		           {header: '序号', dataIndex:'XH',width: width*0.05, sortable: false,renderer:changKeyword},       
-		           {header: '项目名称', dataIndex:'XMMC', width: width*0.1, sortable: false,renderer:changKeyword},
+		           {header: '项目名称', dataIndex:'XMNAME', width: width*0.15, sortable: false,renderer:changKeyword},
 		           {header: '占地', dataIndex:'ZD', width: width*0.05, sortable: false, editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
 		           {header: '规模', dataIndex:'GM',width: width*0.05, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
 		           {header: '户数', dataIndex:'HS',width: width*0.05, sortable: false, editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
@@ -112,8 +112,8 @@
 			    ],  
 			    listeners:{
         			'cellmousedown':function(grid,r,c,e){
-        			  if(c==11){
-        			  	 var bh=grid.getStore().getAt(r).data.ZRBBH;
+        			  if(c==21){
+        			  	 var bh=grid.getStore().getAt(r).data.XMBH;
         			 	  showLocation(bh);
         			   }
         			} 
@@ -121,7 +121,7 @@
         		viewConfig: {
         		},      
 		        stripeRows: true,
-		        width:width*1.72,
+		        width:width*1.77,
 		        height: height-20 ,
 		        stateful: true,
 		        stateId: 'grid',
@@ -144,8 +144,7 @@
 
         function query(){
            var keyWord=Ext.getCmp('keyword').getValue();
-           putClientCommond("zrbHandle","getQuery");
-           putRestParameter("userId","<%=userId%>");
+           putClientCommond("hxxmHandle","getQuery");
            putRestParameter("keyWord",escape(escape(keyWord)));
            var myData = restRequest(); 
            store = new Ext.data.JsonStore({
@@ -178,7 +177,7 @@
 			});
           grid.reconfigure(store, new Ext.grid.ColumnModel([
 		           {header: '序号', dataIndex:'XH',width: width*0.05, sortable: false,renderer:changKeyword},       
-		           {header: '项目名称', dataIndex:'XMMC', width: width*0.1, sortable: false,renderer:changKeyword},
+		           {header: '项目名称', dataIndex:'XMNAME', width: width*0.15, sortable: false,renderer:changKeyword},
 		           {header: '占地', dataIndex:'ZD', width: width*0.05, sortable: false, editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
 		           {header: '规模', dataIndex:'GM',width: width*0.05, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
 		           {header: '户数', dataIndex:'HS',width: width*0.05, sortable: false, editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
