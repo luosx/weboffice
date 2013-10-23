@@ -46,7 +46,10 @@
 		
 	<bean name="jbbHandle" class="com.klspta.web.cbd.yzt.jbb.JbbManager" scope="prototype"/>	
 		<!-- 红线项目管理-->
+	<!--
 	<bean name="hxxmManager" class="com.klspta.web.cbd.hxxm.HxxmManager" scope="prototype"/>	
+	-->
+	<bean name="hxxmHandle" class="com.klspta.web.cbd.yzt.hxxm.HxxmManager" scope="prototype"/>
 		<!-- 安置房-->
 	<bean name="azfjs" class="com.klspta.web.cbd.hxxm.Anzfjs" scope="prototype"/>	
 
