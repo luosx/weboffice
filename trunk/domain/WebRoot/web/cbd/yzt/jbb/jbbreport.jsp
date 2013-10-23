@@ -35,6 +35,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   }
   tr{
     border-width: 0px;
+    text-align:center;
   }
   td{
     text-align:center;
@@ -46,13 +47,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   }
   .title{
     font-weight:bold;
-    font-size: 20px;
+    font-size: 15px;
+    text-align:center;
+    line-height: 50px;
+	margin-top: 3px;
   }
   .trtotal{
+  	text-align:center;
     font-weight:bold;
+    line-height: 30px;
    }
   .trsingle{
     background-color: #D1E5FB;
+    line-height: 20px;
+    text-align:center;
    }
 	</style>
   </head>
