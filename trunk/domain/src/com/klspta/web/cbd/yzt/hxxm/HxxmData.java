@@ -37,16 +37,16 @@ public class HxxmData extends AbstractBaseBean implements IData {
 	
 	
 	private List<Map<String, Object>> addJbb(List<Map<String, Object>> resultList){
-		String zrb = "select t.zrbbh from " + jbformName + " t where t.jbguid = ?";
+		String zrb = "select t.dkbh from " + jbformName + " t where t.xmguid= ?";
 		for(int i = 0; i < resultList.size(); i++){
 			String zrbbh = "";
 			Map<String, Object> resultMap = resultList.get(i);
 			String jbGuid = String.valueOf(resultMap.get("YW_GUID"));
 			List<Map<String, Object>> zrList = query(zrb, YW, new Object[]{jbGuid});
 			for(int j = 0; j < zrList.size(); j++){
-				zrbbh += String.valueOf(zrList.get(j).get("jbbbh"));
+				zrbbh += String.valueOf(zrList.get(j).get("dkbh"));
 			}
-			resultList.get(i).put("jbbbh", zrbbh);
+			resultList.get(i).put("dkbh", zrbbh);
 		}
 		return resultList;
 	}
