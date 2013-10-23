@@ -19,19 +19,19 @@ String xml=request.getParameter("xml");
 	<meta http-equiv="description" content="This is my page">
 	<script src="<%=basePath%>/base/thirdres/anyChart/binaries/js/AnyChart.js"></script>
   </head>
-      <script type="text/javascript" language="javascript">
-      
-    </script>
+
   
 <body leftmargin="0" topmargin="0"  > 
 
     <script type="text/javascript" language="javascript"> 
     var chart = new AnyChart('<%=basePath%>/base/thirdres/anyChart/binaries/swf/AnyChart.swf');
     chart.initText ="加载中........." 
+ 
     chart.setXMLFile('<%=basePath%>web/cbd/tjbb/xml/<%=xml%>'); 
+       window.focus();
 		chart.width = '100%';
 		chart.height = '100%';
-    chart.write(); 
+      chart.write(); 
    // chart.Refresh();
     </script> 
 </body> 
