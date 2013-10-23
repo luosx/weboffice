@@ -99,7 +99,7 @@
 		           {header: '非住宅楼座面积', dataIndex:'FZZLZMJ',width: width*0.09, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
 		           {header: '非住宅拆迁规模', dataIndex:'FZZCQGM',width: width*0.09, sortable: false, editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
 		           {header: '备注', dataIndex:'BZ',width: 140, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
-		     		{header: '位置查看', dataIndex:'DKBH',width:60, sortable: false,renderer:view}	
+		     		{header: '位置查看', dataIndex:'DKBH',width:50, sortable: false,renderer:view}	
 		        ], 
 		        tbar:[
 	    			{xtype:'label',text:'快速查询:',width:60},
