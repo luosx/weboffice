@@ -14,6 +14,9 @@ public class SecondWorker extends AbstractBaseBean {
 	private static Map<String, LinkedHashMap<String, SecondBean>> secondBeansMap = new LinkedHashMap<String, LinkedHashMap<String, SecondBean>>();
 
 	private Map<String, SecondBean> getSecondBeans(String id) {
+        if(!CBDReportManager.USE_CACHE){
+            createBeans(id);
+        }
 		if (secondBeansMap.containsKey(id)) {
 			return secondBeansMap.get(id);
 		} else {

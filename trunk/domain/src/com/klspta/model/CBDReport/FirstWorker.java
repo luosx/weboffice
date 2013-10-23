@@ -13,6 +13,9 @@ public class FirstWorker extends AbstractBaseBean{
 	private static Map<String, FirstBean> firstBeansMap = new LinkedHashMap<String, FirstBean>();
 	
 	private FirstBean getFirstBean(String id) {
+	    if(!CBDReportManager.USE_CACHE){
+	        createBean(id);
+	    }
 		if(firstBeansMap.containsKey(id)){
 			return firstBeansMap.get(id);
 		}else{

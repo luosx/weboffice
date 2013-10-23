@@ -6,6 +6,8 @@ import com.klspta.model.CBDReport.bean.TRBean;
 import com.klspta.model.CBDReport.tablestyle.ITableStyle;
 import com.klspta.model.CBDReport.tablestyle.TableStyleDefault;
 public class CBDReportManager {
+    
+    public static final boolean USE_CACHE = false;
 	
 	private FirstWorker firstWorker = new FirstWorker();
 	
