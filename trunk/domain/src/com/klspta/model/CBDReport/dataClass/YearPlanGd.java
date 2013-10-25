@@ -10,7 +10,6 @@ import com.klspta.model.CBDReport.bean.TRBean;
 
 public class YearPlanGd extends AbstractBaseBean implements IDataClass {
 
-    //select sum(t.hs) as hs,sum(t.dl) as dl,sum(t.gm) as gm,sum(t.tz) as tz,nd from hx_kftl t group by t.nd
     @Override
     public Map<String, TRBean> getTRBeans(Object[] obj) {
         Map<String, TRBean> trbeans = new LinkedHashMap<String, TRBean>();
