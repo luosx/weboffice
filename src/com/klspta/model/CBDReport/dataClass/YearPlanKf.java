@@ -36,9 +36,9 @@ public class YearPlanKf extends AbstractBaseBean implements IDataClass {
                         xmmc });
                 Map<String, Object> map = trList.get(0);
                 TRBean trb = new TRBean();
-                trb.setCssStyle("trsingle"); 
-               
-                TDBean tdbxh = new TDBean(i+"", "20", "");
+                trb.setCssStyle("trsingle");
+
+                TDBean tdbxh = new TDBean(i + "", "20", "");
                 TDBean tdbtz = new TDBean("投资", "40", "");
                 TDBean tdbmc = new TDBean(xmmc, "150", "");
                 trb.addTDBean(tdbxh);
@@ -65,8 +65,8 @@ public class YearPlanKf extends AbstractBaseBean implements IDataClass {
                     trb.addTDBean(tdb8);
                     trb.addTDBean(tdb9);
                     trb.addTDBean(tdb10);
-                }else{
-                    TDBean tdb1 = new TDBean("", "","");
+                } else {
+                    TDBean tdb1 = new TDBean("", "", "");
                     TDBean tdb2 = new TDBean("", "", "");
                     TDBean tdb3 = new TDBean("", "", "");
                     TDBean tdb4 = new TDBean("", "", "");
@@ -87,7 +87,7 @@ public class YearPlanKf extends AbstractBaseBean implements IDataClass {
                     trb.addTDBean(tdb9);
                     trb.addTDBean(tdb10);
                 }
-                trbeans.put("kf"+tdbxh.getText(), trb);
+                trbeans.put("kf" + tdbxh.getText(), trb);
             }
         }
         return trbeans;
