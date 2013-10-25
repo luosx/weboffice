@@ -87,7 +87,7 @@ public class YearPlanKf extends AbstractBaseBean implements IDataClass {
                     trb.addTDBean(tdb9);
                     trb.addTDBean(tdb10);
                 }
-                trbeans.put(tdbxh.getText(), trb);
+                trbeans.put("kf"+tdbxh.getText(), trb);
             }
         }
         return trbeans;

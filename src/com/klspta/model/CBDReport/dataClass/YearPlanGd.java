@@ -22,16 +22,16 @@ public class YearPlanGd extends AbstractBaseBean implements IDataClass {
             List<Map<String, Object>> trList;
             for (int i = 0; i < count; i++) {
                 xmmc = list.get(i).get("xmmc").toString();
-                sql = "select (select  sum(t.tz)  from hx_kftl t  where xmmc = ? and nd = '2011') as a,"
-                        + " (select sum(t.tz)  from hx_kftl t  where xmmc = ? and nd = '2012') as b,"
-                        + " (select sum(t.tz)  from hx_kftl t  where xmmc = ? and nd = '2013') as c,"
-                        + " (select sum(t.tz)  from hx_kftl t  where xmmc = ? and nd = '2014') as d,"
-                        + " (select sum(t.tz)  from hx_kftl t  where xmmc = ? and nd = '2015') as e,"
-                        + " (select sum(t.tz)  from hx_kftl t  where xmmc = ? and nd = '2016') as f,"
-                        + " (select sum(t.tz)  from hx_kftl t  where xmmc = ? and nd = '2017') as g,"
-                        + " (select sum(t.tz)  from hx_kftl t  where xmmc = ? and nd = '2018') as h,"
-                        + " (select sum(t.tz)  from hx_kftl t  where xmmc = ? and nd = '2019') as i,"
-                        + " (select sum(t.tz)  from hx_kftl t  where xmmc = ?) as j" + " from dual";
+                sql = "select (select  sum(t.gm)  from hx_gdtl t  where xmmc = ? and nd = '2011') as a,"
+                        + " (select sum(t.gm)  from hx_gdtl t  where xmmc = ? and nd = '2012') as b,"
+                        + " (select sum(t.gm)  from hx_gdtl t  where xmmc = ? and nd = '2013') as c,"
+                        + " (select sum(t.gm)  from hx_gdtl t  where xmmc = ? and nd = '2014') as d,"
+                        + " (select sum(t.gm)  from hx_gdtl t  where xmmc = ? and nd = '2015') as e,"
+                        + " (select sum(t.gm)  from hx_gdtl t  where xmmc = ? and nd = '2016') as f,"
+                        + " (select sum(t.gm)  from hx_gdtl t  where xmmc = ? and nd = '2017') as g,"
+                        + " (select sum(t.gm)  from hx_gdtl t  where xmmc = ? and nd = '2018') as h,"
+                        + " (select sum(t.gm)  from hx_gdtl t  where xmmc = ? and nd = '2019') as i,"
+                        + " (select sum(t.gm)  from hx_gdtl t  where xmmc = ?) as j" + " from dual";
                 trList = query(sql, YW, new Object[] { xmmc, xmmc, xmmc, xmmc, xmmc, xmmc, xmmc, xmmc, xmmc,
                         xmmc });
                 Map<String, Object> map = trList.get(0);
@@ -39,7 +39,7 @@ public class YearPlanGd extends AbstractBaseBean implements IDataClass {
                 trb.setCssStyle("trsingle"); 
                
                 TDBean tdbxh = new TDBean(i+"", "20", "");
-                TDBean tdbtz = new TDBean("投资", "40", "");
+                TDBean tdbtz = new TDBean("规模", "40", "");
                 TDBean tdbmc = new TDBean(xmmc, "150", "");
                 trb.addTDBean(tdbxh);
                 trb.addTDBean(tdbtz);
@@ -87,7 +87,7 @@ public class YearPlanGd extends AbstractBaseBean implements IDataClass {
                     trb.addTDBean(tdb9);
                     trb.addTDBean(tdb10);
                 }
-                trbeans.put(tdbxh.getText(), trb);
+                trbeans.put("gd"+tdbxh.getText(), trb);
             }
         }
         return trbeans;
