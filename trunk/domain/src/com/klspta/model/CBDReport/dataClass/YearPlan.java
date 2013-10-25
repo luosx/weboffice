@@ -36,9 +36,11 @@ public class YearPlan extends AbstractBaseBean implements IDataClass {
                         xmmc });
                 Map<String, Object> map = trList.get(0);
                 TRBean trb = new TRBean();
-                TDBean tdbxh = new TDBean(i+"", "", "");
-                TDBean tdbtz = new TDBean("投资", "", "");
-                TDBean tdbmc = new TDBean(xmmc, "", "");
+                trb.setCssStyle("trsingle"); 
+               
+                TDBean tdbxh = new TDBean(i+"", "20", "");
+                TDBean tdbtz = new TDBean("投资", "40", "");
+                TDBean tdbmc = new TDBean(xmmc, "150", "");
                 trb.addTDBean(tdbxh);
                 trb.addTDBean(tdbtz);
                 trb.addTDBean(tdbmc);
