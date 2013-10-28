@@ -119,6 +119,7 @@ function pro(id){
 
 //点击查看时，查看详细信息
 function process(id){
+alert(id);
 	var url = "<%=basePath%>/web/xuzhouNW/wpzf/wpxxqk/wpTab.jsp?type=blz&yw_guid=" + id;
 	document.location.href = url;
 	//window.open(url);
