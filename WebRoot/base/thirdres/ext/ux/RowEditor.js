@@ -196,10 +196,12 @@ Ext.ux.grid.RowEditor = Ext.extend(Ext.Panel, {
             }
             r.endEdit();
             this.fireEvent('afteredit', this, changes, r, this.rowIndex);
+            toSave(this,changes,r,this.rowIndex);
         }
         this.hide();
     },
 
+    
     verifyLayout: function(force){
         if(this.el && (this.isVisible() || force === true)){
             var row = this.grid.getView().getRow(this.rowIndex);
