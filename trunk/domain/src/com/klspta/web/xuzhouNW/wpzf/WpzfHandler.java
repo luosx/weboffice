@@ -18,7 +18,7 @@ public class WpzfHandler extends AbstractBaseBean {
 	public static final String HCQK_HF = "1";
 	public static final String HCQK_WF = "2";
 	public static final String HCQK_SSNYD = "3";
-	public static final String WP_FORM = "WP_TEST";
+	public static final String WP_FORM = "WP_XZ";
 	
 	/**
 	 * 
