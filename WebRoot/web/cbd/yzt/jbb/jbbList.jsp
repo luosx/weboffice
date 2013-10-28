@@ -180,6 +180,7 @@
         	});    
         	   
     	grid.render('mygrid_container');
+    
 	});
 	
 
@@ -267,6 +268,15 @@
            }
          } 
          
+  function toSave(obj,changes,r,num){
+     putClientCommond("jbbHandle","update");
+     putRestParameter("tbname","getQuery");
+     putRestParameter("tbbh",12); 
+     var cc=new Array();
+     cc.push(changes);
+     putRestParameter("tbchanges",escape(escape(Ext.encode(cc)))); 
+     var result = restRequest(); 
+  }
          
   function view(bh){
  		return "<span style='cursor:pointer;'return false;'><img src='base/form/images/view.png' alt='地图位置'></span>";		
