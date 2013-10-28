@@ -270,8 +270,8 @@
          
   function toSave(obj,changes,r,num){
      putClientCommond("jbbHandle","update");
-     putRestParameter("tbname","getQuery");
-     putRestParameter("tbbh",12); 
+     putRestParameter("tbname","jc_jiben");
+     putRestParameter("tbbh",r.YW_GUID); 
      var cc=new Array();
      cc.push(changes);
      putRestParameter("tbchanges",escape(escape(Ext.encode(cc)))); 
