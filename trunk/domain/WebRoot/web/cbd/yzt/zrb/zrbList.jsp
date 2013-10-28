@@ -204,6 +204,15 @@
            }
          }
          
+   function toSave(obj,changes,r,num){
+     putClientCommond("jbbHandle","update");
+     putRestParameter("tbname","jc_ziran");
+     putRestParameter("tbbh",r.YW_GUID); 
+     var cc=new Array();
+     cc.push(changes);
+     putRestParameter("tbchanges",escape(escape(Ext.encode(cc)))); 
+     var result = restRequest(); 
+  }
          
 function showLocation(bh){
    var url="<%=basePath%>"+"base/fxgis/fx/FxGIS.html?initFunction=[{\"name\":\"findFeature\",\"parameters\":\"CBD,1,"+bh+",TBBH\"}]";
