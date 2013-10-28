@@ -62,6 +62,45 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     line-height: 20px;
     text-align:center;
    }
+   .tr01{
+    background-color:#C0C0C0;
+    font-weight:bold;
+    font-size: 15px;
+    text-align:center;
+    line-height: 50px;
+	margin-top: 3px;  
+   }
+   .tr02{
+    background-color:#FFFF99;
+  	text-align:center;
+    font-weight:bold;
+    line-height: 30px;
+   }
+    .tr06{
+    background-color:#FFFFFF;
+  	text-align:center;
+    font-weight:bold;
+    line-height: 30px; 
+   }
+   .tr07{
+    background-color:#CCFFFF;
+  	text-align:center;
+    font-weight:bold;
+    line-height: 30px; 
+   }
+   .tr11{
+    background-color:#99CC00;
+  	text-align:center;
+    font-weight:bold;
+    line-height: 30px; 
+   }
+   
+    .tr16{
+    background-color:#FFCC99;
+  	text-align:center;
+    font-weight:bold;
+    line-height: 30px; 
+   }
 	</style>
   </head>
   <body>
