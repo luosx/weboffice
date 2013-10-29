@@ -3,6 +3,7 @@ package com.klspta.console.user;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -196,6 +197,31 @@ public class User implements UserDetails,org.jbpm.api.identity.User {
             e.printStackTrace();
         }
         return null;
+    }
+    
+    public List<String> getRoleIdListByRoleList(){
+        try{
+            List<Role> list = getRoleList();
+            if(list != null){
+                List<String> returnList = new ArrayList<String>();
+                Iterator<Role> iter = list.iterator();
+                while (iter.hasNext()) {
+                    Role role = iter.next();
+                    if(role != null){
+                        returnList.add(role.getRoleid());
+                    }
+                }
+                return returnList;
+            }else{
+                return null;
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+            return null;
+        }
+
+
+        
     }
     
     public static String getDeleteSQL(){
