@@ -12,12 +12,12 @@ public class Test implements IDataClass {
     public Map<String, TRBean> getTRBeans(Object[] obj) {
         Map<String, TRBean> trbeans = new LinkedHashMap<String, TRBean>();
         TRBean trb = new TRBean();
-        TDBean tdb = new TDBean("显示的内容");
-        TDBean tdb2 = new TDBean("显示的内容2");
-        TDBean tdb3 = new TDBean("显示的内容3");
-        TDBean tdb4 = new TDBean("显示的内容4");
-        TDBean tdb5 = new TDBean("显示的内容5");
-        TDBean tdb6 = new TDBean("显示的内容6");
+        TDBean tdb = new TDBean("显示的内容", "10", "10");
+        TDBean tdb2 = new TDBean("显示的内容2", "10", "10");
+        TDBean tdb3 = new TDBean("显示的内容3", "10", "10");
+        TDBean tdb4 = new TDBean("显示的内容4", "10", "10");
+        TDBean tdb5 = new TDBean("显示的内容5", "10", "10");
+        TDBean tdb6 = new TDBean("显示的内容6", "10", "10");
         trb.addTDBean(tdb);
         trb.addTDBean(tdb2);
         trb.addTDBean(tdb3);
