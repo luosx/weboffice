@@ -6,7 +6,7 @@ Ext.onReady(function(){
         width: 400,
   		labelWidth :60,   
   		labelAlign : "right",
-        url:"<%=basePath%>service/rest/hxxmManager/addKftl?xmbh=<%=yw_guid%>",
+        url:"",
         defaults: {
             anchor: '0'
         },
@@ -24,10 +24,12 @@ Ext.onReady(function(){
            	    columnWidth: .5, 
            	  	layout : "form",   
            	  	items :[{
-	                xtype: 'textfield',
+	                xtype: 'numberfield',
 	                id      : 'nd',
 	                value:'',
 	                fieldLabel: '年度',
+	                maxValue:2030,
+	                minValue:2012,
 	                 readOnly:true,
 	                 width :120
 	                }]
@@ -36,11 +38,13 @@ Ext.onReady(function(){
 	            columnWidth: .5, 
            	  	layout : "form",
            	  	items :[{
-	                xtype: 'textfield',
+	                xtype: 'numberfield',
 	                id      : 'jd',
 	                value:'',
 	                fieldLabel: '季度',
-	                 readOnly:true,
+	                maxValue:4,
+	                minValue:1,
+				    readOnly:true,
 	                 width :120
 	                }] 
             }]},
@@ -304,7 +308,7 @@ Ext.onReady(function(){
 							waitMsg: '正在保存,请稍候... ', 		
 							success:function(){ 
 							 Ext.Msg.alert('提示','保存成功。',function(){
-							   query();	
+							 	
 							 });
 							
 							}, 
@@ -314,12 +318,22 @@ Ext.onReady(function(){
 						});
                 	}
             	},   
-            {
-                text   : '关闭',
+            	            {
+                text   : '删除',
                 handler: function() {
-				    win2.hide();
-                }
-            }
+						 	Ext.Msg.confirm("删除确认","是否真的要删除该计划?",function(btuuon){
+                              	 if(btuuon=="yes"){
+                              	 	  putClientCommond("planManager","delKftl");
+  									  putRestParameter("xmmc",escape(escape(Ext.getCmp("xmmc").getValue())));
+									  putRestParameter("nd",Ext.getCmp("nd").getValue());
+									  putRestParameter("jd",Ext.getCmp("jd").getValue());
+									   var msg= restRequest();
+									   Ext.Msg.alert("提示","删除"+(msg.success==true?"成功":"失败"));
+									        win2.hide();                               	
+									   }
+							 });
+                	}
+            	}
         ]
   });		
 	 Ext.getCmp("hsbl").addListener('change',function(){   
@@ -350,36 +364,50 @@ Ext.onReady(function(){
                 closeAction:'hide',
 				items:form2
     });
-    putClientCommond("hxxmManager","getXmmc");
-    putRestParameter("xmbh",'<%=yw_guid%>')
-	var info = restRequest();
-	if(info[0]!=null){
-  	  Ext.getCmp("xmmc").setValue(info[0].XMNAME);
-  	  Ext.getCmp("xmhs").setValue(info[0].HS);
-  	  Ext.getCmp("xmdl").setValue(info[0].ZD);
-  	  Ext.getCmp("xmgm").setValue(info[0].GM);
-  	  Ext.getCmp("xmz").setValue(info[0].ZZCQFY);
-  	  Ext.getCmp("xmq").setValue(info[0].QYCQFY);
-  	  Ext.getCmp("xmtz").setValue(info[0].CQHBTZ);
-  	  Ext.getCmp("lm").setValue(info[0].LMCB);
-  	  Ext.getCmp("cj").setValue(info[0].LMCJJ);
-    }
 })
 
- function addTask(){
-    win2.items.items[0].form.url='<%=basePath%>service/rest/hxxmManager/addKftl?xmbh=<%=yw_guid%>';
-    win2.setTitle("开发体量录入");
-    Ext.getCmp("hs").reset();
-    Ext.getCmp("dl").reset();
-    Ext.getCmp("gm").reset();
-    Ext.getCmp("tz").reset();
-    Ext.getCmp("z").reset();
-    Ext.getCmp("q").reset();
-    Ext.getCmp("hsbl").reset();
-    Ext.getCmp("dlbl").reset();
-    Ext.getCmp("gmbl").reset();
-    Ext.getCmp("tzbl").reset();
-    Ext.getCmp("zbl").reset();
-    Ext.getCmp("qbl").reset();
-    win2.show();
+ function dealKftl(xmmc,nd,jd){
+ 	 putClientCommond("planManager","getXm");
+     putRestParameter("xmmc",escape(escape(xmmc)));
+   	 var info = restRequest();
+   	 	  Ext.getCmp("xmmc").setValue(xmmc);
+	  	  Ext.getCmp("nd").setValue(nd);
+	  	  Ext.getCmp("jd").setValue(jd);
+	 if(info[0]!=null){
+	   	  Ext.getCmp("xmhs").setValue(info[0].HS);
+	  	  Ext.getCmp("xmdl").setValue(info[0].ZD);
+	  	  Ext.getCmp("xmgm").setValue(info[0].GM);
+	  	  Ext.getCmp("xmz").setValue(info[0].ZZCQFY);
+	  	  Ext.getCmp("xmq").setValue(info[0].QYCQFY);
+	  	  Ext.getCmp("xmtz").setValue(info[0].CQHBTZ);
+	  	  Ext.getCmp("lm").setValue(info[0].LMCB);
+	  	  Ext.getCmp("cj").setValue(info[0].LMCJJ);
+	 }
+	  putClientCommond("hxxmManager","getKftl");
+      putRestParameter("xmmc",escape(escape(xmmc)));
+	  putRestParameter("nd",nd);
+	  putRestParameter("jd",jd);
+	  var sinData= restRequest();
+	  if(sinData[0]!=null){
+	  		   win2.items.items[0].form.url=restUrl+'planManager/updateKftl';
+   			    win2.setTitle("开发体量修改")
+	            Ext.getCmp("hs").setValue(sinData[0].HS);
+			    Ext.getCmp("dl").setValue(sinData[0].DL);
+			    Ext.getCmp("gm").setValue(sinData[0].GM);
+			    Ext.getCmp("tz").setValue(sinData[0].TZ);
+			    Ext.getCmp("z").setValue(sinData[0].Z);
+			    Ext.getCmp("q").setValue(sinData[0].Q);
+			    Ext.getCmp("hsbl").setValue(sinData[0].HSZ);
+			    Ext.getCmp("dlbl").setValue(sinData[0].DLZ);
+			    Ext.getCmp("gmbl").setValue(sinData[0].GMZ);
+			    Ext.getCmp("tzbl").setValue(sinData[0].TZZ);
+			    Ext.getCmp("zbl").setValue(sinData[0].ZHUZ);
+			    Ext.getCmp("qbl").setValue(sinData[0].QIZ);
+			    Ext.getCmp("lm").setValue(sinData[0].LM);
+			    Ext.getCmp("cj").setValue(sinData[0].CJ);
+	  }else{
+	      win2.items.items[0].form.url=restUrl+'planManager/addKftl';
+   			 win2.setTitle("开发体量录入");
+	  }
+	   win2.show();
  }
