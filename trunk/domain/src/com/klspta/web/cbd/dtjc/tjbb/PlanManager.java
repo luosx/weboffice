@@ -7,10 +7,11 @@ import java.util.Map;
 import org.springframework.stereotype.Component;
 
 import com.klspta.base.AbstractBaseBean;
+import com.klspta.base.util.UtilFactory;
 
 /**
  * 
- * <br>Title:红线项目管理
+ * <br>Title:计划管理
  * <br>Description:
  * <br>Author:陈强峰
  * <br>Date:2013-10-10
@@ -23,10 +24,10 @@ public class PlanManager extends AbstractBaseBean {
      * <br>Author:陈强峰
      * <br>Date:2013-10-11
      */
-    public void getXmmc(){
-        String xmbh=request.getParameter("xmbh").toString();
-        String sql="select xmname,zd,hs,gm,zzcqfy,qycqfy,cqhbtz,lmcb,lmcjj,zj,lmcjj,fwsj from jc_xiangmu where yw_guid=?";
-        List<Map<String,Object>> list=query(sql,YW,new Object[]{xmbh});
+    public void getXm(){
+        String xmmc=request.getParameter("xmmc").toString();
+        String sql="select zd,hs,gm,zzcqfy,qycqfy,cqhbtz,lmcb,lmcjj,zj,lmcjj,fwsj from jc_xiangmu where xmname=?";
+        List<Map<String,Object>> list=query(sql,YW,new Object[]{UtilFactory.getStrUtil().unescape(xmmc)});
         response(list);
     }
     
