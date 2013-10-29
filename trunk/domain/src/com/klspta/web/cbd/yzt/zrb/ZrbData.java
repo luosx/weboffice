@@ -15,7 +15,7 @@ public class ZrbData extends AbstractBaseBean implements IData {
     /**
      * 保存自然斑列表
      */
-    private static List<Map<String, Object>> zrbList;
+    public static List<Map<String, Object>> zrbList;
 
     /**
      * 
@@ -29,7 +29,8 @@ public class ZrbData extends AbstractBaseBean implements IData {
             return zrbList;
         }
         String sql = "select * from " + formName + " t order by to_number(t.yw_guid)";
-        return query(sql, YW);
+        zrbList=query(sql, YW);
+        return zrbList;
     }
 
     /**
