@@ -70,22 +70,22 @@ public class ZrbData extends AbstractBaseBean implements IData {
      * @return
      */
     public boolean updateZrb(HttpServletRequest request) {
-        String yw_guid=request.getParameter("tbbh");
-        String dbChanges=request.getParameter("tbchanges");
-        JSONArray js=JSONArray.fromObject(UtilFactory.getStrUtil().unescape(dbChanges));
+        String yw_guid = request.getParameter("tbbh");
+        String dbChanges = request.getParameter("tbchanges");
+        JSONArray js = JSONArray.fromObject(UtilFactory.getStrUtil().unescape(dbChanges));
         System.out.println(js);
         Iterator<?> it = js.getJSONObject(0).keys();
-        StringBuffer sb=new StringBuffer("update jc_ziran set ");
-        List<Object> list=new ArrayList<Object>();
-        while(it.hasNext()){        
-           String key = (String) it.next().toString();             
-           String value= js.getJSONObject(0).getString(key); 
-           sb.append(key).append("=?,");
-           list.add(value);
+        StringBuffer sb = new StringBuffer("update jc_ziran set ");
+        List<Object> list = new ArrayList<Object>();
+        while (it.hasNext()) {
+            String key = (String) it.next().toString();
+            String value = js.getJSONObject(0).getString(key);
+            sb.append(key).append("=?,");
+            list.add(value);
         }
         list.add(yw_guid);
-        sb.replace(sb.length()-1,sb.length()," where yw_guid=?");
-        int result=update(sb.toString(),YW,list.toArray());
-        return result==1?true:false;
+        sb.replace(sb.length() - 1, sb.length(), " where yw_guid=?");
+        int result = update(sb.toString(), YW, list.toArray());
+        return result == 1 ? true : false;
     }
 }
