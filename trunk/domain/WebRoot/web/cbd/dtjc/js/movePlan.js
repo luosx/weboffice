@@ -55,8 +55,11 @@ Move.prototype={
 			}
 		}
 		if(type != "callback"){
+			blockArray.push("moveLeft");
+			blockArray.push(this.row);
 			stack.Push(blockArray);
-			stack.Push("moveLeft");
+			//stack.Push("moveLeft");
+			//stack.Push
 		}
 	},
 	moveRight:function(type, blockArray){
@@ -79,8 +82,9 @@ Move.prototype={
 			}
 		}
 		if(type != "callback"){
+			blockArray.push("moveRight");
+			blockArray.push(this.row);
 			stack.Push(blockArray);
-			stack.Push("moveRight");
 		}
 	},
 	swapProperty:function(oldquarter, newquarter){
@@ -98,8 +102,11 @@ Move.prototype={
 		}
 	},
 	callBack: function(){
-		var typeName = stack.Pop();
 		var typeArray = stack.Pop();
+		var length = typeArray.length;
+		var typeName = typeArray[length - 2];
+		this.row = typeArray[length - 1];
+		typeArray.length = length - 2;
 		if(typeName == "moveLeft"){
 			this.moveRight("callback", typeArray);
 		}else if(typeName == "moveRight"){
