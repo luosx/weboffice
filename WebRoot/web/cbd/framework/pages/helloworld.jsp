@@ -188,53 +188,11 @@ Ext.onReady(function(){
            ]
 	});
 	
-	store = new Ext.data.JsonStore({
-		proxy: new Ext.ux.data.PagingMemoryProxy(myData),
-		remoteSort: true,
-		fields:[
-			{name:'CASEID'},
-			{name:'OUTDATE'},
-			{name:'DBID'}
-		]
-	});
-	
-	store.load({params:{start:0, limit:5}});
+
 	
 	var width = 280;
 	var height = 184;
-	grid = new Ext.grid.GridPanel({
-		store: store,
-		columns: [
-			new Ext.grid.RowNumberer(),
-				{header: '案件编号',dataIndex:'CASEID',width: width*0.4, sortable: true},
-			 	{header: '超期天数',dataIndex:'OUTDATE', width: width*0.65, sortable: true},
-			 	{header: 'DBID',dataIndex:'DBID', hidden:true,width: width*0.65, sortable: true}
-			],
-		stripeRows: true,
-		height: height,
-		stateful: true,
-		buttonAlign:'center',
-		bbar: new Ext.PagingToolbar({
-			pageSize: 5,
-			store: store
-			//displayInfo: true,
-			//displayMsg: '共{2}条，当前为：{0} - {1}条',
-			//emptyMsg: "无记录",
-			//plugins: new Ext.ux.ProgressBarPager()
-		}),
-		listeners:{
-			//双击事件
-	        'rowdblclick' : function(grid, rowIndex, e){ 
-	          //var record = grid.store.getAt(rowIndex);
-	          //var menuName = record.get('SXM'); 
-	          //var menuid = record.get('MENUID');
-	          //var menu1,menu23;
-	          chooseMenu('立案查处','00ae8ae23bb0dbcbf5b03d9e31d39968');
-	        }
-		}
-	});
-		
-	grid.render('jicui');
+	
 	
 });
 
