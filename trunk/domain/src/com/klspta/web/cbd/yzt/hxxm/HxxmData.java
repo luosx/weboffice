@@ -14,6 +14,9 @@ public class HxxmData extends AbstractBaseBean implements IData {
 
     private static final String jbformName = "JC_JIBEN";
 
+    /**
+     * 项目数据列表
+     */
     public static List<Map<String, Object>> xmList;
 
     @Override
