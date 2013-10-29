@@ -25,11 +25,10 @@ public class ZrbData extends AbstractBaseBean implements IData {
      * @param request
      */
     public List<Map<String, Object>> getAllList(HttpServletRequest request) {
-        if (zrbList != null) {
-            return zrbList;
+        if (zrbList == null) {
+            String sql = "select * from " + formName + " t order by to_number(t.yw_guid)";
+            zrbList = query(sql, YW);
         }
-        String sql = "select * from " + formName + " t order by to_number(t.yw_guid)";
-        zrbList = query(sql, YW);
         return zrbList;
     }
 
