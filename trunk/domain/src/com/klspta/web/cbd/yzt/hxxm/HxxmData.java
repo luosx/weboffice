@@ -18,7 +18,7 @@ public class HxxmData extends AbstractBaseBean implements IData {
 
     @Override
     public List<Map<String, Object>> getAllList(HttpServletRequest request) {
-        if (xmList== null) {
+        if (xmList == null) {
             StringBuffer sql = new StringBuffer();
             sql.append("select rownum xh,t.* from ").append(formName).append(" t");
             List<Map<String, Object>> resultList = query(sql.toString(), YW);
@@ -34,9 +34,9 @@ public class HxxmData extends AbstractBaseBean implements IData {
         querySql.append("select  rownum xh,t.* from ").append(formName).append(" t");
         if (keyWord != null) {
             keyWord = UtilFactory.getStrUtil().unescape(keyWord);
-            querySql.append(" where dkmc like '%");
+            querySql.append(" where xmname like '%");
             querySql.append(keyWord).append("%'");
-        }else if(xmList!=null){
+        } else if (xmList != null) {
             return xmList;
         }
         List<Map<String, Object>> resultList = query(querySql.toString(), YW);
