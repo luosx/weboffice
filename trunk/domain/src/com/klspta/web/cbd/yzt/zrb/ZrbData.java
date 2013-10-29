@@ -1,9 +1,13 @@
 package com.klspta.web.cbd.yzt.zrb;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+
+import net.sf.json.JSONArray;
 
 import com.klspta.base.AbstractBaseBean;
 import com.klspta.base.util.UtilFactory;
@@ -65,7 +69,23 @@ public class ZrbData extends AbstractBaseBean implements IData {
      * @param request
      * @return
      */
-    public String updateZrb(HttpServletRequest request) {
-        return null;
+    public boolean updateZrb(HttpServletRequest request) {
+        String yw_guid=request.getParameter("tbbh");
+        String dbChanges=request.getParameter("tbchanges");
+        JSONArray js=JSONArray.fromObject(UtilFactory.getStrUtil().unescape(dbChanges));
+        System.out.println(js);
+        Iterator<?> it = js.getJSONObject(0).keys();
+        StringBuffer sb=new StringBuffer("update jc_ziran set ");
+        List<Object> list=new ArrayList<Object>();
+        while(it.hasNext()){        
+           String key = (String) it.next().toString();             
+           String value= js.getJSONObject(0).getString(key); 
+           sb.append(key).append("=?,");
+           list.add(value);
+        }
+        list.add(yw_guid);
+        sb.replace(sb.length()-1,sb.length()," where yw_guid=?");
+        int result=update(sb.toString(),YW,list.toArray());
+        return result==1?true:false;
     }
 }
