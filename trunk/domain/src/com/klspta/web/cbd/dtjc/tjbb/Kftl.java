@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.stereotype.Component;
 
 import com.klspta.base.AbstractBaseBean;
+import com.klspta.base.util.UtilFactory;
 
 /**
  * 
@@ -57,7 +58,7 @@ public class Kftl extends AbstractBaseBean {
         String cj = request.getParameter("cj");
         String season = request.getParameter("jd");
         String xmbh = getXmbh(xmmc);
-        String sql = "insert into hx_kftl(xmmc,nd,jd,hs,dl,gm,tz,zhu,qi,lm,cj,yf,hsz,dlz,gmz,tzz,zhuz,qiz,xmguid) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "insert into hx_kftl(xmmc,nd,jd,hs,dl,gm,tz,zhu,qi,lm,cj,hsz,dlz,gmz,tzz,zhuz,qiz,xmguid) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         int flag = update(sql, YW, new Object[] { xmmc, year, season, hs, dl, gm, tz, z, q, lm, cj, hsz, dlz,
                 gmz, tzz, zhuz, qiz, xmbh });
         if (flag == 1) {
@@ -80,7 +81,6 @@ public class Kftl extends AbstractBaseBean {
     public void update() {
         String xmmc = request.getParameter("xmmc");
         String year = request.getParameter("nd");
-        String month = request.getParameter("month");
         String hs = request.getParameter("hs");
         String dl = request.getParameter("dl");
         String gm = request.getParameter("gm");
@@ -115,7 +115,7 @@ public class Kftl extends AbstractBaseBean {
      * <br>Date:2013-10-11
      */
     public void delete() {
-        String xmmc = request.getParameter("xmmc");
+        String xmmc = UtilFactory.getStrUtil().unescape(request.getParameter("xmmc"));
         String year = request.getParameter("nd");
         String season = request.getParameter("jd");
         String xmbh = getXmbh(xmmc);
@@ -145,8 +145,6 @@ public class Kftl extends AbstractBaseBean {
         List<Map<String, Object>> list = query(sql, YW, new Object[] { xmmc, nd, jd });
         response(list);
     }
-
-
 
     /**
      * 
@@ -247,7 +245,7 @@ public class Kftl extends AbstractBaseBean {
             } else {
                 lastJd = String.valueOf(Integer.parseInt(jd) - 1);
             }
-            sql = "select cbkkc fom hx_sx where nd=? and jd=?";
+            sql = "select cbkkc from hx_sx where nd=? and jd=?";
             List<Map<String, Object>> lastSeasonList = query(sql, YW, new Object[] { lastNd, lastJd });
             double lastCbkkc = 0;
             if (lastSeasonList.size() > 0) {
@@ -263,7 +261,7 @@ public class Kftl extends AbstractBaseBean {
                 lastCbkkc = obj == null ? 0 : Double.parseDouble(obj.toString());
             }
             //更新储备库库存
-            double cbkkc = lastCbkkc + Double.parseDouble(map.get("kfgm").toString()) - gygm;
+            double cbkkc = lastCbkkc + Double.parseDouble(checkNull(map.get("kfgm"))) - gygm;
             double cbkrznl = cbkkc * pgtdjz * dyl * (1 - rzss);
             sql = "update hx_sx set cbkkc=?,cbkrznl=? where nd=?,jd=?";
             update(sql, YW, new Object[] { String.valueOf(cbkkc), String.valueOf(cbkrznl), nd, jd });
@@ -277,5 +275,13 @@ public class Kftl extends AbstractBaseBean {
             return list.get(0).get("yw_guid").toString();
         }
         return "";
+    }
+
+    private String checkNull(Object obj) {
+        if (obj == null) {
+            return "";
+        } else {
+            return obj.toString();
+        }
     }
 }
