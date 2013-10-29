@@ -99,7 +99,7 @@
 		           {header: '非住宅楼座面积', dataIndex:'FZZLZMJ',width: width*0.09, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
 		           {header: '非住宅拆迁规模', dataIndex:'FZZCQGM',width: width*0.09, sortable: false, editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
 		           {header: '备注', dataIndex:'BZ',width: 140, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
-		     		{header: '位置查看', dataIndex:'DKBH',width:50, sortable: false,renderer:view}	
+		     		{header: '位置查看', width:50, sortable: false,renderer:view}	
 		        ], 
 		        tbar:[
 	    			{xtype:'label',text:'快速查询:',width:60},
@@ -177,7 +177,7 @@
 		           {header: '非住宅楼座面积', dataIndex:'FZZLZMJ',width: width*0.09, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
 		           {header: '非住宅拆迁规模', dataIndex:'FZZCQGM',width: width*0.09, sortable: false, editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
 		           {header: '备注', dataIndex:'BZ',width: 150, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
-		     		{header: '位置查看', dataIndex:'DKBH',width:50, sortable: false,renderer:view}	
+		     		{header: '位置查看',width:50, sortable: false,renderer:view}	
           ]));
           	//重新绑定分页工具栏
 			grid.getBottomToolbar().bind(store);
@@ -205,13 +205,17 @@
          }
          
    function toSave(obj,changes,r,num){
-     putClientCommond("jbbHandle","update");
-     putRestParameter("tbname","jc_ziran");
-     putRestParameter("tbbh",r.YW_GUID); 
+     putClientCommond("zrbHandle","updateZrb");
+     putRestParameter("tbbh",r.data.YW_GUID); 
      var cc=new Array();
      cc.push(changes);
      putRestParameter("tbchanges",escape(escape(Ext.encode(cc)))); 
-     var result = restRequest(); 
+     var result = restRequest();
+     if(result.success){
+     	Ext.Msg.alert('提示',"更新成功"); 
+     }else{
+     	Ext.Msg.alert('提示',"更新失败");
+     }
   }
          
 function showLocation(bh){
