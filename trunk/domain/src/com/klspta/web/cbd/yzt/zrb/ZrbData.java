@@ -29,7 +29,7 @@ public class ZrbData extends AbstractBaseBean implements IData {
             return zrbList;
         }
         String sql = "select * from " + formName + " t order by to_number(t.yw_guid)";
-        zrbList=query(sql, YW);
+        zrbList = query(sql, YW);
         return zrbList;
     }
 
@@ -51,7 +51,7 @@ public class ZrbData extends AbstractBaseBean implements IData {
             querySql
                     .append("where t.yw_guid||t.zrbbh||t.zdmj||t.lzmj||t.cqgm||t.zzlzmj||t.zzcqgm||t.yjhs||t.fzzlzmj||t.fzzcqgm||t.bz like '%");
             querySql.append(keyWord).append("%'");
-        }else if(zrbList!=null){
+        } else if (zrbList != null) {
             return zrbList;
         }
         querySql.append(" order by to_number(t.yw_guid)");
