@@ -45,12 +45,28 @@ public class JbbData extends AbstractBaseBean implements IData  {
 	
 	
 	private List<Map<String, Object>> addZrb(List<Map<String, Object>> resultList){
-		String zrb = "select t.zrbbh from " + zrformName + " t where t.jbguid = ?";
+//		String zrb = "select t.zrbbh from " + zrformName + " t where t.jbguid = ?";
+//		for(int i = 0; i < resultList.size(); i++){
+//			String zrbbh = "";
+//			Map<String, Object> resultMap = resultList.get(i);
+//			String jbGuid = String.valueOf(resultMap.get("YW_GUID"));
+//			List<Map<String, Object>> zrList = query(zrb, YW, new Object[]{jbGuid});
+//			for(int j = 0; j < zrList.size(); j++){
+//				zrbbh += String.valueOf(zrList.get(j).get("zrbbh"));
+//			}
+//			resultList.get(i).put("zrbbh", zrbbh);
+//		}
+//		return resultList;
+		
+		StringBuffer zrb = new StringBuffer("select t.zrbbh from " + zrformName + " t where t.jbguid = ");
 		for(int i = 0; i < resultList.size(); i++){
 			String zrbbh = "";
 			Map<String, Object> resultMap = resultList.get(i);
 			String jbGuid = String.valueOf(resultMap.get("YW_GUID"));
-			List<Map<String, Object>> zrList = query(zrb, YW, new Object[]{jbGuid});
+			List<Map<String, Object>> zrList = query(zrb.append("'"+jbGuid+"'").toString(), YW);
+			if(zrList == null){
+				System.out.println("是空的");
+			}
 			for(int j = 0; j < zrList.size(); j++){
 				zrbbh += String.valueOf(zrList.get(j).get("zrbbh"));
 			}
