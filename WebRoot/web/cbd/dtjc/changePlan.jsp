@@ -122,7 +122,7 @@ int width = Integer.parseInt(String.valueOf(planYear.get("maxyear"))) - Integer.
 
   </script>
   <body>
-  	<div id="showDiv" class="divstyle" style="display:none;">
+  	<div id="showDiv" class="divstyle" style="display:none;" onDblClick="showDetail(); return false;">
   	  <table  style="width:80px; height:30px;" cellpadding="0px" cellspacing="0px" >
 	  	<!--
 	  	<tr>
@@ -153,6 +153,7 @@ int width = Integer.parseInt(String.valueOf(planYear.get("maxyear"))) - Integer.
 	</div>
 		 	<div id="addWin" class="x-hidden">
 		</div>
-		<button value="12131" onclick="addTask()">
+				 	<div id="addWin2" class="x-hidden">
+		</div>
   </body>
 </html>
