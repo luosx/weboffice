@@ -678,7 +678,7 @@ Ext.onReady(function(){
                 applyTo:'addWin2',
                 title:'供地体量录入',
                 width:410,
-                height:330,
+                height:335,
                 closeAction:'hide',
 				items:form3
     });
