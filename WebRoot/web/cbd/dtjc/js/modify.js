@@ -308,7 +308,7 @@ Ext.onReady(function(){
 							waitMsg: '正在保存,请稍候... ', 		
 							success:function(){ 
 							 Ext.Msg.alert('提示','保存成功。',function(){
-							 	
+							 	 window.location.reload();
 							 });
 							
 							}, 
@@ -452,7 +452,6 @@ Ext.onReady(function(){
 	                maxValue:100,
 	                fieldLabel: '地量%',
 	                  width : 60
-	                
                 }]
             }]},
    			{
@@ -511,7 +510,7 @@ Ext.onReady(function(){
 	                id      : 'gdcb',
 	                value:'',
 	                fieldLabel: '成本',
-	                   readOnly:true,
+	                 readOnly:true,
 	                 width :60
 	                }]}, 
 	                {
@@ -644,7 +643,7 @@ Ext.onReady(function(){
 							waitMsg: '正在保存,请稍候... ', 		
 							success:function(){ 
 							 Ext.Msg.alert('提示','保存成功。',function(){
-							   query();
+							 	 window.location.reload();
 							 });
 							
 							}, 
