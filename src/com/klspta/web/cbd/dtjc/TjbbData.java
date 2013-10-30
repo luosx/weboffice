@@ -1,0 +1,154 @@
+package com.klspta.web.cbd.dtjc;
+
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
+import java.util.TreeSet;
+
+import com.klspta.base.AbstractBaseBean;
+
+/**
+ * 
+ * <br>Title:统计报表数据处理类
+ * <br>Description:接受管理类的请求，增、删、改、查统计报表类数据
+ * <br>Author:黎春行
+ * <br>Date:2013-10-29
+ */
+public class TjbbData extends AbstractBaseBean {
+	/*
+	 * 缓存，存储已制定计划的最大年份
+	 */
+	private static String max_year = "0";
+	private static String formSX = "HX_SX" ;
+	private  Map<String, Map<String, Object>> kftlPlan = new TreeMap<String, Map<String,Object>>();
+	private  Map<String, Map<String, Object>> gdtlPlan = new TreeMap<String, Map<String,Object>>();
+	/**
+	 * 
+	 * <br>Description:获取统计报表中的最大年度
+	 * <br>Author:黎春行
+	 * <br>Date:2013-10-29
+	 */
+	public String getMaxYear(){
+		if("0" == max_year){
+			StringBuffer sql = new StringBuffer();
+			sql.append("select max(t.nd) as nd from ").append(formSX).append(" t");
+			List<Map<String, Object>> resultList = query(sql.toString(), YW);
+			max_year = String.valueOf(resultList.get(0).get("nd"));
+		}
+		return max_year;
+	}
+	
+	/**
+	 * 
+	 * <br>Description:获取所有开发体量计划项目
+	 * <br>Author:黎春行
+	 * <br>Date:2013-10-29
+	 * @return
+	 */
+	public Set<String> getKFTLProject(){
+		Set<String> projectSet = new TreeSet<String>();
+		String projctsSql = "select distinct t.xmmc from hx_kftl t order by t.xmmc";
+		List<Map<String, Object>> resultList = query(projctsSql, YW);
+		for(int i = 0; i < resultList.size(); i++){
+			projectSet.add(String.valueOf(resultList.get(i).get("xmmc")));
+		}
+		return projectSet;
+	}
+	
+	/**
+	 * 
+	 * <br>Description:获取所有供地体量计划项目
+	 * <br>Author:黎春行
+	 * <br>Date:2013-10-29
+	 * @return
+	 */
+	public Set<String> getGDTLProject(){
+		Set<String> projectSet = new TreeSet<String>();
+		String projctsSql = "select distinct t.xmmc from hx_gdtl t order by t.xmmc";
+		List<Map<String, Object>> resultList = query(projctsSql, YW);
+		for(int i = 0; i < resultList.size(); i++){
+			projectSet.add(String.valueOf(resultList.get(i).get("xmmc")));
+		}
+		return projectSet;
+	}
+	
+	public Map<String, Map<String, Object>> getKFTLPlan(){
+		String sqlString = "select * from hx_kftl t order by t.nd, t.jd ";
+		List<Map<String, Object>> sxList = query(sqlString, YW);
+		for(Map<String, Object> kftl : sxList){
+			String xmmc = String.valueOf(kftl.get("xmmc"));
+			if(kftlPlan.containsKey(xmmc)){
+				Map<String, Object> planMap = kftlPlan.get(xmmc);
+				String year = String.valueOf(kftl.get("nd"));
+				String quarter = String.valueOf(kftl.get("jd"));
+				String key = year + "##" + quarter;
+				planMap.put(key, kftl);
+				kftlPlan.put(xmmc, planMap);
+			}else{
+				Map<String, Object> planMap = new TreeMap<String, Object>();
+				String year = String.valueOf(kftl.get("nd"));
+				String quarter = String.valueOf(kftl.get("jd"));
+				String key = year + "##" + quarter;
+				planMap.put(key, kftl);
+				kftlPlan.put(xmmc, planMap);
+			}
+		} 
+		return kftlPlan;
+	}
+	
+	public Map<String, Map<String, Object>> getGDTLPlan(){
+		String sqlString = "select * from hx_gdtl t order by t.nd, t.jd ";
+		List<Map<String, Object>> sxList = query(sqlString, YW);
+		for(Map<String, Object> gdtl : sxList){
+			String xmmc = String.valueOf(gdtl.get("xmmc"));
+			if(gdtlPlan.containsKey(xmmc)){
+				Map<String, Object> planMap = gdtlPlan.get(xmmc);
+				String year = String.valueOf(gdtl.get("nd"));
+				String quarter = String.valueOf(gdtl.get("jd"));
+				String key = year + "##" + quarter;
+				planMap.put(key, gdtl);
+				gdtlPlan.put(xmmc, planMap);
+			}else{
+				Map<String, Object> planMap = new TreeMap<String, Object>();
+				String year = String.valueOf(gdtl.get("nd"));
+				String quarter = String.valueOf(gdtl.get("jd"));
+				String key = year + "##" + quarter;
+				planMap.put(key, gdtl);
+				gdtlPlan.put(xmmc, planMap);
+			}
+		} 
+		return gdtlPlan;
+	}
+	
+	/**
+	 * 
+	 * <br>Description:修改时序信息
+	 * <br>Author:黎春行
+	 * <br>Date:2013-10-30
+	 * @param formName
+	 * @param setValues
+	 * @param conditions
+	 * @return
+	 */
+	public int changeQuarter(String formName, Map<String, String> setValues, Map<String, String> conditions){
+		StringBuffer sql = new StringBuffer();
+		sql.append("update ").append(formName).append(" t set ");
+		Set<String> nameSet = setValues.keySet();
+		Set<String> conditonSet = conditions.keySet();
+		for(String name : nameSet ){
+			sql.append("t.").append(name).append("=").append("'").append(setValues.get(name)).append("' ,");
+		}
+		int length = sql.length();
+		sql.deleteCharAt(length - 1);
+		sql.append("where 1=1  ");
+		for(String conditon : conditonSet){
+			sql.append(" and t.").append(conditon).append("=").append("'").append(conditions.get(conditon)).append("'");
+		}
+		
+		return update(sql.toString(), YW);
+	}
+
+}
