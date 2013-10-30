@@ -109,7 +109,7 @@
 		            {name: 'YW_GUID'}
 				]
 			});
-			store.load({params:{start:0, limit:10}});
+			store.load({params:{start:0, limit:15}});
 			grid = new Ext.grid.GridPanel({
 				title:'基本斑列表',
 		        store: store,
@@ -252,7 +252,7 @@
           	//重新绑定分页工具栏
 			grid.getBottomToolbar().bind(store);
 			//重新加载数据集
-			store.load({params:{start:0,limit:10}}); 
+			store.load({params:{start:0,limit:15}}); 
         }
         
         function changKeyword(val){
