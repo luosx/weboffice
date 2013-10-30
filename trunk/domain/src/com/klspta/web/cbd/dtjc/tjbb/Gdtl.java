@@ -17,21 +17,22 @@ import com.klspta.base.util.UtilFactory;
  */
 @Component
 public class Gdtl extends AbstractBaseBean {
-    
+
     /**
      * 评估土地价值
      */
-    private double pgtdjz=2;
+    private double pgtdjz = 2;
+
     /**
      * 抵押率
      */
-    private double dyl=0.2;
-     /**
-      * 融资损失
-      */
-    private double rzss=0;
-    
-    
+    private double dyl = 0.2;
+
+    /**
+     * 融资损失
+     */
+    private double rzss = 0;
+
     /**
      * 
      * <br>Description:新增供地体量
@@ -39,10 +40,8 @@ public class Gdtl extends AbstractBaseBean {
      * <br>Date:2013-10-10
      */
     public void add() {
-        String xmbh = request.getParameter("xmbh");
         String xmmc = request.getParameter("xmmc");
-        String year = request.getParameter("year");
-        String month = request.getParameter("month");
+        String year = request.getParameter("nd");
         String dl = request.getParameter("dl");
         String gm = request.getParameter("gm");
         String cb = request.getParameter("cb");
@@ -54,12 +53,11 @@ public class Gdtl extends AbstractBaseBean {
         String syz = request.getParameter("sybl");
         String zjz = request.getParameter("zjbl");
         String zujin = request.getParameter("zujin");
-        String season = getSeason(month);
-        //删除已存在同月信息
-        String sql="delete from hx_gdtl where nd=? and yf=? and xmguid=?";
-        update(sql, YW, new Object[]{year,month,xmbh});
-        sql = "insert into hx_gdtl(xmmc,nd,jd,dl,gm,cb,sy,zj,zuj,xmguid,yf,dlz,gmz,cbz,syz,zjz) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-        int flag = update(sql, YW, new Object[] { xmmc, year, season, dl, gm, cb, sy, zj, zujin,xmbh,month,dlz,gmz,cbz,syz,zjz});
+        String season = request.getParameter("jd");
+        String xmbh = getXmbh(xmmc);
+        String sql = "insert into hx_gdtl(xmmc,nd,jd,dl,gm,cb,sy,zj,zuj,xmguid,dlz,gmz,cbz,syz,zjz) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        int flag = update(sql, YW, new Object[] { xmmc, year, season, dl, gm, cb, sy, zj, zujin, xmbh, dlz,
+                gmz, cbz, syz, zjz });
         if (flag == 1) {
             insertToSx(year, season, xmbh);
             updateTj(year, season);
@@ -78,9 +76,8 @@ public class Gdtl extends AbstractBaseBean {
      * <br>Date:2013-10-11
      */
     public void update() {
-        String gdbh = request.getParameter("gdbh");
+        String xmmc = request.getParameter("xmmc");
         String year = request.getParameter("year");
-        String month = request.getParameter("month");
         String dl = request.getParameter("dl");
         String gm = request.getParameter("gm");
         String cb = request.getParameter("cb");
@@ -92,34 +89,14 @@ public class Gdtl extends AbstractBaseBean {
         String syz = request.getParameter("sybl");
         String zjz = request.getParameter("zjbl");
         String zujin = request.getParameter("zujin");
-        String season = getSeason(month);
-        String sql = "select nd,jd from hx_gdtl where yw_guid=?";
-        List<Map<String, Object>> list = query(sql, YW, new Object[] { gdbh });
-        boolean seasonChange = false;
-        String oldYear="";
-        String oldSeason="";
-        if (list.size() > 0) {
-            Map<String, Object> map = list.get(0);
-            oldYear = map.get("nd").toString();
-            oldSeason = map.get("jd").toString();
-            if (oldYear.equals(year) && oldSeason.equals(season)) {
-
-            } else {
-                seasonChange=judgeCount(year,season,gdbh);
-            }
-        }
-        sql = "update hx_gdtl set nd=?,jd=?,dl=?,gm=?,cb=?,sy=?,zj=?,zuj=?,dlz=?,gmz=?,cbz=?,syz=?,zjz=?,yf=? where yw_guid=?";
-        int flag = update(sql, YW, new Object[] { year, season, dl, gm, cb, sy, zj, zujin,dlz,gmz,cbz,syz,zjz,month,gdbh});
+        String season = request.getParameter("jd");
+        String xmbh = getXmbh(xmmc);
+        String sql = "update hx_gdtl set dl=?,gm=?,cb=?,sy=?,zj=?,zuj=?,dlz=?,gmz=?,cbz=?,syz=?,zjz=? where nd=? and jd=? and xmguid=?";
+        int flag = update(sql, YW, new Object[] { dl, gm, cb, sy, zj, zujin, dlz, gmz, cbz, syz, zjz, year,
+                season, xmbh });
         if (flag == 0) {
             response("{success:false}");
         } else {
-            if (seasonChange) {
-                //删除旧的时序关联
-                removeFromSx(oldYear, oldSeason, gdbh);
-                //插入新的时序关联
-                insertToSx(year, season, gdbh);
-                updateTj(oldYear, oldSeason);           
-            }
             updateTj(year, season);
             response("{success:true}");
         }
@@ -132,26 +109,18 @@ public class Gdtl extends AbstractBaseBean {
      * <br>Date:2013-10-11
      */
     public void delete() {
-        String gdbh = request.getParameter("gdbh");
-        String sql="select nd,jd,xmguid from hx_gdtl where yw_guid=?";
-        List<Map<String,Object>> list=query(sql,YW,new Object[]{gdbh});
-        if(list.size()>0){
-            Map<String,Object> map=list.get(0);
-            String nd=map.get("nd").toString();
-            String jd=map.get("jd").toString();
-            String xmbh=map.get("xmguid").toString();
-            boolean isSingle=judgeCount(nd, jd, xmbh);
-            sql = "delete from hx_gdtl where yw_guid=?";
-            int flag = update(sql, YW, new Object[] { gdbh });
-            if (flag == 0) {
-                response("{success:false}");
-            } else {
-                if(isSingle){
-                    removeFromSx(nd, jd, xmbh);
-                }
-                updateTj(nd,jd);
-                response("{success:true}");
-            }
+        String xmmc = UtilFactory.getStrUtil().unescape(request.getParameter("xmmc"));
+        String year = request.getParameter("nd");
+        String season = request.getParameter("jd");
+        String xmbh = getXmbh(xmmc);
+        String sql = "select nd,jd,xmguid from hx_gdtl where nd=? and jd=? and xmguid=?";
+        int flag = update(sql, YW, new Object[] { year, season, xmbh });
+        if (flag == 0) {
+            response("{success:false}");
+        } else {
+            removeFromSx(year, season, xmbh);
+            updateTj(year, season);
+            response("{success:true}");
         }
         response("{success:false}");
     }
@@ -163,17 +132,17 @@ public class Gdtl extends AbstractBaseBean {
      * <br>Date:2013-10-11
      */
     public void query() {
-        String xmbh = request.getParameter("xmbh");  
-        String keyWord=request.getParameter("keyWord");
-        String sql="select xmmc,nd||'-'||yf as sx,dl,gm,cb,sy,zj,zuj as zujin,rownum-1 as mod,rownum-1 as del,yw_guid  as gdbh,dlz,gmz,cbz,syz,zjz,yf from hx_gdtl where xmguid=?";
+        String xmbh = request.getParameter("xmbh");
+        String keyWord = request.getParameter("keyWord");
+        String sql = "select xmmc,nd||'-'||yf as sx,dl,gm,cb,sy,zj,zuj as zujin,rownum-1 as mod,rownum-1 as del,yw_guid  as gdbh,dlz,gmz,cbz,syz,zjz,yf from hx_gdtl where xmguid=?";
         if (keyWord != null) {
             keyWord = UtilFactory.getStrUtil().unescape(keyWord);
-            sql+=" and nd||'-'||yf like '%"+keyWord+"%'";
+            sql += " and nd||'-'||yf like '%" + keyWord + "%'";
         }
-        List<Map<String,Object>> list=query(sql,YW,new Object[]{xmbh});
+        List<Map<String, Object>> list = query(sql, YW, new Object[] { xmbh });
         response(list);
     }
-    
+
     /**
      * 
      * <br>Description:获取季度
@@ -210,8 +179,8 @@ public class Gdtl extends AbstractBaseBean {
         String sql = "select gdtl from hx_sx where nd=? and jd=?";
         List<Map<String, Object>> list = query(sql, YW, new Object[] { nd, jd });
         if (list.size() > 0) {
-            Object obj= list.get(0).get("gdtl");
-            String gdtls =obj==null?"":obj.toString();
+            Object obj = list.get(0).get("gdtl");
+            String gdtls = obj == null ? "" : obj.toString();
             if (gdtls.indexOf(xmbh) < 0) {
                 StringBuffer sb = new StringBuffer(gdtls);
                 sql = "update hx_sx set gdtl =? where nd=? and jd=?";
@@ -240,9 +209,9 @@ public class Gdtl extends AbstractBaseBean {
     private void removeFromSx(String nd, String jd, String xmbh) {
         String sql = "select gdtl from hx_sx where nd=? and jd=?";
         List<Map<String, Object>> listGdtl = query(sql, YW, new Object[] { nd, jd });
-        if(listGdtl.size()>0){
-            Object obj=listGdtl.get(0).get("gdtl");
-            String gdtls = obj==null?"":obj.toString();
+        if (listGdtl.size() > 0) {
+            Object obj = listGdtl.get(0).get("gdtl");
+            String gdtls = obj == null ? "" : obj.toString();
             if (gdtls.indexOf(xmbh) >= 0) {
                 gdtls = gdtls.replace(xmbh + ",", "").replace(xmbh, "");
                 sql = "update hx_sx set gdtl =? where nd=? and jd=?";
@@ -264,13 +233,12 @@ public class Gdtl extends AbstractBaseBean {
     private boolean judgeCount(String nd, String jd, String xmbh) {
         String sql = "select yw_guid from hx_gdtl where nd=? and jd=? and xmguid=?";
         List<Map<String, Object>> listCount = query(sql, YW, new Object[] { nd, jd, xmbh });
-        if (listCount.size() ==1) {
+        if (listCount.size() == 1) {
             return true;
         }
         return false;
     }
-    
-    
+
     /**
      * 
      * <br>Description:根据年度季度更新相应的供地体量统计
@@ -279,42 +247,52 @@ public class Gdtl extends AbstractBaseBean {
      * @param nd
      * @param jd
      */
-    private void updateTj(String nd, String jd){
-      String sql="select sum(dl) as gydl,sum(gm) as gygm  from hx_gdtl t where  nd=? and jd=? ";
-      List<Map<String,Object>> list=query(sql,YW,new Object[]{nd,jd});
-      if(list.size()>0){
-          Map<String,Object> map=list.get(0);
-          Object gytd=map.get("gydl");
-          Object gygm=map.get("gygm");
-          String lastNd=nd;
-          String lastJd=jd;
-          if(jd.indexOf("1")==0){
-              lastNd=Integer.parseInt(nd)-1+"";
-              lastJd="4";
-          }else{
-              lastJd=Integer.parseInt(jd)-1+"";
-          }
-        //获取上季度的储备库库存
-          sql="select cbkkc fom hx_sx where nd=? and jd=?";
-          List<Map<String,Object>> lastSeasonList=query(sql,YW,new Object[]{lastNd,lastJd});
-          double lastCbkkc=0;
-          if(lastSeasonList.size()>0){
-              Object obj=lastSeasonList.get(0).get("cbkkc");
-              lastCbkkc=obj==null?0:Double.parseDouble(obj.toString());
-          }
-          //获取本季度的完成开发规模
-          sql="select wckfgm from hx_sx where nd=? and jd=?";
-          List<Map<String,Object>> seasonList=query(sql,YW,new Object[]{lastNd,lastJd});
-          double wckfgm=0;
-          if(seasonList.size()>0){
-              Object obj=lastSeasonList.get(0).get("wckfgm");
-              wckfgm=obj==null?0:Double.parseDouble(obj.toString());
-          }
-          //更新储备库库存
-          double cbkkc=lastCbkkc+wckfgm-Double.parseDouble(gygm.toString());
-          double cbkrznl=cbkkc*pgtdjz*dyl*(1-rzss);
-          sql="update hx_sx set gytd=?,gygm=?,cbkkc=?,cbkrznl=? where nd=?,jd=?";
-          update(sql,YW,new Object[]{gytd,gygm,String.valueOf(cbkkc),String.valueOf(cbkrznl),nd,jd});
-      }
+    private void updateTj(String nd, String jd) {
+        String sql = "select sum(dl) as gydl,sum(gm) as gygm  from hx_gdtl t where  nd=? and jd=? ";
+        List<Map<String, Object>> list = query(sql, YW, new Object[] { nd, jd });
+        if (list.size() > 0) {
+            Map<String, Object> map = list.get(0);
+            Object gytd = map.get("gydl");
+            Object gygm = map.get("gygm");
+            String lastNd = nd;
+            String lastJd = jd;
+            if (jd.indexOf("1") == 0) {
+                lastNd = Integer.parseInt(nd) - 1 + "";
+                lastJd = "4";
+            } else {
+                lastJd = Integer.parseInt(jd) - 1 + "";
+            }
+            //获取上季度的储备库库存
+            sql = "select cbkkc fom hx_sx where nd=? and jd=?";
+            List<Map<String, Object>> lastSeasonList = query(sql, YW, new Object[] { lastNd, lastJd });
+            double lastCbkkc = 0;
+            if (lastSeasonList.size() > 0) {
+                Object obj = lastSeasonList.get(0).get("cbkkc");
+                lastCbkkc = obj == null ? 0 : Double.parseDouble(obj.toString());
+            }
+            //获取本季度的完成开发规模
+            sql = "select wckfgm from hx_sx where nd=? and jd=?";
+            List<Map<String, Object>> seasonList = query(sql, YW, new Object[] { lastNd, lastJd });
+            double wckfgm = 0;
+            if (seasonList.size() > 0) {
+                Object obj = lastSeasonList.get(0).get("wckfgm");
+                wckfgm = obj == null ? 0 : Double.parseDouble(obj.toString());
+            }
+            //更新储备库库存
+            double cbkkc = lastCbkkc + wckfgm - Double.parseDouble(gygm.toString());
+            double cbkrznl = cbkkc * pgtdjz * dyl * (1 - rzss);
+            sql = "update hx_sx set gytd=?,gygm=?,cbkkc=?,cbkrznl=? where nd=?,jd=?";
+            update(sql, YW,
+                    new Object[] { gytd, gygm, String.valueOf(cbkkc), String.valueOf(cbkrznl), nd, jd });
+        }
+    }
+
+    private String getXmbh(String xmmc) {
+        String sql = "select yw_guid from jc_xiangmu where xmname=?";
+        List<Map<String, Object>> list = query(sql, YW, new Object[] { xmmc });
+        if (list.size() == 1) {
+            return list.get(0).get("yw_guid").toString();
+        }
+        return "";
     }
 }
