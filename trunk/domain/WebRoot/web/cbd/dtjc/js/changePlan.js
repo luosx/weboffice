@@ -5,6 +5,7 @@ var move;
 
 //计划提前
 function moveLeft(type){
+
 	move.moveLeft();
 }
 
@@ -25,7 +26,7 @@ function changePlan(check, step){
 	row = check.parentElement.rowIndex;
 	step = step;
 	var moveTable = document.getElementById("planTable");
-	move = new Move();
+	move = new Table();
 	move.Init(moveTable, row, cell);
 	
 	//获取当前鼠标点击位置

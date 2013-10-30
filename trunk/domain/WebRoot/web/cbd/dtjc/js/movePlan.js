@@ -3,12 +3,12 @@ var stack = new Stack();
 stack.Init();
 
 //实现一个类，用来实现季度的修改
-var Move = function(){};
-Move.prototype={
+var Table = function(){};
+Table.prototype={
 	Init:function(moveTable,row,cell){
 		this.row = row;
 		this.moveTable = moveTable;
-		this.minnum = 1;
+		this.minnum = 2;
 		this.getArray(cell);
 		//定义一个栈对象
 	},
@@ -100,6 +100,7 @@ Move.prototype={
 		oldCell.onmouseover = function(){
 			hiddleDiv();
 		}
+		this.saveChange(oldquarter, newquarter);
 	},
 	callBack: function(){
 		var typeArray = stack.Pop();
@@ -112,5 +113,50 @@ Move.prototype={
 		}else if(typeName == "moveRight"){
 			this.moveLeft("callback", typeArray);
 		}
+	},
+	//将前台改动保存到数据库
+	saveChange:function(oldcell, newcell){
+		//alert(minyear);
+		//alert(kftlNum);
+		var projectName = "";
+		var oldquarter = 0;
+		var newquarter = 0;
+		var oldyear = 0;
+		var newyear = 0;
+		var formname = "hx_kftl";
+		if(this.row == 2 || this.row == (parseInt(kftlNum) + 2)){
+			projectName = this.moveTable.rows[this.row].cells[1].innerText;
+			oldquarter = (parseInt(oldcell) - 1)%4;
+			newquarter = (parseInt(newcell) - 1)%4;
+			oldyear = (parseInt(oldcell) - 1)/4;
+			newyear = (parseInt(newcell) - 1)/4;
+		}else{
+			projectName = this.moveTable.rows[this.row].cells[0].innerText;
+			oldquarter = (parseInt(oldcell) - 0)%4;
+			newquarter = (parseInt(newcell) - 0)%4;
+			oldyear = (parseInt(oldcell) - 0)/4;
+			newyear = (parseInt(newcell) - 0)/4;
+		}
+		if(oldquarter == 0){
+			oldyear = oldyear - 1;
+			oldquarter = 4;
+		}
+		if(newquarter == 0){
+			newyear = newyear - 1;
+			newquarter = 4;
+		}
+		oldyear = parseInt(oldyear) + parseInt(minyear);
+		newyear = parseInt(newyear) + parseInt(minyear);
+		if(this.row > (2 + parseInt(kftlNum))){
+			formname = "hx_gdtl";
+		}
+       putClientCommond("tjbbManager","changePlan");
+       putRestParameter("projectname",escape(escape(projectName)));
+       putRestParameter("formname",formname);
+       putRestParameter("oldyear",oldyear);
+       putRestParameter("oldquarter",oldquarter);
+       putRestParameter("newyear",newyear);
+       putRestParameter("newquarter",newquarter);
+       restRequest();
 	}
 }
