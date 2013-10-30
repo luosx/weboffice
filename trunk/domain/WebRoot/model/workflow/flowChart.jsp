@@ -5,10 +5,11 @@
 <%@page import="com.klspta.base.workflow.foundations.WorkflowOp"%>
 <%
 	String wfInsTaskId = request.getParameter("wfInsTaskId");
+	String wfid=request.getParameter("wfId");
 	if (wfInsTaskId != null) {
 		IWorkflowOp workflowOp = WorkflowOp.getInstance();
-		DoNextBean ac = workflowOp.getNextInfo(wfInsTaskId);
-		InputStream inputStream = ac.getImageAsInputStream();
+		//DoNextBean ac = workflowOp.getNextInfo(wfInsTaskId);
+		InputStream inputStream = workflowOp.getImageByWfID(wfid);
 		if (inputStream != null) {
 			byte[] b = new byte[1024];
 			int len = -1;

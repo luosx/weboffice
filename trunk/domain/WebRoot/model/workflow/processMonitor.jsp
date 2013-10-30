@@ -115,12 +115,15 @@
 				<tr>
 				<%if(!state.equals("ended")){ %>
 					<td valign="top" >
-	 					<img src="<%=basePath%>model/workflow/flowChart.jsp?wfInsTaskId=<%=wfInsTaskId%>" />
+	 					<img src="<%=basePath%>model/workflow/flowChart.jsp?wfInsTaskId=<%=wfInsTaskId%>&wfId=<%=wfId %>" />
 	 					<div id="kuang" style="position:absolute;display:none;border:1px solid red;left:<%=ac.getX()%>px;top:<%=ac.getY()+203%>px;width:<%=ac.getWidth()%>px;height:<%=ac.getHeight()%>px;"></div>
 	 					<div style="position:absolute;border:4px solid red;left:<%=ac.getX()+2%>px;top:<%=ac.getY()+205%>px;width:<%=ac.getWidth()-4%>px;height:<%=ac.getHeight()-4%>px;"></div>
 	 				</td>
 	 			<%}else{ %>	
-	 			<td>已办结！</td>
+					<td valign="top" >
+	 					<img src="<%=basePath%>model/workflow/flowChart.jsp?wfInsTaskId=<%=wfInsTaskId%>&wfId=<%=wfId %>" />
+	 					<div id="kuang" style="position:absolute;display:none;border:1px solid red;left:<%=ac.getX()%>px;top:<%=ac.getY()+203%>px;width:<%=ac.getWidth()%>px;height:<%=ac.getHeight()%>px;"></div>
+	 				</td>
 	 			<%} %>
 				</tr>
 			</table>
