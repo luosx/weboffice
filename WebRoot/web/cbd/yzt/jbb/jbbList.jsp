@@ -105,7 +105,8 @@
 		           	{name: 'CQQD'},
 		           	{name: 'CBFGL'},
 		            {name: 'ZRBBH'},
-		            {name: 'DKBH'}
+		            {name: 'DKBH'},
+		            {name: 'YW_GUID'}
 				]
 			});
 			store.load({params:{start:0, limit:10}});
@@ -217,7 +218,8 @@
 		           	{name: 'CQQD'},
 		           	{name: 'CBFGL'},
 		            {name: 'ZRBBH'},
-		            {name: 'DKBH'}
+		            {name: 'DKBH'},
+		            {name: 'YW_GUID'}
 					]
 			});
           grid.reconfigure(store, new Ext.grid.ColumnModel([
@@ -269,13 +271,17 @@
          } 
          
   function toSave(obj,changes,r,num){
-     putClientCommond("jbbHandle","update");
-     putRestParameter("tbname","jc_jiben");
-     putRestParameter("tbbh",r.YW_GUID); 
+     putClientCommond("jbbHandle","updateJbb");
+     putRestParameter("tbbh",r.data.YW_GUID); 
      var cc=new Array();
      cc.push(changes);
      putRestParameter("tbchanges",escape(escape(Ext.encode(cc)))); 
      var result = restRequest(); 
+     if(result.success){
+     	Ext.Msg.alert('提示',"更新成功"); 
+     }else{
+     	Ext.Msg.alert('提示',"更新失败");
+     }
   }
          
   function view(bh){
