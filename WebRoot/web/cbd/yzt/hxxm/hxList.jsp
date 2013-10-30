@@ -71,7 +71,8 @@
 		           	{name: 'TYL'},
 		           	{name: 'RZSS'},
 		           	{name: 'BHDK'},
-		           	{name: 'XMBH'}
+		           	{name: 'XMBH'},
+		           	{name: 'YW_GUID'}
 				]
 			});
 			store.load({params:{start:0, limit:10}});
@@ -101,7 +102,7 @@
 		     	   {header: '房屋售价', dataIndex:'FWSJ',width:width*0.07, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
 		     	   {header: '租金', dataIndex:'ZJ',width:width*0.05, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword}, 
 		     	   {header: '评估土地价值', dataIndex:'PGTDJZ',width:width*0.1, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
-		     	   {header: '抵押率', dataIndex:'DYL',width:width*0.05, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
+		     	   {header: '抵押率', dataIndex:'TYL',width:width*0.05, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
 		     	   {header: '融资损失', dataIndex:'RZSS',width:width*0.07, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
 		     	   {header: '包含地块', dataIndex:'BHDK',width:width*0.07, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword}
 		        ], 
@@ -172,7 +173,8 @@
 		           	{name: 'TYL'},
 		           	{name: 'RZSS'},
 		           	{name: 'BHDK'},
-		           	{name: 'XMBH'}
+		           	{name: 'XMBH'},
+		           	{name: 'YW_GUID'}
 					]
 			});
           grid.reconfigure(store, new Ext.grid.ColumnModel([
@@ -195,7 +197,7 @@
 		     	   {header: '房屋售价', dataIndex:'FWSJ',width:width*0.07, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
 		     	   {header: '租金', dataIndex:'ZJ',width:width*0.05, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword}, 
 		     	   {header: '评估土地价值', dataIndex:'PGTDJZ',width:width*0.1, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
-		     	   {header: '抵押率', dataIndex:'DYL',width:width*0.05, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
+		     	   {header: '抵押率', dataIndex:'TYL',width:width*0.05, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
 		     	   {header: '融资损失', dataIndex:'RZSS',width:width*0.05, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
 		     	   {header: '包含地块', dataIndex:'BHDK',width:width*0.05, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword}
           ]));
@@ -225,13 +227,18 @@
          }
          
    function toSave(obj,changes,r,num){
-     putClientCommond("jbbHandle","update");
-     putRestParameter("tbname","jc_xiangmu");
-     putRestParameter("tbbh",r.YW_GUID); 
+     putClientCommond("hxxmHandle","updateHxxm");
+     //putRestParameter("tbname","jc_xiangmu");
+     putRestParameter("tbbh",r.data.YW_GUID); 
      var cc=new Array();
      cc.push(changes);
      putRestParameter("tbchanges",escape(escape(Ext.encode(cc)))); 
      var result = restRequest(); 
+     if(result.success){
+     	Ext.Msg.alert('提示',"更新成功"); 
+     }else{
+     	Ext.Msg.alert('提示',"更新失败");
+     }
   }        
          
 function showLocation(bh){
