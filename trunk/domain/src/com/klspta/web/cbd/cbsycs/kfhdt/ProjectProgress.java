@@ -24,9 +24,9 @@ public class ProjectProgress extends AbstractBaseBean {
      * <br>Date:2013-8-20
      */
     public void init(){ 
-        String xmSql="select distinct(t.xmmc) xmmc from plan开发体量 t";
+        String xmSql="select distinct(t.xmmc) xmmc from hx_kftl t";
         
-        String kfSql="select t.xmmc,t.jd,t.nd from plan开发体量 t where t.xmmc=? order by t.nd,t.jd";
+        String kfSql="select t.xmmc,t.jd,t.nd from hx_kftl t where t.xmmc=? order by t.nd,t.jd";
         
         List<Map<String,Object>> xmList = query(xmSql,YW);  
         Map<String,Object> map = null;
