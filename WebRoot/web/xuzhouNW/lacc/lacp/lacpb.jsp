@@ -97,13 +97,9 @@
 	</head>
 	
 <body bgcolor="#FFFFFF">
-<% 
-if(fixed!=null && fixed.equals("fixedPrint")){%>
-<div id="fixed class="Noprn" style="position: fixed; top: 5px; left: 0px"></div>
-<%	
-}else if(!"false".equals(edit)){%>
+
 <div id="fixed" class="Noprn" style="position: fixed; top: 5px; left: 0px"></div>
-<% } %>
+
 <div style="margin:20px" class="tablestyle1" align="center" >
 <div align="center"><h1>违法案件立案呈批表</h1></div>
 <form method="post">
