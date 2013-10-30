@@ -146,7 +146,7 @@ public class DataManager extends AbstractBaseBean {
 	 * @return
 	 */
 	public List<Map<String, Object>> getAzfProList(){
-		String projctsSql = "select t.kg, t.tz from hx_azf t group by t.kg, t.tz, t.yw_guid order by t.yw_guid";
+		String projctsSql = "select t.kg as kg, t.tz from hx_azf t group by t.kgmc, t.tzmc, t.yw_guid order by t.yw_guid";
 		return query(projctsSql, YW);
 	}
 	

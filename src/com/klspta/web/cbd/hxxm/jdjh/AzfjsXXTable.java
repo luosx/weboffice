@@ -24,9 +24,9 @@ public class AzfjsXXTable implements IBuildTable {
 			StringBuffer kgBuffer = new StringBuffer();
 			StringBuffer tzBuffer = new StringBuffer();
 			kgBuffer.append("<tr><td></td><td ><label>开工</lable></td>");
-			kgBuffer.append("<td style='background: #C0C0C0;'><label>").append(proList.get(i).get("kg")).append("</label></td>");
+			kgBuffer.append("<td style='background: #C0C0C0;'><label>").append(proList.get(i).get("kgmc")).append("</label></td>");
 			tzBuffer.append("<tr><td></td><td><label>投资</lable></td>");
-			tzBuffer.append("<td style='background: #C0C0C0;'><label>").append(proList.get(i).get("tz")).append("</label></td>");
+			tzBuffer.append("<td style='background: #C0C0C0;'><label>").append(proList.get(i).get("tzmc")).append("</label></td>");
 			
 			String projectName = String.valueOf(proList.get(i).get("kg"));
 			for(int year = Integer.parseInt(String.valueOf(betweenYear.get("minyear"))); year <=Integer.parseInt(String.valueOf(betweenYear.get("maxyear"))); year++){

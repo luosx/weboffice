@@ -16,7 +16,7 @@ public class KftlXXTable implements IBuildTable {
 		List<Map<String, Object>> projectList = dataManager.getKFTL_XMList();
 		StringBuffer projectsBuffer = new StringBuffer();
 		Map betweenYear = dataManager.getPlanYear();
-		int kftlNum = 0;
+		int num = 0;
 		for(int i = 0; i < projectList.size(); i++){
 			//记录项目名称
 			String	projectName = String.valueOf(projectList.get(i).get("xmmc"));
@@ -24,6 +24,8 @@ public class KftlXXTable implements IBuildTable {
 			StringBuffer  projectBuffer = new StringBuffer();
 			//确定行参数
 			for(int j = 0; j < fields.length; j++){
+				boolean isExist = false;
+				int kftlNum = num;
 				if(j == 0){
 					projectBuffer.append("<tr><td width='40' rowspan='").append(fields.length).append("' align='center' ><lable>").append(i + 1).append("</label></td>");
 					projectBuffer.append("<td width='100'><lable>").append(kinds[j]).append("</label></td><td style='background: #C0C0C0;' rowspan='");
@@ -31,11 +33,9 @@ public class KftlXXTable implements IBuildTable {
 				}else{
 					projectBuffer.append("<tr><td><label>").append(kinds[j]).append("</label></td>");
 				}
-				kftlNum = 0;
 				for(int year = Integer.parseInt(String.valueOf(betweenYear.get("minyear"))); year <=Integer.parseInt(String.valueOf(betweenYear.get("maxyear"))); year++){
 					for(int quarter = 1; quarter <= 4; quarter++){
-						
-						if(projectName.equals(String.valueOf(kftlList.get(kftlNum).get("xmmc"))) && kftlNum < kftlList.size()&& String.valueOf(year).equals(String.valueOf(kftlList.get(kftlNum).get("nd"))) && String.valueOf(quarter).equals(String.valueOf(kftlList.get(kftlNum).get("jd")))){
+						if( kftlNum < kftlList.size() && projectName.equals(String.valueOf(kftlList.get(kftlNum).get("xmmc"))) && String.valueOf(year).equals(String.valueOf(kftlList.get(kftlNum).get("nd"))) && String.valueOf(quarter).equals(String.valueOf(kftlList.get(kftlNum).get("jd")))){
 							String value = String.valueOf(kftlList.get(kftlNum).get(fields[j]));
 							value = "null".equals(value) ? "" : value;
 							projectBuffer.append("<td width='125' style='background:#99CC00;'><label>").append(value).append("</label></td>");
@@ -46,13 +46,16 @@ public class KftlXXTable implements IBuildTable {
 							}else{
 								projectBuffer.append("<td width='125'></td>");
 							}
-							
 							kftlNum++;
+							isExist = true;
 						}else {
 							projectBuffer.append("<td width='125'></td>");
 							projectBuffer.append("<td width='125'></td>");
 						}
 					}
+				}
+				if(j == (fields.length - 1) && isExist){
+					num = kftlNum;
 				}
 				projectBuffer.append("<td></td>");
 				projectBuffer.append("</tr>");
