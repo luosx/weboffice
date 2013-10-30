@@ -8,7 +8,7 @@ String name = ProjectInfo.getInstance().PROJECT_NAME;
 
 <html>
   <head>
-    <title>执法监察系统</title>
+    <title>CBD核心区储备开发及资金管理研究辅助决策系统</title>
 </head>
   	<frameset id="index" name="index" rows="106,32,*" frameborder="no" border="0"  framespacing="0" >
 		<frame id="flash" name="flash" scrolling="NO" noresize src="<%=basePath%>web/<%=name%>/framework/pages/flash.jsp" />
