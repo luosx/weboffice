@@ -15,5 +15,14 @@ public class JbbManager extends AbstractBaseBean{
 		HttpServletRequest request = this.request;
 		response(new JbbData().getQuery(request));
 	}
+	
+	 public void updateJbb() {
+	        HttpServletRequest request = this.request;
+	        if (new JbbData().updateJbb(request)) {
+	            response("{success:true}");
+	        } else {
+	            response("{success:false}");
+	        }
+	    }
 
 }
