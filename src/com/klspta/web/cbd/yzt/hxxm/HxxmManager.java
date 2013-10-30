@@ -15,5 +15,14 @@ public class HxxmManager extends AbstractBaseBean {
 		HttpServletRequest request = this.request;
 		response(new HxxmData().getQuery(request));
 	}
+	
+	public void updateHxxm() {
+        HttpServletRequest request = this.request;
+        if (new HxxmData().updateHxxm(request)) {
+            response("{success:true}");
+        } else {
+            response("{success:false}");
+        }
+    }
 
 }
