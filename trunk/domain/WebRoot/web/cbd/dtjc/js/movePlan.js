@@ -147,7 +147,7 @@ Table.prototype={
 		}
 		oldyear = parseInt(oldyear) + parseInt(minyear);
 		newyear = parseInt(newyear) + parseInt(minyear);
-		if(this.row > (2 + parseInt(kftlNum))){
+		if(this.row >= (2 + parseInt(kftlNum))){
 			formname = "hx_gdtl";
 		}
        putClientCommond("tjbbManager","changePlan");
