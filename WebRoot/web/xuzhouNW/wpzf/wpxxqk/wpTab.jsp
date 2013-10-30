@@ -5,6 +5,7 @@
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 	String yw_guid = request.getParameter("yw_guid");
 	Map<String, Object> map = new PADDataManager().getWphcData(yw_guid);
+	String year = request.getParameter("year");
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -47,7 +48,7 @@
             <%}%>
             ,{
                 title: '卫片位置查看',
-                html: "<iframe width='"+w+"' height='"+h+"' src='<%=basePath%>base/fxgis/framework/gisViewFrame.jsp?flag=1&yw_guid=<%=yw_guid%>'/>"
+                html: "<iframe width='"+w+"' height='"+h+"' src='<%=basePath%>base/fxgis/framework/gisViewFrame.jsp?flag=1&year=<%=year%>&yw_guid=<%=yw_guid%>'/>"
             },{
                 title: '电子附件',
                 html: "<iframe width='"+w+"' height='"+h+"' src='<%=basePath%>model/accessory/dzfj/accessorymain.jsp?yw_guid=<%=yw_guid%>'/>"
