@@ -15,6 +15,7 @@ public class JhHandler {
 	public static final int JD_GDTL = 5;
 	public static final int JD_GDTL_XX = 6;
 	public static final int JD_TRZQK = 7;
+	public static final int JD_CHANGE = 8;
 	private static IBuildTable buildTable;
 	
 	public static String getTable(int type){	
@@ -40,6 +41,8 @@ public class JhHandler {
 		case JD_TRZQK:
 			buildTable = new TrzqkTable();
 			break;
+		case JD_CHANGE:
+			buildTable = new KFTLBJ();
 		default:
 			break;
 		}
