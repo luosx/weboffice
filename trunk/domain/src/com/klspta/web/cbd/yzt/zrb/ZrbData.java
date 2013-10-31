@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 import com.klspta.base.AbstractBaseBean;
 import com.klspta.base.util.UtilFactory;
@@ -86,6 +87,32 @@ public class ZrbData extends AbstractBaseBean implements IData {
         list.add(yw_guid);
         sb.replace(sb.length() - 1, sb.length(), " where yw_guid=?");
         int result = update(sb.toString(), YW, list.toArray());
+        if(result==1){
+            flush(js.getJSONObject(0),yw_guid);
+        }
         return result == 1 ? true : false;
     }
+    
+    private void flush(JSONObject jObject,String guid){
+        int count=zrbList.size();
+        int num=-1;
+        Map<String,Object> map=null;
+        for(int i=0;i<count;i++){
+            map=zrbList.get(i);
+            if(map.get("yw_guid").equals(guid)){
+                num=i;
+                break;
+            }
+        }
+        if(num!=-1){
+            Iterator<?> it = jObject.keys();
+            while (it.hasNext()) {
+                String key = (String) it.next().toString();
+                String value = jObject.getString(key);
+                map.put(key, value);
+            }
+            zrbList.set(num,map);
+        }
+    }
+    
 }
