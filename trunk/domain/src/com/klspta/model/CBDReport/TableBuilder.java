@@ -50,6 +50,7 @@ public class TableBuilder {
         html = html.replace("#COLSPAN", null2String(tdBean.getColspan()));
         html = html.replace("#ROWPAN", null2String(tdBean.getRowspan()));
         html = html.replace("#TEXT", null2String(tdBean.getText()));
+        html = html.replace("#STYLE", null2String(tdBean.getStyle()));
         return html;
     }
     
