@@ -112,6 +112,7 @@ int width = Integer.parseInt(String.valueOf(planYear.get("maxyear"))) - Integer.
 		var kftlNum = "<%=new TjbbData().getKFTLProject().size()%>";
 		
 		
+		
 		//添加ctrl + "z"回退事件
 		document.onkeydown = function(ev){
 			var oevent = ev || event;
@@ -146,14 +147,19 @@ int width = Integer.parseInt(String.valueOf(planYear.get("maxyear"))) - Integer.
 		</tr>
 	  </table>
   	</div>
-	<div style="width:150%;">
-		 <table id='planTable'  style="text-align: center; font: normal 14px verdana; border:none;" cellpadding="0" cellspacing="0"   >
-			<%=TjbbManager.getKFTLPlan()%>
-		</table>
+	<div id="body" style=" overflow-x:scroll; height:100%;">
+
+			 <table id='planTable'  style="text-align: center; font: normal 14px verdana; border:none; width:1200px;" cellpadding="0" cellspacing="0"   >
+				<%=TjbbManager.getKFTLPlan()%>
+			</table>
+
 	</div>
 		 	<div id="addWin" class="x-hidden">
 		</div>
 				 	<div id="addWin2" class="x-hidden">
 		</div>
   </body>
+  <script type="text/javascript">
+  		document.getElementById("body").style.width = document.body.clientWidth - 400;
+  </script>
 </html>
