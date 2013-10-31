@@ -356,7 +356,8 @@ Ext.onReady(function(){
 	 	Ext.getCmp("tz").setValue(Ext.getCmp("z").getValue()+Ext.getCmp("q").getValue());
 	 	Ext.getCmp("tzbl").setValue(Ext.getCmp("tz").getValue()*100/Ext.getCmp("xmtz").getValue());
 	 });	 
-  
+  form2.render("deal");
+  form2.hide();
 	 /**
    win2=new Ext.Window({
                 applyTo:'addWin',
@@ -675,17 +676,21 @@ Ext.onReady(function(){
 	 	Ext.getCmp("gdsybl").setValue(Ext.getCmp("gdgmbl").getValue());
 	 	Ext.getCmp("gdzjbl").setValue(Ext.getCmp("gdgmbl").getValue());
 	 });
-
+form3.render("deal");
+  form3.hide();
 })
 
  function dealGdtl(xmmc,nd,jd){
- 	 form3.render("deal");
+ 	 form3.show();
+ 	 form2.hide();
+ 	 //form3.render("deal");
  	 putClientCommond("planManager","getXm");
      putRestParameter("xmmc",escape(escape(xmmc)));
    	 var info = restRequest();
    	 	  Ext.getCmp("gdxmmc").setValue(xmmc);
 	  	  Ext.getCmp("gdnd").setValue(nd);
 	  	  Ext.getCmp("gdjd").setValue(jd);
+	  	  
 	 if(info[0]!=null){
 		  Ext.getCmp("gdxmdl").setValue(info[0].ZD);
 		  Ext.getCmp("gdxmgm").setValue(info[0].GM);
@@ -714,13 +719,23 @@ Ext.onReady(function(){
 			    Ext.getCmp("gdsybl").setValue(sinData[0].SYZ);
 			    Ext.getCmp("gdzjbl").setValue(sinData[0].ZJZ);
 	  }else{
+			    Ext.getCmp("gddl").reset();
+			    Ext.getCmp("gddlbl").reset();
+			    Ext.getCmp("gdgm").reset();
+			    Ext.getCmp("gdgmbl").reset();
+			    Ext.getCmp("gdcb").reset();
+			    Ext.getCmp("gdcbbl").reset();
+			    Ext.getCmp("gdsybl").reset();
+			    Ext.getCmp("gdzjbl").reset();
 	        form3.url=restUrl+'planManager/addGdtll';
 	         Ext.getCmp("btngd").setText("新增供地体量");
 	  }
  }
 
  function dealKftl(xmmc,nd,jd){
- 	 form2.render("deal");
+ 	// form3.render("deal");
+ 	 form2.show();
+ 	 form3.hide();
  	 putClientCommond("planManager","getXm");
      putRestParameter("xmmc",escape(escape(xmmc)));
    	 var info = restRequest();
@@ -760,6 +775,18 @@ Ext.onReady(function(){
 			    Ext.getCmp("lm").setValue(sinData[0].LM);
 			    Ext.getCmp("cj").setValue(sinData[0].CJ);
 	  }else{
+			 Ext.getCmp("hs").reset();
+		    Ext.getCmp("dl").reset();
+		    Ext.getCmp("gm").reset();
+		    Ext.getCmp("tz").reset();
+		    Ext.getCmp("z").reset();
+		    Ext.getCmp("q").reset();
+		    Ext.getCmp("hsbl").reset();
+		    Ext.getCmp("dlbl").reset();
+		    Ext.getCmp("gmbl").reset();
+		    Ext.getCmp("tzbl").reset();
+		    Ext.getCmp("zbl").reset();
+		    Ext.getCmp("qbl").reset();
 	        form2.url=restUrl+'planManager/addKftl';
 	         Ext.getCmp("btnkf").setText("增加开发体量");
 	  }
