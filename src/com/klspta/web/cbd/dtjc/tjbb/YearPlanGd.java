@@ -12,7 +12,7 @@ import com.klspta.model.CBDReport.dataClass.IDataClass;
 public class YearPlanGd extends AbstractBaseBean implements IDataClass {
 
     @Override
-    public Map<String, TRBean> getTRBeans(Object[] obj) {
+    public Map<String, TRBean> getTRBeans(Object[] obj,TRBean trBean) {
         Map<String, TRBean> trbeans = new LinkedHashMap<String, TRBean>();
         String sql = "select distinct(xmname) as xmmc from jc_xiangmu t ";
         List<Map<String, Object>> list = query(sql, YW);
