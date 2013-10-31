@@ -309,7 +309,8 @@ Ext.onReady(function(){
 							waitMsg: '正在保存,请稍候... ', 		
 							success:function(){ 
 							 Ext.Msg.alert('提示','保存成功。',function(){
-							 	 window.location.reload();
+							        form2.form.url=restUrl+'planManager/updateKftl';
+	  							    Ext.getCmp("btnkf").setText("修改开发体量");
 							 });
 							
 							}, 
@@ -643,11 +644,12 @@ Ext.onReady(function(){
                 text   : '保存',
                 id:'btngd',
                 handler: function() {
-						form2.form.submit({ 
+						form3.form.submit({ 
 							waitMsg: '正在保存,请稍候... ', 		
 							success:function(){ 
 							 Ext.Msg.alert('提示','保存成功。',function(){
-							 	 window.location.reload();
+							 	  form3.form.url=restUrl+'planManager/updateGdtl';
+	  							    Ext.getCmp("btnkf").setText("修改供地体量");
 							 });
 							
 							}, 
@@ -660,7 +662,6 @@ Ext.onReady(function(){
             {
                 text   : '关闭',
                 handler: function() {
-                     win2.hide();
                 }
             }
         ]
@@ -708,7 +709,7 @@ form3.render("deal");
 	  putRestParameter("jd",jd);
 	  var sinData= restRequest();
 	  if(sinData[0]!=null){
-	  		   form3.url=restUrl+'planManager/updateGdtl';
+	  		   form3.form.url=restUrl+'planManager/updateGdtl';
 	  		    Ext.getCmp("btngd").setText("修改供地体量");
 			    Ext.getCmp("gddl").setValue(sinData[0].DL);
 			    Ext.getCmp("gddlbl").setValue(sinData[0].DLZ);
@@ -727,7 +728,7 @@ form3.render("deal");
 			    Ext.getCmp("gdcbbl").reset();
 			    Ext.getCmp("gdsybl").reset();
 			    Ext.getCmp("gdzjbl").reset();
-	        form3.url=restUrl+'planManager/addGdtll';
+	        form3.form.url=restUrl+'planManager/addGdtll';
 	         Ext.getCmp("btngd").setText("新增供地体量");
 	  }
  }
@@ -758,7 +759,7 @@ form3.render("deal");
 	  putRestParameter("jd",jd);
 	  var sinData= restRequest();
 	  if(sinData[0]!=null){
-	  		   form2.url=restUrl+'planManager/updateKftl';
+	  		   form2.form.url=restUrl+'planManager/updateKftl';
 	  		    Ext.getCmp("btnkf").setText("修改开发体量");
 	            Ext.getCmp("hs").setValue(sinData[0].HS);
 			    Ext.getCmp("dl").setValue(sinData[0].DL);
@@ -787,7 +788,7 @@ form3.render("deal");
 		    Ext.getCmp("tzbl").reset();
 		    Ext.getCmp("zbl").reset();
 		    Ext.getCmp("qbl").reset();
-	        form2.url=restUrl+'planManager/addKftl';
+	        form2.form.url=restUrl+'planManager/addKftl';
 	         Ext.getCmp("btnkf").setText("增加开发体量");
 	  }
  }
