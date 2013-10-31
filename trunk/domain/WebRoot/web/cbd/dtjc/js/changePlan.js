@@ -82,12 +82,7 @@ function showDetail(){
 		quarter = 4;
 	}
 	year = parseInt(year) + parseInt(minyear);
-	//addTask();
-	if(this.row >= (2 + parseInt(kftlNum))){
-		dealGdtl(projectName,year,quarter);
-	}else{
-		dealKftl(projectName,year,quarter);
-	}
+	dealKftl(projectName,year,quarter);
 } 
 
 //隐藏DIV
