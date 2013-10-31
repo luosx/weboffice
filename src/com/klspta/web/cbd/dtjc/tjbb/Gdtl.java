@@ -132,14 +132,12 @@ public class Gdtl extends AbstractBaseBean {
      * <br>Date:2013-10-11
      */
     public void query() {
-        String xmbh = request.getParameter("xmbh");
-        String keyWord = request.getParameter("keyWord");
-        String sql = "select xmmc,nd||'-'||yf as sx,dl,gm,cb,sy,zj,zuj as zujin,rownum-1 as mod,rownum-1 as del,yw_guid  as gdbh,dlz,gmz,cbz,syz,zjz,yf from hx_gdtl where xmguid=?";
-        if (keyWord != null) {
-            keyWord = UtilFactory.getStrUtil().unescape(keyWord);
-            sql += " and nd||'-'||yf like '%" + keyWord + "%'";
-        }
-        List<Map<String, Object>> list = query(sql, YW, new Object[] { xmbh });
+        String xmmc = UtilFactory.getStrUtil().unescape(request.getParameter("xmmc"));
+        String nd = request.getParameter("nd");
+        String jd = request.getParameter("jd");
+        String sql = "select xmmc,nd||'-'||yf as sx,dl,gm,cb,sy,zj,zuj as zujin,rownum-1 as mod,rownum-1 as del,yw_guid  as gdbh,dlz,gmz,cbz,syz,zjz,yf from hx_gdtl  where xmmc=? and nd=? and jd=?";
+
+        List<Map<String, Object>> list = query(sql, YW, new Object[] { xmmc,nd,jd });
         response(list);
     }
 
@@ -281,7 +279,7 @@ public class Gdtl extends AbstractBaseBean {
             //更新储备库库存
             double cbkkc = lastCbkkc + wckfgm - Double.parseDouble(gygm.toString());
             double cbkrznl = cbkkc * pgtdjz * dyl * (1 - rzss);
-            sql = "update hx_sx set gytd=?,gygm=?,cbkkc=?,cbkrznl=? where nd=?,jd=?";
+            sql = "update hx_sx set gytd=?,gygm=?,cbkkc=?,cbkrznl=? where nd=? and jd=?";
             update(sql, YW,
                     new Object[] { gytd, gygm, String.valueOf(cbkkc), String.valueOf(cbkrznl), nd, jd });
         }
