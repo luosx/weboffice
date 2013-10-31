@@ -138,7 +138,7 @@ public class Kftl extends AbstractBaseBean {
      * <br>Date:2013-10-11
      */
     public void query() {
-        String xmmc = request.getParameter("xmmc");
+        String xmmc = UtilFactory.getStrUtil().unescape(request.getParameter("xmmc"));
         String nd = request.getParameter("nd");
         String jd = request.getParameter("jd");
         String sql = "select dl,hs,gm,tz,zhu as z,qi as q,lm,cj,rownum-1 as mod,rownum-1 as del,yw_guid  as kfbh,hsz,dlz,gmz,tzz,zhuz,qiz,yf from hx_kftl where xmmc=? and nd=? and jd=?";
@@ -263,7 +263,7 @@ public class Kftl extends AbstractBaseBean {
             //更新储备库库存
             double cbkkc = lastCbkkc + Double.parseDouble(checkNull(map.get("kfgm"))) - gygm;
             double cbkrznl = cbkkc * pgtdjz * dyl * (1 - rzss);
-            sql = "update hx_sx set cbkkc=?,cbkrznl=? where nd=?,jd=?";
+            sql = "update hx_sx set cbkkc=?,cbkrznl=? where nd=? and jd=?";
             update(sql, YW, new Object[] { String.valueOf(cbkkc), String.valueOf(cbkrznl), nd, jd });
         }
     }
