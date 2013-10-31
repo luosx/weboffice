@@ -46,7 +46,7 @@
 		
 	<bean name="jbbHandle" class="com.klspta.web.cbd.yzt.jbb.JbbManager" scope="prototype"/>	
 		<!-- 计划管理-->
-	<bean name="ndjhManager" class="com.klspta.web.cbd.dtjc.tjbb.NdjhManager" scope="prototype"/>	
+	<bean name="planManager" class="com.klspta.web.cbd.dtjc.tjbb.PlanManager" scope="prototype"/>	
 	
 	<bean name="hxxmHandle" class="com.klspta.web.cbd.yzt.hxxm.HxxmManager" scope="prototype"/>
 		<!-- 安置房-->
