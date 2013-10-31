@@ -8,7 +8,7 @@ Table.prototype={
 	Init:function(moveTable,row,cell){
 		this.row = row;
 		this.moveTable = moveTable;
-		this.minnum = 2;
+		this.minnum = 1;
 		this.getArray(cell);
 		//定义一个栈对象
 	},
@@ -16,9 +16,13 @@ Table.prototype={
 		var moveTable = this.moveTable;
 		var blockArray = new Array();
 		var i = 0;
-		for(i = cell; i > 0; i--){
+		var j =-1;
+		if((this.row == 2 || this.row == (parseInt(kftlNum) + 2))){
+			j = 0;
+		}
+		for(i = cell; i > j; i--){
 			var cells = moveTable.rows[this.row].cells[i];
-			if(cells.className == "no"){
+			if(cells.className == "no" || cells.className == ""){
 				i++;
 				break;
 			}
@@ -44,7 +48,7 @@ Table.prototype={
 		}
 		for(var i = 0; i < blockArray.length; i++){
 			var number = blockArray[i];
-			if(number < this.minnum){
+			if(number < this.minnum || ((this.row == 2 || this.row == (parseInt(kftlNum) + 2)) && number < 2 )){
 				//当季度为表格中最早的季度时
 				Ext.MessageBox.alert('错误','当前计划已提前至最前，不能继续提前！', function(){
 					return ;
