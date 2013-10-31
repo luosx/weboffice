@@ -179,13 +179,12 @@ function init(){
 	            }
             }else{
 	            if(json[i].toString() == "true"){
+	                document.getElementsByName(i.substring(0,i.length-4))[0].disabled = false;
+	            }else{
 	            	if(document.getElementsByName(i.substring(0,i.length-4))[0].nodeName == "SELECT"){
 	            		document.getElementsByName(i.substring(0,i.length-4))[0].disabled = true;
 	            	}
 	            	document.getElementsByName(i.substring(0,i.length-4))[0].readOnly = true;
-	                
-	            }else{
-	                document.getElementsByName(i.substring(0,i.length-4))[0].disabled = false;
 	            }
             }
         }catch (e){
