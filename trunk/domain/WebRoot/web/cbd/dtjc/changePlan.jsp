@@ -96,6 +96,11 @@ int width = Integer.parseInt(String.valueOf(planYear.get("maxyear"))) - Integer.
 		.kftltr{
 			border-bottom:1px #0C1289 solid;
 		}
+		#deal{
+		  position: absolute;
+		  top:0;
+		  right: 0;
+		}
 	</style>
   </head>
   <script type="text/javascript" >
@@ -149,15 +154,12 @@ int width = Integer.parseInt(String.valueOf(planYear.get("maxyear"))) - Integer.
   	</div>
 	<div id="body" style=" overflow-x:scroll; height:100%;">
 
-			 <table id='planTable'  style="text-align: center; font: normal 14px verdana; border:none; width:1200px;" cellpadding="0" cellspacing="0"   >
+			 <table id='planTable'  style="text-align: center; font: normal 14px verdana; border:none; width:2150px;" cellpadding="0" cellspacing="0"   >
 				<%=TjbbManager.getKFTLPlan()%>
 			</table>
 
 	</div>
-		 	<div id="addWin" class="x-hidden">
-		</div>
-				 	<div id="addWin2" class="x-hidden">
-		</div>
+	<div id="deal"></div>
   </body>
   <script type="text/javascript">
   		document.getElementById("body").style.width = document.body.clientWidth - 400;
