@@ -55,7 +55,7 @@ public class FourthWorker extends AbstractBaseBean{
 		    if(fourthBean.getDataFrom().equals("SQL")){
 		        c = localQuery(i+fourthBean.getWyGuid(), fourthBean.getDataFrom(), fourthBean.getSql(),thirdBean.getWidth(), thirdBean.getHeight(), where, trBean);
 		    }else if(fourthBean.getDataFrom().equals("CLASS")){
-		        c = invokeClass(fourthBean, where);
+		        c = invokeClass(fourthBean, where,trBean);
 		    }
 		    trBeans.putAll(c);
 		}
@@ -78,12 +78,12 @@ public class FourthWorker extends AbstractBaseBean{
 	    return trBeans;
 	}
 	
-	private Map<String, TRBean> invokeClass(FourthBean fourthBean, Object[] where){
+	private Map<String, TRBean> invokeClass(FourthBean fourthBean, Object[] where,TRBean trbean){
 	    try {
             Class<?> c = Class.forName(fourthBean.getClassName());
             Constructor<?>[] cons = c.getDeclaredConstructors();
             IDataClass idc = (IDataClass)cons[0].newInstance();
-            return idc.getTRBeans(where);
+            return idc.getTRBeans(where,trbean);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (IllegalArgumentException e) {
