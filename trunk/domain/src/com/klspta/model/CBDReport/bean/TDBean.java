@@ -10,6 +10,7 @@ public class TDBean {
 	private String YWGuid = "";
 	private String width = "10";
 	private String height = "10";
+	private String style = "";
 	
     public TDBean(ThirdBean tb) {
         this.colspan = tb.getColsPan();
@@ -73,4 +74,12 @@ public class TDBean {
     public String getHeight() {
         return height;
     }
+
+	public String getStyle() {
+		return style;
+	}
+
+	public void setStyle(String style) {
+		this.style = style;
+	}
 }
