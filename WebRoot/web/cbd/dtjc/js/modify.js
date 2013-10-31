@@ -1,5 +1,5 @@
 Ext.onReady(function(){           
-   var form2 = new Ext.form.FormPanel({
+     form2 = new Ext.form.FormPanel({
         autoHeight: true,
         frame:true,
         bodyStyle:'padding:5px 0px 0',
@@ -303,6 +303,7 @@ Ext.onReady(function(){
         buttons: [
             {
                 text   : '保存',
+                id:'btnkf',
                 handler: function() {
 						form2.form.submit({ 
 							waitMsg: '正在保存,请稍候... ', 		
@@ -356,6 +357,7 @@ Ext.onReady(function(){
 	 	Ext.getCmp("tzbl").setValue(Ext.getCmp("tz").getValue()*100/Ext.getCmp("xmtz").getValue());
 	 });	 
   
+	 /**
    win2=new Ext.Window({
                 applyTo:'addWin',
                 title:'开发体量录入',
@@ -364,12 +366,12 @@ Ext.onReady(function(){
                 closeAction:'hide',
 				items:form2
     });
-    
-    
+    **/
+
     
     //////////////////////////////////////////////////////////////////////////
 	   
-	    var form3 = new Ext.form.FormPanel({
+	     form3 = new Ext.form.FormPanel({
         autoHeight: true,
         frame:true,
         bodyStyle:'padding:5px 0px 0',
@@ -638,6 +640,7 @@ Ext.onReady(function(){
         buttons: [
             {
                 text   : '保存',
+                id:'btngd',
                 handler: function() {
 						form2.form.submit({ 
 							waitMsg: '正在保存,请稍候... ', 		
@@ -672,19 +675,11 @@ Ext.onReady(function(){
 	 	Ext.getCmp("gdsybl").setValue(Ext.getCmp("gdgmbl").getValue());
 	 	Ext.getCmp("gdzjbl").setValue(Ext.getCmp("gdgmbl").getValue());
 	 });
-  
-   win3=new Ext.Window({
-                applyTo:'addWin2',
-                title:'供地体量录入',
-                width:410,
-                height:335,
-                closeAction:'hide',
-				items:form3
-    });
 
 })
 
  function dealGdtl(xmmc,nd,jd){
+ 	 form3.render("deal");
  	 putClientCommond("planManager","getXm");
      putRestParameter("xmmc",escape(escape(xmmc)));
    	 var info = restRequest();
@@ -702,14 +697,14 @@ Ext.onReady(function(){
 		  Ext.getCmp("gdsy").setValue(Ext.getCmp("gdcjj").getValue()-Ext.getCmp("gdlmcb").getValue()); 
 		  Ext.getCmp("gdzj").setValue(info[0].FWSJ); 
 	 }
-	  putClientCommond("hxxmManager","getGdtl");
+	  putClientCommond("planManager","queryGdtl");
       putRestParameter("xmmc",escape(escape(xmmc)));
 	  putRestParameter("nd",nd);
 	  putRestParameter("jd",jd);
 	  var sinData= restRequest();
 	  if(sinData[0]!=null){
-	  		    win3.items.items[0].form.url=restUrl+'planManager/updateGdtl';
-   			    win3.setTitle("供地体量修改");
+	  		   form3.url=restUrl+'planManager/updateGdtl';
+	  		    Ext.getCmp("btngd").setText("修改供地体量");
 			    Ext.getCmp("gddl").setValue(sinData[0].DL);
 			    Ext.getCmp("gddlbl").setValue(sinData[0].DLZ);
 			    Ext.getCmp("gdgm").setValue(sinData[0].GM);
@@ -719,13 +714,13 @@ Ext.onReady(function(){
 			    Ext.getCmp("gdsybl").setValue(sinData[0].SYZ);
 			    Ext.getCmp("gdzjbl").setValue(sinData[0].ZJZ);
 	  }else{
-	        win3.items.items[0].form.url=restUrl+'planManager/addGdtll';
-   			win3.setTitle("供地体量录入");
+	        form3.url=restUrl+'planManager/addGdtll';
+	         Ext.getCmp("btngd").setText("新增供地体量");
 	  }
-	  win3.show();
  }
 
  function dealKftl(xmmc,nd,jd){
+ 	 form2.render("deal");
  	 putClientCommond("planManager","getXm");
      putRestParameter("xmmc",escape(escape(xmmc)));
    	 var info = restRequest();
@@ -742,14 +737,14 @@ Ext.onReady(function(){
 	  	  Ext.getCmp("lm").setValue(info[0].LMCB);
 	  	  Ext.getCmp("cj").setValue(info[0].LMCJJ);
 	 }
-	  putClientCommond("hxxmManager","getKftl");
+	  putClientCommond("planManager","queryKftl");
       putRestParameter("xmmc",escape(escape(xmmc)));
 	  putRestParameter("nd",nd);
 	  putRestParameter("jd",jd);
 	  var sinData= restRequest();
 	  if(sinData[0]!=null){
-	  		   win2.items.items[0].form.url=restUrl+'planManager/updateKftl';
-   			    win2.setTitle("开发体量修改")
+	  		   form2.url=restUrl+'planManager/updateKftl';
+	  		    Ext.getCmp("btnkf").setText("修改开发体量");
 	            Ext.getCmp("hs").setValue(sinData[0].HS);
 			    Ext.getCmp("dl").setValue(sinData[0].DL);
 			    Ext.getCmp("gm").setValue(sinData[0].GM);
@@ -765,8 +760,7 @@ Ext.onReady(function(){
 			    Ext.getCmp("lm").setValue(sinData[0].LM);
 			    Ext.getCmp("cj").setValue(sinData[0].CJ);
 	  }else{
-	         win2.items.items[0].form.url=restUrl+'planManager/addKftl';
-   			 win2.setTitle("开发体量录入");
+	        form2.url=restUrl+'planManager/addKftl';
+	         Ext.getCmp("btnkf").setText("增加开发体量");
 	  }
-	   win2.show();
  }
