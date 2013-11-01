@@ -9,7 +9,7 @@ import com.klspta.model.CBDReport.bean.TRBean;
 public class Test implements IDataClass {
 
     @Override
-    public Map<String, TRBean> getTRBeans(Object[] obj) {
+    public Map<String, TRBean> getTRBeans(Object[] obj,TRBean trBean) {
         Map<String, TRBean> trbeans = new LinkedHashMap<String, TRBean>();
         TRBean trb = new TRBean();
         TDBean tdb = new TDBean("显示的内容", "10", "10");
