@@ -24,7 +24,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<style type="text/css">
 		  table{
     font-size: 14px;
-    background-color: #A8CEFF;
+    background-color: #D1E5FF;
     border-color:#000000;
     /**
     border-left:1dp #000000 solid;
@@ -101,6 +101,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     font-weight:bold;
     line-height: 30px; 
    }
+   
+   .tdnull {
+ 	border-width: 0px;
+   }
+   .tdfull {
+    background-color: yellow;
+   }
+   
 	</style>
   </head>
   <body>
