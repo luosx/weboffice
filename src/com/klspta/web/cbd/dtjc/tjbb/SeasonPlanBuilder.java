@@ -523,18 +523,21 @@ public class SeasonPlanBuilder extends AbstractBaseBean implements IDataClass {
             Map<String, Object> mapKf = trList.get(0);
             for (int z = 0; z <= ndCount; z++) {
                 if (z == ndCount) {
-                    tb = new TDBean(checkNull(mapKf.get("s" + z)), "", "");
+                    tb = new TDBean(checkNull(mapKf.get("s" + z)), "90", "");
                     trBean.addTDBean(tb);
                 } else {
                     for (int i = 1; i <= 4; i++) {
                         String[] value = checkNull(mapKf.get("s" + z + i)).split("#");
                         if (value.length > 1) {
                             tb = new TDBean(value[0], "50", "");
+                            tb.setStyle("tdfull");
                             trBean.addTDBean(tb);
                             tb = new TDBean(value[1], "50", "");
+                            tb.setStyle("tdfull");
                             trBean.addTDBean(tb);
                         } else {
                             tb = new TDBean("", "50", "");
+                            tb.setStyle("tdnull");
                             trBean.addTDBean(tb);
                             trBean.addTDBean(tb);
                         }
@@ -544,6 +547,7 @@ public class SeasonPlanBuilder extends AbstractBaseBean implements IDataClass {
         } else {
             for (int z = 0; z <= ndCount; z++) {
                 tb = new TDBean("", "100", "");
+                tb.setStyle("tdnull");
                 trBean.addTDBean(tb);
             }
         }
@@ -591,7 +595,7 @@ public class SeasonPlanBuilder extends AbstractBaseBean implements IDataClass {
                 Map<String, Object> mapKf = trList.get(0);
                 for (int z = 0; z <= count; z++) {
                     if (z == count) {
-                        tb = new TDBean(checkNull(mapKf.get("s" + z)), "", "");
+                        tb = new TDBean(checkNull(mapKf.get("s" + z)), "90", "");
                         trBean.addTDBean(tb);
                     } else {
                         for (int i = 1; i <= 4; i++) {
@@ -616,7 +620,7 @@ public class SeasonPlanBuilder extends AbstractBaseBean implements IDataClass {
                 Map<String, Object> mapKf = trList.get(0);
                 for (int z = 0; z <= count; z++) {
                     if (z == count) {
-                        tb = new TDBean(checkNull(mapKf.get("s" + z)), "", "");
+                        tb = new TDBean(checkNull(mapKf.get("s" + z)), "90", "");
                         trBean.addTDBean(tb);
                     } else {
                         for (int i = 1; i <= 4; i++) {
@@ -635,7 +639,7 @@ public class SeasonPlanBuilder extends AbstractBaseBean implements IDataClass {
                     tb = new TDBean("", "50", "");
                     trBean.addTDBean(tb);
                 }
-                tb = new TDBean("", "50", "");
+                tb = new TDBean("", "90", "");
                 trBean.addTDBean(tb);
             }
 
