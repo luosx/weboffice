@@ -311,6 +311,7 @@ Ext.onReady(function(){
 							 Ext.Msg.alert('提示','保存成功。',function(){
 							        form2.form.url=restUrl+'planManager/updateKftl';
 	  							    Ext.getCmp("btnkf").setText("修改开发体量");
+	  							    window.location.reload();
 							 });
 							
 							}, 
@@ -331,7 +332,7 @@ Ext.onReady(function(){
 									  putRestParameter("jd",Ext.getCmp("jd").getValue());
 									   var msg= restRequest();
 									   Ext.Msg.alert("提示","删除"+(msg.success==true?"成功":"失败"));
-									        win2.hide();                               	
+									   window.location.reload();                           	
 									   }
 							 });
                 	}
@@ -659,11 +660,22 @@ Ext.onReady(function(){
 						});
                 	}
             	},   
-            {
-                text   : '关闭',
+  {
+                text   : '删除',
                 handler: function() {
-                }
-            }
+						 	Ext.Msg.confirm("删除确认","是否真的要删除该计划?",function(btuuon){
+                              	 if(btuuon=="yes"){
+                              	 	  putClientCommond("planManager","delGdtl");
+  									  putRestParameter("xmmc",escape(escape(Ext.getCmp("xmmc").getValue())));
+									  putRestParameter("nd",Ext.getCmp("nd").getValue());
+									  putRestParameter("jd",Ext.getCmp("jd").getValue());
+									   var msg= restRequest();
+									   Ext.Msg.alert("提示","删除"+(msg.success==true?"成功":"失败"));
+									   window.location.reload();                           	
+									   }
+							 });
+                	}
+            	}
         ]
   });		
   
