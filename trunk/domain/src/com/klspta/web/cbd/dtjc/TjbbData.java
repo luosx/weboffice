@@ -1,7 +1,6 @@
 package com.klspta.web.cbd.dtjc;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -25,6 +24,7 @@ public class TjbbData extends AbstractBaseBean {
 	private static String formSX = "HX_SX" ;
 	private  Map<String, Map<String, Object>> kftlPlan = new TreeMap<String, Map<String,Object>>();
 	private  Map<String, Map<String, Object>> gdtlPlan = new TreeMap<String, Map<String,Object>>();
+
 	/**
 	 * 
 	 * <br>Description:获取统计报表中的最大年度
@@ -50,10 +50,10 @@ public class TjbbData extends AbstractBaseBean {
 	 */
 	public Set<String> getKFTLProject(){
 		Set<String> projectSet = new TreeSet<String>();
-		String projctsSql = "select distinct t.xmmc from hx_kftl t order by t.xmmc";
+		String projctsSql = "select distinct t.xmname from jc_xiangmu t order by t.xmname";
 		List<Map<String, Object>> resultList = query(projctsSql, YW);
 		for(int i = 0; i < resultList.size(); i++){
-			projectSet.add(String.valueOf(resultList.get(i).get("xmmc")));
+			projectSet.add(String.valueOf(resultList.get(i).get("xmname")));
 		}
 		return projectSet;
 	}
@@ -67,10 +67,10 @@ public class TjbbData extends AbstractBaseBean {
 	 */
 	public Set<String> getGDTLProject(){
 		Set<String> projectSet = new TreeSet<String>();
-		String projctsSql = "select distinct t.xmmc from hx_gdtl t order by t.xmmc";
+		String projctsSql = "select distinct t.xmname from jc_xiangmu t order by t.xmname";
 		List<Map<String, Object>> resultList = query(projctsSql, YW);
 		for(int i = 0; i < resultList.size(); i++){
-			projectSet.add(String.valueOf(resultList.get(i).get("xmmc")));
+			projectSet.add(String.valueOf(resultList.get(i).get("xmname")));
 		}
 		return projectSet;
 	}
@@ -151,4 +151,22 @@ public class TjbbData extends AbstractBaseBean {
 		return update(sql.toString(), YW);
 	}
 
+	/**
+	 * 
+	 * <br>Description:根据用户userId确定用户上次处理的项目和年度
+	 * <br>Author:黎春行
+	 * <br>Date:2013-11-5
+	 * @param userId
+	 * @return
+	 */
+	public List<Map<String, Object>> getPlanByUserId(String userId){
+		String sql = "select t.* from user_projects t where t.userid = ?";
+		return query(sql, YW, new Object[]{userId});
+	}
+	
+	public String saveProjectsByUserid(String userId, String minyear, String maxyear, String projects){
+		String sql = "merge into user_projects t using (select id as userid  from core.core_users where id = ?)  s  on (t.userid = s.userid) when matched then update set t.minyear = ?, t.maxyear = ?, t.projects = ? when not matched then insert(t.userid, t.minyear, t.maxyear,t.projects) values (?,?,?,?)";
+		update(sql, YW, new Object[]{userId, minyear, maxyear, projects, userId, minyear, maxyear, projects});
+		return null;
+	}
 }
