@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ page language="java" pageEncoding="utf-8"%>
 
 <%@page import="org.springframework.security.core.context.SecurityContextHolder"%>
 <%@page import="com.klspta.console.user.User"%>
@@ -46,7 +46,6 @@ body {
  	scrollbar-track-color:#;	
 }
 </STYLE>
-
 	</head>
 	<script>
 
@@ -54,13 +53,10 @@ var path = "<%=basePath%>";
 var actionName = "mapAuthorOperation";
 var actionMethod = "getExtTreeByUserid";
 var parameter = "userid=<%=userId%>";
-var myData = ajaxRequest(path, actionName, actionMethod, parameter);
+putClientCommond(actionName, actionMethod);
+putRestParameter("userid", "<%=userId%>");
+var treeData = restRequest();
 var treeData;
-if(myData!=''){
-	treeData = eval('(' + myData + ')');
-}else{
-    treeData = '';
-}
 var loadFlag=true;
 /*********树形菜单展开收缩功能**add by 李如意 2011-07-13****/	  
 	function closeOrOpenNode(){
