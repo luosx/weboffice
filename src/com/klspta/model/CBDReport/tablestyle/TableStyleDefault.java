@@ -24,7 +24,7 @@ public class TableStyleDefault extends ITableStyle {
 
     @Override
     public String getTable1() {
-        return "<table width='#TABLEWIDTH' border=\"1\" cellpadding=\"1\" cellspacing=\"0\">";
+        return "<table id='report' width='#TABLEWIDTH' border=\"1\" cellpadding=\"1\" cellspacing=\"0\">";
     }
 
     @Override
