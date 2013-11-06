@@ -57,6 +57,7 @@ Table.prototype={
 				this.swapProperty(number, parseInt(number) - 1 );
 				blockArray[i] = parseInt(number) - 1;
 			}
+			this.changePosition(-1);
 		}
 		if(type != "callback"){
 			blockArray.push("moveLeft");
@@ -84,6 +85,7 @@ Table.prototype={
 				this.swapProperty(number, parseInt(number) + 1);
 				blockArray[i] = parseInt(number) + 1;
 			}
+			this.changePosition(1);
 		}
 		if(type != "callback"){
 			blockArray.push("moveRight");
@@ -94,6 +96,7 @@ Table.prototype={
 	swapProperty:function(oldquarter, newquarter){
 		var oldCell = this.moveTable.rows[this.row].cells[oldquarter];
 		var newCell = this.moveTable.rows[this.row].cells[newquarter];
+		
 		newCell.innerHTML = oldCell.innerHTML;
 		newCell.className = "yes";
 		newCell.onmouseover = function(){
@@ -162,5 +165,15 @@ Table.prototype={
        putRestParameter("newyear",newyear);
        putRestParameter("newquarter",newquarter);
        restRequest();
+	},
+	changePosition: function(type){
+		/**
+		var newquarter = this.cell + type;
+		var newCell = this.moveTable.rows[this.row].cells[newquarter];
+		var obj = newCell.getBoundingClientRect();
+		var left = obj.left;
+		var top = obj.top;
+		changePosition(left, top);
+		*/
 	}
 }

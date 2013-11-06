@@ -116,6 +116,12 @@ width = width * 1200 + 490;
 		  right: 100;
 		  background-color:#E2EAF3;
 		}
+		.form{
+		  position: absolute;
+		  top:50;
+		  left: 200;
+		  background-color:#E2EAF3;
+		}
 	</style>
   </head>
   <script type="text/javascript" >
@@ -129,10 +135,10 @@ width = width * 1200 + 490;
 		var positionY = 0;
 		var divName = "showDiv";
 		var minyear = "<%=TjbbBuild.MIN_YEAR%>";		
-		var kftlNum = "<%=new TjbbData().getKFTLProject().size()%>";
+		var kftlNum = "<%=TjbbManager.getxmNumByUserId(userId)%>";
+		
 		
 		//修改项目列表
-		var win;
 		Ext.onReady(function() {
     		Ext.QuickTips.init();
     		
@@ -154,10 +160,12 @@ width = width * 1200 + 490;
 		    });       	
 		    	
 			winForm = new Ext.form.FormPanel({
-		        width:600,
 		        url:'<%=basePath%>service/rest/tjbbManager/setProjectsByUser?userId=<%=userId%>',
 		        bodyStyle: 'padding:10px;',
-		        region: 'center',
+		        renderTo: 'itemselector',
+		        title: '请选择项目和年度',
+        		width:550,
+        		bodyStyle: 'padding:10px;',
 	        	items:[
 	        		new Ext.ux.form.SpinnerField({
                 		fieldLabel: '开始年度',
@@ -170,7 +178,7 @@ width = width * 1200 + 490;
                 		fieldLabel: '结束年度',
                 		name: 'endYear',
                 		id:'endYear',
-                		value:'2013',
+                		value:'2017',
                 		width:'100'
             		}),
             		{
@@ -180,14 +188,14 @@ width = width * 1200 + 490;
             			fieldLabel: '项目列表',
             			multiselects:[
             				{
-			                  width: 220,
-			                  height: 280,
+			                  width: 180,
+			                  height: 245,
 			                  store: leftDs,
 			                  displayField: 'text',
 			                  valueField: 'value'
 			           		},{
-			           		  width: 220,
-				              height: 280,
+			           		  width: 180,
+				              height: 200,
 				              store: rightDs,
 				              displayField: 'text',
 			                  valueField: 'value',	
@@ -215,23 +223,29 @@ width = width * 1200 + 490;
 			           	   	putRestParameter("userId","<%=userId%>");
        						putRestParameter("itemselector",escape(escape(itemselector)));
 				           	var myData = restRequest(); 
-	        					
+	        				document.getElementById("itemselector").style.display = "none";
+	        				window.location.reload();	
 	        			}
-	        			win.hide();
 	        		}
 	        	},{
  			        text: '取消',
 	        		handler: function(){
 	        			if(winForm.getForm().isValid()){
-	        				alert("取消");
+	        				document.getElementById("itemselector").style.display = "none";
 	        			}
-	        			win.hide();
 	        		}
 	        	}
 	        	]
 	        })
-	        changeProject();
+	        //changeProject();
+	        //winForm.hide();
+	        
 	    });
+	    
+	    function changeProject(){
+	    	document.getElementById("itemselector").style.display = "";
+	    	
+	    }
 	    
 	    
 	    		
@@ -247,8 +261,6 @@ width = width * 1200 + 490;
 			
 			
 			}else if(oevent.ctrlKey && oevent.keyCode == 39){
-			
-			
 			
 			}else if(oevent.keyCode == 37){
 			//按住向左键
@@ -287,15 +299,12 @@ width = width * 1200 + 490;
 	  </table>
   	</div>
 	<div id="body" style=" overflow-x:scroll; height:100%;">
-
-			 <table id='planTable'  style="text-align: center; font: normal 14px verdana; border:none; width:2150px;" cellpadding="0" cellspacing="0"   >
-				<%=TjbbManager.getPlan()%>
-			</table>
-
+				<%=TjbbManager.getPlan(userId)%>
 	</div>
 	<div id="changeProject" class="changeProject">
 		<input type="button" value="修改项目和时间" onClick="changeProject(); return false" />
 	</div>
+	<div id="itemselector" class="form" style="display:none"></div>
 	<div id="deal"></div>
   </body>
   <script type="text/javascript">
