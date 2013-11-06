@@ -4,12 +4,18 @@
 <%@page import="com.klspta.web.cbd.dtjc.TjbbManager"%>
 <%@page import="com.klspta.web.cbd.dtjc.TjbbBuild"%>
 <%@page import="com.klspta.web.cbd.dtjc.TjbbData"%>
+<%@page import="org.springframework.security.core.context.SecurityContextHolder"%>
+<%@page import="com.klspta.console.user.User"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+String userId = ((User)principal).getUserID();
+String extPath = basePath + "base/thirdres/ext/";
 Map planYear = DataManager.getInstance().getPlanYear();
+Map<String, String> proMap = TjbbManager.getProjectByUserId(userId);
 int width = Integer.parseInt(String.valueOf(planYear.get("maxyear"))) - Integer.parseInt(String.valueOf(planYear.get("minyear")));
-	width = width * 1200 + 490;
+width = width * 1200 + 490;
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -30,6 +36,9 @@ int width = Integer.parseInt(String.valueOf(planYear.get("maxyear"))) - Integer.
 	<script type="text/javascript" src="web/cbd/dtjc/js/changePlan.js"></script>
 	<script type="text/javascript" src="web/cbd/dtjc/js/planStack.js"></script>
 	<script type="text/javascript" src="web/cbd/dtjc/js/movePlan.js"></script>
+	<script type="text/javascript" src="<%=extPath%>examples/ux/MultiSelect.js"></script>
+	<script type="text/javascript" src="<%=extPath%>examples/ux/ItemSelector.js"></script>
+ 	<link rel="stylesheet" type="text/css" href="<%=extPath%>examples/ux/css/MultiSelect.css"/>
 	<style type="text/css">
 		table{
 			border-left:1px #000000 solid;
@@ -98,8 +107,14 @@ int width = Integer.parseInt(String.valueOf(planYear.get("maxyear"))) - Integer.
 		}
 		#deal{
 		  position: absolute;
-		  top:0;
+		  top:30;
 		  right: 0;
+		}
+		.changeProject{
+		  position: absolute;
+		  top:0;
+		  right: 100;
+		  background-color:#E2EAF3;
 		}
 	</style>
   </head>
@@ -116,20 +131,139 @@ int width = Integer.parseInt(String.valueOf(planYear.get("maxyear"))) - Integer.
 		var minyear = "<%=TjbbBuild.MIN_YEAR%>";		
 		var kftlNum = "<%=new TjbbData().getKFTLProject().size()%>";
 		
-		
-		
-		//添加ctrl + "z"回退事件
+		//修改项目列表
+		var win;
+		Ext.onReady(function() {
+    		Ext.QuickTips.init();
+    		
+       		var leftDs = new Ext.data.ArrayStore({
+		        data: <%=proMap.get("left")%>,
+		        fields: ['value','text'],
+		        sortInfo: {
+		            field: 'value',
+		            direction: 'ASC'
+		        }
+		    }); 
+		    var rightDs = new Ext.data.ArrayStore({
+		        data: <%=proMap.get("right")%>,
+		        fields: ['value','text'],
+		        sortInfo: {
+		            field: 'value',
+		            direction: 'ASC'
+		        }
+		    });       	
+		    	
+			winForm = new Ext.form.FormPanel({
+		        width:600,
+		        url:'<%=basePath%>service/rest/tjbbManager/setProjectsByUser?userId=<%=userId%>',
+		        bodyStyle: 'padding:10px;',
+		        region: 'center',
+	        	items:[
+	        		new Ext.ux.form.SpinnerField({
+                		fieldLabel: '开始年度',
+                		name: 'beginYear',
+                		id:'beginYear',
+       					value:'2013',
+       					width:'100'
+            		}),
+            		new Ext.ux.form.SpinnerField({
+                		fieldLabel: '结束年度',
+                		name: 'endYear',
+                		id:'endYear',
+                		value:'2013',
+                		width:'100'
+            		}),
+            		{
+            			xtype: 'itemselector',
+            			name: 'itemselector',
+            			imagePath: '<%=extPath%>examples/ux/images/',
+            			fieldLabel: '项目列表',
+            			multiselects:[
+            				{
+			                  width: 220,
+			                  height: 280,
+			                  store: leftDs,
+			                  displayField: 'text',
+			                  valueField: 'value'
+			           		},{
+			           		  width: 220,
+				              height: 280,
+				              store: rightDs,
+				              displayField: 'text',
+			                  valueField: 'value',	
+			                  tbar:[{
+			                  	text: '清空已选项目',
+			                  	handler:function(){
+			                  		winForm.getForm().findField('itemselector').reset();
+			                  	}
+			                  }]
+			           		}	
+            			]
+            		
+            		}
+	        	],
+	        	buttons: [{
+	        		text: '保存',
+	        		handler: function(){
+	        			if(winForm.getForm().isValid()){
+	        				var itemselector = winForm.form.findField('itemselector').getValue();
+	        				var beginYear=Ext.getCmp('beginYear').getValue();
+	        				var endYear=Ext.getCmp('endYear').getValue();
+     				       	putClientCommond("tjbbManager","setProjectsByUserId");
+			           	   	putRestParameter("beginYear",beginYear);
+			           	   	putRestParameter("endYear",endYear);
+			           	   	putRestParameter("userId","<%=userId%>");
+       						putRestParameter("itemselector",escape(escape(itemselector)));
+				           	var myData = restRequest(); 
+	        					
+	        			}
+	        			win.hide();
+	        		}
+	        	},{
+ 			        text: '取消',
+	        		handler: function(){
+	        			if(winForm.getForm().isValid()){
+	        				alert("取消");
+	        			}
+	        			win.hide();
+	        		}
+	        	}
+	        	]
+	        })
+	        changeProject();
+	    });
+	    
+	    
+	    		
+		//添加键盘快捷键
 		document.onkeydown = function(ev){
 			var oevent = ev || event;
+			//按住Ctrl + Z键
 			if(oevent.ctrlKey && oevent.keyCode == 90){
 				callback();
+			
+			}else if(oevent.ctrlKey && oevent.keyCode == 37){
+				//按Ctrl + 向左键 向左移动一年
+			
+			
+			}else if(oevent.ctrlKey && oevent.keyCode == 39){
+			
+			
+			
+			}else if(oevent.keyCode == 37){
+			//按住向左键
+			
+			}else if(oevent.keyCode == 39){
+			//按住向右键
+			
 			}
 		}
 
+
   </script>
   <body>
-  	<div id="showDiv" class="divstyle" style="display:none;" onDblClick="showDetail(); return false;">
-  	  <table  style="width:80px; height:30px;" cellpadding="0px" cellspacing="0px" >
+  	<div id="showDiv" class="divstyle" style="display:none; width:50px;" onDblClick="showDetail(); return false;">
+  	  <table  style="width:50px; height:30px;" cellpadding="0px" cellspacing="0px" >
 	  	<!--
 	  	<tr>
 			<td colspan="2" align="right">
@@ -155,9 +289,12 @@ int width = Integer.parseInt(String.valueOf(planYear.get("maxyear"))) - Integer.
 	<div id="body" style=" overflow-x:scroll; height:100%;">
 
 			 <table id='planTable'  style="text-align: center; font: normal 14px verdana; border:none; width:2150px;" cellpadding="0" cellspacing="0"   >
-				<%=TjbbManager.getKFTLPlan()%>
+				<%=TjbbManager.getPlan()%>
 			</table>
 
+	</div>
+	<div id="changeProject" class="changeProject">
+		<input type="button" value="修改项目和时间" onClick="changeProject(); return false" />
 	</div>
 	<div id="deal"></div>
   </body>
