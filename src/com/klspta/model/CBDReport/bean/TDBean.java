@@ -82,4 +82,12 @@ public class TDBean {
 	public void setStyle(String style) {
 		this.style = style;
 	}
+
+    public void setRowspan(String rowspan) {
+        this.rowspan = rowspan;
+    }
+
+    public void setColspan(String colspan) {
+        this.colspan = colspan;
+    }
 }
