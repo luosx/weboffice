@@ -20,7 +20,7 @@ public class MapManager extends AbstractBaseBean {
     private static final String opKey = UtilFactory.getStrUtil().getGuid();
 
     private static MapManager instance;
-
+    
     public static MapManager getInstance() {
         if (instance == null) {
             instance = new MapManager();
@@ -104,7 +104,7 @@ public class MapManager extends AbstractBaseBean {
         }
     }
 
-    public Vector<Map<String, Object>> getExtTree(String userid) {
+    public Vector<Map<String, Object>> getExtTree(String userid) throws Exception {
         Map<String, MapTreeBean> tree = getTreeBeans(userid);
         Vector<Map<String, Object>> root = new Vector<Map<String, Object>>();
         Iterator<MapTreeBean> iter = tree.values().iterator();
@@ -116,17 +116,11 @@ public class MapManager extends AbstractBaseBean {
         return root;
     }
 
-    public Map<String, MapTreeBean> getTreeBeans(String userid) {
-        try {
-            User user = ManagerFactory.getUserManager().getUserWithId(userid);
-            List<String> roleidList = user.getRoleIdListByRoleList();
-            Map<String, MapTreeBean> cMapTreeList = getMapTreeListByRoleIds(roleidList);
-            return cMapTreeList;
-        } catch (Exception e) {
-            responseException(this, "getMemoMapTreeBeanListByUserId", "200001", e);
-            e.printStackTrace();
-        }
-        return null;
+    public Map<String, MapTreeBean> getTreeBeans(String userid) throws Exception {
+        User user = ManagerFactory.getUserManager().getUserWithId(userid);
+        List<String> roleidList = user.getRoleIdListByRoleList();
+        Map<String, MapTreeBean> cMapTreeList = getMapTreeListByRoleIds(roleidList);
+        return cMapTreeList;
     }
     
     public Vector<MapTreeBean> getTreeBeansByTreeID(String treeId){
