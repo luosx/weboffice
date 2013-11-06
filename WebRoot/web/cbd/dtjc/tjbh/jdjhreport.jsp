@@ -11,7 +11,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>年度计划</title>
+    <title>季度计划</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -104,6 +104,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</style>
   </head>
   <body>
-  	<%=new CBDReportManager().getReport("NDJH")%>
+  	<%=new CBDReportManager().getReport("JDJH")%>
   </body>
 </html>
