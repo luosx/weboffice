@@ -51,6 +51,7 @@ public class TableBuilder {
         html = html.replace("#ROWPAN", null2String(tdBean.getRowspan()));
         html = html.replace("#TEXT", null2String(tdBean.getText()));
         html = html.replace("#STYLE", null2String(tdBean.getStyle()));
+        html = html.replace("#TDCSS", null2String(tdBean.getHeight()));
         return html;
     }
     

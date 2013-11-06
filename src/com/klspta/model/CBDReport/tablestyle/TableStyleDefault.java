@@ -4,7 +4,7 @@ public class TableStyleDefault extends ITableStyle {
 
     @Override
     public String getTD1() {
-        return "<td height='#HEIGHT' width='#WIDTH' colspan='#COLSPAN' rowspan='#ROWPAN' style='#STYLE' >#TEXT</td>";
+        return "<td height='#HEIGHT' width='#WIDTH' colspan='#COLSPAN' rowspan='#ROWPAN' class='#STYLE' >#TEXT</td>";
     }
 
     @Override
