@@ -22,6 +22,7 @@ public class SeasonPlanBuilder extends AbstractBaseBean implements IDataClass {
             buildKftl(trbeans, ndList, xmList);
             buildAzfTotal(trbeans, ndList, xmList);
             buildAzf(trbeans, ndList);
+            buildGdtlTotal(trbeans, ndList, xmList);
             buildGdtl(trbeans, ndList, xmList);
             buildRZTotal(trbeans, ndList, xmList);
         }
@@ -88,29 +89,29 @@ public class SeasonPlanBuilder extends AbstractBaseBean implements IDataClass {
         TDBean tdBean = new TDBean("开发体量", "", "");
         tdBean.setRowspan("4");
         trbhs.addTDBean(tdBean);
-        tdBean = new TDBean("1", "", "");
+        tdBean = new TDBean("1", "45", "");
         trbhs.addTDBean(tdBean);
-        tdBean = new TDBean("征收户数", "70", "");
+        tdBean = new TDBean("征收户数", "190", "");
         trbhs.addTDBean(tdBean);
-        putTj(trbhs, "hx_kftl", "hs", ndList);
+        putTj(trbhs, "hx_sx", "zshs", ndList,true);
 
-        tdBean = new TDBean("2", "", "");
+        tdBean = new TDBean("2", "45", "");
         trbdl.addTDBean(tdBean);
-        tdBean = new TDBean("完成开发地量(公顷)", "200", "");
+        tdBean = new TDBean("完成开发地量(公顷)", "190", "");
         trbdl.addTDBean(tdBean);
-        putTj(trbdl, "hx_kftl", "dl", ndList);
+        putTj(trbdl, "hx_sx", "wckfdl", ndList,true);
 
-        tdBean = new TDBean("3", "", "");
+        tdBean = new TDBean("3", "45", "");
         trbgm.addTDBean(tdBean);
         tdBean = new TDBean("完成开发规模（万㎡）", "190", "");
         trbgm.addTDBean(tdBean);
-        putTj(trbgm, "hx_kftl", "gm", ndList);
+        putTj(trbgm, "hx_sx", "wckfgm", ndList,true);
 
-        tdBean = new TDBean("4", "", "");
+        tdBean = new TDBean("4", "45", "");
         trbtz.addTDBean(tdBean);
         tdBean = new TDBean("储备红线投资（亿元）", "190", "");
         trbtz.addTDBean(tdBean);
-        putTj(trbtz, "hx_kftl", "tz", ndList);
+        putTj(trbtz, "hx_sx", "cbhxtz", ndList,true);
 
         trbeans.put("kfhs", trbhs);
         trbeans.put("kfdl", trbdl);
@@ -128,46 +129,46 @@ public class SeasonPlanBuilder extends AbstractBaseBean implements IDataClass {
      */
     private void buildGdtlTotal(Map<String, TRBean> trbeans, List<Map<String, Object>> ndList,
             List<Map<String, Object>> xmList) {
-        TRBean trbhs = new TRBean();
-        trbhs.setCssStyle("tr02");
-        TRBean trbdl = new TRBean();
-        trbdl.setCssStyle("tr02");
-        TRBean trbgm = new TRBean();
-        trbgm.setCssStyle("tr02");
+        TRBean trbgytd = new TRBean();
+        trbgytd.setCssStyle("tr11");
+        TRBean trbgygm = new TRBean();
+        trbgygm.setCssStyle("tr11");
+        TRBean trbcbkkc = new TRBean();
+        trbcbkkc.setCssStyle("tr11");
         TRBean trbtz = new TRBean();
-        trbtz.setCssStyle("tr02");
+        trbtz.setCssStyle("tr11");
 
-        TDBean tdBean = new TDBean("开发体量", "", "");
+        TDBean tdBean = new TDBean("供地体量", "", "");
         tdBean.setRowspan("4");
-        trbhs.addTDBean(tdBean);
-        tdBean = new TDBean("1", "", "");
-        trbhs.addTDBean(tdBean);
-        tdBean = new TDBean("征收户数", "70", "");
-        trbhs.addTDBean(tdBean);
-        putTj(trbhs, "hx_kftl", "hs", ndList);
+        trbgytd.addTDBean(tdBean);
+        tdBean = new TDBean("9", "45", "");
+        trbgytd.addTDBean(tdBean);
+        tdBean = new TDBean("供应土地(公顷)", "190", "");
+        trbgytd.addTDBean(tdBean);
+        putTj(trbgytd, "hx_sx", "gytd", ndList,false);
 
-        tdBean = new TDBean("2", "", "");
-        trbdl.addTDBean(tdBean);
-        tdBean = new TDBean("完成开发地量(公顷)", "200", "");
-        trbdl.addTDBean(tdBean);
-        putTj(trbdl, "hx_kftl", "dl", ndList);
+        tdBean = new TDBean("10", "45", "");
+        trbgygm.addTDBean(tdBean);
+        tdBean = new TDBean("供应规模(公顷)", "190", "");
+        trbgygm.addTDBean(tdBean);
+        putTj(trbgygm, "hx_sx", "gygm", ndList,false);
 
-        tdBean = new TDBean("3", "", "");
-        trbgm.addTDBean(tdBean);
-        tdBean = new TDBean("完成开发规模（万㎡）", "190", "");
-        trbgm.addTDBean(tdBean);
-        putTj(trbgm, "hx_kftl", "gm", ndList);
+        tdBean = new TDBean("11", "45", "");
+        trbcbkkc.addTDBean(tdBean);
+        tdBean = new TDBean("储备库库存（万㎡）", "190", "");
+        trbcbkkc.addTDBean(tdBean);
+        putTj(trbcbkkc, "hx_sx", "cbkkc", ndList,false);
 
-        tdBean = new TDBean("4", "", "");
+        tdBean = new TDBean("12", "45", "");
         trbtz.addTDBean(tdBean);
-        tdBean = new TDBean("储备红线投资（亿元）", "190", "");
+        tdBean = new TDBean("储备库融资能力（亿元）", "190", "");
         trbtz.addTDBean(tdBean);
-        putTj(trbtz, "hx_kftl", "tz", ndList);
+        putTj(trbtz, "hx_sx", "cbkrznl", ndList,false);
 
-        trbeans.put("kfhs", trbhs);
-        trbeans.put("kfdl", trbdl);
-        trbeans.put("kfgm", trbgm);
-        trbeans.put("kftz", trbtz);
+        trbeans.put("gdhs", trbgytd);
+        trbeans.put("gdgm", trbgygm);
+        trbeans.put("gdkc", trbcbkkc);
+        trbeans.put("gdrz", trbtz);
     }
     
     /**
@@ -192,29 +193,29 @@ public class SeasonPlanBuilder extends AbstractBaseBean implements IDataClass {
         TDBean tdBean = new TDBean("安置房建设", "", "");
         tdBean.setRowspan("4");
         trbeanKg.addTDBean(tdBean);
-        tdBean = new TDBean("5", "", "");
+        tdBean = new TDBean("5", "45", "");
         trbeanKg.addTDBean(tdBean);
         tdBean = new TDBean("开工量（㎡）", "200", "");
         trbeanKg.addTDBean(tdBean);
-        putTj(trbeanKg, "hx_azf", "kg", ndList);
+        putTj(trbeanKg, "hx_sx", "kgjgfl", ndList,false);
 
-        tdBean = new TDBean("6", "", "");
+        tdBean = new TDBean("6", "45", "");
         trbtz.addTDBean(tdBean);
         tdBean = new TDBean("投资（亿元）", "200", "");
         trbtz.addTDBean(tdBean);
-        putTj(trbtz, "hx_azf", "tz", ndList);
+        putTj(trbtz, "hx_sx", "azftz", ndList,false);
 
-        tdBean = new TDBean("7", "", "");
+        tdBean = new TDBean("7", "45", "");
         trbsyl.addTDBean(tdBean);
         tdBean = new TDBean("使用量（万㎡）", "190", "");
         trbsyl.addTDBean(tdBean);
-        putTj(trbsyl, "hx_azf", "syl", ndList);
+        putTj(trbsyl, "hx_sx", "azfsyl", ndList,false);
 
-        tdBean = new TDBean("8", "", "");
+        tdBean = new TDBean("8", "45", "");
         trbcl.addTDBean(tdBean);
         tdBean = new TDBean("安置房存量（万㎡）", "190", "");
         trbcl.addTDBean(tdBean);
-        putTj(trbcl, "hx_azf", "kc", ndList);
+        putTj(trbcl, "hx_sx", "azfcl", ndList,false);
 
         trbeans.put("azfkgl", trbeanKg);
         trbeans.put("azftz", trbtz);
@@ -252,53 +253,53 @@ public class SeasonPlanBuilder extends AbstractBaseBean implements IDataClass {
         TDBean tdBean = new TDBean("投融资情况", "", "");
         tdBean.setRowspan("8");
         trbeanTzxq.addTDBean(tdBean);
-        tdBean = new TDBean("13", "", "");
+        tdBean = new TDBean("13", "45", "");
         trbeanTzxq.addTDBean(tdBean);
         tdBean = new TDBean("年度投资需求(亿元)", "190", "");
         trbeanTzxq.addTDBean(tdBean);
-        putTj(trbeanTzxq, "hx_sx", "bqtzxq", ndList);
+        putTj(trbeanTzxq, "hx_sx", "bqtzxq", ndList,false);
 
-        tdBean = new TDBean("14", "", "");
+        tdBean = new TDBean("14", "45", "");
         trbeanHlcb.addTDBean(tdBean);
         tdBean = new TDBean("年度回笼成本（亿元）", "200", "");
         trbeanHlcb.addTDBean(tdBean);
-        putTj(trbeanHlcb, "hx_sx", "bqhlcb", ndList);
+        putTj(trbeanHlcb, "hx_sx", "bqhlcb", ndList,false);
 
-        tdBean = new TDBean("15", "", "");
+        tdBean = new TDBean("15", "45", "");
         trbeanTdsy.addTDBean(tdBean);
         tdBean = new TDBean("政府土地收益(亿元)", "190", "");
         trbeanTdsy.addTDBean(tdBean);
-        putTj(trbeanTdsy, "hx_sx", "zftdsy", ndList);
+        putTj(trbeanTdsy, "hx_sx", "zftdsy", ndList,false);
 
-        tdBean = new TDBean("16", "", "");
+        tdBean = new TDBean("16", "45", "");
         trbeanRzxq.addTDBean(tdBean);
         tdBean = new TDBean("年度融资需求(亿元)", "190", "");
         trbeanRzxq.addTDBean(tdBean);
-        putTj(trbeanRzxq, "hx_sx", "bqrzxq", ndList);
+        putTj(trbeanRzxq, "hx_sx", "bqrzxq", ndList,false);
 
-        tdBean = new TDBean("17", "", "");
+        tdBean = new TDBean("17", "45", "");
         trbeanHkxq.addTDBean(tdBean);
         tdBean = new TDBean("年度还款需求(亿元)", "190", "");
         trbeanHkxq.addTDBean(tdBean);
-        putTj(trbeanHkxq, "hx_sx", "bqhkxq", ndList);
+        putTj(trbeanHkxq, "hx_sx", "bqhkxq", ndList,false);
 
-        tdBean = new TDBean("18", "", "");
+        tdBean = new TDBean("18", "45", "");
         trbeanZjzr.addTDBean(tdBean);
         tdBean = new TDBean("权益性资金注入(亿元)", "190", "");
         trbeanZjzr.addTDBean(tdBean);
-        putTj(trbeanZjzr, "hx_sx", "qyxzjzr", ndList);
+        putTj(trbeanZjzr, "hx_sx", "qyxzjzr", ndList,false);
 
-        tdBean = new TDBean("19", "", "");
+        tdBean = new TDBean("19", "45", "");
         trbeanFzye.addTDBean(tdBean);
         tdBean = new TDBean("负债余额", "190", "");
         trbeanFzye.addTDBean(tdBean);
-        putTj(trbeanFzye, "hx_sx", "fzye", ndList);
+        putTj(trbeanFzye, "hx_sx", "fzye", ndList,false);
 
-        tdBean = new TDBean("20", "", "");
+        tdBean = new TDBean("20", "45", "");
         trbeanZmye.addTDBean(tdBean);
         tdBean = new TDBean("年度账面余额", "190", "");
         trbeanZmye.addTDBean(tdBean);
-        putTj(trbeanZmye, "hx_sx", "bqzmye", ndList);
+        putTj(trbeanZmye, "hx_sx", "bqzmye", ndList,false);
 
         trbeans.put("trztzxq", trbeanTzxq);
         trbeans.put("trzhlcb", trbeanHlcb);
@@ -329,7 +330,7 @@ public class SeasonPlanBuilder extends AbstractBaseBean implements IDataClass {
             TDBean tdBean = new TDBean(i + 1 + "", "", "");
             tdBean.setRowspan("8");
             trbeanHs.addTDBean(tdBean);
-            tdBean = new TDBean("户数", "", "30");
+            tdBean = new TDBean("户数", "45", "");
             trbeanHs.addTDBean(tdBean);
             tdBean = new TDBean(xmmc, "200", "");
             tdBean.setRowspan("8");
@@ -338,43 +339,43 @@ public class SeasonPlanBuilder extends AbstractBaseBean implements IDataClass {
             trbeans.put("kftlhs" + i, trbeanHs);
 
             TRBean trbeanDl = new TRBean();
-            tdBean = new TDBean("地量", "", "30");
+            tdBean = new TDBean("地量", "45", "");
             trbeanDl.addTDBean(tdBean);
             putSingle(xmmc, "hx_kftl", new String[] { "dl", "dlz" }, ndList, trbeanDl);
             trbeans.put("kftldl" + i, trbeanDl);
 
             TRBean trbeanGm = new TRBean();
-            tdBean = new TDBean("规模", "", "30");
+            tdBean = new TDBean("规模", "45", "");
             trbeanGm.addTDBean(tdBean);
             putSingle(xmmc, "hx_kftl", new String[] { "gm", "gmz" }, ndList, trbeanGm);
             trbeans.put("kftlgm" + i, trbeanGm);
 
             TRBean trbeanTz = new TRBean();
-            tdBean = new TDBean("投资", "", "30");
+            tdBean = new TDBean("投资", "45", "");
             trbeanTz.addTDBean(tdBean);
             putSingle(xmmc, "hx_kftl", new String[] { "tz", "tzz" }, ndList, trbeanTz);
             trbeans.put("kftltz" + i, trbeanTz);
 
             TRBean trbeanZ = new TRBean();
-            tdBean = new TDBean("住", "", "30");
+            tdBean = new TDBean("住", "45", "");
             trbeanZ.addTDBean(tdBean);
             putSingle(xmmc, "hx_kftl", new String[] { "zhu", "zhuz" }, ndList, trbeanZ);
             trbeans.put("kftlz" + i, trbeanZ);
 
             TRBean trbeanQ = new TRBean();
-            tdBean = new TDBean("企", "", "30");
+            tdBean = new TDBean("企", "45", "");
             trbeanQ.addTDBean(tdBean);
             putSingle(xmmc, "hx_kftl", new String[] { "qi", "qiz" }, ndList, trbeanQ);
             trbeans.put("kftlq" + i, trbeanQ);
 
             TRBean trbeanLm = new TRBean();
-            tdBean = new TDBean("楼面", "", "30");
+            tdBean = new TDBean("楼面", "45", "");
             trbeanLm.addTDBean(tdBean);
             putSingle(xmmc, "hx_kftl", new String[] { "lm", "'——'" }, ndList, trbeanLm);
             trbeans.put("kftllm" + i, trbeanLm);
 
             TRBean trbeanCj = new TRBean();
-            tdBean = new TDBean("成交", "", "30");
+            tdBean = new TDBean("成交", "45", "");
             trbeanCj.addTDBean(tdBean);
             putSingle(xmmc, "hx_kftl", new String[] { "cj", "'——'" }, ndList, trbeanCj);
             trbeans.put("kftlcj" + i, trbeanCj);
@@ -400,7 +401,7 @@ public class SeasonPlanBuilder extends AbstractBaseBean implements IDataClass {
             TDBean tdBean = new TDBean(i + 1 + "", "", "");
             tdBean.setRowspan("6");
             trbeanDl.addTDBean(tdBean);
-            tdBean = new TDBean("地量", "", "30");
+            tdBean = new TDBean("地量", "45", "");
             trbeanDl.addTDBean(tdBean);
             tdBean = new TDBean(xmmc, "200", "");
             tdBean.setRowspan("6");
@@ -409,31 +410,31 @@ public class SeasonPlanBuilder extends AbstractBaseBean implements IDataClass {
             trbeans.put("gdtlhs" + i, trbeanDl);
 
             TRBean trbeanGm = new TRBean();
-            tdBean = new TDBean("规模", "", "30");
+            tdBean = new TDBean("规模", "45", "");
             trbeanGm.addTDBean(tdBean);
             putSingle(xmmc, "hx_gdtl", new String[] { "gm", "gmz" }, ndList, trbeanGm);
             trbeans.put("gdtlgm" + i, trbeanGm);
 
             TRBean trbeanCb = new TRBean();
-            tdBean = new TDBean("成本", "", "30");
+            tdBean = new TDBean("成本", "45", "");
             trbeanCb.addTDBean(tdBean);
             putSingle(xmmc, "hx_gdtl", new String[] { "cb", "cbz" }, ndList, trbeanCb);
             trbeans.put("gdtlcb" + i, trbeanCb);
 
             TRBean trbeanSy = new TRBean();
-            tdBean = new TDBean("收益", "", "30");
+            tdBean = new TDBean("收益", "45", "");
             trbeanSy.addTDBean(tdBean);
             putSingle(xmmc, "hx_gdtl", new String[] { "sy", "syz" }, ndList, trbeanSy);
             trbeans.put("gdtlsy" + i, trbeanSy);
 
             TRBean trbeanZj = new TRBean();
-            tdBean = new TDBean("总价", "", "30");
+            tdBean = new TDBean("总价", "45", "");
             trbeanZj.addTDBean(tdBean);
             putSingle(xmmc, "hx_gdtl", new String[] { "zj", "zjz" }, ndList, trbeanZj);
             trbeans.put("gdtlzj" + i, trbeanZj);
 
             TRBean trbeanZuj = new TRBean();
-            tdBean = new TDBean("租金", "", "30");
+            tdBean = new TDBean("租金", "45", "");
             trbeanZuj.addTDBean(tdBean);
             putSingle(xmmc, "hx_gdtl", new String[] { "zuj", "'——'" }, ndList, trbeanZuj);
             trbeans.put("gdtlzuj" + i, trbeanZuj);
@@ -464,14 +465,14 @@ public class SeasonPlanBuilder extends AbstractBaseBean implements IDataClass {
                     trBeanKg = new TRBean();
                 }
                 trBeanTz = new TRBean();
-                tdBean = new TDBean("开工", "20", "");
+                tdBean = new TDBean("开工", "45", "");
                 trBeanKg.addTDBean(tdBean);
                 tdBean = new TDBean(checkNull(kgmc), "200", "");
                 trBeanKg.addTDBean(tdBean);
                 putSingle(checkNull(kgmc), "hx_azf", new String[] { "kg", "kgbl" }, ndList, trBeanKg);
 
                 trBeanTz = new TRBean();
-                tdBean = new TDBean("投资", "20", "");
+                tdBean = new TDBean("投资", "45", "");
                 trBeanTz.addTDBean(tdBean);
                 tdBean = new TDBean(checkNull(tzmc), "200", "");
                 trBeanTz.addTDBean(tdBean);
@@ -558,19 +559,19 @@ public class SeasonPlanBuilder extends AbstractBaseBean implements IDataClass {
      * @param field
      * @param ndList
      */
-    private void putTj(TRBean trBean, String tableName, String field, List<Map<String, Object>> ndList) {
+    private void putTj(TRBean trBean, String tableName, String field, List<Map<String, Object>> ndList,boolean isKf) {
         StringBuffer sBuffer = new StringBuffer("select ");
         int count = ndList.size();
         Object[] objs = new Object[count * 4];
         Object nd;
         for (int i = 0; i < count; i++) {
-            sBuffer.append("(select sum(").append(field).append(") from ").append(tableName).append(
+            sBuffer.append("(select ").append(field).append(" from ").append(tableName).append(
                     " where nd=? and jd='1')  as ").append("s").append(i).append("1,");
-            sBuffer.append("(select sum(").append(field).append(") from ").append(tableName).append(
+            sBuffer.append("(select ").append(field).append(" from ").append(tableName).append(
                     " where nd=? and jd='2')  as ").append("s").append(i).append("2,");
-            sBuffer.append("(select sum(").append(field).append(") from ").append(tableName).append(
+            sBuffer.append("(select ").append(field).append(" from ").append(tableName).append(
                     " where nd=? and jd='3')  as ").append("s").append(i).append("3,");
-            sBuffer.append("(select sum(").append(field).append(") from ").append(tableName).append(
+            sBuffer.append("(select ").append(field).append(" from ").append(tableName).append(
                     " where nd=? and jd='4')  as ").append("s").append(i).append("4,");
             nd = ndList.get(i).get("nd");
             objs[i * 4] = nd;
@@ -584,7 +585,7 @@ public class SeasonPlanBuilder extends AbstractBaseBean implements IDataClass {
         List<Map<String, Object>> trList;
         trList = query(sBuffer.toString(), YW, objs);
         TDBean tb;
-        if (tableName.indexOf("kftl") > 0) {
+        if (isKf) {
             if (trList.size() > 0) {
                 Map<String, Object> mapKf = trList.get(0);
                 for (int z = 0; z <= count; z++) {
