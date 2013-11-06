@@ -89,13 +89,13 @@ public class YearPlanBuilder extends AbstractBaseBean implements IDataClass {
         trbhs.addTDBean(tdBean);
         tdBean = new TDBean("1", "", "");
         trbhs.addTDBean(tdBean);
-        tdBean = new TDBean("征收户数", "70", "");
+        tdBean = new TDBean("征收户数", "190", "");
         trbhs.addTDBean(tdBean);
         putTj(trbhs, "hx_sx", "zshs", ndList);
 
         tdBean = new TDBean("2", "", "");
         trbdl.addTDBean(tdBean);
-        tdBean = new TDBean("完成开发地量(公顷)", "200", "");
+        tdBean = new TDBean("完成开发地量(公顷)", "190", "");
         trbdl.addTDBean(tdBean);
         putTj(trbdl, "hx_sx", "wckfdl", ndList);
 
@@ -141,13 +141,13 @@ public class YearPlanBuilder extends AbstractBaseBean implements IDataClass {
         trbgytd.addTDBean(tdBean);
         tdBean = new TDBean("9", "", "");
         trbgytd.addTDBean(tdBean);
-        tdBean = new TDBean("供应土地(公顷)", "70", "");
+        tdBean = new TDBean("供应土地(公顷)", "190", "");
         trbgytd.addTDBean(tdBean);
         putTj(trbgytd, "hx_sx", "gytd", ndList);
 
         tdBean = new TDBean("10", "", "");
         trbgygm.addTDBean(tdBean);
-        tdBean = new TDBean("供应规模(公顷)", "200", "");
+        tdBean = new TDBean("供应规模(公顷)", "190", "");
         trbgygm.addTDBean(tdBean);
         putTj(trbgygm, "hx_sx", "gygm", ndList);
 
@@ -346,7 +346,7 @@ public class YearPlanBuilder extends AbstractBaseBean implements IDataClass {
 
             TDBean tdbxh = new TDBean(i + 1 + "", "20", "");
             TDBean tdbtz = new TDBean("投资", "40", "");
-            TDBean tdbmc = new TDBean(xmmc, "150", "");
+            TDBean tdbmc = new TDBean(xmmc, "190", "");
             trb.addTDBean(tdbxh);
             trb.addTDBean(tdbtz);
             trb.addTDBean(tdbmc);
@@ -401,7 +401,7 @@ public class YearPlanBuilder extends AbstractBaseBean implements IDataClass {
 
             TDBean tdbxh = new TDBean(i + 1 + "", "20", "");
             TDBean tdbtz = new TDBean("规模", "40", "");
-            TDBean tdbmc = new TDBean(xmmc, "150", "");
+            TDBean tdbmc = new TDBean(xmmc, "190", "");
             trb.addTDBean(tdbxh);
             trb.addTDBean(tdbtz);
             trb.addTDBean(tdbmc);
