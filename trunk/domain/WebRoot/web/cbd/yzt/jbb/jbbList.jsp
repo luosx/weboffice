@@ -53,6 +53,9 @@
             	cancelText:' 取消 '
     		});
 
+		    window.onscroll = function(){ 
+   				editor.positionButtons();
+  			 }
 			width = document.body.clientWidth;
 			var tableWidth = document.body.clientWidth;
 			height = document.body.clientHeight * 0.995;
