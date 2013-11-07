@@ -1,5 +1,6 @@
 package com.klspta.web.cbd.dtjc.tjbb;
 
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Map;
 
@@ -17,6 +18,7 @@ import com.klspta.base.util.UtilFactory;
  */
 @Component
 public class Gdtl extends AbstractBaseBean {
+    DecimalFormat df = new DecimalFormat("#.00");
 
     /**
      * 评估土地价值
@@ -137,7 +139,7 @@ public class Gdtl extends AbstractBaseBean {
         String jd = request.getParameter("jd");
         String sql = "select xmmc,nd||'-'||yf as sx,dl,gm,cb,sy,zj,zuj as zujin,rownum-1 as mod,rownum-1 as del,yw_guid  as gdbh,dlz,gmz,cbz,syz,zjz,yf from hx_gdtl  where xmmc=? and nd=? and jd=?";
 
-        List<Map<String, Object>> list = query(sql, YW, new Object[] { xmmc,nd,jd });
+        List<Map<String, Object>> list = query(sql, YW, new Object[] { xmmc, nd, jd });
         response(list);
     }
 
@@ -218,24 +220,7 @@ public class Gdtl extends AbstractBaseBean {
         }
     }
 
-    /**
-     * 
-     * <br>Description:判断在同一季度项目开发体量的条数是否唯一
-     * <br>Author:陈强峰
-     * <br>Date:2013-10-14
-     * @param nd
-     * @param jd
-     * @param xmbh
-     * @return
-     */
-    private boolean judgeCount(String nd, String jd, String xmbh) {
-        String sql = "select yw_guid from hx_gdtl where nd=? and jd=? and xmguid=?";
-        List<Map<String, Object>> listCount = query(sql, YW, new Object[] { nd, jd, xmbh });
-        if (listCount.size() == 1) {
-            return true;
-        }
-        return false;
-    }
+
 
     /**
      * 
@@ -266,7 +251,7 @@ public class Gdtl extends AbstractBaseBean {
             double lastCbkkc = 0;
             if (lastSeasonList.size() > 0) {
                 Object obj = lastSeasonList.get(0).get("cbkkc");
-                lastCbkkc = obj == null ? 0 : Double.parseDouble(obj.toString());
+                lastCbkkc = dealDouble(obj);
             }
             //获取本季度的完成开发规模
             sql = "select wckfgm from hx_sx where nd=? and jd=?";
@@ -274,11 +259,11 @@ public class Gdtl extends AbstractBaseBean {
             double wckfgm = 0;
             if (seasonList.size() > 0) {
                 Object obj = lastSeasonList.get(0).get("wckfgm");
-                wckfgm = obj == null ? 0 : Double.parseDouble(obj.toString());
+                wckfgm = dealDouble(obj);
             }
             //更新储备库库存
-            double cbkkc = lastCbkkc + wckfgm - Double.parseDouble(gygm.toString());
-            double cbkrznl = cbkkc * pgtdjz * dyl * (1 - rzss);
+            double cbkkc = formatDouble(lastCbkkc + wckfgm - dealDouble(gygm));
+            double cbkrznl =formatDouble(cbkkc * pgtdjz * dyl * (1 - rzss));
             sql = "update hx_sx set gytd=?,gygm=?,cbkkc=?,cbkrznl=? where nd=? and jd=?";
             update(sql, YW,
                     new Object[] { gytd, gygm, String.valueOf(cbkkc), String.valueOf(cbkrznl), nd, jd });
@@ -292,5 +277,37 @@ public class Gdtl extends AbstractBaseBean {
             return list.get(0).get("yw_guid").toString();
         }
         return "";
+    }
+
+    /**
+     * 
+     * <br>Description:转double
+     * <br>Author:陈强峰
+     * <br>Date:2013-11-7
+     * @param obj
+     * @return
+     */
+    private double dealDouble(Object obj) {
+        if (obj == null) {
+            return 0;
+        }
+        String str = obj.toString();
+        if (str.length() == 0) {
+            return 0;
+        } else {
+            return Double.parseDouble(str);
+        }
+    }
+
+    /**
+     * 
+     * <br>Description:保留两位小数
+     * <br>Author:陈强峰
+     * <br>Date:2013-11-7
+     * @param value
+     * @return
+     */
+    private double formatDouble(double value) {
+        return Double.parseDouble(df.format(value));
     }
 }

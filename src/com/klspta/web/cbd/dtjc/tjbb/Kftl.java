@@ -1,5 +1,6 @@
 package com.klspta.web.cbd.dtjc.tjbb;
 
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Map;
 
@@ -17,6 +18,7 @@ import com.klspta.base.util.UtilFactory;
  */
 @Component
 public class Kftl extends AbstractBaseBean {
+    DecimalFormat df = new DecimalFormat("#.00");
 
     /**
      * 评估土地价值
@@ -250,19 +252,19 @@ public class Kftl extends AbstractBaseBean {
             double lastCbkkc = 0;
             if (lastSeasonList.size() > 0) {
                 Object obj = lastSeasonList.get(0).get("cbkkc");
-                lastCbkkc = obj == null ? 0 : Double.parseDouble(obj.toString());
+                lastCbkkc = dealDouble(obj);
             }
             //获取当前季度的供应规模
             sql = "select gygm from hx_sx where  nd=? and jd=?";
             List<Map<String, Object>> seasonList = query(sql, YW, new Object[] { lastNd, lastJd });
             double gygm = 0;
-            if (lastSeasonList.size() > 0) {
-                Object obj = lastSeasonList.get(0).get("cbkkc");
-                lastCbkkc = obj == null ? 0 : Double.parseDouble(obj.toString());
+            if (seasonList.size() > 0) {
+                Object obj = seasonList.get(0).get("gygm");
+                gygm = dealDouble(obj);
             }
             //更新储备库库存
-            double cbkkc = lastCbkkc + Double.parseDouble(checkNull(map.get("kfgm"))) - gygm;
-            double cbkrznl = cbkkc * pgtdjz * dyl * (1 - rzss);
+            double cbkkc = formatDouble(lastCbkkc + dealDouble(map.get("kfgm")) - gygm);
+            double cbkrznl = formatDouble(cbkkc * pgtdjz * dyl * (1 - rzss));
             sql = "update hx_sx set cbkkc=?,cbkrznl=? where nd=? and jd=?";
             update(sql, YW, new Object[] { String.valueOf(cbkkc), String.valueOf(cbkrznl), nd, jd });
         }
@@ -277,11 +279,35 @@ public class Kftl extends AbstractBaseBean {
         return "";
     }
 
-    private String checkNull(Object obj) {
+    /**
+     * 
+     * <br>Description:转double
+     * <br>Author:陈强峰
+     * <br>Date:2013-11-7
+     * @param obj
+     * @return
+     */
+    private double dealDouble(Object obj) {
         if (obj == null) {
-            return "";
-        } else {
-            return obj.toString();
+            return 0;
         }
+        String str = obj.toString();
+        if (str.length() == 0) {
+            return 0;
+        } else {
+            return Double.parseDouble(str);
+        }
+    }
+
+    /**
+     * 
+     * <br>Description:保留两位小数
+     * <br>Author:陈强峰
+     * <br>Date:2013-11-7
+     * @param value
+     * @return
+     */
+    private double formatDouble(double value) {
+        return Double.parseDouble(df.format(value));
     }
 }
