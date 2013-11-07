@@ -230,7 +230,7 @@ public class Gdtl extends AbstractBaseBean {
      * @param nd
      * @param jd
      */
-    private void updateTj(String nd, String jd) {
+    public void updateTj(String nd, String jd) {
         String sql = "select sum(dl) as gydl,sum(gm) as gygm  from hx_gdtl t where  nd=? and jd=? ";
         List<Map<String, Object>> list = query(sql, YW, new Object[] { nd, jd });
         if (list.size() > 0) {

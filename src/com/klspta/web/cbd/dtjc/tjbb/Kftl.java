@@ -229,7 +229,7 @@ public class Kftl extends AbstractBaseBean {
      * @param nd
      * @param jd
      */
-    private void updateTj(String nd, String jd) {
+    public void updateTj(String nd, String jd) {
         String sql = "select sum(t.hs) as zshs,sum(dl) as kfdl,sum(gm) as kfgm,sum(tz) as hxtz from hx_kftl t where  nd=? and jd=? ";
         List<Map<String, Object>> list = query(sql, YW, new Object[] { nd, jd });
         if (list.size() > 0) {
