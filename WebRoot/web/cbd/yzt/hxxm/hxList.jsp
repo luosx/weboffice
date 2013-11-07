@@ -37,7 +37,9 @@
     			saveText: ' 保存 ',
             	cancelText:' 取消 '
     		});
-
+ 			window.onscroll = function(){ 
+   				editor.positionButtons();
+  			 }
 			width = document.body.clientWidth - 150;
 			var tableWidth = document.body.clientWidth;
 			height = document.body.clientHeight * 0.995;
