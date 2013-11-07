@@ -353,13 +353,17 @@ Ext.ux.grid.RowEditor = Ext.extend(Ext.Panel, {
         if(this.btns){
             var h = this.el.dom.clientHeight;
             var view = this.grid.getView();
-            var scroll = view.scroller.dom.scrollLeft;
+          //  var scroll = view.scroller.dom.scrollLeft;
+            var scroll =document.body.scrollLeft;
             var width =  view.mainBody.getWidth();
             var bw = this.btns.getWidth();
-            this.btns.el.shift({left: (width/2)-(bw/2)+scroll, top: h - 2, stopFx: true, duration:0.2});
+            var cu=document.body.clientWidth;
+            //(width/2)
+            this.btns.el.shift({left: (cu-(bw/2))/2+scroll, top: h - 2, stopFx: true, duration:0.2});
         }
     },
 
+    
     // private
     preEditValue : function(r, field){
         var value = r.data[field];
