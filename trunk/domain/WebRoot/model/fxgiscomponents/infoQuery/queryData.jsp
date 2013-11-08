@@ -41,7 +41,7 @@
      var fieldsArray = new Array();
      var columnArray = new Array();
      fieldsArray[0]={name: 'feature.geometry'}
-     columnArray[0]=  {header: '标注',width:width*0.15,renderer: biaoZhu};
+     columnArray[0]=  {header: '标注',width:width*0.12,renderer: biaoZhu};
      for(var i=1;i<parent.queryfieldsinfo.length+1;i++){
       fieldsArray[i]= {name:'feature.attributes.'+parent.queryfields[i-1]};
       columnArray[i]={header:parent.queryfieldsinfo[i-1],dataIndex:'feature.attributes.'+parent.queryfields[i-1],width:width*(1/(parent.queryfieldsinfo.length+1))}   
@@ -102,7 +102,7 @@
        var src='a.png';
        var xx= zuobiaozu.rings[0][0][0];
        var yy= zuobiaozu.rings[0][0][1];
-      var point="[{\"y\":"+yy+",\"x\":"+xx+",\"icon\":\""+a+".png\",\"url\":\"\"}]";
+      var point="[{\"y\":"+yy+",\"x\":"+xx+"}]";
       parent.parent.center.frames["lower"].swfobject.getObjectById("FxGIS").drawPoint(point);
  }
  function fanyebiaozhu(rowIndex){
