@@ -245,7 +245,8 @@
          
 function showLocation(bh){
    var url="<%=basePath%>"+"base/fxgis/fx/FxGIS.html?initFunction=[{\"name\":\"findFeature\",\"parameters\":\"CBD,1,"+bh+",TBBH\"}]";
-   window.open(url); 
+   var hxxm=window.open(url);
+   hxxm.document.title="红线项目";
    }
 </script>
 </head>
