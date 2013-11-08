@@ -40,14 +40,14 @@ frames["lower"].swfobject.getObjectById("FxGIS").clear();
 function identify(){
 frames["lower"].swfobject.getObjectById("FxGIS").panmap();
 frames["lower"].swfobject.getObjectById("FxGIS").identify();
-//parent.document.getElementById("east").src="/reduce/model/fxgiscomponents/infoQuery/sxcxList.jsp";
+//parent.document.getElementById("east").src="/domain/model/fxgiscomponents/infoQuery/sxcxList.jsp";
 }
 
 //压盖分析
 function glandAnalyse(){
 parent.Ext.getCmp('east-panel').expand();
 parent.Ext.getCmp('east-panel').setTitle('压盖分析');
-parent.document.getElementById("east").src="/reduce/model/fxgiscomponents/djfx/ygfx.jsp?yw_guid="+yw_guid;	
+parent.document.getElementById("east").src="/domain/model/fxgiscomponents/djfx/ygfx.jsp?yw_guid="+yw_guid;	
 }
 
 //直线长度量算
@@ -93,77 +93,77 @@ frames["lower"].swfobject.getObjectById("FxGIS").doLocation(rings);
 function doLocation(){
 	parent.Ext.getCmp('east-panel').expand();
 	parent.Ext.getCmp('east-panel').setTitle('定位');
-	parent.document.getElementById("east").src="/reduce/model/fxgiscomponents/location/location.jsp";
+	parent.document.getElementById("east").src="/domain/model/fxgiscomponents/location/location.jsp";
 }
 
 /* 图斑导入 */
 function importTB(){
 	parent.Ext.getCmp('east-panel').expand();
 	parent.Ext.getCmp('east-panel').setTitle('图斑导入');
-	parent.document.getElementById("east").src="/reduce/model/fxgiscomponents/importShapefile/importShapefile.jsp";
+	parent.document.getElementById("east").src="/domain/model/fxgiscomponents/importShapefile/importShapefile.jsp";
 }
 
 /* 坐标导入 */
 function importZB(){
 	parent.Ext.getCmp('east-panel').expand();
 	parent.Ext.getCmp('east-panel').setTitle('坐标导入');
-	parent.document.getElementById("east").src="/reduce/model/fxgiscomponents/importzb/importZbFile.jsp";
+	parent.document.getElementById("east").src="/domain/model/fxgiscomponents/importzb/importZbFile.jsp";
 }
 
 /* 地图图例 */
 function legend(){
 	parent.Ext.getCmp('east-panel').expand();
 	parent.Ext.getCmp('east-panel').setTitle('地图图例');
-	parent.document.getElementById("east").src="/reduce/model/fxgiscomponents/legend/legendTab.jsp";
+	parent.document.getElementById("east").src="/domain/model/fxgiscomponents/legend/legendTab.jsp";
 }
 
 /* shp导入 */
 function shpimport(){
 	parent.Ext.getCmp('east-panel').expand();
 	parent.Ext.getCmp('east-panel').setTitle('图斑导入');
-	parent.document.getElementById("east").src="/reduce/model/fxgiscomponents/importShapefile/importShapefile.jsp";
+	parent.document.getElementById("east").src="/domain/model/fxgiscomponents/importShapefile/importShapefile.jsp";
 }
 
 /* 卷帘 */
 function doShutter(){
 	parent.Ext.getCmp('east-panel').expand();
 	parent.Ext.getCmp('east-panel').setTitle('图层透视工具');
-	parent.document.getElementById("east").src="/reduce/model/fxgiscomponents/swipe/swipe.jsp";
-	//parent.document.getElementById("east").src="/reduce/model/fxgiscomponents/location/location.jsp";
+	parent.document.getElementById("east").src="/domain/model/fxgiscomponents/swipe/swipe.jsp";
+	//parent.document.getElementById("east").src="/domain/model/fxgiscomponents/location/location.jsp";
 }
 
 /* 地图图例 */
 function legend(){
 	parent.Ext.getCmp('east-panel').expand();
 	parent.Ext.getCmp('east-panel').setTitle('地图图例');
-	parent.document.getElementById("east").src="/reduce/model/fxgiscomponents/legend/legendTab.jsp";
+	parent.document.getElementById("east").src="/domain/model/fxgiscomponents/legend/legendTab.jsp";
 }
 
 /*叠加分析*/
 function fun(){
     parent.Ext.getCmp('east-panel').expand();
 	parent.Ext.getCmp('east-panel').setTitle('叠加分析');
-	parent.document.getElementById("east").src="/reduce/model/fxgiscomponents/djfx/djfx.jsp";
+	parent.document.getElementById("east").src="/domain/model/fxgiscomponents/djfx/djfx.jsp";
 }
 /* 轨迹回放 */
 function playback(){
 	parent.Ext.getCmp('east-panel').expand();
 	parent.Ext.getCmp('east-panel').setTitle('轨迹回放');
-	parent.document.getElementById("east").src="/reduce/model/fxgiscomponents/playback/playBack.jsp";
+	parent.document.getElementById("east").src="/domain/model/fxgiscomponents/playback/playBack.jsp";
 }
 /* 图斑查询 */
 function tbQuery(){
 	frames["lower"].swfobject.getObjectById("FxGIS").panmap();
 	parent.Ext.getCmp('east-panel').expand();
 	parent.Ext.getCmp('east-panel').setTitle('图斑查询');
-	parent.document.getElementById("east").src="/reduce/model/fxgiscomponents/infoQuery/infoQuery.jsp";
+	parent.document.getElementById("east").src="/domain/model/fxgiscomponents/infoQuery/infoQuery.jsp";
 }
 /* 实时跟踪 */
 function doMonitor(){
 	parent.Ext.getCmp('west-panel').collapse();
 	parent.Ext.getCmp('east-panel').expand();
 	parent.Ext.getCmp('east-panel').setTitle('实时跟踪');
-	parent.document.getElementById("east").src="/reduce/model/fxgiscomponents/carMonitor/index.jsp";
+	parent.document.getElementById("east").src="/domain/model/fxgiscomponents/carMonitor/index.jsp";
 }
 
 /* 地图全屏 */
@@ -192,7 +192,7 @@ openPointAnalysis(1,1);
 function openPointAnalysis(x,y){
 parent.Ext.getCmp('east-panel').expand();
 parent.Ext.getCmp('east-panel').setTitle('标注查看');
-parent.document.getElementById("east").src="/reduce/model/fxgiscomponents/analysisPoint/analysisPoint.jsp?x='"+x+"'&y='"+y+"'";
+parent.document.getElementById("east").src="/domain/model/fxgiscomponents/analysisPoint/analysisPoint.jsp?x='"+x+"'&y='"+y+"'";
 }
 
 /*点标记*/
