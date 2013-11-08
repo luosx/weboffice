@@ -293,7 +293,8 @@
  
  function showLocation(bh){
    var url="<%=basePath%>"+"base/fxgis/fx/FxGIS.html?initFunction=[{\"name\":\"findFeature\",\"parameters\":\"CBD,1,"+bh+",TBBH\"}]";
-   window.open(url,'XX',' left=0,top=0,width='+ (screen.availWidth - 10) +',height='+ (screen.availHeight-50) +',scrollbars,resizable=yes,toolbar=no');
+   var jbb=window.open(url,'XX',' left=0,top=0,width='+ (screen.availWidth - 10) +',height='+ (screen.availHeight-50) +',scrollbars,resizable=yes,toolbar=no');
+   jbbb.document.title ="基本斑"
  }		
  		
 </script>
