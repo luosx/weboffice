@@ -246,7 +246,7 @@ public class Gdtl extends AbstractBaseBean {
                 lastJd = Integer.parseInt(jd) - 1 + "";
             }
             //获取上季度的储备库库存
-            sql = "select cbkkc fom hx_sx where nd=? and jd=?";
+            sql = "select cbkkc from hx_sx where nd=? and jd=?";
             List<Map<String, Object>> lastSeasonList = query(sql, YW, new Object[] { lastNd, lastJd });
             double lastCbkkc = 0;
             if (lastSeasonList.size() > 0) {

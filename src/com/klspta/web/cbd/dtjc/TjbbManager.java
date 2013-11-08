@@ -8,6 +8,9 @@ import java.util.TreeSet;
 
 import com.klspta.base.AbstractBaseBean;
 import com.klspta.base.util.UtilFactory;
+import com.klspta.web.cbd.dtjc.tjbb.Gdtl;
+import com.klspta.web.cbd.dtjc.tjbb.Kftl;
+import com.klspta.web.cbd.hxxm.jdjh.KftlTable;
 
 /**
  * 
@@ -75,8 +78,24 @@ public class TjbbManager extends AbstractBaseBean {
 		conditions.put("jd", oldQuarter);
 		conditions.put("xmmc", projectName);
 		TjbbData tjbbData = new TjbbData();
+		//通过线程实现数据更新。
+		Thread newThread = new Thread(new TjbbThread(formName, setValues, conditions));
+		newThread.setDaemon(true);
+		newThread.start();
+		
+		/*
 		int i = tjbbData.changeQuarter(formName, setValues, conditions);
-		response(String.valueOf(i));
+		if(formName.equals("hx_gdtl")){
+			Gdtl gdtl = new Gdtl();
+			gdtl.updateTj(newYear, newQuarter);
+			gdtl.update(oldYear, oldQuarter);
+		}else if(formName.equals("hx_kftl")){
+			Kftl kftl = new Kftl();
+			kftl.updateTj(newYear, newQuarter);
+			kftl.updateTj(oldYear, oldQuarter);
+		}
+		*/
+		//response(String.valueOf(i));
 	}
 	
 	/**
