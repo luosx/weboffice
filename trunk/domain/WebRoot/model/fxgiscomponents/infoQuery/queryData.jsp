@@ -44,9 +44,10 @@
      columnArray[0]=  {header: '标注',width:width*0.12,renderer: biaoZhu};
      for(var i=1;i<parent.queryfieldsinfo.length+1;i++){
       fieldsArray[i]= {name:'feature.attributes.'+parent.queryfields[i-1]};
-      columnArray[i]={header:parent.queryfieldsinfo[i-1],dataIndex:'feature.attributes.'+parent.queryfields[i-1],width:width*(1/(parent.queryfieldsinfo.length+1))}   
+      columnArray[i]={header:parent.queryfieldsinfo[i-1],dataIndex:'feature.attributes.'+parent.queryfields[i-1],width:width*(1/(parent.queryfieldsinfo.length+2))}   
      }
-
+	 fieldsArray[parent.queryfieldsinfo.length+1]={name: 'feature.geometry'};
+	 columnArray[parent.queryfieldsinfo.length+1]={header: '叠加分析',width:width*0.25,renderer:djfx};
      var queryfieldsinfo = parent.queryfieldsinfo;
      store = new Ext.data.JsonStore({
      proxy: new Ext.ux.data.PagingMemoryProxy(d),
@@ -79,6 +80,7 @@
 		        var rowIndex = grid.store.indexOf(grid.getSelectionModel().getSelected());
    				var rings = grid.getStore().getAt(rowIndex).get('feature.geometry');
    				var jsonstring=toJsonString(rings);
+   				
   				//图斑定位
   				parent.parent.center.frames["lower"].swfobject.getObjectById("FxGIS").doLocation(jsonstring);
 		        
@@ -198,6 +200,21 @@ function biaoZhu(value, cellmeta, record, rowIndex){
    hqzb(rowIndex ,a);
       return "<a href='#' onclick='biaozhu();return false;'><img src='base/fxgis/framework/images/marks/j.png'></a>";
    }
+}
+
+function djfx(value, cellmeta, record, rowIndex){
+	return "<a href='#' onclick='djfxInfo("+rowIndex+");return false;'><img src='base/form/images/view.png' alt='叠加分析'></a>";
+}
+
+function djfxInfo(rowIndex){
+	var rings = grid.getStore().getAt(rowIndex).get('feature.geometry');
+    var zb = ''+rings.rings+'';
+    var zbs = zb.split(',');
+    var points = ''; 
+    for(var i=0;i<zbs.length;i+=2){
+    	points += zbs[i]+','+zbs[i+1]+';';
+    }	
+    window.open("<%=basePath%>model/fxgiscomponents/djfx/wpfx.jsp?points="+points,"","height=800, width=700, top=200,left=300,location=no");
 }
 
 function biaozhu(){}
