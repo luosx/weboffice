@@ -116,7 +116,7 @@ function panel(){
             layout:"accordion",
             layoutConfig: {animate: true }, 
              items:[{
-             collapsible : true,
+             collapsible : false,
                html: "<iframe id='cxjg' style='height:"+(scrHeight-80)+"PX; width:350px;' src='queryData.jsp'/>"
             }
             ]
@@ -127,8 +127,6 @@ function panel(){
 	</head>
 	<body bgcolor="#FFFFFF">
 		<div id="form-ct" style="width: 100%; height: 18%;"></div>
-		<div id="status_grid" style="width: 100%; height: 80%;"></div>
-		<!--  <iframe id="lower" name="lower"  style="width: 100%;height:100%; overflow: auto;" src=""></iframe>
-		-->
+		<div id="status_grid" style="width: 100%; height: 85%;"></div>
 	</body>
 </html>
