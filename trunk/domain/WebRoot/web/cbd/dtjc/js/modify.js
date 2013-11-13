@@ -740,7 +740,7 @@ form3.render("deal");
 			    Ext.getCmp("gdcbbl").reset();
 			    Ext.getCmp("gdsybl").reset();
 			    Ext.getCmp("gdzjbl").reset();
-	        form3.form.url=restUrl+'planManager/addGdtll';
+	        form3.form.url=restUrl+'planManager/addGdtl';
 	         Ext.getCmp("btngd").setText("新增供地体量");
 	  }
  }

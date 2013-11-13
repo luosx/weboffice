@@ -59,6 +59,7 @@ Table.prototype={
 			}
 			this.changePosition(-1);
 		}
+		
 		if(type != "callback"){
 			blockArray.push("moveLeft");
 			blockArray.push(this.row);
@@ -157,6 +158,7 @@ Table.prototype={
 		if(this.row >= (2 + parseInt(kftlNum))){
 			formname = "hx_gdtl";
 		}
+		
        putClientCommond("tjbbManager","changePlan");
        putRestParameter("projectname",escape(escape(projectName)));
        putRestParameter("formname",formname);
@@ -165,6 +167,7 @@ Table.prototype={
        putRestParameter("newyear",newyear);
        putRestParameter("newquarter",newquarter);
        restRequest();
+       
 	},
 	changePosition: function(type){
 		/**

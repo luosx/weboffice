@@ -123,7 +123,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    //创建AX对象excel 
 		    var oWB = oXL.Workbooks.Add(); 
 		    //获取workbook对象 
-		        var oSheet = oWB.ActiveSheet; 
+		    var oSheet = oWB.ActiveSheet; 
 		    //激活当前sheet 
 		    var sel = document.body.createTextRange(); 
 		    sel.moveToElementText(curTbl); 
