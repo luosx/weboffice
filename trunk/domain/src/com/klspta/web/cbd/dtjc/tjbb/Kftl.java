@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import com.klspta.base.AbstractBaseBean;
 import com.klspta.base.util.UtilFactory;
+import com.klspta.web.cbd.dtjc.trzqk.TrzqkThread;
 
 /**
  * 
@@ -267,6 +268,11 @@ public class Kftl extends AbstractBaseBean {
             double cbkrznl = formatDouble(cbkkc * pgtdjz * dyl * (1 - rzss));
             sql = "update hx_sx set cbkkc=?,cbkrznl=? where nd=? and jd=?";
             update(sql, YW, new Object[] { String.valueOf(cbkkc), String.valueOf(cbkrznl), nd, jd });
+            
+    		//通过线程实现投融资情况更新
+    		Thread trzqkThread = new Thread(new TrzqkThread());
+    		trzqkThread.setDaemon(true);
+    		trzqkThread.start();
         }
     }
 

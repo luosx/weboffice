@@ -1,6 +1,5 @@
 package com.klspta.web.cbd.dtjc;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -8,6 +7,7 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 
 import com.klspta.base.AbstractBaseBean;
+import com.klspta.web.cbd.dtjc.trzqk.ExtendData;
 
 /**
  * 
@@ -169,4 +169,56 @@ public class TjbbData extends AbstractBaseBean {
 		update(sql, YW, new Object[]{userId, minyear, maxyear, projects, userId, minyear, maxyear, projects});
 		return null;
 	}
+	
+	/**
+	 * 
+	 * <br>Description:获取一定时间段内的本期融资需求
+	 * <br>Author:黎春行
+	 * <br>Date:2013-11-13
+	 * @param minYear
+	 * @param maxYear
+	 * @return
+	 */
+	public Map<String, String> getBqrzxq(int minYear, int maxYear){
+		return new ExtendData().getBqrzxq(minYear, maxYear);
+	}
+	/**
+	 * 
+	 * <br>Description:获取一定时间段内的权益性资金注入
+	 * <br>Author:黎春行
+	 * <br>Date:2013-11-13
+	 * @param minYear
+	 * @param maxYear
+	 * @return
+	 */
+	public Map<String, String> getQyxzjzr(int minYear, int maxYear){
+		return new ExtendData().getQyxzjzr(minYear, maxYear);
+	}
+	
+	/**
+	 * 
+	 * <br>Description:添加融资需求
+	 * <br>Author:黎春行
+	 * <br>Date:2013-11-13
+	 * @param year
+	 * @param quarter
+	 * @param value
+	 */
+	public void addRzxq(String year, String quarter, String value){
+		new ExtendData().addRzxq(year, quarter, value);
+	}
+	
+	/**
+	 * 
+	 * <br>Description:添加权益性资金注入
+	 * <br>Author:黎春行
+	 * <br>Date:2013-11-13
+	 * @param year
+	 * @param quarter
+	 * @param value
+	 */
+	public void addQyxzjzr(String year, String quarter, String value){
+		new ExtendData().addQyxzjzr(year, quarter, value);
+	}
+	
 }

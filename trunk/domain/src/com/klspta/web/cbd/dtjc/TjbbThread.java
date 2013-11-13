@@ -43,6 +43,8 @@ public class TjbbThread implements Runnable {
 			kftl.updateTj(oldYear, oldQuarter);
 			kftl.updateTj(newYear, newQuarter);
 		}
+		
+		
 		Thread.currentThread().interrupt();
 	}
 

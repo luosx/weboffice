@@ -34,6 +34,8 @@ public class TjbbBuild {
 		tableBuffer.append(buildTitle());
 		tableBuffer.append(buildKFTL());
 		tableBuffer.append(buildGDTL());
+		tableBuffer.append(buildRzxq());
+		tableBuffer.append(buildQyzj());
 		tableBuffer.append("</table>");
 		return tableBuffer;
 	}
@@ -56,6 +58,8 @@ public class TjbbBuild {
 			tableBuffer.append(buildTitle(minyear, maxyear));
 			tableBuffer.append(buildKFTL(minyear, maxyear, projects));
 			tableBuffer.append(buildGDTL(minyear, maxyear, projects));
+			tableBuffer.append(buildRzxq(minyear, maxyear));
+			tableBuffer.append(buildQyzj(minyear, maxyear));
 			tableBuffer.append("</table>");
 			return tableBuffer;
 		}
@@ -193,6 +197,74 @@ public class TjbbBuild {
 		}
 		gdtlBody.append("</tbody>");
 		return gdtlBody;
+	}
+	
+	/**
+	 * 
+	 * <br>Description:创建投融资情况的融资需求模块
+	 * <br>Author:黎春行
+	 * <br>Date:2013-10-29
+	 * @return
+	 */
+	private static StringBuffer buildRzxq(){
+		TjbbData tjbbData = new TjbbData();
+		int max_year = Integer.parseInt(tjbbData.getMaxYear());
+		return buildRzxq(MIN_YEAR, max_year);
+	}
+	
+	private static StringBuffer buildRzxq(int min_year, int max_year){
+		Map<String, String> rzxqMap = new TjbbData().getBqrzxq(min_year, max_year);
+		StringBuffer rzxqBody = new StringBuffer();
+		rzxqBody.append("<tbody id='gdtl'>");
+		rzxqBody.append("<tr  style='background: #FFFFE5;'>");
+		rzxqBody.append("<td style='background: #C0C0C0;border-bottom:1px #ffffff solid;' colspan='2' ><label>融资需求</label></td>");
+		for(int j = min_year; j <= max_year; j++){
+			for(int quarter = 1; quarter <= 4; quarter++){
+				String key = j + "#" + quarter;
+				String value = rzxqMap.get(key);
+				value = (value == null) ? "" : value;
+				rzxqBody.append("<td class='no' width='45px' >");
+				rzxqBody.append("<input type='text' style='width:45px;' onchange='addrzxq(this); return false' value='");
+				rzxqBody.append(value).append("'></td>");
+			}
+		}
+		rzxqBody.append("</tr>");
+		rzxqBody.append("</tbody>");
+		return rzxqBody;
+	}
+	
+	/**
+	 * 
+	 * <br>Description:创建投融资情况的权益性资金注入
+	 * <br>Author:黎春行
+	 * <br>Date:2013-10-29
+	 * @return
+	 */
+	private static StringBuffer buildQyzj(){
+		TjbbData tjbbData = new TjbbData();
+		int max_year = Integer.parseInt(tjbbData.getMaxYear());
+		return buildQyzj(MIN_YEAR, max_year);
+	}
+	
+	private static StringBuffer buildQyzj(int min_year, int max_year){
+		Map<String, String> qyzjMap = new TjbbData().getQyxzjzr(min_year, max_year);
+		StringBuffer qyzjBody = new StringBuffer();
+		qyzjBody.append("<tbody id='gdtl'>");
+		qyzjBody.append("<tr  style='background: #FFFFE5;'>");
+		qyzjBody.append("<td style='background: #C0C0C0;border-bottom:1px #ffffff solid;' colspan='2' ><label>权益性资金注入</label></td>");
+		for(int j = min_year; j <= max_year; j++){
+			for(int quarter = 1; quarter <= 4; quarter++){
+				String key = j + "#" + quarter;
+				String value = qyzjMap.get(key);
+				value = (value == null) ? "" : value;
+				qyzjBody.append("<td class='no' width='45px' >");
+				qyzjBody.append("<input type='text' style='width:45px;' onchange='addzjzr(this); return false' value='");
+				qyzjBody.append(value).append("'></td>");
+			}
+		}
+		qyzjBody.append("</tr>");
+		qyzjBody.append("</tbody>");
+		return qyzjBody;
 	}
 
 }
