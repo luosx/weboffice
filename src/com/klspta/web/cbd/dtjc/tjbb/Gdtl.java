@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import com.klspta.base.AbstractBaseBean;
 import com.klspta.base.util.UtilFactory;
+import com.klspta.web.cbd.dtjc.trzqk.TrzqkThread;
 
 /**
  * 
@@ -42,20 +43,20 @@ public class Gdtl extends AbstractBaseBean {
      * <br>Date:2013-10-10
      */
     public void add() {
-        String xmmc = request.getParameter("xmmc");
-        String year = request.getParameter("nd");
-        String dl = request.getParameter("dl");
-        String gm = request.getParameter("gm");
-        String cb = request.getParameter("cb");
-        String sy = request.getParameter("sy");
-        String zj = request.getParameter("zj");
-        String dlz = request.getParameter("dlbl");
-        String gmz = request.getParameter("gmbl");
-        String cbz = request.getParameter("cbbl");
-        String syz = request.getParameter("sybl");
-        String zjz = request.getParameter("zjbl");
+        String xmmc = request.getParameter("gdxmmc");
+        String year = request.getParameter("gdnd");
+        String dl = request.getParameter("gddl");
+        String gm = request.getParameter("gdgm");
+        String cb = request.getParameter("gdcb");
+        String sy = request.getParameter("gdsy");
+        String zj = request.getParameter("gdzj");
+        String dlz = request.getParameter("gddlbl");
+        String gmz = request.getParameter("gdgmbl");
+        String cbz = request.getParameter("gdcbbl");
+        String syz = request.getParameter("gdsybl");
+        String zjz = request.getParameter("gdzjbl");
         String zujin = request.getParameter("zujin");
-        String season = request.getParameter("jd");
+        String season = request.getParameter("gdnd");
         String xmbh = getXmbh(xmmc);
         String sql = "insert into hx_gdtl(xmmc,nd,jd,dl,gm,cb,sy,zj,zuj,xmguid,dlz,gmz,cbz,syz,zjz) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         int flag = update(sql, YW, new Object[] { xmmc, year, season, dl, gm, cb, sy, zj, zujin, xmbh, dlz,
@@ -78,7 +79,7 @@ public class Gdtl extends AbstractBaseBean {
      * <br>Date:2013-10-11
      */
     public void update() {
-        String xmmc = request.getParameter("xmmc");
+        String xmmc = request.getParameter("gdxmmc");
         String year = request.getParameter("year");
         String dl = request.getParameter("dl");
         String gm = request.getParameter("gm");
@@ -111,9 +112,9 @@ public class Gdtl extends AbstractBaseBean {
      * <br>Date:2013-10-11
      */
     public void delete() {
-        String xmmc = UtilFactory.getStrUtil().unescape(request.getParameter("xmmc"));
-        String year = request.getParameter("nd");
-        String season = request.getParameter("jd");
+        String xmmc = UtilFactory.getStrUtil().unescape(request.getParameter("gdxmmc"));
+        String year = request.getParameter("gdnd");
+        String season = request.getParameter("gdjd");
         String xmbh = getXmbh(xmmc);
         String sql = "select nd,jd,xmguid from hx_gdtl where nd=? and jd=? and xmguid=?";
         int flag = update(sql, YW, new Object[] { year, season, xmbh });
@@ -267,6 +268,11 @@ public class Gdtl extends AbstractBaseBean {
             sql = "update hx_sx set gytd=?,gygm=?,cbkkc=?,cbkrznl=? where nd=? and jd=?";
             update(sql, YW,
                     new Object[] { gytd, gygm, String.valueOf(cbkkc), String.valueOf(cbkrznl), nd, jd });
+            
+    		//通过线程实现投融资情况更新
+    		Thread trzqkThread = new Thread(new TrzqkThread());
+    		trzqkThread.setDaemon(true);
+    		trzqkThread.start();
         }
     }
 

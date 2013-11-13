@@ -10,6 +10,7 @@ import com.klspta.base.AbstractBaseBean;
 import com.klspta.base.util.UtilFactory;
 import com.klspta.web.cbd.dtjc.tjbb.Gdtl;
 import com.klspta.web.cbd.dtjc.tjbb.Kftl;
+import com.klspta.web.cbd.dtjc.trzqk.TrzqkThread;
 import com.klspta.web.cbd.hxxm.jdjh.KftlTable;
 
 /**
@@ -37,28 +38,6 @@ public class TjbbManager extends AbstractBaseBean {
 	
 	/**
 	 * 
-	 * <br>Description:增加开发体量实施计划
-	 * <br>Author:黎春行
-	 * <br>Date:2013-10-29
-	 */
-	public void addKFTLPlan(){
-		
-		
-	}
-	
-	/**
-	 * 
-	 * <br>Description:删除开发体量实施计划
-	 * <br>Author:黎春行
-	 * <br>Date:2013-10-29
-	 */
-	public void delKftlPlan(){
-		
-		
-	}
-	
-	/**
-	 * 
 	 * <br>Description:修改实施计划
 	 * <br>Author:黎春行
 	 * <br>Date:2013-10-29
@@ -77,25 +56,35 @@ public class TjbbManager extends AbstractBaseBean {
 		conditions.put("nd", oldYear);
 		conditions.put("jd", oldQuarter);
 		conditions.put("xmmc", projectName);
-		TjbbData tjbbData = new TjbbData();
 		//通过线程实现数据更新。
 		Thread newThread = new Thread(new TjbbThread(formName, setValues, conditions));
-		newThread.setDaemon(true);
 		newThread.start();
 		
-		/*
-		int i = tjbbData.changeQuarter(formName, setValues, conditions);
-		if(formName.equals("hx_gdtl")){
-			Gdtl gdtl = new Gdtl();
-			gdtl.updateTj(newYear, newQuarter);
-			gdtl.update(oldYear, oldQuarter);
-		}else if(formName.equals("hx_kftl")){
-			Kftl kftl = new Kftl();
-			kftl.updateTj(newYear, newQuarter);
-			kftl.updateTj(oldYear, oldQuarter);
+		//通过线程实现投融资情况更新
+		Thread trzqkThread = new Thread(new TrzqkThread());
+		trzqkThread.start();
+	}
+	
+	/**
+	 * 
+	 * <br>Description:投融资情况数据修改
+	 * <br>Author:黎春行
+	 * <br>Date:2013-11-13
+	 */
+	public void changeTrzqk(){
+		String type = request.getParameter("type");
+		String year = request.getParameter("year");
+		String quarter = request.getParameter("quarter");
+		String value = request.getParameter("value");
+		if (type.equals("rzxq")) {
+			new TjbbData().addRzxq(year, quarter, value);
+		}else if(type.equals("zjzr")){
+			new TjbbData().addQyxzjzr(year, quarter, value);
 		}
-		*/
-		//response(String.valueOf(i));
+		
+		//通过线程实现投融资情况更新
+		Thread trzqkThread = new Thread(new TrzqkThread());
+		trzqkThread.start();
 	}
 	
 	/**
@@ -150,29 +139,6 @@ public class TjbbManager extends AbstractBaseBean {
 			jsonBuffer = jsonBuffer.deleteCharAt(jsonBuffer.length() - 1);
 		jsonBuffer.append("]");
 		return jsonBuffer.toString();
-		
-	}
-	
-	
-	/**
-	 * 
-	 * <br>Description:获取供地体量实施计划
-	 * <br>Author:黎春行
-	 * <br>Date:2013-10-29
-	 */
-	public void getGDTLPlan(){
-		
-		
-	}
-	
-	/**
-	 * 
-	 * <br>Description:获取所有红线项目
-	 * <br>Author:黎春行
-	 * <br>Date:2013-11-5
-	 */
-	public void getAllxm(){
-		
 		
 	}
 	
