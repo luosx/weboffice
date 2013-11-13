@@ -14,8 +14,6 @@ String userId = ((User)principal).getUserID();
 String extPath = basePath + "base/thirdres/ext/";
 Map planYear = DataManager.getInstance().getPlanYear();
 Map<String, String> proMap = TjbbManager.getProjectByUserId(userId);
-int width = Integer.parseInt(String.valueOf(planYear.get("maxyear"))) - Integer.parseInt(String.valueOf(planYear.get("minyear")));
-width = width * 1200 + 490;
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -125,9 +123,8 @@ width = width * 1200 + 490;
 	</style>
   </head>
   <script type="text/javascript" >
-  		
 
-	  		//记录位置
+	  	//记录位置
 		var row = 0;
 		var cell = 0;
 		var step = 1;
@@ -246,8 +243,6 @@ width = width * 1200 + 490;
 	    	document.getElementById("itemselector").style.display = "";
 	    	
 	    }
-	    
-	    
 	    		
 		//添加键盘快捷键
 		document.onkeydown = function(ev){
@@ -258,8 +253,6 @@ width = width * 1200 + 490;
 			
 			}else if(oevent.ctrlKey && oevent.keyCode == 37){
 				//按Ctrl + 向左键 向左移动一年
-			
-			
 			}else if(oevent.ctrlKey && oevent.keyCode == 39){
 			
 			}else if(oevent.keyCode == 37){
@@ -270,6 +263,9 @@ width = width * 1200 + 490;
 			
 			}
 		}
+		
+		
+		
 
 
   </script>

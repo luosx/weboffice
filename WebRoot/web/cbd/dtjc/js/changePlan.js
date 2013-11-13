@@ -1,7 +1,5 @@
 
-
 var move;
-
 
 //计划提前
 function moveLeft(type){
@@ -23,7 +21,6 @@ function callback(){
 function changePlan(check, step){
 	//获取当前点击的行号
 	var obj = check.getBoundingClientRect()
-	//alert(obj.left + "---------" + obj.top);
 	var left = obj.left;
 	var top = obj.top;
 	cell = check.cellIndex;
@@ -48,21 +45,13 @@ function getPosition(check){
 //修改div显示的位置
 function changePosition(x, y ){
 	var showDiv = document.getElementById(divName);
-	//mouseMove();
-	//showDiv.style.left = positionX - 60 + x;
-	//var top  = positionY - 10 + y;
-	//if(top < 0){
-	//	top = 5;
-	//}
 	showDiv.style.left = x;
 	showDiv.style.top = y;
-	//showDiv.style.top = top;
 }
 
 function addDetail(check){
 	cell = check.cellIndex;
 	row = check.parentElement.rowIndex;
-	
 	showDetail();
 }
 
@@ -91,7 +80,7 @@ function showDetail(){
 		quarter = 4;
 	}
 	year = parseInt(year) + parseInt(minyear);
-	if(row > parseInt(kftlNum) + 2){
+	if(row >= parseInt(kftlNum) + 2){
 		dealGdtl(projectName,year,quarter);
 	}else{
 		dealKftl(projectName,year,quarter);
@@ -103,7 +92,6 @@ function hiddleDiv(){
 	var showDiv = document.getElementById(divName);
 	showDiv.style.display = "none";
 }
-
 
 function mouseMove(){ 
 	ev =  window.event; 
@@ -134,4 +122,49 @@ function changeProject(){
         });
         win.show();
 	}
+}
+
+//添加融资需求
+function addrzxq(check){
+	var value = check.value;
+	var changeCell = check.parentNode.cellIndex;
+	//计算年度和季度
+	var moveTable = document.getElementById("planTable");
+	var minyear = moveTable.rows[0].cells[1].innerText;
+	var quarter = (parseInt(changeCell) - 0)%4;
+	var year = (parseInt(changeCell) - 0)/4;
+	if(quarter == 0){
+		year = year - 1;
+		quarter = 4;
+	}
+	year = parseInt(year) + parseInt(minyear);
+   	putClientCommond("tjbbManager","changeTrzqk");
+	putRestParameter("type", "rzxq");
+   	putRestParameter("year",year);
+   	putRestParameter("quarter",quarter);
+   	putRestParameter("value",value);
+   	restRequest();
+}
+
+
+//添加权益资金注入
+function addzjzr(check){
+	var value = check.value;
+	var changeCell = check.parentNode.cellIndex;
+	//计算年度和季度
+	var moveTable = document.getElementById("planTable");
+	var minyear = moveTable.rows[0].cells[1].innerText;
+	var quarter = (parseInt(changeCell) - 0)%4;
+	var year = (parseInt(changeCell) - 0)/4;
+	if(quarter == 0){
+		year = year - 1;
+		quarter = 4;
+	}
+	year = parseInt(year) + parseInt(minyear);
+   	putClientCommond("tjbbManager","changeTrzqk");
+	putRestParameter("type", "zjzr");
+   	putRestParameter("year",year);
+   	putRestParameter("quarter",quarter);
+   	putRestParameter("value",value);
+   	restRequest();
 }
