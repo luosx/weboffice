@@ -1,8 +1,10 @@
 package com.klspta.web.cbd.yzt.jbb;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import com.klspta.base.AbstractBaseBean;
+import com.klspta.model.CBDReport.ReportExcel;
 
 public class JbbManager extends AbstractBaseBean{
 	
@@ -23,6 +25,13 @@ public class JbbManager extends AbstractBaseBean{
 	        } else {
 	            response("{success:false}");
 	        }
-	    }
+	}
+	 
+	public void getExcel(){
+		HttpServletRequest request = this.request;
+		HttpServletResponse response = this.response;
+		ReportExcel jbbReport = new JbbReport();
+		jbbReport.getExcel(request, response);
+	}
 
 }
