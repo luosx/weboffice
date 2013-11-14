@@ -105,8 +105,9 @@ function query() {
 
 	var para = "1=1 ";
 	if (c1 != "" && c1 != "全市") {
-		c1=escape(escape(c1));
-		para += "and wtfsd='" + c1 + "'";
+		//c1=escape(escape(c1));
+		para += "and wtfsd like '%" + c1 + "%'";
+		para = escape(escape(para));
 	}
 	if (c2 != "") {
 		para += " and to_date(djrq,'YYYY/MM/DD')>to_date('"+c2+"','YY/MM/DD')";
