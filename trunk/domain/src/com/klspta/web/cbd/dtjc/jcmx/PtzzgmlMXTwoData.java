@@ -15,4 +15,28 @@ public class PtzzgmlMXTwoData extends AbstractBaseBean{
 		List<Map<String,Object>> result = query(sql, YW);
 		response(result);
 	}
+	
+	public void Sava_GMLPA(){
+		try{
+	    	String SRKYYGFBL=request.getParameter("SRKYYGFBL");
+	    	String FWLX=request.getParameter("FWLX");
+	    	String GFLX=request.getParameter("GFLX");
+	    	String SFGFK=request.getParameter("SFGFK");
+	    	String ZXJZWZJBL=request.getParameter("ZXJZWZJBL");
+	    	String QSYHS=request.getParameter("QSYHS");
+	    	String GJJDKZGED=request.getParameter("GJJDKZGED");
+	    	String DKZGNX=request.getParameter("DKZGNX");
+	    	String GJJJNBL=request.getParameter("GJJJNBL");
+	    	String GJJDKLL=request.getParameter("GJJDKLL");
+	    	String SYDKJZLL=request.getParameter("SYDKJZLL");
+	    	String SYDKLLFD=request.getParameter("SYDKLLFD");
+	    	String YCKSJ=request.getParameter("YCKSJ");
+	    	String ZDCK=request.getParameter("ZDCK");
+	        String sql="update BBD_PARAMETER set SRKYYGFBL=?,FWLX=?,GFLX=?,SFGFK=?,ZXJZWZJBL=?,QSYHS=?,GJJDKZGED=?,DKZGNX=?,GJJJNBL=?,GJJDKLL=?,SYDKJZLL=?,SYDKLLFD=?,YCKSJ=?,ZDCK=?";
+	        update(sql,YW,new Object[]{SRKYYGFBL,FWLX,GFLX,SFGFK,ZXJZWZJBL,QSYHS,GJJDKZGED,DKZGNX,GJJJNBL,GJJDKLL,SYDKJZLL,SYDKLLFD,YCKSJ,ZDCK});
+	        response("true");
+	    	}catch(Exception e){
+	            response("false");
+	    	}
+	}
 }
