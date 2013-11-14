@@ -240,7 +240,7 @@ public class User implements UserDetails,org.jbpm.api.identity.User {
     }
     
     public Object[] getUpdateArgs(){
-        return new Object[] {this.userName,  UserPasswordVerify.encryptMode( this.password), this.fullName, this.email, this.enabled, this.sort, this.officephone, this.mobilephone, this.xzqh, this.userID};
+        return new Object[] {this.userName,  this.password, this.fullName, this.email, this.enabled, this.sort, this.officephone, this.mobilephone, this.xzqh, this.userID};
     }
 
 	public void setUserName(String userName) {
