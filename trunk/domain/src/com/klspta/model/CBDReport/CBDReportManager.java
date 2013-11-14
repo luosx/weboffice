@@ -48,7 +48,7 @@ public class CBDReportManager {
             if(tableWidth == null){
                 tableWidth = firstWorker.getBean(reportId).getTableWidth();
             }
-            return tableBuilder.prase(tableWidth, c, its);
+            return tableBuilder.prase(reportId, tableWidth, c, its);
         }catch(Exception e){
             return tableBuilder.getErrorMsg(e, its);
         }
