@@ -24,109 +24,25 @@ public class PtzzgmlMXOneClReport extends AbstractBaseBean implements IDataClass
 
 	private void buildGMLCL(Map<String, TRBean> trbeans,
 			List<Map<String, Object>> llist) {
-		TRBean trbean = new TRBean();
-		trbean.setCssStyle("tr02");
-		TDBean tdbean = new TDBean("装修及置物比例","150","");
-		trbean.addTDBean(tdbean);
-		tdbean = new TDBean(llist.get(0).get("ZXJZWBL").toString(),"150","");
-		trbean.addTDBean(tdbean);
-		trbeans.put("zxjzwbl", trbean);
+		TRBean trbean = null;
+		TDBean tdbean = null;
+		int i = 0;
+		String[] clname = new String[]{"装修及置物比例","契税、印花税","营业税","手续费","中介费","借款还款期限","公积金贷款最高额度",
+			"贷款年限年龄要求上限","月缴存公积金比例","贷款最高年限","公积金贷款利率","商业贷款基准利率","商业贷款利率浮点"};
 		
-		trbean = new TRBean();
-		trbean.setCssStyle("tr02");
-		tdbean = new TDBean("契税、印花税","150","");
-		trbean.addTDBean(tdbean);
-		tdbean = new TDBean(llist.get(0).get("QSYHS").toString(),"150","");
-		trbean.addTDBean(tdbean);
-		trbeans.put("qsyhs", trbean);
+		Map<String,Object> map = llist.get(0);
+		for(String key : map.keySet()){
+			trbean = new TRBean();
+			trbean.setCssStyle("tr02");
+			tdbean = new TDBean(clname[i],"180","");
+			trbean.addTDBean(tdbean);
+			tdbean = new TDBean(map.get(key).toString(),"120","");
+			trbean.addTDBean(tdbean);
+			trbeans.put(key, trbean);
+			i++;
+		}
 		
-		trbean = new TRBean();
-		trbean.setCssStyle("tr02");
-		tdbean = new TDBean("营业税","150","");
-		trbean.addTDBean(tdbean);
-		tdbean = new TDBean(llist.get(0).get("YYS").toString(),"150","");
-		trbean.addTDBean(tdbean);
-		trbeans.put("yys", trbean);
 		
-		trbean = new TRBean();
-		trbean.setCssStyle("tr02");
-		tdbean = new TDBean("手续费","150","");
-		trbean.addTDBean(tdbean);
-		tdbean = new TDBean(llist.get(0).get("SXF").toString(),"150","");
-		trbean.addTDBean(tdbean);
-		trbeans.put("sxf", trbean);
-		
-		trbean = new TRBean();
-		trbean.setCssStyle("tr02");
-		tdbean = new TDBean("中介费","150","");
-		trbean.addTDBean(tdbean);
-		tdbean = new TDBean(llist.get(0).get("ZJF").toString(),"150","");
-		trbean.addTDBean(tdbean);
-		trbeans.put("zjf", trbean);
-		
-		trbean = new TRBean();
-		trbean.setCssStyle("tr02");
-		tdbean = new TDBean("借款还款期限","150","");
-		trbean.addTDBean(tdbean);
-		tdbean = new TDBean(llist.get(0).get("JKHKQX").toString(),"150","");
-		trbean.addTDBean(tdbean);
-		trbeans.put("jkhkqx", trbean);
-		
-		trbean = new TRBean();
-		trbean.setCssStyle("tr02");
-		tdbean = new TDBean("公积金贷款最高额度","150","");
-		trbean.addTDBean(tdbean);
-		tdbean = new TDBean(llist.get(0).get("GJJDKZGED").toString(),"150","");
-		trbean.addTDBean(tdbean);
-		trbeans.put("gjjdkzged", trbean);
-		
-		trbean = new TRBean();
-		trbean.setCssStyle("tr02");
-		tdbean = new TDBean("贷款年限年龄要求上限","150","");
-		trbean.addTDBean(tdbean);
-		tdbean = new TDBean(llist.get(0).get("DKNXNLYQSX").toString(),"150","");
-		trbean.addTDBean(tdbean);
-		trbeans.put("dknxblyqsx", trbean);
-		
-		trbean = new TRBean();
-		trbean.setCssStyle("tr02");
-		tdbean = new TDBean("月缴存公积金比例","150","");
-		trbean.addTDBean(tdbean);
-		tdbean = new TDBean(llist.get(0).get("YJCGJJBL").toString(),"150","");
-		trbean.addTDBean(tdbean);
-		trbeans.put("yjcgjjbl", trbean);
-		
-		trbean = new TRBean();
-		trbean.setCssStyle("tr02");
-		tdbean = new TDBean("贷款最高年限","150","");
-		trbean.addTDBean(tdbean);
-		tdbean = new TDBean(llist.get(0).get("DKZGNX").toString(),"150","");
-		trbean.addTDBean(tdbean);
-		trbeans.put("dkzgnx", trbean);
-		
-		trbean = new TRBean();
-		trbean.setCssStyle("tr02");
-		tdbean = new TDBean("公积金贷款利率","150","");
-		trbean.addTDBean(tdbean);
-		tdbean = new TDBean(llist.get(0).get("GJJDKLL").toString(),"150","");
-		trbean.addTDBean(tdbean);
-		trbeans.put("gjjdkll", trbean);
-		
-		trbean = new TRBean();
-		trbean.setCssStyle("tr02");
-		tdbean = new TDBean("商业贷款基准利率","150","");
-		trbean.addTDBean(tdbean);
-		tdbean = new TDBean(llist.get(0).get("SYDKJZLL").toString(),"150","");
-		trbean.addTDBean(tdbean);
-		trbeans.put("sydkjzll", trbean);
-		
-		trbean = new TRBean();
-		trbean.setCssStyle("tr02");
-		tdbean = new TDBean("商业贷款利率浮点","150","");
-		trbean.addTDBean(tdbean);
-		tdbean = new TDBean(llist.get(0).get("SYDKLLFD").toString(),"150","");
-		trbean.addTDBean(tdbean);
-		trbeans.put("sydkllfd", trbean);
 		
 	}
 
