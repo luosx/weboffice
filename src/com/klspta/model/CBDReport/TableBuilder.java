@@ -11,13 +11,13 @@ import com.klspta.model.CBDReport.tablestyle.TableStyleDefault;
 
 public class TableBuilder {
     private static String wr = "";
-    public StringBuffer prase(String tableWidth, Map<String, TRBean> c, ITableStyle its) {
+    public StringBuffer prase(String reportID, String tableWidth, Map<String, TRBean> c, ITableStyle its) {
         if(CBDReportManager.USE_CACHE){
             wr = "";
         }else{
             wr = "非缓存模式，测试时使用，正式部署请修改CBDreportManager 类的 USE_CACHE 参数为 true！";
         }
-        StringBuffer html = new StringBuffer(wr).append(its.getTable1().replace("#TABLEWIDTH", tableWidth));
+        StringBuffer html = new StringBuffer(wr).append(its.getTable1().replace("#TABLEWIDTH", tableWidth).replace("#REPORTNAME", reportID));
         Iterator<Map.Entry<String, TRBean>> iter = c.entrySet().iterator();
         while (iter.hasNext()) {
             Map.Entry<String, TRBean> entry = (Map.Entry<String, TRBean>) iter.next();
@@ -27,8 +27,8 @@ public class TableBuilder {
         return html.append(its.getTable2());
     }
 
-    public StringBuffer prase(String tableWidth, Map<String, TRBean> c) {
-        return prase(tableWidth, c, new TableStyleDefault());
+    public StringBuffer prase(String reportID, String tableWidth, Map<String, TRBean> c) {
+        return prase(reportID, tableWidth, c, new TableStyleDefault());
     }
 
     private StringBuffer buildTR(TRBean trBean, ITableStyle its) {
