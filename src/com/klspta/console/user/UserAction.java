@@ -9,7 +9,9 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.ctc.wstx.io.UTFAttrValueWriter;
 import com.klspta.base.AbstractBaseBean;
+import com.klspta.base.util.UtilFactory;
 import com.klspta.console.ManagerFactory;
 import com.klspta.console.role.Role;
 
@@ -234,5 +236,19 @@ public class UserAction extends AbstractBaseBean {
 			String returnString = ManagerFactory.getUserManager().getUserJsonByList(allUserListTemp);
 			response(returnString);
 		}
+	}
+	/***
+	 * 快速查找
+	 */
+	public void getuser(){
+		String keyWord = request.getParameter("keyWord");
+		String sql = "select t.id,t.username,t.password,t.fullname,t.enabled,t.xzqh,t.sort,t.emailaddress,t.officephone,t.mobilephone from core_users t";
+		if(keyWord!=null&&!"".equals(keyWord)){
+			keyWord=UtilFactory.getStrUtil().unescape(keyWord);
+			sql+=" where (t.username||t.fullname||t.xzqh like '%"+keyWord+"%')";
+		}
+		List<Map<String, Object>> query = query(sql,CORE);
+		response(query);
+		
 	}
 }
