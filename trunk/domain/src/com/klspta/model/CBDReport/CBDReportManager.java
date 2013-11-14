@@ -53,4 +53,9 @@ public class CBDReportManager {
             return tableBuilder.getErrorMsg(e, its);
         }
     }
+    
+    public StringBuffer getFormula(String reportId, String id){
+        FormulaWorker fw = new FormulaWorker();
+        return new StringBuffer(fw.getFormula(reportId, id));
+    }
 }
