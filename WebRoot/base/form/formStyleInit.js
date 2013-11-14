@@ -85,7 +85,13 @@ function inputInit(types)
 
   for(var i=0;i<inputArr.length;i++)
   {
-	inputTag=inputArr[i]
+  	inputTag=inputArr[i];
+	var inputSplit = inputTag.value.split(' ');
+	if(inputSplit.length == 2){
+	if(inputSplit[1] == "00:00:00"){
+	inputTag.value = inputSplit[0];
+	}
+	}
 	if(hasbutton&&(inputTag.type=="button"||inputTag.type=="submit"||inputTag.type=="reset"))
               setButton(inputTag);
 	if(hastext&&(inputTag.type=="text"||inputTag.type=="password"))
