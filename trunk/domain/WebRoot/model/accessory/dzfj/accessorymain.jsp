@@ -56,6 +56,7 @@ html,body {
 	margin: 0px;
 	overflow: hidden;
 }
+
 </style>
 	</head>
 	<script>
@@ -156,7 +157,7 @@ function doOnLoad() {
 /*判断是有提供全部下载*/
 function isHaveAccessory(a){
 	if('<%=b%>'=='true'){
-       	a.enableItem('downloadAll');
+       	// a.enableItem('downloadAll');
     }
 }
 
@@ -329,7 +330,7 @@ function downloadAll(){
 	window.open("<%=basePath%>/common/pages/accessory/download/"+yw_guid+".zip");
 }  */
 </script>
-	<body onload="doOnLoad()" bgcolor="#FFFFFF" leftmargin="0" bottommargin="0" rightmargin="0" topmargin="0">
+	<body onLoad="doOnLoad()" bgcolor="#FFFFFF" leftmargin="0" bottommargin="0" rightmargin="0" topmargin="0">
 		<div id="parentId"
 			style="top: 0px; left: 0px; width: 100%; height: 100%;"></div>
 		<input type='text' id='name' name='name' value='' style="display:none"/> 	
@@ -337,3 +338,4 @@ function downloadAll(){
 		</form>   
 	</body>
 </html>
+
