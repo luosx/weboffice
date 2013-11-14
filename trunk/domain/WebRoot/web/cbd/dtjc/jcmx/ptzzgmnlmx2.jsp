@@ -170,10 +170,58 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               }, {
                  text:"保存",
                  handler: function(){
-                    f.form.reset();
+                      var res=save();
+                      if(res){
+                        alert("保存成功");
+                        window.location.reload();
+                      }else{
+                        alert("保存失败");
+                      }
                  }
               }]
            });
+           Ext.getCmp("SRKYYGFBL").on('keyup',function(field,e){ 
+                            tryCol();
+	            });
+	            Ext.getCmp("FWLX").on('keyup',function(field,e){ 
+                            tryCol();
+	            });
+	            Ext.getCmp("GFLX").on('keyup',function(field,e){ 
+                            tryCol();
+	            });
+	            Ext.getCmp("SFGFK").on('keyup',function(field,e){ 
+                            tryCol();
+	            });
+	            Ext.getCmp("ZXJZWZJBL").on('keyup',function(field,e){ 
+                            tryCol();
+	            });
+	            Ext.getCmp("QSYHS").on('keyup',function(field,e){ 
+                            tryCol();
+	            });
+	            Ext.getCmp("GJJDKZGED").on('keyup',function(field,e){ 
+                            tryCol();
+	            });
+	            Ext.getCmp("DKZGNX").on('keyup',function(field,e){ 
+                            tryCol();
+	            });
+	            Ext.getCmp("GJJJNBL").on('keyup',function(field,e){ 
+                            tryCol();
+	            });
+	            Ext.getCmp("GJJDKLL").on('keyup',function(field,e){ 
+                            tryCol();
+	            });
+	            Ext.getCmp("SYDKJZLL").on('keyup',function(field,e){ 
+                            tryCol();
+	            });
+	            Ext.getCmp("SYDKLLFD").on('keyup',function(field,e){ 
+                            tryCol();
+	            });
+	            Ext.getCmp("YCKSJ").on('keyup',function(field,e){ 
+                            tryCol();
+	            });
+	            Ext.getCmp("ZDCK").on('keyup',function(field,e){ 
+                            tryCol();
+	            });
            modifyForm();
            tryCol();
         });
@@ -269,19 +317,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
          }
          
          function save(){
-         	var srkyygfbl =  Ext.getCmp("SRKYYGFBL").getValue();
-            var ycksj = Ext.getCmp("YCKSJ").getValue();
-            var zsjzwzjbl = Ext.getCmp("ZXJZWZJBL").getValue();
-            var qsyhs = Ext.getCmp("QSYHS").getValue();
-            var gjjjnbl = Ext.getCmp("GJJJNBL").getValue()/100;
-            var fwlx = Ext.getCmp("FWLX").getValue();
-            var gflx = Ext.getCmp("GFLX").getValue();
-            var gjjdkzged = Ext.getCmp("GJJDKZGED").getValue();
-            var gjjdkll = Ext.getCmp("GJJDKLL").getValue()/100;
-            var sydkjzll = Ext.getCmp("SYDKJZLL").getValue()/100;
-            var sydkllfd = Ext.getCmp("SYDKLLFD").getValue()/100;
-            var zdck = Ext.getCmp("ZDCK").getValue();
-            var dkzgnx = Ext.getCmp("DKZGNX").getValue();
+         	putClientCommond("ptzzgml","Sava_GMLPA");
+         	putRestParameter("SRKYYGFBL",Ext.getCmp("SRKYYGFBL").getValue());
+	  		    putRestParameter("FWLX",Ext.getCmp("FWLX").getValue());
+			    putRestParameter("GFLX",Ext.getCmp("GFLX").getValue());
+			    putRestParameter("SFGFK",Ext.getCmp("SFGFK").getValue());
+			    putRestParameter("ZXJZWZJBL",Ext.getCmp("ZXJZWZJBL").getValue());
+			    putRestParameter("QSYHS",Ext.getCmp("QSYHS").getValue());
+			    putRestParameter("GJJDKZGED",Ext.getCmp("GJJDKZGED").getValue());
+			    putRestParameter("DKZGNX",Ext.getCmp("DKZGNX").getValue());
+			    putRestParameter("GJJJNBL",Ext.getCmp("GJJJNBL").getValue());
+			    putRestParameter("GJJDKLL",Ext.getCmp("GJJDKLL").getValue());
+			    putRestParameter("SYDKJZLL",Ext.getCmp("SYDKJZLL").getValue());
+			    putRestParameter("SYDKLLFD",Ext.getCmp("SYDKLLFD").getValue());
+			    putRestParameter("YCKSJ",Ext.getCmp("YCKSJ").getValue());
+			    putRestParameter("ZDCK",Ext.getCmp("ZDCK").getValue());
+			    return restRequest();
          }
         </script>
      </head>

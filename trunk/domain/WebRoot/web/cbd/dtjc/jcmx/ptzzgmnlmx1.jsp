@@ -110,6 +110,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    .div2{
    	float:left;margin-left:20px;position:relative;left:0px;
    }
+   .div3{
+   	float:left;margin-left:10px;position:relative;left:0px;
+   }
+   .div4{
+   	float:left;margin-left:10px;position:relative;left:0px;
+   }
 	</style>
     <script type="text/javascript">
   		function print(){
@@ -142,7 +148,96 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		}
   </script>
        <script type="text/javascript">
-        
+        Ext.onReady(function(){
+           var f=new Ext.form.FormPanel({
+              renderTo:"paraform",
+              title:"购房常规涉及参数",
+              height: 500,
+              width: 300,
+              labelWidth: 160,
+              labelAlign: "center",
+              frame: true,
+              defaults:{
+                 xtype:"textfield",
+                 width:120
+              },
+              items: [
+              	 {id: "SRKYYGFBL",fieldLabel:"收入可用于购房比例(50)"},
+                 {id: "FWLX", fieldLabel: "房屋类型"},
+                 {id: "GFLX", fieldLabel: "购房类型"},
+                 {id: "SFGFK", fieldLabel: "首付购房款（%）"},
+                 {id: "ZXJZWZJBL", fieldLabel: "装修及置物资金比例（%）"},
+                 {id: "QSYHS", fieldLabel: "契税、印花税（%）"},
+                 {id: "GJJDKZGED", fieldLabel: "公积金贷款最高额度（万元）"},
+                 {id: "DKZGNX", fieldLabel: "贷款最高年限（年）"},
+                 {id: "GJJJNBL", fieldLabel: "公积金缴纳比例（%）"},
+                 {id: "GJJDKLL", fieldLabel: "公积金贷款利率（%）"},
+                 {id: "SYDKJZLL", fieldLabel: "商业贷款基准利率（%）"},
+                 {id: "SYDKLLFD", fieldLabel: "商业贷款利率浮动（%）"},
+                 {id: "YCKSJ", fieldLabel: "已存款时间（月）"},
+                 {id: "ZDCK", fieldLabel: "定最低存款（万元）"}
+              ],
+              buttons:[{
+                 text:"试算",
+                 handler: tryCol
+              }, {
+                 text:"保存",
+                 handler: function(){
+                      var res=save();
+                      if(res){
+                        alert("保存成功");
+                        window.location.reload();
+                      }else{
+                        alert("保存失败");
+                      }
+                 }
+              }]
+           });
+           Ext.getCmp("SRKYYGFBL").on('keyup',function(field,e){ 
+                            tryCol();
+	            });
+	            Ext.getCmp("FWLX").on('keyup',function(field,e){ 
+                            tryCol();
+	            });
+	            Ext.getCmp("GFLX").on('keyup',function(field,e){ 
+                            tryCol();
+	            });
+	            Ext.getCmp("SFGFK").on('keyup',function(field,e){ 
+                            tryCol();
+	            });
+	            Ext.getCmp("ZXJZWZJBL").on('keyup',function(field,e){ 
+                            tryCol();
+	            });
+	            Ext.getCmp("QSYHS").on('keyup',function(field,e){ 
+                            tryCol();
+	            });
+	            Ext.getCmp("GJJDKZGED").on('keyup',function(field,e){ 
+                            tryCol();
+	            });
+	            Ext.getCmp("DKZGNX").on('keyup',function(field,e){ 
+                            tryCol();
+	            });
+	            Ext.getCmp("GJJJNBL").on('keyup',function(field,e){ 
+                            tryCol();
+	            });
+	            Ext.getCmp("GJJDKLL").on('keyup',function(field,e){ 
+                            tryCol();
+	            });
+	            Ext.getCmp("SYDKJZLL").on('keyup',function(field,e){ 
+                            tryCol();
+	            });
+	            Ext.getCmp("SYDKLLFD").on('keyup',function(field,e){ 
+                            tryCol();
+	            });
+	            Ext.getCmp("YCKSJ").on('keyup',function(field,e){ 
+                            tryCol();
+	            });
+	            Ext.getCmp("ZDCK").on('keyup',function(field,e){ 
+                            tryCol();
+	            });
+           modifyForm();
+           tryCol();
+        });
         
         
         </script>
@@ -157,6 +252,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	   <tr><td><h1>北京地区普通住宅房屋购买能力综合分析模型1</h1></td>
 	  </table>
 	</div>
-	<%=new CBDReportManager().getReport("PTZZGMLMX1CL")%>
+	<div class="div1">
+		<%=new CBDReportManager().getReport("PTZZGMLMX1CL")%>
+	</div>
+	<div class="div2">
+		<%=new CBDReportManager().getReport("PTZZGMLMX1BL")%>
+	</div>
+	<div class="div3">
+		<%=new CBDReportManager().getReport("PTZZGMLMX1BL")%>
+	</div>
+	<div class="div4">
+		<%=new CBDReportManager().getReport("PTZZGMLMX1BL")%>
+	</div>
   </body>
 </html>
