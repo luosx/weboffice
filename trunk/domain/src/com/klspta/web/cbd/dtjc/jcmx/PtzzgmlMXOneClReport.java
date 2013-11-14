@@ -30,7 +30,7 @@ public class PtzzgmlMXOneClReport extends AbstractBaseBean implements IDataClass
 		trbean.addTDBean(tdbean);
 		tdbean = new TDBean(llist.get(0).get("ZXJZWBL").toString(),"150","");
 		trbean.addTDBean(tdbean);
-		trbeans.put("gmlcl", trbean);
+		trbeans.put("zxjzwbl", trbean);
 		
 		trbean = new TRBean();
 		trbean.setCssStyle("tr02");
@@ -38,7 +38,7 @@ public class PtzzgmlMXOneClReport extends AbstractBaseBean implements IDataClass
 		trbean.addTDBean(tdbean);
 		tdbean = new TDBean(llist.get(0).get("QSYHS").toString(),"150","");
 		trbean.addTDBean(tdbean);
-		trbeans.put("gmlcl", trbean);
+		trbeans.put("qsyhs", trbean);
 		
 		trbean = new TRBean();
 		trbean.setCssStyle("tr02");
@@ -46,7 +46,7 @@ public class PtzzgmlMXOneClReport extends AbstractBaseBean implements IDataClass
 		trbean.addTDBean(tdbean);
 		tdbean = new TDBean(llist.get(0).get("YYS").toString(),"150","");
 		trbean.addTDBean(tdbean);
-		trbeans.put("gmlcl", trbean);
+		trbeans.put("yys", trbean);
 		
 		trbean = new TRBean();
 		trbean.setCssStyle("tr02");
@@ -54,7 +54,7 @@ public class PtzzgmlMXOneClReport extends AbstractBaseBean implements IDataClass
 		trbean.addTDBean(tdbean);
 		tdbean = new TDBean(llist.get(0).get("SXF").toString(),"150","");
 		trbean.addTDBean(tdbean);
-		trbeans.put("gmlcl", trbean);
+		trbeans.put("sxf", trbean);
 		
 		trbean = new TRBean();
 		trbean.setCssStyle("tr02");
@@ -62,7 +62,7 @@ public class PtzzgmlMXOneClReport extends AbstractBaseBean implements IDataClass
 		trbean.addTDBean(tdbean);
 		tdbean = new TDBean(llist.get(0).get("ZJF").toString(),"150","");
 		trbean.addTDBean(tdbean);
-		trbeans.put("gmlcl", trbean);
+		trbeans.put("zjf", trbean);
 		
 		trbean = new TRBean();
 		trbean.setCssStyle("tr02");
@@ -70,7 +70,7 @@ public class PtzzgmlMXOneClReport extends AbstractBaseBean implements IDataClass
 		trbean.addTDBean(tdbean);
 		tdbean = new TDBean(llist.get(0).get("JKHKQX").toString(),"150","");
 		trbean.addTDBean(tdbean);
-		trbeans.put("gmlcl", trbean);
+		trbeans.put("jkhkqx", trbean);
 		
 		trbean = new TRBean();
 		trbean.setCssStyle("tr02");
@@ -78,7 +78,7 @@ public class PtzzgmlMXOneClReport extends AbstractBaseBean implements IDataClass
 		trbean.addTDBean(tdbean);
 		tdbean = new TDBean(llist.get(0).get("GJJDKZGED").toString(),"150","");
 		trbean.addTDBean(tdbean);
-		trbeans.put("gmlcl", trbean);
+		trbeans.put("gjjdkzged", trbean);
 		
 		trbean = new TRBean();
 		trbean.setCssStyle("tr02");
@@ -86,7 +86,7 @@ public class PtzzgmlMXOneClReport extends AbstractBaseBean implements IDataClass
 		trbean.addTDBean(tdbean);
 		tdbean = new TDBean(llist.get(0).get("DKNXNLYQSX").toString(),"150","");
 		trbean.addTDBean(tdbean);
-		trbeans.put("gmlcl", trbean);
+		trbeans.put("dknxblyqsx", trbean);
 		
 		trbean = new TRBean();
 		trbean.setCssStyle("tr02");
@@ -94,7 +94,7 @@ public class PtzzgmlMXOneClReport extends AbstractBaseBean implements IDataClass
 		trbean.addTDBean(tdbean);
 		tdbean = new TDBean(llist.get(0).get("YJCGJJBL").toString(),"150","");
 		trbean.addTDBean(tdbean);
-		trbeans.put("gmlcl", trbean);
+		trbeans.put("yjcgjjbl", trbean);
 		
 		trbean = new TRBean();
 		trbean.setCssStyle("tr02");
@@ -102,7 +102,7 @@ public class PtzzgmlMXOneClReport extends AbstractBaseBean implements IDataClass
 		trbean.addTDBean(tdbean);
 		tdbean = new TDBean(llist.get(0).get("DKZGNX").toString(),"150","");
 		trbean.addTDBean(tdbean);
-		trbeans.put("gmlcl", trbean);
+		trbeans.put("dkzgnx", trbean);
 		
 		trbean = new TRBean();
 		trbean.setCssStyle("tr02");
@@ -110,15 +110,15 @@ public class PtzzgmlMXOneClReport extends AbstractBaseBean implements IDataClass
 		trbean.addTDBean(tdbean);
 		tdbean = new TDBean(llist.get(0).get("GJJDKLL").toString(),"150","");
 		trbean.addTDBean(tdbean);
-		trbeans.put("gmlcl", trbean);
+		trbeans.put("gjjdkll", trbean);
 		
 		trbean = new TRBean();
 		trbean.setCssStyle("tr02");
 		tdbean = new TDBean("商业贷款基准利率","150","");
 		trbean.addTDBean(tdbean);
-		tdbean = new TDBean(llist.get(0).get("SYDKJZL").toString(),"150","");
+		tdbean = new TDBean(llist.get(0).get("SYDKJZLL").toString(),"150","");
 		trbean.addTDBean(tdbean);
-		trbeans.put("gmlcl", trbean);
+		trbeans.put("sydkjzll", trbean);
 		
 		trbean = new TRBean();
 		trbean.setCssStyle("tr02");
@@ -126,7 +126,7 @@ public class PtzzgmlMXOneClReport extends AbstractBaseBean implements IDataClass
 		trbean.addTDBean(tdbean);
 		tdbean = new TDBean(llist.get(0).get("SYDKLLFD").toString(),"150","");
 		trbean.addTDBean(tdbean);
-		trbeans.put("gmlcl", trbean);
+		trbeans.put("sydkllfd", trbean);
 		
 	}
 
