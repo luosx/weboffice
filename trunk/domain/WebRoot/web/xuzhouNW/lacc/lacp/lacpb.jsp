@@ -101,7 +101,7 @@
 <div id="fixed" class="Noprn" style="position: fixed; top: 5px; left: 0px"></div>
 
 <div style="margin:20px" class="tablestyle1" align="center" >
-<div align="center"><h1>违法案件立案呈批表</h1></div>
+<div align="center"><font style="font: bold 32px '黑体','微软雅黑' ">违法案件立案呈批表</font></div>
 <form method="post">
 <div style="width:600px;text-align:right;"><span style="font-size:14px;">立案编号：
  <%if(permission.equals("yes")){ %>					
@@ -113,7 +113,7 @@
 <table class="lefttopborder1"  cellspacing="0" cellpadding="0" border="1"  bgcolor="#FFFFFF" bordercolor="#000000" width="600">
   <tr>
     <td colspan="2"><div align="center">案由</div></td>
-    <td colspan="6"><textarea class="noborder" rows="5" style="width: 99%;font-size:14px;" name="ay" onkeyup="changeay(this)" id="ay"></textarea></td>
+    <td colspan="6"><textarea class="noborder" rows="3" style="width: 99%;font-size:14px;" name="ay" onkeyup="changeay(this)" id="ay"></textarea></td>
   </tr>
   <tr>
     <td width="30" rowspan="5"><div align="center">当<br/>
@@ -211,7 +211,7 @@
       承&nbsp;办&nbsp;人<br/>
     建&nbsp;&nbsp;&nbsp;&nbsp;议</div></td>
     <td colspan="6" >
-	<textarea rows="5"  cols="70" name="ddcbrjy" id="ddcbrjy" style="width: 99%"></textarea>
+	<textarea rows="3"  cols="70" name="ddcbrjy" id="ddcbrjy" style="width: 99%"></textarea>
     	 <div class="div80">
 		  	<div  class="divLeftFloat">签名：<input class="underline" type="text" name="ddcbr01" id="ddcbr01" onfocus="underwrite(this)" onClick="sign(this);"    style="width:50px" />
 									<img  id="ddcbr01Sign" style="display:none;" /></div>
@@ -225,7 +225,7 @@
     <td colspan="2"><div align="center">分局领导<br/>
     审查意见</div></td>
     <td colspan="6">
-		<textarea rows="5" cols="70" name="fjldyj" id="fjldyj" style="width: 99%"></textarea>
+		<textarea rows="3" cols="70" name="fjldyj" id="fjldyj" style="width: 99%"></textarea>
     	 <div class="div80">
 		  	<div class="divLeftFloat">签名：<input class="underline" type="text" name="fjld" id="fjld" onfocus="underwrite(this)" onClick="sign(this);"    style="width:50px" />
 			<img  width="60" height="25" id="fjldSign" style="display:none" /></div>
@@ -236,7 +236,7 @@
     <td colspan="2"><div align="center">支队审理<br/>
     意&nbsp;&nbsp;&nbsp;&nbsp;见</div></td>
     <td colspan="6">
-		<textarea rows="5" cols="70" name="zdslyj" id="zdslyj" style="width: 99%"></textarea>
+		<textarea rows="3" cols="70" name="zdslyj" id="zdslyj" style="width: 99%"></textarea>
     	 <div class="div80">
 		  	<div class="divLeftFloat">签名：<input class="underline" type="text" name="zdsl" id="zdsl" onfocus="underwrite(this)" onClick="sign(this);"    style="width:50px" />
 			<img  width="60" height="25" id="zdslSign" style="display:none" /></div>
@@ -259,7 +259,7 @@
       分管局长<br/>
     签批意见</div></td>
     <td colspan="6">
-		<textarea rows="5" cols="70" name="sjfgjzyj" id="sjfgjzyj" style="width: 99%"></textarea>
+		<textarea rows="3" cols="70" name="sjfgjzyj" id="sjfgjzyj" style="width: 99%"></textarea>
     	 <div class="div80">
 		  	<div class="divLeftFloat">签名：<input class="underline" type="text" name="sjfgjz" id="sjfgjz" onfocus="underwrite(this)" onClick="sign(this);"    style="width:50px" />
 			<img  width="60" height="25" id="sjfgjzSign" style="display:none" /></div>
@@ -270,8 +270,6 @@
     <td colspan="2"><div align="center">备注</div></td>
     
     <td colspan="6">
-    	<textarea rows="5" name="ay2" id="ay2" style="width: 99%;border-bottom:0.5px #000 solid;font-size:14px;"></textarea>
-    	
     	<textarea rows="5" name="bz" id="bz" style="width: 99%;font-size:14px;" onfocus="writeBZ(this.value)" onblur="writeSM(this.value)">其他需备注的写在此处...</textarea>
     </td>
   </tr>
