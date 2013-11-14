@@ -27,6 +27,7 @@
 		<script type="text/javascript" src="<%=extPath%>/examples/ux/ProgressBarPager.js"></script>
 		<script type="text/javascript">
 		var myData;
+		 var grid;
 Ext.onReady(function(){
 	myData= <%=rows%>;//采用json格式存储的数组
     // create the data store
@@ -48,7 +49,7 @@ Ext.onReady(function(){
     
     store.load({params:{start:0, limit:15}});
     
-    var grid = new Ext.grid.GridPanel({
+     grid = new Ext.grid.GridPanel({
         store: store,
         columns: [
             {header: '序号', width: 50, sortable: true},
@@ -61,6 +62,11 @@ Ext.onReady(function(){
             {header: '修改', width: 40, sortable: false, renderer: modify}, 
             {header: '删除', width: 50, sortable: false, renderer: del}          
         ],
+         tbar:[
+		        	{xtype:'label',text:'快速查找:',width:60},
+		        	{xtype:'textfield',id:'keyword',width:450,emptyText:'请输入关键字进行查询'},
+		        	{xtype: 'button',text:'查询',handler: query}
+		        ],
         stripeRows: true,
         height: 480,
         title: '系统人员列表',
@@ -101,6 +107,43 @@ var userId=id;
 parent.info.location.href="userInfo.jsp?userId="+userId;
 parent.parent.Ext.getCmp('west').collapse();
 
+}
+/*查询功能*/
+function query(){
+
+        var keyWord=Ext.getCmp('keyword').getValue();
+         putClientCommond("userAction", "getuser");
+         putRestParameter("keyWord",escape(escape(keyWord)));
+         myData = restRequest(); 
+         var store = new Ext.data.JsonStore({
+              proxy: new Ext.ux.data.PagingMemoryProxy(myData),
+              remoteSort:true,
+             fields: [
+           {name: 'SORT'},
+           {name: 'FULLNAME'},
+           {name: 'USERNAME'},
+           {name: 'PASSWORD'},
+           {name: 'EMAILADDRESS'},
+           {name: 'OFFICEPHONE'},
+           {name: 'MOBILEPHONE'},
+           {name: 'ID'},
+           {name: 'XZQH'}
+              ]
+        });
+        grid.reconfigure(store, new Ext.grid.ColumnModel([
+          //new Ext.grid.RowNumberer(),        
+             {header: '序号', dataIndex:'SORT',width: 50, sortable: true},
+            {header: '姓名',dataIndex:'FULLNAME', width: 80, sortable: true},
+            {header: '登录账号',dataIndex:'USERNAME', width: 70, sortable: true},
+            {header: '密码', dataIndex:'PASSWORD',width: 90, sortable: true},
+            {header: 'eMail',dataIndex:'EMAILADDRESS', width: 100, sortable: false},
+            {header: '办公电话',dataIndex:'OFFICEPHONE', width: 100, sortable: true},
+            {header: '手机',dataIndex:'MOBILEPHONE', width: 90, sortable: true},
+            {header: '修改', dataIndex:'ID',width: 40, sortable: false, renderer: modify}, 
+            {header: '删除', dataIndex:'ID',width: 50, sortable: false, renderer: del}        
+        ]));
+        grid.getBottomToolbar().bind(store);
+        store.load({params:{start:0,limit:15}});
 }
 /*删除 add by 郭 2011-1-20*/
 function delteUser(id){
