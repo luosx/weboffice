@@ -55,4 +55,5 @@
 		<!-- 统计报表计划管理类 -->	
 	<bean name="tjbbManager" class="com.klspta.web.cbd.dtjc.TjbbManager" scope="prototype"/>
 	<bean name="ptzzgml" class = "com.klspta.web.cbd.dtjc.jcmx.PtzzgmlMXTwoData" scope="prototype"/>
+	<bean name="jzmjbbdfx" class = "com.klspta.web.cbd.dtjc.jcmx.bbdfx.Jzmjbbdfx" scope="prototype"/>
 </beans>
