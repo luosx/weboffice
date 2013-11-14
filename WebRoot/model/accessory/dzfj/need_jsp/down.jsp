@@ -3,6 +3,7 @@
 <%@page import="com.klspta.model.accessory.dzfj.AccessoryOperation" %>
 <%@page import="com.klspta.base.util.bean.ftputil.AccessoryBean" %>
 <%
+
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 String filePath = request.getParameter("file_path");
@@ -23,6 +24,8 @@ response.addHeader("Content-Disposition","attachment;filename="+fileName+"\"");
 String classPath = Thread.currentThread().getContextClassLoader().getResource("/").getPath();
 String dirpath = classPath.substring(0, classPath.lastIndexOf("WEB-INF/classes"));
 dirpath=dirpath+"model/accessory/dzfj/download/";
+if(!(dirpath+filePath).endsWith("JPG") && !(dirpath+filePath).endsWith("jpg")){
+
 if(hzm.toLowerCase().equals("txt")){
 FileInputStream fis = new FileInputStream(new File(dirpath+filePath));
 
@@ -33,6 +36,7 @@ out.println(inputLine);
 }
 in.close();
 }else{
+	
   OutputStream output = null;  
    FileInputStream in = null;    
  try{
@@ -49,7 +53,7 @@ in.close();
    }    
   output.flush(); 
   out.clear();
-  out = pageContext.pushBody();      
+  out = pageContext.pushBody();
  }catch(Exception e){
  	 e.printStackTrace();
   }finally{
@@ -59,6 +63,12 @@ in.close();
     in.close();    
     in = null;    
  }
+ 
  }
 }
+}else{
+out.write("<img src='"+basePath +"/model//accessory//dzfj//download//"+ filePath+"' height='600'>");
+}
+
 %> 
+
