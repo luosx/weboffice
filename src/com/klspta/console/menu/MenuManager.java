@@ -188,7 +188,7 @@ public class MenuManager extends AbstractBaseBean
 	{
 		String sql = "select t.roleid,t.menuid from map_role_menu t";
 		List<Map<String, Object>> list = query(sql, CORE);
-		roleMenuMap = new HashMap<String, List<MenuBean>>();
+		//roleMenuMap = new HashMap<String, List<MenuBean>>();
 		for (Map<String, Object> map : list)
 		{
 			String roleId = (String) map.get("roleid");
