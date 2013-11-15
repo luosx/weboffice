@@ -1,6 +1,8 @@
 ﻿package com.klspta.web.jizeWW.dtxc;
 
+import java.text.DateFormatSymbols;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -16,8 +18,8 @@ import com.klspta.console.ManagerFactory;
  * <br>Date:2013-9-18
  */
 public class DtxcManager extends AbstractBaseBean {
-		
-
+	
+	private static String xcbh	= "";
 	
 	/**
 	 * 
@@ -27,33 +29,30 @@ public class DtxcManager extends AbstractBaseBean {
 	 * <br>Date: 2013-6-18
 	 */
 	public String buildXcbh(){
-		StringBuffer xcbh = new StringBuffer();
-		String strCou = "";
-		//添加编号头"XC"
-		xcbh.append("XC");
-		//添加日期
-		Date date = new Date();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-		String strDate = sdf.format(date);
-		xcbh.append(strDate);
-		//添加流水号
-		String sql = "select xcbh from( select substr(t.xcbh,11,5) xcbh from xcrz t where userid <> '1' order by t.writedate desc) where rownum=1";
-		List<Map<String, Object>> result = query(sql, YW);
-		if(result != null && result.size() > 0){
-			strCou = result.get(0).get("xcbh").toString();//数据库中日志条数
+		int intnum = 0;
+		String stringnum = "";
+		
+		SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd", new DateFormatSymbols());
+		String dateString = df.format(Calendar.getInstance().getTime());
+		
+		if("".equals(xcbh)){
+			String sql = "select max(substr(t.xcbh,11,3)) num from xcrz t where t.xcbh like '%" + dateString + "%'";
+			List<Map<String, Object>> result = query(sql, YW);
+			if(result.get(0).get("num") != null){
+				intnum = Integer.parseInt(result.get(0).get("num").toString()) + 1;
+				stringnum = "00" + intnum;
+				stringnum = stringnum.substring(stringnum.length() - 3);
+				xcbh = "XC" + dateString + stringnum;
+			}else{
+				xcbh = "XC" + dateString + "001";
+			}
 		}else{
-			strCou = "0";
+			intnum = Integer.parseInt(xcbh.substring(10)) + 1;
+			stringnum = "00" + intnum;
+			stringnum = stringnum.substring(stringnum.length() - 3);
+			xcbh = "XC" + dateString + stringnum;
 		}
-		int intCou = Integer.parseInt(strCou) + 1;//新生成日志是数据库中日志条数+1
-		String strtemp = intCou + "";
-		int i = strtemp.length();
-		int j = 5 - i;//5位流水号
-		for (int n = 0; n < j; n++) {
-			xcbh.append("0");
-		}
-		xcbh.append(strtemp);
-		//返回生成好的巡查日志编号
-		return xcbh.toString();
+		return xcbh;
 	}
 		
 	/**
@@ -287,6 +286,24 @@ public class DtxcManager extends AbstractBaseBean {
 		}else{
 		    response("0");    
 		}
+	}
+	
+	/**
+	 * 
+	 * <br>Description:判断此yw_guid是否在数据库中存在
+	 * <br>Author:姚建林
+	 * <br>Date:2013-9-10
+	 * @param strKey是需要判断的yw_guid
+	 * @return
+	 */
+	public String checkGuid(String strKey){
+		String newForm = "true";
+		String sql = "select t.yw_guid from xcrz t where t.yw_guid = ?";
+		List<Map<String, Object>> resultList = query(sql, YW ,new Object[]{strKey});
+		if(resultList.size() == 1){
+			newForm = "false";
+		}
+		return newForm;
 	}
 	
 }
