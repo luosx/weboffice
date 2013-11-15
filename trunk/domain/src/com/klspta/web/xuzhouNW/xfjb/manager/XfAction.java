@@ -58,7 +58,8 @@ public class XfAction extends AbstractBaseBean {
 	 */
 	public void getXFEndList(){
 		String keyWord = request.getParameter("keyWord");
-		response(new XfManager().getXFEndList(keyWord));
+		String xzqh=request.getParameter("xzqh");
+		response(new XfManager().getXFEndList(keyWord,xzqh));
 	}
 	
 	/**

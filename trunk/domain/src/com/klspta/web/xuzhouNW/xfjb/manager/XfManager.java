@@ -122,7 +122,8 @@ public class XfManager extends AbstractBaseBean {
 	 * 
 	 * @return
 	 */
-	public List<Map<String, Object>> getXFEndList(String keyWord) {
+	public List<Map<String, Object>> getXFEndList(String keyWord,String xzqh) {
+		 String xzqhs=xzqh;
 		// 获取数据
 		String sql = "select t.yw_guid,t.bh ,t.xslx,t.jbr, t.jbfs, t.bjbdw, t.lxdz, t.wtfsd, to_char(t.djsj,'yyyy-MM-dd') as slrq,j.endactivity_ ajblzt, j.wfinsid from wfxsfkxx t join workflow.v_end_wfins j on t.yw_guid=j.yw_guid ";
 		if (keyWord != null) {
@@ -130,6 +131,11 @@ public class XfManager extends AbstractBaseBean {
 			sql += " where (upper(t.bh)||upper(t.xslx)||upper(t.jbfs)||upper(t.jbr)||upper(t.lxdz)||upper(t.wtfsd)||upper(j.endactivity_) like '%"
 					+ keyWord + "%')";
 		}
+		if(xzqhs!=null){
+			 if(!(xzqhs.equals("320300")||xzqhs.equals("320302")||xzqhs.equals("320303")||xzqhs.equals("320311")||xzqhs.equals("320313")||xzqhs.equals("320314"))){
+				 sql+=" and t.txryxzqh='"+xzqhs+"' ";
+			 }
+		 }  
 		sql += " order by j.end_ desc";
 		List<Map<String, Object>> result = query(sql, YW);
 		// 调整数据格式
