@@ -3,26 +3,33 @@
 <%@page import="com.klspta.base.util.UtilFactory"%>
 <%@page import="com.klspta.web.jizeWW.dtxc.DtxcManager"%>
 <%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-Object principalUser = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-User userBean = ((User)principalUser);//得到用户bean
-XzqhBean xzqhBean = null;
-String strXcdwjc = "";//政区简称
-String strXcdw = "";//巡查单位
-String writerId = userBean.getUserID();//填表人userid
-String writerXzqh = userBean.getXzqh();//填表人行政区划
-if(!writerXzqh.equals("")){
-	xzqhBean = UtilFactory.getXzqhUtil().getBeanById(writerXzqh);
-	strXcdw = xzqhBean.getLandname();//巡查单位
-	strXcdwjc = xzqhBean.getCatonsimpleName();//政区简称
-}
-String strDate = UtilFactory.getDateUtil().getCurrentChineseDate();//中国式的时间####年##月##日
-Date date = new Date();
-String writeDate = UtilFactory.getDateUtil().getSimpleDate(date);
-String simInfo = request.getParameter("simInfo");
-DtxcManager dtxc = new DtxcManager();
-String xcbh = dtxc.buildXcbh();
+	String path = request.getContextPath();
+	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+	Object principalUser = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+	User userBean = ((User)principalUser);//得到用户bean
+	
+	String xcbh = "";
+	String newForm = "";
+	String yw_guid = request.getParameter("yw_guid");
+	if("null".equals(yw_guid) || yw_guid == null){
+		DtxcManager dtxc = new DtxcManager();
+		xcbh = dtxc.buildXcbh();
+		newForm = "true";
+	}
+	XzqhBean xzqhBean = null;
+	String strXcdwjc = "";//政区简称
+	String strXcdw = "";//巡查单位
+	String writerId = userBean.getUserID();//填表人userid
+	String writerXzqh = userBean.getXzqh();//填表人行政区划
+	if(!writerXzqh.equals("")){
+		xzqhBean = UtilFactory.getXzqhUtil().getBeanById(writerXzqh);
+		strXcdw = xzqhBean.getLandname();//巡查单位
+		strXcdwjc = xzqhBean.getCatonsimpleName();//政区简称
+	}
+	String strDate = UtilFactory.getDateUtil().getCurrentChineseDate();//中国式的时间####年##月##日
+	String writeDate = UtilFactory.getDateUtil().getFormatDate("yyyy-MM-dd HH:mm:ss",new Date());
+	
+	String simInfo = request.getParameter("simInfo");
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -90,6 +97,7 @@ String xcbh = dtxc.buildXcbh();
 	//页面加载初始化
 	function onInit(){	
 		init();
+		
 		yw_guid = document.getElementById('yw_guid').value;	
 		simInfo = '<%=simInfo%>';
 		
@@ -304,8 +312,18 @@ String xcbh = dtxc.buildXcbh();
   	<form method="post">
   		<center>
   		<div style="width: 600px;text-align: left">
-			<span style="font-size:14px;">巡查编号：<input type="text" name="xcbh" id="xcbh" readonly="readonly" value="<%=xcbh%>"
-					style="width: 120px; background-color: transparent; border: 0px;"></input>
+			<span style="font-size:14px;">
+			<%
+				if(newForm.equals("true")){
+			%>
+				巡查编号：<input type="text" name="xcbh" id="xcbh" readonly="readonly" value="<%=xcbh %>" style="width: 120px; background-color: transparent; border: 0px;"></input>
+			<%
+				}else{
+			%>
+				巡查编号：<input type="text" name="xcbh" id="xcbh" readonly="readonly" style="width: 120px; background-color: transparent; border: 0px;"></input>
+			<%
+				}
+			%>
 			</span>
 		</div>
 		</center>
@@ -313,7 +331,19 @@ String xcbh = dtxc.buildXcbh();
   	    <table align="center" cellpadding="0" cellspacing="0" width="600px" id="xcrztable">
 			<tr>
     			<td height="16" colspan="2"><div align="center">巡查单位</div></td>
-    			<td width="166"><input type="text" class="noborder" name="xcdw" id="xcdw" value="<%=strXcdw %>" style="width: 97%"/></td>
+    			<td width="166">
+    			<%
+					if(newForm.equals("true")){
+				%>
+					<input type="text" class="noborder" name="xcdw" id="xcdw" value="<%=strXcdw %>" style="width: 97%"/>
+				<%
+					}else{
+				%>
+					<input type="text" class="noborder" name="xcdw" id="xcdw" style="width: 97%"/>
+				<%
+					}
+				%>
+    			</td>
     			<td width="102"><div align="center">巡查日期</div></td>
     			<td width="211"><input type="text" class="underline" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})" name="xcrq" id="xcrq" readonly style="width: 97%"/></td>
   			</tr>
@@ -454,7 +484,17 @@ String xcbh = dtxc.buildXcbh();
         </table>
         <input type="text" value="<%=writerId %>" id="userid" name="userid" style="display: none" />
 		<input type="text" value="<%=writerXzqh %>" id="writerxzqh" name="writerxzqh" style="display: none" />
-		<input type="text" value="<%=writeDate %>" id="writerdate" name="writerdate" style="display: none" />
+		<%
+			if(newForm.equals("true")){
+		%>
+			<input type="text" value="<%=writeDate %>" id="writedate" name="writedate" style="display: none" />
+		<%
+			}else{
+		%>
+			<input type="text" id="writedate" name="writedate" style="display: none" />
+		<%
+			}
+		%>
   	</form>
   </body>
   <script type="text/javascript">
