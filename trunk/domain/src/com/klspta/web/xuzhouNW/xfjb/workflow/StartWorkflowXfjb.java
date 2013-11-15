@@ -39,12 +39,11 @@ public class StartWorkflowXfjb extends AbstractBaseBean {
 				zfjcType,
 				ManagerFactory.getUserManager().getUserWithId(userId)
 						.getFullName(), yw_guid);
-		
+		    String xzqh = ManagerFactory.getUserManager().getUserWithId(userId).getXzqh();
 		//2、处理业务相关初始化
 		String bh = buildID();
-		String sql = "insert into wfxsfkxx(yw_guid, bh) values(? , ?)";
-		update(sql, YW, new Object[] { yw_guid, bh});
-		
+		String sql = "insert into wfxsfkxx(yw_guid, bh,txryxzqh) values(? , ?,?)";
+		update(sql, YW, new Object[] { yw_guid, bh,xzqh});
 		//3、response参数封装及跳转
 		String urlPath = "model/workflow/wf.jsp?yw_guid="
 				+ yw_guid + "&zfjcType=" + zfjcType + "&wfInsId=" + wfinsId
