@@ -480,7 +480,11 @@ function openMap(){
 	 }
 	 document.getElementById('operation').style.display="";
 	 document.getElementById('lower').style.display="none";
-	 document.getElementById('operation').src=url;
+	 if(url.indexOf(".jsp?") > 0){
+	 	document.getElementById('operation').src=url + "&r=" + Math.random();
+	 }else{
+	 	document.getElementById('operation').src=url + "?r=" + Math.random();
+	 }
 	 }
 	 	var div_obj =document.getElementById("map_nav");
 		div_obj.style.display="none";
