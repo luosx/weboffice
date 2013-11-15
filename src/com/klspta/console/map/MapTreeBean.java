@@ -71,7 +71,7 @@ public class MapTreeBean extends AbstractBaseBean {
             ret.put("text", treeName);
             ret.put("checked", checked);
             ret.put("leaf", 1);
-            ret.put("id", serverId);
+            ret.put("id", treeId);
             ret.put("parentId", parentTreeId);
             ret.put("type", type);
             ret.put("serverid", serverId);
