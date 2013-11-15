@@ -95,10 +95,9 @@
 				          Ext.MessageBox.confirm('提示','是否填写巡查日志？',function(btn){ 
 			              if(btn=='yes'){ 
 			              array[1] = array[1].replace(/#/g,'@');
-			              //alert(array[1]); 
 			                 document.location.href='<%=basePath%>web/jizeWW/dtxc/xcrz/xcrz.jsp?simInfo='+array[1];
 			              }else{
-			              	 return;
+			              	document.location.href='<%=basePath%>web/jizeWW/dtxc/wyxc/PADDataListTab.jsp';
 			              }    
 			             }); 
 			         }	             	             
