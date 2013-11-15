@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 import java.util.Vector;
 
 import com.klspta.base.AbstractBaseBean;
@@ -14,7 +15,7 @@ import com.klspta.console.user.User;
 
 public class MapManager extends AbstractBaseBean {
 
-    private Map<String, MapTreeBean> treeBeans = new HashMap<String, MapTreeBean>();
+    private Map<String, MapTreeBean> treeBeans = new TreeMap<String, MapTreeBean>();
     private Map<String, Vector<RoleTreeMapBean>> roleTreeMapBeans = new HashMap<String, Vector<RoleTreeMapBean>>();
 
     private static final String opKey = UtilFactory.getStrUtil().getGuid();
