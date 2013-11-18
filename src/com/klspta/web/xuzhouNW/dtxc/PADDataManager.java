@@ -50,7 +50,7 @@ public class PADDataManager extends AbstractBaseBean {
             sql = "select t.readflag,t.guid,t.xzqmc,t.xmmc,t.rwlx,t.sfwf,t.xcr,t.xcrq,t.cjzb,t.jwzb,t.imgname from v_pad_data_xml t where (upper(guid)||upper(xzqmc)||upper(xmmc)||upper(rwlx)||upper(sfwf)||upper(xcr)||upper(xcrq) like '%"
                     + keyword + "%') and" + likeCondition;
         }
-        sql += "and t.guid like 'XC%' and t.islian = '" + status + "'";
+        sql += " and t.islian = '" + status + "'";
         List<Map<String, Object>> query = query(sql, YW);
         for (int i = 0; i < query.size(); i++) {
             query.get(i).put("XIANGXI", i);
