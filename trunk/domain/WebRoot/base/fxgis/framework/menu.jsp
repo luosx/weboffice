@@ -167,7 +167,7 @@ Ext.onReady(function(){
 										},{
 											text : '坐标定位',
 											cls : 'x-btn-text-icon',
-											icon : '<%=basePath%>base/fxgis/framework/images/point1.png',
+											icon : '<%=basePath%>base/fxgis/framework/images/location.png',
 											tooltip : '坐标定位',
 											handler : doLocation
 										},{
@@ -198,14 +198,14 @@ Ext.onReady(function(){
 									    	text : '点标记',
 											id : 'drawPoint',
 											cls : 'x-btn-text-icon',
-											icon : '',
+											icon : '<%=basePath%>base/fxgis/framework/images/point1.png',
 											tooltip : '点标记',
 											handler : drawPoint
 										},{
 									    	text : '面标记',
 											id : 'drawPolygon',
 											cls : 'x-btn-text-icon',
-											icon : '',
+											icon : '<%=basePath%>base/fxgis/framework/images/showVertices.png',
 											tooltip : '面标记',
 											handler : drawPolygon
 										}]

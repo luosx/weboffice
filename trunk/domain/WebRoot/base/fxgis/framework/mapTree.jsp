@@ -91,7 +91,7 @@ Ext.onReady(function(){
         containerScroll: true,
         rootVisible: false,
         checkModel: 'cascade',
-        onlyLeafCheckable: false,
+        onlyLeafCheckable: true,
         loader: new Ext.tree.TreeLoader({
         	baseAttrs: { uiProvider: Ext.ux.TreeCheckNodeUI }
         }),
@@ -113,8 +113,9 @@ if(deep && loadFlag){
 loadFlag=false;
 try{
  //changeMap();
+ setTimeout("changeMap()",3000);
  }catch(ex){
- //document.location.reload();
+ document.location.reload();
  }
  }
             }
@@ -127,6 +128,7 @@ try{
 
 //再合并
  tree.getRootNode().collapse(true); 
+ tree.getRootNode().expand(true); 
 });
 /*当某个mapserice异常时，将下属图层设为不可用 add by guorp 2011-2-22*/
 function unChecked(serviceid_2){
@@ -164,7 +166,7 @@ for(var j=0;j<parentnodes.length;j++){
         jsonData.put(chilenodesinner[t].attributes.serverid,chilenodesinner[t].attributes.layerid,chilenodesinner[t].attributes.type,chilenodesinner[t].attributes.checked);
       }
      }jsonData.put("test",1);
-     alert(jsonData.toStr());
+     //alert(jsonData.toStr());
      jsonData.put(chilenodes[t].attributes.serverid,chilenodes[t].attributes.layerid,chilenodes[t].attributes.type,chilenodes[t].attributes.checked);
      }
 }
