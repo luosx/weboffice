@@ -63,8 +63,8 @@ Ext.onReady(function(){
            {name: 'CJZB'},
            {name: 'JWZB'},
            {name: 'IMGNAME'},
-           {name: 'XIANGXI'},
-           {name: 'DELETE'}
+           {name: 'XIANGXI'}
+         
         ]
     });
     
@@ -77,18 +77,17 @@ Ext.onReady(function(){
         sm:sm,
         columns: [
             //sm,
-          {header: '任务编号', dataIndex:'GUID', width: width*0.1, sortable: false},
-          {header: '所在政区', dataIndex:'XZQMC', width: width*0.1, sortable: false},
-          {header: '项目名称', dataIndex:'XMMC',width: width*0.2, sortable: false},
-          {header: '任务类型', dataIndex:'RWLX',width: width*0.1, sortable: false},
-          {header: '是否违法', dataIndex:'SFWF',width: width*0.1, sortable: false},
-          {header: '巡查人', dataIndex:'XCR',width: width*0.05, sortable: false},
-          {header: '巡查日期', dataIndex:'XCRQ',width: width*0.1, sortable: false},
-          {header: '采集坐标', dataIndex:'CJZB',width: width*0.1, hidden:true, sortable: false},
-          {header: '经纬坐标', dataIndex:'JWZB',width: width*0.1, hidden:true, sortable: false},
-          {header: '图片名称', dataIndex:'IMGNAME',width: width*0.1, hidden:true, sortable: false},
-          {header: '详细信息', dataIndex:'XIANGXI',width: width*0.1, sortable: false,renderer:view},
-          {header: '删除',dataIndex:'DELETE',width: width*0.05, sortable: false,renderer:del}
+          {header: '任务编号', dataIndex:'GUID', width: width*0.12, sortable: false},
+           {header: '所在政区', dataIndex:'XZQMC', width: width*0.1, sortable: false},
+           {header: '项目名称', dataIndex:'XMMC',width: width*0.2, sortable: false},
+            {header: '任务类型', dataIndex:'RWLX',width: width*0.1, sortable: false},
+            {header: '是否违法', dataIndex:'SFWF',width: width*0.1, sortable: false},
+            {header: '巡查人', dataIndex:'XCR',width: width*0.08, sortable: false},
+           {header: '巡查日期', dataIndex:'XCRQ',width: width*0.1, sortable: false},
+            {header: '采集坐标', dataIndex:'CJZB',width: width*0.1, hidden:true, sortable: false},
+            {header: '经纬坐标', dataIndex:'JWZB',width: width*0.1, hidden:true, sortable: false},
+            {header: '图片名称', dataIndex:'IMGNAME',width: width*0.1, hidden:true, sortable: false},
+            {header: '详细信息', dataIndex:'XIANGXI',width: width*0.1, sortable: false,renderer:view}
         ],
           tbar:[
 	    		 	 {xtype:'label',text:'快速查找:',width:60},
@@ -186,23 +185,23 @@ function query(){
            {name: 'CJZB'},
            {name: 'JWZB'},
            {name: 'IMGNAME'},
-           {name: 'XIANGXI'},
-           {name: 'DELETE'}
+           {name: 'XIANGXI'}
+         
         ]
     });
     grid.reconfigure(store, new Ext.grid.ColumnModel([
-           {header: '任务编号', dataIndex:'GUID', width: width*0.1, sortable: false},
+           {header: '任务编号', dataIndex:'GUID', width: width*0.12, sortable: false},
            {header: '所在政区', dataIndex:'XZQMC', width: width*0.1, sortable: false},
            {header: '项目名称', dataIndex:'XMMC',width: width*0.2, sortable: false},
             {header: '任务类型', dataIndex:'RWLX',width: width*0.1, sortable: false},
             {header: '是否违法', dataIndex:'SFWF',width: width*0.1, sortable: false},
-            {header: '巡查人', dataIndex:'XCR',width: width*0.05, sortable: false},
+            {header: '巡查人', dataIndex:'XCR',width: width*0.08, sortable: false},
            {header: '巡查日期', dataIndex:'XCRQ',width: width*0.1, sortable: false},
             {header: '采集坐标', dataIndex:'CJZB',width: width*0.1, hidden:true, sortable: false},
             {header: '经纬坐标', dataIndex:'JWZB',width: width*0.1, hidden:true, sortable: false},
             {header: '图片名称', dataIndex:'IMGNAME',width: width*0.1, hidden:true, sortable: false},
-            {header: '详细信息', dataIndex:'XIANGXI',width: width*0.1, sortable: false,renderer:view},
-            {header: '删除',dataIndex:'DELETE',width: width*0.05, sortable: false,renderer:del}
+            {header: '详细信息', dataIndex:'XIANGXI',width: width*0.1, sortable: false,renderer:view}
+          
         ]));
 //重新绑定分页工具栏
  grid.getBottomToolbar().bind(store);
