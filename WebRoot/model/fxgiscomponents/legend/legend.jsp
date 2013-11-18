@@ -1,5 +1,5 @@
 <%@ page language="java" pageEncoding="utf-8"%>
-<%@page import="com.klspta.model.giscomponents.legend.LegendFiles"%>
+<%@page import="com.klspta.model.legend.LegendFiles"%>
 <%@page import="java.io.File"%>
 
 <%
@@ -66,7 +66,7 @@
 			%>	
 	
 	<td  height="100px" align="center" >	
-		&nbsp;&nbsp;&nbsp;<img style="height: 64px;width: 64px" border="30" src="<%= basePath + "base/gis/images/legend/" + type + "/" + file.getName()%>"></img><p><font size=2>&nbsp;&nbsp;	<%=file.getName().substring(0,file.getName().length()-4)%></font>
+		&nbsp;&nbsp;&nbsp;<img style="height: 64px;width: 64px" border="30" src="<%= basePath + "base/fxgis/framework/images/legend/" + type + "/" + file.getName()%>"></img><p><font size=2>&nbsp;&nbsp;	<%=file.getName().substring(0,file.getName().length()-4)%></font>
 	</td>
 	
 	<% }%>

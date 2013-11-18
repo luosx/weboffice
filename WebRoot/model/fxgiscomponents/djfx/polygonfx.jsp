@@ -69,7 +69,7 @@ String points = request.getParameter("points");
 					叠加分析结果表
 			</div>
 			<br>
-  			<%=cbd.getReport("FX_SP",new Object[]{points,"1"}) %>
+  			<%=cbd.getReport("FX_SP",new Object[]{points,"0"}) %>
 	</center>
   </body>
 </html>
