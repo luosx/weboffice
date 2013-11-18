@@ -1,10 +1,16 @@
 <%@ page language="java" pageEncoding="utf-8"%>
-
+<%@page import="com.klspta.console.ManagerFactory"%>
+<%@page
+	import="org.springframework.security.core.context.SecurityContextHolder"%>
+<%@page import="com.klspta.console.user.User"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
+    Object userprincipal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    String userid = ((User)userprincipal).getUserID();
+    String xzqh = ManagerFactory.getUserManager().getUserWithId(userid).getXzqh();
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -28,8 +34,9 @@
 		var width;
 		var height;
 		Ext.onReady(function(){
-			putClientCommond("xfAction","getXFEndList");
-			myData = restRequest();
+			 putClientCommond("xfAction","getXFEndList");
+			 putRestParameter("xzqh","<%=xzqh%>");
+			 myData = restRequest();
 		    var store = new Ext.data.JsonStore({
 		    proxy: new Ext.ux.data.PagingMemoryProxy(myData),
 		       remoteSort:true,
@@ -122,6 +129,7 @@
          var keyWord=Ext.getCmp('keyword').getValue();
          keyWord=keyWord.toUpperCase();
          putClientCommond("xfAction","getXFEndList");
+          putRestParameter("xzqh","<%=xzqh%>");
          putRestParameter("keyWord",escape(escape(keyWord)));
          var myData = restRequest(); 
          var store = new Ext.data.JsonStore({
