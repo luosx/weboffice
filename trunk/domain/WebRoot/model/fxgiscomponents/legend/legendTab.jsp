@@ -1,5 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<%@page import="com.klspta.model.giscomponents.legend.LegendFiles"%>
+<%@page import="com.klspta.model.legend.LegendFiles"%>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":"

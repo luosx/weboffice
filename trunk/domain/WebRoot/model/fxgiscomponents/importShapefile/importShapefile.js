@@ -1,7 +1,6 @@
 ﻿﻿﻿﻿
 Ext.onReady(function(){
 var polygonWkt ;
-var _$ID = '';
 var polygonJson = "";
 	var fp = new Ext.form.FormPanel({
         renderTo: 'form-ct',
@@ -25,7 +24,7 @@ var polygonJson = "";
                 if(fp.getForm().isValid()){
                 	if(fileType == "shp"){
 		                fp.getForm().submit({
-							url:  "http://" + window.location.href.split("/")[2] + '/reduce/service/rest/parseShapefile/parseShapefile?objectid=0&bjectid2=' + _$ID,
+							url:  basePath + "/service/rest/parseShapefile/parseShapefile",
 							method:'POST', 
 							waitTitle:'提示',
 		                    waitMsg: '正在导入,请稍后...',

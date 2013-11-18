@@ -1,6 +1,4 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<%@page import="com.klspta.base.gis.GisConfigTools"%>
-<%@page import="com.klspta.base.gis.Extent"%>
 <%@page import="com.klspta.base.util.UtilFactory"%>
 <%@ taglib uri="/WEB-INF/taglib/queryLabel.tld" prefix="common"%>
 <%
@@ -8,8 +6,6 @@
 	String basePath = request.getServerName() + ":" + request.getServerPort() + path + "/";
 	String gisapiPath = basePath + "thirdres/arcgis_js_api/library/2.5/arcgis_compact";
 	basePath = request.getScheme() + "://" + basePath; 
-	Extent extent=GisConfigTools.getInstance().getExtent();
-
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -23,6 +19,7 @@ var gisapiPath = "<%=gisapiPath%>";
 		<meta http-equiv="cache-control" content="no-cache">
 		<meta http-equiv="expires" content="0">
         <%@ include file="/base/include/ext.jspf" %>
+        <%@ include file="/base/include/restRequest.jspf" %>
         <script src="<%=basePath%>base/thirdres/ext/examples/ux/fileuploadfield/FileUploadField.js" type="text/javascript"></script>
         <script src="<%=basePath%>model/fxgiscomponents/importShapefile/importShapefile.js" type="text/javascript"></script>
 		<script type="text/javascript" src="<%=basePath%>model/fxgiscomponents/infoQuery/ringsToJson.js"></script>
@@ -83,8 +80,12 @@ Ext.onReady(function(){
         })    
     });  
     grid.render('status_grid');
- })
- var _$WKID = <%=extent.getWkid()%>;
+ });
+ 
+  putClientCommond("mapconfig","getMapExtent");
+  var res = restRequest();
+  var _$WKID = res[0].WKID;
+  var basePath = "<%=basePath%>";
  </script>
 	</head>
 	<body bgcolor="#FFFFFF">
