@@ -206,99 +206,112 @@ public class MapTreeManager extends AbstractBaseBean {
     /**
      * 
      * <br>Description:修改支持3级菜单
-     * <br>Author:陈强峰
-     * <br>Date:2012-9-28
+     * <br>Author:朱波海
+     * <br>Date:2013-11-17
      * @param mapTreeBeanList
      * @return
      */
-    public String getExtTreeByMapTreeList(List<MapTreeBean> mapTreeBeanList) {
-        String MapTreeStr = null;
-        StringBuffer sb = new StringBuffer("[");
-        for (int i = 0; i < mapTreeBeanList.size(); i++) {
-            MapTreeBean t = (MapTreeBean) mapTreeBeanList.get(i);
-            String leaf_flag = t.getLeaf_flag();
-            String checked = t.getChecked();
-            if ("1".equals(checked)) {
-                checked = "true";
-            } else {
-                checked = "false";
-            }
-            if ("0".equals(leaf_flag) && "0".equals(t.getParentTreeId())) {
-                if (sb.length() > 1) {
-                    sb.append(",");
-                }
-                sb.append("\n{text:'" + t.getTreeName() + "',checked:" + checked + ", leaf: 0,id:'"
-                        + t.getTreeId() + "'}");
-            }
-            // 1.2 叶子节点：判断是否存在兄弟节点，如果存在，在children标签中进行插入；如果不存在，构建children标签并进行插入
-            else {
-                String parentId = t.getParentTreeId();
-                int prosition_parent = sb.indexOf("id:'" + parentId + "',children:");
-                int prosition_parent_child = sb.indexOf("id:'" + parentId + "'}");
-                int prositon_child = sb.lastIndexOf(",parentId:'" + t.getParentTreeId() + "'");//最后一位兄弟节点
-                int prositon_child_folder = sb.lastIndexOf(",parentId:'" + t.getParentTreeId() + "',id");
-                if (leaf_flag.equals("0")) {
-                    if (prosition_parent >= 0) {//是子文件夹的且存在兄弟节点
-                        if (prositon_child_folder >= 0) {
-                            String sb_child_folder = ",{text:'" + t.getTreeName() + "',checked:" + checked
-                                    + ", leaf: 0,parentId:'" + t.getParentTreeId() + "',id:'" + t.getTreeId()
-                                    + "'}";
-                            sb.insert(sb.indexOf("}", prositon_child_folder) + 1, sb_child_folder);
-                            continue;
-                        }
-                        String sb_child_folder = ",{text:'" + t.getTreeName() + "',checked:" + checked
-                                + ", leaf: 0,parentId:'" + t.getParentTreeId() + "',id:'" + t.getTreeId()
-                                + "'}";
-                        sb.insert(prositon_child + (",parentId:'" + t.getParentTreeId() + "'}").length(),
-                                sb_child_folder);
-                    } else {
-                        String sb_child_folder = ",children: [{text:'" + t.getTreeName() + "',checked:"
-                                + checked + ",leaf: 0,parentId:'" + t.getParentTreeId() + "',id:'"
-                                + t.getTreeId() + "'}]";
-                        sb.insert(prosition_parent_child + ("id:'" + parentId + "'").length(),
-                                sb_child_folder);
-                    }
-                    continue;
-                }
+public String  getExtTreeByMapTreeList(List<MapTreeBean> mapTreeBeanList){
+	 String MapTreeStr = null;
+     StringBuffer sb = new StringBuffer("[");
+     for (int i = 0; i < mapTreeBeanList.size(); i++) {
+         MapTreeBean t = (MapTreeBean) mapTreeBeanList.get(i);
+         String leaf_flag = t.getLeaf_flag();
+         String checked = t.getChecked();
+         if ("1".equals(checked)) {
+             checked = "true";
+         } else {
+             checked = "false";
+         }
+         if ("0".equals(leaf_flag) && "0".equals(t.getParentTreeId())) { 
+             if (sb.length() > 2) {
+                 sb.append(",");
+             }
+             sb.append("\n{text:'" + t.getTreeName() + "',checked:" + checked + ", leaf: 0,id:'"
+                     + t.getTreeId() + "'}");
+         }
+     }
+     for (int i = 0; i < mapTreeBeanList.size(); i++) {
+    	  MapTreeBean t = (MapTreeBean) mapTreeBeanList.get(i);
+          String leaf_flag = t.getLeaf_flag();
+          String checked = t.getChecked();
+          if ("1".equals(checked)) {
+              checked = "true";
+          } else {
+              checked = "false";
+          }
+          String parentId = t.getParentTreeId();
+          if(!("0".equals(leaf_flag) && "0".equals(t.getParentTreeId()))){
+          //父节点  leaf: 0,id:'20'}
+          int prosition_parent = sb.indexOf("id:'" + parentId + "',children:");
+          int prosition_parent_child = sb.indexOf("id:'" + parentId + "'}");
+          int prositon_child = sb.lastIndexOf(",parentId:'" + t.getParentTreeId() + "'");//最后一位兄弟节点
+          int prositon_child_folder = sb.lastIndexOf(",parentId:'" + t.getParentTreeId() + "',id");
+          if (leaf_flag.equals("0")) {
+              if (prosition_parent >= 0) {//是子文件夹的且存在兄弟节点
+                  if (prositon_child_folder >= 0) {
+                      String sb_child_folder = ",{text:'" + t.getTreeName() + "',checked:" + checked
+                              + ", leaf: 0,parentId:'" + t.getParentTreeId() + "',id:'" + t.getTreeId()
+                              + "'}";
+                      sb.insert(sb.indexOf("}", prositon_child_folder) + 1, sb_child_folder);
+                      continue;
+                  }
+                  String sb_child_folder = ",{text:'" + t.getTreeName() + "',checked:" + checked
+                          + ", leaf: 0,parentId:'" + t.getParentTreeId() + "',id:'" + t.getTreeId()
+                          + "'}";
+                  sb.insert(prositon_child + (",parentId:'" + t.getParentTreeId() + "'}").length(),
+                          sb_child_folder);
+              } else {
+                  String sb_child_folder = ",children: [{text:'" + t.getTreeName() + "',checked:"
+                          + checked + ",leaf: 0,parentId:'" + t.getParentTreeId() + "',id:'"
+                          + t.getTreeId() + "'}]";
+                  sb.insert(prosition_parent_child + ("id:'" + parentId + "'").length(),
+                          sb_child_folder);
+              }
+              continue;
+          }
 
-                if (prosition_parent >= 0 && prositon_child_folder > 0) {
-                    String sb_child = ",{text:'" + t.getTreeName() + "',"
-                            + getIcon(t.getType(), t.getFeatureType()) + "serverid:'" + t.getServerId()
-                            + "',layerid:'" + t.getLayerId() + "',type:'" + t.getType() + "',checked:"
-                            + checked + ", leaf: 1,id:'" + t.getTreeId() + "@" + t.getServerId() + "@"
-                            + t.getLayerId() + "',parentId:'" + t.getParentTreeId() + "'}";
-                    sb.insert(sb.indexOf("}]}", prositon_child_folder) + 3, sb_child);
-                    continue;
-                }
+          if (prosition_parent >= 0 && prositon_child_folder > 0) {
+              String sb_child = ",{text:'" + t.getTreeName() + "',"
+                      + getIcon(t.getType(), t.getFeatureType()) + "serverid:'" + t.getServerId()
+                      + "',layerid:'" + t.getLayerId() + "',type:'" + t.getType() + "',checked:"
+                      + checked + ", leaf: 1,id:'" + t.getTreeId() + "@" + t.getServerId() + "@"
+                      + t.getLayerId() + "',parentId:'" + t.getParentTreeId() + "'}";
+              sb.insert(sb.indexOf("}]}", prositon_child_folder) + 3, sb_child);
+              continue;
+          }
 
-                if (prosition_parent >= 0) {// 存在兄弟节点
-                    String sb_child = ",{text:'" + t.getTreeName() + "',"
-                            + getIcon(t.getType(), t.getFeatureType()) + "serverid:'" + t.getServerId()
-                            + "',layerid:'" + t.getLayerId() + "',type:'" + t.getType() + "',checked:"
-                            + checked + ", leaf: 1,id:'" + t.getTreeId() + "@" + t.getServerId() + "@"
-                            + t.getLayerId() + "',parentId:'" + t.getParentTreeId() + "'}";
-                    sb.insert(prositon_child + (",parentId:'" + t.getParentTreeId() + "'}").length(),
-                            sb_child);
+          if (prosition_parent >= 0) {// 存在兄弟节点
+              String sb_child = ",{text:'" + t.getTreeName() + "',"
+                      + getIcon(t.getType(), t.getFeatureType()) + "serverid:'" + t.getServerId()
+                      + "',layerid:'" + t.getLayerId() + "',type:'" + t.getType() + "',checked:"
+                      + checked + ", leaf: 1,id:'" + t.getTreeId() + "@" + t.getServerId() + "@"
+                      + t.getLayerId() + "',parentId:'" + t.getParentTreeId() + "'}";
+              sb.insert(prositon_child + (",parentId:'" + t.getParentTreeId() + "'}").length(),
+                      sb_child);
 
-                } else if (prosition_parent_child >= 0) {// 不存在兄弟节点
-                    String sb_child = ",children: [{text:'" + t.getTreeName() + "',"
-                            + getIcon(t.getType(), t.getFeatureType()) + "serverid:'" + t.getServerId()
-                            + "',layerid:'" + t.getLayerId() + "',type:'" + t.getType() + "',checked:"
-                            + checked + ", leaf: 1,id:'" + t.getTreeId() + "@" + t.getServerId() + "@"
-                            + t.getLayerId() + "',parentId:'" + t.getParentTreeId() + "'}]";
-                    sb.insert(prosition_parent_child + ("id:'" + parentId + "'").length(), sb_child);
-                } else {
-                    System.out.println("图层树配置错误：   " + t.getTreeName() + "   不存在父级节点。");
-                }
-            }
-        }
-        if (sb.length() > 1) {
-            sb.append("]");
-            MapTreeStr = sb.toString();
-        }
-        return MapTreeStr;
-    }
-
+          } else if (prosition_parent_child >= 0) {// 不存在兄弟节点
+              String sb_child = ",children: [{text:'" + t.getTreeName() + "',"
+                      + getIcon(t.getType(), t.getFeatureType()) + "serverid:'" + t.getServerId()
+                      + "',layerid:'" + t.getLayerId() + "',type:'" + t.getType() + "',checked:"
+                      + checked + ", leaf: 1,id:'" + t.getTreeId() + "@" + t.getServerId() + "@"
+                      + t.getLayerId() + "',parentId:'" + t.getParentTreeId() + "'}]";
+              sb.insert(prosition_parent_child + ("id:'" + parentId + "'").length(), sb_child);
+          } else {
+              System.out.println("图层树配置错误：   " + t.getTreeName() + "   不存在父级节点。");
+          }
+          }
+     }
+     if (sb.length() > 1) {
+         sb.append("]");
+         MapTreeStr = sb.toString();
+         System.out.println(MapTreeStr);
+     }
+     return MapTreeStr;
+}
+    
+    
+    
     private static String getIcon(String mapServiceType, String featureType) {
         // if (mapServiceType != null && "tiled".equals(mapServiceType)) {
         // return "icon:'gisapp/images/tiled.png',";
