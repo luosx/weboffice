@@ -34,7 +34,7 @@
 		var width;
 		var height;
 		Ext.onReady(function(){
-			putClientCommond("XfjbManager","getXxjbDcl");
+			putClientCommond("XfjbManager","getXfjbDcl");
 			putRestParameter("userId","<%=userid%>");
 			myData = restRequest();
 			//myData=eval(myData);
@@ -110,7 +110,6 @@
 		}
 
 		function process(id){
-		  alert(id);
 		     var wfInsTaskId=myData[id].DBID_
 			var activityName=myData[id].ACTIVITY_NAME_;
 			var isFirst;
@@ -130,7 +129,7 @@
       function query(){
          var keyWord=Ext.getCmp('keyword').getValue();
          keyWord=keyWord.toUpperCase();
-         putClientCommond("XfjbManager","getXxjbDcl");
+         putClientCommond("XfjbManager","getXfjbDcl");
          putRestParameter("userId", "<%=userid%>");
          putRestParameter("keyWord",escape(escape(keyWord)));
           myData = restRequest(); 
