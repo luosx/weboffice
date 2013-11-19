@@ -56,4 +56,5 @@
 	<bean name="tjbbManager" class="com.klspta.web.cbd.dtjc.TjbbManager" scope="prototype"/>
 	<bean name="ptzzgml" class = "com.klspta.web.cbd.dtjc.jcmx.PtzzgmlMXTwoData" scope="prototype"/>
 	<bean name="jzmjbbdfx" class = "com.klspta.web.cbd.dtjc.jcmx.bbdfx.Jzmjbbdfx" scope="prototype"/>
+	<bean name="ptzzgmlCL" class="com.klspta.web.cbd.dtjc.jcmx.PtzzgmlMXOneData" scope="prototype"/>
 </beans>
