@@ -109,7 +109,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			// var form=document.getElementById("attachfile");
 			// form.action +="?reprotId=JBZR";
 			// form.submit();
-			    var curTbl = document.getElementById("report"); 
+			    var curTbl = document.getElementById("PTZZGMNL"); 
 			    try{
 			    	var oXL = new ActiveXObject("Excel.Application");
 			    }catch(err){
@@ -341,8 +341,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<img src="base/form/images/print.png" width="20px" height="20px" onClick="print()" >
 	</div>
 	<div>
-	  <table width="1305" height="50" style="background-color: #FFFFFF">
-	   <tr><td ><h2>北京地区普通住宅房屋购买能力综合分析模型2</h2></td>
+	  <table width="1305" height="50" style="background-color: #FFFFFF;font-size: 30px">
+	   <tr><td ><h1>北京地区普通住宅房屋购买能力综合分析模型2</h1></td>
 	   </tr>
 	   <tr><td style="text-align:right;">单位：万元，平方米，万元/平方米</td></tr>
 	  </table>
