@@ -220,8 +220,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			    Ext.getCmp("ZYZJDYXBFB").setValue(formData[0].ZYZJDYXBFB);
 			    Ext.getCmp("ZSYSBL").setValue(formData[0].ZSYSBL);
 			    Ext.getCmp("CZL").setValue(formData[0].CZL);
-	        }
-	   test();
+	         }
+	              test();
         });
         
         function modifyForm(){
@@ -304,7 +304,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
     <script type="text/javascript">
   		function print(){
-			    var curTbl = document.getElementById("report"); 
+			    var curTbl = document.getElementById("JZMJBBDFX"); 
 			    try{
 			    	var oXL = new ActiveXObject("Excel.Application");
 			    }catch(err){
