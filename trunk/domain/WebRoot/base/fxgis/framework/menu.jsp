@@ -1,34 +1,11 @@
-<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<%@page import="com.klspta.web.xuzhouNW.dtxc.PADDataManager"%>
-<%@page import="com.klspta.web.xuzhouNW.xfjb.manager.XfAction"%>
-
+<%@ page language="java" pageEncoding="utf-8"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-//用来标识是不是信访中的地图标注
-String dtbzflag=request.getParameter("dtbzflag");
-//用来标识是不是外业巡查成果展现
-String flag=request.getParameter("flag");
-String yw_guid=request.getParameter("yw_guid");
-String pra = "";
-if(yw_guid==null||"null".equals(yw_guid)){
-	pra="dolocation=true&p={\"rings\":[[[38688372,4431495],[38688350,4431440],[38688372,4431390],[38688402,4431431],[38688430,4431431],[38688414,4431494],[38688372,4431495]]],\"spatialReference\":{\"wkid\":2362}}";
-}else{
-	if(dtbzflag != null && "true".equals(dtbzflag)){
-		XfAction xfAction = new XfAction();
-		if("null".equals(xfAction.getBiaozhu(yw_guid))){
-			
-		}else{
-			pra = "dolocation=true&p="+xfAction.getBiaozhu(yw_guid);
-		}
-	}else{
-		PADDataManager pDataList=new PADDataManager();
-		pra="dolocation=true&p="+pDataList.getCjzb(yw_guid);
-	}
-}
-String url=basePath+"base/fxgis/fx/FxGIS.html?debug=true";
-if(flag!=null&&!flag.equals("null")||dtbzflag!=null&&!dtbzflag.equals("null")){
-  url=basePath+"base/fxgis/fx/FxGIS.html?"+pra;
+String pra = request.getParameter("par");
+String url = basePath+"base/fxgis/fx/FxGIS.html?debug=true";
+if(pra != null && !pra.equals("null")){
+    url = url + "&" +pra;
 }
 %>
 
@@ -36,20 +13,12 @@ if(flag!=null&&!flag.equals("null")||dtbzflag!=null&&!dtbzflag.equals("null")){
 <html>
   <head>
     <base href="<%=basePath%>">
-    
     <title>中上</title>
-    
-	<meta http-equiv="pragma" content="no-cache">
-	<meta http-equiv="cache-control" content="no-cache">
-	<meta http-equiv="expires" content="0">    
-	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-	<meta http-equiv="description" content="This is my page">
-	
 	<%@ include file="/base/include/ext.jspf" %>
   </head>
       <script type="text/javascript" src="<%=basePath%>base/fxgis/framework/js/menu.js"></script>
+      <script type="text/javascript" src="<%=basePath%>base/fxgis/framework/js/flexCallback.js"></script>
 <script type="text/javascript">
-var yw_guid='<%=yw_guid%>';
 var basePath='<%=basePath%>';
  var view;
 Ext.onReady(function(){
