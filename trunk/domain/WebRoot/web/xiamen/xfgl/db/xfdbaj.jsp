@@ -37,8 +37,7 @@
 			putClientCommond("XfjbManager","getXxjbDcl");
 			putRestParameter("userId","<%=userid%>");
 			myData = restRequest();
-			alert(myData);
-			myData=eval(myData);
+			//myData=eval(myData);
 		    var store = new Ext.data.JsonStore({
 		    proxy: new Ext.ux.data.PagingMemoryProxy(myData),
 		       remoteSort:true,
@@ -49,6 +48,8 @@
 		           {name: 'JBSJ'},
 		           {name: 'LXDH'},
 		           {name: 'JBZYWT'},
+		           {name: 'JSR'},
+		            {name: 'INDEX'},
 		           {name: 'YW_GUID'}
 		        ]
 		    });
@@ -62,14 +63,15 @@
 		        store: store,
 		        columns: [
 		            //new Ext.grid.RowNumberer(),        
-		           {header: '举报人',dataIndex:'JBR',width: width*0.12, sortable: true},
+		           {header: '举报人',dataIndex:'JBR',width: width*0.1, sortable: true},
 		           {header: '举报形式',dataIndex:'JBXS',width: width*0.08, sortable: true},
-		           {header: '联系地址',dataIndex:'LXDZ',width: width*0.10, sortable: true},
-		           {header: '举报时间',dataIndex:'JBSJ',width: width*0.15, sortable: true},
-		           {header: '联系电话',dataIndex:'LXDH',width: width*0.15, sortable: true},
+		           {header: '联系地址',dataIndex:'LXDZ',width: width*0.14, sortable: true},
+		           {header: '举报时间',dataIndex:'JBSJ',width: width*0.08, sortable: true},
+		           {header: '联系电话',dataIndex:'LXDH',width: width*0.08, sortable: true},
 		           {header: '举报主要问题',dataIndex:'JBZYWT',width: width*0.15, sortable: true},
+		            {header: '接收人',dataIndex:'JSR',width: width*0.15, sortable: true},
 		           {header: '案件办理状态',dataIndex:'AJBLZT',width: width*0.15, sortable: true},
-		           {header: '办理',dataIndex:'YW_GUID',width: width*0.05, sortable: false,renderer:pro}
+		           {header: '办理',dataIndex:'INDEX',width: width*0.05, sortable: false,renderer:pro}
 		        ],
 		        tbar:[
 		        	{xtype:'label',text:'快速查找:',width:60},
@@ -104,11 +106,12 @@
 		});
 
 		function pro(id){
-		 return "<a href='#'onclick='process("+id+");return false;'><img src='<%=basePath%>web/xuzhouNW/xfaj/images/view.png' alt='办理'></a>";
+		 return "<a href='#'onclick='process("+id+");return false;'><img src='<%=basePath%>web/xiamen/xfgl/image/view.png' alt='办理'></a>";
 		}
 
 		function process(id){
-		    var wfInsTaskId=myData[id].DBID_;
+		  alert(id);
+		     var wfInsTaskId=myData[id].DBID_
 			var activityName=myData[id].ACTIVITY_NAME_;
 			var isFirst;
 			if(activityName=="受理立案"){
@@ -116,8 +119,8 @@
 			}
 			var wfInsId=myData[id].WFINSID;
 			var yw_guid=myData[id].YW_GUID;
-			var zfjcType="91";
-			var returnPath="web/xuzhouNW/xfaj/xfdbaj.jsp";
+			var zfjcType="10";
+			var returnPath="web/xiamen/xfgl/db/xfdbaj.jsp";
 			var buttonHien = "la";
 			var url='<%=basePath%>model/workflow/wf.jsp?yw_guid='+yw_guid+'&wfInsId='+wfInsId+'&zfjcType='+zfjcType+'&returnPath='+returnPath+'&zfjcName=信访举报&buttonHidden='+buttonHien;  
 			//window.open(url); 
@@ -127,10 +130,11 @@
       function query(){
          var keyWord=Ext.getCmp('keyword').getValue();
          keyWord=keyWord.toUpperCase();
-         putClientCommond("xfAction","getDBListByUserId");
+         putClientCommond("XfjbManager","getXxjbDcl");
          putRestParameter("userId", "<%=userid%>");
          putRestParameter("keyWord",escape(escape(keyWord)));
-         var myData = restRequest(); 
+          myData = restRequest(); 
+          myData= eval(myData);
          var store = new Ext.data.JsonStore({
               proxy: new Ext.ux.data.PagingMemoryProxy(myData),
               remoteSort:true,
@@ -141,20 +145,23 @@
 		           {name: 'JBSJ'},
 		           {name: 'LXDH'},
 		           {name: 'JBZYWT'},
+		           {name: 'JSR'},
+		           {name: 'INDEX'},
 		           {name: 'YW_GUID'}
               ]
         });
         
         grid.reconfigure(store, new Ext.grid.ColumnModel([
            //new Ext.grid.RowNumberer(),        
-		           {header: '举报人',dataIndex:'JBR',width: width*0.12, sortable: true},
+		           {header: '举报人',dataIndex:'JBR',width: width*0.1, sortable: true},
 		           {header: '举报形式',dataIndex:'JBXS',width: width*0.08, sortable: true},
-		           {header: '联系地址',dataIndex:'LXDZ',width: width*0.10, sortable: true},
-		           {header: '举报时间',dataIndex:'JBSJ',width: width*0.15, sortable: true},
-		           {header: '联系电话',dataIndex:'LXDH',width: width*0.15, sortable: true},
+		           {header: '联系地址',dataIndex:'LXDZ',width: width*0.14, sortable: true},
+		           {header: '举报时间',dataIndex:'JBSJ',width: width*0.08, sortable: true},
+		           {header: '联系电话',dataIndex:'LXDH',width: width*0.08, sortable: true},
 		           {header: '举报主要问题',dataIndex:'JBZYWT',width: width*0.15, sortable: true},
+		            {header: '接收人',dataIndex:'JSR',width: width*0.15, sortable: true},
 		           {header: '案件办理状态',dataIndex:'AJBLZT',width: width*0.15, sortable: true},
-		           {header: '办理',dataIndex:'YW_GUID',width: width*0.05, sortable: false,renderer:pro}
+		           {header: '办理',dataIndex:'INDEX',width: width*0.05, sortable: false,renderer:pro}
         ]));
         grid.getBottomToolbar().bind(store);
         store.load({params:{start:0,limit:10}});  
