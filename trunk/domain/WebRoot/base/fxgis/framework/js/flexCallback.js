@@ -10,7 +10,7 @@ function getInitMapLayerVisiable(){
 function drawPointCallback(s){
 	tempValue=eval('('+s+')');
 	var point = tempValue.x + ','+ tempValue.y;
-	window.open("/domain/web/xuzhouNW/xfaj/xfbz/pointfx.jsp?point="+point,"","height=300, width=350, top=200,left=300,location=no,scrollbars=yes");
+	window.open("/domain/model/fxgiscomponents/djfx/pointfx.jsp?point="+point,"","height=300, width=350, top=200,left=300,location=no,scrollbars=yes");
 }
 
 //画面 回调方法
