@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
 import com.klspta.base.AbstractBaseBean;
 import com.klspta.base.util.UtilFactory;
 import com.klspta.base.wkt.Polygon;
@@ -93,10 +92,10 @@ public class PADDataManager extends AbstractBaseBean {
      * @return
      */
     public String getCjzb(String rwbh) {
-        String sql = "select jwzb from dc_ydqkdcb where yw_guid=?";
+        String sql = "select pmzb from dc_ydqkdcb where yw_guid=?";
         List<Map<String, Object>> list = query(sql, YW, new Object[] { rwbh });
         if (list.size() > 0) {
-            Object zb = list.get(0).get("jwzb");
+            Object zb = list.get(0).get("pmzb");
             if (zb == null) {
                 return null;
             } else {
