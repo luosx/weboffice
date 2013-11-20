@@ -1,11 +1,34 @@
 <%@ page language="java" pageEncoding="utf-8"%>
+<%@page import="com.klspta.web.xuzhouNW.xfjb.manager.XfAction"%>
+<%@page import="com.klspta.web.xuzhouNW.dtxc.PADDataManager"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-String pra = request.getParameter("par");
-String url = basePath+"base/fxgis/fx/FxGIS.html?debug=true";
-if(pra != null && !pra.equals("null")){
-    url = url + "&" +pra;
+//用来标识是不是信访中的地图标注
+String dtbzflag=request.getParameter("dtbzflag");
+//用来标识是不是外业巡查成果展现
+String flag=request.getParameter("flag");
+String yw_guid=request.getParameter("yw_guid");
+String pra = "";
+if(yw_guid==null||"null".equals(yw_guid)){
+	pra="dolocation=true&p={\"rings\":[[[38688372,4431495],[38688350,4431440],[38688372,4431390],[38688402,4431431],[38688430,4431431],[38688414,4431494],[38688372,4431495]]],\"spatialReference\":{\"wkid\":2362}}";
+}else{
+	if(dtbzflag != null && "true".equals(dtbzflag)){
+		XfAction xfAction = new XfAction();
+		if("null".equals(xfAction.getBiaozhu(yw_guid))){
+			
+		}else{
+			pra = "dolocation=true&p="+xfAction.getBiaozhu(yw_guid);
+		}
+	}else{
+		PADDataManager pDataList=new PADDataManager();
+		pra="dolocation=true&p="+pDataList.getCjzb(yw_guid);
+		System.out.println(pra+"==========================");		
+	}
+}
+String url=basePath+"base/fxgis/fx/FxGIS.html?debug=true";
+if(flag!=null&&!flag.equals("null")||dtbzflag!=null&&!dtbzflag.equals("null")){
+  url=basePath+"base/fxgis/fx/FxGIS.html?"+pra;
 }
 %>
 
@@ -15,10 +38,12 @@ if(pra != null && !pra.equals("null")){
     <base href="<%=basePath%>">
     <title>中上</title>
 	<%@ include file="/base/include/ext.jspf" %>
+	<%@ include file="/base/include/restRequest.jspf" %>
   </head>
       <script type="text/javascript" src="<%=basePath%>base/fxgis/framework/js/menu.js"></script>
       <script type="text/javascript" src="<%=basePath%>base/fxgis/framework/js/flexCallback.js"></script>
 <script type="text/javascript">
+var yw_guid='<%=yw_guid%>';
 var basePath='<%=basePath%>';
  var view;
 Ext.onReady(function(){
@@ -219,5 +244,10 @@ Ext.onReady(function(){
   <div id="mapDiv">
   <iframe id="lower" name="lower"  style="width: 100%;height:100%; overflow: auto;" src=<%=url%>></iframe>
 </div>
+    <div id="result-win" class="x-hidden">    </div>
+    <div id="result-tabs"></div>
+    <div id='properties'   title="图斑属性" style="overflow: scroll;"></div>
+    <div id='xz'  title="现状叠加分析" style="overflow: scroll; "></div>
+    <div id='gh'   title="规划叠加分析" style="overflow: scroll;"></div>
   </body>
 </html>
