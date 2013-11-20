@@ -70,22 +70,26 @@ function showImage2()
 }
 window.onload=function()
 {
-	var obj=document.getElementById("showimage");
-	width=obj.scrollWidth-obj.offsetWidth;
+	//var obj=document.getElementById("showimage");
+	//width=obj.scrollWidth-obj.offsetWidth;
+	//var url="<%=basePath%>"+"base/fxgis/fx/FxGIS.html";
+	//this.href = url;
 	}
 </script>
 <body style="background-color:#D6F9FA;">
+<iframe src="<%=basePath%>base/fxgis/fx/FxGIS.html" width="1400" height="500"></iframe>
 <!--<img id="icon" onclick="clickImage()"  src="<%=resourcePath%>/images/go.png" style="display:block;float:right;width:26px;height:26px;"/>--> 
-
+<!-- 
 <div style="width:100%;">
 	<div id="showimage" style="width:100%;">
 		<table cellpadding="0" cellspacing="0" align="center">
 			<tr>
-				<td><img src="<%=resourcePath%>/images/index3.png"><td>
+				 <td><img src="<%=resourcePath%>/images/index3.png"><td> 
 			</tr>
 		</table>	
 	</div>
 </div>
+ -->
 	<!-- 
 	<table class="allitem" cellspacing="0" cellpadding="0" border="0">
 	<tr>
