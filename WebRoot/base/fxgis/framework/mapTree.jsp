@@ -77,6 +77,7 @@ var loadFlag=true;
 	}
 	
 Ext.onReady(function(){
+	
     tree = new Ext.tree.TreePanel({ 
         el:'mapTree',  
         title:"<div align='left'><img id=\"closeOrOpenNode\" value=\"op\" src='<%=basePath%>/base/thirdres/ext/examples/docs/resources/expand-all.gif' alt='展开' class=x-btn-text onclick=\"closeOrOpenNode();\" /></div>", 
@@ -113,7 +114,7 @@ if(deep && loadFlag){
 loadFlag=false;
 try{
  //changeMap();
- setTimeout("changeMap()",3000);
+ //setTimeout("changeMap()",3000);
  }catch(ex){
  document.location.reload();
  }
