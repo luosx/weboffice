@@ -109,7 +109,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			// var form=document.getElementById("attachfile");
 			// form.action +="?reprotId=JBZR";
 			// form.submit();
-			    var curTbl = document.getElementById("report"); 
+			    var curTbl = document.getElementById("NDJH"); 
 			    try{
 			    	var oXL = new ActiveXObject("Excel.Application");
 			    }catch(err){

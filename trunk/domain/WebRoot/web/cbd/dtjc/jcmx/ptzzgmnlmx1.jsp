@@ -76,25 +76,32 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    .tr02{
     background-color:#FFFFCC;
   	text-align:center;
+    line-height: 30px;
+   }
+   .tr03{
+   	background-color:#CCFFCC;
+  	text-align:center;
+    line-height: 30px;
+   }
+   .tr04{
+   	background-color:#969696;
     font-weight:bold;
+    text-align:center;
     line-height: 30px;
    }
     .tr06{
     background-color:#FFFFFF;
   	text-align:center;
-    font-weight:bold;
     line-height: 30px; 
    }
    .tr07{
     background-color:#CCCCFF;
   	text-align:center;
-    font-weight:bold;
     line-height: 30px; 
    }
    .tr11{
     background-color:#C0C0C0;
   	text-align:center;
-    font-weight:bold;
     line-height: 30px; 
    }
    
@@ -116,6 +123,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    }
    .div4{
    	float:left;margin-left:5px;position:relative;left:0px;
+   }
+   .text{
+   		width:80px;height:25px;background-color: #C0C0C0;border: none;text-align: center;
+   }
+   .text02{
+   		width:80px;height:25px;border: none;text-align: center;
    }
 	</style>
     <script type="text/javascript">
@@ -147,237 +160,93 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			    excel.Init();
 			    excel.setCells(50);
 			    excel.setRows(20);
-			    excel.buildTable("PTZZGMLMX1YBL1", "3", "1");
-                excel.buildTable("PTZZGMLMX1YBL2", "3", "4");
+			    excel.buildTable("tbcl", "3", "1");
+                excel.buildTable("tbbl", "3", "4");
+			    excel.buildTable("PTZZGMLMX1YBL1", "3", "7");
+                excel.buildTable("PTZZGMLMX1YBL2", "3", "10");
 			    var sheet = excel.getSheet();
 			    excel.setSheet(sheet);
 			    excel.showTable();			    
 		    }
        </script>
        <script type="text/javascript">
+       var tbcl;
+       var tbbl;
+       var tbybl1;
+       var tbybl2;
         Ext.onReady(function(){
-           var f=new Ext.form.FormPanel({
-              renderTo:"clparaform",
-              title:"购房常规涉及参数（常量）",
-              height: 500,
-              width: 240,
-              labelWidth: 160,
-              labelAlign: "center",
-              frame: true,
-              defaults:{
-                 xtype:"textfield",
-                 width:60
-              },
-              items: [
-              	 {id: "ZXJZWBL",fieldLabel:"装修及置物比例（%）"},
-                 {id: "QSYHS", fieldLabel: "契税、印花税（%）"},
-                 {id: "YYS", fieldLabel: "营业税（%）"},
-                 {id: "SXF", fieldLabel: "手续费（%）"},
-                 {id: "ZJF", fieldLabel: "中介费（%）"},
-                 {id: "JKHKQX", fieldLabel: "借款还款期限"},
-                 {id: "GJJDKZGED", fieldLabel: "公积金贷款最高额度（万元）"},
-                 {id: "DKNXNLYQSX", fieldLabel: "贷款年限年龄要求上限（岁）"},
-                 {id: "YJCGJJBL", fieldLabel: "月缴存公积金比例（%）"},
-                 {id: "DKZGNX", fieldLabel: "贷款最高年限（年）"},
-                 {id: "GJJDKLL",fieldLabel: "公积金贷款利率（%）"},
-                 {id: "SYDKJZLL", fieldLabel: "商业贷款基准利率（%）"},
-                 {id: "SYDKLLFD", fieldLabel: "商业贷款利率浮动（%）"}
-              ],
-              buttons:[{
-                 text:"保存",
-                 handler: function(){
-                      var res=save();
-                      if(res){
-                        alert("保存成功");
-                        window.location.reload();
-                      }else{
-                        alert("保存失败");
-                      }
-                 }
-              }]
-           });
-           Ext.getCmp("ZXJZWBL").on('keyup',function(field,e){ 
-                tryCol();
-	        });
-	        Ext.getCmp("QSYHS").on('keyup',function(field,e){ 
-                tryCol();
-	        });
-	        Ext.getCmp("YYS").on('keyup',function(field,e){ 
-                tryCol();
-	        });
-	        Ext.getCmp("SXF").on('keyup',function(field,e){ 
-                tryCol();
-	        });
-	        Ext.getCmp("ZJF").on('keyup',function(field,e){ 
-                tryCol();
-	        });
-	        Ext.getCmp("JKHKQX").on('keyup',function(field,e){ 
-                tryCol();
-	        });
-	        Ext.getCmp("GJJDKZGED").on('keyup',function(field,e){ 
-                tryCol();
-	        });
-	        Ext.getCmp("DKNXNLYQSX").on('keyup',function(field,e){ 
-                tryCol();
-	        });
-	        Ext.getCmp("YJCGJJBL").on('keyup',function(field,e){ 
-                tryCol();
-	        });
-	        Ext.getCmp("DKZGNX").on('keyup',function(field,e){ 
-                tryCol();
-	        });
-	        Ext.getCmp("GJJDKLL").on('keyup',function(field,e){ 
-                tryCol();
-	        });
-	         Ext.getCmp("SYDKJZLL").on('keyup',function(field,e){ 
-                tryCol();
-	        });
-	         Ext.getCmp("SYDKLLFD").on('keyup',function(field,e){ 
-                tryCol();
-	        });
+           tbcl = document.getElementById("tbcl");
+           tbbl = document.getElementById("tbbl"); 
            putClientCommond("ptzzgmlCL","getCL");
 	       var formData= restRequest();
 	       if(formData[0]!=null){
-	            Ext.getCmp("ZXJZWBL").setValue(formData[0].ZXJZWBL);
-	  		    Ext.getCmp("QSYHS").setValue(formData[0].QSYHS);
-			    Ext.getCmp("YYS").setValue(formData[0].YYS);
-			    Ext.getCmp("SXF").setValue(formData[0].SXF);
-			    Ext.getCmp("ZJF").setValue(formData[0].ZJF);
-			    Ext.getCmp("JKHKQX").setValue(formData[0].JKHKQX);
-			    Ext.getCmp("GJJDKZGED").setValue(formData[0].GJJDKZGED);
-			    Ext.getCmp("DKNXNLYQSX").setValue(formData[0].DKNXNLYQSX);
-			    Ext.getCmp("YJCGJJBL").setValue(formData[0].YJCGJJBL);
-			    Ext.getCmp("DKZGNX").setValue(formData[0].DKZGNX);
-			    Ext.getCmp("GJJDKLL").setValue(formData[0].GJJDKLL);
-			    Ext.getCmp("SYDKJZLL").setValue(formData[0].SYDKJZLL);
-			    Ext.getCmp("SYDKLLFD").setValue(formData[0].SYDKLLFD);
+	       		document.getElementById("zxjzwbl").value=formData[0].ZXJZWBL;
+	       		document.getElementById("QSYHS").value=formData[0].QSYHS;
+	       		document.getElementById("yys").value=formData[0].YYS;
+	       		document.getElementById("sxf").value=formData[0].SXF;
+	       		document.getElementById("zjf").value=formData[0].ZJF;
+	       		document.getElementById("jkhkqx").value=formData[0].JKHKQX;
+	       		document.getElementById("gjjdkzged").value=formData[0].GJJDKZGED;
+	       		document.getElementById("dknxnlyqsx").value=formData[0].DKNXNLYQSX;
+	       		document.getElementById("yjcgjjbl").value=formData[0].YJCGJJBL;
+	       		document.getElementById("dkzgnx").value=formData[0].DKZGNX;
+	       		document.getElementById("gjjdkll").value=formData[0].GJJDKLL;
+	       		document.getElementById("sydkjzll").value=formData[0].SYDKJZLL;
+	       		document.getElementById("sydkllfd").value=formData[0].SYDKLLFD;
 	        }
-	        
-            var f2=new Ext.form.FormPanel({
-              renderTo:"bl1paraform",
-              title:"拟购住宅房屋情况模块（自变量1）",
-              height: 500,
-              width: 240,
-              labelWidth: 160,
-              labelAlign: "center",
-              frame: true,
-              defaults:{
-                 xtype:"textfield",
-                 width:60
-              },
-              items: [
-              	 {id: "NGFWMJ",fieldLabel:"拟购房屋面积（㎡）"},
-                 {id: "NGFWDJ", fieldLabel: "拟购房屋单价（万元/㎡）"},
-                 {id: "FWLX", fieldLabel: "房屋类型"},
-                 {id: "ESFSYNS", fieldLabel: "二手房使用年数（年）"},
-                 {id: "FL", fieldLabel: "房龄（年）"},
-                 {id: "GFLX", fieldLabel: "购房类型"},
-                 {id: "JTYKZPSR",fieldLabel:"家庭月可支配收入（万元/月）"},
-                 {id: "YYYHDZJBL", fieldLabel: "月用于还贷资金比例（%）"},
-                 {id: "DQCK", fieldLabel: "当前存款（万元）"},
-                 {id: "WXXQJK", fieldLabel: "无息限期借款（万元）"},
-                 {id: "GJJLXJNNS", fieldLabel: "公积金连续缴纳年数（月）"},
-                 {id: "GFRNL", fieldLabel: "购房人年龄(岁)"}
-              ],
-              buttons:[{
-                 text:"保存",
-                 handler: function(){
-                      var res=save();
-                      if(res){
-                        alert("保存成功");
-                        window.location.reload();
-                      }else{
-                        alert("保存失败");
-                      }
-                 }
-              }]
-           });
-           Ext.getCmp("NGFWMJ").on('keyup',function(field,e){ 
-                tryCol();
-	        });
-	        Ext.getCmp("NGFWDJ").on('keyup',function(field,e){ 
-                tryCol();
-	        });
-	        Ext.getCmp("FWLX").on('keyup',function(field,e){ 
-                tryCol();
-	        });
-	         Ext.getCmp("ESFSYNS").on('keyup',function(field,e){ 
-                tryCol();
-	        });
-	         Ext.getCmp("FL").on('keyup',function(field,e){ 
-                tryCol();
-	        });
-	        Ext.getCmp("GFLX").on('keyup',function(field,e){ 
-                tryCol();
-	        });
-	        Ext.getCmp("JTYKZPSR").on('keyup',function(field,e){ 
-                tryCol();
-	        });
-	        Ext.getCmp("YYYHDZJBL").on('keyup',function(field,e){ 
-                tryCol();
-	        });
-	        Ext.getCmp("WXXQJK").on('keyup',function(field,e){ 
-                tryCol();
-	        });
-	        Ext.getCmp("GJJLXJNNS").on('keyup',function(field,e){ 
-                tryCol();
-	        });
-	        Ext.getCmp("GFRNL").on('keyup',function(field,e){ 
-                tryCol();
-	        });
          	putClientCommond("ptzzgmlCL","getBL");
-	          var formData= restRequest();
+	          formData= restRequest();
 	          if(formData[0]!=null){
-	           Ext.getCmp("NGFWMJ").setValue(formData[0].NGFWMJ);
-	  		    Ext.getCmp("NGFWDJ").setValue(formData[0].NGFWDJ);
-			    Ext.getCmp("FWLX").setValue(formData[0].FWLX);
-			    Ext.getCmp("ESFSYNS").setValue(formData[0].ESFSYNS);
-			    Ext.getCmp("FL").setValue(formData[0].FL);
-			    Ext.getCmp("GFLX").setValue(formData[0].GFLX);
-			    Ext.getCmp("JTYKZPSR").setValue(formData[0].JTYKZPSR);
-			    Ext.getCmp("YYYHDZJBL").setValue(formData[0].YYYHDZJBL);
-			    Ext.getCmp("WXXQJK").setValue(formData[0].WXXQJK);
-			    Ext.getCmp("GJJLXJNNS").setValue(formData[0].GJJLXJNNS);
-			    Ext.getCmp("GFRNL").setValue(formData[0].GFRNL);
+	          document.getElementById("ngfwmj").value=formData[0].NGFWMJ;
+	          document.getElementById("ngfwdj").value=formData[0].NGFWDJ;
+	          document.getElementById("fwlx").value=formData[0].FWLX;
+	          document.getElementById("esfsyns").value=formData[0].ESFSYNS;
+	          document.getElementById("fl").value=formData[0].FL;
+	          document.getElementById("gflx").value=formData[0].GFLX;
+              document.getElementById("jtykzpsr").value=formData[0].JTYKZPSR;
+              document.getElementById("yyyhdzjbl").value=formData[0].YYYHDZJBL;
+              document.getElementById("wxxqjk").value=formData[0].WXXQJK;
+              document.getElementById("gjjlxjnns").value=formData[0].GJJLXJNNS;
+              document.getElementById("gfrnl").value=formData[0].GFRNL;
 	        }
 	        
 	        tryCol();
         });
         
         function tryCol(){
-        	var tbybl1=document.getElementById("PTZZGMLMX1YBL1");
-        	var tbybl2= document.getElementById("PTZZGMLMX1YBL2");
-        	var jtykzpsr = Ext.getCmp("JTYKZPSR").getValue();
-        	var yyyhdzjbl = Ext.getCmp("YYYHDZJBL").getValue();
+        	tbybl1=document.getElementById("PTZZGMLMX1YBL1");
+            tbybl2= document.getElementById("PTZZGMLMX1YBL2");
+        	var jtykzpsr = document.getElementById("jtykzpsr").value;
+        	var yyyhdzjbl = document.getElementById("yyyhdzjbl").value;
         	var dqck = fillDQCK(jtykzpsr,yyyhdzjbl);
-        	Ext.getCmp("DQCK").setValue(dqck.toFixed(0));        	
-        	var ngfwmj = Ext.getCmp("NGFWMJ").getValue();
-	  		var ngfwdj = Ext.getCmp("NGFWDJ").getValue();
+        	document.getElementById("dqck").value=dqck.toFixed(0);        	
+        	var ngfwmj = document.getElementById("ngfwmj").value;
+	  		var ngfwdj = document.getElementById("ngfwdj").value;
 	  		var fwzjk = getFWZJK(ngfwmj,ngfwdj);
 	  		tbybl1.rows[2].cells[1].innerHTML=fwzjk.toFixed(0);
-	  		var zxjzwbl = Ext.getCmp("ZXJZWBL").getValue();
+	  		var zxjzwbl = document.getElementById("zxjzwbl").value;
 	  		var zxjzwk = getZXJZWK(fwzjk,zxjzwbl);
 	  		tbybl1.rows[3].cells[1].innerHTML=zxjzwk.toFixed(2);
-	  		var fwlx = Ext.getCmp("FWLX").getValue();
-	  		var qsyhs = Ext.getCmp("QSYHS").getValue();
-	  		var esfsynx = Ext.getCmp("ESFSYNS").getValue();
-	  		var yys = Ext.getCmp("YYS").getValue();
+	  		var fwlx = document.getElementById("fwlx").value;
+	  		var qsyhs = document.getElementById("qsyhs").value;
+	  		var esfsynx = document.getElementById("esfsyns").value;
+	  		var yys = document.getElementById("yys").value;
 	  		var gfxgfs = getGFXGFS(fwlx,fwzjk,qsyhs,esfsynx,yys);
 	  		tbybl1.rows[4].cells[1].innerHTML=gfxgfs.toFixed(2);
-	  		var sxf = Ext.getCmp("SXF").getValue();
-			var zjf = Ext.getCmp("ZJF").getValue();
+	  		var sxf = document.getElementById("sxf").value;
+			var zjf = document.getElementById("zjf").value;
 	  		var gfxgfy = getGFXGFY(fwlx,fwzjk,sxf,zjf);
 	  		tbybl1.rows[5].cells[1].innerHTML=gfxgfy.toFixed(2);
 	  		tbybl1.rows[1].cells[1].innerHTML=getGFZFY(fwzjk,zxjzwk,gfxgfs,gfxgfy).toFixed(0);
-	  		var gflx = Ext.getCmp("GFLX").getValue();
+	  		var gflx = document.getElementById("gflx").value;
 	  		var zdgfsf = getZDGFSF(gflx,fwzjk,ngfwmj);
 	  		tbybl1.rows[6].cells[1].innerHTML=zdgfsf.toFixed(0);
 	  		var zdzcfgked = getZDZCGFKED(zxjzwk,gfxgfs,gfxgfy,zdgfsf);
 	  		tbybl1.rows[7].cells[1].innerHTML=zdzcfgked.toFixed(0);
-	  		var yjcgjjbl = Ext.getCmp("YJCGJJBL").getValue();
+	  		var yjcgjjbl = document.getElementById("yjcgjjbl").value;
 	  		var yjcgjjed = getYJCGJJED(yjcgjjbl,jtykzpsr);
 	  		tbybl1.rows[8].cells[1].innerHTML=yjcgjjed.toFixed(2);
-	  		var wxxqjk = Ext.getCmp("WXXQJK").getValue();
+	  		var wxxqjk = document.getElementById("wxxqjk").value;
 	  		var kcsgfsfed = getKCSGFSFED(dqck,wxxqjk,zxjzwk,gfxgfs,gfxgfy);
 	  		tbybl1.rows[9].cells[1].innerHTML=kcsgfsfed.toFixed(0);
 	  		var yyygfzj = getYYYGFZJ(jtykzpsr,yyyhdzjbl,yjcgjjed);
@@ -390,20 +259,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  		tbybl1.rows[12].cells[1].innerHTML=sydkje.toFixed(0);
 	  		var sydkyld = getSYDKYLD(fwzjk,kcsgfsfed,sydkje);
 	  		tbybl1.rows[13].cells[1].innerHTML=(sydkyld*100).toFixed(0)+"%";
-	  		var fl = Ext.getCmp("FL").getValue();
-	  		var gfrnl = Ext.getCmp("GFRNL").getValue();
+	  		var fl = document.getElementById("fl").value;
+	  		var gfrnl = document.getElementById("gfrnl").value;
 	  		var gjjdkyjnx = getGJJDKYJNX(fl,gfrnl);
 	  		tbybl2.rows[4].cells[1].innerHTML=gjjdkyjnx;
 	  		var sydkyjnx = getSYDKYJNX(fl);
 	  		tbybl2.rows[5].cells[1].innerHTML=sydkyjnx;
-	  		var gjjdkll = Ext.getCmp("GJJDKLL").getValue();
+	  		var gjjdkll = document.getElementById("gjjdkll").value;
 	  		var gjjzdyg = getGJJZDYG(gjjdkll,gjjdkje,gjjdkyjnx);
 	  		tbybl2.rows[4].cells[3].innerHTML=gjjzdyg.toFixed(4);
-	  		var sydkjzll = Ext.getCmp("SYDKJZLL").getValue()*1;
-			var sydkllfd = Ext.getCmp("SYDKLLFD").getValue()*1;
+	  		var sydkjzll = document.getElementById("sydkjzll").value*1;
+			var sydkllfd = document.getElementById("sydkllfd").value*1;
 	  		var sydkzdyg = getSYDKZDYG(sydkje,sydkjzll,sydkllfd,sydkyjnx);
 	  		tbybl2.rows[5].cells[3].innerHTML=sydkzdyg.toFixed(4);
-	  		var jkhkqx = Ext.getCmp("JKHKQX").getValue();
+	  		var jkhkqx = document.getElementById("jkhkqx").value;
 	  		var myylcjk = getMYYLCHK(wxxqjk,jkhkqx);
 	  		tbybl2.rows[6].cells[2].innerHTML=myylcjk.toFixed(4);
 	  		var result1 = getResult1(kcsgfsfed,zdgfsf);
@@ -412,14 +281,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  		tbybl2.rows[3].cells[3].innerHTML=yhkzjhj.toFixed(4);
 	  		tbybl2.rows[2].cells[0].innerHTML=getResult2(yyygfzj,yhkzjhj);
 	  		var sfje = tbybl2.rows[8].cells[1].innerHTML;
-	  	    var gjjlxjnns = Ext.getCmp("GJJLXJNNS").getValue();
+	  	    var gjjlxjnns = document.getElementById("gjjlxjnns").value;
 	  		var gjjdkje2 = getGJJDKJE2(gjjlxjnns,fwzjk,sfje);
-	  		tbybl1.rows[14].cells[1].innerHTML=gjjdkje2;
+	  		//tbybl1.rows[14].cells[1].innerHTML=gjjdkje2;
 	  		var gjjdknx = tbybl2.rows[8].cells[3].innerHTML;
 	  		var mychgjjbx = getMYCHGJJBX(gjjdkje2,gjjdkll,gjjdknx);
 	  		tbybl2.rows[11].cells[1].innerHTML=mychgjjbx.toFixed(4);
-	  		var sydkje2 = getSYDKJE2(fwzjk,sfje,gjjdkje2);
-	  		tbybl1.rows[15].cells[1].innerHTML=sydkje2;
+	  		var sydkje2 = getSYDKJE2(fwzjk,sfje,gjjdkje2).toFixed(0);
+	  		//tbybl1.rows[15].cells[1].innerHTML=sydkje2;
 	  		var sydknx = tbybl2.rows[9].cells[1].innerHTML;
 	  		var mychsydkbx = getMYCHSYDKBX(sydkjzll,sydkllfd,sydkje2,sydknx);
 	  		tbybl2.rows[12].cells[1].innerHTML=mychsydkbx.toFixed(4);
@@ -546,7 +415,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         		if(esfsynx>=5){
         			return fwzjk*qsyhs;
         		}else{
-        			return fwzjk*(qsyhs+yys);
+        			return fwzjk*(qsyhs*1+yys*1);
         		}
         	}
         }
@@ -555,7 +424,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         	if(fwlx=="新房"){
         		return fwzjk*sxf;
         	}else{
-        		return fxwjk*(sxf+zjf);
+        		return fwzjk*(sxf*1+zjf*1);
         	}
         }
         
@@ -586,25 +455,139 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         function getKCSGFSFED(dqck,wxxqjk,zxjzwk,gfxgfs,gfxgfy){
         	return dqck+wxxqjk-zxjzwk-gfxgfs-gfxgfy;
         }
+        function CheckClick(check){
+        	if(check=="checkcl"){
+        		if(tbcl.style.display==""){
+        			tbcl.style.display="none"; 
+        		}else{
+        			tbcl.style.display=""; 
+        		}
+        	}else if(check=="checkbl"){
+        		if(tbbl.style.display==""){
+        			tbbl.style.display="none"; 
+        		}else{
+        			tbbl.style.display=""; 
+        		}
+        	}else if(check=="checkybl1"){
+        		if(tbybl1.style.display==""){
+        			tbybl1.style.display="none"; 
+        		}else{
+        			tbybl1.style.display=""; 
+        		}
+        	}else {
+        		if(tbybl2.style.display==""){
+        			tbybl2.style.display="none"; 
+        		}else{
+        			tbybl2.style.display=""; 
+        		}
+        	}
+        }
+        function textChange(){
+        	tryCol();
+        }
+        
+        function save(){
+        	Sava_CL();
+        	Sava_BL();
+        }
+        function Sava_CL(){
+        	putClientCommond("ptzzgmlCL","Sava_CL");
+        	putRestParameter("ZXJZWBL",document.getElementById("zxjzwbl").value);
+	       	putRestParameter("QSYHS",document.getElementById("QSYHS").value);
+	       	putRestParameter("YYS",document.getElementById("yys").value);
+	       	putRestParameter("SXF",document.getElementById("sxf").value);
+	       	putRestParameter("ZJF",document.getElementById("zjf").value);
+	       	putRestParameter("JKHKQX",document.getElementById("jkhkqx").value);
+	       	putRestParameter("GJJDKZGED",document.getElementById("gjjdkzged").value);
+	       	putRestParameter("DKNXNLYQSX",document.getElementById("dknxnlyqsx").value);
+	       	putRestParameter("YJCGJJBL",document.getElementById("yjcgjjbl").value);
+	       	putRestParameter("DKZGNX",document.getElementById("dkzgnx").value);
+	       	putRestParameter("GJJDKLL",document.getElementById("gjjdkll").value);
+	       	putRestParameter("SYDKJZLL",document.getElementById("sydkjzll").value);
+	       	putRestParameter("SYDKLLFD",document.getElementById("sydkllfd").value);
+        	return restRequest();
+        }
+        
+        function Sava_BL(){
+        	putClientCommond("ptzzgmlCL","Sava_BL");
+        	putRestParameter("NGFWMJ",document.getElementById("ngfwmj").value);
+	          putRestParameter("NGFWDJ",document.getElementById("ngfwdj").value);
+	          putRestParameter("FWLX",document.getElementById("fwlx").value);
+	          putRestParameter("ESFSYNS",document.getElementById("esfsyns").value);
+	          putRestParameter("FL",document.getElementById("fl").value);
+	          putRestParameter("GFLX",document.getElementById("gflx").value);
+              putRestParameter("JTYKZPSR",document.getElementById("jtykzpsr").value);
+              putRestParameter("YYYHDZJBL",document.getElementById("yyyhdzjbl").value);
+              putRestParameter("WXXQJK",document.getElementById("wxxqjk").value);
+              putRestParameter("GJJLXJNNS",document.getElementById("gjjlxjnns").value);
+              putRestParameter("GFRNL",document.getElementById("gfrnl").value);
+        	return restRequest();
+        }
         </script>
      </head>
   <body >
   	<div id="fixed" style="position: fixed; top: 5px; left: 0px">
 		<img src="base/form/images/print.png" width="20px" height="20px" onClick="print()" >
+		<input type="checkbox" name="checkcl" checked="checked" onclick="CheckClick('checkcl');"/>常量
+		<input type="checkbox" name="checkbl" checked="checked" onclick="CheckClick('checkbl');"/>自变量
+		<input type="checkbox" name="checkybl1" checked="checked" onclick="CheckClick('checkybl1');"/>因变量1
+		<input type="checkbox" name="checkybl2" checked="checked" onclick="CheckClick('checkybl2');"/>因变量2
+	<div>
+    	<input type="button" value="保存" onclick="save();"/>
+    	</div>
 	</div>
-    <div id="form" style="float:left" ></div>
+    
 	<div>
 	  <table width="1305" height="60" style="background-color: #FFFFFF;font-size: 30px">
 	   <tr><td><h1>北京地区普通住宅房屋购买能力综合分析模型1</h1></td></tr>
 	  </table>
 	</div>
-	<div class="div1" id="clparaform"></div>
+	<!--<div class="div1" id="clparaform"></div>-->
+	<div class="div1">
+		<table width="240" border="1" id="tbcl">
+			<tr class="tr01"><td colspan="2">购房常规涉及参数（常量）</td></tr>
+			<tr class="tr11"><td width="180">装修及置物比例</td><td><input name="zxjzwbl" class="text" onkeyup="textChange();"/></td></tr>
+			<tr class="tr11"><td width="180">契税、印花税</td><td><input name="qsyhs" class="text" onkeyup="textChange();"/></td></tr>
+			<tr class="tr11"><td width="180">营业税</td><td><input name="yys" class="text" onkeyup="textChange();"/></td></tr>
+			<tr class="tr11"><td width="180">手续费</td><td><input name="sxf" class="text" onkeyup="textChange();"/></td></tr>
+			<tr class="tr11"><td width="180">中介费</td><td><input name="zjf" class="text" onkeyup="textChange();"/></td></tr>
+			<tr class="tr11"><td width="180">借款还款期限</td><td><input name="jkhkqx" class="text" onkeyup="textChange();"/></td></tr>
+			<tr class="tr11"><td width="180">公积金贷款最高额度</td><td><input name="gjjdkzged" class="text" onkeyup="textChange();"/></td></tr>
+			<tr class="tr11"><td width="180">贷款年限年龄要求上限</td><td><input name="dknxnlyqsx" class="text" onkeyup="textChange();"/></td></tr>
+			<tr class="tr11"><td width="180">月缴存公积金比例</td><td><input name="yjcgjjbl" class="text" onkeyup="textChange();"/></td></tr>
+			<tr class="tr11"><td width="180">贷款最高年限</td><td><input name="dkzgnx" class="text" onkeyup="textChange();"/></td></tr>
+			<tr class="tr11"><td width="180">公积金贷款利率</td><td><input name="gjjdkll" class="text" onkeyup="textChange();"/></td></tr>
+			<tr class="tr11"><td width="180">商业贷款基准利率</td><td><input name="sydkjzll" class="text" onkeyup="textChange();"/></td></tr>
+			<tr class="tr11"><td width="180">商业贷款利率浮动</td><td><input name="sydkllfd" class="text" onkeyup="textChange();"/></td></tr>
+		</table>
+	</div>
+	<div class="div2">
+		<table width="240" border="1" id="tbbl">
+			<tr class="tr01"><td colspan="2">拟购住宅房屋情况（自变量1）</td></tr>
+			<tr><td width="180" class="tr02">拟购房屋面积</td><td class="tr06"><input name="ngfwmj" class="text02" onkeyup="textChange();"/></td></tr>
+			<tr><td width="180" class="tr02">拟购房屋单价</td><td class="tr06"><input name="ngfwdj" class="text02" onkeyup="textChange();"/></td></tr>
+			<tr><td width="180" class="tr02">房屋类型</td><td class="tr06"><input name="fwlx" class="text02" onkeyup="textChange();"/></td></tr>
+			<tr><td width="180" class="tr02">二手房使用年数</td><td class="tr06"><input name="esfsyns" class="text02" onkeyup="textChange();"/></td></tr>
+			<tr><td width="180" class="tr02">房龄</td><td class="tr06"><input name="fl" class="text02" onkeyup="textChange();"/></td></tr>
+			<tr><td width="180" class="tr02">购房类型</td><td class="tr06"><input name="gflx" class="text02" onkeyup="textChange();"/></td></tr>
+			<tr class="tr04"><td colspan="2">购房人基本情况模块（自变量2）</td></tr>
+			<tr><td width="180" class="tr02">家庭月可支配收入</td><td class="tr06"><input name="jtykzpsr" class="text02" onkeyup="textChange();"/></td></tr>
+			<tr><td width="180" class="tr02">月用于还贷资金比例</td><td class="tr06"><input name="yyyhdzjbl" class="text02" onkeyup="textChange();"/></td></tr>
+			<tr><td width="180" class="tr02">当前存款</td><td class="tr06"><input name="dqck" class="text02" onkeyup="textChange();"/></td></tr>
+			<tr><td width="180" class="tr02">无息限期借款</td><td class="tr06"><input name="wxxqjk" class="text02" onkeyup="textChange();"/></td></tr>
+			<tr><td width="180" class="tr02">公积金连续缴纳年数</td><td class="tr06"><input name="gjjlxjnns" class="text02" onkeyup="textChange();"/></td></tr>
+			<tr><td width="180" class="tr02">购房人年龄</td><td class="tr06"><input name="gfrnl" class="text02" onkeyup="textChange();"/></td></tr>
+		</table>
+	</div>
+	<!-- 
 	<div class="div2" id="bl1paraform"></div>
+	 -->
 	<div class="div3">
 		<%=new CBDReportManager().getReport("PTZZGMLMX1YBL1")%>
 	</div>
 	<div class="div4">
 		<%=new CBDReportManager().getReport("PTZZGMLMX1YBL2")%>
 	</div>
+	
   </body>
 </html>
