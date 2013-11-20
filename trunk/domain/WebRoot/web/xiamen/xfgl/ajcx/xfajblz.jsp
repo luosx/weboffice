@@ -119,7 +119,7 @@
 			var wfInsId=myData[id].WFINSID;
 			var yw_guid=myData[id].YW_GUID;
 			var zfjcType="10";
-			var returnPath="web/xiamen/xfgl/yb/xfybaj.jsp";
+			var returnPath="web/xiamen/xfgl/ajcx/xfcxTab.jsp";
 			var buttonHien = "delete,la,back,tran";
 			var url='<%=basePath%>model/workflow/wf.jsp?yw_guid='+yw_guid+'&wfInsId='+wfInsId+'&zfjcType='+zfjcType+'&returnPath='+returnPath+'&zfjcName=信访举报&buttonHidden='+buttonHien;  
 			//window.open(url); 
