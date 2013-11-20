@@ -66,7 +66,7 @@
 <div style="margin:20px" class="tablestyle1" align="center" />
 <div align="center"><h4>厦门市国土资源与房产管理局12336违法举报登记处理表</h4></div><br/>
 <form method="post">
-<div style="width: 300px">登记号：厦国土房值班举【2013】<input class="noborder" name="bh" id="bh" style="width: 20px"/>号</div>
+<div style="width: 300px">登记号：厦国土房值班举【20<input class="noborder" name="bn" id="bn" style="width: 20px"/>】<input class="noborder" name="bh" id="bh" style="width: 20px"/>号</div>
    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <div style="width: 300px">20<input class="noborder" name="n" id="n" style="width: 20px"/>年
