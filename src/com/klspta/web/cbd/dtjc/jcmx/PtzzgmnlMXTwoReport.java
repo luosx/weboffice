@@ -69,7 +69,8 @@ public class PtzzgmnlMXTwoReport extends AbstractBaseBean implements IDataClass{
 	private TRBean buildTitle(List<Map<String,Object>> list){
 		TRBean trb = new TRBean();
         trb.setCssStyle("tr01");
-        TDBean td = new TDBean("", "90", "");
+        TDBean td = new TDBean("", "170", "");
+        td.setStyle("td00");
         trb.addTDBean(td);
         for (int i = 0; i < list.size(); i++) {
             td = new TDBean(list.get(i).get("MJ").toString(), "90", "");

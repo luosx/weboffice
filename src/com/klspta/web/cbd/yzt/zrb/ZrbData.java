@@ -114,5 +114,4 @@ public class ZrbData extends AbstractBaseBean implements IData {
             zrbList.set(num,map);
         }
     }
-    
 }

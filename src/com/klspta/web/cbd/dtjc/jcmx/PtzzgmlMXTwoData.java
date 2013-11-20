@@ -20,7 +20,9 @@ public class PtzzgmlMXTwoData extends AbstractBaseBean{
 		try{
 	    	String SRKYYGFBL=request.getParameter("SRKYYGFBL");
 	    	String FWLX=request.getParameter("FWLX");
+	    	FWLX= new String(FWLX.getBytes("iso-8859-1"),"utf-8");
 	    	String GFLX=request.getParameter("GFLX");
+	    	GFLX = new String(GFLX.getBytes("iso-8859-1"),"utf-8");
 	    	String SFGFK=request.getParameter("SFGFK");
 	    	String ZXJZWZJBL=request.getParameter("ZXJZWZJBL");
 	    	String QSYHS=request.getParameter("QSYHS");
@@ -32,7 +34,7 @@ public class PtzzgmlMXTwoData extends AbstractBaseBean{
 	    	String SYDKLLFD=request.getParameter("SYDKLLFD");
 	    	String YCKSJ=request.getParameter("YCKSJ");
 	    	String ZDCK=request.getParameter("ZDCK");
-	        String sql="update BBD_PARAMETER set SRKYYGFBL=?,FWLX=?,GFLX=?,SFGFK=?,ZXJZWZJBL=?,QSYHS=?,GJJDKZGED=?,DKZGNX=?,GJJJNBL=?,GJJDKLL=?,SYDKJZLL=?,SYDKLLFD=?,YCKSJ=?,ZDCK=?";
+	        String sql="update GMLMX1_PARAMETER set SRKYYGFBL=?,FWLX=?,GFLX=?,SFGFK=?,ZXJZWZJBL=?,QSYHS=?,GJJDKZGED=?,DKZGNX=?,GJJJNBL=?,GJJDKLL=?,SYDKJZLL=?,SYDKLLFD=?,YCKSJ=?,ZDCK=?";
 	        update(sql,YW,new Object[]{SRKYYGFBL,FWLX,GFLX,SFGFK,ZXJZWZJBL,QSYHS,GJJDKZGED,DKZGNX,GJJJNBL,GJJDKLL,SYDKJZLL,SYDKLLFD,YCKSJ,ZDCK});
 	        response("true");
 	    	}catch(Exception e){

@@ -47,13 +47,15 @@ public class Jzmjbbdfx extends AbstractBaseBean implements IDataClass {
     private TRBean buildTitle(List<Map<String, Object>> ndList) {
         TRBean trb = new TRBean();
         trb.setCssStyle("tr01");
-        TDBean td = new TDBean("储备/投资", "110", "");
+        TDBean td = new TDBean("", "130", "");
+        td.setStyle("td00");
         trb.addTDBean(td);
         for (int i = 10; i <21; i++) {
             td = new TDBean(i+"", "70", "");
             trb.addTDBean(td);
         }
-        td = new TDBean("投资/入市", "110", "");
+        td = new TDBean("", "130", "");
+        td.setStyle("td01");
         trb.addTDBean(td);
         return trb;
     }
@@ -93,6 +95,8 @@ public class Jzmjbbdfx extends AbstractBaseBean implements IDataClass {
     }
     public void saveBBDpara(){
     	try{
+    	String lmbbdstring = request.getParameter("LMBBDSTRING");
+    	updateLMBBD(lmbbdstring);
     	String JSQ=request.getParameter("JSQ");
     	String JSQLL=request.getParameter("JSQLL");
     	String JSQSFL=request.getParameter("JSQSFL");
@@ -114,6 +118,17 @@ public class Jzmjbbdfx extends AbstractBaseBean implements IDataClass {
     	}catch(Exception e){
             response("false");
     	}
-    	
+    }
+    
+    public void updateLMBBD(String lmbbdstring){
+    	String[] str = lmbbdstring.split(";");
+    	String sql = "";
+    	for(int i=0;i<str.length;i++){
+    		String[] keyvalue = str[i].split(":");
+    		sql = "update zfjc.JC_XIANGMU set lmbbd=? where  round(to_number(lmcb),1)*10000=?";
+    		update(sql, YW, new Object[]{keyvalue[1],Integer.parseInt(keyvalue[0])});
+    		sql = "update zfjc.JC_JIBEN set lmbbd=? where regexp_like(lmcb,'[0-9]') and round(to_number(lmcb)/1000,0)*1000=?";
+    		update(sql, YW, new Object[]{keyvalue[1],Integer.parseInt(keyvalue[0])});
+    	}
     }
 }
