@@ -9,6 +9,7 @@ String dtbzflag=request.getParameter("dtbzflag");
 //用来标识是不是外业巡查成果展现
 String flag=request.getParameter("flag");
 String yw_guid=request.getParameter("yw_guid");
+String year = request.getParameter("year");
 String pra = "";
 if(yw_guid==null||"null".equals(yw_guid)){
 	pra="dolocation=true&p={\"rings\":[[[38688372,4431495],[38688350,4431440],[38688372,4431390],[38688402,4431431],[38688430,4431431],[38688414,4431494],[38688372,4431495]]],\"spatialReference\":{\"wkid\":2362}}";
@@ -23,10 +24,14 @@ if(yw_guid==null||"null".equals(yw_guid)){
 	}else{
 		PADDataManager pDataList=new PADDataManager();
 		pra="dolocation=true&p="+pDataList.getCjzb(yw_guid);
-		System.out.println(pra+"==========================");		
 	}
 }
 String url=basePath+"base/fxgis/fx/FxGIS.html?debug=true";
+
+if(year != null && !"null".equals(year)){
+	pra = "initFunction=[{\"name\":\"findFeature\",\"parameters\":\"jz_yw,0,"+yw_guid+",OBJECTID\"}]";
+}
+
 if(flag!=null&&!flag.equals("null")||dtbzflag!=null&&!dtbzflag.equals("null")){
   url=basePath+"base/fxgis/fx/FxGIS.html?"+pra;
 }
