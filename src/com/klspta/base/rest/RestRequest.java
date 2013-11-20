@@ -80,7 +80,7 @@ public class RestRequest extends ApplicationObjectSupport{
     			}catch(Exception e){
     			    	PrintWriter out = null;
     			    	try {
-    						String msg = UtilFactory.getJSONUtil().objectToJSON("");
+    						String msg = UtilFactory.getJSONUtil().objectToJSON("{}");
     			            response.setContentType("text/html;charset=utf-8"); 
     			            out = new PrintWriter(new OutputStreamWriter(response.getOutputStream(), "UTF-8"));   
     			            out.println(msg); 
