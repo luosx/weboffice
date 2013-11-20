@@ -18,7 +18,7 @@
 	<head>
 		<base href="<%=basePath%>">
 
-		<title>信访案件待办理</title>
+		<title>信访案件已办结</title>
 
 		<meta http-equiv="pragma" content="no-cache">
 		<meta http-equiv="cache-control" content="no-cache">
@@ -59,7 +59,6 @@
 		    height=document.body.clientHeight;//高度
 		    sm = new Ext.grid.CheckboxSelectionModel({handleMouseDown:Ext.emptyFn});
 		    grid = new Ext.grid.GridPanel({
-		        title:'信访待办列表',
 		        store: store,
 		        columns: [
 		            //new Ext.grid.RowNumberer(),        
@@ -71,7 +70,7 @@
 		           {header: '举报主要问题',dataIndex:'JBZYWT',width: width*0.15, sortable: true},
 		            {header: '接收人',dataIndex:'JSR',width: width*0.15, sortable: true},
 		           {header: '案件办理状态',dataIndex:'AJBLZT',width: width*0.15, sortable: true},
-		           {header: '办理',dataIndex:'INDEX',width: width*0.05, sortable: false,renderer:pro}
+		           {header: '查看',dataIndex:'INDEX',width: width*0.05, sortable: false,renderer:pro}
 		        ],
 		        tbar:[
 		        	{xtype:'label',text:'快速查找:',width:60},
@@ -160,7 +159,7 @@
 		           {header: '举报主要问题',dataIndex:'JBZYWT',width: width*0.15, sortable: true},
 		            {header: '接收人',dataIndex:'JSR',width: width*0.15, sortable: true},
 		           {header: '案件办理状态',dataIndex:'AJBLZT',width: width*0.15, sortable: true},
-		           {header: '办理',dataIndex:'INDEX',width: width*0.05, sortable: false,renderer:pro}
+		           {header: '查看',dataIndex:'INDEX',width: width*0.05, sortable: false,renderer:pro}
         ]));
         grid.getBottomToolbar().bind(store);
         store.load({params:{start:0,limit:10}});  
