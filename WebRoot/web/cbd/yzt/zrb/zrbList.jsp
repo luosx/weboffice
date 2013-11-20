@@ -90,7 +90,7 @@
                 margins: '0 5 5 5',
         		hideHeaders: true,
 		        columns: [
-		           {header: '序号', dataIndex:'YW_GUID',width: width*0.08, sortable: false,renderer:changKeyword},       
+		           {header: '序号', dataIndex:'YW_GUID',width: width*0.1, sortable: false,renderer:changKeyword},       
 		           {header: '自然斑编号', dataIndex:'ZRBBH', width: width*0.1, sortable: false,renderer:changKeyword},
 		           {header: '占地面积', dataIndex:'ZDMJ', width: width*0.1, sortable: false, editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
 		           {header: '楼座面积', dataIndex:'LZMJ',width: width*0.09, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
