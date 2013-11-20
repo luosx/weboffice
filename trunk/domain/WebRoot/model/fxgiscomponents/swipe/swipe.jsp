@@ -12,6 +12,8 @@
 		<!--  <script type="text/javascript" src="<%=basePath%>/model/giscomponents/shutter/location.js"></script> -->
 		<%@ include file="/base/include/restRequest.jspf" %>
 		<!-- <script type="text/javascript" src="<%=basePath %>console/mapManage/mapTreeInfo.js"></script> -->
+		<script type="text/javascript" src="<%=basePath%>base/fxgis/framework/js/json2.js"></script>
+		
 		<style type="text/css">
 html,body {
 	font: normal 12px verdana;
@@ -25,21 +27,22 @@ html,body {
 	<script type="text/javascript">
 		var path = "<%=basePath%>";
 		var actionName = "mapconfig";
-		var actionMethod = "getMapProperties";
+		var actionMethod = "getMapServices";
 		var parameter = "";
 		var mapService = ajaxRequest(path, actionName, actionMethod, parameter);
-		var mapService = eval(mapService);
-		//var  mapService = stringToArray(mapServiceIds);
-		
+		var mapService = eval(mapService);		
+		var  mapService = stringToArray(mapService);
+		mapService = JSON.parse(mapService);			
 		function stringToArray(mapServiceid){
-			var array = new Array();
+			var str = '[';
 			for(var i = 0; i < mapServiceid.length; i++){
-				array[i]=new Array(); 
-		   		array[i][0]=mapServiceid[i].ID; 
-		   		array[i][1]=mapServiceid[i].ALIAS;
+				if(i==mapServiceid.length-1){
+					str+='{"VALUE":"'+mapServiceid[i].ID+'","TEXT":"'+ mapServiceid[i].ALIAS+'"}]'; 
+					break;
+				}
+		   		str+='{"VALUE":"'+ mapServiceid[i].ID+'","TEXT":"'+ mapServiceid[i].ALIAS+'"},'; 
 			}
-			
-			return array;
+			return str;
 		}
 	﻿﻿﻿﻿﻿Ext.onReady(function(){
 		var locationForm = new Ext.FormPanel({
