@@ -4,7 +4,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.klspta.base.AbstractBaseBean;
-import com.klspta.model.CBDReport.ReportExcel;
 
 public class JbbManager extends AbstractBaseBean{
 	
@@ -27,11 +26,11 @@ public class JbbManager extends AbstractBaseBean{
 	        }
 	}
 	 
-	public void getExcel(){
+	/*public void getExcel(){
 		HttpServletRequest request = this.request;
 		HttpServletResponse response = this.response;
-		ReportExcel jbbReport = new JbbReport();
+		JbbReport jbbReport = new JbbReport();
 		jbbReport.getExcel(request, response);
-	}
+	}*/
 
 }

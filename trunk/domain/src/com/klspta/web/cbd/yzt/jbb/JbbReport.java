@@ -1,11 +1,9 @@
 package com.klspta.web.cbd.yzt.jbb;
 
 import com.klspta.model.CBDReport.CBDReportManager;
-import com.klspta.model.CBDReport.ReportExcel;
 
-public class JbbReport extends ReportExcel {
+public class JbbReport {
 
-	@Override
 	protected String buildTable(String reportId) {
 		StringBuffer tableBuffer = new CBDReportManager().getReport(reportId);
 		String tableStyle = tableBuffer.toString();

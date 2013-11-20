@@ -169,7 +169,7 @@ public class PtzzgmlMXOneYBL2Report extends AbstractBaseBean implements IDataCla
 	}
 	private TRBean buildTitle1(){
 		TRBean trbean = new TRBean();
-		trbean.setCssStyle("tr01");
+		trbean.setCssStyle("tr04");
 		TDBean tdbean = new TDBean("资金结构、还款年限与月供分析","500","");
 		tdbean.setColspan("4");
 		trbean.addTDBean(tdbean);
