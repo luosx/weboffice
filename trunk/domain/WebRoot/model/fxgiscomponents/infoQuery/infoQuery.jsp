@@ -78,7 +78,7 @@ function chaxun(){
 parent.center.frames["lower"].swfobject.getObjectById("FxGIS").clear();
 	//获取选择的地图服务、输入的关键字
       //var dtService = locationForm.get('dtService').getValue();
-      var dtService="XZ_WP@0@JCBH,XMC@监测编号,县名称";
+      var dtService="jz_yw@0@监测编号,监测面积@监测编号,监测面积";
       var arr=dtService.split("@");
       var keywork = locationForm.get('keywork').getValue();
       keywork=keywork.replace(/[ ]/g,""); 
