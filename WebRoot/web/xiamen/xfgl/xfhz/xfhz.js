@@ -58,10 +58,9 @@ function initComponent() {
 	simple.render(document.body);
 }
 
-function query1() {
-	alert(1234);
+function query() {
 	var c1 = Ext.getCmp("dklx").getValue();
-	c1=escape(escape(c1));
+	 c1=escape(escape(c1));
 	var para ="jbxs="+c1;
 	document.frames('report').location=url+"&&condition="+para;
 	condition=para;
