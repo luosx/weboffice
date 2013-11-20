@@ -59,7 +59,7 @@ public class Djfx extends AbstractBaseBean implements IDataClass{
      * @param flag
      * @return
      */
-    private String getWkt(String points,String flag){
+    public String getWkt(String points,String flag){
         String[] zbs = null;
         Point p = null;
         Polygon polygon = new Polygon();
@@ -89,13 +89,13 @@ public class Djfx extends AbstractBaseBean implements IDataClass{
     }
     /**
      * 
-     * <br>Description:将84经纬度坐标转化为80平面坐标
+     * <br>Description:将80经纬度坐标转化为80平面坐标
      * <br>Author:王雷
      * <br>Date:2013-11-10
      * @param p
      * @return
      */
-    private Point transfer(Point p){
+    public Point transfer(Point p){
         ICoordinateChangeUtil coor = new CoordinateChangeUtil();
         Point point = coor.changePoint(p, ICoordinateChangeUtil.BL80_TO_PLAIN80);
         return point;
@@ -156,7 +156,7 @@ public class Djfx extends AbstractBaseBean implements IDataClass{
         list.add(trb3);         
         
         
-        List<Map<String,Object>> spList = analysis.analysis("XZ_SP", "XMMC,PFWH,SBSJ", wkt);
+        List<Map<String,Object>> spList = analysis.analysis("SP", "XMMC,PZWH,PZSJ", wkt);
         double mianji = 0;
         double temp = 0;
         if(spList!=null && spList.size()>0){
@@ -172,9 +172,9 @@ public class Djfx extends AbstractBaseBean implements IDataClass{
                 }
                 TDBean tdb41 = new TDBean(spMap.get("xmmc")==null?"&nbsp;":spMap.get("xmmc").toString(), "150", "20");
                 trb4.addTDBean(tdb41);
-                TDBean tdb42 = new TDBean(spMap.get("pfwh")==null?"&nbsp;":spMap.get("pfwh").toString(), "150", "20");
+                TDBean tdb42 = new TDBean(spMap.get("pzwh")==null?"&nbsp;":spMap.get("pzwh").toString(), "150", "20");
                 trb4.addTDBean(tdb42);
-                TDBean tdb43 = new TDBean(spMap.get("sbsj")==null?"&nbsp;":spMap.get("sbsj").toString(), "150", "20");
+                TDBean tdb43 = new TDBean(spMap.get("pzsj")==null?"&nbsp;":spMap.get("pzsj").toString(), "150", "20");
                 trb4.addTDBean(tdb43);
                 TDBean tdb44 = new TDBean(area, "150", "20");
                 trb4.addTDBean(tdb44);
@@ -249,7 +249,7 @@ public class Djfx extends AbstractBaseBean implements IDataClass{
         list.add(trb3);         
         
         
-        List<Map<String,Object>> gdList = analysis.analysis("XZ_GD", "XMMC,PZWH,PZYDRQ", wkt);
+        List<Map<String,Object>> gdList = analysis.analysis("GD", "XMMC,PZWH,PZYDRQ", wkt);
         double mianji = 0;
         double temp = 0;
         if(gdList!=null && gdList.size()>0){
@@ -336,7 +336,7 @@ public class Djfx extends AbstractBaseBean implements IDataClass{
         list.add(trb2);          
         
         
-        List<Map<String,Object>> ghList = analysis.analysis("XZ_GH", "TDYTQLXDM", wkt);
+        List<Map<String,Object>> ghList = analysis.analysis("GH_TDYTQ", "TDYTQLXDM", wkt);
         double fhghmj = 0;
         double bfhghmj = 0;
         double zyjbntmj = 0;
@@ -420,7 +420,7 @@ public class Djfx extends AbstractBaseBean implements IDataClass{
         list.add(trb2);         
         
         
-        List<Map<String,Object>> xzList = analysis.analysis("XZ_XZ", "TBBH,QSDWMC,DLBM,DLMC", wkt);
+        List<Map<String,Object>> xzList = analysis.analysis("XZ", "TBBH,QSDWMC,DLBM,DLMC", wkt);
         double nydmj = 0;
         double gengdmj = 0;
         double jsydmj = 0;
