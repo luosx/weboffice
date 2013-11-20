@@ -1,16 +1,16 @@
 <%@ page language="java" pageEncoding="utf-8"%>
-<%@page import="com.klspta.console.ManagerFactory"%>
 <%@page
 	import="org.springframework.security.core.context.SecurityContextHolder"%>
 <%@page import="com.klspta.console.user.User"%>
+
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
-    Object userprincipal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-    String userid = ((User)userprincipal).getUserID();
-    String xzqh = ManagerFactory.getUserManager().getUserWithId(userid).getXzqh();
+	Object principal = SecurityContextHolder.getContext()
+			.getAuthentication().getPrincipal();
+    String userid =((User) principal).getUserID();
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -34,23 +34,23 @@
 		var width;
 		var height;
 		Ext.onReady(function(){
-			 putClientCommond("xfAction","getXFEndList");
-			 putRestParameter("xzqh","<%=xzqh%>");
-			 myData = restRequest();
+			putClientCommond("XfjbManager","getXFEndList");
+			putRestParameter("userId","<%=userid%>");
+			myData = restRequest();
+			//myData=eval(myData);
 		    var store = new Ext.data.JsonStore({
 		    proxy: new Ext.ux.data.PagingMemoryProxy(myData),
 		       remoteSort:true,
 		        fields: [
-		           {name: 'BH'},
-		           {name: 'XSLX'},
 		           {name: 'JBR'},
-		           {name: 'JBFS'},
-		           {name: 'BJBDW'},
-		           {name: 'LXCZ'},
-		           {name: 'WTFSD'},
-		           {name: 'SLRQ'},
-		           {name: 'AJBLZT'},
-		           {name: 'INDEX'}
+		           {name: 'JBXS'},
+		           {name: 'LXDZ'},
+		           {name: 'JBSJ'},
+		           {name: 'LXDH'},
+		           {name: 'JBZYWT'},
+		           {name: 'JSR'},
+		            {name: 'INDEX'},
+		           {name: 'YW_GUID'}
 		        ]
 		    });
 		    
@@ -59,18 +59,19 @@
 		    height=document.body.clientHeight;//高度
 		    sm = new Ext.grid.CheckboxSelectionModel({handleMouseDown:Ext.emptyFn});
 		    grid = new Ext.grid.GridPanel({
-		        title:'信访已办结列表',
+		        title:'信访待办列表',
 		        store: store,
 		        columns: [
 		            //new Ext.grid.RowNumberer(),        
-		           {header: '编号',dataIndex:'BH',width: width*0.16, sortable: true},
-		           {header: '举报人',dataIndex:'JBR',width: width*0.08, sortable: true},
-		           {header: '举报方式',dataIndex:'JBFS',width: width*0.10, sortable: true},
-		           {header: '被举报单位',dataIndex:'BJBDW',width: width*0.15, sortable: true},
-		           {header: '问题发生地',dataIndex:'WTFSD',width: width*0.15, sortable: true},
-		           {header: '登记时间',dataIndex:'SLRQ',width: width*0.12, sortable: true},
+		           {header: '举报人',dataIndex:'JBR',width: width*0.1, sortable: true},
+		           {header: '举报形式',dataIndex:'JBXS',width: width*0.08, sortable: true},
+		           {header: '联系地址',dataIndex:'LXDZ',width: width*0.14, sortable: true},
+		           {header: '举报时间',dataIndex:'JBSJ',width: width*0.08, sortable: true},
+		           {header: '联系电话',dataIndex:'LXDH',width: width*0.08, sortable: true},
+		           {header: '举报主要问题',dataIndex:'JBZYWT',width: width*0.15, sortable: true},
+		            {header: '接收人',dataIndex:'JSR',width: width*0.15, sortable: true},
 		           {header: '案件办理状态',dataIndex:'AJBLZT',width: width*0.15, sortable: true},
-		           {header: '查看',dataIndex:'INDEX',width: width*0.05, sortable: false,renderer:pro}
+		           {header: '办理',dataIndex:'INDEX',width: width*0.05, sortable: false,renderer:pro}
 		        ],
 		        tbar:[
 		        	{xtype:'label',text:'快速查找:',width:60},
@@ -105,11 +106,11 @@
 		});
 
 		function pro(id){
-		 return "<a href='#'onclick='process("+id+");return false;'><img src='<%=basePath%>web/xuzhouNW/xfaj/images/view.png' alt='办理'></a>";
+		 return "<a href='#'onclick='process("+id+");return false;'><img src='<%=basePath%>web/xiamen/xfgl/image/view.png' alt='办理'></a>";
 		}
 
 		function process(id){
-		    var wfInsTaskId=myData[id].DBID_;
+		     var wfInsTaskId=myData[id].DBID_
 			var activityName=myData[id].ACTIVITY_NAME_;
 			var isFirst;
 			if(activityName=="受理立案"){
@@ -117,8 +118,8 @@
 			}
 			var wfInsId=myData[id].WFINSID;
 			var yw_guid=myData[id].YW_GUID;
-			var zfjcType="91";
-			var returnPath="web/xuzhouNW/xfaj/xfajend.jsp";;
+			var zfjcType="10";
+			var returnPath="web/xiamen/xfgl/yb/xfybaj.jsp";
 			var buttonHien = "delete,la,back,tran";
 			var url='<%=basePath%>model/workflow/wf.jsp?yw_guid='+yw_guid+'&wfInsId='+wfInsId+'&zfjcType='+zfjcType+'&returnPath='+returnPath+'&zfjcName=信访举报&buttonHidden='+buttonHien;  
 			//window.open(url); 
@@ -128,37 +129,38 @@
       function query(){
          var keyWord=Ext.getCmp('keyword').getValue();
          keyWord=keyWord.toUpperCase();
-         putClientCommond("xfAction","getXFEndList");
-          putRestParameter("xzqh","<%=xzqh%>");
+         putClientCommond("XfjbManager","getXFEndList");
+         putRestParameter("userId", "<%=userid%>");
          putRestParameter("keyWord",escape(escape(keyWord)));
-         var myData = restRequest(); 
+          myData = restRequest(); 
+          myData= eval(myData);
          var store = new Ext.data.JsonStore({
               proxy: new Ext.ux.data.PagingMemoryProxy(myData),
               remoteSort:true,
               fields: [
-           {name: 'BH'},
-           {name: 'XSLX'},
-           {name: 'JBR'},
-           {name: 'JBFS'},
-           {name: 'BJBDW'},
-           {name: 'LXCZ'},
-           {name: 'WTFSD'},
-           {name: 'SLRQ'},
-           {name: 'AJBLZT'},
-           {name: 'INDEX'}
+                   {name: 'JBR'},
+		           {name: 'JBXS'},
+		           {name: 'LXDZ'},
+		           {name: 'JBSJ'},
+		           {name: 'LXDH'},
+		           {name: 'JBZYWT'},
+		           {name: 'JSR'},
+		           {name: 'INDEX'},
+		           {name: 'YW_GUID'}
               ]
         });
         
         grid.reconfigure(store, new Ext.grid.ColumnModel([
-          //new Ext.grid.RowNumberer(),        
-         {header: '编号',dataIndex:'BH',width: width*0.16, sortable: true},
-         {header: '举报人',dataIndex:'JBR',width: width*0.08, sortable: true},
-         {header: '举报方式',dataIndex:'JBFS',width: width*0.10, sortable: true},
-         {header: '被举报单位',dataIndex:'BJBDW',width: width*0.15, sortable: true},
-         {header: '问题发生地',dataIndex:'WTFSD',width: width*0.15, sortable: true},
-         {header: '登记时间',dataIndex:'SLRQ',width: width*0.15, sortable: true},
-         {header: '问题发生时间',dataIndex:'AJBLZT',width: width*0.15, sortable: true},
-         {header: '查看',dataIndex:'INDEX',width: width*0.05, sortable: false,renderer:pro}
+           //new Ext.grid.RowNumberer(),        
+		           {header: '举报人',dataIndex:'JBR',width: width*0.1, sortable: true},
+		           {header: '举报形式',dataIndex:'JBXS',width: width*0.08, sortable: true},
+		           {header: '联系地址',dataIndex:'LXDZ',width: width*0.14, sortable: true},
+		           {header: '举报时间',dataIndex:'JBSJ',width: width*0.08, sortable: true},
+		           {header: '联系电话',dataIndex:'LXDH',width: width*0.08, sortable: true},
+		           {header: '举报主要问题',dataIndex:'JBZYWT',width: width*0.15, sortable: true},
+		            {header: '接收人',dataIndex:'JSR',width: width*0.15, sortable: true},
+		           {header: '案件办理状态',dataIndex:'AJBLZT',width: width*0.15, sortable: true},
+		           {header: '办理',dataIndex:'INDEX',width: width*0.05, sortable: false,renderer:pro}
         ]));
         grid.getBottomToolbar().bind(store);
         store.load({params:{start:0,limit:10}});  
