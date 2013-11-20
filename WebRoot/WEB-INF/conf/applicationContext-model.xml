@@ -44,4 +44,6 @@
 	
 		<!-- shape导入 -->
 	<bean name="parseShapefile" class="com.klspta.model.parseShapefile.ParseShapefile" scope="prototype"/>
+			<!-- 属性分析 -->
+	<bean id="proanalyse" class="com.klspta.model.analysis.PropertyAnalyse" scope="prototype"/>	
 </beans>   
