@@ -275,8 +275,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     var year=tb.rows[0].cells[j].innerHTML;
                     var cbcb=tb.rows[i].cells[0].innerHTML;
                     tb.rows[i].cells[j].innerHTML=rent(year,cbcb);
-                    if(i==Math.round(tb.rows.length/2)||j==Math.round((tb.rows[0].cells.length-1)/2)){
-                     tb.rows[i].cells[j].style.backgroundColor="green"; 
+                    if(i%3==0){
+                     tb.rows[i].cells[j].style.backgroundColor="#C5D9F1"; 
                     }else{
                      tb.rows[i].cells[j].style.backgroundColor="white"; 
                     }              
