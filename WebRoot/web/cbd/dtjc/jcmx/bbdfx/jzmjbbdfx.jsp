@@ -64,6 +64,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     line-height: 20px;
     text-align:center;
    }
+   .td00{
+   background-color:#C0C0C0;
+   background-image: url("<%=basePath%>/web/cbd/framework/images/titlebbd.jpg") ;
+   background-repeat: no-repeat;
+   /**
+   	 filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='<%=basePath%>/web/cbd/framework/images/titlebbd.jpg',izingMethod='scale');
+   **/
+   }
+   .td01{
+    background-color:#C0C0C0;
+   background-image: url("<%=basePath%>/web/cbd/framework/images/titlebbd1.jpg") ;
+   background-repeat: no-repeat;
+   }
    .tr01{
     background-color:#C0C0C0;
     font-weight:bold;
@@ -106,6 +119,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</style>
   </head>
     <script type="text/javascript">
+        var tb;
         Ext.onReady(function(){
            var f=new Ext.form.FormPanel({
               renderTo:"paraform",
@@ -224,8 +238,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	              test();
         });
         
+        function getLMBBD(){
+        	var lmbbddstring = "";
+        	for(var i=1;i<tb.rows.length;i++){
+        		lmbbddstring += tb.rows[i].cells[12].innerHTML+":"+tb.rows[i].cells[6].innerHTML+";";
+        	}
+        	lmbbdstring = lmbbddstring.substring(0,lmbbddstring.length-1);
+        	return lmbbdstring;
+        }
+        
         function modifyForm(){
         	  putClientCommond("jzmjbbdfx","saveBBDpara");
+        	  putRestParameter("LMBBDSTRING",getLMBBD());
         	  putRestParameter("JSQ",Ext.getCmp("JSQ").getValue());
 			  putRestParameter("JSQLL",Ext.getCmp("JSQLL").getValue());
 			  putRestParameter("JSQSFL",Ext.getCmp("JSQSFL").getValue());
@@ -245,7 +269,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             }
         
         function test(){
-              var tb=document.getElementById("JZMJBBDFX");
+              tb=document.getElementById("JZMJBBDFX");
               for(var i=1;i<tb.rows.length;i++){
                  for(var j=1;j<tb.rows[0].cells.length-1;j++){
                     var year=tb.rows[0].cells[j].innerHTML;

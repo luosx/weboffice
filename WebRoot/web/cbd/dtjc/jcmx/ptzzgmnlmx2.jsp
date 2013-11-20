@@ -64,6 +64,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     line-height: 20px;
     text-align:center;
    }
+   .td00{
+   	background-image: url("<%=basePath%>/web/cbd/framework/images/titlegmlmx2.jpg");
+   	background-repeat: repeat -xy;
+   }
    .tr01{
     background-color:#C0C0C0;
     font-weight:bold;
@@ -71,6 +75,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     text-align:center;
     line-height: 50px;
 	margin-top: 3px;  
+	
    }
    .tr02{
     background-color:#FFFF99;
@@ -135,18 +140,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		}
   </script>
   <script type="text/javascript">
+        var tb;
         Ext.onReady(function(){
            var f=new Ext.form.FormPanel({
               renderTo:"paraform",
               title:"购房常规涉及参数",
               height: 500,
-              width: 300,
+              width: 260,
               labelWidth: 160,
               labelAlign: "center",
               frame: true,
               defaults:{
                  xtype:"textfield",
-                 width:120
+                 width:80
               },
               items: [
               	 {id: "SRKYYGFBL",fieldLabel:"收入可用于购房比例(50)"},
@@ -276,7 +282,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
          
          function fill(srkyygfbl,ycksj,zsjzwzjbl,qsyhs,gjjjnbl,fwlx,gflx,gjjdkzged,gjjdkll,sydkjzll,
                   sydkllfd,zdck,dkzgnx){
-         	var tb=document.getElementById("PTZZGMNL");
+         	tb=document.getElementById("PTZZGMNL");
          	var rows = tb.rows;
          	for(var i = 1;i<rows.length;i++){
          		var cells = rows[i].cells;

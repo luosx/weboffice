@@ -113,7 +113,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   <script type="text/javascript">
   		function print(){
-		    var curTbl = document.getElementById("report"); 
+		    var curTbl = document.getElementById("JDJH"); 
  			try{
 		    	var oXL = new ActiveXObject("Excel.Application");
 		    }catch(err){
