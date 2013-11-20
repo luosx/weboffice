@@ -152,6 +152,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               frame: true,
               defaults:{
                  xtype:"textfield",
+                 enableKeyEvents : true,
                  width:80
               },
               items: [
@@ -171,9 +172,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                  {id: "ZDCK", fieldLabel: "定最低存款（万元）"}
               ],
               buttons:[{
-                 text:"试算",
-                 handler: tryCol
-              }, {
                  text:"保存",
                  handler: function(){
                       var res=save();
