@@ -5,10 +5,64 @@ import java.util.List;
 import java.util.Map;
 
 import com.klspta.base.AbstractBaseBean;
+import com.klspta.base.wkt.Point;
 
 public class PropertyAnalyse extends AbstractBaseBean {
     DecimalFormat df=new DecimalFormat("0.##"); 
-    
+    public void showInfo(){
+        String zb = request.getParameter("point");
+        String x = zb.split(",")[0];
+        String y = zb.split(",")[1];
+        Point p = new Point(x,y);
+        //ICoordinateChangeUtil coor = new CoordinateChangeUtil();
+        //Point point = coor.changePoint(p, ICoordinateChangeUtil.BL80_TO_PLAIN80);     
+        String wkt = p.toWKT();
+        StringBuffer ms = new StringBuffer("<table cellpadding='0' cellspacing='0'>");        
+        String sql = "select t.shape.srid srid from sp t where rownum =1 ";
+        List<Map<String, Object>> ls = query(sql,GIS);
+        String srid = "";
+        if(ls.size()>0){
+            srid = (ls.get(0)).get("srid").toString();
+        }                
+        sql = "select * from sp t where sde.st_contains (t.shape,sde.st_geometry(?,?))=1";       
+        ls = query(sql,GIS,new Object[]{wkt,srid});  
+        ms.append("<tr><td>审批情况：</td>");
+        if (ls.size() > 0) {
+            Map<String, Object> map = ls.get(0);
+            ms.append("<td><SPAN style='COLOR:green'>已审批:").append(map.get("xmmc")).append("</SPAN></td></tr>");
+        } else {
+            ms.append("<td><SPAN style='COLOR:red'>未审批</SPAN>").append("</td></tr>");
+        }       
+        sql = "select * from gd t where sde.st_contains (t.shape,sde.st_geometry(?,?))=1";       
+        ls = query(sql,GIS,new Object[]{wkt,srid});
+        ms.append("<tr><td>供地情况：</td>");
+        if (ls.size() > 0) {
+            Map<String, Object> map = ls.get(0);
+            ms.append("<td><SPAN style='COLOR:green'>已供地:").append(map.get("xmmc")).append("</SPAN></td></tr>");
+        } else {
+            ms.append("<td><SPAN style='COLOR:red'>未供地</SPAN>").append("</td></tr>");
+        }               
+        sql = "select * from gh_tdytq t where sde.st_contains (t.shape,sde.st_geometry(?,?))=1 and t.tdytqlxdm ='010'";       
+        ls = query(sql,GIS,new Object[]{wkt,srid});    
+        ms.append("<tr><td>规划情况：</td>");
+        if (ls.size() > 0) {
+            ms.append("<td><SPAN style='COLOR:red'>占用基本农田</SPAN>").append("</td></tr>");
+        } else {
+            ms.append("<td><SPAN style='COLOR:green'>未占用基本农田</SPAN>").append("</td></tr>");
+        }             
+        sql = "select substr(t.hsx,0,4) year from wp_2012 t where sde.st_contains (t.shape,sde.st_geometry(?,?))=1";
+        ls = query(sql,GIS,new Object[]{wkt,srid});
+        ms.append("<tr><td>卫片情况：</td>");
+        if (ls.size() > 0) {
+            Map<String, Object> map = ls.get(0);
+            ms.append("<td><SPAN style='COLOR:green'>发现"+map.get("year")+"年度卫片执法检查").append(
+                    "</SPAN></td></tr>");
+        }else {
+            ms.append("<td><SPAN style='COLOR:green'>年度卫片执法检查未发现</SPAN></td></tr>");
+        }
+        ms.append("</table>");
+        response(ms.toString());    
+    }    
     public void fenxi(){
         String points = request.getParameter("points");
         String flag = request.getParameter("flag");
