@@ -300,7 +300,7 @@ String xcbh = dtxc.buildXcbh();
   	<div align="center" style="margin-bottom:20px"><h1 style="font-size: 25">国土资源执法监察巡查日志</h1></div>
   	<form method="post">
   		<center>
-  		<div style="width: 100%;text-align:left;">
+  		<div style="width: 100%;text-align:center;">
 			<span style="font-size:14px;">巡查编号：<input type="text" name="xcbh" id="xcbh" readonly="readonly" value="<%=xcbh%>"
 					style="width: 150px; background-color: transparent; border: 0px;"></input>
 			</span>
