@@ -46,7 +46,7 @@ public class StartWorkflowXfjb extends AbstractBaseBean {
 		//3、response参数封装及跳转
 		String urlPath = "model/workflow/wf.jsp?yw_guid="
 				+ yw_guid + "&zfjcType=" + zfjcType + "&wfInsId=" + wfinsId
-				+ "&buttonHidden=la,return,back&zfjcName=信访举报&returnPath=web/xuzhouNW/xfaj/xfybaj.jsp";
+				+ "&buttonHidden=la,return,back&zfjcName=信访举报&returnPath=web/xiamen/xfgl/db/xfdbaj.jsp";
 		response(urlPath);
 	}
 	
