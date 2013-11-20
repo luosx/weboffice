@@ -3,6 +3,7 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 String yw_guid=request.getParameter("yw_guid");
+String year = request.getParameter("year");
 String dtbzflag=request.getParameter("dtbzflag");
 String flag=request.getParameter("flag");
 %>
@@ -57,7 +58,7 @@ Ext.onReady(function(){
 </script>
 	<body>
 		<iframe id="mapTree"  name="mapTree"  style="width: 100%; height: 100%;overflow: auto;" src="<%=basePath%>base/fxgis/framework/mapTree.jsp"></iframe>
-		<iframe id="center" name="center"  style="width: 100%; height:<%=yw_guid==null?100:100%>%;overflow: auto;border: 0px" src="menu.jsp?yw_guid=<%=yw_guid%>&flag=<%=flag%>&dtbzflag=<%=dtbzflag%>"></iframe>
+		<iframe id="center" name="center"  style="width: 100%; height:<%=yw_guid==null?100:100%>%;overflow: auto;border: 0px" src="menu.jsp?yw_guid=<%=yw_guid%>&flag=<%=flag%>&dtbzflag=<%=dtbzflag%>&year=<%=year%>"></iframe>
 		<iframe id="east"  name="east"  style="width: 100%; height: 100%;overflow: auto;" src=""></iframe>
 	</body>
 </html>
