@@ -36,7 +36,16 @@
 		<link rel="stylesheet"
 			href="<%=basePath%>base/form/css/commonForm.css" type="text/css" />
 		<%@ include file="/base/include/formbase.jspf"%>
-		<style> div{ display:inline} </style>
+		<style> 
+		div{ display:inline}
+		input {  BORDER-RIGHT: #ffffff 1px solid;
+		         BORDER-TOP: #ffffff 1px solid;
+		         FONT-SIZE: 14px;
+		         BORDER-LEFT: #ffffff 1px solid;
+		         COLOR: #ffffff ;
+		         BORDER-BOTTOM: #ffffff 1px solid;
+		         FONT-FAMILY:"宋体","Verdana"}
+		 </style>
 		<script>
 		function initEdit(){
 			init();
@@ -63,8 +72,8 @@
 	
 <body bgcolor="#FFFFFF">
 <div id="fixed" class="Noprn" style="position: fixed; top: 5px; left: 0px"></div>
-<div style="margin:20px" class="tablestyle1" align="center" />
-<div align="center"><h4>厦门市国土资源与房产管理局12336违法举报登记处理表</h4></div><br/>
+<div style="margin:20px" class="tablestyle1" align="center" /><br />
+<div align="center"><font style="font: bold 20px '黑体','微软雅黑' ">厦门市国土资源与房产管理局12336违法举报登记处理表</font></div><br/><br />
 <form method="post">
 <div style="width: 300px">登记号：厦国土房值班举【20<input class="noborder" name="bn" id="bn" style="width: 20px"/>】<input class="noborder" name="bh" id="bh" style="width: 20px"/>号</div>
    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
