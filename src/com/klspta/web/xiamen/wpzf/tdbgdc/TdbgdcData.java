@@ -12,8 +12,8 @@ public class TdbgdcData extends AbstractBaseBean implements ItdbgdcData {
 	public static final int XF_YXF = 1;
 	public static final int YGFX_YSWF = 0;
 	public static final int YGFX_HF = 1;
-	public static final int XCHC_YSWF = 0;
-	public static final int XCHC_HF = 1;
+	public static final String XCHC_YSWF = "违法";
+	public static final String XCHC_HF = "合法";
 	private static final String queryString = "(upper(t.JCBH)||upper(t.JCMJ)||upper(t.XZQMC)||upper(t.SPMJ)||upper(t.GDMJ)||upper(t.WPND)";
 	private String formName = "WP_TDBGDC";
 
@@ -76,18 +76,34 @@ public class TdbgdcData extends AbstractBaseBean implements ItdbgdcData {
 	}
 
 	@Override
-	public List<Map<String, Object>> getYhcHf(String userId) {
+	public List<Map<String, Object>> getYhcHf(String userId, String keyword) {
 		String xzq = editXzq(userId);
-		String sql = "select t.* from "+formName+" t where t.xchcqk = ? and t.xzqdm in ?";
-		List<Map<String, Object>> getList = query(sql, YW, new Object[]{String.valueOf(XCHC_HF), xzq});
+		StringBuffer sqlBuffer = new StringBuffer();
+		sqlBuffer.append("select t.* from "+formName+" t where t.xchcqk = '").append(XCHC_HF).append("' and t.xzqdm in ");
+		sqlBuffer.append(xzq);
+		if (keyword != null) {
+            keyword = UtilFactory.getStrUtil().unescape(keyword);
+             sqlBuffer.append(" and").append(queryString).append(" like '%");
+             sqlBuffer.append(keyword);
+             sqlBuffer.append("%')");
+        }
+		List<Map<String, Object>> getList = query(sqlBuffer.toString(), YW);
 		return getList;
 	}
 
 	@Override
-	public List<Map<String, Object>> getYhcWF(String userId) {
+	public List<Map<String, Object>> getYhcWF(String userId, String keyword) {
 		String xzq = editXzq(userId);
-		String sql = "select t.* from "+formName+" t where t.xchcqk = ? and t.xzqdm in ?";
-		List<Map<String, Object>> getList = query(sql, YW, new Object[]{String.valueOf(XCHC_YSWF), xzq});
+		StringBuffer sqlBuffer = new StringBuffer();
+		sqlBuffer.append("select t.* from "+formName+" t where t.xchcqk = '").append(XCHC_YSWF).append("' and t.xzqdm in ");
+		sqlBuffer.append(xzq);
+		if (keyword != null) {
+            keyword = UtilFactory.getStrUtil().unescape(keyword);
+             sqlBuffer.append(" and").append(queryString).append(" like '%");
+             sqlBuffer.append(keyword);
+             sqlBuffer.append("%')");
+        }
+		List<Map<String, Object>> getList = query(sqlBuffer.toString(), YW);
 		return getList;
 	}
 
