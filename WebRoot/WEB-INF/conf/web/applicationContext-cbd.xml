@@ -29,7 +29,8 @@
 	<bean name="proProgress" class="com.klspta.web.cbd.cbsycs.kfhdt.ProjectProgress" scope="prototype"/>
 	<!-- 统计数据-->
 	<bean name="staticData" class="com.klspta.web.cbd.cbsycs.tjsj.StatisData" scope="prototype"/>
-	
+	<!-- 统计报表-->
+	<bean name="staticReport" class="com.klspta.web.cbd.cbsycs.tjsj.StatisReport" scope="prototype"/>	
 	<!-- 开发体量管理类 -->
 	<bean name="kftlHandle" class=" com.klspta.web.cbd.plan.KftlHandler" scope="prototype"/> 
 	
