@@ -1,21 +1,21 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@page import="org.springframework.security.core.context.SecurityContextHolder"%>
 <%@page import="com.klspta.console.user.User"%>
-<%@page import="com.klspta.web.xiamen.wpzf.tdbgdc.TdbgdcManager"%> 
 <%@page import="com.klspta.web.xiamen.jcl.BuildDTPro"%>
+<%@page import="com.klspta.web.xiamen.wpzf.wpzf.WptbManager"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 	Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 	String userid = ((User)principal).getUserID();
-	String[][] showList = TdbgdcManager.showList_WHC;
+	String[][] showList = WptbManager.showList_WCL;
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
     <base href="<%=basePath%>">
-    <title>合法</title>
+    <title>为处理</title>
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
@@ -28,7 +28,7 @@
 		var grid;
 		Ext.onReady(function(){
 			//将是这个用户填写的巡查日志查询出来
-	  		putClientCommond("tdbgdc","getyshf");
+	  		putClientCommond("wptb","getWCLlist");
 		    putRestParameter("userid","<%=userid%>");
 			myData = restRequest();
 			store = new Ext.data.JsonStore({
@@ -51,12 +51,12 @@
 		        store: store,
 		        columns: [
 		        	new Ext.grid.RowNumberer(),
-			<%for(int i = 0; i < showList.length; i++){
+			<%for(int i = 0; i < showList.length - 1; i++){
 				if(!"hiddlen".equals(showList[i][2])){
 			%>
 				{header: '<%=showList[i][2]%>', dataIndex:'<%=showList[i][0]%>', width: width*<%=Float.parseFloat(showList[i][1])%>, sortable: true,renderer:changKeyword},
 			<%}}%>
-		       	{header: '处理', dataIndex:'<%=showList[0][0]%>', width: width*0.05, renderer:view}
+		        {header: '<%=showList[showList.length - 1][2]%>', dataIndex:'<%=showList[showList.length - 1][0]%>', width: width*<%=Float.parseFloat(showList[showList.length - 1][1])%>, sortable: true,renderer:changKeyword}
 		        ], 
 		        tbar:[
 	    			{xtype:'label',text:'快速查询:',width:60},
@@ -105,7 +105,7 @@
 		<!--查询方法 add by 姚建林 2013-6-20-->
         function query(){
            var keyWord=Ext.getCmp('keyword').getValue();
-  		   putClientCommond("tdbgdc","getyshf");
+  		   putClientCommond("wptb","getWCLlist");
 	       putRestParameter("userid","<%=userid%>");
            putRestParameter("keyword",escape(escape(keyWord)));
            var myData = restRequest(); 
@@ -148,16 +148,6 @@
              return val;
            }
          } 
-         	
-	function sure(){
-		alert("选择处理方式");
-		document.getElementById("choseway").style.display = "none";
-	}
-	
-	function cancel(){
-		alert("选择取消当前操作");
-		document.getElementById("choseway").style.display = "none";
-	}
 </script>
 </head>
 <body bgcolor="#FFFFFF" topmargin="0" leftmargin="0">
@@ -165,28 +155,5 @@
 	<div id="importWin" class="x-hidden">
 		<div id="importForm"></div>
 	</div>
-	<div id="choseway" style="position:absolute; height:100px; width:300px;display:none">
-		<table style="border:0; width:300px; height:100px; background-color:#D5E2F2" cellpadding="0" cellspacing="0">
-			<tr align="left">
-				<td>&nbsp;请选择处理方式:</td>
-			</tr>
-			<tr align="center">
-				<td>
-					<input type="radio" name="type" value="函告执法局" />函告执法局 &nbsp;&nbsp;&nbsp;
-					<input type="radio" name="type" value="立案处理" />立案处理
-				</td>
-			</tr>
-			<tr align="center">
-				<td>
-					<input type="button" value="确定" onClick="sure(); return false;" /> &nbsp;&nbsp;
-					<input type="button" value="取消" onClick="cancel(); return false;" />
-				</td>
-			</tr>
-		</table>
-	</div>
 </body>
-<script type="text/javascript">
-	document.getElementById("choseway").style.left = document.body.clientWidth/2 - 150;
-	document.getElementById("choseway").style.top = document.body.clientHeight/2 - 50;
-</script>
 </html>

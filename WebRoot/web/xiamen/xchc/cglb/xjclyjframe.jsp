@@ -2,7 +2,9 @@
 <%@page import="java.util.Map"%>
 <%@page import="java.util.Map.Entry"%>
 <%@page import="java.util.Iterator"%>
-
+<%@page import="org.springframework.security.core.context.SecurityContextHolder"%>
+<%@page import="com.klspta.console.user.User"%>
+<%@page import="com.klspta.web.xiamen.xchc.XchcData"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
@@ -13,6 +15,13 @@
 	edit = request.getParameter("edit");
 	StringBuffer sb = new StringBuffer();
 	Map maps = request.getParameterMap();
+	Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+	String userid = ((User)principal).getUserID();
+	if(!maps.containsKey("yw_guid")){
+		//yw_guid不存在时，创建一个新的yw_guid
+		String yw_guid = new XchcData().SetNewRecord(userid);
+		maps.put("yw_guid", yw_guid);
+	}
 	Iterator its = maps.entrySet().iterator();
 	while (its.hasNext()) {
 		Entry entry = (Entry) (its.next());

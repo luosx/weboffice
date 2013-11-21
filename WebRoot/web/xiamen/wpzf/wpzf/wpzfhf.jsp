@@ -148,16 +148,6 @@
              return val;
            }
          } 
-         	
-	function sure(){
-		alert("选择处理方式");
-		document.getElementById("choseway").style.display = "none";
-	}
-	
-	function cancel(){
-		alert("选择取消当前操作");
-		document.getElementById("choseway").style.display = "none";
-	}
 </script>
 </head>
 <body bgcolor="#FFFFFF" topmargin="0" leftmargin="0">
@@ -165,28 +155,5 @@
 	<div id="importWin" class="x-hidden">
 		<div id="importForm"></div>
 	</div>
-	<div id="choseway" style="position:absolute; height:100px; width:300px;display:none">
-		<table style="border:0; width:300px; height:100px; background-color:#D5E2F2" cellpadding="0" cellspacing="0">
-			<tr align="left">
-				<td>&nbsp;请选择处理方式:</td>
-			</tr>
-			<tr align="center">
-				<td>
-					<input type="radio" name="type" value="函告执法局" />函告执法局 &nbsp;&nbsp;&nbsp;
-					<input type="radio" name="type" value="立案处理" />立案处理
-				</td>
-			</tr>
-			<tr align="center">
-				<td>
-					<input type="button" value="确定" onClick="sure(); return false;" /> &nbsp;&nbsp;
-					<input type="button" value="取消" onClick="cancel(); return false;" />
-				</td>
-			</tr>
-		</table>
-	</div>
 </body>
-<script type="text/javascript">
-	document.getElementById("choseway").style.left = document.body.clientWidth/2 - 150;
-	document.getElementById("choseway").style.top = document.body.clientHeight/2 - 50;
-</script>
 </html>

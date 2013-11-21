@@ -28,7 +28,7 @@
 		var grid;
 		Ext.onReady(function(){
 			//将是这个用户填写的巡查日志查询出来
-	  		putClientCommond("tdbgdc","getyswf");
+	  		putClientCommond("tdbgdc","getwf");
 		    putRestParameter("userid","<%=userid%>");
 			myData = restRequest();
 			store = new Ext.data.JsonStore({
@@ -105,7 +105,7 @@
 		<!--查询方法 add by 姚建林 2013-6-20-->
         function query(){
            var keyWord=Ext.getCmp('keyword').getValue();
-  		   putClientCommond("tdbgdc","getyswf");
+  		   putClientCommond("tdbgdc","getwf");
 	       putRestParameter("userid","<%=userid%>");
            putRestParameter("keyword",escape(escape(keyWord)));
            var myData = restRequest(); 
