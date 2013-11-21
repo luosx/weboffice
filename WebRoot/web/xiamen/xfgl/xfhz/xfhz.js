@@ -60,10 +60,12 @@ function initComponent() {
 
 function query() {
 	var c1 = Ext.getCmp("dklx").getValue();
-	c1=escape(escape(c1));
+	if(c1!=null){
+	c1=escape(escape("'"+c1+"'"));
 	var para ="jbxs="+c1;
 	document.frames('report').location=url+"&&condition="+para;
 	condition=para;
+	}
 	//alert(docu);
 }
 
