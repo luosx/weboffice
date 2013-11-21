@@ -40,5 +40,5 @@ public interface IwptbData {
 	 * @param userId
 	 * @return
 	 */
-	public List<Map<String, Object>> getWCLlist(String userId);
+	public List<Map<String, Object>> getWCLlist(String userId, String keyword);
 }

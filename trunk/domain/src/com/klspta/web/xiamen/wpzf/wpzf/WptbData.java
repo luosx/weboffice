@@ -46,9 +46,21 @@ public class WptbData extends AbstractBaseBean implements IwptbData {
 	}
 
 	@Override
-	public List<Map<String, Object>> getWCLlist(String userId) {
-		
-		return null;
+	public List<Map<String, Object>> getWCLlist(String userId, String keyword) {
+		StringBuffer sqlBuffer = new StringBuffer();
+		String xzq = XzqHandle.editXzq(userId);
+		sqlBuffer.append("select j.objectid, j.sm as xmc, j.bsm as jcbh, j.ysdm as tblx, j.gzqmj as jcmj from ").append(wpBean.getTDBG_NAME());
+		sqlBuffer.append(" t, ").append(wpBean.getWP_NAME()).append(" j where ");
+		sqlBuffer.append("sde.st_intersects(t.shape, j.shape) = 0 and j.xzqdm in ");
+		sqlBuffer.append(xzq);
+		if (keyword != null) {
+            keyword = UtilFactory.getStrUtil().unescape(keyword);
+             sqlBuffer.append(" and").append(WPTB).append(" like '%");
+             sqlBuffer.append(keyword);
+             sqlBuffer.append("%')");
+        }
+		List<Map<String, Object>> queryList = query(sqlBuffer.toString(), GIS);
+		return queryList;
 	}
 
 	@Override
@@ -131,7 +143,6 @@ public class WptbData extends AbstractBaseBean implements IwptbData {
 		for(String key : linkeys){
 			returnList.add(linkMap.get(key));
 		}
-		
 		return returnList;
 	}
 	
