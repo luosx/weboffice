@@ -18,10 +18,18 @@ String xml=request.getParameter("xml");
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
 	<script src="<%=basePath%>/base/thirdres/anyChart/binaries/js/AnyChart.js"></script>
+	<%@include file="/base/include/restRequest.jspf" %>
   </head>
+<script type="text/javascript">
+	function generateXml(){
+		putClientCommond("staticReport","getReportData");
+		putRestParameter("xml","<%=xml%>");
+		restRequest();
+	}
 
+</script>
   
-<body leftmargin="0" topmargin="0"  > 
+<body leftmargin="0" topmargin="0"  onload="generateXml()"> 
 
     <script type="text/javascript" language="javascript"> 
     var chart = new AnyChart('<%=basePath%>/base/thirdres/anyChart/binaries/swf/AnyChart.swf');
