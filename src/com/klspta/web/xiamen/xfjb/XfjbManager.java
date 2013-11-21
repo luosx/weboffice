@@ -75,7 +75,7 @@ public class XfjbManager extends AbstractBaseBean {
 	
 	public void getXfjbBlz(){
 		String keyWord = request.getParameter("keyWord");
-		String sql = "select t.yw_guid,t.jbr,t.jbxs,t.lxdz,t.jbzywt,to_char(t.jbsj, 'yyyy-MM-dd')as jbsj ,t.lxdh ,t.jsr,t.jlr, j.activity_name_ ajblzt, j.wfinsid from xfdjb t left join workflow.v_active_task j on t.yw_guid=j.yw_guid ";
+		String sql = "select t.yw_guid,t.jbr,t.jbxs,t.lxdz,t.jbzywt,to_char(t.jbsj, 'yyyy-MM-dd')as jbsj ,t.lxdh ,t.jsr,t.jlr, j.activity_name_ ajblzt, j.wfinsid from xfdjb t inner join workflow.v_active_task j on t.yw_guid=j.yw_guid ";
 		if (keyWord != null) {
 			keyWord = UtilFactory.getStrUtil().unescape(keyWord);
 			sql += " and (t.jbr||t.jbxs||t.jbsj||t.JSR||t.JLR like '%"
@@ -98,7 +98,7 @@ public class XfjbManager extends AbstractBaseBean {
 	public void getXFEndList(){
 		String keyWord = request.getParameter("keyWord");
 			// 获取数据
-			String sql = "select t.yw_guid,t.jbr,t.jbxs,t.lxdz,t.jbzywt,to_char(t.jbsj, 'yyyy-MM-dd')as jbsj ,t.lxdh ,t.jsr,t.jlr,j.endactivity_ ajblzt, j.wfinsid from xfdjb t join workflow.v_end_wfins j on t.yw_guid=j.yw_guid ";
+			String sql = "select t.yw_guid,t.jbr,t.jbxs,t.lxdz,t.jbzywt,to_char(t.jbsj, 'yyyy-MM-dd')as jbsj ,t.lxdh ,t.jsr,t.jlr,j.endactivity_ ajblzt, j.wfinsid from xfdjb t inner join workflow.v_end_wfins j on t.yw_guid=j.yw_guid ";
 			if (keyWord != null) {
 				keyWord = UtilFactory.getStrUtil().unescape(keyWord);
 				sql += " and (t.jbr||t.jbxs||t.jbsj||t.JSR||t.JLR like '%"
