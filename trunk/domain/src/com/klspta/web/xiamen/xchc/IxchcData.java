@@ -22,4 +22,14 @@ public interface IxchcData {
 	 * @return
 	 */
 	public List<Map<String, Object>>  getDclList(String userId,String keyword);
+	
+	/**
+	 * 
+	 * <br>Description:添加新的外业成果记录
+	 * <br>Author:黎春行
+	 * <br>Date:2013-11-21
+	 * @param userid
+	 * @return
+	 */
+	public String SetNewRecord(String userid);
 }

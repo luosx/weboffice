@@ -31,6 +31,24 @@ public class TdbgdcManager extends AbstractBaseBean {
 		response(queryList);
 	}
 	
+	public void gethf(){
+		String userId = request.getParameter("userid");
+		String keyword = request.getParameter("keyword");
+		ItdbgdcData tdbgdc = new TdbgdcData();
+		List<Map<String, Object>> queryList = tdbgdc.getYhcHf(userId, keyword);
+		response(queryList);
+		
+	}
+	
+	public void getwf(){
+		String userId = request.getParameter("userid");
+		String keyword = request.getParameter("keyword");
+		ItdbgdcData tdbgdc = new TdbgdcData();
+		List<Map<String, Object>> queryList = tdbgdc.getYhcWF(userId, keyword);
+		response(queryList);
+		
+	}
+	
 	public void changefxqk(){
 		String yw_guid = request.getParameter("yw_guid");
 		String value = request.getParameter("value");

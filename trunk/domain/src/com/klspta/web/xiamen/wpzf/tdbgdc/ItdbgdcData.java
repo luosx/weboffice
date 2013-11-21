@@ -39,7 +39,7 @@ public interface ItdbgdcData {
 	 * @param userId
 	 * @return
 	 */
-	public List<Map<String, Object>> getYhcWF(String userId);
+	public List<Map<String, Object>> getYhcWF(String userId, String keyword);
 	
 	/**
 	 * 
@@ -49,7 +49,7 @@ public interface ItdbgdcData {
 	 * @param userId
 	 * @return
 	 */
-	public List<Map<String, Object>> getYhcHf(String userId);
+	public List<Map<String, Object>> getYhcHf(String userId, String keyword);
 	
 	/**
 	 * 
