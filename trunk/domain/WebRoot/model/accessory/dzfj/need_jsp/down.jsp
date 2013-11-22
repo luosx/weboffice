@@ -24,50 +24,75 @@ response.addHeader("Content-Disposition","attachment;filename="+fileName+"\"");
 String classPath = Thread.currentThread().getContextClassLoader().getResource("/").getPath();
 String dirpath = classPath.substring(0, classPath.lastIndexOf("WEB-INF/classes"));
 dirpath=dirpath+"model/accessory/dzfj/download/";
-if(!(dirpath+filePath).endsWith("JPG") && !(dirpath+filePath).endsWith("jpg")){
-
-if(hzm.toLowerCase().equals("txt")){
-FileInputStream fis = new FileInputStream(new File(dirpath+filePath));
-
-BufferedReader in = new BufferedReader(new InputStreamReader(fis,"GBK"));
-String   inputLine;
-while((inputLine = in.readLine()) != null){
-out.println(inputLine);
-}
-in.close();
+if((dirpath+filePath).endsWith("mp4") || (dirpath+filePath).endsWith("mp3")){
+//处理视频、音频
+	StringBuffer bodyBuffer = new StringBuffer();
+	bodyBuffer.append("<object id=\"Player\" width=95% height=500 classid=\"CLSID:6BF52A52-394A-11D3-B153-00C04F79FAA6\">");
+	bodyBuffer.append("<param name=\"URL\" value=\"").append(basePath).append("/model//accessory//dzfj//download//").append(filePath).append("\"");
+	bodyBuffer.append("<param name=\"autoStart\" value=\"1\">");
+	bodyBuffer.append("<param name=\"balance\" value=\"0\">");
+	bodyBuffer.append("<param name=\"baseURL\" value>");
+	bodyBuffer.append("<param name=\"captioningID\" value>");
+	bodyBuffer.append("<param name=\"currentPosition\" value=\"0\">");
+	bodyBuffer.append("<param name=\"currentMarker\" value=\"0\">");
+	bodyBuffer.append(" <param name=\"defaultFrame\" value=\"0\">");
+	bodyBuffer.append("<param name=\"enabled\" value=\"1\">");
+	bodyBuffer.append("<param name=\"enableErrorDialogs\" value=\"0\">");
+	bodyBuffer.append("<param name=\"enableContextMenu\" value=\"1\">");
+	bodyBuffer.append("<param name=\"fullScreen\" value=\"0\"> ");
+	bodyBuffer.append("<param name=\"invokeURLs\" value=\"1\">");
+	bodyBuffer.append("<param name=\"mute\" value=\"0\">");
+	bodyBuffer.append("<param name=\"playCount\" value=\"1\">");
+	bodyBuffer.append("<param name=\"rate\" value=\"1\">");
+	bodyBuffer.append("<param name=\"SAMIStyle\" value>");
+	bodyBuffer.append("<param name=\"SAMILang\" value>");
+	bodyBuffer.append("<param name=\"SAMIFilename\" value>");
+	bodyBuffer.append("<param name=\"stretchToFit\" value=\"0\">");
+	bodyBuffer.append("<param name=\"uiMode\" value=\"full\">");
+	bodyBuffer.append("<param name=\"volume\" value=\"100\">");
+	bodyBuffer.append("<param name=\"windowlessVideo\" value=\"0\">");
+	bodyBuffer.append("</object>");
+	out.write(bodyBuffer.toString());
+	//out.write();bodyBuffer.append("<param name="autoStart" value="1">");
+}else if((dirpath+filePath).endsWith("JPG")){
+//处理图片
+	out.write("<img src='"+basePath +"/model//accessory//dzfj//download//"+ filePath+"' height='600'>");
+}else if((dirpath+filePath).endsWith("pdf")){
+//处理pdf
+	out.write("当前格式不支持预览，请直接下载");
 }else{
-	
-  OutputStream output = null;  
-   FileInputStream in = null;    
- try{
-  
-  	output = response.getOutputStream();  
-   in=new FileInputStream(new File(dirpath+filePath));  
-      
-  byte[] b = new byte[1024];    
-  int i = 0;    
-   
-  while((i = in.read(b)) > 0)    
-  {    
-  output.write(b, 0, i);    
-   }    
-  output.flush(); 
-  out.clear();
-  out = pageContext.pushBody();
- }catch(Exception e){
- 	 e.printStackTrace();
-  }finally{
-  
-  if(in != null)    
-    {    
-    in.close();    
-    in = null;    
- }
- 
- }
-}
-}else{
-out.write("<img src='"+basePath +"/model//accessory//dzfj//download//"+ filePath+"' height='600'>");
+//通用处理方式
+	if(hzm.toLowerCase().equals("txt")){
+		FileInputStream fis = new FileInputStream(new File(dirpath+filePath));
+		BufferedReader in = new BufferedReader(new InputStreamReader(fis,"GBK"));
+		String inputLine;
+		while((inputLine = in.readLine()) != null){
+			out.println(inputLine);
+		}
+		in.close();
+	}else{
+  		OutputStream output = null;  
+   		FileInputStream in = null;    
+ 		try{
+  			output = response.getOutputStream();  
+  			in=new FileInputStream(new File(dirpath+filePath));  
+  			byte[] b = new byte[1024];    
+  			int i = 0;    
+  			while((i = in.read(b)) > 0){    
+  				output.write(b, 0, i);    
+   			}    
+  			output.flush(); 
+  			out.clear();
+  			out = pageContext.pushBody();
+ 		}catch(Exception e){
+ 	 		e.printStackTrace();
+  		}finally{
+  			if(in != null){    
+    			in.close();    
+    			in = null;    
+ 			}
+ 		}
+	}
 }
 
 %> 
