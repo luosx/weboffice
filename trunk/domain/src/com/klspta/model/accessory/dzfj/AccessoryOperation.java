@@ -253,12 +253,15 @@ public class AccessoryOperation extends AbstractBaseBean  {
         //deleteFiles(file);
         file.mkdirs();
         file = new File(realPath + accessoryBean.getFile_path());
-        try {
-            client.download(file_path, file);
-            client.disconnect(true);
-        } catch (Exception e) {
-            e.printStackTrace();
-        } 
+        //当缓存存在时，且文件大于5M时，不再执行下载，不进行缓存清理
+        if(!file.exists() || file.length() < 5 * 1024 * 1024){
+	        try {
+	            client.download(file_path, file);
+	            client.disconnect(true);
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+    	}
         
         return accessoryBean.getFile_path();
 
