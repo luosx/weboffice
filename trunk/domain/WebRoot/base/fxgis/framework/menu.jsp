@@ -26,7 +26,7 @@ if(yw_guid==null||"null".equals(yw_guid)){
 		pra="dolocation=true&p="+pDataList.getCjzb(yw_guid);
 	}
 }
-String url=basePath+"base/fxgis/fx/FxGIS.html?debug=true";
+String url=basePath+"base/fxgis/fx/FxGIS.html?debug=true&i=false";
 
 if(year != null && !"null".equals(year)){
 	pra = "initFunction=[{\"name\":\"findFeature\",\"parameters\":\"jz_yw,0,"+yw_guid+",OBJECTID\"}]";
