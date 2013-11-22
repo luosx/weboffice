@@ -17,11 +17,7 @@
 	Map maps = request.getParameterMap();
 	Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 	String userid = ((User)principal).getUserID();
-	if(!maps.containsKey("yw_guid")){
-		//yw_guid不存在时，创建一个新的yw_guid
-		String yw_guid = new XchcData().SetNewRecord(userid);
-		maps.put("yw_guid", yw_guid);
-	}
+	System.out.println("---------------------");
 	Iterator its = maps.entrySet().iterator();
 	while (its.hasNext()) {
 		Entry entry = (Entry) (its.next());
@@ -36,6 +32,11 @@
 		if (its.hasNext()) {
 			sb.append("&");
 		}
+	}
+	if(!maps.containsKey("yw_guid")){
+		//yw_guid不存在时，创建一个新的yw_guid
+		String yw_guid = new XchcData().SetNewRecord(userid);
+		sb.append("&yw_guid=").append(yw_guid);
 	}
 %>
 
