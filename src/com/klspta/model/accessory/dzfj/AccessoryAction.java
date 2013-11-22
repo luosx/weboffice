@@ -101,7 +101,7 @@ public class AccessoryAction extends AbstractBaseBean{
    // }
     /**
      * 
-     * <br>Description:附件下载，根据附件的file_id获取下载附件
+     * <br>Description:附件下载，根据附件的file_id获取下载附件(2013-11-22修改，因点击文件时，getAccessory.jsp已将文件下载到缓存，故不必要从新下载到缓存中)
      * <br>Author:黎春行
      * <br>Date:2012-6-9
      */
@@ -111,7 +111,12 @@ public class AccessoryAction extends AbstractBaseBean{
     	bean = AccessoryOperation.getInstance().getAccessoryById(file_id);
     	String fileName = bean.getFile_name();
     	fileName = new String(fileName.getBytes(), "ISO8859-1");
-    	String file_Path = cacheLocation + "\\" + AccessoryOperation.getInstance().download(bean, cacheLocation + "\\");
+    	//String file_Path = cacheLocation + "\\" + AccessoryOperation.getInstance().download(bean, cacheLocation + "\\");
+    	String classPath = Thread.currentThread().getContextClassLoader().getResource("/").getPath();
+    	String dirpath = classPath.substring(0, classPath.lastIndexOf("WEB-INF/classes"));
+    	dirpath=dirpath+"model/accessory/dzfj/download/";
+    	String file_Path = dirpath + bean.getFile_path();
+    	
     	FileInputStream fis = new FileInputStream(new File(file_Path));
     	int nSize = (int)fis.available();
     	byte[] data = new byte[nSize];
