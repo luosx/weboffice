@@ -121,7 +121,7 @@
 			var zfjcType="10";
 			var returnPath="web/xiamen/xfgl/db/xfdbaj.jsp";
 			var buttonHien = "la";
-			var url='<%=basePath%>model/workflow/wf.jsp?yw_guid='+yw_guid+'&wfInsId='+wfInsId+'&zfjcType='+zfjcType+'&returnPath='+returnPath+'&zfjcName=信访举报&buttonHidden='+buttonHien;  
+			var url='<%=basePath%>model/workflow/wf.jsp?yw_guid='+yw_guid+'&wfInsId='+wfInsId+'&zfjcType='+zfjcType+'&returnPath='+returnPath+'&zfjcName=信访举报&fixed=save&buttonHidden='+buttonHien;  
 			//window.open(url); 
 			document.location.href=url;
 		}
