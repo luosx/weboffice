@@ -49,6 +49,7 @@
 		<script>
 		function initEdit(){
 			init();
+			butt();
 			var edit="<%=edit%>";
 			if(edit=='false'){
 				 var formlist = document.getElementById('form');
@@ -71,7 +72,10 @@
 	</head>
 	
 <body bgcolor="#FFFFFF">
-<div id="fixed" class="Noprn" style="position: fixed; top: 5px; left: 0px"></div>
+<div id="butt" class="Noprn" style="position: fixed; top: 5px; left: 0px"></div>
+ <%if(fixed!=null){%>
+<div id="fixed class="Noprn" style="position: fixed; top: 5px; left: 0px"></div>
+<%}%>
 <div style="margin:20px" class="tablestyle1" align="center" /><br />
 <div align="center"><font style="font: bold 20px '黑体','微软雅黑' ">厦门市国土资源与房产管理局12336违法举报登记处理表</font></div><br/><br />
 <form method="post">
@@ -128,6 +132,15 @@ if("<%=msg%>" == "success"&&"<%=permission%>"=="yes"){
 	alert("表单权限保存成功");
 }else if("<%=msg%>" == "success"){
 	alert("表单保存成功");  
+}
+
+function butt(){
+	var butt = document.getElementById("butt");
+		if(<%=fixed %>!= null){
+	    	butt.innerHTML = '<img src="base/form/images/save.png" onclick="formSave()" style="cursor:hand" title="保存"/><br /><img src="base/form/images/print.png" onclick="print()" style="cursor:hand" title="打印"/>';
+	    }else{
+	    	butt.innerHTML = '<img src="base/form/images/print.png" onclick="print()" style="cursor:hand" title="打印"/>';
+        }
 }
 </script>
 </html>
