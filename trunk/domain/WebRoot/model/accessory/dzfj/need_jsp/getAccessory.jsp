@@ -2,9 +2,6 @@
 <%@page import="com.klspta.model.accessory.dzfj.AccessoryOperation" %>
 <%@page import="com.klspta.base.util.bean.ftputil.AccessoryBean" %>
 <%
-
-
-
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 String file_id = request.getParameter("file_id");
