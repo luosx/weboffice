@@ -87,7 +87,6 @@
 		}
   </style>
   <script type="text/javascript">
-  	var isInput = true;
   	var yw_guid;
   	var simInfo;
   	function save(){		
@@ -107,14 +106,15 @@
 		var num = parseInt(allnum.value)/5;
 		allnum.value = "5";
 		if(simInfo!='null'){
+			showtbody();//选中是Radio
 			num = num-1;
 			drxccg();
+		}else{
+			hidetbody();//选中否Radio
 		}	
 		for(var i = 1; i < num; i++){
 			addcgd();
 		}		
-		
-		insertData(json);
 		
 	    bingCgdState();
 	    
@@ -156,15 +156,6 @@
 			if(res=='0'){
 				document.getElementById('viewCgButton').style.display="none";
 			}
-	}
-	
-	//添加选项
-	function Addopt(selectname, value, name){
-		var selectname = document.getElementById(selectname);
-		var opt = document.createElement('option');
-		opt.text = name;
-		opt.value = name;
-		selectname.options.add(opt);
 	}
 	
 	//导入巡查成果
@@ -212,6 +203,7 @@
 					document.getElementById("ywguid_" + (i + 1)).value = baseInformation[i].YW_GUID;						
 			}				
 		}
+		showtbody();
 	}
 
 		//抄告单在wbeoffice中生成
@@ -295,11 +287,13 @@
 		}
 		
 		function showtbody(){
+			document.getElementById('sfywf1').checked = 'checked';
 			document.getElementById('add').style.display='';
 			document.getElementById('delete').style.display='';		
 			document.getElementById('info').style.display='block';
 		}
 		function hidetbody(){
+			document.getElementById('sfywf2').checked = 'checked';
 			document.getElementById('add').style.display='none';
 			document.getElementById('delete').style.display='none';
 			document.getElementById('info').style.display='none';
@@ -360,7 +354,7 @@
     			<td colspan="3"><input type="text" class="noborder" name="xclx" id="xclx" style="width: 99%"/></td>
   			</tr>
 			<tr>
-				<td colspan="2"><div align="center">是否有违法</div></td>
+				<td colspan="2"><div align="center">是否有抄告</div></td><!-- 原为"是否有违法"现改为"是否有抄告" -->
 				<td colspan="3">
 					<input type="radio" name="sfywf" id="sfywf1" value="是" onclick="showtbody()"/>是
 					<input type="radio" name="sfywf" id="sfywf2" value="否" onclick="hidetbody()"/>
