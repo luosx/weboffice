@@ -512,7 +512,12 @@ function openMap(){
 function openPage(url){
 	 document.getElementById("showCar").style.display="none";
 	 document.getElementById("showHistory").style.display="none";
-	 openURL("<%=basePath%>web/<%=name%>/" + url,1);
+	 var_flag = url.split("/")[url.split("/").length - 1];//得到jsp页面名称
+	 if(var_flag == "PersonInfo.jsp"){
+	 	openURL("<%=basePath%>" + url,1);
+	 }else{
+	 	openURL("<%=basePath%>web/<%=name%>/" + url,1);
+	 }
 }
 
 function showVideo(puid){
