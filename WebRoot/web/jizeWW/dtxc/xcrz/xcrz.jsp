@@ -87,6 +87,7 @@
 		}
   </style>
   <script type="text/javascript">
+  	var isInput = true;
   	var yw_guid;
   	var simInfo;
   	function save(){		
@@ -99,8 +100,6 @@
 		
 		yw_guid = document.getElementById('yw_guid').value;	
 		simInfo = '<%=simInfo%>';
-		
-		initRadio();
 		
 		var allnum = document.getElementById("allnum");
 		var num = parseInt(allnum.value)/5;
@@ -116,10 +115,14 @@
 			addcgd();
 		}		
 		
+		insertData(json);
+		
 	    bingCgdState();
 	    
 	    //判断此日志是否有巡查成果
 	    isHaveCG();
+	    
+	    initRadio();
 	}
 	
 	function initRadio(){

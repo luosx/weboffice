@@ -76,7 +76,7 @@ Ext.onReady(function(){
         columns: [
            sm,
            new Ext.grid.RowNumberer(),
-          {header: '任务编号', dataIndex:'GUID', width: width*0.1, sortable: false},
+          {header: '任务编号', dataIndex:'GUID', width: width*0.12, sortable: false},
           {header: '所在政区', dataIndex:'XZQMC', width: width*0.1, sortable: false},
           {header: '项目名称', dataIndex:'XMMC',width: width*0.2, sortable: false},
           {header: '任务类型', dataIndex:'RWLX',width: width*0.1, sortable: false},
@@ -221,7 +221,7 @@ function query(){
     grid.reconfigure(store, new Ext.grid.ColumnModel([
     		sm,
     		new Ext.grid.RowNumberer(),
-           {header: '任务编号', dataIndex:'GUID', width: width*0.1, sortable: false},
+           {header: '任务编号', dataIndex:'GUID', width: width*0.12, sortable: false},
            {header: '所在政区', dataIndex:'XZQMC', width: width*0.1, sortable: false},
            {header: '项目名称', dataIndex:'XMMC',width: width*0.2, sortable: false},
             {header: '任务类型', dataIndex:'RWLX',width: width*0.1, sortable: false},
