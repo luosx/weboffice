@@ -63,7 +63,7 @@ public class WyrwManager extends AbstractBaseBean {
         	}
         	yw_guidBuffer.deleteCharAt(yw_guidBuffer.length()-1);
         	yw_guidBuffer.append(")");
-        	String simsql = "select t.yw_guid, t.yddw, replace(replace(replace(t.ydsj,'年','-'),'月','-'),'日','') ydsj,to_char(to_date(t.hcrq,'yyyy-MM-dd hh24:mi;ss'),'yyyy-MM-dd') hcrq, t.jsqk, t.mj from DC_YDQKDCB t where t.yw_guid in " + yw_guidBuffer.toString();
+        	String simsql = "select t.yw_guid, t.yddw, replace(replace(substr(t.ydsj, 1, instr(t.ydsj, '日') -1),'年','-'),'月','-') ydsj,to_char(to_date(t.hcrq,'yyyy-MM-dd hh24:mi;ss'),'yyyy-MM-dd') hcrq, t.jsqk, t.mj from DC_YDQKDCB t where t.yw_guid in " + yw_guidBuffer.toString();
         	List<Map<String, Object>> simList = query(simsql, YW);
         	if(simList!=null && simList.size()>0){
             	for(Map<String,Object> map:simList){
