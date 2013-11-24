@@ -49,7 +49,6 @@ public class LegendFiles {
                     return false;
                 }
             });
-            System.out.println(files.length);
         }
         
         getAllFoldersName();
