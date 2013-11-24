@@ -8,9 +8,9 @@ import com.klspta.base.AbstractBaseBean;
 public class XccgTreeOperation extends AbstractBaseBean{
 	private static XccgTreeOperation xccgtree = null;
 	
-	String selectSQL="select substr(t.xcdw,0,3) xcq,t.xcrq from xcrz t where t.yw_guid=?";
+	String selectSQL="select t.writerxzqh xcq,t.xcrq from xcrz t where t.yw_guid=?";
 	
-	String selectCgSQL="select t.yw_guid from dc_ydqkdcb t where to_char(to_date(t.hcrq,'yyyy-mm-dd hh24:mi:ss'),'yyyy-mm-dd') = to_char(to_date(?,'yyyy-mm-dd hh24:mi:ss'),'yyyy-mm-dd') and t.xian=?";
+	String selectCgSQL="select t.yw_guid from dc_ydqkdcb t where to_char(to_date(t.hcrq,'yyyy-mm-dd hh24:mi:ss'),'yyyy-mm-dd') = to_char(to_date(?,'yyyy-mm-dd hh24:mi:ss'),'yyyy-mm-dd') and t.impxzqbm=?";
 	
 	
 	public static XccgTreeOperation getInstance(){

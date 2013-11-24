@@ -268,7 +268,7 @@ public class DtxcManager extends AbstractBaseBean {
 	 */
 	public void isHaveCG(){
 		String yw_guid = request.getParameter("yw_guid");
-		String selectSQL="select substr(t.xcdw,0,3) xcq,t.xcrq from xcrz t where t.yw_guid=?";
+		String selectSQL="select t.writerxzqh xcq,t.xcrq from xcrz t where t.yw_guid=?";
 		List<Map<String,Object>> list = query(selectSQL,YW,new Object[]{yw_guid});
 		String xcq="";
 		String xcrq="";
@@ -276,7 +276,7 @@ public class DtxcManager extends AbstractBaseBean {
 			Map<String,Object> map = list.get(0);
 			xcq = (String)map.get("xcq");
 			xcrq = (String)map.get("xcrq");
-			String selectCgSQL="select t.yw_guid from dc_ydqkdcb t where to_char(to_date(t.hcrq,'yyyy-mm-dd hh24:mi:ss'),'yyyy-mm-dd') = to_char(to_date(?,'yyyy-mm-dd hh24:mi:ss'),'yyyy-mm-dd') and t.xian=?";
+			String selectCgSQL="select t.yw_guid from dc_ydqkdcb t where to_char(to_date(t.hcrq,'yyyy-mm-dd hh24:mi:ss'),'yyyy-mm-dd') = to_char(to_date(?,'yyyy-mm-dd hh24:mi:ss'),'yyyy-mm-dd') and t.impxzqbm=?";
 			List<Map<String,Object>> list2 = query(selectCgSQL,YW,new Object[]{xcrq,xcq});
 			if(list2!=null && list2.size()>0){
 				response("1");				
