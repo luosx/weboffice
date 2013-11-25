@@ -196,25 +196,25 @@ public class YearPlanBuilder extends AbstractBaseBean implements IDataClass {
         trbeanKg.addTDBean(tdBean);
         tdBean = new TDBean("开工量（㎡）", "200", "");
         trbeanKg.addTDBean(tdBean);
-        putTj(trbeanKg, "hx_sx", "kgjgfl", ndList);
+        putAzf(trbeanKg,  "开工及购房量", ndList);
 
         tdBean = new TDBean("6", "", "");
         trbtz.addTDBean(tdBean);
         tdBean = new TDBean("投资（亿元）", "200", "");
         trbtz.addTDBean(tdBean);
-        putTj(trbtz, "hx_sx", "azftz", ndList);
+        putAzf(trbtz, "投资", ndList);
 
         tdBean = new TDBean("7", "", "");
         trbsyl.addTDBean(tdBean);
         tdBean = new TDBean("使用量（万㎡）", "190", "");
         trbsyl.addTDBean(tdBean);
-        putTj(trbsyl, "hx_sx", "azfsyl", ndList);
+        putAzf(trbsyl,  "使用量", ndList);
 
         tdBean = new TDBean("8", "", "");
         trbcl.addTDBean(tdBean);
         tdBean = new TDBean("安置房存量（万㎡）", "190", "");
         trbcl.addTDBean(tdBean);
-        putTj(trbcl, "hx_sx", "azfcl", ndList);
+        putAzf(trbcl, "剩余量", ndList);
 
         trbeans.put("azfkgl", trbeanKg);
         trbeans.put("azftz", trbtz);
@@ -446,6 +446,35 @@ public class YearPlanBuilder extends AbstractBaseBean implements IDataClass {
         sBuffer.append(" from dual");
         List<Map<String, Object>> trList;
         trList = query(sBuffer.toString(), YW, objs);
+        if (trList.size() > 0) {
+            Map<String, Object> mapKf = trList.get(0);
+            for (int z = 0; z <= count; z++) {
+                TDBean tb = new TDBean(checkNull(mapKf.get("s" + z)), "", "");
+                trBean.addTDBean(tb);
+            }
+        } else {
+            for (int z = 0; z <= count; z++) {
+                TDBean tb = new TDBean("", "", "");
+                trBean.addTDBean(tb);
+            }
+        }
+    }
+    
+    private void putAzf(TRBean trBean,String field, List<Map<String, Object>> ndList) {
+        StringBuffer sBuffer = new StringBuffer("select ");
+        int count = ndList.size();
+        Object[] objs = new Object[count];
+        for (int i = 0; i < count; i++) {
+            sBuffer.append("(select sum(").append(field).append(") from zfjc.v_安置房").append(
+                    " where 年度=?)  as ").append("s").append(i).append(",");
+            objs[i] = ndList.get(i).get("nd");
+        }
+        /*sBuffer.append("(select sum(").append(field).append(") from zfjc.v_安置房").append(" t ) as ")
+                .append("s").append(count);*/
+        String str = sBuffer.substring(0, sBuffer.length()-1);
+        str += " from dual";
+        List<Map<String, Object>> trList;
+        trList = query(str.toString(), YW, objs);
         if (trList.size() > 0) {
             Map<String, Object> mapKf = trList.get(0);
             for (int z = 0; z <= count; z++) {

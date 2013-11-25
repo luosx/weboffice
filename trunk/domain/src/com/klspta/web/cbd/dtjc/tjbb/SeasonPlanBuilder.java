@@ -197,25 +197,25 @@ public class SeasonPlanBuilder extends AbstractBaseBean implements IDataClass {
         trbeanKg.addTDBean(tdBean);
         tdBean = new TDBean("开工量（㎡）", "200", "");
         trbeanKg.addTDBean(tdBean);
-        putTj(trbeanKg, "hx_sx", "kgjgfl", ndList, false);
+        putAzfTotal(trbeanKg,  "开工及购房量", ndList);
 
         tdBean = new TDBean("6", "45", "");
         trbtz.addTDBean(tdBean);
         tdBean = new TDBean("投资（亿元）", "200", "");
         trbtz.addTDBean(tdBean);
-        putTj(trbtz, "hx_sx", "azftz", ndList, false);
+        putAzfTotal(trbtz,  "投资", ndList);
 
         tdBean = new TDBean("7", "45", "");
         trbsyl.addTDBean(tdBean);
         tdBean = new TDBean("使用量（万㎡）", "190", "");
         trbsyl.addTDBean(tdBean);
-        putTj(trbsyl, "hx_sx", "azfsyl", ndList, false);
+        putAzfTotal(trbsyl, "使用量", ndList);
 
         tdBean = new TDBean("8", "45", "");
         trbcl.addTDBean(tdBean);
         tdBean = new TDBean("安置房存量（万㎡）", "190", "");
         trbcl.addTDBean(tdBean);
-        putTj(trbcl, "hx_sx", "azfcl", ndList, false);
+        putAzfTotal(trbcl, "剩余量", ndList);
 
         trbeans.put("azfkgl", trbeanKg);
         trbeans.put("azftz", trbtz);
@@ -464,19 +464,18 @@ public class SeasonPlanBuilder extends AbstractBaseBean implements IDataClass {
                 if (i != 0) {
                     trBeanKg = new TRBean();
                 }
-                trBeanTz = new TRBean();
                 tdBean = new TDBean("开工", "45", "");
                 trBeanKg.addTDBean(tdBean);
                 tdBean = new TDBean(checkNull(kgmc), "200", "");
                 trBeanKg.addTDBean(tdBean);
-                putSingle(checkNull(kgmc), "hx_azf", new String[] { "kg", "kgbl" }, ndList, trBeanKg);
+                putAzf(checkNull(kgmc), "hx_azf", new String[] { "kg", "kgbl" }, ndList, trBeanKg);
 
                 trBeanTz = new TRBean();
                 tdBean = new TDBean("投资", "45", "");
                 trBeanTz.addTDBean(tdBean);
                 tdBean = new TDBean(checkNull(tzmc), "200", "");
                 trBeanTz.addTDBean(tdBean);
-                putSingle(checkNull(kgmc), "hx_azf", new String[] { "kg", "kgbl" }, ndList, trBeanTz);
+                putAzf(checkNull(kgmc), "hx_azf", new String[] { "kg", "kgbl" }, ndList, trBeanTz);
                 trbeans.put("azfkg" + i, trBeanKg);
                 trbeans.put("azftz" + i, trBeanTz);
             }
@@ -535,11 +534,90 @@ public class SeasonPlanBuilder extends AbstractBaseBean implements IDataClass {
                             tb = new TDBean(value[1], "50", "");
                             tb.setStyle("tdfull");
                             trBean.addTDBean(tb);
-                        } else {
+                        } else{
                             tb = new TDBean("", "50", "");
                             tb.setStyle("tdnull");
                             trBean.addTDBean(tb);
                             trBean.addTDBean(tb);
+                        }
+                    }
+                }
+            }
+        } else {
+            for (int z = 0; z <= ndCount; z++) {
+                tb = new TDBean("", "100", "");
+                tb.setStyle("tdnull");
+                trBean.addTDBean(tb);
+            }
+        }
+    }
+    
+    private void putAzf(String xmmc, String tableName, String[] fields, List<Map<String, Object>> ndList,
+            TRBean trBean) {
+        StringBuffer sBuffer = new StringBuffer("select ");
+        int ndCount = ndList.size();
+        Object nd;
+        Object[] objs = new Object[ndCount * 8 + 1];
+        for (int t = 0; t < ndCount; t++) {
+            sBuffer.append("(select ").append(fields[0]).append("||'#'||").append(fields[1]).append(" from ")
+                    .append(tableName).append(" where xmmc=? and nd=? and jd='1')  as ").append("s")
+                    .append(t).append("1,");
+            sBuffer.append("(select ").append(fields[0]).append("||'#'||").append(fields[1]).append(" from ")
+                    .append(tableName).append(" where xmmc=? and nd=? and jd='2')  as ").append("s")
+                    .append(t).append("2,");
+            sBuffer.append("(select ").append(fields[0]).append("||'#'||").append(fields[1]).append(" from ")
+                    .append(tableName).append(" where xmmc=? and nd=? and jd='3')  as ").append("s")
+                    .append(t).append("3,");
+            sBuffer.append("(select ").append(fields[0]).append("||'#'||").append(fields[1]).append(" from ")
+                    .append(tableName).append(" where xmmc=? and nd=? and jd='4')  as ").append("s")
+                    .append(t).append("4,");
+            nd = ndList.get(t).get("nd");
+            objs[t * 8] = xmmc;
+            objs[t * 8 + 1] = nd;
+            objs[t * 8 + 2] = xmmc;
+            objs[t * 8 + 3] = nd;
+            objs[t * 8 + 4] = xmmc;
+            objs[t * 8 + 5] = nd;
+            objs[t * 8 + 6] = xmmc;
+            objs[t * 8 + 7] = nd;
+        }
+        sBuffer.append("(select sum(").append(fields[0]).append(") from ").append(tableName).append(
+                " t where xmmc=? ) as ").append("s").append(ndCount);
+        sBuffer.append(" from dual");
+        objs[ndCount * 8] = xmmc;
+        List<Map<String, Object>> trList;
+        trList = query(sBuffer.toString(), YW, objs);
+        TDBean tb;
+        if (trList.size() > 0) {
+            Map<String, Object> mapKf = trList.get(0);
+            for (int z = 0; z <= ndCount; z++) {
+                if (z == ndCount) {
+                    tb = new TDBean(checkNull(mapKf.get("s" + z)), "90", "");
+                    trBean.addTDBean(tb);
+                } else {
+                    for (int i = 1; i <= 4; i++) {
+                        String[] value = checkNull(mapKf.get("s" + z + i)).split("#");
+                        if (value.length > 1) {
+                            tb = new TDBean(value[0], "50", "");
+                            tb.setStyle("tdfull");
+                            trBean.addTDBean(tb);
+                            tb = new TDBean(value[1], "50", "");
+                            tb.setStyle("tdfull");
+                            trBean.addTDBean(tb);
+                        } else if(value.length==1){
+                        	if(value[0]==null || value[0]==""){
+                        		tb=new TDBean("","50","");
+                            	tb.setStyle("tdnull");
+                            	trBean.addTDBean(tb);
+                            	trBean.addTDBean(tb);
+                        	}else{
+                            tb = new TDBean(value[0], "50", "");
+                            tb.setStyle("tdfull");
+                            trBean.addTDBean(tb);
+                            tb = new TDBean("","50","");
+                            tb.setStyle("tdfull");
+                            trBean.addTDBean(tb);
+                        	}
                         }
                     }
                 }
@@ -646,6 +724,62 @@ public class SeasonPlanBuilder extends AbstractBaseBean implements IDataClass {
         }
     }
 
+    private void putAzfTotal(TRBean trBean,String field, List<Map<String, Object>> ndList){
+    	 StringBuffer sBuffer = new StringBuffer();
+    	 sBuffer.append("select ");
+    	 int count = ndList.size();
+         Object[] objs = new Object[count * 4];
+         Object nd;
+         for (int i = 0; i < count; i++) {
+             sBuffer.append("(select ").append(field).append(" from zfjc.v_安置房 ").append(
+                     " where 年度=? and 季度='1')  as ").append("s").append(i).append("1,");
+             sBuffer.append("(select ").append(field).append(" from zfjc.v_安置房 ").append(
+                     " where 年度=? and 季度='2')  as ").append("s").append(i).append("2,");
+             sBuffer.append("(select ").append(field).append(" from zfjc.v_安置房 ").append(
+                     " where 年度=? and 季度='3')  as ").append("s").append(i).append("3,");
+             sBuffer.append("(select ").append(field).append(" from zfjc.v_安置房 ").append(
+                     " where 年度=? and 季度='4')  as ").append("s").append(i).append("4,");
+             nd = ndList.get(i).get("nd");
+             objs[i * 4] = nd;
+             objs[i * 4 + 1] = nd;
+             objs[i * 4 + 2] = nd;
+             objs[i * 4 + 3] = nd;
+            
+         }
+         String str = sBuffer.substring(0, sBuffer.length()-1);
+         str += " from dual";
+         List<Map<String, Object>> trList;
+         trList = query(str, YW, objs);
+         TDBean tb;
+         if (trList.size() > 0) {
+             Map<String, Object> mapKf = trList.get(0);
+             for (int z = 0; z <= count; z++) {
+                 if (z == count) {
+                     tb = new TDBean(checkNull(mapKf.get("s" + z)), "90", "");
+                     trBean.addTDBean(tb);
+                 } else {
+                     for (int i = 1; i <= 4; i++) {
+                         tb = new TDBean(checkNull(mapKf.get("s" + z + i)), "50", "");
+                         trBean.addTDBean(tb);
+                         tb = new TDBean("", "50", "");
+                         trBean.addTDBean(tb);
+                     }
+                 }
+             }
+         } else {
+             int total = count * 4;
+             for (int z = 0; z < total; z++) {
+                 tb = new TDBean("", "50", "");
+                 trBean.addTDBean(tb);
+                 tb = new TDBean("", "50", "");
+                 trBean.addTDBean(tb);
+             }
+             tb = new TDBean("", "90", "");
+             trBean.addTDBean(tb);
+         }
+
+    }
+    
     private String checkNull(Object obj) {
         if (obj == null) {
             return "";
