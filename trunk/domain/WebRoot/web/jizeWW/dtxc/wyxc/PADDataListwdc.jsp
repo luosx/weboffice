@@ -8,6 +8,7 @@
 			+ path + "/";
     Object userprincipal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     String userid = ((User)userprincipal).getUserID();
+    String userXzq = ((User)userprincipal).getXzqh();
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -114,10 +115,12 @@ Ext.onReady(function(){
             emptyMsg: "无记录",
         plugins: new Ext.ux.ProgressBarPager()
         }),
+        <%if("130431".equals(userXzq)){%>
          buttons: [{
         	text:'导出外业成果',
         	handler: expResult
         }],
+        <%}%>
         viewConfig:{//配置GridPanel的显示样式
 	    		forceFit : true,
 	            getRowClass : function(record,rowIndex,rowParams,store){   
