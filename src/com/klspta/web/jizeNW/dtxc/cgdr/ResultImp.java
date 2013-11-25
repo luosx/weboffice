@@ -194,6 +194,20 @@ public class ResultImp extends AbstractBaseBean {
             String xcdw = baselist.element("XCDW").getText();
             String ordertime = baselist.element("ORDERTIME").getText();
             
+            /*
+             * 鸡泽个性化需求，当导入内网人员为县级人员时，取出xml中的impuserid,impxzqbm,impxzq,impuser
+             */
+            String impuserid = "";
+            String impxzqbm = "";
+            String impxzq = "";
+            String impuser = ""; 
+            if("130431".equals(xzqId)){
+            	impuserid = baselist.element("IMPUSERID").getText();
+                impxzqbm = baselist.element("IMPXZQBM").getText();
+                impxzq = baselist.element("IMPXZQ").getText();
+                impuser = baselist.element("IMPUSER").getText();
+            }
+            
             //坐标
             Element zblist = (Element) root.selectNodes("/WYHC/zb").get(0);
             String jwzb = zblist.element("JWZB").getText();
@@ -209,20 +223,34 @@ public class ResultImp extends AbstractBaseBean {
                         + "xcms, hcrq, spsj, spxmmc, spwh, gdsj, gdxmmc, gdwh, ydqk, status, ygspmj, ygspbl,"
                         + "yggdmj, yggdbl, nyd, gengd, jsyd, wlyd, fhgh, bfhgh, zyjbnt, xmmc, pfwh, pzsj, yxjsq,"
                         + "ytjjsq, xzjsq, jzjsq, xcr, xcdw, ordertime, jwzb, pmzb, shi, xian, padid,impuser,impxzq,impuserid,impxzqbm) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-                count = update(sql, YW, new Object[] { yw_guid, ydsj, yddw, mj, zb, jsqk, wfwglx, dfccqk,
-                        xcms, hcrq, spsj, spxmmc, spwh, gdsj, gdxmmc, gdwh, ydqk, status, ygspmj, ygspbl,
-                        yggdmj, yggdbl, nyd, gengd, jsyd, wlyd, fhgh, bfhgh, zyjbnt, xmmc, pfwh, pzsj, yxjsq,
-                        ytjjsq, xzjsq, jzjsq, xcr, xcdw, ordertime, jwzb, pmzb, shi, xian, padid,userName,userXzq,userId,xzqId});
+                if("130431".equals(xzqId)){
+                	count = update(sql, YW, new Object[] { yw_guid, ydsj, yddw, mj, zb, jsqk, wfwglx, dfccqk,
+                            xcms, hcrq, spsj, spxmmc, spwh, gdsj, gdxmmc, gdwh, ydqk, status, ygspmj, ygspbl,
+                            yggdmj, yggdbl, nyd, gengd, jsyd, wlyd, fhgh, bfhgh, zyjbnt, xmmc, pfwh, pzsj, yxjsq,
+                            ytjjsq, xzjsq, jzjsq, xcr, xcdw, ordertime, jwzb, pmzb, shi, xian, padid,impuser,impxzq,impuserid,impxzqbm});
+                }else{
+                	count = update(sql, YW, new Object[] { yw_guid, ydsj, yddw, mj, zb, jsqk, wfwglx, dfccqk,
+                            xcms, hcrq, spsj, spxmmc, spwh, gdsj, gdxmmc, gdwh, ydqk, status, ygspmj, ygspbl,
+                            yggdmj, yggdbl, nyd, gengd, jsyd, wlyd, fhgh, bfhgh, zyjbnt, xmmc, pfwh, pzsj, yxjsq,
+                            ytjjsq, xzjsq, jzjsq, xcr, xcdw, ordertime, jwzb, pmzb, shi, xian, padid,userName,userXzq,userId,xzqId});
+                }
             } else {
                 delAcc(yw_guid);
                 sql = "update dc_ydqkdcb set ydsj=?,yddw=?,mj=?,zb=?,jsqk=?,wfwglx=?,dfccqk=?,"
                         + "xcms=?,hcrq=?,spsj=?,spxmmc=?,spwh=?,gdsj=?,gdxmmc=?,gdwh=?,ydqk=?,status=?,ygspmj=?,ygspbl=?,"
                         + "yggdmj=?,yggdbl=?,nyd=?,gengd=?,jsyd=?,wlyd=?,fhgh=?,bfhgh=?,zyjbnt=?,xmmc=?,pfwh=?,pzsj=?,yxjsq=?,"
                         + "ytjjsq=?,xzjsq=?,jzjsq=?,xcr=?,xcdw=?,ordertime=?,jwzb=?,pmzb=?,shi=?,xian=?,padid=?,impuser=?,impxzq=?,impuserid=?,impxzqbm=? where yw_guid=?";
-                count = update(sql, YW, new Object[] { ydsj, yddw, mj, zb, jsqk, wfwglx, dfccqk, xcms, hcrq,
-                        spsj, spxmmc, spwh, gdsj, gdxmmc, gdwh, ydqk, status, ygspmj, ygspbl, yggdmj, yggdbl,
-                        nyd, gengd, jsyd, wlyd, fhgh, bfhgh, zyjbnt, xmmc, pfwh, pzsj, yxjsq, ytjjsq, xzjsq,
-                        jzjsq, xcr, xcdw, ordertime, jwzb, pmzb, shi, xian, padid,userName,userXzq,userId,xzqId,yw_guid });
+                if("130431".equals(xzqId)){
+                	count = update(sql, YW, new Object[] { ydsj, yddw, mj, zb, jsqk, wfwglx, dfccqk, xcms, hcrq,
+                            spsj, spxmmc, spwh, gdsj, gdxmmc, gdwh, ydqk, status, ygspmj, ygspbl, yggdmj, yggdbl,
+                            nyd, gengd, jsyd, wlyd, fhgh, bfhgh, zyjbnt, xmmc, pfwh, pzsj, yxjsq, ytjjsq, xzjsq,
+                            jzjsq, xcr, xcdw, ordertime, jwzb, pmzb, shi, xian, padid,impuser,impxzq,impuserid,impxzqbm,yw_guid });
+                }else{
+                	count = update(sql, YW, new Object[] { ydsj, yddw, mj, zb, jsqk, wfwglx, dfccqk, xcms, hcrq,
+                            spsj, spxmmc, spwh, gdsj, gdxmmc, gdwh, ydqk, status, ygspmj, ygspbl, yggdmj, yggdbl,
+                            nyd, gengd, jsyd, wlyd, fhgh, bfhgh, zyjbnt, xmmc, pfwh, pzsj, yxjsq, ytjjsq, xzjsq,
+                            jzjsq, xcr, xcdw, ordertime, jwzb, pmzb, shi, xian, padid,userName,userXzq,userId,xzqId,yw_guid });
+                }
             }
             //现状
             sql = "delete from xz_xxdl where yw_guid=?";

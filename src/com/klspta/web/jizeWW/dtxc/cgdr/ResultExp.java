@@ -69,9 +69,9 @@ public class ResultExp extends AbstractBaseBean {
      */
     private void generateXML(String filepath, String[] guids){
         //基础信息sql
-        String baseSql = "select t.yw_guid,t.ydsj,t.yddw,t.mj,t.zb,t.jsqk,t.wfwglx,t.dfccqk,t.xcms,t.hcrq,t.spsj,t.spxmmc,t.spwh,t.gdsj,t.gdxmmc,t.gdwh,t.ydqk,t.status,t.ygspmj,t.ygspbl,t.yggdmj,t.yggdbl,t.nyd,t.gengd,t.jsyd,t.wlyd,t.fhgh,t.bfhgh,t.zyjbnt,t.xmmc,t.pfwh,t.pzsj,t.yxjsq,t.ytjjsq,t.xzjsq,t.jzjsq,t.xcr,t.xcdw,t.ordertime,t.jwzb,t.pmzb,t.padid,t.shi,t.xian from dc_ydqkdcb t where t.yw_guid=?";
+        String baseSql = "select t.yw_guid,t.ydsj,t.yddw,t.mj,t.zb,t.jsqk,t.wfwglx,t.dfccqk,t.xcms,t.hcrq,t.spsj,t.spxmmc,t.spwh,t.gdsj,t.gdxmmc,t.gdwh,t.ydqk,t.status,t.ygspmj,t.ygspbl,t.yggdmj,t.yggdbl,t.nyd,t.gengd,t.jsyd,t.wlyd,t.fhgh,t.bfhgh,t.zyjbnt,t.xmmc,t.pfwh,t.pzsj,t.yxjsq,t.ytjjsq,t.xzjsq,t.jzjsq,t.xcr,t.xcdw,t.ordertime,t.impuserid,t.impxzqbm,t.impxzq,t.impuser,t.jwzb,t.pmzb,t.padid,t.shi,t.xian from dc_ydqkdcb t where t.yw_guid=?";
         //基础信息节点
-        String[] baseElements = {"yw_guid","ydsj","yddw","mj","zb","jsqk","wfwglx","dfccqk","xcms","hcrq","spsj","spxmmc","spwh","gdsj","gdxmmc","gdwh","ydqk","status","ygspmj","ygspbl","yggdmj","yggdbl","nyd","gengd","jsyd","wlyd","fhgh","bfhgh","zyjbnt","xmmc","pfwh","pzsj","yxjsq","ytjjsq","xzjsq","jzjsq","xcr","xcdw","ordertime"};
+        String[] baseElements = {"yw_guid","ydsj","yddw","mj","zb","jsqk","wfwglx","dfccqk","xcms","hcrq","spsj","spxmmc","spwh","gdsj","gdxmmc","gdwh","ydqk","status","ygspmj","ygspbl","yggdmj","yggdbl","nyd","gengd","jsyd","wlyd","fhgh","bfhgh","zyjbnt","xmmc","pfwh","pzsj","yxjsq","ytjjsq","xzjsq","jzjsq","xcr","xcdw","ordertime","impuserid","impxzqbm","impxzq","impuser"};
         //现状sql
         String xzSql = "select t.yw_guid,t.tbbh,t.qsdwmc,t.dlmc,t.mj from xz_xxdl t where t.yw_guid=?";
         //现状节点
