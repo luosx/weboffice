@@ -27,6 +27,24 @@ public class TjbbData extends AbstractBaseBean {
 
 	/**
 	 * 
+	 * <br>Description:获取一定时间段内安置房建设
+	 * <br>Author:李国明
+	 * <br>Date:2013-11-21
+	 * @param minYear
+	 * @param maxYear
+	 * @return
+	 */
+	public Map<String,String> getKG(int minYear,int maxYear,Map<String,Object> map){
+		return new ExtendData().getKG(minYear, maxYear,map);
+	}
+	
+	public Map<String,String> getTZ(int minYear,int maxYear,Map<String,Object> map){
+		return new ExtendData().getTZ(minYear, maxYear,map);
+	}
+	
+	
+	/**
+	 * 
 	 * <br>Description:获取统计报表中的最大年度
 	 * <br>Author:黎春行
 	 * <br>Date:2013-10-29
@@ -73,6 +91,12 @@ public class TjbbData extends AbstractBaseBean {
 			projectSet.add(String.valueOf(resultList.get(i).get("xmname")));
 		}
 		return projectSet;
+	}
+	
+	public List<Map<String, Object>> getAzfProject(){
+		String projctsSql = "select distinct( t.xmmc),t.tzmc from hx_azf t order by t.xmmc";
+		List<Map<String, Object>> resultList = query(projctsSql, YW);
+		return resultList;
 	}
 	
 	public Map<String, Map<String, Object>> getKFTLPlan(){
@@ -208,6 +232,14 @@ public class TjbbData extends AbstractBaseBean {
 		new ExtendData().addRzxq(year, quarter, value);
 	}
 	
+	public void addKG(String year, String quarter, String value,String xmmc,String tzmc){
+		new ExtendData().addKG(year, quarter, value,xmmc,tzmc);
+	}
+	
+	public void addTZ(String year, String quarter, String value,String xmmc,String tzmc){
+		new ExtendData().addTZ(year, quarter, value,xmmc,tzmc);
+	}
+	
 	/**
 	 * 
 	 * <br>Description:添加权益性资金注入
@@ -219,6 +251,10 @@ public class TjbbData extends AbstractBaseBean {
 	 */
 	public void addQyxzjzr(String year, String quarter, String value){
 		new ExtendData().addQyxzjzr(year, quarter, value);
+	}
+
+	public void savaAZFProject(String xmmc, String tzmc) {
+		new ExtendData().addAZFProject(xmmc, tzmc);
 	}
 	
 }
