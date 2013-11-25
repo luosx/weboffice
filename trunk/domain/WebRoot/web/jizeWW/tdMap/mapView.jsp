@@ -257,7 +257,7 @@ body,td,div,span,li{
 			</div>
 -->
 
-<iframe frameborder="0" id="lower"  name="lower"  style="width: 100%;height:100%; overflow: auto;" src="<%=basePath%>base/fxgis/fx/FxGIS.html"></iframe>
+<iframe frameborder="0" id="lower"  name="lower"  style="width: 100%;height:100%; overflow: auto;" src="<%=basePath%>base/fxgis/fx/FxGIS.html?debug=true&i=false"></iframe>
 
 <iframe frameborder="0" id="operation"  style="display:none;" name="operation"  style="width: 100%;height:92%; overflow: auto;" ></iframe>
 <!-- 
@@ -432,7 +432,6 @@ body,td,div,span,li{
 	}
   
 function openMap(){
-	
 	 if(openFlag!="map"){
 	 openFlag="map";
 	  document.getElementById('mapImg').src='images/tab_1.png';
