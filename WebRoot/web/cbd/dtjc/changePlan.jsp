@@ -227,21 +227,73 @@ Map<String, String> proMap = TjbbManager.getProjectByUserId(userId);
 	        	},{
  			        text: '取消',
 	        		handler: function(){
-	        			if(winForm.getForm().isValid()){
-	        				document.getElementById("itemselector").style.display = "none";
-	        			}
+	        			//if(winForm.getForm().isValid()){
+	        			//	document.getElementById("itemselector").style.display = "none";
+	        			//}
+	        			winForm.hide();
+	        			winForm1.hide();
 	        		}
 	        	}
 	        	]
-	        })
+	        });
+	        winForm1 = new Ext.form.FormPanel({
+	        	bodyStyle: 'padding:10px;',
+		        renderTo: 'itemselector',
+		        title: '请添加项目名称和投资名称',
+        		width:360,
+        		bodyStyle: 'padding:10px;',
+        		defaults:{
+                 xtype:"textfield",
+                 width:200
+              },
+        		items:[
+        			{id: "XMMC", fieldLabel: "项目名称"},
+                 	{id: "TZMC", fieldLabel: "投资名称"}
+        		],
+        		buttons:[{
+                 text:"保存",
+                 handler: function(){
+                      var res=sava();
+                      if(res){
+                        alert("保存成功");
+                        window.location.reload();
+                      }else{
+                        alert("保存失败");
+                      }
+                 }
+              },{
+ 			        text: '取消',
+	        		handler: function(){
+	        			//if(winForm.getForm().isValid()){
+	        			//	document.getElementById("itemselector").style.display = "none";
+	        			//}
+	        			winForm.hide();
+	        			winForm1.hide();
+	        		}
+	        	}
+              ]
+	        });
 	        //changeProject();
-	        //winForm.hide();
-	        
+	        winForm.hide();
+	        winForm1.hide();
 	    });
 	    
+	    function sava(){
+	    	var xmmc = Ext.getCmp("XMMC").getValue();
+	    	var tzmc = Ext.getCmp("TZMC").getValue();
+	    	putClientCommond("tjbbManager","savaAZFProject");
+			putRestParameter("XMMC",xmmc);
+			putRestParameter("TZMC",tzmc);
+			return restRequest(); 
+	    }
+	    
 	    function changeProject(){
-	    	document.getElementById("itemselector").style.display = "";
-	    	
+	    	winForm.show();
+	    	winForm1.hide();
+	    }
+	    function addAZFProject(){
+	    	winForm.hide();
+	    	winForm1.show();
 	    }
 	    		
 		//添加键盘快捷键
@@ -263,11 +315,6 @@ Map<String, String> proMap = TjbbManager.getProjectByUserId(userId);
 			
 			}
 		}
-		
-		
-		
-
-
   </script>
   <body>
   	<div id="showDiv" class="divstyle" style="display:none; width:50px;" onDblClick="showDetail(); return false;">
@@ -295,12 +342,13 @@ Map<String, String> proMap = TjbbManager.getProjectByUserId(userId);
 	  </table>
   	</div>
 	<div id="body" style=" overflow-x:scroll; height:100%;">
-				<%=TjbbManager.getPlan(userId)%>
+		<%=TjbbManager.getPlan(userId)%>
 	</div>
 	<div id="changeProject" class="changeProject">
 		<input type="button" value="修改项目和时间" onClick="changeProject(); return false" />
+		<input type="button" value="添加安置房项目" onClick="addAZFProject(); return false"/>
 	</div>
-	<div id="itemselector" class="form" style="display:none"></div>
+	<div id="itemselector" class="form" ></div>
 	<div id="deal"></div>
   </body>
   <script type="text/javascript">
