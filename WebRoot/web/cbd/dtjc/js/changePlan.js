@@ -186,7 +186,6 @@ function addkg(check){
 		quarter = 4;
 	}	
 	year = parseInt(year) + parseInt(minyear);
-	alert(year+":"+quarter)
    	putClientCommond("tjbbManager","changeTrzqk");
 	putRestParameter("type", "kg");
    	putRestParameter("year",year);
@@ -218,7 +217,7 @@ function addtz(check){
    	putRestParameter("year",year);
    	putRestParameter("quarter",quarter);
    	putRestParameter("value",value);
-   	putRestParameger("xmmc",xmmc);
-   	putRestParameger("tzmc",tzmc);
+   	putRestParameter("xmmc",xmmc);
+   	putRestParameter("tzmc",tzmc);
    	restRequest();
 }
