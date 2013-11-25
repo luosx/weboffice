@@ -329,8 +329,8 @@ public class ResultImp extends AbstractBaseBean {
             }            
             String selectSql = "select * from xcrz t where t.yw_guid = ?";
             List<Map<String,Object>> list = query(selectSql,YW,new Object[]{values[0]});
-            String updateSql = "update xcrz t set xcbh=?,xcdw=?,xcrq=?,xcqy=?,xcry=?,xclx=?,sfywf=?,clyj=?,bz=?,writerxzqh=?,userid=?,writedate=?,spqk=?,allnum=? where t.yw_guid=?";
-            String insertSql = "insert into xcrz(yw_guid,xcbh,xcdw,xcrq,xcqy,xcry,xclx,sfywf,clyj,bz,writerxzqh,userid,writedate,spqk,allnum) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            String updateSql = "update xcrz t set xcbh=?,xcdw=?,xcrq=?,xcqy=?,xcry=?,xclx=?,sfywf=?,clyj=?,bz=?,writerxzqh=?,userid=?,writedate=to_date(?,'yyyy-mm-dd hh24:mi:ss'),spqk=?,allnum=? where t.yw_guid=?";
+            String insertSql = "insert into xcrz(yw_guid,xcbh,xcdw,xcrq,xcqy,xcry,xclx,sfywf,clyj,bz,writerxzqh,userid,writedate,spqk,allnum) values(?,?,?,?,?,?,?,?,?,?,?,?,to_date(?,'yyyy-mm-dd hh24:mi:ss'),?,?)";
             if(list.size()>0){
                 update(updateSql,YW,values2);
             }else{
