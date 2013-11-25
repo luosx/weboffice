@@ -177,7 +177,7 @@ body,td,div,span,li{
 <img id='mapImg' name='mapImg' style="position:absolute;left:-5;top:6;"  src="images/tab_1.png" width="99" height="26" />
 </td>
 <%}else{ %>
-<td width=99 height=38 style="cursor: hand;" onClick="openURL('<%=basePath%>web/jizeWW/padResult/padDatalist.jsp',0)">
+<td width=99 height=38 style="cursor: hand;" onClick="">
 <img id='urlImg' name='urlImg' style="position:absolute;left:-5;top:6;"  src="images/tab_4.png" width="99" height="26" />
 </td>
 <%} %>
@@ -195,10 +195,10 @@ body,td,div,span,li{
 <td  id='zoomout' nowrap  align="center" valign="top"  style="cursor: hand;" onClick='zoomOut()'><img src="images/zoom-out.png" title="缩小" width="27" height="27" /></td>
 <td  id='zoomToFullExtent'  nowrap  align="center" valign="top"  style="cursor: hand;" onClick='zoomToFullExtent()'><img src="images/Full_Extent.png" title="初始视图" width="27" height="27" /></td>
 <td  id='pan'  nowrap  align="center" valign="top"  style="cursor: hand;" onClick='pan()'><img src="images/pan.png" title="漫游" width="27" height="27" /></td>
-<td  id='rule'  nowrap  align="center" valign="top"  style="cursor: hand;" onClick='measureLengths()'><img src="images/rule.png" width="27" height="27" /></td>
+<td  id='rule'  nowrap  align="center" valign="top"  style="cursor: hand;" onClick='measureLengths()'><img src="images/rule.png" title="长度量算" width="27" height="27" /></td>
 <td  id='clear' nowrap  align="center" valign="top"  style="cursor: hand;" onClick='clearLayer()'><img src="images/clear.png" title="清除" width="27" height="27" /></td>
 <td  id='legend'  nowrap  align="center" valign="top"  style="cursor: hand;" onClick='legend()'><img src="images/legend.png" title="图例" width="27" height="27" /></td>
-<td  id='print' nowrap  align="center" valign="top"  style="cursor: hand;" onClick='showInfo()'><img src="images/print.png" title="打印" width="27" height="27" /></td>
+<!-- <td  id='print' nowrap  align="center" valign="top"  style="cursor: hand;" onClick=''><img src="images/print.png" title="打印" width="27" height="27" /></td> -->
 
 <td width=100 >
     <SELECT id="c"  name="c" onChange="locator()" style="vertical-align: middle;padding:0;margin:0;margin-bottom:10px;">
@@ -280,7 +280,7 @@ body,td,div,span,li{
  }
    function closeInfo(){
     document.getElementById("info").style.display='none';
-    openURL("<%=basePath%>web/<%=name%>/padResult/padDatalist.jsp",1);  
+    //openURL("<%=basePath%>web/<%=name%>/padResult/padDatalist.jsp",1);  
   }
   function showInfo(){
     document.getElementById("info").style.display='block';
