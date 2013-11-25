@@ -5,9 +5,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import com.klspta.base.AbstractBaseBean;
+
 import com.klspta.base.util.UtilFactory;
 import com.klspta.base.wkt.Polygon;
 import com.klspta.console.ManagerFactory;
+import com.klspta.model.projectinfo.ProjectInfo;
 import com.klspta.web.xuzhouNW.wpzf.WpzfHandler;
 
 /**
@@ -92,10 +94,15 @@ public class PADDataManager extends AbstractBaseBean {
      * @return
      */
     public String getCjzb(String rwbh) {
-        String sql = "select pmzb from dc_ydqkdcb where yw_guid=?";
+        String zblx = "pmzb";
+        String flag = ProjectInfo.getInstance().getFlag();
+        if(flag.toLowerCase().indexOf("ww")!=-1){
+            zblx = "jwzb";
+        }
+        String sql = "select "+zblx+" from dc_ydqkdcb where yw_guid=?";
         List<Map<String, Object>> list = query(sql, YW, new Object[] { rwbh });
         if (list.size() > 0) {
-            Object zb = list.get(0).get("pmzb");
+            Object zb = list.get(0).get(zblx);
             if (zb == null) {
                 return null;
             } else {
