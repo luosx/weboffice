@@ -12,24 +12,24 @@ String yw_guid=request.getParameter("yw_guid");
 String year = request.getParameter("year");
 String pra = "";
 if(yw_guid==null||"null".equals(yw_guid)){
-	pra="dolocation=true&p={\"rings\":[[[38688372,4431495],[38688350,4431440],[38688372,4431390],[38688402,4431431],[38688430,4431431],[38688414,4431494],[38688372,4431495]]],\"spatialReference\":{\"wkid\":2362}}";
+	pra="dolocation=true&p={\"rings\":[[[38688372,4431495],[38688350,4431440],[38688372,4431390],[38688402,4431431],[38688430,4431431],[38688414,4431494],[38688372,4431495]]],\"spatialReference\":{\"wkid\":2362}}&i=false";
 }else{
 	if(dtbzflag != null && "true".equals(dtbzflag)){
 		XfAction xfAction = new XfAction();
 		if("null".equals(xfAction.getBiaozhu(yw_guid))){
 			
 		}else{
-			pra = "dolocation=true&p="+xfAction.getBiaozhu(yw_guid);
+			pra = "dolocation=true&p="+xfAction.getBiaozhu(yw_guid)+"&i=false";
 		}
 	}else{
 		PADDataManager pDataList=new PADDataManager();
-		pra="dolocation=true&p="+pDataList.getCjzb(yw_guid);
+		pra="dolocation=true&p="+pDataList.getCjzb(yw_guid)+"&i=false";
 	}
 }
 String url=basePath+"base/fxgis/fx/FxGIS.html?debug=true&i=false";
 
 if(year != null && !"null".equals(year)){
-	pra = "initFunction=[{\"name\":\"findFeature\",\"parameters\":\"jz_yw,0,"+yw_guid+",OBJECTID\"}]";
+	pra = "initFunction=[{\"name\":\"findFeature\",\"parameters\":\"jz_yw,0,"+yw_guid+",OBJECTID\"}]&i=false";
 }
 
 if(flag!=null&&!flag.equals("null")||dtbzflag!=null&&!dtbzflag.equals("null")){
