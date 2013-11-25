@@ -185,9 +185,9 @@ public class TrzqkCalculate extends AbstractTrzqkCalculate {
 		ExtendData extendData = new ExtendData();
 		Map<String, String> parameters = extendData.getParameters();
 		String key = year + "_" + quarter;
-		long gygmValue = Long.parseLong(gygm.get(key)== null ? "0":gygm.get(key));
+		Float gygmValue = Float.parseFloat(gygm.get(key)== null ? "0":gygm.get(key));
 		String dyl = parameters.get("dyl");
-		//long value = gygmValue * Long.parseLong(parameters.get("pgtdjz")) * Long.parseLong(dyl) * (1 - Long.parseLong(parameters.get("rzss")));
+		//long value = gygmValue * Float.parseFloat(parameters.get("pgtdjz")) * Long.parseLong(dyl) * (1 - Long.parseLong(parameters.get("rzss")));
 		float value =  gygmValue * Float.parseFloat(parameters.get("pgtdjz")) * Float.parseFloat(dyl) * (1 - Float.parseFloat(parameters.get("rzss")));
 		store.remove(key);
 		store.put(key, String.valueOf(value));
