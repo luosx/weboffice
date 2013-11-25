@@ -1,5 +1,6 @@
 package com.klspta.web.cbd.dtjc;
 
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,6 +23,9 @@ import com.klspta.web.cbd.hxxm.jdjh.KftlTable;
  */
 public class TjbbManager extends AbstractBaseBean {
 	
+	public static StringBuffer addTR(){
+		return TjbbBuild.addTR();
+	}
 	/**
 	 * 
 	 * <br>Description:获取实施计划
@@ -80,6 +84,28 @@ public class TjbbManager extends AbstractBaseBean {
 			new TjbbData().addRzxq(year, quarter, value);
 		}else if(type.equals("zjzr")){
 			new TjbbData().addQyxzjzr(year, quarter, value);
+		}else if(type.equals("kg")){
+			String xmmc = request.getParameter("xmmc");
+			String tzmc = request.getParameter("tzmc");
+			try {
+				tzmc = new String(tzmc.getBytes("iso-8859-1"),"utf-8");
+				xmmc = new String(xmmc.getBytes("iso-8859-1"),"utf-8");
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			new TjbbData().addKG(year,quarter,value,xmmc,tzmc);
+		}else if(type.equals("tz")){
+			String xmmc = request.getParameter("xmmc");
+			String tzmc = request.getParameter("tzmc");
+			try {
+				tzmc = new String(tzmc.getBytes("iso-8859-1"),"utf-8");
+				xmmc = new String(xmmc.getBytes("iso-8859-1"),"utf-8");
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			new TjbbData().addTZ(year,quarter,value,xmmc,tzmc);
 		}
 		
 		//通过线程实现投融资情况更新
@@ -153,7 +179,28 @@ public class TjbbManager extends AbstractBaseBean {
 			return String.valueOf(tjbbData.getKFTLProject().size());
 			
 		}
+	}
+	
+	public void savaAZFProject(){
+		TjbbData tj = new TjbbData();
+		String xmmc = request.getParameter("XMMC");
+		String tzmc = request.getParameter("TZMC");
+		try {
+			xmmc = new String(xmmc.getBytes("iso-8859-1"),"utf-8");
+			tzmc = new String(tzmc.getBytes("iso-8859-1"),"utf-8");
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
+		try {
+			String sql = "insert into zfjc.hx_azf (nd,jd,xmmc,tzmc) values ('2011','1','" + xmmc
+					+ "','" + tzmc + "')";
+			update(sql, YW);
+			response("true");
+		} catch (Exception e) {
+			response("false");
+		}
 	}
 
 }
