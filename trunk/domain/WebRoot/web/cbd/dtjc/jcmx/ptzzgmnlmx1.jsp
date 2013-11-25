@@ -486,9 +486,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         	tryCol();
         }
         
-        function save(){
+        function sava(){
         	Sava_CL();
-        	Sava_BL();
+        	var res=Sava_BL();
+                      if(res){
+                        alert("保存成功");
+                        window.location.reload();
+                      }else{
+                        alert("保存失败");
+                      }
         }
         function Sava_CL(){
         	putClientCommond("ptzzgmlCL","Sava_CL");
@@ -533,7 +539,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<input type="checkbox" name="checkybl1" checked="checked" onclick="CheckClick('checkybl1');"/>因变量1
 		<input type="checkbox" name="checkybl2" checked="checked" onclick="CheckClick('checkybl2');"/>因变量2
 	<div>
-    	<input type="button" value="保存" onclick="save();"/>
+    	<img src="web/cbd/framework/images/save.png" onClick="sava()" width="20px"  height="20px">
     	</div>
 	</div>
     
