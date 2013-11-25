@@ -168,3 +168,57 @@ function addzjzr(check){
    	putRestParameter("value",value);
    	restRequest();
 }
+
+function addkg(check){
+	var value = check.value;
+	var changeCell = check.parentNode.cellIndex;
+	var changeRow = check.parentNode.parentNode.rowIndex;
+	//计算年度和季度
+	var moveTable = document.getElementById("planTable");
+	var minyear = moveTable.rows[0].cells[1].innerText;
+	var quarter = (parseInt(changeCell) - 1)%4;
+	var year = (parseInt(changeCell) - 0)/4;
+	var xmmc = moveTable.rows[parseInt(changeRow)].cells[1].innerText;
+	var tzmc = moveTable.rows[parseInt(changeRow)+1].cells[1].innerText;
+	
+	if(quarter == 0){
+		year = year - 1;
+		quarter = 4;
+	}	
+	year = parseInt(year) + parseInt(minyear);
+	alert(year+":"+quarter)
+   	putClientCommond("tjbbManager","changeTrzqk");
+	putRestParameter("type", "kg");
+   	putRestParameter("year",year);
+   	putRestParameter("quarter",quarter);
+   	putRestParameter("value",value);
+   	putRestParameter("xmmc",xmmc);
+   	putRestParameter("tzmc",tzmc);
+   	restRequest();
+}
+
+function addtz(check){
+	var value = check.value;
+	var changeCell = check.parentNode.cellIndex;
+	var changeRow = check.parentNode.parentNode.rowIndex;
+	//计算年度和季度
+	var moveTable = document.getElementById("planTable");
+	var minyear = moveTable.rows[0].cells[1].innerText;
+	var quarter = (parseInt(changeCell) - 1)%4;
+	var year = (parseInt(changeCell) - 0)/4;
+	var xmmc = moveTable.rows[parseInt(changeRow)-1].cells[1].innerText;
+	var tzmc = moveTable.rows[parseInt(changeRow)].cells[1].innerText;
+	if(quarter == 0){
+		year = year - 1;
+		quarter = 4;
+	}
+	year = parseInt(year) + parseInt(minyear);
+   	putClientCommond("tjbbManager","changeTrzqk");
+	putRestParameter("type", "tz");
+   	putRestParameter("year",year);
+   	putRestParameter("quarter",quarter);
+   	putRestParameter("value",value);
+   	putRestParameger("xmmc",xmmc);
+   	putRestParameger("tzmc",tzmc);
+   	restRequest();
+}
