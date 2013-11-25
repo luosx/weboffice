@@ -43,7 +43,7 @@
 		
 			function initEdit(){
 					init();
-					var singnames = "ddcbr01#ddcbr02#cbdwqm#scqm#zgldqm#zyldqm";
+					var singnames = "ddcbr01#ddcbr02#cbdwqm#scqm#scdwzgldqm#cbdwzgldqm#zyldqm";
 					signLoad(singnames);
 					var sfzd1 = document.getElementById('sfzd1');
 					if(sfzd1.checked){
@@ -243,16 +243,27 @@ if(fixed!=null && fixed.equals("fixedPrint")){%>
 		 </div>	</td>
   </tr>
   <tr>
-    <td colspan="2"><div align="center">
+    <td colspan="2"><div align="center">审查单位<br/>
     主管领导<br/>意&nbsp;&nbsp;&nbsp;&nbsp;见</div></td>
     <td colspan="6">
-		<textarea rows="5" cols="70" name="zgldyj" id="zgldyj" style="width: 99%"></textarea>
+		<textarea rows="5" cols="70" name="scdwzgldyj" id="scdwzgldyj" style="width: 99%"></textarea>
     	 <div class="div80">
-		  	<div class="divLeftFloat">签名：<input class="underline" type="text" name="zgldqm" id="zgldqm" onfocus="underwrite(this)" onClick="sign(this);"    style="width:50px" />
-			<img  width="60" height="25" id="zgldqmSign" style="display:none" onclick="delSign(this)"/></div>
-		    <div>日期：<input type="text" class="underline" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})" name="zgldqmrq" id="zgldqmrq" readonly  style="width: 80px"/></div>
+		  	<div class="divLeftFloat">签名：<input class="underline" type="text" name="scdwzgldqm" id="scdwzgldqm" onfocus="underwrite(this)" onClick="sign(this);"    style="width:50px" />
+			<img  width="60" height="25" id="scdwzgldqmSign" style="display:none" onclick="delSign(this)"/></div>
+		    <div>日期：<input type="text" class="underline" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})" name="scdwzgldqmrq" id="scdwzgldqmrq" readonly  style="width: 80px"/></div>
 		 </div>	</td>
   </tr>
+  <tr>
+    <td colspan="2"><div align="center">承办单位<br/>
+    主管领导<br/>意&nbsp;&nbsp;&nbsp;&nbsp;见</div></td>
+    <td colspan="6">
+		<textarea rows="5" cols="70" name="cbdwzgldyj" id="cbdwzgldyj" style="width: 99%"></textarea>
+    	 <div class="div80">
+		  	<div class="divLeftFloat">签名：<input class="underline" type="text" name="cbdwzgldqm" id="cbdwzgldqm" onfocus="underwrite(this)" onClick="sign(this);"    style="width:50px" />
+			<img  width="60" height="25" id="cbdwzgldqmSign" style="display:none" onclick="delSign(this)"/></div>
+		    <div>日期：<input type="text" class="underline" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})" name="cbdwzgldqmrq" id="cbdwzgldqmrq" readonly  style="width: 80px"/></div>
+		 </div>	</td>
+  </tr>  
   <tr id="zyld" style="display:none;">
     <td colspan="2"><div align="center">
     主要领导<br/>意&nbsp;&nbsp;&nbsp;&nbsp;见</div></td>
