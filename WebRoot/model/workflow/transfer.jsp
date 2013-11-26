@@ -194,7 +194,7 @@ body {
 
 	<body onload="bindCheck()">
 		<div
-			style="width: 250px; height: 150px; margin: auto; margin-top: 50px">
+			style="width: 300px; height: 150px; margin: auto; margin-top: 50px">
 			<form>
 				<font color="#804000"><b>下一办理环节：</b> </font>
 				<br />
@@ -226,7 +226,7 @@ body {
 				%>
 				<div id="roleDiv">
 				<font color="#804000"><b>移交机构：</b> </font>
-				<select id="roles" onchange="changeUser()" style="width: 130px">
+				<select id="roles" onchange="changeUser()" style="width: 200px">
 					<%
 						for (int i = 0; i < Roles.size(); i++) {
 									Map<String, Object> roleMap = (Map<String, Object>) Roles.get(i);
@@ -243,7 +243,7 @@ body {
 				<br />
 				<br />
 				<font color="#804000"><b>移&nbsp&nbsp交&nbsp&nbsp给：</b> </font>
-				<select id="users" style="width: 130px">
+				<select id="users" style="width: 200px">
 					<%
 						List<Object> initUsers = ManagerFactory.getUserManager().getAllUser(currentRole);
 								for (int i = 0; i < initUsers.size(); i++) {
@@ -263,7 +263,7 @@ body {
 				<br />
 				<br />
 				<font color="#804000"><b>移&nbsp&nbsp交&nbsp&nbsp给：</b> </font>
-				<select id="users" style="width: 130px">
+				<select id="users" style="width: 200px">
 					<option value='<%=owner%>'><%=owner%></option>
 				</select>
 				<script type="text/javascript">
