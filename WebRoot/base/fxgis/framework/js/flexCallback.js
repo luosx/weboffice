@@ -59,12 +59,17 @@ function identifyCallback(s){
 	putRestParameter("points", points);
 	putRestParameter("flag", "0");
 	var result = restRequest();
-	document.getElementById('xz').innerHTML = (result.split('@'))[0];
-	document.getElementById('gh').innerHTML = (result.split('@'))[1];
-	showWindow();		
+	if(result.indexOf('@')!=-1){
+			document.getElementById('xz').innerHTML = (result.split('@'))[0];
+			document.getElementById('gh').innerHTML = (result.split('@'))[1];
+			showWindow('right');
+	}else{
+		showWindow('fault');
+	}
+		
 } 
 var win;
-function showWindow() {
+function showWindow(mes) {
 	var tabs = new Ext.TabPanel({
 		        id:'pan',
 				autoTabs : true,
@@ -102,6 +107,10 @@ function showWindow() {
 							autoDestroy : true
 						}]
 			});
+	if(mes=='fault'){
+		tabs.remove('xz_tab');
+		tabs.remove('gh_tab');
+	}	
 	if (!win) {
 		win = new Ext.Window({
 					layout : 'fit',
@@ -118,10 +127,11 @@ function showWindow() {
 							}]
 				});
 	}else{	
-	win.items.removeAt(0);
-	win.items.add("pan",tabs);
-	win.doLayout();
+	 win.items.removeAt(0);
+	 win.items.add("pan",tabs);
+	 win.doLayout();
 	} 
+
 	win.show();
 }
 
