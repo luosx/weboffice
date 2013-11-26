@@ -7,6 +7,18 @@ String zttId=request.getParameter("zttbh");
 String url=basePath+ZttDeal.getInstance().getMapURL(zttId);
 
 %>
+<!--  
 <script type="text/javascript">
 document.location.href='<%=url%>'
 </script>
+-->
+<html>
+<head>
+<script type="text/javascript">
+
+</script>
+</head>
+<body>
+<iframe src="<%=basePath%>base/fxgis/fx/tongchou.html?i=false" width="100%" height="100%"></iframe>
+</body>
+</html>

@@ -9,8 +9,11 @@ String url=basePath+ZttDeal.getInstance().getMapURL(zttId);
 
 <html>
 <head>
+<script type="text/javascript">
+
+</script>
 </head>
 <body>
-<iframe src="<%=basePath%>base/fxgis/fx/tongchou.html?i=false" width="1400" height="500"></iframe>
+<iframe src="<%=basePath%>base/fxgis/fx/tongchou.html?i=false" width="100%" height="100%"></iframe>
 </body>
 </html>
