@@ -77,7 +77,7 @@ window.onload=function()
 	}
 </script>
 <body style="background-color:#D6F9FA;">
-<iframe src="<%=basePath%>base/fxgis/fx/FxGIS.html" width="1400" height="500"></iframe>
+<iframe src="<%=basePath%>base/fxgis/fx/FxGIS.html?i=false" width="100%" height="550"></iframe>
 <!--<img id="icon" onclick="clickImage()"  src="<%=resourcePath%>/images/go.png" style="display:block;float:right;width:26px;height:26px;"/>--> 
 <!-- 
 <div style="width:100%;">

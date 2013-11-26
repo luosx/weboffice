@@ -221,7 +221,7 @@
   }
          
 function showLocation(bh){
-   var url="<%=basePath%>"+"base/fxgis/fx/FxGIS.html?initFunction=[{\"name\":\"findFeature\",\"parameters\":\"CBD,1,"+bh+",TBBH\"}]";
+   var url="<%=basePath%>"+"base/fxgis/fx/FxGIS.html?i=false&initFunction=[{\"name\":\"findFeature\",\"parameters\":\"CBD,1,"+bh+",TBBH\"}]";
    var zrb=window.open(url); 
    zrb.document.title ="自然斑";
    }
