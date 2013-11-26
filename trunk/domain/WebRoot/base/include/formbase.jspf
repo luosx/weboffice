@@ -184,7 +184,7 @@ function init(){
 	            	if(document.getElementsByName(i.substring(0,i.length-4))[0].nodeName == "SELECT"){
 	            		document.getElementsByName(i.substring(0,i.length-4))[0].disabled = true;
 	            	}
-	            	document.getElementsByName(i.substring(0,i.length-4))[0].readOnly = true;
+	            	document.getElementsByName(i.substring(0,i.length-4))[0].disabled = true;
 	            }
             }
         }catch (e){
