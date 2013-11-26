@@ -4,7 +4,20 @@ function showVideo(s){
 }
 //flex加载完成后，会调用此方法，重置图层是否展现等，返回null则无需重置。
 function getInitMapLayerVisiable(){ 
-    return "[{\"servicename\":\"jz_yw\",\"visiableids\":[0]},{\"servicename\":\"jz_xz\",\"visiableids\":[]},{\"servicename\":\"jz_jsydgzq\",\"visiableids\":[]},{\"servicename\":\"jz_tdytq\",\"visiableids\":[]},{\"servicename\":\"jz_yx\",\"visiableids\":[0]}]";
+    putClientCommond("mapconfig", "getInitMapService");
+    var result = restRequest();
+    var jsonData = new Dictionary();
+    var flag;
+    for(var i=0;i<result.length;i++){
+    	if(result[i].FLAG=='true'){
+    		flag = true;
+    	}else{
+    		flag = false;
+    	}
+    	jsonData.put(result[i].SERVERID,result[i].LAYERID,result[i].TYPE,flag);
+    }
+    return jsonData.toStr();
+    //return "[{\"servicename\":\"jz_yw\",\"visiableids\":[0]},{\"servicename\":\"jz_xz\",\"visiableids\":[]},{\"servicename\":\"jz_jsydgzq\",\"visiableids\":[]},{\"servicename\":\"jz_tdytq\",\"visiableids\":[]},{\"servicename\":\"jz_yx\",\"visiableids\":[0]}]";
 }
 //画点 回调方法
 function drawPointCallback(s){
