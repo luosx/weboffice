@@ -47,6 +47,7 @@ if(flag!=null&&!flag.equals("null")||dtbzflag!=null&&!dtbzflag.equals("null")){
   </head>
       <script type="text/javascript" src="<%=basePath%>base/fxgis/framework/js/menu.js"></script>
       <script type="text/javascript" src="<%=basePath%>base/fxgis/framework/js/flexCallback.js"></script>
+      <script src="<%=basePath%>/base/fxgis/framework/js/toJson.js"></script>
 <script type="text/javascript">
 var yw_guid='<%=yw_guid%>';
 var basePath='<%=basePath%>';
