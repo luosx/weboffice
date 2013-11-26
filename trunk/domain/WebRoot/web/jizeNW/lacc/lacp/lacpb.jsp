@@ -57,7 +57,7 @@
 				if(document.getElementById("zyldqmrq").value!=''){
 					sjfgjzrq = document.getElementById("zyldqmrq").value;
 				}else{
-					sjfgjzrq = document.getElementById("zgldqmrq").value; 
+					sjfgjzrq = document.getElementById("cbdwzgldqmrq").value; 
 				}								
 				var yw_guid='<%=yw_guid%>';  
 	            putClientCommond("lacc","saveBhAy");
