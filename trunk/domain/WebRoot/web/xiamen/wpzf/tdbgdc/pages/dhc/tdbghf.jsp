@@ -27,6 +27,7 @@
 	<script type="text/javascript">
 		var myData;
 		var grid;
+		var saveId;
 		Ext.onReady(function(){
 			//将是这个用户填写的巡查日志查询出来
 	  		putClientCommond("tdbgdc","getyshf");
@@ -84,15 +85,7 @@
 			            displayMsg: '共{2}条，当前为：{0} - {1}条',
 			            emptyMsg: "无记录",
 			        plugins: new Ext.ux.ProgressBarPager()
-		        }),
-		        buttons: [
-		         {
-		         	text:'导出核查任务',
-		         	handler: sendTask
-		         },{
-		         	text:'导入核查成果',
-		         	handler: impTask
-		         }]
+		        })
         	});
     	grid.render('mygrid_container');
 	});
@@ -102,6 +95,9 @@
 	}
 	
 	function viewDetail(id){
+		saveId = id;
+		document.getElementById("choseway").style.display = "";
+		/*
 		 Ext.MessageBox.confirm('确认', '确定将当前图斑设为疑似违法?', function(btn){
 		 	if(btn == "yes"){
 		 		putClientCommond("tdbgdc","changefxqk");
@@ -115,6 +111,7 @@
 		 	}
 		 	
 		 })
+		 */
 	}
 	
 	function showMap(id){
@@ -170,15 +167,15 @@
              return val;
            }
          } 
-         
-    //导出核查任务
-	function sendTask(){
-	  	// window.showModalDialog("<%=basePath%>web/jinan/lacc/lb/xiafa/xiafa.jsp?userId=<%=userid%>","","dialogWidth=650px;dialogHeight=450px;status=no;scroll=no");
-    	query();
-	
+		
+   	function sure(){
+		alert("选择处理方式");
+		document.getElementById("choseway").style.display = "none";
 	}
 	
-	function impTask(){
+	function cancel(){
+		alert("选择取消当前操作");
+		document.getElementById("choseway").style.display = "none";
 	}
 </script>
 </head>
@@ -187,5 +184,28 @@
 	<div id="importWin" class="x-hidden">
 		<div id="importForm"></div>
 	</div>
+		<div id="choseway" style="position:absolute; height:100px; width:300px;display:none">
+		<table style="border:0; width:300px; height:100px; background-color:#D5E2F2" cellpadding="0" cellspacing="0">
+			<tr align="left">
+				<td>&nbsp;请选择违法类型:</td>
+			</tr>
+			<tr align="center">
+				<td>
+					<input type="radio" name="type" value="函告执法局" />无审批 &nbsp;&nbsp;&nbsp;
+					<input type="radio" name="type" value="立案处理" />无供地
+				</td>
+			</tr>
+			<tr align="center">
+				<td>
+					<input type="button" value="确定" onClick="sure(); return false;" /> &nbsp;&nbsp;
+					<input type="button" value="取消" onClick="cancel(); return false;" />
+				</td>
+			</tr>
+		</table>
+	</div>
 </body>
+<script type="text/javascript">
+	document.getElementById("choseway").style.left = document.body.clientWidth/2 - 150;
+	document.getElementById("choseway").style.top = document.body.clientHeight/2 - 50;
+</script>
 </html>
