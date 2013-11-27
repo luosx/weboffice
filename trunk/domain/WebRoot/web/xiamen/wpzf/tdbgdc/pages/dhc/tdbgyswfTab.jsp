@@ -8,7 +8,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
   <head>
     
-    <title>土地变更调查</title>
+    <title>土地变更调查待核查</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -40,14 +40,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	        items:[
 	        	{
 	                title: '全部',
-	                html: "<iframe width='"+w+"' height='"+h+"' src='tdbgqb.jsp'/>" 
+	                html: "<iframe width='"+w+"' height='"+h+"' src='yswf/tdbgyswfqb.jsp'/>" 
 	            },
 	        	{
-	                title: '疑似违法',
-	                html: "<iframe width='"+w+"' height='"+h+"' src='tdbgyswfTab.jsp'/>" 
+	                title: '无审批',
+	                html: "<iframe width='"+w+"' height='"+h+"' src='yswf/tdbgyswfwsp.jsp'/>" 
+	            },
+	        	{
+	                title: '无供地',
+	                html: "<iframe width='"+w+"' height='"+h+"' src='yswf/tdbgyswfwgd.jsp'/>" 
 	            },{
-	                title: '合法',
-	                html: "<iframe width='"+w+"' height='"+h+"' src='tdbghf.jsp'/>"
+	                title: '巡查发现',
+	                html: "<iframe width='"+w+"' height='"+h+"' src='yswf/tdbgyswf.jsp'/>"
 	            }
 	        ]
     	})
