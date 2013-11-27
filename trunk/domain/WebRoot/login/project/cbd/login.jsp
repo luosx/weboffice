@@ -78,8 +78,8 @@
         <td height="53">&nbsp;</td>
         <td><table width="" border="0" cellspacing="0" cellpadding="0">
           <tr>
-            <td style="width:40px;text-align: left"><span style="margin-left:-10px;color:red;"><%=type%></span></td>
-            <td width="93" ><a href="#" style="margin-left:-3px;" onclick='login();return false;' target="_parent" onmouseover="MM_swapImage('Image1','','../../images/dl_btnB.gif',1)" onmouseout="MM_swapImgRestore()"><img src="../../images/dl_btnA.gif" name="Image1" width="51" height="22" border="0" id="Image1" /></a></td>
+            <td style="width:40px;text-align: left"><span style="margin-left:-60px;color:red;"><%=type%></span></td>
+            <td width="93" ><a href="#" style="margin-left:-4px;" onclick='login();return false;' target="_parent" onmouseover="MM_swapImage('Image1','','../../images/dl_btnB.gif',1)" onmouseout="MM_swapImgRestore()"><img src="../../images/dl_btnA.gif" name="Image1" width="51" height="22" border="0" id="Image1" /></a></td>
           </tr>
         </table></td>
       </tr>
