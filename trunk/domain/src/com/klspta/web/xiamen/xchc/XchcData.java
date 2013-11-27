@@ -67,6 +67,7 @@ public class XchcData extends AbstractBaseBean implements IxchcData {
              sqlBuffer.append(keyword);
              sqlBuffer.append("%')");
         }
+		sqlBuffer.append(" order by t.HCRQ");
 		List<Map<String, Object>> getList = query(sqlBuffer.toString(), YW);
         for (int i = 0; i < getList.size(); i++) {
         	getList.get(i).put("XIANGXI", i);
