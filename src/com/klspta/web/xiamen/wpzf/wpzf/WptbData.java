@@ -10,6 +10,7 @@ import java.util.Set;
 import com.klspta.base.AbstractBaseBean;
 import com.klspta.base.util.UtilFactory;
 import com.klspta.web.xiamen.jcl.XzqHandle;
+import com.sun.corba.se.impl.oa.poa.ActiveObjectMap.Key;
 
 public class WptbData extends AbstractBaseBean implements IwptbData {
 	private WPbean wpBean = new WPbean();
@@ -83,7 +84,18 @@ public class WptbData extends AbstractBaseBean implements IwptbData {
 		List<Map<String, Object>> tdbgList = getTDBGList(userId, "违法", keyword);
 		return linkMap(queryList, tdbgList);
 	}
-
+	
+	public List<Map<String, Object>> getWPList(String where){
+		StringBuffer sqlBuffer = new StringBuffer();
+		sqlBuffer.append("select t.objectid as yw_guid, t.jcbh, t.xmc, t.xzb, t.yzb from ").append(wpBean.getTDBG_NAME()).append(" t ");
+		if(where != null){
+			sqlBuffer.append(" ").append(where);
+		}
+		sqlBuffer.append(" order by to_number(t.jcbh) ");
+		List<Map<String, Object>> queryList = query(sqlBuffer.toString(), GIS);
+		return queryList;
+	}
+	
 	private String getTDBG(String userId, String type, String keyword){
 		List<Map<String, Object>> queryList = getTDBGList(userId, type, keyword);
 		Set<String> tdbgSet = new HashSet<String>();

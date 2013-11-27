@@ -9,8 +9,8 @@ package com.klspta.web.xiamen.jcl;
  */
 public class BuildDTPro {
 	public static final int CKLX_WP = 1;
+	//public static final String MODEL_WP = "initFunction=[{\"name\":\"findFeature\",\"parameters\":\"jctb,0,yw_guid,OBJECTID\"},{\"name\":\"drawPoint\",\"parameters\":\"jctb,0,yw_guid,OBJECTID\"}]";
 	public static final String MODEL_WP = "initFunction=[{\"name\":\"findFeature\",\"parameters\":\"jctb,0,yw_guid,OBJECTID\"}]";
-	
 	public static String getPar(String yw_guid, int type){
 		String pro = "";
 		switch (type) {
