@@ -48,7 +48,6 @@
 			height = document.body.clientHeight * 0.995;
 			
 			grid = new Ext.grid.GridPanel({
-				title:'巡查日志列表',
 		        store: store,
 		        columns: [
 		        	new Ext.grid.RowNumberer(),
