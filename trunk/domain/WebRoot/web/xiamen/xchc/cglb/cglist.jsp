@@ -24,9 +24,10 @@
 	<script type="text/javascript">
 		var myData;
 		var grid;
+		var limitNum;
 		Ext.onReady(function(){
 			//将是这个用户填写的巡查日志查询出来
-	  		putClientCommond("xchc","getDclList");
+	  		putClientCommond("xchc","getDCLList");
 		    putRestParameter("userid","<%=userid%>");
 			myData = restRequest();
 			store = new Ext.data.JsonStore({
@@ -39,10 +40,10 @@
 						{name: '<%=showList[showList.length - 1][0]%>'}
 					]
 			});
-			
-			store.load({params:{start:0, limit:15}});
 			width = document.body.clientWidth;
 			height = document.body.clientHeight * 0.995;
+			limitNum = parseInt(height/31);
+			store.load({params:{start:0, limit:limitNum}});
 			
 			grid = new Ext.grid.GridPanel({
 		        store: store,
@@ -76,13 +77,21 @@
 		        stateId: 'grid',
 		        buttonAlign:'center',
 		        bbar: new Ext.PagingToolbar({
-			        pageSize: 15,
+			        pageSize: limitNum,
 			        store: store,
 			        displayInfo: true,
 			            displayMsg: '共{2}条，当前为：{0} - {1}条',
 			            emptyMsg: "无记录",
 			        plugins: new Ext.ux.ProgressBarPager()
-		        })
+		        }),
+     		    buttons: [
+		         {
+		         	text:'外业成果导入',
+		         	handler: impTask
+		         },{
+		         	text:'新增巡查成果',
+		         	handler: newTask
+		         }]
         	});
     	grid.render('mygrid_container');
 	});
@@ -110,15 +119,15 @@
 		});
 	}
 	function showDetail(id){
-	    var url = "xjclyjframe.jsp?zfjcType=11&yw_guid="+myData[id].GUID;     
-		var height = window.screen.availHeight;
-		var width = window.screen.availWidth;
-		window.showModalDialog(url,"","dialogWidth="+width+";dialogHeight="+height);
+	    var url = "/domain/web/xiamen/xchc/cglb/xjclyjframe.jsp?zfjcType=11&yw_guid="+myData[id].GUID;     
+		//var url = "/domain/web/xiamen/xchc/cglb/xjclyjframe.jsp";
+		//window.showModalDialog(url,"","dialogWidth=600px;dialogHeight=268px");
+		window.open(url);
 	}
 		<!--查询方法 add by 姚建林 2013-6-20-->
         function query(){
            var keyWord=Ext.getCmp('keyword').getValue();
-  		   putClientCommond("tdbgdc","getyshf");
+  		   putClientCommond("xchc","getDCLList");
 	       putRestParameter("userid","<%=userid%>");
            putRestParameter("keyword",escape(escape(keyWord)));
            var myData = restRequest(); 
@@ -145,7 +154,7 @@
           	//重新绑定分页工具栏
 			grid.getBottomToolbar().bind(store);
 			//重新加载数据集
-			store.load({params:{start:0,limit:15}}); 
+			store.load({params:{start:0,limit:limitNum}}); 
         }
         
         function changKeyword(val){
@@ -162,7 +171,21 @@
              return val;
            }
          } 
-         
+        
+        //导入巡查成果
+        function impTask(){
+       		var url = "/domain/web/xiamen/xchc/cgdr/importCgfile.jsp";
+			//var height = window.screen.availHeight;
+			//var width = window.screen.availWidth;
+			window.showModalDialog(url,"","dialogWidth=600px;dialogHeight=268px");
+        }
+        
+        //新建巡查成果
+        function newTask(){
+      		var url = "/domain/web/xiamen/xchc/cglb/xjclyjframe.jsp?zfjcType=11";    
+        	//window.showModalDialog(url,"","dialogWidth=800px;dialogHeight=600px");
+        	window.open(url);
+        }
 
 </script>
 </head>
