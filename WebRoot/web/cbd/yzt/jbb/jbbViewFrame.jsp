@@ -26,9 +26,9 @@
 	</head>
 	<body>
 		<iframe id="west" name="west" class="div1"
-			style="width: 60%; height: 100%; overflow: auto; margin: " src="jbbList.jsp"></iframe>
+			style="width: 61%; height: 100%; overflow: auto; margin: " src="jbbList.jsp"></iframe>
 		<iframe id="east" name="east" class="div2"
-			style="width: 38%; height: 100%; overflow: auto; border: 0px;float: left;margin-left: 10px;margin-top: 0px" src="<%=basePath%>base/fxgis/framework/gisViewFrame.jsp"></iframe>
+			style="width: 38%; height: 100%; overflow: auto; border: 0px;float: left;margin-left: 10px;margin-top: 0px" src="<%=basePath%>base/fxgis/fx/FxGIS.html?i=false"></iframe>
 
 	</body>
 </html>
