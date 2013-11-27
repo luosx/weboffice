@@ -14,7 +14,16 @@ import com.klspta.base.AbstractBaseBean;
  */
 public class TdbgdcManager extends AbstractBaseBean {
 	public static final String[][] showList_WHC = new String[][]{{"YW_GUID", "0.1","hiddlen"},{"JCBH", "0.1","监测编号"},{"JCMJ", "0.1","监测面积"},{"XZQMC", "0.1","行政区名称"},{"WPND","0.1","卫片年度"},{"SPMJ","0.1","审批面积"},{"GDMJ","0.1","供地面积"},{"HCMJ","0.1","巡查核查面积"},{"YGQK","0.1","压盖情况"},{"XF","0.1","下发"}};
-
+	public static final String[][] showList_QB = new String[][]{{"YW_GUID", "0.1","hiddlen"},{"JCBH", "0.1","监测编号"},{"JCMJ", "0.08","监测面积"},{"XMC", "0.1","行政区名称"},{"ND","0.1","卫片年度"},{"TBLX","0.1","图斑类型"},{"SPMJ","0.1","审批面积"},{"SPBL","0.1","审批比率"},{"GDMJ","0.1","供地面积"},{"GDBL","0.1","供地比率"},{"HCMJ","0.1","巡查核查情况"}};
+	
+	public void getqb(){
+		String userId = request.getParameter("userid");
+		String keyword = request.getParameter("keyword");
+		ItdbgdcData tdbgdc = new TdbgdcData();
+		List<Map<String, Object>> queryList = tdbgdc.getList(keyword);
+		response(queryList);
+	}
+	
 	public void getyshf(){
 		String userId = request.getParameter("userid");
 		String keyword = request.getParameter("keyword");
@@ -30,25 +39,7 @@ public class TdbgdcManager extends AbstractBaseBean {
 		List<Map<String, Object>> queryList = tdbgdc.getDhcWF(userId, keyword);
 		response(queryList);
 	}
-	
-	public void gethf(){
-		String userId = request.getParameter("userid");
-		String keyword = request.getParameter("keyword");
-		ItdbgdcData tdbgdc = new TdbgdcData();
-		List<Map<String, Object>> queryList = tdbgdc.getYhcHf(userId, keyword);
-		response(queryList);
 		
-	}
-	
-	public void getwf(){
-		String userId = request.getParameter("userid");
-		String keyword = request.getParameter("keyword");
-		ItdbgdcData tdbgdc = new TdbgdcData();
-		List<Map<String, Object>> queryList = tdbgdc.getYhcWF(userId, keyword);
-		response(queryList);
-		
-	}
-	
 	public void changefxqk(){
 		String yw_guid = request.getParameter("yw_guid");
 		String value = request.getParameter("value");
