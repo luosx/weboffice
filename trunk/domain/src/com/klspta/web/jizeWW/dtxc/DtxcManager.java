@@ -1,6 +1,7 @@
 ﻿package com.klspta.web.jizeWW.dtxc;
 
 import java.text.DateFormatSymbols;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -9,6 +10,8 @@ import java.util.Map;
 import com.klspta.base.AbstractBaseBean;
 import com.klspta.base.util.UtilFactory;
 import com.klspta.console.ManagerFactory;
+import com.klspta.model.analysis.Analysis;
+import com.klspta.model.analysis.Djfx;
 
 /**
  * 
@@ -18,7 +21,7 @@ import com.klspta.console.ManagerFactory;
  * <br>Date:2013-9-18
  */
 public class DtxcManager extends AbstractBaseBean {
-	
+    DecimalFormat df=new DecimalFormat("0.##"); 	
 	private static String xcbh	= "";
 	
 	/**
@@ -305,5 +308,86 @@ public class DtxcManager extends AbstractBaseBean {
 		}
 		return newForm;
 	}
-	
+    /**
+     * 
+     * <br>Description:外业成果统计
+     * <br>Author:王雷
+     * <br>Date:2013-11-26
+     */
+    public void staticWycg(){
+        String xzq = UtilFactory.getStrUtil().unescape(request.getParameter("xzq"));
+        String start = request.getParameter("start");
+        String end = request.getParameter("end");       
+        String sql = "select t.yw_guid, t.pmzb from dc_ydqkdcb t where t.impxzq = ? and to_date(t.hcrq,'YYYY-MM-DD HH24:MI:SS') between to_date(?,'YY/MM/DD') and to_date(?,'YY/MM/DD')";      
+        List<Map<String,Object>> list = query(sql,YW,new Object[]{xzq,start,end});
+        Map<String,Object> map = null;
+        String yw_guid = "";
+        String points = "";
+        Djfx djfx = new Djfx();
+        Analysis analysis = new Analysis();
+        String wkt = "";
+        StringBuffer sb = new StringBuffer("<table id='title' border='0' cellpadding='0' cellspacing='0' width='800' height='60' style='text-align:center; vertical-align:middle;font-family: 宋体, Arial; font-size: 18px;'><tr><td>"+xzq+"&nbsp;&nbsp;&nbsp;"+start+"—"+end+"&nbsp;外业统计表</td></tr></table>"
+        +"<table id='report' border='1' cellpadding='0' cellspacing='0' width='800'  style='text-align:center; vertical-align:middle;font-family: 宋体, Arial; font-size: 16px;border-collapse:collapse;border:1px #000 solid;' >");        
+        sb.append("<tr><td>编号</td><td>总面积</td><td>不符合规划</td><td>符合规划</td><td>基本农田</td><td>权属单位</td><td>备注</td></tr>");
+        double zongmianjihj =0;
+        double fhghmjhj = 0;
+        double bfhghmjhj = 0;
+        double zyjbntmjhj = 0;              
+        for(int i=0;i<list.size();i++){
+            map = list.get(i);
+            yw_guid = (String)map.get("yw_guid");
+            points = (String)map.get("pmzb");
+            wkt = djfx.getWkt(points, "0");            
+            //现状
+            List<Map<String,Object>> xzList =analysis.analysis("XZ", "QSDWMC", wkt);
+            StringBuffer xzSb = new StringBuffer("");
+            for(int j=0;j<xzList.size();j++){
+                Map<String,Object> xzMap = xzList.get(j);           
+                xzSb.append(xzMap.get("qsdwmc")==null?"":xzMap.get("qsdwmc").toString()).append(" ");               
+            }
+            //规划
+            List<Map<String,Object>> ghList = analysis.analysis("GH_TDYTQ", "TDYTQLXDM", wkt);
+            double fhghmj = 0;
+            double bfhghmj = 0;
+            double zyjbntmj = 0;
+            String fhghdm = "030,040,050";
+            String zyjbntdm = "010";                    
+            for(int j=0;j<ghList.size();j++){
+                Map<String,Object> ghMap = ghList.get(j);
+                String tdytqlxdm = (String)ghMap.get("tdytqlxdm");            
+                double ghdlmj = 0;
+                if(ghMap.get("area")!=null){
+                    ghdlmj = Double.parseDouble(ghMap.get("area").toString());              
+                }
+                if (fhghdm.indexOf(tdytqlxdm) >= 0)
+                {
+                    fhghmj += ghdlmj;
+                }
+                else
+                {
+                    bfhghmj += ghdlmj;
+                    if (zyjbntdm.equals(tdytqlxdm))
+                    {
+                        zyjbntmj += ghdlmj;
+                    }
+                }          
+            }
+            String fhghmianji = String.valueOf(df.format(fhghmj*0.0015))+"亩";
+            String bfhghmianji = String.valueOf(df.format(bfhghmj*0.0015))+"亩";
+            String zyjbntmianji = String.valueOf(df.format(zyjbntmj*0.0015))+"亩";            
+            String zongmianji = String.valueOf(df.format(fhghmj*0.0015+bfhghmj*0.0015))+"亩";  
+            sb.append("<tr><td>").append(yw_guid==null?"&nbap;":yw_guid).append("</td><td>")
+            .append(zongmianji).append("</td><td>").append(bfhghmianji).append("</td><td>")
+            .append(fhghmianji).append("</td><td>").append(zyjbntmianji).append("</td><td>")
+            .append(xzSb).append("</td><td>").append("&nbsp;").append("</td></tr>");             
+            zongmianjihj += (fhghmj*0.0015+bfhghmj*0.0015);
+            fhghmjhj += fhghmj*0.0015;
+            bfhghmjhj += bfhghmj*0.0015;
+            zyjbntmjhj += zyjbntmj*0.0015; 
+        }      
+        sb.append("<tr><td>合计</td><td>").append(String.valueOf(df.format(zongmianjihj))+"亩").append("</td><td>")
+        .append(String.valueOf(df.format(bfhghmjhj))+"亩").append("</td><td>").append(String.valueOf(df.format(fhghmjhj))+"亩").append("</td><td>")
+        .append(String.valueOf(df.format(zyjbntmjhj))+"亩").append("</td><td>").append("&nbsp;").append("</td><td>").append("&nbsp;").append("</td></tr></table>");       
+        response(sb.toString());
+    }   
 }
