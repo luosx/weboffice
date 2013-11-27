@@ -2,20 +2,20 @@
 <%@page import="org.springframework.security.core.context.SecurityContextHolder"%>
 <%@page import="com.klspta.console.user.User"%>
 <%@page import="com.klspta.web.xiamen.jcl.BuildDTPro"%>
-<%@page import="com.klspta.web.xiamen.wpzf.wpzf.WptbManager"%>
+<%@page import="com.klspta.web.xiamen.phjg.PhjgManager"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 	Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 	String userid = ((User)principal).getUserID();
-	String[][] showList = WptbManager.showList_BG;
+	String[][] showList = PhjgManager.showList;
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
     <base href="<%=basePath%>">
-    <title>合法</title>
+    <title>批后监管</title>
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
@@ -26,8 +26,9 @@
 	<script type="text/javascript">
 		var myData;
 		var grid;
+		var limitNum;
 		Ext.onReady(function(){
-	  		putClientCommond("wptb","getHFlist");
+	  		putClientCommond("phjg","getList");
 		    putRestParameter("userid","<%=userid%>");
 			myData = restRequest();
 			store = new Ext.data.JsonStore({
@@ -41,12 +42,12 @@
 					]
 			});
 			
-			store.load({params:{start:0, limit:15}});
 			width = document.body.clientWidth;
 			height = document.body.clientHeight * 0.995;
+			limitNum = parseInt(height/31);
+			store.load({params:{start:0, limit:limitNum}});
 			
 			grid = new Ext.grid.GridPanel({
-				title:'巡查日志列表',
 		        store: store,
 		        columns: [
 		        	new Ext.grid.RowNumberer(),
@@ -75,7 +76,7 @@
 		        stateId: 'grid',
 		        buttonAlign:'center',
 		        bbar: new Ext.PagingToolbar({
-			        pageSize: 15,
+			        pageSize: limitNum,
 			        store: store,
 			        displayInfo: true,
 			            displayMsg: '共{2}条，当前为：{0} - {1}条',
@@ -87,13 +88,7 @@
     	grid.render('mygrid_container');
 	});
 	
-	function view(id){
-		return "<a href='#' onclick='viewDetail(\""+id+"\");return false;'><img src='web/jizeNW/dtxc/images/view.png' alt='查看'></a>";
-	}
-	
-	function viewDetail(id){
-		document.getElementById("choseway").style.display = "";
-	}
+
 	
 	function showMap(id){
 		var url ="/domain/base/fxgis/framework/gisViewFrame.jsp?type=<%=BuildDTPro.CKLX_WP%>&yw_guid="+ id;     
@@ -104,7 +99,7 @@
 		<!--查询方法 add by 姚建林 2013-6-20-->
         function query(){
            var keyWord=Ext.getCmp('keyword').getValue();
-  		   putClientCommond("wptb","getHFlist");
+  		   putClientCommond("phjg","getList");
 	       putRestParameter("userid","<%=userid%>");
            putRestParameter("keyword",escape(escape(keyWord)));
            var myData = restRequest(); 
@@ -130,7 +125,7 @@
           	//重新绑定分页工具栏
 			grid.getBottomToolbar().bind(store);
 			//重新加载数据集
-			store.load({params:{start:0,limit:15}}); 
+			store.load({params:{start:0,limit:limitNum}}); 
         }
         
         function changKeyword(val){
