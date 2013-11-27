@@ -27,21 +27,6 @@ public class TdbgdcData extends AbstractBaseBean implements ItdbgdcData {
 	}
 
 	@Override
-	public String changeXF(String yw_guid, String type) {
-		String sql = "update "+formName+" t set t.isxf = ? where t.yw_guid = ?";
-		int result = update(sql, YW, new Object[]{type, yw_guid});
-		return String.valueOf(result);
-	}
-
-	@Override
-	public String changeXF(Set guids) {
-		for(Object yw_guid : guids){
-			changeXF(String.valueOf(yw_guid), String.valueOf(XF_YXF));
-		}
-		return null;
-	}
-
-	@Override
 	public List<Map<String, Object>> getDhcHF(String userId, String keyword) {
 		String xzq = editXzq(userId);
 		StringBuffer sqlBuffer = new StringBuffer();
@@ -75,37 +60,6 @@ public class TdbgdcData extends AbstractBaseBean implements ItdbgdcData {
 		return getList;
 	}
 
-	@Override
-	public List<Map<String, Object>> getYhcHf(String userId, String keyword) {
-		String xzq = editXzq(userId);
-		StringBuffer sqlBuffer = new StringBuffer();
-		sqlBuffer.append("select t.* from "+formName+" t where t.xchcqk = '").append(XCHC_HF).append("' and t.xzqdm in ");
-		sqlBuffer.append(xzq);
-		if (keyword != null) {
-            keyword = UtilFactory.getStrUtil().unescape(keyword);
-             sqlBuffer.append(" and").append(queryString).append(" like '%");
-             sqlBuffer.append(keyword);
-             sqlBuffer.append("%')");
-        }
-		List<Map<String, Object>> getList = query(sqlBuffer.toString(), YW);
-		return getList;
-	}
-
-	@Override
-	public List<Map<String, Object>> getYhcWF(String userId, String keyword) {
-		String xzq = editXzq(userId);
-		StringBuffer sqlBuffer = new StringBuffer();
-		sqlBuffer.append("select t.* from "+formName+" t where t.xchcqk = '").append(XCHC_YSWF).append("' and t.xzqdm in ");
-		sqlBuffer.append(xzq);
-		if (keyword != null) {
-            keyword = UtilFactory.getStrUtil().unescape(keyword);
-             sqlBuffer.append(" and").append(queryString).append(" like '%");
-             sqlBuffer.append(keyword);
-             sqlBuffer.append("%')");
-        }
-		List<Map<String, Object>> getList = query(sqlBuffer.toString(), YW);
-		return getList;
-	}
 
 	@Override
 	public String setClqk(String yw_guid, String value) {
@@ -137,6 +91,18 @@ public class TdbgdcData extends AbstractBaseBean implements ItdbgdcData {
 		String sql = "update "+formName+" t set t.ygfxqk = ? where t.yw_guid = ?";
 		int result = update(sql, YW, new Object[]{value, yw_guid});
 		return String.valueOf(result);
+	}
+
+	@Override
+	public List<Map<String, Object>> getList(String where) {
+		StringBuffer sqlBuffer = new StringBuffer();
+		sqlBuffer.append("select t.* from "+formName+" t ");
+		if(where != null && !where.equals("null")){
+			sqlBuffer.append(" where ").append(where);
+		}
+		sqlBuffer.append(" order by t.jcbh");
+		List<Map<String, Object>> getList = query(sqlBuffer.toString(), YW);
+		return getList;
 	}
 
 }
