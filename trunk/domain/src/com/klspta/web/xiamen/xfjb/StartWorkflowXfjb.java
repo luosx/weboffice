@@ -40,9 +40,10 @@ public class StartWorkflowXfjb extends AbstractBaseBean {
 				ManagerFactory.getUserManager().getUserWithId(userId).getFullName(),
 				yw_guid);
 		    String xzqh = ManagerFactory.getUserManager().getUserWithId(userId).getXzqh();
+		    String BH = buildID();
 		//2、处理业务相关初始化
-		String sql = "insert into xfdjb(yw_guid, xzqh) values(? ,?)";
-		update(sql, YW, new Object[] { yw_guid,xzqh});
+		String sql = "insert into xfdjb(yw_guid, xzqh,bh) values(? ,?,?)";
+		update(sql, YW, new Object[] { yw_guid,xzqh,BH});
 		//3、response参数封装及跳转
 		String urlPath = "model/workflow/wf.jsp?yw_guid="
 				+ yw_guid + "&zfjcType=" + zfjcType + "&wfInsId=" + wfinsId
@@ -57,22 +58,18 @@ public class StartWorkflowXfjb extends AbstractBaseBean {
 	 * <br>Date:2013-6-18
 	 */
 	private String buildID(){
-		SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd", new DateFormatSymbols());
+		SimpleDateFormat df = new SimpleDateFormat("yyyy", new DateFormatSymbols());
 		String dateString = df.format(Calendar.getInstance().getTime());
 				
 		//目前所有人共用测试数据库，不能用内存记录流水号
-		String numsql = "select max(t.bh) num from wfxsfkxx t where t.bh like '" + dateString + "%'";
-		String num;
+		String numsql = "select max(t.bh) num from xfdjb t where t.bh like '" + dateString + "%'";
+		String num="";
 		List<Map<String, Object>> result = query(numsql, YW);
-		String nestNum = String.valueOf(result.get(0).get("num"));
-		if(nestNum.equals("null") || nestNum.equals("")){
-			num = dateString + "001";
+		if(result.size()>0){
+		    long l=result.size()+1;
+			num = dateString + "_"+l;
 		}else{
-			//String nestNum = (String)result.get(0).get("num");
-			String temp = nestNum.substring(nestNum.length() - 3, nestNum.length());
-            temp=String.valueOf(Integer.parseInt(temp)+1);   
-            temp = "00" + temp;
-            num = dateString + temp.substring(temp.length() - 3);
+		    num = dateString + "_1";
 		}
 		return num;
 		
