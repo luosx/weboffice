@@ -316,13 +316,15 @@ public class FormHandler extends AbstractBaseBean {
 						continue;
 					}
 					String fieldvalue = (String)fieldvalues.get(fieldString);
-					sqlsb.append(fieldString).append(" = ");
-					if("VARCHAR2".equals(dataTypeString) || "NUMBER".equals(dataTypeString) || "CHAR".endsWith(dataTypeString)){
-						sqlsb.append("'").append(fieldvalue).append("',");
-					}else if ("DATE".equals(dataTypeString)) {
-						sqlsb.append("TO_DATE('").append(fieldvalue).append("','yyyy-mm-dd hh24:mi:ss'),");
-					}else{
-						sqlsb.append(fieldvalue).append(",");
+					if(fieldvalue != null && !"null".equals(fieldvalue) && !"".equals(fieldvalue)){
+						sqlsb.append(fieldString).append(" = ");
+						if("VARCHAR2".equals(dataTypeString) || "NUMBER".equals(dataTypeString) || "CHAR".endsWith(dataTypeString)){
+							sqlsb.append("'").append(fieldvalue).append("',");
+						}else if ("DATE".equals(dataTypeString)) {
+							sqlsb.append("TO_DATE('").append(fieldvalue).append("','yyyy-mm-dd hh24:mi:ss'),");
+						}else{
+							sqlsb.append(fieldvalue).append(",");
+						}
 					}
 				}
 				
