@@ -16,11 +16,17 @@ function turn(){
  frameshow.src="<%=resourcePath%>/images/left/partline_right.png";
  oa_tree.title="显示";
  parent.content.cols="0,9,*";
+ //同时刷新右边页面
+parent.frames['right'].location.reload();
 }
 else{
 frameshow.src="<%=resourcePath%>/images/left/partline_left.png";
 oa_tree.title="隐藏";
-parent.content.cols="211,9,*";} 
+parent.content.cols="211,9,*";
+//同时刷新右边页面
+parent.frames['right'].location.reload();
+
+} 
 }
 function show()
 {
