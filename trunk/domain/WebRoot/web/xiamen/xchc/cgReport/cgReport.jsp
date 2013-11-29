@@ -98,7 +98,6 @@ String userid = ((User)principal).getUserID();
   		
   		//根据用地单位和关键字作过滤
   		function query(yddw, keyword){
-  			alert("yddw:" + yddw + " keyword:" + keyword);
  			putClientCommond("xchc","getReport");
 		    putRestParameter("userid","<%=userid%>");
 		    putRestParameter("yddw",escape(escape(yddw)));
@@ -113,7 +112,7 @@ String userid = ((User)principal).getUserID();
 		<img src="base/form/images/print.png" width="20px" height="20px" onClick="javascript:print();"  />
 	</div>
 	<div align="center" id="center" style="position:absolute; top:30px; left: 20px;">
-  		<%=new CBDReportManager().getReport("XCHC")%>
+  		<%=new CBDReportManager().getReport("XCHCCG", new Object[]{})%>
   	</div>
   </body>
 </html>
