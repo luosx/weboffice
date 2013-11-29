@@ -41,9 +41,11 @@ public class StartWorkflowXfjb extends AbstractBaseBean {
 				yw_guid);
 		    String xzqh = ManagerFactory.getUserManager().getUserWithId(userId).getXzqh();
 		    String BH = buildID();
+		    SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-yy", new DateFormatSymbols());
+	        String dateString = df.format(Calendar.getInstance().getTime());
 		//2、处理业务相关初始化
-		String sql = "insert into xfdjb(yw_guid, xzqh,bh) values(? ,?,?)";
-		update(sql, YW, new Object[] { yw_guid,xzqh,BH});
+		String sql = "insert into xfdjb(yw_guid, xzqh,bh,rq) values(? ,?,?,?)";
+		update(sql, YW, new Object[] { yw_guid,xzqh,BH,dateString});
 		//3、response参数封装及跳转
 		String urlPath = "model/workflow/wf.jsp?yw_guid="
 				+ yw_guid + "&zfjcType=" + zfjcType + "&wfInsId=" + wfinsId
@@ -62,7 +64,7 @@ public class StartWorkflowXfjb extends AbstractBaseBean {
 		String dateString = df.format(Calendar.getInstance().getTime());
 				
 		//目前所有人共用测试数据库，不能用内存记录流水号
-		String numsql = "select max(t.bh) num from xfdjb t where t.bh like '" + dateString + "%'";
+		String numsql = "select t.bh from xfdjb t where t.bh like '" + dateString + "%'";
 		String num="";
 		List<Map<String, Object>> result = query(numsql, YW);
 		if(result.size()>0){
