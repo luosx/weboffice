@@ -1,8 +1,12 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@page import="com.klspta.model.CBDReport.CBDReportManager"%>
+<%@page import="org.springframework.security.core.context.SecurityContextHolder"%>
+<%@page import="com.klspta.console.user.User"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+String userid = ((User)principal).getUserID();
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
@@ -91,13 +95,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    oXL.Visible = true; 
 		    //设置excel可见属性 
 		}
-		
+  		
+  		//根据用地单位和关键字作过滤
+  		function query(yddw, keyword){
+  			alert("yddw:" + yddw + " keyword:" + keyword);
+ 			putClientCommond("xchc","getReport");
+		    putRestParameter("userid","<%=userid%>");
+		    putRestParameter("yddw",escape(escape(yddw)));
+		    putRestParameter("keyword",escape(escape(keyword)));
+			myData = restRequest();
+  			document.getElementById("center").innerHTML = myData;
+  		}
+  		
   </script>
   <body>
   	<div id="fixed" style="position: fixed; top: 5px; left: 0px">
 		<img src="base/form/images/print.png" width="20px" height="20px" onClick="javascript:print();"  />
 	</div>
-	<div align="center" style="position:absolute; top:30px; left: 20px;">
+	<div align="center" id="center" style="position:absolute; top:30px; left: 20px;">
   		<%=new CBDReportManager().getReport("XCHC")%>
   	</div>
   </body>
