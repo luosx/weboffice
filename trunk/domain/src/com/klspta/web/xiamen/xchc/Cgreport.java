@@ -6,9 +6,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import org.apache.commons.lang.ObjectUtils.Null;
-import org.geotools.filter.IsBetweenImpl;
-import org.hibernate.annotations.SQLUpdate;
 
 import com.klspta.base.AbstractBaseBean;
 import com.klspta.model.CBDReport.bean.TDBean;
@@ -62,6 +59,7 @@ public class Cgreport extends AbstractBaseBean implements IDataClass {
 		
 		for(int num = 0; num < queryList.size(); num++){
 			TRBean trBean = new TRBean();
+			trBean.setCssStyle("trsingle");
 			Map<String, Object> map = queryList.get(num);
 			for(int i = 0; i < showList.length; i++){
 				String value = String.valueOf(map.get(showList[i][0]));
