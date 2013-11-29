@@ -27,7 +27,7 @@
 		var limitNum;
 		Ext.onReady(function(){
 			//将是这个用户填写的巡查日志查询出来
-	  		putClientCommond("xchc","getDCLList");
+	  		putClientCommond("xchc","getDclList");
 		    putRestParameter("userid","<%=userid%>");
 			myData = restRequest();
 			store = new Ext.data.JsonStore({
@@ -54,8 +54,8 @@
 			%>
 				{header: '<%=showList[i][2]%>', dataIndex:'<%=showList[i][0]%>', width: width*<%=Float.parseFloat(showList[i][1])%>, sortable: true,renderer:changKeyword},
 			<%}}%>
-	          	{header: '详细信息', dataIndex:'XIANGXI',width: width*0.1, sortable: false,renderer:view},
-          		{header: '删除',dataIndex:'DELETE',width: width*0.05, sortable: false,renderer:del}
+	          	{header: '详细信息', dataIndex:'XIANGXI',width: width*0.05, sortable: false,renderer:view},
+          		{header: '删除',dataIndex:'DELETE',width: width*0.03, sortable: false,renderer:del}
 		        ], 
 		        tbar:[
 	    			{xtype:'label',text:'快速查询:',width:60},
@@ -127,7 +127,7 @@
 		<!--查询方法 add by 姚建林 2013-6-20-->
         function query(){
            var keyWord=Ext.getCmp('keyword').getValue();
-  		   putClientCommond("xchc","getDCLList");
+  		   putClientCommond("xchc","getDclList");
 	       putRestParameter("userid","<%=userid%>");
            putRestParameter("keyword",escape(escape(keyWord)));
            var myData = restRequest(); 

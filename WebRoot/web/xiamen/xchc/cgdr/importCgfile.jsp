@@ -9,6 +9,7 @@ String userid = ((User)userprincipal).getUserID();
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<meta http-equiv="X-UA-Compatible" content="IE=8">
 <html>
   <head>
     <base href="<%=basePath%>">
@@ -56,7 +57,7 @@ String userid = ((User)userprincipal).getUserID();
 	            emptyText: '请选择zip格式外业成果包..',
 	            fieldLabel: '文件路径',
 	            name: 'file',
-	            buttonText: '浏览&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',
+	            buttonText: '浏览&nbsp;&nbsp;&nbsp;&nbsp;',
 	            buttonCfg: {
 	                iconCls: 'upload-icon'
 	            }
@@ -112,13 +113,11 @@ String userid = ((User)userprincipal).getUserID();
                 resizable:false,
                 closable:false,
                 closeAction:'hide',
-                html:'<div style="font-size:12px;">说明：将由平板导出的巡查成果zip包导入系统中，其中巡查成果zip包中包含每日巡查日志和<br/>外业设备采集的图斑和照片等</div>',
+                html:'<div style="font-size:12px;">说明：将由平板导出的巡查成果zip包导入系统中，其中巡查成果zip包中包含外业设备采集的图斑和照片等</div>',
 				items:form
     });  
   win.show();
   })
-  
-   
   
   </script>
   <body>
