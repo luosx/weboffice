@@ -38,6 +38,11 @@ String password = UtilFactory.getConfigUtil().getConfig("ftp.password");
 body {
 	height: 700px;
 }
+input{
+	height:25px;
+	background:none;
+	
+}
 
 .container,.container img {
 	width: 600px;
@@ -65,7 +70,7 @@ body {
 
 </script>
 	</head>
-	<body onload="init(); return false;" style="text-align: left;">&nbsp; 
+	<body onLoad="init(); return false;" style="text-align: left;">&nbsp; 
  	<div align="left" id="fixed" class="Noprn" style="position: fixed; top: 5px; left:0px"></div>	
 	<div align="center" style="font-weight: bold; font-size: 18pt; font-family: 宋体">
 					实地巡查情况表
@@ -74,99 +79,115 @@ body {
 	<form method="post">
 		<table width="600px" cellspacing="0" cellpadding="0"
 			 align='center' border='1'
-			style="text-align: center; border-left:1px solid #2C2B29; border-top:1px solid #2C2B29">
+			style="text-align: center; border-left:1px solid #2C2B29; border-top:1px solid #2C2B29; border-bottom:none; background:#ffffff">
 			<tr>
 				<td width="15%">
 					任务编号
 				</td>
-				<td colspan="2" align="left">
+				<td  align="left">
 					<input type="text" class="noborder" readonly
 						value="<%=yw_guid%>">
 				</td>
 				<td width="16%">
 					巡查时间
 				</td>
-				<td width="32%">
-					<input type="text" class="noborder" id="hcrq" name="hcrq"  >
+				<td width="32%" style="border-right:none;">
+					<input type="text" class="noborder" id="hcrq" name="hcrq"
+								onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})"    readonly style="width: 98%" />
 				</td>
 			</tr>
 			<tr>
 				<td>
 					用地单位
 				</td>
-				<td colspan="2" align="left">
+				<td  align="left">
 					<input type="text" class="noborder" id="yddw" name="yddw" >
 				</td>
 				<td>
 					用地时间
 				</td>
-				<td colspan="2">
-					<input type="text" class="noborder" id="ydsj" name="ydsj">
+				<td style="border-right:none;">
+					<input type="text" class="noborder" id="ydsj" name="ydsj"
+								onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})"    readonly style="width: 98%" />
 				</td>
-			</tr>
-						<tr>
-				<td>
-					巡查人
-				</td>
-				<td colspan="2" align="left">
-					<input type="text" class="noborder" id="impuser" name="impuser" >
-				</td>
-				<td>
-					所在政区
-				</td>
-				<td colspan="2">
-					<input type="text" class="noborder" id="impxzq" name="impxzq" >
-				</td>
-			</tr>
-		     <tr>
-   				<td>
-					建设项目
-				</td>
-				<td colspan="4">
-					<input type="text" class="noborder" id="xmmc" name="xmmc">
-				</td>
-
 			</tr>
 			<tr>
+				<td>
+					土地用途
+				</td>
+				<td   align="left">
+					<select style="width:80%" id="tdyt" name="tdyt">
+						<option selected="selected" value="商服用地">商服用地</option>
+						<option  value="工矿仓储用地">工矿仓储用地</option>
+						<option  value="住宅用地">住宅用地</option>
+						<option  value="公共管理与公共服务用地">公共管理与公共服务用地</option>
+						<option  value="水域及水利设施用地">水域及水利设施用地</option>
+						<option  value="交通运输用地">交通运输用地</option>
+						<option  value="特殊用地">特殊用地</option>
+					</select>
+				</td>
 				<td>
 					建设情况
 				</td>
-				<td colspan="4" align="left">
-					<textarea align="left" cols="45" class="noborder" id="jsqk" name="jsqk"></textarea>
+				<td align="left" style="border-right:none;">
+					<select style="width:80%" id="jsqk" name="jsqk">
+						<option selected="selected" value="平场">平场</option>
+						<option value="在建">在建</option>
+						<option value="建成">建成</option>
+					</select>
 				</td>
 			</tr>
 			<tr>
 				<td>
-					建设面积
+					用地情况
 				</td>
-				<td colspan="4" align="left">
-					<input type="text" class="noborder" id="mj" name="mj" >
+				<td align="left">
+					<select style="width:80%" id="ydqk" name="ydqk">
+						<option selected="selected" value="合法">合法</option>
+						<option value="违法违规">违法违规</option>
+						<option value="伪变化">伪变化</option>
+					</select>
 				</td>
-			</tr>
-			<tr>
 				<td>
 					地方查处情况
 				</td>
-				<td colspan="4" align="left">
-					<input type="text" class="noborder" id="dfccqk" name="dfccqk" >
+				<td align="left" style="border-right:none;">
+					<select style="width:80%" id="dfccqk" name="dfccqk">
+						<option selected="selected" value="未立案">未立案</option>
+						<option value="已立案未结案">已立案未结案</option>
+						<option value="已结案">已结案</option>
+					</select>
 				</td>
 			</tr>
 			<tr>
 				<td>
+					违法违规类型
+				</td>
+				<td colspan="3" style="border-right:none;" align="left">
+					<select  id="wfwglx" name="wfwglx" >
+						<option selected="selected" value="非法批地">非法批地</option>
+						<option value="未报即用">未报即用</option>
+						<option value="边报边用">边报边用</option>
+						<option value="未供先用">未供先用</option>
+						<option value="批而未征">批而未征</option>
+						<option value="闲置">闲置</option>	
+						<option value="违反产业政策">违反产业政策</option>
+						<option value="违反招拍挂">违反招拍挂</option>
+						<option value="补偿不到位">补偿不到位</option>
+						<option value="其他">其他</option>
+					</select>
+				</td>
+			</tr>
+			<tr style="border-bottom:none;">
+				<td>
 					现场情况描述
 				</td>
-				<td colspan="4" align="left">
-					<input type="text" class="noborder" id="xcms" name="xcms" >
+				<td colspan="3" style=" border-right:none;">
+					<textarea rows="5" cols="70" name="xcqkms" id="xcqkms" style="width: 99%"></textarea>
 				</td>
 			</tr>
-			<tr>
-		     	<td>
-				违法违规类型
-				</td>
-				<td colspan="4">
-					<input type="text" class="noborder" id="wfwglx" name="wfwglx" >
-				</td>
-			</tr>
+
+
 		</table>
 		</form>
 		<br>
