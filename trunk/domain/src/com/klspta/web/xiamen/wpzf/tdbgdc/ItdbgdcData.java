@@ -43,7 +43,10 @@ public interface ItdbgdcData {
 	 */
 	public List<Map<String, Object>> getList(String where);
 	
-		
+	
+	
+	public List<Map<String, Object>> getWFList(String where);
+	
 	/**
 	 * 
 	 * <br>Description:添加现场核查情况

@@ -14,8 +14,8 @@ public class TdbgdcData extends AbstractBaseBean implements ItdbgdcData {
 	public static final int YGFX_HF = 1;
 	public static final String XCHC_YSWF = "违法";
 	public static final String XCHC_HF = "合法";
-	private static final String queryString = "(upper(t.JCBH)||upper(t.JCMJ)||upper(t.XZQMC)||upper(t.SPMJ)||upper(t.GDMJ)||upper(t.WPND)";
-	private String formName = "WP_TDBGDC";
+	private static final String queryString = "(upper(t.JCBH)||upper(t.JCMJ)||upper(t.XZQDM)||upper(t.SPMJ)||upper(t.GDMJ)";
+	private String formName = "TDBGDC";
 
 	public TdbgdcData(String formName) {
 		super();
@@ -100,9 +100,23 @@ public class TdbgdcData extends AbstractBaseBean implements ItdbgdcData {
 		if(where != null && !where.equals("null")){
 			sqlBuffer.append(" where ").append(where);
 		}
-		sqlBuffer.append(" order by t.jcbh");
+		sqlBuffer.append(" order by t.tbbh");
 		List<Map<String, Object>> getList = query(sqlBuffer.toString(), YW);
 		return getList;
 	}
 
+    @Override
+    public List<Map<String, Object>> getWFList(String where) {
+        StringBuffer sqlBuffer = new StringBuffer();
+        sqlBuffer.append("select t.* from "+formName+" t where t.iswf = '1'");
+        if(where != null && !where.equals("null")){
+            sqlBuffer.append(" where ").append(where);
+        }
+        sqlBuffer.append(" order by t.tbbh");
+        List<Map<String, Object>> getWFList = query(sqlBuffer.toString(), YW);
+        return getWFList;
+    }
+	
+	
+	
 }
