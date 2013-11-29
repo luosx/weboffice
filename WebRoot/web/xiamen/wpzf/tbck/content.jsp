@@ -54,7 +54,7 @@ String userid = ((User)principal).getUserID();
     			{xtype: 'button',text:'查询',handler: query}
 		    ],  
 		    listeners:{
-	  			rowdblclick : function(grid, rowIndex, e)
+	  			rowclick : function(grid, rowIndex, e)
 				{
 					showMap(grid.getStore().getAt(rowIndex).data.YW_GUID);
 				}
@@ -86,7 +86,7 @@ String userid = ((User)principal).getUserID();
 		var flexObject = parent.frames['right'].frames["center"].frames["lower"].swfobject.getObjectById("FxGIS");
   		flexObject.clear();
 		flexObject.findFeature('jctb',0,yw_guid,'OBJECTID');
-  		flexObject.drawPoint("[{\"y\":"+myData[0].YZB+",\"x\":"+myData[0].XZB+",\"icon\":\"a.png\",\"url\":\"web/xuzhouNW/dtxc/wyxc/xjclyjframe.jsp?zfjcType=11&yw_guid=SP110201307251039491\"}]");
+  		flexObject.drawPoint("[{\"y\":"+myData[0].YZB+",\"x\":"+myData[0].XZB+",\"icon\":\"a.png\",\"url\":\"web/xiamen/wpzf/wpzf/djfx.jsp\"}]");
   	}
   
   	<!--查询方法 add by 姚建林 2013-6-20 -->
