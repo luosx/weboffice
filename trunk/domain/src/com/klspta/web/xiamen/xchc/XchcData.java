@@ -20,7 +20,7 @@ public class XchcData extends AbstractBaseBean implements IxchcData {
 	@Override
 	public String SetNewRecord(String userid){
 		SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd", new DateFormatSymbols());
-		String dateString = "DJ" + df.format(Calendar.getInstance().getTime());
+		String dateString = "XC" + df.format(Calendar.getInstance().getTime());
 				
 		String numsql = "select max(t.yw_guid) num from dc_ydqkdcb t where t.yw_guid like '" + dateString + "%'";
 		String num;
@@ -51,15 +51,11 @@ public class XchcData extends AbstractBaseBean implements IxchcData {
 		return num;
 	}
 	
-	
-	
-	
-	
 	@Override
 	public List<Map<String, Object>> getDclList(String userId, String keyword) {
 		String xzq = editXzq(userId);
 		StringBuffer sqlBuffer = new StringBuffer();
-		sqlBuffer.append("select t.readflag,t.guid,t.xzqmc,t.xmmc,t.rwlx,t.sfwf,t.xcr,t.xcrq,t.cjzb,t.jwzb,t.imgname from v_pad_data_xml t where t.impxzqbm in");
+		sqlBuffer.append("select t.* from v_pad_data_xml t where t.impxzqbm in");
 		sqlBuffer.append(xzq);
 		if (keyword != null) {
             keyword = UtilFactory.getStrUtil().unescape(keyword);
@@ -67,7 +63,7 @@ public class XchcData extends AbstractBaseBean implements IxchcData {
              sqlBuffer.append(keyword);
              sqlBuffer.append("%')");
         }
-		sqlBuffer.append(" order by t.HCRQ");
+		sqlBuffer.append(" order by t.XCRQ");
 		List<Map<String, Object>> getList = query(sqlBuffer.toString(), YW);
         for (int i = 0; i < getList.size(); i++) {
         	getList.get(i).put("XIANGXI", i);
