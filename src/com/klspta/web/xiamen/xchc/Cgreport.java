@@ -24,7 +24,9 @@ public class Cgreport extends AbstractBaseBean implements IDataClass {
 	public Map<String, TRBean> getTRBeans(Object[] obj, TRBean trBean) {
 		Map<String, TRBean> trbeans = new TreeMap<String, TRBean>();
 		Map<String, Object> queryMap = new HashMap<String, Object>();
-		queryMap = (Map<String, Object>)obj[0];
+		if(obj.length > 1){
+			queryMap = (Map<String, Object>)obj[0];
+		}
 		TRBean titleBean = getTitle();
 		List<TRBean> trbeanList = getBody(queryMap);
 		trbeans.put("01", titleBean);
@@ -52,7 +54,7 @@ public class Cgreport extends AbstractBaseBean implements IDataClass {
 		}
 		sqlBuffer.append("t.").append(showList[showList.length - 1][0]).append(" from ");
 		sqlBuffer.append(form_name).append(" t ");
-		if(queryMap != null){
+		if(queryMap != null && !queryMap.isEmpty()){
 			sqlBuffer.append(String.valueOf(queryMap.get("query")));
 		}
 		List<Map<String, Object>> queryList = query(sqlBuffer.toString(), YW);
