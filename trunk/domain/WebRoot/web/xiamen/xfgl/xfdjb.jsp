@@ -2,7 +2,9 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="com.klspta.base.util.UtilFactory"%>
 <%@page import="com.klspta.console.ManagerFactory"%>
-<%@page import="com.klspta.web.xuzhouNW.xfjb.manager.XfAction"%>
+<%@page import="com.klspta.console.user.User"%>
+<%@page
+	import="org.springframework.security.core.context.SecurityContextHolder"%>
 <%@page import="java.text.DateFormatSymbols"%>
 <%
     String path = request.getContextPath();
@@ -55,7 +57,6 @@
 			var edit="<%=edit%>";
 			if(edit=='false'){
 				 var formlist = document.getElementById('form');
-				
         		 for(var i=0;i<formlist.length;i++)
          		 {
              			if(formlist[i].type=='text'||formlist[i].type=='textarea'||formlist[i].type=='select-one')
@@ -98,16 +99,27 @@
 <td width="70px">举报形式</td>
 <td ><input  type="radio" name="jbxs" value="电话"  checked="checked"/>电话<input  type="radio" name="jbxs" value="传真"/>传真</td>
 </tr>
-<tr><td>联系地址</td><td colspan="3">
+<tr><td>联系地址</td><td colspan="5">
 <input class="noborder" name="lxdz" id="lxdz" style="width: 95%"/></td>
+</tr>
+<tr>
 <td>所在政区</td>
-<td><select name="xzq" ><option selected="selected" value="厦门市" >市局</option>
+<td colspan="2" align="left">
+            <select name="xzq" id="xzq" style="width: 60" onchange="change()">
+                            <option selected="selected" value="市局" >市局</option>
 							<option value="直属区">直属区</option>
 							<option value="集美区">集美区</option>
 							<option value="海沧区">海沧区</option>
 							<option value="同安区">同安区</option>
 							<option value="翔安区" >翔安区</option>
-							</select></td>
+			</select></td>
+<td>所属国土局管制</td>
+<td colspan="2" align="left">
+          <select name="gts" id="gts"  >
+                        <option selected="selected" value="思明国土所" >思明国土所</option>
+						<option value="湖里国土所">湖里国土所</option>
+         </select></td>
+
 </tr>
 <tr>
 <td>举报时间</td>
@@ -157,6 +169,63 @@ function butt(){
 	    }else{
 	    	butt.innerHTML = '<img src="base/form/images/print.png" onclick="print()" style="cursor:hand" title="打印"/>';
         }
+}
+
+function change(){
+ var xzq=document.getElementById("xzq");
+ var index=xzq.selectedIndex;
+ var xzqname=xzq.options[index].value
+ var gts=document.getElementById("gts");
+  if(xzqname=='市局'||xzqname=='直属区'){
+    delOption(gts);
+    addOption(gts, '思明国土所','思明国土所');
+    addOption(gts,'湖里国土所','湖里国土所');
+  }if(xzqname=='集美区'){
+    delOption(gts);
+    addOption(gts, '后溪国土所','后溪国土所');
+    addOption(gts,'灌口国土所','灌口国土所');
+    addOption(gts, '杏林国土所','杏林国土所');
+    addOption(gts,'集美国土所','集美国土所');
+  }
+  if(xzqname=='海沧区'){
+   delOption(gts);
+    addOption(gts, '海沧国土所','海沧国土所');
+    addOption(gts,'东孚国土所','东孚国土所');
+  }
+  if(xzqname=='同安区'){
+     delOption(gts);
+     addOption(gts, '西柯国土所','西柯国土所');
+     addOption(gts,'莲花国土所','莲花国土所');
+     addOption(gts, '汀溪国土所','汀溪国土所');
+     addOption(gts,'五显国土所','五显国土所');
+     addOption(gts, '洪塘国土所','洪塘国土所');
+     addOption(gts,'新民国土所','新民国土所');
+     addOption(gts, '城区国土所','城区国土所');
+   }
+  if(xzqname=='翔安区'){
+    delOption(gts);
+     addOption(gts, '马巷国土所','马巷国土所');
+     addOption(gts,'新圩国土所','新圩国土所');
+     addOption(gts, '内厝国土所','内厝国土所');
+     addOption(gts,'大嶝国土所','大嶝国土所');
+     addOption(gts, '新店国土所','新店国土所');
+   }
+
+}
+//增加option
+ function addOption(objSelect, txt, val) {   
+            var objOption = document.createElement("OPTION");        
+            objOption.text = txt;                                                  
+            objOption.value = val;                                                 
+            objSelect.options.add(objOption);                       
+ } 
+//删除option
+function delOption(objSelect){
+   for(var k=objSelect.length-1; k>=0; k--){    
+          objSelect.options.removeChild(objSelect.options[k]);     //这里一定要进行倒序删除
+                         }
+
+
 }
 </script>
 </html>
