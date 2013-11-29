@@ -3,7 +3,7 @@
 <%@page import="com.klspta.base.util.UtilFactory"%>
 <%@page import="com.klspta.console.ManagerFactory"%>
 <%@page import="com.klspta.web.xuzhouNW.xfjb.manager.XfAction"%>
-
+<%@page import="java.text.DateFormatSymbols"%>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":"
@@ -25,6 +25,8 @@
     String edit = request.getParameter("edit");
     String xzqh = ManagerFactory.getUserManager().getUserWithId(userid).getXzqh();
     String name = UtilFactory.getXzqhUtil().getBeanById(xzqh).getCatonname();
+       SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd", new DateFormatSymbols());
+ 		String dateString = df.format(Calendar.getInstance().getTime());
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -53,6 +55,7 @@
 			var edit="<%=edit%>";
 			if(edit=='false'){
 				 var formlist = document.getElementById('form');
+				
         		 for(var i=0;i<formlist.length;i++)
          		 {
              			if(formlist[i].type=='text'||formlist[i].type=='textarea'||formlist[i].type=='select-one')
@@ -77,23 +80,34 @@
 <div id="fixed class="Noprn" style="position: fixed; top: 5px; left: 0px"></div>
 <%}%>
 <div style="margin:20px" class="tablestyle1" align="center" /><br />
-<div align="center"><font style="font: bold 20px '黑体','微软雅黑' ">厦门市国土资源与房产管理局12336违法举报登记处理表</font></div><br/><br />
+<div align="center"><font style="font: bold 16px '黑体','微软雅黑' ">厦门市国土资源与房产管理局12336违法举报登记处理表</font></div><br/><br />
 <form method="post">
-<div style="width: 300px">登记号：厦国土房值班举【20<input class="noborder" name="bn" id="bn" style="width: 20px"/>】<input class="noborder" name="bh" id="bh" style="width: 20px"/>号</div>
-   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<div style="width: 300px">20<input class="noborder" name="n" id="n" style="width: 20px"/>年
-       <input class="noborder" name="y" id="y" style="width: 20px"/>月
-       <input class="noborder" name="r" id="r" style="width: 20px"/>日</div>
+<div style="width: 600px">
+<div align="left">登记号：厦国土房值班举<input class="noborder" name="bh" id="bh" style="width: 60px"/>号</div>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<div align="right">日期：<input  type="text" class="noborder" id="rq" name="rq" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})" readonly style="width: 100px"/></div>
+</div>
 <table class="lefttopborder1"  cellspacing="0" cellpadding="0" border="1"  bgcolor="#FFFFFF" bordercolor="#000000" width="600">
-<tr><td width="60px">举报人</td>
+<tr><td width="70px">举报人</td>
 <td width="140"><input class="noborder" name="jbr" id="jbr" style="width: 95%"/></td>
-<td width="60px">性别</td>
+<td width="70px">性别</td>
 <td width="120px"><input  type="radio" name="xb" value="男"  checked="checked"/>男<input  type="radio" name="xb" value="女"/>女</td>
-<td width="60px">举报形式</td>
-<td width="160"><input  type="radio" name="jbxs" value="电话"  checked="checked"/>电话<input  type="radio" name="jbxs" value="传真"/>传真</td>
+<td width="70px">举报形式</td>
+<td ><input  type="radio" name="jbxs" value="电话"  checked="checked"/>电话<input  type="radio" name="jbxs" value="传真"/>传真</td>
 </tr>
-<tr><td>联系地址</td><td colspan="5"><input class="noborder" name="lxdz" id="lxdz" style="width: 95%"/></td>
+<tr><td>联系地址</td><td colspan="3">
+<input class="noborder" name="lxdz" id="lxdz" style="width: 95%"/></td>
+<td>所在政区</td>
+<td><select name="xzq" ><option selected="selected" value="厦门市" >市局</option>
+							<option value="直属区">直属区</option>
+							<option value="集美区">集美区</option>
+							<option value="海沧区">海沧区</option>
+							<option value="同安区">同安区</option>
+							<option value="翔安区" >翔安区</option>
+							</select></td>
 </tr>
 <tr>
 <td>举报时间</td>
@@ -104,18 +118,20 @@
 <td><input class="noborder" name="ldcs" id="ldcs" style="width: 95%"/></td>
 </tr>
 <tr>
-<td>举<br />报<br />主<br />要<br />问<br />题</td>
+<td align="center">举<br />报<br />主<br />要<br />问<br />题</td>
 <td colspan="5"><textarea rows="8" name="jbzywt" id="jbzywt" style="width: 99%"></textarea></td>
 </tr>
 <tr>
-<td>值班员<br />办理情<br />况</td>
+<td align="center">值班员<br />办理情<br />况</td>
 <td colspan="5"><textarea rows="5" name="zbyblqk" id="zbyblqk" style="width: 99%"></textarea> </td>
 </tr>
+<tr>
+<td>接收人</td>
+<td colspan="2"><input class="noborder"  type="text"   name="jsr" id="jsr" style="width: 95%;"/></td>
+<td>记录人</td>
+<td colspan="2"><input class="noborder"  type="text"   name="jlr" id="jlr" style="width:95%;"/></td>
+</tr>
 </table>
-<br/>
-<div style="width: 290px" align="left" >接收人：<input class="underline" type="text"  onfocus="underwrite(this)" name="jsr" id="jsr" style="width: 50px;"/></div>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<div style="width: 290px" align="right">记录人：<input class="underline" type="text"  onfocus="underwrite(this)" name="jlr" id="jlr" style="width:50px;"/></div>
 </form>
 </body>
 <script>
