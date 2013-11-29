@@ -33,6 +33,26 @@
 		var sm;
 		var width;
 		var height;
+		var XZQData=[{key:'市局',value:'市局'},
+		               {key:'直属区',value:'直属区'},
+						{key:'思明区',value:'思明区'},
+						{key:'海沧区',value:'海沧区'},
+						{key:'湖里区',value:'湖里区'},
+						{key:'集美区',value:'集美区'},
+						{key:'同安区',value:'同安区'},
+						{key:'翔安区',value:'翔安区'}];
+       var XZQStore= new Ext.data.JsonStore({
+							  data: XZQData,
+							  fields: 
+							   ['key','value']
+						     });
+         var LXData=[{key:'电话',value:'电话'},
+					 {key:'传真',value:'传真'}];
+		var LXStore= new Ext.data.JsonStore({
+						  data: LXData,
+						  fields: 
+						   ['key','value']
+					     });
 		Ext.onReady(function(){
 			putClientCommond("XfjbManager","getXfjbYcl");
 			putRestParameter("userId","<%=userid%>");
@@ -42,6 +62,7 @@
 		    proxy: new Ext.ux.data.PagingMemoryProxy(myData),
 		       remoteSort:true,
 		        fields: [
+		           {name:'BH'},
 		           {name: 'JBR'},
 		           {name: 'JBXS'},
 		           {name: 'LXDZ'},
@@ -49,6 +70,8 @@
 		           {name: 'LXDH'},
 		           {name: 'JBZYWT'},
 		           {name: 'JSR'},
+		            {name: 'XZQ'},
+		            {name: 'JLR'},
 		            {name: 'INDEX'},
 		           {name: 'YW_GUID'}
 		        ]
@@ -62,18 +85,48 @@
 		       // title:'信访待办列表',
 		        store: store,
 		        columns: [
-		            //new Ext.grid.RowNumberer(),        
+		            //new Ext.grid.RowNumberer(),  
+		           {header: '线索号',dataIndex:'BH',width: width*0.08, sortable: true},
+		            {header: '行政区',dataIndex:'XZQ',width: width*0.08, sortable: true},
 		           {header: '举报人',dataIndex:'JBR',width: width*0.1, sortable: true},
 		           {header: '举报形式',dataIndex:'JBXS',width: width*0.08, sortable: true},
-		           {header: '联系地址',dataIndex:'LXDZ',width: width*0.14, sortable: true},
+		           {header: '联系地址',dataIndex:'LXDZ',width: width*0.16, sortable: true},
 		           {header: '举报时间',dataIndex:'JBSJ',width: width*0.08, sortable: true},
 		           {header: '联系电话',dataIndex:'LXDH',width: width*0.08, sortable: true},
-		           {header: '举报主要问题',dataIndex:'JBZYWT',width: width*0.15, sortable: true},
-		            {header: '接收人',dataIndex:'JSR',width: width*0.15, sortable: true},
-		           {header: '案件办理状态',dataIndex:'AJBLZT',width: width*0.15, sortable: true},
+		           {header: '举报主要问题',dataIndex:'JBZYWT',width: width*0.16, sortable: true},
+		            {header: '记录人',dataIndex:'JLR',width: width*0.06, sortable: true},
+		             {header: '接收人',dataIndex:'JSR',width: width*0.06, sortable: true},
 		           {header: '查看',dataIndex:'INDEX',width: width*0.05, sortable: false,renderer:pro}
 		        ],
 		        tbar:[
+		            {xtype:'label',text:'政区:',width:30},
+		           new Ext.form.ComboBox({
+			                   id:'XZQcombo',
+							    store:XZQStore,
+							    displayField:'key',
+							    valueField:'value',
+							    editable:false,
+							    typeAhead:true,
+							    width:80,
+							    mode:'local',
+							    forceSelection:true,
+							    triggerAction:'all',
+									    selectOnFocus:true
+					    }),
+					{xtype:'label',text:'举报类型:',width:60},
+					   new Ext.form.ComboBox({
+			                   id:'LXcombo',
+							    store:LXStore,
+							    displayField:'key',
+							    valueField:'value',
+							    editable:false,
+							    typeAhead:true,
+							    width:80,
+							    mode:'local',
+							    forceSelection:true,
+							    triggerAction:'all',
+									    selectOnFocus:true
+					    }),
 		        	{xtype:'label',text:'快速查找:',width:60},
 		        	{xtype:'textfield',id:'keyword',width:450,emptyText:'请输入关键字进行查询'},
 		        	{xtype: 'button',text:'查询',handler: query}
@@ -128,38 +181,58 @@
 
       function query(){
          var keyWord=Ext.getCmp('keyword').getValue();
+         var LX=Ext.getCmp('LXcombo').getValue();
+         var XZQ=Ext.getCmp('XZQcombo').getValue();
+         var condition='';
+         if(LX.length>0&&XZQ.length>0){
+          LX=escape(escape("'"+LX+"'"));
+          XZQ=escape(escape("'"+XZQ+"'"));
+         condition="xzq="+XZQ+"  and jbxs="+LX ;
+         }else if(XZQ.length>0){
+          XZQ=escape(escape("'"+XZQ+"'"));
+           condition="xzq="+XZQ;
+         }else if(LX.length>0){
+          LX=escape(escape("'"+LX+"'"));
+          condition="jbxs="+LX ;
+         }
          keyWord=keyWord.toUpperCase();
          putClientCommond("XfjbManager","getXfjbYcl");
          putRestParameter("userId", "<%=userid%>");
          putRestParameter("keyWord",escape(escape(keyWord)));
+         putRestParameter("condition", condition);
           myData = restRequest(); 
           myData= eval(myData);
          var store = new Ext.data.JsonStore({
               proxy: new Ext.ux.data.PagingMemoryProxy(myData),
               remoteSort:true,
               fields: [
-                   {name: 'JBR'},
+                   {name:'BH'},
+		           {name: 'JBR'},
 		           {name: 'JBXS'},
 		           {name: 'LXDZ'},
 		           {name: 'JBSJ'},
 		           {name: 'LXDH'},
 		           {name: 'JBZYWT'},
 		           {name: 'JSR'},
-		           {name: 'INDEX'},
+		            {name: 'XZQ'},
+		            {name: 'JLR'},
+		            {name: 'INDEX'},
 		           {name: 'YW_GUID'}
               ]
         });
         
         grid.reconfigure(store, new Ext.grid.ColumnModel([
            //new Ext.grid.RowNumberer(),        
+		           {header: '线索号',dataIndex:'BH',width: width*0.08, sortable: true},
+		           {header: '行政区',dataIndex:'XZQ',width: width*0.08, sortable: true},
 		           {header: '举报人',dataIndex:'JBR',width: width*0.1, sortable: true},
 		           {header: '举报形式',dataIndex:'JBXS',width: width*0.08, sortable: true},
-		           {header: '联系地址',dataIndex:'LXDZ',width: width*0.14, sortable: true},
+		           {header: '联系地址',dataIndex:'LXDZ',width: width*0.16, sortable: true},
 		           {header: '举报时间',dataIndex:'JBSJ',width: width*0.08, sortable: true},
 		           {header: '联系电话',dataIndex:'LXDH',width: width*0.08, sortable: true},
-		           {header: '举报主要问题',dataIndex:'JBZYWT',width: width*0.15, sortable: true},
-		            {header: '接收人',dataIndex:'JSR',width: width*0.15, sortable: true},
-		           {header: '案件办理状态',dataIndex:'AJBLZT',width: width*0.15, sortable: true},
+		           {header: '举报主要问题',dataIndex:'JBZYWT',width: width*0.16, sortable: true},
+		           {header: '记录人',dataIndex:'JLR',width: width*0.06, sortable: true},
+		           {header: '接收人',dataIndex:'JSR',width: width*0.06, sortable: true},
 		           {header: '查看',dataIndex:'INDEX',width: width*0.05, sortable: false,renderer:pro}
         ]));
         grid.getBottomToolbar().bind(store);
