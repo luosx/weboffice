@@ -22,12 +22,13 @@
 		var height;
 		var store;
 		var grid;
+		var limitNum;
 		Ext.onReady(function(){
 	  		putClientCommond("tdbgdc","getqb");
 			myData = restRequest();			
 			width = document.body.clientWidth;
 			height = document.body.clientHeight * 0.995;
-			var limitNum = parseInt(height/24);			
+			limitNum = parseInt(height/24);			
 			store = new Ext.data.JsonStore({
 				proxy:new Ext.ux.data.PagingMemoryProxy(myData),
 					remoteSort:true,
@@ -79,7 +80,8 @@
 						},{
 							name : '3'
 						}]
-			});			
+			});	
+				
 			grid = new Ext.grid.GridPanel({
 		        store: store,
 		        sm:sm,
@@ -141,28 +143,26 @@
 						},'-',{
 							xtype : 'label',
 							text : '监测面积：'
-						},{xtype:'textfield',id:'jcmj1',width:60},{
+						},{xtype:'textfield',id:'jcmj1',width:50},{
 							xtype : 'label',
-							text : '监测面积：'
-						},{xtype:'textfield',id:'jcmj2',width:60},						
+							text : '—'
+						},{xtype:'textfield',id:'jcmj2',width:50},						
 						'-',{
 							xtype : 'label',
 							text : '压盖审批面积：'
-						},{xtype:'textfield',id:'ygspmj',width:60},						
+						},{xtype:'textfield',id:'ygspmj1',width:50},
+						{
+							xtype : 'label',
+							text : '—'
+						},{xtype:'textfield',id:'ygspmj2',width:50},																
 						'-',{
 							xtype : 'label',
 							text : '压盖供地面积：'
-						},{xtype:'textfield',id:'yggdmj',width:60},						
-						'-',{
+						},{xtype:'textfield',id:'yggdmj1',width:50},
+						{
 							xtype : 'label',
-							text : '农用地面积：'
-						},{xtype:'textfield',id:'nydmj',width:60},
-						'-',{
-							xtype : 'label',
-							text : '符合规划面积：'
-						},{xtype:'textfield',id:'fhghmj',width:60},
-						'-',
-	    			{xtype: 'button',text:'查询',handler: query}
+							text : '—'
+						},{xtype:'textfield',id:'yggdmj2',width:50}
 			    ], 
 			    listeners:{
 		  			rowclick : function(grid, rowIndex, e)
@@ -172,7 +172,7 @@
         		},
 		        stripeRows: true,
 		        width:width,
-		        height: height ,
+		        height: height-30 ,
 		        stateful: true,
 		        stateId: 'grid',
 		        buttonAlign:'right',
@@ -191,8 +191,55 @@
 		        	text:'导出Excel',
 		        	handler: expExcel
 		        }]
-        	});   				
+        	});         	 				
 			grid.render('mygrid_container');
+			this.tb = new Ext.Toolbar({
+				renderTo : grid.tbar,
+				items : [{
+							xtype : 'label',
+							text : '压盖审批比率：'
+						},{xtype:'textfield',id:'ygspbl1',width:50},
+						{
+							xtype : 'label',
+							text : '—'
+						},{xtype:'textfield',id:'ygspbl2',width:50},																
+						'-',{
+							xtype : 'label',
+							text : '压盖供地比率：'
+						},{xtype:'textfield',id:'yggdbl1',width:50},
+						{
+							xtype : 'label',
+							text : '—'
+						},{xtype:'textfield',id:'yggdbl2',width:50},
+						'-',{
+							xtype : 'label',
+							text : '农用地面积：'
+						},{xtype:'textfield',id:'nydmj1',width:50},
+						{
+							xtype : 'label',
+							text : '—'
+						},{xtype:'textfield',id:'nydmj2',width:50},
+						'-',{
+							xtype : 'label',
+							text : '符合规划面积：'
+						},{xtype:'textfield',id:'fhghmj1',width:50},
+						{
+							xtype : 'label',
+							text : '—'
+						},{xtype:'textfield',id:'fhghmj2',width:50},																		
+						'-',{
+							xtype : 'label',
+							text : '不符合规划面积：'
+						},{xtype:'textfield',id:'bfhghmj1',width:50},
+						{
+							xtype : 'label',
+							text : '—'
+						},{xtype:'textfield',id:'bfhghmj2',width:50},																		
+						'-',
+	    			{xtype: 'button',text:'查询',handler: query}
+	    			]
+
+			});	 			
 	});
 	//设为违法	
 	function setWf(){   
@@ -269,19 +316,67 @@
 	}	
 		
     function query(){
-         var keyWord=Ext.getCmp('keyword').getValue();
-		 putClientCommond("tdbgdc","getqb");
-         putRestParameter("keyword",escape(escape(keyWord)));
-         var myData = restRequest(); 
+         //var keyWord=Ext.getCmp('keyword').getValue();
+		 //putClientCommond("tdbgdc","getqb");
+         //putRestParameter("keyword",escape(escape(keyWord)));
+         var myData = []//restRequest(); 
          store = new Ext.data.JsonStore({
 		proxy:new Ext.ux.data.PagingMemoryProxy(myData),
 			remoteSort:true,
 			fields:[
-			
+				{name:'YW_GUID'},
+				{name:'XZDM'},
+				{name:'TBBH'},
+				{name:'TBLX'},
+				{name:'XZB'},
+				{name:'YZB'},
+				{name:'QSX'},
+				{name:'HSX'},
+				{name:'JCMJ'},
+				{name:'YGSPMJ'},
+				{name:'YGSPBL'},
+				{name:'YGGDMJ'},
+				{name:'YGGDBL'},
+				{name:'NYDMJ'},
+				{name:'GDMJ'},
+				{name:'JSYDMJ'},
+				{name:'WLYDMJ'},
+				{name:'YXJSQ'},
+				{name:'YTJJSQ'},
+				{name:'XZJSQ'},
+				{name:'JZJSQ'},
+				{name:'FHGHMJ'},
+				{name:'BFHGHMJ'},
+				{name:'ZYJBNTMJ'}			
 			]
 	});
-        grid.reconfigure(store, sm, new Ext.grid.ColumnModel([
-	
+        grid.reconfigure(store, new Ext.grid.ColumnModel([
+			new Ext.grid.RowNumberer(),
+		    sm,
+	        {header: '业务编号', dataIndex:'YW_GUID', width: width*0.1 , sortable: true,hidden:true},
+			{header: '行政代码', dataIndex:'XZDM', width: width*0.1 , sortable: true},		
+			{header: '图斑编号', dataIndex:'TBBH', width: width*0.1, sortable: true},
+			{header: '图斑类型', dataIndex:'TBLX', width: width*0.1,sortable: true},
+			{header: '中心X坐标', dataIndex:'XZB', width: width*0.1, sortable: true},		
+			{header: '中心Y坐标', dataIndex:'YZB', width: width*0.1, sortable: true},
+			{header: '前时相', dataIndex:'QSX', width: width*0.1,sortable: true},
+			{header: '后时相', dataIndex:'HSX', width: width*0.1, sortable: true},		
+			{header: '监测面积', dataIndex:'JCMJ', width: width*0.1, sortable: true},
+			{header: '压盖审批面积', dataIndex:'YGSPMJ', width: width*0.1,sortable: true},
+			{header: '压盖审批比率', dataIndex:'YGSPBL', width: width*0.1, sortable: true},		
+			{header: '压盖供地面积', dataIndex:'YGGDMJ', width: width*0.1, sortable: true},
+			{header: '压盖供地比率', dataIndex:'YGGDBL', width: width*0.1, sortable: true},
+			{header: '农用地面积', dataIndex:'NYDMJ', width: width*0.1, sortable: true},		
+			{header: '耕地面积', dataIndex:'GDMJ', width: width*0.1, sortable: true},
+			{header: '建设用地面积', dataIndex:'JSYDMJ', width: width*0.1,sortable: true},
+			{header: '未利用地面积', dataIndex:'WLYDMJ', width: width*0.1, sortable: true},		
+			{header: '允许建设区', dataIndex:'YXJSQ', width: width*0.1, sortable: true},
+			{header: '有条件建设区', dataIndex:'YTJJSQ', width: width*0.1,sortable: true},
+			{header: '限制建设区', dataIndex:'XZJSQ', width: width*0.1, sortable: true},		
+			{header: '禁止建设区', dataIndex:'JZJSQ', width: width*0.1, sortable: true},
+			{header: '符合规划面积', dataIndex:'FHGHMJ', width: width*0.1,sortable: true},
+			{header: '不符合规划面积', dataIndex:'BFHGHMJ', width: width*0.1, sortable: true},		
+			{header: '占用基本农田面积', dataIndex:'ZYJBNTMJ', width: width*0.1, sortable: true}			
         ]));
         	//重新绑定分页工具栏
 	grid.getBottomToolbar().bind(store);
