@@ -24,7 +24,7 @@ public class Cgreport extends AbstractBaseBean implements IDataClass {
 	public Map<String, TRBean> getTRBeans(Object[] obj, TRBean trBean) {
 		Map<String, TRBean> trbeans = new TreeMap<String, TRBean>();
 		Map<String, Object> queryMap = new HashMap<String, Object>();
-		if(obj.length > 1){
+		if(obj.length > 0){
 			queryMap = (Map<String, Object>)obj[0];
 		}
 		TRBean titleBean = getTitle();
