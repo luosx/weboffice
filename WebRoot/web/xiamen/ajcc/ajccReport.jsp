@@ -1,8 +1,25 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@page import="com.klspta.model.CBDReport.CBDReportManager"%>
+<%@page import="com.klspta.console.ManagerFactory"%>
+<%@page import="org.springframework.security.core.context.SecurityContextHolder"%>
+<%@page import="com.klspta.console.user.User"%>
+<%@page import="com.klspta.console.role.Role"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+Object userprincipal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+	String userid = ((User)userprincipal).getUserID();
+	List<Role> list = null;
+	try {
+		list = ManagerFactory.getUserManager().getUserWithId(userid).getRoleList();
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+	String user_role="";
+	if(list.size()>0){
+	Role role=(Role)list.get(0);
+	user_role=role.getRolename();
+	}
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
@@ -105,9 +122,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    oXL.Visible = true; 
 		    //设置excel可见属性 
 		}
+		//根据用地单位和关键字作过滤
+  		function query(keyword){
+ 			putClientCommond("ajcc","getReport");
+		    putRestParameter("userid","<%=userid%>");
+		    putRestParameter("keyword",escape(escape(keyword)));
+			myData = restRequest();
+  			document.getElementById("center").innerHTML = myData;
+  		}
 		
   </script>
-  <body>
+  <body >
   	<div id="fixed" style="position: fixed; top: 5px; left: 0px">
 		<img src="base/form/images/print.png" width="20px" height="20px" onClick="javascript:print();"  />
 	</div>
@@ -116,11 +141,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	      <h1>发现制止土地违法行为清单</h1>
 	   </div>
 	    <div style="position:absolute; top:45px; left: 20px; width:990px;" >
-	    <font style="font-size: 15px ;">填报单位：厦门市国土资源与房产管理局</font>
+	    <font id="tbdw" style="font-size: 15px ;">填报单位：<%=user_role %></font>
 		<font style="font-size: 15px; float: right">计量单位：件、亩</font>
 	    </div>
 	    
-	<div align="center" style="position:absolute; top:65px; left: 20px;">
+	<div align="center" id="center" style="position:absolute; top:65px; left: 20px;">
   		<%=new CBDReportManager().getReport("AJCC")%>
   	</div>
   </body>
