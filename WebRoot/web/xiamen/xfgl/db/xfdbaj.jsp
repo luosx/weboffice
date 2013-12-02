@@ -18,7 +18,7 @@
 	<head>
 		<base href="<%=basePath%>">
 
-		<title>信访案件待办理</title>
+		<title>12336举报线索待办理</title>
 
 		<meta http-equiv="pragma" content="no-cache">
 		<meta http-equiv="cache-control" content="no-cache">
@@ -82,7 +82,7 @@
 		    height=document.body.clientHeight;//高度
 		    sm = new Ext.grid.CheckboxSelectionModel({handleMouseDown:Ext.emptyFn});
 		    grid = new Ext.grid.GridPanel({
-		        title:'信访待办列表',
+		        title:'12336待办列表',
 		        store: store,
 		        columns: [
 		            //new Ext.grid.RowNumberer(),        
