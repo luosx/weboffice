@@ -140,8 +140,10 @@ Object userprincipal = SecurityContextHolder.getContext().getAuthentication().ge
 	   <div align="center" style="margin-top: 15px">
 	      <h1>发现制止土地违法行为清单</h1>
 	   </div>
-	    <div style="position:absolute; top:45px; left: 20px; width:990px;" >
-	    <font id="tbdw" style="font-size: 15px ;">填报单位：<%=user_role %></font>
+	    <div style="position:absolute; top:45px; left: 20px; width:1180px;" >
+	    <font style="font-size: 15px ;">填报单位：
+	    <input id="tbdw" name="textBox" type="text" style="width:260px;border:0;padding:0;" value=<%=user_role %> />
+	    </font>
 		<font style="font-size: 15px; float: right">计量单位：件、亩</font>
 	    </div>
 	    
