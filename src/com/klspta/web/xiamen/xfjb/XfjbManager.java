@@ -1,11 +1,14 @@
 package com.klspta.web.xiamen.xfjb;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import com.klspta.base.AbstractBaseBean;
 import com.klspta.base.util.UtilFactory;
 import com.klspta.console.ManagerFactory;
+import com.klspta.model.CBDReport.CBDReportManager;
+import com.klspta.web.xiamen.xchc.Cgreport;
 
 public class XfjbManager extends AbstractBaseBean {
 	/**
@@ -140,5 +143,36 @@ public class XfjbManager extends AbstractBaseBean {
 			response(result);
 	}
 	
-	
+public void getReport(){
+        String userid = request.getParameter("userid");
+        String yddw = request.getParameter("yddw");
+        String keyword = request.getParameter("keyword");
+        StringBuffer query = new StringBuffer();
+        if (yddw != null && !("".equals(yddw))) {
+            query.append(" where ");
+            yddw = UtilFactory.getStrUtil().unescape(yddw);
+            query.append(" xzq = '").append(yddw).append("'");
+        }
+        if(keyword != null&& !("".equals(keyword))){
+            if(!(yddw != null && !("".equals(yddw)))){
+                query.append(" where ");
+            }else {
+                query.append(" and ");
+            }
+            keyword = UtilFactory.getStrUtil().unescape(keyword);
+            StringBuffer querybuffer = new StringBuffer();
+            String[][] nameStrings = Cgreport.showList;
+            for(int i = 0; i < nameStrings.length - 1; i++){
+                querybuffer.append("upper(").append(nameStrings[i][0]).append(")||");
+                
+            }
+            querybuffer.append("upper(").append(nameStrings[nameStrings.length - 1][0]).append(") like '%").append(keyword).append("%')");
+            query.append("(");
+            query.append(querybuffer);
+        }
+        Map<String, Object> conditionMap = new HashMap<String, Object>();
+        conditionMap.put("query", query.toString());
+        response(String.valueOf(new CBDReportManager().getReport("XFJBCX", new Object[]{conditionMap})));
+    }
+    
 }
