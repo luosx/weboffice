@@ -42,8 +42,8 @@ public class XchcData extends AbstractBaseBean implements IxchcData {
 			user = ManagerFactory.getUserManager().getUserWithId(userid);
 			xzqdm = user.getXzqh();
 			xzqmc = UtilFactory.getXzqhUtil().getNameByCode(xzqdm);
-			String sql = "insert into dc_ydqkdcb(yw_guid,impuser, impxzq, impuserid, impxzqbm) values(?,?,?,?,?)";
-			update(sql, YW, new Object[]{num, user.getFullName(), xzqmc, userid, xzqdm});
+			String sql = "insert into dc_ydqkdcb(yw_guid,impuser, impxzq, impxzqbm) values(?,?,?,?)";
+			update(sql, YW, new Object[]{num, user.getFullName(), xzqmc, xzqdm});
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -63,7 +63,7 @@ public class XchcData extends AbstractBaseBean implements IxchcData {
              sqlBuffer.append(keyword);
              sqlBuffer.append("%')");
         }
-		sqlBuffer.append(" order by t.XCRQ");
+		sqlBuffer.append(" order by t.ydsj");
 		List<Map<String, Object>> getList = query(sqlBuffer.toString(), YW);
         for (int i = 0; i < getList.size(); i++) {
         	getList.get(i).put("XIANGXI", i);
