@@ -24,7 +24,7 @@ response.addHeader("Content-Disposition","attachment;filename="+fileName+"\"");
 String classPath = Thread.currentThread().getContextClassLoader().getResource("/").getPath();
 String dirpath = classPath.substring(0, classPath.lastIndexOf("WEB-INF/classes"));
 dirpath=dirpath+"model/accessory/dzfj/download/";
-if((dirpath+filePath).endsWith("mp4") || (dirpath+filePath).endsWith("mp3")){
+if((dirpath+filePath).endsWith("mp4") || (dirpath+filePath).endsWith("mp3")|| (dirpath+filePath).endsWith("3gpp")){
 //处理视频、音频
 	StringBuffer bodyBuffer = new StringBuffer();
 	bodyBuffer.append("<object id=\"Player\" width=95% height=500 classid=\"CLSID:6BF52A52-394A-11D3-B153-00C04F79FAA6\">");
@@ -54,7 +54,7 @@ if((dirpath+filePath).endsWith("mp4") || (dirpath+filePath).endsWith("mp3")){
 	bodyBuffer.append("</object>");
 	out.write(bodyBuffer.toString());
 	//out.write();bodyBuffer.append("<param name="autoStart" value="1">");
-}else if((dirpath+filePath).endsWith("JPG")){
+}else if((dirpath+filePath).endsWith("JPG") || (dirpath+filePath).endsWith("jpg")){
 //处理图片
 	out.write("<img src='"+basePath +"/model//accessory//dzfj//download//"+ filePath+"' height='600'>");
 }else if((dirpath+filePath).endsWith("pdf")){
