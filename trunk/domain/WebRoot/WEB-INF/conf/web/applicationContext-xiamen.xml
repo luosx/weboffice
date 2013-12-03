@@ -14,6 +14,8 @@
 	<bean name="wptb" class="com.klspta.web.xiamen.wpzf.wpzf.WptbManager" scope="prototype"/> 
 	<!-- 巡查核查管理 -->   
 	<bean name="xchc" class="com.klspta.web.xiamen.xchc.XchcManager" scope="prototype"/>  
+	<!-- 案件查处管理 --> 
+    <bean name="ajcc" class="com.klspta.web.xiamen.ajcc.AjccManager" scope="prototype" />
 	<!-- 批后监管管理 -->   
 	<bean name="phjg" class="com.klspta.web.xiamen.phjg.PhjgManager" scope="prototype"/>    
 	 <!-- 信访举报工作流启动 -->
