@@ -92,7 +92,7 @@ input{
 					巡查时间
 				</td>
 				<td width="32%" style="border-right:none;">
-					<input type="text" class="noborder" id="hcrq" name="hcrq"
+					<input type="text" class="noborder" id="begindate" name="begindate"
 								onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})"    readonly style="width: 98%" />
 				</td>
 			</tr>
@@ -190,32 +190,5 @@ input{
 
 		</table>
 		</form>
-		<br>
-		<center>
-			<div class="container" id="idContainer2" align="center" >
-				<ul id="idSlider2">
-					<%
-						String[] images = map.get("ZPBH") == null ? null : map.get(
-									"ZPBH").toString().split(",");
-							if (images != null) {
-								for (int i = 0; i < images.length; i++) {
-					%>
-					
-						<img 
-							src="ftp://<%=username%>:<%=password%>@<%=host%>:<%=port%>/<%=images[i]%>.jpg"
-							alt="图片上传预览" />
-					<br/>
-
-					<%
-						}}
-					%>
-				</ul>
-				<ul class="num" id="idNum">
-				</ul>
-			</div>
-			<br />
-
-		</center>
-
 	</body>
 </html>
