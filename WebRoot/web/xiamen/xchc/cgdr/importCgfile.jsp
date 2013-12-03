@@ -1,6 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@page import="org.springframework.security.core.context.SecurityContextHolder"%>
 <%@page import="com.klspta.console.user.User"%>
+<%@page import="com.klspta.model.wyrw.WyrwManager"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -41,7 +42,7 @@ String userid = ((User)userprincipal).getUserID();
 	  labelAlign: 'right',    
 	  labelWidth: 60,  
 	  frame:true,
-      url:  "http://" + window.location.href.split("/")[2] + '/domain/service/rest/wyrwmanager/uploadResult?userid=<%=userid%>',
+      url:  "http://" + window.location.href.split("/")[2] + '/domain/service/rest/wyrwmanager/uploadResult?userid=<%=userid%>&type=<%=WyrwManager.XM_XIAMEN%>',
 	  width: 500, 
 	  fileUpload: true,
 	  autoHeight: true,
