@@ -5,6 +5,8 @@ import java.rmi.server.UID;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
@@ -31,7 +33,7 @@ import com.klspta.console.user.User;
  * <br>Date:2012-7-2
  */
 @Component
-public class ResultImp extends AbstractBaseBean {
+public class ResultImp extends AResultImp {
     /**
      * 临时位置
      */
@@ -41,7 +43,8 @@ public class ResultImp extends AbstractBaseBean {
     private String userId;
     private String xzqId;
     
-    public ResultImp() {
+    public ResultImp(HttpServletRequest request) {
+    	super(request);
         tempPath = getTemp();
     }
 
@@ -80,22 +83,6 @@ public class ResultImp extends AbstractBaseBean {
         }
     }
 
-    /**
-     * 
-     * <br>Description:临时文件
-     * <br>Author:陈强峰
-     * <br>Date:2012-7-4
-     * @return
-     */
-    private String tempFile() {
-        try {
-            List<String> list = UtilFactory.getFileUtil().upload(request, 0, 0);
-            return list.get(0);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
 
     /**
      * 
@@ -301,24 +288,6 @@ public class ResultImp extends AbstractBaseBean {
         return count;
     }
 
-    /**
-     * 
-     * <br>Description:删除附件信息
-     * <br>Author:陈强峰
-     * <br>Date:2012-7-29
-     * @param rwbh
-     */
-    private void delAcc(String rwbh) {
-        String sql = "select file_id,file_path from atta_accessory where yw_guid=? ";
-        List<Map<String, Object>> list = query(sql, CORE, new Object[] { rwbh });
-        for (int i = 0; i < list.size(); i++) {
-            String ftpFileName = list.get(i).get("file_path").toString();
-            String fileId = list.get(i).get("file_id").toString();
-            UtilFactory.getFtpUtil().deleteFile(ftpFileName);
-            sql = "delete from atta_accessory where file_id=?";
-            update(sql, CORE, new Object[] { fileId });
-        }
-    }
 
     /**
      * 
@@ -463,5 +432,10 @@ public class ResultImp extends AbstractBaseBean {
                     map.get("JSQK"), map.get("XCR"), map.get("XCSJ") });
         }
     }
+
+	@Override
+	public void expResult() {
+		
+	}
 
 }

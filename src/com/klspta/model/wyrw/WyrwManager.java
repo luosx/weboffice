@@ -3,6 +3,7 @@ package com.klspta.model.wyrw;
 import org.springframework.stereotype.Component;
 
 import com.klspta.base.AbstractBaseBean;
+import com.klspta.web.xiamen.xchc.importwycg.XmResultImp;
 
 /**
  * 
@@ -14,6 +15,12 @@ import com.klspta.base.AbstractBaseBean;
 @Component
 public class WyrwManager extends AbstractBaseBean {
 
+	/**
+	 * 添加项目标志位，不同项目调用不同方法
+	 */
+	public static final int XM_XIAMEN = 1;
+	
+	
     public WyrwManager() {
     }
 
@@ -37,7 +44,19 @@ public class WyrwManager extends AbstractBaseBean {
      * <br>Date:2012-8-14
      */
     public void uploadResult() {
-        ResultImp rs = new ResultImp();
+        AResultImp rs;
+        String type = request.getParameter("type");
+    	if(type == null || type.equals("")){
+    		type = "0";
+    	}
+    	switch (Integer.parseInt(type)) {
+		case XM_XIAMEN:
+			rs = new XmResultImp(request);
+			break;
+		default:
+			rs = new ResultImp(request);
+			break;
+		}
         rs.request = this.request;
         rs.response = this.response;
         rs.saveData();
