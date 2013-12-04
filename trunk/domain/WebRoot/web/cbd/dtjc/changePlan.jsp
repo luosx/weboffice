@@ -1,5 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%@page import="com.klspta.web.cbd.hxxm.jdjh.JhHandler" %>
+
 <%@page import="com.klspta.web.cbd.hxxm.jdjh.DataManager"%>
 <%@page import="com.klspta.web.cbd.dtjc.TjbbManager"%>
 <%@page import="com.klspta.web.cbd.dtjc.TjbbBuild"%>

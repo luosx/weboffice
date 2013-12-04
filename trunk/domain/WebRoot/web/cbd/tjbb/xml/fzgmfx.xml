@@ -67,9 +67,9 @@
           <point name="2020" y="12" />
         </series>
         <series id="1" name="储备库融资能力(存)" type="Line" color="red">
-          <point name="2013" y="5.34" />
-          <point name="2014" y="-4.99" />
-          <point name="2015" y="5.42" />
+          <point name="2013" y="-10.87" />
+          <point name="2014" y="-4.92" />
+          <point name="2015" y="4.23" />
           <point name="2016" y="4.23" />
           <point name="2017" y="0" />
           <point name="2018" y="0" />

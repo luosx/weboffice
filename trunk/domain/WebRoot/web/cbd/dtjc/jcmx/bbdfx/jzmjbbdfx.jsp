@@ -163,7 +163,7 @@ td {
                  {id: "XSFYBFB", fieldLabel: "销售费用百分比（%）"},
                  {id: "QTFYBFB", fieldLabel: "其他费用百分比（%）"},
                  {id: "DZXSJGXS", fieldLabel: "定制销售价格系数"},
-                 {id: "ZYZJDYXBFB", fieldLabel: "自有资金的影像（%）"},
+                 {id: "ZYZJDYXBFB", fieldLabel: "自有资金的影响（%）"},
                  {id: "ZSYSBL", fieldLabel: "招商预售比例（%）"},
                  {id: "CZL", fieldLabel: "出租率（%）"}
               ],
