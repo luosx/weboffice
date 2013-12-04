@@ -45,7 +45,19 @@
 			height = document.body.clientHeight * 0.995;
 			
 			//定义title
- 			var con="<div style=\"height:60;width:"+tableWidth+"; background:url(base/thirdres/ext/examples/image-organizer/images/selected.gif);border-right:1px solid #D0D0D0\" ><table  cellpadding=\"0\" cellspacing=\"0\" align=\"center\" width='tableWidth'><tr  class=\"tableheader\" ><td rowspan=\"2\" class=\"list_title_c\" style=\"border-right:1px solid #D0D0D0;\" width='" + (width * 0.1 - 17) + "'><label>序号</label></td><td rowspan=\"2\" class=\"list_title_c\"  style=\"border-right:1px solid #D0D0D0;\" width='" + (width * 0.1 - 2) + "'><label>自然斑编号</label></td><td class=\"list_title_c\" rowspan=\"2\"  style=\"border-right:1px solid #D0D0D0;\" width='" + (width*0.1-2) + "'><label>占地面积</label></td><td class=\"list_title_c\" colspan=\"2\"  style=\"border-right:1px solid #D0D0D0; border-bottom:1px solid #D0D0D0;\" width='" + (width* 0.2 - 5) + "'><label>总计</label></td><td  class=\"list_title_c\"  colspan=\"3\"  style=\"border-right:1px solid #D0D0D0; border-bottom:1px solid #D0D0D0;\" width='" + (width * 0.3 - 7)+ "' ><label>住宅拆迁(户、人、㎡)</label></td><td class=\"list_title_c\" colspan=\"2\"  style=\"border-right:1px solid #D0D0D0; border-bottom:1px solid #D0D0D0;\" width='" + (width * 0.2)+ "' ><label>非住宅拆迁(㎡)</label></td><td class=\"list_title_c\" rowspan=\"2\"  style=\"border-right:1px solid #D0D0D0;\" width='140'><label>备注</label></td><td class=\"list_title_c\" rowspan=\"2\"  style=\"border-right:1px solid #D0D0D0;\" width='60'><label>位置<br>查看</label></td></tr><tr class=\"tableheader\" ><td class=\"list_title_c\" style=\"border-right:1px solid #D0D0D0; \" ><label>楼座面积</label></td><td class=\"list_title_c\" style=\"border-right:1px solid #D0D0D0; \" ><label>拆迁规模</label></td><td class=\"list_title_c\" style=\"border-right:1px solid #D0D0D0; \" width='" + (width * 0.1)+  "'><label>住宅楼座面积</label></td><td class=\"list_title_c\" style=\"border-right:1px solid #D0D0D0; \" width='" +(width * 0.1)+ "'><label>住宅拆迁规模</label></td><td class=\"list_title_c\" style=\"border-right:1px solid #D0D0D0; \" width='" +(width * 0.1)+ "'><label>预计户数</label></td><td class=\"list_title_c\" style=\"border-right:1px solid #D0D0D0; \" ><label>非住宅楼座面积</label></td><td class=\"list_title_c\" style=\"border-right:1px solid #D0D0D0; \" ><label>非住宅拆迁规模</label></td></tr></table>"
+ 			var con="<div style=\"height:60;width:"+tableWidth+"; background:url(base/thirdres/ext/examples/image-organizer/images/selected.gif);border-right:1px solid #D0D0D0\" >"+
+ 			"<table  cellpadding=\"0\" cellspacing=\"0\" align=\"center\" width='tableWidth'><tr  class=\"tableheader\" >"+
+ 			"<td rowspan=\"2\" class=\"list_title_c\" style=\"border-right:1px solid #D0D0D0;\" width='" + (width * 0.1 - 17) + "'><label>序号</label></td>"+
+ 			"<td rowspan=\"2\" class=\"list_title_c\"  style=\"border-right:1px solid #D0D0D0;\" width='" + (width * 0.1 - 2) + "'><label>自然斑编号</label></td>"+
+ 			"<td class=\"list_title_c\" rowspan=\"2\"  style=\"border-right:1px solid #D0D0D0;\" width='" + (width*0.1-2) + "'><label>占地面积</label></td>"+
+ 			"<td class=\"list_title_c\" colspan=\"2\"  style=\"border-right:1px solid #D0D0D0; border-bottom:1px solid #D0D0D0;\" width='" + (width* 0.2 - 5) + "'><label>总计</label></td>"+
+ 			"<td  class=\"list_title_c\"  colspan=\"3\"  style=\"border-right:1px solid #D0D0D0; border-bottom:1px solid #D0D0D0;\" width='" + (width * 0.3 - 7)+ "' ><label>住宅拆迁(户、人、㎡)</label></td>"+
+ 			"<td class=\"list_title_c\" colspan=\"2\"  style=\"border-right:1px solid #D0D0D0; border-bottom:1px solid #D0D0D0;\" width='" + (width * 0.2)+ "' ><label>非住宅拆迁(㎡)</label></td>"+
+ 			"<td class=\"list_title_c\" rowspan=\"2\"  style=\"border-right:1px solid #D0D0D0;\" width='140'><label>备注</label></td></tr><tr class=\"tableheader\" >"+
+ 			"<td class=\"list_title_c\" style=\"border-right:1px solid #D0D0D0; \" ><label>楼座面积</label></td><td class=\"list_title_c\" style=\"border-right:1px solid #D0D0D0; \" ><label>拆迁规模</label></td>"+
+ 			"<td class=\"list_title_c\" style=\"border-right:1px solid #D0D0D0; \" width='" + (width * 0.1)+  "'><label>住宅楼座面积</label></td><td class=\"list_title_c\" style=\"border-right:1px solid #D0D0D0; \" width='" +(width * 0.1)+ "'><label>住宅拆迁规模</label></td>"+
+ 			"<td class=\"list_title_c\" style=\"border-right:1px solid #D0D0D0; \" width='" +(width * 0.1)+ "'><label>预计户数</label></td><td class=\"list_title_c\" style=\"border-right:1px solid #D0D0D0; \" ><label>非住宅楼座面积</label></td>"+
+ 			"<td class=\"list_title_c\" style=\"border-right:1px solid #D0D0D0; \" ><label>非住宅拆迁规模</label></td></tr></table>"
 			var ht=con;
 			var table = new Ext.Panel({
     			layout:'table',
@@ -90,18 +102,17 @@
                 margins: '0 5 5 5',
         		hideHeaders: true,
 		        columns: [
-		           {header: '序号', dataIndex:'YW_GUID',width: width*0.1, sortable: false,renderer:changKeyword},       
+		           {header: '序号', dataIndex:'YW_GUID',width: width*0.08, sortable: false,renderer:changKeyword},       
 		           {header: '自然斑编号', dataIndex:'ZRBBH', width: width*0.1, sortable: false,renderer:changKeyword},
 		           {header: '占地面积', dataIndex:'ZDMJ', width: width*0.1, sortable: false, editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
 		           {header: '楼座面积', dataIndex:'LZMJ',width: width*0.09, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
-		           {header: '拆迁规模', dataIndex:'CQGM',width: width*0.09, sortable: false, editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
-		           {header: '住宅楼座面积', dataIndex:'ZZLZMJ', width: width*0.1, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
-		           {header: '住宅拆迁规模', dataIndex:'ZZCQGM',width: width*0.1, sortable: false, editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
+		           {header: '拆迁规模', dataIndex:'CQGM',width: width*0.1, sortable: false, editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
+		           {header: '住宅楼座面积', dataIndex:'ZZLZMJ', width: width*0.12, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
+		           {header: '住宅拆迁规模', dataIndex:'ZZCQGM',width: width*0.12, sortable: false, editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
 		           {header: '预计户数', dataIndex:'YJHS',width: width*0.1, sortable: false, editor: {xtype: 'textfield',allowBlank:true},renderer:changKeyword},
-		           {header: '非住宅楼座面积', dataIndex:'FZZLZMJ',width: width*0.09, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
-		           {header: '非住宅拆迁规模', dataIndex:'FZZCQGM',width: width*0.09, sortable: false, editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
-		           {header: '备注', dataIndex:'BZ',width: 140, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
-		     		{header: '位置查看', width:50, sortable: false,renderer:view}	
+		           {header: '非住宅楼座面积', dataIndex:'FZZLZMJ',width: width*0.12, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
+		           {header: '非住宅拆迁规模', dataIndex:'FZZCQGM',width: width*0.12, sortable: false, editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
+		           {header: '备注', dataIndex:'BZ',width: 140, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword}
 		        ], 
 		        tbar:[
 	    			{xtype:'label',text:'快速查询:',width:60},
@@ -221,9 +232,10 @@
   }
          
 function showLocation(bh){
-   var url="<%=basePath%>"+"base/fxgis/fx/FxGIS.html?i=false&initFunction=[{\"name\":\"findFeature\",\"parameters\":\"CBD,1,"+bh+",TBBH\"}]";
-   var zrb=window.open(url); 
-   zrb.document.title ="自然斑";
+   //var url="<%=basePath%>"+"base/fxgis/fx/FxGIS.html?i=false&initFunction=[{\"name\":\"findFeature\",\"parameters\":\"CBD,1,"+bh+",TBBH\"}]";
+   //var zrb=window.open(url); 
+   //zrb.document.title ="自然斑";
+   parent.frames['east'].swfobject.getObjectById("FxGIS").findFeature("cbd", "1", bh, "TBBH");
    }
 </script>
 </head>

@@ -138,7 +138,7 @@
 		            {name: 'YW_GUID'}
 				]
 			});
-			store.load({params:{start:0, limit:15}});
+			store.load({params:{start:0, limit:10}});
 			grid = new Ext.grid.GridPanel({
 				title:'基本斑列表',
 		        store: store,
@@ -321,7 +321,7 @@
  		}
  
  function showLocation(bh){
- document.getElementById("map");
+ //document.getElementById("map");
  // var ring = {"rings":[[[40560762.895622835,3467853.4509063377],[40568435.82763537,3466583.448366333],[40568433.181796744,3467641.7838163367],[40567110.26248424,3465789.696778829],[40567163.17925674,3468065.1179963383],[40565152.341901734,3465578.0296888286],[40565152.341901734,3468012.201223838],[40563511.92195422,3465419.2793713277],[40563511.92195422,3468012.201223838],[40560762.895622835,3465207.612281327],[40560762.895622835,3467853.4509063377]]],"spatialReference":{"wkid":2364}}
   //parent.frames["east"].frames["lower"].swfobject.getObjectById("FxGIS").findFeature('cbd',1,yw_guid,'OBJECTID');
 parent.frames['east'].swfobject.getObjectById("FxGIS").findFeature("cbd", "1", bh, "TBBH");

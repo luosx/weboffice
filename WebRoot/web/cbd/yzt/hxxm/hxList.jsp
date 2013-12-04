@@ -74,7 +74,6 @@
 		           	{name: 'TYL'},
 		           	{name: 'RZSS'},
 		           	{name: 'BHDK'},
-		           	{name: 'XMBH'},
 		           	{name: 'YW_GUID'}
 				]
 			});
@@ -86,29 +85,29 @@
                 margins: '0 5 5 5',
         		//hideHeaders: true,
 		        columns: [
-		           {header: '序号', dataIndex:'XH',width: width*0.05, sortable: false,renderer:changKeyword},       
+		           {header: '序号', dataIndex:'XH',width: width*0.03, sortable: false,renderer:changKeyword},       
 		           {header: '项目名称', dataIndex:'XMNAME', width: width*0.15, sortable: false,renderer:changKeyword},
-		           {header: '位置查看', dataIndex:'XMBH',width:width*0.07, sortable: false,renderer:view}	,
+		          // {header: '位置查看', dataIndex:'XMBH',width:width*0.05, sortable: false,renderer:view}	,
 		           {header: '占地', dataIndex:'ZD', width: width*0.05, sortable: false, editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
 		           {header: '规模', dataIndex:'GM',width: width*0.05, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
 		           {header: '户数', dataIndex:'HS',width: width*0.05, sortable: false, editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
 		           {header: '成本', dataIndex:'CB', width: width*0.05, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
-		           {header: '住宅拆迁费用', dataIndex:'ZZCQFY',width: width*0.1, sortable: false, editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
-		           {header: '企业拆迁费用', dataIndex:'QYCQFY',width: width*0.1, sortable: false, editor: {xtype: 'textfield',allowBlank:true},renderer:changKeyword},
-		           {header: '其他费用', dataIndex:'QTFY',width: width*0.07, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
-		           {header: '安置房货币投资成本', dataIndex:'AZFTZCB',width: width*0.14, sortable: false, editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
-		           {header: '住宅货币投资成本', dataIndex:'ZZHBTZCB',width:width*0.12, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
-		           {header: '拆迁货币投资', dataIndex:'CQHBTZ',width:width*0.1, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
-		           {header: '其他费用占比', dataIndex:'QTFYZB',width:width*0.1, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},  
-		     	   {header: '楼面成本', dataIndex:'LMCB',width:width*0.07, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
-		     	   {header: '楼面保本点', dataIndex:'LMBBD',width:width*0.07, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
-		     	   {header: '楼面成交价', dataIndex:'LMCJJ',width:width*0.08, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
+		           {header: '住宅拆迁费用', dataIndex:'ZZCQFY',width: width*0.07, sortable: false, editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
+		           {header: '企业拆迁费用', dataIndex:'QYCQFY',width: width*0.07, sortable: false, editor: {xtype: 'textfield',allowBlank:true},renderer:changKeyword},
+		           {header: '其他费用', dataIndex:'QTFY',width: width*0.05, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
+		           {header: '安置房货币投资成本', dataIndex:'AZFTZCB',width: width*0.1, sortable: false, editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
+		           {header: '住宅货币投资成本', dataIndex:'ZZHBTZCB',width:width*0.1, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
+		           {header: '拆迁货币投资', dataIndex:'CQHBTZ',width:width*0.06, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
+		           {header: '其他费用占比', dataIndex:'QTFYZB',width:width*0.08, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},  
+		     	   {header: '楼面成本', dataIndex:'LMCB',width:width*0.05, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
+		     	   {header: '楼面保本点', dataIndex:'LMBBD',width:width*0.06, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
+		     	   {header: '楼面成交价', dataIndex:'LMCJJ',width:width*0.06, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
 		     	   {header: '房屋售价', dataIndex:'FWSJ',width:width*0.07, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
 		     	   {header: '租金', dataIndex:'ZJ',width:width*0.05, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword}, 
-		     	   {header: '评估土地价值', dataIndex:'PGTDJZ',width:width*0.1, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
+		     	   {header: '评估土地价值', dataIndex:'PGTDJZ',width:width*0.08, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
 		     	   {header: '抵押率', dataIndex:'TYL',width:width*0.05, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
-		     	   {header: '融资损失', dataIndex:'RZSS',width:width*0.07, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
-		     	   {header: '包含地块', dataIndex:'BHDK',width:width*0.07, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword}
+		     	   {header: '融资损失', dataIndex:'RZSS',width:width*0.05, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
+		     	   {header: '包含地块', dataIndex:'BHDK',width:width*0.05, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword}
 		        ], 
 		        tbar:[
 	    			{xtype:'label',text:'快速查询:',width:60},
@@ -126,7 +125,7 @@
         		viewConfig: {
         		},      
 		        stripeRows: true,
-		        width:width*1.77,
+		        width:width*1.49+5,
 		        height: height-20 ,
 		        stateful: true,
 		        stateId: 'grid',
@@ -248,9 +247,10 @@
   }        
          
 function showLocation(bh){
-   var url="<%=basePath%>"+"base/fxgis/fx/FxGIS.html?initFunction=[{\"name\":\"findFeature\",\"parameters\":\"CBD,1,"+bh+",TBBH\"}]";
-   var hxxm=window.open(url);
-   hxxm.document.title="红线项目";
+  // var url="<%=basePath%>"+"base/fxgis/fx/FxGIS.html?initFunction=[{\"name\":\"findFeature\",\"parameters\":\"CBD,1,"+bh+",TBBH\"}]";
+   //var hxxm=window.open(url);
+   //hxxm.document.title="红线项目";
+   parent.frames['east'].swfobject.getObjectById("FxGIS").findFeature("cbd", "1", bh, "TBBH");
    }
 </script>
 </head>
