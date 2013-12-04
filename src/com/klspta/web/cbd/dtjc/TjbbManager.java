@@ -9,10 +9,7 @@ import java.util.TreeSet;
 
 import com.klspta.base.AbstractBaseBean;
 import com.klspta.base.util.UtilFactory;
-import com.klspta.web.cbd.dtjc.tjbb.Gdtl;
-import com.klspta.web.cbd.dtjc.tjbb.Kftl;
 import com.klspta.web.cbd.dtjc.trzqk.TrzqkThread;
-import com.klspta.web.cbd.hxxm.jdjh.KftlTable;
 
 /**
  * 
