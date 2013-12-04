@@ -28,7 +28,7 @@
 			myData = restRequest();			
 			width = document.body.clientWidth;
 			height = document.body.clientHeight * 0.995;
-			limitNum = parseInt(height/24);			
+			limitNum = parseInt(height/32);			
 			store = new Ext.data.JsonStore({
 				proxy:new Ext.ux.data.PagingMemoryProxy(myData),
 					remoteSort:true,
@@ -64,7 +64,7 @@
 			var districtStore = new Ext.data.JsonStore({
 				fields : ['name'],
 				data : [{
-							name : '350200'
+							name : '130431'
 						},{
 							name : '350201'
 						},{
@@ -79,6 +79,18 @@
 							name : '2'
 						},{
 							name : '3'
+						},{
+							name : '4'
+						},{
+							name : '5'
+						},{
+							name : '6'
+						},{
+							name : '7'
+						},{
+							name : '8'
+						},{
+							name : '9'
 						}]
 			});	
 				
@@ -116,7 +128,7 @@
 		        tbar:[
 	    			   {
 							xtype : 'label',
-							text : '行政区：'
+							text : '行 政 区：'
 						}, {
 							id : 'district',
 							xtype : 'combo',
@@ -129,20 +141,7 @@
 							selectOnFocus : true
 						}, '-',{
 							xtype : 'label',
-							text : '图斑类型：'
-						}, {
-							id : 'tblx',
-							xtype : 'combo',
-							width :80,
-							store : tblxStore,
-							displayField : 'name',
-							typeAhead : true,
-							mode : 'local',
-							triggerAction : 'all',
-							selectOnFocus : true
-						},'-',{
-							xtype : 'label',
-							text : '监测面积：'
+							text : '监 测 面积：'
 						},{xtype:'textfield',id:'jcmj1',width:50},{
 							xtype : 'label',
 							text : '—'
@@ -157,12 +156,20 @@
 						},{xtype:'textfield',id:'ygspmj2',width:50},																
 						'-',{
 							xtype : 'label',
-							text : '压盖供地面积：'
-						},{xtype:'textfield',id:'yggdmj1',width:50},
+							text : '压盖审批比率：'
+						},{xtype:'textfield',id:'ygspbl1',width:40},'%',
 						{
 							xtype : 'label',
 							text : '—'
-						},{xtype:'textfield',id:'yggdmj2',width:50}
+						},{xtype:'textfield',id:'ygspbl2',width:40},'%',
+						'-',{
+							xtype : 'label',
+							text : '符合 规划 面积：'
+						},{xtype:'textfield',id:'fhghmj1',width:50},
+						{
+							xtype : 'label',
+							text : '—'
+						},{xtype:'textfield',id:'fhghmj2',width:50}						
 			    ], 
 			    listeners:{
 		  			rowclick : function(grid, rowIndex, e)
@@ -172,7 +179,7 @@
         		},
 		        stripeRows: true,
 		        width:width,
-		        height: height-30 ,
+		        height: height-28 ,
 		        stateful: true,
 		        stateId: 'grid',
 		        buttonAlign:'right',
@@ -197,36 +204,41 @@
 				renderTo : grid.tbar,
 				items : [{
 							xtype : 'label',
-							text : '压盖审批比率：'
-						},{xtype:'textfield',id:'ygspbl1',width:50},
-						{
-							xtype : 'label',
-							text : '—'
-						},{xtype:'textfield',id:'ygspbl2',width:50},																
-						'-',{
-							xtype : 'label',
-							text : '压盖供地比率：'
-						},{xtype:'textfield',id:'yggdbl1',width:50},
-						{
-							xtype : 'label',
-							text : '—'
-						},{xtype:'textfield',id:'yggdbl2',width:50},
-						'-',{
+							text : '图斑类型：'
+						}, {
+							id : 'tblx',
+							xtype : 'combo',
+							width :80,
+							store : tblxStore,
+							displayField : 'name',
+							typeAhead : true,
+							mode : 'local',
+							triggerAction : 'all',
+							selectOnFocus : true
+						},'-',{
 							xtype : 'label',
 							text : '农用地面积：'
 						},{xtype:'textfield',id:'nydmj1',width:50},
 						{
 							xtype : 'label',
 							text : '—'
-						},{xtype:'textfield',id:'nydmj2',width:50},
+						},{xtype:'textfield',id:'nydmj2',width:50},																
 						'-',{
 							xtype : 'label',
-							text : '符合规划面积：'
-						},{xtype:'textfield',id:'fhghmj1',width:50},
+							text : '压盖供地面积：'
+						},{xtype:'textfield',id:'yggdmj1',width:50},
 						{
 							xtype : 'label',
 							text : '—'
-						},{xtype:'textfield',id:'fhghmj2',width:50},																		
+						},{xtype:'textfield',id:'yggdmj2',width:50},
+						'-',{
+							xtype : 'label',
+							text : '压盖供地比率：'
+						},{xtype:'textfield',id:'yggdbl1',width:40},'%',
+						{
+							xtype : 'label',
+							text : '—'
+						},{xtype:'textfield',id:'yggdbl2',width:40},'%',																														
 						'-',{
 							xtype : 'label',
 							text : '不符合规划面积：'
@@ -269,43 +281,38 @@
 		downloadViewData(grid);	
 	}
 	
-	function downloadViewData(grid){
-	try {
-		var xls = new ActiveXObject("Excel.Application");
-		} catch (e) {
-			alert("要打印该表，您必须安装Excel电子表格软件，同时浏览器须使用“ActiveX 控件”，您的浏览器须允许执行控件。 请点击【帮助】了解浏览器设置方法！");
-			return "";  
-		}
-		var cm = grid.getColumnModel();
-   		var colCount = cm.getColumnCount();   
-   		//alert('总列数：'+colCount);
-   		xls.visible = true; // 设置excel为可见
-   		var xlBook = xls.Workbooks.Add;
-   		var xlSheet = xlBook.Worksheets(1);    
-   		var temp_obj = [];
-   		// 只下载没有隐藏的列(isHidden()为true表示隐藏,其他都为显示)    
-   		for (i = 2; i < colCount; i++) {
-    		if (cm.isHidden(i) == true) {
-    		} else {
-     		temp_obj.push(i);   
-     		}
-   		}
-   			for (l = 1; l <= temp_obj.length; l++) {
-    			xlSheet.Cells(1, l).Value = cm.getColumnHeader(temp_obj[l-1]); 
-   			}
+	function downloadViewData(grid){		
+	  if(grid.getSelectionModel().hasSelection()){
+	   		var records=grid.getSelectionModel().getSelections();
+			try {
+				var xls = new ActiveXObject("Excel.Application");
+				} catch (e) {
+					alert("要打印该表，您必须安装Excel电子表格软件，同时浏览器须使用“ActiveX 控件”，您的浏览器须允许执行控件。 请点击【帮助】了解浏览器设置方法！");
+					return "";  
+				}
+				var cm = grid.getColumnModel();
+		   		var colCount = cm.getColumnCount();
+		   		xls.visible = true; // 设置excel为可见
+		   		var xlBook = xls.Workbooks.Add;
+		   		var xlSheet = xlBook.Worksheets(1);    
+		   		var temp_obj = [];
+		   		// 只下载没有隐藏的列(isHidden()为true表示隐藏,其他都为显示)    
+		   		for (i = 2; i < colCount; i++) {
+		    		if (cm.isHidden(i) == true) {
+		    		} else {
+		     			temp_obj.push(i);   
+		     		}
+		   		}
+	   			for (l = 1; l <= temp_obj.length; l++) {
+	    			xlSheet.Cells(1, l).Value = cm.getColumnHeader(temp_obj[l-1]); 
+	   			}
     			var store = grid.getStore();
    				var recordCount = store.getCount();
-   				//alert("记录总数："+recordCount);
-   				//alert('总列数：'+temp_obj.length);
    				var view = grid.getView();
-   				for (k = 1; k <= recordCount; k++) {
-   					//alert('k-'+k);
+   				for (k = 1; k <= records.length; k++) {
     				for (j = 1; j <= temp_obj.length; j++) {
-     				// EXCEL数据从第二行开始,故row = k + 1;
-    				//alert(view.getCell(k - 1, temp_obj[j- 1]).innerText);
-     				xlSheet.Cells(k + 1, j).Value = view.getCell(k - 1, temp_obj[j- 1]).innerText; 
-     				}
-   					
+     					xlSheet.Cells(k + 1, j).Value = records[k-1].get(records[k-1].fields.items[j].name);
+     				}		   					
 				}
 				xlSheet.Columns.AutoFit;
    				xls.ActiveWindow.Zoom = 75;
@@ -313,15 +320,37 @@
    				xls = null;
    				xlBook = null;
    				xlSheet = null;
+   		    }else{
+    			Ext.Msg.alert('提示','请选择图斑！');
+  		}
 	}	
 		
     function query(){
-         //var keyWord=Ext.getCmp('keyword').getValue();
-		 //putClientCommond("tdbgdc","getqb");
-         //putRestParameter("keyword",escape(escape(keyWord)));
-         var myData = []//restRequest(); 
-         store = new Ext.data.JsonStore({
-		proxy:new Ext.ux.data.PagingMemoryProxy(myData),
+    	  var xzq = checkNotNull(Ext.getCmp('district').getValue());
+    	  var jcmj1 = checkNotNull(Ext.getCmp('jcmj1').getValue());
+    	  var jcmj2 = checkNotNull(Ext.getCmp('jcmj2').getValue());  	  
+    	  var ygspmj1 = checkNotNull(Ext.getCmp('ygspmj1').getValue());
+    	  var ygspmj2 = checkNotNull(Ext.getCmp('ygspmj2').getValue());    	  
+    	  var ygspbl1 = checkNotNull(Ext.getCmp('ygspbl1').getValue());
+    	  var ygspbl2 = checkNotNull(Ext.getCmp('ygspbl2').getValue());        	  
+    	  var fhghmj1 = checkNotNull(Ext.getCmp('fhghmj1').getValue());
+    	  var fhghmj2 = checkNotNull(Ext.getCmp('fhghmj2').getValue());      	  
+    	  var tblx = checkNotNull(Ext.getCmp('tblx').getValue());
+    	  var nydmj1 = checkNotNull(Ext.getCmp('nydmj1').getValue());
+    	  var nydmj2 = checkNotNull(Ext.getCmp('nydmj2').getValue());
+    	  var yggdmj1 = checkNotNull(Ext.getCmp('yggdmj1').getValue());
+    	  var yggdmj2 = checkNotNull(Ext.getCmp('yggdmj2').getValue());    	  
+    	  var yggdbl1 = checkNotNull(Ext.getCmp('yggdbl1').getValue());  	  
+    	  var yggdbl2 = checkNotNull(Ext.getCmp('yggdbl2').getValue());     	  
+    	  var bfhghmj1 = checkNotNull(Ext.getCmp('bfhghmj1').getValue());   	  
+    	  var bfhghmj2 = checkNotNull(Ext.getCmp('bfhghmj2').getValue());      	  
+    	  var keyWord = xzq+'@'+ jcmj1+'@'+jcmj2+'@'+ygspmj1+'@'+ygspmj2+'@'+ygspbl1+'@'+ygspbl2+'@'+fhghmj1+'@'+fhghmj2+'@'
+    	  			  +	tblx+'@'+nydmj1+'@'+nydmj2+'@'+yggdmj1+'@'+yggdmj2+'@'+yggdbl1+'@'+yggdbl2+'@'+bfhghmj1+'@'+bfhghmj2;
+		  putClientCommond("tdbgdc","getqb");
+          putRestParameter("keyword",escape(escape(keyWord)));
+          var myData = restRequest(); 
+          store = new Ext.data.JsonStore({
+		  proxy:new Ext.ux.data.PagingMemoryProxy(myData),
 			remoteSort:true,
 			fields:[
 				{name:'YW_GUID'},
@@ -384,6 +413,12 @@
 	store.load({params:{start:0,limit:limitNum}}); 
    }
 
+ function checkNotNull(value){
+ 	if(!value){
+ 		value = 'null';
+ 	}
+ 	return value;
+ }
 </script>
 </head>
 <body bgcolor="#FFFFFF" topmargin="0" leftmargin="0">
