@@ -56,7 +56,7 @@ public class Gdtl extends AbstractBaseBean {
         String syz = request.getParameter("gdsybl");
         String zjz = request.getParameter("gdzjbl");
         String zujin = request.getParameter("zujin");
-        String season = request.getParameter("gdnd");
+        String season = request.getParameter("gdjd");
         String xmbh = getXmbh(xmmc);
         String sql = "insert into hx_gdtl(xmmc,nd,jd,dl,gm,cb,sy,zj,zuj,xmguid,dlz,gmz,cbz,syz,zjz) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         int flag = update(sql, YW, new Object[] { xmmc, year, season, dl, gm, cb, sy, zj, zujin, xmbh, dlz,

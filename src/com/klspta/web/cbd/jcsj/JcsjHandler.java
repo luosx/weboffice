@@ -46,6 +46,4 @@ public class JcsjHandler extends AbstractBaseBean{
 		List<Map<String, Object>> projectList = query(sql, YW, new Object[]{xmmc});
 		response(projectList);
 	}
-	
-	
 }
