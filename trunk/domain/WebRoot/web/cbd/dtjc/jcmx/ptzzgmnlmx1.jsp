@@ -227,7 +227,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  		var zxjzwbl = document.getElementById("zxjzwbl").value;
 	  		var zxjzwk = getZXJZWK(fwzjk,zxjzwbl);
 	  		tbybl1.rows[3].cells[1].innerHTML=zxjzwk.toFixed(2);
-	  		var fwlx = document.getElementById("fwlx").value;
+	  		var fwlx = document.getElementById("fwlx").value.trim();
 	  		var qsyhs = document.getElementById("qsyhs").value;
 	  		var esfsynx = document.getElementById("esfsyns").value;
 	  		var yys = document.getElementById("yys").value;
@@ -531,7 +531,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         }
         </script>
      </head>
-  <body >
+  <body>
+  <div style="min-width: 1370px;width: 1300px;height: 500px;">
   	<div id="fixed" style="position: fixed; top: 5px; left: 0px">
 		<img src="base/form/images/print.png" width="20px" height="20px" onClick="print()" >
 		<input type="checkbox" name="checkcl" checked="checked" onclick="CheckClick('checkcl');"/>常量
@@ -594,6 +595,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<div class="div4">
 		<%=new CBDReportManager().getReport("PTZZGMLMX1YBL2")%>
 	</div>
-	
+	</div>
   </body>
 </html>
