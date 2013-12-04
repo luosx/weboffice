@@ -1,124 +1,139 @@
 ﻿<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@page import="com.klspta.model.CBDReport.CBDReportManager"%>
 <%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
-  <head>
-    <base href="<%=basePath%>">
-    
-    <title>年度计划</title>
-    
-	<meta http-equiv="pragma" content="no-cache">
-	<meta http-equiv="cache-control" content="no-cache">
-	<meta http-equiv="expires" content="0">    
-	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-	<meta http-equiv="description" content="This is my page">
-	<%@ include file="/base/include/ext.jspf" %>
-	<%@ include file="/base/include/restRequest.jspf"%>
-	<!--
+	<head>
+		<base href="<%=basePath%>">
+
+		<title>年度计划</title>
+
+		<meta http-equiv="pragma" content="no-cache">
+		<meta http-equiv="cache-control" content="no-cache">
+		<meta http-equiv="expires" content="0">
+		<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+		<meta http-equiv="description" content="This is my page">
+		<%@ include file="/base/include/ext.jspf"%>
+		<%@ include file="/base/include/restRequest.jspf"%>
+		<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-	<style type="text/css">
-		  table{
-    font-size: 14px;
-    background-color: #A8CEFF;
-    border-color:#000000;
-    /**
+		<style type="text/css">
+table {
+	font-size: 14px;
+	background-color: #A8CEFF;
+	border-color: #000000;
+	/**
     border-left:1dp #000000 solid;
     border-top:1dp #000000 solid;
     **/
-    color:#000000;
-    border-collapse: collapse;
-  }
-  tr{
-    border-width: 0px;
-    text-align:center;
-  }
-  td{
-    text-align:center;
-    border-color:#000000;
-    /**
+	color: #000000;
+	border-collapse: collapse;
+}
+
+tr {
+	border-width: 0px;
+	text-align: center;
+}
+
+td {
+	text-align: center;
+	border-color: #000000;
+	/**
     border-bottom:1dp #000000 solid;
     border-right:1dp #000000 solid;
     **/
-  }
-  .title{
-    font-weight:bold;
-    font-size: 15px;
-    text-align:center;
-    line-height: 50px;
+}
+
+.title {
+	font-weight: bold;
+	font-size: 15px;
+	text-align: center;
+	line-height: 50px;
 	margin-top: 3px;
-  }
-  .trtotal{
-  	text-align:center;
-    font-weight:bold;
-    line-height: 30px;
-   }
-  .trsingle{
-    background-color: #D1E5FB;
-    line-height: 20px;
-    text-align:center;
-   }
-   .td00{
-   background-color:#C0C0C0;
-   background-image: url("<%=basePath%>/web/cbd/framework/images/titlebbd.jpg") ;
-   background-repeat: no-repeat;
-   /**
+}
+
+.trtotal {
+	text-align: center;
+	font-weight: bold;
+	line-height: 30px;
+}
+
+.trsingle {
+	background-color: #D1E5FB;
+	line-height: 20px;
+	text-align: center;
+}
+
+.td00 {
+	background-color: #C0C0C0;
+	background-image:
+		url("<%=basePath%>/web/cbd/framework/images/titlebbd.jpg");
+	background-repeat: no-repeat;
+	/**
    	 filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='<%=basePath%>/web/cbd/framework/images/titlebbd.jpg',izingMethod='scale');
    **/
-   }
-   .td01{
-    background-color:#C0C0C0;
-   background-image: url("<%=basePath%>/web/cbd/framework/images/titlebbd1.jpg") ;
-   background-repeat: no-repeat;
-   }
-   .tr01{
-    background-color:#C0C0C0;
-    font-weight:bold;
-    font-size: 15px;
-    text-align:center;
-    line-height: 50px;
-	margin-top: 3px;  
-   }
-   .tr02{
-    background-color:#FFFF99;
-  	text-align:center;
-    font-weight:bold;
-    line-height: 30px;
-   }
-    .tr06{
-    background-color:#FFFFFF;
-  	text-align:center;
-    font-weight:bold;
-    line-height: 30px; 
-   }
-   .tr07{
-    background-color:#CCFFFF;
-  	text-align:center;
-    font-weight:bold;
-    line-height: 30px; 
-   }
-   .tr11{
-    background-color:#99CC00;
-  	text-align:center;
-    font-weight:bold;
-    line-height: 30px; 
-   }
-   
-    .tr16{
-    background-color:#FFCC99;
-  	text-align:center;
-    font-weight:bold;
-    line-height: 30px; 
-   }
-	</style>
-  </head>
-    <script type="text/javascript">
+}
+
+.td01 {
+	background-color: #C0C0C0;
+	background-image:
+		url("<%=basePath%>/web/cbd/framework/images/titlebbd1.jpg");
+	background-repeat: no-repeat;
+}
+
+.tr01 {
+	background-color: #C0C0C0;
+	font-weight: bold;
+	font-size: 15px;
+	text-align: center;
+	line-height: 50px;
+	margin-top: 3px;
+}
+
+.tr02 {
+	background-color: #FFFF99;
+	text-align: center;
+	font-weight: bold;
+	line-height: 30px;
+}
+
+.tr06 {
+	background-color: #FFFFFF;
+	text-align: center;
+	font-weight: bold;
+	line-height: 30px;
+}
+
+.tr07 {
+	background-color: #CCFFFF;
+	text-align: center;
+	font-weight: bold;
+	line-height: 30px;
+}
+
+.tr11 {
+	background-color: #99CC00;
+	text-align: center;
+	font-weight: bold;
+	line-height: 30px;
+}
+
+.tr16 {
+	background-color: #FFCC99;
+	text-align: center;
+	font-weight: bold;
+	line-height: 30px;
+}
+</style>
+	</head>
+	<script type="text/javascript">
         var tb;
         Ext.onReady(function(){
            var f=new Ext.form.FormPanel({
@@ -309,7 +324,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			        		a=(cbkfcb+mdj-(cbkfcb+mdj+jscbd)*(zyzjdyxbfb+dzxsjgxs*zsysbl))*
 			        		jsqll*jsq+jscbd*jsqll*(1+jsq)/2;
 			        	}else{
-			        		if(cbkfcb+mdj-(cbkfcb+mdj+jscbd)*(zyzjdyxbfb+dzxsjgxs*zsysbl)<0){
+			        	    if(cbkfcb+mdj-(cbkfcb+mdj+jscbd)*(zyzjdyxbfb+dzxsjgxs*zsysbl)<0){
 			        			a=(cbkfcb+mdj+jscbd)*(1-zyzjdyxbfb-dzxsjgxs*zsysbl)*jsqll*(1+jsq)/2;
 			        		}else{
 			        			a=jscbd*jsqll*(1+jsq)/2;
@@ -324,9 +339,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			    	return rent;
          }
       </script>
-  
-  
-    <script type="text/javascript">
+
+
+	<script type="text/javascript">
   		function print(){
 			    var curTbl = document.getElementById("JZMJBBDFX"); 
 			    try{
@@ -353,11 +368,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			    //设置excel可见属性 
 		}
   </script>
-  <body>
-  	<div id="fixed" style="position: fixed; top: 5px; left: 0px">
-		<img src="base/form/images/print.png" width="20px" height="20px" onClick="print()" >
-	</div>
-	<div id="paraform" style="float:left" ></div>
-  	<%=new CBDReportManager().getReport("JZMJBBDFX")%>
-  </body>
+	<body>
+		<div style="min-width: 1370px; width: 1400px; height: 500px;">
+			<div id="fixed" style="position: fixed; top: 5px; left: 0px">
+				<img src="base/form/images/print.png" width="20px" height="20px"
+					onClick="print()">
+			</div>
+			<div id="paraform" style="float: left"></div>
+			<%=new CBDReportManager().getReport("JZMJBBDFX")%>
+		</div>
+	</body>
 </html>

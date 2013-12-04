@@ -341,6 +341,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </script>
      </head>
   <body >
+  <div style="min-width: 1370px;width: 1300px;height: 500px;">
   	<div id="fixed" style="position: fixed; top: 5px; left: 0px">
 		<img src="base/form/images/print.png" width="20px" height="20px" onClick="print()" >
 	</div>
@@ -355,6 +356,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<div>
 	 
   	<%=new CBDReportManager().getReport("PTZZGMNL")%>
+  	</div>
   	</div>
   </body>
 </html>
