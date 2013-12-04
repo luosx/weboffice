@@ -14,7 +14,7 @@ import com.klspta.model.CBDReport.dataClass.IDataClass;
 
 public class Cgreport extends AbstractBaseBean implements IDataClass {
 	
-	public static String[][] showList = new String[][]{{"xmmc", "项目名称"},{"YDDW","用地单位"},{"hcrq","用地时间"},{"tdyt","土地用途"},{"jsqk","建设情况"},{"ydqk","用地情况"},{"dfccqk","地方查处情况"},{"wfwglx","违法违规类型"},{"spxmmc","审批项目名称"},{"spwh","审批文号"},{"gdxmmc","供地项目名称"},{"gdwh","供地文号"}};
+	public static String[][] showList = new String[][]{{"YDDW","用地单位"},{"ydsj","用地时间"},{"ydqk","用地情况"},{"mj","面积"},{"jsqk","建设情况"},{"dfccqk","地方查处情况"},{"wfwglx","违法违规类型"},{"sfwf","是否违法"},{"wflx","违法类型"},{"xcqkms","现场情况描述"}};
 	private String form_name = "DC_YDQKDCB";
 	
 	@Override
