@@ -1,13 +1,10 @@
 <%@page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%@page import="com.klspta.web.cbd.cbxmjbsj.ProjectManager"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 String extPath = basePath + "base/thirdres/ext/";
 String yw_guid = request.getParameter("yw_guid");
-ProjectManager projectManager = new ProjectManager();
-String selectDkInfo = projectManager.getSelectDkJsonByProjectID(yw_guid);
-String notSelectDkInfo = projectManager.getDkInfoArrayJsonByProjectID();
+
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
