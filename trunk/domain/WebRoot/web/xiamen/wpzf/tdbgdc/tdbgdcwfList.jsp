@@ -28,7 +28,7 @@
 			myData = restRequest();			
 			width = document.body.clientWidth;
 			height = document.body.clientHeight * 0.995;
-			limitNum = parseInt(height/24);			
+			limitNum = parseInt(height/32);			
 			store = new Ext.data.JsonStore({
 				proxy:new Ext.ux.data.PagingMemoryProxy(myData),
 					remoteSort:true,
@@ -79,6 +79,18 @@
 							name : '2'
 						},{
 							name : '3'
+						},{
+							name : '4'
+						},{
+							name : '5'
+						},{
+							name : '6'
+						},{
+							name : '7'
+						},{
+							name : '8'
+						},{
+							name : '9'
 						}]
 			});				
 			grid = new Ext.grid.GridPanel({
@@ -115,7 +127,7 @@
 		        tbar:[
 	    			   {
 							xtype : 'label',
-							text : '行政区：'
+							text : '行 政 区：'
 						}, {
 							id : 'district',
 							xtype : 'combo',
@@ -128,20 +140,7 @@
 							selectOnFocus : true
 						}, '-',{
 							xtype : 'label',
-							text : '图斑类型：'
-						}, {
-							id : 'tblx',
-							xtype : 'combo',
-							width :80,
-							store : tblxStore,
-							displayField : 'name',
-							typeAhead : true,
-							mode : 'local',
-							triggerAction : 'all',
-							selectOnFocus : true
-						},'-',{
-							xtype : 'label',
-							text : '监测面积：'
+							text : '监 测 面积：'
 						},{xtype:'textfield',id:'jcmj1',width:50},{
 							xtype : 'label',
 							text : '—'
@@ -156,13 +155,21 @@
 						},{xtype:'textfield',id:'ygspmj2',width:50},																
 						'-',{
 							xtype : 'label',
-							text : '压盖供地面积：'
-						},{xtype:'textfield',id:'yggdmj1',width:50},
+							text : '压盖审批比率：'
+						},{xtype:'textfield',id:'ygspbl1',width:50},
 						{
 							xtype : 'label',
 							text : '—'
-						},{xtype:'textfield',id:'yggdmj2',width:50}
-			    ], 
+						},{xtype:'textfield',id:'ygspbl2',width:50},
+						'-',{
+							xtype : 'label',
+							text : '符合 规划 面积：'
+						},{xtype:'textfield',id:'fhghmj1',width:50},
+						{
+							xtype : 'label',
+							text : '—'
+						},{xtype:'textfield',id:'fhghmj2',width:50}						
+			    ], 	       
 			    listeners:{
 		  			rowdblclick : function(grid, rowIndex, e)
 					{
@@ -173,7 +180,7 @@
         		},
 		        stripeRows: true,
 		        width:width,
-		        height: height ,
+		        height: height-28 ,
 		        stateful: true,
 		        stateId: 'grid',
 		        buttonAlign:'right',
@@ -198,12 +205,33 @@
 				renderTo : grid.tbar,
 				items : [{
 							xtype : 'label',
-							text : '压盖审批比率：'
-						},{xtype:'textfield',id:'ygspbl1',width:50},
+							text : '图斑类型：'
+						}, {
+							id : 'tblx',
+							xtype : 'combo',
+							width :80,
+							store : tblxStore,
+							displayField : 'name',
+							typeAhead : true,
+							mode : 'local',
+							triggerAction : 'all',
+							selectOnFocus : true
+						},'-',{
+							xtype : 'label',
+							text : '农用地面积：'
+						},{xtype:'textfield',id:'nydmj1',width:50},
 						{
 							xtype : 'label',
 							text : '—'
-						},{xtype:'textfield',id:'ygspbl2',width:50},																
+						},{xtype:'textfield',id:'nydmj2',width:50},																
+						'-',{
+							xtype : 'label',
+							text : '压盖供地面积：'
+						},{xtype:'textfield',id:'yggdmj1',width:50},
+						{
+							xtype : 'label',
+							text : '—'
+						},{xtype:'textfield',id:'yggdmj2',width:50},
 						'-',{
 							xtype : 'label',
 							text : '压盖供地比率：'
@@ -211,23 +239,7 @@
 						{
 							xtype : 'label',
 							text : '—'
-						},{xtype:'textfield',id:'yggdbl2',width:50},
-						'-',{
-							xtype : 'label',
-							text : '农用地面积：'
-						},{xtype:'textfield',id:'nydmj1',width:50},
-						{
-							xtype : 'label',
-							text : '—'
-						},{xtype:'textfield',id:'nydmj2',width:50},
-						'-',{
-							xtype : 'label',
-							text : '符合规划面积：'
-						},{xtype:'textfield',id:'fhghmj1',width:50},
-						{
-							xtype : 'label',
-							text : '—'
-						},{xtype:'textfield',id:'fhghmj2',width:50},																		
+						},{xtype:'textfield',id:'yggdbl2',width:50},																														
 						'-',{
 							xtype : 'label',
 							text : '不符合规划面积：'
@@ -239,7 +251,6 @@
 						'-',
 	    			{xtype: 'button',text:'查询',handler: query}
 	    			]
-
 			});	 			
 	});
 	//设为合法	
