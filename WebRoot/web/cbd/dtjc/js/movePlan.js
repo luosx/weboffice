@@ -39,14 +39,53 @@ Table.prototype={
 		
 		this.cellArray = blockArray;
 	},
+	getArrayLeft:function(cell){
+		var moveTable = this.moveTable;
+		var blockArray = new Array();
+		var i = 0;
+		var j =-1;
+		if((this.row == 2 || this.row == (parseInt(kftlNum) + 2))){
+			j = 0;
+		}
+		for(i = cell; i > j; i--){
+			var cells = moveTable.rows[this.row].cells[i];
+			if(cells.className == "no" ){
+				i++;
+				break;	
+			}else{
+				blockArray.push(i);
+			}
+		}
+		this.cellArray = blockArray;
+	},
+	getArrayRight:function(cell){
+		var moveTable = this.moveTable;
+		var blockArray = new Array();
+		var i = 0;
+		var j =-1;
+		if((this.row == 2 || this.row == (parseInt(kftlNum) + 2))){
+			j = 0;
+		}
+		var maxLength = moveTable.rows[row].cells.length;
+		for(i =cell ; i < maxLength; i++){
+			var cells = moveTable.rows[this.row].cells[i];
+			if(cells.className == "no"){
+				break;	
+			}else{
+				blockArray.push(i);
+			}
+		}
+		
+		this.cellArray = blockArray;
+	},
 	moveLeft:function( type, blockArray){
 		if(type == "callback"){
 			var blockArray = blockArray;
 		}else{
-			this.getArray(cell);
+			this.getArrayLeft(cell);
 			var blockArray = this.cellArray;
 		}
-		for(var i = 0; i < blockArray.length; i++){
+		for(var i = blockArray.length - 1; i >= 0; i--){
 			var number = blockArray[i];
 			if(number < this.minnum || ((this.row == 2 || this.row == (parseInt(kftlNum) + 2)) && number < 2 )){
 				//当季度为表格中最早的季度时
@@ -72,7 +111,7 @@ Table.prototype={
 		if(type == "callback"){
 			var blockArray = blockArray;
 		}else{
-			this.getArray(cell);
+			this.getArrayRight(cell);
 			var blockArray = this.cellArray;
 		}
 		var maxLength = this.moveTable.rows[row].cells.length;
