@@ -3,7 +3,6 @@ package com.klspta.web.xiamen.wpzf.tdbgdc;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
 import com.klspta.base.AbstractBaseBean;
 import com.klspta.base.util.UtilFactory;
 import com.klspta.web.xiamen.jcl.XzqHandle;
@@ -95,11 +94,66 @@ public class TdbgdcData extends AbstractBaseBean implements ItdbgdcData {
 
 	@Override
 	public List<Map<String, Object>> getList(String where) {
-		StringBuffer sqlBuffer = new StringBuffer();
-		sqlBuffer.append("select t.* from "+formName+" t ");
-		if(where != null && !where.equals("null")){
-			sqlBuffer.append(" where ").append(where);
-		}
+	    StringBuffer sqlBuffer = new StringBuffer();
+	    sqlBuffer.append("select t.* from "+formName+" t where 1=1 ");
+	    if(where != null && !"null".equals(where)){	        
+	        where = UtilFactory.getStrUtil().unescape(where);	        
+	        String[] wheres = where.split("@");
+	        if(!"null".equals(wheres[0])){
+	            sqlBuffer.append("and t.xzdm = ").append(wheres[0]);
+	        }
+	        if(!"null".equals(wheres[1])){ 
+	            sqlBuffer.append("and t.jcmj > ").append(wheres[1]);
+	        }
+	        if(!"null".equals(wheres[2])){
+	            sqlBuffer.append("and t.jcmj < ").append(wheres[2]);
+	        }
+	        if(!"null".equals(wheres[3])){
+	            sqlBuffer.append("and t.ygspmj > ").append(wheres[3]);
+	        }
+	        if(!"null".equals(wheres[4])){
+                sqlBuffer.append("and t.ygspmj < ").append(wheres[4]);
+            }
+	        if(!"null".equals(wheres[5])){
+                sqlBuffer.append("and t.ygspbl > ").append(wheres[5]+'%');
+            }
+	        if(!"null".equals(wheres[6])){
+                sqlBuffer.append("and t.ygspbl < ").append(wheres[6]+'%');
+            }
+	        if(!"null".equals(wheres[7])){
+                sqlBuffer.append("and t.fhghmj > ").append(wheres[7]);
+            }
+	        if(!"null".equals(wheres[8])){
+                sqlBuffer.append("and t.fhghmj < ").append(wheres[8]);
+            }
+	        if(!"null".equals(wheres[9])){
+                sqlBuffer.append("and t.tblx = ").append(wheres[9]);
+            }
+	        if(!"null".equals(wheres[10])){
+                sqlBuffer.append("and t.nydmj > ").append(wheres[10]);
+            }
+	        if(!"null".equals(wheres[11])){
+                sqlBuffer.append("and t.nydmj < ").append(wheres[11]);
+            }
+	        if(!"null".equals(wheres[12])){
+                sqlBuffer.append("and t.yggdmj > ").append(wheres[12]);
+            }
+	        if(!"null".equals(wheres[13])){
+                sqlBuffer.append("and t.yggdmj < ").append(wheres[13]);
+            }
+	        if(!"null".equals(wheres[14])){
+                sqlBuffer.append("and t.yggdbl > ").append(wheres[14]+'%');
+            }
+	        if(!"null".equals(wheres[15])){
+                sqlBuffer.append("and t.yggdbl < ").append(wheres[15]+'%');
+            }
+	        if(!"null".equals(wheres[16])){
+                sqlBuffer.append("and t.bfhghmj > ").append(wheres[16]);
+            }
+	        if(!"null".equals(wheres[17])){
+                sqlBuffer.append("and t.bfhghmj < ").append(wheres[17]);
+            }
+        }
 		sqlBuffer.append(" order by t.tbbh");
 		List<Map<String, Object>> getList = query(sqlBuffer.toString(), YW);
 		return getList;
