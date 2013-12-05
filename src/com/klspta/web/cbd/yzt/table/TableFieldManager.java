@@ -50,11 +50,11 @@ public class TableFieldManager extends AbstractBaseBean {
 	}
 	
 	public void deleteTableField(){
-		String userid = request.getParameter("userid");
+		//String userid = request.getParameter("userid");
 		String tablename = request.getParameter("tablename");
 		String fieldname = request.getParameter("fieldname");
-		
-		
+		boolean cacluate = tableFields.dropField(tablename, fieldname);
+		response(String.valueOf(cacluate));
 	}
 	
 }

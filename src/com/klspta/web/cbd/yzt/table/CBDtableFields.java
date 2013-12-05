@@ -36,8 +36,10 @@ public class CBDtableFields extends TableFields {
 	@Override
 	public boolean dropField(String formName, String field) {
 		boolean jc = super.dropField(formName, field);
-		
-		
+		StringBuffer deleteSql = new StringBuffer();
+		deleteSql.append("delete from ").append(extentName).append(" t ");
+		deleteSql.append(" where t.tablename=? and t.columnname=?");
+		int i = update(deleteSql.toString(), template, new Object[]{formName, field});
 		return jc;
 	}
 

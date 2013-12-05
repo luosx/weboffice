@@ -55,8 +55,14 @@ public class TableFields extends AbstractBaseBean implements ITableFields {
 			alterSql.append(fields).append(",");
 		}
 		alterSql.append(fields[fields.length - 1]).append(") CASCADE CONSTRAINTS");
-		int i = update(alterSql.toString(), template);
-		return Boolean.parseBoolean(String.valueOf(i));
+		boolean result = true;
+		try {
+			update(alterSql.toString(), template);
+		} catch (Exception e) {
+			result = false;
+			System.out.println("字段不存在，无法删除");
+		}
+		return result;
 	}
 
 	@Override
