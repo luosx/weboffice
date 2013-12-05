@@ -38,14 +38,18 @@ public class TableFieldManager extends AbstractBaseBean {
 		String tablename = request.getParameter("tablename");
 		String fieldname = request.getParameter("fieldname");
 		String type = request.getParameter("type");
+		String annotation = request.getParameter("annotation");
 		String showname = request.getParameter("showname");
 		String isshow = request.getParameter("isshow");
 		if(showname !=null){
 			showname = UtilFactory.getStrUtil().unescape(showname);
 		}
+		if(annotation !=null){
+			annotation = UtilFactory.getStrUtil().unescape(annotation);
+		}
 		//type为VARCHAR时，设定默认大小为32字节
 		type +="(32)";
-		boolean cacluate = tableFields.addField(tablename, fieldname, type, showname, isshow);
+		boolean cacluate = tableFields.addField(tablename, fieldname, type,annotation, showname, isshow);
 		response(String.valueOf(cacluate));
 	}
 	

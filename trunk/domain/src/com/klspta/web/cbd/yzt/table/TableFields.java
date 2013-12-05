@@ -18,7 +18,7 @@ public class TableFields extends AbstractBaseBean implements ITableFields {
 	}
 
 	@Override
-	public boolean addField(String formName, String fieldName, String type,
+	public boolean addField(String formName, String fieldName, String type, String annotation,
 			String defaultValue) {
 		StringBuffer alterSql = new StringBuffer();
 		alterSql.append("alter table ").append(formName).append(" add ( ");
@@ -34,12 +34,17 @@ public class TableFields extends AbstractBaseBean implements ITableFields {
 			result = false;
 			System.out.println("字段已存在");
 		}
+		if(!"null".equals(annotation) && annotation != null){
+			String sql = "comment on column " + formName +"." + fieldName + "is '" + annotation + "'";
+			update(sql, template);
+		}
+		
 		return result;
 	}
 
 	@Override
-	public boolean addField(String formName, String fieldName, String type) {
-		return addField(formName, fieldName, type, null);
+	public boolean addField(String formName, String fieldName, String type, String annotation) {
+		return addField(formName, fieldName, type, annotation, null);
 	}
 
 	@Override

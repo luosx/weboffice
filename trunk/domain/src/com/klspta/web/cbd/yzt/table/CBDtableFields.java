@@ -2,6 +2,8 @@ package com.klspta.web.cbd.yzt.table;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class CBDtableFields extends TableFields {
 	
@@ -20,8 +22,8 @@ public class CBDtableFields extends TableFields {
 	 * @param isshow
 	 * @return
 	 */
-	public boolean addField(String formName, String fieldName, String type, String showname, String isshow) {
-		boolean jc = super.addField(formName, fieldName, type);
+	public boolean addField(String formName, String fieldName, String type, String annotation,  String showname, String isshow) {
+		boolean jc = super.addField(formName, fieldName, type, annotation);
 		boolean modify = modifyField(formName, fieldName, showname, isshow);
 		return jc&&modify;
 	}
@@ -49,6 +51,17 @@ public class CBDtableFields extends TableFields {
 		return tableList;
 	}
 	
+	/**
+	 * 
+	 * <br>Description:修改字段的描述信息
+	 * <br>Author:黎春行
+	 * <br>Date:2013-12-5
+	 * @param formName
+	 * @param fieldName
+	 * @param showname
+	 * @param isshow
+	 * @return
+	 */
 	public boolean modifyField(String formName, String fieldName, String showname, String isshow){
 		StringBuffer extendSql = new StringBuffer();
 		extendSql.append("merge into ").append(extentName).append(" t using (select distinct '").append(formName).append("' as tablename, '");
@@ -63,5 +76,34 @@ public class CBDtableFields extends TableFields {
 			System.out.println("属性更新失败");
 		}
 		return result;
+	}
+	
+	/**
+	 * 
+	 * <br>Description:查询数据表的描述信息
+	 * <br>Author:黎春行
+	 * <br>Date:2013-12-5
+	 * @param formName
+	 * @return
+	 */
+	public Set<String[]> getShowListTitle(String formName){
+		StringBuffer querySql = new StringBuffer();
+		Set<String[]> showSet = new TreeSet<String[]>();
+		querySql.append("select t.table_name, t.column_name as columnname, j.showname, j.isshow from user_col_comments t left join jc_canshu_extent j on t.table_name = j.tablename and t.column_name = j.columnname where t.table_name = upper('").append(formName).append("')");
+		List<Map<String, Object>> showList = query(querySql.toString(), template);
+		for(int i = 0; i < showList.size(); i++){
+			Map<String, Object> showMap = showList.get(i);
+			String isshow = String.valueOf(showMap.get("isshow"));
+			if("no".equals(isshow)){
+				continue;
+			}
+			String columnname = String.valueOf(showMap.get("columnname"));
+			String showName = String.valueOf(showMap.get("showname"));
+			showName = "null".equals(showName)?columnname:showName;
+			//String[] show = new String[]{columnname, "0.1", showName};
+			String[] show = new String[]{"aa","0.1","aa"};
+			showSet.add(show);
+		}
+		return showSet;
 	}
 }
