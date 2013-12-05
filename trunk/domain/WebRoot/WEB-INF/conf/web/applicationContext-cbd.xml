@@ -53,9 +53,14 @@
 		<!-- 安置房-->
 	<bean name="azfjs" class="com.klspta.web.cbd.hxxm.Anzfjs" scope="prototype"/>	
 	
-		<!-- 统计报表计划管理类 -->	
+	<!-- 统计报表计划管理类 -->	
 	<bean name="tjbbManager" class="com.klspta.web.cbd.dtjc.TjbbManager" scope="prototype"/>
 	<bean name="ptzzgml" class = "com.klspta.web.cbd.dtjc.jcmx.PtzzgmlMXTwoData" scope="prototype"/>
 	<bean name="jzmjbbdfx" class = "com.klspta.web.cbd.dtjc.jcmx.bbdfx.Jzmjbbdfx" scope="prototype"/>
 	<bean name="ptzzgmlCL" class="com.klspta.web.cbd.dtjc.jcmx.PtzzgmlMXOneData" scope="prototype"/>
+	
+	<!-- 数据表字段管理类 -->	
+	<bean name="tableField" class="com.klspta.web.cbd.yzt.table.TableFieldManager" scope="prototype"/>
+	
+	
 </beans>
