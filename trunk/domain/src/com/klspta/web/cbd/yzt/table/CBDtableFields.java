@@ -22,13 +22,8 @@ public class CBDtableFields extends TableFields {
 	 */
 	public boolean addField(String formName, String fieldName, String type, String showname, String isshow) {
 		boolean jc = super.addField(formName, fieldName, type);
-		StringBuffer extendSql = new StringBuffer();
-		extendSql.append("merge into ").append(extentName).append(" t using (select distinct '").append(formName).append("' as tablename, '");
-		extendSql.append(fieldName).append("' as columnname from ").append(extentName).append(" ");
-		extendSql.append(") s on (s.tablename = t.tablename and s.columnname = t.columnname) when ");
-		extendSql.append("matched then update set t.showname = ?, t.isshow=? when not matched then insert(t.tablename, t.columnname, t.showname, t.isshow) values(?,?,?,?)");
-		int i = update(extendSql.toString(), template, new Object[]{showname,isshow, formName, fieldName, showname, isshow});
-		return jc;
+		boolean modify = modifyField(formName, fieldName, showname, isshow);
+		return jc&&modify;
 	}
 
 	
@@ -52,5 +47,21 @@ public class CBDtableFields extends TableFields {
 		formSql.append("t.TABLE_NAME='upper(").append(formName).append(")'");
 		List<Map<String, Object>> tableList = query(formSql.toString(), template);
 		return tableList;
+	}
+	
+	public boolean modifyField(String formName, String fieldName, String showname, String isshow){
+		StringBuffer extendSql = new StringBuffer();
+		extendSql.append("merge into ").append(extentName).append(" t using (select distinct '").append(formName).append("' as tablename, '");
+		extendSql.append(fieldName).append("' as columnname from ").append(extentName).append(" ");
+		extendSql.append(") s on (s.tablename = t.tablename and s.columnname = t.columnname) when ");
+		extendSql.append("matched then update set t.showname = ?, t.isshow=? when not matched then insert(t.tablename, t.columnname, t.showname, t.isshow) values(?,?,?,?)");
+		boolean result = true;
+		try {
+			update(extendSql.toString(), template, new Object[]{showname,isshow, formName, fieldName, showname, isshow});
+		} catch (Exception e) {
+			result = false;
+			System.out.println("属性更新失败");
+		}
+		return result;
 	}
 }
