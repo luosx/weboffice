@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.Vector;
 
 public class CBDtableFields extends TableFields {
 	
@@ -86,9 +87,9 @@ public class CBDtableFields extends TableFields {
 	 * @param formName
 	 * @return
 	 */
-	public Set<String[]> getShowListTitle(String formName){
+	public Vector<String[]> getShowListTitle(String formName){
 		StringBuffer querySql = new StringBuffer();
-		Set<String[]> showSet = new TreeSet<String[]>();
+		Vector<String[]> showVector = new Vector<String[]>();
 		querySql.append("select t.table_name, t.column_name as columnname, j.showname, j.isshow from user_col_comments t left join jc_canshu_extent j on t.table_name = j.tablename and t.column_name = j.columnname where t.table_name = upper('").append(formName).append("')");
 		List<Map<String, Object>> showList = query(querySql.toString(), template);
 		for(int i = 0; i < showList.size(); i++){
@@ -100,10 +101,8 @@ public class CBDtableFields extends TableFields {
 			String columnname = String.valueOf(showMap.get("columnname"));
 			String showName = String.valueOf(showMap.get("showname"));
 			showName = "null".equals(showName)?columnname:showName;
-			//String[] show = new String[]{columnname, "0.1", showName};
-			String[] show = new String[]{"aa","0.1","aa"};
-			showSet.add(show);
+			showVector.add(new String[]{columnname, "0.1", showName});
 		}
-		return showSet;
+		return showVector;
 	}
 }
