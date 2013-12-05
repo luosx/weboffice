@@ -38,11 +38,11 @@ public class TableFieldManager extends AbstractBaseBean {
 		String tablename = request.getParameter("tablename");
 		String fieldname = request.getParameter("fieldname");
 		String type = request.getParameter("type");
-		if(type !=null){
-			type = UtilFactory.getStrUtil().unescape(type);
-		}
 		String showname = request.getParameter("showname");
 		String isshow = request.getParameter("isshow");
+		if(showname !=null){
+			showname = UtilFactory.getStrUtil().unescape(showname);
+		}
 		//type为VARCHAR时，设定默认大小为32字节
 		type +="(32)";
 		boolean cacluate = tableFields.addField(tablename, fieldname, type, showname, isshow);
@@ -50,10 +50,23 @@ public class TableFieldManager extends AbstractBaseBean {
 	}
 	
 	public void deleteTableField(){
-		//String userid = request.getParameter("userid");
+		String userid = request.getParameter("userid");
 		String tablename = request.getParameter("tablename");
 		String fieldname = request.getParameter("fieldname");
 		boolean cacluate = tableFields.dropField(tablename, fieldname);
+		response(String.valueOf(cacluate));
+	}
+	
+	public void modifyTableField(){
+		// String userid = request.getParameter("userid");
+		String tablename = request.getParameter("tablename");
+		String fieldname = request.getParameter("fieldname");
+		String showname = request.getParameter("showname");
+		String isshow = request.getParameter("isshow");
+		if(showname !=null){
+			showname = UtilFactory.getStrUtil().unescape(showname);
+		}
+		boolean cacluate = tableFields.modifyField(tablename, fieldname, showname, isshow);
 		response(String.valueOf(cacluate));
 	}
 	
