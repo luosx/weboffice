@@ -17,7 +17,7 @@ public class TableFieldManager extends AbstractBaseBean {
 	 * 表字段管理类显示内容
 	 */
 	public static String[][] TABLE_INF = new String[][]{{"TABLENAME", "0.1","表名"},{"FIELD", "0.1","字段名"},{"DATATYPE", "0.1","数据类型"},{"ISSHOW", "0.1","是否展现"},{"SHOWNAME", "0.1","别名"},{"ANNOTATION", "0.1","注释"}}; 
-	private TableFields tableFields = new TableFields();
+	private CBDtableFields tableFields = new CBDtableFields();
 	
 	/**
 	 * 
@@ -30,6 +30,22 @@ public class TableFieldManager extends AbstractBaseBean {
 		String tablename = request.getParameter("tablename");
 		List<Map<String, Object>> returnList = tableFields.getFormInf(tablename);
 		response(returnList);
+	}
+	
+	public void addTableField(){
+		String userid = request.getParameter("userid");
+		String tablename = request.getParameter("tablename");
+		String fieldname = request.getParameter("fieldname");
+		String type = request.getParameter("type");
+		String showname = request.getParameter("showname");
+		String isshow = request.getParameter("isshow");
+		boolean cacluate = tableFields.addField(tablename, fieldname, type, showname, isshow);
+		response(String.valueOf(cacluate));
+	}
+	
+	public void deleteTableField(){
+		
+		
 	}
 	
 }
