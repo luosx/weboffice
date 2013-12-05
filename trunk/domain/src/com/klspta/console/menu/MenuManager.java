@@ -26,7 +26,8 @@ public class MenuManager extends AbstractBaseBean
 	public static MenuManager getInstance(String key) throws Exception
 	{
 		if ("NEW WITH MANAGER FACTORY!".equals(key))
-		{
+		{ 
+		    instance.flush();
 			return instance;
 		} else
 		{
