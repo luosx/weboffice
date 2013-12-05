@@ -23,14 +23,25 @@ public class CBDtableFields extends TableFields {
 	public boolean addField(String formName, String fieldName, String type, String showname, String isshow) {
 		boolean jc = super.addField(formName, fieldName, type);
 		StringBuffer extendSql = new StringBuffer();
-		extendSql.append("merge into ").append(extentName).append(" t using (select '").append(formName).append("' as tablename, '");
+		extendSql.append("merge into ").append(extentName).append(" t using (select distinct '").append(formName).append("' as tablename, '");
 		extendSql.append(fieldName).append("' as columnname from ").append(extentName).append(" ");
 		extendSql.append(") s on (s.tablename = t.tablename and s.columnname = t.columnname) when ");
 		extendSql.append("matched then update set t.showname = ?, t.isshow=? when not matched then insert(t.tablename, t.columnname, t.showname, t.isshow) values(?,?,?,?)");
 		int i = update(extendSql.toString(), template, new Object[]{showname,isshow, formName, fieldName, showname, isshow});
-		boolean qk = Boolean.parseBoolean(String.valueOf(i));
-		return jc&&qk;
+		return jc;
 	}
+
+	
+	
+	@Override
+	public boolean dropField(String formName, String field) {
+		boolean jc = super.dropField(formName, field);
+		
+		
+		return jc;
+	}
+
+
 
 	@Override
 	public List<Map<String, Object>> getFormInf(String formName) {

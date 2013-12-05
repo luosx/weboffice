@@ -26,8 +26,15 @@ public class TableFields extends AbstractBaseBean implements ITableFields {
 		if(defaultValue != null){
 			alterSql.append(" default ").append(defaultValue);
 		}
-		int i = update(alterSql.toString(), template);
-		return Boolean.parseBoolean(String.valueOf(i));
+		alterSql.append(")");
+		boolean result = true;
+		try {
+			update(alterSql.toString(), template);
+		} catch (Exception e) {
+			result = false;
+			System.out.println("字段已存在");
+		}
+		return result;
 	}
 
 	@Override
