@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.klspta.base.AbstractBaseBean;
+import com.klspta.base.util.UtilFactory;
 
 /**
  * 
@@ -37,13 +38,21 @@ public class TableFieldManager extends AbstractBaseBean {
 		String tablename = request.getParameter("tablename");
 		String fieldname = request.getParameter("fieldname");
 		String type = request.getParameter("type");
+		if(type !=null){
+			type = UtilFactory.getStrUtil().unescape(type);
+		}
 		String showname = request.getParameter("showname");
 		String isshow = request.getParameter("isshow");
+		//type为VARCHAR时，设定默认大小为32字节
+		type +="(32)";
 		boolean cacluate = tableFields.addField(tablename, fieldname, type, showname, isshow);
 		response(String.valueOf(cacluate));
 	}
 	
 	public void deleteTableField(){
+		String userid = request.getParameter("userid");
+		String tablename = request.getParameter("tablename");
+		String fieldname = request.getParameter("fieldname");
 		
 		
 	}
