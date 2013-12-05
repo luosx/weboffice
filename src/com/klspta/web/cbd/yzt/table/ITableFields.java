@@ -23,7 +23,7 @@ public interface ITableFields {
 	 * @param defalultValue
 	 * @return
 	 */
-	public boolean addField(String formName, String fieldName, String type, String defalultValue);
+	public boolean addField(String formName, String fieldName, String type, String annotation, String defalultValue);
 	
 	/**
 	 * 
@@ -35,7 +35,7 @@ public interface ITableFields {
 	 * @param type
 	 * @return
 	 */
-	public boolean addField(String formName, String fieldName, String type);
+	public boolean addField(String formName, String fieldName, String type,String annotation);
 	
 	/**
 	 * 
