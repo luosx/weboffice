@@ -44,7 +44,7 @@ public class CBDtableFields extends TableFields {
 	public List<Map<String, Object>> getFormInf(String formName) {
 		StringBuffer formSql = new StringBuffer();
 		formSql.append("select t.TABLE_NAME as tablename, t.COLUMN_NAME as field, t.DATA_TYPE as datatype, j.comments as annotation, k.showname as showname,k.isdelete as isdelete, k.isshow as isshow  from dba_tab_columns t, user_col_comments j left join jc_canshu_extent k on j.table_name = k.tablename and j.column_name = k.columnname where t.TABLE_NAME = j.table_name and t.COLUMN_NAME = j.column_name and ");
-		formSql.append("t.TABLE_NAME='upper(").append(formName).append(")'");
+		formSql.append("t.TABLE_NAME=upper('").append(formName).append("')");
 		List<Map<String, Object>> tableList = query(formSql.toString(), template);
 		return tableList;
 	}
