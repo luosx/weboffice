@@ -25,7 +25,7 @@
 </style>
 	</head>
 	<body>
-	<div style="min-width: 1370px;width: 1300px;height: 500px;">
+	<div style="width: 2300px;height: 100%;">
 		<iframe id="west" name="west" class="div1"
 			style="width: 61%; height: 100%; overflow: auto; margin: " src="jbbList.jsp"></iframe>
 		<iframe id="east" name="east" class="div2"
