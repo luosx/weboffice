@@ -414,12 +414,14 @@
 	     }
 	     
 	    //保存矢量信息
-	    putClientCommond("jbbHandle","drawZrb");
-     	putRestParameter("tbbh",escape(escape(dkmc))); 
-     	putRestParameter("polygon",polygon); 
-     	restRequest();
-	    parent.frames['east'].swfobject.getObjectById("FxGIS").clear();
-     	parent.frames['east'].swfobject.getObjectById("FxGIS").findFeature("cbd", "1", dkmc, "TBBH");
+	     if(polygon != undefined){
+		    putClientCommond("jbbHandle","drawZrb");
+	     	putRestParameter("tbbh",escape(escape(dkmc))); 
+	     	putRestParameter("polygon",polygon); 
+	     	restRequest();
+		    parent.frames['east'].swfobject.getObjectById("FxGIS").clear();
+	     	parent.frames['east'].swfobject.getObjectById("FxGIS").findFeature("cbd", "1", dkmc, "TBBH");
+	     }
 	     if(result == "" || result.success){
 	     	Ext.Msg.alert('提示',"更新成功"); 
 	     }else{
