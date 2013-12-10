@@ -29,6 +29,7 @@
 	<script type="text/javascript">
 		var myData;
 		var grid;
+		var polygon;
 		Ext.onReady(function(){
 		
 			Ext.QuickTips.init();
@@ -218,12 +219,19 @@
          }
          
    function toSave(obj,changes,r,num){
+	 //保存业务信息
      putClientCommond("zrbHandle","updateZrb");
      putRestParameter("tbbh",r.data.YW_GUID); 
      var cc=new Array();
      cc.push(changes);
      putRestParameter("tbchanges",escape(escape(Ext.encode(cc)))); 
      var result = restRequest();
+     //保存矢量信息
+     putClientCommond("zrbHandle","drawZrb");
+     putRestParameter("tbbh",escape(escape(dkmc))); 
+     putRestParameter("polygon",polygon); 
+     restRequest();
+     
      if(result.success){
      	Ext.Msg.alert('提示',"更新成功"); 
      }else{
@@ -247,10 +255,11 @@ function toRecord(obj, num){
 
 //实现上图
 function setRecord(polygon){
-	 putClientCommond("zrbHandle","drawZrb");
-     putRestParameter("tbbh",escape(escape(dkmc))); 
-     putRestParameter("polygon",polygon); 
-     var result = restRequest();
+	 this.polygon = polygon;
+	 //putClientCommond("zrbHandle","drawZrb");
+     //putRestParameter("tbbh",escape(escape(dkmc))); 
+     //putRestParameter("polygon",polygon); 
+     //var result = restRequest();
 	 parent.frames['east'].swfobject.getObjectById("FxGIS").clear();
 }
 
