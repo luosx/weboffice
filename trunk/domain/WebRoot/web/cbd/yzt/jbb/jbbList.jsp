@@ -2,12 +2,19 @@
 <%@page
 	import="org.springframework.security.core.context.SecurityContextHolder"%>
 <%@page import="com.klspta.console.user.User"%>
+<%@page import="com.klspta.web.cbd.dtjc.TjbbManager"%>
+<%@page import="com.klspta.web.cbd.yzt.zrb.ZrbManager"%>
+<%@page import="com.klspta.console.ManagerFactory"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 	
 	Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 	String userId = ((User)principal).getUserID();
+	String extPath = basePath + "base/thirdres/ext/";
+	Map<String, String> proMap = ZrbManager.getZRBBHMap();
+	String roleId = "057e3a269b88cb8554a4cf5118ded145";
+	String userInfoArray=ManagerFactory.getUserManager().getUserInfoArrayJsonByRoleId(roleId);
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -20,10 +27,12 @@
 		<meta http-equiv="expires" content="0">
 		<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 		<meta http-equiv="description" content="This is my page">
-		<%@ include file="/base/include/ext.jspf"%>
-		<%@ include file="/base/include/restRequest.jspf"%>
-		<script type="text/javascript"
-			src="<%=basePath%>/web/cbd/yzt/RowEditor.js"></script>
+		<%@ include file="/base/include/ext.jspf" %>
+		<%@ include file="/base/include/restRequest.jspf" %>
+		<script type="text/javascript" src="<%=basePath%>/web/cbd/yzt/RowEditor.js"></script>
+		<script type="text/javascript" src="<%=extPath%>examples/ux/MultiSelect.js"></script>
+		<script type="text/javascript" src="<%=extPath%>examples/ux/ItemSelector.js"></script>
+		<link rel="stylesheet" type="text/css" href="<%=extPath%>examples/ux/css/MultiSelect.css"/>
 		<style type="text/css">
 .list_title_c {
 	height: 30px;
@@ -46,10 +55,21 @@
    .div2{
    	float:left;margin-left:10px;position:relative;left:0px;
    }
+.form{
+  position: absolute;
+  top:50;
+  left: 200;
+  background-color:#E2EAF3;
+}
 </style>
 		<script type="text/javascript">
 		var myData;
 		var grid;
+		var winForm;
+		var win;
+		var dkmc;
+		var chose;
+		var polygon;
 		Ext.onReady(function(){
 		
 			Ext.QuickTips.init();
@@ -170,8 +190,8 @@
 		           {header: '预计政府土地收益', dataIndex:'YJZFTDSY',width:width*0.04, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
 		           {header: '存蓄比', dataIndex:'CXB',width:width*0.05-4, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
 		           {header: '拆迁强度', dataIndex:'CQQD',width:width*0.04-5, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
-		           {header: '成本覆盖率', dataIndex:'CBFGL',width:width*0.04, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
-		           {header: '自然斑', dataIndex:'ZRBBH',width:width*0.04, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword}		           
+		           {header: '成本覆盖率', dataIndex:'CBFGL',width:width*0.04, sortable: false,editor: {xtype: 'textfield',listeners:{'focus':function(id){getZRB(id,this);}},allowBlank: true},renderer:changKeyword},
+		           {header: '自然斑', dataIndex:'ZRBBH',width:width*0.04, sortable: false,editor: {xtype: 'textfield',allowBlank: true,listeners:{'focus':function(id){getZRB(id,this);}}},renderer:changKeyword}		           
 		        ], 
 		        tbar:[
 	    			{xtype:'label',text:'快速查询:',width:60},
@@ -211,10 +231,86 @@
         	});    
         	   
     	grid.render('mygrid_container');
-    
+    	
+    	
+    	
+    	
+      var leftDs = new Ext.data.ArrayStore({
+	       data: <%=proMap.get("left")%>,
+	       fields: ['value','text']
+	   	}); 
+	  var rightDs = new Ext.data.ArrayStore({ 
+	       fields: ['value','text'],
+	       sortInfo: {
+	           field: 'value',
+	           direction: 'ASC'
+	       }
+	  }); 
+	  
+	 winForm = new Ext.form.FormPanel({
+	   	bodyStyle: 'padding:10px;',
+     	width:550,
+        items:[{
+          	xtype: 'itemselector',
+            name: 'itemselector',
+            imagePath: '<%=extPath%>examples/ux/images/',
+            fieldLabel: '自然斑列表',
+            multiselects:[
+         		{
+                  width: 180,
+                  height: 245,
+                  store: leftDs,
+                  displayField: 'text',
+                  valueField: 'value'
+           		},{
+	           		  width: 180,
+		              height: 245,
+		              store: rightDs,
+		              displayField: 'text',
+	                  valueField: 'value',	
+	                  tbar:[{
+	                  		text: '清空已选列表',
+	                  		handler:function(){
+	                  			winForm.getForm().findField('itemselector').reset();
+	                  		}
+				      }]
+			     }	
+            ]
+            		
+         }],
+       	buttons: [{
+       		text: '保存',
+       		handler: function(){
+       			if(winForm.getForm().isValid()){
+       				var itemselector = winForm.form.findField('itemselector').getValue();
+       				chose.value = itemselector;
+       				win.hide();
+       			}
+       		}
+       	},{
+		        text: '取消',
+       		handler: function(){
+				win.hide();
+       		}
+       	}]
 	});
-	
-
+	  
+ 			   	win = new Ext.Window({
+				    layout: 'fit',
+				    title: '请选择自然斑',
+				    closeAction: 'hide',
+				    width:600,
+				    height:440,
+				    x: 40,
+				    y: 110,
+				    items:winForm
+				});
+    	
+    	
+    	
+    	
+	});
+				
         function query(){
            var keyWord=Ext.getCmp('keyword').getValue();
            putClientCommond("jbbHandle","getQuery");
@@ -284,7 +380,8 @@
           	//重新绑定分页工具栏
 			grid.getBottomToolbar().bind(store);
 			//重新加载数据集
-			store.load({params:{start:0,limit:15}}); 
+			store.load({params:{start:0,limit:15}});
+			
         }
         
         function changKeyword(val){
@@ -302,30 +399,61 @@
            }
          } 
          
-  function toSave(obj,changes,r,num){
-     putClientCommond("jbbHandle","updateJbb");
-     putRestParameter("tbbh",r.data.YW_GUID); 
-     var cc=new Array();
-     cc.push(changes);
-     putRestParameter("tbchanges",escape(escape(Ext.encode(cc)))); 
-     var result = restRequest(); 
-     if(result.success){
-     	Ext.Msg.alert('提示',"更新成功"); 
-     }else{
-     	Ext.Msg.alert('提示',"更新失败");
-     }
-  }
+	  function toSave(obj,changes,r,num, change){
+		 //保存业务信息
+		 var result = "";
+		 if(change == "true"){
+		     putClientCommond("jbbHandle","updateJbb");
+		     putRestParameter("tbbh",r.data.YW_GUID); 
+		     var cc=new Array();
+		     cc.push(changes);
+		     putRestParameter("tbchanges",escape(escape(Ext.encode(cc)))); 
+		     result = restRequest();
+	     }
+	     
+	    //保存矢量信息
+	    putClientCommond("jbbHandle","drawZrb");
+     	putRestParameter("tbbh",escape(escape(dkmc))); 
+     	putRestParameter("polygon",polygon); 
+     	restRequest();
+	     
+	     if(result == "" || result.success){
+	     	Ext.Msg.alert('提示',"更新成功"); 
+	     }else{
+	     	Ext.Msg.alert('提示',"更新失败");
+	     }
+	  }
          
-  function view(bh){
+	  function view(bh){
  		return "<span style='cursor:pointer;'return false;'><img src='base/form/images/view.png' alt='地图位置'></span>";		
- 		}
+	 
+	  }
  
- function showLocation(bh){
- //document.getElementById("map");
- // var ring = {"rings":[[[40560762.895622835,3467853.4509063377],[40568435.82763537,3466583.448366333],[40568433.181796744,3467641.7838163367],[40567110.26248424,3465789.696778829],[40567163.17925674,3468065.1179963383],[40565152.341901734,3465578.0296888286],[40565152.341901734,3468012.201223838],[40563511.92195422,3465419.2793713277],[40563511.92195422,3468012.201223838],[40560762.895622835,3465207.612281327],[40560762.895622835,3467853.4509063377]]],"spatialReference":{"wkid":2364}}
-  //parent.frames["east"].frames["lower"].swfobject.getObjectById("FxGIS").findFeature('cbd',1,yw_guid,'OBJECTID');
-parent.frames['east'].swfobject.getObjectById("FxGIS").findFeature("cbd", "1", bh, "TBBH");
- }		
+	 function showLocation(bh){
+		 //document.getElementById("map");
+		 // var ring = {"rings":[[[40560762.895622835,3467853.4509063377],[40568435.82763537,3466583.448366333],[40568433.181796744,3467641.7838163367],[40567110.26248424,3465789.696778829],[40567163.17925674,3468065.1179963383],[40565152.341901734,3465578.0296888286],[40565152.341901734,3468012.201223838],[40563511.92195422,3465419.2793713277],[40563511.92195422,3468012.201223838],[40560762.895622835,3465207.612281327],[40560762.895622835,3467853.4509063377]]],"spatialReference":{"wkid":2364}}
+		  //parent.frames["east"].frames["lower"].swfobject.getObjectById("FxGIS").findFeature('cbd',1,yw_guid,'OBJECTID');
+		parent.frames['east'].swfobject.getObjectById("FxGIS").findFeature("cbd", "1", bh, "TBBH");
+	 }
+	 
+	 //打开自然斑选择框
+function getZRB(id,check){
+	chose = check;
+   	win.show();
+}
+
+//rowEditors.js关联方法，用来初始化编辑
+function toRecord(obj, num){
+	dkmc = obj.record.data.DKBH;
+	//设置地图为可编辑
+	parent.frames['east'].swfobject.getObjectById("FxGIS").drawPolygon();
+}
+
+//实现上图
+function setRecord(polygon){
+	 this.polygon = polygon;
+     parent.frames['east'].swfobject.getObjectById("FxGIS").clear();
+}
  		
 </script>
 	</head>
@@ -335,5 +463,6 @@ parent.frames['east'].swfobject.getObjectById("FxGIS").findFeature("cbd", "1", b
 		<div id="importWin" class="x-hidden">
 			<div id="importForm"></div>
 		</div>
+		<div id="itemselector" class="form" ></div>
 	</body>
 </html>
