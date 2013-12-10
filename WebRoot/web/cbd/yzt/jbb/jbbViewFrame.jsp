@@ -12,8 +12,10 @@
 		<title></title>
 
 		<%@ include file="/base/include/ext.jspf"%>
-		<script type="text/javascript">
-
+<script type="text/javascript">
+	function drawPolygonCallback(s){
+		frames['west'].setRecord(s);
+	}
 </script>
 <style type="text/css">
 .div1{
