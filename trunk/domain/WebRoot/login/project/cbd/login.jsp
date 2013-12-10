@@ -32,7 +32,7 @@
     font.style1 {
     font-family: "微软雅黑";
     color: #FFFFFF;
-    font-size:40px;
+    font-size:37px;
     font-weight: bolder;
   }
   font.style2 {
@@ -47,22 +47,18 @@
 <form id='loginForm' method="post" action='<%=basePath %>j_spring_security_check'>
 <table border="0" align="center" cellpadding="0" cellspacing="0">
   <tr>
-    <td height="648" valign="top" background="../../images/cbd.jpg">
-    <table width="1020" border="0" cellspacing="0" cellpadding="0">
+    <td height="648"  valign="top" background="../../images/cbd.jpg">
+    <div  style="margin-top: 8%;margin-left: 18%"><font class="style1"><%=loginname1 %></font></div>
+    <div  style="margin-top: 0.5%;margin-left: 21%"><font class="style2"><%=loginname2 %></font></div>
+    <table width="1020" border="0" cellspacing="0" cellpadding="0"> 
       <tr>
-      <td  colspan="2"><div style="margin-top: 6%;margin-left: 25%; display:none"><font class="style1"><%=loginname1 %></font></div></td>
-      </tr>
-      <tr>
-      <td colspan="2" ><div style="margin-top: 1%;margin-left: 26%; display:none" ><font class="style2"><%=loginname2 %></font></div></td>
-      </tr>
-      <tr>
-        <td width="707" height="134">&nbsp;</td>
+        <td width="710" height="104">&nbsp;</td>
         <td width="293">&nbsp;</td>
       </tr>
      
       <tr>
         <td height="16">&nbsp;</td>
-        <td style="padding-left:0px;padding-top:150px;"><label>
+        <td style="padding-left:0px;padding-top:15px;"><label>
           <input name="j_username" type="text" class="input" id="j_username" />
         </label></td>
       </tr>
