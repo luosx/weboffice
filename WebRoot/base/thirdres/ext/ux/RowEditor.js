@@ -145,7 +145,9 @@ Ext.ux.grid.RowEditor = Ext.extend(Ext.Panel, {
             for(var i = 0, len = cm.getColumnCount(); i < len; i++){
                 val = this.preEditValue(record, cm.getDataIndex(i));
                 f = fields[i];
-                f.setValue(val);
+                if(f.xtype != 'button'){
+                	f.setValue(val);
+                }
                 this.values[f.id] = val || '';
             }
             this.verifyLayout(true);
@@ -161,6 +163,7 @@ Ext.ux.grid.RowEditor = Ext.extend(Ext.Panel, {
                 this.doFocus.defer(this.focusDelay, this);
             }
         }
+        toRecord(this,this.rowIndex);
     },
 
     stopEditing : function(saveChanges){
@@ -196,7 +199,9 @@ Ext.ux.grid.RowEditor = Ext.extend(Ext.Panel, {
             }
             r.endEdit();
             this.fireEvent('afteredit', this, changes, r, this.rowIndex);
-            toSave(this,changes,r,this.rowIndex);
+            toSave(this,changes,r,this.rowIndex, "true");
+        }else{
+        	toSave(this,changes,r,this.rowIndex,"false");
         }
         this.hide();
     },
@@ -429,7 +434,7 @@ Ext.ux.grid.RowEditor = Ext.extend(Ext.Panel, {
     isValid: function(){
         var valid = true;
         this.items.each(function(f){
-            if(!f.isValid(true)){
+            if(f.xtype!='button'&& !f.isValid(true)){
                 valid = false;
                 return false;
             }
