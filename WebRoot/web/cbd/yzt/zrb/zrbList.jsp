@@ -124,10 +124,10 @@
             			table.render(grid.tbar); 
         			},
         			'cellmousedown':function(grid,r,c,e){
-        			  if(c==11){
+        				//if(c==11){
         			  	 var bh=grid.getStore().getAt(r).data.ZRBBH;
         			 	  showLocation(bh);
-        			   }
+        			   //}
         			} 
         		},  
         		viewConfig: {
@@ -235,8 +235,25 @@ function showLocation(bh){
    //var url="<%=basePath%>"+"base/fxgis/fx/FxGIS.html?i=false&initFunction=[{\"name\":\"findFeature\",\"parameters\":\"CBD,1,"+bh+",TBBH\"}]";
    //var zrb=window.open(url); 
    //zrb.document.title ="自然斑";
-   parent.frames['east'].swfobject.getObjectById("FxGIS").findFeature("cbd", "1", bh, "TBBH");
+     parent.frames['east'].swfobject.getObjectById("FxGIS").findFeature("cbd", "0", bh, "ZRBBH");
    }
+
+//rowEditors.js关联方法，用来初始化编辑
+function toRecord(obj, num){
+	dkmc = obj.record.data.ZRBBH;
+	//设置地图为可编辑
+	parent.frames['east'].swfobject.getObjectById("FxGIS").drawPolygon();
+}
+
+//实现上图
+function setRecord(polygon){
+	 putClientCommond("zrbHandle","drawZrb");
+     putRestParameter("tbbh",escape(escape(dkmc))); 
+     putRestParameter("polygon",polygon); 
+     var result = restRequest();
+	 parent.frames['east'].swfobject.getObjectById("FxGIS").clear();
+}
+
 </script>
 </head>
 <body bgcolor="#FFFFFF" topmargin="0" leftmargin="0">
