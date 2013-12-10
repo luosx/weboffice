@@ -283,7 +283,9 @@
        		handler: function(){
        			if(winForm.getForm().isValid()){
        				var itemselector = winForm.form.findField('itemselector').getValue();
-       				chose.value = itemselector;
+       				//chose.value = itemselector;
+       				chose.setValue(itemselector);
+       				
        				win.hide();
        			}
        		}
@@ -416,7 +418,8 @@
      	putRestParameter("tbbh",escape(escape(dkmc))); 
      	putRestParameter("polygon",polygon); 
      	restRequest();
-	     
+	    parent.frames['east'].swfobject.getObjectById("FxGIS").clear();
+     	parent.frames['east'].swfobject.getObjectById("FxGIS").findFeature("cbd", "1", dkmc, "TBBH");
 	     if(result == "" || result.success){
 	     	Ext.Msg.alert('提示',"更新成功"); 
 	     }else{
@@ -426,7 +429,6 @@
          
 	  function view(bh){
  		return "<span style='cursor:pointer;'return false;'><img src='base/form/images/view.png' alt='地图位置'></span>";		
-	 
 	  }
  
 	 function showLocation(bh){
@@ -452,7 +454,7 @@ function toRecord(obj, num){
 //实现上图
 function setRecord(polygon){
 	 this.polygon = polygon;
-     parent.frames['east'].swfobject.getObjectById("FxGIS").clear();
+     //parent.frames['east'].swfobject.getObjectById("FxGIS").clear();
 }
  		
 </script>
