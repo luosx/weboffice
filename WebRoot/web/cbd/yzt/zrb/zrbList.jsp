@@ -41,8 +41,8 @@
 			 window.onscroll = function(){ 
    				editor.positionButtons();
   			 }
-			width = document.body.clientWidth - 150;
-			var tableWidth = document.body.clientWidth;
+			width = 1000;
+			var tableWidth = 1000;
 			height = document.body.clientHeight * 0.995;
 			
 			//定义title
@@ -101,7 +101,7 @@
 		        store: store,
 		        region:'center',
                 margins: '0 5 5 5',
-        		hideHeaders: true,
+        		// hideHeaders: true,
 		        columns: [
 		           {header: '序号', dataIndex:'YW_GUID',width: width*0.08, sortable: false,renderer:changKeyword},       
 		           {header: '自然斑编号', dataIndex:'ZRBBH', width: width*0.1, sortable: false,renderer:changKeyword},
@@ -122,7 +122,7 @@
 			    ],  
 			    listeners:{
 					'render': function(){ 
-            			table.render(grid.tbar); 
+            			// table.render(grid.tbar); 
         			},
         			'cellmousedown':function(grid,r,c,e){
         				//if(c==11){
@@ -135,7 +135,7 @@
         			//forceFit: true
         		},      
 		        stripeRows: true,
-		        width:width+150,
+		        width:document.body.clientWidth,
 		        height: height-20 ,
 		        stateful: true,
 		        stateId: 'grid',
