@@ -14,7 +14,9 @@
 	<!-- 基础数据管理你类 -->
 	<bean name="jcsjHandler" class="com.klspta.web.cbd.jcsj.JcsjHandler" scope="prototype"/>
      <!-- 系统名称修改 -->
-	<bean name="projectInfo" class="com.klspta.model.projectinfo.ProjectInfo" scope="prototype"/> 
+	<bean name="projectInfo" class="com.klspta.model.projectinfo.ProjectInfo" scope="prototype"/>
+	  <!-- 基础配置回收期-->
+	<bean name="pzmanager" class="com.klspta.web.cbd.jcpz.PzManager" scope="prototype"/> 
 	<!-- 计划表管理类 -->
 	<bean name="planHandle" class="com.klspta.web.cbd.plan.PlanHandle" scope="prototype"/>
 	<!-- 基本信息 -->
