@@ -29,8 +29,6 @@
 	<bean name="proProgress" class="com.klspta.web.cbd.cbsycs.kfhdt.ProjectProgress" scope="prototype"/>
 	<!-- 统计数据-->
 	<bean name="staticData" class="com.klspta.web.cbd.cbsycs.tjsj.StatisData" scope="prototype"/>
-	<!-- 统计报表-->
-	<bean name="staticReport" class="com.klspta.web.cbd.cbsycs.tjsj.StatisReport" scope="prototype"/>	
 	<!-- 开发体量管理类 -->
 	<bean name="kftlHandle" class=" com.klspta.web.cbd.plan.KftlHandler" scope="prototype"/> 
 	
@@ -61,6 +59,6 @@
 	
 	<!-- 数据表字段管理类 -->	
 	<bean name="tableField" class="com.klspta.web.cbd.yzt.table.TableFieldManager" scope="prototype"/>
-	
-	
+	<bean name="xzlzjjc" class="com.klspta.web.cbd.sccsl.XzlzjjcManager" scope="prototype"/>
+	<bean name="staticReport" class="com.klspta.web.cbd.cbsycs.tjsj.StatisReport" scope="prototype"/>
 </beans>
