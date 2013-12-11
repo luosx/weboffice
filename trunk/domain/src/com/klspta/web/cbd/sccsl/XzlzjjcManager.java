@@ -20,18 +20,18 @@ public class XzlzjjcManager extends AbstractBaseBean {
 		return result;
 	}
 	
-	public Map<String,Object> getXZLData(String bh){
+	public Map<String,Object> getXZLData(String yw_guid){
 		List<Map<String,Object>> result = null;
 		Calendar cal = Calendar.getInstance();
 		String month = cal.get(Calendar.MONTH) + 1+"";
 	    String year = cal.get(Calendar.YEAR)+"";
-		String sql = "select * from xzlzjqk where bh='"+bh +"' and year='"+year+"' and month='"+month+"'";
+		String sql = "select * from xzlzjqk where yw_guid='"+yw_guid +"' and year='"+year+"' and month='"+month+"'";
 		if(query(sql, YW).size()>0){
 			sql = "select t.*,k.zj,k.sj from xzlxx t , xzlzjqk k where " +
-				" t.bh=k.bh and k.year=? and k.month=? and  t.bh='"+bh+"'";
+				" t.bh=k.bh and k.year=? and k.month=? and  t.yw_guid='"+yw_guid+"'";
 			result = query(sql, YW,new Object[]{year,month});
 		}else {
-			sql = "select * from xzlxx where bh='"+bh+"'";
+			sql = "select * from xzlxx where yw_guid='"+yw_guid+"'";
 			result = query(sql, YW);
 			for (int i = 0; i < result.size(); i++) {
 				 result.get(i).put("ZJ", null);
