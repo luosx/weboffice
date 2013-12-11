@@ -13,10 +13,10 @@
 	<bean name="prohandle" class="com.klspta.web.cbd.cbsycs.sxzdwh.PropertyHandle" scope="prototype"/>  
 	<!-- 基础数据管理你类 -->
 	<bean name="jcsjHandler" class="com.klspta.web.cbd.jcsj.JcsjHandler" scope="prototype"/>
-	
+     <!-- 系统名称修改 -->
+	<bean name="projectInfo" class="com.klspta.model.projectinfo.ProjectInfo" scope="prototype"/> 
 	<!-- 计划表管理类 -->
 	<bean name="planHandle" class="com.klspta.web.cbd.plan.PlanHandle" scope="prototype"/>
-	
 	<!-- 基本信息 -->
 	<bean name="basicInfo" class="com.klspta.web.cbd.cbsycs.BasicInfo" scope="prototype"/>
 	<!-- 项目信息 -->
