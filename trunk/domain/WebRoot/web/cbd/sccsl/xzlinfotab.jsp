@@ -2,7 +2,6 @@
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
-	String bh = request.getParameter("bh");
 	String yw_guid =request.getParameter("yw_guid");
 	
 %>
@@ -39,10 +38,10 @@
         items:[
         	{
                 title: '写字楼信息',
-                html: "<iframe width='"+w+"' height='"+h+"' src='xzlxxform.jsp?bh=<%=bh%>&yw_guid=<%=yw_guid%>'/>" 
+                html: "<iframe width='"+w+"' height='"+h+"' src='xzlxxform.jsp?yw_guid=<%=yw_guid%>'/>" 
             },{
                 title: '租金情况',
-                html: "<iframe width='"+w+"' height='"+h+"' src='chart.jsp?bh=<%=bh%>&xml=xzlsingle.xml'/>"
+                html: "<iframe width='"+w+"' height='"+h+"' src='chart.jsp?yw_guid=<%=yw_guid%>&xml=esfzj.xml'/>"
             }
         ]
     })

@@ -3,7 +3,7 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 String xml=request.getParameter("xml");
-String bh= request.getParameter("bh");
+String yw_guid= request.getParameter("yw_guid");
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -25,7 +25,7 @@ String bh= request.getParameter("bh");
 	function generateXml(){
 		putClientCommond("staticReport","getReportData");
 		putRestParameter("xml","<%=xml%>");
-		putRestParameter("bh","<%=bh%>");
+		putRestParameter("yw_guid","<%=yw_guid%>");
 		restRequest();
 	}
 </script>
