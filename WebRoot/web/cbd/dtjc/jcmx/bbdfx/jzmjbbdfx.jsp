@@ -135,6 +135,7 @@ td {
 	</head>
 	<script type="text/javascript">
         var tb;
+        var json='';
         Ext.onReady(function(){
            var f=new Ext.form.FormPanel({
               renderTo:"paraform",
@@ -172,6 +173,9 @@ td {
                  handler: function(){
                       var res=modifyForm();
                       if(res){
+                        putClientCommond("jzmjbbdfx","setValue");
+                        putRestParameter("json",json);
+                        var result= restRequest();
                         alert("保存成功");
                         window.location.reload();
                       }else{
@@ -285,11 +289,27 @@ td {
         
         function test(){
               tb=document.getElementById("JZMJBBDFX");
+              json='[';
               for(var i=1;i<tb.rows.length;i++){
+              if(i==1){
+                    json=json+"{";
+               }else{
+                json=json+",{";
+               }
                  for(var j=1;j<tb.rows[0].cells.length-1;j++){
                     var year=tb.rows[0].cells[j].innerHTML;
                     var cbcb=tb.rows[i].cells[0].innerHTML;
-                    tb.rows[i].cells[j].innerHTML=rent(year,cbcb);
+                    var s=rent(year,cbcb);
+                    if(j==1){
+                      json=json+"cbcb:"+cbcb+",";
+                    }
+                   if(j==tb.rows[0].cells.length-2){
+                    json=json+year+":"+s;
+                     json=json+"}";
+                   }else{
+                    json=json+ year+":"+s+",";
+                   }
+                    tb.rows[i].cells[j].innerHTML=s;
                     if(i%3==0){
                      tb.rows[i].cells[j].style.backgroundColor="#C5D9F1"; 
                     }else{
@@ -297,6 +317,7 @@ td {
                     }              
                  }            
               }  
+              json=json+"]";
         }
         
         function rent(year,cbkfcb){
