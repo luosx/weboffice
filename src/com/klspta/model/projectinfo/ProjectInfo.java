@@ -1,5 +1,6 @@
 package com.klspta.model.projectinfo;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import com.klspta.base.AbstractBaseBean;
@@ -46,4 +47,19 @@ public String getProjectLoginName2(){
 public String getFlag(){
     return FLAG;
 }
+public void save(){
+    String ChName = request.getParameter("ChName");
+    String EnName = request.getParameter("EnName");
+    String sqlString="update core_projectname set loginname1=?,loginname2=? where use = 'yes' ";
+    int i = update(sqlString, CORE, new Object[]{ChName,EnName});
+    if(i>0){
+        init();
+        try {
+            response.getWriter().write("{success:true}");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
 }
