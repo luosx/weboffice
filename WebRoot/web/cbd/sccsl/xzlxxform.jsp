@@ -84,7 +84,7 @@ body {
 					写字楼信息及租金情况
 			</div>
 			<br>
-			<form id="form">
+			<form id="form" method="post">
 		<table width="1000px" cellspacing="0" cellpadding="0"
 			 align='center' border='1'
 			style="text-align: center; border-left:1px solid #2C2B29; border-top:1px solid #2C2B29">
@@ -239,7 +239,7 @@ body {
 				</td>
 			</tr>
 		</table>
-		</form>
+		
 		<center>
 				<br>
 				<br>
@@ -249,6 +249,7 @@ body {
 					<button type="submit"  onclick="save();" style="width: 50px;height: 30px;">保存</button>
 				</div> 
 			</center>
+		</form>
 		<%} %>
 		<br>
 		
