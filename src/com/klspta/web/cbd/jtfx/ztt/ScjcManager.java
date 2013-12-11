@@ -9,5 +9,14 @@ public class ScjcManager extends AbstractBaseBean{
         HttpServletRequest request = this.request;
         response(new ScjcData().getAllList(request));
     }
+    public void updateScjc() {
+        HttpServletRequest request = this.request;
+        if (new ScjcData().updateScjc(request)) {
+            response("{success:true}");
+        } else {
+            response("{success:false}");
+        }
+       
+    }
 
 }
