@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<anychart>
+  <settings>
+    <animation enabled="True" />
+  </settings>
+  <charts>
+    <chart plot_type="CategorizedVertical">
+      <chart_settings>
+        <title enabled="true">
+          <font size="30" family="黑体" />
+          <text>写字楼租金及售价分析</text>
+        </title>
+        <axes>
+          <y_axis position="Left">
+            <scale minimum="0" maximum="10" major_interval="1" show_last_label="false" />
+            <title enabled="true">
+              <text>资金(元/天/平方米 || 千元)</text>
+            </title>
+            <axis_markers>
+              <ranges>
+                <range minimum="0" maximum="90">
+                  <fill color="#C0C0C0" opacity="0.7" />
+                </range>
+              </ranges>
+            </axis_markers>
+          </y_axis>
+          <x_axis>
+            <title enabled="true">
+              <text>时序(月)</text>
+            </title>
+          </x_axis>
+        </axes>
+        <legend enabled="true" position="Bottom" align="Spread" ignore_auto_item="true" padding="15">
+          <format>{%Icon} {%Name}</format>
+          <font size="30" />
+          <template />
+          <title enabled="false" />
+          <columns_separator enabled="false" />
+          <background>
+            <inside_margin left="10" right="10" />
+          </background>
+          <items>
+            <item source="series" />
+          </items>
+        </legend>
+      </chart_settings>
+      <data_plot_settings>
+        <line_series>
+          <line_style>
+            <line thickness="3" />
+          </line_style>
+          <tooltip_settings enabled="true" />
+        </line_series>
+        <bar_series>
+          <tooltip_settings enabled="True" />
+        </bar_series>
+      </data_plot_settings>
+      <data>
+        <series id="0" name="租金" type="Line" color="yellow">
+          <point name="1" y="6" />
+          <point name="2" y="6" />
+          <point name="3" y="6" />
+          <point name="4" y="6.375" />
+          <point name="5" y="6.5" />
+          <point name="6" y="6.54" />
+          <point name="7" y="6.77" />
+          <point name="8" y="7.25" />
+          <point name="9" y="6.75" />
+          <point name="10" y="7" />
+          <point name="11" y="6.3" />
+          <point name="12" y="6.5" />
+        </series>
+        <series id="1" name="售价" type="Line" color="red">
+          <point name="1" y="2.4" />
+          <point name="2" y="2.4" />
+          <point name="3" y="2.4" />
+          <point name="4" y="2.4" />
+          <point name="5" y="2.4" />
+          <point name="6" y="2.4" />
+          <point name="7" y="2.4" />
+          <point name="8" y="2.4" />
+          <point name="9" y="2.4" />
+          <point name="10" y="2.4" />
+          <point name="11" y="2.4" />
+          <point name="12" y="2.4" />
+        </series>
+      </data>
+    </chart>
+  </charts>
+</anychart>
+
