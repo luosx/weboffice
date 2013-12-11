@@ -132,6 +132,27 @@
              return val;
            }
          }
+         
+         function toRecord(){
+         
+         }
+         
+         function toSave(obj,changes,r,num,change){
+	 var cc=new Array();
+     cc.push(changes);
+     var result = "";
+     if(change == "true"){
+	     putClientCommond("scjcHandle","updateScjc");
+	     putRestParameter("tbbh",r.data.YW_GUID); 
+	     putRestParameter("tbchanges",escape(escape(Ext.encode(cc)))); 
+	     var result = restRequest();
+     }
+     if(result == "" || result.success){
+     	Ext.Msg.alert('提示',"更新成功"); 
+     }else{
+     	Ext.Msg.alert('提示',"更新失败");
+     }
+     }
 	</script>
 
 
