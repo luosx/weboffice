@@ -68,7 +68,7 @@
 		           	{name: 'XQMC'},
 		           	{name: 'ESFZL'},
 		           	{name: 'ESFJJ'},
-		           	{name: 'ESFJJZF'},
+		           	{name: 'ESJJZF'},
 		           	{name: 'CZL'},
 		           	{name: 'CZFJJ'},
 		           	{name: 'CZFJJZF'},
@@ -82,16 +82,16 @@
 		        store: store,
 		        region:'center',
 		        columns: [
-		           {header: '所属区域', dataIndex:'SSQY',width: width*0.07, sortable: false,editor: {xtype: 'textfield',allowBlank: true}},       
-		           {header: '序号', dataIndex:'XH', width: width*0.07, sortable: false,editor: {xtype: 'textfield',allowBlank: true}},
-		           {header: '小区名称', dataIndex:'XQMC', width: width*0.07, sortable: false, editor: {xtype: 'textfield',allowBlank: true}},
-		           {header: '二手房总量', dataIndex:'ESFZL',width: width*0.07, sortable: false,editor: {xtype: 'textfield',allowBlank: true}},
-		           {header: '二手房均价', dataIndex:'ESFJJ',width: width*0.07, sortable: false, editor: {xtype: 'textfield',allowBlank: true}},
-		           {header: '二手房均价涨幅', dataIndex:'ESFJJZF', width: width*0.07, sortable: false,editor: {xtype: 'textfield',allowBlank: true}},
-		           {header: '出租量', dataIndex:'CLZ',width: width*0.07, sortable: false, editor: {xtype: 'textfield',allowBlank: true}},
-		           {header: '出租房均价', dataIndex:'CZFJJ',width: width*0.07, sortable: false, editor: {xtype: 'textfield',allowBlank:true}},
-		           {header: '出租房均价涨幅', dataIndex:'CZFJJZF',width: width*0.1, sortable: false,editor: {xtype: 'textfield',allowBlank: true}},
-		           {header: '备注', dataIndex:'BZ',width: width*0.5, sortable: false, editor: {xtype: 'textfield',allowBlank: true}}
+		           {header: '所属区域', dataIndex:'SSQY',width: width*0.07, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},       
+		           {header: '序号', dataIndex:'XH', width: width*0.03, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
+		           {header: '小区名称', dataIndex:'XQMC', width: width*0.07, sortable: false, editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
+		           {header: '二手房总量', dataIndex:'ESFZL',width: width*0.07, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
+		           {header: '二手房均价', dataIndex:'ESFJJ',width: width*0.07, sortable: false, editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
+		           {header: '二手房均价涨幅', dataIndex:'ESJJZF', width: width*0.09, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
+		           {header: '出租量', dataIndex:'CZL',width: width*0.07, sortable: false, editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
+		           {header: '出租房均价', dataIndex:'CZFJJ',width: width*0.07, sortable: false, editor: {xtype: 'textfield',allowBlank:true},renderer:changKeyword},
+		           {header: '出租房均价涨幅', dataIndex:'CZFJJZF',width: width*0.1, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
+		           {header: '备注', dataIndex:'BZ',width: width*0.5, sortable: false, editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword}
 		        ], 
         	tbar:[
 	    			{xtype:'label',text:'快速查询:',width:60},
@@ -118,6 +118,20 @@
         	});
     	grid.render('mygrid_container');
 		});
+		function changKeyword(val){
+            var key=Ext.getCmp('keyword').getValue().toUpperCase();
+            if(key!=''&& val!=null){
+              var temp=val.toUpperCase();
+              if(temp.indexOf(key)>=0){
+	             return val.substring(0,temp.indexOf(key))+"<B style='color:black;background-color:#CD8500;font-size:120%'>"+val.substring(temp.indexOf(key),temp.indexOf(key)+key.length)+"</B>"
+	               +temp.substring(temp.indexOf(key)+key.length,temp.length);
+              }else{
+                return val;
+              }
+           }else{
+             return val;
+           }
+         }
 	</script>
 
 
