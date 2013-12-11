@@ -83,7 +83,11 @@
    				editor.positionButtons();
   			 }
 			width = document.body.clientWidth;
-			var tableWidth = document.body.clientWidth;
+			width = 1500;
+			//var tableWidth = document.body.clientWidth;
+			//var width = 1500;
+			//var tableWidth = 1500;
+			
 			height = document.body.clientHeight * 0.995;
 			
 			//定义title
@@ -164,7 +168,7 @@
 		        store: store,
 		        region:'center',
                 margins: '0 5 5 5',
-        	  	hideHeaders: true,
+        	  	// hideHeaders: true,
 		        columns: [
 		           {header: '序号', dataIndex:'XH',width:width*0.03, sortable: false},       
 		           {header: '基本地块编号', dataIndex:'DKMC', width:width*0.04, sortable: false,renderer:changKeyword},
@@ -190,8 +194,8 @@
 		           {header: '预计政府土地收益', dataIndex:'YJZFTDSY',width:width*0.04, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
 		           {header: '存蓄比', dataIndex:'CXB',width:width*0.05-4, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
 		           {header: '拆迁强度', dataIndex:'CQQD',width:width*0.04-5, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
-		           {header: '成本覆盖率', dataIndex:'CBFGL',width:width*0.04, sortable: false,editor: {xtype: 'textfield',listeners:{'focus':function(id){getZRB(id,this);}},allowBlank: true},renderer:changKeyword},
-		           {header: '自然斑', dataIndex:'ZRBBH',width:width*0.04, sortable: false,editor: {xtype: 'textfield',allowBlank: true,listeners:{'focus':function(id){getZRB(id,this);}}},renderer:changKeyword}		           
+		           {header: '自然斑', dataIndex:'ZRBBH',width:width*0.04 - 5, sortable: false,editor: {xtype: 'textfield',allowBlank: true,listeners:{'focus':function(id){getZRB(id,this);}}},renderer:changKeyword},
+				   {header: '成本覆盖率', dataIndex:'CBFGL',width:width*0.04, sortable: false,editor: {xtype: 'textfield',listeners:{'focus':function(id){getZRB(id,this);}},allowBlank: true},renderer:changKeyword}		           
 		        ], 
 		        tbar:[
 	    			{xtype:'label',text:'快速查询:',width:60},
@@ -201,7 +205,7 @@
 			    listeners:{
 			    	
 					'render': function(){ 
-                    	table.render(grid.tbar); 
+                    //	table.render(grid.tbar); 
         			}, 
         			'cellmousedown':function(grid,r,c,e){
         			 
@@ -214,8 +218,8 @@
         		},      
 		        stripeRows: true,
 		        forceFit:false,
-		        width:width,
-		        height: height-30,
+		        width:document.body.clientWidth,
+		        height: height,
 		        stateful: true,
 		        stateId: 'grid',
 		        buttonAlign:'center',
