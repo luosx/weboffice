@@ -49,7 +49,9 @@
 	
 	<bean name="hxxmHandle" class="com.klspta.web.cbd.yzt.hxxm.HxxmManager" scope="prototype"/>
 		<!-- 安置房-->
-	<bean name="azfjs" class="com.klspta.web.cbd.hxxm.Anzfjs" scope="prototype"/>	
+	<bean name="azfjs" class="com.klspta.web.cbd.hxxm.Anzfjs" scope="prototype"/>
+		<!-- 二手房市场监测 -->	
+	<bean name="scjcHandle" class="com.klspta.web.cbd.jtfx.ztt.ScjcManager" scope="prototype"/>
 	
 	<!-- 统计报表计划管理类 -->	
 	<bean name="tjbbManager" class="com.klspta.web.cbd.dtjc.TjbbManager" scope="prototype"/>
