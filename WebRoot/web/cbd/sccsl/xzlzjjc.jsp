@@ -30,7 +30,6 @@
 		var myData;
 		var grid;
 		Ext.onReady(function(){
-		
 			Ext.QuickTips.init();
 			    // use RowEditor for editing
     		var editor = new Ext.ux.grid.RowEditor({
@@ -44,7 +43,6 @@
 			var tableWidth = document.body.clientWidth;
 			height = document.body.clientHeight * 0.995;
 
-    	
 			//获取数据
 			putClientCommond("xzlzjjc", "getXZL");
 			myData = restRequest();
