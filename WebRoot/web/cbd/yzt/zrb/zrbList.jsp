@@ -230,12 +230,14 @@
 	     var result = restRequest();
      }
      //保存矢量信息
-     putClientCommond("zrbHandle","drawZrb");
-     putRestParameter("tbbh",escape(escape(dkmc))); 
-     putRestParameter("polygon",polygon); 
-     restRequest();
-     parent.frames['east'].swfobject.getObjectById("FxGIS").clear();
-     parent.frames['east'].swfobject.getObjectById("FxGIS").findFeature("cbd", "0", dkmc, "ZRBBH");
+     if(polygon != undefined){
+	     putClientCommond("zrbHandle","drawZrb");
+	     putRestParameter("tbbh",escape(escape(dkmc))); 
+	     putRestParameter("polygon",polygon); 
+	     restRequest();
+     	 parent.frames['east'].swfobject.getObjectById("FxGIS").clear();
+     	 parent.frames['east'].swfobject.getObjectById("FxGIS").findFeature("cbd", "0", dkmc, "ZRBBH");
+     }
      if(result == "" || result.success){
      	Ext.Msg.alert('提示',"更新成功"); 
      }else{
