@@ -170,7 +170,7 @@
  		}
  		
  		function showDetail(id){
- 			 var url = "<%=basePath%>web/cbd/sccsl/xzlinfotab.jsp?bh="+myData[id].BH+"&yw_guid="+myData[id].YW_GUID;  
+ 			 var url = "<%=basePath%>web/cbd/sccsl/xzlinfotab.jsp?yw_guid="+myData[id].YW_GUID;  
 			//document.location.href=url;
 			var height = window.screen.availHeight;
 			var width = window.screen.availWidth;
