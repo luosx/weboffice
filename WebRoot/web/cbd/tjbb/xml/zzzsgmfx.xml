@@ -61,9 +61,9 @@
       </data_plot_settings>
       <data>
         <series id="0" name="年度征收规模(流)" type="Line" color="yellow">
-          <point name="2013" y="67" />
-          <point name="2014" y="13" />
-          <point name="2015" y="24" />
+          <point name="2013" y="17" />
+          <point name="2014" y="52" />
+          <point name="2015" y="0" />
           <point name="2016" y="0" />
           <point name="2017" y="0" />
           <point name="2018" y="0" />

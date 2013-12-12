@@ -68,7 +68,7 @@
           <point name="9" y="6.75" />
           <point name="10" y="7" />
           <point name="11" y="6.3" />
-          <point name="12" y="6.5" />
+          <point name="12" y="5.93333333333333333333333333333333333333" />
         </series>
         <series id="1" name="售价" type="Line" color="red">
           <point name="1" y="2.4" />
@@ -82,7 +82,7 @@
           <point name="9" y="2.4" />
           <point name="10" y="2.4" />
           <point name="11" y="2.4" />
-          <point name="12" y="2.4" />
+          <point name="12" y="2.36666666666666666666666666666666666667" />
         </series>
       </data>
     </chart>

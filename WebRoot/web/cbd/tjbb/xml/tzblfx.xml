@@ -57,24 +57,32 @@
       </data_plot_settings>
       <data>
         <series id="0" name="自有资金使用规模" type="Bar" color="yellow">
-          <point name="2013" y="-20.98" />
-          <point name="2014" y="4.08" />
-          <point name="2015" y="43.52" />
-          <point name="2016" y="-22" />
-          <point name="2017" y="-37" />
-          <point name="2018" y="22" />
-          <point name="2019" y="37" />
-          <point name="2020" y="-34" />
+          <point name="1" y="0" />
+          <point name="2" y="0" />
+          <point name="3" y="0" />
+          <point name="4" y="0" />
+          <point name="5" y="0" />
+          <point name="6" y="0" />
+          <point name="7" y="0" />
+          <point name="8" y="0" />
+          <point name="9" y="0" />
+          <point name="10" y="0" />
+          <point name="11" y="0" />
+          <point name="12" y="0" />
         </series>
         <series id="1" name="债务资金使用规模" type="Bar" color="red">
-          <point name="2013" y="37" />
-          <point name="2014" y="0" />
-          <point name="2015" y="-37" />
-          <point name="2016" y="22" />
-          <point name="2017" y="37" />
-          <point name="2018" y="-22" />
-          <point name="2019" y="-37" />
-          <point name="2020" y="34" />
+          <point name="1" y="0" />
+          <point name="2" y="0" />
+          <point name="3" y="0" />
+          <point name="4" y="0" />
+          <point name="5" y="0" />
+          <point name="6" y="0" />
+          <point name="7" y="0" />
+          <point name="8" y="0" />
+          <point name="9" y="0" />
+          <point name="10" y="0" />
+          <point name="11" y="0" />
+          <point name="12" y="0" />
         </series>
       </data>
     </chart>
