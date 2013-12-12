@@ -57,24 +57,32 @@
       </data_plot_settings>
       <data>
         <series id="0" name="安置房需求规模(流)" type="Line" color="yellow">
-          <point name="2013" y="33" />
-          <point name="2014" y="0" />
-          <point name="2015" y="10" />
-          <point name="2016" y="0" />
-          <point name="2017" y="0" />
-          <point name="2018" y="0" />
-          <point name="2019" y="0" />
-          <point name="2020" y="15" />
+          <point name="1" y="0" />
+          <point name="2" y="0" />
+          <point name="3" y="0" />
+          <point name="4" y="0" />
+          <point name="5" y="0" />
+          <point name="6" y="0" />
+          <point name="7" y="0" />
+          <point name="8" y="0" />
+          <point name="9" y="0" />
+          <point name="10" y="0" />
+          <point name="11" y="0" />
+          <point name="12" y="0" />
         </series>
         <series id="1" name="安置房可使用规模(存)" type="Line" color="red">
-          <point name="2013" y="59" />
-          <point name="2014" y="0" />
-          <point name="2015" y="22" />
-          <point name="2016" y="0" />
-          <point name="2017" y="0" />
-          <point name="2018" y="0" />
-          <point name="2019" y="0" />
-          <point name="2020" y="28" />
+          <point name="1" y="0" />
+          <point name="2" y="0" />
+          <point name="3" y="0" />
+          <point name="4" y="0" />
+          <point name="5" y="0" />
+          <point name="6" y="0" />
+          <point name="7" y="0" />
+          <point name="8" y="0" />
+          <point name="9" y="0" />
+          <point name="10" y="0" />
+          <point name="11" y="0" />
+          <point name="12" y="0" />
         </series>
       </data>
     </chart>

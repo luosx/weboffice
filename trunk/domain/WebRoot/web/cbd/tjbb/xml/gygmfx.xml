@@ -58,7 +58,7 @@
       <data>
         <series id="0" name="年度供应规模(流)" type="Line" color="yellow">
           <point name="2013" y="44" />
-          <point name="2014" y="66" />
+          <point name="2014" y="22" />
           <point name="2015" y="22" />
           <point name="2016" y="0" />
           <point name="2017" y="0" />
@@ -68,8 +68,8 @@
         </series>
         <series id="1" name="净地可出让规模(存)" type="Line" color="red">
           <point name="2013" y="43" />
-          <point name="2014" y="-134" />
-          <point name="2015" y="-138" />
+          <point name="2014" y="-83" />
+          <point name="2015" y="-100" />
           <point name="2016" y="0" />
           <point name="2017" y="0" />
           <point name="2018" y="0" />
@@ -77,9 +77,9 @@
           <point name="2020" y="0" />
         </series>
         <series id="2" name="完成开发规模(流)" type="Line" color="blue">
-          <point name="2013" y="41" />
-          <point name="2014" y="24" />
-          <point name="2015" y="33" />
+          <point name="2013" y="21" />
+          <point name="2014" y="31" />
+          <point name="2015" y="0" />
           <point name="2016" y="0" />
           <point name="2017" y="0" />
           <point name="2018" y="0" />

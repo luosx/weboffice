@@ -46,7 +46,7 @@
 			{name:'土地储备年度实施计划', id:'0',children:[
 			{name:'住宅征收规模分析',reportid:'RPT1',data_type:'实时数据',remark:'描述住宅征收规模',data_generarion_time:'2013-08-23',parentid:'0',id:'zzzsgmfx.xml'},
 			{name:'供应规模分析',reportid:'RPT2',data_type:'实时数据',remark:'描述供应规模',data_generarion_time:'2013-08-23',parentid:'0',id:'gygmfx.xml'},
-			{name:'安置房用情况分析',reportid:'RPT3',data_type:'实时数据',remark:'描述安置房用情况',data_generarion_time:'2013-08-23',parentid:'0',id:'azfyqkfx.xml'},
+			{name:'安置房使用情况分析',reportid:'RPT3',data_type:'实时数据',remark:'描述安置房用情况',data_generarion_time:'2013-08-23',parentid:'0',id:'azfyqkfx.xml'},
 			{name:'资金使用情况分析',reportid:'RPT4',data_type:'实时数据',remark:'描述资金使用情况',data_generarion_time:'2013-08-23',parentid:'0',id:'zjsyqkfx.xml'},
 			{name:'资金风险分析',reportid:'RPT5',data_type:'实时数据',remark:'描述资金风险',data_generarion_time:'2013-08-23',parentid:'0',id:'zjfxfx.xml'},
 			{name:'融资需求分析',reportid:'RPT6',data_type:'实时数据',remark:'描述融资需求',data_generarion_time:'2013-08-23',parentid:'0',id:'rzxqfx.xml'},
