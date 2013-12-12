@@ -7,10 +7,9 @@ String basePath = request.getScheme() + "://"
 		+ request.getServerName() + ":" + request.getServerPort()
 		+ path + "/";
 
-String bh = request.getParameter("bh");
 String yw_guid = request.getParameter("yw_guid");
 String type=request.getParameter("type");
-Map<String, Object> map = new XzlzjjcManager().getXZLData(bh);
+Map<String, Object> map = new XzlzjjcManager().getXZLData(yw_guid);
 String returnPath = request.getParameter("returnPath");
 String edit = request.getParameter("edit");
 if (edit == null || !edit.equals("false")) {
@@ -61,7 +60,7 @@ body {
 	      putRestParameter("zj",zj);
 	      putRestParameter("sj",sj);
 	      putRestParameter("xzlmc",escape(escape(xzlmc)));
-	      putRestParameter("bh","<%=bh%>");
+	      putRestParameter("yw_guid","<%=yw_guid%>");
 	      myData = restRequest();
 	      document.forms[0].submit();
 	      if(myData){
