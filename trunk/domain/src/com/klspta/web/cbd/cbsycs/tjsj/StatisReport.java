@@ -36,9 +36,11 @@ public class StatisReport extends AbstractBaseBean {
     public static final String XZLZJ = "xzlsingle.xml";
   //写字楼租金所有楼
     public static final String XZLZJ_ALL = "xzlall.xml";
+    //二手房租金
+    public static final String ESF = "esfzj.xml";
     //年度数组
     static String[] array = null;// new String[9];
-    static String bh = null;
+    static String yw_guid = null;
     static{
         /*
         for(int i=0;i<array.length;i++){
@@ -75,7 +77,7 @@ public class StatisReport extends AbstractBaseBean {
     public void getReportData(){
         String xml = request.getParameter("xml");
         try{
-        	bh = request.getParameter("bh");
+        	yw_guid = request.getParameter("yw_guid");
         }catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -99,10 +101,25 @@ public class StatisReport extends AbstractBaseBean {
         	getXzlzj();
         }else if(XZLZJ_ALL.equals(xml)){
         	getXzlzjAll();
+        }else if(ESF.equals(xml)){
+        	getEsfzj();
         }
     }
     
-    private void getXzlzjAll() {
+    /*
+     * 二手房租金及售价
+     */
+    private void getEsfzj() {
+    	String[] names = {"租金","售价"};
+        String[] colors = {"yellow","red"};
+        String[] alias = {"zj","sj"}; 
+        String year = Calendar.getInstance().get(Calendar.YEAR)+"";
+        String sql1 = "select k.czfjj as zj,k.esfjj as sj  from zsqk k where k.nd='"+year+"' and k.yd=? and k.yw_guid='"+yw_guid+"'";
+        String[] array = new String[]{"1","2","3","4","5","6","7","8","9","10","11","12"};
+        generateReport(names,colors,alias,sql1,array,"xzlall","Line");
+	}
+
+	private void getXzlzjAll() {
     	String[] names = {"租金","售价"};
         String[] colors = {"yellow","red"};
         String[] alias = {"zj","sj"}; 
@@ -123,7 +140,7 @@ public class StatisReport extends AbstractBaseBean {
          String[] colors = {"yellow","red"};
          String[] alias = {"zj","sj"}; 
          String year = Calendar.getInstance().get(Calendar.YEAR)+"";
-         String sql1 = "select k.zj,k.sj/1000 as sj  from xzlzjqk k where k.year='"+year+"' and k.month=? and k.bh='"+bh+"'";
+         String sql1 = "select k.zj,k.sj/1000 as sj  from xzlzjqk k where k.year='"+year+"' and k.month=? and k.yw_guid='"+yw_guid+"'";
          String[] array = new String[]{"1","2","3","4","5","6","7","8","9","10","11","12"};
          generateReport(names,colors,alias,sql1,array,"xzlsingle","Line"); 
 	}
@@ -349,11 +366,15 @@ public class StatisReport extends AbstractBaseBean {
             e.setAttribute("type", type);
             e.setAttribute("color", colors[i]);
             for(int j=0;j<array.length;j++){
-                list2 = (List<Map<String,Object>>)allList.get(j); 
-                map = list2.get(0);
                 e1 = new Element("point");
                 e1.setAttribute("name", array[j]);
-                e1.setAttribute("y", map.get(alias[i])==null?"0":map.get(alias[i]).toString());  
+                list2 = (List<Map<String,Object>>)allList.get(j); 
+                if(list2.size()>0){
+	                map = list2.get(0);
+	                e1.setAttribute("y", map.get(alias[i])==null?"0":map.get(alias[i]).toString());  
+                }else{
+                	e1.setAttribute("y", "0");  
+                }
                 e.addContent(e1);
             }
             data.addContent(e);
