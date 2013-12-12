@@ -87,7 +87,7 @@ public class ZrbManager extends AbstractBaseBean {
     	ZrbData zrbData = new ZrbData();
     	Set<String> leftSet = new TreeSet<String>();
     	List<Map<String, Object>> zRBBHList = zrbData.getZRBNameList();
-    	for(int i = 0; i < 6; i++){
+    	for(int i = 0; i < zRBBHList.size(); i++){
     		String name = String.valueOf(zRBBHList.get(i).get("ZRBBH"));
     		leftSet.add(name);
     	}

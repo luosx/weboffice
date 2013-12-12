@@ -90,7 +90,6 @@ public class ZrbData extends AbstractBaseBean implements IData {
         String yw_guid = request.getParameter("tbbh");
         String dbChanges = request.getParameter("tbchanges");
         JSONArray js = JSONArray.fromObject(UtilFactory.getStrUtil().unescape(dbChanges));
-        System.out.println(js);
         Iterator<?> it = js.getJSONObject(0).keys();
         StringBuffer sb = new StringBuffer("update jc_ziran set ");
         List<Object> list = new ArrayList<Object>();
@@ -103,9 +102,12 @@ public class ZrbData extends AbstractBaseBean implements IData {
         list.add(yw_guid);
         sb.replace(sb.length() - 1, sb.length(), " where yw_guid=?");
         int result = update(sb.toString(), YW, list.toArray());
+        
+        
         if(result==1){
             flush(js.getJSONObject(0),yw_guid);
         }
+        
         return result == 1 ? true : false;
     }
     
