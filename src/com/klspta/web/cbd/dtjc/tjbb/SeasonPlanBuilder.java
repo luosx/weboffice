@@ -534,7 +534,7 @@ public class SeasonPlanBuilder extends AbstractBaseBean implements IDataClass {
                             tb = new TDBean(value[1], "50", "");
                             tb.setStyle("tdfull");
                             trBean.addTDBean(tb);
-                        } else{
+                        }else{
                             tb = new TDBean("", "50", "");
                             tb.setStyle("tdnull");
                             trBean.addTDBean(tb);
