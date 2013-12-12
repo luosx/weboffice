@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.xml.crypto.Data;
 
 import com.klspta.base.AbstractBaseBean;
+import com.klspta.base.util.UtilFactory;
 
 public class XzlzjjcManager extends AbstractBaseBean {
 
@@ -25,7 +26,7 @@ public class XzlzjjcManager extends AbstractBaseBean {
 		Calendar cal = Calendar.getInstance();
 		String month = cal.get(Calendar.MONTH) + 1+"";
 	    String year = cal.get(Calendar.YEAR)+"";
-		String sql = "select * from xzlzjqk where yw_guid='"+yw_guid +"' and year='"+year+"' and month='"+month+"'";
+		String sql = "select k.* from xzlzjqk k,xzlxx t where t.yw_guid='"+yw_guid +"' and t.bh=k.bh and k.year='"+year+"' and k.month='"+month+"'";
 		if(query(sql, YW).size()>0){
 			sql = "select t.*,k.zj,k.sj from xzlxx t , xzlzjqk k where " +
 				" t.bh=k.bh and k.year=? and k.month=? and  t.yw_guid='"+yw_guid+"'";
@@ -58,11 +59,14 @@ public class XzlzjjcManager extends AbstractBaseBean {
 	public void saveXzlzj(){
 		String zj = request.getParameter("zj");
 		String sj = request.getParameter("sj");
-		String bh =request.getParameter("bh");
+		String yw_guid =request.getParameter("yw_guid");
 		String xzlmc =request.getParameter("xzlmc");
+		xzlmc = UtilFactory.getStrUtil().unescape(xzlmc);
 		StringBuffer sql = new StringBuffer();
 		String year = Calendar.getInstance().get(Calendar.YEAR)+"";
 		String month = Calendar.getInstance().get(Calendar.MONTH)+1+"";
+		String sql1 ="select bh from xzlxx where yw_guid='"+yw_guid+"'";
+		String bh = query(sql1, YW).get(0).get("BH").toString();
 		sql.append("merge into xzlzjqk j using(select distinct '");
 		sql
 				.append(year)
