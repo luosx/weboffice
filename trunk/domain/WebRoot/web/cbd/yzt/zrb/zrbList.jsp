@@ -4,7 +4,6 @@
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-	
 	Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 	String userId = ((User)principal).getUserID();
 %>
@@ -22,6 +21,7 @@
 	<%@ include file="/base/include/ext.jspf" %>
 	<%@ include file="/base/include/restRequest.jspf" %>
 	<script type="text/javascript" src="<%=basePath%>/web/cbd/yzt/RowEditor.js"></script>
+	<script type="text/javascript" src="web/cbd/yzt/zrb/js/Record.js"></script>
 	<style type="text/css">
   		.list_title_c{height:30px; text-align:center; margin-top:3px;border-bottom:1px solid #D0D0D0;}
 		.tableheader{color:#000000;font-size: 12px;height:30px;width:100%;margin-bottom:0px;border-bottom:1px solid #8DB2E3;}
@@ -30,11 +30,13 @@
 		var myData;
 		var grid;
 		var polygon;
+		var record;
+		var editor;
 		Ext.onReady(function(){
 		
 			Ext.QuickTips.init();
 			    // use RowEditor for editing
-    		 var editor= new Ext.ux.grid.RowEditor({
+    		editor= new Ext.ux.grid.RowEditor({
     			saveText: ' 保存 ',
             	cancelText:' 取消 '
     		});
@@ -95,7 +97,7 @@
 		           	{name: 'BZ'}
 				]
 			});
-			store.load({params:{start:0, limit:10}});
+			store.load({params:{start:0, limit:15}});
 			grid = new Ext.grid.GridPanel({
 				title:'自然斑列表',
 		        store: store,
@@ -103,7 +105,7 @@
                 margins: '0 5 5 5',
         		// hideHeaders: true,
 		        columns: [
-		           {header: '序号', dataIndex:'YW_GUID',width: width*0.08, sortable: false,renderer:changKeyword},       
+		           //{header: '序号', dataIndex:'YW_GUID',width: width*0.08, sortable: false,renderer:changKeyword},       
 		           {header: '自然斑编号', dataIndex:'ZRBBH', width: width*0.1, sortable: false,renderer:changKeyword},
 		           {header: '占地面积', dataIndex:'ZDMJ', width: width*0.1, sortable: false, editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
 		           {header: '楼座面积', dataIndex:'LZMJ',width: width*0.09, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
@@ -118,7 +120,34 @@
 		        tbar:[
 	    			{xtype:'label',text:'快速查询:',width:60},
 	    			{xtype:'textfield',id:'keyword',width:350,emptyText:'请输入关键字进行查询'},
-	    			{xtype: 'button',text:'查询',handler: query}
+	    			{xtype: 'button',text:'查询',handler: query},
+				    {
+			            iconCls: 'icon-user-add',
+			            text: '添加自然斑',
+			            handler: function(){
+			                editor.stopEditing();
+							record = new Record();
+			                record.build();
+			                record.create();
+			                //grid.getView().refresh();
+			                //grid.getSelectionModel().selectRow(0);
+			                //editor.startEditing(0);
+			            }
+			        },{
+			            ref: '../removeBtn',
+			            iconCls: 'icon-user-delete',
+			            text: '删除自然斑',
+			            disabled: false,
+			            handler: function(){
+			                editor.stopEditing();
+			                var s = grid.getSelectionModel().getSelections();
+			                for(var i = 0, r; r = s[i]; i++){
+			                    store.remove(r);
+			                    
+			                }
+			                //删除自然斑
+			            }
+			        }
 			    ],  
 			    listeners:{
 					'render': function(){ 
@@ -154,7 +183,16 @@
         	});
     	grid.render('mygrid_container');
 	});
-	
+		
+		function addZRB(text){
+            putClientCommond("zrbHandle","insertZrb");
+           	putRestParameter("ZRBBH",escape(escape(text)));
+         	myData = restRequest(); 
+		 	store = record.add(store,text);
+            grid.getView().refresh();
+            grid.getSelectionModel().selectRow(0);
+            editor.startEditing(0);
+		}
 
         function query(){
            var keyWord=Ext.getCmp('keyword').getValue();
