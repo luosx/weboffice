@@ -1,11 +1,15 @@
 package com.klspta.web.cbd.yzt.jbb;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
+
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import com.klspta.base.AbstractBaseBean;
 import com.klspta.base.util.UtilFactory;
-import com.klspta.web.cbd.yzt.zrb.ZrbData;
 
 public class JbbManager extends AbstractBaseBean{
 	
@@ -46,6 +50,32 @@ public class JbbManager extends AbstractBaseBean{
 	    	}
 	    	boolean draw = new JbbData().recordGIS(tbbh, polygon);
 	    	response(String.valueOf(draw)); 
+	    }
+	    
+	    public static Map<String, String> getDKMCMap(){
+	        JbbData jbbData = new JbbData();
+	        Set<String> leftSet = new TreeSet<String>();
+	        List<Map<String, Object>> dkmcList = jbbData.getDkmcList();
+	        for(int i = 0; i < dkmcList.size(); i++){
+	            String name = String.valueOf(dkmcList.get(i).get("DKMC"));
+	            leftSet.add(name);
+	        }
+	        Map<String, String> proMap = new HashMap<String, String>();
+	        proMap.put("left", toJson(leftSet));
+	        return proMap;
+	    }
+	    private static String toJson(Set<String> set){
+	        StringBuffer jsonBuffer = new StringBuffer();
+	        jsonBuffer.append("[");
+	        for(String project : set){
+	            jsonBuffer.append("['").append(project).append("','");
+	            jsonBuffer.append(project).append("'],");
+	        }
+	        if(!set.isEmpty())
+	            jsonBuffer = jsonBuffer.deleteCharAt(jsonBuffer.length() - 1);
+	        jsonBuffer.append("]");
+	        return jsonBuffer.toString();
+	        
 	    }
 	 
 	/*public void getExcel(){

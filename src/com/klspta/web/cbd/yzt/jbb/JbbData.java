@@ -195,5 +195,10 @@ public class JbbData extends AbstractBaseBean implements IData  {
 			return false;
 		}
 	}
+	
+	public List<Map<String, Object>> getDkmcList(){
+        String sql = "select t.dkmc from " + formName + " t order by to_number(t.cqqd)";
+        return query(sql, YW);
+    }
 
 }
