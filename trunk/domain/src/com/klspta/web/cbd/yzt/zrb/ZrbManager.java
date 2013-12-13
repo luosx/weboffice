@@ -66,6 +66,26 @@ public class ZrbManager extends AbstractBaseBean {
     
     /**
      * 
+     * <br>Description:添加一个新的自然斑
+     * <br>Author:黎春行
+     * <br>Date:2013-12-12
+     */
+    public void insertZrb(){
+    	String zrbBH = request.getParameter("ZRBBH");
+    	if (zrbBH != null) {
+    		zrbBH = UtilFactory.getStrUtil().unescape(zrbBH);
+	        if (new ZrbData().insertZrb(zrbBH)) {
+	            response("{success:true}");
+	        } else {
+	            response("{success:false}");
+	        }
+    	}else{
+    		response("{success:false}");
+    	}
+    }
+    
+    /**
+     * 
      * <br>Description:自然斑上图
      * <br>Author:黎春行
      * <br>Date:2013-12-10

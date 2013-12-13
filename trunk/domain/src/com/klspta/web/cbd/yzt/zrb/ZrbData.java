@@ -1,6 +1,7 @@
 package com.klspta.web.cbd.yzt.zrb;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -35,7 +36,7 @@ public class ZrbData extends AbstractBaseBean implements IData {
      */
     public List<Map<String, Object>> getAllList(HttpServletRequest request) {
         if (zrbList == null) {
-            String sql = "select * from " + formName + " t order by to_number(t.yw_guid)";
+            String sql = "select * from " + formName + " t order by t.zrbbh";
             zrbList = query(sql, YW);
         }
         return zrbList;
@@ -109,6 +110,26 @@ public class ZrbData extends AbstractBaseBean implements IData {
         }
         
         return result == 1 ? true : false;
+    }
+    
+    /**
+     * 
+     * <br>Description:导入自然斑编号
+     * <br>Author:黎春行
+     * <br>Date:2013-12-12
+     * @param zrb
+     * @return
+     */
+    public boolean insertZrb(String zrb){
+    	//生成序号
+    	String ywsql = "select max(to_number(t.yw_guid)) t from " + formName+ " t";
+    	String yw_guid = String.valueOf(query(ywsql, YW).get(0).get("t"));
+    	yw_guid = String.valueOf(Integer.parseInt(yw_guid) + 1);
+    	String sql = "insert into " + formName + "(ZRBBH, yw_guid) VALUES(?,?)";
+    	int result = update(sql, YW, new Object[]{zrb, yw_guid});
+        sql = "select * from " + formName + " t order by t.zrbbh";
+        zrbList = query(sql, YW);
+    	return result == 1 ? true : false;
     }
     
     private void flush(JSONObject jObject,String guid){
