@@ -1,10 +1,14 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@page import="org.springframework.security.core.context.SecurityContextHolder"%>
 <%@page import="com.klspta.console.user.User"%>
+<%@page import="com.klspta.web.cbd.dtjc.TjbbManager"%>
+<%@page import="com.klspta.web.cbd.yzt.jbb.JbbManager"%>
+<%@page import="com.klspta.console.ManagerFactory"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-	
+	String extPath = basePath + "base/thirdres/ext/";
+	Map<String, String> proMap = JbbManager.getDKMCMap();
 	Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 	String userId = ((User)principal).getUserID();
 %>
@@ -22,6 +26,9 @@
 	<%@ include file="/base/include/ext.jspf" %>
 	<%@ include file="/base/include/restRequest.jspf" %>
 	<script type="text/javascript" src="<%=basePath%>/web/cbd/yzt/RowEditor.js"></script>
+	<script type="text/javascript" src="<%=extPath%>examples/ux/MultiSelect.js"></script>
+	<script type="text/javascript" src="<%=extPath%>examples/ux/ItemSelector.js"></script>
+	<link rel="stylesheet" type="text/css" href="<%=extPath%>examples/ux/css/MultiSelect.css"/>
 	<style type="text/css">
   		.list_title_c{height:30px; text-align:center; margin-top:3px;border-bottom:1px solid #D0D0D0;}
 		.tableheader{color:#000000;font-size: 12px;height:30px;width:100%;margin-bottom:0px;border-bottom:1px solid #8DB2E3;}
@@ -74,6 +81,7 @@
 		           	{name: 'TYL'},
 		           	{name: 'RZSS'},
 		           	{name: 'BHDK'},
+		           	{name: 'DKMC'},
 		           	{name: 'YW_GUID'}
 				]
 			});
@@ -106,6 +114,7 @@
 		     	   {header: '租金', dataIndex:'ZJ',width:width*0.05, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword}, 
 		     	   {header: '评估土地价值', dataIndex:'PGTDJZ',width:width*0.08, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
 		     	   {header: '抵押率', dataIndex:'TYL',width:width*0.05, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
+		     	   {header: '基本地块', dataIndex:'DKMC',width:width*0.05, sortable: false,editor: {xtype: 'textfield',allowBlank: true,listeners:{'focus':function(id){getJbb(id,this);}}},renderer:changKeyword},
 		     	   {header: '融资损失', dataIndex:'RZSS',width:width*0.05, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
 		     	   {header: '包含地块', dataIndex:'BHDK',width:width*0.05, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword}
 		        ], 
@@ -143,6 +152,79 @@
 		        
         	});
     	grid.render('mygrid_container');
+    	
+    	var leftDs = new Ext.data.ArrayStore({
+	       data: <%=proMap.get("left")%>,
+	       fields: ['value','text']
+	   	}); 
+	  var rightDs = new Ext.data.ArrayStore({ 
+	       fields: ['value','text'],
+	       sortInfo: {
+	           field: 'value',
+	           direction: 'ASC'
+	       }
+	  });
+    	
+    	winForm = new Ext.form.FormPanel({
+	   	bodyStyle: 'padding:10px;',
+     	width:550,
+        items:[{
+          	xtype: 'itemselector',
+            name: 'itemselector',
+            imagePath: '<%=extPath%>examples/ux/images/',
+            fieldLabel: '基本地块列表',
+            multiselects:[
+         		{
+                  width: 180,
+                  height: 245,
+                  store: leftDs,
+                  displayField: 'text',
+                  valueField: 'value'
+           		},{
+	           		  width: 180,
+		              height: 245,
+		              store: rightDs,
+		              displayField: 'text',
+	                  valueField: 'value',	
+	                  tbar:[{
+	                  		text: '清空已选列表',
+	                  		handler:function(){
+	                  			winForm.getForm().findField('itemselector').reset();
+	                  		}
+				      }]
+			     }	
+            ]
+            		
+         }],
+       	buttons: [{
+       		text: '保存',
+       		handler: function(){
+       			if(winForm.getForm().isValid()){
+       				var itemselector = winForm.form.findField('itemselector').getValue();
+       				//chose.value = itemselector;
+       				chose.setValue(itemselector);
+       				
+       				win.hide();
+       			}
+       		}
+       	},{
+		        text: '取消',
+       		handler: function(){
+				win.hide();
+       		}
+       	}]
+	});
+	  
+ 			   	win = new Ext.Window({
+				    layout: 'fit',
+				    title: '请选择基本地块',
+				    closeAction: 'hide',
+				    width:600,
+				    height:440,
+				    x: 40,
+				    y: 110,
+				    items:winForm
+				});
 	});
 	
 
@@ -252,6 +334,12 @@ function showLocation(bh){
    //hxxm.document.title="红线项目";
    parent.frames['east'].swfobject.getObjectById("FxGIS").findFeature("cbd", "1", bh, "TBBH");
    }
+function getJbb(id,check){
+	chose = check;
+   	win.show();
+}      
+function toRecord(){
+}
 </script>
 </head>
 <body bgcolor="#FFFFFF" topmargin="0" leftmargin="0">
