@@ -180,19 +180,34 @@ window.onload=function()
 	isLoad=false;
 
 	}
-function openPage(url){
-
-	top.content.document.getElementById("content").cols="0,9,*";
- 
-		
+function openPage(obj,url){
+	if(!isLoad)		
+		parent.content.partline.show();
+	if(openObj!=obj)
+	{		
+		obj.style.background="url('<%=resourcePath%>/images/top/bg_w_hc.png')";	
+		obj.style.color="white";
+		isChange=false;	
+		if(openObj!=undefined)
+		{
+			openObj.style.background="none";
+			openObj.style.color="#444444";
+					
+		}	
+		openObj=obj;
+	}
+	top.content.document.getElementById("content").cols="0,9,*";	
 	parent.content.right.location.href='<%=basePath%>'+url; 
+	
+	/*
     var  autoExtend = url.indexOf("autoExtend");
     if(autoExtend != -1){
         var isAuto = url.substring(autoExtend+11,autoExtend+15);
         if(isAuto){
             top.content.content.cols="0,0,*"; 
        }
-    }         
+    }     
+    */    
 }
 
 	//点击退出时，触发关闭窗口事件
