@@ -18,13 +18,13 @@ public class PropertyAnalyse extends AbstractBaseBean {
         //Point point = coor.changePoint(p, ICoordinateChangeUtil.BL80_TO_PLAIN80);     
         String wkt = p.toWKT();
         StringBuffer ms = new StringBuffer("<table cellpadding='0' cellspacing='0'>");        
-        String sql = "select t.shape.srid srid from sp t where rownum =1 ";
+        String sql = "select t.shape.srid srid from dlgzspr t where rownum =1 ";
         List<Map<String, Object>> ls = query(sql,GIS);
         String srid = "";
         if(ls.size()>0){
             srid = (ls.get(0)).get("srid").toString();
         }                
-        sql = "select * from sp t where sde.st_contains (t.shape,sde.st_geometry(?,?))=1";       
+        sql = "select * from dlgzspr t where sde.st_contains (t.shape,sde.st_geometry(?,?))=1";       
         ls = query(sql,GIS,new Object[]{wkt,srid});  
         ms.append("<tr><td>审批情况：</td>");
         if (ls.size() > 0) {
@@ -33,7 +33,7 @@ public class PropertyAnalyse extends AbstractBaseBean {
         } else {
             ms.append("<td><SPAN style='COLOR:red'>未审批</SPAN>").append("</td></tr>");
         }       
-        sql = "select * from gd t where sde.st_contains (t.shape,sde.st_geometry(?,?))=1";       
+        sql = "select * from dlgzgdr t where sde.st_contains (t.shape,sde.st_geometry(?,?))=1";       
         ls = query(sql,GIS,new Object[]{wkt,srid});
         ms.append("<tr><td>供地情况：</td>");
         if (ls.size() > 0) {
@@ -42,7 +42,7 @@ public class PropertyAnalyse extends AbstractBaseBean {
         } else {
             ms.append("<td><SPAN style='COLOR:red'>未供地</SPAN>").append("</td></tr>");
         }               
-        sql = "select * from gh_tdytq t where sde.st_contains (t.shape,sde.st_geometry(?,?))=1 and t.tdytqlxdm ='010'";       
+        sql = "select * from dlgztdytqr t where sde.st_contains (t.shape,sde.st_geometry(?,?))=1 and t.tdytfqdm ='010'";       
         ls = query(sql,GIS,new Object[]{wkt,srid});    
         ms.append("<tr><td>规划情况：</td>");
         if (ls.size() > 0) {
@@ -50,7 +50,7 @@ public class PropertyAnalyse extends AbstractBaseBean {
         } else {
             ms.append("<td><SPAN style='COLOR:green'>未占用基本农田</SPAN>").append("</td></tr>");
         }             
-        sql = "select substr(t.hsx,0,4) year from wp_2012 t where sde.st_contains (t.shape,sde.st_geometry(?,?))=1";
+        sql = "select substr(t.hsx,0,4) year from dlgzwpr t where sde.st_contains (t.shape,sde.st_geometry(?,?))=1";
         ls = query(sql,GIS,new Object[]{wkt,srid});
         ms.append("<tr><td>卫片情况：</td>");
         if (ls.size() > 0) {
@@ -70,7 +70,7 @@ public class PropertyAnalyse extends AbstractBaseBean {
         String wkt = djfx.getWkt(points,flag);
         Analysis analysis = new Analysis();
         //现状
-        List<Map<String,Object>> xzList =analysis.analysis("XZ", "TBBH,QSDWMC,DLBM,DLMC", wkt);
+        List<Map<String,Object>> xzList =analysis.analysis("dlgzxzr", "TBBH,QSDWMC,DLBM,DLMC", wkt);
         double nydmj = 0;
         double gengdmj = 0;
         double jsydmj = 0;
@@ -131,7 +131,7 @@ public class PropertyAnalyse extends AbstractBaseBean {
         xzsb.append("</table>");        
         
         //规划
-        List<Map<String,Object>> ghList = analysis.analysis("GH_TDYTQ", "TDYTQLXDM", wkt);
+        List<Map<String,Object>> ghList = analysis.analysis("dlgztdytqr", "TDYTFQDM", wkt);
         double fhghmj = 0;
         double bfhghmj = 0;
         double zyjbntmj = 0;
@@ -140,7 +140,7 @@ public class PropertyAnalyse extends AbstractBaseBean {
         
         for(int i=0;i<ghList.size();i++){
             Map<String,Object> ghMap = ghList.get(i);
-            String tdytqlxdm = (String)ghMap.get("tdytqlxdm");            
+            String tdytqlxdm = (String)ghMap.get("tdytfqdm");            
             double ghdlmj = 0;
             if(ghMap.get("area")!=null){
                 ghdlmj = Double.parseDouble(ghMap.get("area").toString());              
