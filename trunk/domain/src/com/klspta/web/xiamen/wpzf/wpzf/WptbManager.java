@@ -43,7 +43,7 @@ public class WptbManager extends AbstractBaseBean {
 		String where = null;
 		if(keyword != null){
             keyword = UtilFactory.getStrUtil().unescape(keyword);
-			where = " where (upper(t.jcbh)||upper(t.xmc) like '%" +keyword +"%')";
+			where = " where (upper(t.tbbh)||upper(t.xjxzqhmc) like '%" +keyword +"%')";
 		}
 		WptbData wptbData = new WptbData();
 		List<Map<String, Object>> wptbList = wptbData.getWPList(where);
@@ -60,4 +60,16 @@ public class WptbManager extends AbstractBaseBean {
 		List<Map<String, Object>> wptbList = wptbData.getWPList(where);
 		response(wptbList);
 	}
+	
+	public void getReport(){
+        String xzq = UtilFactory.getStrUtil().unescape(request.getParameter("xzq"));
+        String start = request.getParameter("start");
+        String end = request.getParameter("end");  
+        
+        StringBuffer sb = new StringBuffer("<table id='title' border='0' cellpadding='0' cellspacing='0' width='800' height='60' style='text-align:center; vertical-align:middle;font-family: 宋体, Arial; font-size: 18px;'><tr><td>厦门市2012年度卫片执法检查土地违法案件查处整改情况统计表</td></tr></table>"
+        +"<table id='report' border='1' cellpadding='0' cellspacing='0' width='800'  style='text-align:center; vertical-align:middle;font-family: 宋体, Arial; font-size: 16px;border-collapse:collapse;border:1px #000 solid;' >");        
+        sb.append("<tr></tr>");        
+	    
+	}
+	
 }

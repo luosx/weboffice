@@ -1,9 +1,9 @@
 package com.klspta.web.xiamen.wpzf.wpzf;
 
 public class WPbean {
-	private String WP_NAME = "jsydgzq";
-	private String TDBG_NAME = "jctb";
-	private String TDBG_YW = "wp_tdbgdc";
+	private String WP_NAME = "dlgzwpr";
+	private String TDBG_NAME = "wp_2012";
+	private String TDBG_YW = "wp_2012";
 	
 	public String getTDBG_YW() {
 		return TDBG_YW;
