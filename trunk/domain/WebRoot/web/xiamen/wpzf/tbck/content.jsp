@@ -34,8 +34,8 @@ String userid = ((User)principal).getUserID();
 			remoteSort:true,
 	        fields: [
        			{name:'YW_GUID'},
-	           {name: 'JCBH'},
-	           {name: 'XMC'}
+	           {name: 'TBBH'},
+	           {name: 'XJXZQHMC'}
 	        ]
   	  	});
 		width = document.body.clientWidth-10;
@@ -46,8 +46,8 @@ String userid = ((User)principal).getUserID();
 		grid = new Ext.grid.GridPanel({
 		     store: store,
 		     columns: [
-		        {header: '图斑编号', dataIndex:'JCBH', width: width*0.5, sortable: true,renderer:changKeyword},
-		        {header: '行政区', dataIndex:'XMC', width: width*0.5, sortable: true,renderer:changKeyword}
+		        {header: '图斑编号', dataIndex:'TBBH', width: width*0.5, sortable: true,renderer:changKeyword},
+		        {header: '行政区', dataIndex:'XJXZQHMC', width: width*0.5, sortable: true,renderer:changKeyword}
 		     ], 
 	        tbar:[
     			{xtype:'textfield',id:'keyword',width:150,emptyText:'请输入关键字进行查询'},
@@ -85,61 +85,51 @@ String userid = ((User)principal).getUserID();
 		myData = restRequest();
 		var flexObject = parent.frames['right'].frames["center"].frames["lower"].swfobject.getObjectById("FxGIS");
   		flexObject.clear();
-		flexObject.findFeature('jctb',0,yw_guid,'OBJECTID');
+		flexObject.findFeature('jz_yw',0,yw_guid,'OBJECTID');
   		flexObject.drawPoint("[{\"y\":"+myData[0].YZB+",\"x\":"+myData[0].XZB+",\"icon\":\"a.png\",\"url\":\"web/xiamen/wpzf/wpzf/djfx.jsp\"}]");
   	}
   
-  	<!--查询方法 add by 姚建林 2013-6-20 -->
-        function query(){
-           var keyWord=Ext.getCmp('keyword').getValue();
-  		   putClientCommond("wptb","getWPList");
-	       putRestParameter("userid","<%=userid%>");
-           putRestParameter("keyword",escape(escape(keyWord)));
-           var myData = restRequest(); 
-	  		store = new Ext.data.JsonStore({
-		        proxy: new Ext.ux.data.PagingMemoryProxy(myData),
-				remoteSort:true,
-		        fields: [
-	       			{name:'YW_GUID'},
-		           {name: 'JCBH'},
-		           {name: 'XMC'}
-		        ]
-	  	  	});
-          grid.reconfigure(store, new Ext.grid.ColumnModel([
-		        {header: '图斑编号', dataIndex:'JCBH', width: width*0.5, sortable: true,renderer:changKeyword},
-		        {header: '行政区', dataIndex:'XMC', width: width*0.5, sortable: true,renderer:changKeyword}
-          ]));
-          	//重新绑定分页工具栏
-			grid.getBottomToolbar().bind(store);
-			//重新加载数据集
-			store.load({params:{start:0,limit:limitNum}}); 
-        }
+   function query(){
+      var keyWord=Ext.getCmp('keyword').getValue();
+	  putClientCommond("wptb","getWPList");
+      putRestParameter("userid","<%=userid%>");
+      putRestParameter("keyword",escape(escape(keyWord)));
+      var myData = restRequest(); 
+ 	  store = new Ext.data.JsonStore({
+      proxy: new Ext.ux.data.PagingMemoryProxy(myData),
+	  remoteSort:true,
+      fields: [
+     	  {name:'YW_GUID'},
+          {name: 'TBBH'},
+          {name: 'XJXZQHMC'}
+       ]
+	  });
+      grid.reconfigure(store, new Ext.grid.ColumnModel([
+      {header: '图斑编号', dataIndex:'TBBH', width: width*0.5, sortable: true,renderer:changKeyword},
+      {header: '行政区', dataIndex:'XJXZQHMC', width: width*0.5, sortable: true,renderer:changKeyword}
+      ]));
+    //重新绑定分页工具栏
+	grid.getBottomToolbar().bind(store);
+	//重新加载数据集
+	store.load({params:{start:0,limit:limitNum}}); 
+   }
         
-        function changKeyword(val){
-            var key=Ext.getCmp('keyword').getValue().toUpperCase();
-            if(key!=''&& val!=null){
-              var temp=(""+val).toUpperCase();
-              if(temp.indexOf(key)>=0){
-	             return val.substring(0,temp.indexOf(key))+"<B style='color:black;background-color:#CD8500;font-size:120%'>"+val.substring(temp.indexOf(key),temp.indexOf(key)+key.length)+"</B>"
-	               +temp.substring(temp.indexOf(key)+key.length,temp.length);
-              }else{
-                return val;
-              }
-           }else{
-             return val;
-           }
-       } 
-        
-      	function showDetail(){
-      		
-      		
-      		
-      	}
+   function changKeyword(val){
+        var key=Ext.getCmp('keyword').getValue().toUpperCase();
+        if(key!=''&& val!=null){
+          var temp=(""+val).toUpperCase();
+          if(temp.indexOf(key)>=0){
+          return val.substring(0,temp.indexOf(key))+"<B style='color:black;background-color:#CD8500;font-size:120%'>"+val.substring(temp.indexOf(key),temp.indexOf(key)+key.length)+"</B>"
+            +temp.substring(temp.indexOf(key)+key.length,temp.length);
+          }else{
+            return val;
+          }
+       }else{
+         return val;
+       }
+   } 
   </script>
   <body>
-  	<div id="mygrid_container" style="width: 100%; height: 85%;"></div>
-  	<div>
-  		<input type="button" onClick="showDetail();return false" value="显示详细" />
-  	</div>	  	
+  	<div id="mygrid_container" style="width: 100%; height: 85%;"></div>	  	
   </body>
 </html>

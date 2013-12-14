@@ -156,11 +156,11 @@
 						'-',{
 							xtype : 'label',
 							text : '压盖审批比率：'
-						},{xtype:'textfield',id:'ygspbl1',width:50},
+						},{xtype:'textfield',id:'ygspbl1',width:40},'%',
 						{
 							xtype : 'label',
 							text : '—'
-						},{xtype:'textfield',id:'ygspbl2',width:50},
+						},{xtype:'textfield',id:'ygspbl2',width:40},'%',
 						'-',{
 							xtype : 'label',
 							text : '符合 规划 面积：'
@@ -169,7 +169,7 @@
 							xtype : 'label',
 							text : '—'
 						},{xtype:'textfield',id:'fhghmj2',width:50}						
-			    ], 	       
+			    ],        
 			    listeners:{
 		  			rowdblclick : function(grid, rowIndex, e)
 					{
@@ -235,11 +235,11 @@
 						'-',{
 							xtype : 'label',
 							text : '压盖供地比率：'
-						},{xtype:'textfield',id:'yggdbl1',width:50},
+						},{xtype:'textfield',id:'yggdbl1',width:40},'%',
 						{
 							xtype : 'label',
 							text : '—'
-						},{xtype:'textfield',id:'yggdbl2',width:50},																														
+						},{xtype:'textfield',id:'yggdbl2',width:40},'%',																														
 						'-',{
 							xtype : 'label',
 							text : '不符合规划面积：'
@@ -251,6 +251,7 @@
 						'-',
 	    			{xtype: 'button',text:'查询',handler: query}
 	    			]
+
 			});	 			
 	});
 	//设为合法	
@@ -282,42 +283,37 @@
 	}
 	
 	function downloadViewData(grid){
-	try {
-		var xls = new ActiveXObject("Excel.Application");
-		} catch (e) {
-			alert("要打印该表，您必须安装Excel电子表格软件，同时浏览器须使用“ActiveX 控件”，您的浏览器须允许执行控件。 请点击【帮助】了解浏览器设置方法！");
-			return "";  
-		}
-		var cm = grid.getColumnModel();
-   		var colCount = cm.getColumnCount();   
-   		//alert('总列数：'+colCount);
-   		xls.visible = true; // 设置excel为可见
-   		var xlBook = xls.Workbooks.Add;
-   		var xlSheet = xlBook.Worksheets(1);    
-   		var temp_obj = [];
-   		// 只下载没有隐藏的列(isHidden()为true表示隐藏,其他都为显示)    
-   		for (i = 2; i < colCount; i++) {
-    		if (cm.isHidden(i) == true) {
-    		} else {
-     		temp_obj.push(i);   
-     		}
-   		}
-   			for (l = 1; l <= temp_obj.length; l++) {
-    			xlSheet.Cells(1, l).Value = cm.getColumnHeader(temp_obj[l-1]); 
-   			}
+	  if(grid.getSelectionModel().hasSelection()){
+	   		var records=grid.getSelectionModel().getSelections();
+			try {
+				var xls = new ActiveXObject("Excel.Application");
+				} catch (e) {
+					alert("要打印该表，您必须安装Excel电子表格软件，同时浏览器须使用“ActiveX 控件”，您的浏览器须允许执行控件。 请点击【帮助】了解浏览器设置方法！");
+					return "";  
+				}
+				var cm = grid.getColumnModel();
+		   		var colCount = cm.getColumnCount();
+		   		xls.visible = true; // 设置excel为可见
+		   		var xlBook = xls.Workbooks.Add;
+		   		var xlSheet = xlBook.Worksheets(1);    
+		   		var temp_obj = [];
+		   		// 只下载没有隐藏的列(isHidden()为true表示隐藏,其他都为显示)    
+		   		for (i = 2; i < colCount; i++) {
+		    		if (cm.isHidden(i) == true) {
+		    		} else {
+		     			temp_obj.push(i);   
+		     		}
+		   		}
+	   			for (l = 1; l <= temp_obj.length; l++) {
+	    			xlSheet.Cells(1, l).Value = cm.getColumnHeader(temp_obj[l-1]); 
+	   			}
     			var store = grid.getStore();
    				var recordCount = store.getCount();
-   				//alert("记录总数："+recordCount);
-   				//alert('总列数：'+temp_obj.length);
    				var view = grid.getView();
-   				for (k = 1; k <= recordCount; k++) {
-   					//alert('k-'+k);
+   				for (k = 1; k <= records.length; k++) {
     				for (j = 1; j <= temp_obj.length; j++) {
-     				// EXCEL数据从第二行开始,故row = k + 1;
-    				//alert(view.getCell(k - 1, temp_obj[j- 1]).innerText);
-     				xlSheet.Cells(k + 1, j).Value = view.getCell(k - 1, temp_obj[j- 1]).innerText; 
-     				}
-   					
+     					xlSheet.Cells(k + 1, j).Value = records[k-1].get(records[k-1].fields.items[j].name);
+     				}		   					
 				}
 				xlSheet.Columns.AutoFit;
    				xls.ActiveWindow.Zoom = 75;
@@ -325,13 +321,35 @@
    				xls = null;
    				xlBook = null;
    				xlSheet = null;
+   		    }else{
+    			Ext.Msg.alert('提示','请选择图斑！');
+  		}
 	}	
 		
     function query(){
-         //var keyWord=Ext.getCmp('keyword').getValue();
-		 //putClientCommond("tdbgdc","getqb");
-         //putRestParameter("keyword",escape(escape(keyWord)));
-         var myData = []//restRequest(); 
+    	  var xzq = checkNotNull(Ext.getCmp('district').getValue());
+    	  var jcmj1 = checkNotNull(Ext.getCmp('jcmj1').getValue());
+    	  var jcmj2 = checkNotNull(Ext.getCmp('jcmj2').getValue());  	  
+    	  var ygspmj1 = checkNotNull(Ext.getCmp('ygspmj1').getValue());
+    	  var ygspmj2 = checkNotNull(Ext.getCmp('ygspmj2').getValue());    	  
+    	  var ygspbl1 = checkNotNull(Ext.getCmp('ygspbl1').getValue());
+    	  var ygspbl2 = checkNotNull(Ext.getCmp('ygspbl2').getValue());        	  
+    	  var fhghmj1 = checkNotNull(Ext.getCmp('fhghmj1').getValue());
+    	  var fhghmj2 = checkNotNull(Ext.getCmp('fhghmj2').getValue());      	  
+    	  var tblx = checkNotNull(Ext.getCmp('tblx').getValue());
+    	  var nydmj1 = checkNotNull(Ext.getCmp('nydmj1').getValue());
+    	  var nydmj2 = checkNotNull(Ext.getCmp('nydmj2').getValue());
+    	  var yggdmj1 = checkNotNull(Ext.getCmp('yggdmj1').getValue());
+    	  var yggdmj2 = checkNotNull(Ext.getCmp('yggdmj2').getValue());    	  
+    	  var yggdbl1 = checkNotNull(Ext.getCmp('yggdbl1').getValue());  	  
+    	  var yggdbl2 = checkNotNull(Ext.getCmp('yggdbl2').getValue());     	  
+    	  var bfhghmj1 = checkNotNull(Ext.getCmp('bfhghmj1').getValue());   	  
+    	  var bfhghmj2 = checkNotNull(Ext.getCmp('bfhghmj2').getValue());      	  
+    	  var keyWord = xzq+'@'+ jcmj1+'@'+jcmj2+'@'+ygspmj1+'@'+ygspmj2+'@'+ygspbl1+'@'+ygspbl2+'@'+fhghmj1+'@'+fhghmj2+'@'
+    	  			  +	tblx+'@'+nydmj1+'@'+nydmj2+'@'+yggdmj1+'@'+yggdmj2+'@'+yggdbl1+'@'+yggdbl2+'@'+bfhghmj1+'@'+bfhghmj2;
+		 putClientCommond("tdbgdc","getwf");
+         putRestParameter("keyword",escape(escape(keyWord)));
+         var myData = restRequest(); 
          store = new Ext.data.JsonStore({
 		proxy:new Ext.ux.data.PagingMemoryProxy(myData),
 			remoteSort:true,
@@ -395,6 +413,13 @@
 	//重新加载数据集
 	store.load({params:{start:0,limit:limitNum}}); 
    } 
+   
+    function checkNotNull(value){
+ 	if(!value){
+ 		value = 'null';
+ 	}
+ 	return value;
+ }
 </script>
 </head>
 <body bgcolor="#FFFFFF" topmargin="0" leftmargin="0">
