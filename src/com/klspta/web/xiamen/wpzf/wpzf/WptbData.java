@@ -87,11 +87,11 @@ public class WptbData extends AbstractBaseBean implements IwptbData {
 	
 	public List<Map<String, Object>> getWPList(String where){
 		StringBuffer sqlBuffer = new StringBuffer();
-		sqlBuffer.append("select t.objectid as yw_guid, t.jcbh, t.xmc, t.xzb, t.yzb from ").append(wpBean.getTDBG_NAME()).append(" t ");
+		sqlBuffer.append("select t.objectid as yw_guid, t.tbbh, t.xjxzqhmc, sde.st_astext(t.shape) wkt from ").append(wpBean.getWP_NAME()).append(" t ");
 		if(where != null){
 			sqlBuffer.append(" ").append(where);
 		}
-		sqlBuffer.append(" order by to_number(t.jcbh) ");
+		sqlBuffer.append(" order by to_number(t.tbbh) ");
 		List<Map<String, Object>> queryList = query(sqlBuffer.toString(), GIS);
 		return queryList;
 	}
