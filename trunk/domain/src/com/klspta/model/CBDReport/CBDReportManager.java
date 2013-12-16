@@ -7,7 +7,7 @@ import com.klspta.model.CBDReport.tablestyle.ITableStyle;
 import com.klspta.model.CBDReport.tablestyle.TableStyleDefault;
 public class CBDReportManager {
     
-    public static final boolean USE_CACHE = true;
+    public static final boolean USE_CACHE = false;
 	
 	private FirstWorker firstWorker = new FirstWorker();
 	
@@ -26,7 +26,7 @@ public class CBDReportManager {
     }
     
     public StringBuffer getReport(String reportId, ITableStyle its){
-        return getReport(reportId, null,tableStyleDefault, null);
+        return getReport(reportId, null,its, null);
     }
     
     public StringBuffer getReport(String reportId, Object[] where, String tableWidth){
@@ -34,11 +34,11 @@ public class CBDReportManager {
     }
     
     public StringBuffer getReport(String reportId, Object[] where, ITableStyle its){
-        return getReport(reportId, where, tableStyleDefault, null);
+        return getReport(reportId, where, its, null);
     }
     
     public StringBuffer getReport(String reportId, ITableStyle its, String tableWidth){
-        return getReport(reportId, null, tableStyleDefault, tableWidth);
+        return getReport(reportId, null, its, tableWidth);
     }
     
     public StringBuffer getReport(String reportId, Object[] where, ITableStyle its, String tableWidth){

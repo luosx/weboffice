@@ -1,10 +1,10 @@
 package com.klspta.model.CBDReport.tablestyle;
 
-public class TableStyleDefault extends ITableStyle {
+public class TableStyleDefaultEdit extends ITableStyle {
 
     @Override
     public String getTD1() {
-        return "<td id='#TDINDEX' height='#HEIGHT' width='#WIDTH' colspan='#COLSPAN' rowspan='#ROWPAN' class='#STYLE'>#TEXT</td>";
+        return "<td id='#TDINDEX' onclick='send(this.id)' height='#HEIGHT' width='#WIDTH' colspan='#COLSPAN' rowspan='#ROWPAN' class='#STYLE'><div id='0' style='display:none;width:10'></div>#TEXT</td>";
     }
 
     @Override

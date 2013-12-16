@@ -19,10 +19,11 @@ public class TableBuilder {
         }
         StringBuffer html = new StringBuffer(wr).append(its.getTable1().replace("#TABLEWIDTH", tableWidth).replace("#REPORTNAME", reportID));
         Iterator<Map.Entry<String, TRBean>> iter = c.entrySet().iterator();
+        int trIndex = 0;
         while (iter.hasNext()) {
             Map.Entry<String, TRBean> entry = (Map.Entry<String, TRBean>) iter.next();
             TRBean val = (TRBean) entry.getValue();
-            html.append(buildTR(val, its));
+            html.append(buildTR(trIndex++, val, its));
         }
         return html.append(its.getTable2());
     }
@@ -31,20 +32,21 @@ public class TableBuilder {
         return prase(reportID, tableWidth, c, new TableStyleDefault());
     }
 
-    private StringBuffer buildTR(TRBean trBean, ITableStyle its) {
+    private StringBuffer buildTR(int trIndex, TRBean trBean, ITableStyle its) {
         if (trBean != null) {
             Vector<TDBean> tdBeans = trBean.getTDBeans();
             StringBuffer tds = new StringBuffer(its.getTR1().replace("#TRCSS", trBean.getCssStyle()));
             for (int j = 0; j < tdBeans.size(); j++) {
-                tds.append(buildTD(tdBeans.get(j), its));
+                tds.append(buildTD(trIndex, j, tdBeans.get(j), its));
             }
             return tds.append(its.getTR2());
         }
         return null;
     }
 
-    private String buildTD(TDBean tdBean, ITableStyle its) {
+    private String buildTD(int trIndex, int tdIndex, TDBean tdBean, ITableStyle its) {
         String html = its.getTD1();
+        html = html.replace("#TDINDEX", trIndex + "_" + tdIndex);
         html = html.replace("#HEIGHT", null2String(tdBean.getHeight()));
         html = html.replace("#WIDTH", null2String(tdBean.getWidth()));
         html = html.replace("#COLSPAN", null2String(tdBean.getColspan()));
