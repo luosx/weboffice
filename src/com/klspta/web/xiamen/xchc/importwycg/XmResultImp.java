@@ -297,6 +297,9 @@ public class XmResultImp extends  AResultImp {
 	private void importAccessoryField(String filePath){
         File f = new File(filePath);
         File[] files = f.listFiles();
+        //数据更新前删除旧的数据
+        String sql= "delete from atta_accessory where yw_guid = ?";
+        update(sql, CORE, new Object[] { yw_guid });
         for (int i = 0; i < files.length; i++) {
             if (files[i].getAbsolutePath().endsWith(".txt")) {
                 continue;
@@ -337,6 +340,8 @@ public class XmResultImp extends  AResultImp {
                 }
             }
         }
+        
+        
         sql = "update "+form_name+" set zpbh=? where yw_guid=?";
         update(sql, YW, new Object[] { sb.toString(), yw_guid });
     }
