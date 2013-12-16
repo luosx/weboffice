@@ -93,7 +93,7 @@ td {
 	font-weight: bold;
 	font-size: 15px;
 	text-align: center;
-	line-height: 50px;
+	line-height: 40px;
 	margin-top: 3px;
 }
 
