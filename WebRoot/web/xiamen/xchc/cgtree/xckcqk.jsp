@@ -186,9 +186,40 @@ input{
 					<textarea rows="5" cols="70" name="xcqkms" id="xcqkms" style="width: 99%"></textarea>
 				</td>
 			</tr>
-
-
 		</table>
 		</form>
+		<% 
+			if (map != null) { 
+		%>
+		<center>
+			<div class="container" id="idContainer2" align="center" >
+				<ul id="idSlider2">
+					<%
+						String[] images = map.get("ZPBH") == null ? null : map.get(
+									"ZPBH").toString().split(",");
+							if (images != null) {
+								for (int i = 0; i < images.length; i++) {
+					%>
+					
+						<img 
+							src="ftp://<%=username%>:<%=password%>@<%=host%>:<%=port%>/<%=images[i]%>.jpg"
+							alt="图片上传预览" />
+					<br/>
+
+					<%
+						}
+					%>
+				</ul>
+				<ul class="num" id="idNum">
+				</ul>
+			</div>
+			<br />
+			<%
+				}
+			%>
+		</center>
+		<%
+			}
+		%>
 	</body>
 </html>
