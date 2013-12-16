@@ -23,6 +23,7 @@ public class JbbData extends AbstractBaseBean implements IData  {
 	 private static final String form_gis = "CBD_JBB";
 	
 	public static List<Map<String, Object>> jbbList;
+	
 	@Override
 	public List<Map<String, Object>> getAllList(HttpServletRequest request) {
 		if(jbbList == null){
@@ -50,18 +51,6 @@ public class JbbData extends AbstractBaseBean implements IData  {
 	
 	
 	private List<Map<String, Object>> addZrb(List<Map<String, Object>> resultList){
-//		String zrb = "select t.zrbbh from " + zrformName + " t where t.jbguid = ?";
-//		for(int i = 0; i < resultList.size(); i++){
-//			String zrbbh = "";
-//			Map<String, Object> resultMap = resultList.get(i);
-//			String jbGuid = String.valueOf(resultMap.get("YW_GUID"));
-//			List<Map<String, Object>> zrList = query(zrb, YW, new Object[]{jbGuid});
-//			for(int j = 0; j < zrList.size(); j++){
-//				zrbbh += String.valueOf(zrList.get(j).get("zrbbh"));
-//			}
-//			resultList.get(i).put("zrbbh", zrbbh);
-//		}
-//		return resultList;
 		
 		StringBuffer zrb = new StringBuffer("select t.zrbbh from " + zrformName + " t where t.jbguid = ");
 		for(int i = 0; i < resultList.size(); i++){
@@ -83,27 +72,46 @@ public class JbbData extends AbstractBaseBean implements IData  {
 	public boolean updateJbb(HttpServletRequest request){
 	    String yw_guid=request.getParameter("tbbh");
         String dbChanges=request.getParameter("tbchanges");
+        String zrbbh = "";
         JSONArray js=JSONArray.fromObject(UtilFactory.getStrUtil().unescape(dbChanges));
         System.out.println(js);
         Iterator<?> it = js.getJSONObject(0).keys();
         StringBuffer sb=new StringBuffer("update jc_jiben set ");
         List<Object> list=new ArrayList<Object>();
         while(it.hasNext()){        
-           String key = (String) it.next().toString();             
-           String value= js.getJSONObject(0).getString(key); 
+           String key = (String) it.next().toString();
+           String value= js.getJSONObject(0).getString(key);
+           if("ZRBBH".equals(key.toUpperCase())){
+        	   zrbbh = value;
+           }
            sb.append(key).append("=?,");
            list.add(value);
         }
         list.add(yw_guid);
         sb.replace(sb.length()-1,sb.length()," where yw_guid=?");
         int result=update(sb.toString(),YW,list.toArray());
+        
+        //关联了自然斑后，修改基本斑数据
+        refreshJBB();
+        
         if(result==1){
             flush(js.getJSONObject(0),yw_guid);
         }
         return result == 1 ? true : false;
     }
+	/**
+	 * 
+	 * <br>Description:基本斑缓存与数据库同步
+	 * <br>Author:黎春行
+	 * <br>Date:2013-12-11
+	 */
+    public void refreshJBB(){
+	    StringBuffer sql = new StringBuffer();
+	    sql.append("select rownum xh,t.* from ").append(formName).append(" t") ;
+        List<Map<String, Object>> resultList = query(sql.toString(), YW);
+        jbbList = addZrb(resultList);
+    }
 	
-    
     private void flush(JSONObject jObject,String guid){
         int count=jbbList.size();
         int num=-1;
