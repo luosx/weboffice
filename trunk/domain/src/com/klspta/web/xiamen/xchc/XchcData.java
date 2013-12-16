@@ -15,7 +15,7 @@ import com.klspta.web.xiamen.jcl.XzqHandle;
 
 public class XchcData extends AbstractBaseBean implements IxchcData {
 	
-	private static final String queryString = "(upper(guid)||upper(xzqmc)||upper(xmmc)||upper(rwlx)||upper(sfwf)||upper(xcr)||upper(xcrq)";
+	private static final String queryString = "(upper(guid)||upper(xzqmc)||upper(yddw)||upper(ydsj)||upper(tdyt)||upper(jsqk)||upper(ydqk)||upper(dfccqk)||upper(wfwglx)";
 	
 	@Override
 	public String SetNewRecord(String userid){

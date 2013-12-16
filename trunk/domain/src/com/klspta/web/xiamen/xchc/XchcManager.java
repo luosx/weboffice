@@ -6,6 +6,7 @@ import java.util.Map;
 
 import com.klspta.base.AbstractBaseBean;
 import com.klspta.base.util.UtilFactory;
+import com.klspta.console.ManagerFactory;
 import com.klspta.model.CBDReport.CBDReportManager;
 
 public class XchcManager extends AbstractBaseBean {
@@ -21,7 +22,7 @@ public class XchcManager extends AbstractBaseBean {
 		response(queryList);
 	}
 	
-	public void getReport(){
+	public void getReport() throws Exception{
 		String userid = request.getParameter("userid");
 		String yddw = request.getParameter("yddw");
 		String keyword = request.getParameter("keyword");
@@ -29,6 +30,10 @@ public class XchcManager extends AbstractBaseBean {
 		if (yddw != null && !("".equals(yddw))) {
 			query.append(" where ");
             yddw = UtilFactory.getStrUtil().unescape(yddw);
+            query.append(" t.yddw = '").append(yddw).append("'");
+        }else{
+			query.append(" where ");
+            yddw = UtilFactory.getXzqhUtil().getNameByCode(ManagerFactory.getUserManager().getUserWithId(userid).getXzqh());
             query.append(" t.yddw = '").append(yddw).append("'");
         }
 		if(keyword != null){
