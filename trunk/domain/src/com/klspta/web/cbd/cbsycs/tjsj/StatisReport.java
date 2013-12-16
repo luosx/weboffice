@@ -106,8 +106,11 @@ public class StatisReport extends AbstractBaseBean {
         }
     }
     
-    /*
-     * 二手房租金及售价
+    /**
+     * 
+     * <br>Description:二手房租金售价分析图
+     * <br>Author:李国明
+     * <br>Date:2013-12-12
      */
     private void getEsfzj() {
     	String[] names = {"租金","售价"};
@@ -116,9 +119,16 @@ public class StatisReport extends AbstractBaseBean {
         String year = Calendar.getInstance().get(Calendar.YEAR)+"";
         String sql1 = "select k.czfjj as zj,k.esfjj as sj  from zsqk k where k.nd='"+year+"' and k.yd=? and k.yw_guid='"+yw_guid+"'";
         String[] array = new String[]{"1","2","3","4","5","6","7","8","9","10","11","12"};
-        generateReport(names,colors,alias,sql1,array,"xzlall","Line");
+        generateReport(names,colors,alias,sql1,array,"esfzj","Line");
 	}
 
+    
+    /**
+     * 
+     * <br>Description:写字楼租金售价分析图
+     * <br>Author:李国明
+     * <br>Date:2013-12-12
+     */
 	private void getXzlzjAll() {
     	String[] names = {"租金","售价"};
         String[] colors = {"yellow","red"};
@@ -341,45 +351,14 @@ public class StatisReport extends AbstractBaseBean {
         generateXml(doc,xmlPath);             
     }
     
-    /*
-     * 自定义
+    /**
+     * 
+     * <br>Description:二手房租金售价分析图
+     * <br>Author:李国明
+     * <br>Date:2013-12-12
      */
     private void generateReport(String[] names,String[] colors ,String[] alias,String sql1,String[] array,String xml,String type){
-        List<Object> allList = new ArrayList<Object>();
-        List<Map<String,Object>> list1 = null;
-        for(int i=0;i<array.length;i++){
-            list1 = query(sql1,YW,new Object[]{array[i]});
-            allList.add(list1);
-        }         
-        List<Object> list = parseXml(xml);
-        String xmlPath = (String)list.get(0);
-        Document doc = (Document)list.get(1);      
-        Element data = (Element)list.get(2);
-        Element e = null;
-        Element e1 = null;
-        List<Map<String,Object>> list2 = null;
-        Map<String,Object> map = null;
-        for(int i=0;i<names.length;i++){
-            e = new Element("series");
-            e.setAttribute("id", i+"");
-            e.setAttribute("name", names[i]);
-            e.setAttribute("type", type);
-            e.setAttribute("color", colors[i]);
-            for(int j=0;j<array.length;j++){
-                e1 = new Element("point");
-                e1.setAttribute("name", array[j]);
-                list2 = (List<Map<String,Object>>)allList.get(j); 
-                if(list2.size()>0){
-	                map = list2.get(0);
-	                e1.setAttribute("y", map.get(alias[i])==null?"0":map.get(alias[i]).toString());  
-                }else{
-                	e1.setAttribute("y", "0");  
-                }
-                e.addContent(e1);
-            }
-            data.addContent(e);
-        }        
-        generateXml(doc,xmlPath);             
+        generateReport(names, colors, alias, sql1, xml, type);        
     }
     
     /**
