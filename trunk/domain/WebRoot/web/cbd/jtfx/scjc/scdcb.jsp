@@ -1,167 +1,130 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%@page
-	import="org.springframework.security.core.context.SecurityContextHolder"%>
-<%@page import="com.klspta.console.user.User"%>
+<%@page import="com.klspta.model.CBDReport.CBDReportManager"%>
 <%
-	String path = request.getContextPath();
-	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-	
-	Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-	String userId = ((User)principal).getUserID();
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+
 %>
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+
   <head>
-    <base href="<%=basePath%>">
-    <title>CBD租售情况一览表</title>
+    <base href="<%=basePath%>" >
+    <title>My JSP 'JbbZrb.jsp' starting page</title>
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
-	<%@ include file="/base/include/ext.jspf"%>
 	<%@ include file="/base/include/restRequest.jspf"%>
-	<script type="text/javascript"
-		src="<%=basePath%>/web/cbd/yzt/RowEditor.js"></script>
+	<!--
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	-->
 	<style type="text/css">
-.list_title_c {
-	height: 30px;
-	text-align: center;
+		  table{
+    font-size: 14px;
+    background-color: #A8CEFF;
+    border-color:#000000;
+    /**
+    border-left:1dp #000000 solid;
+    border-top:1dp #000000 solid;
+    **/
+    color:#000000;
+    border-collapse: collapse;
+  }
+  tr{
+    border-width: 0px;
+    text-align:center;
+  }
+  td{
+    text-align:center;
+    border-color:#000000;
+    /**
+    border-bottom:1dp #000000 solid;
+    border-right:1dp #000000 solid;
+    **/
+  }
+  .title{
+    font-weight:bold;
+    font-size: 15px;
+    text-align:center;
+    line-height: 50px;
 	margin-top: 3px;
-	border-bottom: 1px solid #D0D0D0;
-}
-
-.tableheader {
-	color: #000000;
-	font-size: 12px;
-	height: 30px;
-	width: 100%;
-	margin-bottom: 0px;
-	border-bottom: 1px solid #8DB2E3;
-}
+  }
+  .trtotal{
+  	text-align:center;
+    font-weight:bold;
+    line-height: 30px;
+    background-color: #A9A9A9;
+   }
+  .trsingle{
+    background-color: #F8F8FF;
+    line-height: 20px;
+    text-align:center;
+   }
+  .tr01{
+  	background-color: #C0C0C0;
+    line-height: 20px;
+    text-align:center;
+  }
+  .tr02{
+  	background-color: #FFFF00;
+    line-height: 20px;
+    text-align:center;
+  }
+  .tr03{
+  	background-color: #87CEEB;
+    line-height: 20px;
+    text-align:center;
+  }
 	</style>
-	<script type="text/javascript">
-		var myData;
-		var grid;
-		Ext.onReady(function(){
-			Ext.QuickTips.init();
-			var editor = new Ext.ux.grid.RowEditor({
-    			saveText: ' 保存 ',
-            	cancelText:' 取消 '
-    		});
-			window.onscroll = function(){ 
-   				editor.positionButtons();
-  			 }
-  			width = document.body.clientWidth;
-			var tableWidth = document.body.clientWidth;
-			height = document.body.clientHeight * 0.995;
-			
-			putClientCommond("scjcHandle", "getScjc");
-			myData = restRequest();
-			store = new Ext.data.JsonStore({
-				proxy:new Ext.ux.data.PagingMemoryProxy(myData),
-				remoteSort:true,
-				fields:[
-	           		{name: 'SSQY'},
-	           		{name: 'XH'},
-		           	{name: 'XQMC'},
-		           	{name: 'ESFZL'},
-		           	{name: 'ESFJJ'},
-		           	{name: 'ESJJZF'},
-		           	{name: 'CZL'},
-		           	{name: 'CZFJJ'},
-		           	{name: 'CZFJJZF'},
-		           	{name: 'BZ'},
-		           	{name: 'YW_GUID'}
-				]
-			});
-			store.load({params:{start:0, limit:10}});
-			grid = new Ext.grid.GridPanel({
-				title:'CBD住宅租售一览表',
-		        store: store,
-		        region:'center',
-		        columns: [
-		           {header: '所属区域', dataIndex:'SSQY',width: width*0.07, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},       
-		           {header: '序号', dataIndex:'XH', width: width*0.03, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
-		           {header: '小区名称', dataIndex:'XQMC', width: width*0.07, sortable: false, editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
-		           {header: '二手房总量', dataIndex:'ESFZL',width: width*0.07, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
-		           {header: '二手房均价', dataIndex:'ESFJJ',width: width*0.07, sortable: false, editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
-		           {header: '二手房均价涨幅', dataIndex:'ESJJZF', width: width*0.09, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
-		           {header: '出租量', dataIndex:'CZL',width: width*0.07, sortable: false, editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
-		           {header: '出租房均价', dataIndex:'CZFJJ',width: width*0.07, sortable: false, editor: {xtype: 'textfield',allowBlank:true},renderer:changKeyword},
-		           {header: '出租房均价涨幅', dataIndex:'CZFJJZF',width: width*0.1, sortable: false,editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword},
-		           {header: '备注', dataIndex:'BZ',width: width*0.5, sortable: false, editor: {xtype: 'textfield',allowBlank: true},renderer:changKeyword}
-		        ], 
-        	tbar:[
-	    			{xtype:'label',text:'快速查询:',width:60},
-	    			{xtype:'textfield',id:'keyword',width:350,emptyText:'请输入关键字进行查询'},
-	    			{xtype: 'button',text:'查询',handler: query}
-			    ],  
-        		viewConfig: {
-        		},      
-		        stripeRows: true,
-		        width:width*1.49+5,
-		        height: height-20 ,
-		        stateful: true,
-		        stateId: 'grid',
-		        buttonAlign:'center',
-		        plugins: [editor],
-		        bbar: new Ext.PagingToolbar({
-			        pageSize: 15,
-			        store: store,
-			        displayInfo: true,
-			            displayMsg: '共{2}条，当前为：{0} - {1}条',
-			            emptyMsg: "无记录",
-			        plugins: new Ext.ux.ProgressBarPager()
-		        })
-        	});
-    	grid.render('mygrid_container');
-		});
-		function changKeyword(val){
-            var key=Ext.getCmp('keyword').getValue().toUpperCase();
-            if(key!=''&& val!=null){
-              var temp=val.toUpperCase();
-              if(temp.indexOf(key)>=0){
-	             return val.substring(0,temp.indexOf(key))+"<B style='color:black;background-color:#CD8500;font-size:120%'>"+val.substring(temp.indexOf(key),temp.indexOf(key)+key.length)+"</B>"
-	               +temp.substring(temp.indexOf(key)+key.length,temp.length);
-              }else{
-                return val;
-              }
-           }else{
-             return val;
-           }
-         }
-         
-         function toRecord(){
-         
-         }
-         
-         function toSave(obj,changes,r,num,change){
-	 var cc=new Array();
-     cc.push(changes);
-     var result = "";
-     if(change == "true"){
-	     putClientCommond("scjcHandle","updateScjc");
-	     putRestParameter("tbbh",r.data.YW_GUID); 
-	     putRestParameter("tbchanges",escape(escape(Ext.encode(cc)))); 
-	     var result = restRequest();
-     }
-     if(result == "" || result.success){
-     	Ext.Msg.alert('提示',"更新成功"); 
-     }else{
-     	Ext.Msg.alert('提示',"更新失败");
-     }
-     }
-	</script>
-
-
-	</head>
-	<body bgcolor="#FFFFFF" topmargin="0" leftmargin="0" style="overflow: scroll;">
-		<div id="mygrid_container" ></div>
+  </head>
+  <script type="text/javascript">
+  		function print(){
+			//var form=document.getElementById("attachfile");
+			//form.action +="?reprotId=JBZR";
+			//form.submit();
+			/*
+			var excel = new ReportExcel();
+			excel.Init();
+			excel.setCells(7);
+			excel.setRows(56);
+			excel.buildTable("report", "3", "1");
+			excel.showTable();
+			*/
+			    var curTbl = document.getElementById("JBZR"); 
+			    var oXL = new ActiveXObject("Excel.Application"); 
+			    //创建AX对象excel 
+			    var oWB = oXL.Workbooks.Add(); 
+			    //获取workbook对象 
+			        var oSheet = oWB.ActiveSheet; 
+			    //激活当前sheet 
+			    var sel = document.body.createTextRange(); 
+			    sel.moveToElementText(curTbl); 
+			    //把表格中的内容移到TextRange中 
+			    sel.select(); 
+			    //全选TextRange中内容 
+			    sel.execCommand("Copy"); 
+			    //复制TextRange中内容  
+			    oSheet.Paste(); 
+			    //粘贴到活动的EXCEL中       
+			    oXL.Visible = true; 
+			    //设置excel可见属性 
 		
-		<div id="importWin" class="x-hidden">
-			<div id="importForm"></div>
-		</div>
-	</body>
+			
+		}
+
+		
+  </script>
+  <body>
+  	<div id="fixed" style="position: fixed; top: 5px; left: 0px">
+		<img src="base/form/images/print.png" width="20px" height="20px" onClick="javascript:print();"  />
+	</div>
+	<div>
+		<%=new CBDReportManager().getReport("ZSQKB")%>
+	</div>
+  		
+  </body>
 </html>
