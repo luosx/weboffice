@@ -40,14 +40,11 @@
             }
             ,{
                 title: '资金管理',
-                html: "<iframe width='"+w+"' height='"+h+"' src=''/>"
+                html: "<iframe width='"+w+"' height='"+h+"' src='web/cbd/xmgl/zjgl/zjgl.jsp'/>"
             }
             ,{
                 title: '档案管理',
-                html: "<iframe width='"+w+"' height='"+h+"' src=''/>"
-            },{
-                title: '控规表',
-                html: "<iframe width='"+w+"' height='"+h+"' src=''/>"
+                html: "<iframe width='"+w+"' height='"+h+"' src='model/accessory/dzfj/accessorymain.jsp?yw_guid=<%=yw_guid%>'/>"
             },{
                 title: '控规表',
                 html: "<iframe width='"+w+"' height='"+h+"' src=''/>"

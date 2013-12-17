@@ -98,7 +98,8 @@ border:none;
 		<td align="center" ><textarea id='bz' rows="4" cols="20" style="width: 120px"></textarea> </td>
 		</tr>
 		</table>
-	    <div id="addtable" style="width: 1000px" ></div>
-		 <input   id='save' type="button" value="保存"  onclick="save()"/></div>
+	    <div id="addtable" style="width: 1000px" align="right" >
+	    <img src="web/cbd/xmgl/image/bc.png" style="width: 100px;height:50px" onclick="save()"/>
+	    </div>
 	</body>
 </html>
