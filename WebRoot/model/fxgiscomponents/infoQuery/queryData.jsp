@@ -20,6 +20,7 @@
 		<meta http-equiv="description" content="This is my page">
 	    <%@ include file="/base/include/ext.jspf" %>
 	    <%@ include file="/base/include/restRequest.jspf" %>
+	    <script src="<%=basePath%>/base/fxgis/framework/js/json2.js"></script>
 	</head>
 	<style>
 	    a{TEXT-DECORATION:none}
@@ -79,8 +80,7 @@
 		       rowclick:function(grid,row){
 		        var rowIndex = grid.store.indexOf(grid.getSelectionModel().getSelected());
    				var rings = grid.getStore().getAt(rowIndex).get('feature.geometry');
-   				var jsonstring=toJsonString(rings);
-   				
+   				var jsonstring=JSON.stringify(rings);  				
   				//图斑定位
   				parent.parent.center.frames["lower"].swfobject.getObjectById("FxGIS").doLocation(jsonstring);
 		        
