@@ -32,14 +32,14 @@
    <div align="center" style="width: 100%;height: 95%">
      	<img src="web/cbd/sy/zkj.png" height="460px" width="850px" border="0" usemap="#planetmap" alt="总体设计图" />
               <map name="planetmap"  id="planetmap">  
-              <area shape="circle" coords="55,65,40" href ="venus.html" alt="二手房" />  
-              <area shape="circle" coords="160,65,40" href ="mercur.html" alt="搬迁" /> 
-              <area shape="circle"   coords="265,65,40" href ="sun.html" alt="写字楼" />
-              <area shape="circle" coords="370,65,40" href ="venus.html" alt="租金" /> 
-               <area shape="circle" coords="475,65,40" href ="venus.html" alt="项目" /> 
-               <area shape="circle" coords="580,65,40" href ="venus.html" alt="项目报告" /> 
-               <area shape="circle" coords="685,65,40" href ="venus.html" alt="土地" /> 
-               <area shape="circle" coords="790,65,40" href ="venus.html" alt="房源" /> 
+              <area shape="circle" coords="55,65,40" href ="<%=basePath%>web/cbd/jtfx/scjc/scdcb.jsp?flag=zs" alt="二手房市场监测" />  
+              <area shape="circle" coords="160,65,40" href ="<%=basePath%>" alt="搬迁政策研究" /> 
+              <area shape="circle"   coords="265,65,40" href ="<%=basePath%>web/cbd/sccsl/xzljcTab.jsp" alt="写字楼租金监测" />
+              <area shape="circle" coords="370,65,40" href ="<%=basePath%>web/cbd/dtjc/jcmx/bbdfx/jzmjbbdfx.jsp" alt="租金保本点模型" /> 
+               <area shape="circle" coords="475,65,40" href ="<%=basePath%>" alt="项目开发管理" /> 
+               <area shape="circle" coords="580,65,40" href ="<%=basePath%>" alt="项目报告" /> 
+               <area shape="circle" coords="685,65,40" href ="<%=basePath%>" alt="土地资产管理" /> 
+               <area shape="circle" coords="790,65,40" href ="<%=basePath%>" alt="房源资产管理" /> 
               </map>
               </div>
               <div align="center"><h3>系统总体设计图</h3></div>
