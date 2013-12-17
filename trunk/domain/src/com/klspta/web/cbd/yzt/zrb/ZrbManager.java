@@ -1,5 +1,6 @@
 package com.klspta.web.cbd.yzt.zrb;
 
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,7 +26,7 @@ import com.sun.org.apache.bcel.internal.generic.RETURN;
  * <br>Date:2013-10-18
  */
 public class ZrbManager extends AbstractBaseBean {
-
+	private String[] fields = new String[]{"yw_guid", "zrbbh","zdmj", "lzmj","cqgm","zzlzmj","zzcqgm","yjhs","fzzlzmj","fzzcqgm","bz"};
     /**
      * 
      * <br>Description:获取所有自然斑列表
@@ -53,16 +54,28 @@ public class ZrbManager extends AbstractBaseBean {
      * <br>Description:更新自然斑
      * <br>Author:黎春行
      * <br>Date:2013-10-22
+     * @throws Exception 
      */
-    public void updateZrb() {
+    public void updateZrb() throws Exception {
         HttpServletRequest request = this.request;
         if (new ZrbData().updateZrb(request)) {
             response("{success:true}");
         } else {
             response("{success:false}");
         }
-       
     }
+    
+    
+    public void update() throws Exception{
+    	String zrbbh =new String(request.getParameter("key").getBytes("iso-8859-1"), "UTF-8");
+    	String index = request.getParameter("vindex");
+    	String value = new String(request.getParameter("value").getBytes("iso-8859-1"), "UTF-8");
+    	String field = fields[Integer.parseInt(index)];
+    	response(String.valueOf(new ZrbData().modifyValue(zrbbh, field, value)));
+    }
+    
+    
+    
     
     /**
      * 
@@ -126,6 +139,5 @@ public class ZrbManager extends AbstractBaseBean {
 			jsonBuffer = jsonBuffer.deleteCharAt(jsonBuffer.length() - 1);
 		jsonBuffer.append("]");
 		return jsonBuffer.toString();
-		
 	}
 }

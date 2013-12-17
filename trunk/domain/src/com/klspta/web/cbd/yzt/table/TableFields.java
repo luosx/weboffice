@@ -89,7 +89,6 @@ public class TableFields extends AbstractBaseBean implements ITableFields {
 
 	@Override
 	public List<Map<String, Object>> getFormInf(String formName) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

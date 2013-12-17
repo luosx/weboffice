@@ -1,7 +1,6 @@
 package com.klspta.web.cbd.yzt.zrb;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -16,11 +15,14 @@ import com.klspta.base.util.UtilFactory;
 import com.klspta.base.wkt.Point;
 import com.klspta.base.wkt.Polygon;
 import com.klspta.base.wkt.Ring;
+import com.klspta.web.cbd.yzt.jc.valueChange.AbstractValueChange;
+import com.klspta.web.cbd.yzt.jc.valueChange.ZrbValueChange;
 import com.klspta.web.cbd.yzt.utilList.IData;
 
 public class ZrbData extends AbstractBaseBean implements IData {
     private static final String formName = "JC_ZIRAN";
     private static final String form_gis = "CBD_ZRB";
+    private static final AbstractValueChange linkChange = new ZrbValueChange();
 
     /**
      * 保存自然斑列表
@@ -86,10 +88,12 @@ public class ZrbData extends AbstractBaseBean implements IData {
      * <br>Date:2013-10-21
      * @param request
      * @return
+     * @throws Exception 
      */
-    public boolean updateZrb(HttpServletRequest request) {
-        String yw_guid = request.getParameter("tbbh");
-        String dbChanges = request.getParameter("tbchanges");
+    public boolean updateZrb(HttpServletRequest request) throws Exception {
+        //String yw_guid = UtilFactory.getStrUtil().escape(request.getParameter("tbbh"));
+        String yw_guid = new String(request.getParameter("tbbh").getBytes("iso-8859-1"), "UTF-8");
+    	String dbChanges = request.getParameter("tbchanges");
         JSONArray js = JSONArray.fromObject(UtilFactory.getStrUtil().unescape(dbChanges));
         Iterator<?> it = js.getJSONObject(0).keys();
         StringBuffer sb = new StringBuffer("update jc_ziran set ");
@@ -101,14 +105,12 @@ public class ZrbData extends AbstractBaseBean implements IData {
             list.add(value);
         }
         list.add(yw_guid);
-        sb.replace(sb.length() - 1, sb.length(), " where yw_guid=?");
+        sb.replace(sb.length() - 1, sb.length(), " where ZRBBH=?");
         int result = update(sb.toString(), YW, list.toArray());
-        
-        
         if(result==1){
             flush(js.getJSONObject(0),yw_guid);
         }
-        
+        linkChange.add(yw_guid);
         return result == 1 ? true : false;
     }
     
@@ -130,6 +132,15 @@ public class ZrbData extends AbstractBaseBean implements IData {
         sql = "select * from " + formName + " t order by t.zrbbh";
         zrbList = query(sql, YW);
     	return result == 1 ? true : false;
+    }
+    
+    public boolean modifyValue(String zrbbh, String field, String value){
+    	StringBuffer sqlBuffer = new StringBuffer();
+    	sqlBuffer.append(" update ").append(formName);
+    	sqlBuffer.append(" t set t.").append(field).append("=? where t.zrbbh=?");
+    	int i = update(sqlBuffer.toString(), YW, new Object[]{value, zrbbh});
+    	linkChange.add(zrbbh);
+    	return i == 1 ? true : false;
     }
     
     private void flush(JSONObject jObject,String guid){
