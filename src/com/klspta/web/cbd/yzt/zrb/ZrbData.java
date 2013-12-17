@@ -139,7 +139,11 @@ public class ZrbData extends AbstractBaseBean implements IData {
     	sqlBuffer.append(" update ").append(formName);
     	sqlBuffer.append(" t set t.").append(field).append("=? where t.zrbbh=?");
     	int i = update(sqlBuffer.toString(), YW, new Object[]{value, zrbbh});
-    	linkChange.add(zrbbh);
+    	if(!"zrbbh".equals(field)){
+    		linkChange.add(zrbbh);
+    	}else{
+    		linkChange.add(value);
+    	}
     	return i == 1 ? true : false;
     }
     
