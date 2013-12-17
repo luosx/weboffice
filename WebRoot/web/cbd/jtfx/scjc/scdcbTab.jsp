@@ -34,10 +34,10 @@
         items:[
         	{
                 title: '租售情况表',
-                html: "<iframe width='"+w+"' height='"+h+"' src='scdcb.jsp?flag=zs'/>" 
+                html: "<iframe width='"+w+"' height='"+h+"' src='scdcb.jsp'/>" 
             },{
                 title: '折线图',
-                html: "<iframe width='"+w+"' height='"+h+"' src='scdcb.jsp?flag=zx'/>"
+                html: "<iframe width='"+w+"' height='"+h+"' src='chart.jsp'/>"
             }
         ]
     })
