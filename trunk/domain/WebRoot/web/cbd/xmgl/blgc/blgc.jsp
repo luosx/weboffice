@@ -145,9 +145,9 @@ border:none;
 		<tr>
 		<td align="center" ><input id='xh' type="text" width="95px"/></td>
 		<td align="center" ><input id='sj' type="text"/ width="95px"></td>
-		<td align="center" ><textarea id='sjbl' rows="4" cols="10" style="width: 370px"></textarea>  </td>
+		<td align="center" ><textarea id='sjbl' rows="4" cols="10" style="width: 370px;overflow: hidden"></textarea>  </td>
 		<td align="center" ><input id='bmjbr' type="text" width="95px"/></td>
-		<td align="center" ><textarea id='bz' rows="4" cols="20" style="width: 120px"></textarea> </td>
+		<td align="center" ><textarea id='bz' rows="4" cols="20" style="width: 200px;overflow: hidden"></textarea> </td>
 		</tr>
 		</table>
 	    <div id="addtable" style="width: 1000px" align="right" ><!--
