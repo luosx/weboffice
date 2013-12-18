@@ -31,7 +31,8 @@ import com.klspta.model.wyrw.AResultImp;
 public class XmResultImp extends  AResultImp {
 	private Map<String, String[][]> saveMap = getCondition();
 	private String form_name = "DC_YDQKDCB";
-	private String gis_name = "XCHC_WYCG";
+	private String gis_name = "dlgzwyr";
+	private String srid_name = "dlgzwpr";
 	private String yw_guid = "";
 	
 	public XmResultImp(String formName, String gisName,HttpServletRequest request) {
@@ -164,7 +165,7 @@ public class XmResultImp extends  AResultImp {
 			}
 		}
 		//添加导入人员的行政区划
-		insertNames.append("impuser,impxzq,impxzqbm");
+		insertNames.append("impuser,impxzq,impxzqbm,");
 		insertValue +="?,?,?,";
 		updatenames.append("impuser=?,impxzq=?,impxzqbm=?,");
 		User user = ManagerFactory.getUserManager().getUserWithId(userid);
@@ -221,9 +222,9 @@ public class XmResultImp extends  AResultImp {
 			wkt = polygon.toWKT();	
 		}
 		
-		String querySrid = "select t.srid from sde.st_geometry_columns t where t.table_name = ?";
+		String querySrid = "select t.shape.srid srid from "+ srid_name +" t where rownum =1";
         String srid = null;
-        List<Map<String, Object>> rs = query(querySrid, GIS, new Object[]{gis_name});
+        List<Map<String, Object>> rs = query(querySrid, GIS);
         if(rs.size() > 0){
         	srid = rs.get(0).get("srid") + "";
         }
