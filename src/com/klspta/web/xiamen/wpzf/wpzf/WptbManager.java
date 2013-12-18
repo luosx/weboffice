@@ -2,14 +2,12 @@ package com.klspta.web.xiamen.wpzf.wpzf;
 
 import java.util.List;
 import java.util.Map;
-
 import com.klspta.base.AbstractBaseBean;
 import com.klspta.base.util.UtilFactory;
-import com.sun.jndi.url.corbaname.corbanameURLContextFactory;
+import com.klspta.base.wkt.Polygon;
+
 
 public class WptbManager extends AbstractBaseBean {
-	public static final String[][] showList_BG = new String[][]{{"YW_GUID", "0.1","hiddlen"},{"JCBH", "0.1","监测编号"},{"XMC", "0.1","项目名称"},{"TBLX", "0.1","图斑类型"},{"XZQMC", "0.1","行政区名称"},{"WPND","0.1","卫片年度"},{"JCMJ","0.1","监测面积"},{"SPMJ","0.1","审批面积"},{"GDMJ","0.1","供地面积"},{"HCMJ","0.1","巡查核查面积"}};
-	public static final String[][] showList_WCL = new String[][]{{"OBJECTID", "0.1","卫片编号"},{"XMC", "0.1","项目名称"},{"JCBH", "0.1","监测编号"},{"TBLX", "0.1","图斑类型"},{"JCMJ", "0.1","监测面积"}};
 	
 	public void getWFlist(){
 		String userId = request.getParameter("userid");
@@ -61,6 +59,16 @@ public class WptbManager extends AbstractBaseBean {
 		response(wptbList);
 	}
 	
+	public void getWkt(){
+	    String objectId = request.getParameter("objectId"); 
+	    String sql = "select sde.st_astext(t.shape) wkt from dlgzwpr t where t.objectid = ?";
+	    List<Map<String,Object>> list = query(sql,GIS,new Object[]{objectId});
+	    String wkt = (String)(list.get(0)).get("wkt");
+	    Polygon polygon = new Polygon(wkt);
+	    response(polygon.toJson());
+	}
+	
+	
 	public void getReport(){
         String xzq = UtilFactory.getStrUtil().unescape(request.getParameter("xzq"));
         String start = request.getParameter("start");
@@ -71,5 +79,38 @@ public class WptbManager extends AbstractBaseBean {
         sb.append("<tr></tr>");        
 	    
 	}
+	
+	public void getWpxf(){
+	    String keyword = request.getParameter("keyword");
+	    WptbData wptbData = new WptbData();
+        List<Map<String, Object>> wptbList = wptbData.getWpxf(keyword);	    
+ 	    response(wptbList);
+	}
+    public void getWpsb(){
+        String keyword = request.getParameter("keyword");
+        WptbData wptbData = new WptbData();
+        List<Map<String, Object>> wptbList = wptbData.getWpsb(keyword);     
+        response(wptbList);
+    }	
+    
+    public void setWf(){
+        String yw_guid = request.getParameter("yw_guid");
+        String[] yw_guids = yw_guid.split(",");
+        String sql = "update wpzfjc t set t.iswf = '1' where t.yw_guid = ?";
+        for(int i=0;i<yw_guids.length;i++){
+            update(sql,YW,new Object[]{yw_guids[i]});
+        }
+        response("true");
+    }
+
+    public void setHf(){
+        String yw_guid = request.getParameter("yw_guid");
+        String[] yw_guids = yw_guid.split(",");
+        String sql = "update wpzfjc t set t.iswf = '0' where t.yw_guid = ?";
+        for(int i=0;i<yw_guids.length;i++){
+            update(sql,YW,new Object[]{yw_guids[i]});
+        }
+        response("true");
+    }
 	
 }

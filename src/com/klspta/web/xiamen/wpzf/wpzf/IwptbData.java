@@ -41,4 +41,8 @@ public interface IwptbData {
 	 * @return
 	 */
 	public List<Map<String, Object>> getWCLlist(String userId, String keyword);
+	
+	
+	public List<Map<String,Object>> getWpxf(String keyword);
+	public List<Map<String,Object>> getWpsb(String keyword);
 }
