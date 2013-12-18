@@ -9,9 +9,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <head>
 <title>content</title>
 </head>
-  <frameset id="main" name="main" cols="211,9,*" frameborder="no" border="0" framespacing="0">
-    <frame id="left" name="left"  src="<%=basePath%>web/cbd/xmgl/hxxmList.jsp" scrolling="No" noresize="noresize" />
-    <frame id="partline" name="partline" src="<%=basePath%>web/cbd/xmgl/partline.jsp"  scrolling="No" noresize="noresize" />
-    <frame id="right" name="right" src="<%=basePath%>web/cbd/xmgl/contentTab.jsp" />
-  </frameset>
+
+	<frameset id="zzjg" name="zzjg" cols="200,*" frameborder="no" border="0" framespacing="0" >
+		<frame id="left" name="left" scrolling="NO" noresize
+			src="<%=basePath%>web/cbd/xmgl/hxxmList.jsp" />
+		<frame id="right" name="right" scrolling="NO" noresize
+			src="<%=basePath%>web/cbd/xmgl/contentTab.jsp" />		
+	</frameset>
 </html>
