@@ -15,12 +15,15 @@ import com.klspta.base.util.UtilFactory;
 import com.klspta.base.wkt.Point;
 import com.klspta.base.wkt.Polygon;
 import com.klspta.base.wkt.Ring;
+import com.klspta.web.cbd.yzt.jc.valueChange.AbstractValueChange;
+import com.klspta.web.cbd.yzt.jc.valueChange.JbdkValueChange;
 import com.klspta.web.cbd.yzt.utilList.IData;
 
 public class JbbData extends AbstractBaseBean implements IData  {
 	private static final String formName = "JC_JIBEN";
 	private static final String zrformName = "JC_ZIRAN";
-	 private static final String form_gis = "CBD_JBB";
+	private static final String form_gis = "CBD_JBB";
+	private static final AbstractValueChange linkChange = new JbdkValueChange();
 	
 	public static List<Map<String, Object>> jbbList;
 	
@@ -134,6 +137,19 @@ public class JbbData extends AbstractBaseBean implements IData  {
         }
     }
     
+    public boolean modifyValue(String zrbbh, String field, String value){
+    	StringBuffer sqlBuffer = new StringBuffer();
+    	sqlBuffer.append(" update ").append(formName);
+    	sqlBuffer.append(" t set t.").append(field).append("=? where t.dkmc=?");
+    	int i = update(sqlBuffer.toString(), YW, new Object[]{value, zrbbh});
+    	if(!"dkmc".equals(field)){
+    		linkChange.add(zrbbh);
+    	}else{
+    		linkChange.add(value);
+    	}
+    	return i == 1 ? true : false;
+    }
+    
     /**
      * 
      * <br>Description:上图，将基本斑保存到空间库中
@@ -180,11 +196,12 @@ public class JbbData extends AbstractBaseBean implements IData  {
             if(isExit){
             	sql = "update " + form_gis + " t set t.SHAPE=sde.st_geometry ('" + wkt + "', " + srid + ") where t.TBBH='" + tbbh + "'";
             }else{
-                sql = "INSERT INTO "+ form_gis+"(OBJECTID,TBBH,SHAPE) VALUES ((select nvl(max(OBJECTID)+1,1) from "+form_gis+"),'"
-                	+ tbbh + "',sde.st_geometry ('" + wkt + "', " + srid + "))";
+                sql = "INSERT INTO "+ form_gis+"(OBJECTID,TBBH,GISER_CBD_,SHAPE) VALUES ((select nvl(max(OBJECTID)+1,1) from "+form_gis+"),'"
+                	+ tbbh + "','0',sde.st_geometry ('" + wkt + "', " + srid + "))";
             }
             update(sql, GIS);
         } catch (Exception e) {
+        	e.printStackTrace();
             System.out.println("采集坐标出错");
             return false;
         }
