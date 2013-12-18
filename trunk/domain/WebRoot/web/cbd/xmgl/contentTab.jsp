@@ -1,8 +1,13 @@
 ﻿<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@page import="com.klspta.base.util.UtilFactory"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 	String yw_guid = request.getParameter("yw_guid");
+	String xmmc = request.getParameter("xmmc");
+	if(xmmc!=null){
+		xmmc = new String(xmmc.getBytes("iso-8859-1"),"utf-8");
+	}
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -36,7 +41,7 @@
         items:[
         	{
                 title: '办理经过',
-                html: "<iframe width='"+w+"' height='"+h+"' src='web/cbd/xmgl/blgc/blgc.jsp?yw_guid=<%=yw_guid%>'/>" 
+                html: "<iframe width='"+w+"' height='"+h+"' src='web/cbd/xmgl/blgc/blgc.jsp?yw_guid=<%=yw_guid%>&xmmc=<%=xmmc%>'/>" 
             }
             ,{
                 title: '资金管理',
@@ -44,7 +49,7 @@
             }
             ,{
                 title: '档案管理',
-                html: "<iframe width='"+w+"' height='"+h+"' src='model/accessory/dzfj/accessorymain.jsp?yw_guid=<%=yw_guid%>'/>"
+                html: "<iframe width='"+w+"' height='"+h+"' src='model/accessory/dzfj/accessorymain.jsp?yw_guid=<%=yw_guid%>&xmmc=<%=xmmc%>'/>"
             },{
                 title: '控规表',
                 html: "<iframe width='"+w+"' height='"+h+"' src=''/>"
