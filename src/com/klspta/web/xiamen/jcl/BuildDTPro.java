@@ -12,7 +12,7 @@ public class BuildDTPro {
 	public static final int XCHC_CG = 2;
 	//public static final String MODEL_WP = "initFunction=[{\"name\":\"findFeature\",\"parameters\":\"jctb,0,yw_guid,OBJECTID\"},{\"name\":\"drawPoint\",\"parameters\":\"jctb,0,yw_guid,OBJECTID\"}]";
 	public static final String MODEL_WP = "initFunction=[{$name$:$findFeature$,$parameters$:$jctb,0,yw_guid,OBJECTID$}]";
-	public static final String MODEL_XCHC = "initFunction=[{$name$:$findFeature$,$parameters$:$XCHC,0,yw_guid,YW_GUID$}]";
+	public static final String MODEL_XCHC = "initFunction=[{$name$:$findFeature$,$parameters$:$xm_wy,5,yw_guid,YW_GUID$}]";
 	public static String getPar(String yw_guid, int type){
 		String pro = "";
 		switch (type) {
