@@ -20,6 +20,7 @@ String userid = ((User)principal).getUserID();
 	<meta http-equiv="description" content="This is my page">
 	<%@ include file="/base/include/ext.jspf" %>
 	<%@ include file="/base/include/restRequest.jspf" %>
+	<script src="<%=basePath%>/base/fxgis/framework/js/json2.js"></script>
   </head>
   <script type="text/javascript">
   	var myData;
@@ -79,6 +80,7 @@ String userid = ((User)principal).getUserID();
   	})
   	
   	function showMap(yw_guid){
+  		/*
   		//获取中心点坐标
   		putClientCommond("wptb","getZXDList");
 	    putRestParameter("objectId",yw_guid);
@@ -87,6 +89,15 @@ String userid = ((User)principal).getUserID();
   		flexObject.clear();
 		flexObject.findFeature('jz_yw',0,yw_guid,'OBJECTID');
   		flexObject.drawPoint("[{\"y\":"+myData[0].YZB+",\"x\":"+myData[0].XZB+",\"icon\":\"a.png\",\"url\":\"web/xiamen/wpzf/wpzf/djfx.jsp\"}]");
+  		*/
+  		putClientCommond("wptb","getWkt");
+	    putRestParameter("objectId",yw_guid);
+		var res = restRequest(); 
+		res = JSON.stringify(res);
+  		var flexObject = parent.frames['right'].frames["center"].frames["lower"].swfobject.getObjectById("FxGIS");
+  		flexObject.clear();
+  		flexObject.doLocation(res);
+  		//flexObject.doLocation("{\"rings\":[[[60265.03097703,10789.92030516],[60258.11421995,10818.92207053],[60235.05370561,10870.75837163],[60151.16113747,10825.86863531],[60148.81124883,10824.09765788],[60158.40985556,10804.06652389],[60173.08599036,10802.88063078],[60174.26210331,10779.34956523],[60189.55760719,10777.87886508],[60175.68573298,10768.0143837],[60181.61603558,10756.11240031],[60190.1705737,10758.83434781],[60194.55806713,10760.23042252],[60195.218365,10759.34060586],[60197.35309224,10756.46329795],[60265.03097703,10789.92030516],[60265.03097703,10789.92030516]]],\"spatialReference\":{\"wkid\":0}}");  		
   	}
   
    function query(){

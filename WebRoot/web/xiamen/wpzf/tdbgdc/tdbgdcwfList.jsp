@@ -62,13 +62,25 @@
 			store.load({params:{start:0, limit:limitNum}});
 			sm = new Ext.grid.CheckboxSelectionModel({handleMouseDown:Ext.emptyFn});
 			var districtStore = new Ext.data.JsonStore({
-				fields : ['name'],
+				fields : ['name','value'],
 				data : [{
-							name : '350200'
+							name : '思明区',
+							value : '350203'
 						},{
-							name : '350201'
+							name : '湖里区',
+							value : '350206'
 						},{
-							name : '350202'
+							name : '海沧区',
+							value : '350205'
+						},{
+							name : '翔安区',
+							value : '350213'
+						},{
+							name : '同安区',
+							value : '350212'
+						},{
+							name : '集美区',
+							value : '350211'
 						}]
 			});
 			var tblxStore = new Ext.data.JsonStore({
@@ -134,6 +146,7 @@
 							width :80,
 							store : districtStore,
 							displayField : 'name',
+							valueField : 'value',
 							typeAhead : true,
 							mode : 'local',
 							triggerAction : 'all',
@@ -156,11 +169,11 @@
 						'-',{
 							xtype : 'label',
 							text : '压盖审批比率：'
-						},{xtype:'textfield',id:'ygspbl1',width:40},'%',
+						},{xtype:'textfield',id:'ygspbl1',width:50},
 						{
 							xtype : 'label',
 							text : '—'
-						},{xtype:'textfield',id:'ygspbl2',width:40},'%',
+						},{xtype:'textfield',id:'ygspbl2',width:50},
 						'-',{
 							xtype : 'label',
 							text : '符合 规划 面积：'
@@ -235,11 +248,11 @@
 						'-',{
 							xtype : 'label',
 							text : '压盖供地比率：'
-						},{xtype:'textfield',id:'yggdbl1',width:40},'%',
+						},{xtype:'textfield',id:'yggdbl1',width:50},
 						{
 							xtype : 'label',
 							text : '—'
-						},{xtype:'textfield',id:'yggdbl2',width:40},'%',																														
+						},{xtype:'textfield',id:'yggdbl2',width:50},																														
 						'-',{
 							xtype : 'label',
 							text : '不符合规划面积：'
@@ -256,9 +269,10 @@
 	});
 	//设为合法	
 	function setHf(){   
-		var yw_guid='';      
+		var yw_guid='';    
+		var records;  
         if(grid.getSelectionModel().hasSelection()){
-        	 var records=grid.getSelectionModel().getSelections();
+        	 records = grid.getSelectionModel().getSelections();
         	 for(var i=0;i<records.length;i++){
 				   if(i==records.length-1){
 				      yw_guid=yw_guid+records[i].data.YW_GUID;
@@ -271,7 +285,9 @@
         var res = restRequest();
         if(res){
         	Ext.Msg.alert('提示','设置合法成功！');
-        	document.location.reload();
+        	for(var i=0;i<records.length;i++){
+        		grid.store.remove(records[i]);
+        	}
         }
         }else{
     		Ext.Msg.alert('提示','请选择图斑！');
