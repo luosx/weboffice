@@ -2,10 +2,15 @@
 <%@ page import="com.klspta.web.cbd.xmgl.Xmmanager" %>
 <%@page import="java.util.List" %>
 <%@page import="java.util.Map" %>
+<%@page import="com.klspta.base.util.UtilFactory"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 	String yw_guid=request.getParameter("yw_guid");
+	String xmmc = request.getParameter("xmmc");
+	if(xmmc!=null){
+		xmmc = new String(xmmc.getBytes("iso-8859-1"),"utf-8");
+	}
 	List<Map<String, Object>> list=null;
 	if(!yw_guid.equals("")&&!yw_guid.equals("null")){
 	   Xmmanager hxzm=new Xmmanager();
@@ -41,6 +46,52 @@ border:none;
 textarea{
 border:none;
 }
+.tr01{
+    background-color:#969696;
+    font-weight:bold;
+    font-size: 15px;
+    text-align:center;
+    line-height: 50px;
+	margin-top: 3px;  
+   }
+   .tr02{
+    background-color:#FFFFCC;
+  	text-align:center;
+    line-height: 30px;
+   }
+   .tr03{
+   	background-color:#CCFFCC;
+  	text-align:center;
+    line-height: 30px;
+   }
+   .tr04{
+   	background-color:#969696;
+    font-weight:bold;
+    text-align:center;
+    line-height: 30px;
+   }
+    .tr06{
+    background-color:#FFFFFF;
+  	text-align:center;
+    line-height: 30px; 
+   }
+   .tr07{
+    background-color:#CCCCFF;
+  	text-align:center;
+    line-height: 30px; 
+   }
+   .tr11{
+    background-color:#C0C0C0;
+  	text-align:center;
+    line-height: 30px; 
+   }
+   
+    .tr16{
+    background-color:#FFCC99;
+  	text-align:center;
+    font-weight:bold;
+    line-height: 30px; 
+   }
  </style>
 <script type="text/javascript">
 	function save(){
@@ -72,9 +123,10 @@ border:none;
 </script>
 	</head>
 	<body bgcolor="#FFFFFF" topmargin="0" leftmargin="0" style="overflow: scroll;">
-	 <div align="center" style="width: 1000px"><h3>项目办理过程</h3></div>
-		<table  width="1000px">
-		<tr bgcolor="#FEA639" >
+	<%if(list!=null && list.size()>0){ %>
+	 <div align="center" style="width: 1000px;height: 20px"><h3><%=xmmc %>大事记</h3></div>
+		<table  width="1000px" cellpadding="0" cellspacing="0">
+		<tr class="tr11" >
 		<td align="center" width="100px" height="50px"><h3>序号</h3></td>
 		<td align="center" width="100px"><h3>时间</h3></td>
 		<td align="center" width="500px"><h3>事件</h3></td>
@@ -98,8 +150,10 @@ border:none;
 		<td align="center" ><textarea id='bz' rows="4" cols="20" style="width: 120px"></textarea> </td>
 		</tr>
 		</table>
-	    <div id="addtable" style="width: 1000px" align="right" >
+	    <div id="addtable" style="width: 1000px" align="right" ><!--
 	    <img src="web/cbd/xmgl/image/bc.png" style="width: 100px;height:50px" onclick="save()"/>
+	    --><button onclick="save()">保存</button>
 	    </div>
+	    <%} %>
 	</body>
 </html>
