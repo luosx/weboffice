@@ -1,5 +1,6 @@
 package com.klspta.web.cbd.yzt.jbb;
 
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,7 +13,7 @@ import com.klspta.base.AbstractBaseBean;
 import com.klspta.base.util.UtilFactory;
 
 public class JbbManager extends AbstractBaseBean{
-	
+	private String[] fields = new String[]{"dkmc","zzsgm","zzzsgm","zzzshs","hjmj","fzzzsgm","fzzjs","zd","jsyd","rjl","jzgm","ghyt","gjjzgm","jzjzgm","szjzgm","kfcb","lmcb","dmcb","yjcjj","yjzftdsy","cxb","cqqd","cbfgl"};
 	public void getJbb() {
 		HttpServletRequest request = this.request;
 		response(new JbbData().getAllList(request));
@@ -23,13 +24,21 @@ public class JbbManager extends AbstractBaseBean{
 		response(new JbbData().getQuery(request));
 	}
 	
-	 public void updateJbb() {
+	public void updateJbb() {
 	        HttpServletRequest request = this.request;
 	        if (new JbbData().updateJbb(request)) {
 	            response("{success:true}");
 	        } else {
 	            response("{success:false}");
 	        }
+	}
+	
+	public void update() throws Exception{
+    	String dkmc =new String(request.getParameter("key").getBytes("iso-8859-1"), "UTF-8");
+    	String index = request.getParameter("vindex");
+    	String value = new String(request.getParameter("value").getBytes("iso-8859-1"), "UTF-8");
+    	String field = fields[Integer.parseInt(index)];
+    	response(String.valueOf(new JbbData().modifyValue(dkmc, field, value)));
 	}
 	 
 	 
