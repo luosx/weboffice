@@ -142,7 +142,7 @@ public class ZrbData extends AbstractBaseBean implements IData {
     	if(!"zrbbh".equals(field)){
     		linkChange.add(zrbbh);
     	}else{
-    		linkChange.add(value);
+    		linkChange.modifyguid(zrbbh,value);
     	}
     	return i == 1 ? true : false;
     }
