@@ -35,6 +35,17 @@ public abstract class AbstractValueChange extends AbstractBaseBean {
 	
 	/**
 	 * 
+	 * <br>Description:修改（自然斑、基本地块）业务主键
+	 * <br>Author:黎春行
+	 * <br>Date:2013-12-18
+	 * @param oldguid
+	 * @param newguid
+	 * @return
+	 */
+	public abstract boolean modifyguid(String oldguid, String newguid);
+	
+	/**
+	 * 
 	 * <br>Description:同时删除多个（自然斑、基本地块）时，修改关联数据
 	 * <br>Author:黎春行
 	 * <br>Date:2013-12-13

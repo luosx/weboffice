@@ -43,7 +43,16 @@ public class ZrbValueChange extends AbstractValueChange {
 
 	@Override
 	public boolean delete(String dkmc) {
-		return false;
+		String[] strings = getValues(dkmc);
+		String jbdkmc = dkmc.split("-")[0];
+		boolean delete = true;
+		if(strings[0] == "null" || "0".equals(strings[0])){
+			String sql = "delete from " + impress_name + " t where t.dkmc = ?";
+			delete = update(sql, YW, new Object[]{jbdkmc}) == 1?true:false;
+		}else{
+			delete = add(dkmc);
+		}
+		return delete;
 	}
 
 	@Override
@@ -62,6 +71,11 @@ public class ZrbValueChange extends AbstractValueChange {
 		}
 		String returnValue = value.substring(0, value.length() - 1);
 		return returnValue.split(",");
+	}
+
+	@Override
+	public boolean modifyguid(String oldguid, String newguid) {
+		return delete(oldguid)&&add(newguid);
 	}
 
 }
