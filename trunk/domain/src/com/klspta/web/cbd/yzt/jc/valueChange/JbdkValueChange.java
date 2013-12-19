@@ -4,6 +4,10 @@ public class JbdkValueChange extends AbstractValueChange {
 
 	@Override
 	public boolean add(String ywGuid) {
+		
+		
+		
+		
 		return false;
 	}
 
@@ -14,6 +18,12 @@ public class JbdkValueChange extends AbstractValueChange {
 
 	@Override
 	public boolean modify(String ywGuid) {
+		return add(ywGuid);
+	}
+
+	@Override
+	public boolean modifyguid(String oldguid, String newguid) {
+		// TODO Auto-generated method stub
 		return false;
 	}
 
