@@ -24,7 +24,7 @@ String bh= request.getParameter("bh");
 <script type="text/javascript">
 	function generateXml(){
 		putClientCommond("staticReport","getReportData");
-		putRestParameter("xml","<%=xml%>");
+		putRestParameter("xml","esfzj.xml");
 		restRequest();
 	}
 </script>
@@ -35,7 +35,7 @@ String bh= request.getParameter("bh");
     var chart = new AnyChart('<%=basePath%>/base/thirdres/anyChart/binaries/swf/AnyChart.swf');
     chart.initText ="加载中........." 
  
-    chart.setXMLFile('<%=basePath%>web/cbd/tjbb/xml/<%=xml%>'); 
+    chart.setXMLFile('<%=basePath%>web/cbd/tjbb/xml/esfzj.xml'); 
        window.focus();
 		chart.width = '100%';
 		chart.height = '100%';
