@@ -21,7 +21,7 @@ import com.klspta.model.CBDReport.dataClass.IDataClass;
  * <br>Date:2013-12-18
  */
 public class JbbReport extends AbstractBaseBean implements IDataClass {
-	public static String[] shows = new String[]{"dkmc","zzsgm","zzzsgm","zzzshs","hjmj","fzzzsgm","fzzjs","zd","jsyd","rjl","jzgm","ghyt","gjjzgm","jzjzgm","szjzgm","kfcb","lmcb","dmcb","yjcjj","yjzftdsy","cxb","cqqd","cbfgl"};
+	public static String[][] shows = new String[][]{{"dkmc","false"},{"zzsgm","false"},{"zzzsgm","false"},{"zzzshs","false"},{"hjmj","false"},{"fzzzsgm","false"},{"fzzjs","false"},{"zd","true"},{"jsyd","true"},{"rjl","true"},{"jzgm","true"},{"kzgd","true"},{"ghyt","true"},{"gjjzgm","true"},{"jzjzgm","true"},{"szjzgm","true"},{"kfcb","true"},{"lmcb","true"},{"dmcb","true"},{"yjcjj","true"},{"yjzftdsy","true"},{"cxb","true"},{"cqqd","true"},{"cbfgl","true"},{"nrghcbk","true"}};
 	private String form_name = "JC_JIBEN";
 	
 	@Override
@@ -31,21 +31,19 @@ public class JbbReport extends AbstractBaseBean implements IDataClass {
 		if(obj.length > 0){
 			queryMap = (Map<String, Object>)obj[0];
 		}
-		List<TRBean> trbeanList = getBody(queryMap);
-		for(int i = 0; i < trbeanList.size(); i++){
-			trbeans.put(i + "1", trbeanList.get(i));
-		}
+		trbeans = getBody(queryMap);
 		return trbeans;
 	}
 
-	public List<TRBean> getBody(Map queryMap){
+	public Map<String, TRBean> getBody(Map queryMap){
 		List<TRBean> list = new ArrayList<TRBean>();
+		Map<String, TRBean> trbeans = new TreeMap<String, TRBean>();
 		StringBuffer sqlBuffer = new StringBuffer();
 		sqlBuffer.append("select ");
 		for(int i = 0; i < shows.length - 1; i++){
-			sqlBuffer.append("t.").append(shows[i]).append(",");
+			sqlBuffer.append("t.").append(shows[i][0]).append(",");
 		}
-		sqlBuffer.append("t.").append(shows[shows.length - 1]).append(" from ");
+		sqlBuffer.append("t.").append(shows[shows.length - 1][0]).append(" from ");
 		sqlBuffer.append(form_name).append(" t ");
 		if(queryMap != null && !queryMap.isEmpty()){
 			sqlBuffer.append(String.valueOf(queryMap.get("query")));
@@ -67,11 +65,11 @@ public class JbbReport extends AbstractBaseBean implements IDataClass {
 			TRBean trBean = new TRBean();
 			trBean.setCssStyle("trsingle");
 			for(int j = 0; j < shows.length; j++){
-				String value = String.valueOf(map.get(shows[j]));
+				String value = String.valueOf(map.get(shows[j][0]));
 				if("null".equals(value)){
 					value = "";
 				}
-				TDBean tdBean = new TDBean(value,"100","20");
+				TDBean tdBean = new TDBean(value,"100","20", shows[j][1]);
 				trBean.addTDBean(tdBean);
 			}
 			subTotal.add(trBean);
@@ -82,9 +80,11 @@ public class JbbReport extends AbstractBaseBean implements IDataClass {
 		Set<String> keySet = buildMap.keySet();
 		for(String key : keySet){
 			List<TRBean> trBeans = buildMap.get(key);
-			list.addAll(trBeans);
+			for(int i = 0; i < trBeans.size(); i++){
+				trbeans.put(key+i, trBeans.get(i));
+			}
 		}
-		return list;
+		return trbeans;
 	}
 	
 	private Set<String> getSubTotalKey(Map queryMap){
@@ -107,9 +107,9 @@ public class JbbReport extends AbstractBaseBean implements IDataClass {
 		StringBuffer sqlBuffer = new StringBuffer();
 		sqlBuffer.append("select ");
 		for(int i = 1; i < shows.length - 1; i++){
-			sqlBuffer.append("sum(t.").append(shows[i]).append(") as ").append(shows[i]).append(",");
+			sqlBuffer.append("sum(t.").append(shows[i][0]).append(") as ").append(shows[i][0]).append(",");
 		}
-		sqlBuffer.append("sum(t.").append(shows[shows.length - 1]).append(") as ").append(shows[shows.length - 1]).append(" from ");
+		sqlBuffer.append("sum(t.").append(shows[shows.length - 1][0]).append(") as ").append(shows[shows.length - 1][0]).append(" from ");
 		sqlBuffer.append(form_name).append(" t ");
 		if(queryMap != null && !queryMap.isEmpty()){
 			sqlBuffer.append(String.valueOf(queryMap.get("query")));
@@ -122,14 +122,14 @@ public class JbbReport extends AbstractBaseBean implements IDataClass {
 		Map<String, Object> map = queryList.get(0);
 		TRBean trBean = new TRBean();
 		trBean.setCssStyle("trtotal");
-		TDBean tdtitle = new TDBean(key + "小计","130","20");
+		TDBean tdtitle = new TDBean(key + "小计","130","20","false");
 		trBean.addTDBean(tdtitle);
 		for(int j = 1; j < shows.length; j++){
-			String value = String.valueOf(map.get(shows[j]));
+			String value = String.valueOf(map.get(shows[j][0]));
 			if("null".equals(value)){
 				value = "";
 			}
-			TDBean tdBean = new TDBean(value,"100","20");
+			TDBean tdBean = new TDBean(value,"100","20","false");
 			trBean.addTDBean(tdBean);
 		}
 		List<TRBean> returnList = new ArrayList<TRBean>();
