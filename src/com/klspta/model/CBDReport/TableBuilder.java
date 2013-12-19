@@ -35,17 +35,17 @@ public class TableBuilder {
     private StringBuffer buildTR(int trIndex, TRBean trBean, ITableStyle its) {
         if (trBean != null) {
             Vector<TDBean> tdBeans = trBean.getTDBeans();
-            StringBuffer tds = new StringBuffer(its.getTR1().replace("#TRCSS", trBean.getCssStyle()));
+            StringBuffer tds = new StringBuffer(its.getTR1(trBean).replace("#TRCSS", trBean.getCssStyle()));
             for (int j = 0; j < tdBeans.size(); j++) {
                 tds.append(buildTD(trIndex, j, tdBeans.get(j), its));
             }
-            return tds.append(its.getTR2());
+            return tds.append(its.getTR2(trBean));
         }
         return null;
     }
 
     private String buildTD(int trIndex, int tdIndex, TDBean tdBean, ITableStyle its) {
-        String html = its.getTD1();
+        String html = its.getTD1(tdBean);
         html = html.replace("#TDINDEX", trIndex + "_" + tdIndex);
         html = html.replace("#HEIGHT", null2String(tdBean.getHeight()));
         html = html.replace("#WIDTH", null2String(tdBean.getWidth()));

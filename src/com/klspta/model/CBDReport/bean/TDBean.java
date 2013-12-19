@@ -10,7 +10,8 @@ public class TDBean {
 	private String YWGuid = "";
 	private String width = "10";
 	private String height = "10";
-	private String style = "";
+	private String style = ""; 
+	private String editable = ""; 
 	
     public TDBean(ThirdBean tb) {
         this.colspan = tb.getColsPan();
@@ -26,10 +27,11 @@ public class TDBean {
         setHeight(height);
 	}
 	
-	public TDBean(String text, String width, String height){
+	public TDBean(String text, String width, String height, String editable){
 	    this.text = text;
 	    setWidth(width);
 	    setHeight(height);
+	    setEditable(editable);
 	}
 	
 	private void setWidth(String width){
@@ -75,13 +77,21 @@ public class TDBean {
         return height;
     }
 
-	public String getStyle() {
-		return style;
+	public String getEditable() {
+		return editable;
 	}
 
-	public void setStyle(String style) {
-		this.style = style;
+	public void setEditable(String editable) {
+		this.editable = editable;
 	}
+	
+    public String getStyle() {
+        return style;
+    }
+
+    public void setStyle(String style) {
+        this.style = style;
+    }
 
     public void setRowspan(String rowspan) {
         this.rowspan = rowspan;

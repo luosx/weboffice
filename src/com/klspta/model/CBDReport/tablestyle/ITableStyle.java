@@ -1,12 +1,15 @@
 package com.klspta.model.CBDReport.tablestyle;
 
+import com.klspta.model.CBDReport.bean.TDBean;
+import com.klspta.model.CBDReport.bean.TRBean;
+
 public abstract class ITableStyle {
     public abstract String getTable1();
     public abstract String getTable2();
-    public abstract String getTR1();
-    public abstract String getTR2();
-    public abstract String getTD1();
-    public abstract String getTD2();
+    public abstract String getTR1(TRBean trBean);
+    public abstract String getTR2(TRBean trBean);
+    public abstract String getTD1(TDBean tdBean);
+    public abstract String getTD2(TDBean tdBean);
     public StringBuffer getErrorMsg(Exception e){
         StringBuffer trace = new StringBuffer();
         StackTraceElement[] ele = e.getStackTrace();

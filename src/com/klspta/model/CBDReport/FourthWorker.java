@@ -45,7 +45,7 @@ public class FourthWorker extends AbstractBaseBean{
 		return isExits;
 	}
 	
-	public Map<String, TRBean> build(ThirdBean thirdBean,TRBean trBean, Object[] where){
+	public Map<String, TRBean> build(ThirdBean thirdBean, TRBean trBean, Object[] where){
 		Map<String, FourthBean> map = getFourthBeans(thirdBean.getThirdKey() + thirdBean.getYWGuid());
 		FourthBean fourthBean = null;
 		Map<String, TRBean> trBeans = new LinkedHashMap<String, TRBean>();
@@ -53,16 +53,16 @@ public class FourthWorker extends AbstractBaseBean{
 		    fourthBean = map.get("" + i);
 		    Map<String, TRBean> c = null;
 		    if(fourthBean.getDataFrom().equals("SQL")){
-		        c = localQuery(i+fourthBean.getWyGuid(), fourthBean.getDataFrom(), fourthBean.getSql(),thirdBean.getWidth(), thirdBean.getHeight(), where, trBean);
+		        c = localQuery(i+fourthBean.getWyGuid(), fourthBean.getDataFrom(), fourthBean.getSql(),thirdBean.getWidth(), thirdBean.getHeight(), thirdBean.getEditable(), where, trBean);
 		    }else if(fourthBean.getDataFrom().equals("CLASS")){
-		        c = invokeClass(fourthBean, where,trBean);
+		        c = invokeClass(fourthBean, where, trBean);
 		    }
 		    trBeans.putAll(c);
 		}
 		return trBeans;
 	}
 	
-	private Map<String, TRBean> localQuery(String ywGuid, String from, String sql, String width, String height,Object[] where, TRBean trBean){
+	private Map<String, TRBean> localQuery(String ywGuid, String from, String sql, String width, String height, String editable, Object[] where, TRBean trBean){
 	    List<Map<String, Object>> rets = null;
 	    if(where != null){
 	        rets = query(sql, YW, where);
@@ -72,7 +72,7 @@ public class FourthWorker extends AbstractBaseBean{
 	    Map<String, TRBean> trBeans = new LinkedHashMap<String, TRBean>();
 	    for(int i = 0; i < rets.size(); i++){
 	        TRBean trCopy = trBean.copyStatic();
-	        trCopy.addTDBeans(rets.get(i), width, height);
+	        trCopy.addTDBeans(rets.get(i), width, height, editable);
 	        trBeans.put(ywGuid + i, trCopy);
 	    }
 	    return trBeans;
