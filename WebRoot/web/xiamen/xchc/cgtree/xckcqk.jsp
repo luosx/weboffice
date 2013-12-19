@@ -222,4 +222,12 @@ input{
 			}
 		%>
 	</body>
+<script>
+<%
+	String msg = (String)request.getParameter("msg");
+%>
+if("<%=msg%>" == "success"){
+	alert("表单保存成功");  
+}
+</script>	
 </html>
