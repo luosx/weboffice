@@ -15,6 +15,7 @@ public class ThirdBean {
 	private String data = "";
 	private String height = "";
 	private String width = "";
+	private String editable = "";
 
 	public ThirdBean(Map<String, Object> map) {
 		this.YWGuid = (String) map.get("YW_GUID");
@@ -25,6 +26,7 @@ public class ThirdBean {
 		this.data = (String) map.get("DATA");
 		this.height = null2Str(map.get("HEIGHT"));
 		this.width = null2Str(map.get("WIDTH"));
+		this.editable = null2Str(map.get("EDITABLE"));
 	}
 
 	public String getYWGuid() {
@@ -57,6 +59,10 @@ public class ThirdBean {
 
     public String getWidth() {
         return width;
+    }
+    
+    public String getEditable() {
+        return editable;
     }
 
 	private String null2Str(Object str){

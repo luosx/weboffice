@@ -21,13 +21,13 @@ public class TRBean {
         }
     }
 	
-	public void addTDBeans(Map<String, Object> beans, String width, String height){
+	public void addTDBeans(Map<String, Object> beans, String width, String height, String editable){
 	    if(beans != null){
 	        Iterator<Map.Entry<String,Object>> iter = beans.entrySet().iterator();
 	        while (iter.hasNext()) {
 	            Map.Entry<String, Object> entry = (Map.Entry<String, Object>)iter.next();
 	            String val = null2Str(entry.getValue());
-	            tdMaps.add(new TDBean(val, width, height));
+	            tdMaps.add(new TDBean(val, width, height, editable));
 	        }
 	    }
 	}
