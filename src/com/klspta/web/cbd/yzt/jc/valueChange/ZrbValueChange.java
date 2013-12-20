@@ -12,6 +12,7 @@ public class ZrbValueChange extends AbstractValueChange {
 	//private String fields = "dkmc,zzsgm";
 	private String fields = "dkmc,zzsgm,zzzsgm,zzzshs,hjmj,fzzzsgm";
 	private String sql = "select sum(t.lzmj) as zcsgm, sum(t.zzcqgm) as zzzsgm, sum(t.yjhs) as zzzshs , sum(t.fzzcqgm) as fzzzsgm,  CEIL((sum(t.zzcqgm)/sum(t.yjhs))*10000) as hjmj   from jc_ziran t where t.zrbbh like ?";
+	private AbstractValueChange jbdkValueChange = new JbdkValueChange();
 	
 	@Override
 	public boolean add(String dkmc) {
@@ -33,7 +34,7 @@ public class ZrbValueChange extends AbstractValueChange {
 		sqlBuffer.append("when not matched then insert(").append(fields).append(") values (");
 		sqlBuffer.append(insertValue).append(")");
 		int i = update(sqlBuffer.toString(), YW);
-		
+		jbdkValueChange.add(jbdkmc);
 		//刷新缓存
 		JbbData jbbData = new JbbData();
 		jbbData.refreshJBB();
@@ -49,6 +50,7 @@ public class ZrbValueChange extends AbstractValueChange {
 		if(strings[0] == "null" || "0".equals(strings[0])){
 			String sql = "delete from " + impress_name + " t where t.dkmc = ?";
 			delete = update(sql, YW, new Object[]{jbdkmc}) == 1?true:false;
+			jbdkValueChange.delete(jbdkmc);
 		}else{
 			delete = add(dkmc);
 		}
