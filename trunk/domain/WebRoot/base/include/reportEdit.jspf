@@ -20,6 +20,16 @@ function modify(obj, key, valueIndex){
     addContext(obj.id, key, valueIndex);
 }
 
+var preObjColor;
+function mouseOver(obj){
+    preObjColor = obj.style.backgroundColor;
+    obj.style.backgroundColor = "#ffff99";
+}
+
+function mouseOut(obj){
+    obj.style.backgroundColor = preObjColor;
+}
+
 function addContext(obj_id, key, valueIndex){
     var obj = document.getElementById(obj_id);
     var modiForm = document.createElement("<form>");
