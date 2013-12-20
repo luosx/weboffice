@@ -34,6 +34,10 @@ public class TDBean {
 	    setEditable(editable);
 	}
 	
+	public TDBean(String text, String width, String height){
+	    this(text,width,height,"false");
+	}
+
 	private void setWidth(String width){
 	    this.width = width.equals("") ? "10": width;
 	}
