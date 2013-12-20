@@ -135,10 +135,14 @@ public class Jzmjbbdfx extends AbstractBaseBean implements IDataClass {
     	}
     }
     
+    
+    /**
+     * 保存租金保本点结果
+     */
     public void setValue(){
         String json=request.getParameter("json");
         //删除数据库数据
-        String delSql="delete BBDFXJG where kfcb is not null";
+        String delSql="delete BBDFXJG where lmcb is not null";
         update(delSql, YW);
         JSONArray jsonArray;
         try {
@@ -146,21 +150,13 @@ public class Jzmjbbdfx extends AbstractBaseBean implements IDataClass {
                     json.substring(json.indexOf('[')));
         for (int m = 0; m < jsonArray.size(); m++) {
             JSONObject obj = jsonArray.getJSONObject(m);
-            String yw_guid = obj.get("cbcb").toString();
-            String TZHSQ10 = obj.get("10").toString();
-            String TZHSQ11 = obj.get("11").toString();
-            String TZHSQ12 = obj.get("12").toString();
-            String TZHSQ13 = obj.get("13").toString();
-            String TZHSQ14 = obj.get("14").toString();
-            String TZHSQ15= obj.get("15").toString();
-            String TZHSQ16 = obj.get("16").toString();
-            String TZHSQ17 = obj.get("17").toString();
-            String TZHSQ18= obj.get("18").toString();
-            String TZHSQ19 = obj.get("19").toString();
-            String TZHSQ20= obj.get("20").toString();
-            String SqlString="insert into  BBDFXJG (KFCB,TZHSQ10,TZHSQ11,TZHSQ12,TZHSQ13,TZHSQ14,TZHSQ15,TZHSQ16,TZHSQ17,TZHSQ18,TZHSQ19,TZHSQ20 )" +
-            		"values (?,?,?,?,?,?,?,?,?,?,?,?)";
-            update(SqlString, YW, new Object []{yw_guid,TZHSQ10,TZHSQ11,TZHSQ12,TZHSQ13,TZHSQ14,TZHSQ15,TZHSQ16,TZHSQ17,TZHSQ18,TZHSQ19,TZHSQ20});
+            String lmcb = obj.get("cbcb").toString();
+            for(int i=10 ;i<=20;i++){
+            String bbd = obj.get(i+"").toString();
+          
+            String SqlString="insert into  BBDFXJG (LMCB,TZHSQ,BBD)" +"values (?,?,?)";
+            update(SqlString, YW, new Object []{lmcb,i,bbd,});
+            }
         }
         } catch (Exception e) {
             e.printStackTrace();
