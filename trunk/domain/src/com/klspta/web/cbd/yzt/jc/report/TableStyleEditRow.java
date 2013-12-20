@@ -1,5 +1,6 @@
 package com.klspta.web.cbd.yzt.jc.report;
 
+import com.klspta.model.CBDReport.bean.TRBean;
 import com.klspta.model.CBDReport.tablestyle.TableStyleDefaultEdit;
 
 /**
@@ -12,12 +13,12 @@ import com.klspta.model.CBDReport.tablestyle.TableStyleDefaultEdit;
 public class TableStyleEditRow extends TableStyleDefaultEdit {
 
 	@Override
-	public String getTR1() {
+	public String getTR1(TRBean trBean) {
 		return "<tr class='#TRCSS' onclick='showMap(this); return false;' ondblclick='editMap(this); return false;'>";
 	}
 
 	@Override
-	public String getTR2() {
+	public String getTR2(TRBean trBean) {
 		return "</tr>";
 	}
 
