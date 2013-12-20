@@ -1,5 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%@page   import= "java.io.* "%>
+<%@page import= "java.io.* "%>
 <%@page import="com.klspta.model.accessory.dzfj.AccessoryOperation" %>
 <%@page import="com.klspta.base.util.bean.ftputil.AccessoryBean" %>
 <%
@@ -25,6 +25,24 @@ String classPath = Thread.currentThread().getContextClassLoader().getResource("/
 String dirpath = classPath.substring(0, classPath.lastIndexOf("WEB-INF/classes"));
 dirpath=dirpath+"model/accessory/dzfj/download/";
 if((dirpath+filePath).endsWith("mp4") || (dirpath+filePath).endsWith("mp3")|| (dirpath+filePath).endsWith("3gpp")){
+	//判断是否安装了MP4解码器
+	String isExist = "C:\\WINDOWS\\system32\\rundll32.exe";
+	File file = new File(isExist);
+	if(!file.exists()){
+		//安装mp4解码器
+		String mp4file=dirpath+"WMP.exe";
+		Runtime r = Runtime.getRuntime();
+		Process pro = null;
+		try {
+	        //该方法开启一个新的进程
+	        pro = r.exec(mp4file);
+	    } catch (IOException e) {
+	       e.printStackTrace();
+	    }
+	    //利用该方法结束开启的进程
+	    //pro.destroy();
+	}
+	
 //处理视频、音频
 	StringBuffer bodyBuffer = new StringBuffer();
 	bodyBuffer.append("<object id=\"Player\" width=95% height=500 classid=\"CLSID:6BF52A52-394A-11D3-B153-00C04F79FAA6\">");
