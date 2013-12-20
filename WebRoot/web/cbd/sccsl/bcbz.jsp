@@ -132,21 +132,23 @@ textarea {
 		<div align="center" style="width:100%">
 			<table width="90%" cellpadding="0" cellspacing="0">
 				<tr class="tr11">
-					<td align="center" width="60%" height="35px" colspan="2">
+					<td align="center" width="75%" height="35px" colspan="3">
 						住宅补偿标准
 					</td>
-					<td align="center" width="40%" rowspan="2">
+					<td align="center" width="25%" rowspan="2">
 						非住宅补偿标准
 					</td>
 				</tr>
 				<tr align="center">
-					<td width="30%" >补偿费</td>
-					<td width="30%">补助费</td>
+					<td width="25%" >补偿费</td>
+					<td width="25%">补助费</td>
+					<td width="25%">合计</td>
 				</tr>
 				<tr align="center">
-					<td width="30%"><%=list.get(0).get("bcf") %></td>
-					<td width="30%"><%=list.get(0).get("bzf") %></td>
-					<td width="40%"><%=list.get(0).get("fzzbcbz") %></td>
+					<td width="25%"><%=list.get(0).get("bcf") %></td>
+					<td width="25%"><%=list.get(0).get("bzf") %></td>
+					<td width="25%"><%=list.get(0).get("hj") %></td>
+					<td width="25%"><%=list.get(0).get("fzzbcbz") %></td>
 				</tr>
 			</table>
 			<div id="addtable" style="width: 90%" align="right">
