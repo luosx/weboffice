@@ -13,7 +13,7 @@ Ext.onReady(function() {
 function initComponent() {
 	simple = new Ext.FormPanel({
 				frame : true,
-				title : '违法行为清单',
+				title : '案件清单',
 				bodyStyle : 'padding:5px 5px 0',
 				tbar : [{
 							xtype : 'label',
