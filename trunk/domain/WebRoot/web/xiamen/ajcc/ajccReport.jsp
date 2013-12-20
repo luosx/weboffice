@@ -97,7 +97,7 @@ Object userprincipal = SecurityContextHolder.getContext().getAuthentication().ge
   </head>
   <script type="text/javascript">
   		function print(){
-		    var curTbl = document.getElementById("AJCC"); 
+		    var curTbl = document.getElementById("AJCCCX"); 
  			try{
 		    	var oXL = new ActiveXObject("Excel.Application");
 		    }catch(err){
@@ -148,7 +148,7 @@ Object userprincipal = SecurityContextHolder.getContext().getAuthentication().ge
 	    </div>
 	    
 	<div align="center" id="center" style="position:absolute; top:65px; left: 20px;">
-  		<%=new CBDReportManager().getReport("AJCC")%>
+  		<%=new CBDReportManager().getReport("AJCCCX",new Object[]{})%>
   	</div>
   </body>
 </html>
