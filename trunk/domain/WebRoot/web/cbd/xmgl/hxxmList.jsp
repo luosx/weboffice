@@ -67,7 +67,6 @@ border-top:1px solid #C1DAD7;
 	                parentMapTreeId='0';
 	                }
 	                parent.right.location.href="<%=basePath%>web/cbd/xmgl/contentTab.jsp?yw_guid="+nodeid+"&xmmc="+nodetest;
-	             	parent.parent.Ext.getCmp('west').collapse();
 	             }
 	         }
 	    });
