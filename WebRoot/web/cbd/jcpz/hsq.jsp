@@ -77,10 +77,8 @@
                 }
             }
         ]
-    });
-    
+    }); 
 });
-
 	</script>
 	</head>
 	<body bgcolor="#FFFFFF"">
