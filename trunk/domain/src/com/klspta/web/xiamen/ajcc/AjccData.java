@@ -9,19 +9,18 @@ import java.util.Set;
 
 import com.klspta.base.AbstractBaseBean;
 import com.klspta.base.util.UtilFactory;
-import com.klspta.console.ManagerFactory;
-import com.klspta.console.user.User;
+
 import com.klspta.web.xiamen.jcl.XzqHandle;
 
 public class AjccData extends AbstractBaseBean implements IajccData {
 	
-	private static final String queryString = "(upper(guid)||upper(xh)||upper(ydxmmc)||upper(ydzt)||upper(zdmj)||upper(jzmj)||upper(jzxz)||upper(yt)||upper(sffhtdlyztgh)||upper(fxsj)||upper(wflx)||upper(zzqk)||upper(zztzsbh)||upper(wjzzhjxzz)||upper(yydspqcz)";
+	private static final String queryString = "(upper(guid)||upper(rownum)||upper(ydxmmc)||upper(yddw)||upper(ydwz)||upper(mj)||upper(jzmj)||upper(jzqk)||upper(yt)||upper(sffhtdlyztgh)||upper(ydsj)||upper(zzqk)||upper(zztzsbh)||upper(wjzzhjxzz)||upper(yydspqcz)";
 	@Override
 	public String SetNewRecord(String userid){
 		SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd", new DateFormatSymbols());
 		String dateString = "XC" + df.format(Calendar.getInstance().getTime());
 				
-		String numsql = "select max(t.yw_guid) num from ajccqd t where t.yw_guid like '" + dateString + "%'";
+		String numsql = "select max(t.yw_guid) num from dc_ydqkdcb t where t.yw_guid like '" + dateString + "%'";
 		String num;
 		List<Map<String, Object>> result = query(numsql, YW);
 		String nestNum = String.valueOf(result.get(0).get("num"));
@@ -48,7 +47,7 @@ public class AjccData extends AbstractBaseBean implements IajccData {
              sqlBuffer.append(keyword);
              sqlBuffer.append("%')");
         }
-		sqlBuffer.append(" order by t.fxsj");
+		sqlBuffer.append(" order by rownum");
 		List<Map<String, Object>> getList = query(sqlBuffer.toString(), YW);
         for (int i = 0; i < getList.size(); i++) {
         	getList.get(i).put("XIANGXI", i);
