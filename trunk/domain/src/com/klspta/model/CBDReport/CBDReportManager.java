@@ -7,7 +7,7 @@ import com.klspta.model.CBDReport.tablestyle.ITableStyle;
 import com.klspta.model.CBDReport.tablestyle.TableStyleDefault;
 public class CBDReportManager {
     
-    public static final boolean USE_CACHE = false;
+    public static final boolean USE_CACHE = true;
 	
 	private FirstWorker firstWorker = new FirstWorker();
 	
