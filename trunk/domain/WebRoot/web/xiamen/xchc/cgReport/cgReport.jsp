@@ -115,7 +115,4 @@ String userid = ((User)principal).getUserID();
   		<%=new CBDReportManager().getReport("XCHCCG", new Object[]{})%>
   	</div>
   </body>
-  <script type="text/javascript">
-  	 query("","");
-  </script>
 </html>
