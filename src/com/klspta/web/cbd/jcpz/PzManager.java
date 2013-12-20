@@ -22,7 +22,7 @@ public class PzManager extends AbstractBaseBean {
     }
 
     public  void inint(){
-        String sql="select hsq from HSQ";
+        String sql="select hsq from SYS_PARAMETER";
         List<Map<String, Object>> query = query(sql, YW);
         if (query.size()>0) {
             hsq= query.get(0).get("hsq").toString();
@@ -33,8 +33,8 @@ public class PzManager extends AbstractBaseBean {
     }
     public void setHsq(){
         String parameter = request.getParameter("hsq");
-        String del="delete hsq where hsq is not null";
-        String update="insert into hsq(hsq) values(?) ";
+        String del="delete SYS_PARAMETER where hsq is not null";
+        String update="insert into SYS_PARAMETER(hsq) values(?) ";
         update(del, YW);
         int i = update(update, YW,new Object []{parameter});
         if(i>0){
