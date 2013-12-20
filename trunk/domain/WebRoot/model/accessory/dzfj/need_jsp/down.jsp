@@ -24,26 +24,9 @@ response.addHeader("Content-Disposition","attachment;filename="+fileName+"\"");
 String classPath = Thread.currentThread().getContextClassLoader().getResource("/").getPath();
 String dirpath = classPath.substring(0, classPath.lastIndexOf("WEB-INF/classes"));
 dirpath=dirpath+"model/accessory/dzfj/download/";
+String mp4filePath = dirpath+"WMP.exe";
 if((dirpath+filePath).endsWith("mp4") || (dirpath+filePath).endsWith("mp3")|| (dirpath+filePath).endsWith("3gpp")){
-	//判断是否安装了MP4解码器
-	String isExist = "C:\\WINDOWS\\system32\\rundll32.exe";
-	File file = new File(isExist);
-	if(!file.exists()){
-		//安装mp4解码器
-		String mp4file=dirpath+"WMP.exe";
-		Runtime r = Runtime.getRuntime();
-		Process pro = null;
-		try {
-	        //该方法开启一个新的进程
-	        pro = r.exec(mp4file);
-	    } catch (IOException e) {
-	       e.printStackTrace();
-	    }
-	    //利用该方法结束开启的进程
-	    //pro.destroy();
-	}
-	
-//处理视频、音频
+	//处理视频、音频
 	StringBuffer bodyBuffer = new StringBuffer();
 	bodyBuffer.append("<object id=\"Player\" width=95% height=500 classid=\"CLSID:6BF52A52-394A-11D3-B153-00C04F79FAA6\">");
 	bodyBuffer.append("<param name=\"URL\" value=\"").append(basePath).append("/model//accessory//dzfj//download//").append(filePath).append("\"");
@@ -72,6 +55,8 @@ if((dirpath+filePath).endsWith("mp4") || (dirpath+filePath).endsWith("mp3")|| (d
 	bodyBuffer.append("</object>");
 	out.write(bodyBuffer.toString());
 	//out.write();bodyBuffer.append("<param name="autoStart" value="1">");
+	out.println("<br><br><font size='5'>说明：如果音视频文件不能正常播放，请自行下载MP4解码器并安装！</font>");
+	out.println("<br><font size='4'><a href='javascript:void(0)' onclick='downMP4()'>点击此处下载MP4解码器</a></font>");
 }else if((dirpath+filePath).endsWith("JPG") || (dirpath+filePath).endsWith("jpg")){
 //处理图片
 	out.write("<img src='"+basePath +"/model//accessory//dzfj//download//"+ filePath+"' height='600'>");
@@ -114,4 +99,8 @@ if((dirpath+filePath).endsWith("mp4") || (dirpath+filePath).endsWith("mp3")|| (d
 }
 
 %> 
-
+<script type="text/javascript">
+function downMP4(){
+	window.open("<%=basePath%>model/accessory/dzfj/download/dowmmp4.jsp?file_path=<%=mp4filePath%>");
+}
+</script>
