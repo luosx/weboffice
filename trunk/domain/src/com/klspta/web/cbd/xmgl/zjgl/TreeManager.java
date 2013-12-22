@@ -78,7 +78,7 @@ public class TreeManager extends AbstractBaseBean {
         String sql_qqfy="  select * from zjgl_tree where yw_guid=? and parent_id=?" ;
         List<Map<String, Object>> list = query(sql_qqfy, YW,new Object []{yw_guid,type});
         if (list.size()>0) {
-            buffer.append("{text:'"+name+"',leaf:0,id:'102',children:[");
+            buffer.append("{text:'"+name+"',leaf:0,id:'"+type+"',children:[");
             for (int i = 0; i < list.size(); i++) {
                 if (i == 0) {
                     buffer.append("\n{text:'");
@@ -92,7 +92,7 @@ public class TreeManager extends AbstractBaseBean {
             }
             buffer.append("]}");
         }else{
-            buffer.append("{text:'"+name+"',leaf:1,id:'102'}");  
+            buffer.append("{text:'"+name+"',leaf:1,id:'"+type+"'}");  
             
         }
         return buffer;
