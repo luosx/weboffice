@@ -8,7 +8,10 @@
     String basePath = request.getScheme() + "://" + request.getServerName() + ":"
             + request.getServerPort() + path + "/";
     String yw_guid= request.getParameter("yw_guid");
-    String tree=  new TreeManager().getParentNOde().toString();
+   // String tree=  new TreeManager().getParentNOde(yw_guid).toString();
+   yw_guid="121312";
+    String tree=  new TreeManager().getTree(yw_guid);
+    tree="["+tree+"]";
     System.out.print(tree);
   
 %>
@@ -219,7 +222,6 @@ scrollbar-3dlight-color:#D4D0C8;
 } 
     
 });
-
 
 </script>
 	<body bgcolor="#FFFFFF" >
