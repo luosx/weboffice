@@ -74,9 +74,6 @@ public class ZrbManager extends AbstractBaseBean {
     	response(String.valueOf(new ZrbData().modifyValue(zrbbh, field, value)));
     }
     
-    
-    
-    
     /**
      * 
      * <br>Description:添加一个新的自然斑

@@ -12,7 +12,7 @@ import com.klspta.model.CBDReport.bean.TRBean;
 import com.klspta.model.CBDReport.dataClass.IDataClass;
 
 public class ZrbReport extends AbstractBaseBean implements IDataClass {
-	public static String[][] shows = new String[][]{{"rownum","false"},{"zrbbh","true"},{"zdmj","true"},{"lzmj","true"},{"cqgm","true"},{"zzlzmj","true"},{"zzcqgm","true"},{"yjhs","true"},{"fzzlzmj","true"},{"fzzcqgm","true"},{"bz","true"}};
+	public static String[][] shows = new String[][]{{"yw_guid","false"},{"zrbbh","true"},{"zdmj","true"},{"lzmj","true"},{"cqgm","true"},{"zzlzmj","true"},{"zzcqgm","true"},{"yjhs","true"},{"fzzlzmj","true"},{"fzzcqgm","true"},{"bz","true"}};
 	private String form_name = "JC_ZIRAN";
 	
 	@Override
@@ -24,15 +24,18 @@ public class ZrbReport extends AbstractBaseBean implements IDataClass {
 		}
 		List<TRBean> trbeanList = getBody(queryMap);
 		for(int i = 0; i < trbeanList.size(); i++){
-			trbeans.put(i + "1", trbeanList.get(i));
+			String key = String.valueOf(i);
+			key = "000" + i;
+			key = key.substring(key.length() - 3, key.length());
+			trbeans.put(key, trbeanList.get(i));
 		}
 		return trbeans;
 	}
 	
 	public List<TRBean> getBody(Map queryMap){
 		StringBuffer sqlBuffer = new StringBuffer();
-		sqlBuffer.append("select rownum,");
-		for(int i = 1; i < shows.length - 1; i++){
+		sqlBuffer.append("select ");
+		for(int i = 0; i < shows.length - 1; i++){
 			sqlBuffer.append("t.").append(shows[i][0]).append(",");
 		}
 		sqlBuffer.append("t.").append(shows[shows.length - 1][0]).append(" from ");
@@ -40,7 +43,7 @@ public class ZrbReport extends AbstractBaseBean implements IDataClass {
 		if(queryMap != null && !queryMap.isEmpty()){
 			sqlBuffer.append(String.valueOf(queryMap.get("query")));
 		}
-		//sqlBuffer.append(" order by t.zrbbh,t.yw_guid");
+		sqlBuffer.append(" order by to_number(t.yw_guid)");
 		List<Map<String, Object>> queryList = query(sqlBuffer.toString(), YW);
 		List<TRBean> list = new ArrayList<TRBean>();
 		for(int num = 0; num < queryList.size(); num++){
