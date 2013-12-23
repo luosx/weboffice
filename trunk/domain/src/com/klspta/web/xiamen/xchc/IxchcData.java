@@ -23,6 +23,7 @@ public interface IxchcData {
 	 */
 	public List<Map<String, Object>>  getDclList(String userId,String keyword);
 	
+	public List<Map<String, Object>>  getHccgList(String userId,String keyword);
 	/**
 	 * 
 	 * <br>Description:添加新的外业成果记录
