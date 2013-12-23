@@ -23,6 +23,8 @@ ITableStyle its = new TableStyleEditRow();
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
 	<script src="web/cbd/yzt/zrb/js/zrbRowEditor.js"></script>
+	<script src="web/cbd/yzt/zrb/js/table.js"></script>
+	<%@ include file="/base/include/ext.jspf" %>
 	<%@ include file="/base/include/restRequest.jspf"%>
 	<%@ include file="/base/include/reportEdit.jspf"%>
 	<style type="text/css">
@@ -68,10 +70,9 @@ ITableStyle its = new TableStyleEditRow();
 		   }
 	</style>
   </head>
-  
+  <script type="text/javascript">
+  </script>
   <body>
-    <div id="fixed" style="position: fixed; top: 5px; left: 0px">
-		<img src="base/form/images/print.png" width="20px" height="20px" onClick="javascript:print();"  />
 	</div>
   		<%=new CBDReportManager().getReport("ZRB",new Object[]{},its)%>
   	<form id="attachfile" action="<%=basePath%>service/rest/zrbHandle/update" method="post">
