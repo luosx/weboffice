@@ -11,7 +11,7 @@ public class Xmmanager extends AbstractBaseBean {
     public static Xmmanager instens;
     private Xmmanager(){}
     
-    public Xmmanager getXmmanager(){
+    public static Xmmanager getXmmanager(){
         if (instens==null){
             return new Xmmanager ();
         }else{
