@@ -1,7 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@page import="org.springframework.security.core.context.SecurityContextHolder"%>
 <%@page import="com.klspta.console.user.User"%>
-<%@page import="com.klspta.web.xiamen.jcl.BuildDTPro"%>
 <%@page import="com.klspta.web.xiamen.phjg.PhjgManager"%>
 <%
 	String path = request.getContextPath();
@@ -23,6 +22,7 @@
 	<meta http-equiv="description" content="This is my page">
 	<%@ include file="/base/include/ext.jspf" %>
 	<%@ include file="/base/include/restRequest.jspf" %>
+	<script src="<%=basePath%>/base/fxgis/framework/js/json2.js"></script>
 	<script type="text/javascript">
 		var myData;
 		var grid;
@@ -66,12 +66,12 @@
 			    listeners:{
 		  			rowdblclick : function(grid, rowIndex, e)
 					{
-						showMap(grid.getStore().getAt(rowIndex).data.YW_GUID);
+						showMap(grid.getStore().getAt(rowIndex).data.OBJECTID);
 					}
         		},
 		        stripeRows: true,
 		        width:width,
-		        height: height ,
+		        height: height-50 ,
 		        stateful: true,
 		        stateId: 'grid',
 		        buttonAlign:'center',
@@ -91,10 +91,14 @@
 
 	
 	function showMap(id){
-		var url ="/domain/base/fxgis/framework/gisViewFrame.jsp?type=<%=BuildDTPro.CKLX_WP%>&yw_guid="+ id;     
+  		//putClientCommond("phjg","getWkt");
+	    //putRestParameter("objectId",id);
+		//var res = restRequest();
+		//var jsonstring=JSON.stringify(res);   
+		var url = "<%=basePath%>web/xiamen/phjg/location.jsp?objectId="+id;  
 		var height = window.screen.availHeight;
 		var width = window.screen.availWidth;
-		window.showModalDialog(url,"","dialogWidth="+width+";dialogHeight="+height);
+		window.open(url,"","width="+width+",height="+height);
 	}
 		<!--查询方法 add by 姚建林 2013-6-20-->
         function query(){
@@ -146,8 +150,6 @@
 </head>
 <body bgcolor="#FFFFFF" topmargin="0" leftmargin="0">
 	<div id="mygrid_container" style="width: 100%; height: 85%;"></div>	
-	<div id="importWin" class="x-hidden">
-		<div id="importForm"></div>
-	</div>
+	<div style="font-size:12px;text-align:left;margin-top:10px;">说明：双击每一条记录可以查看项目的位置</div>
 </body>
 </html>
