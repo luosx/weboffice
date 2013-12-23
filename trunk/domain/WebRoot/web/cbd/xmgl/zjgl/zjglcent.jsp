@@ -7,14 +7,12 @@
 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 	String yw_guid=request.getParameter("yw_guid");
 	String table="";
-	yw_guid="121312";
 	List<Map<String, Object>> lr=null;
 	List<Map<String, Object>> zc=null;
 	if(!yw_guid.equals("")&&!yw_guid.equals("null")){
 	  Contorl contorl=new Contorl();
 	  table=contorl.getTextMode(yw_guid).toString();
-System.out.print(contorl.getTextMode(yw_guid).toString());
-
+    System.out.print(contorl.getTextMode(yw_guid).toString());
    }
 %>
 
@@ -48,32 +46,39 @@ border:none;
 }
  </style>
 <script type="text/javascript">
-	function save(){
-	var xh=document.getElementById("xh").value;
-	var sj=document.getElementById("sj").value
-	var sjbl=document.getElementById("sjbl").value
-	var bmjbr=document.getElementById("bmjbr").value
-	var bz=document.getElementById("bz").value
-	if(xh==null||xh==''||sj==null||sj==''||sjbl==null||sjbl==''||bmjbr==null||bmjbr==''||bz==null||bz==''){
-	 alert("请填写完整之后再保存！！"); 
-	}else{
-	alert("");
-	putClientCommond("xmmanager","saveBLGC");
+function addrzxq(check){
+var val = check.value;
+var id=check.id;
+var ids=id.split("@");
+var status=ids[0];
+var lb=ids[1];
+var sort=ids[2];
+var cols==ids[3];
+putClientCommond("xmmanager","saveZJGL_ZJZC");
 	putRestParameter("yw_guid","<%=yw_guid%>");
-	putRestParameter("xh",xh);
-	putRestParameter("sj",sj);
-	putRestParameter("sjbl",sjbl);
-	putRestParameter("bmjbr",bmjbr);
-	putRestParameter("bz",bz);
-	var msg=restRequest();
-	if('success'==msg){
-	alert("保存成功！");
-	document.location.reload();
-	}else{
-	alert("保存失败！");
+	putRestParameter("val",val);
+	putRestParameter("status",status);
+	putRestParameter("lb",lb);
+	putRestParameter("sort",sort);
+	putRestParameter("cols",cols);
+	var msg=restRequest(); 
 	}
-	}
-	}
+
+
+function addzjlr(check){
+ var val = check.value;
+ var id=check.id;
+ var ids=id.split("@");
+ var stye=ids[1];
+ var cols=ids[2];
+putClientCommond("xmmanager","saveZJGL_ZJLR");
+
+	putRestParameter("yw_guid","<%=yw_guid%>");
+	putRestParameter("cols",cols);
+	putRestParameter("stye",stye);
+	putRestParameter("val",val);
+	var msg=restRequest(); 
+ }
 </script>
 	</head>
 	<body bgcolor="#FFFFFF" topmargin="0" leftmargin="0" style="overflow: scroll;">
