@@ -1,8 +1,19 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@page import="com.klspta.model.projectinfo.ProjectInfo"%>
+<%@ page import="com.klspta.web.cbd.xmgl.Xmmanager" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+Xmmanager hxzm=Xmmanager.getXmmanager();
+List<Map<String, Object>> list=hxzm.getHXXM();
+String yw_guid="";
+String xmmc="";
+if(list.size()>0){
+yw_guid=list.get(0).get("yw_guid").toString();
+xmmc=list.get(0).get("xmname").toString();
+}
+
+
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -14,6 +25,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<frame id="left" name="left" scrolling="NO" noresize
 			src="<%=basePath%>web/cbd/xmgl/hxxmList.jsp" />
 		<frame id="right" name="right" scrolling="NO" noresize
-			src="<%=basePath%>web/cbd/xmgl/contentTab.jsp" />		
+			src="<%=basePath%>web/cbd/xmgl/contentTab.jsp?yw_guid=<%=yw_guid%>&xmmc=<%=xmmc%>" />		
 	</frameset>
 </html>
