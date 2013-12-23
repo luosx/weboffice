@@ -46,14 +46,16 @@ border:none;
 }
  </style>
 <script type="text/javascript">
+
 function addrzxq(check){
-var val = check.value;
-var id=check.id;
-var ids=id.split("@");
-var status=ids[0];
-var lb=ids[1];
-var sort=ids[2];
-var cols==ids[3];
+		alert(11);
+		var val = check.value;
+		var id=check.id;
+		var ids=id.split("@");
+		var status=ids[0];
+		var lb=ids[1];
+		var sort=ids[2];
+		var cols==ids[3];
 putClientCommond("xmmanager","saveZJGL_ZJZC");
 	putRestParameter("yw_guid","<%=yw_guid%>");
 	putRestParameter("val",val);
@@ -62,17 +64,15 @@ putClientCommond("xmmanager","saveZJGL_ZJZC");
 	putRestParameter("sort",sort);
 	putRestParameter("cols",cols);
 	var msg=restRequest(); 
+	
 	}
-
-
 function addzjlr(check){
- var val = check.value;
- var id=check.id;
- var ids=id.split("@");
- var stye=ids[1];
- var cols=ids[2];
+		 var val = check.value;
+		 var id=check.id;
+		 var ids=id.split("@");
+		 var stye=ids[1];
+		 var cols=ids[2];
 putClientCommond("xmmanager","saveZJGL_ZJLR");
-
 	putRestParameter("yw_guid","<%=yw_guid%>");
 	putRestParameter("cols",cols);
 	putRestParameter("stye",stye);
