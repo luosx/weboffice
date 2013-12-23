@@ -27,7 +27,7 @@ public class ZjglData extends AbstractBaseBean {
     }
     
     public void setMX( String yw_guid){
-        String sql="select yw_guid from zjgl_zc where yw_guid=?";
+        String sql="select yw_guid from xmzjgl_zc where yw_guid=?";
         List<Map<String, Object>> query = query(sql, YW,new Object []{yw_guid});
         if(query.size()>0){
         }else{
@@ -38,8 +38,8 @@ public class ZjglData extends AbstractBaseBean {
         String s[]={"QQFY","CQFY","SZFY","CWFY","GLFY","CRZJFH","QTZC"};
         for(int i=0;i<st.length;i++){
             for(int j=0;j<sr.length;j++){
-                String sqlString="insert into XMZJGL_ZC (yw_guid,status,lb,lj,zcstatus,sort) values(?,?,?,?)";
-                update(sqlString, YW,new Object[]{yw_guid, s[i],st[i],sr[j],(j+1)});
+                String sqlString="insert into XMZJGL_ZC (yw_guid,status,lb,lj,zcstatus,sort) values(?,?,?,?,?,?)";
+                update(sqlString, YW,new Object[]{yw_guid, s[i],st[i],sr[j],s[i],(j+1)});
             }
         }
         for(int k=0;k<lr_name.length;k++){

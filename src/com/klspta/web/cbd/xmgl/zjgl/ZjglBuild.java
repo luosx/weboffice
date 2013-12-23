@@ -8,6 +8,9 @@ import java.util.Map;
 
 public class ZjglBuild {
     static ZjglData zjglData= new ZjglData();
+    String lr="";
+    String zc="";
+    
     /****
      * 
      * <br>Description:构建title
@@ -56,44 +59,44 @@ public class ZjglBuild {
        if (list!=null) {
        for (int i=0;i<list.size();i++){
          stringBuffer.append("<tr>"+
-         "<td ><input type='text' style='width:150px;' onchange='addrzxq(this); return false' value='"+
-         delNull(String.valueOf( list.get(i).get("lb")))+  "'/></td>"+
-        "<td ><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
-        delNull(String.valueOf(list.get(i).get("ysfy")))+ "'/></td>"+
-        "<td colspan='2'><input type='text' style='width:45px;' onchange='addrzxq(this); return false' value='" +
-        delNull( String.valueOf( list.get(i).get("lj")))+ "'/></td>"+
-       "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
-       delNull(String.valueOf(list.get(i).get("YFSDZ")))+  "'/></td>"+
-        "<td><input type='text' style='width:45px;' onchange='addrzxq(this); return false' value='" +
-        delNull(String.valueOf( list.get(i).get("ZJJD")))+ "'/></td>"+
-        "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
-        delNull(String.valueOf( list.get(i).get("CQYE")))+ "'/></td>"+
-        "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
-        delNull(String.valueOf( list.get(i).get("YY")))+ "'/></td>"+
-        "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
-        delNull(String.valueOf(list.get(i).get("EY")))+ "'/></td>"+
-        "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
-        delNull(String.valueOf(list.get(i).get("SANY")))+  "'/></td>"+
-        "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
-        delNull(String.valueOf(list.get(i).get("SIY")))+  "'/></td>"+
-        "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
-        delNull(String.valueOf(list.get(i).get("WY")))+  "'/></td>"+
-        "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
-        delNull(String.valueOf(list.get(i).get("LY")))+  "'/></td>"+
-        "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
-        delNull(String.valueOf(list.get(i).get("QY")))+ "'/></td>"+
-        "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
-        delNull(String.valueOf(list.get(i).get("BAY")))+  "'/></td>"+
-        "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
-        delNull(String.valueOf(list.get(i).get("JY")))+  "'/></td>"+
-        "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
-        delNull( String.valueOf( list.get(i).get("SIYUE")))+ "'/></td>"+
-        "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
-        delNull(String.valueOf(list.get(i).get("SYY")))+ "'/></td>"+
-        "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
-        delNull(String.valueOf(list.get(i).get("SEY")))+  "'/></td>"+
-        "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
-        delNull(String.valueOf(list.get(i).get("LRSP")))+ "'/></td>"+
+         "<td ><input type='text' style='width:150px;'  onchange='addzjlr(this); return false' value='"+
+         delNull(String.valueOf( list.get(i).get("lb")))+  " ' id='lr@"+String.valueOf( list.get(i).get("status"))+"@1'/></td>"+
+        "<td ><input type='text' style='width:90px;' onchange='addzjlr(this); return false' value='" +
+        delNull(String.valueOf(list.get(i).get("ysfy")))+ "'  id='lr@"+String.valueOf( list.get(i).get("status"))+"@2'/></td>"+
+        "<td colspan='2'><input type='text' style='width:45px;' onchange='addzjlr(this); return false' value='" +
+        delNull( String.valueOf( list.get(i).get("lj")))+ " ' id='lr@"+String.valueOf( list.get(i).get("status"))+"@3'/></td>"+
+       "<td><input type='text' style='width:90px;' onchange='addzjlr(this); return false' value='" +
+       delNull(String.valueOf(list.get(i).get("YFSDZ")))+  " ' id='lr@"+String.valueOf( list.get(i).get("status"))+"@4'/></td>"+
+        "<td><input type='text' style='width:45px;' onchange='addzjlr(this); return false' value='" +
+        delNull(String.valueOf( list.get(i).get("ZJJD")))+ " ' id='lr@"+String.valueOf( list.get(i).get("status"))+"@5'/></td>"+
+        "<td><input type='text' style='width:90px;' onchange='addzjlr(this); return false' value='" +
+        delNull(String.valueOf( list.get(i).get("CQYE")))+ " ' id='lr@"+String.valueOf( list.get(i).get("status"))+"@6'/></td>"+
+        "<td><input type='text' style='width:90px;' onchange='addzjlr(this); return false' value='" +
+        delNull(String.valueOf( list.get(i).get("YY")))+ " ' id='lr@"+String.valueOf( list.get(i).get("status"))+"@7'/></td>"+
+        "<td><input type='text' style='width:90px;' onchange='addzjlr(this); return false' value='" +
+        delNull(String.valueOf(list.get(i).get("EY")))+ " ' id='lr@"+String.valueOf( list.get(i).get("status"))+"@8'/></td>"+
+        "<td><input type='text' style='width:90px;' onchange='addzjlr(this); return false' value='" +
+        delNull(String.valueOf(list.get(i).get("SANY")))+  "' id='lr@"+String.valueOf( list.get(i).get("status"))+"@9'/></td>"+
+        "<td><input type='text' style='width:90px;' onchange='addzjlr(this); return false' value='" +
+        delNull(String.valueOf(list.get(i).get("SIY")))+  " ' id='lr@"+String.valueOf( list.get(i).get("status"))+"@10'/></td>"+
+        "<td><input type='text' style='width:90px;' onchange='addzjlr(this); return false' value='" +
+        delNull(String.valueOf(list.get(i).get("WY")))+  " ' id='lr@"+String.valueOf( list.get(i).get("status"))+"@11'/></td>"+
+        "<td><input type='text' style='width:90px;' onchange='addzjlr(this); return false' value='" +
+        delNull(String.valueOf(list.get(i).get("LY")))+  " ' id='lr@"+String.valueOf( list.get(i).get("status"))+"@12'/></td>"+
+        "<td><input type='text' style='width:90px;' onchange='addzjlr(this); return false' value='" +
+        delNull(String.valueOf(list.get(i).get("QY")))+ " ' id='lr@"+String.valueOf( list.get(i).get("status"))+"@13'/></td>"+
+        "<td><input type='text' style='width:90px;' onchange='addzjlr(this); return false' value='" +
+        delNull(String.valueOf(list.get(i).get("BAY")))+  " ' id='lr@"+String.valueOf( list.get(i).get("status"))+"@14'/></td>"+
+        "<td><input type='text' style='width:90px;' onchange='addzjlr(this); return false' value='" +
+        delNull(String.valueOf(list.get(i).get("JY")))+  " ' id='lr@"+String.valueOf( list.get(i).get("status"))+"@15'/></td>"+
+        "<td><input type='text' style='width:90px;' onchange='addzjlr(this); return false' value='" +
+        delNull( String.valueOf( list.get(i).get("SIYUE")))+ " ' id='lr@"+String.valueOf( list.get(i).get("status"))+"@16'/></td>"+
+        "<td><input type='text' style='width:90px;' onchange='addzjlr(this); return false' value='" +
+        delNull(String.valueOf(list.get(i).get("SYY")))+ " ' id='lr@"+String.valueOf( list.get(i).get("status"))+"@17'/></td>"+
+        "<td><input type='text' style='width:90px;' onchange='addzjlr(this); return false' value='" +
+        delNull(String.valueOf(list.get(i).get("SEY")))+  " ' id='lr@"+String.valueOf( list.get(i).get("status"))+"@18'/></td>"+
+        "<td><input type='text' style='width:90px;' onchange='addzjlr(this); return false' value='" +
+        delNull(String.valueOf(list.get(i).get("LRSP")))+ " ' id='lr@"+String.valueOf( list.get(i).get("status"))+"@19'/></td>"+
         "</tr>" );
          
        }
@@ -110,81 +113,81 @@ public class ZjglBuild {
           if(i==0){
         stringBuffer.append("<tr>"+
         "<td  rowspan='8'><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='"+
-        delNull(String.valueOf(list.get(i).get("LB")))+  "'/></td>"+
+        delNull(String.valueOf(list.get(i).get("LB")))+  " id='"+String.valueOf( list.get(i).get("status"))+"@"+String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) +"@1'/></td>"+
        "<td rowspan='8'><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
-       delNull( String.valueOf(list.get(i).get("YSFY")))+ "'/></td>"+
+       delNull( String.valueOf(list.get(i).get("YSFY")))+ "id='"+String.valueOf( list.get(i).get("status"))+"@"+String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) +"@2'/></td>"+
        "<td ><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
-       delNull(String.valueOf(list.get(i).get("LJ")))+ "'/></td>"+
+       delNull(String.valueOf(list.get(i).get("LJ")))+ "id='"+String.valueOf( list.get(i).get("status"))+"@"+String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) +"@3'/></td>"+
       "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
-      delNull(String.valueOf(list.get(i).get("LJ2")))+  "'/></td>"+
+      delNull(String.valueOf(list.get(i).get("LJ2")))+  "id='"+String.valueOf( list.get(i).get("status"))+"@"+String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) +"@4'/></td>"+
        "<td rowspan='8'><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
-       delNull(String.valueOf(list.get(i).get("YFSDZ")))+ "'/></td>"+
+       delNull(String.valueOf(list.get(i).get("YFSDZ")))+ "id='"+String.valueOf( list.get(i).get("status"))+"@"+String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) +"@5'/></td>"+
        "<td rowspan='8'><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
-       delNull( String.valueOf(list.get(i).get("ZJJD")))+ "'/></td>"+
+       delNull( String.valueOf(list.get(i).get("ZJJD")))+ "id='"+String.valueOf( list.get(i).get("status"))+"@"+String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) +"@6'/></td>"+
        "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
-       delNull(String.valueOf(list.get(i).get("CQYE")))+ "'/></td>"+
+       delNull(String.valueOf(list.get(i).get("CQYE")))+ "id='"+String.valueOf( list.get(i).get("status"))+"@"+String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) +"@7'/></td>"+
        "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
-       delNull( String.valueOf(list.get(i).get("YY")))+ "'/></td>"+
+       delNull( String.valueOf(list.get(i).get("YY")))+ "id='"+String.valueOf( list.get(i).get("status"))+"@"+String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) +"@8'/></td>"+
        "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
-       delNull( String.valueOf(list.get(i).get("EY")))+  "'/></td>"+
+       delNull( String.valueOf(list.get(i).get("EY")))+  "id='"+String.valueOf( list.get(i).get("status"))+"@"+String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) +"@9'/></td>"+
        "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
-       delNull(String.valueOf(list.get(i).get("SANY")))+  "'/></td>"+
+       delNull(String.valueOf(list.get(i).get("SANY")))+  "id='"+String.valueOf( list.get(i).get("status"))+"@"+String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) +"@10'/></td>"+
        "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
-       delNull(String.valueOf(list.get(i).get("SIY")))+  "'/></td>"+
+       delNull(String.valueOf(list.get(i).get("SIY")))+  "id='"+String.valueOf( list.get(i).get("status"))+"@"+String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) +"@11'/></td>"+
        "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
-       delNull(String.valueOf(list.get(i).get("WY")))+  "'/></td>"+
+       delNull(String.valueOf(list.get(i).get("WY")))+  "id='"+String.valueOf( list.get(i).get("status"))+"@"+String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) +"@12'/></td>"+
        "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
-       delNull( String.valueOf(list.get(i).get("LY")))+ "'/></td>"+
+       delNull( String.valueOf(list.get(i).get("LY")))+ "id='"+String.valueOf( list.get(i).get("status"))+"@"+String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) +"@13'/></td>"+
        "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
-       delNull(String.valueOf(list.get(i).get("QY")))+  "'/></td>"+
+       delNull(String.valueOf(list.get(i).get("QY")))+  "id='"+String.valueOf( list.get(i).get("status"))+"@"+String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) +"@14'/></td>"+
        "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
-       delNull(String.valueOf(list.get(i).get("BAY")))+  "'/></td>"+
+       delNull(String.valueOf(list.get(i).get("BAY")))+  "id='"+String.valueOf( list.get(i).get("status"))+"@"+String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) +"@15'/></td>"+
        "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
-       delNull(String.valueOf(list.get(i).get("JY")))+ "'/></td>"+
+       delNull(String.valueOf(list.get(i).get("JY")))+ "id='"+String.valueOf( list.get(i).get("status"))+"@"+String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) +"@16'/></td>"+
        "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
-       delNull(String.valueOf(list.get(i).get("SIYUE")))+ "'/></td>"+
+       delNull(String.valueOf(list.get(i).get("SIYUE")))+ "id='"+String.valueOf( list.get(i).get("status"))+"@"+String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) +"@17'/></td>"+
        "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
-       delNull(String.valueOf(list.get(i).get("SYY")))+  "'/></td>"+
+       delNull(String.valueOf(list.get(i).get("SYY")))+  "id='"+String.valueOf( list.get(i).get("status"))+"@"+String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) +"@18'/></td>"+
        "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
-       delNull(String.valueOf(list.get(i).get("SEY")))+ "'/></td>"+
+       delNull(String.valueOf(list.get(i).get("SEY")))+ "id='"+String.valueOf( list.get(i).get("status"))+"@"+String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) +"@19'/></td>"+
        "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
-       delNull(String.valueOf(list.get(i).get("LRSP")))+ "'/></td>"+
+       delNull(String.valueOf(list.get(i).get("LRSP")))+ "id='"+String.valueOf( list.get(i).get("status"))+"@"+String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) +"@20'/></td>"+
        "</tr>");
       }else{
           stringBuffer.append("<tr>"+
                   delNull(String.valueOf(list.get(i).get("YSFY")))+ "</td>"+
                  "<td ><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
-                 delNull(String.valueOf(list.get(i).get("LJ")))+ "'/></td>"+
+                 delNull(String.valueOf(list.get(i).get("LJ")))+ "id='"+String.valueOf( list.get(i).get("status"))+"@"+String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) +"@3'/></td>"+
                  "<td ><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
-                 delNull( String.valueOf(list.get(i).get("LJ1")))+ "'/></td>"+
+                 delNull( String.valueOf(list.get(i).get("LJ1")))+ "id='"+String.valueOf( list.get(i).get("status"))+"@"+String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) +"@4'/></td>"+
                  "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
-                 delNull( String.valueOf(list.get(i).get("CQYE")))+ "'/></td>"+
+                 delNull( String.valueOf(list.get(i).get("CQYE")))+ "id='"+String.valueOf( list.get(i).get("status"))+"@"+String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) +"@7'/></td>"+
                  "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
-                 delNull(String.valueOf(list.get(i).get("YY")))+ "'/></td>"+
+                 delNull(String.valueOf(list.get(i).get("YY")))+ "id='"+String.valueOf( list.get(i).get("status"))+"@"+String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) +"@8'/></td>"+
                  "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
-                 delNull(String.valueOf(list.get(i).get("EY")))+  "'/></td>"+
+                 delNull(String.valueOf(list.get(i).get("EY")))+  "id='"+String.valueOf( list.get(i).get("status"))+"@"+String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) +"@9'/></td>"+
                  "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
-                 delNull( String.valueOf(list.get(i).get("SANY")))+  "'/></td>"+
+                 delNull( String.valueOf(list.get(i).get("SANY")))+  "id='"+String.valueOf( list.get(i).get("status"))+"@"+String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) +"@10'/></td>"+
                  "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
-                 delNull( String.valueOf(list.get(i).get("SIY")))+  "'/></td>"+
+                 delNull( String.valueOf(list.get(i).get("SIY")))+  "id='"+String.valueOf( list.get(i).get("status"))+"@"+String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) +"@11'/></td>"+
                  "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
-                 delNull( String.valueOf(list.get(i).get("WY")))+  "'/></td>"+
+                 delNull( String.valueOf(list.get(i).get("WY")))+  "id='"+String.valueOf( list.get(i).get("status"))+"@"+String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) +"@12'/></td>"+
                  "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
-                 delNull( String.valueOf(list.get(i).get("LY")))+ "'/></td>"+
+                 delNull( String.valueOf(list.get(i).get("LY")))+ "id='"+String.valueOf( list.get(i).get("status"))+"@"+String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) +"@13'/></td>"+
                  "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
-                 delNull( String.valueOf(list.get(i).get("QY")))+  "'/></td>"+
+                 delNull( String.valueOf(list.get(i).get("QY")))+  "id='"+String.valueOf( list.get(i).get("status"))+"@"+String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) +"@14'/></td>"+
                  "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
-                 delNull(String.valueOf(list.get(i).get("BAY")))+  "'/></td>"+
+                 delNull(String.valueOf(list.get(i).get("BAY")))+  "id='"+String.valueOf( list.get(i).get("status"))+"@"+String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) +"@15'/></td>"+
                  "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
-                 delNull( String.valueOf(list.get(i).get("JY")))+ "'/></td>"+
+                 delNull( String.valueOf(list.get(i).get("JY")))+ "id='"+String.valueOf( list.get(i).get("status"))+"@"+String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) +"@16'/></td>"+
                  "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
-                 delNull( String.valueOf(list.get(i).get("SIYUE")))+ "'/></td>"+
+                 delNull( String.valueOf(list.get(i).get("SIYUE")))+ "id='"+String.valueOf( list.get(i).get("status"))+"@"+String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) +"@17'/></td>"+
                  "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
-                 delNull(  String.valueOf(list.get(i).get("SYY")))+  "'/></td>"+
+                 delNull(  String.valueOf(list.get(i).get("SYY")))+  "id='"+String.valueOf( list.get(i).get("status"))+"@"+String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) +"@18'/></td>"+
                  "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
-                 delNull( String.valueOf(list.get(i).get("SEY")))+ "'/></td>"+
+                 delNull( String.valueOf(list.get(i).get("SEY")))+ "id='"+String.valueOf( list.get(i).get("status"))+"@"+String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) +"@19'/></td>"+
                  "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
-                 delNull( String.valueOf(list.get(i).get("LRSP")))+ "'/></td>"+
+                 delNull( String.valueOf(list.get(i).get("LRSP")))+ "id='"+String.valueOf( list.get(i).get("status"))+"@"+String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) +"@20'/></td>"+
                  "</tr>");
       }
       }
@@ -200,86 +203,86 @@ public class ZjglBuild {
       for (int i=0;i<list.size();i++){
           if(i==0){
               stringBuffer.append("<tr>"+
-                      "<td  rowspan='8'><input type='text' style='width:150px;' onchange='addrzxq(this); return false' value='"+
-                      delNull(String.valueOf(list.get(i).get("LB")))+  "'/></td>"+
+                      "<td  rowspan='8'><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='"+
+                      delNull(String.valueOf(list.get(i).get("LB")))+  " id='"+String.valueOf( list.get(i).get("status"))+"@"+String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) +"@1'/></td>"+
                      "<td rowspan='8'><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
-                     delNull(String.valueOf(list.get(i).get("YSFY")))+ "'/></td>"+
+                     delNull( String.valueOf(list.get(i).get("YSFY")))+ "id='"+String.valueOf( list.get(i).get("status"))+"@"+String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) +"@2'/></td>"+
                      "<td ><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
-                     delNull(String.valueOf(list.get(i).get("LJ")))+ "'/></td>"+
+                     delNull(String.valueOf(list.get(i).get("LJ")))+ "id='"+String.valueOf( list.get(i).get("status"))+"@"+String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) +"@3'/></td>"+
                     "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
-                    delNull(String.valueOf(list.get(i).get("LJ2")))+  "'/></td>"+
-                     "<td ><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
-                     delNull(String.valueOf(list.get(i).get("YFSDZ")))+ "'/></td>"+
-                     "<td ><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
-                     delNull(String.valueOf(list.get(i).get("ZJJD")))+ "'/></td>"+
+                    delNull(String.valueOf(list.get(i).get("LJ2")))+  "id='"+String.valueOf( list.get(i).get("status"))+"@"+String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) +"@4'/></td>"+
+                     "<td rowspan='8'><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
+                     delNull(String.valueOf(list.get(i).get("YFSDZ")))+ "id='"+String.valueOf( list.get(i).get("status"))+"@"+String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) +"@5'/></td>"+
+                     "<td rowspan='8'><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
+                     delNull( String.valueOf(list.get(i).get("ZJJD")))+ "id='"+String.valueOf( list.get(i).get("status"))+"@"+String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) +"@6'/></td>"+
                      "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
-                     delNull( String.valueOf(list.get(i).get("CQYE")))+ "'/></td>"+
+                     delNull(String.valueOf(list.get(i).get("CQYE")))+ "id='"+String.valueOf( list.get(i).get("status"))+"@"+String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) +"@7'/></td>"+
                      "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
-                     delNull( String.valueOf(list.get(i).get("YY")))+ "'/></td>"+
+                     delNull( String.valueOf(list.get(i).get("YY")))+ "id='"+String.valueOf( list.get(i).get("status"))+"@"+String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) +"@8'/></td>"+
                      "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
-                     delNull( String.valueOf(list.get(i).get("EY")))+  "'/></td>"+
+                     delNull( String.valueOf(list.get(i).get("EY")))+  "id='"+String.valueOf( list.get(i).get("status"))+"@"+String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) +"@9'/></td>"+
                      "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
-                     delNull( String.valueOf(list.get(i).get("SANY")))+  "'/></td>"+
+                     delNull(String.valueOf(list.get(i).get("SANY")))+  "id='"+String.valueOf( list.get(i).get("status"))+"@"+String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) +"@10'/></td>"+
                      "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
-                     delNull( String.valueOf(list.get(i).get("SIY")))+  "'/></td>"+
+                     delNull(String.valueOf(list.get(i).get("SIY")))+  "id='"+String.valueOf( list.get(i).get("status"))+"@"+String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) +"@11'/></td>"+
                      "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
-                     delNull(String.valueOf(list.get(i).get("WY")))+  "'/></td>"+
+                     delNull(String.valueOf(list.get(i).get("WY")))+  "id='"+String.valueOf( list.get(i).get("status"))+"@"+String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) +"@12'/></td>"+
                      "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
-                     delNull(String.valueOf(list.get(i).get("LY")))+ "'/></td>"+
+                     delNull( String.valueOf(list.get(i).get("LY")))+ "id='"+String.valueOf( list.get(i).get("status"))+"@"+String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) +"@13'/></td>"+
                      "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
-                     delNull(String.valueOf(list.get(i).get("QY")))+  "'/></td>"+
+                     delNull(String.valueOf(list.get(i).get("QY")))+  "id='"+String.valueOf( list.get(i).get("status"))+"@"+String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) +"@14'/></td>"+
                      "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
-                     delNull( String.valueOf(list.get(i).get("BAY")))+  "'/></td>"+
+                     delNull(String.valueOf(list.get(i).get("BAY")))+  "id='"+String.valueOf( list.get(i).get("status"))+"@"+String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) +"@15'/></td>"+
                      "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
-                     delNull(String.valueOf(list.get(i).get("JY")))+ "'/></td>"+
+                     delNull(String.valueOf(list.get(i).get("JY")))+ "id='"+String.valueOf( list.get(i).get("status"))+"@"+String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) +"@16'/></td>"+
                      "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
-                     delNull( String.valueOf(list.get(i).get("SIYUE")))+ "'/></td>"+
+                     delNull(String.valueOf(list.get(i).get("SIYUE")))+ "id='"+String.valueOf( list.get(i).get("status"))+"@"+String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) +"@17'/></td>"+
                      "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
-                     delNull( String.valueOf(list.get(i).get("SYY")))+  "'/></td>"+
+                     delNull(String.valueOf(list.get(i).get("SYY")))+  "id='"+String.valueOf( list.get(i).get("status"))+"@"+String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) +"@18'/></td>"+
                      "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
-                     delNull(String.valueOf(list.get(i).get("SEY")))+ "'/></td>"+
+                     delNull(String.valueOf(list.get(i).get("SEY")))+ "id='"+String.valueOf( list.get(i).get("status"))+"@"+String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) +"@19'/></td>"+
                      "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
-                     delNull(String.valueOf(list.get(i).get("LRSP")))+ "'/></td>"+
+                     delNull(String.valueOf(list.get(i).get("LRSP")))+ "id='"+String.valueOf( list.get(i).get("status"))+"@"+String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) +"@20'/></td>"+
                      "</tr>");
                     }else{
                         stringBuffer.append("<tr>"+
-                               "<td ><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
-                               delNull(String.valueOf(list.get(i).get("LJ")))+ "'/></td>"+
-                              "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
-                              delNull( String.valueOf(list.get(i).get("LJ2")))+  "'/></td>"+
-                               "<td ><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
-                               delNull( String.valueOf(list.get(i).get("YFSDZ")))+ "'/></td>"+
-                               "<td ><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
-                               delNull( String.valueOf(list.get(i).get("ZJJD")))+ "'/></td>"+
+                                "<td ><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
+                                delNull(String.valueOf(list.get(i).get("LJ")))+ "id='"+String.valueOf( list.get(i).get("status"))+"@"+String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) +"@3'/></td>"+
                                "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
-                               delNull( String.valueOf(list.get(i).get("CQYE")))+ "'/></td>"+
-                               "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
-                               delNull(String.valueOf(list.get(i).get("YY")))+ "'/></td>"+
-                               "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
-                               delNull(String.valueOf(list.get(i).get("EY")))+  "'/></td>"+
-                               "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
-                               delNull(String.valueOf(list.get(i).get("SANY")))+  "'/></td>"+
-                               "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
-                               delNull(String.valueOf(list.get(i).get("SIY")))+  "'/></td>"+
-                               "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
-                               delNull( String.valueOf(list.get(i).get("WY")))+  "'/></td>"+
-                               "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
-                               delNull(String.valueOf(list.get(i).get("LY")))+ "'/></td>"+
-                               "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
-                               delNull(String.valueOf(list.get(i).get("QY")))+  "'/></td>"+
-                               "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
-                               delNull( String.valueOf(list.get(i).get("BAY")))+  "'/></td>"+
-                               "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
-                               delNull( String.valueOf(list.get(i).get("JY")))+ "'/></td>"+
-                               "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
-                               delNull(String.valueOf(list.get(i).get("SIYUE")))+ "'/></td>"+
-                               "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
-                               delNull( String.valueOf(list.get(i).get("SYY")))+  "'/></td>"+
-                               "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
-                               delNull( String.valueOf(list.get(i).get("SEY")))+ "'/></td>"+
-                               "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
-                               delNull(String.valueOf(list.get(i).get("LRSP")))+ "'/></td>"+
-                               "</tr>");
+                               delNull(String.valueOf(list.get(i).get("LJ2")))+  "id='"+String.valueOf( list.get(i).get("status"))+"@"+String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) +"@4'/></td>"+
+                                "<td rowspan='8'><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
+                                delNull(String.valueOf(list.get(i).get("YFSDZ")))+ "id='"+String.valueOf( list.get(i).get("status"))+"@"+String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) +"@5'/></td>"+
+                                "<td rowspan='8'><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
+                                delNull( String.valueOf(list.get(i).get("ZJJD")))+ "id='"+String.valueOf( list.get(i).get("status"))+"@"+String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) +"@6'/></td>"+
+                                "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
+                                delNull(String.valueOf(list.get(i).get("CQYE")))+ "id='"+String.valueOf( list.get(i).get("status"))+"@"+String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) +"@7'/></td>"+
+                                "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
+                                delNull( String.valueOf(list.get(i).get("YY")))+ "id='"+String.valueOf( list.get(i).get("status"))+"@"+String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) +"@8'/></td>"+
+                                "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
+                                delNull( String.valueOf(list.get(i).get("EY")))+  "id='"+String.valueOf( list.get(i).get("status"))+"@"+String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) +"@9'/></td>"+
+                                "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
+                                delNull(String.valueOf(list.get(i).get("SANY")))+  "id='"+String.valueOf( list.get(i).get("status"))+"@"+String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) +"@10'/></td>"+
+                                "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
+                                delNull(String.valueOf(list.get(i).get("SIY")))+  "id='"+String.valueOf( list.get(i).get("status"))+"@"+String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) +"@11'/></td>"+
+                                "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
+                                delNull(String.valueOf(list.get(i).get("WY")))+  "id='"+String.valueOf( list.get(i).get("status"))+"@"+String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) +"@12'/></td>"+
+                                "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
+                                delNull( String.valueOf(list.get(i).get("LY")))+ "id='"+String.valueOf( list.get(i).get("status"))+"@"+String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) +"@13'/></td>"+
+                                "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
+                                delNull(String.valueOf(list.get(i).get("QY")))+  "id='"+String.valueOf( list.get(i).get("status"))+"@"+String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) +"@14'/></td>"+
+                                "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
+                                delNull(String.valueOf(list.get(i).get("BAY")))+  "id='"+String.valueOf( list.get(i).get("status"))+"@"+String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) +"@15'/></td>"+
+                                "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
+                                delNull(String.valueOf(list.get(i).get("JY")))+ "id='"+String.valueOf( list.get(i).get("status"))+"@"+String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) +"@16'/></td>"+
+                                "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
+                                delNull(String.valueOf(list.get(i).get("SIYUE")))+ "id='"+String.valueOf( list.get(i).get("status"))+"@"+String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) +"@17'/></td>"+
+                                "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
+                                delNull(String.valueOf(list.get(i).get("SYY")))+  "id='"+String.valueOf( list.get(i).get("status"))+"@"+String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) +"@18'/></td>"+
+                                "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
+                                delNull(String.valueOf(list.get(i).get("SEY")))+ "id='"+String.valueOf( list.get(i).get("status"))+"@"+String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) +"@19'/></td>"+
+                                "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
+                                delNull(String.valueOf(list.get(i).get("LRSP")))+ "id='"+String.valueOf( list.get(i).get("status"))+"@"+String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) +"@20'/></td>"+
+                                "</tr>");
       }
       }
       } 
