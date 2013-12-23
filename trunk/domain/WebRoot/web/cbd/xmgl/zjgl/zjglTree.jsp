@@ -92,6 +92,7 @@ scrollbar-3dlight-color:#D4D0C8;
 		   		        putRestParameter("parent_id", parentMenuTreeId);
 		   		         putRestParameter("tree_name", tree_name);
     					var result = restRequest();
+    					document.location.reload();
     					}
                    }
                   }]
