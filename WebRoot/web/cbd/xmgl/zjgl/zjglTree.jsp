@@ -9,11 +9,9 @@
             + request.getServerPort() + path + "/";
     String yw_guid= request.getParameter("yw_guid");
    // String tree=  new TreeManager().getParentNOde(yw_guid).toString();
-   yw_guid="121312";
     String tree=  new TreeManager().getTree(yw_guid);
     tree="["+tree+"]";
     System.out.print(tree);
-  
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -92,7 +90,8 @@ scrollbar-3dlight-color:#D4D0C8;
 		   		        putRestParameter("parent_id", parentMenuTreeId);
 		   		         putRestParameter("tree_name", tree_name);
     					var result = restRequest();
-    					document.location.reload();
+    					//document.location.reload();
+    					document.parentWindow.location.reload();
     					}
                    }
                   }]
@@ -124,7 +123,8 @@ scrollbar-3dlight-color:#D4D0C8;
 		   		        putRestParameter("menuType", "1");
 		   		        putRestParameter("parentId", parentMenuTreeId);
     					var result = restRequest();
-		   		   		document.location.reload()
+		   		   		//document.location.reload()
+		   		   		document.parentWindow.location.reload();
 		   		   }
 	   		   }
 	   		   ]
