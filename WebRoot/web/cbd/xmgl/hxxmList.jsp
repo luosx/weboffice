@@ -3,7 +3,7 @@
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-  Xmmanager hxzm=new Xmmanager();
+  Xmmanager hxzm=Xmmanager.getXmmanager();
 List<Map<String, Object>> list=hxzm.getHXXM();
 
 %>
