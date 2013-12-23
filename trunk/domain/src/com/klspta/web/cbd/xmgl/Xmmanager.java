@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.klspta.base.AbstractBaseBean;
+import com.klspta.base.util.UtilFactory;
+import com.klspta.web.cbd.xmgl.zjgl.ZjglData;
 
 public class Xmmanager extends AbstractBaseBean {
     public static String ZJGL_ZJZC;
@@ -135,10 +137,6 @@ public List<Map<String, Object>> getZJGL_ZJZC(String yw_guid){
         list.get(i).get("lb").toString();
         
     }
-    
-    
-    
-    
     return list;
  }
 /******
@@ -147,12 +145,25 @@ public List<Map<String, Object>> getZJGL_ZJZC(String yw_guid){
  * <br>Author:朱波海
  * <br>Date:2013-12-17
  */
-public void saveZJGL_ZJZC(){
-    
-    
-    
-}    
+public void saveZJGL_ZJZC() {
 
+}
+
+public void saveZjglTree(){
+    String st[]={"QQFY","CQFY","SZFY","CWFY","GLFY","CRZJFH","QTZC"};
+    String yw_guid = request.getParameter("yw_guid");
+    String parent_id = request.getParameter("parent_id");
+    String id = request.getParameter("id");
+    String tree_name = request.getParameter("tree_name");
+    tree_name=UtilFactory.getStrUtil().unescape(tree_name);
+    for (int i=0;i<st.length;i++){
+        if(id.equals(st[i])){
+    String sql=" insert into zjgl_tree (yw_guid,parent_id,tree_name,tree_id)values (?,?,?,?)";
+    update(sql, YW,new Object[]{yw_guid,id,tree_name,id});
+    new ZjglData().saveNode( tree_name,st[i], yw_guid);
+        }
+    }
+}
 
 
 }
