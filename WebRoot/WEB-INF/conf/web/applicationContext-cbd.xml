@@ -56,7 +56,8 @@
 	<bean name="azfjs" class="com.klspta.web.cbd.hxxm.Anzfjs" scope="prototype"/>
 		<!-- 二手房市场监测 -->	
 	<bean name="scjcHandle" class="com.klspta.web.cbd.jtfx.ztt.ScjcManager" scope="prototype"/>
-	
+	<!-- 房源资产管理 -->
+	<bean name="fyzcHandle" class="com.klspta.web.cbd.swkgl.Fyzcmanager" scope="prototype"/>
 	<!-- 统计报表计划管理类 -->	
 	<bean name="tjbbManager" class="com.klspta.web.cbd.dtjc.TjbbManager" scope="prototype"/>
 	<bean name="ptzzgml" class = "com.klspta.web.cbd.dtjc.jcmx.PtzzgmlMXTwoData" scope="prototype"/>
