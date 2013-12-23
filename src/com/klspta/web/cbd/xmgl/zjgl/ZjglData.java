@@ -3,6 +3,7 @@ package com.klspta.web.cbd.xmgl.zjgl;
 import java.util.List;
 import java.util.Map;
 
+
 import com.klspta.base.AbstractBaseBean;
 
 public class ZjglData extends AbstractBaseBean {
@@ -26,6 +27,10 @@ public class ZjglData extends AbstractBaseBean {
     }
     
     public void setMX( String yw_guid){
+        String sql="select yw_guid from zjgl_zc where yw_guid=?";
+        List<Map<String, Object>> query = query(sql, YW,new Object []{yw_guid});
+        if(query.size()>0){
+        }else{
         String lr_name[]={"1.1 筹融资金","1.1.1 金融机构贷款","1.1.2 实施主体带资","1.1.3 国有土地收益基金","1.2 出让回笼资金","1.3 其他资金"};
         String lr_type[]={"CRZJ","ZRJGDK","SSZTDZ","GYTDSYJJ","CRHLZJ","QTZJ"};
         String sr[]={"总计划审批","贷款审批","实施主体带资审批","国有土地收益基金审批","出让回笼资金审批","其他资金审批","实际支付","已批未付"};
@@ -40,6 +45,7 @@ public class ZjglData extends AbstractBaseBean {
         for(int k=0;k<lr_name.length;k++){
             String sqlString="insert into XMZJGL_LR (yw_guid,status,lb,sort) values(?,?,?,?)";
             update(sqlString, YW,new Object[]{yw_guid,lr_type[k],lr_name[k],(k+1)});
+        }
         }
     }
     public void saveNode(String tree_name,String type,String yw_guid){
