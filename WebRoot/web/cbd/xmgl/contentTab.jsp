@@ -45,7 +45,7 @@
             }
             ,{
                 title: '资金管理',
-                html: "<iframe width='"+w+"' height='"+h+"' src='web/cbd/xmgl/zjgl/zjgl.jsp'/>"
+                html: "<iframe width='"+w+"' height='"+h+"' src='web/cbd/xmgl/zjgl/zjgl.jsp?yw_guid=<%=yw_guid%>&xmmc=<%=xmmc%>'/>"
             }
             ,{
                 title: '档案管理',
