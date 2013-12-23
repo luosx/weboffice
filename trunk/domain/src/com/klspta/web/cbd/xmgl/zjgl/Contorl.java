@@ -59,6 +59,8 @@ public static String  QTZC="QTZC";
     }
     
     public String getTextMode(String yw_guid){
+        //是否项目初始化
+        new ZjglData().setMX(yw_guid);
         StringBuffer stringBuffer = new StringBuffer();
         StringBuffer title = ZjglBuild.buildTitle();
         stringBuffer.append(title);
