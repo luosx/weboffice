@@ -1,5 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@page import="com.klspta.model.CBDReport.CBDReportManager"%>
+<%@ page import="com.klspta.web.cbd.swkgl.Fyzcmanager" %>
+<%@page import="com.klspta.base.util.UtilFactory"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -156,14 +158,29 @@ String all=start[0]+add+"</table>";
 	var ze=document.getElementById("ze").value;
 	var jhcb=document.getElementById("jhcb").value;
 	var xj=document.getElementById("xj").value;
-	var dj =document.getElementById("dj ").value;
-	putClientCommond("xmmanager","saveBLGC");
+	var dj =document.getElementById("dj").value;
+	
+	mc=escape(escape(mc));
+
+	putClientCommond("fyzcHandle","saveFyzc");
 	putRestParameter("yw_guid","<%=yw_guid%>");
-	putRestParameter("xh",xh);
-	putRestParameter("sj",sj);
-	putRestParameter("sjbl",sjbl);
-	putRestParameter("bmjbr",bmjbr);
-	putRestParameter("bz",bz);
+	putRestParameter("mc",mc);
+	putRestParameter("gzfy",gzfy);
+	putRestParameter("gzgm",gzgm);
+	putRestParameter("cbzj",cbzj);
+	putRestParameter("gzdj",gzdj);
+	putRestParameter("lyfy",lyfy);
+	putRestParameter("lygm",lygm);
+	putRestParameter("qmfy",qmfy);
+	putRestParameter("jzmj",jzmj);
+	putRestParameter("zyzj",zyzj);
+	putRestParameter("pmft",pmft);
+	putRestParameter("lyft",lyft);
+	putRestParameter("clft",clft);
+	putRestParameter("ze",ze);
+	putRestParameter("jhcb",jhcb);
+	putRestParameter("xj",xj);
+	putRestParameter("dj",dj);
 	var msg=restRequest();
 	if('success'==msg){
 	alert("保存成功！");
