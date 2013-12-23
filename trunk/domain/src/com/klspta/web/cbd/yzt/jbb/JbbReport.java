@@ -28,14 +28,11 @@ public class JbbReport extends AbstractBaseBean implements IDataClass {
 	public Map<String, TRBean> getTRBeans(Object[] obj, TRBean trBean) {
 		Map<String, TRBean> trbeans = new TreeMap<String, TRBean>();
 		Map<String, Object> queryMap = new HashMap<String, Object>();
-		if(obj.length > 0){
-			queryMap = (Map<String, Object>)obj[0];
-		}
-		trbeans = getBody(queryMap);
+		trbeans = getBody(obj);
 		return trbeans;
 	}
 
-	public Map<String, TRBean> getBody(Map queryMap){
+	public Map<String, TRBean> getBody(Object[] obj){
 		List<TRBean> list = new ArrayList<TRBean>();
 		Map<String, TRBean> trbeans = new TreeMap<String, TRBean>();
 		StringBuffer sqlBuffer = new StringBuffer();
@@ -44,12 +41,9 @@ public class JbbReport extends AbstractBaseBean implements IDataClass {
 			sqlBuffer.append("t.").append(shows[i][0]).append(",");
 		}
 		sqlBuffer.append("t.").append(shows[shows.length - 1][0]).append(" from ");
-		sqlBuffer.append(form_name).append(" t ");
-		if(queryMap != null && !queryMap.isEmpty()){
-			sqlBuffer.append(String.valueOf(queryMap.get("query")));
-		}
+		sqlBuffer.append(form_name).append(" t where t.ssqy like ? ");
 		sqlBuffer.append(" order by t.dkmc");
-		List<Map<String, Object>> queryList = query(sqlBuffer.toString(), YW);
+		List<Map<String, Object>> queryList = query(sqlBuffer.toString(), YW, obj);
 		Map<String, List<TRBean>> buildMap = new TreeMap<String, List<TRBean>>();
 		for(int i = 0; i < queryList.size(); i++){
 			Map map = queryList.get(i);
@@ -60,7 +54,7 @@ public class JbbReport extends AbstractBaseBean implements IDataClass {
 			}
 			List<TRBean> subTotal = buildMap.get(key);
 			if(subTotal == null){
-				subTotal = getSubTotal(key, queryMap);
+				subTotal = getSubTotal(key, obj);
 			}
 			TRBean trBean = new TRBean();
 			trBean.setCssStyle("trsingle");
@@ -87,12 +81,10 @@ public class JbbReport extends AbstractBaseBean implements IDataClass {
 		return trbeans;
 	}
 	
-	private Set<String> getSubTotalKey(Map queryMap){
+	private Set<String> getSubTotalKey(Object[] obj){
 		Set<String> keySet = new TreeSet<String>();
 		String sqlKey = "select substr(t.dkmc, 0,instr(t.dkmc,'_') - 1) dk from "+ form_name +" t ";
-		if(queryMap != null && !queryMap.isEmpty()){
-			sqlKey += String.valueOf(queryMap.get("query"));
-		}
+
 		sqlKey += " order by t.dkmc";
 		List<Map<String, Object>> queryList = query(sqlKey, YW);
 		for(int i = 0; i < queryList.size(); i++){
@@ -103,7 +95,7 @@ public class JbbReport extends AbstractBaseBean implements IDataClass {
 	}
 	
 	
-	private List<TRBean> getSubTotal(String key,Map queryMap){
+	private List<TRBean> getSubTotal(String key,Object[] obj){
 		StringBuffer sqlBuffer = new StringBuffer();
 		sqlBuffer.append("select ");
 		for(int i = 1; i < shows.length - 1; i++){
@@ -111,14 +103,18 @@ public class JbbReport extends AbstractBaseBean implements IDataClass {
 		}
 		sqlBuffer.append("sum(t.").append(shows[shows.length - 1][0]).append(") as ").append(shows[shows.length - 1][0]).append(" from ");
 		sqlBuffer.append(form_name).append(" t ");
-		if(queryMap != null && !queryMap.isEmpty()){
-			sqlBuffer.append(String.valueOf(queryMap.get("query")));
-			sqlBuffer.append("　and  t.dkmc like '").append(key).append("_%'");
+		if(obj != null){
+			sqlBuffer.append("  where t.dkmc like '").append(key).append("_%' and t.ssqy like ? ");
 		}else{
 			sqlBuffer.append("  where t.dkmc like '").append(key).append("_%'");
 		}
 		sqlBuffer.append(" order by t.dkmc");
-		List<Map<String, Object>> queryList = query(sqlBuffer.toString(), YW);
+		List<Map<String, Object>> queryList = null;
+		if(obj != null){
+			queryList = query(sqlBuffer.toString(), YW, obj);
+		}else{
+			queryList = query(sqlBuffer.toString(), YW);
+		}
 		Map<String, Object> map = queryList.get(0);
 		TRBean trBean = new TRBean();
 		trBean.setCssStyle("trtotal");
