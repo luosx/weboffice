@@ -77,6 +77,7 @@ function initComponent() {
 
 function query() {
 	var yddw = Ext.getCmp("yddw").getValue();
+	alert(yddw)
 	var keyword = Ext.getCmp("keyword").getValue();
 	document.frames['report'].query(yddw , keyword);
 }

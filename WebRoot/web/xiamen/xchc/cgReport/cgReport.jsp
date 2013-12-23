@@ -70,7 +70,7 @@ String userid = ((User)principal).getUserID();
   </head>
   <script type="text/javascript">
   		function print(){
-		    var curTbl = document.getElementById("XCHC"); 
+		    var curTbl = document.getElementById("center"); 
  			try{
 		    	var oXL = new ActiveXObject("Excel.Application");
 		    }catch(err){
