@@ -7,13 +7,13 @@
 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 	Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 	String userid = ((User)principal).getUserID();
-	String[][] showList = XchcManager.showList;
+	String[][] showList = XchcManager.showHCList;
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
-    <title>巡查核查成果</title>
+    <title>动态巡查成果</title>
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
@@ -24,10 +24,11 @@
 	<script type="text/javascript">
 		var myData;
 		var grid;
+		var store;
 		var limitNum;
 		Ext.onReady(function(){
 			//将是这个用户填写的巡查日志查询出来
-	  		putClientCommond("xchc","getDclList");
+	  		putClientCommond("xchc","getHccgList");
 		    putRestParameter("userid","<%=userid%>");
 			myData = restRequest();
 			store = new Ext.data.JsonStore({
@@ -65,9 +66,7 @@
 			    listeners:{
 		  			rowdblclick : function(grid, rowIndex, e)
 					{
-				   		// showDetail(grid.getStore().getAt(rowIndex).data.XIANGXI);
-				   		//viewDetail(grid.getStore().getAt(rowIndex).data.RUNNUM1);
-						alert("查看详细信息");
+				   		showDetail(rowIndex);
 					}
         		},
 		        stripeRows: true,
@@ -88,9 +87,6 @@
 		         {
 		         	text:'外业成果导入',
 		         	handler: impTask
-		         },{
-		         	text:'新增巡查成果',
-		         	handler: newTask
 		         }]
         	});
     	grid.render('mygrid_container');
@@ -122,12 +118,14 @@
 	    var url = "/domain/web/xiamen/xchc/cglb/xjclyjframe.jsp?zfjcType=11&yw_guid="+myData[id].GUID;     
 		//var url = "/domain/web/xiamen/xchc/cglb/xjclyjframe.jsp";
 		//window.showModalDialog(url,"","dialogWidth=600px;dialogHeight=268px");
-		window.open(url);
+		var height = window.screen.availHeight;
+		var width = window.screen.availWidth;
+		window.open(url,"","width="+width+",height="+height);
 	}
 		<!--查询方法 add by 姚建林 2013-6-20-->
         function query(){
            var keyWord=Ext.getCmp('keyword').getValue();
-  		   putClientCommond("xchc","getDclList");
+  		   putClientCommond("xchc","getHccgList");
 	       putRestParameter("userid","<%=userid%>");
            putRestParameter("keyword",escape(escape(keyWord)));
            var myData = restRequest(); 
@@ -172,19 +170,15 @@
            }
          } 
         
-        //导入巡查成果
+        //导入核查成果
         function impTask(){
        		var url = "/domain/web/xiamen/xchc/cgdr/importCgfile.jsp";
 			//var height = window.screen.availHeight;
 			//var width = window.screen.availWidth;
-			window.showModalDialog(url,"","dialogWidth=600px;dialogHeight=268px");
-        }
-        
-        //新建巡查成果
-        function newTask(){
-      		var url = "/domain/web/xiamen/xchc/cglb/xjclyjframe.jsp?zfjcType=11";    
-        	//window.showModalDialog(url,"","dialogWidth=800px;dialogHeight=600px");
-        	window.open(url);
+			var retrunValue = window.showModalDialog(url,"","dialogWidth=600px;dialogHeight=268px");
+			if(retrunValue=="success"){
+				document.location.reload(); 
+			}
         }
 
 </script>

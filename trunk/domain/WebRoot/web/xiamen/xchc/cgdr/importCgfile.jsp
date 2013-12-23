@@ -58,10 +58,10 @@ String userid = ((User)userprincipal).getUserID();
 	            emptyText: '请选择zip格式外业成果包..',
 	            fieldLabel: '文件路径',
 	            name: 'file',
-	            buttonText: '浏览&nbsp;&nbsp;&nbsp;&nbsp;',
-	            buttonCfg: {
-	                iconCls: 'upload-icon'
-	            }
+	            buttonText: '&nbsp;浏 览&nbsp;'
+	            //buttonCfg: {
+	            //    iconCls: 'upload-icon'
+	            //}
 	        }],  
 	    
 	  buttons: [{  
@@ -88,6 +88,7 @@ String userid = ((User)userprincipal).getUserID();
 	      	waitMsg: '数据处理中...',
 	        success: function(form, action){  
 	             Ext.Msg.alert('提示','文件导入成功！,共导入'+action.result.msg+'条核查成果！',function(btn){document.location.reload();});  
+	             window.returnValue="success";
 	        },  
 	        failure: function(){  
 	           Ext.Msg.alert('错误', '文件导入失败');  
