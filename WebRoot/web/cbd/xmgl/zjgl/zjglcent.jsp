@@ -79,8 +79,5 @@ border:none;
 	<body bgcolor="#FFFFFF" topmargin="0" leftmargin="0" style="overflow: scroll;">
 	 <div align="center" style="width: 1350px"><h3>资金管理</h3></div>
 	   <%=table%>
-	    <div id="addtable" style="width: 1000px" align="right" >
-	    <img src="web/cbd/xmgl/image/bc.png" style="width: 100px;height:50px" onclick="save()"/>
-	    </div>
 	</body>
 </html>
