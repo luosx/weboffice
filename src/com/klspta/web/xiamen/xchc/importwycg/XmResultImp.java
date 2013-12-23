@@ -76,7 +76,8 @@ public class XmResultImp extends  AResultImp {
 	private Map<String,String[][]> getCondition(){
 		Map<String, String[][]> saveMap = new HashMap<String, String[][]>();
 		// String[][] ywStrings = new String[]{{"xznyd","xznyd"},{"xzwlyd","xzwlyd"},"ghjinzh","ygspmj","ygspbl","yggdbl","yggdmj","ghjbnt","ghfuh","ghxianzh","ghbufh","ghyoutj","ghyunx","xzjsyd","xzgd","taskType","taskid","endDate","beginDate","dfccqk","jsqk","wflx","area","wfwglx","zbs","sfwf","xcqkms","yddw","xy","picture","ydsj","ydqk"}; 
-		String[][] ywStrings = new String[][]{{"xznyd","xznyd"},{"xzwlyd","xzwlyd"},{"taskid","yw_guid"},{"ydsj","ydsj"},{"yddw","yddw"},{"area","mj"},{"zbs","zb"},{"jsqk","jsqk"},{"wfwglx","wfwglx"},{"dfccqk","dfccqk"},{"xcqkms","xcqkms"},{"ydqk","ydqk"},{"ygspmj","ygspmj"},{"ygspbl","ygspbl"},{"yggdbl","yggdbl"},{"yggdmj","yggdmj"},{"beginDate","beginDate"},{"taskType","taskType"},{"endDate","endDate"},{"wflx","wflx"},{"sfwf","sfwf"}};
+		String[][] ywStrings = new String[][]{{"xznyd","xznyd"},{"xzwlyd","xzwlyd"},{"taskid","yw_guid"},{"ydsj","ydsj"},{"yddw","yddw"},{"area","mj"},{"zbs","zb"},{"jsqk","jsqk"},{"wfwglx","wfwglx"},{"dfccqk","dfccqk"},{"xcqkms","xcqkms"},{"ydqk","ydqk"},{"ygspmj","ygspmj"},{"ygspbl","ygspbl"},{"yggdbl","yggdbl"},{"yggdmj","yggdmj"},{"beginDate","beginDate"},{"taskType","taskType"},{"endDate","endDate"},{"wflx","wflx"},{"sfwf","sfwf"}
+		                                        ,{"ydxmmc","ydxmmc"},{"ydzt","ydzt"},{"ydwz","ydwz"},{"zdmj","zdmj"},{"gdmj","gdmj"},{"jzmj","jzmj"},{"jzxz","jzxz"},{"fhgh","fhgh"},{"fxsj","fxsj"},{"zzqk","zzqk"},{"zztzsbh","zztzsbh"},{"wjzzhjxzz","wjzzhjxzz"},{"yydspqcz","yydspqcz"},{"yt","yt"}};
 		String[][] gisStrings = new String[][]{{"taskType","tasktype"},{"wflx","wflx"},{"yddw","yddw"},{"ydqk","ydqk"},{"ydsj","ydsj"},{"taskid", "yw_guid"}};
 		saveMap.put("yw", ywStrings);
 		saveMap.put("gis", gisStrings);

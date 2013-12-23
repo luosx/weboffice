@@ -57,6 +57,7 @@ public class XchcData extends AbstractBaseBean implements IxchcData {
 		StringBuffer sqlBuffer = new StringBuffer();
 		sqlBuffer.append("select t.* from v_pad_data_xml t where t.impxzqbm in");
 		sqlBuffer.append(xzq);
+		sqlBuffer.append(" and t.guid like 'XC%'");
 		if (keyword != null) {
             keyword = UtilFactory.getStrUtil().unescape(keyword);
              sqlBuffer.append(" and").append(queryString).append(" like '%");
@@ -72,7 +73,29 @@ public class XchcData extends AbstractBaseBean implements IxchcData {
 		return getList;
 	}
 	
-	
+    @Override
+    public List<Map<String, Object>> getHccgList(String userId, String keyword) {
+        String xzq = editXzq(userId);
+        StringBuffer sqlBuffer = new StringBuffer();
+        sqlBuffer.append("select t.* from v_pad_data_xml t where t.impxzqbm in");
+        sqlBuffer.append(xzq);
+        sqlBuffer.append(" and t.guid not like 'XC%'");
+        if (keyword != null) {
+            keyword = UtilFactory.getStrUtil().unescape(keyword);
+             sqlBuffer.append(" and").append(queryString).append(" like '%");
+             sqlBuffer.append(keyword);
+             sqlBuffer.append("%')");
+        }
+        sqlBuffer.append(" order by t.ydsj");
+        List<Map<String, Object>> getList = query(sqlBuffer.toString(), YW);
+        for (int i = 0; i < getList.size(); i++) {
+            getList.get(i).put("XIANGXI", i);
+            getList.get(i).put("DELETE", i);
+        }
+        return getList;
+    }
+    
+    
 	private String editXzq(String userId){
 		Set<String> xzqSet = XzqHandle.getChildSetByUserId(userId);
 		StringBuffer containBuffer = new StringBuffer();
@@ -83,5 +106,7 @@ public class XchcData extends AbstractBaseBean implements IxchcData {
 		containBuffer.append(" 'null' )");
 		return containBuffer.toString();
 	}
+
+
 
 }
