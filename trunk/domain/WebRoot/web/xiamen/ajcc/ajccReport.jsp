@@ -92,11 +92,13 @@ Object userprincipal = SecurityContextHolder.getContext().getAuthentication().ge
     line-height: 20px;
     text-align:center;
    }
- 
+  img{
+  	cursor:hand;
+  }
 	</style>
   </head>
   <script type="text/javascript">
-  		function print(){
+  		function exportExcel(){
 		    var curTbl = document.getElementById("AJCCCX"); 
  			try{
 		    	var oXL = new ActiveXObject("Excel.Application");
@@ -134,17 +136,19 @@ Object userprincipal = SecurityContextHolder.getContext().getAuthentication().ge
   </script>
   <body >
   	<div id="fixed" style="position: fixed; top: 5px; left: 0px">
-		<img src="base/form/images/print.png" width="20px" height="20px" onClick="javascript:print();"  />
+  		&nbsp;
+  		<img src="base/form/images/print.png" width="20px" height="20px" title="打印" onClick="print();"  />&nbsp;&nbsp;&nbsp;
+		<img src="base/form/images/exportexcel.png" width="20px" height="20px" title="导出Excel" onClick="javascript:exportExcel();"  />
 	</div>
 	
 	   <div align="center" style="margin-top: 15px">
 	      <h1>发现制止土地违法行为清单</h1>
 	   </div>
-	    <div style="position:absolute; top:45px; left: 20px; width:1180px;" >
-	    <font style="font-size: 15px ;">填报单位：
+	    <div style="position:absolute; top:45px; left: 20px; width:1000px;" >
+	    <font style="font-size: 13px ;">填报单位：
 	    <input id="tbdw" name="textBox" type="text" style="width:260px;border:0;padding:0;" value=<%=user_role %> />
 	    </font>
-		<font style="font-size: 15px; float: right">计量单位：件、亩</font>
+		<font style="font-size: 13px; float: right">计量单位：件、亩</font>
 	    </div>
 	    
 	<div align="center" id="center" style="position:absolute; top:65px; left: 20px;">
