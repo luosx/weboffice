@@ -152,6 +152,7 @@ public void saveZJGL_ZJZC() {
     String val = request.getParameter("val");
     String status = request.getParameter("status");
     String lb = request.getParameter("lb");
+    lb =  UtilFactory.getStrUtil().unescape(lb);
     String sort = request.getParameter("sort");
     String cols = request.getParameter("cols");
     int i=Integer.parseInt(cols);
