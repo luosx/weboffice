@@ -26,19 +26,31 @@ public class ZjglData extends AbstractBaseBean {
     }
     
     public void setMX( String yw_guid){
+        String lr_name[]={"1.1 筹融资金","1.1.1 金融机构贷款","1.1.2 实施主体带资","1.1.3 国有土地收益基金","1.2 出让回笼资金","1.3 其他资金"};
+        String lr_type[]={"CRZJ","ZRJGDK","SSZTDZ","GYTDSYJJ","CRHLZJ","QTZJ"};
         String sr[]={"总计划审批","贷款审批","实施主体带资审批","国有土地收益基金审批","出让回笼资金审批","其他资金审批","实际支付","已批未付"};
         String st[]={"2.1.1 前期费用","2.1.2 拆迁费用","2.1.3 市政费用","2.1.4 财务费用","2.1.5 管理费","2.2 筹融资金返还","2.3 其他支出"};
         String s[]={"QQFY","CQFY","SZFY","CWFY","GLFY","CRZJFH","QTZC"};
         for(int i=0;i<st.length;i++){
             for(int j=0;j<sr.length;j++){
-                String sqlString="insert into XMZJGL_ZC (yw_guid,status,lb,lj) value(?,?,?,?)";
-                update(sqlString, YW,new Object[]{yw_guid, s[i],st[i],sr[j]});
+                String sqlString="insert into XMZJGL_ZC (yw_guid,status,lb,lj,zcstatus,sort) values(?,?,?,?)";
+                update(sqlString, YW,new Object[]{yw_guid, s[i],st[i],sr[j],(j+1)});
             }
-            
         }
-       
-        
+        for(int k=0;k<lr_name.length;k++){
+            String sqlString="insert into XMZJGL_LR (yw_guid,status,lb,sort) values(?,?,?,?)";
+            update(sqlString, YW,new Object[]{yw_guid,lr_type[k],lr_name[k],(k+1)});
+        }
+    }
+    public void saveNode(String tree_name,String type,String yw_guid){
+        String sr[]={"总计划审批","贷款审批","实施主体带资审批","国有土地收益基金审批","出让回笼资金审批","其他资金审批","实际支付","已批未付"};
+        String s[]={"QQFY","CQFY","SZFY","CWFY","GLFY","CRZJFH","QTZC"};
+        for(int j=0;j<sr.length;j++){
+            String sqlString="insert into XMZJGL_ZC (yw_guid,status,lb,lj,zcstatus,sort) values(?,?,?,?,?,?)";
+            update(sqlString, YW,new Object[]{yw_guid, type,tree_name,sr[j],type,(j+1)});
+        }
         
         
     }
+    
 }
