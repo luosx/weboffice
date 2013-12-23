@@ -74,7 +74,7 @@ ITableStyle its = new TableStyleEditRow();
     <div id="fixed" style="position: fixed; top: 5px; left: 0px">
 		<img src="base/form/images/print.png" width="20px" height="20px" onClick="javascript:print();"  />
 	</div>
-  		<%=new CBDReportManager().getReport("JBB",new Object[]{},its)%>
+  		<%=new CBDReportManager().getReport("JBB",new Object[]{"%%"},its)%>
   	<form id="attachfile" action="<%=basePath%>service/rest/zrbHandle/update" method="post">
 	</form> 
   </body>
