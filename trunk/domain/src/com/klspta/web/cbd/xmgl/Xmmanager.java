@@ -1,6 +1,5 @@
 package com.klspta.web.cbd.xmgl;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -9,6 +8,8 @@ import com.klspta.base.util.UtilFactory;
 import com.klspta.web.cbd.xmgl.zjgl.ZjglData;
 
 public class Xmmanager extends AbstractBaseBean {
+   public static  String  ZJGL_LR[]={"LB","YSFY","LJ","YFSDZ","ZJJD","CQYE","YY","EY","SANY","SIY","WY","LY","QY","BAY","JY","SIYUE","SYY","SEY","LRSP"};
+   public static  String  ZJGL_ZC[]={"LB","YSFY","LJ","JL2","YFSDZ","ZJJD","CQYE","YY","EY","SANY","SIY","WY","LY","QY","BAY","JY","SIYUE","SYY","SEY","LRSP"};
     public static String ZJGL_ZJZC;
     public static Xmmanager instens;
     private Xmmanager(){}
@@ -75,7 +76,7 @@ public class Xmmanager extends AbstractBaseBean {
       String sjbl = request.getParameter("sjbl");
       String bmjbr = request.getParameter("bmjbr");
       String bz = request.getParameter("bz");
-      String yw_guid = request.getParameter("yw_guid");
+      String yw_guid = request.getParameter("yw_guid").trim();
       String insertString="insert into xmblgc (xh,sj,sjbl,bmjbr,bz,yw_guid )values(?,?,?,?,?,?)";
       int i = update(insertString, YW,new Object[]{xh,sj,sjbl,bmjbr,bz,yw_guid});
       if(i>0){
@@ -115,11 +116,13 @@ public class Xmmanager extends AbstractBaseBean {
   */
  public  void saveZJGL_ZJLR(){
      
-     
-     
-     
-     
-     
+     String yw_guid = request.getParameter("yw_guid");
+     String val = request.getParameter("val");
+     String cols = request.getParameter("cols");
+     int i=Integer.parseInt(cols);
+     String stye = request.getParameter("stye");
+     String sql="update xmzjgl_lr set "+ZJGL_LR[i-1]+"= "+val+"  where yw_guid=? and status=?";
+     update(sql, YW,new Object []{yw_guid,stye});
  }
  
  /****
@@ -129,7 +132,6 @@ public class Xmmanager extends AbstractBaseBean {
   * <br>Date:2013-12-17
   */
 public List<Map<String, Object>> getZJGL_ZJZC(String yw_guid){
-   // ArrayList<?> arrayList = new ArrayList<?>();
     String  sql="select distinct lb,yw_guid  from  xmzjgl where status='zc' and yw_guid=?";
     List<Map<String, Object>> list = query(sql, YW,new Object []{yw_guid});
     //t.zcstatus 
@@ -146,16 +148,25 @@ public List<Map<String, Object>> getZJGL_ZJZC(String yw_guid){
  * <br>Date:2013-12-17
  */
 public void saveZJGL_ZJZC() {
-
+    String yw_guid = request.getParameter("yw_guid");
+    String val = request.getParameter("val");
+    String status = request.getParameter("status");
+    String lb = request.getParameter("lb");
+    String sort = request.getParameter("sort");
+    String cols = request.getParameter("cols");
+    int i=Integer.parseInt(cols);
+    String sql="update xmzjgl_lr set "+ZJGL_ZC[i-1]+"= "+val+"  where yw_guid=? and status=? and sort=?";
+    update(sql, YW,new Object []{yw_guid,status,sort});
+    
 }
 
 public void saveZjglTree(){
     String st[]={"QQFY","CQFY","SZFY","CWFY","GLFY","CRZJFH","QTZC"};
-    String yw_guid = request.getParameter("yw_guid");
+    String yw_guid = request.getParameter("yw_guid").trim();
     String parent_id = request.getParameter("parent_id");
     String id = request.getParameter("id");
     String tree_name = request.getParameter("tree_name");
-    tree_name=UtilFactory.getStrUtil().unescape(tree_name);
+    tree_name=UtilFactory.getStrUtil().unescape(tree_name).trim();
     for (int i=0;i<st.length;i++){
         if(id.equals(st[i])){
     String sql=" insert into zjgl_tree (yw_guid,parent_id,tree_name,tree_id)values (?,?,?,?)";
