@@ -27,6 +27,14 @@ function initComponent() {
 							xtype : 'button',
 							text : '导出Excel',
 							handler : exportExcel
+						}, '-', {
+							xtype : 'button',
+							text : '添加',
+							handler : add
+						}, '-', {
+							xtype : 'button',
+							text : '删除',
+							handler : dele
 						}],
 				items : [{
 					html : "<iframe id='report' width=" + (width - 50)
@@ -45,6 +53,14 @@ function query() {
 
 function exportExcel() {
 	document.frames['report'].print();
+}
+
+function add(){
+	document.frames['report'].add();
+}
+
+function dele(){
+	alert("dele");
 }
 
 
