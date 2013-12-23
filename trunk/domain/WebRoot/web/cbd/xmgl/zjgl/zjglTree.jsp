@@ -46,6 +46,10 @@ scrollbar-3dlight-color:#D4D0C8;
 </STYLE>
 	</head>
 	<script>
+	var updateForm;
+	var win;
+	var parentMenuTreeId;
+    var selectMenuTreeId; 
  Ext.onReady(function() {
         
 	    var tree = new Ext.tree.TreePanel({
@@ -62,62 +66,63 @@ scrollbar-3dlight-color:#D4D0C8;
 	        root: new Ext.tree.AsyncTreeNode({
 	            expanded: false,
 	            children: <%=tree%>
-	        }),
-	         listeners: {//单击右侧进行修改
-	         'click': function(node, e){
-	                var nodeid=node.attributes.id;
-	                var parentMenuTreeId;
-	                if(node.leaf){
-	                parentMapTreeId=node.attributes.parentId;
-	                }else{
-	                parentMapTreeId='0';
-	                }
-	                parent.menuInfo.location.href="<%=basePath%>/console/menu/menuManage/menuTreeInfo.jsp?treeId="+nodeid+"&parentTreeId="+parentMenuTreeId;
-	             	parent.parent.Ext.getCmp('west').collapse();
-	             }
-	         }
+	        })
 	    });
 	    
+	   updateForm=new Ext.form.FormPanel({
+	   applyTo:'updateForm',
+	   baseCls: 'x-plain',
+       labelWidth:60,	
+       url:"<%=basePath%>/service/rest/xmmanager/saveZjglTree?yw_guid=<%=yw_guid%>&id="+selectMenuTreeId+"&parent_id="+parentMenuTreeId,
+       width:150, 
+       defaults:{xtype:"textfield",anchor:'90%'},   
+       items: [{	
+            name:'tree_name',
+            id:'tree_name',
+            fieldLabel:'节点名称'      			
+        }],				
+             buttons: [{
+                    text:'保存', handler: function() {
+                     var tree_name=  Ext.getCmp("tree_name").getValue();
+                      tree_name=escape(escape(tree_name));
+                   if(tree_name!=null){
+                        putClientCommond("xmmanager","saveZjglTree");
+    					putRestParameter("yw_guid",' <%=yw_guid%>');
+		   		        putRestParameter("id", selectMenuTreeId);
+		   		        putRestParameter("parent_id", parentMenuTreeId);
+		   		         putRestParameter("tree_name", tree_name);
+    					var result = restRequest();
+    					}
+                   }
+                  }]
+            });  
+	    win = new Ext.Window({
+                applyTo:'updateCar',
+                width:180,
+                height:100,
+                closeAction:'hide',
+				items:updateForm
+        	 }); 
 	        //增加右键事件
 	   tree.on('contextmenu',showRighrClickMenu,RighrClickMenu);
-	   var parentMenuTreeId;
-	   var selectMenuTreeId;   //要删除的menuTreeId
+	    //要删除的menuTreeId
 	   var RighrClickMenu=new Ext.menu.Menu({
 	   items:[{
-		   		   text:"添加子图层",
+		   		   text:"添加子节点",
 		   		   pressed:true,
 		   		   handler:function(tree){
-		   		   		var menuTreeId=newGuid();
-		   		   		//var path = "<%=basePath%>";
-		   		   		//var parentTreeId=node.attributes.parentId;
-		   			  	//var actionName="";
-		   		    	//var actionMethod="addMenuTreeNode";
-		   		    	//var parameter="treeId="+menuTreeId+"&menuType=2&parentId="+parentMenuTreeId;
-		   		        //var result = ajaxRequest(path,actionName,actionMethod,parameter);
-		   		        //页面刷新
-		   		   		document.location.reload();
-						parent.menuInfo.location.href="<%=basePath%>/console/menu/menuManage/menuTreeInfo.jsp?treeId="+menuTreeId+"&parentTreeId="+selectMenuTreeId;
-		   		   		parent.parent.Ext.getCmp('west').collapse();
+		
 		   		   }
 	   		   },
 	   		   {
 		   		   text:"删除",
 		   		    pressed:true,
 		   		    handler:function(tree){
-		   		    	/*
-		   		    	var path = "<%=basePath%>";
-		   		    	var beanName="menuAction";
-		   		    	var actionMethod="deleteMenu";
-		   		    	var parameter="treeId="+selectMenuTreeId+"&menuType=1&parentId="+parentMenuTreeId;
-		   		        var result = ajaxRequest(path,beanName,actionMethod,parameter);
-		   		    	*/
 		   		    	putClientCommond("menuAction","deleteMenu");
     					putRestParameter("treeId", selectMenuTreeId);
 		   		        putRestParameter("menuType", "1");
 		   		        putRestParameter("parentId", parentMenuTreeId);
     					var result = restRequest();
-		   		    	
-		   		    	//页面刷新
 		   		   		document.location.reload()
 		   		   }
 	   		   }
@@ -126,40 +131,23 @@ scrollbar-3dlight-color:#D4D0C8;
 	   
 	      var leaf_RighrClickMenu=new Ext.menu.Menu({
 	   	  items:[{
-	   		     text:"添加子图层",
+	   		     text:"添加子节点",
 		   		   pressed:true,
 		   		   handler:function(tree){
-		   		   		var menuTreeId=newGuid();
-		   		   		//var parentTreeId=node.attributes.parentId;
-		   		   		//var path = "<%=basePath%>";
-		   		    	//var actionName="treeAC";
-		   		    	//var actionMethod="addMenuTreeNode";
-		   		    	//var parameter="treeId="+menuTreeId+"&menuType=2&parentId="+parentMenuTreeId;
-		   		        //var result = ajaxRequest(path,actionName,actionMethod,parameter);
-		   		        //页面刷新
-		   		   		document.location.reload();
-						parent.menuInfo.location.href="<%=basePath%>/console/menu/menuManage/menuTreeInfo.jsp?treeId="+menuTreeId+"&parentTreeId="+selectMenuTreeId;
-		   		   		parent.parent.Ext.getCmp('west').collapse();
+		   		   		   updateForm.getForm().reset();
+                            win.show(); 
+                             win.setTitle('新增')
 		   		   }
 	   		   },
 	   		   {
 		   		   text:"删除",
 		   		    pressed:true,
 		   		    handler:function(tree){
-		   		    	/*
-		   		    	var path = "<%=basePath%>";
-		   		    	var beanName="menuAction";
-		   		    	var actionMethod="deleteMenu";
-		   		    	var parameter="treeId="+selectMenuTreeId+"&menuType=1&parentId="+parentMenuTreeId;
-		   		        var result = ajaxRequest(path,beanName,actionMethod,parameter);
-		   		    	*/
 		   		    	putClientCommond("menuAction","deleteMenu");
     					putRestParameter("treeId", selectMenuTreeId);
 		   		        putRestParameter("menuType", "1");
 		   		        putRestParameter("parentId", parentMenuTreeId);
     					var result = restRequest();
-		   		    	
-		   		    	//页面刷新
 		   		   		document.location.reload()
 		   		   }
 	   		   }
@@ -182,9 +170,9 @@ scrollbar-3dlight-color:#D4D0C8;
      //表单FormPanel
         var form = new Ext.form.FormPanel({
         renderTo: 'mapTree',
-        title   : '菜单树管理',
+        title   : '资金树管理',
         autoHeight: true,
-        width   : 500,
+        width   : 200,
        
         bodyStyle: 'padding: 5px',
         defaults: {
@@ -192,24 +180,8 @@ scrollbar-3dlight-color:#D4D0C8;
         },
         items   : [
         		tree
-   				],
-        buttons: [
-            {
-                text   : '新增一级菜单',
-                handler: function() {
-                		var menuTreeId=newGuid();
-		   		   		//var path = "<%=basePath%>";
-		   		    	//var actionName="treeAC";
-		   		    	//var actionMethod="addMenuTreeNode";
-		   		    	//var parameter="treeId="+menuTreeId+"&menuType=1&parentId=0";
-		   		        //var result = ajaxRequest(path,actionName,actionMethod,parameter);
-		   		        //页面刷新
-		   		   		document.location.reload();
-						parent.menuInfo.location.href="<%=basePath%>/console/menu/menuManage/menuTreeInfo.jsp?treeId="+menuTreeId+"&parentTreeId=0";
-		   		   		parent.parent.Ext.getCmp('west').collapse();
-				}
-          	}
-        ]
+   				]
+    
     });
     
     function newGuid(){ 
@@ -226,6 +198,10 @@ scrollbar-3dlight-color:#D4D0C8;
 </script>
 	<body bgcolor="#FFFFFF" >
 		<div id="mapTree"  style="width:500px;height:500px;OVERFLOW-y:auto;  "/>
-	</div></body>
+	</div>
+	<div id="updateCar" class="x-hidden">
+			<div id="updateForm" style="width: 102%; height: 90%;margin-left: 10px; margin-top: 5px"></div>
+		</div>
+	</body>
 </html>
 
