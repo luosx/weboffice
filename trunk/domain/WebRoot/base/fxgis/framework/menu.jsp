@@ -136,14 +136,6 @@ Ext.onReady(function(){
 								icon : '<%=basePath%>base/fxgis/framework/images/isearch.png',
 								tooltip : '属性查询',
 								handler : identify
-								},{		
-							    text : '压盖分析',
-							    id:'yganalyse',
-								cls : 'x-btn-text-icon',
-								hidden : true,
-								icon : '<%=basePath%>base/fxgis/framework/images/analyse.png',
-								tooltip : '压盖分析',
-								handler : glandAnalyse
 								},{
 							     text : '图斑查询',
 								cls : 'x-btn-text-icon',
@@ -209,14 +201,17 @@ Ext.onReady(function(){
 											tooltip : '面标记',
 											handler : drawPolygon
 										}]
-							           },{
+							           },
+							           /*
+							           {
 									    	text : '切换',
 											id:'image',
 											cls : 'x-btn-text-icon',
 											icon : '<%=basePath%>base/fxgis/framework/images/layers.png',
 											tooltip : '切换',
 											handler : changeBaseMap
-										},{
+										},
+										*/{
 									    	text : '全屏',
 											id:'full_screen',
 											cls : 'x-btn-text-icon',
@@ -240,7 +235,7 @@ Ext.onReady(function(){
 	});
 	if(!parent.parent.content){
 		Ext.getCmp('full_screen').setVisible(false);
-		Ext.getCmp('yganalyse').setVisible(true);
+		//Ext.getCmp('yganalyse').setVisible(true);
 	}	
 });
 
