@@ -50,7 +50,7 @@ public class PropertyAnalyse extends AbstractBaseBean {
         } else {
             ms.append("<td><SPAN style='COLOR:green'>未占用基本农田</SPAN>").append("</td></tr>");
         }             
-        sql = "select substr(t.hsx,0,4) year from dlgzwpr t where sde.st_contains (t.shape,sde.st_geometry(?,?))=1";
+        sql = "select t.year from dlgzwpr t where sde.st_contains (t.shape,sde.st_geometry(?,?))=1";
         ls = query(sql,GIS,new Object[]{wkt,srid});
         ms.append("<tr><td>卫片情况：</td>");
         if (ls.size() > 0) {

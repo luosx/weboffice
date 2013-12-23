@@ -156,7 +156,7 @@ public class Djfx extends AbstractBaseBean implements IDataClass{
         list.add(trb3);         
         
         
-        List<Map<String,Object>> spList = analysis.analysis("SP", "XMMC,PZWH,PZSJ", wkt);
+        List<Map<String,Object>> spList = analysis.analysis("dlgzspr", "XMMC,PZWH,PZSJ", wkt);
         double mianji = 0;
         double temp = 0;
         if(spList!=null && spList.size()>0){
@@ -249,7 +249,7 @@ public class Djfx extends AbstractBaseBean implements IDataClass{
         list.add(trb3);         
         
         
-        List<Map<String,Object>> gdList = analysis.analysis("GD", "XMMC,PZWH,PZYDRQ", wkt);
+        List<Map<String,Object>> gdList = analysis.analysis("dlgzgdr", "XMMC,SZFPW,PZRQ", wkt);
         double mianji = 0;
         double temp = 0;
         if(gdList!=null && gdList.size()>0){
@@ -265,9 +265,9 @@ public class Djfx extends AbstractBaseBean implements IDataClass{
                 }
                 TDBean tdb41 = new TDBean(gdMap.get("xmmc")==null?"&nbsp;":gdMap.get("xmmc").toString(), "150", "20");
                 trb4.addTDBean(tdb41);
-                TDBean tdb42 = new TDBean(gdMap.get("pzwh")==null?"&nbsp;":gdMap.get("pzwh").toString(), "150", "20");
+                TDBean tdb42 = new TDBean(gdMap.get("szfpw")==null?"&nbsp;":gdMap.get("szfpw").toString(), "150", "20");
                 trb4.addTDBean(tdb42);
-                TDBean tdb43 = new TDBean(gdMap.get("pzydrq")==null?"&nbsp;":gdMap.get("pzydrq").toString(), "150", "20");
+                TDBean tdb43 = new TDBean(gdMap.get("pzrq")==null?"&nbsp;":gdMap.get("pzrq").toString(), "150", "20");
                 trb4.addTDBean(tdb43);
                 TDBean tdb44 = new TDBean(area, "150", "20");
                 trb4.addTDBean(tdb44);
@@ -336,7 +336,7 @@ public class Djfx extends AbstractBaseBean implements IDataClass{
         list.add(trb2);          
         
         
-        List<Map<String,Object>> ghList = analysis.analysis("GH_TDYTQ", "TDYTQLXDM", wkt);
+        List<Map<String,Object>> ghList = analysis.analysis("dlgztdytqr", "TDYTFQDM", wkt);
         double fhghmj = 0;
         double bfhghmj = 0;
         double zyjbntmj = 0;
@@ -345,7 +345,7 @@ public class Djfx extends AbstractBaseBean implements IDataClass{
         
         for(int i=0;i<ghList.size();i++){
             Map<String,Object> ghMap = ghList.get(i);
-            String tdytqlxdm = (String)ghMap.get("tdytqlxdm");            
+            String tdytqlxdm = (String)ghMap.get("tdytfqdm");            
             double ghdlmj = 0;
             if(ghMap.get("area")!=null){
                 ghdlmj = Double.parseDouble(ghMap.get("area").toString());              
@@ -420,7 +420,7 @@ public class Djfx extends AbstractBaseBean implements IDataClass{
         list.add(trb2);         
         
         
-        List<Map<String,Object>> xzList = analysis.analysis("XZ", "TBBH,QSDWMC,DLBM,DLMC", wkt);
+        List<Map<String,Object>> xzList = analysis.analysis("dlgzxzr", "TBBH,QSDWMC,DLBM,DLMC", wkt);
         double nydmj = 0;
         double gengdmj = 0;
         double jsydmj = 0;
