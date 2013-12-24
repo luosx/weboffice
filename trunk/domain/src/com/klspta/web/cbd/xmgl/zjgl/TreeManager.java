@@ -25,28 +25,28 @@ public class TreeManager extends AbstractBaseBean {
 
     public String getTree(String yw_guid){
         StringBuffer buffer = new StringBuffer();
-       buffer.append("{text:'资金支出',leaf:0,id:'1',");
-       buffer.append("children:[{text:'一级开发支出',leaf:0,id:'101',");
+       buffer.append("{text:'Ⅱ.资金支出',leaf:0,id:'1',");
+       buffer.append("children:[{text:'2.1 一级开发支出',leaf:0,id:'101',");
        buffer.append("children:[");
-       StringBuffer qqfy = getChaild_tree(yw_guid,"前期费用","QQFY");
+       StringBuffer qqfy = getChaild_tree(yw_guid,"2.1.1 前期费用","QQFY");
        buffer.append(qqfy);
        buffer.append(",");
-       StringBuffer cqfy = getChaild_tree(yw_guid,"拆迁费用","CQFY");
+       StringBuffer cqfy = getChaild_tree(yw_guid,"2.1.2 拆迁费用","CQFY");
        buffer.append(cqfy);
        buffer.append(",");
-       StringBuffer szfy = getChaild_tree(yw_guid,"市政费用","SZFY");
+       StringBuffer szfy = getChaild_tree(yw_guid,"2.1.3 市政费用","SZFY");
        buffer.append(szfy);
        buffer.append(",");
-       StringBuffer cwfy = getChaild_tree(yw_guid,"财务费用","CWFY");
+       StringBuffer cwfy = getChaild_tree(yw_guid,"2.1.4 财务费用","CWFY");
        buffer.append(cwfy);
        buffer.append(",");
-       StringBuffer qlfy = getChaild_tree(yw_guid,"管理费","GLFY");
+       StringBuffer qlfy = getChaild_tree(yw_guid,"2.1.5 管理费","GLFY");
        buffer.append(qlfy);
        buffer.append("]},");
-       StringBuffer cyzjfh = getChaild_tree(yw_guid,"筹融资金返还","CRZJFH");
+       StringBuffer cyzjfh = getChaild_tree(yw_guid,"2.2 筹融资金返还","CRZJFH");
        buffer.append(cyzjfh);
        buffer.append(",");
-       StringBuffer qtzc = getChaild_tree(yw_guid,"其他支出","QTZC");
+       StringBuffer qtzc = getChaild_tree(yw_guid,"2.3 其他支出","QTZC");
        buffer.append(qtzc);
        buffer.append("]}");
         return  buffer.toString();

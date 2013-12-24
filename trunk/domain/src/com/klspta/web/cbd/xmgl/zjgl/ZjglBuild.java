@@ -3,16 +3,9 @@ package com.klspta.web.cbd.xmgl.zjgl;
 import java.util.List;
 import java.util.Map;
 
-import com.klspta.base.util.UtilFactory;
-
-
 
 
 public class ZjglBuild {
-    static ZjglData zjglData= new ZjglData();
-    String lr="";
-    String zc="";
-    
     /****
      * 
      * <br>Description:构建title
@@ -23,21 +16,21 @@ public class ZjglBuild {
    public static StringBuffer  buildTitle(){
        StringBuffer Buffer = new StringBuffer();
        Buffer.append("<table  width='1350px'>" +
-       		"<tr bgcolor='#C0C0C0' >" +
-       		"<td rowspan='3'  align='center' width='200px' ><h3>类别</h3></td>" +
+       		"<tr class='title' >" +
+       		"<td rowspan='3' align='center' width='200px' ><h3>类别</h3></td>" +
        		"<td rowspan='3'  align='center' width='50px'><h3>预算费用</h3></td>" +
        		"<td rowspan='3' colspan='2' align='center' width='120px'><h3>累计已缴纳/已审批资金</h3></td>" +
        		"<td rowspan='2' colspan='2' align='center' width='200'><h3>累计发生(或返还)费用</h3></td><td rowspan='3'  align='center' width='80'><h3>期初余额</h3></td>" +
        		"<td colspan='12'  align='center' width='600' ><h3>xx年资金审批</h3></td>" +
        		"<td  rowspan='3'  align='center' width='80px'><h3>XX年度流入/审批</h3></td>" +
        		"</tr>" +
-       	   "<tr bgcolor='#C0C0C0'>" +
+       	   "<tr class='title'>" +
        	   "<td colspan='3' align='center' width='150px'><h3>一季度</h3></td>" +
        	   "<td colspan='3' align='center' width='150'><h3>二季度</h3></td>" +
        	   "<td colspan='3' align='center' width='150'><h3>三季度</h3></td>" +
        	   "<td colspan='3' align='center' width='150px'><h3>四季度</h3></td>" +
        	   "</tr>" +
-       		"<tr bgcolor='#C0C0C0'>" +
+       		"<tr class='title'>" +
        		"<td align='center' width='60px'><h3>已发生/到账</h3></td>" +
        		"<td align='center' width='60px'><h3>资金进度</h3></td>" +
        		"<td align='center' width='50px'><h3>一月</h3></td>" +
@@ -55,13 +48,12 @@ public class ZjglBuild {
        		"</tr>");
        return Buffer;
    }
-   public static  StringBuffer buildZjlr(String yw_guid){
+   public static  StringBuffer buildZjlr(List<Map<String, Object>> list){
       StringBuffer stringBuffer = new StringBuffer();
-       List<Map<String, Object>> list = zjglData. getZJGL_ZJLR(yw_guid);
        if (list!=null) {
        for (int i=0;i<list.size();i++){
          stringBuffer.append("<tr>"+
-         "<td ><input type='text' style='width:150px;'  onchange='addzjlr(this); return false' value='"+
+         "<td ><input type='text' style='width:150px;'   value='"+
          delNull(String.valueOf( list.get(i).get("lb")))+  " ' id='lr@"+String.valueOf( list.get(i).get("status"))+"@1'/></td>"+
         "<td ><input type='text' style='width:90px;' onchange='addzjlr(this); return false' value='" +
         delNull(String.valueOf(list.get(i).get("ysfy")))+ "'  id='lr@"+String.valueOf( list.get(i).get("status"))+"@2'/></td>"+
@@ -107,18 +99,17 @@ public class ZjglBuild {
        
    }
    
-  public static StringBuffer buildZjzc_father(String yw_guid,String type){
-      List<Map<String, Object>> list = zjglData. getZJGL_father(yw_guid, type);
+  public static StringBuffer buildZjzc_father(List<Map<String, Object>> list){
       StringBuffer  stringBuffer=  new StringBuffer();
       if (list!=null) {
       for (int i=0;i<list.size();i++){
           if(i==0){
         stringBuffer.append("<tr>"+
-        "<td  rowspan='8'><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='"+
+        "<td  rowspan='8'><input type='text' style='width:90px;'  value='"+
         delNull(String.valueOf(list.get(i).get("LB")))+  "' id='"+String.valueOf( list.get(i).get("status"))+"@"+String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) +"@1'/></td>"+
        "<td rowspan='8'><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
        delNull( String.valueOf(list.get(i).get("YSFY")))+ "'id='"+String.valueOf( list.get(i).get("status"))+"@"+String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) +"@2'/></td>"+
-       "<td ><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
+       "<td ><input type='text' style='width:90px;'  value='" +
        delNull(String.valueOf(list.get(i).get("LJ")))+ "'id='"+String.valueOf( list.get(i).get("status"))+"@"+String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) +"@3'/></td>"+
       "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
       delNull(String.valueOf(list.get(i).get("LJ2")))+  "'id='"+String.valueOf( list.get(i).get("status"))+"@"+String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) +"@4'/></td>"+
@@ -158,7 +149,7 @@ public class ZjglBuild {
       }else{
           stringBuffer.append("<tr>"+
                   delNull(String.valueOf(list.get(i).get("YSFY")))+ "</td>"+
-                 "<td ><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
+                 "<td ><input type='text' style='width:90px;'  value='" +
                  delNull(String.valueOf(list.get(i).get("LJ")))+ "'id='"+String.valueOf( list.get(i).get("status"))+"@"+String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) +"@3'/></td>"+
                  "<td ><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
                  delNull( String.valueOf(list.get(i).get("LJ1")))+ "'id='"+String.valueOf( list.get(i).get("status"))+"@"+String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) +"@4'/></td>"+
@@ -198,18 +189,17 @@ public class ZjglBuild {
       return stringBuffer;
   } 
  
-  public static StringBuffer buildZjzc_child(String yw_guid ,String tree_name,String type){
+  public static StringBuffer buildZjzc_child(List<Map<String, Object>> list){
        StringBuffer stringBuffer = new StringBuffer();
-      List<Map<String, Object>> list = zjglData. getZJGL_child(yw_guid,tree_name,type);
       if (list!=null) {
       for (int i=0;i<list.size();i++){
           if(i==0){
               stringBuffer.append("<tr>"+
-                      "<td  rowspan='8'><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='"+
+                      "<td  rowspan='8'><input type='text' style='width:90px;'  value='"+
                       delNull(String.valueOf(list.get(i).get("LB")))+  " 'id='"+String.valueOf( list.get(i).get("status"))+"@"+ String.valueOf( list.get(i).get("lb"))  +"@"+String.valueOf( list.get(i).get("sort")) +"@1'/></td>"+
                      "<td rowspan='8'><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
                      delNull( String.valueOf(list.get(i).get("YSFY")))+ "'id='"+String.valueOf( list.get(i).get("status"))+"@"+ String.valueOf( list.get(i).get("lb"))  +"@"+String.valueOf( list.get(i).get("sort")) +"@2'/></td>"+
-                     "<td ><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
+                     "<td ><input type='text' style='width:90px;'  value='" +
                      delNull(String.valueOf(list.get(i).get("LJ")))+ "'id='"+String.valueOf( list.get(i).get("status"))+"@"+ String.valueOf( list.get(i).get("lb"))  +"@"+String.valueOf( list.get(i).get("sort")) +"@3'/></td>"+
                     "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
                     delNull(String.valueOf(list.get(i).get("LJ2")))+  "'id='"+String.valueOf( list.get(i).get("status"))+"@"+ String.valueOf( list.get(i).get("lb"))  +"@"+String.valueOf( list.get(i).get("sort")) +"@4'/></td>"+
@@ -248,7 +238,7 @@ public class ZjglBuild {
                      "</tr>");
                     }else{
                         stringBuffer.append("<tr>"+
-                                "<td ><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
+                                "<td ><input type='text' style='width:90px;'  value='" +
                                 delNull(String.valueOf(list.get(i).get("LJ")))+ "'id='"+String.valueOf( list.get(i).get("status"))+"@"+ String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) +"@3'/></td>"+
                                "<td><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
                                delNull(String.valueOf(list.get(i).get("LJ2")))+  "'id='"+String.valueOf( list.get(i).get("status"))+"@"+ String.valueOf( list.get(i).get("lb"))  +"@"+String.valueOf( list.get(i).get("sort")) +"@4'/></td>"+
