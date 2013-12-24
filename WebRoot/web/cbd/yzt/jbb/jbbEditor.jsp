@@ -22,6 +22,39 @@
 input,img {
 	vertical-align: middle;
 }
+/*!
+ * Ext JS Library 3.0.0
+ * Copyright(c) 2006-2009 Ext JS, LLC
+ * licensing@extjs.com
+ * http://www.extjs.com/license
+ */
+/*
+ * FileUploadField component styles
+ */
+.x-form-file-wrap {
+    position: relative;
+    height: 22px;
+}
+.x-form-file-wrap .x-form-file {
+	position: absolute;
+	right: 0;
+	-moz-opacity: 0;
+	filter:alpha(opacity: 0);
+	opacity: 0;
+	z-index: 2;
+    height: 22px;
+}
+.x-form-file-wrap .x-form-file-btn {
+	position: absolute;
+	right: 0;
+	z-index: 1;
+}
+.x-form-file-wrap .x-form-file-text {
+    position: absolute;
+    left: 0;
+    z-index: 3;
+    color: #777;
+}
 </style>
 		<script>
 		var basePath="<%=basePath%>";
@@ -34,5 +67,6 @@ input,img {
 			<div id="updateForm"
 				style="width: 100%; height: 90%; margin-left: 10px; margin-top: 5px"></div>
 		</div>
+		<div id="fi-form" style="position:absolute; left:200px; top:200px; width:200px; height:100px; background:#FFFFFF; display:none;" ></div>
 	</body>
 </html>
