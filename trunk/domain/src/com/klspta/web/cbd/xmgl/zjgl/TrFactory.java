@@ -9,6 +9,12 @@ public class TrFactory {
 //资金指出-入口
    public static StringBuffer getmodel(List<Map<String, Object>> list, String yw_guid, String type) {
         StringBuffer buffer = new StringBuffer();
+        if(type.equals("ZJZC")){
+            List<Map<String, Object>> li = zjglData.getZC_sum(yw_guid);
+            StringBuffer stringBuffer = ZjglBuild.buildZjzc_father(li);
+            buffer.append(stringBuffer);
+            return buffer;
+        }else{
         if (list != null||list.size()>0) {
             StringBuffer fatehr = buildFather(yw_guid, type);
             StringBuffer chaild = buildChild(yw_guid, list, type);
@@ -20,7 +26,7 @@ public class TrFactory {
             buffer.append(fatehr);
             return buffer;
         }
-
+        }
     }
   //资金流入-入口
    public static StringBuffer getmod(String yw_guid){
