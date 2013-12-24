@@ -29,7 +29,7 @@
 	<body>
 	<div style="width: 100%;height: 100%;">
 		<iframe id="east" name="east" class="div2"
-			style="width: 38%; height: 100%; overflow: auto; border: 0px;float: left;margin-left: 10px;margin-top: 0px" src="<%=basePath%>base/fxgis/fx/FxGIS.html?i=false"></iframe>
+			style="width: 38%; height: 100%; overflow: auto; border: 0px;float: left;margin-left: 10px;margin-top: 0px" src="<%=basePath%>base/fxgis/framework/gisViewFrame.jsp"></iframe>
 		<iframe id="west" name="west" class="div1"
 			style="width: 61%; height: 100%; overflow: auto; margin: " src="jbbEditor.jsp"></iframe>
 		
