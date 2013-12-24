@@ -50,13 +50,14 @@
 		        store: store,
 		        columns: [
 		        	new Ext.grid.RowNumberer(),
-			<%for(int i = 0; i < showList.length - 2; i++){
+			<%for(int i = 0; i < showList.length-3; i++){
 				if(!"hiddlen".equals(showList[i][2])){
 			%>
 				{header: '<%=showList[i][2]%>', dataIndex:'<%=showList[i][0]%>', width: width*<%=Float.parseFloat(showList[i][1])%>, sortable: true,renderer:changKeyword},
 			<%}}%>
 	          	{header: '详细信息', dataIndex:'XIANGXI',width: width*0.05, sortable: false,renderer:view},
-          		{header: '删除',dataIndex:'DELETE',width: width*0.03, sortable: false,renderer:del}
+	          	{header: '立案', dataIndex:'LIAN',width: width*0.05, sortable: false,renderer:lian},
+          		{header: '删除',dataIndex:'DELETE',width: width*0.05, sortable: false,renderer:del}
 		        ], 
 		        tbar:[
 	    			{xtype:'label',text:'快速查询:',width:60},
@@ -95,7 +96,11 @@
 	function view(id){
 		return "<a href='#' onclick='showDetail(\""+id+"\");return false;'><img src='/domain/base/form/images/view.png' alt='详细信息'></a>";
 	}
-	
+
+	function lian(id){
+		return "<a href='#' onclick='register(\""+id+"\");return false;'><img src='/domain/base/form/images/view.png' alt='立案'></a>";
+	}
+		
 	function del(id){
  		return "<a href='#' onclick='delTask(\""+id+"\");return false;'><img src='/domain/base/form/images/delete.png' alt='删除'></a>";
 	}
@@ -122,6 +127,12 @@
 		var width = window.screen.availWidth;
 		window.open(url,"","width="+width+",height="+height);
 	}
+	function register(id){
+		var url = "http://192.168.8.132/xzcf/sys/login/login.aspx";
+		var height = window.screen.availHeight;
+		var width = window.screen.availWidth;
+		window.open(url,"","width="+width+",height="+height);		
+	}
 		<!--查询方法 add by 姚建林 2013-6-20-->
         function query(){
            var keyWord=Ext.getCmp('keyword').getValue();
@@ -141,12 +152,13 @@
 			});
           grid.reconfigure(store, new Ext.grid.ColumnModel([
         	new Ext.grid.RowNumberer(),
-			<%for(int i = 0; i < showList.length - 2 ; i++){
+			<%for(int i = 0; i < showList.length-3 ; i++){
 				if(!"hiddlen".equals(showList[i][2])){
 			%>
 				{header: '<%=showList[i][2]%>', dataIndex:'<%=showList[i][0]%>', width: width*<%=Float.parseFloat(showList[i][1])%>, sortable: true,renderer:changKeyword},
 			<%}}%>
-	          	{header: '详细信息', dataIndex:'XIANGXI',width: width*0.1, sortable: false,renderer:view},
+	          	{header: '详细信息', dataIndex:'XIANGXI',width: width*0.05, sortable: false,renderer:view},
+	          	{header: '立案', dataIndex:'LIAN',width: width*0.05, sortable: false,renderer:lian},
           		{header: '删除',dataIndex:'DELETE',width: width*0.05, sortable: false,renderer:del}
           ]));
           	//重新绑定分页工具栏
