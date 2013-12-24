@@ -31,18 +31,39 @@
 		<style type="text/css">
 table{
 border-right:1px solid #000000;
-border-bottom:1px solid #000000
+border-bottom:1px solid #000000;
+ font-size: 14px;
+    border-color:#000000;
+background-color: #A8CEFF;
 }
 table td{
 border-left:1px solid #000000;
 border-top:1px solid #000000;
+     text-align:center;
+    border-color:#000000;
+    background-color: #A8CEFF;
 } 
+tr{
+    border-width: 0px;
+    text-align:center;
+    background-color: #A8CEFF;
+}
+.title{
+    font-weight:bold;
+    font-size: 15px;
+    text-align:center;
+    line-height: 30px;
+	margin-top: 3px;
+	background-color: #A8CEFF;
+  }
 
 input{
 border:none;
+background-color: #A8CEFF;
 }
 textarea{
 border:none;
+background-color: #A8CEFF;
 }
  </style>
 <script type="text/javascript">
