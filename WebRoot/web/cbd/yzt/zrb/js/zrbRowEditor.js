@@ -73,8 +73,7 @@ function add(){
 }
 
 function dele(){
-	
-	
+	alert("dele");
 }
 
 
