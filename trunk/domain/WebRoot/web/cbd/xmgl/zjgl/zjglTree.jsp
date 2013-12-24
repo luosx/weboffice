@@ -48,9 +48,16 @@ scrollbar-3dlight-color:#D4D0C8;
 	var win;
 	var parentMenuTreeId;
     var selectMenuTreeId; 
+      var tree;
+      var root;
  Ext.onReady(function() {
-        
-	    var tree = new Ext.tree.TreePanel({
+      root= new Ext.tree.AsyncTreeNode({
+	            expanded: true,
+	           // expandChildNodes：true,
+	            children: <%=tree%>
+	        });
+	        
+	 tree = new Ext.tree.TreePanel({
 	        useArrows:true,
 	        autoScroll:true,
 	        animate:true,
@@ -60,13 +67,11 @@ scrollbar-3dlight-color:#D4D0C8;
 	        containerScroll: true,
 	        rootVisible: false,
 	        frame: true,
+	        expandChildNodes:true,
 	        loader: new Ext.tree.TreeLoader(),
-	        root: new Ext.tree.AsyncTreeNode({
-	            expanded: false,
-	            children: <%=tree%>
-	        })
+	        root: root
+	        
 	    });
-	    
 	   updateForm=new Ext.form.FormPanel({
 	   applyTo:'updateForm',
 	   baseCls: 'x-plain',
@@ -77,7 +82,7 @@ scrollbar-3dlight-color:#D4D0C8;
        items: [{	
             name:'tree_name',
             id:'tree_name',
-            fieldLabel:'节点名称'      			
+            fieldLabel:'费用名称'      			
         }],				
              buttons: [{
                     text:'保存', handler: function() {
@@ -96,6 +101,7 @@ scrollbar-3dlight-color:#D4D0C8;
                    }
                   }]
             });  
+         
 	    win = new Ext.Window({
                 applyTo:'updateCar',
                 width:180,
@@ -104,11 +110,12 @@ scrollbar-3dlight-color:#D4D0C8;
 				items:updateForm
         	 }); 
 	        //增加右键事件
-	   tree.on('contextmenu',showRighrClickMenu,RighrClickMenu);
+	    tree.on('contextmenu',showRighrClickMenu,RighrClickMenu);
+	  
 	    //要删除的menuTreeId
 	   var RighrClickMenu=new Ext.menu.Menu({
 	   items:[{
-		   		   text:"添加子节点",
+		   		   text:"添加指出费用",
 		   		   pressed:true,
 		   		   handler:function(tree){
 		
@@ -119,12 +126,12 @@ scrollbar-3dlight-color:#D4D0C8;
 	   
 	      var leaf_RighrClickMenu=new Ext.menu.Menu({
 	   	  items:[{
-	   		     text:"添加子节点",
+	   		     text:"添加指出费用",
 		   		   pressed:true,
 		   		   handler:function(tree){
 		   		   		   updateForm.getForm().reset();
                             win.show(); 
-                             win.setTitle('新增')
+                             win.setTitle('添加指出费用')
 		   		   }
 	   		   }
 	   		   ]
@@ -168,7 +175,7 @@ scrollbar-3dlight-color:#D4D0C8;
     } 
     return guid; 
 } 
-    
+            tree.expandAll(); 
 });
 
 </script>
