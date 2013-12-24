@@ -79,7 +79,7 @@ public static String  QTZC="QTZC";
        stringBuffer.append(cqfy);
        //一级开发-市政费用
        List<Map<String, Object>> zc_szfy = treeManager.getZC_tree(yw_guid, SZFY);
-       StringBuffer szfy = TrFactory.getmodel(zc_szfy,yw_guid, CQFY);
+       StringBuffer szfy = TrFactory.getmodel(zc_szfy,yw_guid, SZFY);
        stringBuffer.append(szfy);
        //一级开发-财务费用
        List<Map<String, Object>> zc_cwfy = treeManager.getZC_tree(yw_guid,CWFY);

@@ -156,8 +156,8 @@ public void saveZJGL_ZJZC() {
     String sort = request.getParameter("sort");
     String cols = request.getParameter("cols");
     int i=Integer.parseInt(cols);
-    String sql="update xmzjgl_lr set "+ZJGL_ZC[i-1]+"= "+val+"  where yw_guid=? and status=? and sort=?";
-    update(sql, YW,new Object []{yw_guid,status,sort});
+    String sql="update xmzjgl_zc set "+ZJGL_ZC[i-1]+"= "+val+"  where yw_guid=? and status=? and lb=? and sort=?";
+    update(sql, YW,new Object []{yw_guid,status,lb,sort});
     
 }
 

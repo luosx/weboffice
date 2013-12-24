@@ -37,7 +37,7 @@ public class TrFactory {
 
     public static StringBuffer getmodel(List<Map<String, Object>> list, String yw_guid, String type) {
         StringBuffer buffer = new StringBuffer();
-        if (list != null) {
+        if (list != null||list.size()>0) {
             StringBuffer fatehr = buildFather(yw_guid, type);
             StringBuffer chaild = buildChild(yw_guid, list, type);
             buffer.append(fatehr);
