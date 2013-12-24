@@ -42,6 +42,9 @@ public class GisFactory extends AbstractBaseBean{
 			case TYPE_ZRB:
 				insertCIS = new ZrbInsertGIS();
 				break;
+			case TYPE_JBB:
+				insertCIS = new JbbInsertGIS();
+				break;
 			default:
 				insertCIS = new ZrbInsertGIS();
 				break;
