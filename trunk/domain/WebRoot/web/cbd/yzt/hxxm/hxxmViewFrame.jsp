@@ -15,6 +15,11 @@
 		<script type="text/javascript">
 			frames['west'].frames['report'].setRecord(s);
 		</script>
+   <script type="text/javascript">
+	function drawPolygonCallback(s){
+		frames['west'].setRecord(s);
+	}
+</script>
 <style type="text/css">
 .div1{
    	float:left;position:relative;left:5px;
@@ -22,12 +27,13 @@
    .div2{
    	float:left;margin-left:10px;position:relative;left:0px;
    }
+
 </style>
 	</head>
 	<body>
-	<div style="min-width: 1370px;width: 1300px;height: 500px;">
+	<div style="width: 100%;height: 100%;">
 		<iframe id="east" name="east" class="div2"
-			style="width: 38%; height: 100%; overflow: auto; border: 0px;float: left;margin-left: 10px;margin-top: 0px" src="<%=basePath%>base/fxgis/fx/FxGIS.html?i=false"></iframe>
+			style="width: 38%; height: 100%; overflow: auto; border: 0px;float: left;margin-left: 10px;margin-top: 0px" src="<%=basePath%>base/fxgis/framework/gisViewFrame.jsp"></iframe>
 		<iframe id="west" name="west" class="div1"
 			style="width: 61%; height: 100%; overflow: auto; margin: " src="hxxmEditor.jsp"></iframe>
 	</div>
