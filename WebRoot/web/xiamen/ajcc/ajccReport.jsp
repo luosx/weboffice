@@ -99,7 +99,7 @@ Object userprincipal = SecurityContextHolder.getContext().getAuthentication().ge
   </head>
   <script type="text/javascript">
   		function exportExcel(){
-		    var curTbl = document.getElementById("AJCCCX"); 
+		    var curTbl = document.getElementById("center"); 
  			try{
 		    	var oXL = new ActiveXObject("Excel.Application");
 		    }catch(err){
