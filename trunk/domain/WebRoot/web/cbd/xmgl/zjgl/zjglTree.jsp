@@ -90,8 +90,8 @@ scrollbar-3dlight-color:#D4D0C8;
 		   		        putRestParameter("parent_id", parentMenuTreeId);
 		   		         putRestParameter("tree_name", tree_name);
     					var result = restRequest();
-    					//document.location.reload();
-    					document.parentWindow.location.reload();
+    					document.location.reload();
+    					parent.right.location.reload();
     					}
                    }
                   }]
@@ -113,19 +113,6 @@ scrollbar-3dlight-color:#D4D0C8;
 		   		   handler:function(tree){
 		
 		   		   }
-	   		   },
-	   		   {
-		   		   text:"删除",
-		   		    pressed:true,
-		   		    handler:function(tree){
-		   		    	putClientCommond("menuAction","deleteMenu");
-    					putRestParameter("treeId", selectMenuTreeId);
-		   		        putRestParameter("menuType", "1");
-		   		        putRestParameter("parentId", parentMenuTreeId);
-    					var result = restRequest();
-		   		   		//document.location.reload()
-		   		   		document.parentWindow.location.reload();
-		   		   }
 	   		   }
 	   		   ]
 	   });
@@ -138,18 +125,6 @@ scrollbar-3dlight-color:#D4D0C8;
 		   		   		   updateForm.getForm().reset();
                             win.show(); 
                              win.setTitle('新增')
-		   		   }
-	   		   },
-	   		   {
-		   		   text:"删除",
-		   		    pressed:true,
-		   		    handler:function(tree){
-		   		    	putClientCommond("menuAction","deleteMenu");
-    					putRestParameter("treeId", selectMenuTreeId);
-		   		        putRestParameter("menuType", "1");
-		   		        putRestParameter("parentId", parentMenuTreeId);
-    					var result = restRequest();
-		   		   		document.location.reload()
 		   		   }
 	   		   }
 	   		   ]
