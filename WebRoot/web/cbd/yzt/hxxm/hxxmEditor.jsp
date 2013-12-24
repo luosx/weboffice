@@ -24,8 +24,8 @@ input,img {
 }
 </style>
 		<script>
-		var basePath="<%=basePath%>";
-</script>
+			var basePath="<%=basePath%>";
+		</script>
 		<script src="js/hxxmEditor.js"></script>
 	</head>
 	<body bgcolor="#FFFFFF" topmargin="0" leftmargin="0">
