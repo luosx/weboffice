@@ -1,4 +1,5 @@
 var zrbbh = "";
+var num = 0;
 
 //单击地图定位
 function showMap(objid){
@@ -32,4 +33,26 @@ function setRecord(polygon){
 	parent.parent.frames['east'].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").findFeature("cbd", "0", zrbbh, "ZRBBH");
 	
 }
+
+
+function add(){
+	var table = new tableoper();
+	table.init(document.getElementById("HXXM"));
+	Ext.MessageBox.prompt('输入', '项目名称:', function(btn, text){
+		if(btn == 'ok'){
+			var rows = table.addRow(3,4,num);
+			num++;
+			rows.cells[1].innerHTML = text;
+			//向后台库中添加一笔数据
+			putClientCommond("hxxmHandle","insert");
+	    	putRestParameter("xmmc",escape(escape(text))); 
+	    	var result = restRequest();
+    	}
+	});
+}
+
+function dele(){
+	alert("dele");
+}
+
 
