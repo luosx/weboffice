@@ -126,4 +126,28 @@ public class HxxmData extends AbstractBaseBean implements IData {
 			xmList.set(num, map);
 		}
 	}
+
+	/**
+	 * 
+	 * <br>Description:修改红线项目的值
+	 * <br>Author:黎春行
+	 * <br>Date:2013-12-24
+	 * @param xmmc
+	 * @param field
+	 * @param value
+	 * @return
+	 */
+	public boolean modifyValue(String xmmc, String field, String value) {
+    	StringBuffer sqlBuffer = new StringBuffer();
+    	sqlBuffer.append(" update ").append(formName);
+    	sqlBuffer.append(" t set t.").append(field).append("=? where t.xmname=?");
+    	int i = update(sqlBuffer.toString(), YW, new Object[]{value, xmmc});
+		return i == 1 ? true : false;
+	}
+
+	public boolean insertHxxm(String xmmc) {
+		String sql = "insert into " + formName + "(xmname) values(?)";
+		int result = update(sql, YW, new Object[]{xmmc});
+		return result == 1 ? true : false;
+	}
 }
