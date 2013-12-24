@@ -4,14 +4,11 @@
 var mouserLocation;
 var isMoveReady=false;
 var e;
-function mouserMenuMoveOnOrOut(obj,imagePath)
-{
+function mouserMenuMoveOnOrOut(obj,imagePath){
 	if(imagePath.indexOf(".")==-1)
 		obj.style.color=imagePath;
-	else if(imagePath!=""||imagepath!="null")
-	{
-		//alert(obj.children[i]);
-		//obj.style.background="url(<%=resourcePath%>/images/top/"+imagePath+")";
+	else if(imagePath!=""||imagepath!="null"){
+		obj.children[0].src = "../images/menu/"+imagePath;
 	}
 }
 
