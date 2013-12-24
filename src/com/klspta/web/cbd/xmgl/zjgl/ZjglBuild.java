@@ -17,12 +17,12 @@ public class ZjglBuild {
        StringBuffer Buffer = new StringBuffer();
        Buffer.append("<table  width='1350px'>" +
        		"<tr class='title' >" +
-       		"<td rowspan='3' align='center' width='200px' ><h3>类别</h3></td>" +
-       		"<td rowspan='3'  align='center' width='50px'><h3>预算费用</h3></td>" +
-       		"<td rowspan='3' colspan='2' align='center' width='120px'><h3>累计已缴纳/已审批资金</h3></td>" +
-       		"<td rowspan='2' colspan='2' align='center' width='200'><h3>累计发生(或返还)费用</h3></td><td rowspan='3'  align='center' width='80'><h3>期初余额</h3></td>" +
-       		"<td colspan='12'  align='center' width='600' ><h3>xx年资金审批</h3></td>" +
-       		"<td  rowspan='3'  align='center' width='80px'><h3>XX年度流入/审批</h3></td>" +
+       		"<td rowspan='3' align='center' width='200px' >类别</td>" +
+       		"<td rowspan='3'  align='center' width='50px'>预算费用</td>" +
+       		"<td rowspan='3' colspan='2' align='center' width='120px'>累计已缴纳/已审批资金</td>" +
+       		"<td rowspan='2' colspan='2' align='center' width='200'>累计发生(或返还)费用</td><td rowspan='3'  align='center' width='80'><h3>期初余额</h3></td>" +
+       		"<td colspan='12'  align='center' width='600' >xx年资金审批</td>" +
+       		"<td  rowspan='3'  align='center' width='80px'>XX年度流入/审批</td>" +
        		"</tr>" +
        	   "<tr class='title'>" +
        	   "<td colspan='3' align='center' width='150px'><h3>一季度</h3></td>" +
@@ -53,7 +53,7 @@ public class ZjglBuild {
        if (list!=null) {
        for (int i=0;i<list.size();i++){
          stringBuffer.append("<tr>"+
-         "<td ><input type='text' style='width:150px;'   value='"+
+         "<td ><input type='text' style='width:180px;'   value='"+
          delNull(String.valueOf( list.get(i).get("lb")))+  " ' id='lr@"+String.valueOf( list.get(i).get("status"))+"@1'/></td>"+
         "<td ><input type='text' style='width:90px;' onchange='addzjlr(this); return false' value='" +
         delNull(String.valueOf(list.get(i).get("ysfy")))+ "'  id='lr@"+String.valueOf( list.get(i).get("status"))+"@2'/></td>"+
@@ -105,7 +105,7 @@ public class ZjglBuild {
       for (int i=0;i<list.size();i++){
           if(i==0){
         stringBuffer.append("<tr>"+
-        "<td  rowspan='8'><input type='text' style='width:90px;'  value='"+
+        "<td  rowspan='8'><input type='text' style='width:180px;'  value='"+
         delNull(String.valueOf(list.get(i).get("LB")))+  "' id='"+String.valueOf( list.get(i).get("status"))+"@"+String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) +"@1'/></td>"+
        "<td rowspan='8'><input type='text' style='width:90px;' onchange='addrzxq(this); return false' value='" +
        delNull( String.valueOf(list.get(i).get("YSFY")))+ "'id='"+String.valueOf( list.get(i).get("status"))+"@"+String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) +"@2'/></td>"+
