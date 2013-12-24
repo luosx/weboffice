@@ -15,13 +15,13 @@ public class ZjglData extends AbstractBaseBean {
     }
 
     public List<Map<String, Object>> getZJGL_father(String yw_guid, String type) {
-        String sql = "select * from  XMZJGL_ZC where status=? and yw_guid=? order by  sort";
+        String sql = "select * from  XMZJGL_ZC where status=? and yw_guid=? and zcstatus is  null order by  sort";
         List<Map<String, Object>> list = query(sql, YW, new Object[] { type, yw_guid });
         return list;
     }
 
     public List<Map<String, Object>> getZJGL_child(String yw_guid, String tree_name, String type) {
-        String sql = "select * from  XMZJGL_ZC where status=? and yw_guid=? and lb=? order by  sort";
+        String sql = "select * from  XMZJGL_ZC where status=? and yw_guid=? and lb=?  and zcstatus is not null order by  sort";
         List<Map<String, Object>> list = query(sql, YW, new Object[] { type, yw_guid, tree_name });
         return list;
     }
@@ -38,8 +38,8 @@ public class ZjglData extends AbstractBaseBean {
         String s[]={"QQFY","CQFY","SZFY","CWFY","GLFY","CRZJFH","QTZC"};
         for(int i=0;i<st.length;i++){
             for(int j=0;j<sr.length;j++){
-                String sqlString="insert into XMZJGL_ZC (yw_guid,status,lb,lj,zcstatus,sort) values(?,?,?,?,?,?)";
-                update(sqlString, YW,new Object[]{yw_guid, s[i],st[i],sr[j],s[i],(j+1)});
+                String sqlString="insert into XMZJGL_ZC (yw_guid,status,lb,lj,sort) values(?,?,?,?,?)";
+                update(sqlString, YW,new Object[]{yw_guid, s[i],st[i],sr[j],(j+1)});
             }
         }
         for(int k=0;k<lr_name.length;k++){
