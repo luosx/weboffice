@@ -115,26 +115,26 @@ window.onload=function(){
 	if(document.getElementById("sel_"+url)!=null)
 		showSel(url);
 	
-//	document.getElementById("menuLeftDiv").children.length!=0;
-//	{
-//		var obj = document.getElementById("menuLeftDiv").children[0];
-//		if(obj!=null)
-//		{
-//				obj=obj.children[0];
-//			if( document.createEvent )
-//			{
-//				var evObj = document.createEvent('MouseEvents');
-//				evObj.initEvent( 'onclick', true, false );
-//				obj.dispatchEvent(evObj);
-//			}
-//			else if( document.createEventObject )
-//			{
-//				obj.fireEvent('onclick');
-//			}
+	document.getElementById("menuLeftDiv").children.length!=0;
+	{
+		var obj = document.getElementById("menuLeftDiv").children[0];
+		if(obj!=null)
+		{
+				obj=obj.children[0];
+			if( document.createEvent )
+			{
+				var evObj = document.createEvent('MouseEvents');
+				evObj.initEvent( 'onclick', true, false );
+				obj.dispatchEvent(evObj);
+			}
+			else if( document.createEventObject )
+			{
+				obj.fireEvent('onclick');
+			}
 	
-//		}
-//	}
-//var leftMenuHeight=window.screen.availHeight-top.flash.document.body.clientHeight-top.menu.document.body.clientHeight-100;
+		}
+	}
+var leftMenuHeight=window.screen.availHeight-top.flash.document.body.clientHeight-top.menu.document.body.clientHeight-100;
 }
 -->
 </script>
