@@ -14,6 +14,11 @@ public class TrFactory {
             StringBuffer stringBuffer = ZjglBuild.buildZjzc_father(li);
             buffer.append(stringBuffer);
             return buffer;
+        }else if(type.equals("YIKFZC")){
+            List<Map<String, Object>> ls = zjglData.getZC_YJZC_sum(yw_guid);
+            StringBuffer stringBuffer = ZjglBuild.buildZjzc_father(ls);
+            buffer.append(stringBuffer);
+            return buffer;
         }else{
         if (list != null||list.size()>0) {
             StringBuffer fatehr = buildFather(yw_guid, type);
