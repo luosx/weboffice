@@ -14,8 +14,11 @@ import org.springframework.context.support.StaticApplicationContext;
 
 import com.klspta.base.AbstractBaseBean;
 import com.klspta.base.util.UtilFactory;
+import com.klspta.console.ManagerFactory;
+import com.klspta.model.CBDReport.CBDReportManager;
 import com.klspta.web.cbd.dtjc.TjbbData;
 import com.klspta.web.cbd.yzt.table.CBDtableFields;
+import com.klspta.web.xiamen.xchc.Cgreport;
 import com.sun.org.apache.bcel.internal.generic.RETURN;
 
 /**
@@ -113,6 +116,34 @@ public class ZrbManager extends AbstractBaseBean {
     	response(String.valueOf(draw)); 
     }
     
+    /**
+     * 
+     * <br>Description:自然斑列表过滤
+     * <br>Author:黎春行
+     * <br>Date:2013-12-25
+     * @throws Exception
+     */
+	public void getReport() throws Exception{
+		String keyword = request.getParameter("keyword");
+		StringBuffer query = new StringBuffer();
+		if(keyword != null){
+			query.append(" where ");
+			keyword = UtilFactory.getStrUtil().unescape(keyword);
+			StringBuffer querybuffer = new StringBuffer();
+			String[][] nameStrings = ZrbReport.shows;
+			for(int i = 0; i < nameStrings.length - 1; i++){
+				querybuffer.append("upper(").append(nameStrings[i][0]).append(")||");
+				
+			}
+			querybuffer.append("upper(").append(nameStrings[nameStrings.length - 1][0]).append(")) like '%").append(keyword).append("%'");
+			query.append("(");
+			query.append(querybuffer);
+		}
+		Map<String, Object> conditionMap = new HashMap<String, Object>();
+		conditionMap.put("query", query.toString());
+		response(String.valueOf(new CBDReportManager().getReport("ZRB", new Object[]{conditionMap})));
+	}
+    
     public static Map<String, String> getZRBBHMap(){
     	ZrbData zrbData = new ZrbData();
     	Set<String> leftSet = new TreeSet<String>();
@@ -125,6 +156,25 @@ public class ZrbManager extends AbstractBaseBean {
     	proMap.put("left", toJson(leftSet));
     	return proMap;
     }
+    
+    /**
+     * 
+     * <br>Description:根据自然斑编号删除自然斑
+     * <br>Author:黎春行
+     * <br>Date:2013-12-25
+     * @throws Exception
+     */
+    public void delete() throws Exception{
+    	boolean result = false;
+    	ZrbData zrbData = new ZrbData();
+    	String zrbs =new String(request.getParameter("zrbbh").getBytes("iso-8859-1"),"utf-8");
+    	String[] zrbArray = zrbs.split(",");
+    	for(int i = 0; i < zrbArray.length; i++){
+    		result = result && zrbData.delete(zrbArray[i]);
+    	}
+    	response(String.valueOf(result));
+    }
+    
 	private static String toJson(Set<String> set){
 		StringBuffer jsonBuffer = new StringBuffer();
 		jsonBuffer.append("[");
@@ -137,4 +187,6 @@ public class ZrbManager extends AbstractBaseBean {
 		jsonBuffer.append("]");
 		return jsonBuffer.toString();
 	}
+	
+	
 }

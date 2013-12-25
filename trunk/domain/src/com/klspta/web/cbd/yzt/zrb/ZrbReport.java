@@ -29,6 +29,7 @@ public class ZrbReport extends AbstractBaseBean implements IDataClass {
 			key = key.substring(key.length() - 3, key.length());
 			trbeans.put(key, trbeanList.get(i));
 		}
+		trbeans.put("999", getSub(queryMap).get(0));
 		return trbeans;
 	}
 	
@@ -61,6 +62,31 @@ public class ZrbReport extends AbstractBaseBean implements IDataClass {
 			list.add(trBean);
 		}
 		
+		return list;
+	}
+	
+	public List<TRBean> getSub(Map queryMap){
+		String sql = "select sum(t.zdmj) as zdmj, sum(t.lzmj) as lzmj, sum(t.cqgm) as cqgm, sum(t.zzlzmj) as zzlzmj, sum(t.zzcqgm) as zzcqgm, sum(t.yjhs) as yjhs, sum(t.fzzlzmj) as fzzlzmj, sum(t.fzzcqgm) as fzzcqgm, '0' as bz from jc_ziran t ";
+		if(queryMap != null && !queryMap.isEmpty()){
+			sql += String.valueOf(queryMap.get("query"));
+		}
+		List<Map<String, Object>> queryList = query(sql.toString(), YW);
+		List<TRBean> list = new ArrayList<TRBean>();
+		TRBean trBean = new TRBean();
+		trBean.setCssStyle("trtotal");
+		Map<String, Object> map = queryList.get(0);
+		TDBean tdname=new TDBean("合计","180","20");
+		tdname.setColspan("2");
+		trBean.addTDBean(tdname);
+		for(int i = 2; i < shows.length; i++){
+			String value = String.valueOf(map.get(shows[i][0]));
+			if("null".equals(value)){
+				value = "";
+			}
+			TDBean tdBean = new TDBean(value, "80", "20",shows[i][1]);
+			trBean.addTDBean(tdBean);
+		}
+		list.add(trBean);
 		return list;
 	}
 }
