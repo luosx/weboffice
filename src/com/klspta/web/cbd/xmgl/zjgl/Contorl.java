@@ -1,6 +1,5 @@
 package com.klspta.web.cbd.xmgl.zjgl;
 
-import com.sun.org.apache.xml.internal.security.Init;
 
 public class Contorl  {
     //前期费用\拆迁费用\市政费用\财务费用\管理费用\筹融资金返还\ 其他支出\Ⅱ.资金支出
@@ -33,7 +32,7 @@ public Contorl(String yw_guid){
         e.printStackTrace();
     }
 }
-public synchronized void Init(){
+public  void Init(){
     ZJZCThread = new ZjglThread(this.yw_guid,ZJZC);
     Thread thread1=new Thread(ZJZCThread);
     thread1.start();
@@ -70,7 +69,6 @@ public  String getTextMode(){
         StringBuffer zjlr = TrFactory.getmod(this.yw_guid);
         buffer.append(zjlr);
         buffer.append(ZJZCThread.getBuffer());
-        System.out.print(ZJZCThread.getBuffer().toString());
         buffer.append(QQFYThread.getBuffer());
         buffer.append(CQFYThread.getBuffer());
         buffer.append(SZFYThread.getBuffer());

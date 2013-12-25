@@ -21,16 +21,7 @@ public class Xmmanager extends AbstractBaseBean {
             return  instens;
         }
     }
-    /***
-     * 
-     * <br>Description:刷新缓存
-     * <br>Author:朱波海
-     * <br>Date:2013-12-17
-     */
-    public void refresh(){
-        
-        
-    }
+
     public void init(){
      // ArrayList<?> arrayList = new ArrayList<?>();
         //获取全部支出yw_guid
@@ -48,8 +39,6 @@ public class Xmmanager extends AbstractBaseBean {
             }
             
         }
-        
-        
         
     }
    /***
@@ -160,11 +149,16 @@ public void saveZJGL_ZJZC() {
     update(sql, YW,new Object []{yw_guid,status,lb,sort});
     
 }
-
+/***
+ * 
+ * <br>Description:保存树
+ * <br>Author:朱波海
+ * <br>Date:2013-12-25
+ */
 public void saveZjglTree(){
     String st[]={"QQFY","CQFY","SZFY","CWFY","GLFY","CRZJFH","QTZC"};
     String yw_guid = request.getParameter("yw_guid").trim();
-    String parent_id = request.getParameter("parent_id");
+  //  String parent_id = request.getParameter("parent_id");
     String id = request.getParameter("id");
     String tree_name = request.getParameter("tree_name");
     tree_name=UtilFactory.getStrUtil().unescape(tree_name).trim();
