@@ -101,7 +101,8 @@ public class JbbReport extends AbstractBaseBean implements IDataClass {
 		for(int i = 1; i < shows.length - 1; i++){
 			sqlBuffer.append("sum(t.").append(shows[i][0]).append(") as ").append(shows[i][0]).append(",");
 		}
-		sqlBuffer.append("sum(t.").append(shows[shows.length - 1][0]).append(") as ").append(shows[shows.length - 1][0]).append(" from ");
+		//sqlBuffer.append("sum(t.").append(shows[shows.length - 1][0]).append(") as ").append(shows[shows.length - 1][0]).append(" from ");
+		sqlBuffer.append("' ' as ").append(shows[shows.length - 1][0]).append(" from ");
 		sqlBuffer.append(form_name).append(" t ");
 		if(obj != null){
 			sqlBuffer.append("  where t.dkmc like '").append(key).append("_%' and t.ssqy like ? ");
