@@ -21,6 +21,7 @@ function editMap(objid){
 
 //导出Excel
 function print(){
+	alert("print");
     var curTbl = document.getElementById("ZRB"); 
     try{
     	var oXL = new ActiveXObject("Excel.Application");
@@ -76,5 +77,12 @@ function dele(){
 	alert("dele");
 }
 
+//根据用地单位和关键字作过滤
+function queryZrb(keyword){
+	putClientCommond("zrbHandle","getReport");
+	putRestParameter("keyword",escape(escape(keyword)));
+	myData = restRequest();
+  	document.getElementById("show").innerHTML = myData;
+}
 
 
