@@ -12,11 +12,14 @@ import net.sf.json.JSONObject;
 
 import com.klspta.base.AbstractBaseBean;
 import com.klspta.base.util.UtilFactory;
+import com.klspta.base.wkt.Point;
+import com.klspta.base.wkt.Polygon;
+import com.klspta.base.wkt.Ring;
 import com.klspta.web.cbd.yzt.utilList.IData;
 
 public class HxxmData extends AbstractBaseBean implements IData {
 	private static final String formName = "JC_XIANGMU";
-
+	private static final String form_gis = "CBD_XM";
 	private static final String jbformName = "JC_JIBEN";
 
 	/**
@@ -149,5 +152,75 @@ public class HxxmData extends AbstractBaseBean implements IData {
 		String sql = "insert into " + formName + "(xmname) values(?)";
 		int result = update(sql, YW, new Object[]{xmmc});
 		return result == 1 ? true : false;
+	}
+	
+	/**
+     * 
+     * <br>Description:上图，将自然斑保存到空间库中
+     * <br>Author:黎春行
+     * <br>Date:2013-12-10
+     * @param tbbh
+     * @param polygon
+     * @return
+     * @throws Exception 
+     */
+    public boolean recordGIS(String tbbh, String polygons) throws Exception{
+    	JSONObject json = UtilFactory.getJSONUtil().jsonToObject(polygons);
+    	String rings = json.getString("rings");
+    	rings = rings.replace("]]]", "]");
+    	rings = rings.replace("[[[", "[");
+    	String wkt = "4326";
+    	String[] allPoint = rings.split(",");
+		Polygon polygon = new Polygon();
+		Ring ring = new Ring();
+    	if(allPoint.length > 2){
+    		for(int i = 0; i < allPoint.length; i+=2){
+    			allPoint[i] = allPoint[i].replace("[", "");
+    			double x = Double.parseDouble(allPoint[i]);
+    			allPoint[i+1] = allPoint[i+1].replace("]", "");
+    			double y = Double.parseDouble(allPoint[i + 1]);
+    			Point point = new Point(x, y);
+    			ring.putPoint(point);
+    		}
+    		Point p2 = new Point(Double.parseDouble(allPoint[0]), Double.parseDouble(allPoint[1]));
+            ring.putPoint(p2);
+            polygon.addRing(ring);
+            wkt = polygon.toWKT();
+    	}
+        String querySrid = "select t.srid from sde.st_geometry_columns t where upper(t.table_name) = ?";
+        String srid = null;
+        List<Map<String, Object>> rs = query(querySrid, GIS, new Object[]{form_gis});
+        try {
+            if (rs.size() > 0) {
+                srid = rs.get(0).get("srid") + "";
+            }
+            //判断对应zrbbh是否存在,存在用update 否则 用 insert
+            boolean isExit = isExit(form_gis, "xmguid", tbbh, GIS);
+            String sql = "";
+            if(isExit){
+            	sql = "update " + form_gis + " t set t.SHAPE=sde.st_geometry ('" + wkt + "', " + srid + ") where t.xmguid='" + tbbh + "'";
+            }else{
+                sql = "INSERT INTO "+ form_gis+"(OBJECTID,xmguid,SHAPE) VALUES ((select nvl(max(OBJECTID)+1,1) from "+form_gis+"),'"
+                	+ tbbh + "',sde.st_geometry ('" + wkt + "', " + srid + "))";
+            }
+            update(sql, GIS);
+        } catch (Exception e) {
+            System.out.println("采集坐标出错");
+            return false;
+        }
+        return true;
+    }
+    
+	private boolean isExit(String formName, String primaryName, String primaryValue, String type){
+		if("".equals(primaryName) || "".equals(primaryValue)){
+			return false;
+		}
+		String sql = "select " + primaryName + " from " + formName + " where " + primaryName + "='" + primaryValue + "'";
+		List<Map<String, Object>> list = query(sql, type);
+		if(list.size() > 0){
+			return true;
+		}else{
+			return false;
+		}
 	}
 }

@@ -2,6 +2,8 @@ package com.klspta.web.cbd.yzt.hxxm;
 
 
 
+import java.io.UnsupportedEncodingException;
+
 import javax.servlet.http.HttpServletRequest;
 
 import com.klspta.base.AbstractBaseBean;
@@ -62,5 +64,20 @@ public class HxxmManager extends AbstractBaseBean {
     		response("{success:false}");
     	}
 	}
+	
+	
+	public void draw() throws Exception{
+    	String guid = request.getParameter("guid");
+    	String polygon = request.getParameter("polygon");
+    	if (guid != null) {
+    		guid = UtilFactory.getStrUtil().unescape(guid);
+    	}else{
+    		response("{error:not primary}");
+    	}
+    	boolean draw = new HxxmData().recordGIS(guid, polygon);
+    	response(String.valueOf(draw)); 
+	}
+	
+	
 
 }
