@@ -2,7 +2,8 @@ package com.klspta.web.cbd.xmgl.zjgl;
 
 
 public class Contorl  {
-    //前期费用\拆迁费用\市政费用\财务费用\管理费用\筹融资金返还\ 其他支出\Ⅱ.资金支出
+    //Ⅱ.资金支出\2.1 一级开发支出\前期费用\拆迁费用\市政费用\财务费用\管理费用\筹融资金返还\ 其他支出\Ⅱ.资金支出
+ public static String ZJZC="ZJZC";
 public static String YIKFZC="YIKFZC";
 public static String  QQFY="QQFY";
 public static String  CQFY="CQFY";
@@ -11,10 +12,11 @@ public static String  CWFY="CWFY";
 public static String  GLFY="GLFY";
 public static String  CRZJFH="CRZJFH";
 public static String  QTZC="QTZC";
-public static String ZJZC="ZJZC";
+
 private String  yw_guid;
 
 private ZjglThread ZJZCThread;
+private ZjglThread YIKFZCThread;
 private ZjglThread QQFYThread;
 private ZjglThread CQFYThread;
 private ZjglThread SZFYThread;
@@ -34,7 +36,10 @@ public Contorl(String yw_guid){
 }
 public  void Init(){
     ZJZCThread = new ZjglThread(this.yw_guid,ZJZC);
-    Thread thread1=new Thread(ZJZCThread);
+    Thread thread=new Thread(ZJZCThread);
+    thread.start();
+    YIKFZCThread = new ZjglThread(this.yw_guid,YIKFZC);
+    Thread thread1=new Thread(YIKFZCThread);
     thread1.start();
     QQFYThread=new ZjglThread(this.yw_guid,QQFY);
     Thread thread2=new Thread(QQFYThread);
@@ -69,6 +74,7 @@ public  String getTextMode(){
         StringBuffer zjlr = TrFactory.getmod(this.yw_guid);
         buffer.append(zjlr);
         buffer.append(ZJZCThread.getBuffer());
+        buffer.append(YIKFZCThread.getBuffer());
         buffer.append(QQFYThread.getBuffer());
         buffer.append(CQFYThread.getBuffer());
         buffer.append(SZFYThread.getBuffer());
