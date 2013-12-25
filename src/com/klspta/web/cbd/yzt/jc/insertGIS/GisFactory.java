@@ -1,7 +1,6 @@
 package com.klspta.web.cbd.yzt.jc.insertGIS;
 
 
-import java.io.FileInputStream;
 import java.util.List;
 
 
@@ -44,6 +43,9 @@ public class GisFactory extends AbstractBaseBean{
 				break;
 			case TYPE_JBB:
 				insertCIS = new JbbInsertGIS();
+				break;
+			case TYPE_HXXM:
+				insertCIS = new HxxmInsertGIS();
 				break;
 			default:
 				insertCIS = new ZrbInsertGIS();
