@@ -1,10 +1,8 @@
 package com.klspta.web.cbd.xmgl.zjgl;
 
-import java.util.List;
-import java.util.Map;
+import com.sun.org.apache.xml.internal.security.Init;
 
-
-public class Contorl {
+public class Contorl  {
     //前期费用\拆迁费用\市政费用\财务费用\管理费用\筹融资金返还\ 其他支出\Ⅱ.资金支出
 public static String YIKFZC="YIKFZC";
 public static String  QQFY="QQFY";
@@ -15,50 +13,71 @@ public static String  GLFY="GLFY";
 public static String  CRZJFH="CRZJFH";
 public static String  QTZC="QTZC";
 public static String ZJZC="ZJZC";
+private String  yw_guid;
+
+private ZjglThread ZJZCThread;
+private ZjglThread QQFYThread;
+private ZjglThread CQFYThread;
+private ZjglThread SZFYThread;
+private ZjglThread CWFYThread;
+private ZjglThread GLFYThread;
+private ZjglThread CRZJFHThread;
+private ZjglThread QTZCHThread;
+
+public Contorl(String yw_guid){
+    this.yw_guid=yw_guid;
+    Init();
+    try {
+        Thread.sleep(3000);
+    } catch (InterruptedException e) {
+        e.printStackTrace();
+    }
+}
+public synchronized void Init(){
+    ZJZCThread = new ZjglThread(this.yw_guid,ZJZC);
+    Thread thread1=new Thread(ZJZCThread);
+    thread1.start();
+    QQFYThread=new ZjglThread(this.yw_guid,QQFY);
+    Thread thread2=new Thread(QQFYThread);
+    thread2.start();
+    CQFYThread= new ZjglThread(this.yw_guid,CQFY);
+    Thread thread3=new Thread(CQFYThread);
+    thread3.start();
+    SZFYThread=new ZjglThread(this.yw_guid,SZFY);
+    Thread thread4=new Thread(SZFYThread);
+    thread4.start();
+    CWFYThread=new ZjglThread(this.yw_guid,CWFY);
+    Thread thread5=new Thread(CWFYThread);
+    thread5.start();
+    GLFYThread=new ZjglThread(this.yw_guid,GLFY);
+    Thread thread6=new Thread(GLFYThread);
+    thread6.start();
+    CRZJFHThread=new ZjglThread(this.yw_guid,CRZJFH);
+    Thread thread7=new Thread(CRZJFHThread);
+    thread7.start();
+    QTZCHThread=new ZjglThread(this.yw_guid,QTZC);
+    Thread thread8=new Thread(QTZCHThread);
+    thread8.start(); 
     
-    public String getTextMode(String yw_guid){
+}
+private StringBuffer buffer=new StringBuffer();
+public  String getTextMode(){
         //是否项目初始化
-        new ZjglData().setMX(yw_guid);
-        StringBuffer stringBuffer = new StringBuffer();
+        new ZjglData().setMX(this.yw_guid);
         StringBuffer title = ZjglBuild.buildTitle();
-        stringBuffer.append(title);
-        TreeManager treeManager = new  TreeManager();
+        buffer.append(title);
         //资金流入
-        StringBuffer zjlr = TrFactory.getmod(yw_guid);
-        stringBuffer.append(zjlr);
-        TreeManager Manager = new  TreeManager();
-        //Ⅱ.资金支出
-        List<Map<String, Object>> zc_zjzc = treeManager.getZC_tree(yw_guid,ZJZC);
-        StringBuffer zjzc = TrFactory.getmodel(zc_zjzc,yw_guid, ZJZC);
-        stringBuffer.append(zjzc);
-        //一级开发-前期费用
-       List<Map<String, Object>> zc_qqfy = Manager.getZC_tree(yw_guid,QQFY);
-       StringBuffer qqfy = TrFactory.getmodel(zc_qqfy,yw_guid, QQFY);
-       stringBuffer.append(qqfy);
-       //一级开发-拆迁费用
-       List<Map<String, Object>> zc_cqfy = Manager.getZC_tree(yw_guid, CQFY);
-       StringBuffer cqfy = TrFactory.getmodel(zc_cqfy,yw_guid, CQFY);
-       stringBuffer.append(cqfy);
-       //一级开发-市政费用
-       List<Map<String, Object>> zc_szfy = treeManager.getZC_tree(yw_guid, SZFY);
-       StringBuffer szfy = TrFactory.getmodel(zc_szfy,yw_guid, SZFY);
-       stringBuffer.append(szfy);
-       //一级开发-财务费用
-       List<Map<String, Object>> zc_cwfy = treeManager.getZC_tree(yw_guid,CWFY);
-       StringBuffer cwfy = TrFactory.getmodel(zc_cwfy,yw_guid, CWFY);
-       stringBuffer.append(cwfy);
-       //一级开发-管理费用
-       List<Map<String, Object>> zc_glfy = treeManager.getZC_tree(yw_guid,GLFY);
-       StringBuffer glfy = TrFactory.getmodel(zc_glfy,yw_guid, GLFY);
-       stringBuffer.append(glfy);
-       //一级开发-筹融资金返还
-       List<Map<String, Object>> zc_crzjfh = treeManager.getZC_tree(yw_guid,CRZJFH);
-       StringBuffer crzjfh= TrFactory.getmodel(zc_crzjfh,yw_guid, CRZJFH);
-       stringBuffer.append(crzjfh);
-       //一级开发-其他支出
-       List<Map<String, Object>> zc_qtzc = treeManager.getZC_tree(yw_guid,QTZC);
-       StringBuffer qtzc = TrFactory.getmodel(zc_qtzc,yw_guid, QTZC);
-       stringBuffer.append(qtzc);
-        return stringBuffer.toString();
+        StringBuffer zjlr = TrFactory.getmod(this.yw_guid);
+        buffer.append(zjlr);
+        buffer.append(ZJZCThread.getBuffer());
+        System.out.print(ZJZCThread.getBuffer().toString());
+        buffer.append(QQFYThread.getBuffer());
+        buffer.append(CQFYThread.getBuffer());
+        buffer.append(SZFYThread.getBuffer());
+        buffer.append(CWFYThread.getBuffer());
+        buffer.append(GLFYThread.getBuffer());
+        buffer.append(CRZJFHThread.getBuffer());
+        buffer.append(QTZCHThread.getBuffer());
+        return this.buffer.toString();
     }
 }
