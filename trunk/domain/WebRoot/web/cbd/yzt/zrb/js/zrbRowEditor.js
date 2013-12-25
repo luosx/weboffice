@@ -21,7 +21,7 @@ function editMap(objid){
 
 //导出Excel
 function print(){
-    var curTbl = document.getElementById("NDJH"); 
+    var curTbl = document.getElementById("ZRB"); 
     try{
     	var oXL = new ActiveXObject("Excel.Application");
     }catch(err){
