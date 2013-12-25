@@ -1,4 +1,4 @@
-var zrbbh = "";
+var xmmc = "";
 var num = 0;
 
 //单击地图定位
@@ -13,7 +13,7 @@ function showMap(objid){
 //双击编辑地图
 function editMap(objid){
 	var key = objid.cells[1].innerText;
-	zrbbh = key;
+	xmmc = key;
 	parent.parent.frames['east'].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").clear();
 	parent.parent.frames['east'].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").drawPolygon();
 }
@@ -25,13 +25,12 @@ function print(){
 
 //上图
 function setRecord(polygon){
-	putClientCommond("zrbHandle","drawZrb");
-    putRestParameter("tbbh",escape(escape(zrbbh))); 
+	putClientCommond("hxxmHandle","draw");
+    putRestParameter("guid",escape(escape(xmmc))); 
     putRestParameter("polygon",polygon); 
     var result = restRequest();
 	parent.parent.frames['east'].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").clear();
 	parent.parent.frames['east'].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").findFeature("cbd", "0", zrbbh, "ZRBBH");
-	
 }
 
 
