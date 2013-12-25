@@ -6,7 +6,7 @@ function showMap(objid){
 	//alert("showMap");
 	var key = objid.cells[1].innerText;
 	parent.parent.frames['east'].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").clear();
-	parent.parent.frames['east'].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").findFeature("cbd", "0", key, "ZRBBH");
+	parent.parent.frames['east'].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").findFeature("hxxm", "0", xmmc, "XMGUID");
 	
 }
 
@@ -30,7 +30,7 @@ function setRecord(polygon){
     putRestParameter("polygon",polygon); 
     var result = restRequest();
 	parent.parent.frames['east'].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").clear();
-	parent.parent.frames['east'].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").findFeature("cbd", "0", zrbbh, "ZRBBH");
+	parent.parent.frames['east'].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").findFeature("hxxm", "0", xmmc, "XMGUID");
 }
 
 
