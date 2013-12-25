@@ -33,45 +33,22 @@ public class JbbReport extends AbstractBaseBean implements IDataClass {
 	}
 
 	public Map<String, TRBean> getBody(Object[] obj){
-		List<TRBean> list = new ArrayList<TRBean>();
 		Map<String, TRBean> trbeans = new TreeMap<String, TRBean>();
-		StringBuffer sqlBuffer = new StringBuffer();
-		sqlBuffer.append("select ");
-		for(int i = 0; i < shows.length - 1; i++){
-			sqlBuffer.append("t.").append(shows[i][0]).append(",");
-		}
-		sqlBuffer.append("t.").append(shows[shows.length - 1][0]).append(" from ");
-		sqlBuffer.append(form_name).append(" t where t.ssqy like ? ");
-		sqlBuffer.append(" order by t.dkmc");
-		List<Map<String, Object>> queryList = query(sqlBuffer.toString(), YW, obj);
 		Map<String, List<TRBean>> buildMap = new TreeMap<String, List<TRBean>>();
-		for(int i = 0; i < queryList.size(); i++){
-			Map map = queryList.get(i);
-			String key = String.valueOf(map.get("dkmc"));
-			key = key.split("_")[0];
-			if("".equals(key)){
-				continue;
-			}
-			List<TRBean> subTotal = buildMap.get(key);
-			if(subTotal == null){
-				subTotal = getSubTotal(key, obj);
-			}
-			TRBean trBean = new TRBean();
-			trBean.setCssStyle("trsingle");
-			for(int j = 0; j < shows.length; j++){
-				String value = String.valueOf(map.get(shows[j][0]));
-				if("null".equals(value)){
-					value = "";
-				}
-				TDBean tdBean = new TDBean(value,"100","20", shows[j][1]);
-				trBean.addTDBean(tdBean);
-			}
-			subTotal.add(trBean);
-			buildMap.remove(key);
-			buildMap.put(key, subTotal);
-		}
-
+		//添加所有纳入规划储备库数据
+		buildMap.putAll(getByStatus(obj,"是"));
 		Set<String> keySet = buildMap.keySet();
+		for(String key : keySet){
+			List<TRBean> trBeans = buildMap.get(key);
+			for(int i = 0; i < trBeans.size(); i++){
+				trbeans.put("11" + key+i, trBeans.get(i));
+			}
+		}
+		//添加所有未纳入规划储备库数据
+		buildMap.clear();
+		keySet.clear();
+		buildMap.putAll(getByStatus(obj,"否"));
+		keySet = buildMap.keySet();
 		for(String key : keySet){
 			List<TRBean> trBeans = buildMap.get(key);
 			for(int i = 0; i < trBeans.size(); i++){
@@ -133,4 +110,45 @@ public class JbbReport extends AbstractBaseBean implements IDataClass {
 		returnList.add(trBean);
 		return returnList;
 	}
+	
+	private Map<String, List<TRBean>> getByStatus(Object[] obj,String status){
+		StringBuffer sqlBuffer = new StringBuffer();
+		sqlBuffer.append("select ");
+		for(int i = 0; i < shows.length - 1; i++){
+			sqlBuffer.append("t.").append(shows[i][0]).append(",");
+		}
+		sqlBuffer.append("t.").append(shows[shows.length - 1][0]).append(" from ");
+		sqlBuffer.append(form_name).append(" t where t.nrghcbk='").append(status).append("' and  t.ssqy like ? ");
+		sqlBuffer.append(" order by t.dkmc");
+		List<Map<String, Object>> queryList = query(sqlBuffer.toString(), YW, obj);
+		Map<String, List<TRBean>> buildMap = new TreeMap<String, List<TRBean>>();
+		for(int i = 0; i < queryList.size(); i++){
+			Map map = queryList.get(i);
+			String key = String.valueOf(map.get("dkmc"));
+			key = key.split("_")[0];
+			if("".equals(key)){
+				continue;
+			}
+			List<TRBean> subTotal = buildMap.get(key);
+			if(subTotal == null){
+				subTotal = getSubTotal(key, obj);
+			}
+			TRBean trBean = new TRBean();
+			trBean.setCssStyle("trsingle");
+			for(int j = 0; j < shows.length; j++){
+				String value = String.valueOf(map.get(shows[j][0]));
+				if("null".equals(value)){
+					value = "";
+				}
+				TDBean tdBean = new TDBean(value,"100","20", shows[j][1]);
+				trBean.addTDBean(tdBean);
+			}
+			subTotal.add(trBean);
+			buildMap.remove(key);
+			buildMap.put(key, subTotal);
+		}
+		return buildMap;
+	}
+	
+
 }
