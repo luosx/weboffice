@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.klspta.base.AbstractBaseBean;
 import com.klspta.base.util.UtilFactory;
+import com.klspta.web.cbd.yzt.zrb.ZrbData;
 
 public class HxxmManager extends AbstractBaseBean {
 	
@@ -64,6 +65,24 @@ public class HxxmManager extends AbstractBaseBean {
     		response("{success:false}");
     	}
 	}
+	
+	/**
+	 * 
+	 * <br>Description:删除红线项目
+	 * <br>Author:黎春行
+	 * <br>Date:2013-12-25
+	 * @throws Exception
+	 */
+    public void delete() throws Exception{
+    	boolean result = false;
+    	HxxmData hxxmData = new HxxmData();
+    	String hxxms =new String(request.getParameter("xmmc").getBytes("iso-8859-1"),"utf-8");
+    	String[] hxxmArray = hxxms.split(",");
+    	for(int i = 0; i < hxxmArray.length; i++){
+    		result = result && hxxmData.delete(hxxmArray[i]);
+    	}
+    	response(String.valueOf(result));
+    }
 	
 	
 	public void draw() throws Exception{

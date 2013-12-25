@@ -83,6 +83,20 @@ public class HxxmData extends AbstractBaseBean implements IData {
 		}
 		return resultList;
 	}
+	
+    /**
+     * 
+     * <br>Description:TODO 方法功能描述
+     * <br>Author:黎春行
+     * <br>Date:2013-12-25
+     * @param zrb
+     * @return
+     */
+    public boolean delete(String zrb){
+    	String sql = "delete from " + formName + " where t.xmname = ?";
+    	int result = update(sql, YW, new Object[]{zrb});
+    	return result == 1 ? true : false;
+    }
 
 	public boolean updateHxxm(HttpServletRequest request) {
 		String yw_guid = request.getParameter("tbbh");
