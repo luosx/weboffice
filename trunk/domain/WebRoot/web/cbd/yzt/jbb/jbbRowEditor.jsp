@@ -24,6 +24,7 @@ ITableStyle its = new TableStyleEditRow();
 	<meta http-equiv="description" content="This is my page">
 	<script src="web/cbd/yzt/jbb/js/jbbRowEditor.js"></script>
 	<%@ include file="/base/include/restRequest.jspf"%>
+	<%@ include file="/base/include/ext.jspf" %>
 	<%@ include file="/web/cbd/yzt/jbb/js/reportEdit.jspf"%>
 	<style type="text/css">
   		table{
@@ -71,8 +72,6 @@ ITableStyle its = new TableStyleEditRow();
   </head>
   
   <body>
-    <div id="fixed" style="position: fixed; top: 5px; left: 0px">
-		<img src="base/form/images/print.png" width="20px" height="20px" onClick="javascript:print();"  />
 	</div>
   		<%=new CBDReportManager().getReport("JBB",new Object[]{"%%"},its)%>
   	<form id="attachfile" action="<%=basePath%>service/rest/zrbHandle/update" method="post">
