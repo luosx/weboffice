@@ -115,7 +115,7 @@ scrollbar-3dlight-color:#D4D0C8;
 	    //要删除的menuTreeId
 	   var RighrClickMenu=new Ext.menu.Menu({
 	   items:[{
-		   		   text:"添加指出费用",
+		   		   text:"添加支出费用",
 		   		   pressed:true,
 		   		   handler:function(tree){
 		
@@ -126,12 +126,12 @@ scrollbar-3dlight-color:#D4D0C8;
 	   
 	      var leaf_RighrClickMenu=new Ext.menu.Menu({
 	   	  items:[{
-	   		     text:"添加指出费用",
+	   		     text:"添加支出费用",
 		   		   pressed:true,
 		   		   handler:function(tree){
 		   		   		   updateForm.getForm().reset();
                             win.show(); 
-                             win.setTitle('添加指出费用')
+                             win.setTitle('添加支出费用')
 		   		   }
 	   		   }
 	   		   ]
