@@ -92,7 +92,6 @@ public class ZjglBuild {
         "<td><input type='text' style='width:90px;' onchange='addzjlr(this); return false' value='" +
         delNull(String.valueOf(list.get(i).get("LRSP")))+ " ' id='lr@"+String.valueOf( list.get(i).get("status"))+"@19'/></td>"+
         "</tr>" );
-         
        }
        }
        return stringBuffer;
@@ -282,7 +281,7 @@ public class ZjglBuild {
   } 
   
   public static String delNull(String str){
-      if(str.equals("null")){
+      if(str.equals("null")||str.equals("0")){
           return "";
       }else {
         return str;
