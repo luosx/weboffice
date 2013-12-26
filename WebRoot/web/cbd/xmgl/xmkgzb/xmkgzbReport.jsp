@@ -8,28 +8,26 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 Object userprincipal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-	String userid = ((User)userprincipal).getUserID();
-	List<Role> list = null;
-	try {
-		list = ManagerFactory.getUserManager().getUserWithId(userid).getRoleList();
-	} catch (Exception e) {
-		e.printStackTrace();
-	}
-	
+String xmmc = request.getParameter("xmmc");	
+String yw_guid = request.getParameter("yw_guid");
+if(xmmc!=null){
+	xmmc = new String(xmmc.getBytes("iso-8859-1"),"utf-8");
+}
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
-<html xmlns="http://www.w3.org/1999/xhtml"> 
+<html> 
   <head>
-    <base href="<%=basePath%>" />
+    <base href='<%=basePath%>' />
     <title>项目控规指标表</title>
 	<meta http-equiv="pragma" content="no-cache"/>
 	<meta http-equiv="cache-control" content="no-cache"/>
 	<meta http-equiv="expires" content="0"/>    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3"/>
 	<meta http-equiv="description" content="This is my page"/>
-
+	<%@ include file="/base/include/ext.jspf"%>
+	<%@ include file="/base/include/restRequest.jspf"%>
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
@@ -89,8 +87,7 @@ Object userprincipal = SecurityContextHolder.getContext().getAuthentication().ge
    }
  
 	</style>
-  </head>
-  <script type="text/javascript">
+	 <script type="text/javascript">
   		function print(){
 		    var curTbl = document.getElementById("XMKGZBB"); 
  			try{
@@ -118,25 +115,52 @@ Object userprincipal = SecurityContextHolder.getContext().getAuthentication().ge
 		    //设置excel可见属性 
 		}
 		//根据用地单位和关键字作过滤
-  		function query(keyword){
- 			putClientCommond("ajcc","getReport");
-		    putRestParameter("userid","<%=userid%>");
-		    putRestParameter("keyword",escape(escape(keyword)));
-			myData = restRequest();
-  			document.getElementById("center").innerHTML = myData;
-  		}
+  		//function query(keyword){
+ 		//	putClientCommond("xmkgzbb","getReport");
+		 //   putRestParameter("keyword",escape(escape(keyword)));
+		//	myData = restRequest();
+  		//	document.getElementById("center").innerHTML = myData;
+  		//}
 		
+		
+		function saves(ydxzlx){
+		var dkbh=document.getElementById("dkbh").value;
+		var ydxz=document.getElementById("ydxz").value;
+		var ydxzdh=document.getElementById("ydxzdh").value;
+		var ydmj=document.getElementById("ydmj").value;
+		var rjl=document.getElementById("rjl").value;
+		var jzmj=document.getElementById("jzmj").value;
+		var kzgd=document.getElementById("kzgd").value;
+		var bz=document.getElementById("bz").value;
+		if(dkbh==null||dkbh==''||ydxz==null||ydxz==''||ydxzdh==null||ydxzdh==''||ydmj==null||ydmj==''||rjl==null||rjl==''||jzmj==null||jzmj==''||kzgd==null||kzgd==''||ydxzlx==null||ydxzlx==''){
+			alert("请填写完整之后再保存！！"); 
+		}else{
+	    	putClientCommond("xmkgzbbmanager","saveDK");
+			putRestParameter("yw_guid","<%=yw_guid%>");
+			putRestParameter("dkbh",dkbh);
+			putRestParameter("ydxz",ydxz);
+			putRestParameter("ydxzdh",ydxzdh);
+			putRestParameter("ydmj",ydmj);
+			putRestParameter("rjl",rjl);
+			putRestParameter("jzmj",jzmj);
+			putRestParameter("kzgd",kzgd);
+			putRestParameter("bz",bz);
+			putRestParameter("ydxzlx",ydxzlx);
+			var msg=restRequest();
+			if('success'==msg){
+				alert("保存成功！");
+				document.location.reload();
+			}else{
+				alert("保存失败！");
+			}
+		}
+	}
   </script>
+  </head>
   <body >
-  	<div id="fixed" style="position: fixed; top: 5px; left: 0px">
-		<img src="base/form/images/print.png" width="20px" height="20px" onclick="javascript:print();"  />
+	<div align="center" style="margin-top: 15px;  width:800px;">
+	      <h1><%=xmmc%>控规指标表</h1>
 	</div>
-	
-	   <div align="center" style="margin-top: 15px;  width:1000px;">
-	      <h1>XXX项目控规指标表</h1>
-	   </div>
-	    
-	    
 	<div align="center" id="center" style="position:absolute; top:65px; left: 20px;">
   		<%=new CBDReportManager().getReport("XMKGZBB")%>
   	</div>
