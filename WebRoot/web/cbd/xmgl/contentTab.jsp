@@ -52,7 +52,7 @@
                 html: "<iframe width='"+w+"' height='"+h+"' src='model/accessory/dzfj/accessorymain.jsp?yw_guid=<%=yw_guid%>&xmmc=<%=xmmc%>'/>"
             },{
                 title: '控规表',
-                html: "<iframe width='"+w+"' height='"+h+"' src='web/cbd/xmgl/xmkgzb/xmkgzbReport.jsp'/>"
+                html: "<iframe width='"+w+"' height='"+h+"' src='web/cbd/xmgl/xmkgzb/xmkgzbb.jsp?yw_guid=<%=yw_guid%>&xmmc=<%=xmmc%>'/>"
             }
         ]
     })
