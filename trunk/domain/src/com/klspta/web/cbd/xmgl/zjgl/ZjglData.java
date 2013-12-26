@@ -17,24 +17,24 @@ public class ZjglData extends AbstractBaseBean {
     public List<Map<String, Object>> getZJGL_ZJLR(String yw_guid) {
         String sql = "select * from  XMZJGL_lr where  yw_guid=? order by  sort";
         List<Map<String, Object>> list = query(sql, YW, new Object[] { yw_guid });
-        //流入总计
         return list;
     }
 
     public List<Map<String, Object>> getZJGL_father(String yw_guid, String type) {
-        String sql = "select * from  XMZJGL_ZC where status=? and yw_guid=? and zcstatus is  null order by  sort";
+        String sql = "select * from  XMZJGL_ZC_view where status=? and yw_guid=? and zcstatus is  null order by  sort";
         List<Map<String, Object>> list = query(sql, YW, new Object[] { type, yw_guid });
         return list;
     }
 
     public List<Map<String, Object>> getZJGL_child(String yw_guid, String tree_name, String type) {
-        String sql = "select * from  XMZJGL_ZC where status=? and yw_guid=? and lb=?  and zcstatus is not null order by  sort";
+        String sql = "select * from  XMZJGL_ZC_view where status=? and yw_guid=? and lb=?  and zcstatus is not null order by  sort";
         List<Map<String, Object>> list = query(sql, YW, new Object[] { type, yw_guid, tree_name });
         return list;
     }
     
     public void setMX( String yw_guid){
-        String sql="select yw_guid from xmzjgl_zc where yw_guid=?";
+        if(yw_guid!=null&&!yw_guid.equals("")){
+        String sql="select yw_guid from XMZJGL_ZC_view where yw_guid=?";
         List<Map<String, Object>> query = query(sql, YW,new Object []{yw_guid});
         if(query.size()>0){
         }else{
@@ -47,6 +47,7 @@ public class ZjglData extends AbstractBaseBean {
         for(int k=0;k<lr_name.length;k++){
             String sqlString="insert into XMZJGL_LR (yw_guid,status,lb,sort) values(?,?,?,?)";
             update(sqlString, YW,new Object[]{yw_guid,lr_type[k],lr_name[k],(k+1)});
+        }
         }
         }
     }
@@ -65,7 +66,7 @@ public class ZjglData extends AbstractBaseBean {
     public List<Map<String, Object>>  getZC_sum(String yw_guid){
         List<Map<String, Object>> list=new ArrayList<Map<String,Object>>();
         for(int i=1;i<9;i++){
-        String sql="select 'Ⅱ.资金支出' as lb,sum(ysfy) as ysfy,'"+zc_chaild[i-1]+"' as lj,sum(jl2) as jl2 ,sum(yfsdz)as yfsdz,sum(zjjd) as zjjd,sum(cqye)as cqye ,sum(yy)as yy,sum(ey)as ey,sum(sany)as sany,sum(siy)as siy,sum(wy)as wy,sum(ly)as ly ,sum(qy)as qy ,sum(bay)as bay,sum(jy)as jy,sum(siyue)as siyue,sum(syy)as syy,sum(sey)as sey ,sum(lrsp)as lrsp   from xmzjgl_zc t where yw_guid=? and sort=?";
+        String sql="select 'Ⅱ.资金支出' as lb,sum(ysfy) as ysfy,'"+zc_chaild[i-1]+"' as lj,sum(jl2) as jl2 ,sum(yfsdz)as yfsdz,sum(zjjd) as zjjd,sum(cqye)as cqye ,sum(yy)as yy,sum(ey)as ey,sum(sany)as sany,sum(siy)as siy,sum(wy)as wy,sum(ly)as ly ,sum(qy)as qy ,sum(bay)as bay,sum(jy)as jy,sum(siyue)as siyue,sum(syy)as syy,sum(sey)as sey ,sum(lrsp)as lrsp   from XMZJGL_ZC_view t where yw_guid=? and sort=?";
         List<Map<String, Object>> query = query(sql, YW,new Object[]{yw_guid,i});
         list.add(query.get(0));
         }
@@ -80,5 +81,6 @@ public class ZjglData extends AbstractBaseBean {
         }
         return list;
     }
+    
     
 }
