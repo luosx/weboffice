@@ -10,9 +10,8 @@
 	List<Map<String, Object>> lr=null;
 	List<Map<String, Object>> zc=null;
 	if(!yw_guid.equals("")&&!yw_guid.equals("null")){
-	  Contorl contorl=new Contorl();
-	  table=contorl.getTextMode(yw_guid).toString();
-    System.out.print(contorl.getTextMode(yw_guid).toString());
+	  Contorl contorl=new Contorl(yw_guid);
+	  table=contorl.getTextMode();
    }
 %>
 
