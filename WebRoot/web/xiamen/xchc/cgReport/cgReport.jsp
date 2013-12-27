@@ -10,7 +10,6 @@ String userid = ((User)principal).getUserID();
 String xzq = request.getParameter("xzq");
 String begindate = request.getParameter("begindate");
 String enddate = request.getParameter("enddate");
-System.out.println(begindate+"================="+enddate+"=============");
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
