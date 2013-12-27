@@ -7,6 +7,10 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 String userid = ((User)principal).getUserID();
+String xzq = request.getParameter("xzq");
+String begindate = request.getParameter("begindate");
+String enddate = request.getParameter("enddate");
+System.out.println(begindate+"================="+enddate+"=============");
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
@@ -53,7 +57,7 @@ String userid = ((User)principal).getUserID();
     font-weight:bold;
     font-size: 15px;
     text-align:center;
-    line-height: 50px;
+    line-height: 30px;
 	margin-top: 3px;
   }
   .trtotal{
@@ -96,23 +100,17 @@ String userid = ((User)principal).getUserID();
 		    //设置excel可见属性 
 		}
   		
-  		//根据用地单位和关键字作过滤
-  		function query(yddw, keyword){
- 			putClientCommond("xchc","getReport");
-		    putRestParameter("userid","<%=userid%>");
-		    putRestParameter("yddw",escape(escape(yddw)));
-		    putRestParameter("keyword",escape(escape(keyword)));
-			myData = restRequest();
-  			document.getElementById("center").innerHTML = myData;
-  		}
+
   		
   </script>
   <body>
+  	<!--  
   	<div id="fixed" style="position: fixed; top: 5px; left: 0px">
 		<img src="base/form/images/print.png" width="20px" height="20px" onClick="javascript:print();"  />
 	</div>
+	-->
 	<div align="center" id="center" style="position:absolute; top:30px; left: 20px;">
-  		<%=new CBDReportManager().getReport("XCHCCG", new Object[]{})%>
+  		<%=new CBDReportManager().getReport("XCHCCG", new Object[]{xzq,begindate,enddate}) %>
   	</div>
   </body>
 </html>

@@ -235,7 +235,7 @@
 		           {header: '查看',dataIndex:'INDEX',width: width*0.05, sortable: false,renderer:pro}
         ]));
         grid.getBottomToolbar().bind(store);
-        store.load({params:{start:0,limit:10}});  
+        store.load({params:{start:0,limit:15}});  
       }
       
        <!--改变关键字方法 add by 赵伟 2012-9-7-->

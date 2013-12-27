@@ -8,7 +8,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 	<head>
-		<title>信访汇总</title>
+		<title>巡查核查成果汇总</title>
 
 		<meta http-equiv="pragma" content="no-cache">
 		<meta http-equiv="cache-control" content="no-cache">
@@ -28,9 +28,5 @@ input,img {
 	</head>
 	<body bgcolor="#FFFFFF" topmargin="0" leftmargin="0">
 		<div id="mygrid_container"></div>
-		<div id="update" class="x-hidden">
-			<div id="updateForm"
-				style="width: 100%; height: 90%; margin-left: 10px; margin-top: 5px"></div>
-		</div>
 	</body>
 </html>
