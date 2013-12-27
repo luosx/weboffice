@@ -134,7 +134,7 @@ window.onload=function(){
 	
 		}
 	}
-var leftMenuHeight=window.screen.availHeight-top.flash.document.body.clientHeight-top.menu.document.body.clientHeight-100;
+	//var leftMenuHeight=window.screen.availHeight-top.flash.document.body.clientHeight-top.menu.document.body.clientHeight-100;
 }
 -->
 </script>
