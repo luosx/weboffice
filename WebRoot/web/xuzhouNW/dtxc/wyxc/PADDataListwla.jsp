@@ -178,7 +178,8 @@ function showDetail(id){
 	//document.location.href=url;
 	var height = window.screen.availHeight;
 	var width = window.screen.availWidth;
-	window.showModalDialog(url,"","dialogWidth="+width+";dialogHeight="+height);
+	//window.showModalDialog(url,"","dialogWidth="+width+";dialogHeight="+height);
+	window.open(url,"","width="+width+",height="+height);
 }
 
 function query(){
