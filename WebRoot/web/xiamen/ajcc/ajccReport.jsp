@@ -9,17 +9,19 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 Object userprincipal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 	String userid = ((User)userprincipal).getUserID();
+	String userXzqh = ((User)userprincipal).getXzqh();
 	List<Role> list = null;
+    String parent_role="";
 	try {
 		list = ManagerFactory.getUserManager().getUserWithId(userid).getRoleList();
+		if(list.size()>0){
+			Role role=(Role)list.get(0);
+			parent_role=ManagerFactory.getRoleManager().getParantRoleName(role.getRoleid());
+		}
 	} catch (Exception e) {
 		e.printStackTrace();
 	}
-	String user_role="";
-	if(list.size()>0){
-	Role role=(Role)list.get(0);
-	user_role=role.getRolename();
-	}
+	
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
@@ -124,14 +126,6 @@ Object userprincipal = SecurityContextHolder.getContext().getAuthentication().ge
 		    oXL.Visible = true; 
 		    //设置excel可见属性 
 		}
-		//根据用地单位和关键字作过滤
-  		function query(keyword){
- 			putClientCommond("ajcc","getReport");
-		    putRestParameter("userid","<%=userid%>");
-		    putRestParameter("keyword",escape(escape(keyword)));
-			myData = restRequest();
-  			document.getElementById("center").innerHTML = myData;
-  		}
 		
   </script>
   <body >
@@ -146,13 +140,13 @@ Object userprincipal = SecurityContextHolder.getContext().getAuthentication().ge
 	   </div>
 	    <div style="position:absolute; top:45px; left: 20px; width:1000px;" >
 	    <font style="font-size: 13px ;">填报单位：
-	    <input id="tbdw" name="textBox" type="text" style="width:260px;border:0;padding:0;" value=<%=user_role %> />
+	    <input id="tbdw" name="textBox" type="text" style="width:260px;border:0;padding:0;" value=<%=parent_role %> />
 	    </font>
 		<font style="font-size: 13px; float: right">计量单位：件、亩</font>
 	    </div>
 	    
 	<div align="center" id="center" style="position:absolute; top:65px; left: 20px;">
-  		<%=new CBDReportManager().getReport("AJCCCX",new Object[]{})%>
+  		<%=new CBDReportManager().getReport("AJCC",new Object[]{userXzqh})%>
   	</div>
   </body>
 </html>
