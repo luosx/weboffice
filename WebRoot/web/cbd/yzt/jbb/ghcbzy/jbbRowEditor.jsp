@@ -12,23 +12,21 @@ String query = "";
 int type = Integer.parseInt(request.getParameter("type"));
 switch(type){
 case 1:
-	query = "产业定位矛盾突出的功能改造区";
+	query = "产业功能改造区";
 	break;
 case 2:
-	query = "民生改造区";
+	query = "民生改善区";
 	break;
 case 3:
-	query = "城市形象改造区";
+	query = "城市形象提升区";
 	break;
 case 4:
-	query = "微调区域合计";
+	query = "保留微调区";
 	break;
 default:
 	query = "%%";
 	break;
 }
-System.out.println(query + "____________________");
-
 
 %>
 
