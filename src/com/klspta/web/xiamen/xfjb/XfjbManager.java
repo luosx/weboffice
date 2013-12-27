@@ -25,14 +25,14 @@ public class XfjbManager extends AbstractBaseBean {
 		String fullName = ManagerFactory.getUserManager().getUserWithId(userId)
 				.getFullName();
 		String sql = "select  t.yw_guid,t.bh,t.xzq,t.jbr,t.jbxs,t.lxdz,t.jbzywt,to_char(t.jbsj, 'yyyy-MM-dd')as jbsj ,t.lxdh ,t.jsr,t.jlr,j.activity_name_ ajblzt, j.wfinsid from xfdjb t join workflow.v_active_task j on t.yw_guid=j.yw_guid where j.assignee_=?";
-		if(condition!=null){
+		if(condition!=null && !"".equals(condition)){
 	        condition = UtilFactory.getStrUtil().unescape(condition);
 	        condition="(select * from xfdjb where "+condition+")";
 	        sql = "select  t.yw_guid,t.bh,t.xzq,t.jbr,t.jbxs,t.lxdz,t.jbzywt,to_char(t.jbsj, 'yyyy-MM-dd')as jbsj ,t.lxdh ,t.jsr,t.jlr,j.activity_name_ ajblzt, j.wfinsid from "+condition+"  t join workflow.v_active_task j on t.yw_guid=j.yw_guid where j.assignee_=?";
 		}
-		if (keyWord != null) {
+		if (keyWord != null && !"".equals(keyWord)) {
 			keyWord = UtilFactory.getStrUtil().unescape(keyWord);
-			sql += " and (t.xzq||t.bh||t.jbr||t.jbxs||t.jbsj||t.JSR||t.JLR like '%"
+			sql += " and (t.xzq||t.bh||t.jbr||t.jbxs||t.jbsj||t.JSR||t.JLR||t.lxdz||t.jbzywt||t.lxdh like '%"
 					+ keyWord + "%') ";
 		}
 		sql += " order by jbsj desc";
@@ -61,14 +61,14 @@ public class XfjbManager extends AbstractBaseBean {
 			.getFullName();
 	// 获取数据
 	String sql = "select distinct t.yw_guid,t.bh,t.xzq,t.jbr,t.jbxs,t.lxdz,t.jbzywt,to_char(t.jbsj, 'yyyy-MM-dd')as jbsj ,t.lxdh ,t.jsr,t.jlr,j.activityname as ajblzt, j.wfinsid from xfdjb t inner join workflow.v_hist_task j on t.yw_guid=j.yw_guid where j.assignee_=?";
-	if(condition!=null){
+	if(condition!=null && !"".equals(condition)){
         condition = UtilFactory.getStrUtil().unescape(condition);
         condition="(select * from xfdjb where "+condition+")";
         sql = "select distinct t.yw_guid,t.bh,t.xzq,t.jbr,t.jbxs,t.lxdz,t.jbzywt,to_char(t.jbsj, 'yyyy-MM-dd')as jbsj ,t.lxdh ,t.jsr,t.jlr,j.activityname as ajblzt, j.wfinsid from "+condition+" t inner join workflow.v_hist_task j on t.yw_guid=j.yw_guid where j.assignee_=?";
     }
-	if (keyWord != null) {
+	if (keyWord != null && !"".equals(keyWord)) {
 		keyWord = UtilFactory.getStrUtil().unescape(keyWord);
-		sql += "and (t.xzq||t.bh||t.jbr||t.jbxs||t.jbsj||t.JSR||t.JLR like '%"
+		sql += "and (t.xzq||t.bh||t.jbr||t.jbxs||t.jbsj||t.JSR||t.JLR||t.lxdz||t.jbzywt||t.lxdh like '%"
 				+ keyWord + "%')";
 	}
 	sql += " order by jbsj desc";
@@ -90,17 +90,17 @@ public class XfjbManager extends AbstractBaseBean {
 	
 	public void getXfjbBlz(){
 		String keyWord = request.getParameter("keyWord");
-		String userId = request.getParameter("userId");
+		//String userId = request.getParameter("userId");
 		String condition = request.getParameter("condition");
 		String sql = "select t.bh,t.xzq, t.yw_guid,t.jbr,t.jbxs,t.lxdz,t.jbzywt,to_char(t.jbsj, 'yyyy-MM-dd')as jbsj ,t.lxdh ,t.jsr,t.jlr, j.activity_name_ ajblzt, j.wfinsid from xfdjb t inner join workflow.v_active_task j on t.yw_guid=j.yw_guid ";
-		if(condition!=null){
+		if(condition!=null && !"".equals(condition)){
 	        condition = UtilFactory.getStrUtil().unescape(condition);
 	        condition="(select * from xfdjb where "+condition+")";
 	        sql = "select t.bh,t.xzq, t.yw_guid,t.jbr,t.jbxs,t.lxdz,t.jbzywt,to_char(t.jbsj, 'yyyy-MM-dd')as jbsj ,t.lxdh ,t.jsr,t.jlr, j.activity_name_ ajblzt, j.wfinsid from "+condition+" t inner join workflow.v_active_task j on t.yw_guid=j.yw_guid ";
 		}
-		if (keyWord != null) {
+		if (keyWord != null && !"".equals(keyWord)) {
 			keyWord = UtilFactory.getStrUtil().unescape(keyWord);
-			sql += " and (t.xzq||t.bh||t.jbr||t.jbxs||t.jbsj||t.JSR||t.JLR like '%"
+			sql += " and (t.xzq||t.bh||t.jbr||t.jbxs||t.jbsj||t.JSR||t.JLR||t.lxdz||t.jbzywt||t.lxdh like '%"
 					+ keyWord + "%')";
 		}
 		sql += " order by jbsj desc";
@@ -119,18 +119,18 @@ public class XfjbManager extends AbstractBaseBean {
 	 */
 	public void getXFEndList(){
 		String keyWord = request.getParameter("keyWord");
-		String userId = request.getParameter("userId");
+		//String userId = request.getParameter("userId");
         String condition = request.getParameter("condition");
 			// 获取数据
 			String sql = "select t.bh,t.xzq,t.yw_guid,t.jbr,t.jbxs,t.lxdz,t.jbzywt,to_char(t.jbsj, 'yyyy-MM-dd')as jbsj ,t.lxdh ,t.jsr,t.jlr,j.endactivity_ ajblzt, j.wfinsid from xfdjb t inner join workflow.v_end_wfins j on t.yw_guid=j.yw_guid ";
-			if(condition!=null){
+			if(condition!=null && !"".equals(condition)){
 	            condition = UtilFactory.getStrUtil().unescape(condition);
 	            condition="(select * from xfdjb where "+condition+")";
 	            sql = "select t.bh,t.xzq,t.yw_guid,t.jbr,t.jbxs,t.lxdz,t.jbzywt,to_char(t.jbsj, 'yyyy-MM-dd')as jbsj ,t.lxdh ,t.jsr,t.jlr,j.endactivity_ ajblzt, j.wfinsid from "+condition+" t inner join workflow.v_end_wfins j on t.yw_guid=j.yw_guid ";
 	        }
-			if (keyWord != null) {
+			if (keyWord != null && !"".equals(keyWord)) {
 				keyWord = UtilFactory.getStrUtil().unescape(keyWord);
-				sql += " and (t.xzq||t.bh||t.jbr||t.jbxs||t.jbsj||t.JSR||t.JLR like '%"
+				sql += " and (t.xzq||t.bh||t.jbr||t.jbxs||t.jbsj||t.JSR||t.JLR||t.lxdz||t.jbzywt||t.lxdh like '%"
 						+ keyWord + "%')";
 			}
 			sql += " order by j.end_ desc";
@@ -161,7 +161,7 @@ public void getReport(){
             }
             keyword = UtilFactory.getStrUtil().unescape(keyword);
             StringBuffer querybuffer = new StringBuffer();
-            String[][] nameStrings = Cgreport.showList;
+            String[][] nameStrings = Cgreport.showHCList;
             for(int i = 0; i < nameStrings.length - 1; i++){
                 querybuffer.append("upper(").append(nameStrings[i][0]).append(")||");
                 
