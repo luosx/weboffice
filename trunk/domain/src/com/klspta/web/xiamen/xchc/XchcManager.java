@@ -29,7 +29,7 @@ public class XchcManager extends AbstractBaseBean {
         List<Map<String, Object>> queryList = xchc.getHccgList(userId, keyword);
         response(queryList);	        
 	}
-	
+	/*
 	public void getReport() throws Exception{
 		String userid = request.getParameter("userid");
 		String yddw = request.getParameter("yddw");
@@ -52,7 +52,7 @@ public class XchcManager extends AbstractBaseBean {
 			}
 			keyword = UtilFactory.getStrUtil().unescape(keyword);
 			StringBuffer querybuffer = new StringBuffer();
-			String[][] nameStrings = Cgreport.showList;
+			String[][] nameStrings = Cgreport.showHCList;
 			for(int i = 0; i < nameStrings.length - 1; i++){
 				querybuffer.append("upper(").append(nameStrings[i][0]).append(")||");
 				
@@ -64,6 +64,40 @@ public class XchcManager extends AbstractBaseBean {
 		Map<String, Object> conditionMap = new HashMap<String, Object>();
 		conditionMap.put("query", query.toString());
 		response(String.valueOf(new CBDReportManager().getReport("XCHCCG", new Object[]{conditionMap})));
+	}
+	*/
+	public void getReport(){
+	     String xzq = request.getParameter("xzq");
+	     String begindate = request.getParameter("begindate");
+	     String enddate = request.getParameter("enddate");
+	     //String keyword = request.getParameter("keyword");
+	     StringBuffer query = new StringBuffer();
+	     if (xzq != null && !("".equals(xzq))) {
+	         query.append(" where ");
+	         query.append(" t.impxzqbm = '").append(xzq).append("'");
+	     }	     
+	     if(begindate !=null && !("".equals(begindate))){
+	         if(!(xzq != null && !("".equals(xzq)))){
+	             query.append(" where ");             
+	         }else{
+	             query.append(" and ");
+	             
+	         }
+	         query.append(" t.begindate > '").append(begindate).append("'");
+	     }
+	     if(enddate !=null && !("".equals(enddate))){
+	         if(!(xzq != null && !("".equals(xzq))&& begindate !=null && !("".equals(begindate)))){
+                 query.append(" where ");             
+             }else{
+                 query.append(" and ");              
+             }
+	         query.append(" t.enddate < '").append(enddate).append("'");
+	     }
+	     Map<String,Object> conditionMap = new HashMap<String,Object>();
+	     
+	     conditionMap.put("query", query.toString());
+	     response(String.valueOf(new CBDReportManager().getReport("XCHCCG", new Object[]{conditionMap})));
+	    
 	}
 	
 	
