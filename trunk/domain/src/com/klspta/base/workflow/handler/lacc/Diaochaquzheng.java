@@ -28,12 +28,12 @@ public class Diaochaquzheng extends AbstractBaseBean implements IWfHandler  {
 		IWorkflowOp workflowOp=WorkflowOp.getInstance();
 		String yw_guid = workflowOp.getYW_guidByWfInsID(wfInsID);
 		String wfId=workflowOp.getWfIdByWfInsID(wfInsID);
-		String name=workflowOp.getPreActivity(wfId, "调查取证").getName();
-		if("".equals(name)){
-			String newyw_guid = yw_guid + "v02";
-			String sql = "insert into cljdcpb(yw_guid) values ('"+ newyw_guid +"')";
-			update(sql, YW);
-		}
+		//String name=workflowOp.getPreActivity(wfId, "调查取证").getName();
+		//if("".equals(name)){
+		//	String newyw_guid = yw_guid + "v02";
+		//	String sql = "insert into cljdcpb(yw_guid) values ('"+ newyw_guid +"')";
+		//	update(sql, YW);
+		//}
 	}
 
 	@Override
