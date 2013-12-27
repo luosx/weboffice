@@ -1,25 +1,21 @@
 package com.klspta.web.cbd.yzt.zrb;
 
-import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.Vector;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.context.support.StaticApplicationContext;
 
 import com.klspta.base.AbstractBaseBean;
 import com.klspta.base.util.UtilFactory;
-import com.klspta.console.ManagerFactory;
 import com.klspta.model.CBDReport.CBDReportManager;
-import com.klspta.web.cbd.dtjc.TjbbData;
-import com.klspta.web.cbd.yzt.table.CBDtableFields;
-import com.klspta.web.xiamen.xchc.Cgreport;
-import com.sun.org.apache.bcel.internal.generic.RETURN;
+import com.klspta.model.CBDReport.tablestyle.ITableStyle;
+import com.klspta.web.cbd.yzt.jc.report.TableStyleEditRow;
 
 /**
  * 
@@ -38,7 +34,7 @@ public class ZrbManager extends AbstractBaseBean {
      */
     public void getZrb() {
         HttpServletRequest request = this.request;
-        response(new ZrbData().getAllList(request));
+        response(ZrbData.getInstance().getAllList(request));
     }
 
     /**
@@ -49,7 +45,7 @@ public class ZrbManager extends AbstractBaseBean {
      */
     public void getQuery() {
         HttpServletRequest request = this.request;
-        response(new ZrbData().getQuery(request));
+        response(ZrbData.getInstance().getQuery(request));
     }
 
     /**
@@ -61,7 +57,7 @@ public class ZrbManager extends AbstractBaseBean {
      */
     public void updateZrb() throws Exception {
         HttpServletRequest request = this.request;
-        if (new ZrbData().updateZrb(request)) {
+        if (ZrbData.getInstance().updateZrb(request)) {
             response("{success:true}");
         } else {
             response("{success:false}");
@@ -74,7 +70,17 @@ public class ZrbManager extends AbstractBaseBean {
     	String index = request.getParameter("vindex");
     	String value = new String(request.getParameter("value").getBytes("iso-8859-1"), "UTF-8");
     	String field = fields[Integer.parseInt(index)];
-    	response(String.valueOf(new ZrbData().modifyValue(zrbbh, field, value)));
+    	//response(String.valueOf(new ZrbData().modifyValue(zrbbh, field, value)));
+    	//为添加响应速度，采用多线程
+    	//Thread thread = new Thread(new ZrbData(zrbbh, field, value));
+    	//thread.run();
+    	ZrbData zrbData = ZrbData.getInstance();
+    	zrbData.setChange(zrbbh, field, value);
+    	ExecutorService exec = Executors.newCachedThreadPool();
+    	exec.execute(zrbData);
+    	exec.shutdown();
+    	//zrbData.run();
+    	
     }
     
     /**
@@ -87,7 +93,7 @@ public class ZrbManager extends AbstractBaseBean {
     	String zrbBH = request.getParameter("ZRBBH");
     	if (zrbBH != null) {
     		zrbBH = UtilFactory.getStrUtil().unescape(zrbBH);
-	        if (new ZrbData().insertZrb(zrbBH)) {
+	        if (ZrbData.getInstance().insertZrb(zrbBH)) {
 	            response("{success:true}");
 	        } else {
 	            response("{success:false}");
@@ -112,7 +118,7 @@ public class ZrbManager extends AbstractBaseBean {
     	}else{
     		response("{error:not primary}");
     	}
-    	boolean draw = new ZrbData().recordGIS(tbbh, polygon);
+    	boolean draw = ZrbData.getInstance().recordGIS(tbbh, polygon);
     	response(String.valueOf(draw)); 
     }
     
@@ -125,7 +131,9 @@ public class ZrbManager extends AbstractBaseBean {
      */
 	public void getReport() throws Exception{
 		String keyword = request.getParameter("keyword");
+		String type = request.getParameter("type");
 		StringBuffer query = new StringBuffer();
+		ITableStyle its = new TableStyleEditRow();
 		if(keyword != null){
 			query.append(" where ");
 			keyword = UtilFactory.getStrUtil().unescape(keyword);
@@ -141,11 +149,14 @@ public class ZrbManager extends AbstractBaseBean {
 		}
 		Map<String, Object> conditionMap = new HashMap<String, Object>();
 		conditionMap.put("query", query.toString());
-		response(String.valueOf(new CBDReportManager().getReport("ZRB", new Object[]{conditionMap})));
+		if(type != null){
+			response(String.valueOf(new CBDReportManager().getReport("ZRBR", new Object[]{conditionMap},its)));
+		}else{
+			response(String.valueOf(new CBDReportManager().getReport("ZRB", new Object[]{conditionMap},its)));
+		}
 	}
-    
     public static Map<String, String> getZRBBHMap(){
-    	ZrbData zrbData = new ZrbData();
+    	ZrbData zrbData = ZrbData.getInstance();
     	Set<String> leftSet = new TreeSet<String>();
     	List<Map<String, Object>> zRBBHList = zrbData.getZRBNameList();
     	for(int i = 0; i < zRBBHList.size(); i++){
@@ -166,7 +177,7 @@ public class ZrbManager extends AbstractBaseBean {
      */
     public void delete() throws Exception{
     	boolean result = false;
-    	ZrbData zrbData = new ZrbData();
+    	ZrbData zrbData = ZrbData.getInstance();
     	String zrbs =new String(request.getParameter("zrbbh").getBytes("iso-8859-1"),"utf-8");
     	String[] zrbArray = zrbs.split(",");
     	for(int i = 0; i < zrbArray.length; i++){

@@ -19,10 +19,23 @@ import com.klspta.web.cbd.yzt.jc.valueChange.AbstractValueChange;
 import com.klspta.web.cbd.yzt.jc.valueChange.ZrbValueChange;
 import com.klspta.web.cbd.yzt.utilList.IData;
 
-public class ZrbData extends AbstractBaseBean implements IData {
+public class ZrbData extends AbstractBaseBean implements IData, Runnable {
     private static final String formName = "JC_ZIRAN";
     private static final String form_gis = "CBD_ZRB";
     private static final AbstractValueChange linkChange = new ZrbValueChange();
+    
+    private String zrbbh = "";
+    private String field = "";
+    private String value = "";
+    
+    private static ZrbData zrbData;
+    
+    public static ZrbData getInstance(){
+    	if(zrbData == null){
+    		zrbData = new ZrbData();
+    	}
+    	return zrbData;
+    }
 
     /**
      * 保存自然斑列表
@@ -251,5 +264,20 @@ public class ZrbData extends AbstractBaseBean implements IData {
 		}else{
 			return false;
 		}
+	}
+
+	@Override
+	public void run() {
+		modifyValue(zrbbh, field, value);
+	}
+	
+	public void setChange(String zrbbh, String field, String value) {
+		this.zrbbh = zrbbh;
+		this.field = field;
+		this.value = value;
+	}
+	
+	private ZrbData(){
+		super();
 	}
 }
