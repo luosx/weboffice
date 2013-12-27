@@ -282,4 +282,13 @@ public class RoleManager extends AbstractBaseBean{
     	return list;
     }
     
+    public String getParantRoleName(String roleid){
+        String sql1 = "select t.parentroleid from core_roles t where t.roleid=?";
+        List<Map<String,Object>> list1 = query(sql1,CORE,new Object[]{roleid});
+        String parentroleid = (String)(list1.get(0)).get("parentroleid");
+        String sql2 = "select t.rolename from core_roles t where t.parentroleid='0' and t.roleid=?";
+        List<Map<String,Object>> list2 = query(sql2,CORE,new Object[]{parentroleid});      
+        return (String)(list2.get(0)).get("rolename");
+    }
+    
 }
