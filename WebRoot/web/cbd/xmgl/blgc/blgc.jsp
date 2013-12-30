@@ -232,21 +232,19 @@ document.getElementById("bz").value=bz;
 				%>
 				<tr>
 					<td align="center">
-						<input id='xh' type="text" />
+						<textarea id='xh' rows="4" cols="1" style="width: 80px; overflow: hidden"></textarea>
 					</td>
 					<td align="center">
-						<input id='sj' type="text" onfocus="WdatePicker()" />
+						<textarea id='sj' rows="4" cols="1" style=" width: 100px;overflow: hidden" onfocus="WdatePicker()" ></textarea>
 					</td>
 					<td align="center">
-						<textarea id='sjbl' rows="4" cols="10"
-							style="width: 370px; overflow:auto"></textarea>
+						<textarea id='sjbl' rows="4" cols="10" style="width: 370px; overflow:auto"></textarea>
 					</td>
 					<td align="center">
-						<input id='bmjbr' type="text" />
+						<textarea id='bmjbr' rows="4" cols="1" style="width: 120px; overflow: hidden"></textarea>
 					</td>
 					<td align="center">
-						<textarea id='bz' rows="4" cols="20"
-							style="width: 200px; overflow: auto"></textarea>
+						<textarea id='bz' rows="4" cols="20" style="width: 200px; overflow: auto"></textarea>
 					</td>
 					<td align="center">
 						<button onclick="save()">保存</button>
