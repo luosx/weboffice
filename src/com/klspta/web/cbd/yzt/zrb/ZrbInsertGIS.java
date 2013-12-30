@@ -1,11 +1,13 @@
-package com.klspta.web.cbd.yzt.jc.insertGIS;
+package com.klspta.web.cbd.yzt.zrb;
 
 import java.io.InputStream;
 
+import com.klspta.model.CBDinsertGIS.AbstractInsertGIS;
 
-public class HxxmInsertGIS extends AbstractInsertGIS {
+
+public class ZrbInsertGIS extends AbstractInsertGIS {
 	
-	 private static final String form_gis = "CBD_XM";
+	 private static final String form_gis = "CBD_ZRB";
 
 	@Override
 	public boolean insertGIS(InputStream inputStream, String guid) {
@@ -14,12 +16,12 @@ public class HxxmInsertGIS extends AbstractInsertGIS {
 			String wkt = buildWKT(inputStream);
 			String srid = getSrid(form_gis);
             //判断对应zrbbh是否存在,存在用update 否则 用 insert
-            boolean isExit = isExit(form_gis, "XMMC", guid, GIS);
+            boolean isExit = isExit(form_gis, "ZRBBH", guid, GIS);
             String sql = "";
             if(isExit){
-            	sql = "update " + form_gis + " t set t.SHAPE=sde.st_geometry ('" + wkt + "', " + srid + ") where t.XMGUID='" + guid + "'";
+            	sql = "update " + form_gis + " t set t.SHAPE=sde.st_geometry ('" + wkt + "', " + srid + ") where t.ZRBBH='" + guid + "'";
             }else{
-                sql = "INSERT INTO "+ form_gis+"(OBJECTID,XMGUID,SHAPE) VALUES ((select nvl(max(OBJECTID)+1,1) from "+form_gis+"),'"
+                sql = "INSERT INTO "+ form_gis+"(OBJECTID,ZRBBH,SHAPE) VALUES ((select nvl(max(OBJECTID)+1,1) from "+form_gis+"),'"
                 	+ guid + "',sde.st_geometry ('" + wkt + "', " + srid + "))";
             }
             update(sql, GIS);

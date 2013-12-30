@@ -15,14 +15,11 @@ import com.klspta.base.util.UtilFactory;
 import com.klspta.base.wkt.Point;
 import com.klspta.base.wkt.Polygon;
 import com.klspta.base.wkt.Ring;
-import com.klspta.web.cbd.yzt.jc.valueChange.AbstractValueChange;
-import com.klspta.web.cbd.yzt.jc.valueChange.ZrbValueChange;
-import com.klspta.web.cbd.yzt.utilList.IData;
 
-public class ZrbData extends AbstractBaseBean implements IData, Runnable {
+public class ZrbData extends AbstractBaseBean implements Runnable {
     private static final String formName = "JC_ZIRAN";
     private static final String form_gis = "CBD_ZRB";
-    private static final AbstractValueChange linkChange = new ZrbValueChange();
+    private static final ZrbValueChange linkChange = new ZrbValueChange();
     
     private String zrbbh = "";
     private String field = "";
@@ -77,7 +74,6 @@ public class ZrbData extends AbstractBaseBean implements IData, Runnable {
      * @param request
      * @return
      */
-    @Override
     public List<Map<String, Object>> getQuery(HttpServletRequest request) {
         String keyWord = request.getParameter("keyWord");
         StringBuffer querySql = new StringBuffer();
@@ -156,7 +152,7 @@ public class ZrbData extends AbstractBaseBean implements IData, Runnable {
      * @return
      */
     public boolean delete(String zrb){
-    	String sql = "delete from " + formName + " where t.zrbbh = ?";
+    	String sql = "delete from " + formName + " t where t.zrbbh = ?";
     	int result = update(sql, YW, new Object[]{zrb});
     	return result == 1 ? true : false;
     }

@@ -14,13 +14,17 @@ import com.klspta.model.CBDReport.dataClass.IDataClass;
 public class ZrbReport extends AbstractBaseBean implements IDataClass {
 	public static String[][] shows = new String[][]{{"yw_guid","false"},{"zrbbh","true"},{"zdmj","true"},{"lzmj","true"},{"cqgm","true"},{"zzlzmj","true"},{"zzcqgm","true"},{"yjhs","true"},{"fzzlzmj","true"},{"fzzcqgm","true"},{"bz","true"}};
 	private String form_name = "JC_ZIRAN";
+	private String isEdit = "true";
 	
 	@Override
 	public Map<String, TRBean> getTRBeans(Object[] obj, TRBean trBean) {
 		Map<String, TRBean> trbeans = new TreeMap<String, TRBean>();
 		Map<String, Object> queryMap = new HashMap<String, Object>();
-		if(obj.length > 0){
-			queryMap = (Map<String, Object>)obj[0];
+		if(obj.length > 1){
+			queryMap = (Map<String, Object>)obj[1];
+			isEdit = (String)obj[0];
+		}else{
+			isEdit = (String)obj[0];
 		}
 		List<TRBean> trbeanList = getBody(queryMap);
 		for(int i = 0; i < trbeanList.size(); i++){
@@ -53,10 +57,15 @@ public class ZrbReport extends AbstractBaseBean implements IDataClass {
 			Map<String, Object> map = queryList.get(num);
 			for(int i = 0; i < shows.length; i++){
 				String value = String.valueOf(map.get(shows[i][0]));
+				TDBean tdBean;
 				if("null".equals(value)){
 					value = "";
 				}
-				TDBean tdBean = new TDBean(value, "80", "20",shows[i][1]);
+				if("true".equals(isEdit)){
+					tdBean = new TDBean(value, "80", "20",shows[i][1]);
+				}else{
+					tdBean = new TDBean(value, "80", "20","false");
+				}
 				trBean.addTDBean(tdBean);
 			}
 			list.add(trBean);
@@ -83,7 +92,7 @@ public class ZrbReport extends AbstractBaseBean implements IDataClass {
 			if("null".equals(value)){
 				value = "";
 			}
-			TDBean tdBean = new TDBean(value, "80", "20",shows[i][1]);
+			TDBean tdBean = new TDBean(value, "80", "20","false");
 			trBean.addTDBean(tdBean);
 		}
 		list.add(trBean);

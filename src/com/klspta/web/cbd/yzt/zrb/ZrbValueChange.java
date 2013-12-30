@@ -1,23 +1,24 @@
-package com.klspta.web.cbd.yzt.jc.valueChange;
+package com.klspta.web.cbd.yzt.zrb;
 
 import java.util.List;
 import java.util.Map;
 
+import com.klspta.base.AbstractBaseBean;
 import com.klspta.web.cbd.yzt.jbb.JbbData;
+import com.klspta.web.cbd.yzt.jbb.JbdkValueChange;
 
 
-public class ZrbValueChange extends AbstractValueChange {
+public class ZrbValueChange extends AbstractBaseBean  {
 	private String source_name = "JC_ZIRAN";
 	private String impress_name = "JC_JIBEN";
 	//private String fields = "dkmc,zzsgm";
 	private String fields = "dkmc,zzsgm,zzzsgm,zzzshs,hjmj,fzzzsgm";
 	private String sql = "select sum(t.lzmj) as zcsgm, sum(t.zzcqgm) as zzzsgm, sum(t.yjhs) as zzzshs , sum(t.fzzcqgm) as fzzzsgm,  CEIL((sum(t.zzcqgm)/sum(t.yjhs))*10000) as hjmj   from jc_ziran t where t.zrbbh like ?";
-	private AbstractValueChange jbdkValueChange = new JbdkValueChange();
+	private  JbdkValueChange jbdkValueChange = new JbdkValueChange();
 	
-	@Override
 	public boolean add(String dkmc) {
 		//约定自然斑的名称构成为基本地块+"-"+编号
-		String jbdkmc = dkmc.split("-")[0];
+		String jbdkmc = dkmc.substring(0,dkmc.lastIndexOf("-"));
 		String[] cacluteValue = getValues(jbdkmc);
 		StringBuffer sqlBuffer = new StringBuffer();
 		String[] field = fields.split(",");
@@ -42,7 +43,6 @@ public class ZrbValueChange extends AbstractValueChange {
 		return i==1?true:false;
 	}
 
-	@Override
 	public boolean delete(String dkmc) {
 		String[] strings = getValues(dkmc);
 		String jbdkmc = dkmc.split("-")[0];
@@ -57,7 +57,6 @@ public class ZrbValueChange extends AbstractValueChange {
 		return delete;
 	}
 
-	@Override
 	public boolean modify(String dkmc) {
 		return add(dkmc);
 	}
@@ -75,7 +74,6 @@ public class ZrbValueChange extends AbstractValueChange {
 		return returnValue.split(",");
 	}
 
-	@Override
 	public boolean modifyguid(String oldguid, String newguid) {
 		return delete(oldguid)&&add(newguid);
 	}

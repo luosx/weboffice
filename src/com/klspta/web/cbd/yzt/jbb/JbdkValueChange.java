@@ -1,17 +1,18 @@
-package com.klspta.web.cbd.yzt.jc.valueChange;
+package com.klspta.web.cbd.yzt.jbb;
 
 import java.util.List;
 import java.util.Map;
 
+import com.klspta.base.AbstractBaseBean;
 
-public class JbdkValueChange extends AbstractValueChange {
+
+public class JbdkValueChange extends AbstractBaseBean {
 	private String source_name = "JC_JIBEN";
 	private String impress_name = "JC_XIANGMU";
 	private String fields = "jsyd,rjl,jzgm,gjjzgm,jzjzgm,szjzgm,zzsgm,zzzsgm,zzzshs,hjmj,fzzzsgm,fzzjs,kfcb,dmcb,yjcjj,yjzftdsy,cxb,cqqd,cbfgl";
 	private String sql = "select  sum(t.zzzsgm) as zzzsgm, sum(t.zzzshs) as zzzshs, trunc(sum(t.zzzsgm)/sum(t.zzzshs),2) as hjmj, sum(t.fzzzsgm) as fzzzsgm,"+
 						" sum(t.fzzjs) as fzzjs, sum(t.kfcb) as kfcb, sum(t.dmcb) as dmcb,sum(t.yjcjj) as yjcjj, sum(t.yjzftdsy) as yjzfdsy, sum(t.cxb)"+
 						" as cxb, sum(t.cqqd) as cqqd, sum(t.cbfgl) as cbfgl from jc_jiben t where t.dkmc in ";
-	@Override
 	public boolean add(String ywGuid) {
 		//根据地块编号找到对应项目编号
 		String jbdkSql = "select t.dkmc,t.xmname from " + impress_name + " t where  t.dkmc like '%" + ywGuid + "%'";
@@ -35,17 +36,14 @@ public class JbdkValueChange extends AbstractValueChange {
 		}
 	}
 
-	@Override
 	public boolean delete(String ywGuid) {
 		return false;
 	}
 
-	@Override
 	public boolean modify(String ywGuid) {
 		return add(ywGuid);
 	}
 
-	@Override
 	public boolean modifyguid(String oldguid, String newguid) {
 		// TODO Auto-generated method stub
 		return false;

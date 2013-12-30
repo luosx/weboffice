@@ -1,6 +1,8 @@
-package com.klspta.web.cbd.yzt.jc.insertGIS;
+package com.klspta.web.cbd.yzt.jbb;
 
 import java.io.InputStream;
+
+import com.klspta.model.CBDinsertGIS.AbstractInsertGIS;
 
 
 public class JbbInsertGIS extends AbstractInsertGIS {

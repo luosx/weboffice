@@ -20,8 +20,8 @@ import com.klspta.model.CBDReport.dataClass.IDataClass;
  * <br>Author:黎春行
  * <br>Date:2013-12-18
  */
-public class JbbReport extends AbstractBaseBean implements IDataClass {
-	public static String[][] shows = new String[][]{{"dkmc","false"},{"zzsgm","false"},{"zzzsgm","false"},{"zzzshs","false"},{"hjmj","false"},{"fzzzsgm","false"},{"fzzjs","false"},{"zd","true"},{"jsyd","true"},{"rjl","true"},{"jzgm","true"},{"kzgd","true"},{"ghyt","true"},{"gjjzgm","true"},{"jzjzgm","true"},{"szjzgm","true"},{"kfcb","true"},{"lmcb","true"},{"dmcb","true"},{"yjcjj","true"},{"yjzftdsy","true"},{"cxb","true"},{"cqqd","true"},{"cbfgl","true"},{"nrghcbk","true"}};
+public class JbbReportRead extends AbstractBaseBean implements IDataClass {
+	public static String[][] shows = new String[][]{{"dkmc","false"},{"zzsgm","false"},{"zzzsgm","false"},{"zzzshs","false"},{"hjmj","false"},{"fzzzsgm","false"},{"fzzjs","false"},{"zd","false"},{"jsyd","false"},{"rjl","false"},{"jzgm","false"},{"kzgd","false"},{"ghyt","false"},{"gjjzgm","false"},{"jzjzgm","false"},{"szjzgm","false"},{"kfcb","false"},{"lmcb","false"},{"dmcb","false"},{"yjcjj","false"},{"yjzftdsy","false"},{"cxb","false"},{"cqqd","false"},{"cbfgl","false"},{"ssqy","false"}};
 	private String form_name = "JC_JIBEN";
 	
 	@Override
@@ -35,13 +35,15 @@ public class JbbReport extends AbstractBaseBean implements IDataClass {
 	public Map<String, TRBean> getBody(Object[] obj){
 		Map<String, TRBean> trbeans = new TreeMap<String, TRBean>();
 		Map<String, List<TRBean>> buildMap = new TreeMap<String, List<TRBean>>();
+		List<TRBean> totalList = getSubTotal(null, obj, "是");
+		trbeans.put("11", totalList.get(0));
 		//添加所有纳入规划储备库数据
 		buildMap.putAll(getByStatus(obj,"是"));
 		Set<String> keySet = buildMap.keySet();
 		for(String key : keySet){
 			List<TRBean> trBeans = buildMap.get(key);
 			for(int i = 0; i < trBeans.size(); i++){
-				trbeans.put("11" + key+i, trBeans.get(i));
+				trbeans.put("22" + key+i, trBeans.get(i));
 			}
 		}
 		//添加所有未纳入规划储备库数据
@@ -72,7 +74,11 @@ public class JbbReport extends AbstractBaseBean implements IDataClass {
 	}
 	
 	
-	private List<TRBean> getSubTotal(String key,Object[] obj){
+	private List<TRBean> getSubTotal(String key,Object[] obj,String status){
+		Map<String, Object> queryMap = new HashMap<String, Object>();
+		if(obj.length > 0){
+			queryMap = (Map<String, Object>)obj[0];
+		}
 		StringBuffer sqlBuffer = new StringBuffer();
 		sqlBuffer.append("select ");
 		for(int i = 1; i < shows.length - 1; i++){
@@ -81,22 +87,32 @@ public class JbbReport extends AbstractBaseBean implements IDataClass {
 		//sqlBuffer.append("sum(t.").append(shows[shows.length - 1][0]).append(") as ").append(shows[shows.length - 1][0]).append(" from ");
 		sqlBuffer.append("' ' as ").append(shows[shows.length - 1][0]).append(" from ");
 		sqlBuffer.append(form_name).append(" t ");
-		if(obj != null){
-			sqlBuffer.append("  where t.dkmc like '").append(key).append("_%' and t.ssqy like ? ");
+		if(queryMap != null && !queryMap.isEmpty()){
+			sqlBuffer.append(String.valueOf(queryMap.get("query"))).append(" and t.nrghcbk='").append(status).append("'");
 		}else{
-			sqlBuffer.append("  where t.dkmc like '").append(key).append("_%'");
+			sqlBuffer.append(" where t.nrghcbk='").append(status).append("'");
 		}
+		if(key != null){
+			sqlBuffer.append(" and t.dkmc like '").append(key).append("_%'");
+		}
+		
+		//if(obj != null){
+		//	sqlBuffer.append("  where t.dkmc like '").append(key).append("_%' and t.ssqy like ? ");
+		//}else{
+		//	sqlBuffer.append("  where t.dkmc like '").append(key).append("_%'");
+		//}
 		sqlBuffer.append(" order by t.dkmc");
 		List<Map<String, Object>> queryList = null;
-		if(obj != null){
-			queryList = query(sqlBuffer.toString(), YW, obj);
-		}else{
-			queryList = query(sqlBuffer.toString(), YW);
-		}
+		queryList = query(sqlBuffer.toString(), YW);
 		Map<String, Object> map = queryList.get(0);
 		TRBean trBean = new TRBean();
 		trBean.setCssStyle("trtotal");
-		TDBean tdtitle = new TDBean(key + "小计","130","20","false");
+		TDBean tdtitle;
+		if(key == null){
+			tdtitle = new TDBean("合计","200","20","false");
+		}else{
+			tdtitle = new TDBean(key + "小计","200","20","false");
+		}
 		trBean.addTDBean(tdtitle);
 		for(int j = 1; j < shows.length; j++){
 			String value = String.valueOf(map.get(shows[j][0]));
@@ -112,15 +128,25 @@ public class JbbReport extends AbstractBaseBean implements IDataClass {
 	}
 	
 	private Map<String, List<TRBean>> getByStatus(Object[] obj,String status){
+		Map<String, Object> queryMap = new HashMap<String, Object>();
+		if(obj.length > 0){
+			queryMap = (Map<String, Object>)obj[0];
+		}
 		StringBuffer sqlBuffer = new StringBuffer();
 		sqlBuffer.append("select ");
 		for(int i = 0; i < shows.length - 1; i++){
 			sqlBuffer.append("t.").append(shows[i][0]).append(",");
 		}
 		sqlBuffer.append("t.").append(shows[shows.length - 1][0]).append(" from ");
-		sqlBuffer.append(form_name).append(" t where t.nrghcbk='").append(status).append("' and  t.ssqy like ? ");
+		//sqlBuffer.append(form_name).append(" t where t.nrghcbk='").append(status).append("' and  t.ssqy like ? ");
+		sqlBuffer.append(form_name).append(" t ");
+		if(queryMap != null && !queryMap.isEmpty()){
+			sqlBuffer.append(String.valueOf(queryMap.get("query"))).append(" and t.nrghcbk='").append(status).append("'");
+		}else{
+			sqlBuffer.append(" where t.nrghcbk='").append(status).append("'");
+		}
 		sqlBuffer.append(" order by t.dkmc");
-		List<Map<String, Object>> queryList = query(sqlBuffer.toString(), YW, obj);
+		List<Map<String, Object>> queryList = query(sqlBuffer.toString(), YW);
 		Map<String, List<TRBean>> buildMap = new TreeMap<String, List<TRBean>>();
 		for(int i = 0; i < queryList.size(); i++){
 			Map map = queryList.get(i);
@@ -131,7 +157,7 @@ public class JbbReport extends AbstractBaseBean implements IDataClass {
 			}
 			List<TRBean> subTotal = buildMap.get(key);
 			if(subTotal == null){
-				subTotal = getSubTotal(key, obj);
+				subTotal = getSubTotal(key, obj, status);
 			}
 			TRBean trBean = new TRBean();
 			trBean.setCssStyle("trsingle");
@@ -149,6 +175,5 @@ public class JbbReport extends AbstractBaseBean implements IDataClass {
 		}
 		return buildMap;
 	}
-	
-
+		
 }
