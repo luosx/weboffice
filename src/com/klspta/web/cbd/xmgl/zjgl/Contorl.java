@@ -3,7 +3,7 @@ package com.klspta.web.cbd.xmgl.zjgl;
 
 public class Contorl  {
     //Ⅱ.资金支出\2.1 一级开发支出\前期费用\拆迁费用\市政费用\财务费用\管理费用\筹融资金返还\ 其他支出\Ⅱ.资金支出
- public static String ZJZC="ZJZC";
+public static String ZJZC="ZJZC";
 public static String YIKFZC="YIKFZC";
 public static String  QQFY="QQFY";
 public static String  CQFY="CQFY";
