@@ -196,7 +196,7 @@ document.getElementById("bz").value=bz;
 						事件
 						</h3>
 					</td>
-					<td align="center" width="100px">
+					<td align="center" width="120px">
 					    <h3>
 						部门/经办人
 						</h3>
@@ -235,18 +235,18 @@ document.getElementById("bz").value=bz;
 						<input id='xh' type="text" />
 					</td>
 					<td align="center">
-						<input id='sj' type="text" width="95px" onfocus="WdatePicker()" />
+						<input id='sj' type="text" onfocus="WdatePicker()" />
 					</td>
 					<td align="center">
 						<textarea id='sjbl' rows="4" cols="10"
-							style="width: 370px; overflow: hidden"></textarea>
+							style="width: 370px; overflow:auto"></textarea>
 					</td>
 					<td align="center">
-						<input id='bmjbr' type="text" width="95px" />
+						<input id='bmjbr' type="text" />
 					</td>
 					<td align="center">
 						<textarea id='bz' rows="4" cols="20"
-							style="width: 200px; overflow: hidden"></textarea>
+							style="width: 200px; overflow: auto"></textarea>
 					</td>
 					<td align="center">
 						<button onclick="save()">保存</button>
