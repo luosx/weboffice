@@ -13,6 +13,9 @@ String yw_guid = request.getParameter("yw_guid");
 if(xmmc!=null){
 	xmmc = new String(xmmc.getBytes("iso-8859-1"),"utf-8");
 }
+Map<String, String> conditionMap = new HashMap<String, String>();
+conditionMap.put("query", " yw_guid = '" + yw_guid + "'");
+
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
@@ -89,7 +92,7 @@ if(xmmc!=null){
 	</style>
 	 <script type="text/javascript">
   		function print(){
-		    var curTbl = document.getElementById("XMKGZBB"); 
+		    var curTbl = document.getElementById("XMKGZBBCX"); 
  			try{
 		    	var oXL = new ActiveXObject("Excel.Application");
 		    }catch(err){
@@ -115,15 +118,16 @@ if(xmmc!=null){
 		    //设置excel可见属性 
 		}
 		//根据用地单位和关键字作过滤
-  		//function query(keyword){
- 		//	putClientCommond("xmkgzbb","getReport");
-		 //   putRestParameter("keyword",escape(escape(keyword)));
-		//	myData = restRequest();
-  		//	document.getElementById("center").innerHTML = myData;
-  		//}
+  		function query(keyword){
+ 			putClientCommond("xmkgzbbmanager","getReport");
+ 			putRestParameter("yw_guid", "<%=yw_guid%>")
+		    putRestParameter("keyword",escape(escape(keyword)));
+			myData = restRequest();
+  			document.getElementById("center").innerHTML = myData;
+  		}
 		
 		
-		function saves(ydxzlx){
+		function saves(ydxzlx,adding){
 		var dkbh=document.getElementById("dkbh").value;
 		var ydxz=document.getElementById("ydxz").value;
 		var ydxzdh=document.getElementById("ydxzdh").value;
@@ -132,7 +136,7 @@ if(xmmc!=null){
 		var jzmj=document.getElementById("jzmj").value;
 		var kzgd=document.getElementById("kzgd").value;
 		var bz=document.getElementById("bz").value;
-		if(dkbh==null||dkbh==''||ydxz==null||ydxz==''||ydxzdh==null||ydxzdh==''||ydmj==null||ydmj==''||rjl==null||rjl==''||jzmj==null||jzmj==''||kzgd==null||kzgd==''||ydxzlx==null||ydxzlx==''){
+		if(dkbh==null||dkbh==''||ydxz==null||ydxz==''||ydxzdh==null||ydxzdh==''||ydmj==null||ydmj==''||rjl==null||rjl==''||jzmj==null||jzmj==''){
 			alert("请填写完整之后再保存！！"); 
 		}else{
 	    	putClientCommond("xmkgzbbmanager","saveDK");
@@ -149,6 +153,8 @@ if(xmmc!=null){
 			var msg=restRequest();
 			if('success'==msg){
 				alert("保存成功！");
+				alert(window.parent.adding);
+				 window.parent.adding=false;
 				document.location.reload();
 			}else{
 				alert("保存失败！");
@@ -162,7 +168,7 @@ if(xmmc!=null){
 	      <h1><%=xmmc%>控规指标表</h1>
 	</div>
 	<div align="center" id="center" style="position:absolute; top:65px; left: 20px;">
-  		<%=new CBDReportManager().getReport("XMKGZBB")%>
+  		<%=new CBDReportManager().getReport("XMKGZBBCX",new Object[]{conditionMap})%>
   	</div>
   </body>
 </html>

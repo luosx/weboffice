@@ -28,7 +28,7 @@ input,img {
 		<script>
 		var basePath="<%=basePath%>";
 		function ss(){
-		var tb = document.getElementById("XMKGZBB"); 
+		var tb = document.getElementById("XMKGZBBCX"); 
 		add(tb);
 		}
 		
@@ -38,6 +38,8 @@ var formPanel;
 var radio ;
 var simple;
 var fp;
+var adding = false;
+
 var url = basePath
 		+ 'web/cbd/xmgl/xmkgzb/xmkgzbReport.jsp?yw_guid=<%=yw_guid%>&xmmc=<%=xmmc%>';
 var condition = "";
@@ -117,18 +119,23 @@ Ext.onReady(function(){
             buttons: [{
 	                    text:'提交',
 	                    handler: function(){
-		                        fp.close();
-		                        addb();
-                	                         }
+		                        if(ydxzlx!=null){
+			                        fp.hide();
+			                        addb();
+			                        }else{
+			                        	alert("地块类型不能为空！！！");
+			                        }
+                	    }
                 	},{
 	                    text: '关闭',
 	                    handler: function(){
-	                        fp.close();
+	                        fp.hide();
                     }
 			}]   
 	});  
   
    fp = new Ext.Window({ 
+   		closeAction:"hide",
     	title:'添加地块',    
         frame: true,   
         labelWidth:160,   
@@ -142,10 +149,15 @@ Ext.onReady(function(){
     }) 
 
 function add(){
- fp.show();
-  }
+	if(adding == false){
+		adding = true;
+		fp.show();
+	}else{
+		alert("请将前一地块提交后再进行此操作！");
+	}
+ }
  function addb(){
-		var tb = frames['report'].document.getElementById("XMKGZBB"); 
+		var tb = frames['report'].document.getElementById("XMKGZBBCX"); 
 		var tr = tb.insertRow(1);     
 		tr.style.cssText = tb.rows[1].style.trsingle; 
 		
@@ -166,7 +178,7 @@ function add(){
 		td6.innerHTML = "<input id='rjl' style='width: 80px' type='text' value=''   />";
 		td7.innerHTML = "<input id='jzmj' style='width: 80px' type='text' value=''   />";
 		td8.innerHTML = "<input id='kzgd' style='width: 80px' type='text' value=''   />";
-		td9.innerHTML = "<input id='bz' style='width: 80px' type='text' value=''/><input type='button' value='保存' onclick='saves("+ydxzlx+")'/>";
+		td9.innerHTML = "<input id='bz' style='width: 80px' type='text' value=''/><input type='button' value='保存' onclick='saves("+ydxzlx+","+adding+")'/>";
 		
 	} 
 	
