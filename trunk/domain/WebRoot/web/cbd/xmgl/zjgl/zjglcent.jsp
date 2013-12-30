@@ -6,9 +6,15 @@
 	String path = request.getContextPath();
 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 	String yw_guid=request.getParameter("yw_guid");
+	String xmmc=request.getParameter("xmmc");
 	String table="";
 	List<Map<String, Object>> lr=null;
 	List<Map<String, Object>> zc=null;
+	if (xmmc != null) {
+		xmmc = new String(xmmc.getBytes("iso-8859-1"), "utf-8");
+	} else {
+		xmmc = "";
+	}
 	if(!yw_guid.equals("")&&!yw_guid.equals("null")){
 	  Contorl contorl=new Contorl(yw_guid);
 	  table=contorl.getTextMode();
@@ -31,9 +37,10 @@
 table{
 border-right:1px solid #000000;
 border-bottom:1px solid #000000;
- font-size: 14px;
-    border-color:#000000;
+ font-size: 12px;
+ border-color:#000000;
 background-color: #A8CEFF;
+ table-layout:fixed;
 }
 table td{
 border-left:1px solid #000000;
@@ -52,7 +59,7 @@ tr{
     font-size: 15px;
     text-align:center;
     line-height: 30px;
-	margin-top: 3px;
+	margin-top: 6px;
 	background-color: #A8CEFF;
   }
 
@@ -98,10 +105,24 @@ putClientCommond("xmmanager","saveZJGL_ZJLR");
 	putRestParameter("val",val);
 	var msg=restRequest(); 
  }
+ 
+function turn(){
+ if(parent.content.cols=="211,2,*"){
+ frameshow.src="<%=basePath%>web/cbd/framework/images/left/partline_right.png";
+ oa_tree.title="显示";
+ parent.content.cols="0,2,*";
+}
+else{
+frameshow.src="<%=basePath%>web/cbd/framework/images/left/partline_left.png";
+oa_tree.title="隐藏";
+parent.content.cols="211,2,*";} 
+}
+
+ 
 </script>
 	</head>
 	<body bgcolor="#FFFFFF" topmargin="0" leftmargin="0" style="overflow: scroll;">
-	 <div align="center" style="width: 1350px"><h3>资金管理</h3></div>
+	 <div align="center" style="width: 1350px"><h3><%=xmmc%>-资金管理</h3></div>
 	   <%=table%>
 	</body>
 </html>

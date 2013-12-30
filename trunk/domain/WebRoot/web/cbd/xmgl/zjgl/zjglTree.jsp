@@ -8,6 +8,12 @@
     String basePath = request.getScheme() + "://" + request.getServerName() + ":"
             + request.getServerPort() + path + "/";
     String yw_guid= request.getParameter("yw_guid");
+    	String xmmc=request.getParameter("xmmc");
+    	if (xmmc != null) {
+		xmmc = new String(xmmc.getBytes("iso-8859-1"), "utf-8");
+	} else {
+		xmmc = "";
+	}
     String tree=  new TreeManager().getTree(yw_guid);
     tree="["+tree+"]";
     //System.out.print(tree);
@@ -152,9 +158,9 @@ scrollbar-3dlight-color:#D4D0C8;
      //表单FormPanel
         var form = new Ext.form.FormPanel({
         renderTo: 'mapTree',
-        title   : '资金树管理',
+        title   : '<%=xmmc%>',
         autoHeight: true,
-        width   : 200,
+        width   : 210,
        
         bodyStyle: 'padding: 5px',
         defaults: {
