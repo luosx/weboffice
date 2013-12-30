@@ -15,19 +15,15 @@ import com.klspta.base.util.UtilFactory;
 import com.klspta.base.wkt.Point;
 import com.klspta.base.wkt.Polygon;
 import com.klspta.base.wkt.Ring;
-import com.klspta.web.cbd.yzt.jc.valueChange.AbstractValueChange;
-import com.klspta.web.cbd.yzt.jc.valueChange.JbdkValueChange;
-import com.klspta.web.cbd.yzt.utilList.IData;
 
-public class JbbData extends AbstractBaseBean implements IData  {
+public class JbbData extends AbstractBaseBean   {
 	private static final String formName = "JC_JIBEN";
 	private static final String zrformName = "JC_ZIRAN";
 	private static final String form_gis = "CBD_JBB";
-	private static final AbstractValueChange linkChange = new JbdkValueChange();
+	private static final JbdkValueChange linkChange = new JbdkValueChange();
 	
 	public static List<Map<String, Object>> jbbList;
 	
-	@Override
 	public List<Map<String, Object>> getAllList(HttpServletRequest request) {
 		if(jbbList == null){
 		    StringBuffer sql = new StringBuffer();
@@ -38,7 +34,6 @@ public class JbbData extends AbstractBaseBean implements IData  {
 		return jbbList;
 	}
 
-	@Override
 	public List<Map<String, Object>> getQuery(HttpServletRequest request) {
 		String keyWord = request.getParameter("keyWord");
 		StringBuffer querySql = new StringBuffer();

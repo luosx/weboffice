@@ -150,9 +150,9 @@ public class ZrbManager extends AbstractBaseBean {
 		Map<String, Object> conditionMap = new HashMap<String, Object>();
 		conditionMap.put("query", query.toString());
 		if(type != null){
-			response(String.valueOf(new CBDReportManager().getReport("ZRBR", new Object[]{conditionMap},its)));
+			response(String.valueOf(new CBDReportManager().getReport("ZRB", new Object[]{"false",conditionMap},its)));
 		}else{
-			response(String.valueOf(new CBDReportManager().getReport("ZRB", new Object[]{conditionMap},its)));
+			response(String.valueOf(new CBDReportManager().getReport("ZRB", new Object[]{"true",conditionMap},its)));
 		}
 	}
     public static Map<String, String> getZRBBHMap(){
@@ -176,7 +176,7 @@ public class ZrbManager extends AbstractBaseBean {
      * @throws Exception
      */
     public void delete() throws Exception{
-    	boolean result = false;
+    	boolean result = true;
     	ZrbData zrbData = ZrbData.getInstance();
     	String zrbs =new String(request.getParameter("zrbbh").getBytes("iso-8859-1"),"utf-8");
     	String[] zrbArray = zrbs.split(",");

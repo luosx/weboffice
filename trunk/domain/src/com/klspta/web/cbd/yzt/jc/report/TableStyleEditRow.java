@@ -1,5 +1,6 @@
 package com.klspta.web.cbd.yzt.jc.report;
 
+import com.klspta.model.CBDReport.bean.TDBean;
 import com.klspta.model.CBDReport.bean.TRBean;
 import com.klspta.model.CBDReport.tablestyle.TableStyleDefaultEdit;
 
@@ -22,7 +23,15 @@ public class TableStyleEditRow extends TableStyleDefaultEdit {
 		return "</tr>";
 	}
 
-	
-	
+    @Override
+    public String getTD1(TDBean tdBean) {
+        if(tdBean.getEditable() != null && tdBean.getEditable().equals("true")){
+            return "<td id='#TDINDEX' onclick='send(this.id)' onmouseover='mouseOver(this)' onmouseout='mouseOut(this)' height='#HEIGHT' width='#WIDTH' colspan='#COLSPAN' rowspan='#ROWPAN' class='#STYLE'><div id='0' style='display:none;width:10'></div>#TEXT</td>";
+        }else if (tdBean.getEditable() != null && tdBean.getEditable().equals("false")) {
+        	return "<td id='#TDINDEX' onmouseover='mouseOver(this)' onmouseout='mouseOut(this)' height='#HEIGHT' width='#WIDTH' colspan='#COLSPAN' rowspan='#ROWPAN' class='#STYLE'>#TEXT</td>";
+		}else{
+            return "<td id='#TDINDEX' height='#HEIGHT' width='#WIDTH' colspan='#COLSPAN' rowspan='#ROWPAN' class='#STYLE'>#TEXT</td>";
+        }
+    }
 
 }

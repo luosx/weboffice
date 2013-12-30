@@ -15,9 +15,8 @@ import com.klspta.base.util.UtilFactory;
 import com.klspta.base.wkt.Point;
 import com.klspta.base.wkt.Polygon;
 import com.klspta.base.wkt.Ring;
-import com.klspta.web.cbd.yzt.utilList.IData;
 
-public class HxxmData extends AbstractBaseBean implements IData {
+public class HxxmData extends AbstractBaseBean {
 	private static final String formName = "JC_XIANGMU";
 	private static final String form_gis = "CBD_XM";
 	private static final String jbformName = "JC_JIBEN";
@@ -27,7 +26,6 @@ public class HxxmData extends AbstractBaseBean implements IData {
 	 */
 	public static List<Map<String, Object>> xmList;
 
-	@Override
 	public List<Map<String, Object>> getAllList(HttpServletRequest request) {
 		//if (xmList == null) {
 			StringBuffer sql = new StringBuffer();
@@ -49,7 +47,6 @@ public class HxxmData extends AbstractBaseBean implements IData {
 		return xmList;
 	}
 
-	@Override
 	public List<Map<String, Object>> getQuery(HttpServletRequest request) {
 		String keyWord = request.getParameter("keyWord");
 		StringBuffer querySql = new StringBuffer();

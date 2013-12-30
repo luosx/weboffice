@@ -1,6 +1,5 @@
 package com.klspta.web.cbd.yzt.jbb;
 
-import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.klspta.base.AbstractBaseBean;
 import com.klspta.base.util.UtilFactory;
+import com.klspta.model.CBDReport.CBDReportManager;
+import com.klspta.model.CBDReport.tablestyle.ITableStyle;
+import com.klspta.web.cbd.yzt.jc.report.TableStyleEditRow;
+import com.klspta.web.cbd.yzt.zrb.ZrbData;
+import com.klspta.web.cbd.yzt.zrb.ZrbReport;
 
 public class JbbManager extends AbstractBaseBean{
 	public void getJbb() {
@@ -39,7 +43,39 @@ public class JbbManager extends AbstractBaseBean{
     	String field = JbbReport.shows[Integer.parseInt(index)][0];
     	response(String.valueOf(new JbbData().modifyValue(dkmc, field, value)));
 	}
-	 
+	
+    /**
+     * 
+     * <br>Description:基本斑列表过滤
+     * <br>Author:黎春行
+     * <br>Date:2013-12-25
+     * @throws Exception
+     */
+	public void getReport() throws Exception{
+		String keyword = request.getParameter("keyword");
+		String type = request.getParameter("type");
+		StringBuffer query = new StringBuffer();
+		ITableStyle its = new TableStyleEditRow();
+		if(keyword != null){
+			query.append(" where ");
+			keyword = UtilFactory.getStrUtil().unescape(keyword);
+			StringBuffer querybuffer = new StringBuffer();
+			String[][] nameStrings = JbbReport.shows;
+			for(int i = 0; i < nameStrings.length - 1; i++){
+				querybuffer.append("upper(").append(nameStrings[i][0]).append(")||");
+			}
+			querybuffer.append("upper(").append(nameStrings[nameStrings.length - 1][0]).append(")) like '%").append(keyword).append("%'");
+			query.append("(");
+			query.append(querybuffer);
+		}
+		Map<String, Object> conditionMap = new HashMap<String, Object>();
+		conditionMap.put("query", query.toString());
+		if(type != null){
+			response(String.valueOf(new CBDReportManager().getReport("JBBR", new Object[]{conditionMap},its)));
+		}else{
+			response(String.valueOf(new CBDReportManager().getReport("JBB", new Object[]{conditionMap},its)));
+		}
+	}
 	 
 	    /**
 	     * 
@@ -72,6 +108,7 @@ public class JbbManager extends AbstractBaseBean{
 	        proMap.put("left", toJson(leftSet));
 	        return proMap;
 	    }
+	    
 	    private static String toJson(Set<String> set){
 	        StringBuffer jsonBuffer = new StringBuffer();
 	        jsonBuffer.append("[");
