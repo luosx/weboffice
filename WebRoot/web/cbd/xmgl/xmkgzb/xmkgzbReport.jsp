@@ -153,7 +153,6 @@ conditionMap.put("query", " yw_guid = '" + yw_guid + "'");
 			var msg=restRequest();
 			if('success'==msg){
 				alert("保存成功！");
-				alert(window.parent.adding);
 				 window.parent.adding=false;
 				document.location.reload();
 			}else{
