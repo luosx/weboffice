@@ -1,42 +1,42 @@
 package com.klspta.web.cbd.xmgl.xmkgzbb;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import com.klspta.base.AbstractBaseBean;
 import com.klspta.base.util.UtilFactory;
 import com.klspta.model.CBDReport.CBDReportManager;
-import com.klspta.web.xiamen.ajcc.AjccData;
-import com.klspta.web.xiamen.ajcc.IajccData;
+import com.klspta.web.cbd.yzt.zrb.ZrbData;
 
 public class Xmkgzbbmanager extends AbstractBaseBean { 
 	public static final String[][] showList = new String[][]{{"READFLAG", "0.1","hiddlen"},{"ROWNUM", "0.03","序号"},{"DKBH", "0.1","地块编号"},{"YDXZDH", "0.11","用地性质代号"},{"YDXZ", "0.11","用地性质"},{"YDMJ", "0.09","用地面积"},{"RJL","0.08","容积率"},{"JZMJ","0.08","建筑面积"},{"KZGD","0.08","控制高度"},{"BZ","0.1","备注"}};
 	
 	
-	public void getDclList(){
-		String userId = request.getParameter("userid");
-		String keyword = request.getParameter("keyword");
-		IajccData ajcc = new AjccData();
-		List<Map<String, Object>> queryList = ajcc.getDclList(userId, keyword);
-		response(queryList);
-	}
 	
 	public void getReport(){
 		String keyword = request.getParameter("keyword");
+		String yw_guid = request.getParameter("yw_guid");
 		StringBuffer query = new StringBuffer();
 		if(keyword != null){
-			query.append(" where ");
 			keyword = UtilFactory.getStrUtil().unescape(keyword);
 			StringBuffer querybuffer = new StringBuffer();
-			querybuffer.append("upper(YDDW)||upper(MJ)||upper(JSQK)||upper(YDSJ) like '%").append(keyword).append("%') order by ROWNUM");
+			querybuffer.append("upper(DKBH)||upper(YDXZDH)||upper(YDXZ)||upper(YDMJ)||upper(RJL)||upper(JZMJ)||upper(KZGD)||upper(BZ) like '%").append(keyword).append("%') ");
 			query.append("(");
 			query.append(querybuffer);
 		}
-		Map<String, Object> conditionMap = new HashMap<String, Object>();
+		if(yw_guid != null){
+			query.append(" and yw_guid = '").append(yw_guid).append("'");
+		}
+		Map<String, String> conditionMap = new HashMap<String, String>();
 		conditionMap.put("query", query.toString());
-		response(String.valueOf(new CBDReportManager().getReport("AJCCCX", new Object[]{conditionMap})));
+		response(String.valueOf(new CBDReportManager().getReport("XMKGZBBCX", new Object[]{conditionMap})));
 	}
+	 public void getQuery() {
+	        HttpServletRequest request = this.request;
+	        response(new XmkgzbbData().getQuery(request));
+	    }
   
     /*******
      * 
