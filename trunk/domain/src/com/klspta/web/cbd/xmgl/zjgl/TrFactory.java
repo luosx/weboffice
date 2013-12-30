@@ -2,7 +2,13 @@ package com.klspta.web.cbd.xmgl.zjgl;
 
 import java.util.List;
 import java.util.Map;
-
+/*****
+ * 
+ * <br>Title:工厂类
+ * <br>Description:根据数据提供前台展现页面
+ * <br>Author:朱波海
+ * <br>Date:2013-12-26
+ */
 public class TrFactory {
     static ZjglData zjglData= new ZjglData();
    

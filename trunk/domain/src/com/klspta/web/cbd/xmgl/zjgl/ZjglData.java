@@ -6,7 +6,13 @@ import java.util.Map;
 
 
 import com.klspta.base.AbstractBaseBean;
-
+/***
+ * 
+ * <br>Title:资金管理数据库交互类
+ * <br>Description:查、跟新等操作
+ * <br>Author:朱波海
+ * <br>Date:2013-12-26
+ */
 public class ZjglData extends AbstractBaseBean {
     private  String lr_name[]={"1.1 筹融资金","1.1.1 金融机构贷款","1.1.2 实施主体带资","1.1.3 国有土地收益基金","1.2 出让回笼资金","1.3 其他资金"};
     private  String lr_type[]={"CRZJ","ZRJGDK","SSZTDZ","GYTDSYJJ","CRHLZJ","QTZJ"};
