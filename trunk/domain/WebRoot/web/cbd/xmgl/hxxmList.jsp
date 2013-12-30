@@ -5,7 +5,13 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
   Xmmanager hxzm=Xmmanager.getXmmanager();
 List<Map<String, Object>> list=hxzm.getHXXM();
-
+String yw_guid = request.getParameter("yw_guid");
+	String xmmc = request.getParameter("xmmc");
+	if (xmmc != null) {
+		xmmc = new String(xmmc.getBytes("iso-8859-1"), "utf-8");
+	} else {
+		xmmc = "";
+	}
 %>
 
 <html>
