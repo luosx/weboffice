@@ -121,6 +121,7 @@ Ext.onReady(function(){
 	                    handler: function(){
 		                        if(ydxzlx!=null){
 			                        fp.hide();
+			                        adding = true;
 			                        addb();
 			                        }else{
 			                        	alert("地块类型不能为空！！！");
@@ -150,7 +151,6 @@ Ext.onReady(function(){
 
 function add(){
 	if(adding == false){
-		adding = true;
 		fp.show();
 	}else{
 		alert("请将前一地块提交后再进行此操作！");
