@@ -95,7 +95,7 @@ conditionMap.put("query", " where t.ssqy like '%" + query + "%'");
   </script>
   <body>
  	<div id='show'>
-  		<%=new CBDReportManager().getReport("JBB",new Object[]{"true",conditionMap},its)%>
+  		<%=new CBDReportManager().getReport("JBB",new Object[]{"false",conditionMap},its)%>
   	</div>
   	<form id="attachfile" action="<%=basePath%>service/rest/zrbHandle/update" method="post">
 	</form> 
