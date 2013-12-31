@@ -36,9 +36,8 @@ function initComponent() {
 }
 
 function query() {
-	var yddw = Ext.getCmp("yddw").getValue();
 	var keyword = Ext.getCmp("keyword").getValue();
-	document.frames['report'].query(yddw , keyword);
+	document.frames['report'].queryJBB(keyword);
 }
 
 function exportExcel() {

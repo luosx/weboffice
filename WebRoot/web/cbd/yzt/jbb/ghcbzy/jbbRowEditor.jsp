@@ -27,7 +27,8 @@ default:
 	query = "%%";
 	break;
 }
-
+Map<String, Object> conditionMap = new HashMap<String, Object>();
+conditionMap.put("query", " where t.ssqy like '%" + query + "%'");
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -42,7 +43,7 @@ default:
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
-	<script src="web/cbd/yzt/jbb/js/jbbRowEditor.js"></script>
+	<script src="web/cbd/yzt/jbb/ghcbzy/js/jbbRowEditor.js"></script>
 	<%@ include file="/base/include/restRequest.jspf"%>
 	<%@ include file="/base/include/reportEdit.jspf"%>
 	<style type="text/css">
@@ -89,12 +90,13 @@ default:
 		   }
 	</style>
   </head>
-  
+  <script type="text/javascript">
+  	var query = "<%=query%>";
+  </script>
   <body>
-    <div id="fixed" style="position: fixed; top: 5px; left: 0px">
-		<img src="base/form/images/print.png" width="20px" height="20px" onClick="javascript:print();"  />
-	</div>
-  		<%=new CBDReportManager().getReport("JBB",new Object[]{query},its)%>
+ 	<div id='show'>
+  		<%=new CBDReportManager().getReport("JBB",new Object[]{"true",conditionMap},its)%>
+  	</div>
   	<form id="attachfile" action="<%=basePath%>service/rest/zrbHandle/update" method="post">
 	</form> 
   </body>
