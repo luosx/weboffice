@@ -4,22 +4,22 @@
 <%@page import="java.util.Map"%>
 <%@page import="com.klspta.base.util.UtilFactory"%>
 <%
-	String path = request.getContextPath();
-	String basePath = request.getScheme() + "://"
-			+ request.getServerName() + ":" + request.getServerPort()
-			+ path + "/";
-	String yw_guid = request.getParameter("yw_guid");
-	String xmmc = request.getParameter("xmmc");
-	if (xmmc != null) {
-		xmmc = new String(xmmc.getBytes("iso-8859-1"), "utf-8");
-	} else {
-		xmmc = "";
-	}
-	List<Map<String, Object>> list = null;
-	if (!yw_guid.equals("") && !yw_guid.equals("null")) {
-		Xmmanager hxzm = Xmmanager.getXmmanager();
-		list = hxzm.getBLGC(yw_guid);
-	}
+    String path = request.getContextPath();
+    String basePath = request.getScheme() + "://" + request.getServerName() + ":"
+            + request.getServerPort() + path + "/";
+    String yw_guid = request.getParameter("yw_guid");
+    String xmmc = request.getParameter("xmmc");
+    
+    if (xmmc != null) {
+        xmmc = new String(xmmc.getBytes("iso-8859-1"), "utf-8");
+    } else {
+        xmmc = "";
+    }
+    List<Map<String, Object>> list = null;
+    if (!yw_guid.equals("") && !yw_guid.equals("null")) {
+        Xmmanager hxzm = Xmmanager.getXmmanager();
+        list = hxzm.getBLGC(yw_guid);
+    }
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -109,14 +109,15 @@ textarea {
 }
 </style>
 		<script type="text/javascript">
-		var BS='';
+var BS='';
+var newRow;
 	function save(){
-	var xh=document.getElementById("xh").value;
+	
 	var sj=document.getElementById("sj").value;
 	var sjbl=document.getElementById("sjbl").value;
 	var bmjbr=document.getElementById("bmjbr").value;
 	var bz=document.getElementById("bz").value;
-	if(xh==null||xh==''||sj==null||sj==''||sjbl==null||sjbl==''||bmjbr==null||bmjbr==''||bz==null||bz==''){
+	if(sj==null||sj==''||sjbl==null||sjbl==''||bmjbr==null||bmjbr==''){
 	 alert("请填写完整之后再保存！！"); 
 	}else{
 	sjbl=escape(escape(sjbl));
@@ -124,7 +125,7 @@ textarea {
 	bz=escape(escape(bz));
 	putClientCommond("xmmanager","saveBLGC");
 	putRestParameter("yw_guid","<%=yw_guid%>");
-	putRestParameter("xh",xh);
+	putRestParameter("xh",<%=list.size() + 1%>);
 	putRestParameter("sj",sj);
 	putRestParameter("sjbl",sjbl);
 	putRestParameter("bmjbr",bmjbr);
@@ -140,26 +141,34 @@ textarea {
 	}
 	}
 	}
-	
-	function smb(bs){
-	putClientCommond("xmmanager","smbBLGC");
-	putRestParameter("bs",bs);
-	putRestParameter("yw_guid","<%=yw_guid%>");
-	var dat=restRequest();
-	dat=eval(dat);
-	var xh=dat[0].XH;
-	var sj=dat[0].SJ;
-	var sjbl=dat[0].SJBL;
-	var bmjbr=dat[0].BMJBR;
-	var bz=dat[0].BZ;
-	BS=dat[0].BS;
-document.getElementById("xh").value=xh;
-document.getElementById("sj").value=sj;
-document.getElementById("sjbl").value=sjbl;
-document.getElementById("bmjbr").value=bmjbr;
-document.getElementById("bz").value=bz;
+
+function smb(bs,row){
+	alert(row);
+	selectedTr = document.getElementById("row" +row);
+    selectedTr.style.display = 'none';
+    var tb = document.getElementById("esftable");
+     newRow = tb.insertRow(row + 2);
+    var c0 = newRow.insertCell(0);
+    c0.align='center';
+    c0.innerHTML = selectedTr.cells[0].childNodes[0].nodeValue ;//序号
+    var c1 = newRow.insertCell(1);
+    c1.align='center';
+    c1.innerHTML="<textarea id='sj1' rows='4' cols='1' style=' width: 100px;overflow: hidden' onfocus='WdatePicker()' >"+ selectedTr.cells[1].childNodes[0].nodeValue+"</textarea>" ;//时间
+     var c2 = newRow.insertCell(2);//事件
+     c2.align='center';
+    c2.innerHTML="<textarea id='sjbl1' rows='4' cols='10' style='width: 370px; overflow:auto'>"+selectedTr.cells[2].childNodes[0].nodeValue+"</textarea>";
+     var c3 = newRow.insertCell(3);//部门/经办人
+     c3.align='center';
+    c3.innerHTML="<textarea id='bmjbr1' rows='4' cols='1' style='width: 120px; overflow: hidden'>"+selectedTr.cells[3].childNodes[0].nodeValue+"</textarea>";
+      var c4 = newRow.insertCell(4);//备注
+      c4.align='center';
+    c4.innerHTML="<textarea id='bz1' rows='4' cols='20' style='width: 200px; overflow: auto'>"+selectedTr.cells[4].childNodes[0].nodeValue+"</textarea>";
+    var c5 = newRow.insertCell(5);
+    c5.align='center';
+    c5.innerHTML="<button onclick='save()'>保存</button><button onclick='del("+bs+")'>删除</button>";
+  
 	}
-	function del(bs){
+function del(bs){
 	putClientCommond("xmmanager","delBLGC");
 	putRestParameter("bs",bs);
 	putRestParameter("yw_guid","<%=yw_guid%>");
@@ -174,12 +183,12 @@ document.getElementById("bz").value=bz;
 </script>
 	</head>
 	<body bgcolor="#FFFFFF" style="overflow: scroll;">
-		<div align="center" style="width:100%">
+		<div align="center" style="width: 100%">
 			<div align="center" style="width: 95%; height: 20px">
 				<h3><%=(xmmc == null || xmmc == "" ? "" : xmmc)%>大事记
 				</h3>
 			</div>
-			<table width="95%" cellpadding="0" cellspacing="0">
+			<table width="95%" cellpadding="0" cellspacing="0" id='esftable'>
 				<tr class="tr11">
 					<td align="center" width="80px" height="50px">
 						<h3>
@@ -187,67 +196,80 @@ document.getElementById("bz").value=bz;
 						</h3>
 					</td>
 					<td align="center" width="90px">
-					<h3>
-						时间
+						<h3>
+							时间
 						</h3>
 					</td>
 					<td align="center" width="500px">
-					<h3>
-						事件
+						<h3>
+							事件
 						</h3>
 					</td>
 					<td align="center" width="120px">
-					    <h3>
-						部门/经办人
+						<h3>
+							部门/经办人
 						</h3>
 					</td>
 					<td align="center" width="200px">
-					 <h3>
-						备注
+						<h3>
+							备注
 						</h3>
 					</td>
 					<td align="center" width="100px">
-					 <h3>
-					操作
+						<h3>
+							操作
 						</h3>
 					</td>
 				</tr>
 				<%
-					if (list != null) {
-						for (int i = 0; i < list.size(); i++) {
+				    if (list != null) {
+				        for (int i = 0; i < list.size(); i++) {
 				%>
-				<tr align="center">
+				<tr align="center" id='row<%=i%>'>
 					<td align="center" width="80px">
 						<%=list.get(i).get("xh").toString()%></td>
 					<td align="center" width="80px"><%=list.get(i).get("sj").toString()%></td>
 					<td align="center" width="500px"><%=list.get(i).get("sjbl").toString()%></td>
 					<td align="center" width="80px"><%=list.get(i).get("bmjbr").toString()%></td>
 					<td align="center" width="200px"><%=list.get(i).get("bz").toString()%></td>
-					<td align="center" width="200px"><button onclick="smb(<%=list.get(i).get("bs").toString()%>)">修改</button>
-					<button onclick="del(<%=list.get(i).get("bs").toString()%>)">删除</button></td>
+					<td align="center" width="200px">
+						<button
+							onclick="smb(<%=list.get(i).get("bs").toString()%>,<%=i%>)">
+							修改
+						</button>
+						<button onclick="del(<%=list.get(i).get("bs").toString()%>)">
+							删除
+						</button>
+					</td>
 				</tr>
 				<%
-					}
-					}
+				    }
+				    }
 				%>
 				<tr>
 					<td align="center">
-						<textarea id='xh' rows="4" cols="1" style="width: 80px; overflow: hidden"></textarea>
+						<%=list.size() + 1%>
 					</td>
 					<td align="center">
-						<textarea id='sj' rows="4" cols="1" style=" width: 100px;overflow: hidden" onfocus="WdatePicker()" ></textarea>
+						<textarea id='sj' rows="4" cols="1"
+							style="width: 100px; overflow: hidden" onfocus="WdatePicker()"></textarea>
 					</td>
 					<td align="center">
-						<textarea id='sjbl' rows="4" cols="10" style="width: 370px; overflow:auto"></textarea>
+						<textarea id='sjbl' rows="4" cols="10"
+							style="width: 370px; overflow: auto"></textarea>
 					</td>
 					<td align="center">
-						<textarea id='bmjbr' rows="4" cols="1" style="width: 120px; overflow: hidden"></textarea>
+						<textarea id='bmjbr' rows="4" cols="1"
+							style="width: 120px; overflow: hidden"></textarea>
 					</td>
 					<td align="center">
-						<textarea id='bz' rows="4" cols="20" style="width: 200px; overflow: auto"></textarea>
+						<textarea id='bz' rows="4" cols="20"
+							style="width: 200px; overflow: auto"></textarea>
 					</td>
 					<td align="center">
-						<button onclick="save()">保存</button>
+						<button onclick="save()">
+							保存
+						</button>
 					</td>
 				</tr>
 			</table>
