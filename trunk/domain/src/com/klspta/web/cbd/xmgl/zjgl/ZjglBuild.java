@@ -119,8 +119,8 @@ public class ZjglBuild {
        delNull( String.valueOf(list.get(i).get("YSFY")))+ "'id='"+String.valueOf( list.get(i).get("status"))+"@"+String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) +"@2'/></td>"+
        "<td width:'160px'>" +
        delNull(String.valueOf(list.get(i).get("LJ")))+"</td>"+
-      "<td ><input type='text' style='width:80px;' onchange='addrzxq(this); return false' value='" +
-      delNull(String.valueOf(list.get(i).get("LJ2")))+  "'id='"+String.valueOf( list.get(i).get("status"))+"@"+String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) +"@4'/></td>"+
+      "<td >" +
+      delZer(String.valueOf(list.get(i).get("JL2")))+  "</td>"+
        "<td rowspan='8'><input type='text' style='width:70px;' onchange='addrzxq(this); return false' value='" +
        delNull(String.valueOf(list.get(i).get("YFSDZ")))+ "'id='"+String.valueOf( list.get(i).get("status"))+"@"+String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) +"@5'/></td>"+
        "<td rowspan='8'><input type='text' style='width:70px;' onchange='addrzxq(this); return false' value='" +
@@ -159,8 +159,8 @@ public class ZjglBuild {
                   delNull(String.valueOf(list.get(i).get("YSFY")))+ "</td>"+
                  "<td >" +
                  delNull(String.valueOf(list.get(i).get("LJ")))+ "</td>"+
-                 "<td ><input type='text' style='width:150px;' onchange='addrzxq(this); return false' value='" +
-                 delNull( String.valueOf(list.get(i).get("LJ2")))+ "'id='"+String.valueOf( list.get(i).get("status"))+"@"+String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) +"@4'/></td>"+
+                 "<td >" +
+                 delZer(String.valueOf(list.get(i).get("JL2")))+ "</td>"+
                  "<td><input type='text' style='width:70px;' onchange='addrzxq(this); return false' value='" +
                  delNull( String.valueOf(list.get(i).get("CQYE")))+ "'id='"+String.valueOf( list.get(i).get("status"))+"@"+String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) +"@7'/></td>"+
                  "<td><input type='text' style='width:70px;' onchange='addrzxq(this); return false' value='" +
@@ -210,7 +210,7 @@ public class ZjglBuild {
                      "<td >" +
                      delNull(String.valueOf(list.get(i).get("LJ")))+ "</td>"+
                     "<td><input type='text' style='width:70px;' onchange='addrzxq(this); return false' value='" +
-                    delNull(String.valueOf(list.get(i).get("LJ2")))+  "'id='"+String.valueOf( list.get(i).get("status"))+"@"+ String.valueOf( list.get(i).get("lb"))  +"@"+String.valueOf( list.get(i).get("sort")) +"@4'/></td>"+
+                    delNull(String.valueOf(list.get(i).get("JL2")))+  "'id='"+String.valueOf( list.get(i).get("status"))+"@"+ String.valueOf( list.get(i).get("lb"))  +"@"+String.valueOf( list.get(i).get("sort")) +"@4'/></td>"+
                      "<td  ><input type='text' style='width:70px;' onchange='addrzxq(this); return false' value='" +
                      delNull(String.valueOf(list.get(i).get("YFSDZ")))+ "'id='"+String.valueOf( list.get(i).get("status"))+"@"+ String.valueOf( list.get(i).get("lb"))  +"@"+String.valueOf( list.get(i).get("sort")) +"@5'/></td>"+
                      "<td ><input type='text' style='width:70px;' onchange='addrzxq(this); return false' value='" +
@@ -246,8 +246,8 @@ public class ZjglBuild {
                      "</tr>");
                     }else{
                         stringBuffer.append("<tr>"+
-                                "<td ><input type='text' style='width:70px;'  value='" +
-                                delNull(String.valueOf(list.get(i).get("LJ")))+ "'id='"+String.valueOf( list.get(i).get("status"))+"@"+ String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) +"@3'/></td>"+
+                                "<td >" +
+                                delNull(String.valueOf(list.get(i).get("LJ")))+ "</td>"+
                                "<td><input type='text' style='width:70px;' onchange='addrzxq(this); return false' value='" +
                                delNull(String.valueOf(list.get(i).get("LJ2")))+  "'id='"+String.valueOf( list.get(i).get("status"))+"@"+ String.valueOf( list.get(i).get("lb"))  +"@"+String.valueOf( list.get(i).get("sort")) +"@4'/></td>"+
                                 "<td ><input type='text' style='width:70px;' onchange='addrzxq(this); return false' value='" +
@@ -295,7 +295,14 @@ public class ZjglBuild {
       }else {
         return str;
     }
-      
+  }
+  
+  public static String delZer(String str){
+      if(str.equals("null")||str.equals("")){
+          return "0";
+      }else {
+        return str;
+    }
   }
   
   

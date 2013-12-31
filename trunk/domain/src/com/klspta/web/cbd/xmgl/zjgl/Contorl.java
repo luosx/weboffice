@@ -29,7 +29,7 @@ public Contorl(String yw_guid){
     this.yw_guid=yw_guid;
     Init();
     try {
-        Thread.sleep(3000);
+        Thread.sleep(1000);
     } catch (InterruptedException e) {
         e.printStackTrace();
     }
