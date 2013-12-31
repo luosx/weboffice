@@ -29,6 +29,8 @@
 	<bean name="jbdkxxlr" class="com.klspta.web.cbd.cbsycs.BasicInfoSave" scope="prototype"/>
 	<!-- 项目基本信息保存 -->
 	<bean name="jbxmxxlr" class="com.klspta.web.cbd.cbxmjbsj.ProjectInfoSave" scope="prototype"/> 
+	<!-- 项目控规指标表 -->	
+	<bean name="xmkgzbbmanager" class="com.klspta.web.cbd.xmgl.xmkgzbb.Xmkgzbbmanager" scope="prototype"/>
 	<!-- 开发工作航道图-->
 	<bean name="proProgress" class="com.klspta.web.cbd.cbsycs.kfhdt.ProjectProgress" scope="prototype"/>
 	<!-- 统计数据-->
