@@ -80,20 +80,21 @@ scrollbar-3dlight-color:#D4D0C8;
 	   updateForm=new Ext.form.FormPanel({
 	   applyTo:'updateForm',
 	   baseCls: 'x-plain',
-       labelWidth:60,	
+       labelWidth:40,	
        url:"<%=basePath%>/service/rest/xmmanager/saveZjglTree?yw_guid=<%=yw_guid%>&id="+selectMenuTreeId+"&parent_id="+parentMenuTreeId,
-       width:150, 
+       width:185, 
        defaults:{xtype:"textfield",anchor:'90%'},   
        items: [{	
             name:'tree_name',
             id:'tree_name',
-            fieldLabel:'费用名称'      			
+            fieldLabel:'名称'      			
         }],				
              buttons: [{
                     text:'保存', handler: function() {
                      var tree_name=  Ext.getCmp("tree_name").getValue();
+                     
+                   if(tree_name!=null&&tree_name!=''){
                       tree_name=escape(escape(tree_name));
-                   if(tree_name!=null){
                         putClientCommond("xmmanager","saveZjglTree");
     					putRestParameter("yw_guid",' <%=yw_guid%>');
 		   		        putRestParameter("id", selectMenuTreeId);
@@ -103,13 +104,16 @@ scrollbar-3dlight-color:#D4D0C8;
     					document.location.reload();
     					parent.right.location.reload();
     					}
+    					else{
+    					alert("请输入信息后再保存！");
+    					}
                    }
                   }]
             });  
          
 	    win = new Ext.Window({
                 applyTo:'updateCar',
-                width:180,
+                width:200,
                 height:100,
                 closeAction:'hide',
 				items:updateForm

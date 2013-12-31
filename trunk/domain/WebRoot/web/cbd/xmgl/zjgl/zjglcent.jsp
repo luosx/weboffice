@@ -75,7 +75,9 @@ background-color: #A8CEFF;
 <script type="text/javascript">
 
 function addrzxq(check){
+
 		var val = check.value;
+if(!isNaN(val)){ 
 		var id=check.id;
 		var ids=id.split("@");
 		var status=ids[0];
@@ -91,9 +93,14 @@ putClientCommond("xmmanager","saveZJGL_ZJZC");
 	putRestParameter("sort",sort);
 	putRestParameter("cols",cols);
 	var msg=restRequest(); 
+	}else{
+	alert("请填写有效数据！");
+	check.value="";
+	}
 	}
 function addzjlr(check){
 		 var val = check.value;
+if(!isNaN(val)){  
 		 var id=check.id;
 		 var ids=id.split("@");
 		 var stye=ids[1];
@@ -104,20 +111,12 @@ putClientCommond("xmmanager","saveZJGL_ZJLR");
 	putRestParameter("stye",stye);
 	putRestParameter("val",val);
 	var msg=restRequest(); 
+	}else{
+	alert("请填写有效数据！");
+	check.value="";
+	}
  }
  
-function turn(){
- if(parent.content.cols=="211,2,*"){
- frameshow.src="<%=basePath%>web/cbd/framework/images/left/partline_right.png";
- oa_tree.title="显示";
- parent.content.cols="0,2,*";
-}
-else{
-frameshow.src="<%=basePath%>web/cbd/framework/images/left/partline_left.png";
-oa_tree.title="隐藏";
-parent.content.cols="211,2,*";} 
-}
-
  
 </script>
 	</head>
