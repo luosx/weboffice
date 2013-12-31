@@ -53,6 +53,7 @@ public class JbbManager extends AbstractBaseBean{
      */
 	public void getReport() throws Exception{
 		String keyword = request.getParameter("keyword");
+		String ssqy = request.getParameter("ssqy");
 		String type = request.getParameter("type");
 		StringBuffer query = new StringBuffer();
 		ITableStyle its = new TableStyleEditRow();
@@ -62,18 +63,24 @@ public class JbbManager extends AbstractBaseBean{
 			StringBuffer querybuffer = new StringBuffer();
 			String[][] nameStrings = JbbReport.shows;
 			for(int i = 0; i < nameStrings.length - 1; i++){
-				querybuffer.append("upper(").append(nameStrings[i][0]).append(")||");
+				querybuffer.append("upper(t.").append(nameStrings[i][0]).append(")||");
 			}
-			querybuffer.append("upper(").append(nameStrings[nameStrings.length - 1][0]).append(")) like '%").append(keyword).append("%'");
+			querybuffer.append("upper(t.").append(nameStrings[nameStrings.length - 1][0]).append(")) like '%").append(keyword).append("%'");
 			query.append("(");
 			query.append(querybuffer);
 		}
+		if(ssqy != null){
+			ssqy = UtilFactory.getStrUtil().unescape(ssqy);
+		}else{
+			ssqy = "%%";
+		}
+		query.append(" and t.ssqy like '").append(ssqy).append("'");
 		Map<String, Object> conditionMap = new HashMap<String, Object>();
 		conditionMap.put("query", query.toString());
-		if(type != null){
-			response(String.valueOf(new CBDReportManager().getReport("JBBR", new Object[]{conditionMap},its)));
+		if(!"reader".equals(type)){
+			response(String.valueOf(new CBDReportManager().getReport("JBB", new Object[]{"true",conditionMap},its)));
 		}else{
-			response(String.valueOf(new CBDReportManager().getReport("JBB", new Object[]{conditionMap},its)));
+			response(String.valueOf(new CBDReportManager().getReport("JBB", new Object[]{"false",conditionMap},its)));
 		}
 	}
 	 
