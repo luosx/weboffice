@@ -109,14 +109,13 @@ textarea {
 }
 </style>
 		<script type="text/javascript">
-var BS='';
 var newRow;
+var yw_guid="";
 	function save(){
-	
-	var sj=document.getElementById("sj").value;
-	var sjbl=document.getElementById("sjbl").value;
-	var bmjbr=document.getElementById("bmjbr").value;
-	var bz=document.getElementById("bz").value;
+	 var sj=document.getElementById("sj").value;
+	 var sjbl=document.getElementById("sjbl").value;
+	 var bmjbr=document.getElementById("bmjbr").value;
+	 var bz=document.getElementById("bz").value;
 	if(sj==null||sj==''||sjbl==null||sjbl==''||bmjbr==null||bmjbr==''){
 	 alert("请填写完整之后再保存！！"); 
 	}else{
@@ -125,13 +124,12 @@ var newRow;
 	bz=escape(escape(bz));
 	putClientCommond("xmmanager","saveBLGC");
 	putRestParameter("yw_guid","<%=yw_guid%>");
-	putRestParameter("xh",<%=list.size() + 1%>);
 	putRestParameter("sj",sj);
 	putRestParameter("sjbl",sjbl);
 	putRestParameter("bmjbr",bmjbr);
 	putRestParameter("bz",bz);
-	putRestParameter("BS",BS);
-	BS='';
+	putRestParameter("BS","");
+	document.getElementById("add").style.display="none";
 	var msg=restRequest();
 	if('success'==msg){
 	alert("保存成功！");
@@ -141,13 +139,41 @@ var newRow;
 	}
 	}
 	}
-
-function smb(bs,row){
+function saves(yw_guid){
+	var sj=document.getElementById("sj1").value;
+	var sjbl=document.getElementById("sjbl1").value;
+	var bmjbr=document.getElementById("bmjbr1").value;
+    var bz=document.getElementById("bz1").value;
+	if(sj==null||sj==''||sjbl==null||sjbl==''||bmjbr==null||bmjbr==''){
+	 alert("请填写完整之后再保存！！"); 
+	}else{
+	sjbl=escape(escape(sjbl));
+	bmjbr=escape(escape(bmjbr));
+	bz=escape(escape(bz));
+	putClientCommond("xmmanager","saveBLGC");
+	putRestParameter("yw_guid","<%=yw_guid%>");
+	putRestParameter("sj",sj);
+	putRestParameter("sjbl",sjbl);
+	putRestParameter("bmjbr",bmjbr);
+	putRestParameter("bz",bz);
+	putRestParameter("BS",yw_guid);
+	var msg=restRequest();
+	if('success'==msg){
+	alert("保存成功！");
+	document.location.reload();
+	}else{
+	alert("保存失败！");
+	}
+	}
+	}
+function modify(row,yw_guid){
 	alert(row);
-	selectedTr = document.getElementById("row" +row);
+	yw_guid=yw_guid;
+	BS='xg';
+	selectedTr = document.getElementById("row" +(row-1));
     selectedTr.style.display = 'none';
     var tb = document.getElementById("esftable");
-     newRow = tb.insertRow(row + 2);
+     newRow = tb.insertRow(row);
     var c0 = newRow.insertCell(0);
     c0.align='center';
     c0.innerHTML = selectedTr.cells[0].childNodes[0].nodeValue ;//序号
@@ -165,8 +191,14 @@ function smb(bs,row){
     c4.innerHTML="<textarea id='bz1' rows='4' cols='20' style='width: 200px; overflow: auto'>"+selectedTr.cells[4].childNodes[0].nodeValue+"</textarea>";
     var c5 = newRow.insertCell(5);
     c5.align='center';
-    c5.innerHTML="<button onclick='save()'>保存</button><button onclick='del("+bs+")'>删除</button>";
-  
+    //拼字符
+    var s= "saves('"+yw_guid+"')";
+    var d= "del('"+yw_guid+"')";
+    var a='<a onclick="';
+    var f='">保存</a>';
+    var ff='">删除</a>';
+    butt=a+s+f+a+d+ff;
+    c5.innerHTML=butt;
 	}
 function del(bs){
 	putClientCommond("xmmanager","delBLGC");
@@ -179,6 +211,11 @@ function del(bs){
 	}else{
 	alert("删除失败！");
 	}
+	}
+	function add(){
+	document.getElementById("msg").style.display="";
+	document.getElementById("add").style.display="none";
+	
 	}
 </script>
 	</head>
@@ -226,27 +263,20 @@ function del(bs){
 				        for (int i = 0; i < list.size(); i++) {
 				%>
 				<tr align="center" id='row<%=i%>'>
-					<td align="center" width="80px">
-						<%=list.get(i).get("xh").toString()%></td>
-					<td align="center" width="80px"><%=list.get(i).get("sj").toString()%></td>
-					<td align="center" width="500px"><%=list.get(i).get("sjbl").toString()%></td>
-					<td align="center" width="80px"><%=list.get(i).get("bmjbr").toString()%></td>
-					<td align="center" width="200px"><%=list.get(i).get("bz").toString()%></td>
+					<td align="center" width="80px"><%=i+1%></td>
+					<td align="center" width="80px"><%=list.get(i).get("blsj")%></td>
+					<td align="center" width="500px"><%=list.get(i).get("sjbl")%></td>
+					<td align="center" width="80px"><%=list.get(i).get("bmjbr")%></td>
+					<td align="center" width="200px"><%=list.get(i).get("bz")%></td>
 					<td align="center" width="200px">
-						<button
-							onclick="smb(<%=list.get(i).get("bs").toString()%>,<%=i%>)">
-							修改
-						</button>
-						<button onclick="del(<%=list.get(i).get("bs").toString()%>)">
-							删除
-						</button>
+				    <a onclick="modify('<%=(i+1)%>','<%=list.get(i).get("yw_guid")%>')">修改</a>	<a onclick="del('<%=list.get(i).get("yw_guid")%>')">删除</a>
 					</td>
 				</tr>
 				<%
 				    }
 				    }
 				%>
-				<tr>
+				<tr id ='msg' style="display: none">
 					<td align="center">
 						<%=list.size() + 1%>
 					</td>
@@ -273,6 +303,9 @@ function del(bs){
 					</td>
 				</tr>
 			</table>
+			<button style="display: " id="add" onclick="add() ">
+							新增
+						</button>
 		</div>
 	</body>
 </html>
