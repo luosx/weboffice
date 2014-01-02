@@ -1,0 +1,65 @@
+<script type="text/javascript">
+var obj_id;
+function send(objid){ 
+    var keyIndex = "";
+    var valueIndex = "";
+    var obj = document.getElementById(objid);
+    keyIndex = obj.id.split('_')[0] + "_" + "<%=keyIndex%>";
+    valueIndex = obj.id.split('_')[1];
+    var key = document.getElementById(keyIndex).innerText;
+    var objDiv = obj.firstChild;
+    if(objDiv.id == "0" || objDiv.id == ""){
+        objDiv.id = "1";
+        addContext(objid, key, valueIndex);
+    }
+}
+
+function modify(obj, key, valueIndex){
+    var modify = obj;
+    var old = modify.innerText;
+    modify.innerHTML = "<font color='blue'>" + old + "</font>";
+    addContext(obj.id, key, valueIndex);
+}
+
+var preObjColor;
+function mouseOver(obj){
+    preObjColor = obj.style.backgroundColor;
+    obj.style.backgroundColor = "#ffff99";
+}
+
+function mouseOut(obj){
+    obj.style.backgroundColor = preObjColor;
+}
+
+function addContext(obj_id, key, valueIndex){
+	this.obj_id = obj_id;
+    var obj = document.getElementById(obj_id);
+    var modiForm = document.createElement("<form>");
+    var modiInput;
+    if(valueIndex != '34'){
+    	modiInput = document.createElement("<input type='text' name='data' id='data' onblur='ajax2(\"" + obj.id + "\", this, \"" + key + "\", \"" + valueIndex + "\")'>");
+   	    modiForm.appendChild(modiInput);
+    	obj.appendChild(modiForm);
+    	modiInput.innerText = obj.innerText;
+    	addFocus(obj_id);
+    }else{
+    	//modiInput = document.createElement("<input type='text' name='data' id='data' onblur='ajax2(\"" + obj.id + "\", this, \"" + key + "\", \"" + valueIndex + "\")'>");
+    	win.show();
+    }
+}
+
+function ajax2(objid, obj, key, valueIndex){
+    var v=obj.value;
+    var p=obj.parentNode.parentNode;
+    p.innerHTML="<font color='red' onclick='send(\"" + objid + "\")'>"+v+"</font>";
+    putClientCommond("<%=reportID%>", "update");
+    putRestParameter("key", key);
+    putRestParameter("vindex", valueIndex);
+    putRestParameter("value", v);
+    restRequest();
+}
+
+function addFocus(obj_id){
+    var obj = document.getElementById("data").focus();
+}
+</script>
