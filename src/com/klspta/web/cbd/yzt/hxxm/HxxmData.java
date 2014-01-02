@@ -15,6 +15,7 @@ import com.klspta.base.util.UtilFactory;
 import com.klspta.base.wkt.Point;
 import com.klspta.base.wkt.Polygon;
 import com.klspta.base.wkt.Ring;
+import com.klspta.web.cbd.yzt.jbb.JbdkValueChange;
 
 public class HxxmData extends AbstractBaseBean {
 	private static final String formName = "JC_XIANGMU";
@@ -89,9 +90,9 @@ public class HxxmData extends AbstractBaseBean {
      * @param zrb
      * @return
      */
-    public boolean delete(String zrb){
-    	String sql = "delete from " + formName + " where t.xmname = ?";
-    	int result = update(sql, YW, new Object[]{zrb});
+    public boolean delete(String xmmc){
+    	String sql = "delete from " + formName + " t where t.xmname = ?";
+    	int result = update(sql, YW, new Object[]{xmmc});
     	return result == 1 ? true : false;
     }
 
@@ -156,6 +157,10 @@ public class HxxmData extends AbstractBaseBean {
     	sqlBuffer.append(" update ").append(formName);
     	sqlBuffer.append(" t set t.").append(field).append("=? where t.xmname=?");
     	int i = update(sqlBuffer.toString(), YW, new Object[]{value, xmmc});
+    	//如果修改的是基本斑编号
+    	if("DKMC".equals(field)){
+    		new JbdkValueChange().modify(value.split(",")[0]);
+    	}
 		return i == 1 ? true : false;
 	}
 
@@ -209,13 +214,14 @@ public class HxxmData extends AbstractBaseBean {
             boolean isExit = isExit(form_gis, "xmguid", tbbh, GIS);
             String sql = "";
             if(isExit){
-            	sql = "update " + form_gis + " t set t.SHAPE=sde.st_geometry ('" + wkt + "', " + srid + ") where t.xmguid='" + tbbh + "'";
+            	sql = "update " + form_gis + " t set t.SHAPE=sde.st_geometry ('" + wkt + "', " + srid + ") where t.xmmc='" + tbbh + "'";
             }else{
-                sql = "INSERT INTO "+ form_gis+"(OBJECTID,xmguid,SHAPE) VALUES ((select nvl(max(OBJECTID)+1,1) from "+form_gis+"),'"
+                sql = "INSERT INTO "+ form_gis+"(OBJECTID,xmmc,SHAPE) VALUES ((select nvl(max(OBJECTID)+1,1) from "+form_gis+"),'"
                 	+ tbbh + "',sde.st_geometry ('" + wkt + "', " + srid + "))";
             }
             update(sql, GIS);
         } catch (Exception e) {
+        	e.printStackTrace();
             System.out.println("采集坐标出错");
             return false;
         }

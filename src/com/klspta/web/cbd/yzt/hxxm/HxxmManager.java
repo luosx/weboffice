@@ -2,13 +2,18 @@ package com.klspta.web.cbd.yzt.hxxm;
 
 
 
-import java.io.UnsupportedEncodingException;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import com.klspta.base.AbstractBaseBean;
 import com.klspta.base.util.UtilFactory;
-import com.klspta.web.cbd.yzt.zrb.ZrbData;
+import com.klspta.model.CBDReport.CBDReportManager;
+import com.klspta.model.CBDReport.tablestyle.ITableStyle;
+import com.klspta.web.cbd.yzt.jbb.JbbReport;
+import com.klspta.web.cbd.yzt.jc.report.TableStyleEditRow;
 
 public class HxxmManager extends AbstractBaseBean {
 	
@@ -79,15 +84,16 @@ public class HxxmManager extends AbstractBaseBean {
     	String hxxms =new String(request.getParameter("xmmc").getBytes("iso-8859-1"),"utf-8");
     	String[] hxxmArray = hxxms.split(",");
     	for(int i = 0; i < hxxmArray.length; i++){
-    		result = result && hxxmData.delete(hxxmArray[i]);
+    		result = result || hxxmData.delete(hxxmArray[i]);
     	}
     	response(String.valueOf(result));
     }
 	
 	
 	public void draw() throws Exception{
+    	//String guid = new String(request.getParameter("guid").getBytes("ISO-8859-1"),"UTF-8");
     	String guid = request.getParameter("guid");
-    	String polygon = request.getParameter("polygon");
+		String polygon = request.getParameter("polygon");
     	if (guid != null) {
     		guid = UtilFactory.getStrUtil().unescape(guid);
     	}else{
@@ -95,6 +101,34 @@ public class HxxmManager extends AbstractBaseBean {
     	}
     	boolean draw = new HxxmData().recordGIS(guid, polygon);
     	response(String.valueOf(draw)); 
+	}
+	
+    /**
+     * 
+     * <br>Description：红线项目列表过滤
+     * <br>Author:黎春行
+     * <br>Date:2013-12-25
+     * @throws Exception
+     */
+	public void getReport() throws Exception{
+		String keyword = request.getParameter("keyword");
+		StringBuffer query = new StringBuffer();
+		ITableStyle its = new TableStyleEditRow();
+		if(keyword != null){
+			query.append(" where ");
+			keyword = UtilFactory.getStrUtil().unescape(keyword);
+			StringBuffer querybuffer = new StringBuffer();
+			String[][] nameStrings = HxxmReport.shows;
+			for(int i = 1; i < nameStrings.length - 1; i++){
+				querybuffer.append("upper(t.").append(nameStrings[i][0]).append(")||");
+			}
+			querybuffer.append("upper(t.").append(nameStrings[nameStrings.length - 1][0]).append(")) like '%").append(keyword).append("%'");
+			query.append("(");
+			query.append(querybuffer);
+		}
+		Map<String, Object> conditionMap = new HashMap<String, Object>();
+		conditionMap.put("query", query.toString());
+		response(String.valueOf(new CBDReportManager().getReport("HXXM", new Object[]{conditionMap},its)));
 	}
 	
 	
