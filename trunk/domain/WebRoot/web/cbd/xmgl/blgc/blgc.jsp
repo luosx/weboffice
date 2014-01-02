@@ -110,6 +110,7 @@ textarea {
 </style>
 		<script type="text/javascript">
 var newRow;
+var selectedTr;
 var yw_guid="";
 	function save(){
 	 var sj=document.getElementById("sj").value;
@@ -166,7 +167,16 @@ function saves(yw_guid){
 	}
 	}
 	}
+	function cancel2() {
+		selectedTr.style.display = '';
+		newRow.parentNode.removeChild(newRow);//删除行
+	}
 function modify(row,yw_guid){
+if(newRow!=null&&selectedTr!=null){
+ var tbs = document.getElementById("esftable");
+        selectedTr.style.display = '';
+		newRow.parentNode.removeChild(newRow);//删除行
+}
 	yw_guid=yw_guid;
 	BS='xg';
 	selectedTr = document.getElementById("row" +(row-1));
