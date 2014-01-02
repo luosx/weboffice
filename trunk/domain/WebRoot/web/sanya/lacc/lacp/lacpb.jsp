@@ -1,6 +1,7 @@
 <%@ page language="java" pageEncoding="utf-8"%>
 <%@page import="com.klspta.base.util.UtilFactory"%>
 <%@page import="com.klspta.console.ManagerFactory"%>
+<%@page import="com.klspta.base.util.bean.xzqhutil.XzqhBean"%>
 
 <%
     String path = request.getContextPath();
@@ -16,7 +17,8 @@
     String userid = ((User)userprincipal).getUserID();
     String edit = request.getParameter("edit");
     String xzqh = ManagerFactory.getUserManager().getUserWithId(userid).getXzqh();
-   	String name = UtilFactory.getXzqhUtil().getBeanById(xzqh).getCatonname();
+   	XzqhBean xb=UtilFactory.getXzqhUtil().getBeanById(xzqh);
+   	String name=(xb==null)?(""):(xb.getCatonname());
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -233,7 +235,7 @@ if(fixed!=null && fixed.equals("fixedPrint")){%>
     </td>
   </tr>
 </table>
-	<input type="text"   class="noborder"  style="width: 70%;display:none;"  value="<%=name%>" name="qy" id="qy" />
+	<input type="text"   class="noborder"  style="width: 70%;display:none;"  value="<%=name %>" name="qy" id="qy" />
 </form>
 </div>
 </body>
