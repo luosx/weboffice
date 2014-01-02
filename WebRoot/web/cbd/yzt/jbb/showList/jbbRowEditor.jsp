@@ -25,7 +25,7 @@ ITableStyle its = new TableStyleEditRow();
 	<script src="web/cbd/yzt/jbb/showList/js/jbbRowEditor.js"></script>
 	<%@ include file="/base/include/restRequest.jspf"%>
 	<%@ include file="/base/include/ext.jspf" %>
-	<%@ include file="/web/cbd/yzt/jbb/js/reportEdit.jspf"%>
+	<%@ include file="/base/include/reportEdit.jspf"%>
 	<style type="text/css">
   		table{
 		    font-size: 14px;
