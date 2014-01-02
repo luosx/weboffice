@@ -40,7 +40,7 @@ background-image : url('<%=resourcePath%>/images/left/partline.png');background-
 <body >
 
 					<div  id=oa_tree onclick="turn();" title=隐藏工具栏 style="padding-top:200px;">
-						<img align="absmiddle" id=frameshow src="<%=resourcePath%>/images/left/partline_left.png">
+						<img align="absmiddle" id=frameshow src="<%=resourcePath%>/images/left/partline_right.png">
 					</div>
 	
 </body>
