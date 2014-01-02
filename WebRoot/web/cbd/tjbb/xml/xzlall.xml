@@ -57,32 +57,24 @@
       </data_plot_settings>
       <data>
         <series id="0" name="租金" type="Line" color="yellow">
-          <point name="1" y="6" />
-          <point name="2" y="6" />
-          <point name="3" y="6" />
-          <point name="4" y="6.375" />
-          <point name="5" y="6.5" />
-          <point name="6" y="6.54" />
-          <point name="7" y="6.77" />
-          <point name="8" y="7.25" />
-          <point name="9" y="6.75" />
-          <point name="10" y="7" />
-          <point name="11" y="6.3" />
-          <point name="12" y="5.93333333333333333333333333333333333333" />
+          <point name="2013" y="0" />
+          <point name="2014" y="0" />
+          <point name="2015" y="0" />
+          <point name="2016" y="0" />
+          <point name="2017" y="0" />
+          <point name="2018" y="0" />
+          <point name="2019" y="0" />
+          <point name="2020" y="0" />
         </series>
         <series id="1" name="售价" type="Line" color="red">
-          <point name="1" y="2.4" />
-          <point name="2" y="2.4" />
-          <point name="3" y="2.4" />
-          <point name="4" y="2.4" />
-          <point name="5" y="2.4" />
-          <point name="6" y="2.4" />
-          <point name="7" y="2.4" />
-          <point name="8" y="2.4" />
-          <point name="9" y="2.4" />
-          <point name="10" y="2.4" />
-          <point name="11" y="2.4" />
-          <point name="12" y="2.36666666666666666666666666666666666667" />
+          <point name="2013" y="0" />
+          <point name="2014" y="0" />
+          <point name="2015" y="0" />
+          <point name="2016" y="0" />
+          <point name="2017" y="0" />
+          <point name="2018" y="0" />
+          <point name="2019" y="0" />
+          <point name="2020" y="0" />
         </series>
       </data>
     </chart>

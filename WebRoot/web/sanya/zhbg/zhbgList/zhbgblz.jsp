@@ -72,7 +72,7 @@ html, body {
         		columns: [
         			new Ext.grid.RowNumberer(),
         			{header: '督办', dataIndex:'BLSX', width:40, sortable: true,renderer:view},
-		        	{header: '文件审批事项', dataIndex:'WJSPSX', width: (width - 580), sortable: true,renderer:changKeyword},
+		        	{header: '来文编号', dataIndex:'WJSPSX', width: (width - 580), sortable: true,renderer:changKeyword},
 		            {header: '文件类型', dataIndex:'WJLX', width: 130, sortable: true,renderer:changKeyword},
 		            {header: '办理时限', dataIndex:'BLSX', width: 80, sortable: true,renderer:changKeyword},
 		            {header: '文件申请', dataIndex:'WJSQ', width: 70, sortable: true,renderer:changKeyword},
@@ -216,7 +216,7 @@ function query(){
 	grid.reconfigure(store, new Ext.grid.ColumnModel([
 		new Ext.grid.RowNumberer(),
     		{header: '督办', dataIndex:'BLSX', width:40, sortable: true,renderer:view},
-        	{header: '文件审批事项', dataIndex:'WJSPSX', width: (width - 580), sortable: true,renderer:changKeyword},
+        	{header: '来文编号', dataIndex:'WJSPSX', width: (width - 580), sortable: true,renderer:changKeyword},
             {header: '文件类型', dataIndex:'WJLX', width: 130, sortable: true,renderer:changKeyword},
             {header: '办理时限', dataIndex:'BLSX', width: 80, sortable: true,renderer:changKeyword},
             {header: '文件申请', dataIndex:'WJSQ', width: 80, sortable: true,renderer:changKeyword},

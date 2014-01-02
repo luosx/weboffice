@@ -115,7 +115,7 @@ String flag1 = request.getParameter("flag");
   	    <table align="center" cellpadding="0" cellspacing="0" width="600px">
 			<tr>
 				<td align="center">
-					文件审批事项
+					来文编号
 				</td>
 				<td colspan="3">
 					<textarea id="wjspsx" name="wjspsx" style="width:99%; overflow:hidden" rows="5" ></textarea>
@@ -142,7 +142,6 @@ String flag1 = request.getParameter("flag");
 				<td>
 					<input type="text" class="noborder" id="blsx" name="blsx" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm'})" style="width:98%" />
 					<input type="text" id="createdate" name="createdate" style="display:none" />
-					<input type="text" style="display: none;" name="zhblr" id="zhblr" value="<%=fullName%>" />
 					</td>
 			</tr>
 			<tr>
@@ -167,6 +166,14 @@ String flag1 = request.getParameter("flag");
 						<option value="已处理">处理中</option>
 						<option value="已处理">已处理</option>
 					</select>
+				</td>
+			</tr>
+			<tr>
+			     <td align="center">
+					<label>办理人员</label>
+				</td>
+				<td colspan=3>
+					<input type="text"  name="zhblr" id="zhblr" value="<%=fullName%>" />
 				</td>
 			</tr>
         </table>
