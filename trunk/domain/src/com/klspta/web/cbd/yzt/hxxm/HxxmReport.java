@@ -20,9 +20,9 @@ import com.klspta.model.CBDReport.dataClass.IDataClass;
  * <br>Date:2013-12-18
  */
 public class HxxmReport extends AbstractBaseBean implements IDataClass {
-	public static String[][] shows = new String[][]{{"rownum","false"},{"xmname","true"},{"zzsgm","true"},{"zzzsgm","true"},{"zzzshs","true"},{"hjmj","true"},{"fzzzsgm","true"},{"fzzjs","true"},{"zd","true"},{"jsyd","true"},{"rjl","true"},{"jzgm","true"},{"ghyt","true"},
+	public static String[][] shows = new String[][]{{"rownum","false"},{"xmname","true"},{"zzsgm","false"},{"zzzsgm","false"},{"zzzshs","false"},{"hjmj","false"},{"fzzzsgm","false"},{"fzzjs","false"},{"zd","true"},{"jsyd","true"},{"rjl","true"},{"jzgm","true"},{"ghyt","true"},
 				{"GJJZGM","true"},{"JZJZGM","true"},{"SZJZGM","true"},{"KFCB","true"},{"LMCB","true"},{"DMCB","true"},{"YJCJJ","true"},{"YJZFTDSY","true"},{"CXB","true"},{"CQQD","true"},{"CBFGL","true"},{"ZZCQFY","true"},{"QYCQFY","true"}
-				,{"QTFY","true"},{"AZFTZCB","true"},{"ZZHBTZCB","true"},{"CQHBTZ","true"},{"QTFYZB","true"},{"LMCJJ","true"},{"FWSJ","true"},{"ZJ","true"}};
+				,{"QTFY","true"},{"AZFTZCB","true"},{"ZZHBTZCB","true"},{"CQHBTZ","true"},{"QTFYZB","true"},{"LMCJJ","true"},{"FWSJ","true"},{"ZJ","true"},{"DKMC","true"}};
 	private String form_name = "JC_XIANGMU";
 	
 	@Override
@@ -32,6 +32,7 @@ public class HxxmReport extends AbstractBaseBean implements IDataClass {
 		if(obj.length > 0){
 			queryMap = (Map<String, Object>)obj[0];
 		}
+		trbeans.put("00", getSub(queryMap).get(0));
 		List<TRBean> trbeanList = getBody(queryMap);
 		for(int i = 0; i < trbeanList.size(); i++){
 			trbeans.put(i + "1", trbeanList.get(i));
@@ -55,6 +56,7 @@ public class HxxmReport extends AbstractBaseBean implements IDataClass {
 		List<TRBean> list = new ArrayList<TRBean>();
 		for(int num = 0; num < queryList.size(); num++){
 			TRBean trBean = new TRBean();
+			TDBean tdBean;
 			trBean.setCssStyle("trsingle");
 			Map<String, Object> map = queryList.get(num);
 			for(int i = 0; i < shows.length; i++){
@@ -62,11 +64,44 @@ public class HxxmReport extends AbstractBaseBean implements IDataClass {
 				if("null".equals(value)){
 					value = "";
 				}
-				TDBean tdBean = new TDBean(value, "80", "20",shows[i][1]);
+				if(i == shows.length - 1){
+					tdBean = new TDBean(value, "200", "20",shows[i][1]);
+				}else{
+					tdBean = new TDBean(value, "80", "20",shows[i][1]);
+				}
+				
 				trBean.addTDBean(tdBean);
 			}
 			list.add(trBean);
 		}
+		return list;
+	}
+	
+	public List<TRBean> getSub(Map queryMap){
+		String sql = "select sum(t.zzsgm) as zzsgm, sum(t.zzzsgm) as zzzsgm, sum(t.zzzshs) as zzzshs,trunc(decode(sum(t.zzzshs),0,0,sum(t.zzzsgm)/sum(t.zzzshs)),2) as hjmj,sum(t.fzzzsgm) as fzzzsgm, "+
+					"sum(t.fzzjs) as fzzjs, sum(t.zd) as zd, sum(t.jsyd) as jsyd,sum(t.rjl) as rjl, sum(t.jzgm) as jzgm, ''as ghyt, sum(t.gjjzgm) as gjjzgm, sum(t.jzjzgm) as jzjzgm,sum(t.szjzgm) as szjzgm,"+
+					"sum(t.kfcb) as kfcb,sum(t.lmcb) as lmcb,sum(t.dmcb) as dmcb,sum(t.yjcjj) as yjcjj,sum(t.yjzftdsy) as yjzftdsy,sum(t.cxb) as cxb,sum(t.cqqd) as cqqd,sum(t.cbfgl) as cbfgl" + 
+					",sum(t.zzcqfy) as zzcqfy,sum(t.qycqfy) as qycqfy,sum(t.qtfy) as qtfy,sum(t.azftzcb) as azftzcb,sum(t.zzhbtzcb) as zzhbtzcb,sum(t.cqhbtz) as cqhbtz,'' as qtfyzb,sum(t.lmcjj) as lmcjj,sum(t.fwsj) as fwsj,sum(t.zj) as zj,''as dk from JC_XIANGMU t ";
+		if(queryMap != null && !queryMap.isEmpty()){
+			sql += String.valueOf(queryMap.get("query"));
+		}
+		List<Map<String, Object>> queryList = query(sql.toString(), YW);
+		List<TRBean> list = new ArrayList<TRBean>();
+		TRBean trBean = new TRBean();
+		trBean.setCssStyle("trtotal");
+		Map<String, Object> map = queryList.get(0);
+		TDBean tdname=new TDBean("合计","180","20");
+		tdname.setColspan("2");
+		trBean.addTDBean(tdname);
+		for(int i = 2; i < shows.length; i++){
+			String value = String.valueOf(map.get(shows[i][0]));
+			if("null".equals(value)){
+				value = "";
+			}
+			TDBean tdBean = new TDBean(value, "80", "20","false");
+			trBean.addTDBean(tdBean);
+		}
+		list.add(trBean);
 		return list;
 	}
 }
