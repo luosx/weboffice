@@ -167,7 +167,6 @@ function saves(yw_guid){
 	}
 	}
 function modify(row,yw_guid){
-	alert(row);
 	yw_guid=yw_guid;
 	BS='xg';
 	selectedTr = document.getElementById("row" +(row-1));
@@ -195,7 +194,7 @@ function modify(row,yw_guid){
     var s= "saves('"+yw_guid+"')";
     var d= "del('"+yw_guid+"')";
     var a='<a onclick="';
-    var f='">保存</a>';
+    var f='">保存&nbsp;&nbsp;&nbsp;</a>';
     var ff='">删除</a>';
     butt=a+s+f+a+d+ff;
     c5.innerHTML=butt;
@@ -269,7 +268,7 @@ function del(bs){
 					<td align="center" width="80px"><%=list.get(i).get("bmjbr")%></td>
 					<td align="center" width="200px"><%=list.get(i).get("bz")%></td>
 					<td align="center" width="200px">
-				    <a onclick="modify('<%=(i+1)%>','<%=list.get(i).get("yw_guid")%>')">修改</a>	<a onclick="del('<%=list.get(i).get("yw_guid")%>')">删除</a>
+				    <a onclick="modify('<%=(i+1)%>','<%=list.get(i).get("yw_guid")%>')">修改</a>	<a onclick="del('<%=list.get(i).get("yw_guid")%>')">&nbsp;&nbsp;&nbsp;删除</a>
 					</td>
 				</tr>
 				<%
@@ -297,15 +296,15 @@ function del(bs){
 							style="width: 200px; overflow: auto"></textarea>
 					</td>
 					<td align="center">
-						<button onclick="save()">
+						<a onclick="save()">
 							保存
-						</button>
+						</a>
 					</td>
 				</tr>
 			</table>
-			<button style="display: " id="add" onclick="add() ">
-							新增
-						</button>
+		  <div align="right" style="width: 95%">	
+		  <button style="display: " id="add" onclick="add() ">新增</button>
+						</div>
 		</div>
 	</body>
 </html>
