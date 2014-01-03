@@ -1,7 +1,9 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@page import="com.klspta.base.util.UtilFactory"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+	String xzq = UtilFactory.getXzqhUtil().generateOptionByList(UtilFactory.getXzqhUtil().getChildListByParentId("350200"));
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -62,26 +64,8 @@
 			store.load({params:{start:0, limit:limitNum}});
 			sm = new Ext.grid.CheckboxSelectionModel({handleMouseDown:Ext.emptyFn});
 			var districtStore = new Ext.data.JsonStore({
-				fields : ['name','value'],
-				data : [{
-							name : '思明区',
-							value : '350203'
-						},{
-							name : '湖里区',
-							value : '350206'
-						},{
-							name : '海沧区',
-							value : '350205'
-						},{
-							name : '翔安区',
-							value : '350213'
-						},{
-							name : '同安区',
-							value : '350212'
-						},{
-							name : '集美区',
-							value : '350211'
-						}]
+				fields : ['name','code'],
+				data : <%=xzq%>
 			});
 			var tblxStore = new Ext.data.JsonStore({
 				fields : ['name'],
@@ -146,7 +130,7 @@
 							width :80,
 							store : districtStore,
 							displayField : 'name',
-							valueField : 'value',
+							valueField : 'code',
 							typeAhead : true,
 							mode : 'local',
 							triggerAction : 'all',
@@ -181,7 +165,11 @@
 						{
 							xtype : 'label',
 							text : '—'
-						},{xtype:'textfield',id:'fhghmj2',width:50}						
+						},{xtype:'textfield',id:'fhghmj2',width:50},'-',
+						{
+							xtype : 'label',
+							html : '&nbsp;&nbsp;注：单位为平方米'
+						}						
 			    ],        
 			    listeners:{
 		  			rowdblclick : function(grid, rowIndex, e)
