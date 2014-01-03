@@ -1,7 +1,11 @@
 package com.klspta.web.xiamen.xchc;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import com.klspta.base.AbstractBaseBean;
@@ -119,4 +123,48 @@ public class XchcManager extends AbstractBaseBean {
         return null;
     }
 	
+    public void seeLocation(){
+        String xzq = request.getParameter("xzq");
+        String begindate = request.getParameter("begindate");
+        String enddate = request.getParameter("enddate");
+        String sql = "select t.yw_guid from dc_ydqkdcb t where 1=1 ";//t.impxzq = ? and to_date(t.begindate,'YYYY-MM-DD') between to_date(?,'YY/MM/DD') and to_date(?,'YY/MM/DD') 
+        if(xzq!=null && !"".equals(xzq)){
+            sql+=" and t.impxzqbm ="+xzq;
+        }
+        Date begintime= null;
+        Date endtime= null;     
+        SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss 'UTC 0800' yyyy",Locale.ENGLISH);
+        SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+        if(begindate!=null && !"".equals(begindate)){
+            try {
+                begintime = sdf.parse(begindate);
+                begindate = sdf1.format(begintime);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            sql+=" and to_date(t.begindate,'YYYY-MM-DD')>to_date('"+begindate+"','YY/MM/DD')";
+        }
+        if(enddate!=null && !"".equals(enddate)){
+            try {         
+                endtime = sdf.parse(enddate);
+                enddate = sdf1.format(endtime);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            sql+=" and to_date(t.begindate,'YYYY-MM-DD')<to_date('"+enddate+"','YY/MM/DD')";
+        }
+        List<Map<String,Object>> list = query(sql,YW);     
+         
+        String sql2 = " update dlgzwyr t set t.location='0'";
+        update(sql2,GIS);
+        String gisSql = "update dlgzwyr t set t.location='1' where t.yw_guid=?";
+        for(int i=0;i<list.size();i++){
+            Map<String,Object> map = list.get(i);
+            update(gisSql,GIS,new Object[]{map.get("yw_guid")});
+        }
+
+        response("true");
+        
+    }
+    
 }
