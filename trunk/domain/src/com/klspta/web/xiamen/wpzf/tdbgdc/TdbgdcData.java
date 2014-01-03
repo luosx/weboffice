@@ -127,7 +127,7 @@ public class TdbgdcData extends AbstractBaseBean implements ItdbgdcData {
                 sqlBuffer.append(" and t.fhghmj < ").append(wheres[8]);
             }
 	        if(!"null".equals(wheres[9])){
-                sqlBuffer.append(" and t.tblx = ").append(wheres[9]);
+                sqlBuffer.append(" and t.tblx like '%").append(wheres[9]).append("%'");
             }
 	        if(!"null".equals(wheres[10])){
                 sqlBuffer.append(" and t.nydmj > ").append(wheres[10]);
@@ -194,7 +194,7 @@ public class TdbgdcData extends AbstractBaseBean implements ItdbgdcData {
                 sqlBuffer.append(" and t.fhghmj < ").append(wheres[8]);
             }
             if(!"null".equals(wheres[9])){
-                sqlBuffer.append(" and t.tblx = ").append(wheres[9]);
+                sqlBuffer.append(" and t.tblx like '%").append(wheres[9]).append("%'");
             }
             if(!"null".equals(wheres[10])){
                 sqlBuffer.append(" and t.nydmj > ").append(wheres[10]);
