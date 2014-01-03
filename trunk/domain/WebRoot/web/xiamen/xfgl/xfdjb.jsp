@@ -123,7 +123,7 @@
 </tr>
 <tr>
 <td>举报时间</td>
-<td><input  type="text" class="noborder" id="jbsj" name="jbsj" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})" readonly style="width: 98%"/></td>
+<td><input  type="text" class="noborder" id="jbsj" name="jbsj" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})" readonly style="width: 90%"/></td>
 <td>联系电话</td>
 <td><input class="noborder" name="lxdh" id="lxdh" style="width: 95%"/></td>
 <td>来电次数</td>

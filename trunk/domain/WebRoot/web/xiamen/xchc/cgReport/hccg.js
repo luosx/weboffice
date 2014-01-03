@@ -81,6 +81,12 @@ function initComponent() {
 							xtype : 'button',
 							text : '导出Excel',
 							handler : exportExcel
+						},'-',{
+							xtype : 'button',
+							text : '查看位置',
+							id : 'location',
+							hidden : true,
+							handler : seeLocation													
 						}],
 				items : [{
 					html : "<iframe id='report' width=" + (width - 50)
@@ -101,9 +107,24 @@ function query() {
 	//var keyword = Ext.getCmp("keyword").getValue();
 	//document.frames['report'].query(xzq ,begindate, enddate);
 	document.getElementById('report').src= url+"?xzq="+xzq+"&begindate="+begindate+"&enddate="+enddate;
-	//alert(document.frames['report'].src)
+	Ext.getCmp('location').setVisible(true) ;	
 }
 
 function exportExcel() {
 	document.frames['report'].print();
+}
+
+function seeLocation(){
+	var xzq = Ext.getCmp("xzq").getValue();
+	var begindate = Ext.getCmp("begindate").getValue();
+	var enddate = Ext.getCmp("enddate").getValue();
+	putClientCommond("xchc","seeLocation");
+	putRestParameter("xzq",xzq);
+	putRestParameter("begindate",begindate);
+	putRestParameter("enddate",enddate);
+	var result = restRequest();	
+	var url = basePath+"web/xiamen/xchc/cglb/location.jsp?type=3&yw_guid=1";  
+	var height = window.screen.availHeight;
+	var width = window.screen.availWidth;
+	window.open(url,"","width="+width+",height="+height);		
 }
