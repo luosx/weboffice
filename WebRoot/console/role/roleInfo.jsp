@@ -37,6 +37,8 @@
 		<meta http-equiv="description" content="This is my page">
 		<%@ include file="/base/include/ext.jspf" %>
 		<%@ include file="/base/include/restRequest.jspf" %>
+		<script type="text/javascript"
+			src="<%=basePath%>/web/cbd/yzt/RowEditor.js"></script>
 	<script type="text/javascript" src="<%=extPath%>examples/ux/MultiSelect.js"></script>
 <script type="text/javascript" src="<%=extPath%>examples/ux/ItemSelector.js"></script>
 			 <link rel="stylesheet" type="text/css" href="<%=extPath%>examples/ux/css/MultiSelect.css"/>
