@@ -28,6 +28,7 @@ public class MenuManager extends AbstractBaseBean
 		if ("NEW WITH MANAGER FACTORY!".equals(key))
 		{ 
 		    instance.flush();
+		    instance.flush();
 			return instance;
 		} else
 		{
@@ -702,7 +703,7 @@ public class MenuManager extends AbstractBaseBean
 		menuCode.append("<span id='menu");
 		menuCode.append(parentId);
 		menuCode.append("_cm' class='menuDiv_");
-		menuCode.append(menuLevel);
+		menuCode.append("1");
 		menuCode.append("' ");
 		menuCode.append("name='menu");
 		menuCode.append(menuLevel);
