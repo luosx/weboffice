@@ -1,14 +1,17 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@page import="com.klspta.model.CBDReport.CBDReportManager"%>
-<%@page import="com.klspta.console.ManagerFactory"%>
 <%@page import="org.springframework.security.core.context.SecurityContextHolder"%>
-<%@page import="com.klspta.console.user.User"%>
-<%@page import="com.klspta.console.role.Role"%>
+<%@page import="com.klspta.model.CBDReport.tablestyle.ITableStyle"%>
+<%@page import="com.klspta.web.cbd.xmgl.xmkgzbb.XmkgzbbStyleEditRow"%>
+<%@page import="com.klspta.model.CBDReport.tablestyle.TableStyleDefaultEdit"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 Object userprincipal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 String xmmc = request.getParameter("xmmc");	
+String reportID = "XMKGZBBCX";
+String keyIndex = "1";
+ITableStyle its = new XmkgzbbStyleEditRow();
 String yw_guid = request.getParameter("yw_guid");
 if(xmmc!=null){
 	xmmc = new String(xmmc.getBytes("iso-8859-1"),"utf-8");
@@ -29,8 +32,10 @@ conditionMap.put("query", " yw_guid = '" + yw_guid + "'");
 	<meta http-equiv="expires" content="0"/>    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3"/>
 	<meta http-equiv="description" content="This is my page"/>
+	<script src="web/cbd/xmgl/xmkgzb/table.js"></script>
 	<%@ include file="/base/include/ext.jspf"%>
 	<%@ include file="/base/include/restRequest.jspf"%>
+	<%@ include file="/web/cbd/xmgl/xmkgzb/reportEdit.jspf"%>
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
@@ -89,9 +94,20 @@ conditionMap.put("query", " yw_guid = '" + yw_guid + "'");
     text-align:center;
    }
  
-	</style>
-	 <script type="text/javascript">
-  		function print(){
+</style>
+<script type="text/javascript">
+	var table = new tableoper();
+	var dkbh = "";
+	
+	function deletedk(objid){
+		if(table.element == undefined){
+			table.init(document.getElementById("XMKGZBBCX"));
+		}
+		var key = objid.cells[1].innerText;
+		dkbh = key;
+		table.addAnnotation(objid.rowIndex);
+	}
+  	function print(){
 		    var curTbl = document.getElementById("XMKGZBBCX"); 
  			try{
 		    	var oXL = new ActiveXObject("Excel.Application");
@@ -118,7 +134,7 @@ conditionMap.put("query", " yw_guid = '" + yw_guid + "'");
 		    //设置excel可见属性 
 		}
 		//根据用地单位和关键字作过滤
-  		function query(keyword){
+  	function query(keyword){
  			putClientCommond("xmkgzbbmanager","getReport");
  			putRestParameter("yw_guid", "<%=yw_guid%>")
 		    putRestParameter("keyword",escape(escape(keyword)));
@@ -127,7 +143,7 @@ conditionMap.put("query", " yw_guid = '" + yw_guid + "'");
   		}
 		
 		
-		function saves(ydxzlx,adding){
+	function saves(ydxzlx,adding){
 		var dkbh=document.getElementById("dkbh").value;
 		var ydxz=document.getElementById("ydxz").value;
 		var ydxzdh=document.getElementById("ydxzdh").value;
@@ -139,6 +155,15 @@ conditionMap.put("query", " yw_guid = '" + yw_guid + "'");
 		if(dkbh==null||dkbh==''||ydxz==null||ydxz==''||ydxzdh==null||ydxzdh==''||ydmj==null||ydmj==''||rjl==null||rjl==''||jzmj==null||jzmj==''){
 			alert("请填写完整之后再保存！！"); 
 		}else{
+		  dkbh=escape(escape(dkbh));
+		  ydxz=escape(escape(ydxz));
+		  ydxzdh=escape(escape(ydxzdh));
+		  ydmj=escape(escape(ydmj));
+		  rjl=escape(escape(rjl));
+		  jzmj=escape(escape(jzmj));
+		  kzgd=escape(escape(kzgd));
+		  bz=escape(escape(bz));
+		
 	    	putClientCommond("xmkgzbbmanager","saveDK");
 			putRestParameter("yw_guid","<%=yw_guid%>");
 			putRestParameter("dkbh",dkbh);
@@ -160,6 +185,34 @@ conditionMap.put("query", " yw_guid = '" + yw_guid + "'");
 			}
 		}
 	}
+	
+	function dele(){
+	Ext.MessageBox.confirm('确认', '系统将删除所有选中地块，确定?', function(btn,text){
+		if(btn == 'yes'){
+			var choseValue = table.getAnnotations();
+			var choseString = '';
+			while(choseValue.length != 0){
+				choseString += table.getValue(choseValue.pop(),"1") + ",";
+			}
+			putClientCommond("xmkgzbbmanager","delete");
+			putRestParameter("dkbh",choseString);
+			myData = restRequest();
+			if(myData){
+				Ext.MessageBox.alert('提醒', '删除成功！', function(btn, text){
+					document.location.reload();
+					return;
+				});
+			}else{
+				Ext.MessageBox.alert('提醒', '删除失败，请联系管理员或重试', function(btn, text){
+					return;
+				});
+			}
+			
+		}
+	});
+}
+
+
   </script>
   </head>
   <body >
@@ -167,7 +220,7 @@ conditionMap.put("query", " yw_guid = '" + yw_guid + "'");
 	      <h1><%=xmmc%>控规指标表</h1>
 	</div>
 	<div align="center" id="center" style="position:absolute; top:65px; left: 20px;">
-  		<%=new CBDReportManager().getReport("XMKGZBBCX",new Object[]{conditionMap})%>
+  		<%=new CBDReportManager().getReport("XMKGZBBCX",new Object[]{conditionMap},its)%>
   	</div>
   </body>
 </html>

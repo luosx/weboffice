@@ -4,6 +4,8 @@
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 	String xmmc = request.getParameter("xmmc");
+	String reportID = "XMKGZBBCX";
+	String keyIndex = "1";
 	String yw_guid = request.getParameter("yw_guid");
 	if(xmmc!=null){
 		xmmc = new String(xmmc.getBytes("iso-8859-1"),"utf-8");
@@ -27,10 +29,6 @@ input,img {
 </style>
 		<script>
 		var basePath="<%=basePath%>";
-		function ss(){
-		var tb = document.getElementById("XMKGZBBCX"); 
-		add(tb);
-		}
 		
 var ydxzlx;
 var data;
@@ -39,6 +37,9 @@ var radio ;
 var simple;
 var fp;
 var adding = false;
+
+
+var deleteformPanel;
 
 var url = basePath
 		+ 'web/cbd/xmgl/xmkgzb/xmkgzbReport.jsp?yw_guid=<%=yw_guid%>&xmmc=<%=xmmc%>';
@@ -71,6 +72,10 @@ function initComponent() {
 							xtype : 'button',
 							text : '添加地块',
 							handler : add
+						},'-',{
+							xtype : 'button',
+							text : '删除地块',
+							handler : dele
 						}],
 				items : [{
 					html : "<iframe id='report' width=" + (width - 50)
@@ -147,8 +152,11 @@ Ext.onReady(function(){
         ]   
     });  
       
-    }) 
+    }); 
 
+function dele(){
+	document.frames['report'].dele();
+}
 function add(){
 	if(adding == false){
 		fp.show();
@@ -171,17 +179,24 @@ function add(){
 		var td8 = tr.insertCell();
 		var td9 = tr.insertCell();
 		td1.innerHTML = "0";
-		td2.innerHTML = "<input id='dkbh' style='width: 80px' type='text' value=''  />";
+		td2.innerHTML = "<input id='dkbh' style='width: 80px' type='text' value='' />";
 		td3.innerHTML = "<input id='ydxzdh' style='width: 20px' type='text' value=''  />";
 		td4.innerHTML = "<input id='ydxz' style='width: 80px' type='text' value=''   />";
-		td5.innerHTML = "<input id='ydmj' style='width: 80px' type='text' value=''   />";
-		td6.innerHTML = "<input id='rjl' style='width: 80px' type='text' value=''   />";
-		td7.innerHTML = "<input id='jzmj' style='width: 80px' type='text' value=''   />";
-		td8.innerHTML = "<input id='kzgd' style='width: 80px' type='text' value=''   />";
+		td5.innerHTML = "<input id='ydmj' style='width: 80px' type='text' value=''   onpropertychange='if(isNaN(value)) value=value.substring(0,value.length-1);'/>";
+		td6.innerHTML = "<input id='rjl' style='width: 80px' type='text' value=''   onpropertychange='if(isNaN(value)) value=value.substring(0,value.length-1);'/>";
+		td7.innerHTML = "<input id='jzmj' style='width: 80px' type='text' value=''   onpropertychange='if(isNaN(value)) value=value.substring(0,value.length-1);'/>";
+		td8.innerHTML = "<input id='kzgd' style='width: 80px' type='text' value=''   onpropertychange='if(isNaN(value)) value=value.substring(0,value.length-1);'/>";
 		td9.innerHTML = "<input id='bz' style='width: 80px' type='text' value=''/><input type='button' value='保存' onclick='saves("+ydxzlx+","+adding+")'/>";
 		
 	} 
-	
+function clearNoNum(obj)
+    {
+        obj.value = obj.value.replace(/[^\d.]/g,"");
+        obj.value = obj.value.replace(/^\./g,"");
+        obj.value = obj.value.replace(/\.{2,}/g,".");
+        obj.value = obj.value.replace(".","$#$").replace(/\./g,"").replace("$#$",".");
+    }
+
 		</script>
 	</head>
 	<body bgcolor="#FFFFFF" topmargin="0" leftmargin="0">
