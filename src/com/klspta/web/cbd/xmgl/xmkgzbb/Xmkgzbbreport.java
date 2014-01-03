@@ -80,7 +80,7 @@ public class Xmkgzbbreport extends AbstractBaseBean implements IDataClass {
 						}else if(3 == i){
 							width = "130px";
 						}
-						tdBean = new TDBean(value, width, "","");
+						tdBean = new TDBean(value, width, "","true");
 						trBean.addTDBean(tdBean);
 					}
 					if(isnull){
@@ -94,7 +94,7 @@ public class Xmkgzbbreport extends AbstractBaseBean implements IDataClass {
 							}else if(3 == i){
 								width = "130px";
 							}
-							tdBean = new TDBean(value, width, "","");
+							tdBean = new TDBean(value, width, "","true");
 							trBean.addTDBean(tdBean);
 						}
 					}
@@ -117,7 +117,7 @@ public class Xmkgzbbreport extends AbstractBaseBean implements IDataClass {
 				}else if(3 == i){
 					width = "130px";
 				}
-				tdBean = new TDBean(value, width, "","");
+				tdBean = new TDBean(value, width, "","true");
 				trBean.addTDBean(tdBean);
 			}
 			list.add(trBean);
@@ -164,7 +164,7 @@ public class Xmkgzbbreport extends AbstractBaseBean implements IDataClass {
 						if(i==2){
 							width ="20";
 						}
-						tdBean = new TDBean(value, width, "","");
+						tdBean = new TDBean(value, width, "","true");
 						trBean.addTDBean(tdBean);
 					}
 				list.add(trBean);
@@ -232,7 +232,7 @@ public class Xmkgzbbreport extends AbstractBaseBean implements IDataClass {
 						if(i==2){
 							width ="20";
 						}
-						tdBean = new TDBean(value, width, "","");
+						tdBean = new TDBean(value, width, "","true");
 						trBean.addTDBean(tdBean);
 					}
 				list.add(trBean);
@@ -280,7 +280,7 @@ public class Xmkgzbbreport extends AbstractBaseBean implements IDataClass {
 						if(i==2){
 							width ="20";
 						}
-						tdBean = new TDBean(value, width, "","");
+						tdBean = new TDBean(value, width, "","true");
 						trBean.addTDBean(tdBean);
 					}
 				list.add(trBean);
