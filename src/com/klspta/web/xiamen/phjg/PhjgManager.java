@@ -8,7 +8,7 @@ import com.klspta.base.wkt.Polygon;
 
 public class PhjgManager extends AbstractBaseBean {
 
-	public static final String[][] showList = new String[][]{{"OBJECTID","0.1","hiddlen"},{"XMBH", "0.1","项目编号"},{"XMMC", "0.12","项目名称"},{"YDDWMC", "0.12","用地单位名称"},{"AREA", "0.1","项目面积"},{"YWLX", "0.1","项目类型"},{"YDQK","0.1","用地情况"},{"YDSJ","0.1","用地时间"},{"SZFPW","0.13","批准文号"},{"PZRQ","0.1","批准时间"}};
+	public static final String[][] showList = new String[][]{{"OBJECTID","0.1","hiddlen"},{"XMBH", "0.1","项目编号"},{"XMMC", "0.12","项目名称"},{"YDDWMC", "0.12","用地单位名称"},{"AREA", "0.1","项目面积"},{"YWLX", "0.1","项目类型"},{"用地主体","0.1","用地主体"},{"发现时间","0.1","发现时间"},{"SZFPW","0.13","批准文号"},{"PZRQ","0.1","批准时间"}};
 	
 	public void getList(){
 		String userId = request.getParameter("userid");
