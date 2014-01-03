@@ -82,7 +82,10 @@ font-weight:bold;
 }
 
 /*二 三级菜单*/
-
+.menuDiv_2,.menuDiv_3
+{
+	cursor:pointer;
+}
 .menu_2
 {
 
