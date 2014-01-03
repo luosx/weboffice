@@ -58,6 +58,8 @@
 	<bean name="azfjs" class="com.klspta.web.cbd.hxxm.Anzfjs" scope="prototype"/>
 		<!-- 二手房市场监测 -->	
 	<bean name="scjcHandle" class="com.klspta.web.cbd.jtfx.ztt.ScjcManager" scope="prototype"/>
+	<!-- 二手房基本信息及月度监测信息 add by zouy@chinastis.com 2013-12-30 -->	
+	<bean name="scjcManager" class="com.klspta.web.cbd.jtfx.scjc.ScjcManager" scope="prototype"/>
 	<!-- 房源资产管理 -->
 	<bean name="fyzcHandle" class="com.klspta.web.cbd.swkgl.Fyzcmanager" scope="prototype"/>
 	<!-- 统计报表计划管理类 -->	
