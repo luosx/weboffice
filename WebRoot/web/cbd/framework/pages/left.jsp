@@ -82,30 +82,6 @@ function showSel(selId)
 	showid=selId;
 }
 var closeMenu;
-function openMenu(menuId)
-{
-  var childMenu=document.getElementById("menu"+menuId+"_cm");
-  if(childMenu==null)
-     return;
-  if(childMenu.name=="menu2")
-  {
-	if(closeMenu!=undefined&&closeMenu!=childMenu)
-	    closeMenu.style.display="none"; 	
-	closeMenu=childMenu ;
-  }
-	  var state=childMenu.style.display;
-	  childMenu.style.display= state=="block"?"none":"block";
-
-//图片切换
-  if(childMenu.name=="menu2")
-  	return;
-  var imgObj=document.getElementById("img_"+menuId);
- 
-  var imgName=getIconName(imgObj.src);
-  var extName=getExtName(imgObj.src);
- 
-  imgObj.src= state== "block"? "../images/left/"+imgName+"_hc"+extName:"../images/left/"+imgName+extName;
-}
 
 
 window.onload=function(){
