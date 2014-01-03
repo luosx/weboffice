@@ -79,5 +79,7 @@ public interface ItdbgdcData {
 	 * @return
 	 */
 	public String changeFxqk(String yw_guid, String value);
+	
+	public List<Map<String, Object>> getBGList(String where);
 
 }

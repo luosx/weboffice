@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.Map;
 
 import com.klspta.base.AbstractBaseBean;
+import com.klspta.base.util.UtilFactory;
+import com.klspta.base.wkt.Polygon;
+import com.klspta.web.xiamen.wpzf.wpzf.WptbData;
 
 /**
  * 
@@ -91,5 +94,26 @@ public class TdbgdcManager extends AbstractBaseBean {
         } catch (IOException e) {
             e.printStackTrace();
         }       
+    }
+    public void getBGList(){
+        String keyword =  request.getParameter("keyword");
+        String where = null;
+        if(keyword != null){
+            keyword = UtilFactory.getStrUtil().unescape(keyword);
+            where = " where (upper(t.tbbh)||upper(t.xmc) like '%" +keyword +"%')";
+        }
+        ItdbgdcData bgdcData = new TdbgdcData();
+        List<Map<String, Object>> wptbList = bgdcData.getBGList(where);
+        response(wptbList);
+    }    
+    
+    public void getWkt(){
+        String tbbh = request.getParameter("tbbh"); 
+        String xzdm = request.getParameter("xzdm"); 
+        String sql = "select sde.st_astext(t.shape) wkt from dlgzbgdcr t where t.jcbh = ? and t.xzqdm = ?";
+        List<Map<String,Object>> list = query(sql,GIS,new Object[]{tbbh,xzdm});
+        String wkt = (String)(list.get(0)).get("wkt");
+        Polygon polygon = new Polygon(wkt);
+        response(polygon.toJson());
     }
 }
