@@ -66,7 +66,10 @@
 	<bean name="jzmjbbdfx" class = "com.klspta.web.cbd.dtjc.jcmx.bbdfx.Jzmjbbdfx" scope="prototype"/>
 	<bean name="ptzzgmlCL" class="com.klspta.web.cbd.dtjc.jcmx.PtzzgmlMXOneData" scope="prototype"/>
 	<!-- GIS-->
-	<bean name="gisfactory" class="com.klspta.web.cbd.yzt.jc.insertGIS.GisFactory" scope="prototype"/>
+	<bean name="gisfactory" class="com.klspta.model.CBDinsertGIS.GisFactory" scope="prototype"/>
+	
+	<bean name="formulaEdit" class="com.klspta.model.formulaEdit.FormulaEdit" scope="prototype"/>
+	
 	<!-- 数据表字段管理类 -->	
 	<bean name="tableField" class="com.klspta.web.cbd.yzt.table.TableFieldManager" scope="prototype"/>
 	<bean name="xzlzjjc" class="com.klspta.web.cbd.sccsl.XzlzjjcManager" scope="prototype"/>
