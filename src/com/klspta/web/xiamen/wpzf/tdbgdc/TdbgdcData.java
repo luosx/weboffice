@@ -226,6 +226,15 @@ public class TdbgdcData extends AbstractBaseBean implements ItdbgdcData {
         return getWFList;
     }
 	
-	
+    public List<Map<String, Object>> getBGList(String where){
+        StringBuffer sqlBuffer = new StringBuffer();
+        sqlBuffer.append("select t.yw_guid, t.tbbh, t.xmc,t.xzdm from ").append(formName).append(" t ");
+        if(where != null){
+            sqlBuffer.append(" ").append(where);
+        }
+        sqlBuffer.append(" order by to_number(t.tbbh) ");
+        List<Map<String, Object>> queryList = query(sqlBuffer.toString(), YW);
+        return queryList;
+    }
 	
 }
