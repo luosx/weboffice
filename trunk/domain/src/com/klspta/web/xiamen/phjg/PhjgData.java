@@ -27,9 +27,9 @@ public class PhjgData extends AbstractBaseBean implements IphjgData {
 		sqlBuffer.append("select t.* from ").append(FORM_NAME).append(" t where 1=1 ");
 		if(where != null){
 		    where = UtilFactory.getStrUtil().unescape(where);
-		    sqlBuffer.append("and t.XMBH||t.XMMC||t.YDDWMC||t.AREA||t.YWLX||t.YDQK||t.YDSJ||t.SZFPW||t.PZRQ like '%"+where+"%'");
+		    sqlBuffer.append("and t.XMBH||t.XMMC||t.YDDWMC||t.AREA||t.YWLX||t.用地主体||t.发现时间||t.SZFPW||t.PZRQ like '%"+where+"%'");
 		}
-		sqlBuffer.append("order by t.ydsj");
+		sqlBuffer.append("order by t.发现时间");
 		List<Map<String, Object>> getList = query(sqlBuffer.toString(), YW);
 		Map<String,Object> map = null;
 		for(int i=0;i<getList.size();i++){
