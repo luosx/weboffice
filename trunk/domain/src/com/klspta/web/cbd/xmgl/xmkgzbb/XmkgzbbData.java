@@ -14,6 +14,19 @@ public class XmkgzbbData extends AbstractBaseBean {
 	private static final String queryString = "(upper(yw_guid)||upper(rownum)||upper(DKBH)||upper(YDXZDH)||upper(YDXZ)||upper(YDMJ)||upper(RJL)||upper(JZMJ)||upper(KZGD)||upper(BZ)";
 	public static List<Map<String, Object>> xmkgzbbList;
 	
+	private static XmkgzbbData xmkgzbbData;
+	
+	private String dkbh = "";
+    private String field = "";
+    private String value = "";
+	
+	public static XmkgzbbData getInstance(){
+    	if(xmkgzbbData == null){
+    		xmkgzbbData = new XmkgzbbData();
+    	}
+    	return xmkgzbbData;
+    }
+	
 	public List<Map<String, Object>> getAllList(HttpServletRequest request) {
 			String yw_guid = request.getParameter("yw_guid").toString();
 			if(xmkgzbbList == null){
@@ -56,5 +69,19 @@ public class XmkgzbbData extends AbstractBaseBean {
         }
         return query(querySql.toString(), YW);
     }
-
+	public boolean delete(String dk){
+    	String sql = "delete from " + formName + " t where t.dkbh = ?";
+    	int result = update(sql, YW, new Object[]{dk});
+    	return result == 1 ? true : false;
+    }
+	public boolean modifyValue(String dkbh, String field, String value){
+    	StringBuffer sqlBuffer = new StringBuffer();
+    	sqlBuffer.append(" update ").append(formName);
+    	sqlBuffer.append(" t set t.").append(field);
+    	sqlBuffer.append("='"+value);
+    	sqlBuffer.append("' where t.dkbh=?");
+    	int i = update(sqlBuffer.toString(), YW, new Object[]{ dkbh});
+     	return i == 1 ? true : false;
+    }
+	
 }
