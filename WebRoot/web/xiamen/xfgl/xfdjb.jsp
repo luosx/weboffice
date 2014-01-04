@@ -99,9 +99,22 @@
 <td width="70px">举报形式</td>
 <td ><input  type="radio" name="jbxs" value="电话"  checked="checked"/>电话<input  type="radio" name="jbxs" value="传真"/>传真</td>
 </tr>
-<tr><td>联系地址</td><td colspan="5">
-<input class="noborder" name="lxdz" id="lxdz" style="width: 95%"/></td>
+<tr>
+<td>联系地址</td>
+<td colspan="3"><input class="noborder" name="lxdz" id="lxdz" style="width: 95%"/></td>
+<td>处理机关</td>
+<td>
+	<select name="xzq" id="xzq" style="width:60">
+		<option selected="selected" value="局机关">局机关</option>
+		<option value="直属分局">直属分局</option>
+		<option value="集美分局">集美分局</option>
+		<option value="海沧分局">海沧分局</option>
+		<option value="同安分局">同安分局</option>
+		<option value="翔安分局">翔安分局</option>
+	</select></td>
 </tr>
+
+<!--
 <tr>
 <td>所在政区</td>
 <td colspan="2" align="left">
@@ -121,6 +134,8 @@
          </select></td>
 
 </tr>
+-->
+ 
 <tr>
 <td>举报时间</td>
 <td><input  type="text" class="noborder" id="jbsj" name="jbsj" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})" readonly style="width: 90%"/></td>
@@ -213,19 +228,17 @@ function change(){
 
 }
 //增加option
- function addOption(objSelect, txt, val) {   
-            var objOption = document.createElement("OPTION");        
-            objOption.text = txt;                                                  
-            objOption.value = val;                                                 
-            objSelect.options.add(objOption);                       
- } 
+function addOption(objSelect, txt, val){   
+	var objOption = document.createElement("OPTION");        
+	objOption.text = txt;                                                  
+	objOption.value = val;                                                 
+	objSelect.options.add(objOption);                       
+} 
 //删除option
 function delOption(objSelect){
-   for(var k=objSelect.length-1; k>=0; k--){    
-          objSelect.options.removeChild(objSelect.options[k]);     //这里一定要进行倒序删除
-                         }
-
-
+	for(var k=objSelect.length-1; k>=0; k--){    
+		objSelect.options.removeChild(objSelect.options[k]);//这里一定要进行倒序删除
+	}
 }
 </script>
 </html>
