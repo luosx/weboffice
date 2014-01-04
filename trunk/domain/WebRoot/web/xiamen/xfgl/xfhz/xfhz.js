@@ -24,23 +24,23 @@ function initComponent() {
 	var xzqStore = new Ext.data.JsonStore({
 				fields : ['name'],
 				data : [{
-							name : '市局'
+							name : '局机关'
 						}, {
-							name : '直属区'
+							name : '直属分局'
 						}, {
-							name : '集美区'
+							name : '集美分局'
 						}, {
-							name : '海沧区'
+							name : '海沧分局'
 						}, {
-							name : '同安区'
+							name : '同安分局'
 						}, {
-							name : '翔安区'
+							name : '翔安分局'
 						}]
 			})
 
 	simple = new Ext.FormPanel({
 				frame : true,
-				title : '信访台帐',
+				title : '12336举报台帐',
 				bodyStyle : 'padding:5px 5px 0',
 				tbar : [{
 							xtype : 'label',
@@ -56,7 +56,7 @@ function initComponent() {
 							selectOnFocus : true
 						}, {
 							xtype : 'label',
-							text : '所在政区：'
+							text : '处理机关：'
 						}, {
 							id : 'xzq',
 							xtype : 'combo',
@@ -94,14 +94,14 @@ function query() {
 	var c1 = Ext.getCmp("dklx").getValue();
 	var c2 = Ext.getCmp("xzq").getValue();
 	var para = '';
-	if (c1 != null && c2 != null) {
+	if (c1 != '' && c2 != '') {
 		c1 = escape(escape("'" + c1 + "'"));
 		c2 = escape(escape("'" + c2 + "'"));
 		para = "jbxs=" + c1 + "  and xzq=" + c2;
-	} else if (c1 != null) {
+	} else if (c1 != '') {
 		c1 = escape(escape("'" + c1 + "'"));
 		var para = "jbxs=" + c1;
-	} else if (c2 != null) {
+	} else if (c2 != '') {
 		c2 = escape(escape("'" + c2 + "'"));
 		var para = "xzq=" + c2;
 	}
