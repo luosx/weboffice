@@ -33,14 +33,12 @@
 		var sm;
 		var width;
 		var height;
-		var XZQData=[{key:'市局',value:'市局'},
-		               {key:'直属区',value:'直属区'},
-						{key:'思明区',value:'思明区'},
-						{key:'海沧区',value:'海沧区'},
-						{key:'湖里区',value:'湖里区'},
-						{key:'集美区',value:'集美区'},
-						{key:'同安区',value:'同安区'},
-						{key:'翔安区',value:'翔安区'}];
+		var XZQData=[{key:'局机关',value:'局机关'},
+		                {key:'直属分局',value:'直属分局'},
+						{key:'集美分局',value:'集美分局'},
+						{key:'海沧分局',value:'海沧分局'},
+						{key:'同安分局',value:'同安分局'},
+						{key:'翔安分局',value:'翔安分局'}];
        var XZQStore= new Ext.data.JsonStore({
 							  data: XZQData,
 							  fields: 
@@ -82,12 +80,12 @@
 		    height=document.body.clientHeight;//高度
 		    sm = new Ext.grid.CheckboxSelectionModel({handleMouseDown:Ext.emptyFn});
 		    grid = new Ext.grid.GridPanel({
-		       // title:'信访待办列表',
+		        title:'12336举报已办列表',
 		        store: store,
 		        columns: [
 		            //new Ext.grid.RowNumberer(),  
-		           {header: '线索号',dataIndex:'BH',width: width*0.08, sortable: true},
-		            {header: '行政区',dataIndex:'XZQ',width: width*0.08, sortable: true},
+		           {header: '登记号',dataIndex:'BH',width: width*0.08, sortable: true},
+		            {header: '处理机关',dataIndex:'XZQ',width: width*0.08, sortable: true},
 		           {header: '举报人',dataIndex:'JBR',width: width*0.1, sortable: true},
 		           {header: '举报形式',dataIndex:'JBXS',width: width*0.08, sortable: true},
 		           {header: '联系地址',dataIndex:'LXDZ',width: width*0.16, sortable: true},
@@ -99,7 +97,7 @@
 		           {header: '查看',dataIndex:'INDEX',width: width*0.05, sortable: false,renderer:pro}
 		        ],
 		        tbar:[
-		            {xtype:'label',text:'政区:',width:30},
+		            {xtype:'label',text:'处理机关:',width:30},
 		           new Ext.form.ComboBox({
 			                   id:'XZQcombo',
 							    store:XZQStore,
@@ -223,8 +221,8 @@
         
         grid.reconfigure(store, new Ext.grid.ColumnModel([
            //new Ext.grid.RowNumberer(),        
-		           {header: '线索号',dataIndex:'BH',width: width*0.08, sortable: true},
-		           {header: '行政区',dataIndex:'XZQ',width: width*0.08, sortable: true},
+		           {header: '登记号',dataIndex:'BH',width: width*0.08, sortable: true},
+		           {header: '处理机关',dataIndex:'XZQ',width: width*0.08, sortable: true},
 		           {header: '举报人',dataIndex:'JBR',width: width*0.1, sortable: true},
 		           {header: '举报形式',dataIndex:'JBXS',width: width*0.08, sortable: true},
 		           {header: '联系地址',dataIndex:'LXDZ',width: width*0.16, sortable: true},
