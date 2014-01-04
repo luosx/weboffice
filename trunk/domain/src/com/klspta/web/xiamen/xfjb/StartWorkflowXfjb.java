@@ -41,7 +41,7 @@ public class StartWorkflowXfjb extends AbstractBaseBean {
 				yw_guid);
 		    String xzqh = ManagerFactory.getUserManager().getUserWithId(userId).getXzqh();
 		    String BH = buildID();
-		    SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-yy", new DateFormatSymbols());
+		    SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd", new DateFormatSymbols());
 	        String dateString = df.format(Calendar.getInstance().getTime());
 		//2、处理业务相关初始化
 		String sql = "insert into xfdjb(yw_guid, xzqh,bh,rq) values(? ,?,?,?)";
