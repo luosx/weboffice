@@ -1,6 +1,8 @@
 package com.klspta.web.xiamen.shortmessage;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import com.klspta.base.AbstractBaseBean;
@@ -39,6 +41,8 @@ public class MessageManager extends AbstractBaseBean {
     }
     
     public void send(){
+        //任务编号
+        String xcbh = request.getParameter("guid");
         //组织人员
         String users = request.getParameter("users");
         //手机号
@@ -57,13 +61,36 @@ public class MessageManager extends AbstractBaseBean {
         //定时发送
         String time = request.getParameter("time");
         
+        String fssj = "";
+        if(istime!= null){
+            fssj = time;
+        }else{
+            Date date = new Date();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            fssj = sdf.format(date);
+        }
+        String fsr_name = "";
+        String fsr_id = "";
+        String fsr_xzqh = "";
+        if(isauto!=null){
+            fsr_name = autoname;
+            User user = ManagerFactory.getUserManager().getUserWithFullName(fsr_name);
+            fsr_id = user.getUserID();
+            fsr_xzqh = user.getXzqh();
+        }
         //调用OA短信接口发送短信
         
         
         
         //短信存档
+        String sql = "insert into dxxxb(DXBH,DXNR,FSSJ,FSR_NAME,FSR_ID,JSRY,FSR_XZQH) values(?,?,?,?,?,?,?)";
+        update(sql,YW,new Object[]{xcbh,content,fssj,fsr_name,fsr_id,users,fsr_xzqh});
         
-        
+        try {
+            response.getWriter().write("{success:true,msg:true}");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }        
         
     }
     
