@@ -22,4 +22,6 @@
 	<bean name="startWorkflowXfjb" class="com.klspta.web.xiamen.xfjb.StartWorkflowXfjb" scope="prototype"/>
 	<!-- 信访举报XfjbManager -->
 	<bean name="XfjbManager" class="com.klspta.web.xiamen.xfjb.XfjbManager" scope="prototype"/>
+	<!-- 短信设置-->
+	<bean name="messageManager" class="com.klspta.web.xiamen.shortmessage.MessageManager" scope="prototype"/>
 </beans>
