@@ -130,10 +130,11 @@
 		window.open(url,"","width="+width+",height="+height);
 	}
 	function sendMessage(id){
+		var guid = myData[id].GUID;
 		var ydzt = myData[id].YDZT;
 		var ydwz = myData[id].YDWZ;
 		var zdmj = myData[id].ZDMJ;
-		var url = "<%=basePath%>web/xiamen/shortmessage/sendmessage.jsp?ydzt="+escape(escape(ydzt))+"&ydwz="+escape(escape(ydwz))+"&zdmj="+zdmj;
+		var url = "<%=basePath%>web/xiamen/shortmessage/sendmessage.jsp?guid="+guid+"&ydzt="+escape(escape(ydzt))+"&ydwz="+escape(escape(ydwz))+"&zdmj="+zdmj;
 		var top = (window.screen.availHeight-30-600)/2; //获得窗口的垂直位置;
 		var left = (window.screen.availWidth-10-800)/2; //获得窗口的水平位置;		
 		window.open(url,"","width=800,height=600,top="+top+",left="+left);
