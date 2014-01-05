@@ -33,4 +33,15 @@ public interface IxchcData {
 	 * @return
 	 */
 	public String SetNewRecord(String userid);
+	
+	/**
+	 * 
+	 * <br>Description:TODO 获取已立案列表
+	 * <br>Author:姚建林
+	 * <br>Date:2014-1-5
+	 * @param userId
+	 * @param keyword
+	 * @return
+	 */
+	public List<Map<String, Object>>  getYlaList(String userId,String keyword);
 }

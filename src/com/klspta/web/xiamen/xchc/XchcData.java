@@ -111,6 +111,27 @@ public class XchcData extends AbstractBaseBean implements IxchcData {
 		return containBuffer.toString();
 	}
 
+	@Override
+	public List<Map<String, Object>> getYlaList(String userId, String keyword) {
+		String xzq = editXzq(userId);
+		StringBuffer sqlBuffer = new StringBuffer();
+		sqlBuffer.append("select t.* from v_pad_data_xml t where t.impxzqbm in");
+		sqlBuffer.append(xzq);
+		sqlBuffer.append("and t.state = '已立案' and t.guid like 'XC%'");
+		if (keyword != null) {
+            keyword = UtilFactory.getStrUtil().unescape(keyword);
+             sqlBuffer.append(" and").append(queryString).append(" like '%");
+             sqlBuffer.append(keyword);
+             sqlBuffer.append("%')");
+        }
+		sqlBuffer.append(" order by t.ydsj");
+		List<Map<String, Object>> getList = query(sqlBuffer.toString(), YW);
+        for (int i = 0; i < getList.size(); i++) {
+        	getList.get(i).put("XIANGXI", i);
+        }
+		return getList;
+	}
+
 
 
 }
