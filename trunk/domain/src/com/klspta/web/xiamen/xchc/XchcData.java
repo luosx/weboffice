@@ -68,6 +68,7 @@ public class XchcData extends AbstractBaseBean implements IxchcData {
 		List<Map<String, Object>> getList = query(sqlBuffer.toString(), YW);
         for (int i = 0; i < getList.size(); i++) {
         	getList.get(i).put("XIANGXI", i);
+        	getList.get(i).put("SEND", i);
         	getList.get(i).put("LIAN", i);
         	getList.get(i).put("DELETE", i);
         }
@@ -91,6 +92,7 @@ public class XchcData extends AbstractBaseBean implements IxchcData {
         List<Map<String, Object>> getList = query(sqlBuffer.toString(), YW);
         for (int i = 0; i < getList.size(); i++) {
             getList.get(i).put("XIANGXI", i);
+            getList.get(i).put("SEND", i);
             getList.get(i).put("LIAN", i);
             getList.get(i).put("DELETE", i);
         }

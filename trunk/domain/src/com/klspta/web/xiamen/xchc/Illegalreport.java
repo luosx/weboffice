@@ -85,9 +85,17 @@ public class Illegalreport extends AbstractBaseBean implements IDataClass {
     
     private List<TRBean> getBody(String userXzqh){
         List<TRBean> list = new ArrayList<TRBean>();          
-        String sql = "select rownum xh, t.ydxmmc,t.ydzt,t.ydwz,t.zdmj,t.gdmj,t.jzmj,t.jzxz,t.yt,t.fhgh,t.fxsj,t.zzqk,t.zztzsbh,t.wjzzhjxzz,t.yydspqcz from dc_ydqkdcb t " +
-        		     "where t.ydxmmc||t.ydzt||t.ydwz is not null and t.impxzqbm=?";       
-        List<Map<String,Object>> result = query(sql,YW,new Object[]{userXzqh});
+        String sql = "";
+        List<Map<String,Object>> result = null;
+        if("350200".equals(userXzqh)){
+            sql = "select rownum xh, t.ydxmmc,t.ydzt,t.ydwz,t.zdmj,t.gdmj,t.jzmj,t.jzxz,t.yt,t.fhgh,t.fxsj,t.zzqk,t.zztzsbh,t.wjzzhjxzz,t.yydspqcz from dc_ydqkdcb t " +
+                  "where t.ydxmmc||t.ydzt||t.ydwz is not null and t.state='未立案'";
+            result = query(sql,YW);
+        }else{
+            sql = "select rownum xh, t.ydxmmc,t.ydzt,t.ydwz,t.zdmj,t.gdmj,t.jzmj,t.jzxz,t.yt,t.fhgh,t.fxsj,t.zzqk,t.zztzsbh,t.wjzzhjxzz,t.yydspqcz from dc_ydqkdcb t " +
+            "where t.ydxmmc||t.ydzt||t.ydwz is not null and t.state='未立案' and t.impxzqbm=?";   
+            result = query(sql,YW,new Object[]{userXzqh});
+        }       
         for(int i=0;i<result.size();i++){
             TRBean tr = new TRBean();
             tr.setCssStyle("trsingle");            
