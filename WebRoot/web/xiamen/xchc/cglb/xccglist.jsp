@@ -50,12 +50,13 @@
 		        store: store,
 		        columns: [
 		        	new Ext.grid.RowNumberer(),
-			<%for(int i = 0; i < showList.length-3; i++){
+			<%for(int i = 0; i < showList.length-4; i++){
 				if(!"hiddlen".equals(showList[i][2])){
 			%>
 				{header: '<%=showList[i][2]%>', dataIndex:'<%=showList[i][0]%>', width: width*<%=Float.parseFloat(showList[i][1])%>, sortable: true,renderer:changKeyword},
 			<%}}%>
 	          	{header: '详细信息', dataIndex:'XIANGXI',width: width*0.05, sortable: false,renderer:view},
+	          	{header: '发送短信', dataIndex:'SEND',width: width*0.05, sortable: false,renderer:send},
 	          	{header: '立案', dataIndex:'LIAN',width: width*0.05, sortable: false,renderer:lian},
           		{header: '删除',dataIndex:'DELETE',width: width*0.05, sortable: false,renderer:del}
 		        ], 
@@ -88,9 +89,6 @@
 		         {
 		         	text:'外业成果导入',
 		         	handler: impTask
-		         },{
-		         	text:'新增巡查成果',
-		         	handler: newTask
 		         }]
         	});
     	grid.render('mygrid_container');
@@ -99,9 +97,11 @@
 	function view(id){
 		return "<a href='#' onclick='showDetail(\""+id+"\");return false;'><img src='/domain/base/form/images/view.png' alt='详细信息'></a>";
 	}
-	
+	function send(id){
+		return "<a href='#' onclick='sendMessage(\""+id+"\");return false;'><img src='/domain/base/form/images/message.png' alt='发送短信'></a>";
+	}
 	function lian(id){
-		return "<a href='#' onclick='register(\""+id+"\");return false;'><img src='/domain/base/form/images/view.png' alt='立案'></a>";
+		return "<a href='#' onclick='register(\""+id+"\");return false;'><img src='/domain/base/form/images/record.gif' alt='立案'></a>";
 	}
 	function del(id){
  		return "<a href='#' onclick='delTask(\""+id+"\");return false;'><img src='/domain/base/form/images/delete.png' alt='删除'></a>";
@@ -129,12 +129,31 @@
 		var width = window.screen.availWidth;
 		window.open(url,"","width="+width+",height="+height);
 	}
+	function sendMessage(id){
+		var ydzt = myData[id].YDZT;
+		var ydwz = myData[id].YDWZ;
+		var zdmj = myData[id].ZDMJ;
+		var url = "<%=basePath%>web/xiamen/shortmessage/sendmessage.jsp?ydzt="+escape(escape(ydzt))+"&ydwz="+escape(escape(ydwz))+"&zdmj="+zdmj;
+		var top = (window.screen.availHeight-30-600)/2; //获得窗口的垂直位置;
+		var left = (window.screen.availWidth-10-800)/2; //获得窗口的水平位置;		
+		window.open(url,"","width=800,height=600,top="+top+",left="+left);
+	}
 	
 	function register(id){
-		var url = "http://192.168.8.132/xzcf/sys/login/login.aspx";
-		var height = window.screen.availHeight;
-		var width = window.screen.availWidth;
-		window.open(url,"","width="+width+",height="+height);		
+		//var url = "http://192.168.8.132/xzcf/sys/login/login.aspx";
+		//var height = window.screen.availHeight;
+		//var width = window.screen.availWidth;
+		//window.open(url,"","width="+width+",height="+height);	
+  		Ext.MessageBox.confirm('注意', '是否判断为土地违法',function(btn){
+	  		if(btn=='yes'){
+				putClientCommond("xchc","updateState");
+				putRestParameter("id",myData[id].GUID);
+				var result=restRequest();
+				document.location.reload();
+			}else{
+				return false;
+			}
+  		});			
 	}
 	
 		<!--查询方法 add by 姚建林 2013-6-20-->
@@ -156,12 +175,13 @@
 			});
           grid.reconfigure(store, new Ext.grid.ColumnModel([
         	new Ext.grid.RowNumberer(),
-			<%for(int i = 0; i < showList.length-3 ; i++){
+			<%for(int i = 0; i < showList.length-4 ; i++){
 				if(!"hiddlen".equals(showList[i][2])){
 			%>
 				{header: '<%=showList[i][2]%>', dataIndex:'<%=showList[i][0]%>', width: width*<%=Float.parseFloat(showList[i][1])%>, sortable: true,renderer:changKeyword},
 			<%}}%>
 	          	{header: '详细信息', dataIndex:'XIANGXI',width: width*0.05, sortable: false,renderer:view},
+	          	{header: '发送短信', dataIndex:'SEND',width: width*0.05, sortable: false,renderer:send},
 	          	{header: '立案', dataIndex:'LIAN',width: width*0.05, sortable: false,renderer:lian},
           		{header: '删除',dataIndex:'DELETE',width: width*0.05, sortable: false,renderer:del}
           ]));
