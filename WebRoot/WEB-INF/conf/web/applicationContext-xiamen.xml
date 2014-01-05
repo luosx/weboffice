@@ -24,4 +24,6 @@
 	<bean name="XfjbManager" class="com.klspta.web.xiamen.xfjb.XfjbManager" scope="prototype"/>
 	<!-- 短信设置-->
 	<bean name="messageManager" class="com.klspta.web.xiamen.shortmessage.MessageManager" scope="prototype"/>
+	<!-- 短信查询dxManager -->
+	<bean name="dxManager" class="com.klspta.web.xiamen.dxgl.DxManager" scope="prototype"/>
 </beans>
