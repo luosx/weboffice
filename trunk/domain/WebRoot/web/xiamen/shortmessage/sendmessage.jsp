@@ -2,6 +2,8 @@
 <%@page import="com.klspta.console.ManagerFactory"%>
 <%@page import="com.klspta.console.role.Role"%>
 <%@page import="com.klspta.base.util.UtilFactory"%>
+<%@page import="org.springframework.security.core.context.SecurityContextHolder"%>
+<%@page import="com.klspta.console.user.User"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -11,6 +13,7 @@ if(roleBean==null)
 	roleBean=new Role();
 String users=ManagerFactory.getUserManager().getSelectUserJsonByRoleId(roleId);
 String userInfoArray=ManagerFactory.getUserManager().getUserInfoArrayJsonByRoleId(roleId);
+String guid = request.getParameter("guid");
 String ydzt = request.getParameter("ydzt");
 if(ydzt!=null){
 	ydzt = UtilFactory.getStrUtil().unescape(ydzt);
@@ -20,7 +23,8 @@ if(ydwz!=null){
 	ydwz = UtilFactory.getStrUtil().unescape(ydwz);
 }
 String zdmj = request.getParameter("zdmj");
-
+Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+String fullname = ((User)principal).getFullName();
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -133,11 +137,23 @@ String zdmj = request.getParameter("zdmj");
                            {
                                xtype: 'checkbox',
                                boxLabel: '', 
-                               name:'isauto'                            							
+                               name:'isauto',
+                               id:'isauto',
+                               listeners : { 
+                               		"check" : function(obj,ischecked){
+                               				if(ischecked){
+                               					Ext.getCmp('autoname').setValue('<%=fullname%>');
+                               				}else{
+                               					Ext.getCmp('autoname').setValue('');
+                               				}
+                               		}
+                               }   
+                                                           							
                            },{
                            	   xtype: 'textfield',
                            	   width: 630,
-                           	   name :'autoname'   
+                           	   name :'autoname',
+                           	   id :'autoname'   
                            }
                         ]
                     },{
@@ -148,13 +164,26 @@ String zdmj = request.getParameter("zdmj");
                            {
                                xtype: 'checkbox',
                                boxLabel: '', 
-                               name:'istime'                            							
+                               name:'istime',
+                               listeners : { 
+                               		"check" : function(obj,ischecked){
+                               				if(ischecked){
+                               					//WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'});
+                               				}else{
+                               					document.getElementById('time').value = '';
+                               				}
+                               		}
+                               }                                                           							
                            },{
-                           	   html :'<input type="text" onClick="WdatePicker({dateFmt:\'yyyy-MM-dd HH:mm:ss\'})" style="width:630px;background-image:url(<%=basePath%>base/form/DatePicker/skin/datePicker.gif);background-repeat:no-repeat;background-position:right;">',
-                           	   name :'time'   
+                           	   html :'<input type="text" id="time" name="time" onClick="WdatePicker({dateFmt:\'yyyy-MM-dd HH:mm:ss\'})" style="width:630px;background-image:url(<%=basePath%>base/form/DatePicker/skin/datePicker.gif);background-repeat:no-repeat;background-position:right;">' 
                            }
                         ]
-                    }]
+                    }] 
+        	  },{
+        	  	xtype: 'textfield',
+                name:'guid',
+                hidden : true,
+                value:'<%=guid%>'     	  
         	  }         	  
         	  
         	  ],
@@ -269,6 +298,7 @@ String zdmj = request.getParameter("zdmj");
             var myData = restRequest(); 	   		
 	   		winForm.getForm().findField('itemselector').restore(myData);
         }        
+       
   </script>
   <body>
     <div id="container" style="width:100%;height:100%;text-align:left;">
