@@ -153,7 +153,7 @@ String fullname = ((User)principal).getFullName();
                            	   xtype: 'textfield',
                            	   width: 630,
                            	   name :'autoname',
-                           	   id :'autoname'   
+                           	   id :'autoname' 
                            }
                         ]
                     },{
@@ -184,8 +184,13 @@ String fullname = ((User)principal).getFullName();
                 name:'guid',
                 hidden : true,
                 value:'<%=guid%>'     	  
-        	  }         	  
-        	  
+        	  },         	  
+        	  {
+        	  	xtype: 'textfield',
+                name:'fullname',
+                hidden : true,
+                value:'<%=fullname%>'     	  
+        	  }
         	  ],
               buttons:[{
                  text:"发送",
