@@ -15,7 +15,8 @@ import com.klspta.web.xiamen.jcl.XzqHandle;
 
 public class XchcData extends AbstractBaseBean implements IxchcData {
 	
-	private static final String queryString = "(upper(guid)||upper(xzqmc)||upper(yddw)||upper(ydsj)||upper(tdyt)||upper(jsqk)||upper(ydqk)||upper(dfccqk)||upper(wfwglx)";
+	private static final String queryString = "(upper(guid)||upper(xzqmc)||upper(yddw)||upper(ydsj)||upper(tdyt)||upper(jsqk)||upper(ydqk)||upper(dfccqk)||upper(wfwglx)" +
+			                                  "||upper(ydxmmc)||upper(ydzt)||upper(ydwz)||upper(zdmj)||upper(gdmj)||upper(jzmj)||upper(jzxz)";
 	
 	@Override
 	public String SetNewRecord(String userid){
@@ -93,7 +94,6 @@ public class XchcData extends AbstractBaseBean implements IxchcData {
         for (int i = 0; i < getList.size(); i++) {
             getList.get(i).put("XIANGXI", i);
             getList.get(i).put("SEND", i);
-            getList.get(i).put("LIAN", i);
             getList.get(i).put("DELETE", i);
         }
         return getList;
