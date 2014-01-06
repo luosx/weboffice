@@ -102,9 +102,9 @@ public class JbbReport extends AbstractBaseBean implements IDataClass {
 		//}
 		if(!queryMap.isEmpty()){
 			String query = String.valueOf(queryMap.get("query"));
-			sqlBuffer.append(query).append(" and t.nrghcbk='").append(status).append("'");
+			sqlBuffer.append(query).append(" and t.nrghcbk='").append(status).append("' and t.dkmc like '").append(key).append("_%'");
 		}else{
-			sqlBuffer.append("where t.nrghcbk='").append(status).append("'");
+			sqlBuffer.append("where t.nrghcbk='").append(status).append("' and t.dkmc like '").append(key).append("_%'");
 		}
 		sqlBuffer.append(" order by t.dkmc");
 		List<Map<String, Object>> queryList = null;
@@ -196,9 +196,9 @@ public class JbbReport extends AbstractBaseBean implements IDataClass {
 		trBean.setCssStyle("trtotal");
 		Map<String, Object> map = queryList.get(0);
 		TDBean tdname=new TDBean("合计","180","20");
-		tdname.setColspan("2");
+		tdname.setColspan("1");
 		trBean.addTDBean(tdname);
-		for(int i = 2; i < shows.length; i++){
+		for(int i = 1; i < shows.length; i++){
 			String value = String.valueOf(map.get(shows[i][0]));
 			if("null".equals(value)){
 				value = "";
