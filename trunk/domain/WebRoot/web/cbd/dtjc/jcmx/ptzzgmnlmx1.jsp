@@ -573,10 +573,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<tr class="tr01"><td colspan="2">拟购住宅房屋情况（自变量1）</td></tr>
 			<tr><td width="180" class="tr02">拟购房屋面积</td><td class="tr06"><input name="ngfwmj" class="text02" onkeyup="textChange();"/></td></tr>
 			<tr><td width="180" class="tr02">拟购房屋单价</td><td class="tr06"><input name="ngfwdj" class="text02" onkeyup="textChange();"/></td></tr>
-			<tr><td width="180" class="tr02">房屋类型</td><td class="tr06"><input name="fwlx" class="text02" onkeyup="textChange();"/></td></tr>
+			<tr><td width="180" class="tr02">房屋类型</td><td class="tr06"><select name="fwlx" id="fwlx" onchange="textChange();"><option value="新房" selected="selected">新房</option><option value="二手房">二手房</option></select> </td></tr>
 			<tr><td width="180" class="tr02">二手房使用年数</td><td class="tr06"><input name="esfsyns" class="text02" onkeyup="textChange();"/></td></tr>
 			<tr><td width="180" class="tr02">房龄</td><td class="tr06"><input name="fl" class="text02" onkeyup="textChange();"/></td></tr>
-			<tr><td width="180" class="tr02">购房类型</td><td class="tr06"><input name="gflx" class="text02" onkeyup="textChange();"/></td></tr>
+			<tr><td width="180" class="tr02">购房类型</td><td class="tr06"><select name="gflx" id="gflx" onchange="textChange();"><option value="首套" selected="selected">首套</option><option value="二套及以上">二套及以上</option></select> </td></tr>
 			<tr class="tr04"><td colspan="2">购房人基本情况模块（自变量2）</td></tr>
 			<tr><td width="180" class="tr02">家庭月可支配收入</td><td class="tr06"><input name="jtykzpsr" class="text02" onkeyup="textChange();"/></td></tr>
 			<tr><td width="180" class="tr02">月用于还贷资金比例</td><td class="tr06"><input name="yyyhdzjbl" class="text02" onkeyup="textChange();"/></td></tr>
