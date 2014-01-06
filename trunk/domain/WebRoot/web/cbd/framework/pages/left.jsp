@@ -44,7 +44,6 @@ body {
 -->
 </style>
 	<script type="text/javascript">
-<!--
 function openPage(url){
 	showSel(url);
     if(!(url=='#' || url=='')){
@@ -112,7 +111,11 @@ window.onload=function(){
 	}
 	//var leftMenuHeight=window.screen.availHeight-top.flash.document.body.clientHeight-top.menu.document.body.clientHeight-100;
 }
--->
+
+function openMenu(){
+	
+	
+}
 </script>
 	<body style="margin: 0px 0px 0px 0px;" >
 	<div id="menuLeftDiv" class="menuLeft" onmousedown="scrollMouserDown()"  onmouseup="scrollMouserUp()" onmousemove="scrollMouserMove(this)" onmouseout="scrollMouserUp()">
