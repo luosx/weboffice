@@ -50,14 +50,13 @@
 		        store: store,
 		        columns: [
 		        	new Ext.grid.RowNumberer(),
-			<%for(int i = 0; i < showList.length-4; i++){
+			<%for(int i = 0; i < showList.length-3; i++){
 				if(!"hiddlen".equals(showList[i][2])){
 			%>
 				{header: '<%=showList[i][2]%>', dataIndex:'<%=showList[i][0]%>', width: width*<%=Float.parseFloat(showList[i][1])%>, sortable: true,renderer:changKeyword},
 			<%}}%>
 	          	{header: '详细信息', dataIndex:'XIANGXI',width: width*0.05, sortable: false,renderer:view},
 	          	{header: '发送短信', dataIndex:'SEND',width: width*0.05, sortable: false,renderer:send},
-	          	{header: '立案', dataIndex:'LIAN',width: width*0.05, sortable: false,renderer:lian},
           		{header: '删除',dataIndex:'DELETE',width: width*0.05, sortable: false,renderer:del}
 		        ], 
 		        tbar:[
@@ -171,14 +170,13 @@
 			});
           grid.reconfigure(store, new Ext.grid.ColumnModel([
         	new Ext.grid.RowNumberer(),
-			<%for(int i = 0; i < showList.length-4 ; i++){
+			<%for(int i = 0; i < showList.length-3 ; i++){
 				if(!"hiddlen".equals(showList[i][2])){
 			%>
 				{header: '<%=showList[i][2]%>', dataIndex:'<%=showList[i][0]%>', width: width*<%=Float.parseFloat(showList[i][1])%>, sortable: true,renderer:changKeyword},
 			<%}}%>
 	          	{header: '详细信息', dataIndex:'XIANGXI',width: width*0.05, sortable: false,renderer:view},
 	          	{header: '发送短信', dataIndex:'SEND',width: width*0.05, sortable: false,renderer:send},
-	          	{header: '立案', dataIndex:'LIAN',width: width*0.05, sortable: false,renderer:lian},
           		{header: '删除',dataIndex:'DELETE',width: width*0.05, sortable: false,renderer:del}
           ]));
           	//重新绑定分页工具栏
