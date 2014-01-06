@@ -141,16 +141,17 @@
 	}
 	
 	function register(id){
-		//var url = "http://192.168.8.132/xzcf/sys/login/login.aspx";
-		//var height = window.screen.availHeight;
-		//var width = window.screen.availWidth;
-		//window.open(url,"","width="+width+",height="+height);	
-  		Ext.MessageBox.confirm('注意', '是否判断为土地违法',function(btn){
+
+  		Ext.MessageBox.confirm('注意', '此案件涉及土地违法，需要立案查处',function(btn){
 	  		if(btn=='yes'){
 				putClientCommond("xchc","updateState");
 				putRestParameter("id",myData[id].GUID);
 				var result=restRequest();
 				document.location.reload();
+				var url = "http://192.168.8.132/xzcf/sys/login/login.aspx";
+				var height = window.screen.availHeight;
+				var width = window.screen.availWidth;
+				window.open(url,"","width="+width+",height="+height);					
 			}else{
 				return false;
 			}
