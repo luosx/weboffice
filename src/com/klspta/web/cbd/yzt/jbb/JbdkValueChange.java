@@ -10,7 +10,7 @@ public class JbdkValueChange extends AbstractBaseBean {
 	private String source_name = "JC_JIBEN";
 	private String impress_name = "JC_XIANGMU";
 	private String fields = "jsyd,rjl,jzgm,gjjzgm,jzjzgm,szjzgm,zzsgm,zzzsgm,zzzshs,hjmj,fzzzsgm,fzzjs,kfcb,dmcb,yjcjj,yjzftdsy,cxb,cqqd,cbfgl";
-	private String sql = "select  sum(t.zzzsgm) as zzzsgm, sum(t.zzzshs) as zzzshs, trunc(sum(t.zzzsgm)/sum(t.zzzshs),2) as hjmj, sum(t.fzzzsgm) as fzzzsgm,"+
+	private String sql = "select sum(t.zzsgm) as zzsgm,  sum(t.zzzsgm) as zzzsgm, sum(t.zzzshs) as zzzshs, trunc(decode(sum(t.zzzshs),0,0,sum(t.zzzsgm)/sum(t.zzzshs)),2) as hjmj, sum(t.fzzzsgm) as fzzzsgm,"+
 						" sum(t.fzzjs) as fzzjs, sum(t.kfcb) as kfcb, sum(t.dmcb) as dmcb,sum(t.yjcjj) as yjcjj, sum(t.yjzftdsy) as yjzfdsy, sum(t.cxb)"+
 						" as cxb, sum(t.cqqd) as cqqd, sum(t.cbfgl) as cbfgl from jc_jiben t where t.dkmc in ";
 	public boolean add(String ywGuid) {
