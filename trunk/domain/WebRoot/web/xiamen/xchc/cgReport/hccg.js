@@ -85,7 +85,7 @@ function initComponent() {
 							xtype : 'button',
 							text : '查看位置',
 							id : 'location',
-							hidden : true,
+							hidden : false,
 							handler : seeLocation													
 						}],
 				items : [{
@@ -107,7 +107,7 @@ function query() {
 	//var keyword = Ext.getCmp("keyword").getValue();
 	//document.frames['report'].query(xzq ,begindate, enddate);
 	document.getElementById('report').src= url+"?xzq="+xzq+"&begindate="+begindate+"&enddate="+enddate;
-	Ext.getCmp('location').setVisible(true) ;	
+	//Ext.getCmp('location').setVisible(true) ;	
 }
 
 function exportExcel() {
