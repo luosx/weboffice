@@ -5,6 +5,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+
+import org.apache.commons.lang.StringUtils;
+
 import com.klspta.base.AbstractBaseBean;
 import com.klspta.console.ManagerFactory;
 import com.klspta.console.user.User;
@@ -61,6 +64,12 @@ public class MessageManager extends AbstractBaseBean {
         //定时发送
         String time = request.getParameter("time");
         
+        //发送人
+        String fullname = request.getParameter("fullname");
+        
+        if(isauto!=null){
+            content +="发送人："+autoname;
+        }  
         String fssj = "";
         if(istime!= null){
             fssj = time;
@@ -69,22 +78,21 @@ public class MessageManager extends AbstractBaseBean {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             fssj = sdf.format(date);
         }
-        String fsr_name = "";
-        String fsr_id = "";
-        String fsr_xzqh = "";
-        if(isauto!=null){
-            fsr_name = autoname;
-            User user = ManagerFactory.getUserManager().getUserWithFullName(fsr_name);
-            fsr_id = user.getUserID();
-            fsr_xzqh = user.getXzqh();
-        }
+
+        String fsr_name = fullname;
+        User user = ManagerFactory.getUserManager().getUserWithFullName(fsr_name);
+        String fsr_id = user.getUserID();
+        String[] jsrys = getReceiver(users,phones);
+        String jsry = StringUtils.join(jsrys,",");
+        String fsr_xzqh = user.getXzqh();
+
         //调用OA短信接口发送短信
         
         
         
         //短信存档
         String sql = "insert into dxxxb(DXBH,DXNR,FSSJ,FSR_NAME,FSR_ID,JSRY,FSR_XZQH) values(?,?,?,?,?,?,?)";
-        update(sql,YW,new Object[]{xcbh,content,fssj,fsr_name,fsr_id,users,fsr_xzqh});
+        update(sql,YW,new Object[]{xcbh,content,fssj,fsr_name,fsr_id,jsry,fsr_xzqh});
         
         try {
             response.getWriter().write("{success:true,msg:true}");
@@ -134,4 +142,30 @@ public class MessageManager extends AbstractBaseBean {
         return allphones;
     }
     
+    private String[] getReceiver(String users,String phones){
+        String[] receivers = null;      
+        String[] usernames = null; 
+        String[] fullnames = null;
+        if(users!=null && !"".equals(users)){
+            usernames = users.split(",");
+            fullnames = new String[usernames.length];
+            for(int i=0;i<usernames.length;i++){
+                fullnames[i] = usernames[i].substring(0,usernames[i].indexOf("("));         
+            }         
+        }         
+        String[] phonenumbers = null;
+        if(phones!=null && !"".equals(phones)){
+            phonenumbers = phones.split(",");           
+        }  
+        if(fullnames!=null && phonenumbers !=null){
+            receivers = new String[fullnames.length+phonenumbers.length];
+            System.arraycopy(fullnames, 0, receivers, 0, fullnames.length);   
+            System.arraycopy(phonenumbers, 0, receivers, fullnames.length, phonenumbers.length);                        
+        }else if(fullnames==null && phonenumbers !=null){
+            receivers = phonenumbers;
+        }else if(fullnames!=null && phonenumbers ==null){
+            receivers = fullnames;
+        }               
+        return receivers;       
+    }
 }
