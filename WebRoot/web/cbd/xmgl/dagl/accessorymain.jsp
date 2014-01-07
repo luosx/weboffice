@@ -1,6 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@page import="com.klspta.model.accessory.dzfj.*"%>
 <%@page import="com.klspta.base.util.bean.ftputil.*"%>
+<%@page import="com.klspta.web.cbd.yzt.jbb.JbbManager"%>
 <%
 
     String path = request.getContextPath();
@@ -11,11 +12,12 @@
     String yw_guid = request.getParameter("yw_guid");
     String tree = AccessoryBean.transfer(AccessoryOperation.getInstance()
             .getAccessorylistByYwGuid(yw_guid));
-    
+    System.out.println(tree);
 	request.setCharacterEncoding("utf-8");
 	response.setCharacterEncoding("UTF-8");
     String treePath = basePath + "base/thirdres/dhtmlx//dhtmlxTree//codebase";
     boolean b =  AccessoryOperation.getInstance().isHaveAccessory(yw_guid);
+    String extPath = basePath + "base/thirdres/ext/";
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -49,6 +51,10 @@
 		<script src="<%=toolbarPath%>/dhtmlxtoolbar.js"></script>
 		<script src="<%=treePath%>/dhtmlxtree.js"></script>
 		<script src="<%=treePath%>/ext/dhtmlxtree_json.js"></script>
+		<%@ include file="/base/include/ext.jspf" %>
+		<script type="text/javascript" src="<%=extPath%>examples/ux/MultiSelect.js"></script>
+		<script type="text/javascript" src="<%=extPath%>examples/ux/ItemSelector.js"></script>
+		<link rel="stylesheet" type="text/css" href="<%=extPath%>examples/ux/css/MultiSelect.css"/>
 		<style>
 html,body {
 	width: 100%;
@@ -320,8 +326,9 @@ function download(){
 }
 //生成PPT
 function reportPPT(){
-	var form=document.getElementById("reportppt");
-	form.submit();
+	//var form=document.getElementById("reportppt");
+	//form.submit();
+	win.show();
 }
 
 /* 电子附件全部下载功能 
@@ -334,6 +341,95 @@ function downloadAll(){
 	var result = ajaxRequest(path,actionName,actionMethod,parameter);
 	window.open("<%=basePath%>/common/pages/accessory/download/"+yw_guid+".zip");
 }  */
+
+//选择导出PPT图片
+Ext.onReady(function(){
+		Ext.QuickTips.init();
+		var treeArray = new Array(<%=tree%>);
+		var showArray = new Array();
+		for(var i = 0; i < treeArray.length;i++){
+			var name = treeArray[i][3];
+			//确定是图片时，添加到数组中
+			if (/\.(gif|jpg|jpeg|png|GIF|JPG|PNG)$/.test(name)){
+				var array = new Array(treeArray[i][0],treeArray[i][2]);
+				showArray.push(array);
+			} 
+		}
+		
+    	var leftDs = new Ext.data.ArrayStore({
+	       data:  showArray,
+	       fields: ['value','text']
+	   	}); 
+    	
+ 		var rightDs = new Ext.data.ArrayStore({ 
+	       fields: ['value','text'],
+	       sortInfo: {
+	           field: 'value',
+	           direction: 'ASC'
+	       }
+	  	});
+ 		
+ 		winForm = new Ext.form.FormPanel({
+	   		bodyStyle: 'padding:10px;',
+     		width:500,
+        	items:[{
+	          	xtype: 'itemselector',
+	            name: 'itemselector',
+	            imagePath: '<%=extPath%>examples/ux/images/',
+	            fieldLabel: '附件列表',
+	            multiselects:[
+	         		{
+	                  width: 180,
+	                  height: 245,
+	                  store: leftDs,
+	                  displayField: 'text',
+	                  valueField: 'value'
+	           		},{
+	           		  width: 180,
+		              height: 245,
+		              store: rightDs,
+		              displayField: 'text',
+	                  valueField: 'value',	
+	                  tbar:[{
+	                  		text: '清空已选列表',
+	                  		handler:function(){
+	                  			winForm.getForm().findField('itemselector').reset();
+	                  		}
+				      }]
+			     	}	
+            	]
+         }],
+       		buttons: [{
+       		text: '保存',
+       		handler: function(){
+       			if(winForm.getForm().isValid()){
+       				var itemselector = winForm.form.findField('itemselector').getValue();
+					win.hide();
+       				var form=document.getElementById("reportppt");
+					form.action = "<%=basePath%>service/rest/xmbg/getPPT?yw_guid=<%=yw_guid%>&file_id=" + itemselector;
+       				form.submit();
+       				//win.hide();
+       			}
+       		}
+       	},{
+		        text: '取消',
+       		handler: function(){
+				win.hide();
+       		}
+       	}]
+	});
+ 		
+   		win = new Ext.Window({
+		    layout: 'fit',
+		    title: '请选择PPT所用图层',
+		    closeAction: 'hide',
+		    width:550,
+		    height:380,
+		    x: 100,
+		    y: 110,
+		    items:winForm
+		});
+})
 </script>
 	<body onLoad="doOnLoad()" bgcolor="#FFFFFF" leftmargin="0" bottommargin="0" rightmargin="0" topmargin="0">
 		<div id="parentId"
@@ -341,7 +437,7 @@ function downloadAll(){
 		<input type='text' id='name' name='name' value='' style="display:none"/> 	
 		<form id="attachfile" action="<%=basePath%>service/rest/accessoryAction/downLoadfile" method="post">
 		</form> 
-		<form id="reportppt" action="<%=basePath%>service/rest/xmbg/getPPT" method="post"></form>    
+		<form id="reportppt" action="<%=basePath%>service/rest/xmbg/getPPT?yw_guid=<%=yw_guid%>" method="post"></form>    
 	</body>
 </html>
 
