@@ -174,4 +174,21 @@ public class XchcManager extends AbstractBaseBean {
         response("success");
     }
     
+    
+    public void receiveCoordinate(){
+        String x = request.getParameter("X");
+        String y = request.getParameter("Y");
+        String id = request.getParameter("id"); 
+        System.out.println("X:"+x+"========Y:"+y+"=========="+id);
+        String insertSql = "insert into gps_location_log(gps_id,gps_x,gps_y) values(?,?,?)";
+        int i = update(insertSql,YW,new Object[]{id,x,y});
+        if(i==1){
+            System.out.println("坐标保存成功！");
+        }else{
+            System.out.println("坐标保存失败！");
+        }
+        
+        
+    }
+    
 }
