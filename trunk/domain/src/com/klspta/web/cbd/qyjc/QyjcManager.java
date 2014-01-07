@@ -5,6 +5,8 @@ import java.util.Map;
 
 import com.klspta.base.AbstractBaseBean;
 import com.klspta.base.util.UtilFactory;
+import com.klspta.web.cbd.qyjc.common.BuildModel;
+import com.klspta.web.cbd.qyjc.common.ModelFactory;
 
 public class QyjcManager extends AbstractBaseBean{
 	private static QyjcManager qyjcManager;
@@ -264,4 +266,107 @@ public class QyjcManager extends AbstractBaseBean{
 	          response("failure");
 	      }
 	  }
+
+///////////////////////////////////////////////////////////////////
+
+    /****
+     * 
+     * <br>Description:资金管理基本信息保存
+     * <br>Author:朱波海
+     * <br>Date:2014-1-6
+     */
+    public void Save_ZjqkXX(){
+        String date_id_cols_value = request.getParameter("date_id_cols_value");
+        date_id_cols_value=  UtilFactory.getStrUtil().unescape(date_id_cols_value);
+        if(date_id_cols_value!=null&&!date_id_cols_value.equals("")){
+            String[] split = date_id_cols_value.split("@");
+            for(int i=0;i<split.length;i++){
+                String[] split2 = split[i].split("_");
+                String update="update XZLZJQK set "+split2[1]+"='"+split2[2]+"'  where yw_guid=? ";
+                update(update,YW,new Object[]{split2[0]});
+            }
+            response("success");
+        }
+    }
+    /*****
+     * 
+     * <br>Description:资金管理按年度保存
+     * <br>Author:朱波海
+     * <br>Date:2014-1-6
+     */
+    public void Save_Zjqk(){
+        String datepjlm_id_cols_value = request.getParameter("datepjlm_id_cols_value");
+        String datepjzj_id_cols_value = request.getParameter("datepjzj_id_cols_value");
+        String year = request.getParameter("year");
+        if(datepjlm_id_cols_value!=null&&!datepjlm_id_cols_value.equals("")){
+            String[] split = datepjlm_id_cols_value.split("@");
+            for(int i=0;i<split.length;i++){
+                String[] split2 = split[i].split("_");
+                String update="update XZLZJQKND_PJLM set "+split2[1]+"='"+split2[2]+"'  where yw_guid=? and rq=?";
+                update(update,YW,new Object[]{split2[0],year});
+            }
+          
+        }
+        if(datepjzj_id_cols_value!=null&&!datepjzj_id_cols_value.equals("")){
+            String[] split = datepjzj_id_cols_value.split("@");
+            for(int i=0;i<split.length;i++){
+                String[] split2 = split[i].split("_");
+                String update="update XZLZJQKND_PJZJ set "+split2[1]+"='"+split2[2]+"'  where yw_guid=? and rq=?";
+                update(update,YW,new Object[]{split2[0],year});
+            }
+        }
+        response("success");
+    }
+  /****
+   * 
+   * <br>Description:
+   * <br>Author:朱波海
+   * <br>Date:2014-1-7
+   */
+    public void getTable(){
+        String year = request.getParameter("year");
+        String sqlString="select *  from XZLXX t";
+        List<Map<String, Object>> list = query(sqlString,YW);
+        for(int i=0;i<list.size();i++){
+        String que="select * from XZLZJQKND_PJZJ where yw_guid=? and rq=?";
+        List<Map<String, Object>> list2 = query(que, YW,new Object[]{list.get(i).get("yw_guid"),year});
+        if(list2.size()<1){
+            String insert="insert into XZLZJQKND_PJZJ (yw_guid,rq) values(?,?)";
+            update(insert, YW,new Object[]{list.get(i).get("yw_guid"),year});
+        }
+        }
+        for(int i=0;i<list.size();i++){
+            String que="select * from XZLZJQKND_PJLM where yw_guid=? and rq=?";
+            List<Map<String, Object>> list2 = query(que, YW,new Object[]{list.get(i).get("yw_guid"),year});
+            if(list2.size()<1){
+                String insert="insert into XZLZJQKND_PJLM (yw_guid,rq) values(?,?)";
+                update(insert, YW,new Object[]{list.get(i).get("yw_guid"),year});
+            }
+            }
+        String sql2="select * from XZLXX t,XZLZJQKND_PJLM t2 where t2.yw_guid=t.yw_guid and t2.rq=?";
+        List<Map<String, Object>> query = query(sql2, YW,new Object []{year});
+        String sql="select * from XZLXX t,XZLZJQKND_PJZJ t2 where t2.yw_guid=t.yw_guid and t2.rq=?";
+        List<Map<String, Object>> query2 = query(sql, YW,new Object []{year});
+        BuildModel buildModel = new BuildModel();
+        String table = buildModel.getZjqkNd(query,query2);
+        response(table);        
+        
+    }
+/****
+ * 
+ * <br>Description:查询两年的数据
+ * <br>Author:朱波海
+ * <br>Date:2014-1-7
+ */
+    public void getXzl_ND(){
+        String year1 = request.getParameter("year1");
+        String year2 = request.getParameter("year2");
+        String tabName = request.getParameter("tabName");
+        String [] year={year1,year2};
+        String ta=new ModelFactory().getMoreTab(year,tabName);
+        response(ta);
+        
+    }
+    
+
 }
