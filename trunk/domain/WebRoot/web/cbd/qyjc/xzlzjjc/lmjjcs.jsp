@@ -93,7 +93,7 @@ var year2=selt2.options[selt2.selectedIndex].value;
 			alert('保存成功！');
 		}
      deleteDiv();
-	document.getElementById("newTable").innerHTML=reslut;
+	document.getElementById("newTab").innerHTML=reslut;
 }
 
  
