@@ -163,35 +163,11 @@ td1 {
 			window.location.reload();
 		}
 	}
+
 </script>
 <body>
 	<div align="center">
-		年度： <select>
-			<option value=2010>2010年</option>
-			<option value=2010>2011年</option>
-			<option value=2010>2012年</option>
-			<option value=2010>2013年</option>
-			<option value=2010>2014年</option>
-			<option value=2010>2015年</option>
-			<option value=2010>2016年</option>
-			<option value=2010>2017年</option>
-			<option value=2010>2018年</option>
-			<option value=2010>2019年</option>
-			<option value=2010>2020年</option>
-		</select> 月份： <select>
-			<option value=1>1月</option>
-			<option value=2>2月</option>
-			<option value=3>3月</option>
-			<option value=4>4月</option>
-			<option value=5>5月</option>
-			<option value=6>6月</option>
-			<option value=7>7月</option>
-			<option value=8>8月</option>
-			<option value=9>9月</option>
-			<option value=10>10月</option>
-			<option value=11>11月</option>
-			<option value=12>12月</option>
-		</select>
+		
 		<button onClick='addRow()' id='addButton'>添加</button><button onClick="javascript:window.location.href='esfscjczsqk.jsp'" id='addButton'>录入租售情况</button>
 	</div>
 
