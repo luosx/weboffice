@@ -47,6 +47,10 @@ td1 {
 	padding: 3px 3px 3px 8px;
 	color: #fdfdfd;
 }
+input{
+border:none;
+width: 50px;
+}
 
 .tr01 {
 	background-color: #C0C0C0;
@@ -59,17 +63,23 @@ td1 {
 var date_id_cols_value="";
 
 function chang(dom){
+if(!isNaN(dom.value)){
 	if(date_id_cols_value!=null&&date_id_cols_value!=""){
 		 date_id_cols_value=date_id_cols_value+"@"+dom.id+"_"+dom.value
 	}else{
-	 date_id_cols_value=dom.id+"_"+dom.value}
+	 date_id_cols_value=dom.id+"_"+dom.value
 	}
-	
+	}else{
+	alert("写入数据有误！");
+	dom.value="";
+	}
+	}
 function newtab(){
 	var selt=document.getElementById("selt");
 	var year=selt.options[selt.selectedIndex].value;
-	putClientCommond("qyjcManager", "insert");
-		putRestParameter("sj",sj);
+	    putClientCommond("qyjcManager", "getTable");
+		putRestParameter("year",year);
+		putRestParameter("tabName","XZLZJQKND_PJLM");
 		var reslut = restRequest();
 		if (reslut == 'success') {
 			alert('保存成功！');
@@ -86,8 +96,11 @@ function deleteDiv(){
  function save(){
 	  var selt=document.getElementById("selt");
 	  var year=selt.options[selt.selectedIndex].value;
-	   putClientCommond("qyjcManager", "Save_Zjqk_pjlm");
+	  alert(year);
+	   putClientCommond("qyjcManager", "Save_Zjqk");
 		putRestParameter("date_id_cols_value",date_id_cols_value);
+		//putRestParameter("tabName","XZLZJQKND_PJLM");
+		putRestParameter("year",year);
 		var reslut = restRequest();
 		if (reslut == 'success') {
 			alert('保存成功！');
@@ -96,7 +109,7 @@ function deleteDiv(){
 </script>
 <body>
 	<div align="center">
-		年度： <select onchange="newtab()" id="selt">
+	平均楼面均价录入-----	年度： <select onchange="newtab()" id="selt">
 			<option value=2010>2010年</option>
 			<option value=2011>2011年</option>
 			<option value=2012>2012年</option>
