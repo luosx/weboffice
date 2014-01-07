@@ -38,6 +38,7 @@ td {
 	font-size: 12px;
 	padding: 3px 3px 3px 8px;
 	color: #000000;
+	text-align:center;
 }
 
 td1 {
@@ -46,6 +47,7 @@ td1 {
 	font-size: 13px;
 	padding: 3px 3px 3px 8px;
 	color: #fdfdfd;
+	text-align:center;
 }
   .tr01{
   	background-color: #C0C0C0;
@@ -65,7 +67,7 @@ td1 {
 var selectedTr;
 var newRow;
 var preObjColor;
-	
+var bhs = "";	
 	function save(){
 		var bh=document.getElementById("bh").value;
 		var xzlmc=document.getElementById("xzlmc").value;
@@ -118,6 +120,9 @@ var preObjColor;
 		  tcwzj=escape(escape(tcwzj));
 		  syl=escape(escape(syl));
 		  qt=escape(escape(qt));
+		  if(bh==null||bh==''){
+			alert("请填写写字楼编号！！"); 
+		  }else{
 	    	putClientCommond("qyjcManager","saveZJXX");
 			putRestParameter("bh",bh);
 			putRestParameter("xzlmc",xzlmc);
@@ -153,10 +158,10 @@ var preObjColor;
 			}else{
 				alert("保存失败！");
 			}
-		
+		}
 	}
 	function update(){
-		var bh=document.getElementById("bh1").value;
+		var bh=bhs;
 		var xzlmc=document.getElementById("xzlmc1").value;
 		var kfs=document.getElementById("kfs1").value;
 		var wygs=document.getElementById("wygs1").value;
@@ -164,7 +169,7 @@ var preObjColor;
 		var cpdw=document.getElementById("cpdw1").value;
 		var cplx=document.getElementById("cplx1").value;
 		var cylx=document.getElementById("cylx1").value;
-		
+		alert();
 		var rzqy=document.getElementById("rzqy1").value;
 		var kpsj=document.getElementById("kpsj1").value;
 		var ysxkz=document.getElementById("ysxkz1").value;
@@ -206,6 +211,9 @@ var preObjColor;
 		  tcwzj=escape(escape(tcwzj));
 		  syl=escape(escape(syl));
 		  qt=escape(escape(qt));
+		  if(bh==null||bh==''){
+			alert("请填写写字楼编号！！"); 
+			}else{
 	    	putClientCommond("qyjcManager","updateZJXX");
 			putRestParameter("bh",bh);
 			putRestParameter("xzlmc",xzlmc);
@@ -241,7 +249,7 @@ var preObjColor;
 			}else{
 				alert("保存失败！");
 			}
-		
+		}
 	}
 	function addRow() {
 
@@ -258,14 +266,15 @@ var preObjColor;
 	//}
 	function modify(i) {
 		if (selectedTr != null && newRow != null) {
-			cancel();
+			cancel1();
 		}
 		selectedTr = document.getElementById("row" + i);
 		selectedTr.style.display = 'none';
 		var tb = document.getElementById("XZLZJ");
 		newRow = tb.insertRow(i + 3);
 		var c0 = newRow.insertCell(0);
-		c0.innerHTML = "<font id='bh1' >"+selectedTr.cells[0].childNodes[0].nodeValue+"</font>";
+		bhs=selectedTr.cells[0].childNodes[0].nodeValue;
+		c0.innerHTML = "<font id='bh1' >"+bhs+"</font>";
 		var c1 = newRow.insertCell(1);
 		c1.innerHTML = "<input id='xzlmc1' size='10' value='"+selectedTr.cells[1].childNodes[0].nodeValue+"'/>";
 		var c2 = newRow.insertCell(2);
@@ -309,7 +318,7 @@ var preObjColor;
 		var c21 = newRow.insertCell(21);
 		c21.innerHTML = "<input id='syl1' size='10' value='"+selectedTr.cells[21].childNodes[0].nodeValue+"'/>";
 		var c22 = newRow.insertCell(22);
-		c22.innerHTML = "<input id='qt1' size='10' value='"+selectedTr.cells[22].childNodes[0].nodeValue+"'/>";
+		c22.innerHTML = "<input id='qt1' size='50' value='"+selectedTr.cells[22].childNodes[0].nodeValue+"'/>";
 		var c23 = newRow.insertCell(23);
 		c23.innerHTML = "<a href='javascript:update()'>保存</a>&nbsp;&nbsp;<a href='javascript:cancel1()'>取消</a>"
 	}
@@ -321,6 +330,8 @@ var preObjColor;
 			if (reslut == 'success') {
 				alert('删除成功！');
 				window.location.reload();
+			}else{
+			alert('删除失败！');
 			}
 		}
 
@@ -329,9 +340,42 @@ var preObjColor;
 		selectedTr.style.display = '';
 		newRow.parentNode.removeChild(newRow);
 	}
+	function exportExcel(){
+		    var curTbl = document.getElementById("center"); 
+ 			try{
+		    	var oXL = new ActiveXObject("Excel.Application");
+		    }catch(err){
+		    	Ext.Msg.alert('提示','Excel生成失败，请先确定系统已安装office，并在浏览器的\'工具\' - Internet选项 -安全 - 自定义级别 - ActiveX控件和插件 - 对未标记为可安全执行脚本的ActiveX控件.. 标记为\'启用\'');
+		    	return;
+		    } 
+		    //创建AX对象excel 
+		    var oWB = oXL.Workbooks.Add(); 
+		    //获取workbook对象 
+		    var oSheet = oWB.ActiveSheet; 
+		    //激活当前sheet 
+		    var sel = document.body.createTextRange(); 
+		    sel.moveToElementText(curTbl); 
+		    //把表格中的内容移到TextRange中 
+		    sel.select(); 
+		    //全选TextRange中内容 
+		    sel.execCommand("Copy"); 
+		    //复制TextRange中内容 
+		    //oSheet.Paste(); 
+		    oSheet.Paste(); 
+		    //粘贴到活动的EXCEL中       
+		    oXL.Visible = true; 
+		    //设置excel可见属性 
+		}
 
 </script>
 <body>
-	<%=list%>
+<div id="fixed" style="position: fixed; top: 5px; left: 20px">
+  		&nbsp;
+  		
+		<img src="base/form/images/exportexcel.png" width="20px" height="20px" title="导出Excel" onClick="javascript:exportExcel();"  />&nbsp;&nbsp;&nbsp;
+		<img src="base/form/images/add.png" width="20px" height="20px" title="添加新写字楼信息" onClick="addRow();"  />&nbsp;&nbsp;&nbsp;
+	</div><br/>
+		<%=list%>
+
 </body>
 </html>
