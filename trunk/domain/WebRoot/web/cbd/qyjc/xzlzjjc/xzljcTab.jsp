@@ -36,7 +36,7 @@
         items:[
         	{
                 title: '写字楼信息',
-                html: "<iframe width='"+w+"' height='"+h+"' src='web/cbd/qyjc/xzlzjjc/xzlzjjc.jsp'/>" 
+                html: "<iframe width='"+w+"' height='"+h+"' src='web/cbd/qyjc/xzlzjjc/xzlxx/xzlxx.jsp'/>" 
             }
             ,{
                 title: '租金情况',
