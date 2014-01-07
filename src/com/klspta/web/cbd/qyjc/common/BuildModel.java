@@ -8,7 +8,6 @@ public class BuildModel {
     
     public String  getTitle(String [] year){
         StringBuffer buffer = new StringBuffer();
-     //   buffer.append("<table width='95%' cellpadding='0' cellspacing='0' id='esftable'>");
         buffer.append("<tr class='tr11'>");
         buffer.append("<td align='center' width='80px' height='50px'><h3>序号</h3></td><td align='center' width='120px'><h3>写字楼名称</h3></td>");
         for(int i=0;i<year.length;i++){
@@ -66,33 +65,7 @@ public class BuildModel {
         buffer.append("</table>");
         return  buffer.toString();
     }
-   /****
-    * 
-    * <br>Description:多年展现
-    * <br>Author:朱波海
-    * <br>Date:2014-1-3
-    * @param list
-    * @param type
-    * @param year
-    */
-    public String build_More_year(List<List<Map<String, Object>>> list,String type,String [] year){
-        StringBuffer buffer = new StringBuffer();
-        String title = getTitle(year);
-        buffer.append(title);
-        for (int i = 0; i < list.size(); i++) {
-            if(i==0){
-                List<Map<String, Object>> listMode1 = list.get(i);
-                String mode1 = getMode1(listMode1);
-                buffer.append(mode1);
-            }else {
-                List<Map<String, Object>> listMode2 = list.get(i);
-                String mode2 = getMode2(listMode2); 
-                buffer.append(mode2);
-            }
-            
-        }
-        return buffer.toString();
-    }
+  
     /***
      * 
      * <br>Description:带你bh和名称的
@@ -100,105 +73,69 @@ public class BuildModel {
      * <br>Date:2014-1-3
      * @return
      */
-    public String getMode1(List<Map<String, Object>> list){
+    public String getMode1(List<Map<String, Object>> list,List<Map<String, Object>> list2,String []year){
         StringBuffer buffer = new StringBuffer();
-        buffer.append(" <div style='width:360px;height:200px;float:left;margin-left:40px;'><table width='360' height=200 border='0' cellpadding='0' cellspacing='0'>");
+        buffer.append("<table id='firstTable'>");
+        String title = getTitle(year);
+        buffer.append(title);
+
         for(int i=0;i<list.size();i++){
             buffer.append("<tr><td width='90px'>");
             buffer.append( delNull(String.valueOf(list.get(i).get("BH"))));
-            buffer.append("</td>");
-            buffer.append("<td width='120px'>");
+            buffer.append("</td><td width='120px'>");
             buffer.append( delNull(String.valueOf(list.get(i).get("XZLMC"))));
-            buffer.append("</td>");
-            buffer.append("<td width='90px'>");
+            buffer.append("</td></td><td width='90px'>");
             buffer.append( delNull(String.valueOf(list.get(i).get("YY"))));
-            buffer.append("</td>");
-            buffer.append("<td width='90px'>");
+            buffer.append("</td><td width='90px'>");
             buffer.append( delNull(String.valueOf(list.get(i).get("EY"))));
-            buffer.append("</td>");
-            buffer.append("<td width='90px'>");
+            buffer.append("</td><td width='90px'>");
             buffer.append( delNull(String.valueOf(list.get(i).get("SY"))));
-            buffer.append("</td>");
-            buffer.append("<td width='90px'>");
+            buffer.append("</td><td width='90px'>");
             buffer.append( delNull(String.valueOf(list.get(i).get("SIY"))));
-            buffer.append("</td>");
-            buffer.append("<td width='90px'>");
+            buffer.append("</td><td width='90px'>");
             buffer.append( delNull(String.valueOf(list.get(i).get("WY"))));
-            buffer.append("</td>");
-            buffer.append("<td width='90px'>");
+            buffer.append("</td><td width='90px'>");
             buffer.append( delNull(String.valueOf(list.get(i).get("LY"))));
-            buffer.append("</td>");
-            buffer.append("<td width='90px'>");
+            buffer.append("</td><td width='90px'>");
             buffer.append( delNull(String.valueOf(list.get(i).get("QY"))));
-            buffer.append("</td>"); 
-            buffer.append("<td width='90px'>");
+            buffer.append("</td><td width='90px'>");
             buffer.append( delNull(String.valueOf(list.get(i).get("BAY"))));
-            buffer.append("</td>");
-            buffer.append("<td width='90px'>");
+            buffer.append("</td><td width='90px'>");
             buffer.append( delNull(String.valueOf(list.get(i).get("JY"))));
-            buffer.append("</td>");
-            buffer.append("<td width='90px'>");
+            buffer.append("</td><td width='90px'>");
             buffer.append( delNull(String.valueOf(list.get(i).get("SHIY"))));
-            buffer.append("</td>");
-            buffer.append("<td width='90px'>");
+            buffer.append("</td><td width='90px'>");
             buffer.append( delNull(String.valueOf(list.get(i).get("SYY"))));
-            buffer.append("</td>");
-            buffer.append("<td width='90px'>");
+            buffer.append("</td><td width='90px'>");
             buffer.append( delNull(String.valueOf(list.get(i).get("SRY"))));
-            buffer.append("</td>");
+            buffer.append("</td><td>");
+          
+            buffer.append( delNull(String.valueOf(list2.get(i).get("YY"))));
+            buffer.append("</td><td width='90px'>");
+            buffer.append( delNull(String.valueOf(list2.get(i).get("EY"))));
+            buffer.append("</td><td width='90px'>");
+            buffer.append( delNull(String.valueOf(list2.get(i).get("SY"))));
+            buffer.append("</td><td width='90px'>");
+            buffer.append( delNull(String.valueOf(list2.get(i).get("SIY"))));
+            buffer.append("</td><td width='90px'>");
+            buffer.append( delNull(String.valueOf(list2.get(i).get("WY"))));
+            buffer.append("</td><td width='90px'>");
+            buffer.append( delNull(String.valueOf(list2.get(i).get("LY"))));
+            buffer.append("</td><td width='90px'>");
+            buffer.append( delNull(String.valueOf(list2.get(i).get("QY"))));
+            buffer.append("</td><td width='90px'>");
+            buffer.append( delNull(String.valueOf(list2.get(i).get("BAY"))));
+            buffer.append("</td><td width='90px'>");
+            buffer.append( delNull(String.valueOf(list2.get(i).get("JY"))));
+            buffer.append("</td><td width='90px'>");
+            buffer.append( delNull(String.valueOf(list2.get(i).get("SHIY"))));
+            buffer.append("</td><td width='90px'>");
+            buffer.append( delNull(String.valueOf(list2.get(i).get("SYY"))));
+            buffer.append("</td><td width='90px'>");
+            buffer.append( delNull(String.valueOf(list2.get(i).get("SRY"))));
+            buffer.append("</td></tr>");
         }
-        buffer.append(" </table> </div>");
-        return buffer.toString();
-    }
-    /***
-     * 
-     * <br>Description:不带你bh和名称的
-     * <br>Author:朱波海
-     * <br>Date:2014-1-3
-     * @return
-     */
-    public String getMode2(List<Map<String, Object>> list){
-        StringBuffer buffer = new StringBuffer();
-        buffer.append(" <div style='width:360px;height:200px;float:left;margin-left:40px;'><table width='360' height=200 border='0' cellpadding='0' cellspacing='0'>");
-        for(int i=0;i<list.size();i++){
-            buffer.append("<tr><td width='90px'>");
-            buffer.append( delNull(String.valueOf(list.get(i).get("YY"))));
-            buffer.append("</td>");
-            buffer.append("<td width='90px'>");
-            buffer.append( delNull(String.valueOf(list.get(i).get("EY"))));
-            buffer.append("</td>");
-            buffer.append("<td width='90px'>");
-            buffer.append( delNull(String.valueOf(list.get(i).get("SY"))));
-            buffer.append("</td>");
-            buffer.append("<td width='90px'>");
-            buffer.append( delNull(String.valueOf(list.get(i).get("SIY"))));
-            buffer.append("</td>");
-            buffer.append("<td width='90px'>");
-            buffer.append( delNull(String.valueOf(list.get(i).get("WY"))));
-            buffer.append("</td>");
-            buffer.append("<td width='90px'>");
-            buffer.append( delNull(String.valueOf(list.get(i).get("LY"))));
-            buffer.append("</td>");
-            buffer.append("<td width='90px'>");
-            buffer.append( delNull(String.valueOf(list.get(i).get("QY"))));
-            buffer.append("</td>"); 
-            buffer.append("<td width='90px'>");
-            buffer.append( delNull(String.valueOf(list.get(i).get("BAY"))));
-            buffer.append("</td>");
-            buffer.append("<td width='90px'>");
-            buffer.append( delNull(String.valueOf(list.get(i).get("JY"))));
-            buffer.append("</td>");
-            buffer.append("<td width='90px'>");
-            buffer.append( delNull(String.valueOf(list.get(i).get("SHIY"))));
-            buffer.append("</td>");
-            buffer.append("<td width='90px'>");
-            buffer.append( delNull(String.valueOf(list.get(i).get("SYY"))));
-            buffer.append("</td>");
-            buffer.append("<td width='90px'>");
-            buffer.append( delNull(String.valueOf(list.get(i).get("SRY"))));
-            buffer.append("</td>");
-        }
-        buffer.append(" </table> </div>");
+        buffer.append(" </table>");
         return buffer.toString();
     }
     
@@ -220,10 +157,10 @@ public class BuildModel {
   */
   public String getZjqkTable(List<Map<String, Object>> list){
       StringBuffer buffer = new StringBuffer();
-      buffer.append("<table width='900px' id='firstTable'><tr id='title' class='tr01'><td width='50px'>编号</td><td width='50px'>写字楼名称</td><td width='50px'>地址</td><td width='50px'>城区</td><td width='50px'>商圈</td><td width='50px'>地铁</td><td width='50px'>出租价格</td><td  width='50px'>售价</td><td width='50px'>租售比</td><td  width='50px'>可租售面积</td> <td width='50px'>信息</td></tr>");
+      buffer.append("<table width='100%' id='firstTable'><tr id='title' class='tr01'><td >编号</td><td >写字楼名称</td><td >地址</td><td >城区</td><td >商圈</td><td >地铁</td><td >出租价格</td><td >售价</td><td >租售比</td><td  >可租售面积</td> <td >信息</td></tr>");
      for(int i=0;i<list.size();i++){
        buffer.append("<tr>");
-       buffer.append("<td withd> ");
+       buffer.append("<td> ");
        buffer.append(delNull(String.valueOf(list.get(i).get("BH"))));
        buffer.append("</td> ");
        buffer.append("<td> ");
@@ -231,31 +168,31 @@ public class BuildModel {
        buffer.append("</td> ");
        buffer.append("<td> <input id='"+list.get(i).get("yw_guid")+"_DZ' onchange='chang(this)' value=' ");
        buffer.append(delNull(String.valueOf(list.get(i).get("DZ"))));
-       buffer.append("'/></td> ");
+       buffer.append("' /></td> ");
        buffer.append("<td> <input id='"+list.get(i).get("yw_guid")+"_CQ' onchange='chang(this)' value='  ");
        buffer.append(delNull(String.valueOf(list.get(i).get("CQ"))));
-       buffer.append("'/></td> ");
+       buffer.append("' /></td> ");
        buffer.append("<td>  <input id='"+list.get(i).get("yw_guid")+"_SQ' onchange='chang(this)' value='");
        buffer.append(delNull(String.valueOf(list.get(i).get("SQ"))));
-       buffer.append("'/></td> ");
+       buffer.append("' /></td> ");
        buffer.append("<td>  <input id='"+list.get(i).get("yw_guid")+"_DT' onchange='chang(this)' value='");
        buffer.append(delNull(String.valueOf(list.get(i).get("DT"))));
-       buffer.append("'/></td> ");
+       buffer.append("' /></td> ");
        buffer.append("<td>  <input id='"+list.get(i).get("yw_guid")+"_CZJG' onchange='chang(this)' value='");
        buffer.append(delNull(String.valueOf(list.get(i).get("CZJG"))));
        buffer.append("'/></td> ");
        buffer.append("<td>  <input id='"+list.get(i).get("yw_guid")+"_SJ' onchange='chang(this)' value='");
        buffer.append(delNull(String.valueOf(list.get(i).get("SJ"))));
-       buffer.append("'/></td> ");
+       buffer.append("' /></td> ");
        buffer.append("<td>  <input id='"+list.get(i).get("yw_guid")+"_ZSB' onchange='chang(this)' value='");
        buffer.append(delNull(String.valueOf(list.get(i).get("ZSB"))));
-       buffer.append("'/></td> ");
+       buffer.append("' /></td> ");
        buffer.append("<td>  <input id='"+list.get(i).get("yw_guid")+"_KZSMJ' onchange='chang(this)' value='");
        buffer.append(delNull(String.valueOf(list.get(i).get("KZSMJ"))));
-       buffer.append("'/></td> ");
+       buffer.append("' /></td> ");
        buffer.append("<td>  <input id='"+list.get(i).get("yw_guid")+"_XX'  onchange='chang(this)' value='");
        buffer.append(delNull(String.valueOf(list.get(i).get("XX"))));
-       buffer.append("'/></td> ");
+       buffer.append("' /></td> ");
        buffer.append("</tr>");
      }
       
@@ -263,62 +200,6 @@ public class BuildModel {
       return  buffer.toString();
       
   }
-    
-  public String getZjqkNd(List<Map<String, Object>> list){
-      StringBuffer buffer = new StringBuffer();
-      buffer.append("<table width='900px' id='firstTable'><tr id='title' class='tr01'><td width='50px'>编号</td><td width='50px'>写字楼名称</td><td width='50px'>一月</td><td width='50px'>二月</td><td width='50px'>三月</td><td width='50px'>四月</td><td width='50px'>五月</td><td  width='50px'>六月</td><td width='50px'>七月</td><td  width='50px'>八月</td> <td width='50px'>九月</td><td width='50px'>十月</td><td width='50px'>十一月</td><td width='50px'>十二月</td></tr>");
-      for(int i=0;i<list.size();i++){
-          buffer.append("<tr>");
-          buffer.append("<td> ");
-          buffer.append(delNull(String.valueOf(list.get(i).get("BH"))));
-          buffer.append("</td> ");
-          buffer.append("<td> ");
-          buffer.append(delNull(String.valueOf(list.get(i).get("XZLMC"))));
-          buffer.append("</td> ");
-          buffer.append("<td> <input id='"+list.get(i).get("yw_guid")+"_YY' onchange='chang(this)' value=' ");
-          buffer.append(delNull(String.valueOf(list.get(i).get("YY"))));
-          buffer.append("'/></td> ");
-          buffer.append("<td> <input id='"+list.get(i).get("yw_guid")+"_EY' onchange='chang(this)' value='  ");
-          buffer.append(delNull(String.valueOf(list.get(i).get("EY"))));
-          buffer.append("'/></td> ");
-          buffer.append("<td>  <input id='"+list.get(i).get("yw_guid")+"_SY' onchange='chang(this)' value='");
-          buffer.append(delNull(String.valueOf(list.get(i).get("SY"))));
-          buffer.append("'/></td> ");
-          buffer.append("<td>  <input id='"+list.get(i).get("yw_guid")+"_SIY' onchange='chang(this)' value='");
-          buffer.append(delNull(String.valueOf(list.get(i).get("SIY"))));
-          buffer.append("'/></td> ");
-          buffer.append("<td>  <input id='"+list.get(i).get("yw_guid")+"_WY' onchange='chang(this)' value='");
-          buffer.append(delNull(String.valueOf(list.get(i).get("WY"))));
-          buffer.append("'/></td> ");
-          buffer.append("<td>  <input id='"+list.get(i).get("yw_guid")+"_LY' onchange='chang(this)' value='");
-          buffer.append(delNull(String.valueOf(list.get(i).get("LY"))));
-          buffer.append("'/></td> ");
-          buffer.append("<td>  <input id='"+list.get(i).get("yw_guid")+"_QY' onchange='chang(this)' value='");
-          buffer.append(delNull(String.valueOf(list.get(i).get("QY"))));
-          buffer.append("'/></td> ");
-          buffer.append("<td>  <input id='"+list.get(i).get("yw_guid")+"_BAY' onchange='chang(this)' value='");
-          buffer.append(delNull(String.valueOf(list.get(i).get("BAY"))));
-          buffer.append("'/></td> ");
-          buffer.append("<td>  <input id='"+list.get(i).get("yw_guid")+"_JY'  onchange='chang(this)' value='");
-          buffer.append(delNull(String.valueOf(list.get(i).get("JY"))));
-          buffer.append("'/></td> ");
-          buffer.append("<td>  <input id='"+list.get(i).get("yw_guid")+"_SHIY'  onchange='chang(this)' value='");
-          buffer.append(delNull(String.valueOf(list.get(i).get("SHIY"))));
-          buffer.append("'/></td> ");
-          buffer.append("<td>  <input id='"+list.get(i).get("yw_guid")+"_SYY'  onchange='chang(this)' value='");
-          buffer.append(delNull(String.valueOf(list.get(i).get("SYY"))));
-          buffer.append("'/></td> ");
-          buffer.append("<td>  <input id='"+list.get(i).get("yw_guid")+"_SEY'  onchange='chang(this)' value='");
-          buffer.append(delNull(String.valueOf(list.get(i).get("SEY"))));
-          buffer.append("'/></td> ");
-          
-          buffer.append("</tr>");
-        }
-         
-         buffer.append("</table>");
-         return  buffer.toString();
-  }
-    
   public String getZjqkNd(List<Map<String, Object>> list,List<Map<String, Object>> list2){
       StringBuffer buffer = new StringBuffer();
       buffer.append("<table width='900px' id='firstTable'><tr id='title' class='tr01'><td width='50px'>编号</td><td width='50px' colspan='2'>写字楼名称</td><td width='50px'>一月</td><td width='50px'>二月</td><td width='50px'>三月</td><td width='50px'>四月</td><td width='50px'>五月</td><td  width='50px'>六月</td><td width='50px'>七月</td><td  width='50px'>八月</td> <td width='50px'>九月</td><td width='50px'>十月</td><td width='50px'>十一月</td><td width='50px'>十二月</td></tr>");
