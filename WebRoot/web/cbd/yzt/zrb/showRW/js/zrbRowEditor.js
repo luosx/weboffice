@@ -15,7 +15,7 @@ function showMap(objid){
 	//parent.parent.dhxLayout.cells("a").getFrame().contentWindow.document.swfobject.getObjectById("FxGIS").clear();
 	//parent.parent.dhxLayout.cells("a").getFrame().contentWindow.document.swfobject.getObjectById("FxGIS").findFeature("cbd", "0", key, "ZRBBH");
 	parent.parent.document.frames[0].swfobject.getObjectById("FxGIS").clear();
-	parent.parent.document.frames[0].swfobject.getObjectById("FxGIS").findFeature("cbd", "0", key, "ZRBBH");
+	parent.parent.document.frames[0].swfobject.getObjectById("FxGIS").findFeature("cbd", "3", key, "ZRBBH");
 
 	//添加选中保存
 	//var num = objid.rowIndex();
@@ -71,14 +71,14 @@ function setRecord(polygon){
 	//parent.parent.frames['east'].swfobject.getObjectById("FxGIS").clear();
 	//parent.parent.frames['east'].swfobject.getObjectById("FxGIS").findFeature("cbd", "0", zrbbh, "ZRBBH");
     parent.parent.document.frames[0].swfobject.getObjectById("FxGIS").clear();
-	parent.parent.document.frames[0].swfobject.getObjectById("FxGIS").findFeature("cbd", "0", zrbbh, "ZRBBH");
+	parent.parent.document.frames[0].swfobject.getObjectById("FxGIS").findFeature("cbd", "3", zrbbh, "ZRBBH");
 }
 
 function add(){
 	if(table.element == undefined){
 		table.init(document.getElementById("ZRB"));
 	}
-	Ext.MessageBox.prompt('输入', '请输入自然斑编号:', function(btn, text){
+	Ext.MessageBox.prompt('输入', '请输入自然斑编号(“区号-基本斑编号-自然斑编号“):', function(btn, text){
 		if(btn == 'ok'){
 			//判断自然斑编号是否符合条件
 			var reg = /^\w+-\w+-\w+/;
