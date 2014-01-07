@@ -8,10 +8,11 @@ import com.klspta.base.AbstractBaseBean;
 public class XmbgManager extends AbstractBaseBean {
 	
 	public void getPPT() throws Exception{
-		//String xmmc = new String(request.getParameter("xmmc").getBytes("iso-8859-1"),"utf-8");
-		//String file_ids = new String(request.getParameter("file_id").getBytes("iso-8859-1"),"utf-8"); 
+		request.setCharacterEncoding("UTF-8");
+		String yw_guid = new String(request.getParameter("yw_guid").getBytes("iso-8859-1"),"utf-8");
+		String file_ids = request.getParameter("file_id"); 
 		ReportPPT reportPPT = new ReportPPT();
-		SlideShow ppt = reportPPT.getPPT();
+		SlideShow ppt = reportPPT.buildPPT(yw_guid, file_ids);
 		response.setContentType("application/x-msdownload");
 		response.setHeader( "Content-Disposition", "attachment; filename=reportPPT.ppt");
 		ppt.write(response.getOutputStream());
