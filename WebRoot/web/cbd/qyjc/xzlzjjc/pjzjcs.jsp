@@ -9,7 +9,7 @@
     String basePath = request.getScheme() + "://" + request.getServerName() + ":"
             + request.getServerPort() + path + "/";
             String []year={"2013","2014"};
-            String ta=new ModelFactory().getMoreTab(year,"XZLZJQKND_PJLM");
+            String ta=new ModelFactory().getMoreTab(year,"XZLZJQKND_PJZJ");
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -87,7 +87,7 @@ var year2=selt2.options[selt2.selectedIndex].value;
         putClientCommond("qyjcManager", "getXzl_ND");
 		putRestParameter("year1", year1);
 		putRestParameter("year2", year2);
-		putRestParameter("tabName", "XZLZJQKND_PJLM");
+		putRestParameter("tabName", "XZLZJQKND_PJZJ");
 		var reslut = restRequest();
 		if (reslut == 'success') {
 			alert('保存成功！');
