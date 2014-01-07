@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@page import="com.klspta.web.cbd.jtfx.scjc.ScjcManager"%>
+<%@page import="java.util.Date"%>
 <%
     String path = request.getContextPath();
 			String basePath = request.getScheme() + "://"
@@ -54,58 +55,94 @@ td1 {
 }
 </style>
 <script type="text/javascript">
-var yw_guid_xh_value="";
-
+	var yw_guid_xh_value = "";
+	var today = new Date();//获得当前日期
+	var year = today.getFullYear();//获得年份
+	var month = today.getMonth() + 1;//此方法获得的月份是从0---11，所以要加1才是当前月份
 
 	function insert() {
-	  var sj=yw_guid_xh_value;
+		var sj = yw_guid_xh_value;
+		var yearObj = document.getElementById("year");
+		var year = yearObj.options[yearObj.selectedIndex].text;
+		var monthObj = document.getElementById("month");
+		var month = monthObj.options[monthObj.selectedIndex].text;
 		putClientCommond("scjcManager", "insert");
-		putRestParameter("sj",sj);
+		putRestParameter("sj", sj);
+		putRestParameter("year", year);
+		putRestParameter("month", month);
 		var reslut = restRequest();
 		if (reslut == 'success') {
 			alert('保存成功！');
-			
+
 		}
 
 	}
-	function chang(yw){
-	if(yw_guid_xh_value!=null&&yw_guid_xh_value!=""){
-		 yw_guid_xh_value=yw_guid_xh_value+"@"+yw.id+"_"+yw.value
-	}else{
-	 yw_guid_xh_value=yw.id+"_"+yw.value}
-	
+	function chang(yw) {
+		if (yw_guid_xh_value != null && yw_guid_xh_value != "") {
+			yw_guid_xh_value = yw_guid_xh_value + "@" + yw.id + "_" + yw.value
+		} else {
+			yw_guid_xh_value = yw.id + "_" + yw.value
+		}
+
+	}
+	function change2(day) {
+
+		var yearObj = document.getElementById("year");
+		var year = yearObj.options[yearObj.selectedIndex].text;
+		var monthObj = document.getElementById("month");
+		var month = monthObj.options[monthObj.selectedIndex].text;
+		putClientCommond("scjcManager", "months_mm");
+		putRestParameter("year", year);
+		putRestParameter("month", month);
+		var reslut = restRequest();
+		if (reslut == 'success') {
+			alert('保存成功！');
+
+		}
+		deleteDiv();
+		document.getElementById("news").innerHTML = reslut;
+
+	}
+
+	function deleteDiv() {
+		var my = document.getElementById("zsqktable");
+		if (my != null)
+			my.parentNode.removeChild(my);
 	}
 </script>
 <body>
 	<div align="center">
-		年度： <select>
-			<option value=2010>2010年</option>
-			<option value=2010>2011年</option>
-			<option value=2010>2012年</option>
-			<option value=2010>2013年</option>
-			<option value=2010>2014年</option>
-			<option value=2010>2015年</option>
-			<option value=2010>2016年</option>
-			<option value=2010>2017年</option>
-			<option value=2010>2018年</option>
-			<option value=2010>2019年</option>
-			<option value=2010>2020年</option>
-		</select> 月份： <select>
-			<option value=1>1月</option>
-			<option value=2>2月</option>
-			<option value=3>3月</option>
-			<option value=4>4月</option>
-			<option value=5>5月</option>
-			<option value=6>6月</option>
-			<option value=7>7月</option>
-			<option value=8>8月</option>
-			<option value=9>9月</option>
-			<option value=10>10月</option>
-			<option value=11>11月</option>
-			<option value=12>12月</option>
+		年度： <select id='year'
+			onchange="change2(this.options[this.options.selectedIndex].value)">
+			<option value=2010>2010</option>
+			<option value=2011>2011</option>
+			<option value=2012>2012</option>
+			<option value=2013>2013</option>
+			<option value=2014 selected='selected'>2014</option>
+			<option value=2015>2015</option>
+			<option value=2016>2016</option>
+			<option value=2017>2017</option>
+			<option value=2018>2018</option>
+			<option value=2019>2019</option>
+			<option value=2020>2020</option>
+		</select> 月份： <select id='month'
+			onchange="change2(this.options[this.options.selectedIndex].value)">
+			<option value=1 selected="selected">1</option>
+			<option value=2>2</option>
+			<option value=3>3</option>
+			<option value=4>4</option>
+			<option value=5>5</option>
+			<option value=6>6</option>
+			<option value=7>7</option>
+			<option value=8>8</option>
+			<option value=9>9</option>
+			<option value=10>10</option>
+			<option value=11>11</option>
+			<option value=12>12</option>
 		</select>
 		<button onClick='insert()'>保存</button>
 		<button onClick="javascript:window.location.href='esfscjcxxwh.jsp'">返回</button>
 		<%=list%>
+		<div id="news"></div>
 </body>
 </html>
