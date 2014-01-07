@@ -19,47 +19,33 @@ public class DataInteraction extends AbstractBaseBean {
  * @return
  */
     public List<Map<String, Object>> getDateList(String year, String tabName) {
-        String tableName = "";
-        List<Map<String, Object>>query=null;
-        if (tabName.equals(types[0])) {
-            tableName = "XZLZJQKND_PJZJ";
-        }
-        if (tabName.equals(types[1])) {
-            tableName = "XZLZJQKND_PJLM";
-        }
+        String tableName = tabName;
+        List<Map<String, Object>>query1=null;
         if (tableName != null && !tableName.equals("")) {
-        String sql="select t.bh,t.xzlmc,t2.* from XZLXX t,"+tableName+" t2 where t.yw_guid=t2.yw_guid and t2.rq=?";
-         query = query(sql, YW,new Object[]{year});
+         String sql="select t.bh,t.xzlmc,t2.* from XZLXX t,"+tableName+" t2 where t.yw_guid=t2.yw_guid and t2.rq=?";
+         query1 = query(sql, YW,new Object[]{year});
+         String sqlString="select * from XZLXX ";
+         List<Map<String, Object>> query2 = query(sqlString,YW);
+         if(query1.size()==query2.size()){
+             return query1;
+         }else {
+             for(int i=0;i<query2.size();i++){
+                 String sq="Select * from "+tabName+" where yw_guid=? and rq=?";
+                 List<Map<String, Object>> list = query(sq, YW,new Object[]{query2.get(i).get("yw_guid"),year});
+                 if(list.size()<1){
+                     String insert="insert into "+tabName+"(yw_guid,rq ) values (?,?)";
+                     update(insert, YW,new Object []{query2.get(i).get("yw_guid"),year });
+                 }
+                 
+             }
+             String sq="select t.bh,t.xzlmc,t2.* from XZLXX t,"+tableName+" t2 where t.yw_guid=t2.yw_guid and t2.rq=?";
+             query1 = query(sq, YW,new Object[]{year});
+             return query1;
         }
-        return query;
+        }
+        return null;
     }
-    /****
-     * 
-     * <br>Description:测算
-     * <br>Author:朱波海
-     * <br>Date:2014-1-7
-     * @param year
-     * @param type
-     * @return
-     */
-    public List<List<Map<String, Object>>> getDateList(String []year, String type) {
-        String tableName = "";
-        ArrayList<List<Map<String, Object>>> list = new ArrayList<List<Map<String, Object>>>();
-        if (type.equals(types[0])) {
-            tableName = "XZL_LMJJCS";
-        }
-        if (type.equals(types[1])) {
-            tableName = "XZL_PJZJCS";
-        }
-        if (tableName != null && !tableName.equals("")) {
-            for(int i=0;i<year.length;i++){
-        String sql="select t.bh,t.xzlmc,t2.* from XZLXX t,"+tableName+" t2 where t.yw_guid=t2.yw_guid  and t2.rq=?";
-        List<Map<String, Object>>query = query(sql, YW,new Object[]{year[i]});
-        list.add(query);
-            }
-        }
-        return list;
-    }
+    
     /*****
      * 
      * <br>Description:获取租金情况
