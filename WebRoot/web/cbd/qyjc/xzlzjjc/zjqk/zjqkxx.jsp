@@ -28,7 +28,10 @@ table {
 	margin: 0 auto;
 	border-collapse: collapse;
 }
-
+input{
+border:none;
+width: 100px;
+}
 td {
 	border: 1px solid #000000;
 	background: #fff;
@@ -83,8 +86,7 @@ var  date_id_cols_value="";
 <body>
 	<div align="center">
 		<button onClick='save()' id='addButton'>保存</button>
-		<button onClick="javascript:window.location.href='zjqknd_pjlm.jsp'" id='addButton1'>平均楼面均价录入</button>
-	   <button onClick="javascript:window.location.href='zjqknd_pjzj.jsp'" id='addButton2'>平均租金录入</button>
+	   <button onClick="javascript:window.location.href='zjqknd_pjzj.jsp'" id='addButton2'>租金录入</button>
 	</div>
 	<%=list%>
 </body>

@@ -6,7 +6,7 @@
 					+ request.getServerName() + ":" + request.getServerPort()
 					+ path + "/";
 
-String list = ModelFactory.getZjqk_pjzj();
+String list = ModelFactory.getZjqk_nd();
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -28,6 +28,7 @@ table {
 	padding: 0;
 	margin: 0 auto;
 	border-collapse: collapse;
+	 table-layout:fixed;
 }
 
 td {
@@ -36,6 +37,10 @@ td {
 	font-size: 12px;
 	padding: 3px 3px 3px 8px;
 	color: #000000;
+}
+input{
+border:none;
+width: 50px;
 }
 
 td1 {
@@ -54,20 +59,39 @@ td1 {
 }
 </style>
 <script type="text/javascript">
-var date_id_cols_value="";
+var datepjzj_id_cols_value="";
+var datepjlm_id_cols_value="";
 
 function chang(dom){
-	if(date_id_cols_value!=null&&date_id_cols_value!=""){
-		 date_id_cols_value=date_id_cols_value+"@"+dom.id+"_"+dom.value
+if(!isNaN(dom.value)){
+	if(datepjlm_id_cols_value!=null&&datepjlm_id_cols_value!=""){
+		 datepjlm_id_cols_value=datepjlm_id_cols_value+"@"+dom.id+"_"+dom.value
 	}else{
-	 date_id_cols_value=dom.id+"_"+dom.value}
+	 datepjlm_id_cols_value=dom.id+"_"+dom.value
 	}
-	
+	}else{
+	alert("写入数据有误！");
+	dom.value="";
+	}
+	}
+function cha(dom){
+if(!isNaN(dom.value)){
+	if(datepjzj_id_cols_value!=null&&datepjzj_id_cols_value!=""){
+		 datepjzj_id_cols_value=datepjzj_id_cols_value+"@"+dom.id+"_"+dom.value
+	}else{
+	 datepjzj_id_cols_value=dom.id+"_"+dom.value
+	}
+	}else{
+	alert("写入数据有误！");
+	dom.value="";
+	}
+	}
 function newtab(){
 	var selt=document.getElementById("selt");
 	var year=selt.options[selt.selectedIndex].value;
-	putClientCommond("qyjcManager", "insert");
-		putRestParameter("sj",sj);
+	   putClientCommond("qyjcManager", "getTable");
+		putRestParameter("year",year);
+		//putRestParameter("tabName","XZLZJQKND_PJZJ");
 		var reslut = restRequest();
 		if (reslut == 'success') {
 			alert('保存成功！');
@@ -81,11 +105,15 @@ function deleteDiv(){
 	  my.parentNode.removeChild(my);
 	  }
 	  
- function save(){
+function save(){
 	  var selt=document.getElementById("selt");
 	  var year=selt.options[selt.selectedIndex].value;
-	   putClientCommond("scjcManager", "Save_Zjqk_pjzj");
-		putRestParameter("date_id_cols_value",date_id_cols_value);
+	  alert(year);
+	   putClientCommond("qyjcManager", "Save_Zjqk");
+		putRestParameter("datepjlm_id_cols_value",datepjlm_id_cols_value);
+		putRestParameter("datepjzj_id_cols_value",datepjzj_id_cols_value);
+		putRestParameter("tabName","XZLZJQKND_PJZJ");
+		putRestParameter("year",year);
 		var reslut = restRequest();
 		if (reslut == 'success') {
 			alert('保存成功！');
@@ -94,7 +122,7 @@ function deleteDiv(){
 </script>
 <body>
 	<div align="center">
-		年度： <select onchange="newtab()" id="selt">
+		平均租金录入-----年度： <select onchange="newtab()" id="selt">
 			<option value=2010>2010年</option>
 			<option value=2011>2011年</option>
 			<option value=2012>2012年</option>
@@ -105,12 +133,13 @@ function deleteDiv(){
 			<option value=2017>2017年</option>
 			<option value=2018>2018年</option>
 			<option value=2019>2019年</option>
-			<option value=2020>2020年</option>
+			<option value=2020 >2020年</option>
 		</select>
-		<button onClick='save()'>保存</button>
+		<button onClick="save()" >保存</button>
 		<button onClick="javascript:window.location.href='zjqkxx.jsp'">返回</button>
 		</div>
 		<%=list %>
-		<div id ="newTable"></div>
+		<div id ="newTable" ></div>
+		<input style='width: 50px'>
 </body>
 </html>
