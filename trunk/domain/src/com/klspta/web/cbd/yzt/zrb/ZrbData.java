@@ -242,6 +242,11 @@ public class ZrbData extends AbstractBaseBean implements Runnable {
                 	+ tbbh + "',sde.st_geometry ('" + wkt + "', " + srid + "))";
             }
             update(sql, GIS);
+            
+            //更新自然斑面积
+            String updatesql = "update zfjc." + formName + " a set(a.zdmj)=(select trunc(b.shape.area) from giser." + form_gis + " b where b.zrbbh = a.zrbbh) where a.zrbbh in (select zrbbh from giser." + form_gis + ")";
+            update(updatesql, YW);
+            
         } catch (Exception e) {
             System.out.println("采集坐标出错");
             return false;
