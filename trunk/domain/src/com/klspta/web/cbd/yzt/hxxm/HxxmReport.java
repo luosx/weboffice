@@ -20,8 +20,8 @@ import com.klspta.model.CBDReport.dataClass.IDataClass;
  * <br>Date:2013-12-18
  */
 public class HxxmReport extends AbstractBaseBean implements IDataClass {
-	public static String[][] shows = new String[][]{{"rownum","false"},{"xmname","true"},{"zzsgm","false"},{"zzzsgm","false"},{"zzzshs","false"},{"hjmj","false"},{"fzzzsgm","false"},{"fzzjs","false"},{"zd","true"},{"jsyd","true"},{"rjl","true"},{"jzgm","true"},{"ghyt","true"},
-				{"GJJZGM","true"},{"JZJZGM","true"},{"SZJZGM","true"},{"KFCB","true"},{"LMCB","true"},{"DMCB","true"},{"YJCJJ","true"},{"YJZFTDSY","true"},{"CXB","true"},{"CQQD","true"},{"CBFGL","true"},{"ZZCQFY","true"},{"QYCQFY","true"}
+	public static String[][] shows = new String[][]{{"rownum","false"},{"xmname","true"},{"zd","true"},{"jsyd","true"},{"rjl","true"},{"jzgm","true"},{"ghyt","true"},{"GJJZGM","true"},{"JZJZGM","true"},{"SZJZGM","true"},{"zzsgm","false"},{"zzzsgm","false"},{"zzzshs","false"},{"hjmj","false"},{"fzzzsgm","false"},{"fzzjs","false"},
+				{"KFCB","true"},{"LMCB","true"},{"DMCB","true"},{"YJCJJ","true"},{"YJZFTDSY","true"},{"CXB","true"},{"CQQD","true"},{"CBFGL","true"},{"ZZCQFY","true"},{"QYCQFY","true"}
 				,{"QTFY","true"},{"AZFTZCB","true"},{"ZZHBTZCB","true"},{"CQHBTZ","true"},{"QTFYZB","true"},{"LMCJJ","true"},{"FWSJ","true"},{"ZJ","true"},{"DKMC","true"}};
 	private String form_name = "JC_XIANGMU";
 	
