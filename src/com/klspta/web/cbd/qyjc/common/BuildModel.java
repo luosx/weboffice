@@ -9,10 +9,10 @@ public class BuildModel {
     public String  getTitle(String [] year){
         StringBuffer buffer = new StringBuffer();
         buffer.append("<tr class='tr11'>");
-        buffer.append("<td align='center' width='80px' height='50px' class='tr01'><h3>序号</h3></td><td align='center' width='120px' class='tr01'><h3>写字楼名称</h3></td>");
+        buffer.append("<td  width='40px'  class='tr01'><h3>序号</h3></td><td  width='295px' class='tr01'><h3>写字楼名称</h3></td>");
         for(int i=0;i<year.length;i++){
            for(int j=1;j<13;j++){
-               buffer.append("<td align='center' width='90px' class='tr01'><h3>"+year[i]+"年"+j+"月</h3></td>");
+               buffer.append("<td  width='74px' class='tr01'><h3>"+year[i]+"年"+j+"月</h3></td>");
            }
         }
         buffer.append("</tr >");
@@ -75,63 +75,63 @@ public class BuildModel {
      */
     public String getMode1(List<Map<String, Object>> list,List<Map<String, Object>> list2,String []year,List<Map<String, Object>> cont1 ,List<Map<String, Object>> cont2){
         StringBuffer buffer = new StringBuffer();
-        buffer.append("<table id='firstTable'>");
+        buffer.append("<table id='firstTable' width='2100px' >");
         String title = getTitle(year);
         buffer.append(title);
 
         for(int i=0;i<list.size();i++){
-            buffer.append("<tr><td width='90px'>");
+            buffer.append("<tr><td  class='tr04'>");
             buffer.append( delNull(String.valueOf(list.get(i).get("BH"))));
-            buffer.append("</td><td >");
+            buffer.append("</td><td  class='tr04'>");
             buffer.append( delNull(String.valueOf(list.get(i).get("XZLMC"))));
-            buffer.append("</td></td><td width='90px'>");
+            buffer.append("</td><td class='tr03'>");
             buffer.append( delNull(String.valueOf(list.get(i).get("YY"))));
-            buffer.append("</td><td width='90px'>");
+            buffer.append("</td><td  class='tr03'>");
             buffer.append( delNull(String.valueOf(list.get(i).get("EY"))));
-            buffer.append("</td><td width='90px'>");
+            buffer.append("</td><td  class='tr03'>");
             buffer.append( delNull(String.valueOf(list.get(i).get("SY"))));
-            buffer.append("</td><td width='90px'>");
+            buffer.append("</td><td  class='tr03'>");
             buffer.append( delNull(String.valueOf(list.get(i).get("SIY"))));
-            buffer.append("</td><td width='90px'>");
+            buffer.append("</td><td  class='tr03'>");
             buffer.append( delNull(String.valueOf(list.get(i).get("WY"))));
-            buffer.append("</td><td width='90px'>");
+            buffer.append("</td><td  class='tr03'>");
             buffer.append( delNull(String.valueOf(list.get(i).get("LY"))));
-            buffer.append("</td><td width='90px'>");
+            buffer.append("</td><td  class='tr03'>");
             buffer.append( delNull(String.valueOf(list.get(i).get("QY"))));
-            buffer.append("</td><td width='90px'>");
+            buffer.append("</td><td  class='tr03'>");
             buffer.append( delNull(String.valueOf(list.get(i).get("BAY"))));
-            buffer.append("</td><td width='90px'>");
+            buffer.append("</td><td  class='tr03'>");
             buffer.append( delNull(String.valueOf(list.get(i).get("JY"))));
-            buffer.append("</td><td width='90px'>");
+            buffer.append("</td><td  class='tr03'>");
             buffer.append( delNull(String.valueOf(list.get(i).get("SHIY"))));
-            buffer.append("</td><td width='90px'>");
+            buffer.append("</td><td  class='tr03'>");
             buffer.append( delNull(String.valueOf(list.get(i).get("SYY"))));
-            buffer.append("</td><td width='90px'>");
+            buffer.append("</td><td  class='tr03'>");
             buffer.append( delNull(String.valueOf(list.get(i).get("SRY"))));
-            buffer.append("</td><td>");
+            buffer.append("</td><td class='tr02'>");
           
             buffer.append( delNull(String.valueOf(list2.get(i).get("YY"))));
-            buffer.append("</td><td width='90px'>");
+            buffer.append("</td><td  class='tr02'>");
             buffer.append( delNull(String.valueOf(list2.get(i).get("EY"))));
-            buffer.append("</td><td width='90px'>");
+            buffer.append("</td><td  class='tr02'>");
             buffer.append( delNull(String.valueOf(list2.get(i).get("SY"))));
-            buffer.append("</td><td width='90px'>");
+            buffer.append("</td><td  class='tr02'>");
             buffer.append( delNull(String.valueOf(list2.get(i).get("SIY"))));
-            buffer.append("</td><td width='90px'>");
+            buffer.append("</td><td  class='tr02'>");
             buffer.append( delNull(String.valueOf(list2.get(i).get("WY"))));
-            buffer.append("</td><td width='90px'>");
+            buffer.append("</td><td  class='tr02'>");
             buffer.append( delNull(String.valueOf(list2.get(i).get("LY"))));
-            buffer.append("</td><td width='90px'>");
+            buffer.append("</td><td  class='tr02'>");
             buffer.append( delNull(String.valueOf(list2.get(i).get("QY"))));
-            buffer.append("</td><td width='90px'>");
+            buffer.append("</td><td  class='tr02'>");
             buffer.append( delNull(String.valueOf(list2.get(i).get("BAY"))));
-            buffer.append("</td><td width='90px'>");
+            buffer.append("</td><td class='tr02'>");
             buffer.append( delNull(String.valueOf(list2.get(i).get("JY"))));
-            buffer.append("</td><td width='90px'>");
+            buffer.append("</td><td  class='tr02'>");
             buffer.append( delNull(String.valueOf(list2.get(i).get("SHIY"))));
-            buffer.append("</td><td width='90px'>");
+            buffer.append("</td><td  class='tr02'>");
             buffer.append( delNull(String.valueOf(list2.get(i).get("SYY"))));
-            buffer.append("</td><td width='90px'>");
+            buffer.append("</td><td  class='tr02'>");
             buffer.append( delNull(String.valueOf(list2.get(i).get("SRY"))));
             buffer.append("</td></tr>");
         }
@@ -144,56 +144,56 @@ public class BuildModel {
                     title="环比增长（%）";
                 if(j==2)
                     title="总增长（%）";
-            buffer.append("<tr><td  colspan='2'>");
+            buffer.append("<tr><td  colspan='2' class='tr04'>");
             buffer.append(title);
-            buffer.append("</td><td width='90px'>");
+            buffer.append("</td><td >");
             buffer.append( delNull(String.valueOf(cont1.get(j).get("YY"))));
-            buffer.append("</td><td width='90px'>");
+            buffer.append("</td><td >");
             buffer.append( delNull(String.valueOf(cont1.get(j).get("EY"))));
-            buffer.append("</td><td width='90px'>");
+            buffer.append("</td><td >");
             buffer.append( delNull(String.valueOf(cont1.get(j).get("SY"))));
-            buffer.append("</td><td width='90px'>");
+            buffer.append("</td><td >");
             buffer.append( delNull(String.valueOf(cont1.get(j).get("SIY"))));
-            buffer.append("</td><td width='90px'>");
+            buffer.append("</td><td >");
             buffer.append( delNull(String.valueOf(cont1.get(j).get("WY"))));
-            buffer.append("</td><td width='90px'>");
+            buffer.append("</td><td>");
             buffer.append( delNull(String.valueOf(cont1.get(j).get("LY"))));
-            buffer.append("</td><td width='90px'>");
+            buffer.append("</td><td >");
             buffer.append( delNull(String.valueOf(cont1.get(j).get("QY"))));
-            buffer.append("</td><td width='90px'>");
+            buffer.append("</td><td >");
             buffer.append( delNull(String.valueOf(cont1.get(j).get("BAY"))));
-            buffer.append("</td><td width='90px'>");
+            buffer.append("</td><td >");
             buffer.append( delNull(String.valueOf(cont1.get(j).get("JY"))));
-            buffer.append("</td><td width='90px'>");
+            buffer.append("</td><td >");
             buffer.append( delNull(String.valueOf(cont1.get(j).get("SHIY"))));
-            buffer.append("</td><td width='90px'>");
+            buffer.append("</td><td>");
             buffer.append( delNull(String.valueOf(cont1.get(j).get("SYY"))));
-            buffer.append("</td><td width='90px'>");
+            buffer.append("</td><td >");
             buffer.append( delNull(String.valueOf(cont1.get(j).get("SRY"))));
             buffer.append("</td><td>");
           
             buffer.append( delNull(String.valueOf(cont2.get(j).get("YY"))));
-            buffer.append("</td><td width='90px'>");
+            buffer.append("</td><td >");
             buffer.append( delNull(String.valueOf(cont2.get(j).get("EY"))));
-            buffer.append("</td><td width='90px'>");
+            buffer.append("</td><td >");
             buffer.append( delNull(String.valueOf(cont2.get(j).get("SY"))));
-            buffer.append("</td><td width='90px'>");
+            buffer.append("</td><td >");
             buffer.append( delNull(String.valueOf(cont2.get(j).get("SIY"))));
-            buffer.append("</td><td width='90px'>");
+            buffer.append("</td><td >");
             buffer.append( delNull(String.valueOf(cont2.get(j).get("WY"))));
-            buffer.append("</td><td width='90px'>");
+            buffer.append("</td><td >");
             buffer.append( delNull(String.valueOf(cont2.get(j).get("LY"))));
-            buffer.append("</td><td width='90px'>");
+            buffer.append("</td><td>");
             buffer.append( delNull(String.valueOf(cont2.get(j).get("QY"))));
-            buffer.append("</td><td width='90px'>");
+            buffer.append("</td><td >");
             buffer.append( delNull(String.valueOf(cont2.get(j).get("BAY"))));
-            buffer.append("</td><td width='90px'>");
+            buffer.append("</td><td >");
             buffer.append( delNull(String.valueOf(cont2.get(j).get("JY"))));
-            buffer.append("</td><td width='90px'>");
+            buffer.append("</td><td >");
             buffer.append( delNull(String.valueOf(cont2.get(j).get("SHIY"))));
-            buffer.append("</td><td width='90px'>");
+            buffer.append("</td><td >");
             buffer.append( delNull(String.valueOf(cont2.get(j).get("SYY"))));
-            buffer.append("</td><td width='90px'>");
+            buffer.append("</td><td >");
             buffer.append( delNull(String.valueOf(cont2.get(j).get("SRY"))));
             buffer.append("</td></tr>");
             
@@ -226,10 +226,10 @@ public class BuildModel {
       buffer.append("<table  id='firstTable'><tr id='title' class='tr01'><td  class='tr01'>编号</td><td  class='tr01'>写字楼名称</td><td class='tr01'>地址</td><td class='tr01'>城区</td><td class='tr01'>商圈</td><td class='tr01'>地铁</td><td class='tr01'>出租价格</td><td class='tr01'>售价</td><td class='tr01'>租售比</td><td  class='tr01'>可租售面积</td> <td class='tr01'>信息</td></tr>");
      for(int i=0;i<list.size();i++){
        buffer.append("<tr>");
-       buffer.append("<td> ");
+       buffer.append("<td class='tr04'> ");
        buffer.append(delNull(String.valueOf(list.get(i).get("BH"))));
        buffer.append("</td> ");
-       buffer.append("<td> ");
+       buffer.append("<td class='tr04'> ");
        buffer.append(delNull(String.valueOf(list.get(i).get("XZLMC"))));
        buffer.append("</td> ");
        buffer.append("<td> <input id='"+list.get(i).get("yw_guid")+"_DZ' onchange='chang(this)' value=' ");
@@ -280,13 +280,13 @@ public class BuildModel {
       buffer.append("<table id='firstTable'><tr id='title' class='tr01'><td width='50px' class='tr01'>编号</td><td width='150px' colspan='2' class='tr01'>写字楼名称</td><td width='50px' class='tr01'> 一月</td><td width='50px' class='tr01'>二月</td><td width='50px' class='tr01'>三月</td><td width='50px' class='tr01'>四月</td><td width='50px' class='tr01'>五月</td><td  width='50px' class='tr01'>六月</td><td width='50px' class='tr01'>七月</td><td  width='50px' class='tr01'>八月</td> <td width='50px' class='tr01'>九月</td><td width='50px' class='tr01'>十月</td><td width='50px' class='tr01'>十一月</td><td width='50px' class='tr01'>十二月</td></tr>");
       for(int i=0;i<list.size();i++){
           buffer.append("<tr>");
-          buffer.append("<td rowspan='2'> ");
+          buffer.append("<td rowspan='2' class='tr04'> ");
           buffer.append(delNull(String.valueOf(list.get(i).get("BH"))));
           buffer.append("</td> ");
-          buffer.append("<td rowspan='2'> ");
+          buffer.append("<td rowspan='2' class='tr04'> ");
           buffer.append(delNull(String.valueOf(list.get(i).get("XZLMC"))));
           buffer.append("</td> ");
-          buffer.append("<td>售价</td>");
+          buffer.append("<td class='tr04'>售价</td>");
           buffer.append("<td> <input id='"+list.get(i).get("yw_guid")+"_YY' onchange='chang(this)' value=' ");
           buffer.append(delNull(String.valueOf(list.get(i).get("YY"))));
           buffer.append("'/></td> ");
@@ -326,7 +326,7 @@ public class BuildModel {
           buffer.append("</tr>");
           
           buffer.append("<tr>");
-          buffer.append("<td>租金</td>");
+          buffer.append("<td class='tr04'>租金</td>");
           buffer.append("<td> <input id='"+list2.get(i).get("yw_guid")+"_YY' onchange='cha(this)' value=' ");
           buffer.append(delNull(String.valueOf(list2.get(i).get("YY"))));
           buffer.append("'/></td> ");
