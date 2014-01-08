@@ -139,7 +139,7 @@ textarea {
 				<tr align="center">
 					<td width="25%"><%=list.get("KFCB") %></td>
 					<td width="25%"><%=list.get("LMCB") %></td>
-					<td width="25%"><%=list.get("bbd") %></td>
+					<td width="25%"><%=list.get("BBD") %></td>
 					<td width="25%"><%=list.get("DMCB") %></td>
 					
 				</tr>
