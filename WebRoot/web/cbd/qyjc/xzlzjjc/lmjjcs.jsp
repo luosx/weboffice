@@ -31,7 +31,9 @@ table {
 	padding: 0;
 	margin: 0 auto;
 	border-collapse: collapse;
-	 table-layout:fixed;
+	   /***
+   table-layout:fixed;
+   ***/
 }
 
 td {
@@ -61,6 +63,22 @@ td1 {
 	line-height: 30px;
 	text-align: center;
 }
+.tr02 {
+	background-color:#FFCC99;
+	line-height: 30px;
+	text-align: center;
+}
+.tr03 {
+	background-color:#CCFFFF;
+	line-height: 30px;
+	text-align: center;
+}
+.tr04 {
+	background-color:#D5E1F3;
+	line-height: 30px;
+	text-align: center;
+}
+
 </style>
 <script type="text/javascript">
 
