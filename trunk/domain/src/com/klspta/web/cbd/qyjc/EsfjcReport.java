@@ -221,7 +221,7 @@ public class EsfjcReport extends AbstractBaseBean implements IDataClass {
 				Map<String, Object> sonMap = subMap.get(name);
 				TRBean tr = new TRBean();
 				tr.addTDBean(new TDBean(String.valueOf(num), "50","20"));
-				tr.addTDBean(new TDBean(name,"100","20"));
+				tr.addTDBean(new TDBean(name,"180","20"));
 				for(int i = 0; i < total.length; i++){
 					String value = String.valueOf(sonMap.get(total[i][0]));
 					tr.addTDBean(new TDBean(value, "100", "20"));
