@@ -82,7 +82,7 @@ public class BuildModel {
         for(int i=0;i<list.size();i++){
             buffer.append("<tr><td width='90px'>");
             buffer.append( delNull(String.valueOf(list.get(i).get("BH"))));
-            buffer.append("</td><td width='120px'>");
+            buffer.append("</td><td >");
             buffer.append( delNull(String.valueOf(list.get(i).get("XZLMC"))));
             buffer.append("</td></td><td width='90px'>");
             buffer.append( delNull(String.valueOf(list.get(i).get("YY"))));
@@ -141,9 +141,9 @@ public class BuildModel {
                 if(j==0)
                     title="平均租金（元/天·㎡）";  
                 if(j==1)
-                    title="环比增长";
+                    title="环比增长（%）";
                 if(j==2)
-                    title="总增长";
+                    title="总增长（%）";
             buffer.append("<tr><td  colspan='2'>");
             buffer.append(title);
             buffer.append("</td><td width='90px'>");
@@ -277,7 +277,7 @@ public class BuildModel {
    */
   public String getZjqkNd(List<Map<String, Object>> list,List<Map<String, Object>> list2){
       StringBuffer buffer = new StringBuffer();
-      buffer.append("<table width='900px' id='firstTable'><tr id='title' class='tr01'><td width='50px' class='tr01'>编号</td><td width='50px' colspan='2' class='tr01'>写字楼名称</td><td width='50px' class='tr01'> 一月</td><td width='50px' class='tr01'>二月</td><td width='50px' class='tr01'>三月</td><td width='50px' class='tr01'>四月</td><td width='50px' class='tr01'>五月</td><td  width='50px' class='tr01'>六月</td><td width='50px' class='tr01'>七月</td><td  width='50px' class='tr01'>八月</td> <td width='50px' class='tr01'>九月</td><td width='50px' class='tr01'>十月</td><td width='50px' class='tr01'>十一月</td><td width='50px' class='tr01'>十二月</td></tr>");
+      buffer.append("<table id='firstTable'><tr id='title' class='tr01'><td width='50px' class='tr01'>编号</td><td width='150px' colspan='2' class='tr01'>写字楼名称</td><td width='50px' class='tr01'> 一月</td><td width='50px' class='tr01'>二月</td><td width='50px' class='tr01'>三月</td><td width='50px' class='tr01'>四月</td><td width='50px' class='tr01'>五月</td><td  width='50px' class='tr01'>六月</td><td width='50px' class='tr01'>七月</td><td  width='50px' class='tr01'>八月</td> <td width='50px' class='tr01'>九月</td><td width='50px' class='tr01'>十月</td><td width='50px' class='tr01'>十一月</td><td width='50px' class='tr01'>十二月</td></tr>");
       for(int i=0;i<list.size();i++){
           buffer.append("<tr>");
           buffer.append("<td rowspan='2'> ");

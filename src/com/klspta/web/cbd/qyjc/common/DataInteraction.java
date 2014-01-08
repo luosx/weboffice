@@ -1,6 +1,6 @@
 package com.klspta.web.cbd.qyjc.common;
 
-import java.util.ArrayList;
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -102,18 +102,18 @@ public class DataInteraction extends AbstractBaseBean {
         if (query.size() > 0) {
             HashMap<String, Object> hashMap = new HashMap<String, Object>();
             HashMap<String, Object> Map = new HashMap<String, Object>();
-            int yy = Integer.parseInt(String.valueOf(query.get(0).get("yy")));
-            int ey = Integer.parseInt(String.valueOf(query.get(0).get("ey")));
-            int sy = Integer.parseInt(String.valueOf(query.get(0).get("sy")));
-            int siy = Integer.parseInt(String.valueOf(query.get(0).get("siy")));
-            int wy = Integer.parseInt(String.valueOf(query.get(0).get("wy")));
-            int ly = Integer.parseInt(String.valueOf(query.get(0).get("ly")));
-            int qy = Integer.parseInt(String.valueOf(query.get(0).get("qy")));
-            int bay = Integer.parseInt(String.valueOf(query.get(0).get("bay")));
-            int jy = Integer.parseInt(String.valueOf(query.get(0).get("jy")));
-            int shiy = Integer.parseInt(String.valueOf(query.get(0).get("shiy")));
-            int syy = Integer.parseInt(String.valueOf(query.get(0).get("syy")));
-            int sey = Integer.parseInt(String.valueOf(query.get(0).get("sey")));
+            double yy =Double.parseDouble(String.valueOf(query.get(0).get("yy")));
+            double ey = Double.parseDouble(String.valueOf(query.get(0).get("ey")));
+            double sy = Double.parseDouble(String.valueOf(query.get(0).get("sy")));
+            double siy = Double.parseDouble(String.valueOf(query.get(0).get("siy")));
+            double wy = Double.parseDouble(String.valueOf(query.get(0).get("wy")));
+            double ly = Double.parseDouble(String.valueOf(query.get(0).get("ly")));
+            double qy = Double.parseDouble(String.valueOf(query.get(0).get("qy")));
+            double bay = Double.parseDouble(String.valueOf(query.get(0).get("bay")));
+            double jy = Double.parseDouble(String.valueOf(query.get(0).get("jy")));
+            double shiy = Double.parseDouble(String.valueOf(query.get(0).get("shiy")));
+            double syy = Double.parseDouble(String.valueOf(query.get(0).get("syy")));
+            double sey =Double.parseDouble(String.valueOf(query.get(0).get("sey")));
             //环比增长
             hashMap.put("yy", "0");
             hashMap.put("ey",getOpration (ey , yy ));
@@ -147,11 +147,16 @@ public class DataInteraction extends AbstractBaseBean {
         return query;
     }
 
-    public int getOpration(int i, int j) {
+    public double getOpration(double i, double j) {
         if (j == 0) {
-            return 0;
+            return 0.0000;
         } else {
-            return (i / j - 1) * 100;
+           
+           // DecimalFormat dec = new DecimalFormat("#.0000");
+          //  String date = dec.format((i / j - 1) * 100);
+            BigDecimal   b   =   new   BigDecimal((i / j - 1) * 100);  
+            double   f1   =   b.setScale(4,   BigDecimal.ROUND_HALF_UP).doubleValue(); 
+            return f1;
         }
     }
 

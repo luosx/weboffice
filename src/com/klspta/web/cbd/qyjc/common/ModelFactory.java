@@ -8,7 +8,7 @@ public class ModelFactory {
   
     /****
      * 
-     * <br>Description:一年测算展现
+     * <br>Description:2年测算展现
      * <br>Author:朱波海
      * <br>Date:2014-1-7
      * @param year
@@ -45,7 +45,7 @@ public class ModelFactory {
     }
     /*****
      * 
-     * <br>Description:资金管理年度
+     * <br>Description:资金管理年度录入
      * <br>Author:朱波海
      * <br>Date:2014-1-6
      * @return
