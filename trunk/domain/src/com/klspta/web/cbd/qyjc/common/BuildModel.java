@@ -220,7 +220,7 @@ public class BuildModel {
           buffer.append("<td rowspan='2'> ");
           buffer.append(delNull(String.valueOf(list.get(i).get("XZLMC"))));
           buffer.append("</td> ");
-          buffer.append("<td> 租金</td>");
+          buffer.append("<td>售价</td>");
           buffer.append("<td> <input id='"+list.get(i).get("yw_guid")+"_YY' onchange='chang(this)' value=' ");
           buffer.append(delNull(String.valueOf(list.get(i).get("YY"))));
           buffer.append("'/></td> ");
@@ -260,7 +260,7 @@ public class BuildModel {
           buffer.append("</tr>");
           
           buffer.append("<tr>");
-          buffer.append("<td>均价</td>");
+          buffer.append("<td>租金</td>");
           buffer.append("<td> <input id='"+list2.get(i).get("yw_guid")+"_YY' onchange='cha(this)' value=' ");
           buffer.append(delNull(String.valueOf(list2.get(i).get("YY"))));
           buffer.append("'/></td> ");
