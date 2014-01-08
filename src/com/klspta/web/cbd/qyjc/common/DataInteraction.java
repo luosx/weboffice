@@ -1,6 +1,5 @@
 package com.klspta.web.cbd.qyjc.common;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -29,21 +28,18 @@ public class DataInteraction extends AbstractBaseBean {
          if(query1.size()==query2.size()){
              return query1;
          }else {
-             for(int i=0;i<query2.size();i++){
-                 String sq="Select * from "+tabName+" where yw_guid=? and rq=?";
-                 List<Map<String, Object>> list = query(sq, YW,new Object[]{query2.get(i).get("yw_guid"),year});
-                 if(list.size()<1){
+             String sqldiff="select  distinct t2.yw_guid from xzlxx t2 where t2.yw_guid  not in (select yw_guid from "+tabName+" where rq=? )";
+             List<Map<String, Object>> list = query(sqldiff, YW,new Object[]{year});
+             for(int i=0;i<list.size();i++){
                      String insert="insert into "+tabName+"(yw_guid,rq ) values (?,?)";
-                     update(insert, YW,new Object []{query2.get(i).get("yw_guid"),year });
+                     update(insert, YW,new Object []{list.get(i).get("yw_guid"),year });
                  }
                  
              }
              String sq="select t.bh,t.xzlmc,t2.* from XZLXX t,"+tableName+" t2 where t.yw_guid=t2.yw_guid and t2.rq=?";
              query1 = query(sq, YW,new Object[]{year});
-             return query1;
         }
-        }
-        return null;
+        return query1;
     }
     
     /*****
@@ -53,6 +49,14 @@ public class DataInteraction extends AbstractBaseBean {
      * <br>Date:2014-1-6
      */
     public  List<Map<String, Object>> getXzl_Zjqk_xx(){
+        String sqldiff="select  distinct t2.yw_guid from xzlxx t2 where t2.yw_guid  not in (select yw_guid from XZLZJQK  )";
+          List<Map<String, Object>> diff = query(sqldiff, YW);
+          if(diff.size()>0){
+              for(int i=0;i<diff.size();i++){
+              String insert="insert into XZLZJQK (yw_guid) values(?)";
+              update(insert, YW,new Object[]{diff.get(i).get("yw_guid")});
+              }
+          }
         String sql="Select t.xzlmc,t.bh,t2.* from xzlxx t,xzlzjqk t2 where t.yw_guid=t2.yw_guid";
         List<Map<String, Object>> query = query(sql, YW);
         return  query;
