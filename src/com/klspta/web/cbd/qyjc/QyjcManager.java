@@ -330,41 +330,40 @@ public class QyjcManager extends AbstractBaseBean {
         String year = request.getParameter("year");
         String sqlString = "select *  from XZLXX t";
         List<Map<String, Object>> list = query(sqlString, YW);
-        List<Map<String, Object>> query1=null;
-        List<Map<String, Object>> query2=null;
+        List<Map<String, Object>> query1 = null;
+        List<Map<String, Object>> query2 = null;
         String que1 = "select * from XZLXX t,XZLZJQKND_PJZJ t2 where t.yw_guid=t2.yw_guid and t2.rq=?";
         query1 = query(que1, YW, new Object[] { year });
         if (query1.size() != list.size()) {
-            for (int i = 0; i < list.size(); i++) {
-                String sqls = "select * from XZLZJQKND_PJZJ t where t.yw_guid=? and t.rq=?";
-                List<Map<String, Object>> query = query(sqls, YW, new Object[] { list.get(i).get("yw_guid"),
-                        year });
-                if (query.size() < 1) {
+            String sqldiff = "select  distinct t2.yw_guid from xzlxx t2 where t2.yw_guid  not in (select yw_guid from XZLZJQKND_PJZJ where rq=? )";
+            List<Map<String, Object>> query = query(sqldiff, YW, new Object[] { year });
+            if (query.size() > 0) {
+                for (int i = 0; i < query.size(); i++) {
                     String insert = "insert into XZLZJQKND_PJZJ (yw_guid,rq) values(?,?)";
                     update(insert, YW, new Object[] { list.get(i).get("yw_guid"), year });
                 }
+                String sql2 = "select * from XZLXX t,XZLZJQKND_PJLM t2 where t2.yw_guid=t.yw_guid and t2.rq=?";
+                query1 = query(sql2, YW, new Object[] { year });
             }
-            String sql2 = "select * from XZLXX t,XZLZJQKND_PJLM t2 where t2.yw_guid=t.yw_guid and t2.rq=?";
-            query1 = query(sql2, YW, new Object[] { year });
         }
         String que2 = "select * from XZLXX t,XZLZJQKND_PJLM t2 where t.yw_guid=t2.yw_guid and t2.rq=?";
-        query2= query(que2, YW, new Object[] { year });
-        
-        if(query2.size() != list.size()){
-        for (int i = 0; i < list.size(); i++) {
-            String que = "select * from XZLZJQKND_PJLM where yw_guid=? and rq=?";
-            List<Map<String, Object>> list4 = query(que, YW, new Object[] { list.get(i).get("yw_guid"), year });
-            if (list4.size() < 1) {
-                String insert = "insert into XZLZJQKND_PJLM (yw_guid,rq) values(?,?)";
-                update(insert, YW, new Object[] { list.get(i).get("yw_guid"), year });
+        query2 = query(que2, YW, new Object[] { year });
+        if (query2.size() != list.size()) {
+            String sqldiff = "select  distinct t2.yw_guid from xzlxx t2 where t2.yw_guid  not in (select yw_guid from XZLZJQKND_PJLM where rq=? )";
+            List<Map<String, Object>> query = query(sqldiff, YW, new Object[] { year });
+            if (query.size() > 0) {
+                for (int i = 0; i < list.size(); i++) {
+                    String insert = "insert into XZLZJQKND_PJLM (yw_guid,rq) values(?,?)";
+                    update(insert, YW, new Object[] { list.get(i).get("yw_guid"), year });
+                }
+                String sql = "select * from XZLXX t,XZLZJQKND_PJZJ t2 where t2.yw_guid=t.yw_guid and t2.rq=?";
+                query2 = query(sql, YW, new Object[] { year });
             }
-        }
-        String sql = "select * from XZLXX t,XZLZJQKND_PJZJ t2 where t2.yw_guid=t.yw_guid and t2.rq=?";
-        query2 = query(sql, YW, new Object[] { year });
         }
         BuildModel buildModel = new BuildModel();
         String table = buildModel.getZjqkNd(query1, query2);
         response(table);
+
 
     }
 
