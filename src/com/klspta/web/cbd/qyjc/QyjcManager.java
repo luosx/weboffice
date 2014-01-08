@@ -18,37 +18,37 @@ public class QyjcManager extends AbstractBaseBean {
 	        return qyjcManager;
 	    }
 
-		public String getList() {
+	    public String getList() {
 	        String sql = "select t.bh,t.xzlmc,t.kfs,t.wygs,t.tzf,t.cpdw,t.cplx,t.cylx,t.rzqy,t.kpsj,t.ysxkz,t.cbcs,t.lc,t.bzcg,t.wq,t.cn,t.gd,t.gs,t.dt,t.gdcw,t.tcwzj,t.syl,t.qt from xzlxx t";
 	        List<Map<String, Object>> list = query(sql, YW);
 	        StringBuffer result = new StringBuffer(
 	                "<table id='XZLZJ' width='3000' border='1' cellpadding='1' cellspacing='0'>" +
-	                "<tr class='tr01' ><td id='0_0' height='10' width='10' colspan='1' rowspan='2' class='tr01'>编号</td>" +
-	                "<td id='0_1' height='10' width='10' colspan='1' rowspan='2' class='tr01'>写字楼名称</td>" +
-	                "<td id='0_2' height='10' width='10' colspan='1' rowspan='2' class='tr01'>开发商</td>" +
-	                "<td id='0_3' height='10' width='10' colspan='1' rowspan='2' class='tr01'>物业公司</td>" +
-	                "<td id='0_4' height='10' width='10' colspan='1' rowspan='2' class='tr01'>投资方</td>" +
-	                "<td id='0_5' height='10' width='10' colspan='3' rowspan='1' class='tr01'>产品</td>" +
-	                "<td id='0_6' height='10' width='10' colspan='14' rowspan='1' class='tr01'>项目</td>" +
-	                "<td id='0_7' height='10' width='150' colspan='1' rowspan='2' class='tr01'>其他</td>" +
-	                "<td id='0_7' height='10' width='16' colspan='1' rowspan='2' class='tr01'>操作</td>" +
-	                "</tr><tr class='trtotal' ><td id='1_0' height='10' width='60' colspan='1' rowspan='1' class='tr01'>产品定位</td>" +
-	                "<td id='1_1' height='10' width='40' colspan='1' rowspan='1' class='tr01'>产品类型</td>" +
-	                "<td id='1_2' height='10' width='60' colspan='1' rowspan='1' class='tr01'>产业类型</td>" +
-	                "<td id='1_3' height='10' width='10' colspan='1' rowspan='1' class='tr01'>入驻企业</td>" +
-	                "<td id='1_4' height='10' width='10' colspan='1' rowspan='1' class='tr01'>开盘时间</td>" +
-	                "<td id='1_5' height='10' width='10' colspan='1' rowspan='1' class='tr01'>预售许可证</td>" +
-	                "<td id='1_6' height='10' width='10' colspan='1' rowspan='1' class='tr01'>成本测算</td>" +
-	                "<td id='1_7' height='10' width='10' colspan='1' rowspan='1' class='tr01'>楼层</td>" +
-	                "<td id='1_8' height='10' width='10' colspan='1' rowspan='1' class='tr01'>标准层高（米）</td>" +
-	                "<td id='1_9' height='10' width='10' colspan='1' rowspan='1' class='tr01'>外墙</td>" +
-	                "<td id='1_10' height='10' width='10' colspan='1' rowspan='1' class='tr01'>采暖</td>" +
-	                "<td id='1_11' height='10' width='10' colspan='1' rowspan='1' class='tr01'>供电</td>" +
-	                "<td id='1_12' height='10' width='10' colspan='1' rowspan='1' class='tr01'>供水</td>" +
-	                "<td id='1_13' height='10' width='50' colspan='1' rowspan='1' class='tr01'>电梯</td>" +
-	                "<td id='1_14' height='10' width='10' colspan='1' rowspan='1' class='tr01'>固定车位（个）</td>" +
-	                "<td id='1_15' height='10' width='10' colspan='1' rowspan='1' class='tr01'>停车位租价（元/月·个）</td>" +
-	                "<td id='1_16' height='10' width='10' colspan='1' rowspan='1' class='tr01'>使用率</td></tr>  ");
+	                "<tr class='tr01' ><td id='0_0' height='10' width='50' colspan='1' rowspan='2' class='tr01'>编号</td>" +
+	                "<td id='0_1' height='10' width='100' colspan='1' rowspan='2' class='tr01'>写字楼名称</td>" +
+	                "<td id='0_2' height='10' width='100' colspan='1' rowspan='2' class='tr01'>开发商</td>" +
+	                "<td id='0_3' height='10' width='100' colspan='1' rowspan='2' class='tr01'>物业公司</td>" +
+	                "<td id='0_4' height='10' width='100' colspan='1' rowspan='2' class='tr01'>投资方</td>" +
+	                "<td id='0_5' height='10' width='100' colspan='3' rowspan='1' class='tr01'>产品</td>" +
+	                "<td id='0_6' height='10' width='100' colspan='14' rowspan='1' class='tr01'>项目</td>" +
+	                "<td id='0_7' height='10' width='300' colspan='1' rowspan='2' class='tr01'>其他</td>" +
+	                "<td id='0_7' height='10' width='100' colspan='1' rowspan='2' class='tr01'>操作</td>" +
+	                "</tr><tr class='trtotal' ><td id='1_0' height='10' width='100' colspan='1' rowspan='1' class='tr01'>产品定位</td>" +
+	                "<td id='1_1' height='10' width='100' colspan='1' rowspan='1' class='tr01'>产品类型</td>" +
+	                "<td id='1_2' height='10' width='100' colspan='1' rowspan='1' class='tr01'>产业类型</td>" +
+	                "<td id='1_3' height='10' width='100' colspan='1' rowspan='1' class='tr01'>入驻企业</td>" +
+	                "<td id='1_4' height='10' width='100' colspan='1' rowspan='1' class='tr01'>开盘时间</td>" +
+	                "<td id='1_5' height='10' width='100' colspan='1' rowspan='1' class='tr01'>预售许可证</td>" +
+	                "<td id='1_6' height='10' width='100' colspan='1' rowspan='1' class='tr01'>成本测算</td>" +
+	                "<td id='1_7' height='10' width='100' colspan='1' rowspan='1' class='tr01'>楼层</td>" +
+	                "<td id='1_8' height='10' width='100' colspan='1' rowspan='1' class='tr01'>标准层高（米）</td>" +
+	                "<td id='1_9' height='10' width='100' colspan='1' rowspan='1' class='tr01'>外墙</td>" +
+	                "<td id='1_10' height='10' width='100' colspan='1' rowspan='1' class='tr01'>采暖</td>" +
+	                "<td id='1_11' height='10' width='100' colspan='1' rowspan='1' class='tr01'>供电</td>" +
+	                "<td id='1_12' height='10' width='100' colspan='1' rowspan='1' class='tr01'>供水</td>" +
+	                "<td id='1_13' height='10' width='100' colspan='1' rowspan='1' class='tr01'>电梯</td>" +
+	                "<td id='1_14' height='10' width='100' colspan='1' rowspan='1' class='tr01'>固定车位（个）</td>" +
+	                "<td id='1_15' height='10' width='100' colspan='1' rowspan='1' class='tr01'>停车位租价（元/月·个）</td>" +
+	                "<td id='1_16' height='10' width='100' colspan='1' rowspan='1' class='tr01'>使用率</td></tr>  ");
 	        result.append("<tr id='newRow' class='tr02' style='display:none;'>"
 	        +"<td  class='td1'><input  id='bh'/ ></td>"
 	        +"<td  class='td1'><input  id='xzlmc' /></td>"
