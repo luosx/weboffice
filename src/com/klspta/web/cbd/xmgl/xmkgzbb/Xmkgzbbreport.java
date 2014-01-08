@@ -79,6 +79,20 @@ public class Xmkgzbbreport extends AbstractBaseBean implements IDataClass {
 							width ="30px";
 						}else if(3 == i){
 							width = "130px";
+						}else if(0 == i){
+							width = "30px";
+						}else if(1 == i){
+							width = "120px";
+						}else if(4 == i){
+							width = "140px";
+						}else if(5 == i){
+							width = "80px";
+						}else if(6 == i){
+							width = "140px";
+						}else if(7 == i){
+							width = "100px";
+						}else if(7 == i){
+							width = "3000px";
 						}
 						tdBean = new TDBean(value, width, "","true");
 						trBean.addTDBean(tdBean);
@@ -116,6 +130,20 @@ public class Xmkgzbbreport extends AbstractBaseBean implements IDataClass {
 					width ="30px";
 				}else if(3 == i){
 					width = "130px";
+				}else if(0 == i){
+					width = "30px";
+				}else if(1 == i){
+					width = "120px";
+				}else if(4 == i){
+					width = "140px";
+				}else if(5 == i){
+					width = "80px";
+				}else if(6 == i){
+					width = "140px";
+				}else if(7 == i){
+					width = "100px";
+				}else if(7 == i){
+					width = "3000px";
 				}
 				tdBean = new TDBean(value, width, "","true");
 				trBean.addTDBean(tdBean);
@@ -162,7 +190,23 @@ public class Xmkgzbbreport extends AbstractBaseBean implements IDataClass {
 						String width = "";
 						TDBean tdBean;
 						if(i==2){
-							width ="20";
+							width ="30px";
+						}else if(3 == i){
+							width = "130px";
+						}else if(0 == i){
+							width = "30px";
+						}else if(1 == i){
+							width = "120px";
+						}else if(4 == i){
+							width = "140px";
+						}else if(5 == i){
+							width = "80px";
+						}else if(6 == i){
+							width = "140px";
+						}else if(7 == i){
+							width = "100px";
+						}else if(7 == i){
+							width = "3000px";
 						}
 						tdBean = new TDBean(value, width, "","true");
 						trBean.addTDBean(tdBean);
@@ -230,7 +274,23 @@ public class Xmkgzbbreport extends AbstractBaseBean implements IDataClass {
 						String width = "";
 						TDBean tdBean;
 						if(i==2){
-							width ="20";
+							width ="30px";
+						}else if(3 == i){
+							width = "130px";
+						}else if(0 == i){
+							width = "30px";
+						}else if(1 == i){
+							width = "120px";
+						}else if(4 == i){
+							width = "140px";
+						}else if(5 == i){
+							width = "80px";
+						}else if(6 == i){
+							width = "140px";
+						}else if(7 == i){
+							width = "100px";
+						}else if(7 == i){
+							width = "3000px";
 						}
 						tdBean = new TDBean(value, width, "","true");
 						trBean.addTDBean(tdBean);
@@ -278,7 +338,23 @@ public class Xmkgzbbreport extends AbstractBaseBean implements IDataClass {
 						String width = "";
 						TDBean tdBean;
 						if(i==2){
-							width ="20";
+							width ="30px";
+						}else if(3 == i){
+							width = "130px";
+						}else if(0 == i){
+							width = "30px";
+						}else if(1 == i){
+							width = "120px";
+						}else if(4 == i){
+							width = "140px";
+						}else if(5 == i){
+							width = "80px";
+						}else if(6 == i){
+							width = "140px";
+						}else if(7 == i){
+							width = "100px";
+						}else if(7 == i){
+							width = "3000px";
 						}
 						tdBean = new TDBean(value, width, "","true");
 						trBean.addTDBean(tdBean);
