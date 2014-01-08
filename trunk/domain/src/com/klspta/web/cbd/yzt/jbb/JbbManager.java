@@ -151,7 +151,7 @@ public class JbbManager extends AbstractBaseBean{
 			}else {
 				sql = "select b.bbd as bbd from bbdfxjg b ,sys_parameter s where b.tzhsq=s.hsq order by to_number(lmcb) desc";
 				result = query(sql, YW);
-				map.put("bbd", ">"+result.get(0).get("bbd"));
+				map.put("BBD", ">"+result.get(0).get("bbd"));
 			}
 			return map;
 		}
