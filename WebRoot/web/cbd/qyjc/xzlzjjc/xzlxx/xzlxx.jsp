@@ -150,7 +150,6 @@ var bhs = "";
 			putRestParameter("syl",syl);
 			putRestParameter("qt",qt);
 			var msg=restRequest();
-			alert(msg);
 			if('success'==msg){
 				alert("保存成功！");
 				 window.parent.adding=false;
@@ -241,7 +240,6 @@ var bhs = "";
 			putRestParameter("syl",syl);
 			putRestParameter("qt",qt);
 			var msg=restRequest();
-			alert(msg);
 			if('success'==msg){
 				alert("保存成功！");
 				 window.parent.adding=false;
