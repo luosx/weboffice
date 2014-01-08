@@ -28,7 +28,7 @@ table {
 	padding: 0;
 	margin: 0 auto;
 	border-collapse: collapse;
-	 table-layout:fixed;
+   table-layout:fixed;
 }
 
 td {
@@ -37,6 +37,7 @@ td {
 	font-size: 12px;
 	padding: 3px 3px 3px 8px;
 	color: #000000;
+	text-align: center;
 }
 input{
 border:none;

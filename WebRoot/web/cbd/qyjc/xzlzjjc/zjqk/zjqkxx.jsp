@@ -27,6 +27,7 @@ table {
 	padding: 0;
 	margin: 0 auto;
 	border-collapse: collapse;
+	table-layout:fixed;
 }
 input{
 border:none;
@@ -38,7 +39,7 @@ td {
 	font-size: 12px;
 	padding: 3px 3px 3px 8px;
 	color: #000000;
-	 text-align:center;
+   text-align:center;
 }
 
 td1 {
@@ -49,7 +50,7 @@ td1 {
 	color: #fdfdfd;
 }
   .tr01{
-  	background-color: #C0C0C0;
+  	background-color:#D5E1F2;
   	font-weight:bold;
     line-height: 30px;
     text-align:center;
@@ -60,6 +61,8 @@ td1 {
    .tr03{
   	background-color: #FCFCFC;
   }
+  
+
 </style>
 </head>
 <script type="text/javascript">
