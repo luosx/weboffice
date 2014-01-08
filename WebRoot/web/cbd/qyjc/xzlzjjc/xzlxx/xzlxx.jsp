@@ -21,6 +21,7 @@
 <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 <meta http-equiv="description" content="This is my page">
 	<%@ include file="/base/include/restRequest.jspf"%>
+	<%@ include file="/base/include/ext.jspf" %>
 	<style type="text/css">
 table {
 	border: 1px solid #000000;
@@ -339,7 +340,7 @@ var bhs = "";
 		newRow.parentNode.removeChild(newRow);
 	}
 	function exportExcel(){
-		    var curTbl = document.getElementById("center"); 
+		    var curTbl = document.getElementById("XZLZJ"); 
  			try{
 		    	var oXL = new ActiveXObject("Excel.Application");
 		    }catch(err){
@@ -367,7 +368,7 @@ var bhs = "";
 
 </script>
 <body>
-<div id="fixed" style="position: fixed; top: 5px; left: 20px">
+<div id="fixed" style="position: fixed; top: 2px; left: 20px">
   		&nbsp;
   		
 		<img src="base/form/images/exportexcel.png" width="20px" height="20px" title="导出Excel" onClick="javascript:exportExcel();"  />&nbsp;&nbsp;&nbsp;
