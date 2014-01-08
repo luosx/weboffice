@@ -19,8 +19,10 @@ public class ModelFactory {
         BuildModel buildModel = new BuildModel();
         DataInteraction interaction = new DataInteraction();
         List<Map<String, Object>> list1 = interaction.getDateList(year[0],tabName);
+        List<Map<String, Object>> cont1 = interaction.getCont(year[0], tabName);
         List<Map<String, Object>> list2 = interaction.getDateList(year[1],tabName);
-        String two_year = buildModel.getMode1(list1, list2, year);
+        List<Map<String, Object>> cont2 = interaction.getCont(year[0], tabName);
+        String two_year = buildModel.getMode1(list1, list2, year,cont1,cont2);
         return two_year;
         }
   
