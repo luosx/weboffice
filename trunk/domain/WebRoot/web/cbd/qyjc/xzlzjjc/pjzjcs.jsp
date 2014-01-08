@@ -108,7 +108,7 @@ function deleteDiv(){
 	<body bgcolor="#FFFFFF" style="overflow: scroll;">
 		<div align="center" style="width: 100%">
 			<div align="center" style="width: 95%; height: 20px">
-				<h3>平均楼面均价测算 </h3>
+				<h3>平均租金测算 </h3>
 			</div>
 	     	
 			日期选择 <select id="selt1" onchange="chang1()"> 
