@@ -33,45 +33,66 @@
 		<meta http-equiv="description" content="This is my page">
 		<%@ include file="/base/include/ext.jspf" %>
 		<%@ include file="/base/include/restRequest.jspf" %>
-		<style type="text/css">
-table{
-border-right:1px solid #000000;
-border-bottom:1px solid #000000;
- font-size: 12px;
- border-color:#000000;
-background-color: #A8CEFF;
- table-layout:fixed;
-}
-table td{
-border-left:1px solid #000000;
-border-top:1px solid #000000;
-     text-align:center;
-    border-color:#000000;
-    background-color: #A8CEFF;
-} 
-tr{
-    border-width: 0px;
-    text-align:center;
-    background-color: #A8CEFF;
-}
-.title{
-    font-weight:bold;
-    font-size: 15px;
-    text-align:center;
-    line-height: 30px;
-	margin-top: 6px;
-	background-color: #A8CEFF;
-  }
 
+<style type="text/css">
+table {
+	border: 1px solid #000000;
+	padding: 0;
+	margin: 0 auto;
+	border-collapse: collapse;
+   table-layout:fixed;
+}
+
+td {
+	border: 1px solid #000000;
+	background: #fff;
+	font-size: 12px;
+	padding: 3px 3px 3px 8px;
+	color: #000000;
+	text-align: center;
+}
 input{
 border:none;
-background-color: #A8CEFF;
+height: 25px;
 }
-textarea{
-border:none;
-background-color: #A8CEFF;
+
+td1 {
+	border: 1px solid #000000;
+	background: #adadad;
+	font-size: 13px;
+	padding: 3px 3px 3px 8px;
+	color: #fdfdfd;
 }
- </style>
+
+.tr01 {
+	background-color:#BCD2EF;
+	font-weight: bold;
+	line-height: 30px;
+	text-align: center;
+}
+.tr02 {
+	background-color:#FFCC99;
+	font-weight: bold;
+	line-height: 30px;
+	text-align: center;
+}
+.tr03 {
+	background-color:#FFCC99;
+	line-height: 20px;
+	text-align: center;
+}
+.tr04 {
+	background-color:#CCFFFF;
+	line-height: 30px;
+	text-align: center;
+}
+.tr05 {
+	background-color:#FFF69A;
+	background-color:#FFCC99;
+	line-height: 20px;
+	text-align: center;
+}
+</style>
 <script type="text/javascript">
 
 function addrzxq(check){
