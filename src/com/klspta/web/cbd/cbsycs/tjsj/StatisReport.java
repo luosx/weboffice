@@ -117,7 +117,7 @@ public class StatisReport extends AbstractBaseBean {
         String[] colors = {"yellow","red"};
         String[] alias = {"zj","sj"}; 
         String year = Calendar.getInstance().get(Calendar.YEAR)+"";
-        String sql1 = "select k.czfjj as zj,k.esfjj as sj  from zsqk k where k.nd='"+year+"' and k.yd=? and k.yw_guid='"+yw_guid+"'";
+        String sql1 = "select avg(k.czfjj) as zj,avg(k.esfjj) as sj  from zsqk k where k.nd='"+year+"' and k.yd=? ";
         String[] array = new String[]{"1","2","3","4","5","6","7","8","9","10","11","12"};
         generateReport(names,colors,alias,sql1,array,"esfzj","Line");
 	}
@@ -133,10 +133,36 @@ public class StatisReport extends AbstractBaseBean {
     	String[] names = {"租金","售价"};
         String[] colors = {"yellow","red"};
         String[] alias = {"zj","sj"}; 
-        String year = Calendar.getInstance().get(Calendar.YEAR)+"";
-        String sql1 = "select avg(k.zj) as zj,avg(k.sj/1000) as sj   from xzlzjqk k where k.year='"+year+"' and k.month=?";
-        String[] array = new String[]{"1","2","3","4","5","6","7","8","9","10","11","12"};
-        generateReport(names,colors,alias,sql1,array,"xzlall","Line"); 
+        String[] column = new String[12];
+        String[] months = new String[] {"YY","ER","SY","SIY","WY","LY","QY","BAY","JY","SHIY","SYY","SEY"};
+        int[] array1 = null;
+        int[] array2 = null;
+        
+        int month = Calendar.getInstance().get(Calendar.MONTH)+1;
+        if(month==12){
+        	array1 = new int[12];
+        	for(int i=1;i<=12;i++){
+        		array1[i-1] = i;       		
+        	}
+        	column = months;
+        }else {
+        	int j=0;
+        	array1 = new int[12-month];
+        	array2 = new int[month];
+        	for(int i = month % 12 + 1; i<=12;i++ ){
+        		array1[j]= i;	
+        		column[j] = months[i-1];
+        		j++;
+        	}
+        	int z=0;
+        	for( int i=1;i<=month;i++){
+        		array2[z]= i;
+        		column[j] = months[i-1];
+        		z++;
+        		j++;
+        	}
+        }
+        generateReport(names,colors,alias,array1,array2,months,"xzlall","Line"); 
 	}
 
 	/**
@@ -358,7 +384,111 @@ public class StatisReport extends AbstractBaseBean {
      * <br>Date:2013-12-12
      */
     private void generateReport(String[] names,String[] colors ,String[] alias,String sql1,String[] array,String xml,String type){
-        generateReport(names, colors, alias, sql1, xml, type);        
+    	 List<Object> allList = new ArrayList<Object>();
+         List<Map<String,Object>> list1 = null;
+         for(int i=0;i<array.length;i++){
+             list1 = query(sql1,YW,new Object[]{array[i]});
+             allList.add(list1);
+         }         
+         List<Object> list = parseXml(xml);
+         String xmlPath = (String)list.get(0);
+         Document doc = (Document)list.get(1);      
+         Element data = (Element)list.get(2);
+         Element e = null;
+         Element e1 = null;
+         List<Map<String,Object>> list2 = null;
+         Map<String,Object> map = null;
+         for(int i=0;i<names.length;i++){
+             e = new Element("series");
+             e.setAttribute("id", i+"");
+             e.setAttribute("name", names[i]);
+             e.setAttribute("type", type);
+             e.setAttribute("color", colors[i]);
+             for(int j=0;j<array.length;j++){
+                 list2 = (List<Map<String,Object>>)allList.get(j); 
+                 map = list2.get(0);
+                 e1 = new Element("point");
+                 e1.setAttribute("name", array[j]);
+                 e1.setAttribute("y", map.get(alias[i])==null?"0":map.get(alias[i]).toString());  
+                 e.addContent(e1);
+             }
+             data.addContent(e);
+         }        
+         generateXml(doc,xmlPath);       
+    }
+    
+    /**
+     * 
+     * <br>Description: 写字楼租金及售价
+     * <br>Author:李国明
+     * <br>Date:2013-12-12
+     */
+    private void generateReport(String[] names,String[] colors ,String[] alias,int[] array1,int[] array2,String[] column,String xml,String type){
+    	 List<Object> allList = new ArrayList<Object>();
+         List<Map<String,Object>> list1 = null;
+         List<Map<String,Object>> list2 = null;
+         int year = Calendar.getInstance().get(Calendar.YEAR);
+         String sql1 = "select ";
+         String sql2 = "select ";
+         if(array1[0]==1){
+        	 for(int i=0;i<11;i++){
+        		 sql1+= "avg("+column[i]+") as "+column[i]+",";
+        	 }
+        	 sql1 += "avg("+column[11]+") as "+column[11]+" from xzlzjqknd_pjzj where rq=?";
+        	 list1 = query(sql1, YW,new Object[]{year+""});
+         }else {
+        	 for(int i=0;i<array1.length-1;i++){
+        		 sql1+= "avg("+column[array1[i]-1]+") as "+column[array1[i]-1]+",";
+        	 }
+        	 sql1 += "avg("+column[array1[array1.length-1]-1]+") as "+column[array1[array1.length-1]-1]+" from xzlzjqknd_pjzj where rq=?";
+        	 list1 = query(sql1, YW,new Object[]{year-1+""});
+        	 for(int i=0;i<array2.length-1;i++){
+        		 sql2+= "avg("+column[array2[i]-1]+") as "+column[array2[i]-1]+",";
+        	 }
+        	 sql2 += "avg("+column[array2[array2.length-1]-1]+") as "+column[array2[array2.length-1]-1]+" from xzlzjqknd_pjzj where rq=?";
+        	 list2 = query(sql2, YW,new Object[]{year+""});
+         }       
+         List<Object> list = parseXml(xml);
+         String xmlPath = (String)list.get(0);
+         Document doc = (Document)list.get(1);      
+         Element data = (Element)list.get(2);
+         Element e = null;
+         Element e1 = null;
+         Map<String,Object> map = null;
+         for(int i=0;i<names.length;i++){
+             e = new Element("series");
+             e.setAttribute("id", i+"");
+             e.setAttribute("name", names[i]);
+             e.setAttribute("type", type);
+             e.setAttribute("color", colors[i]);
+             if(array2==null){
+	             for(int j=0;j<array1.length;j++){
+	                 map = list1.get(0);
+	                 e1 = new Element("point");
+	                 e1.setAttribute("name", year+"年"+array1[j]+"月");
+	                 e1.setAttribute("y", map.get(column[array1[j]-1])==null?"0":map.get(column[array1[j]-1]).toString());  
+	                 e.addContent(e1);
+	             }
+             }else {
+            	 for(int j=0;j<array1.length;j++){
+                     map = list1.get(0);
+                     e1 = new Element("point");
+                     e1.setAttribute("name", year-1+"年"+array1[j]+"月");
+                     e1.setAttribute("y", map.get(column[array1[j]-1])==null?"0":map.get(column[array1[j]-1]).toString());  
+                     e.addContent(e1);
+                 }
+	             for(int j=0;j<array2.length;j++){
+	                 map = list2.get(0);
+	                 e1 = new Element("point");
+	                 System.out.println(map.get(column[array1[j]-1]));
+	                 e1.setAttribute("name", year+"年"+array2[j]+"月");
+	                 e1.setAttribute("y", map.get(column[array2[j]-1])==null?"0":map.get(column[array2[j]-1]).toString());  
+	                 e.addContent(e1);
+	             }
+             }
+             data.addContent(e);
+         }        
+         generateXml(doc,xmlPath);       
     }
     
     /**
