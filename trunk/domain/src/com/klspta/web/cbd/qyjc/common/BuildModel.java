@@ -73,7 +73,7 @@ public class BuildModel {
      * <br>Date:2014-1-3
      * @return
      */
-    public String getMode1(List<Map<String, Object>> list,List<Map<String, Object>> list2,String []year){
+    public String getMode1(List<Map<String, Object>> list,List<Map<String, Object>> list2,String []year,List<Map<String, Object>> cont1 ,List<Map<String, Object>> cont2){
         StringBuffer buffer = new StringBuffer();
         buffer.append("<table id='firstTable'>");
         String title = getTitle(year);
@@ -135,12 +135,78 @@ public class BuildModel {
             buffer.append( delNull(String.valueOf(list2.get(i).get("SRY"))));
             buffer.append("</td></tr>");
         }
+        if(cont1.size()==3&&cont2.size()==3){
+            for (int j = 0; j <cont1.size(); j++) {
+                title="";
+                if(j==0)
+                    title="平均租金（元/天·㎡）";  
+                if(j==1)
+                    title="环比增长";
+                if(j==2)
+                    title="总增长";
+            buffer.append("<tr><td  colspan='2'>");
+            buffer.append(title);
+            buffer.append("</td><td width='90px'>");
+            buffer.append( delNull(String.valueOf(cont1.get(j).get("YY"))));
+            buffer.append("</td><td width='90px'>");
+            buffer.append( delNull(String.valueOf(cont1.get(j).get("EY"))));
+            buffer.append("</td><td width='90px'>");
+            buffer.append( delNull(String.valueOf(cont1.get(j).get("SY"))));
+            buffer.append("</td><td width='90px'>");
+            buffer.append( delNull(String.valueOf(cont1.get(j).get("SIY"))));
+            buffer.append("</td><td width='90px'>");
+            buffer.append( delNull(String.valueOf(cont1.get(j).get("WY"))));
+            buffer.append("</td><td width='90px'>");
+            buffer.append( delNull(String.valueOf(cont1.get(j).get("LY"))));
+            buffer.append("</td><td width='90px'>");
+            buffer.append( delNull(String.valueOf(cont1.get(j).get("QY"))));
+            buffer.append("</td><td width='90px'>");
+            buffer.append( delNull(String.valueOf(cont1.get(j).get("BAY"))));
+            buffer.append("</td><td width='90px'>");
+            buffer.append( delNull(String.valueOf(cont1.get(j).get("JY"))));
+            buffer.append("</td><td width='90px'>");
+            buffer.append( delNull(String.valueOf(cont1.get(j).get("SHIY"))));
+            buffer.append("</td><td width='90px'>");
+            buffer.append( delNull(String.valueOf(cont1.get(j).get("SYY"))));
+            buffer.append("</td><td width='90px'>");
+            buffer.append( delNull(String.valueOf(cont1.get(j).get("SRY"))));
+            buffer.append("</td><td>");
+          
+            buffer.append( delNull(String.valueOf(cont2.get(j).get("YY"))));
+            buffer.append("</td><td width='90px'>");
+            buffer.append( delNull(String.valueOf(cont2.get(j).get("EY"))));
+            buffer.append("</td><td width='90px'>");
+            buffer.append( delNull(String.valueOf(cont2.get(j).get("SY"))));
+            buffer.append("</td><td width='90px'>");
+            buffer.append( delNull(String.valueOf(cont2.get(j).get("SIY"))));
+            buffer.append("</td><td width='90px'>");
+            buffer.append( delNull(String.valueOf(cont2.get(j).get("WY"))));
+            buffer.append("</td><td width='90px'>");
+            buffer.append( delNull(String.valueOf(cont2.get(j).get("LY"))));
+            buffer.append("</td><td width='90px'>");
+            buffer.append( delNull(String.valueOf(cont2.get(j).get("QY"))));
+            buffer.append("</td><td width='90px'>");
+            buffer.append( delNull(String.valueOf(cont2.get(j).get("BAY"))));
+            buffer.append("</td><td width='90px'>");
+            buffer.append( delNull(String.valueOf(cont2.get(j).get("JY"))));
+            buffer.append("</td><td width='90px'>");
+            buffer.append( delNull(String.valueOf(cont2.get(j).get("SHIY"))));
+            buffer.append("</td><td width='90px'>");
+            buffer.append( delNull(String.valueOf(cont2.get(j).get("SYY"))));
+            buffer.append("</td><td width='90px'>");
+            buffer.append( delNull(String.valueOf(cont2.get(j).get("SRY"))));
+            buffer.append("</td></tr>");
+            
+            
+            
+            }  
+        }
         buffer.append(" </table>");
         return buffer.toString();
     }
     
     public String delNull(String str){
-        if(str.equals("null")){
+        if(str.equals("null")||str.equals("0")){
             return "";
         }else {
             return str;
