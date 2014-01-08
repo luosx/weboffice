@@ -1,3 +1,4 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <script type="text/javascript">
 var obj_id;
 function send(objid){ 
@@ -51,12 +52,19 @@ function addContext(obj_id, key, valueIndex){
 function ajax2(objid, obj, key, valueIndex){
     var v=obj.value;
     var p=obj.parentNode.parentNode;
-    p.innerHTML="<font color='red' onclick='send(\"" + objid + "\")'>"+v+"</font>";
-    putClientCommond("<%=reportID%>", "update");
-    putRestParameter("key", key);
-    putRestParameter("vindex", valueIndex);
-    putRestParameter("value", v);
-    restRequest();
+        //不是数字是，提示保存出错
+    if(((valueIndex >= 2 && valueIndex < 6) || (valueIndex >=7 && valueIndex < 34)) && isNaN(v)){
+    	Ext.MessageBox.alert("确认","输入数据必须是数字，请确认后重新输入!",function(){
+    		obj.value = "";
+    	});
+    }else{
+	    p.innerHTML="<font color='red' onclick='send(\"" + objid + "\")'>"+v+"</font>";
+	    putClientCommond("<%=reportID%>", "update");
+	    putRestParameter("key", key);
+	    putRestParameter("vindex", valueIndex);
+	    putRestParameter("value", v);
+	    restRequest();
+    }
 }
 
 function addFocus(obj_id){
