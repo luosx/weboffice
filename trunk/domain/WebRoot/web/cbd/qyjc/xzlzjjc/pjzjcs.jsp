@@ -31,8 +31,10 @@ table {
 	padding: 0;
 	margin: 0 auto;
 	border-collapse: collapse;
-	 table-layout:fixed;
-}
+   /***
+   table-layout:fixed;
+   ***/
+   }
 
 td {
 	border: 1px solid #000000;
@@ -58,6 +60,21 @@ td1 {
 .tr01 {
 	background-color: #C0C0C0;
 	font-weight: bold;
+	line-height: 30px;
+	text-align: center;
+}
+.tr02 {
+	background-color:#FFCC99;
+	line-height: 30px;
+	text-align: center;
+}
+.tr03 {
+	background-color:#CCFFFF;
+	line-height: 30px;
+	text-align: center;
+}
+.tr04 {
+	background-color:#D5E1F3;
 	line-height: 30px;
 	text-align: center;
 }
