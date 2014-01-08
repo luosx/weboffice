@@ -424,9 +424,13 @@ public class StatisReport extends AbstractBaseBean {
      * <br>Date:2013-12-12
      */
     private void generateReport(String[] names,String[] colors ,String[] alias,int[] array1,int[] array2,String[] column,String xml,String type){
+    	 List<Object> allListzj = new ArrayList<Object>();
+    	 List<Object> allListsj = new ArrayList<Object>();
     	 List<Object> allList = new ArrayList<Object>();
-         List<Map<String,Object>> list1 = null;
-         List<Map<String,Object>> list2 = null;
+         List<Map<String,Object>> listzj1 = null;
+         List<Map<String,Object>> listzj2 = null;
+         List<Map<String,Object>> listsj1 = null;
+         List<Map<String,Object>> listsj2 = null;
          int year = Calendar.getInstance().get(Calendar.YEAR);
          String sql1 = "select ";
          String sql2 = "select ";
@@ -435,18 +439,44 @@ public class StatisReport extends AbstractBaseBean {
         		 sql1+= "avg("+column[i]+") as "+column[i]+",";
         	 }
         	 sql1 += "avg("+column[11]+") as "+column[11]+" from xzlzjqknd_pjzj where rq=?";
-        	 list1 = query(sql1, YW,new Object[]{year+""});
+        	 listzj1 = query(sql1, YW,new Object[]{year+""});
+        	 sql1 = "select ";
+        	 for(int i=0;i<11;i++){
+        		 sql1+= "avg("+column[i]+") as "+column[i]+",";
+        	 }
+        	 sql1 += "avg("+column[11]+") as "+column[11]+" from xzlzjqknd_pjlm where rq=?";
+        	 listsj1 = query(sql1, YW,new Object[]{year+""});
+        	 allListzj.add(listzj1);
+        	 allListzj.add(listsj1);
          }else {
         	 for(int i=0;i<array1.length-1;i++){
         		 sql1+= "avg("+column[array1[i]-1]+") as "+column[array1[i]-1]+",";
         	 }
         	 sql1 += "avg("+column[array1[array1.length-1]-1]+") as "+column[array1[array1.length-1]-1]+" from xzlzjqknd_pjzj where rq=?";
-        	 list1 = query(sql1, YW,new Object[]{year-1+""});
+        	 listzj1 = query(sql1, YW,new Object[]{year-1+""});
+        	 allListzj.add(listzj1);
         	 for(int i=0;i<array2.length-1;i++){
         		 sql2+= "avg("+column[array2[i]-1]+") as "+column[array2[i]-1]+",";
         	 }
         	 sql2 += "avg("+column[array2[array2.length-1]-1]+") as "+column[array2[array2.length-1]-1]+" from xzlzjqknd_pjzj where rq=?";
-        	 list2 = query(sql2, YW,new Object[]{year+""});
+        	 listzj2 = query(sql2, YW,new Object[]{year+""});
+        	 allListzj.add(listzj2);
+        	 sql1 = "select ";
+             sql2 = "select ";
+             for(int i=0;i<array1.length-1;i++){
+        		 sql1+= "avg("+column[array1[i]-1]+") as "+column[array1[i]-1]+",";
+        	 }
+        	 sql1 += "avg("+column[array1[array1.length-1]-1]+") as "+column[array1[array1.length-1]-1]+" from xzlzjqknd_pjlm where rq=?";
+        	 listsj1 = query(sql1, YW,new Object[]{year-1+""});
+        	 allListsj.add(listsj1);
+        	 for(int i=0;i<array2.length-1;i++){
+        		 sql2+= "avg("+column[array2[i]-1]+") as "+column[array2[i]-1]+",";
+        	 }
+        	 sql2 += "avg("+column[array2[array2.length-1]-1]+") as "+column[array2[array2.length-1]-1]+" from xzlzjqknd_pjlm where rq=?";
+        	 listsj2 = query(sql2, YW,new Object[]{year+""});
+        	 allListsj.add(listsj2);
+        	 allList.add(allListzj);
+        	 allList.add(allListsj);
          }       
          List<Object> list = parseXml(xml);
          String xmlPath = (String)list.get(0);
@@ -463,22 +493,23 @@ public class StatisReport extends AbstractBaseBean {
              e.setAttribute("color", colors[i]);
              if(array2==null){
 	             for(int j=0;j<array1.length;j++){
-	                 map = list1.get(0);
+	                 map = ((List<Map<String,Object>>)allListzj.get(i)).get(0);
 	                 e1 = new Element("point");
 	                 e1.setAttribute("name", year+"年"+array1[j]+"月");
 	                 e1.setAttribute("y", map.get(column[array1[j]-1])==null?"0":map.get(column[array1[j]-1]).toString());  
 	                 e.addContent(e1);
 	             }
              }else {
+            	 allListzj = (List<Object>)allList.get(i);
             	 for(int j=0;j<array1.length;j++){
-                     map = list1.get(0);
+                     map = ((List<Map<String,Object>>)allListzj.get(0)).get(0);
                      e1 = new Element("point");
                      e1.setAttribute("name", year-1+"年"+array1[j]+"月");
                      e1.setAttribute("y", map.get(column[array1[j]-1])==null?"0":map.get(column[array1[j]-1]).toString());  
                      e.addContent(e1);
                  }
 	             for(int j=0;j<array2.length;j++){
-	                 map = list2.get(0);
+	                 map = ((List<Map<String,Object>>)allListzj.get(1)).get(0);
 	                 e1 = new Element("point");
 	                 System.out.println(map.get(column[array1[j]-1]));
 	                 e1.setAttribute("name", year+"年"+array2[j]+"月");
