@@ -167,6 +167,14 @@ public class ZrbData extends AbstractBaseBean implements Runnable {
     	}else{
     		linkChange.modifyguid(zrbbh,value);
     	}
+    	//同步自然斑与空间库数据
+    	StringBuffer synBuffer = new StringBuffer();
+    	synBuffer.append("update giser.").append(form_gis);
+    	synBuffer.append(" a set(a.zdmj, a.lzmj, a.cqgm, a.zzlzmj, a.zzcqgm, a.yjhs, a.fzzlzmj, a.fzzcqgm, a.bz)=(select b.zdmj, b.lzmj, b.cqgm,b.zzlzmj, b.zzcqgm, b.yjhs, b.fzzlzmj, b.fzzcqgm, b.bz from zfjc.");
+    	synBuffer.append(formName).append(" b where a.ZRBBH = b.zrbbh) where a.ZRBBH in (select zrbbh from zfjc.").append(formName).append(")");
+    	update(synBuffer.toString(), YW);
+    	
+    	
     	return i == 1 ? true : false;
     }
     
