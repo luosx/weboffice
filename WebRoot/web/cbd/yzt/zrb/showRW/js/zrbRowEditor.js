@@ -78,7 +78,7 @@ function add(){
 	if(table.element == undefined){
 		table.init(document.getElementById("ZRB"));
 	}
-	Ext.MessageBox.prompt('输入', '请输入自然斑编号(“区号-基本斑编号-自然斑编号“):', function(btn, text){
+	Ext.MessageBox.prompt('输入', '请输入自然斑编号(“基本斑编号-自然斑编号“):', function(btn, text){
 		if(btn == 'ok'){
 			//判断自然斑编号是否符合条件
 			var reg = /^\w+-\w+/;
