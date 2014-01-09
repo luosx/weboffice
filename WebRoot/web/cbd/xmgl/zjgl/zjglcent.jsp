@@ -40,7 +40,7 @@ table {
 	padding: 0;
 	margin: 0 auto;
 	border-collapse: collapse;
-   table-layout:fixed;
+    table-layout:fixed;
 }
 
 td {
