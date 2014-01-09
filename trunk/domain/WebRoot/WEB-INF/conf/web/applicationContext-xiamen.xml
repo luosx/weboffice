@@ -26,4 +26,8 @@
 	<bean name="messageManager" class="com.klspta.web.xiamen.shortmessage.MessageManager" scope="prototype"/>
 	<!-- 短信查询dxManager -->
 	<bean name="dxManager" class="com.klspta.web.xiamen.dxgl.DxManager" scope="prototype"/>
+	<!-- 设备树 -->
+	<bean name="deviceTree" class="com.klspta.web.xiamen.device.DeviceTree" scope="prototype"/>
+	<!-- 设备树监控 -->
+	<bean name="deviceMonitor" class="com.klspta.web.xiamen.device.DeviceMonitor" scope="prototype"/>
 </beans>
