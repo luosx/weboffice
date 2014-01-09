@@ -223,7 +223,7 @@ public class BuildModel {
   */
   public String getZjqkTable(List<Map<String, Object>> list){
       StringBuffer buffer = new StringBuffer();
-      buffer.append("<table  id='firstTable'><tr id='title' class='tr01'><td  class='tr01'>编号</td><td  class='tr01'>写字楼名称</td><td class='tr01'>地址</td><td class='tr01'>城区</td><td class='tr01'>商圈</td><td class='tr01'>地铁</td><td class='tr01'>出租价格</td><td class='tr01'>售价</td><td class='tr01'>租售比</td><td  class='tr01'>可租售面积</td> <td class='tr01'>信息</td></tr>");
+      buffer.append("<table  id='firstTable'><tr id='title' class='tr01'><td  width='50px' class='tr01'>编号</td><td  width='180px' class='tr01'>写字楼名称</td><td width='180px' class='tr01'>地址</td><td width='50px' class='tr01'>城区</td><td  width='50px' class='tr01'>商圈</td><td width='50px' class='tr01'>地铁</td><td  width='54px' class='tr01'>出租价格</td><td width='50px' class='tr01'>售价</td><td width='50px' class='tr01'>租售比</td><td width='160px'  class='tr01'>可租售面积</td> <td width='200px' class='tr01'>信息</td></tr>");
      for(int i=0;i<list.size();i++){
        buffer.append("<tr>");
        buffer.append("<td class='tr04'> ");
@@ -232,31 +232,31 @@ public class BuildModel {
        buffer.append("<td class='tr04'> ");
        buffer.append(delNull(String.valueOf(list.get(i).get("XZLMC"))));
        buffer.append("</td> ");
-       buffer.append("<td> <input id='"+list.get(i).get("yw_guid")+"_DZ' onchange='chang(this)' value=' ");
+       buffer.append("<td> <input style='width: 180px' id='"+list.get(i).get("yw_guid")+"_DZ' onchange='chang(this)' value=' ");
        buffer.append(delNull(String.valueOf(list.get(i).get("DZ"))));
        buffer.append("' /></td> ");
-       buffer.append("<td> <input id='"+list.get(i).get("yw_guid")+"_CQ' onchange='chang(this)' value='  ");
-       buffer.append(delNull(String.valueOf(list.get(i).get("CQ"))));
+       buffer.append("<td> <input style='width:54px' id='"+list.get(i).get("yw_guid")+"_CQ' onchange='chang(this)' value='  ");
+       buffer.append(delNull(String.valueOf(list.get(i).get("CQ")).trim()));
        buffer.append("' /></td> ");
-       buffer.append("<td>  <input id='"+list.get(i).get("yw_guid")+"_SQ' onchange='chang(this)' value='");
-       buffer.append(delNull(String.valueOf(list.get(i).get("SQ"))));
+       buffer.append("<td>  <input style='width:50px' id='"+list.get(i).get("yw_guid")+"_SQ' onchange='chang(this)' value='");
+       buffer.append(delNull(String.valueOf(list.get(i).get("SQ")).trim()));
        buffer.append("' /></td> ");
-       buffer.append("<td>  <input id='"+list.get(i).get("yw_guid")+"_DT' onchange='chang(this)' value='");
+       buffer.append("<td>  <input style='width: 50px' id='"+list.get(i).get("yw_guid")+"_DT' onchange='chang(this)' value='");
        buffer.append(delNull(String.valueOf(list.get(i).get("DT"))));
        buffer.append("' /></td> ");
-       buffer.append("<td>  <input id='"+list.get(i).get("yw_guid")+"_CZJG' onchange='chang(this)' value='");
+       buffer.append("<td>  <input  style='width:50px'  id='"+list.get(i).get("yw_guid")+"_CZJG' onchange='chang(this)' value='");
        buffer.append(delNull(String.valueOf(list.get(i).get("CZJG"))));
        buffer.append("'/></td> ");
-       buffer.append("<td>  <input id='"+list.get(i).get("yw_guid")+"_SJ' onchange='chang(this)' value='");
+       buffer.append("<td>  <input style='width:50px'  id='"+list.get(i).get("yw_guid")+"_SJ' onchange='chang(this)' value='");
        buffer.append(delNull(String.valueOf(list.get(i).get("SJ"))));
        buffer.append("' /></td> ");
-       buffer.append("<td>  <input id='"+list.get(i).get("yw_guid")+"_ZSB' onchange='chang(this)' value='");
+       buffer.append("<td>  <input style='width:50px'  id='"+list.get(i).get("yw_guid")+"_ZSB' onchange='chang(this)' value='");
        buffer.append(delNull(String.valueOf(list.get(i).get("ZSB"))));
        buffer.append("' /></td> ");
-       buffer.append("<td>  <input id='"+list.get(i).get("yw_guid")+"_KZSMJ' onchange='chang(this)' value='");
+       buffer.append("<td>  <input style='width:160px'  id='"+list.get(i).get("yw_guid")+"_KZSMJ' onchange='chang(this)' value='");
        buffer.append(delNull(String.valueOf(list.get(i).get("KZSMJ"))));
        buffer.append("' /></td> ");
-       buffer.append("<td>  <input id='"+list.get(i).get("yw_guid")+"_XX'  onchange='chang(this)' value='");
+       buffer.append("<td>  <input style='width:200px'  id='"+list.get(i).get("yw_guid")+"_XX'  onchange='chang(this)' value='");
        buffer.append(delNull(String.valueOf(list.get(i).get("XX"))));
        buffer.append("' /></td> ");
        buffer.append("</tr>");
