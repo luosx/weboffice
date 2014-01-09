@@ -1,5 +1,6 @@
 var data;
 var simple;
+var combo;
 var url = basePath
 		+ 'web/cbd/yzt/hxxm/showRW/hxxmRowEditor.jsp';
 var condition = "";
@@ -52,12 +53,33 @@ function initComponent() {
 
 
 function initFile(){
+	putClientCommond("hxxmHandle","getHxxmmc");
+	var hxxmmc = restRequest();
+	var array = new Array();
+	for(var i=0;i<hxxmmc.length;i++ ){
+	array.push(hxxmmc[i].XMNAME);
+	}
+	
+	 combo = new Ext.form.ComboBox({
+	 	      fieldLabel: '项目名称',
+	 	     	id:'zrbbh',
+				store : array,
+				width : 150,
+				displayField : 'state',
+				typeAhead : true,
+				mode : 'local',
+				forceSelection : true,
+				triggerAction : 'all',
+				emptyText : "-请选择项目名称-",
+				selectOnFocus : true
+			});
 	var fp = new Ext.FormPanel({
 		renderTo: 'fi-form',
         fileUpload: true,
         width: 300,
         frame: true,
         title: '坐标导入',
+        monitorValid:false,
         autoHeight: true,
         bodyStyle: 'padding: 10px 10px 0 10px;',
         labelWidth: 70,
@@ -66,13 +88,11 @@ function initFile(){
             allowBlank: false,
             msgTarget: 'side'
         },
-		items: [{
-            xtype: 'textfield',
-            id:'zrbbh',
-            width:190,
-            fieldLabel: '项目名称'
-        },{
-            xtype: 'fileuploadfield',
+		items: [ 
+		    combo,{
+		    anchor: '95%',
+            xtype: 'fileuploadfield',  
+            allowBlank :false,
             id: 'form-file',
             emptyText: '请选择一个txt文件',
             fieldLabel: '文件位置',
