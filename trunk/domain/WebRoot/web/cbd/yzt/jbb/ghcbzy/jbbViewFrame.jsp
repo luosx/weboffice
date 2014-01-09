@@ -4,7 +4,9 @@
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
-	String type = request.getParameter("type");
+    String layoutPath = basePath + "base/thirdres/dhtmlx//dhtmlxLayout//codebase";
+    String toolbarPath = basePath + "base/thirdres/dhtmlx//dhtmlxToolbar//codebase";
+    String type = request.getParameter("type");
 %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -13,6 +15,22 @@
 		<title></title>
 
 		<%@ include file="/base/include/ext.jspf"%>
+				<link rel="stylesheet" type="text/css"
+			href="<%=basePath%>base/form/css/styles.css">
+		<link rel="stylesheet" type="text/css"
+			href="<%=layoutPath%>/dhtmlxlayout.css">
+		<link rel="stylesheet" type="text/css"
+			href="<%=toolbarPath%>/skins/dhtmlxtoolbar_dhx_skyblue.css">
+		<link rel="stylesheet" type="text/css"
+			href="<%=layoutPath%>/skins/dhtmlxlayout_dhx_blue.css">
+		<link rel="stylesheet" type="text/css"
+			href="<%=layoutPath%>/skins/dhtmlxlayout_dhx_skyblue.css">
+		<%@ include file="/base/include/restRequest.jspf"%>
+		<script src="<%=layoutPath%>/dhtmlxcommon.js"></script>
+		<script src="<%=layoutPath%>/dhtmlxcontainer.js"></script>
+		<script src="<%=layoutPath%>/dhtmlxlayout.js"></script>
+		<script src="<%=toolbarPath%>/dhtmlxtoolbar.js"></script>
+		<script src="<%=toolbarPath%>/patterns/dhtmlxlayout_pattern4j.js"></script>
 <script type="text/javascript">
 	function drawPolygonCallback(s){
 		frames['west'].frames['report'].setRecord(s);
@@ -27,12 +45,32 @@
    }
 </style>
 	</head>
-	<body>
-	<div style="width: 100%;height: 100%;">
-		<iframe id="east" name="east" class="div2"
-			style="width: 38%; height: 100%; overflow: auto; border: 0px;float: left;margin-left: 10px;margin-top: 0px" src="<%=basePath%>base/fxgis/framework/gisViewFrame.jsp"></iframe>
-		<iframe id="west" name="west" class="div1"
-			style="width: 61%; height: 100%; overflow: auto; margin: " src="jbbEditor.jsp?type=<%=type%>"></iframe>
-	</div>
+	<script type="text/javascript">
+		function doOnLoad(){
+			dhxLayout = new dhtmlXLayoutObject("parentId", "2U");
+			dhxLayout.cells("a").setWidth(600);
+			dhxLayout.cells("a").hideHeader();
+			dhxLayout.setEffect("resize", true);
+			dhxLayout.cells("a").attachURL("<%=basePath%>base/fxgis/framework/gisViewFrame.jsp");
+			//dhxLayout.cells("b").setWidth(width * 0.61);
+			dhxLayout.cells("b").attachURL("jbbEditor.jsp?type=<%=type%>");
+			dhxLayout.cells("b").hideHeader();
+			//dhxLayout.setAutoSize("a;b", "a;b");
+			//页面大小修改时重新刷新
+			dhxLayout.attachEvent("onPanelResizeFinish", function(){
+				//dhxLayout.cells("a").fixSize(true, false);
+				//dhxLayout.cells(id).getFrame().refresh;
+				//dhxLayout.cells("a").attachURL("<%=basePath%>base/fxgis/fx/FxGIS.html?i=false");
+				dhxLayout.cells("b").attachURL("jbbEditor.jsp?type=<%=type%>");
+				
+			});
+		}	
+	
+		function drawPolygonCallback(s){
+			frames[1].frames['report'].setRecord(s);
+		}
+	</script>
+	<body onLoad="doOnLoad()" >
+		<div id="parentId" style="top: 0px; left: 0px; width: 100%; height: 100%;overflow-x:hidden;overflow-y:hidden"></div>
 	</body>
 </html>
