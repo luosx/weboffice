@@ -1,12 +1,16 @@
 var zrbbh = "";
-
+var table = new tableoper();
 //单击地图定位
 function showMap(objid){
-	//alert("showMap");
+	if(table.element == undefined){
+		table.init(document.getElementById("JBB"));
+	}
 	var key = objid.cells[0].innerText;
 	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").clear();
-	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").findFeature("cbd", "1", key, "TBBH");
-	
+	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").findFeature("cbd", "4", key, "TBBH");
+	if(-1 == key.indexOf("计")){
+		table.addAnnotation(objid.rowIndex);
+	}
 }
 
 //双击编辑地图
@@ -24,7 +28,7 @@ function setRecord(polygon){
     putRestParameter("polygon",polygon); 
     var result = restRequest();
 	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").clear();
-	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").findFeature("cbd", "1", zrbbh, "TBBH");
+	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").findFeature("cbd", "4", zrbbh, "TBBH");
 }
 
 //导出Excel
