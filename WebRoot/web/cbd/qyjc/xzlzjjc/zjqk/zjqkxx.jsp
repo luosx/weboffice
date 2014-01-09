@@ -31,7 +31,7 @@ table {
 }
 input{
 border:none;
-width: 100px;
+text-align: left;
 }
 td {
 	border: 1px solid #000000;
@@ -61,7 +61,11 @@ td1 {
    .tr03{
   	background-color: #FCFCFC;
   }
-  
+  .tr04 {
+	background-color:#D5E1F3;
+	line-height: 30px;
+	text-align: center;
+}
 
 </style>
 </head>
