@@ -8,12 +8,14 @@ import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 
+import com.jasson.im.api.APIClient;
 import com.klspta.base.AbstractBaseBean;
 import com.klspta.console.ManagerFactory;
 import com.klspta.console.user.User;
 
 
 public class MessageManager extends AbstractBaseBean {
+    private APIClient apiClient = new APIClient();
     
     public void save(){
         String content = request.getParameter("content");        
@@ -85,17 +87,57 @@ public class MessageManager extends AbstractBaseBean {
         String[] jsrys = getReceiver(users,phones);
         String jsry = StringUtils.join(jsrys,",");
         String fsr_xzqh = user.getXzqh();
-
         //调用OA短信接口发送短信
+        ///////////////////////////////////////调用API接口//////////////////////////////////////////////
+        String connmessage = "";
+        apiClient.release();
+        //IP 和 DBNAME 需改下
+        int connReturn = apiClient.init("192.168.1.199", "zfjcdx", "Qq123456789", "ZFJCSMS", "mas");
+        if(connReturn ==APIClient.IMAPI_SUCC){
+            connmessage = "初始化成功";
+        }else if(connReturn == APIClient.IMAPI_CONN_ERR){
+            connmessage = "连接失败";
+        }else if(connReturn == APIClient.IMAPI_API_ERR){
+            connmessage = "API编码非法";
+        }
+        System.out.println(connmessage+"====================================================");
+        int sendReturn = 0;
+        String sendmessage = "";
+        if(istime!=null){
+            //定时发送
+            sendReturn = apiClient.sendSM(allPersonphone, content, time, 23, 23);
+        }else{
+            sendReturn = apiClient.sendSM(allPersonphone, content, 23);
+        }
+        if(sendReturn == APIClient.IMAPI_SUCC){
+            sendmessage = "发送成功";
+        }else if(sendReturn == APIClient.IMAPI_INIT_ERR){
+            sendmessage = "未初始化";
+        }else if(sendReturn == APIClient.IMAPI_CONN_ERR){
+            sendmessage = "数据库连接失败";
+        }else if(sendReturn == APIClient.IMAPI_DATA_ERR){
+            sendmessage = "参数错误";
+        }else if(sendReturn == APIClient.IMAPI_DATA_TOOLONG){
+            sendmessage = "消息内容太长";
+        }else if(sendReturn == APIClient.IMAPI_INS_ERR){
+            sendmessage = "数据库插入错误";
+        }else{
+            sendmessage = "出现其他错误";
+        }
+        apiClient.release();
+        /*
+        /////////////////////////////////////////调用DB接口/////////////////////////////////////////////
+        //修改表名api_mt_<xxx> sm_id,src_id的值需提供,需在core用户下data_source表中配置与mysql的连接信息
+        String insertDxSql = "insert into api_mt_<xxx> (sm_id,src_id,mobiles,content,send_time) values (?,?,?,?,?)";
+        update(insertDxSql,DX,new Object[]{0,0,allPersonphone,content,fssj});
+        */
         
-        
-        
-        //短信存档
+        //短信本地存档
         String sql = "insert into dxxxb(DXBH,DXNR,FSSJ,FSR_NAME,FSR_ID,JSRY,FSR_XZQH) values(?,?,?,?,?,?,?)";
         update(sql,YW,new Object[]{xcbh,content,fssj,fsr_name,fsr_id,jsry,fsr_xzqh});
-        
+        response.setContentType("application/json; charset=utf-8");
         try {
-            response.getWriter().write("{success:true,msg:true}");
+            response.getWriter().write("{success:true,msg:'"+sendmessage+"'}");
         } catch (IOException e) {
             e.printStackTrace();
         }        
