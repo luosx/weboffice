@@ -30,7 +30,7 @@ table {
 	border-collapse: collapse;
 }
 input{
-width: 50px;
+
 
 }
 td {
@@ -317,7 +317,7 @@ var bhs = "";
 		var c21 = newRow.insertCell(21);
 		c21.innerHTML = "<input id='syl1' size='10' value='"+selectedTr.cells[21].childNodes[0].nodeValue+"'/>";
 		var c22 = newRow.insertCell(22);
-		c22.innerHTML = "<input id='qt1' size='50' value='"+selectedTr.cells[22].childNodes[0].nodeValue+"'/>";
+		c22.innerHTML = "<input id='qt1'   size='45'value='"+selectedTr.cells[22].childNodes[0].nodeValue+"'/>";
 		var c23 = newRow.insertCell(23);
 		c23.innerHTML = "<a href='javascript:update()'>保存</a>&nbsp;&nbsp;<a href='javascript:cancel1()'>取消</a>"
 	}
