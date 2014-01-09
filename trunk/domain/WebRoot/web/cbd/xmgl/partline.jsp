@@ -20,7 +20,7 @@ background-image : url('<%=basePath%>web/cbd/xmgl/image/left/line.png');backgrou
 </style>
 <body >
 
-					<divstyle="padding-top:200px;">
+					<div style="padding-top:200px;">
 						<img align="absmiddle" id=frameshow src="<%=basePath%>web/cbd/xmgl/image/left/line.png">
 					</div>
 	
