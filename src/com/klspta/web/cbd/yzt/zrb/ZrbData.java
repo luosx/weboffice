@@ -133,11 +133,11 @@ public class ZrbData extends AbstractBaseBean implements Runnable {
      */
     public boolean insertZrb(String zrb){
     	//生成序号
-    	String ywsql = "select max(to_number(t.yw_guid)) t from " + formName+ " t";
-    	String yw_guid = String.valueOf(query(ywsql, YW).get(0).get("t"));
-    	yw_guid = String.valueOf(Integer.parseInt(yw_guid) + 1);
-    	String sql = "insert into " + formName + "(ZRBBH, yw_guid) VALUES(?,?)";
-    	int result = update(sql, YW, new Object[]{zrb, yw_guid});
+//    	String ywsql = "select max(to_number(t.yw_guid)) t from " + formName+ " t";
+//    	String yw_guid = String.valueOf(query(ywsql, YW).get(0).get("t"));
+//    	yw_guid = String.valueOf(Integer.parseInt(yw_guid) + 1);
+    	String sql = "insert into " + formName + "(ZRBBH) VALUES(?)";
+    	int result = update(sql, YW, new Object[]{zrb});
         sql = "select * from " + formName + " t order by t.zrbbh";
         zrbList = query(sql, YW);
     	return result == 1 ? true : false;
