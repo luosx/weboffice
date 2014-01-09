@@ -43,6 +43,7 @@ conditionMap.put("query", " where t.ssqy like '%" + query + "%'");
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
+	<script src="web/cbd/yzt/jbb/showRW/js/table.js"></script>
 	<script src="web/cbd/yzt/jbb/ghcbzy/js/jbbRowEditor.js"></script>
 	<%@ include file="/base/include/restRequest.jspf"%>
 	<%@ include file="/base/include/reportEdit.jspf"%>

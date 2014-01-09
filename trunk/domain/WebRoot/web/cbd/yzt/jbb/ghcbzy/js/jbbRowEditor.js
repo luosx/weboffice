@@ -1,12 +1,14 @@
 var zrbbh = "";
-
+var table = new tableoper();
 //单击地图定位
 function showMap(objid){
 	//alert("showMap");
 	var key = objid.cells[0].innerText;
 	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").clear();
 	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").findFeature("cbd", "4", key, "TBBH");
-	
+	if(-1 == key.indexOf("计")){
+		table.addAnnotation(objid.rowIndex);
+	}
 }
 
 //双击编辑地图
