@@ -102,9 +102,9 @@ public class JbbReport extends AbstractBaseBean implements IDataClass {
 		//}
 		if(!queryMap.isEmpty()){
 			String query = String.valueOf(queryMap.get("query"));
-			sqlBuffer.append(query).append(" and t.nrghcbk='").append(status).append("' and t.dkmc like '").append(key).append("_%'");
+			sqlBuffer.append(query).append(" and t.nrghcbk='").append(status).append("' and t.dkmc like '").append(key).append("%'");
 		}else{
-			sqlBuffer.append("where t.nrghcbk='").append(status).append("' and t.dkmc like '").append(key).append("_%'");
+			sqlBuffer.append("where t.nrghcbk='").append(status).append("' and t.dkmc like '").append(key).append("%'");
 		}
 		sqlBuffer.append(" order by t.dkmc");
 		List<Map<String, Object>> queryList = null;
@@ -154,7 +154,8 @@ public class JbbReport extends AbstractBaseBean implements IDataClass {
 		for(int i = 0; i < queryList.size(); i++){
 			Map map = queryList.get(i);
 			String key = String.valueOf(map.get("dkmc"));
-			key = key.split("-")[0];
+			//key = key.split("-")[0];
+			key = key.substring(0,1);
 			if("".equals(key)){
 				continue;
 			}
