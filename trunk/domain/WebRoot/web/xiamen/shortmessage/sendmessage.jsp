@@ -205,9 +205,9 @@ String fullname = ((User)principal).getFullName();
                        waitTitle:"请稍候",
                        waitMsg:"正在提交表单数据，请稍候",
                        success:function(form,action){ 
-				           if(action.result.msg){
-				               Ext.Msg.alert('提示','发送成功！'); 
-				           } 
+				           //if(action.result.msg){
+				               Ext.Msg.alert('提示',action.result.msg); 
+				           //} 
 					   }, 
 					   failure:function(){ 
 							Ext.Msg.alert('提示','发送失败，请稍后重试或联系管理员。');
