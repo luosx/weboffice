@@ -14,35 +14,14 @@
 		<meta http-equiv="cache-control" content="no-cache">
 		<meta http-equiv="expires" content="0">
 		<%@ include file="/base/include/ext.jspf"%>
+		<%@ include file="/base/include/restRequest.jspf"%>
 		<script>
-		Ext.onReady(function(){
-		   new Ext.Viewport(
-		   {
-		     layout:"border",
-		     items:[
-		       {region:'center',
-		       contentEl:'center',
-		       collapsible:false,
-		       margins:'0 0 0 0'},
-		       {region:'west',
-		        contentEl:'west',
-		        split:true,
-		        width: 200,
-                minSize: 0,
-                maxSize: 300,
-		        collapsible:true,
-		        title:'设备列表'}
-		     ]
-		   }
-		   );
-		});
+		var basePath="<%=basePath%>";
 </script>
+		<script src="deviceFrame.js"></script>
+		<script src="deviceTree.js"></script>
+		<script src="monitorView.js"></script>
 	</head>
 	<body bgcolor="#FFFFFF" topmargin="0" leftmargin="0">
-		<iframe id="west" name="west"
-			style="width: 100%; height: 100%; overflow: auto;" src="deviceTree.jsp"></iframe>
-		<iframe id="center" name="center"
-			style="width: 100%; height: 100%; overflow: auto; border: 0px"
-			src="<%=basePath%>base/fxgis/fx/FxGIS.html?i=false"></iframe>
 	</body>
 </html>
