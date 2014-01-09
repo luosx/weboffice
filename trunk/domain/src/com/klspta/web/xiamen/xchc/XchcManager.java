@@ -179,16 +179,12 @@ public class XchcManager extends AbstractBaseBean {
         String x = request.getParameter("X");
         String y = request.getParameter("Y");
         String id = request.getParameter("id"); 
-        System.out.println("X:"+x+"========Y:"+y+"=========="+id);
+        System.out.println("X:"+x+"========Y:"+y+"==========ID:"+id);
         String insertSql = "insert into gps_location_log(gps_id,gps_x,gps_y) values(?,?,?)";
-        int i = update(insertSql,YW,new Object[]{id,x,y});
-        if(i==1){
-            System.out.println("坐标保存成功！");
-        }else{
-            System.out.println("坐标保存失败！");
-        }
-        
-        
+        update(insertSql,YW,new Object[]{id,x,y});      
+        String sql = "update gps_current_location t set t.gps_x=?,t.gps_y=?,t.send_time=sysdate where t.gps_id=?";
+        update(sql,YW,new Object[]{x,y,id});       
+        response("success");       
     }
     
 }
