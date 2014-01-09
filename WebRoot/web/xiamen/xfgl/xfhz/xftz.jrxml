@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="xftz" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.5"/>
-	<property name="ireport.x" value="167"/>
+	<property name="ireport.x" value="523"/>
 	<property name="ireport.y" value="155"/>
 	<queryString language="SQL">
 		<![CDATA[SELECT * from xfdjb]]>
@@ -121,7 +121,7 @@
 				<text><![CDATA[举报人]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="6" y="10" width="47" height="43" backcolor="#CCCCCC"/>
+				<reportElement mode="Opaque" x="0" y="10" width="53" height="43" backcolor="#CCCCCC"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0" lineStyle="Solid"/>
@@ -132,7 +132,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None">
 					<font size="15" isBold="true"/>
 				</textElement>
-				<text><![CDATA[编号]]></text>
+				<text><![CDATA[登记号]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Opaque" x="266" y="10" width="69" height="43" backcolor="#CCCCCC"/>
@@ -161,7 +161,7 @@
 				<text><![CDATA[记录人]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="735" y="10" width="60" height="43" backcolor="#CCCCCC"/>
+				<reportElement mode="Opaque" x="735" y="10" width="67" height="43" backcolor="#CCCCCC"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0" lineStyle="Solid"/>
@@ -172,7 +172,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None">
 					<font size="15" isBold="true"/>
 				</textElement>
-				<text><![CDATA[所在政区]]></text>
+				<text><![CDATA[处理机关]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Opaque" x="105" y="10" width="49" height="43" backcolor="#CCCCCC"/>
@@ -283,7 +283,7 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{JLR}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="734" y="0" width="61" height="20"/>
+				<reportElement x="734" y="0" width="68" height="20"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<bottomPen lineWidth="1.0"/>
@@ -293,7 +293,7 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{XZQ}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="6" y="0" width="47" height="20"/>
+				<reportElement x="0" y="0" width="53" height="20"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
