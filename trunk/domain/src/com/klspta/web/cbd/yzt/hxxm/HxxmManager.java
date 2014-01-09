@@ -4,6 +4,7 @@ package com.klspta.web.cbd.yzt.hxxm;
 
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,6 +22,19 @@ public class HxxmManager extends AbstractBaseBean {
 		HttpServletRequest request = this.request;
 		response(new HxxmData().getAllList(request));
 	}
+	
+	public void getHxxmmc(){
+		StringBuffer sqlBuffer = new StringBuffer();
+		sqlBuffer.append("select t.xmname from JC_XIANGMU t");
+		List<Map<String, Object>> list = query(sqlBuffer.toString(), YW);
+		String [] hxxmmc = new String[list.size()];
+		for (int i = 0; i < list.size(); i++) {
+			String xmname = (String) (list.get(i)).get("xmname");
+			hxxmmc[i] = xmname;
+		}
+		
+		response(list);
+	} 
 	
 	public void getQuery(){
 		HttpServletRequest request = this.request;
