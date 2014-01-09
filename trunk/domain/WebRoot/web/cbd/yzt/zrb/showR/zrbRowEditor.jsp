@@ -22,7 +22,7 @@ ITableStyle its = new TableStyleEditRow();
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
-	<script src="web/cbd/yzt/zrb/showList/js/zrbRowEditor.js"></script>
+	<script src="web/cbd/yzt/zrb/showR/js/zrbRowEditor.js"></script>
 	<script src="web/cbd/yzt/zrb/js/table.js"></script>
 	<%@ include file="/base/include/ext.jspf" %>
 	<%@ include file="/base/include/restRequest.jspf"%>
