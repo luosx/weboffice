@@ -58,6 +58,11 @@ td1 {
 	line-height: 30px;
 	text-align: center;
 }
+.tr04 {
+	background-color:#D5E1F3;
+	line-height: 30px;
+	text-align: center;
+}
 </style>
 <script type="text/javascript">
 var datepjzj_id_cols_value="";
