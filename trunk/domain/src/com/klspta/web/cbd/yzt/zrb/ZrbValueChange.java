@@ -28,7 +28,7 @@ public class ZrbValueChange extends AbstractBaseBean  {
 		sqlBuffer.append(" update set ");
 		for(int i = 1; i < field.length - 1; i++){
 			sqlBuffer.append("t.").append(field[i]).append("='").append(cacluteValue[i-1]).append("',");
-			insertValue += cacluteValue[i] + "','";
+			insertValue += cacluteValue[i - 1] + "','";
 		}
 		sqlBuffer.append("t.").append(field[field.length - 1]).append("='").append(cacluteValue[field.length - 2]).append("'");
 		insertValue += cacluteValue[field.length - 2] + "'";
