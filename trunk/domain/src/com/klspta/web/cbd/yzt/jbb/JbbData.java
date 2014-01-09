@@ -142,6 +142,14 @@ public class JbbData extends AbstractBaseBean   {
     	}else{
     		linkChange.add(value);
     	}
+    	
+    	//同步基本斑与空间库数据
+    	StringBuffer synBuffer = new StringBuffer();
+    	synBuffer.append("update giser.").append(form_gis);
+    	synBuffer.append(" a set( a.zd, a.jsyd, a.rjl,a.jzgm, a.ghyt, a.gjjzgm, a.jzjzgm, a.szjzgm, a.zzsgm, a.zzzsgm, a.zzzshs, a.hjmj, a.fzzzsgm, a.fzzjs, a.kfcb, a.lmcb, a.dmcb, a.yjcjj , a.yjzftdsy, a.cxb, a.cqqd, a.cbfgl, a.xmguid)=(select b.zd, b.jsyd, b.rjl,b.jzgm, b.ghyt, b.gjjzgm, b.jzjzgm, b.szjzgm, b.zzsgm, b.zzzsgm, b.zzzshs, b.hjmj, b.fzzzsgm, b.fzzjs, b.kfcb, b.lmcb, b.dmcb, b.yjcjj, b.yjzftdsy, b.cxb, b.cqqd, b.cbfgl, b.xmguid from zfjc.");
+    	synBuffer.append(formName).append(" b where a.tbbh = b.dkmc) where a.tbbh in (select dkmc from zfjc.").append(formName).append(")");
+    	update(synBuffer.toString(), YW);
+    	
     	return i == 1 ? true : false;
     }
     
