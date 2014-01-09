@@ -62,7 +62,7 @@ public class ZrbData extends AbstractBaseBean implements Runnable {
      * @return
      */
     public List<Map<String, Object>> getZRBNameList(){
-    	String sql = "select t.zrbbh from " + formName + " t order by to_number(t.yw_guid)";
+    	String sql = "select t.zrbbh from " + formName + " t order by t.zrbbh";
     	return query(sql, YW);
     }
 
