@@ -48,14 +48,15 @@ public class ZrbReport extends AbstractBaseBean implements IDataClass {
 		if(queryMap != null && !queryMap.isEmpty()){
 			sqlBuffer.append(String.valueOf(queryMap.get("query")));
 		}
-		sqlBuffer.append(" order by to_number(t.yw_guid)");
+		sqlBuffer.append(" order by t.zrbbh");
 		List<Map<String, Object>> queryList = query(sqlBuffer.toString(), YW);
 		List<TRBean> list = new ArrayList<TRBean>();
 		for(int num = 0; num < queryList.size(); num++){
 			TRBean trBean = new TRBean();
 			trBean.setCssStyle("trsingle");
 			Map<String, Object> map = queryList.get(num);
-			for(int i = 0; i < shows.length; i++){
+			trBean.addTDBean(new TDBean(String.valueOf(num + 1),"80", "20"));
+			for(int i = 1; i < shows.length; i++){
 				String value = String.valueOf(map.get(shows[i][0]));
 				TDBean tdBean;
 				if("null".equals(value)){
