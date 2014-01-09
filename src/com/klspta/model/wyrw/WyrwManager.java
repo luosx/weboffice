@@ -47,7 +47,7 @@ public class WyrwManager extends AbstractBaseBean {
         AResultImp rs;
         String type = request.getParameter("type");
     	if(type == null || type.equals("")){
-    		type = "0";
+    		type = "1";
     	}
     	switch (Integer.parseInt(type)) {
 		case XM_XIAMEN:
