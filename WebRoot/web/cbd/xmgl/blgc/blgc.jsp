@@ -49,10 +49,12 @@ table td {
 input {
 	border: none;
 	width: 70px;
+	font-size: 15px;
 }
 
 textarea {
 	border: none;
+	font-size: 15px;
 }
 
 .tr01 {
@@ -117,9 +119,13 @@ var yw_guid="";
 	 var sjbl=document.getElementById("sjbl").value;
 	 var bmjbr=document.getElementById("bmjbr").value;
 	 var bz=document.getElementById("bz").value;
+	
 	if(sj==null||sj==''||sjbl==null||sjbl==''||bmjbr==null||bmjbr==''){
 	 alert("请填写完整之后再保存！！"); 
 	}else{
+	 if(bz==null||bz==''){
+	 bz="&nbsp;"
+	 }
 	sjbl=escape(escape(sjbl));
 	bmjbr=escape(escape(bmjbr));
 	bz=escape(escape(bz));
@@ -148,6 +154,9 @@ function saves(yw_guid){
 	if(sj==null||sj==''||sjbl==null||sjbl==''||bmjbr==null||bmjbr==''){
 	 alert("请填写完整之后再保存！！"); 
 	}else{
+	 if(bz==null||bz==''){
+	 bz="&nbsp;"
+	 }
 	sjbl=escape(escape(sjbl));
 	bmjbr=escape(escape(bmjbr));
 	bz=escape(escape(bz));
@@ -236,7 +245,7 @@ function del(bs){
 			</div>
 			<table width="95%" cellpadding="0" cellspacing="0" id='esftable'>
 				<tr class="tr11">
-					<td align="center" width="80px" height="50px">
+					<td align="center" width="80px" height="50px" >
 						<h3>
 							序号
 						</h3>
@@ -272,12 +281,12 @@ function del(bs){
 				        for (int i = 0; i < list.size(); i++) {
 				%>
 				<tr align="center" id='row<%=i%>'>
-					<td align="center" width="80px"><%=i+1%></td>
+					<td align="center" width="80px" class="tr03"><%=i+1%></td>
 					<td align="center" width="80px"><%=list.get(i).get("blsj")%></td>
 					<td align="center" width="500px"><%=list.get(i).get("sjbl")%></td>
 					<td align="center" width="80px"><%=list.get(i).get("bmjbr")%></td>
 					<td align="center" width="200px"><%=list.get(i).get("bz")%></td>
-					<td align="center" width="200px">
+					<td align="center" width="200px" class="tr03">
 				    <a onclick="modify('<%=(i+1)%>','<%=list.get(i).get("yw_guid")%>')">修改</a>	<a onclick="del('<%=list.get(i).get("yw_guid")%>')">&nbsp;&nbsp;&nbsp;删除</a>
 					</td>
 				</tr>
@@ -286,7 +295,7 @@ function del(bs){
 				    }
 				%>
 				<tr id ='msg' style="display: none">
-					<td align="center">
+					<td align="center" class="tr03">
 						<%=list.size() + 1%>
 					</td>
 					<td align="center">
@@ -305,16 +314,16 @@ function del(bs){
 						<textarea id='bz' rows="4" cols="20"
 							style="width: 200px; overflow: auto"></textarea>
 					</td>
-					<td align="center">
+					<td align="center" class="tr03">
 						<a onclick="save()">
 							保存
 						</a>
 					</td>
 				</tr>
 			</table>
-		  <div align="right" style="width: 95%">	
-		  <button style="display: " id="add" onclick="add() ">新增</button>
-						</div>
+		  <div align="right" style="width: 96%">	
+		  <img style="display: " id="add"  width="100px" height="45px" src="web/cbd/xmgl/image/xz.png" onclick="add()"></img>
+		  </div>
 		</div>
 	</body>
 </html>
