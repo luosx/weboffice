@@ -178,7 +178,7 @@ public class XchcManager extends AbstractBaseBean {
     public void receiveCoordinate(){
         String x = request.getParameter("X");
         String y = request.getParameter("Y");
-        String id = request.getParameter("id"); 
+        String id = request.getParameter("imsi"); 
         System.out.println("X:"+x+"========Y:"+y+"==========ID:"+id);
         String insertSql = "insert into gps_location_log(gps_id,gps_x,gps_y) values(?,?,?)";
         update(insertSql,YW,new Object[]{id,x,y});      
