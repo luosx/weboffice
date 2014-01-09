@@ -34,7 +34,7 @@ public class XmResultImp extends  AResultImp {
 	private String gis_name = "dlgzwyr";
 	private String srid_name = "dlgzwpr";
 	private String yw_guid = "";
-	
+	private String imsi = "";
 	public XmResultImp(String formName, String gisName,HttpServletRequest request) {
 		super(request);
 		form_name = formName;
@@ -77,7 +77,7 @@ public class XmResultImp extends  AResultImp {
 		Map<String, String[][]> saveMap = new HashMap<String, String[][]>();
 		// String[][] ywStrings = new String[]{{"xznyd","xznyd"},{"xzwlyd","xzwlyd"},"ghjinzh","ygspmj","ygspbl","yggdbl","yggdmj","ghjbnt","ghfuh","ghxianzh","ghbufh","ghyoutj","ghyunx","xzjsyd","xzgd","taskType","taskid","endDate","beginDate","dfccqk","jsqk","wflx","area","wfwglx","zbs","sfwf","xcqkms","yddw","xy","picture","ydsj","ydqk"}; 
 		String[][] ywStrings = new String[][]{{"xznyd","xznyd"},{"xzwlyd","xzwlyd"},{"taskid","yw_guid"},{"ydsj","ydsj"},{"yddw","yddw"},{"area","mj"},{"zbs","zb"},{"jsqk","jsqk"},{"wfwglx","wfwglx"},{"dfccqk","dfccqk"},{"xcqkms","xcqkms"},{"ydqk","ydqk"},{"ygspmj","ygspmj"},{"ygspbl","ygspbl"},{"yggdbl","yggdbl"},{"yggdmj","yggdmj"},{"beginDate","beginDate"},{"taskType","taskType"},{"endDate","endDate"},{"wflx","wflx"},{"sfwf","sfwf"}
-		                                        ,{"ydxmmc","ydxmmc"},{"ydzt","ydzt"},{"ydwz","ydwz"},{"zdmj","zdmj"},{"gdmj","gdmj"},{"jzmj","jzmj"},{"jzxz","jzxz"},{"fhgh","fhgh"},{"fxsj","fxsj"},{"zzqk","zzqk"},{"zztzsbh","zztzsbh"},{"wjzzhjxzz","wjzzhjxzz"},{"yydspqcz","yydspqcz"},{"yt","yt"}};
+		                                        ,{"ydxmmc","ydxmmc"},{"ydzt","ydzt"},{"ydwz","ydwz"},{"zdmj","zdmj"},{"gdmj","gdmj"},{"jzmj","jzmj"},{"jzxz","jzxz"},{"fhgh","fhgh"},{"fxsj","fxsj"},{"zzqk","zzqk"},{"zztzsbh","zztzsbh"},{"wjzzhjxzz","wjzzhjxzz"},{"yydspqcz","yydspqcz"},{"yt","yt"},{"imsi","imsi"}};
 		String[][] gisStrings = new String[][]{{"taskType","tasktype"},{"ydxmmc","用地项目"},{"ydzt","用地主体"},{"ydwz","用地位置"},{"fxsj","发现时间"},{"taskid", "yw_guid"}};
 		saveMap.put("yw", ywStrings);
 		saveMap.put("gis", gisStrings);
@@ -169,10 +169,15 @@ public class XmResultImp extends  AResultImp {
 		insertNames.append("impuser,impxzq,impxzqbm,");
 		insertValue +="?,?,?,";
 		updatenames.append("impuser=?,impxzq=?,impxzqbm=?,");
-		User user = ManagerFactory.getUserManager().getUserWithId(userid);
-		valueObjects[num++] = user.getFullName();
-		valueObjects[num++] = UtilFactory.getXzqhUtil().getNameByCode(user.getXzqh());
-		valueObjects[num] = user.getXzqh();
+		//User user = ManagerFactory.getUserManager().getUserWithId(userid);
+		//valueObjects[num++] = user.getFullName();
+		//valueObjects[num++] = UtilFactory.getXzqhUtil().getNameByCode(user.getXzqh());
+		//valueObjects[num] = user.getXzqh();
+		imsi = root.element("imsi").getText();
+		List<Map<String,Object>> list = getXzq(imsi);
+		valueObjects[num++] = "";
+		valueObjects[num++] =(list.get(0)).get("gps_unit");
+		valueObjects[num] = (list.get(0)).get("gps_cantoncode");
 		
 		
 		String updatename = updatenames.substring(0, updatenames.length() - 1);
@@ -303,9 +308,9 @@ public class XmResultImp extends  AResultImp {
         String sql= "delete from atta_accessory where yw_guid = ?";
         update(sql, CORE, new Object[] { yw_guid });
         for (int i = 0; i < files.length; i++) {
-            if (files[i].getAbsolutePath().endsWith(".txt")) {
-                continue;
-            }
+            //if (files[i].getAbsolutePath().endsWith(".txt")) {
+            //    continue;
+            //}
             accUpload(files[i]);
         }
 	}
@@ -320,6 +325,10 @@ public class XmResultImp extends  AResultImp {
     private void accUpload(File file) {
     	
         File[] files = file.listFiles();
+        if(file.getAbsolutePath().endsWith("txt")){
+            dealAcc(file);
+            return;
+        }
         if(files == null || file.getAbsolutePath().endsWith("shape")){
         	return ;
         }
@@ -366,5 +375,11 @@ public class XmResultImp extends  AResultImp {
             String sql = "insert into atta_accessory(file_id,file_type,file_name,file_path,yw_guid) values(?,?,?,?,?)";
             update(sql, CORE, new Object[] { file_id, "file", filename, newFilePath, yw_guid});
         }
+    }
+    
+    private List<Map<String,Object>> getXzq(String imsi){
+        String sql = "select t.gps_cantoncode,t.gps_unit from gps_info t where t.gps_id = ?";
+        List<Map<String,Object>> list = query(sql,YW,new Object[]{imsi});
+        return list;       
     }
 }
