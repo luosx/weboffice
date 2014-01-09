@@ -65,15 +65,17 @@ if((dirpath+filePath).endsWith("mp4") || (dirpath+filePath).endsWith("mp3")|| (d
 	out.write("当前格式不支持预览，请直接下载");
 }else{
 //通用处理方式
+
 	if(hzm.toLowerCase().equals("txt")){
 		FileInputStream fis = new FileInputStream(new File(dirpath+filePath));
 		BufferedReader in = new BufferedReader(new InputStreamReader(fis,"GBK"));
 		String inputLine;
 		while((inputLine = in.readLine()) != null){
-			out.println(inputLine);
+			out.println(inputLine+"<br>");
 		}
 		in.close();
 	}else{
+	
   		OutputStream output = null;  
    		FileInputStream in = null;    
  		try{
