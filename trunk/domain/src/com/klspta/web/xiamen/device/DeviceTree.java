@@ -70,7 +70,7 @@ public class DeviceTree extends AbstractBaseBean {
 	 * Date:2014-1-9
 	 */
 	private Map<String, Map<String, Object>> getDevicesOnline() {
-		String sql = "select t.*, case when floor(to_number(sysdate - t.send_time) * 24 * 60) < 5 then 'true' else 'false' end \"online\" from gps_current_location t";
+		String sql = "select t.*, case when floor(to_number(sysdate - t.send_time) * 24 * 60) < 5 then '1' else '0' end \"online\" from gps_current_location t";
 		List<Map<String, Object>> result = query(sql, YW);
 		Map<String, Map<String, Object>> map = new HashMap<String, Map<String, Object>>();
 		for (Map<String, Object> one : result) {
@@ -95,13 +95,16 @@ public class DeviceTree extends AbstractBaseBean {
 			if (onlineDevices.get(gps_id) == null) {
 				text = "<font color='red'>" + text + "(离线)</font>";
 				treeResults.get(i).put("text", text);
+				treeResults.get(i).put("online", "0");
 				continue;
 			}
-			boolean online = new Boolean(onlineDevices.get(gps_id).get("ONLINE").toString());
-			if (online) {
+			String online = onlineDevices.get(gps_id).get("ONLINE").toString();
+			if (online.equals("1")) {
 				text = "<font color='green'>" + text + "(在线)</font>";
+				treeResults.get(i).put("online", "0");
 			} else {
 				text = "<font color='red'>" + text + "(离线)</font>";
+				treeResults.get(i).put("online", "1");
 			}
 			treeResults.get(i).put("text", text);
 		}
