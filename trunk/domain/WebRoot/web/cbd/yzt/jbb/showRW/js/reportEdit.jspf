@@ -84,7 +84,7 @@ function ajax2(objid, obj, key, valueIndex){
 	    putRestParameter("vindex", valueIndex);
 	    putRestParameter("value", v);
 	    restRequest();
-	    obj.parentNode.removeChild('data');
+	    //obj.parentNode.removeChild('data');
     }
 }
 
