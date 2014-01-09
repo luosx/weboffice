@@ -81,9 +81,9 @@ function add(){
 	Ext.MessageBox.prompt('输入', '请输入自然斑编号(“区号-基本斑编号-自然斑编号“):', function(btn, text){
 		if(btn == 'ok'){
 			//判断自然斑编号是否符合条件
-			var reg = /^\w+-\w+-\w+/;
+			var reg = /^\w+-\w+/;
 			if(!reg.test(text)){
-				Ext.MessageBox.alert('提醒', '自然斑编号不规范，正确的自然斑编号应该是“区号-基本斑编号-自然斑编号“，请重新输入', function(btn, text){
+				Ext.MessageBox.alert('提醒', '自然斑编号不规范，正确的自然斑编号应该是“基本斑编号-自然斑编号“，请重新输入', function(btn, text){
 					add();
 				});
 				return;	
