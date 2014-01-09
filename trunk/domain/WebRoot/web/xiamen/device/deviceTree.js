@@ -36,7 +36,7 @@ var tree = new Ext.tree.TreePanel({
 						return;
 					}
 					swf.carMonitor("locate", id, deviceCoors[id].GPS_X,
-							deviceCoors[id].GPS_Y, deviceCoors[id].online,0,0,deviceCoors[id].GPS_UNIT+deviceCoors[id].NAME)
+							deviceCoors[id].GPS_Y, deviceCoors[id].online,0,0,node.attributes.GPS_UNIT+node.attributes.GPS_NAME)
 				}
 			}
 		});
