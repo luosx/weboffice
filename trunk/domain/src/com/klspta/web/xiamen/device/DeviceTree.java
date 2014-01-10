@@ -58,6 +58,7 @@ public class DeviceTree extends AbstractBaseBean {
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.clear();
 			map.put("text", key);
+			map.put("expanded", true);
 			map.put("children", lt);
 			treeJson.add(map);
 		}

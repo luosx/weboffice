@@ -107,6 +107,7 @@ Ext.onReady(function() {
 
 			}, {
 				height : height,
+				width : width,
 				html : '<iframe name="center" id="map" frameborder="0" style="width: 100%; height: 100%; overflow: auto;" src="'
 						+ basePath
 						+ 'base/fxgis/fx/FxGIS.html?i=false"></iframe>'
@@ -118,13 +119,51 @@ Ext.onReady(function() {
 			split : true,
 			width : 200,
 			minSize : 0,
-			maxSize : 300,
 			collapsible : true,
-			title : '设备列表',
+			id : 'treePanel',
+			title : '设备列表--<font color=red>定位</font>',
+			tbar : [{
+						xtype : 'tbbutton',
+						enableToggle : true,
+						pressed : true,
+						text : ' 定位',
+						id : 'locate',
+						cls : 'x-btn-text-icon',
+						icon : basePath
+								+ 'base/fxgis/framework/images/zoom-in.png',
+						handler : function() {
+							Ext.getCmp("monitor").doToggle();
+							changeMethod();
+						}
+					}, {
+						xtype : 'tbbutton',
+						enableToggle : true,
+						id : 'monitor',
+						text : '监控',
+						cls : 'x-btn-text-icon',
+						icon : basePath
+								+ 'base/fxgis/framework/images/zoom-out.png',
+						handler : function() {
+							Ext.getCmp("locate").doToggle();
+							changeMethod();
+						}
+					}],
 			items : [tree]
 		}]
 	});
 });
+var method = "LOCATE";
+function changeMethod() {
+	var flag = Ext.getCmp("locate").pressed;
+	if (flag) {
+		method = "LOCATE";
+		Ext.getCmp("treePanel").setTitle("设备列表--<font color=red>定位</font>");
+	} else {
+		method = "MONITOR";
+		Ext.getCmp("treePanel").setTitle("设备列表--<font color=green>监控</font>");
+	}
+}
+
 // ////////////////////////////////////////////////////////////////////////////////////
 // 放大
 function zoomIn() {

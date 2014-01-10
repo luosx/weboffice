@@ -1,6 +1,6 @@
 var tree = new Ext.tree.TreePanel({
 			useArrows : true,
-			width : 195,
+			width : 198,
 			autoScroll : true,
 			frame : true, // 显示树形列表样式
 			animate : true,
@@ -18,31 +18,47 @@ var tree = new Ext.tree.TreePanel({
 					}),
 			root : new Ext.tree.AsyncTreeNode({
 						children : getTreeContent(),
-						expanded : true
+						expanded : false
 					}),
 			listeners : {
 				'checkchange' : function(node, checked) {
-					var swf = frames["center"].swfobject.getObjectById("FxGIS");
 					var id = node.attributes.GPS_ID;
+					var swf = frames["center"].swfobject.getObjectById("FxGIS");
 					if (!checked) {
 						swf.carMonitor("remove", id);
 						return;
 					}
-					var deviceCoors = getDeviceCoor();
-					var target = deviceCoors[id];
-					if (target == null) {
-						parent.Ext.MessageBox.alert("提示", "没有该设备的坐标信息!");
-						node.unselect();
-						return;
-					}
-					swf.carMonitor("locate", id, deviceCoors[id].GPS_X,
-							deviceCoors[id].GPS_Y, deviceCoors[id].online,0,0,node.attributes.GPS_UNIT+node.attributes.GPS_NAME)
+					deviceMonitor(node, swf);
 				}
 			}
 		});
 
-tree.getRootNode().expand(true);
-
+function deviceMonitor(node, swf) {
+	if (method == "LOCATE") {
+		locate(node, swf);
+	} else if (method == "MONITOR") {
+		monitor(node, swf);
+	}
+}
+function monitor(node, swf) {
+}
+function locate(node, swf) {
+	var id = node.attributes.GPS_ID;
+	var deviceCoors = getDeviceCoor();
+	var target = deviceCoors[id];
+	if (target == null) {
+		parent.Ext.MessageBox.alert("提示", "没有该设备的坐标信息!");
+		return;
+	}
+	try {
+		swf.carMonitor("locate", id, deviceCoors[id].GPS_X,
+				deviceCoors[id].GPS_Y, deviceCoors[id].online, 0, 0,
+				node.attributes.GPS_UNIT + node.attributes.GPS_NAME);
+	} catch (e) {
+		parent.Ext.MessageBox.alert("提示", "地图尚未加载完毕，请稍后重试!");
+	}
+}
+// ///Get Data
 function getTreeContent() {
 	putClientCommond("deviceTree", "getDeviceMonitorTree");
 	return (restRequest());
@@ -50,14 +66,4 @@ function getTreeContent() {
 function getDeviceCoor() {
 	putClientCommond("deviceMonitor", "getDeviceCoordinate");
 	return (restRequest());
-}
-function locate() {
-	var deviceCoors = getDeviceCoor();
-	for (var i = 0; i < deviceIds.length; i++) {
-		var deviceId = deviceIds[i];
-		swf.carMonitor("locate", deviceId, deviceCoors[deviceId].GPS_X,
-				deviceCoors[deviceId].GPS_Y, 1);
-	}
-}
-function monitor() {
 }
