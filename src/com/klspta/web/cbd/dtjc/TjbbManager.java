@@ -199,5 +199,47 @@ public class TjbbManager extends AbstractBaseBean {
 			response("false");
 		}
 	}
+	
+	/**
+	 * 
+	 * <br>Description:获取安置房项目列表
+	 * <br>Author:李国明
+	 * <br>Date:2014-01-10
+	 * @param userId
+	 * @return
+	 */
+	public void getAZFProject(){
+		StringBuffer sqlBuffer = new StringBuffer();
+		sqlBuffer.append("select distinct t.xmmc from hx_azf t");
+		List<Map<String, Object>> list = query(sqlBuffer.toString(), YW);
+		String [] hxxmmc = new String[list.size()];
+		for (int i = 0; i < list.size(); i++) {
+			String xmname = (String) (list.get(i)).get("xmmc");
+			hxxmmc[i] = xmname;
+		}
+		
+		response(list);
+	}
 
+	/**
+	 * 
+	 * <br>Description:删除安置房项目
+	 * <br>Author:李国明
+	 * <br>Date:2014-01-10
+	 * @param userId
+	 * @return
+	 */
+	public void deleteAZFProject(){
+		String xmmc = request.getParameter("XMMC");
+		try {
+			xmmc = new String(xmmc.getBytes("iso-8859-1"),"utf-8");
+			String sql = "delete from hx_azf where xmmc=?";
+			update(sql, YW,new Object[]{xmmc});
+			response("true");
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			response("flase");
+		}
+	}
 }
