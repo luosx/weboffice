@@ -131,9 +131,10 @@ Map<String, String> proMap = TjbbManager.getProjectByUserId(userId);
 		var positionX = 0;
 		var positionY = 0;
 		var divName = "showDiv";
+		var selectForm = null;
 		var minyear = "<%=TjbbBuild.MIN_YEAR%>";		
 		var kftlNum = "<%=TjbbManager.getxmNumByUserId(userId)%>";
-		
+		var array = new Array();
 		
 		//修改项目列表
 		Ext.onReady(function() {
@@ -232,6 +233,9 @@ Map<String, String> proMap = TjbbManager.getProjectByUserId(userId);
 	        			//}
 	        			winForm.hide();
 	        			winForm1.hide();
+	        			if(selectForm!=null){
+		        			selectForm.hide();
+	        			}
 	        		}
 	        	}
 	        	]
@@ -269,13 +273,20 @@ Map<String, String> proMap = TjbbManager.getProjectByUserId(userId);
 	        			//}
 	        			winForm.hide();
 	        			winForm1.hide();
+	        			if(selectForm!=null){
+		        			selectForm.hide();
+	        			}
 	        		}
 	        	}
               ]
 	        });
-	        //changeProject();
+	        
+	        
 	        winForm.hide();
 	        winForm1.hide();
+	        if(selectForm!=null){
+		        			selectForm.hide();
+	        			}
 	    });
 	    
 	    function sava(){
@@ -290,10 +301,67 @@ Map<String, String> proMap = TjbbManager.getProjectByUserId(userId);
 	    function changeProject(){
 	    	winForm.show();
 	    	winForm1.hide();
+	    	selectForm.hide();
 	    }
 	    function addAZFProject(){
 	    	winForm.hide();
 	    	winForm1.show();
+	    	selectForm.hide();
+	    }
+	    
+	    function deleteAZFProject(){	    	
+		    putClientCommond("tjbbManager","getAZFProject");
+			var azfproject = restRequest();			
+			for(var i=0;i<azfproject.length;i++ ){
+				array.push(azfproject[i].XMMC);
+			}
+ 			combo = new Ext.form.ComboBox({
+	 	      fieldLabel: '项目名称',
+	 	     	id:'zrbbh',
+				store : array,
+				width : 150,
+				displayField : 'state',
+				typeAhead : true,
+				mode : 'local',
+				forceSelection : true,
+				triggerAction : 'all',
+				emptyText : "-请选择项目名称-",
+				selectOnFocus : true
+			});
+	         selectForm = new Ext.form.FormPanel({
+	        	bodyStyle: 'padding:10px;',
+		        renderTo: 'itemselector',
+		        title: '请选择项目名称和投资名称',
+        		width:360,
+        		bodyStyle: 'padding:10px;',
+        		
+        		items:[
+        			combo
+        		],
+        		buttons:[{
+                 text:"保存",
+                 handler: function(){
+                      var res=sava();
+                      if(res){
+                        alert("保存成功");
+                        window.location.reload();
+                      }else{
+                        alert("保存失败");
+                      }
+                 }
+              },{
+ 			        text: '取消',
+	        		handler: function(){
+	        			winForm.hide();
+	        			winForm1.hide();
+	        			selectForm.hide();
+	        		}
+	        	}
+              ]
+	        });
+	    	selectForm.show();
+	    	winForm1.hide();
+	    	winForm.hide();
 	    }
 	    		
 		//添加键盘快捷键
@@ -341,17 +409,19 @@ Map<String, String> proMap = TjbbManager.getProjectByUserId(userId);
 		</tr>
 	  </table>
   	</div>
+  	<div id="changeProject" align="center">
+		<input type="button" value="修改项目和时间" onClick="changeProject(); return false" />
+		<input type="button" value="添加安置房项目" onClick="addAZFProject(); return false"/>
+		<input type="button" value="删除安置房项目" onClick="deleteAZFProject(); return false"/>
+	</div>
 	<div id="body" style=" overflow-x:scroll; height:100%;">
 		<%=TjbbManager.getPlan(userId)%>
 	</div>
-	<div id="changeProject" class="changeProject">
-		<input type="button" value="修改项目和时间" onClick="changeProject(); return false" />
-		<input type="button" value="添加安置房项目" onClick="addAZFProject(); return false"/>
-	</div>
+	
 	<div id="itemselector" class="form" ></div>
 	<div id="deal"></div>
   </body>
   <script type="text/javascript">
-  		document.getElementById("body").style.width = document.body.clientWidth - 400;
+  		
   </script>
 </html>
