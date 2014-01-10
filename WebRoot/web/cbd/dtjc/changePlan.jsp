@@ -281,41 +281,7 @@ Map<String, String> proMap = TjbbManager.getProjectByUserId(userId);
               ]
 	        });
 	        
-	        
-	        winForm.hide();
-	        winForm1.hide();
-	        if(selectForm!=null){
-		        			selectForm.hide();
-	        			}
-	    });
-	    
-	    function sava(){
-	    	var xmmc = Ext.getCmp("XMMC").getValue();
-	    	var tzmc = Ext.getCmp("TZMC").getValue();
-	    	putClientCommond("tjbbManager","savaAZFProject");
-			putRestParameter("XMMC",xmmc);
-			putRestParameter("TZMC",tzmc);
-			return restRequest(); 
-	    }
-	    
-	    function changeProject(){
-	    	winForm.show();
-	    	winForm1.hide();
-	    	selectForm.hide();
-	    }
-	    function addAZFProject(){
-	    	winForm.hide();
-	    	winForm1.show();
-	    	selectForm.hide();
-	    }
-	    
-	    function deleteAZFProject(){	    	
-		    putClientCommond("tjbbManager","getAZFProject");
-			var azfproject = restRequest();			
-			for(var i=0;i<azfproject.length;i++ ){
-				array.push(azfproject[i].XMMC);
-			}
- 			combo = new Ext.form.ComboBox({
+	        combo = new Ext.form.ComboBox({
 	 	      fieldLabel: '项目名称',
 	 	     	id:'zrbbh',
 				store : array,
@@ -339,14 +305,14 @@ Map<String, String> proMap = TjbbManager.getProjectByUserId(userId);
         			combo
         		],
         		buttons:[{
-                 text:"保存",
+                 text:"删除",
                  handler: function(){
-                      var res=sava();
+                      var res=del();
                       if(res){
-                        alert("保存成功");
+                        alert("删除成功");
                         window.location.reload();
                       }else{
-                        alert("保存失败");
+                        alert("删除失败");
                       }
                  }
               },{
@@ -359,6 +325,50 @@ Map<String, String> proMap = TjbbManager.getProjectByUserId(userId);
 	        	}
               ]
 	        });
+	        winForm.hide();
+	        winForm1.hide();
+	        if(selectForm!=null){
+		        			selectForm.hide();
+	        			}
+	    });
+	    
+	    function sava(){
+	    	var xmmc = Ext.getCmp("XMMC").getValue();
+	    	var tzmc = Ext.getCmp("TZMC").getValue();
+	    	putClientCommond("tjbbManager","savaAZFProject");
+			putRestParameter("XMMC",xmmc);
+			putRestParameter("TZMC",tzmc);
+			return restRequest(); 
+	    }
+	    
+	    function del(){
+	    	putClientCommond("tjbbManager","deleteAZFProject");
+			putRestParameter("XMMC",combo.getValue());
+	    	return restRequest(); 
+	    }
+	    
+	    function changeProject(){
+	    	winForm.show();
+	    	winForm1.hide();
+	    	selectForm.hide();
+	    }
+	    function addAZFProject(){
+	    	winForm.hide();
+	    	winForm1.show();
+	    	selectForm.hide();
+	    }
+	    
+	    function deleteAZFProject(){	    	
+		    putClientCommond("tjbbManager","getAZFProject");
+			var azfproject = restRequest();			
+			for(var i=0;i<azfproject.length;i++ ){
+				array.push(azfproject[i].XMMC);
+			}
+			if(combo.store.data.length==0){
+	        	combo.store.loadData(array);   
+	        }else {
+	        	combo.store.reload(array);  
+	        }
 	    	selectForm.show();
 	    	winForm1.hide();
 	    	winForm.hide();
