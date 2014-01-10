@@ -1,5 +1,6 @@
 var data;
 var simple;
+var array = new Array();
 var url = basePath
 		+ '/web/cbd/yzt/jbb/showRW/jbbRowEditor.jsp';
 var condition = "";
@@ -44,13 +45,6 @@ function initComponent() {
 
 
 function initFile(){
-	putClientCommond("jbbHandle","getJBBBH");
-	var jbbbh = restRequest();
-	var array = new Array();
-	for(var i=0;i<jbbbh.length;i++ ){
-	array.push(jbbbh[i].DKMC);
-	}
-	
 	 combo = new Ext.form.ComboBox({
 	 	      fieldLabel: '基本斑编号',
 	 	     	id:'zrbbh',
@@ -129,6 +123,15 @@ function exportExcel() {
 }
 
 function insertGIS(){
+	putClientCommond("jbbHandle","getJBBBH");
+	var jbbbh = restRequest();
+	if(array.length>0){
+		array=[];
+	}
+	for(var i=0;i<jbbbh.length;i++ ){
+	array.push(jbbbh[i].DKMC);
+	}
+	combo.store.loadData(array);
 	var form = document.getElementById("fi-form");
 	var display = form.style.display;
 	if(display == "none"){
