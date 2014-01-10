@@ -37,10 +37,54 @@ function deviceMonitor(node, swf) {
 	if (method == "LOCATE") {
 		locate(node, swf);
 	} else if (method == "MONITOR") {
-		monitor(node, swf);
+		monitor(swf);
 	}
 }
-function monitor(node, swf) {
+function monitor(swf) {
+	if (swf == null || swf == "") {
+		swf = frames["center"].swfobject.getObjectById("FxGIS");
+	}
+	if (method != "MONITOR") {
+		return;
+	}
+	var nodes = new Array();
+	// iterator nodes
+	iteratorNodes(tree.getRootNode());
+	function iteratorNodes(rootnode) {
+		var childNodes = rootnode.childNodes;
+		for (var i = 0; i < childNodes.length; i++) {
+			var childNode = childNodes[i];
+			if (childNode.leaf == true && childNode.attributes.checked == true) {
+				nodes.push(childNode);
+			}
+			if (childNode.hasChildNodes()) {
+				iteratorNodes(childNode);
+			}
+		}
+	}
+	if (nodes.length < 1) {
+		return;
+	}
+	var deviceCoors = getDeviceCoor();
+	// monitor
+	for (var i = 0; i < nodes.length; i++) {
+		var id = nodes[i].attributes.GPS_ID;
+		var target = deviceCoors[id];
+		if (target == null) {
+			return;
+		}
+		try {
+			swf
+					.carMonitor("monitor", id, deviceCoors[id].GPS_X,
+							deviceCoors[id].GPS_Y, nodes[i].attributes.online,
+							0, 0, nodes[i].attributes.GPS_UNIT
+									+ nodes[i].attributes.GPS_NAME);
+		} catch (e) {
+		}
+	}
+	setTimeout(function() {
+				monitor(swf)
+			}, 1000);
 }
 function locate(node, swf) {
 	var id = node.attributes.GPS_ID;
@@ -52,7 +96,7 @@ function locate(node, swf) {
 	}
 	try {
 		swf.carMonitor("locate", id, deviceCoors[id].GPS_X,
-				deviceCoors[id].GPS_Y, deviceCoors[id].online, 0, 0,
+				deviceCoors[id].GPS_Y, node.attributes.online, 0, 0,
 				node.attributes.GPS_UNIT + node.attributes.GPS_NAME);
 	} catch (e) {
 		parent.Ext.MessageBox.alert("提示", "地图尚未加载完毕，请稍后重试!");

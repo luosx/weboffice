@@ -126,11 +126,10 @@ Ext.onReady(function() {
 						xtype : 'tbbutton',
 						enableToggle : true,
 						pressed : true,
-						text : ' 定位',
+						text : '  定位',
 						id : 'locate',
 						cls : 'x-btn-text-icon',
-						icon : basePath
-								+ 'base/fxgis/framework/images/zoom-in.png',
+						icon : 'locate.png',
 						handler : function() {
 							Ext.getCmp("monitor").doToggle();
 							changeMethod();
@@ -139,10 +138,9 @@ Ext.onReady(function() {
 						xtype : 'tbbutton',
 						enableToggle : true,
 						id : 'monitor',
-						text : '监控',
+						text : '  监控',
 						cls : 'x-btn-text-icon',
-						icon : basePath
-								+ 'base/fxgis/framework/images/zoom-out.png',
+						icon : 'monitor.png',
 						handler : function() {
 							Ext.getCmp("locate").doToggle();
 							changeMethod();
@@ -161,6 +159,7 @@ function changeMethod() {
 	} else {
 		method = "MONITOR";
 		Ext.getCmp("treePanel").setTitle("设备列表--<font color=green>监控</font>");
+		monitor("");
 	}
 }
 
