@@ -110,7 +110,7 @@ Ext.onReady(function() {
 				width : width,
 				html : '<iframe name="center" id="map" frameborder="0" style="width: 100%; height: 100%; overflow: auto;" src="'
 						+ basePath
-						+ 'base/fxgis/fx/FxGIS.html?i=false"></iframe>'
+						+ 'base/fxgis/fx/FxGIS.html?i=false&initFunction=[{$name$:$setMapExtent$,$parameters$:$11,11,11,11$}]"></iframe>'
 			}],
 			collapsible : false,
 			margins : '0 0 0 0'
@@ -178,7 +178,9 @@ function pan() {
 }
 // 全图
 function zoomToFullExtent() {
-	frames["center"].swfobject.getObjectById("FxGIS").zoomToFullExtent();
+	frames["center"].swfobject.getObjectById("FxGIS").setMapExtent(minx, miny,
+			maxx, maxy);
+	// frames["center"].swfobject.getObjectById("FxGIS").zoomToFullExtent();
 }
 // 前一视图
 function zoomToPrevExtent() {
