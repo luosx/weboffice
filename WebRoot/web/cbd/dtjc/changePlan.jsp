@@ -358,17 +358,16 @@ Map<String, String> proMap = TjbbManager.getProjectByUserId(userId);
 	    	selectForm.hide();
 	    }
 	    
-	    function deleteAZFProject(){	    	
+	    function deleteAZFProject(){		
 		    putClientCommond("tjbbManager","getAZFProject");
-			var azfproject = restRequest();			
+			var azfproject = restRequest();
+			if(array.length>0){
+				array = [];
+			}		
 			for(var i=0;i<azfproject.length;i++ ){
 				array.push(azfproject[i].XMMC);
 			}
-			if(combo.store.data.length==0){
-	        	combo.store.loadData(array);   
-	        }else {
-	        	combo.store.reload(array);  
-	        }
+	        combo.store.loadData(array);  
 	    	selectForm.show();
 	    	winForm1.hide();
 	    	winForm.hide();
