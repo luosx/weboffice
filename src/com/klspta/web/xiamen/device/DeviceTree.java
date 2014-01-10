@@ -102,10 +102,10 @@ public class DeviceTree extends AbstractBaseBean {
 			String online = onlineDevices.get(gps_id).get("ONLINE").toString();
 			if (online.equals("1")) {
 				text = "<font color='green'>" + text + "(在线)</font>";
-				treeResults.get(i).put("online", "0");
+				treeResults.get(i).put("online", "1");
 			} else {
 				text = "<font color='red'>" + text + "(离线)</font>";
-				treeResults.get(i).put("online", "1");
+				treeResults.get(i).put("online", "0");
 			}
 			treeResults.get(i).put("text", text);
 		}
