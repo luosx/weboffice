@@ -155,5 +155,18 @@ public class JbbManager extends AbstractBaseBean{
 			}
 			return map;
 		}
-
+		
+		/**
+	     * 
+	     * <br>Description:获取基本斑编号
+	     * <br>Author:侯文超
+	     * <br>Date:2014-01-10
+	     * @throws Exception
+	     */
+		public void getJBBBH(){
+			StringBuffer sqlBuffer = new StringBuffer();
+			sqlBuffer.append("select t.dkmc from JC_JIBEN t");
+			List<Map<String, Object>> list = query(sqlBuffer.toString(), YW);
+			response(list);
+		} 
 }

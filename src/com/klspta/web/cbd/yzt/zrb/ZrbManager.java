@@ -198,6 +198,18 @@ public class ZrbManager extends AbstractBaseBean {
 		jsonBuffer.append("]");
 		return jsonBuffer.toString();
 	}
-	
+	/**
+     * 
+     * <br>Description:获取自然斑编号
+     * <br>Author:侯文超
+     * <br>Date:2014-01-10
+     * @throws Exception
+     */
+	public void getZRBBH(){
+		StringBuffer sqlBuffer = new StringBuffer();
+		sqlBuffer.append("select t.zrbbh from JC_ZIRAN t");
+		List<Map<String, Object>> list = query(sqlBuffer.toString(), YW);
+		response(list);
+	} 
 	
 }
