@@ -98,6 +98,9 @@ function locate(node, swf) {
 		swf.carMonitor("locate", id, deviceCoors[id].GPS_X,
 				deviceCoors[id].GPS_Y, node.attributes.online, 0, 0,
 				node.attributes.GPS_UNIT + node.attributes.GPS_NAME);
+
+		swf.setCenterAtAndZoom(deviceCoors[id].GPS_X, deviceCoors[id].GPS_Y,
+				10, false);
 	} catch (e) {
 		parent.Ext.MessageBox.alert("提示", "地图尚未加载完毕，请稍后重试!");
 	}
