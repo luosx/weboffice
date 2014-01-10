@@ -146,7 +146,7 @@ Object userprincipal = SecurityContextHolder.getContext().getAuthentication().ge
 	    </div>
 	    
 	<div align="center" id="center" style="position:absolute; top:65px; left: 20px;">
-  		<%=new CBDReportManager().getReport("AJCC",new Object[]{userXzqh})%>
+  		<%=new CBDReportManager().getReport("AJCC",new Object[]{userid})%>
   	</div>
   </body>
 </html>
