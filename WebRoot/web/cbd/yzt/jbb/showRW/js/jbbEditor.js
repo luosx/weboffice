@@ -3,7 +3,7 @@ var simple;
 var url = basePath
 		+ '/web/cbd/yzt/jbb/showRW/jbbRowEditor.jsp';
 var condition = "";
-
+var combo;
 Ext.onReady(function() {
 			width = document.body.clientWidth;
 			height = document.body.clientHeight;
@@ -44,6 +44,26 @@ function initComponent() {
 
 
 function initFile(){
+	putClientCommond("jbbHandle","getJBBBH");
+	var jbbbh = restRequest();
+	var array = new Array();
+	for(var i=0;i<jbbbh.length;i++ ){
+	array.push(jbbbh[i].DKMC);
+	}
+	
+	 combo = new Ext.form.ComboBox({
+	 	      fieldLabel: '基本斑编号',
+	 	     	id:'zrbbh',
+				store : array,
+				width : 150,
+				displayField : 'state',
+				typeAhead : true,
+				mode : 'local',
+				forceSelection : true,
+				triggerAction : 'all',
+				emptyText : "-请选择基本斑编号-",
+				selectOnFocus : true
+			});
 	var fp = new Ext.FormPanel({
 		renderTo: 'fi-form',
         fileUpload: true,
@@ -58,12 +78,8 @@ function initFile(){
             allowBlank: false,
             msgTarget: 'side'
         },
-		items: [{
-            xtype: 'textfield',
-            id:'zrbbh',
-            width:190,
-            fieldLabel: '基本斑编号'
-        },{
+		items: [
+			combo,{
             xtype: 'fileuploadfield',
             id: 'form-file',
             emptyText: 'Select an file',

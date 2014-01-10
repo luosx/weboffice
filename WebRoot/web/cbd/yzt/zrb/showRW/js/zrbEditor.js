@@ -1,5 +1,6 @@
 var data;
-var simple;
+var simple; 
+var combo;
 var url = basePath
 		+ '/web/cbd/yzt/zrb/showRW/zrbRowEditor.jsp';
 var condition = "";
@@ -51,6 +52,26 @@ function initComponent() {
 }
 
 function initFile(){
+	putClientCommond("zrbHandle","getZRBBH");
+	var zrbbh = restRequest();
+	var array = new Array();
+	for(var i=0;i<zrbbh.length;i++ ){
+	array.push(zrbbh[i].ZRBBH);
+	}
+	
+	 combo = new Ext.form.ComboBox({
+	 	      fieldLabel: '自然斑编号',
+	 	     	id:'zrbbh',
+				store : array,
+				width : 150,
+				displayField : 'state',
+				typeAhead : true,
+				mode : 'local',
+				forceSelection : true,
+				triggerAction : 'all',
+				emptyText : "-请选择自然斑编号-",
+				selectOnFocus : true
+			});
 	var fp = new Ext.FormPanel({
 		renderTo: 'fi-form',
         fileUpload: true,
@@ -65,12 +86,8 @@ function initFile(){
             allowBlank: false,
             msgTarget: 'side'
         },
-		items: [{
-            xtype: 'textfield',
-            id:'zrbbh',
-            width:190,
-            fieldLabel: '自然斑编号'
-        },{
+		items: [
+			combo,{
             xtype: 'fileuploadfield',
             id: 'form-file',
             emptyText: '请选择txt文件位置',
