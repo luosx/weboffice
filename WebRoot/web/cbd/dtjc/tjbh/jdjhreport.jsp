@@ -18,6 +18,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
+	<%@ include file="/base/include/restRequest.jspf"%>
+	<%@ include file="/base/include/ext.jspf"%>
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
@@ -108,7 +110,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    .tdfull {
     background-color: yellow;
    }
-   
+    .proccess{border:0px solid;border-color:#009900;height:600px;line-height:600px;width:600px;text-align:center;background:#ffffff;margin:0;position:absolute;top:0;left:0;} 
+ 	.proccess b{vertical-align:middle; center;padding-left:35px;display:inline-block;} 
 	</style>
   </head>
   <script type="text/javascript">
@@ -139,10 +142,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			
 		}
   </script>
-  <body>
+  <body onload="init(); return false">
     <div id="fixed" style="position: fixed; top: 5px; left: 0px">
 		<img src="base/form/images/print.png" width="20px" height="20px" onClick="print()" >
 	</div>
-  	<%=new CBDReportManager().getReport("JDJH")%>
+  	<div id='show' style="display:none">
+  	</div>
+  	<div class="proccess" id="loading"><b>正在加载中。。。</b></div> 
   </body>
+  <script type="text/javascript">
+  		Ext.onReady(function(){
+  			putClientCommond("jh","getJdjhReport");
+  			myData = restRequest();
+  			document.getElementById("show").innerHTML = myData;
+  			document.getElementById("loading").style.display = "none";
+  			document.getElementById("show").style.display = "";
+  		})
+  </script>
 </html>
