@@ -1,6 +1,7 @@
 var data;
 var simple;
 var combo;
+var array = new Array();
 var url = basePath
 		+ 'web/cbd/yzt/hxxm/showRW/hxxmRowEditor.jsp';
 var condition = "";
@@ -53,12 +54,8 @@ function initComponent() {
 
 
 function initFile(){
-	putClientCommond("hxxmHandle","getHxxmmc");
-	var hxxmmc = restRequest();
-	var array = new Array();
-	for(var i=0;i<hxxmmc.length;i++ ){
-	array.push(hxxmmc[i].XMNAME);
-	}
+	
+	
 	
 	 combo = new Ext.form.ComboBox({
 	 	      fieldLabel: '项目名称',
@@ -149,6 +146,15 @@ function dele(){
 }
 
 function insertGIS(){
+	putClientCommond("hxxmHandle","getHxxmmc");
+	var hxxmmc = restRequest();
+	if(array.length>0){
+		array=[];
+	}
+	for(var i=0;i<hxxmmc.length;i++ ){
+		array.push(hxxmmc[i].XMNAME);
+	}
+	combo.store.loadData(array);
 	var form = document.getElementById("fi-form");
 	var display = form.style.display;
 	if(display == "none"){
@@ -157,6 +163,7 @@ function insertGIS(){
 		form.style.display = "none";
 	}
 }
+
 
 
 

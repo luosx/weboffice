@@ -1,6 +1,7 @@
 var data;
 var simple; 
 var combo;
+var array = new Array();
 var url = basePath
 		+ '/web/cbd/yzt/zrb/showRW/zrbRowEditor.jsp';
 var condition = "";
@@ -52,13 +53,6 @@ function initComponent() {
 }
 
 function initFile(){
-	putClientCommond("zrbHandle","getZRBBH");
-	var zrbbh = restRequest();
-	var array = new Array();
-	for(var i=0;i<zrbbh.length;i++ ){
-	array.push(zrbbh[i].ZRBBH);
-	}
-	
 	 combo = new Ext.form.ComboBox({
 	 	      fieldLabel: '自然斑编号',
 	 	     	id:'zrbbh',
@@ -145,6 +139,15 @@ function dele(){
 }
 
 function insertGIS(){
+	putClientCommond("zrbHandle","getZRBBH");
+	var zrbbh = restRequest();
+	if(array.length>0){
+		array=[];
+	}
+	for(var i=0;i<zrbbh.length;i++ ){
+		array.push(zrbbh[i].ZRBBH);
+	}
+	combo.store.loadData(array);
 	var form = document.getElementById("fi-form");
 	var display = form.style.display;
 	if(display == "none"){
