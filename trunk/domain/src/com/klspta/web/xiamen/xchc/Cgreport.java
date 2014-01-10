@@ -150,7 +150,7 @@ public class Cgreport extends AbstractBaseBean implements IDataClass {
 	private List<TRBean> getBody1(String where){
 	    List<TRBean> list = new ArrayList<TRBean>();          
         String sql = "select rownum xh,t.ydxmmc,t.ydzt,t.ydwz,t.zdmj,t.gdmj,t.jzmj,t.jzxz,t.yt,t.fhgh,t.fxsj,t.zzqk,t.zztzsbh,t.wjzzhjxzz,t.yydspqcz from dc_ydqkdcb t " +
-                     "where t.ydxmmc||t.ydzt||t.ydwz is not null "; 
+                     "where t.yw_guid like 'XC%' "; 
         sql += where;
         List<Map<String,Object>> result = query(sql,YW);
         for(int i=0;i<result.size();i++){
@@ -235,7 +235,7 @@ public class Cgreport extends AbstractBaseBean implements IDataClass {
 	private List<TRBean> getBody2(String where){
 		List<TRBean> list = new ArrayList<TRBean>();
 	       String sql = "select rownum xh,t.yddw,t.ydsj,t.ydqk,t.mj,t.jsqk,t.dfccqk,t.wfwglx,t.sfwf,t.wflx,t.xcqkms from dc_ydqkdcb t " +
-           "where t.yddw||t.ydsj||t.ydqk is not null "; 
+           "where t.yw_guid not like 'XC%' "; 
             sql += where;
             List<Map<String,Object>> result = query(sql,YW);
             for(int i=0;i<result.size();i++){

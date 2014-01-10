@@ -54,10 +54,13 @@ public class XchcData extends AbstractBaseBean implements IxchcData {
 	
 	@Override
 	public List<Map<String, Object>> getDclList(String userId, String keyword) {
-		String xzq = editXzq(userId);
+		//String xzq = editXzq(userId);
+	    //String xzqs = XzqHandle.getXzqByUserxzq(userXzq)	    
 		StringBuffer sqlBuffer = new StringBuffer();
-		sqlBuffer.append("select t.* from v_pad_data_xml t where t.impxzqbm in");
-		sqlBuffer.append(xzq);
+		String sql ="select t.* from v_pad_data_xml t where 1=1";
+		//sqlBuffer.append(xzq);
+		String xzqSql = XzqHandle.getXzqSql(userId, sql, "impxzqbm");
+		sqlBuffer.append(xzqSql);
 		sqlBuffer.append(" and t.guid like 'XC%'");
 		if (keyword != null) {
             keyword = UtilFactory.getStrUtil().unescape(keyword);
@@ -78,10 +81,13 @@ public class XchcData extends AbstractBaseBean implements IxchcData {
 	
     @Override
     public List<Map<String, Object>> getHccgList(String userId, String keyword) {
-        String xzq = editXzq(userId);
+        //String xzq = editXzq(userId);
         StringBuffer sqlBuffer = new StringBuffer();
-        sqlBuffer.append("select t.* from v_pad_data_xml t where t.impxzqbm in");
-        sqlBuffer.append(xzq);
+        //sqlBuffer.append("select t.* from v_pad_data_xml t where t.impxzqbm in");
+        String sql ="select t.* from v_pad_data_xml t where 1=1";
+        //sqlBuffer.append(xzq);
+        String xzqSql = XzqHandle.getXzqSql(userId, sql, "impxzqbm");
+        sqlBuffer.append(xzqSql);
         sqlBuffer.append(" and t.guid not like 'XC%'");
         if (keyword != null) {
             keyword = UtilFactory.getStrUtil().unescape(keyword);
@@ -115,9 +121,10 @@ public class XchcData extends AbstractBaseBean implements IxchcData {
 	public List<Map<String, Object>> getYlaList(String userId, String keyword) {
 		String xzq = editXzq(userId);
 		StringBuffer sqlBuffer = new StringBuffer();
-		sqlBuffer.append("select t.* from v_pad_data_xml t where t.impxzqbm in");
-		sqlBuffer.append(xzq);
-		sqlBuffer.append("and t.state = '已立案' and t.guid like 'XC%'");
+		String sql ="select t.* from v_pad_data_xml t where 1=1";
+		String xzqSql = XzqHandle.getXzqSql(userId, sql, "impxzqbm");
+		sqlBuffer.append(xzqSql);
+		sqlBuffer.append(" and t.state = '已立案' and t.guid like 'XC%'");
 		if (keyword != null) {
             keyword = UtilFactory.getStrUtil().unescape(keyword);
              sqlBuffer.append(" and").append(queryString).append(" like '%");

@@ -10,6 +10,7 @@ import com.klspta.base.util.UtilFactory;
 import com.klspta.base.util.bean.xzqhutil.XzqhBean;
 import com.klspta.console.ManagerFactory;
 import com.klspta.console.role.Role;
+import com.klspta.console.user.User;
 
 /**
  * 
@@ -87,5 +88,62 @@ public class XzqHandle  {
 		return containBuffer.toString();
 	}
 	
-
+    
+	public static String[] getXzqByUserxzq(String userId){
+	    User user = null;
+        try {
+            user = ManagerFactory.getUserManager().getUserWithId(userId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+	    String userXzq = user.getXzqh();
+	    String[] mateXzqs = null;
+	    String mateXzq = "";
+	    if(userXzq != null && !"".equals(userXzq)){
+	         String[] xzqs = userXzq.split(",");
+	         mateXzqs = new String[xzqs.length];
+	         for(int i=0;i<xzqs.length;i++){
+	             if(xzqs[i].length()==6){
+	                 if(xzqs[i].endsWith("00")){
+	                     mateXzq = xzqs[i].substring(0, 4);
+	                 }else{
+	                     mateXzq = xzqs[i];
+	                 }
+	             }else{
+	                 mateXzq = xzqs[i];
+	             }
+	             mateXzqs[i] = mateXzq;
+	         }
+	        
+	    }	    
+	    return mateXzqs; 
+	}
+	
+	public static String getXzqSql(String userId,String sql,String field){
+	    String[] xzqs = getXzqByUserxzq(userId);
+	    StringBuffer sb = new StringBuffer(sql+" and (");
+	    for(int i=0;i<xzqs.length;i++){
+	        sb.append(field).append(" like '").append(xzqs[i]).append("%'");
+	        if(i!=xzqs.length-1){
+	            sb.append(" or ");
+	        }
+	    } 
+	    sb.append(")");
+	    return sb.toString();
+	}
+	
+	
+	public static void main(String args[]){
+	    //String aa = "350200";
+	    //System.out.println(aa.substring(0,4));
+	    //String[] aa = getXzqByUserxzq("350203,350206");
+	    //String[] aa = getXzqByUserxzq("350203111,350206123");
+	    //for(String a:aa){
+	    //    System.out.println(a);
+	    //}
+	    String[] xzqs = {"350205"};
+	    String aa = getXzqSql("","select t.yw_guid,t.impxzqbm from dc_ydqkdcb t where 1=1","impxzqbm");
+	    System.out.println(aa);
+	}
+	
 }

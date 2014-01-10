@@ -62,7 +62,11 @@ public class XmResultImp extends  AResultImp {
             int count = importData(folderpath);
             //上传附件
             importAccessoryField(folderpath);
-            response("{success:true,msg:" + count + "}");
+            if(count != 0){
+                response("{success:true,msg:" + count + "}");
+            }else{
+                response("{failure:true}");
+            }
 		}
 	}
 	

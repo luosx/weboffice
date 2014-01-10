@@ -8,18 +8,19 @@ import com.klspta.base.AbstractBaseBean;
 import com.klspta.model.CBDReport.bean.TDBean;
 import com.klspta.model.CBDReport.bean.TRBean;
 import com.klspta.model.CBDReport.dataClass.IDataClass;
+import com.klspta.web.xiamen.jcl.XzqHandle;
 
 public class Illegalreport extends AbstractBaseBean implements IDataClass {
 
     @Override
     public Map<String, TRBean> getTRBeans(Object[] obj, TRBean trBean) {
-        String userXzqh = (String)obj[0];      
+        String userId = (String)obj[0];      
         Map<String, TRBean> trbeans = new LinkedHashMap<String, TRBean>();    
         List<TRBean> titleList = getTitle();
         for(int i=0;i<titleList.size();i++){
             trbeans.put(i+"0", titleList.get(i));
         }      
-        List<TRBean> bodyList = getBody(userXzqh);
+        List<TRBean> bodyList = getBody(userId);
         for(int i=0;i<bodyList.size();i++){
             trbeans.put(i+"1", bodyList.get(i));
         }               
@@ -83,19 +84,13 @@ public class Illegalreport extends AbstractBaseBean implements IDataClass {
         return list;      
     }
     
-    private List<TRBean> getBody(String userXzqh){
+    private List<TRBean> getBody(String userId){
         List<TRBean> list = new ArrayList<TRBean>();          
-        String sql = "";
-        List<Map<String,Object>> result = null;
-        if("350200".equals(userXzqh)){
-            sql = "select rownum xh, t.ydxmmc,t.ydzt,t.ydwz,t.zdmj,t.gdmj,t.jzmj,t.jzxz,t.yt,t.fhgh,t.fxsj,t.zzqk,t.zztzsbh,t.wjzzhjxzz,t.yydspqcz from dc_ydqkdcb t " +
-                  "where t.ydxmmc||t.ydzt||t.ydwz is not null and t.state='未立案'";
-            result = query(sql,YW);
-        }else{
-            sql = "select rownum xh, t.ydxmmc,t.ydzt,t.ydwz,t.zdmj,t.gdmj,t.jzmj,t.jzxz,t.yt,t.fhgh,t.fxsj,t.zzqk,t.zztzsbh,t.wjzzhjxzz,t.yydspqcz from dc_ydqkdcb t " +
-            "where t.ydxmmc||t.ydzt||t.ydwz is not null and t.state='未立案' and t.impxzqbm=?";   
-            result = query(sql,YW,new Object[]{userXzqh});
-        }       
+        List<Map<String,Object>> result = null;  
+        String sql = "select rownum xh, t.ydxmmc,t.ydzt,t.ydwz,t.zdmj,t.gdmj,t.jzmj,t.jzxz,t.yt,t.fhgh,t.fxsj,t.zzqk,t.zztzsbh,t.wjzzhjxzz,t.yydspqcz from dc_ydqkdcb t " +
+                     "where t.yw_guid like 'XC%' and t.state='未立案'";
+        sql = XzqHandle.getXzqSql(userId, sql, "impxzqbm");
+        result = query(sql,YW);
         for(int i=0;i<result.size();i++){
             TRBean tr = new TRBean();
             tr.setCssStyle("trsingle");            

@@ -182,10 +182,16 @@ public class XchcManager extends AbstractBaseBean {
         String id = request.getParameter("imsi"); 
         System.out.println("X:"+x+"========Y:"+y+"==========ID:"+id);
         String insertSql = "insert into gps_location_log(gps_id,gps_x,gps_y) values(?,?,?)";
-        update(insertSql,YW,new Object[]{id,x,y});      
+        int i = 0;
+        i = update(insertSql,YW,new Object[]{id,x,y});      
         String sql = "update gps_current_location t set t.gps_x=?,t.gps_y=?,t.send_time=sysdate where t.gps_id=?";
-        update(sql,YW,new Object[]{x,y,id});       
-        response("success");       
+        i = update(sql,YW,new Object[]{x,y,id});
+        if(i == 1){
+            response("success"); 
+        }else{
+            response("failure"); 
+        }
+              
     }
     
     public void getYlaList(){
