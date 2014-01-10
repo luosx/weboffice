@@ -77,4 +77,10 @@
 	<bean name="tableField" class="com.klspta.web.cbd.yzt.table.TableFieldManager" scope="prototype"/>
 	<bean name="xzlzjjc" class="com.klspta.web.cbd.sccsl.XzlzjjcManager" scope="prototype"/>
 	<bean name="staticReport" class="com.klspta.web.cbd.cbsycs.tjsj.StatisReport" scope="prototype"/>
+	
+	<!-- 生成PPT -->	
+	<bean name="xmbg" class="com.klspta.web.cbd.xmgl.xmbg.XmbgManager" scope="prototype"/>
+	
+	<!-- 生成计划报表（年度计划、季度计划） -->	
+	<bean name="jh" class="com.klspta.web.cbd.dtjc.tjbh.JhManager" scope="prototype"/>
 </beans>
