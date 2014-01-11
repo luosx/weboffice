@@ -25,8 +25,8 @@
     Object userprincipal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     String userid = ((User)userprincipal).getUserID();
     String edit = request.getParameter("edit");
-    String xzqh = ManagerFactory.getUserManager().getUserWithId(userid).getXzqh();
-    String name = UtilFactory.getXzqhUtil().getBeanById(xzqh).getCatonname();
+    //String xzqh = ManagerFactory.getUserManager().getUserWithId(userid).getXzqh();
+    //String name = UtilFactory.getXzqhUtil().getBeanById(xzqh).getCatonname();
        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd", new DateFormatSymbols());
  		String dateString = df.format(Calendar.getInstance().getTime());
 %>
