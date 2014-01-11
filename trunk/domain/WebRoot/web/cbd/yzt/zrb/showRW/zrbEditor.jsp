@@ -57,6 +57,7 @@ input,img {
 </style>
 		<script>
 		var basePath="<%=basePath%>";
+		
 </script>
 		<script src="js/zrbEditor.js"></script>
 	</head>
@@ -67,5 +68,8 @@ input,img {
 				style="width: 100%; height: 90%; margin-left: 10px; margin-top: 5px"></div>
 		</div>
 		<div id="fi-form" style="position:absolute; left:200px; top:200px; width:200px; height:100px; background:#FFFFFF; display:none;" ></div>
+		<form id="attachfile" action="<%=basePath%>service/rest/zrbHandle/getImage" method="post">
+		
+		</form>   
 	</body>
 </html>
