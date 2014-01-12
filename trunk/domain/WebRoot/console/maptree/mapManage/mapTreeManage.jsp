@@ -274,7 +274,7 @@ scrollbar-3dlight-color:#D4D0C8;
 		   		        var result = ajaxRequest(path,actionName,actionMethod,parameter);
 		   		        */
 		   		       	putClientCommond("mapAuthorOperation", "addMapTreeNode");
-		   		    	putRestParameter("treeId", mapTreeid);
+		   		    	putRestParameter("treeId", mapTreeId);
 		   		    	putRestParameter("leafFlag", "0");
 		   		    	putRestParameter("parentTreeId", "0");
 		   		    	var result = restRequest();
