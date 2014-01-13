@@ -144,18 +144,19 @@ public class UserManager extends AbstractBaseBean {
 		// 删除
 		String sql = "delete from map_user_role where role_id=?";
 		update(sql, CORE, new Object[] { roleId });
-		// 添加
-		StringBuffer sqlBuf = new StringBuffer(
-				"insert into map_user_role(role_id,user_id)(select ?,t.id from core_users t where t.id in (");
-		Object[] args = new Object[userNames.size() + 1];
-		args[0] = roleId;
-		for (int i = 0; i < userNames.size(); i++) {
-			sqlBuf.append("?,");
-			args[i + 1] = usermap.get(userNames.get(i)).getUserID();
+		if(userNames.size()>0 && !"".equals(userNames.get(0))){
+    		// 添加
+    		StringBuffer sqlBuf = new StringBuffer(
+    				"insert into map_user_role(role_id,user_id)(select ?,t.id from core_users t where t.id in (");
+    		Object[] args = new Object[userNames.size() + 1];
+    		args[0] = roleId;
+    		for (int i = 0; i < userNames.size(); i++) {
+    			sqlBuf.append("?,");
+    			args[i + 1] = usermap.get(userNames.get(i)).getUserID();
+    		}
+    		String sql2 = sqlBuf.substring(0, sqlBuf.length() - 1) + "))";
+    		update(sql2, CORE, args);
 		}
-		String sql2 = sqlBuf.substring(0, sqlBuf.length() - 1) + "))";
-		update(sql2, CORE, args);
-
 		// 刷新内存
 		rolemap.remove(roleId);
 		ManagerFactory.getRoleManager().flashUserMap();

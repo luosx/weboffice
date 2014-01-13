@@ -82,18 +82,20 @@ public class UserAction extends AbstractBaseBean {
 				ManagerFactory.getRoleManager().updateRole(role);
 			}
 			String personName = request.getParameter("personName");
-			if ("".equals(personName)) {
-				response.getWriter().write("{success:true,msg:true}");
-				return;
-			}
-			String[] users = personName.split(",");
 			List<String> userNames = new ArrayList<String>();
-
-			for (int i = 0; i < users.length; i++) {
-				if ("".equals(users[i]))
-					continue;
-				userNames.add(users[i].substring(users[i].indexOf('(') + 1,
-						users[i].indexOf(')')));
+			
+			if ("".equals(personName)) {
+				//response.getWriter().write("{success:true,msg:true}");
+				//return;
+			    userNames.add("");
+			}else{
+    			String[] users = personName.split(",");    		   
+    			for (int i = 0; i < users.length; i++) {
+    				if ("".equals(users[i]))
+    					continue;
+    				userNames.add(users[i].substring(users[i].indexOf('(') + 1,
+    						users[i].indexOf(')')));
+    			}
 			}
 			ManagerFactory.getUserManager().addUserRoleMap(role.getRoleid(),
 					userNames);
