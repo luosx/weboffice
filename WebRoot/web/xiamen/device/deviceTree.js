@@ -79,7 +79,8 @@ function monitor(swf) {
 							deviceCoors[id].GPS_Y, nodes[i].attributes.online,
 							0, 0, nodes[i].attributes.GPS_UNIT
 									+ nodes[i].attributes.GPS_NAME);
-			swf.expandExtent(0.2);
+			swf.expandExtentByMapPoint(deviceCoors[id].GPS_X,
+					deviceCoors[id].GPS_Y, 0.2);
 		} catch (e) {
 		}
 	}
@@ -100,7 +101,8 @@ function locate(node, swf) {
 				deviceCoors[id].GPS_Y, node.attributes.online, 0, 0,
 				node.attributes.GPS_UNIT + node.attributes.GPS_NAME);
 
-		swf.expandExtent(0.2);
+		swf.expandExtentByMapPoint(deviceCoors[id].GPS_X,
+				deviceCoors[id].GPS_Y, 0.2);
 	} catch (e) {
 		parent.Ext.MessageBox.alert("提示", "地图尚未加载完毕，请稍后重试!");
 	}
