@@ -372,10 +372,10 @@ public class XmResultImp extends  AResultImp {
         String filename = file.getName();
         String fileSuffix = filename.substring(filename.lastIndexOf("."));
         String file_id = new UID().toString().replaceAll(":", "-");
-        String newFilePath =file.getParentFile().getAbsolutePath()+"\\"+file_id + fileSuffix;
-        File newFile = new File(newFilePath);
+        String newFilePath =file_id + fileSuffix;
+        File newFile = new File(file.getParentFile().getAbsolutePath()+"\\"+newFilePath);
         file.renameTo(newFile);
-        if (UtilFactory.getFtpUtil().uploadFile(newFilePath)) {
+        if (UtilFactory.getFtpUtil().uploadFile(newFile.getAbsolutePath())) {
             String sql = "insert into atta_accessory(file_id,file_type,file_name,file_path,yw_guid) values(?,?,?,?,?)";
             update(sql, CORE, new Object[] { file_id, "file", filename, newFilePath, yw_guid});
         }
