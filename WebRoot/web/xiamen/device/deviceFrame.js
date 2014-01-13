@@ -156,9 +156,12 @@ function changeMethod() {
 	if (flag) {
 		method = "LOCATE";
 		Ext.getCmp("treePanel").setTitle("设备列表--<font color=red>定位</font>");
+		frames["center"].swfobject.getObjectById("FxGIS").clear();
+		locate(null,null);
 	} else {
 		method = "MONITOR";
 		Ext.getCmp("treePanel").setTitle("设备列表--<font color=green>监控</font>");
+		frames["center"].swfobject.getObjectById("FxGIS").clear();
 		monitor("");
 	}
 }
@@ -166,11 +169,13 @@ function changeMethod() {
 // ////////////////////////////////////////////////////////////////////////////////////
 // 放大
 function zoomIn() {
-	frames["center"].swfobject.getObjectById("FxGIS").zoomIn();
+	frames["center"].swfobject.getObjectById("FxGIS").carMonitor("monitor", "123", "11", "22", 1, 0, 0, 'test1');
+	// frames["center"].swfobject.getObjectById("FxGIS").zoomIn();
 }
 // 缩小
 function zoomOut() {
-	frames["center"].swfobject.getObjectById("FxGIS").zoomOut();
+	frames["center"].swfobject.getObjectById("FxGIS").carMonitor("monitor", "123", "33", "44", 1, 0, 0, 'test1');
+	// frames["center"].swfobject.getObjectById("FxGIS").zoomOut();
 }
 // 漫游
 function pan() {
