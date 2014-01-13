@@ -42,6 +42,7 @@ Ext.onReady(function(){
            {name: 'eMail'},
            {name: '办公电话'},
            {name: '手机'},
+           {name: '行政区划'},
            {name: '修改'},
            {name: '删除'}
         ]
@@ -59,6 +60,7 @@ Ext.onReady(function(){
             {header: 'eMail', width: 100, sortable: false},
             {header: '办公电话', width: 100, sortable: true},
             {header: '手机', width: 90, sortable: true},
+            {header: '行政区划', width: 90, sortable: true},
             {header: '修改', width: 40, sortable: false, renderer: modify}, 
             {header: '删除', width: 50, sortable: false, renderer: del}          
         ],
@@ -126,6 +128,7 @@ function query(){
            {name: 'EMAILADDRESS'},
            {name: 'OFFICEPHONE'},
            {name: 'MOBILEPHONE'},
+           {name: 'XZQH'},
            {name: 'ID'},
            {name: 'XZQH'}
               ]
@@ -139,6 +142,7 @@ function query(){
             {header: 'eMail',dataIndex:'EMAILADDRESS', width: 100, sortable: false},
             {header: '办公电话',dataIndex:'OFFICEPHONE', width: 100, sortable: true},
             {header: '手机',dataIndex:'MOBILEPHONE', width: 90, sortable: true},
+            {header: '行政区划',dataIndex:'XZQH', width: 90, sortable: true},
             {header: '修改', dataIndex:'ID',width: 40, sortable: false, renderer: modify}, 
             {header: '删除', dataIndex:'ID',width: 50, sortable: false, renderer: del}        
         ]));
