@@ -149,6 +149,10 @@ Ext.onReady(function() {
 			items : [tree]
 		}]
 	});
+	if (type == "showTrack") {
+		Ext.getCmp("treePanel").topToolbar.hide();
+		Ext.getCmp("treePanel").setTitle("设备列表");
+	}
 });
 var method = "LOCATE";
 function changeMethod() {
@@ -163,6 +167,7 @@ function changeMethod() {
 		Ext.getCmp("treePanel").setTitle("设备列表--<font color=green>监控</font>");
 		frames["center"].swfobject.getObjectById("FxGIS").clear();
 		monitor("");
+		monitorFlag=true;
 	}
 }
 

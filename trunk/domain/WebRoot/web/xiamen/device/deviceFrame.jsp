@@ -3,6 +3,7 @@
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
+	String type = request.getParameter("type");
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -17,6 +18,7 @@
 		<%@ include file="/base/include/restRequest.jspf"%>
 		<script>
 		var basePath="<%=basePath%>";
+		var type="<%=type%>";
 </script>
 		<script src="deviceFrame.js"></script>
 		<script src="deviceTree.js"></script>
