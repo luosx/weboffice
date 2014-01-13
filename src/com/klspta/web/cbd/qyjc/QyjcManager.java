@@ -306,7 +306,6 @@ public class QyjcManager extends AbstractBaseBean {
                         + "'  where yw_guid=? and rq=?";
                 update(update, YW, new Object[] { split2[0], year });
             }
-
         }
         if (datepjzj_id_cols_value != null && !datepjzj_id_cols_value.equals("")) {
             String[] split = datepjzj_id_cols_value.split("@");
@@ -338,10 +337,14 @@ public class QyjcManager extends AbstractBaseBean {
             String sqldiff = "select  distinct t2.yw_guid from xzlxx t2 where t2.yw_guid  not in (select yw_guid from XZLZJQKND_PJZJ where rq=? )";
             List<Map<String, Object>> query = query(sqldiff, YW, new Object[] { year });
             if (query.size() > 0) {
+            	StringBuffer insert = new StringBuffer("insert all ");
                 for (int i = 0; i < query.size(); i++) {
-                    String insert = "insert into XZLZJQKND_PJZJ (yw_guid,rq) values(?,?)";
-                    update(insert, YW, new Object[] { list.get(i).get("yw_guid"), year });
+//                    String insert = "insert into XZLZJQKND_PJZJ (yw_guid,rq) values(?,?)";
+//                    update(insert, YW, new Object[] { list.get(i).get("yw_guid"), year });
+                	insert.append("into XZLZJQKND_PJZJ (yw_guid,rq) values('").append(list.get(i).get("yw_guid")).append("','").append(year).append("') ");
                 }
+                insert.append("select 'a','b' from dual");
+                update(insert.toString(), YW);
                 String sql2 = "select * from XZLXX t,XZLZJQKND_PJLM t2 where t2.yw_guid=t.yw_guid and t2.rq=?";
                 query1 = query(sql2, YW, new Object[] { year });
             }
@@ -352,10 +355,12 @@ public class QyjcManager extends AbstractBaseBean {
             String sqldiff = "select  distinct t2.yw_guid from xzlxx t2 where t2.yw_guid  not in (select yw_guid from XZLZJQKND_PJLM where rq=? )";
             List<Map<String, Object>> query = query(sqldiff, YW, new Object[] { year });
             if (query.size() > 0) {
+            	StringBuffer insert = new StringBuffer("insert all ");
                 for (int i = 0; i < list.size(); i++) {
-                    String insert = "insert into XZLZJQKND_PJLM (yw_guid,rq) values(?,?)";
-                    update(insert, YW, new Object[] { list.get(i).get("yw_guid"), year });
+                	insert.append("into XZLZJQKND_PJLM (yw_guid,rq) values('").append(list.get(i).get("yw_guid")).append("','").append(year).append("') ");
                 }
+                insert.append("select 'a','b' from dual");
+                update(insert.toString(), YW);
                 String sql = "select * from XZLXX t,XZLZJQKND_PJZJ t2 where t2.yw_guid=t.yw_guid and t2.rq=?";
                 query2 = query(sql, YW, new Object[] { year });
             }
