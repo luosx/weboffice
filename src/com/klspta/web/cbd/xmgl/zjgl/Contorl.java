@@ -14,6 +14,7 @@ public static String  CRZJFH="CRZJFH";
 public static String  QTZC="QTZC";
 
 private String  yw_guid;
+private String  year;
 
 private ZjglThread ZJZCThread;
 private ZjglThread YIKFZCThread;
@@ -25,8 +26,9 @@ private ZjglThread GLFYThread;
 private ZjglThread CRZJFHThread;
 private ZjglThread QTZCHThread;
 
-public Contorl(String yw_guid){
+public Contorl(String yw_guid,String year){
     this.yw_guid=yw_guid;
+    this.year=year;
     Init();
     try {
         Thread.sleep(1000);
@@ -35,31 +37,31 @@ public Contorl(String yw_guid){
     }
 }
 public  void Init(){
-    ZJZCThread = new ZjglThread(this.yw_guid,ZJZC);
+    ZJZCThread = new ZjglThread(this.yw_guid,ZJZC,this.year);
     Thread thread=new Thread(ZJZCThread);
     thread.start();
-    YIKFZCThread = new ZjglThread(this.yw_guid,YIKFZC);
+    YIKFZCThread = new ZjglThread(this.yw_guid,YIKFZC,this.year);
     Thread thread1=new Thread(YIKFZCThread);
     thread1.start();
-    QQFYThread=new ZjglThread(this.yw_guid,QQFY);
+    QQFYThread=new ZjglThread(this.yw_guid,QQFY,this.year);
     Thread thread2=new Thread(QQFYThread);
     thread2.start();
-    CQFYThread= new ZjglThread(this.yw_guid,CQFY);
+    CQFYThread= new ZjglThread(this.yw_guid,CQFY,this.year);
     Thread thread3=new Thread(CQFYThread);
     thread3.start();
-    SZFYThread=new ZjglThread(this.yw_guid,SZFY);
+    SZFYThread=new ZjglThread(this.yw_guid,SZFY,this.year);
     Thread thread4=new Thread(SZFYThread);
     thread4.start();
-    CWFYThread=new ZjglThread(this.yw_guid,CWFY);
+    CWFYThread=new ZjglThread(this.yw_guid,CWFY,this.year);
     Thread thread5=new Thread(CWFYThread);
     thread5.start();
-    GLFYThread=new ZjglThread(this.yw_guid,GLFY);
+    GLFYThread=new ZjglThread(this.yw_guid,GLFY,this.year);
     Thread thread6=new Thread(GLFYThread);
     thread6.start();
-    CRZJFHThread=new ZjglThread(this.yw_guid,CRZJFH);
+    CRZJFHThread=new ZjglThread(this.yw_guid,CRZJFH,this.year);
     Thread thread7=new Thread(CRZJFHThread);
     thread7.start();
-    QTZCHThread=new ZjglThread(this.yw_guid,QTZC);
+    QTZCHThread=new ZjglThread(this.yw_guid,QTZC,this.year);
     Thread thread8=new Thread(QTZCHThread);
     thread8.start(); 
     
@@ -67,11 +69,11 @@ public  void Init(){
 private StringBuffer buffer=new StringBuffer();
 public  String getTextMode(){
         //是否项目初始化
-        new ZjglData().setMX(this.yw_guid);
-        StringBuffer title = ZjglBuild.buildTitle();
+        new ZjglData().setMX(this.yw_guid,this.year);
+        StringBuffer title = ZjglBuild.buildTitle(this.year);
         buffer.append(title);
         //资金流入
-        StringBuffer zjlr = TrFactory.getmod(this.yw_guid);
+        StringBuffer zjlr = TrFactory.getmod(this.yw_guid,this.year);
         buffer.append(zjlr);
         buffer.append(ZJZCThread.getBuffer());
         buffer.append(YIKFZCThread.getBuffer());

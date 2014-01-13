@@ -17,36 +17,36 @@ public class TreeManager extends AbstractBaseBean {
  * @return
  */
     
-    public List<Map<String, Object>> getZC_tree(String yw_guid, String type) {
-        String sql = "select *  from zjgl_tree where yw_guid=? and parent_id=?";
-        List<Map<String, Object>> list = query(sql, YW, new Object[] { yw_guid, type });
+    public List<Map<String, Object>> getZC_tree(String yw_guid, String type,String year) {
+        String sql = "select *  from zjgl_tree where yw_guid=? and parent_id=? and rq=?";
+        List<Map<String, Object>> list = query(sql, YW, new Object[] { yw_guid, type ,year});
         return list;
     }
 
-    public String getTree(String yw_guid){
+    public String getTree(String yw_guid ,String year){
         StringBuffer buffer = new StringBuffer();
        buffer.append("{text:'Ⅱ.资金支出',leaf:0,id:'1',");
        buffer.append("children:[{text:'2.1 一级开发支出',leaf:0,id:'101',");
        buffer.append("children:[");
-       StringBuffer qqfy = getChaild_tree(yw_guid,"2.1.1 前期费用","QQFY");
+       StringBuffer qqfy = getChaild_tree(yw_guid,"2.1.1 前期费用","QQFY",year);
        buffer.append(qqfy);
        buffer.append(",");
-       StringBuffer cqfy = getChaild_tree(yw_guid,"2.1.2 拆迁费用","CQFY");
+       StringBuffer cqfy = getChaild_tree(yw_guid,"2.1.2 拆迁费用","CQFY",year);
        buffer.append(cqfy);
        buffer.append(",");
-       StringBuffer szfy = getChaild_tree(yw_guid,"2.1.3 市政费用","SZFY");
+       StringBuffer szfy = getChaild_tree(yw_guid,"2.1.3 市政费用","SZFY",year);
        buffer.append(szfy);
        buffer.append(",");
-       StringBuffer cwfy = getChaild_tree(yw_guid,"2.1.4 财务费用","CWFY");
+       StringBuffer cwfy = getChaild_tree(yw_guid,"2.1.4 财务费用","CWFY",year);
        buffer.append(cwfy);
        buffer.append(",");
-       StringBuffer qlfy = getChaild_tree(yw_guid,"2.1.5 管理费","GLFY");
+       StringBuffer qlfy = getChaild_tree(yw_guid,"2.1.5 管理费","GLFY",year);
        buffer.append(qlfy);
        buffer.append("]},");
-       StringBuffer cyzjfh = getChaild_tree(yw_guid,"2.2 筹融资金返还","CRZJFH");
+       StringBuffer cyzjfh = getChaild_tree(yw_guid,"2.2 筹融资金返还","CRZJFH" ,year);
        buffer.append(cyzjfh);
        buffer.append(",");
-       StringBuffer qtzc = getChaild_tree(yw_guid,"2.3 其他支出","QTZC");
+       StringBuffer qtzc = getChaild_tree(yw_guid,"2.3 其他支出","QTZC" ,year);
        buffer.append(qtzc);
        buffer.append("]}");
         return  buffer.toString();
@@ -73,10 +73,10 @@ public class TreeManager extends AbstractBaseBean {
         return buffer;
     }
 
-    public StringBuffer getChaild_tree(String yw_guid,String name,String type) {
+    public StringBuffer getChaild_tree(String yw_guid,String name,String type,String year) {
         StringBuffer buffer = new StringBuffer();
-        String sql_qqfy="  select * from zjgl_tree where yw_guid=? and parent_id=?" ;
-        List<Map<String, Object>> list = query(sql_qqfy, YW,new Object []{yw_guid,type});
+        String sql_qqfy="  select * from zjgl_tree where yw_guid=? and parent_id=? and rq=?"  ;
+        List<Map<String, Object>> list = query(sql_qqfy, YW,new Object []{yw_guid,type,year});
         if (list.size()>0) {
             buffer.append("{text:'"+name+"',leaf:0,id:'"+type+"',children:[");
             for (int i = 0; i < list.size(); i++) {

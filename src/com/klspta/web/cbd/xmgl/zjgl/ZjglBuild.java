@@ -19,7 +19,7 @@ public class ZjglBuild {
      * <br>Date:2013-12-19
      * @return
      */
-   public static StringBuffer  buildTitle(){
+   public static StringBuffer  buildTitle(String year){
        StringBuffer Buffer = new StringBuffer();
        Buffer.append("<table  width='1900px'>" +
        		"<tr class='tr01' style='text-align:center' >" +
@@ -28,8 +28,8 @@ public class ZjglBuild {
        		"<td rowspan='3' colspan='2' align='center' width='260px' class='tr01'>累计已缴纳/已审批资金</td>" +
        		"<td rowspan='2' colspan='2' align='center' width='200' class='tr01'>累计发生(或返还)费用</td>" +
        		"<td rowspan='3'  align='center' width='80px' class='tr01'>期初余额</td>" +
-       		"<td colspan='12'  align='center' width='1000px' class='tr01'>2014年资金审批</td>" +
-       		"<td  rowspan='3'  align='center' width='80px' class='tr01'>2014年度流入/审批</td>" +
+       		"<td colspan='12'  align='center' width='1000px' class='tr01'>"+year+"年资金审批</td>" +
+       		"<td  rowspan='3'  align='center' width='80px' class='tr01'>"+year+"年度流入/审批</td>" +
        		"</tr>" +
        		
        	   "<tr class='tr01'>" +

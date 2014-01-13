@@ -13,38 +13,38 @@ public class TrFactory {
     static ZjglData zjglData= new ZjglData();
    
 //资金指出-入口
-   public static StringBuffer getmodel(List<Map<String, Object>> list, String yw_guid, String type) {
+   public static StringBuffer getmodel(List<Map<String, Object>> list, String yw_guid, String type,String year) {
         StringBuffer buffer = new StringBuffer();
         if(type.equals("ZJZC")){
-            List<Map<String, Object>> li = zjglData.getZC_sum(yw_guid);
+            List<Map<String, Object>> li = zjglData.getZC_sum(yw_guid,year);
             StringBuffer stringBuffer = ZjglBuild.buildZjzc_father_sum(li);
             buffer.append(stringBuffer);
             return buffer;
         }else if(type.equals("YIKFZC")){
-            List<Map<String, Object>> ls = zjglData.getZC_YJZC_sum(yw_guid);
+            List<Map<String, Object>> ls = zjglData.getZC_YJZC_sum(yw_guid,year);
             StringBuffer stringBuffer = ZjglBuild.buildZjzc_father_sum(ls);
             buffer.append(stringBuffer);
             return buffer;
         }else{
         if (list != null||list.size()>0) {
-            StringBuffer fatehr = buildFather(yw_guid, type);
-            StringBuffer chaild = buildChild(yw_guid, list, type);
+            StringBuffer fatehr = buildFather(yw_guid, type,year);
+            StringBuffer chaild = buildChild(yw_guid, list, type,year);
             buffer.append(fatehr);
             buffer.append(chaild);
             return buffer;
         } else {
-            StringBuffer fatehr = buildFather(yw_guid, type);
+            StringBuffer fatehr = buildFather(yw_guid, type,year);
             buffer.append(fatehr);
             return buffer;
         }
         }
     }
   //资金流入-入口
-   public static StringBuffer getmod(String yw_guid){
+   public static StringBuffer getmod(String yw_guid,String year){
         StringBuffer buffer = new StringBuffer();
         //总计
-        List<Map<String, Object>> query=zjglData.getLR_sum(yw_guid);
-        List<Map<String, Object>> list = zjglData. getZJGL_ZJLR(yw_guid);
+        List<Map<String, Object>> query=zjglData.getLR_sum(yw_guid,year);
+        List<Map<String, Object>> list = zjglData. getZJGL_ZJLR(yw_guid,year);
         StringBuffer stringBufZJ = ZjglBuild.buildZjlr_sum(query);
         buffer.append(stringBufZJ);
         StringBuffer stringBuffer = ZjglBuild.buildZjlr(list);
@@ -58,8 +58,8 @@ public class TrFactory {
     * <br>Author:朱波海
     * <br>Date:2013-12-18
     */
-   public static StringBuffer buildFather(String yw_guid, String type) {
-       List<Map<String, Object>> list = zjglData. getZJGL_father(yw_guid, type);
+   public static StringBuffer buildFather(String yw_guid, String type ,String year) {
+       List<Map<String, Object>> list = zjglData. getZJGL_father(yw_guid, type,year);
        StringBuffer stringBuffer = ZjglBuild.buildZjzc_father(list);
        return stringBuffer;
    }
@@ -70,12 +70,12 @@ public class TrFactory {
     * <br>Author:朱波海
     * <br>Date:2013-12-18
     */
-   public static StringBuffer buildChild(String yw_guid, List<Map<String, Object>> list, String type) {
+   public static StringBuffer buildChild(String yw_guid, List<Map<String, Object>> list, String type,String year) {
        StringBuffer buffer = new StringBuffer();
        if (list != null) {
            for (int i = 0; i < list.size(); i++) {
                String tree_name = list.get(i).get("tree_name").toString();
-               List<Map<String, Object>> query = zjglData. getZJGL_child(yw_guid,tree_name,type);
+               List<Map<String, Object>> query = zjglData. getZJGL_child(yw_guid,tree_name,type,year);
                StringBuffer stringBuffer = ZjglBuild.buildZjzc_child(query);
                buffer.append(stringBuffer);
            }
