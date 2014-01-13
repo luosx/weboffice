@@ -387,5 +387,16 @@ public class QyjcManager extends AbstractBaseBean {
         response(ta);
 
     }
+    
+    /****
+     * 
+     * <br>Description:改造政策研究
+     * <br>Author:李国明
+     * <br>Date:2014-1-13
+     */
+    public List<Map<String,Object>> getGZZCYJ() {
+        String sql = "select * from gzzcyj ";
+        return query(sql, YW);
+    }
 
 }
