@@ -208,6 +208,7 @@ public class UserManager extends AbstractBaseBean {
 				row.add(user.getEmail());
 				row.add(user.getOfficephone());
 				row.add(user.getMobilephone());
+				row.add(user.getXzqh());
 				row.add(user.getUserID());
 				row.add(user.getUserID());
 				rows.add(row);
