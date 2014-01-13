@@ -356,7 +356,7 @@ public class QyjcManager extends AbstractBaseBean {
             List<Map<String, Object>> query = query(sqldiff, YW, new Object[] { year });
             if (query.size() > 0) {
             	StringBuffer insert = new StringBuffer("insert all ");
-                for (int i = 0; i < list.size(); i++) {
+                for (int i = 0; i < query.size(); i++) {
                 	insert.append("into XZLZJQKND_PJLM (yw_guid,rq) values('").append(list.get(i).get("yw_guid")).append("','").append(year).append("') ");
                 }
                 insert.append("select 'a','b' from dual");
