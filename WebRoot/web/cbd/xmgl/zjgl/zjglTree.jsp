@@ -1,20 +1,18 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<%@page import="com.klspta.console.ManagerFactory"%>
 <%@page import="com.klspta.web.cbd.xmgl.zjgl.TreeManager"%>
-<%@page import="java.util.List"%>
-<%@page import="java.util.Map"%>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":"
             + request.getServerPort() + path + "/";
     String yw_guid= request.getParameter("yw_guid");
     	String xmmc=request.getParameter("xmmc");
+    	String year=request.getParameter("year");
     	if (xmmc != null) {
 		xmmc = new String(xmmc.getBytes("iso-8859-1"), "utf-8");
 	} else {
 		xmmc = "";
 	}
-    String tree=  new TreeManager().getTree(yw_guid);
+    String tree=  new TreeManager().getTree(yw_guid,year);
     tree="["+tree+"]";
     //System.out.print(tree);
 %>
@@ -53,15 +51,16 @@ scrollbar-3dlight-color:#D4D0C8;
 	var win;
 	var parentMenuTreeId;
     var selectMenuTreeId; 
-      var tree;
-      var root;
+    var tree;
+    var root;
+    var selected_leaf;
+    var sign_tree="";
  Ext.onReady(function() {
       root= new Ext.tree.AsyncTreeNode({
 	            expanded: true,
 	           // expandChildNodes：true,
 	            children: <%=tree%>
 	        });
-	        
 	 tree = new Ext.tree.TreePanel({
 	        useArrows:true,
 	        autoScroll:true,
@@ -91,26 +90,49 @@ scrollbar-3dlight-color:#D4D0C8;
         }],				
              buttons: [{
                     text:'保存', handler: function() {
+                     win.hide(); 
                      var tree_name=  Ext.getCmp("tree_name").getValue();
-                     
-                   if(tree_name!=null&&tree_name!=''){
-                      tree_name=escape(escape(tree_name));
-                        putClientCommond("xmmanager","saveZjglTree");
-    					putRestParameter("yw_guid",' <%=yw_guid%>');
-		   		        putRestParameter("id", selectMenuTreeId);
-		   		        putRestParameter("parent_id", parentMenuTreeId);
-		   		         putRestParameter("tree_name", tree_name);
+                    var selet= document.getElementById("selet");
+                    var selet_year=selet.options[selet.selectedIndex].value;
+                     var lef=new Ext.tree.TreeNode({ 
+                         text:tree_name,
+                         isLeaf:'ture'
+                                 });
+                        if(sign_tree=="Y"){
+                           selected_leaf.setText(tree_name) ;
+	   		             var   tree_text=escape(escape(tree_name));
+		                      putClientCommond("xmmanager","modify_tree");
+		   				     	putRestParameter("yw_guid",' <%=yw_guid%>');
+			   		           putRestParameter("id", selectMenuTreeId);
+			   		           putRestParameter("parent_id", parentMenuTreeId);
+			   		           putRestParameter("tree_text", tree_text);
+			   		            putRestParameter("selet_year", selet_year);
+    				    	    var result = restRequest();
+                            	parent.right.location.reload();
+                            }else{
+                            selected_leaf.appendChild(lef);  
+                            if(tree_name!=null&&tree_name!=''){
+		                    tree_name=escape(escape(tree_name));
+		                    putClientCommond("xmmanager","saveZjglTree");
+		   					putRestParameter("yw_guid",' <%=yw_guid%>');
+			   		        putRestParameter("id", selectMenuTreeId);
+			   		        putRestParameter("parent_id", parentMenuTreeId);
+			   		        putRestParameter("tree_name", tree_name);
+			   		        putRestParameter("selet_year", selet_year);
     					var result = restRequest();
-    					document.location.reload();
+    					//document.location.reload();
     					parent.right.location.reload();
     					}
     					else{
     					alert("请输入信息后再保存！");
-    					}
+    					}       
+                                 }
+                       sign_tree='';
+                 
                    }
                   }]
             });  
-         
+        
 	    win = new Ext.Window({
                 applyTo:'updateCar',
                 width:200,
@@ -123,12 +145,11 @@ scrollbar-3dlight-color:#D4D0C8;
 	  
 	    //要删除的menuTreeId
 	   var RighrClickMenu=new Ext.menu.Menu({
+	   
 	   items:[{
 		   		   text:"添加支出费用",
 		   		   pressed:true,
-		   		   handler:function(tree){
-		
-		   		   }
+		   		   handler:function(tree){ }
 	   		   }
 	   		   ]
 	   });
@@ -138,15 +159,47 @@ scrollbar-3dlight-color:#D4D0C8;
 	   		     text:"添加支出费用",
 		   		   pressed:true,
 		   		   handler:function(tree){
+		   		           sign_tree='N';
 		   		   		   updateForm.getForm().reset();
-                            win.show(); 
+                             win.show(); 
                              win.setTitle('添加支出费用')
-		   		   }
+		   		         }
+	   		   },
+	   		   {
+	   		     text:"修改",
+		   		   pressed:true,
+		   		   handler:function(tree){
+		   		            sign_tree='Y';
+		   		   		    updateForm.getForm().reset();
+		   		   		   var ss= Ext.getCmp("tree_name")
+		   		   		    ss.setValue(selected_leaf.text);
+                             win.show(); 
+                             win.setTitle('修改')
+		   		         }
+	   		   },
+	   		   {
+	   		     text:"删除",
+		   		   pressed:true,
+		   		   handler:function(tree){
+		   		    var selet= document.getElementById("selet");
+                    var selet_year=selet.options[selet.selectedIndex].value;
+		   		            tree_text=escape(escape(selected_leaf.text));
+		                    putClientCommond("xmmanager","delt_tree");
+		   					putRestParameter("yw_guid",' <%=yw_guid%>');
+			   		        putRestParameter("id", selectMenuTreeId);
+			   		        putRestParameter("parent_id", parentMenuTreeId);
+			   		         putRestParameter("tree_text", tree_text);
+			   		         putRestParameter("selet_year", selet_year);
+    				     	var result = restRequest();
+    				     		parent.right.location.reload();
+		   		   		  selected_leaf.remove() 
+		   		         }
 	   		   }
 	   		   ]
 	   	});
 	   	
 	   	function showRighrClickMenu(node,e){
+	   	selected_leaf=node;
    			e.preventDefault();
    			node.select();
    			selectMenuTreeId=node.id;
@@ -158,11 +211,15 @@ scrollbar-3dlight-color:#D4D0C8;
 	   			 RighrClickMenu.showAt(e.getPoint());
    			}
    		}
+ //
+ 
+
+ 
  
      //表单FormPanel
         var form = new Ext.form.FormPanel({
         renderTo: 'mapTree',
-        title   : '<%=xmmc%>',
+        title   : '资金支出操作树',
         autoHeight: true,
         width   : 210,
        
@@ -185,15 +242,57 @@ scrollbar-3dlight-color:#D4D0C8;
     return guid; 
 } 
             tree.expandAll(); 
+           //  root.reload();
+
 });
+function change(){
+var selet=document.getElementById("selet");
+var index=selet.selectedIndex;
+var selet_value=selet.options[index].value;
+var url="<%=basePath%>web/cbd/xmgl/zjgl/zjglcent.jsp?yw_guid=<%=yw_guid%>&xmmc=<%=xmmc%>&year="+selet_value;
+parent.right.location.href=url;
+var urltree="<%=basePath%>web/cbd/xmgl/zjgl/zjglTree.jsp?yw_guid=<%= yw_guid%>&xmmc=<%=xmmc%>&year="+selet_value;
+parent.left.location.href=urltree;
+}
+function  sele_year(){
+var slet=document.getElementById("selet");
+for(var i=0;i<slet.length;i++){
+if(slet.options[i].value=='<%=year%>'){
+slet.options[i].selected='true';
+}
+}
+
+}
+
 
 </script>
-	<body bgcolor="#FFFFFF" >
-		<div id="mapTree"  style="width:500px;height:500px;OVERFLOW-y:auto;  "/>
+	<body bgcolor="#FFFFFF"  onload="sele_year()">
+	<div align="center" style="width:205px;background-color: #C1D5F0 ;height:30px;">项目：<%=xmmc %>
+	</div>
+	<div align="center" style="width:205px;margin-top: 5px">
+		<fieldset  style="background-color: #DFE8F6 ;height:60px"  >
+		<legend>时间选择区</legend>
+		时间：<select onchange="change()" id="selet" >
+		<option value="2010">2010</option>
+		<option value="2011">2011</option>
+		<option value="2012">2012</option>
+		<option value="2013">2013</option>
+		<option value="2014" selected="selected">2014</option>
+		<option value="2015">2015</option>
+		<option value="2016">2016</option>
+		<option value="2017">2017</option>
+		<option value="2018">2018</option>
+		<option value="2019">2019</option>
+		<option value="2020">2020</option>
+		</select>
+		</fieldset>
+		</div>
+		<div id="mapTree" />
 	</div>
 	<div id="updateCar" class="x-hidden">
-			<div id="updateForm" style="width: 102%; height: 90%;margin-left: 10px; margin-top: 5px"></div>
+			<div id="updateForm" style="width:211px; height:250px;margin-left: 5px; margin-top: 5px"></div>
 		</div>
+
 	</body>
 </html>
 

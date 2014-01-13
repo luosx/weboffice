@@ -7,6 +7,7 @@
 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 	String yw_guid=request.getParameter("yw_guid");
 	String xmmc=request.getParameter("xmmc");
+   String year=request.getParameter("year");
 	String table="";
 	List<Map<String, Object>> lr=null;
 	List<Map<String, Object>> zc=null;
@@ -16,7 +17,7 @@
 		xmmc = "";
 	}
 	if(!yw_guid.equals("")&&!yw_guid.equals("null")){
-	  Contorl contorl=new Contorl(yw_guid);
+	  Contorl contorl=new Contorl(yw_guid,year);
 	  table=contorl.getTextMode();
    }
 %>
@@ -138,11 +139,14 @@ putClientCommond("xmmanager","saveZJGL_ZJLR");
 	}
  }
  
- 
+ function addds(){
+ alert("");
+ }
 </script>
 	</head>
 	<body bgcolor="#FFFFFF" topmargin="0" leftmargin="0" style="overflow: scroll;">
-	 <div align="center" style="width: 1350px"><h3><%=xmmc%>-资金管理</h3></div>
+	 <div align="center" style="width: 1350px;margin-top: 10px"><h3><%=xmmc%>-资金管理</h3></div>
 	   <%=table%>
 	</body>
+
 </html>
