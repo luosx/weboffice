@@ -97,7 +97,7 @@
                 fieldLabel: '排序号'
             },           
             {
-                xtype: 'numberfield',
+                xtype: 'textfield',
                 id      : 'xzqh',
                 value:'<%=userBean.getXzqh()%>',
                 fieldLabel: '行政区划代码'
