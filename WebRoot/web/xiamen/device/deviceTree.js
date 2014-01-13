@@ -40,6 +40,8 @@ function deviceMonitor(node, swf) {
 		monitor(swf);
 	}
 }
+// //////////////////////////////////////////////
+var monitorFlag = true;
 function monitor(swf) {
 	if (swf == null || swf == "") {
 		swf = frames["center"].swfobject.getObjectById("FxGIS");
@@ -79,8 +81,11 @@ function monitor(swf) {
 							deviceCoors[id].GPS_Y, nodes[i].attributes.online,
 							0, 0, nodes[i].attributes.GPS_UNIT
 									+ nodes[i].attributes.GPS_NAME);
-			swf.expandExtentByMapPoint(deviceCoors[id].GPS_X,
-					deviceCoors[id].GPS_Y, 0.2);
+			if (monitorFlag) {
+				swf.expandExtentByMapPoint(deviceCoors[id].GPS_X,
+						deviceCoors[id].GPS_Y, 0.2);
+				monitorFlag = false;
+			}
 		} catch (e) {
 		}
 	}
@@ -88,6 +93,7 @@ function monitor(swf) {
 				monitor(swf)
 			}, 10000);
 }
+// ////////////////////////////////////////////////////////////////
 function locate(node, swf) {
 	// ///////////////////////////// multiple nodes
 	if (node == null && swf == null) {
@@ -152,9 +158,24 @@ function multiLocate() {
 		}
 	}
 }
+
 // ///Get Data
 function getTreeContent() {
+	var tree;
+	if (type == "showTrack") {
+		tree = getTrackTreeContent();
+		// Ext.getCmp("treePanel").topToolBar.removeall();
+	} else {
+		tree = getMonitorTreeContent();
+	}
+	return tree;
+}
+function getMonitorTreeContent() {
 	putClientCommond("deviceTree", "getDeviceMonitorTree");
+	return (restRequest());
+}
+function getTrackTreeContent() {
+	putClientCommond("deviceTree", "getDeviceTrackTree");
 	return (restRequest());
 }
 function getDeviceCoor() {
