@@ -372,7 +372,7 @@ public class XmResultImp extends  AResultImp {
         String filename = file.getName();
         String fileSuffix = filename.substring(filename.lastIndexOf("."));
         String file_id = new UID().toString().replaceAll(":", "-");
-        String newFilePath = file_id + fileSuffix;
+        String newFilePath =file.getParentFile().getAbsolutePath()+"\\"+file_id + fileSuffix;
         File newFile = new File(newFilePath);
         file.renameTo(newFile);
         if (UtilFactory.getFtpUtil().uploadFile(newFilePath)) {
