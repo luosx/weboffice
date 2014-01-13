@@ -110,7 +110,7 @@ Ext.onReady(function() {
 				width : width,
 				html : '<iframe name="center" id="map" frameborder="0" style="width: 100%; height: 100%; overflow: auto;" src="'
 						+ basePath
-						+ 'base/fxgis/fx/FxGIS.html?i=false&initFunction=[{$name$:$setMapExtent$,$parameters$:$11,11,11,11$}]"></iframe>'
+						+ 'base/fxgis/fx/FxGIS.html?i=false&initFunction=[{$name$:$setMapExtent$,$parameters$:$45044.3121547718,5049.116018257262,72646.91380705396,14896.972418257263$}]"></iframe>'
 			}],
 			collapsible : false,
 			margins : '0 0 0 0'
