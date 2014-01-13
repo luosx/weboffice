@@ -10,6 +10,7 @@ import java.util.Map;
 
 import com.klspta.base.AbstractBaseBean;
 import com.klspta.base.util.UtilFactory;
+import com.klspta.web.cbd.xmgl.zjgl.TreeManager;
 import com.klspta.web.cbd.xmgl.zjgl.ZjglData;
 
 public class Xmmanager extends AbstractBaseBean {
@@ -211,17 +212,76 @@ public class Xmmanager extends AbstractBaseBean {
     public void saveZjglTree() {
         String st[] = { "QQFY", "CQFY", "SZFY", "CWFY", "GLFY", "CRZJFH", "QTZC" };
         String yw_guid = request.getParameter("yw_guid").trim();
-        //  String parent_id = request.getParameter("parent_id");
-        String id = request.getParameter("id");
+        String parent_id = request.getParameter("parent_id");
+        String selct_id = request.getParameter("id");
+        String selet_year=request.getParameter("selet_year");
         String tree_name = request.getParameter("tree_name");
         tree_name = UtilFactory.getStrUtil().unescape(tree_name).trim();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd_HHmmss");
+        String date = dateFormat.format(new Date());
         for (int i = 0; i < st.length; i++) {
-            if (id.equals(st[i])) {
-                String sql = " insert into zjgl_tree (yw_guid,parent_id,tree_name,tree_id)values (?,?,?,?)";
-                update(sql, YW, new Object[] { yw_guid, id, tree_name, id });
-                new ZjglData().saveNode(tree_name, st[i], yw_guid);
+            if (selct_id.equals(st[i])) {
+                String sql = " insert into zjgl_tree (yw_guid,parent_id,tree_name,tree_id,rq)values (?,?,?,?,?)";
+                update(sql, YW, new Object[] { yw_guid, selct_id, tree_name, date,selet_year });
+                new ZjglData().saveNode(tree_name, st[i], yw_guid,selet_year);
             }
         }
     }
-
+    
+    public void delt_tree(){
+    	  String st[] = { "QQFY", "CQFY", "SZFY", "CWFY", "GLFY", "CRZJFH", "QTZC" };
+          String yw_guid = request.getParameter("yw_guid").trim();
+          String parent_id = request.getParameter("parent_id");
+          String id = request.getParameter("id");
+          String selet_year=request.getParameter("selet_year");
+          String tree_text = request.getParameter("tree_text");
+          tree_text = UtilFactory.getStrUtil().unescape(tree_text).trim();
+          for (int i = 0; i < st.length; i++) {
+              if (parent_id.equals(st[i])) {
+                  String sql = " delete zjgl_tree where  yw_guid=? and parent_id=? and tree_name=? and tree_id=? and rq=?";
+                  update(sql, YW, new Object[] { yw_guid, parent_id, tree_text, id,selet_year });
+                  String delet="delete XMZJGL_ZC where yw_guid=? and lb=? and zcstatus=? and rq=?";
+                  update(delet, YW, new Object[] { yw_guid, tree_text,parent_id,selet_year });
+              
+              }
+          }
+    }
+          public void modify_tree(){
+        	  String st[] = { "QQFY", "CQFY", "SZFY", "CWFY", "GLFY", "CRZJFH", "QTZC" };
+              String yw_guid = request.getParameter("yw_guid").trim();
+              String parent_id = request.getParameter("parent_id");
+              String id = request.getParameter("id");
+              String selet_year=request.getParameter("selet_year");
+              String tree_text = request.getParameter("tree_text");
+              tree_text = UtilFactory.getStrUtil().unescape(tree_text).trim();
+              for (int i = 0; i < st.length; i++) {
+                  if (!id.equals(st[i])&&parent_id.equals(st[i])) {
+                      String sql = " update zjgl_tree set tree_name='"+tree_text+"'  where  yw_guid=? and parent_id=? and tree_id=? and rq=?";
+                      update(sql, YW, new Object[] { yw_guid, parent_id, id ,selet_year});
+                      String delet="update XMZJGL_ZC set lb='"+tree_text+"' where yw_guid=? and  zcstatus=? and rq=?";
+                      update(delet, YW, new Object[] { yw_guid,parent_id,selet_year});
+                  
+                  }
+              }
+        	
+              
+    }
+    
+  public void getTree(){
+	 String yw_guid= request.getParameter("yw_guid");
+	 String  rq=request.getParameter("rq");
+	 String tree = new TreeManager().getTree(yw_guid, rq);
+	 response(tree);
+  }  
+    
+    
+public  String  dellNull(String str){
+    if (str.equals("null")){
+        return "";
+    }else{
+        return str;
+    }
+    
+    
+}
 }
