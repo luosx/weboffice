@@ -53,10 +53,10 @@ Ext.onReady(function(){
      grid = new Ext.grid.GridPanel({
         store: store,
         columns: [
-            {header: '序号', width: 50, sortable: true},
+            {header: '序号', width: 40, sortable: true},
             {header: '姓名', width: 80, sortable: true},
             {header: '登录账号', width: 70, sortable: true},
-            {header: '密码', width: 90, sortable: true},
+            {header: '密码', width: 50, sortable: true},
             {header: 'eMail', width: 100, sortable: false},
             {header: '办公电话', width: 100, sortable: true},
             {header: '手机', width: 90, sortable: true},
@@ -135,10 +135,10 @@ function query(){
         });
         grid.reconfigure(store, new Ext.grid.ColumnModel([
           //new Ext.grid.RowNumberer(),        
-             {header: '序号', dataIndex:'SORT',width: 50, sortable: true},
+             {header: '序号', dataIndex:'SORT',width: 40, sortable: true},
             {header: '姓名',dataIndex:'FULLNAME', width: 80, sortable: true},
             {header: '登录账号',dataIndex:'USERNAME', width: 70, sortable: true},
-            {header: '密码', dataIndex:'PASSWORD',width: 90, sortable: true},
+            {header: '密码', dataIndex:'PASSWORD',width: 50, sortable: true},
             {header: 'eMail',dataIndex:'EMAILADDRESS', width: 100, sortable: false},
             {header: '办公电话',dataIndex:'OFFICEPHONE', width: 100, sortable: true},
             {header: '手机',dataIndex:'MOBILEPHONE', width: 90, sortable: true},
