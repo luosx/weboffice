@@ -93,7 +93,7 @@ function locate(node, swf) {
 	var deviceCoors = getDeviceCoor();
 	var target = deviceCoors[id];
 	if (target == null) {
-		parent.Ext.MessageBox.alert("提示", "没有该设备的坐标信息!");
+		Ext.MessageBox.alert("提示", "没有该设备的坐标信息!");
 		return;
 	}
 	try {
@@ -104,7 +104,7 @@ function locate(node, swf) {
 		swf.expandExtentByMapPoint(deviceCoors[id].GPS_X,
 				deviceCoors[id].GPS_Y, 0.2);
 	} catch (e) {
-		parent.Ext.MessageBox.alert("提示", "地图尚未加载完毕，请稍后重试!");
+		Ext.MessageBox.alert("提示", "地图尚未加载完毕，请稍后重试!");
 	}
 }
 // ///Get Data
