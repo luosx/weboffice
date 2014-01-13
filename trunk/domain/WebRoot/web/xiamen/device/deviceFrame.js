@@ -181,8 +181,8 @@ function pan() {
 }
 // 全图
 function zoomToFullExtent() {
-	frames["center"].swfobject.getObjectById("FxGIS").setMapExtent(minx, miny,
-			maxx, maxy);
+	frames["center"].swfobject.getObjectById("FxGIS").setMapExtent(45044.3121547718, 5049.116018257262,
+			72646.91380705396, 14896.972418257263);
 	// frames["center"].swfobject.getObjectById("FxGIS").zoomToFullExtent();
 }
 // 前一视图
