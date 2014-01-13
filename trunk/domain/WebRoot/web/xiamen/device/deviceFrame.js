@@ -110,7 +110,7 @@ Ext.onReady(function() {
 				width : width,
 				html : '<iframe name="center" id="map" frameborder="0" style="width: 100%; height: 100%; overflow: auto;" src="'
 						+ basePath
-						+ 'base/fxgis/fx/FxGIS.html?i=false"></iframe>'
+						+ 'base/fxgis/fx/FxGIS.html?i=false&initFunction=[{$name$:$setMapExtent$,$parameters$:$11,11,11,11$}]"></iframe>'
 			}],
 			collapsible : false,
 			margins : '0 0 0 0'
@@ -157,7 +157,7 @@ function changeMethod() {
 		method = "LOCATE";
 		Ext.getCmp("treePanel").setTitle("设备列表--<font color=red>定位</font>");
 		frames["center"].swfobject.getObjectById("FxGIS").clear();
-		locate(null,null);
+		locate(null, null);
 	} else {
 		method = "MONITOR";
 		Ext.getCmp("treePanel").setTitle("设备列表--<font color=green>监控</font>");
@@ -169,13 +169,11 @@ function changeMethod() {
 // ////////////////////////////////////////////////////////////////////////////////////
 // 放大
 function zoomIn() {
-	frames["center"].swfobject.getObjectById("FxGIS").carMonitor("monitor", "123", "11", "22", 1, 0, 0, 'test1');
-	// frames["center"].swfobject.getObjectById("FxGIS").zoomIn();
+	frames["center"].swfobject.getObjectById("FxGIS").zoomIn();
 }
 // 缩小
 function zoomOut() {
-	frames["center"].swfobject.getObjectById("FxGIS").carMonitor("monitor", "123", "33", "44", 1, 0, 0, 'test1');
-	// frames["center"].swfobject.getObjectById("FxGIS").zoomOut();
+	frames["center"].swfobject.getObjectById("FxGIS").zoomOut();
 }
 // 漫游
 function pan() {
