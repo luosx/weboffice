@@ -1,37 +1,59 @@
 var tree = new Ext.tree.TreePanel({
-			useArrows : true,
-			width : 198,
-			autoScroll : true,
-			frame : true, // 显示树形列表样式
-			animate : true,
-			renderTo : Ext.getBody(),
-			autoScroll : true,
-			border : false,
-			containerScroll : true,
-			rootVisible : false,
-			checkModel : 'cascade',
-			onlyLeafCheckable : true,
-			loader : new Ext.tree.TreeLoader({
-						baseAttrs : {
-							uiProvider : Ext.ux.TreeCheckNodeUI
-						}
-					}),
-			root : new Ext.tree.AsyncTreeNode({
-						children : getTreeContent(),
-						expanded : false
-					}),
-			listeners : {
-				'checkchange' : function(node, checked) {
-					var id = node.attributes.GPS_ID;
-					var swf = frames["center"].swfobject.getObjectById("FxGIS");
-					if (!checked) {
-						swf.carMonitor("remove", id);
-						return;
-					}
-					deviceMonitor(node, swf);
+	useArrows : true,
+	width : 258,
+	autoScroll : true,
+	frame : true, // 显示树形列表样式
+	animate : true,
+	renderTo : Ext.getBody(),
+	autoScroll : true,
+	border : false,
+	containerScroll : true,
+	rootVisible : false,
+	checkModel : 'cascade',
+	onlyLeafCheckable : true,
+	loader : new Ext.tree.TreeLoader({
+				baseAttrs : {
+					uiProvider : Ext.ux.TreeCheckNodeUI
 				}
+			}),
+	root : new Ext.tree.AsyncTreeNode({
+				children : getTreeContent(),
+				expanded : false
+			}),
+	listeners : {
+		'checkchange' : function(node, checked) {
+			// TRACK
+			if (method == "TRACK") {
+				// delete
+				if (!checked) {
+					for (var i = 0; i < trackNode.length; i++) {
+						if (node.id == trackNode[i].id) {
+							trackNode.splice(i,1);
+						}
+					}
+					if (trackNode.length == 1) {
+						Ext.getCmp("playBack").setDisabled(false);
+					}
+					return;
+				}
+				// add
+				trackNode.push(node);
+				if (trackNode.length > 1) {
+					Ext.getCmp("playBack").setDisabled(true);
+				}
+				return;
 			}
-		});
+			// MONITOR AND LOCATE
+			var id = node.attributes.GPS_ID;
+			var swf = frames["center"].swfobject.getObjectById("FxGIS");
+			if (!checked) {
+				swf.carMonitor("remove", id);
+				return;
+			}
+			deviceMonitor(node, swf);
+		}
+	}
+});
 
 function deviceMonitor(node, swf) {
 	if (method == "LOCATE") {
