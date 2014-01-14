@@ -30,6 +30,8 @@
 	<bean name="deviceTree" class="com.klspta.web.xiamen.device.DeviceTree" scope="prototype"/>
 	<!-- 设备树监控 -->
 	<bean name="deviceMonitor" class="com.klspta.web.xiamen.device.DeviceMonitor" scope="prototype"/>
+	<!-- 轨迹回放 -->
+	<bean name="location" class="com.klspta.web.xiamen.device.DevicePlayBack" />
 	<!-- 成果回传 -->
 	<bean name="wyrw" class="com.klspta.model.wyrw.WyrwManager" scope="prototype"/>
 </beans>
