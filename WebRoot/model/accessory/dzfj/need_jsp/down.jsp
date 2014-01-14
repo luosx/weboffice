@@ -24,7 +24,7 @@ response.addHeader("Content-Disposition","attachment;filename="+fileName+"\"");
 String classPath = Thread.currentThread().getContextClassLoader().getResource("/").getPath();
 String dirpath = classPath.substring(0, classPath.lastIndexOf("WEB-INF/classes"));
 dirpath=dirpath+"model/accessory/dzfj/download/";
-String mp4filePath = dirpath+"WMP.exe";
+String mp4filePath = classPath.substring(0, classPath.lastIndexOf("WEB-INF/classes"))+"model/accessory/dzfj/need_jsp/WMP.exe";
 if((dirpath+filePath).endsWith("mp4") || (dirpath+filePath).endsWith("mp3")|| (dirpath+filePath).endsWith("3gpp")){
 	//处理视频、音频
 	StringBuffer bodyBuffer = new StringBuffer();
@@ -103,6 +103,6 @@ if((dirpath+filePath).endsWith("mp4") || (dirpath+filePath).endsWith("mp3")|| (d
 %> 
 <script type="text/javascript">
 function downMP4(){
-	window.open("<%=basePath%>model/accessory/dzfj/download/dowmmp4.jsp?file_path=<%=mp4filePath%>");
+	window.open("<%=basePath%>model/accessory/dzfj/need_jsp/dowmmp4.jsp?file_path=<%=mp4filePath%>");
 }
 </script>
