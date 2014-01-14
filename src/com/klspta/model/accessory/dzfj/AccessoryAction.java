@@ -129,6 +129,29 @@ public class AccessoryAction extends AbstractBaseBean{
     	fis.close();
     }
     
-    
-    
+    public void emptyFiles(){
+        String classPath = Thread.currentThread().getContextClassLoader().getResource("/").getPath();
+        String dirpath = classPath.substring(0, classPath.lastIndexOf("WEB-INF/classes"));
+        dirpath=dirpath+"model/accessory/dzfj/download/";
+        File file = new File(dirpath);
+        if (!file.exists()) {
+          return ;
+        }
+        if (!file.isDirectory()) {
+          return ;
+        }
+        String[] tempList = file.list();
+        File temp = null;
+        for (int i = 0; i < tempList.length; i++) {
+           if (dirpath.endsWith(File.separator)) {
+              temp = new File(dirpath + tempList[i]);
+           } else {
+               temp = new File(dirpath + File.separator + tempList[i]);
+           }
+           if (temp.isFile()) {
+              temp.delete();
+           }
+
+        }
+    }
 }
