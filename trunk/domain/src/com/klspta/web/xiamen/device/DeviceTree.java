@@ -63,7 +63,16 @@ public class DeviceTree extends AbstractBaseBean {
 			treeJson.add(map);
 		}
 	}
-
+	/**
+	 * <br>Description:获取轨迹回放的资源树
+	 * <br>Author:赵伟
+	 * <br>Date:2014-1-13
+	 * @throws Exception
+	 */
+	public void getDeviceTrackTree() throws Exception{
+		response(UtilFactory.getJSONUtil().objectToJSON(treeJson));
+	}
+	
 	/**
 	 * <br>
 	 * Description:获取所有设备在线状态 <br>
