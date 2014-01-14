@@ -71,7 +71,7 @@ ITableStyle its = new TableStyleEditRow();
   </head>
   <script type="text/javascript">
   </script>
-  <body onload="init(); return false;">
+  <body onload="init(); return false;" style="overflow-x:hidden;overflow-y:hidden">
   	<div id='show'>
   		<%=new CBDReportManager().getReport("CBJHZHB",its)%>
   	</div>
