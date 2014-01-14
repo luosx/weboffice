@@ -2,13 +2,15 @@
 <%@page import="com.klspta.model.CBDReport.CBDReportManager"%>
 <%@ page import="com.klspta.web.cbd.swkgl.Fyzcmanager" %>
 <%@page import="com.klspta.base.util.UtilFactory"%>
+<%@page import="com.klspta.web.cbd.swkgl.Fyzcmanager"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+String list = Fyzcmanager.getInstcne().getList();
 String yw_guid=request.getParameter("yw_guid");
-StringBuffer tabl=new CBDReportManager().getReport("FYZC");
-String table = tabl.toString();
-String [] start=table.split("</table>");
+
+
+String [] start=list.split("</table>");
 String add="<tr ><td align='center' height='10' width='10'><input id='mc' type='text' /></td>"+
 			"<td align='center' height='10' width='10'><input id='gzfy' type='text'/></td>"+
 			"<td align='center' height='10' width='10'><input id='gzgm' type='text' /></td>"+
@@ -26,6 +28,9 @@ String add="<tr ><td align='center' height='10' width='10'><input id='mc' type='
 			"<td align='center' height='10' width='10'><input id='jhcb' type='text' /></td>"+
 			"<td align='center' height='10' width='10'><input id='xj' type='text' /></td>"+
 			"<td align='center' height='10' width='10'><input id='dj' type='text' /></td>"+
+			"<td align='center' height='10' width='10'><input id='jhcbs' type='text' /></td>"+
+			"<td align='center' height='10' width='10'><input id='xjs' type='text' /></td>"+
+			"<td align='center' height='10' width='10'><input id='djs' type='text' /></td>"+
 		"</tr>";
 String all=start[0]+add+"</table>";
 %>
@@ -47,99 +52,38 @@ String all=start[0]+add+"</table>";
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
 	<style type="text/css">
-		  table{
-    font-size: 14px;
-    background-color: #A8CEFF;
-    border-color:#000000;
-    /**
-    border-left:1dp #000000 solid;
-    border-top:1dp #000000 solid;
-    **/
-    color:#000000;
-    border-collapse: collapse;
-  }
-  tr{
-    border-width: 0px;
-    text-align:center;
-  }
-  td{
-    text-align:center;
-    border-color:#000000;
-    /**
-    border-bottom:1dp #000000 solid;
-    border-right:1dp #000000 solid;
-    **/
-  }
-  .title{
-    font-weight:bold;
-    font-size: 15px;
-    text-align:center;
-    line-height: 50px;
-	margin-top: 3px;
-  }
-  .trtotal{
-  	text-align:center;
-    font-weight:bold;
-    line-height: 30px;
-    background-color: #A9A9A9;
-   }
-  .trsingle{
-    background-color: #F8F8FF;
-    line-height: 20px;
-    text-align:center;
-    font-size: 15px;
-   }
+table {
+	border: 1px solid #000000;
+	padding: 0;
+	margin: 0 auto;
+	border-collapse: collapse;
+	text-align:center;
+	width:50px;
+}
+
+td {
+	border: 1px solid #000000;
+	background: #fff;
+	font-size: 12px;
+	padding: 3px 3px 3px 8px;
+	color: #000000;
+	text-align:center;
+	width:50px;
+}
+
+
   .tr01{
   	background-color: #C0C0C0;
-    line-height: 20px;
+  	font-weight:bold;
+    line-height: 30px;
     text-align:center;
+    width:50px;
   }
-  .tr02{
-  	background-color: #FFFF00;
-    line-height: 20px;
-    text-align:center;
-  }
-  .tr03{
-  	background-color: #87CEEB;
-    line-height: 20px;
-    text-align:center;
-  }
-	</style>
+
+</style>
   </head>
   <script type="text/javascript">
-  		function print(){
-			//var form=document.getElementById("attachfile");
-			//form.action +="?reprotId=JBZR";
-			//form.submit();
-			/*
-			var excel = new ReportExcel();
-			excel.Init();
-			excel.setCells(7);
-			excel.setRows(56);
-			excel.buildTable("report", "3", "1");
-			excel.showTable();
-			*/
-			    var curTbl = document.getElementById("JBZR"); 
-			    var oXL = new ActiveXObject("Excel.Application"); 
-			    //创建AX对象excel 
-			    var oWB = oXL.Workbooks.Add(); 
-			    //获取workbook对象 
-			        var oSheet = oWB.ActiveSheet; 
-			    //激活当前sheet 
-			    var sel = document.body.createTextRange(); 
-			    sel.moveToElementText(curTbl); 
-			    //把表格中的内容移到TextRange中 
-			    sel.select(); 
-			    //全选TextRange中内容 
-			    sel.execCommand("Copy"); 
-			    //复制TextRange中内容  
-			    oSheet.Paste(); 
-			    //粘贴到活动的EXCEL中       
-			    oXL.Visible = true; 
-			    //设置excel可见属性 
-		
-			
-		}
+
 
 	function save(){
 	var mc=document.getElementById("mc").value;
@@ -159,9 +103,10 @@ String all=start[0]+add+"</table>";
 	var jhcb=document.getElementById("jhcb").value;
 	var xj=document.getElementById("xj").value;
 	var dj =document.getElementById("dj").value;
-	
+	var jhcbs=document.getElementById("jhcbs").value;
+	var xjs=document.getElementById("xjs").value;
+	var djs =document.getElementById("djs").value;
 	mc=escape(escape(mc));
-
 	putClientCommond("fyzcHandle","saveFyzc");
 	putRestParameter("yw_guid","<%=yw_guid%>");
 	putRestParameter("mc",mc);
@@ -181,6 +126,9 @@ String all=start[0]+add+"</table>";
 	putRestParameter("jhcb",jhcb);
 	putRestParameter("xj",xj);
 	putRestParameter("dj",dj);
+	putRestParameter("jhcbs",jhcbs);
+	putRestParameter("xjs",xjs);
+	putRestParameter("djs",djs);
 	var msg=restRequest();
 	if('success'==msg){
 	alert("保存成功！");
@@ -189,11 +137,29 @@ String all=start[0]+add+"</table>";
 	alert("保存失败！");
 	}
 	}
+	
+	function set(){
+		var dklx=escape(escape(document.getElementById("dklx").value));
+		var jzrq=escape(escape(document.getElementById("jzrq").value));
+		var jzrqs=escape(escape(document.getElementById("jzrqs").value));
+		putClientCommond("fyzcHandle","set");
+		putRestParameter("dklx",dklx);
+		putRestParameter("jzrq",jzrq);
+		putRestParameter("jzrqs",jzrqs);
+		var msg=restRequest();
+		if('success'==msg){
+		alert("设置成功！");
+		document.location.reload();
+		}else{
+		alert("设置失败！");
+		}
+	}
 			
   </script>
   <body>
-  	<div id="fixed" style="position: fixed; top: 5px; left: 0px">
-		<img src="base/form/images/print.png" width="20px" height="20px" onClick="javascript:print();"  />
+  	
+	<div>
+		贷款利息<input id='dklx' type='text' />截止日期一<input id='jzrq' type='text' />截止日期二<input id='jzrqs' type='text' /><button onclick="set()">设置</button>
 	</div>
 	<div>
 		<%=all%>
@@ -201,7 +167,5 @@ String all=start[0]+add+"</table>";
 	<div id="addtable"  align="left" >
 		<button onclick="save()">保存</button>
 	</div>
-	
-  		
   </body>
 </html>
