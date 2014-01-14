@@ -117,7 +117,7 @@ Ext.onReady(function() {
 		}, {
 			region : 'west',
 			split : true,
-			width : 200,
+			width : 260,
 			minSize : 0,
 			collapsible : true,
 			id : 'treePanel',
@@ -146,14 +146,81 @@ Ext.onReady(function() {
 							changeMethod();
 						}
 					}],
-			items : [tree]
+			items : [tree, {
+				id : 'timeSelector',
+				hidden : true,
+				preventBodyReset : true,
+				labelWidth : 60,
+				width : 259,
+				layout : 'form',
+				frame : true,
+				defaults : {
+					xtype : "datetimefield",
+					anchor : '90%'
+				},
+				items : [{
+							fieldLabel : '开始时间',
+							id : 'startTime',
+							value : new Date().add(Date.HOUR, -2),
+							format : 'H:i'
+						}, {
+							fieldLabel : '结束时间',
+							id : 'endTime',
+							format : 'H:i',
+							value : new Date()
+						}],
+				buttons : [{
+					id : 'showTrack',
+					text : '显示轨迹',
+					handler : function() {
+						var start = Ext.getCmp("startTime").getValue()
+								.toString();
+						var end = Ext.getCmp("endTime").getValue().toString();
+						start = Ext.util.Format.date(start, 'Y-m-d H:i');
+						end = Ext.util.Format.date(end, 'Y-m-d H:i');
+						if (start == "" || end == "" || trackNode.length < 1) {
+							Ext.MessageBox.alert("提示",
+									"请检查[开始时间][结束时间][设备]是否为空!");
+							return;
+						}
+						var deviceIds = "";
+						for (var i = 0; i < trackNode.length; i++) {
+							deviceIds += trackNode[i].attributes.GPS_ID + ","
+						}
+						deviceIds = deviceIds.substr(0, deviceIds.length - 1);
+						frames["center"].swfobject.getObjectById("FxGIS")
+								.showTrack(deviceIds, start, end);
+					}
+				}, {
+					id : 'playBack',
+					text : '回放轨迹',
+					handler : function() {
+						var start = Ext.getCmp("startTime").getValue();
+						var end = Ext.getCmp("endTime").getValue();
+						start = Ext.util.Format.date(start, 'Y-m-d H:i');
+						end = Ext.util.Format.date(end, 'Y-m-d H:i');
+						if (start == "" || end == "" || trackNode.length != 1) {
+							Ext.MessageBox.alert("提示",
+									"请检查[开始时间][结束时间][设备]是否为空!");
+							return;
+						}
+						frames["center"].swfobject.getObjectById("FxGIS")
+								.playBack(trackNode[0].attributes.GPS_ID,
+										start, end);
+					}
+				}]
+			}]
 		}]
 	});
+	// init
 	if (type == "showTrack") {
 		Ext.getCmp("treePanel").topToolbar.hide();
+		Ext.getCmp("timeSelector").show();
 		Ext.getCmp("treePanel").setTitle("设备列表");
+		method = "TRACK";
 	}
 });
+var trackNode = new Array();
 var method = "LOCATE";
 function changeMethod() {
 	var flag = Ext.getCmp("locate").pressed;
@@ -167,7 +234,7 @@ function changeMethod() {
 		Ext.getCmp("treePanel").setTitle("设备列表--<font color=green>监控</font>");
 		frames["center"].swfobject.getObjectById("FxGIS").clear();
 		monitor("");
-		monitorFlag=true;
+		monitorFlag = true;
 	}
 }
 
@@ -186,8 +253,9 @@ function pan() {
 }
 // 全图
 function zoomToFullExtent() {
-	frames["center"].swfobject.getObjectById("FxGIS").setMapExtent(45044.3121547718, 5049.116018257262,
-			72646.91380705396, 14896.972418257263);
+	frames["center"].swfobject.getObjectById("FxGIS").setMapExtent(
+			45044.3121547718, 5049.116018257262, 72646.91380705396,
+			14896.972418257263);
 	// frames["center"].swfobject.getObjectById("FxGIS").zoomToFullExtent();
 }
 // 前一视图
