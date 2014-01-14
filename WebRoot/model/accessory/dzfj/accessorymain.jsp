@@ -329,8 +329,12 @@ function downloadAll(){
 	var result = ajaxRequest(path,actionName,actionMethod,parameter);
 	window.open("<%=basePath%>/common/pages/accessory/download/"+yw_guid+".zip");
 }  */
+function emptyFiles(){
+	putClientCommond("accessoryAction", "emptyFiles");
+	restRequest();
+}
 </script>
-	<body onLoad="doOnLoad()" bgcolor="#FFFFFF" leftmargin="0" bottommargin="0" rightmargin="0" topmargin="0">
+	<body onLoad="doOnLoad()" onunload="emptyFiles()" bgcolor="#FFFFFF" leftmargin="0" bottommargin="0" rightmargin="0" topmargin="0">
 		<div id="parentId"
 			style="top: 0px; left: 0px; width: 100%; height: 100%;"></div>
 		<input type='text' id='name' name='name' value='' style="display:none"/> 	
