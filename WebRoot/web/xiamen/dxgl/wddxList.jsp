@@ -144,7 +144,7 @@
    				xlBook = null;
    				xlSheet = null;
    		    }else{
-    			Ext.Msg.alert('提示','请选择图斑！');
+    			Ext.Msg.alert('提示','请选择短信！');
   		}
 	}	
 		
