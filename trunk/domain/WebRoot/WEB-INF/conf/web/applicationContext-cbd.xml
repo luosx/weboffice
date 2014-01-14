@@ -73,6 +73,9 @@
 	<bean name="formulaEdit" class="com.klspta.model.formulaEdit.FormulaEdit" scope="prototype"/>
 	<!-- 区域监测 -->	
 	<bean name="qyjcManager" class="com.klspta.web.cbd.qyjc.QyjcManager" scope="prototype"/>
+	<!-- CBD中心区控规指标 -->	
+	<bean name="kgzbmanager" class="com.klspta.web.cbd.yzt.kgzb.KgzbManager" scope="prototype"/>
+	
 	<!-- 数据表字段管理类 -->	
 	<bean name="tableField" class="com.klspta.web.cbd.yzt.table.TableFieldManager" scope="prototype"/>
 	<bean name="xzlzjjc" class="com.klspta.web.cbd.sccsl.XzlzjjcManager" scope="prototype"/>
