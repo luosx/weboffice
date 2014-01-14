@@ -7,6 +7,7 @@ import java.util.Map;
 
 import com.klspta.base.AbstractBaseBean;
 import com.klspta.base.util.UtilFactory;
+import com.klspta.model.CBDReport.CBDReportManager;
 
 /**
  * <br>Title:市场监测信息维护
@@ -282,4 +283,15 @@ public class ScjcManager extends AbstractBaseBean {
 
     }
 
+    public void query_year_month(){
+        String year = request.getParameter("year");
+        String month = request.getParameter("month");
+        StringBuffer buffer = new CBDReportManager().getReport("ESFQK",new Object[] {year,month},"1000px");
+        response(buffer.toString());
+    }
+    
+    
+    
+    
+    
 }
