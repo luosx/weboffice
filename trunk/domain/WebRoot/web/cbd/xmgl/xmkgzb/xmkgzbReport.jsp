@@ -17,7 +17,7 @@ if(xmmc!=null){
 	xmmc = new String(xmmc.getBytes("iso-8859-1"),"utf-8");
 }
 Map<String, String> conditionMap = new HashMap<String, String>();
-conditionMap.put("query", " yw_guid = '" + yw_guid + "'");
+conditionMap.put("query", " t2.yw_guid = '" + yw_guid + "'");
 
 %>
 
