@@ -143,7 +143,10 @@ public class JbbManager extends AbstractBaseBean{
 			List<Map<String, Object>> result = null;
 			String sql = "select sum(j.kfcb) as kfcb ,round(sum(j.kfcb)/sum(j.jzgm),1)*10000 as lmcb ,round(sum(j.kfcb)/sum(j.jsyd),1)*10000 as dmcb from jc_jiben j where j.ssqy in(?,?,?)";
 			result = query(sql, YW,new Object[]{"产业功能改造区","民生改善区","城市形象提升区"});
-			map.putAll(result.get(0));
+			
+			map.put("KFCB",result.get(0).get("KFCB")==null?"0":result.get(0).get("KFCB").toString());
+			map.put("LMCB",result.get(0).get("LMCB")==null?"0":result.get(0).get("LMCB").toString());
+			map.put("DMCB",result.get(0).get("DMCB")==null?"0":result.get(0).get("DMCB").toString());
 			sql = "select b.bbd as bbd from sys_parameter s,bbdfxjg b where b.lmcb=? and s.hsq = b.tzhsq";
 			result = query(sql, YW,new Object[]{map.get("LMCB").toString()});
 			if(result.size()>0){
