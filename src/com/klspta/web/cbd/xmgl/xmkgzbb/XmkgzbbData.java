@@ -11,7 +11,7 @@ import com.klspta.base.util.UtilFactory;
 public class XmkgzbbData extends AbstractBaseBean {
 	
 	private static final String formName = "XMKGZBB";
-	private static final String queryString = "(upper(yw_guid)||upper(rownum)||upper(DKBH)||upper(YDXZDH)||upper(YDXZ)||upper(YDMJ)||upper(RJL)||upper(JZMJ)||upper(KZGD)||upper(BZ)";
+	private static final String queryString = "(upper(ROWNUM)||upper(T1.DKMC)||upper(T1.YDXZDH)||upper(T1.YDXZ)||upper(T1.JSYDMJ)||upper(T1.RJL)||upper(T1.GHJZGM)||upper(T1.JZKZGD)||upper(T1.BZ))";
 	public static List<Map<String, Object>> xmkgzbbList;
 	
 	private static XmkgzbbData xmkgzbbData;
@@ -27,16 +27,7 @@ public class XmkgzbbData extends AbstractBaseBean {
     	return xmkgzbbData;
     }
 	
-	public List<Map<String, Object>> getAllList(HttpServletRequest request) {
-			String yw_guid = request.getParameter("yw_guid").toString();
-			if(xmkgzbbList == null){
-			    StringBuffer sql = new StringBuffer();
-			    sql.append("select rownum,t.dkbh, t.ydxzdh, t.ydxz, t.ydmj, t.rjl, t.jzmj, t.kzgd, t.bz from ").append(formName).append(" t where yw_guid = '") .append(yw_guid).append("'");
-			    
-			    xmkgzbbList = query(sql.toString(), YW);
-			}
-			return xmkgzbbList;
-		}
+	
 	public List<Map<String, Object>> getDclList(String userId, String keyword) {
 		StringBuffer sqlBuffer = new StringBuffer();
 		sqlBuffer.append("select t.* from v_pad_data_xml t ");
@@ -59,10 +50,10 @@ public class XmkgzbbData extends AbstractBaseBean {
         String keyWord = request.getParameter("keyWord");
         String yw_guid = request.getParameter("yw_guid");
         StringBuffer querySql = new StringBuffer();
-        querySql.append("select rownum ,t.* from ").append(formName).append(" t where yw_guid = '").append(yw_guid).append("'");
+        querySql.append("select rownum,t1.dkmc,t1.ydxzdh,t1.ydxz,t1.jsydmj,t1.rjl,t1.ghjzgm,t1.jzkzgd,t1.bz,t2.ydxzlx from  DCSJK_KGZB t1,XMKGZBB t2 where t1.dkmc=t2.dkbh and yw_guid = '").append(yw_guid).append("'");
         if (keyWord != null&&!"".equals(keyWord)) {
             keyWord = UtilFactory.getStrUtil().unescape(keyWord);
-            querySql.append("and t.rownum||t.dkbh||t.ydxz||t.ydxzdh||t.ydmj||t.rjl||t.jzmj||t.kzgd||t.bz like '%");
+            querySql.append("and t1.dkmc||t1.ydxz||t1.ydxzdh||t1.jsydmj||t1.rjl||t1.ghjzgm||t1.jzkzgd||t1.bz like '%");
             querySql.append(keyWord).append("'");
         } else if (xmkgzbbList != null) {
             return xmkgzbbList;
