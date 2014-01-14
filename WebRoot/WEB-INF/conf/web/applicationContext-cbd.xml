@@ -83,4 +83,7 @@
 	
 	<!-- 生成计划报表（年度计划、季度计划） -->	
 	<bean name="jh" class="com.klspta.web.cbd.dtjc.tjbh.JhManager" scope="prototype"/>
+	
+	<!-- 生成储备计划整合表 -->	
+	<bean name="cbjhzhb" class="com.klspta.web.cbd.yzt.cbjhzhb.CbjhManager" scope="prototype"/>
 </beans>
