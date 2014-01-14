@@ -15,7 +15,7 @@ import com.klspta.model.CBDReport.dataClass.IDataClass;
 public class EsfjcReport extends AbstractBaseBean implements IDataClass {
 	private String[][] title = {{"所属<br>区域","40"},{"序号","50"},{"小区名称","180"},{"二手房总量<br>(户)","150"},{"二手房均价<br>(元/㎡)","200"},{"二手房均价涨幅(%)","200"},{"出租量(户)","100"},{"出租房均价(元/月)","200"},{"出租房均价涨幅(%)","150"},{"备注","500"}};
 	private Map<String, Map<String, Map<String, Object>>> showMap = new TreeMap<String, Map<String,Map<String, Object>>>();
-	private String[][] total ={{"zl","total"},{"esfjj","avg"},{"esfjjzf","avg"},{"czl","total"},{"czfjj","avg"}};
+	private String[][] total ={{"zl","total"},{"esfjj","avg"},{"esfjjzf","avg"},{"czl","total"},{"czfjj","avg"},{"czfjjzf","avg"}};
 	private DecimalFormat df = new DecimalFormat("#.00");
 	@Override
 	public Map<String, TRBean> getTRBeans(Object[] obj, TRBean trBean) {
@@ -23,7 +23,7 @@ public class EsfjcReport extends AbstractBaseBean implements IDataClass {
 		//添加标题
 		trbeans.put("00", getTitle());
 		//添加总计
-		trbeans.putAll(getQuhj());
+		trbeans.putAll(getQuhj( obj));
 		return trbeans;
 	}
 	
@@ -37,9 +37,11 @@ public class EsfjcReport extends AbstractBaseBean implements IDataClass {
 		return trBean;
 	}
 	
-	public void getBody(){
-		String sql = "select t.*,j.ssqy, j.xqmc, j.xqlb,j.bz, t.rowid from esf_zsxx t, esf_jbxx j where t.yw_guid = j.yw_guid and t.year = '2014' and t.month='2'";
-		List<Map<String, Object>> resultList = query(sql, YW);
+	public void getBody(Object[] obj){
+	    String year=obj[0].toString();
+	    String month=obj[1].toString();
+		String sql = "select t.*,j.ssqy, j.xqmc, j.xqlb,j.bz, t.rowid from esf_zsxx t, esf_jbxx j where t.yw_guid = j.yw_guid and t.year = ? and t.month=?";
+		List<Map<String, Object>> resultList = query(sql, YW,new Object []{year,month});
 		for(int i = 0; i < resultList.size(); i++){
 			Map<String, Object> resultMap = resultList.get(i);
 			String xqmc = String.valueOf(resultMap.get("xqmc"));
@@ -75,14 +77,14 @@ public class EsfjcReport extends AbstractBaseBean implements IDataClass {
 		
 	}
 	
-	private Map<String, TRBean> getQuhj(){
+	private Map<String, TRBean> getQuhj( Object[] obj){
 		Map<String, TRBean> trbeans = new TreeMap<String, TRBean>();
 		Map<String, Map<String, Object>> quTotalMap = new TreeMap<String, Map<String,Object>>();
 		String sql = "select t.ssqy, t.xqlb from esf_jbxx t group by t.ssqy, t.xqlb order by t.ssqy";
 		List<Map<String, Object>> typeList = query(sql, YW);
 		Map<String, TRBean> list = new LinkedHashMap<String, TRBean>();
 		String pressqy = "";
-		getBody();
+		getBody(obj);
 		//生成对应数据
 		for(int i = 0; i < typeList.size(); i++){
 			Map<String, Object> type = typeList.get(i);
@@ -155,7 +157,7 @@ public class EsfjcReport extends AbstractBaseBean implements IDataClass {
 					trBean.addTDBean(tdbean);
 					
 				}
-				trBean.addTDBean(new TDBean("", "100", "20"));
+				//trBean.addTDBean(new TDBean("", "100", "20"));
 				trBean.addTDBean(new TDBean("", "100", "20"));
 				trbeans.put(ssqy, trBean);
 				//添加详细数据
@@ -210,7 +212,7 @@ public class EsfjcReport extends AbstractBaseBean implements IDataClass {
 			}
 			trBean.addTDBean(tdbean);
 		}
-		trBean.addTDBean(new TDBean("", "100", "20"));
+		//trBean.addTDBean(new TDBean("", "100", "20"));
 		trBean.addTDBean(new TDBean("", "100", "20"));
 		trbeans.put(key, trBean);
 		//处理其他数据
@@ -226,8 +228,8 @@ public class EsfjcReport extends AbstractBaseBean implements IDataClass {
 					String value = String.valueOf(sonMap.get(total[i][0]));
 					tr.addTDBean(new TDBean(value, "100", "20"));
 				}
-				tr.addTDBean(new TDBean("", "100", "20"));
-				tr.addTDBean(new TDBean(String.valueOf(sonMap.get("bz")), "500", "20"));
+				//tr.addTDBean(new TDBean("", "100", "20"));
+				tr.addTDBean(new TDBean(String.valueOf(sonMap.get("bz")), "1000", "20"));
 				trbeans.put(key + name, tr);
 				num++;
 			}
@@ -264,7 +266,7 @@ public class EsfjcReport extends AbstractBaseBean implements IDataClass {
 			trBean.addTDBean(new TDBean(df.format(value),"100","20"));
 		}
 		trBean.addTDBean(new TDBean("", "100", "20"));
-		trBean.addTDBean(new TDBean("", "100", "20"));
+		//trBean.addTDBean(new TDBean("", "100", "20"));
 		return trBean;
 	}
 }
