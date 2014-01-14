@@ -10,6 +10,8 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
+import sun.print.SunMinMaxPage;
+
 import com.klspta.base.AbstractBaseBean;
 import com.klspta.model.CBDReport.bean.TDBean;
 import com.klspta.model.CBDReport.bean.TRBean;
@@ -38,15 +40,15 @@ public class Cbjhzhb extends AbstractBaseBean implements IDataClass {
 		//{name,width,cols,row}
 		String[][] firstTitle = {{"序号","50","1","3"},{"项目名称","100","1","3"},{"项目类型","200","1","3"},{"区县","100","1","3"},{"地块名称","100","1","3"},{"项目位置","100","1","3"},{"项目区位","100","1","3"},{"项目类别","100","1","3"},
 				{"项目主体","100","1","3"},{"实施主<br>体是否<br>带资","100","1","3"},{"项目单位带资实施比率","100","1","3"},{"项目状态","100","1","3"},{"土地面积<br>(公顷)","300","3","1"},{"代拆土<br>地面积<br>(公顷)","100","1","3"},{"规划用地面积","500","5","1"},{"规划建筑规模(万平方米)","400","4","1"},
-				{"手续办理情况","700","7","1"},{"征地情况(公顷)","500","5","1"},{"拆迁情况(万平方米)","500","3","1"},{"投资情况(万元)","500","11","1"},{"预计资金回笼情况(万元)","500","4","1"},{"完成开发情况(公顷、万平方米)","500","15","1"},{"计划供应情况(公顷、万平方米)","500","15","1"}
+				{"手续办理情况","700","7","1"},{"征地情况(公顷)","500","5","1"},{"拆迁情况(万平方米)","500","3","1"},{"投资情况(万元)","500","10","1"},{"预计资金回笼情况(万元)","500","4","1"},{"完成开发情况(公顷、万平方米)","500","15","1"},{"计划供应情况(公顷、万平方米)","500","15","1"}
 				,{"当前项目推进中存在的主要问题","200","1","3"},{"是否位<br>于新城<br>范围","200","1","3"},{"轨道交<br>通线<br>（站点半<br>径1km范围）","200","1","3"},{"项目新增理由","200","1","3"},{"备注","200","1","3"}};
 		String[][] secondTitle = {{"总面积<br>(不含代<br>拆土地)","100","1","2"},{"农用地<br>面积","100","1","2"},{"其中耕<br>地面积","100","1","2"},{"建设用地","400","4","1"},{"代征地","100","1","2"},{"小计","100","1","2"}
 		,{"居住","100","1","2"},{"商服","100","1","2"},{"其它","100","1","2"},{"过会年份","100","1","2"},{"取得一<br>级开发<br>授权时间","100","1","2"},{"一级规<br>划条件","100","1","2"},{"用地预<br>审批复","100","1","2"},{"核准<br>批复","100","1","2"},{"征地<br>批复","100","1","2"}
 		,{"拆迁<br>许可","100","1","2"},{"需征地<br>总面积","100","1","2"},{"已完成<br>征地总<br>面积","100","1","2"},{"2013年<br>前已征<br>地面积","100","1","2"},{"2013年<br>已征地<br>面积","100","1","2"},{"2014年<br>计划征<br>地面积","100","1","2"},{"需拆迁<br>建筑面积","100","1","2"},{"已完成<br>拆迁比例","100","1","2"},{"2014年<br>计划拆迁建筑面积","100","1","2"},
-		{"计划<br>总投资","100","1","2"},{"已完成<br>投资","100","1","2"},{"2013年已投资","400","4","1"},{"2014年计划投资","500","5","1"},{"2014年预计回笼资金","400","4","1"},{"累计完<br>成开发<br>面积","100","1","2"},{"2013年<br>现场验<br>收面积","100","1","2"},{"是否<br>计划<br>2014年<br>完成开发","100","1","2"},{"计划完成开发时间","100","1","2"},{"计划完成开发面积","100","1","2"},
+		{"土地储<br>备开发<br>总成本","100","1","2"},{"已完成<br>投资","100","1","2"},{"2013年已投资","400","4","1"},{"2014年计划投资","500","4","1"},{"2014年预计回笼资金","400","4","1"},{"累计完<br>成开发<br>面积","100","1","2"},{"2013年<br>现场验<br>收面积","100","1","2"},{"是否<br>计划<br>2014年<br>完成开发","100","1","2"},{"计划完成开发时间","100","1","2"},{"计划完成开发面积","100","1","2"},
 		{"规划用地面积","400","4","1"},{"规划建筑规模","400","4","1"},{"完成开发确保程度","100","1","2"},{"完成开发可能性排序","100","1","2"},{"累计供应面积","100","1","2"},{"2013年供应面积","100","1","2"},{"是否计2014年供应","100","1","2"},{"计划供应时间","100","1","2"},{"计划供应面积","100","1","2"},{"规划用地面积","400","4","1"}
 		,{"规划建筑规模","400","4","1"},{"实现供应确保程度","100","1","2"},{"实现供应可能性排序","100","1","2"}}; 
-		String[][] thirdTitle = {{"小计","100","1","1"},{"居住","100","1","1"},{"商服","100","1","1"},{"其他","100","1","1"},{"小计","100","1","1"},{"市中心已投资","100","1","1"},{"分中心已投资","100","1","1"},{"企业已投资","100","1","1"},{"小计","100","1","1"},{"土地储备开发总成本","100","1","1"},{"市中心投资","100","1","1"},{"分中心投资","100","1","1"},{"企业投资","100","1","1"},
+		String[][] thirdTitle = {{"小计","100","1","1"},{"居住","100","1","1"},{"商服","100","1","1"},{"其他","100","1","1"},{"小计","100","1","1"},{"市中心已投资","100","1","1"},{"分中心已投资","100","1","1"},{"企业已投资","100","1","1"},{"小计","100","1","1"},{"市中心投资","100","1","1"},{"分中心投资","100","1","1"},{"企业投资","100","1","1"},
 				{"小计","100","1","1"},{"市中心回笼","100","1","1"},{"分中心回笼","100","1","1"},{"企业回笼","100","1","1"},{"小计","100","1","1"},{"居住","100","1","1"},{"商服","100","1","1"},{"其他","100","1","1"},{"小计","100","1","1"},{"居住","100","1","1"},{"商服","100","1","1"},{"其他","100","1","1"},{"小计","100","1","1"},{"居住","100","1","1"},{"商服","100","1","1"},{"其他","100","1","1"}
 				,{"小计","100","1","1"},{"居住","100","1","1"},{"商服","100","1","1"},{"其他","100","1","1"}};
 		
@@ -93,8 +95,8 @@ public class Cbjhzhb extends AbstractBaseBean implements IDataClass {
 	private void Setfields(){
 		//no:不参与统计，null：统计显示为空，sum：显示统计总和为（sum）
 		String[][] fields = {{"xmname","false","no"},{"xmlx","true","null"},{"xmqx","true","null"},{"dkmc","true","null"},{"xmwz","true","null"},{"xmqw","true","null"},{"xmlb","true","null"},{"xmzt","true","null"},{"sfdz","true","null"},{"dzbv","true","null"},{"xmztai","true","null"},{"zd","false","sum"},{"nydmj","true","sum"},{"qzgdmj","true","sum"},{"dctdmj","true","sum"},{"jsydxj","true","sum"},{"jsydjz","true","sum"},{"jsydsf","true","sum"},{"jsydqt","true","sum"},{"ghdzd","true","sum"},
-			{"ghjzxj","true","sum"},{"ghjzjz","true","sum"},{"ghjzsf","true","sum"},{"ghjzqt","true","sum"},{"sxghnf","true","null"},{"sxsqsj","true","null"},{"sxghtj","true","null"},{"sxyspf","true","null"},{"sxhzpf","true","null"},{"sxzdpf","true","null"},{"sxcqxk","true","null"},{"zdzmj","true","sum"},{"ywczdzmj","true","sum"},{"qyzdmj","true","sum"},{"yzdmj","true","sum"},{"jhzdmj","true","sum"},{"cqjzmj","true","sum"},{"cqcqbl","true","sum"},{"cqjhmj","true","sum"},{"tzjhtz","true","sum"},
-			{"tzywc","true","sum"},{"ytzxj","true","sum"},{"ytzszx","true","sum"},{"ytzfzx","true","sum"},{"ytzqy","true","sum"},{"jhxj","true","sum"},{"jhzcb","true","sum"},{"jhszx","true","sum"},{"jhfzx","true","sum"},{"jhqy","true","sum"},{"zjhlxj","true","sum"},{"zjhlszx","true","sum"},{"zjhlfzx","true","sum"},{"zjhlqy","true","sum"},{"ljwckf","true","sum"},{"xcysmj","true","sum"},{"sfjhwc","true","null"},{"jhwcsj","true","null"},{"jhwcmj","true","sum"},{"ghydxj","true","sum"},{"ghydjz","true","sum"},{"ghydsf","true","sum"}
+			{"ghjzxj","true","sum"},{"ghjzjz","true","sum"},{"ghjzsf","true","sum"},{"ghjzqt","true","sum"},{"sxghnf","true","null"},{"sxsqsj","true","null"},{"sxghtj","true","null"},{"sxyspf","true","null"},{"sxhzpf","true","null"},{"sxzdpf","true","null"},{"sxcqxk","true","null"},{"zdzmj","true","sum"},{"ywczdzmj","true","sum"},{"qyzdmj","true","sum"},{"yzdmj","true","sum"},{"jhzdmj","true","sum"},{"cqjzmj","true","sum"},{"cqcqbl","true","sum"},{"cqjhmj","true","sum"},{"JHZCB","true","sum"},
+			{"tzywc","true","sum"},{"ytzxj","true","sum"},{"ytzszx","true","sum"},{"ytzfzx","true","sum"},{"ytzqy","true","sum"},{"jhxj","true","sum"},{"jhszx","true","sum"},{"jhfzx","true","sum"},{"jhqy","true","sum"},{"zjhlxj","true","sum"},{"zjhlszx","true","sum"},{"zjhlfzx","true","sum"},{"zjhlqy","true","sum"},{"ljwckf","true","sum"},{"xcysmj","true","sum"},{"sfjhwc","true","null"},{"jhwcsj","true","null"},{"jhwcmj","true","sum"},{"ghydxj","true","sum"},{"ghydjz","true","sum"},{"ghydsf","true","sum"}
 			,{"ghydqt","true","sum"},{"wcghjzxj","true","sum"},{"wcghjzjz","true","sum"},{"wcghjzsf","true","sum"},{"wcghjzqt","true","sum"},{"WCKFQBCD","true","null"},{"WCKFPX","true","null"},{"LJGYMJ","true","sum"},{"DNGYMJ","true","sum"},{"SFJMNGY","true","sum"},{"JHGYSJ","true","sum"},{"JHGYMJ","true","sum"},{"GHYDMJXJ","true","sum"},{"GHYDMJJZ","true","sum"},{"GHYDMJSF","true","sum"},{"GHYDMJQT","true","sum"},{"GHYDMXJ","true","sum"},{"GHJZGMJZ","true","sum"},{"GHJZGMSF","true","sum"},{"GHJZGMQT","true","sum"},{"SXGYQBCD","true","null"},
 			{"SXGYPX","true","null"},{"ZYWT","true","null"},{"SFXCFW","true","null"},{"GDJTX","true","null"},{"XZLY","true","null"},{"BZ","true","null"}};
 		this.fields = fields;
@@ -114,6 +116,7 @@ public class Cbjhzhb extends AbstractBaseBean implements IDataClass {
 		}
 		String querySql = "select t.* , j.* from " + form_base + " t left join " + form_extend + " j on j.xmmc = t.xmname order by j.xmlx desc,t.xmname ";
 		Map<String, Map<String, String>> subTotalMap = new HashMap<String, Map<String,String>>();
+		Map<String, String> totalMap = new HashMap<String, String>();
 		String key = "";
 		List<Map<String, Object>> queryList = query(querySql, YW);
 		int num = 1;
@@ -126,15 +129,63 @@ public class Cbjhzhb extends AbstractBaseBean implements IDataClass {
 			if(null == key || "null".equals(key) || "".equals(key)){
 				key = "计划新增项目";
 			}
+			if("计划新增项目".equals(key)){
+				System.out.println("this");
+			}
 			Map<String, String> subMap = subTotalMap.get(key);
 			//添加小计行
 			if(!"".equals(prekey) && !prekey.equals(key)){
 				num = 1;
 				trBeans.put("0" + (i+1), getTotal(subTotalMap, prekey));
-			}else{
+			}
 				//添加合计
+				if(subMap == null){
+					subMap = new HashMap<String, String>();
+				}
+				for(int t = 0; t < fields.length; t++){
+					String[] field = fields[t];
+					if(field[2].equals("no")){
+						continue;
+					}else if(field[2].equals("null")){
+						if(!subMap.containsKey(field[0])){
+							subMap.put(field[0], "---");
+						}
+						if(!totalMap.containsKey(field[0])){
+							totalMap.put(field[0], "---");
+						}
+					}else{
+						String keyname = field[0];
+						String newvalue = String.valueOf(queryMap.get(keyname));
+						float value = 0;
+						try{
+							value = Float.parseFloat(newvalue);
+						}catch (Exception e) {
+						}
+						
+						if(subMap.containsKey(keyname)){
+							if("计划新增项目".equals(key)){
+								System.out.println("this");
+							}
+							String oldvalue = subMap.get(keyname);
+							String newValue = String.valueOf(Float.parseFloat(oldvalue) + value);
+							subMap.put(keyname, newValue);
+						}else{
+							subMap.put(keyname, String.valueOf(value));
+						}
+						
+						if(totalMap.containsKey(keyname)){
+							String oldvalue = totalMap.get(keyname);
+							String newValue = String.valueOf(Float.parseFloat(oldvalue) + value);
+							totalMap.put(keyname, newValue);
+						}else{
+							totalMap.put(keyname, String.valueOf(value));
+						}
+						
+						subTotalMap.put(key, subMap);
+					}
 				
 			}
+			subTotalMap.put("合计", totalMap);
 			// 添加展现行
 			TDBean tdBean = new TDBean(String.valueOf(num),"50","20");
 			trbean.addTDBean(tdBean);
