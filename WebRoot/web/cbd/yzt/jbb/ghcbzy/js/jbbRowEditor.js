@@ -69,4 +69,3 @@ function queryJBB(keyword){
 	myData = restRequest();
   	document.getElementById("show").innerHTML = myData;
 }
-

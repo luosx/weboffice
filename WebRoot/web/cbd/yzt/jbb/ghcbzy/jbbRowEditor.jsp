@@ -97,7 +97,7 @@ conditionMap.put("query", " where t.ssqy like '%" + query + "%'");
   	var query = "<%=query%>";
   	$(document).ready(function () { 
 		var width = document.body.clientWidth;
-		var height = document.body.clientHeight;
+		var height = document.body.clientHeight-20;
        	FixTable("JBB", 1,2, width, height);
 	});
   </script>
