@@ -33,6 +33,7 @@ ITableStyle its = new TableStyleEditRow();
 	<link rel="stylesheet" type="text/css" href="<%=extPath%>examples/ux/css/MultiSelect.css"/>
 	<%@ include file="/base/include/restRequest.jspf"%>
 	<%@ include file="/web/cbd/yzt/hxxm/showRW/js/reportEdit.jspf"%>
+	<script src="base/include/jquery-1.10.2.js"></script>
 	<style type="text/css">
   		table{
 		    font-size: 14px;
@@ -167,6 +168,13 @@ ITableStyle its = new TableStyleEditRow();
 })
   
   
+  </script>
+  <script type="text/javascript">
+  	$(document).ready(function () { 
+		var width = document.body.clientWidth;
+		var height = document.body.clientHeight-20;
+       	FixTable("HXXM", 2,2, width, height);
+	});
   </script>
   <body>
   	<div id='show'>
