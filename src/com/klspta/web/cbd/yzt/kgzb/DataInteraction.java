@@ -13,7 +13,7 @@ public class DataInteraction extends AbstractBaseBean {
 		BuilTable table = new BuilTable();
 		StringBuffer buffer = new StringBuffer();
 		for(int i=0;i<list.size();i++){
-			String qy = list.get(i).get("qy").toString();
+			String qy = String.valueOf(list.get(i).get("qy"));
 			String sql1="select * from dcsjk_kgzb where qy=? and dqy=?";
 			List<Map<String, Object>> list1 = query(sql1, YW,new Object[] { qy,dqyName });
 			StringBuffer qyTr = table.getQyTr(list1);
