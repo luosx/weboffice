@@ -44,6 +44,7 @@ var combo1;
 var combo2;
 var combo3;
 var dkbh;
+var qy;
 var xqy;
 var fp_add;
 var fp;
@@ -79,7 +80,7 @@ function getQYComoBox() {
 				listeners:{
 	         	'change':function(){
 		         	array2 = new Array();
-			        var qy= combo1.value;
+			        qy = combo1.value;
 				        if(qy==("中心区")){
 							array2.push("西北区");
 							array2.push("西南区");
@@ -100,7 +101,7 @@ function getQYComoBox() {
 }
 
 function getXQYComoBox() {
-	var qy = document.getElementById("qy");
+	qy = document.getElementById("qy");
 	array2 = [];
 	var combo = new Ext.form.ComboBox({
 				store : array2,
@@ -160,7 +161,6 @@ function getDKXZLXComoBox() {
 	array4.push("经营性建设用地");
 	array4.push("非经营性建设用地");
 	array4.push("代征绿地及水域");
-	array4.push("代征道路");
 	var combo = new Ext.form.ComboBox({
 				store : array4,
 				width : 60,
@@ -181,8 +181,6 @@ function getDKXZLXComoBox() {
 	         	ydxzlx = "2";
 	         	}else if(combo4.value=="代征绿地及水域"){
 	         	ydxzlx = "3";
-	         	}else{
-	         	ydxzlx = "4";
 	         	}
           }
         }
@@ -216,19 +214,27 @@ function initComponent() {
 		        buttons: [{
 		            text: '保存',
 		            handler: function(){
-						dkbh=escape(escape(dkbh));
-						ydxzlx=escape(escape(ydxzlx));
-						putClientCommond("xmkgzbbmanager","saveDK");
-						putRestParameter("yw_guid","<%=yw_guid%>");
-						putRestParameter("dkbh",dkbh);
-						putRestParameter("ydxzlx",ydxzlx);
-						var msg=restRequest();
-							if('success'==msg){
-								alert("保存成功！");
-								document.location.reload();
-							}else{
-								alert("保存失败！");
-							}
+		            if(dkbh==null||dkbh==''||ydxzlx==null||ydxzlx==''||qy==null||qy==''||xqy==null||xqy==''){
+							alert("请填写完整之后再保存！！"); 
+				    }else{
+				            dkbh=escape(escape(dkbh));
+							ydxzlx=escape(escape(ydxzlx));
+							qy=escape(escape(qy));
+							xqy=escape(escape(xqy));
+							putClientCommond("xmkgzbbmanager","saveDK");
+							putRestParameter("yw_guid","<%=yw_guid%>");
+							putRestParameter("dkbh",dkbh);
+							putRestParameter("ydxzlx",ydxzlx);
+							putRestParameter("qy",qy);
+							putRestParameter("xqy",xqy);
+							var msg=restRequest();
+								if('success'==msg){
+									alert("保存成功！");
+									document.location.reload();
+								}else{
+									alert("保存失败！");
+								}
+				    }
 			            }
 			        },{
 			            text: '取消',

@@ -142,50 +142,6 @@ conditionMap.put("query", " t2.yw_guid = '" + yw_guid + "'");
   			document.getElementById("center").innerHTML = myData;
   		}
 		
-		
-	function saves(ydxzlx,adding){
-		var dkbh=document.getElementById("dkbh").value;
-		var ydxz=document.getElementById("ydxz").value;
-		var ydxzdh=document.getElementById("ydxzdh").value;
-		var ydmj=document.getElementById("ydmj").value;
-		var rjl=document.getElementById("rjl").value;
-		var jzmj=document.getElementById("jzmj").value;
-		var kzgd=document.getElementById("kzgd").value;
-		var bz=document.getElementById("bz").value;
-		if(dkbh==null||dkbh==''||ydxz==null||ydxz==''||ydxzdh==null||ydxzdh==''||ydmj==null||ydmj==''||rjl==null||rjl==''||jzmj==null||jzmj==''){
-			alert("请填写完整之后再保存！！"); 
-		}else{
-		  dkbh=escape(escape(dkbh));
-		  ydxz=escape(escape(ydxz));
-		  ydxzdh=escape(escape(ydxzdh));
-		  ydmj=escape(escape(ydmj));
-		  rjl=escape(escape(rjl));
-		  jzmj=escape(escape(jzmj));
-		  kzgd=escape(escape(kzgd));
-		  bz=escape(escape(bz));
-		
-	    	putClientCommond("xmkgzbbmanager","saveDK");
-			putRestParameter("yw_guid","<%=yw_guid%>");
-			putRestParameter("dkbh",dkbh);
-			putRestParameter("ydxz",ydxz);
-			putRestParameter("ydxzdh",ydxzdh);
-			putRestParameter("ydmj",ydmj);
-			putRestParameter("rjl",rjl);
-			putRestParameter("jzmj",jzmj);
-			putRestParameter("kzgd",kzgd);
-			putRestParameter("bz",bz);
-			putRestParameter("ydxzlx",ydxzlx);
-			var msg=restRequest();
-			if('success'==msg){
-				alert("保存成功！");
-				 window.parent.adding=false;
-				document.location.reload();
-			}else{
-				alert("保存失败！");
-			}
-		}
-	}
-	
 	function dele(){
 	Ext.MessageBox.confirm('确认', '系统将删除所有选中地块，确定?', function(btn,text){
 		if(btn == 'yes'){
@@ -196,6 +152,7 @@ conditionMap.put("query", " t2.yw_guid = '" + yw_guid + "'");
 			}
 			putClientCommond("xmkgzbbmanager","delete");
 			putRestParameter("dkbh",choseString);
+			putRestParameter("yw_guid", "<%=yw_guid%>")
 			myData = restRequest();
 			if(myData){
 				Ext.MessageBox.alert('提醒', '删除成功！', function(btn, text){
