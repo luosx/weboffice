@@ -72,6 +72,9 @@ ITableStyle its = new TableStyleEditRow();
   <script type="text/javascript">
   </script>
   <body onload="init(); return false;" style="overflow-x:hidden;overflow-y:hidden">
+   	<div id="fixed" style="position: fixed; top: 5px; left: 0px">
+		<img src="base/form/images/print.png" width="20px" height="20px" onClick="print()" >
+	</div>
   	<div id='show'>
   		<%=new CBDReportManager().getReport("CBJHZHB",its)%>
   	</div>
