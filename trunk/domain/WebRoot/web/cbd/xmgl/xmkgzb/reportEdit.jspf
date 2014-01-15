@@ -48,14 +48,14 @@ function ajax2(objid, obj, key, valueIndex){
     var v=obj.value;
     var p=obj.parentNode.parentNode;
     //不是数字是，提示保存出错
-    if(valueIndex >= 4 && valueIndex <= 7 && isNaN(v)){
+    if(valueIndex >= 1 && valueIndex <= 3 && isNaN(v)){
     	Ext.MessageBox.alert("","输入数据必须是数字，请确认后重新输入!",function(){
     		obj.value = oldV;
     	});
     }else{
 	  p.innerHTML="<font color='red' onclick='send(\"" + objid + "\")'>"+v+"</font>";
 	  putClientCommond("xmkgzbbmanager", "update");
-	  putRestParameter("key", key);
+	  putRestParameter("key", "<%=yw_guid%>");
 	  putRestParameter("vindex", valueIndex);
 	  putRestParameter("value", v);
 	  restRequest();
