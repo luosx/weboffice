@@ -345,7 +345,7 @@ public class QyjcManager extends AbstractBaseBean {
                 }
                 insert.append("select 'a','b' from dual");
                 update(insert.toString(), YW);
-                String sql2 = "select * from XZLXX t,XZLZJQKND_PJLM t2 where t2.yw_guid=t.yw_guid and t2.rq=?";
+                String sql2 = "select * from XZLXX t,XZLZJQKND_PJZJ t2 where t2.yw_guid=t.yw_guid and t2.rq=?";
                 query1 = query(sql2, YW, new Object[] { year });
             }
         }
@@ -361,12 +361,12 @@ public class QyjcManager extends AbstractBaseBean {
                 }
                 insert.append("select 'a','b' from dual");
                 update(insert.toString(), YW);
-                String sql = "select * from XZLXX t,XZLZJQKND_PJZJ t2 where t2.yw_guid=t.yw_guid and t2.rq=?";
+                String sql = "select * from XZLXX t,XZLZJQKND_PJLM t2 where t2.yw_guid=t.yw_guid and t2.rq=?";
                 query2 = query(sql, YW, new Object[] { year });
             }
         }
         BuildModel buildModel = new BuildModel();
-        String table = buildModel.getZjqkNd(query1, query2);
+        String table = buildModel.getZjqkNd(query2, query1);
         response(table);
 
 
@@ -390,7 +390,7 @@ public class QyjcManager extends AbstractBaseBean {
     
     /****
      * 
-     * <br>Description:改造政策研究
+     * <br>Description:获取改造政策研究
      * <br>Author:李国明
      * <br>Date:2014-1-13
      */
@@ -399,4 +399,43 @@ public class QyjcManager extends AbstractBaseBean {
         return query(sql, YW);
     }
 
+    /***
+     * 
+     * <br>Description:修改改造政策研究
+     * <br>Author:李国明
+     * <br>Date:2014-1-13
+     */
+    public void updateGZZYJ(){
+    	try{
+	    	String bqhs = request.getParameter("bqhs");
+	    	String bbqfwhjmj = request.getParameter("bbqfwhjmj");
+	    	String bqgm = request.getParameter("bqgm");
+	    	String kxccrgm = request.getParameter("kxccrgm");
+	    	String zhbzf = request.getParameter("zhbzf");
+	    	String azfscdj = request.getParameter("azfscdj");
+	    	String azfzhjadj = request.getParameter("azfzhjadj");
+	    	String azfgddj = request.getParameter("azfgddj");
+	    	String bqpgdj = request.getParameter("bqpgdj");
+	    	String azfsj = request.getParameter("azfsj");
+	    	String azfdjxs = request.getParameter("azfdjxs");
+	    	String fzzbqgm = request.getParameter("fzzbqgm");
+	    	String fkxccrgm = request.getParameter("fkxccrgm");
+	    	String fzzfwbqdj = request.getParameter("fzzfwbqdj");
+	    	String zzd = request.getParameter("zzd");
+	    	String jsydtjxs = request.getParameter("jsydtjxs");
+	    	String zkcrjsyd = request.getParameter("zkcrjsyd");
+	    	String rjl = request.getParameter("rjl");
+	    	String zkcrjzgm = request.getParameter("zkcrjzgm");
+	    	String mdj = request.getParameter("mdj");
+	    	String yjcjj = request.getParameter("yjcjj");
+	    	String sql = "update gzzcyj set bqhs=?,bbqfwhjmj=?,bqgm=?,kxccrgm=?,zhbzf=?" +
+	    			",azfscdj=?,azfzhjadj=?,azfgddj=?,bqpgdj=?,azfsj=?,azfdjxs=?,fzzbqgm=?,fkxccrgm=?,fzzfwbqdj=?,"+
+	    			"zzd=?,jsydtjxs=?,zkcrjsyd=?,rjl=?,zkcrjzgm=?,mdj=?,yjcjj=?";
+	    	update(sql, YW,new Object[]{bqhs,bbqfwhjmj,bqgm,kxccrgm,zhbzf,azfscdj,azfzhjadj,azfgddj,bqpgdj,azfsj,azfdjxs,fzzbqgm,fkxccrgm,fzzfwbqdj,zzd,jsydtjxs,zkcrjsyd,rjl,zkcrjzgm,mdj,yjcjj});
+	    	response("true");
+    	}catch (Exception e) {
+    		response("false");
+			// TODO: handle exception
+		}
+    }
 }
