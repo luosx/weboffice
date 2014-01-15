@@ -5,7 +5,7 @@ function showMap(objid){
 	//alert("showMap");
 	var key = objid.cells[0].innerText;
 	parent.parent.frames['east'].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").clear();
-	parent.parent.frames['east'].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").findFeature("cbd", "1", key, "TBBH");
+	parent.parent.frames['east'].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").findFeature("cbd", "4", key, "TBBH");
 	
 }
 
@@ -26,7 +26,7 @@ function setRecord(polygon){
     putRestParameter("polygon",polygon); 
     var result = restRequest();
 	parent.parent.frames['east'].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").clear();
-	parent.parent.frames['east'].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").findFeature("cbd", "1", zrbbh, "TBBH");
+	parent.parent.frames['east'].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").findFeature("cbd", "4", zrbbh, "TBBH");
 }
 
 //导出Excel
