@@ -26,6 +26,7 @@ ITableStyle its = new TableStyleEditRow();
 	<script src="web/cbd/yzt/hxxm/js/table.js"></script>
 	<%@ include file="/base/include/ext.jspf" %>
 	<%@ include file="/base/include/restRequest.jspf"%>
+	<script src="base/include/jquery-1.10.2.js"></script>
 	<%@ include file="/base/include/reportEdit.jspf"%>
 	<style type="text/css">
   		table{
@@ -70,7 +71,13 @@ ITableStyle its = new TableStyleEditRow();
 		   }
 	</style>
   </head>
-  
+  <script type="text/javascript">
+  	$(document).ready(function () { 
+		var width = document.body.clientWidth;
+		var height = document.body.clientHeight-20;
+       	FixTable("HXXM", 1,2, width, height);
+	});
+  </script>
   <body>
   		<%=new CBDReportManager().getReport("HXXM",new Object[]{},its)%>
   	<form id="attachfile" action="<%=basePath%>service/rest/zrbHandle/update" method="post">
