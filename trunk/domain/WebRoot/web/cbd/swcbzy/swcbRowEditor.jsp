@@ -25,6 +25,7 @@ ITableStyle its = new TableStyleEditRow();
 	<script src="web/cbd/yzt/jbb/showRW/js/table.js"></script>
 	<script src="web/cbd/swcbzy/js/swcbRowEditor.js"></script>
 	<%@ include file="/base/include/restRequest.jspf"%>
+	<script src="base/include/jquery-1.10.2.js"></script>
 	<%@ include file="/base/include/reportEdit.jspf"%>
 	<style type="text/css">
   		table{
@@ -69,6 +70,13 @@ ITableStyle its = new TableStyleEditRow();
 		    text-align:center;
 		   }
 	</style>
+	<script type="text/javascript">
+		$(document).ready(function () { 
+		var width = document.body.clientWidth-20;
+		var height = document.body.clientHeight-35;
+       	FixTable("SWCBR", 1,1, width, height);
+	});
+	</script>
   </head>
   <body>
  	<div id='show'>

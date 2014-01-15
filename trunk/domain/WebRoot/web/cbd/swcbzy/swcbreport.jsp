@@ -101,9 +101,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		
   </script>
   <body>
-  	<div id="fixed" style="position: fixed; top: 5px; left: 0px">
-		<img src="base/form/images/print.png" width="20px" height="20px" onClick="javascript:print();"  />
-	</div>
+
   		<%=new CBDReportManager().getReport("SWCBR")%>
   	<form id="attachfile" action="<%=basePath%>service/rest/jbbHandle/getExcel" method="post">
 	</form> 
