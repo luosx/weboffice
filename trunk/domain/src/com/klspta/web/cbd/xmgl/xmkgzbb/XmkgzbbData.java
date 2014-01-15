@@ -50,28 +50,28 @@ public class XmkgzbbData extends AbstractBaseBean {
         String keyWord = request.getParameter("keyWord");
         String yw_guid = request.getParameter("yw_guid");
         StringBuffer querySql = new StringBuffer();
-        querySql.append("select rownum,t1.dkmc,t1.ydxzdh,t1.ydxz,t1.jsydmj,t1.rjl,t1.ghjzgm,t1.jzkzgd,t1.bz,t2.ydxzlx from  DCSJK_KGZB t1,XMKGZBB t2 where t1.dkmc=t2.dkbh and yw_guid = '").append(yw_guid).append("'");
+        querySql.append("select rownum,t1.dkmc,t1.ydxzdh,t1.ydxz,t1.jsydmj,t1.rjl,t1.ghjzgm,t1.jzkzgd,t1.bz,t2.ydxzlx from  DCSJK_KGZB t1,XMKGZBB t2 where t1.dkmc=t2.dkbh and yw_guid = '").append(yw_guid).append("' and t1.dqy=t2.qy and t1.qy=t2.xqy ");
         if (keyWord != null&&!"".equals(keyWord)) {
             keyWord = UtilFactory.getStrUtil().unescape(keyWord);
-            querySql.append("and t1.dkmc||t1.ydxz||t1.ydxzdh||t1.jsydmj||t1.rjl||t1.ghjzgm||t1.jzkzgd||t1.bz like '%");
+            querySql.append(" and t1.dkmc||t1.ydxz||t1.ydxzdh||t1.jsydmj||t1.rjl||t1.ghjzgm||t1.jzkzgd||t1.bz like '%");
             querySql.append(keyWord).append("'");
         } else if (xmkgzbbList != null) {
             return xmkgzbbList;
         }
         return query(querySql.toString(), YW);
     }
-	public boolean delete(String dk){
-    	String sql = "delete from " + formName + " t where t.dkbh = ?";
+	public boolean delete(String dk,String yw_guid){
+    	String sql = "delete from " + formName + " t where t.dkbh = ? and t.yw_guid = '"+yw_guid+"'";
     	int result = update(sql, YW, new Object[]{dk});
     	return result == 1 ? true : false;
     }
-	public boolean modifyValue(String dkbh, String field, String value){
+	public boolean modifyValue(String yw_guid, String field, String value){
     	StringBuffer sqlBuffer = new StringBuffer();
     	sqlBuffer.append(" update ").append(formName);
     	sqlBuffer.append(" t set t.").append(field);
     	sqlBuffer.append("='"+value);
-    	sqlBuffer.append("' where t.dkbh=?");
-    	int i = update(sqlBuffer.toString(), YW, new Object[]{ dkbh});
+    	sqlBuffer.append("' where t.ydxzlx='4' and t.yw_guid=?");
+    	int i = update(sqlBuffer.toString(), YW, new Object[]{ yw_guid});
      	return i == 1 ? true : false;
     }
 	
