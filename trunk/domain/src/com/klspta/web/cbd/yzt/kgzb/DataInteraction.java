@@ -14,7 +14,7 @@ import com.klspta.base.AbstractBaseBean;
 public class DataInteraction extends AbstractBaseBean {
 	
 	public StringBuffer getDate( String dqyName) {
-		String sql = "Select distinct qy from dcsjk_kgzb where  dqy=?";
+		String sql = "Select distinct qy from dcsjk_kgzb where  dqy=?  order by  qy";
 		List<Map<String, Object>> list = query(sql, YW, new Object[] {dqyName });
 		BuilTable table = new BuilTable();
 		StringBuffer buffer = new StringBuffer();
@@ -30,7 +30,14 @@ public class DataInteraction extends AbstractBaseBean {
 			buffer.append(qyTr_sum);
 		}
 		
+		String sqlAll_sum="select *  from  dcsjk_kgzb_view2 where qy=? ";
+		List<Map<String, Object>> list3 = query(sqlAll_sum, YW,new Object[]{dqyName});
+		StringBuffer qyAll_sum = table.getQyTr_sum(list3);
+		buffer.append(qyAll_sum);
 		return buffer;
 	}
+	
+	
+	
 
 }
