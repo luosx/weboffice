@@ -160,9 +160,6 @@ public class Cbjhzhb extends AbstractBaseBean implements IDataClass {
 						}
 						
 						if(subMap.containsKey(keyname)){
-							if("计划新增项目".equals(key)){
-								System.out.println("this");
-							}
 							String oldvalue = subMap.get(keyname);
 							String newValue = String.valueOf(Float.parseFloat(oldvalue) + value);
 							subMap.put(keyname, newValue);
