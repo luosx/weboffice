@@ -78,6 +78,10 @@ td1 {
 
 	}
 	function chang(yw) {
+		if(isNaN(yw.value)){
+		alert("数字格式错误");
+		return ;
+		}
 		if (yw_guid_xh_value != null && yw_guid_xh_value != "") {
 			yw_guid_xh_value = yw_guid_xh_value + "@" + yw.id + "_" + yw.value
 		} else {
