@@ -129,9 +129,6 @@ public class Cbjhzhb extends AbstractBaseBean implements IDataClass {
 			if(null == key || "null".equals(key) || "".equals(key)){
 				key = "计划新增项目";
 			}
-			if("计划新增项目".equals(key)){
-				System.out.println("this");
-			}
 			Map<String, String> subMap = subTotalMap.get(key);
 			//添加小计行
 			if(!"".equals(prekey) && !prekey.equals(key)){
