@@ -22,7 +22,6 @@ function editMap(objid){
 	//parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").drawPolygon();
 }
 
-
 //导出Excel
 function print(){
     var curTbl = document.getElementById("SWCBR"); 
@@ -62,10 +61,9 @@ function setRecord(polygon){
 }
 
 function queryJBB(keyword){
-	putClientCommond("jbbHandle","getReport");
+	putClientCommond("kgzbmanager","getReport");
 	putRestParameter("keyword",escape(escape(keyword)));
 	putRestParameter("type","reader");
-	putRestParameter("ssqy",escape(escape(query)));
 	myData = restRequest();
   	document.getElementById("show").innerHTML = myData;
 }
