@@ -42,10 +42,7 @@
                 title: '东扩区',
                 html: "<iframe width='"+w+"' height='"+h+"' src='web/cbd/yzt/kgzb/kgzb.jsp?type=东扩区'/>"
             }
-            ,{
-                title: '区域管理',
-                html: "<iframe width='"+w+"' height='"+h+"' src='web/cbd/yzt/kgzb/kgzbgl.jsp'/>"
-            }
+           
         ]
     })
   });
