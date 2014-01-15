@@ -8,19 +8,20 @@
 			String  list= QyjcManager.getInstcne().getList();
 %>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
 
 <head>
-<base href="<%=basePath%>">
-<title>lz</title>
-<meta http-equiv="pragma" content="no-cache">
-<meta http-equiv="cache-control" content="no-cache">
-<meta http-equiv="expires" content="0">
-<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-<meta http-equiv="description" content="This is my page">
+	<base href="<%=basePath%>">
+	<title>lz</title>
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">    
+	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+	<meta http-equiv="description" content="This is my page">
 	<%@ include file="/base/include/restRequest.jspf"%>
+	<script src="base/include/jquery-1.10.2.js"></script>
+	<%@ include file="js/reportEdit.jspf"%>
 	<%@ include file="/base/include/ext.jspf" %>
 	<style type="text/css">
 table {
@@ -366,6 +367,13 @@ var bhs = "";
 		    //设置excel可见属性 
 		}
 
+</script>
+<script type="text/javascript">
+$(document).ready(function () { 
+		var width = document.body.clientWidth+10;
+		var height = document.body.clientHeight-35;
+       	FixTable("XZLZJ", 1,2, width, height);
+	});
 </script>
 <body>
 <div id="fixed" style="position: fixed; top: 2px; left: 20px">
