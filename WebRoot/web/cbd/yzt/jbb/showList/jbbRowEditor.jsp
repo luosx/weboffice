@@ -24,8 +24,10 @@ ITableStyle its = new TableStyleEditRow();
 	<meta http-equiv="description" content="This is my page">
 	<script src="web/cbd/yzt/jbb/showList/js/jbbRowEditor.js"></script>
 	<%@ include file="/base/include/restRequest.jspf"%>
-	<%@ include file="/base/include/ext.jspf" %>
 	<%@ include file="/base/include/reportEdit.jspf"%>
+	<script src="base/include/jquery-1.10.2.js"></script>
+	<%@ include file="/base/include/ext.jspf" %>
+	
 	<style type="text/css">
   		table{
 		    font-size: 14px;
@@ -70,6 +72,14 @@ ITableStyle its = new TableStyleEditRow();
 		   }
 	</style>
   </head>
+  
+  <script type="text/javascript">
+  	$(document).ready(function () { 
+		var width = document.body.clientWidth;
+		var height = document.body.clientHeight-20;
+       	FixTable("JBB", 1,2, width, height);
+	});
+  </script>
   
   <body>
 	<div id='show'>
