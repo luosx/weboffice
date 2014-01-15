@@ -25,6 +25,7 @@ ITableStyle its = new TableStyleEditRow();
 	<script src="web/cbd/yzt/jbb/showRW/js/table.js"></script>
 	<script src="web/cbd/yzt/jbb/showRW/js/jbbRowEditor.js"></script>
 	<%@ include file="/base/include/restRequest.jspf"%>
+	<script src="base/include/jquery-1.10.2.js"></script>
 	<%@ include file="/base/include/ext.jspf" %>
 	<%@ include file="/web/cbd/yzt/jbb/showRW/js/reportEdit.jspf"%>
 	<style type="text/css">
@@ -71,7 +72,13 @@ ITableStyle its = new TableStyleEditRow();
 		   }
 	</style>
   </head>
-  
+  <script type="text/javascript">
+  	$(document).ready(function () { 
+		var width = document.body.clientWidth+10;
+		var height = document.body.clientHeight-10;
+       	FixTable("JBB", 1,2, width, height);
+	});
+  </script>
   <body>
 	<div id='show'>
   		<%=new CBDReportManager().getReport("JBB",new Object[]{"true"},its)%>
