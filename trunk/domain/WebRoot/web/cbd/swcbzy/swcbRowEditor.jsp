@@ -72,7 +72,7 @@ ITableStyle its = new TableStyleEditRow();
   </head>
   <body>
  	<div id='show'>
-  		<%=new CBDReportManager().getReport("SWCBR",its)%>
+  		<%=new CBDReportManager().getReport("SWCBR",new Object[]{"%%"},its)%>
   	</div>
   	<form id="attachfile" action="<%=basePath%>service/rest/zrbHandle/update" method="post">
 	</form> 
