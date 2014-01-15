@@ -45,8 +45,10 @@ conditionMap.put("query", " where t.ssqy like '%" + query + "%'");
 	<meta http-equiv="description" content="This is my page">
 	<script src="web/cbd/yzt/jbb/showRW/js/table.js"></script>
 	<script src="web/cbd/yzt/jbb/ghcbzy/js/jbbRowEditor.js"></script>
+	<script src="base/include/jquery-1.10.2.js"></script>
 	<%@ include file="/base/include/restRequest.jspf"%>
 	<%@ include file="/base/include/reportEdit.jspf"%>
+	
 	<style type="text/css">
   		table{
 		    font-size: 14px;
@@ -93,8 +95,13 @@ conditionMap.put("query", " where t.ssqy like '%" + query + "%'");
   </head>
   <script type="text/javascript">
   	var query = "<%=query%>";
+  	$(document).ready(function () { 
+		var width = document.body.clientWidth;
+		var height = document.body.clientHeight;
+       	FixTable("JBB", 1,2, width, height);
+	});
   </script>
-  <body>
+  <body style="overflow-x:hidden;overflow-y:hidden">
  	<div id='show'>
   		<%=new CBDReportManager().getReport("JBB",new Object[]{"false",conditionMap},its)%>
   	</div>
