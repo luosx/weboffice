@@ -133,7 +133,11 @@ public class EsfjcReport extends AbstractBaseBean implements IDataClass {
 				trBean.addTDBean(tdBean);
 				for(int j = 0; j < total.length; j++){
 					String name = total[j][0];
-					String values = String.valueOf(quMap.get(name));
+					String values = "";
+					if(quMap.containsKey(name)){
+						values = String.valueOf(quMap.get(name));
+					}
+					values = values=="null"?"0":values;
 					String calcutype = total[j][1];
 					TDBean tdbean;
 					if("total".equals(calcutype)){
