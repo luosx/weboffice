@@ -9,7 +9,7 @@ function init(){
 	// table.fixzeTable('3','3');
 }
 
-//单击地图定位
+
 function showMap(objid){
 	if(table.element == undefined){
 		table.init(document.getElementById("CBJHZHB"));
@@ -19,7 +19,7 @@ function showMap(objid){
 	table.addAnnotation(objid.rowIndex);
 }
 
-//双击编辑地图
+
 function editMap(objid){
 	showMap(objid);
 }
