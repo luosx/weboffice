@@ -4,7 +4,13 @@ import java.util.List;
 import java.util.Map;
 
 import com.klspta.base.AbstractBaseBean;
-
+/****
+ * 
+ * <br>Title:数据库操作类
+ * <br>Description:
+ * <br>Author:朱波海
+ * <br>Date:2014-1-15
+ */
 public class DataInteraction extends AbstractBaseBean {
 	
 	public StringBuffer getDate( String dqyName) {

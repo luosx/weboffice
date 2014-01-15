@@ -8,9 +8,20 @@ import com.klspta.base.util.UtilFactory;
 import com.klspta.model.CBDReport.CBDReportManager;
 import com.klspta.model.CBDReport.tablestyle.ITableStyle;
 import com.klspta.web.cbd.yzt.jc.report.TableStyleEditRow;
-
+/*****
+ * 
+ * <br>Title:底层数据库——控规指标处理类
+ * <br>Description:
+ * <br>Author:朱波海
+ * <br>Date:2014-1-15
+ */
 public class KgzbManager extends AbstractBaseBean {
-
+/**
+ * 
+ * <br>Description:删除操作
+ * <br>Author:朱波海
+ * <br>Date:2014-1-15
+ */
 	public void delet() {
 		String yw_guid = request.getParameter("yw_guid");
 		String type = request.getParameter("type");
@@ -22,7 +33,12 @@ public class KgzbManager extends AbstractBaseBean {
 		}
 
 	}
-
+/*****
+ * 
+ * <br>Description:查询功能
+ * <br>Author:朱波海
+ * <br>Date:2014-1-15
+ */
 	public void quey() {
 		String yw_guid = request.getParameter("yw_guid");
 		String type = request.getParameter("type");
@@ -33,7 +49,12 @@ public class KgzbManager extends AbstractBaseBean {
 		response(query);
 
 	}
-
+/**
+ * 
+ * <br>Description:保存功能
+ * <br>Author:朱波海
+ * <br>Date:2014-1-15
+ */
 	public void save() {
 		String type = request.getParameter("type");
 		String yw_guid = request.getParameter("yw_guid");
