@@ -1,6 +1,7 @@
 package com.klspta.web.cbd.qyjc;
 
 import java.text.DecimalFormat;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -134,7 +135,7 @@ public class EsfjcReport extends AbstractBaseBean implements IDataClass {
 				for(int j = 0; j < total.length; j++){
 					String name = total[j][0];
 					String values = "";
-					if(quMap.containsKey(name)){
+					if(quMap!=null && quMap.containsKey(name)){
 						values = String.valueOf(quMap.get(name));
 					}
 					values = values=="null"?"0":values;
@@ -184,7 +185,12 @@ public class EsfjcReport extends AbstractBaseBean implements IDataClass {
 		TRBean trBean = new TRBean();
 		TDBean tdtotal = new TDBean(key.substring(0, key.indexOf("区")+1),"50","100");
 		tdtotal.setColspan("1");
-		tdtotal.setRowspan(String.valueOf(subMap.size()));
+		if(subMap != null){
+			tdtotal.setRowspan(String.valueOf(subMap.size()));
+		}else{
+			tdtotal.setRowspan("1");
+			subMap = new HashMap<String, Map<String,Object>>();
+		}
 		trBean.addTDBean(tdtotal);
 		TDBean td2 = new TDBean(key + "小计","200","20");
 		td2.setColspan("2");
@@ -193,7 +199,10 @@ public class EsfjcReport extends AbstractBaseBean implements IDataClass {
 		for(int j = 0; j < total.length; j++){
 			String name = total[j][0];
 			Map<String, Object> quMap = subMap.get(key);
-			String values = String.valueOf(quMap.get(name));
+			String values = "0";
+			if(quMap != null && quMap.containsKey(name)){
+				values = String.valueOf(quMap.get(name));
+			}
 			String calcutype = total[j][1];
 			TDBean tdbean;
 			if("total".equals(calcutype)){
