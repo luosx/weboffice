@@ -5,6 +5,9 @@ import java.util.Map;
 
 import com.klspta.base.AbstractBaseBean;
 import com.klspta.base.util.UtilFactory;
+import com.klspta.model.CBDReport.CBDReportManager;
+import com.klspta.model.CBDReport.tablestyle.ITableStyle;
+import com.klspta.web.cbd.yzt.jc.report.TableStyleEditRow;
 
 public class KgzbManager extends AbstractBaseBean {
 
@@ -61,21 +64,41 @@ public class KgzbManager extends AbstractBaseBean {
 		BZ = UtilFactory.getStrUtil().unescape(BZ);
 		YDXZ = UtilFactory.getStrUtil().unescape(YDXZ);
 		GHSJLY = UtilFactory.getStrUtil().unescape(GHSJLY);
-		int i=0;
-if(yw_guid!=null&&!yw_guid.equals("")){
-	String sql = " update  dcsjk_kgzb set DKMC='" + DKMC + "',YDXZDH='"
-	+ YDXZDH + "' ,YDXZ='" + YDXZ + "' ,JSYDMJ='" + JSYDMJ
-	+ "',RJL='" + RJL + "',GHJZGM='" + GHJZGM + "',JZKZGD='"
-	+ JZKZGD + "',JZMD='" + JZMD + "',LHL='" + LHL
-	+ "',DBZS='"+DBZS+"',DXMK='"+DXMK+"',GHSJLY='"+GHSJLY+"',BZ='"+BZ+"' where yw_guid=? and dqy=?";
-    i = update(sql, YW, new Object[] { yw_guid, type });
-}else{
-	String sql = " insert into  dcsjk_kgzb ( DKMC,YDXZDH,YDXZ ,JSYDMJ,RJL,GHJZGM,JZKZGD,JZMD,LHL,DBZS,DXMK,GHSJLY,BZ,dqy) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-   i = update(sql, YW, new Object[] { DKMC,YDXZDH,YDXZ ,JSYDMJ,RJL,GHJZGM,JZKZGD,JZMD,LHL,DBZS,DXMK,GHSJLY,BZ,type });
-}
-if(i==1){
-	response("success");
-}
+		int i = 0;
+		if (yw_guid != null && !yw_guid.equals("")) {
+			String sql = " update  dcsjk_kgzb set DKMC='" + DKMC + "',YDXZDH='"
+					+ YDXZDH + "' ,YDXZ='" + YDXZ + "' ,JSYDMJ='" + JSYDMJ
+					+ "',RJL='" + RJL + "',GHJZGM='" + GHJZGM + "',JZKZGD='"
+					+ JZKZGD + "',JZMD='" + JZMD + "',LHL='" + LHL + "',DBZS='"
+					+ DBZS + "',DXMK='" + DXMK + "',GHSJLY='" + GHSJLY
+					+ "',BZ='" + BZ + "' where yw_guid=? and dqy=?";
+			i = update(sql, YW, new Object[] { yw_guid, type });
+		} else {
+			String sql = " insert into  dcsjk_kgzb ( DKMC,YDXZDH,YDXZ ,JSYDMJ,RJL,GHJZGM,JZKZGD,JZMD,LHL,DBZS,DXMK,GHSJLY,BZ,dqy) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+			i = update(sql, YW, new Object[] { DKMC, YDXZDH, YDXZ, JSYDMJ, RJL,
+					GHJZGM, JZKZGD, JZMD, LHL, DBZS, DXMK, GHSJLY, BZ, type });
+		}
+		if (i == 1) {
+			response("success");
+		}
+	}
+	
+	/**
+     * 
+     * <br>Description:控规指标列表过滤
+     * <br>Author:李国明
+     * <br>Date:2014-1-15
+     * @throws Exception
+     */
+	public void getReport() throws Exception{
+		String keyword = request.getParameter("keyword");
+		String type = request.getParameter("type");
+		ITableStyle its = new TableStyleEditRow();
+		if(!"reader".equals(type)){
+			response(String.valueOf(new CBDReportManager().getReport("SWCBR", new Object[]{"%"+keyword+"%"},its)));
+		}else{
+			response(String.valueOf(new CBDReportManager().getReport("SWCBR", new Object[]{"%"+keyword+"%"},its)));
+		}
 	}
 
 }
