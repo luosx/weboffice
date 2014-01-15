@@ -5,8 +5,10 @@ import java.util.List;
 import java.util.Map;
 /*****
  * 
- * @author zhubohai
- *
+ * <br>Title:拼写前台table类
+ * <br>Description:
+ * <br>Author:朱波海
+ * <br>Date:2014-1-15
  */
 public class BuilTable {
 	
