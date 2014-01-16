@@ -15,7 +15,7 @@ import com.klspta.web.cbd.yzt.zrb.ZrbData;
 
 public class Xmkgzbbmanager extends AbstractBaseBean { 
 	public static final String[][] showList = new String[][]{{"READFLAG", "0.1","hiddlen"},{"ROWNUM", "0.03","序号"},{"DKBH", "0.1","地块编号"},{"YDXZDH", "0.11","用地性质代号"},{"YDXZ", "0.11","用地性质"},{"YDMJ", "0.09","用地面积"},{"RJL","0.08","容积率"},{"JZMJ","0.08","建筑面积"},{"KZGD","0.08","控制高度"},{"BZ","0.1","备注"}};
-	private String[] fields = new String[]{"yw_guid", "dzdlydmj","rjl","dzdljzmj","kzgd","dzdlbz"};
+	private String[] fields = new String[]{"yw_guid", "dzdlydmj","rjl","dzdljzmj","dzdlkzgd","dzdlbz"};
 	
 	public void getDKMC(){
 		StringBuffer sqlBuffer = new StringBuffer();

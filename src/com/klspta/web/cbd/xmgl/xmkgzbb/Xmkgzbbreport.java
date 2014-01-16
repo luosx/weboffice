@@ -47,7 +47,7 @@ public class Xmkgzbbreport extends AbstractBaseBean implements IDataClass {
 		}
 		
 		StringBuffer sqlDZDL = new StringBuffer();
-		sqlDZDL.append("select t.dzdlydmj,t.dzdljzmj,t.dzdlbz from xmkgzbb t where t.ydxzlx='4' ");
+		sqlDZDL.append("select t.dzdlydmj,t.dzdljzmj,t.dzdlkzgd t.dzdlbz from xmkgzbb t where t.ydxzlx='4' ");
 		if(yw_guid != null){ 
 			sqlDZDL.append(" and t.yw_guid = '"+yw_guid+"'");
 		}
@@ -339,6 +339,7 @@ public class Xmkgzbbreport extends AbstractBaseBean implements IDataClass {
 		ydmj_dzdl = Double.valueOf(String.valueOf( dzdlmap.get("dzdlydmj"))).doubleValue();
 		jzmj_dzdl = Double.valueOf(String.valueOf( dzdlmap.get("dzdljzmj"))).doubleValue();
 		String dzdlbz = String.valueOf(dzdlmap.get("dzdlbz"));
+		String dzdlkzgd = String.valueOf(dzdlmap.get("dzdlkzgd"));
 		if("null".equals(dzdlbz)){
 			dzdlbz = "";
 		}
@@ -357,7 +358,7 @@ public class Xmkgzbbreport extends AbstractBaseBean implements IDataClass {
 		TDBean tdname54=new TDBean(""+jzmj_dzdl,"","","true");
 		trBean_dzdl.addTDBean(tdname54);
 		
-		TDBean tdname55=new TDBean("","","");
+		TDBean tdname55=new TDBean(dzdlkzgd,"","","true");
 		trBean_dzdl.addTDBean(tdname55);
 		
 		TDBean tdname56=new TDBean(dzdlbz,"","","true");
