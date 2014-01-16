@@ -276,12 +276,14 @@ public class QyjcManager extends AbstractBaseBean {
      */
     public void Save_ZjqkXX() {
         String date_id_cols_value = request.getParameter("date_id_cols_value");
-        date_id_cols_value = UtilFactory.getStrUtil().unescape(date_id_cols_value);
+      //  date_id_cols_value = UtilFactory.getStrUtil().unescape(date_id_cols_value);
         if (date_id_cols_value != null && !date_id_cols_value.equals("")) {
             String[] split = date_id_cols_value.split("@");
             for (int i = 0; i < split.length; i++) {
                 String[] split2 = split[i].split("_");
-                String update = "update XZLZJQK set " + split2[1] + "='" + split2[2] + "'  where yw_guid=? ";
+                //解析
+               String val= UtilFactory.getStrUtil().unescape(split2[2] );
+                String update = "update XZLZJQK set " + split2[1] + "='" + val + "'  where yw_guid=? ";
                 update(update, YW, new Object[] { split2[0] });
             }
             response("success");
