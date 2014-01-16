@@ -7,30 +7,30 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 String list = Fyzcmanager.getInstcne().getList();
-String yw_guid=request.getParameter("yw_guid");
+
 
 
 String [] start=list.split("</table>");
-String add="<tr ><td align='center' height='10' width='10'><input id='mc' type='text' /></td>"+
-			"<td align='center' height='10' width='10'><input id='gzfy' type='text'/></td>"+
-			"<td align='center' height='10' width='10'><input id='gzgm' type='text' /></td>"+
-			"<td align='center' height='10' width='10'><input id='cbzj' type='text' /></td>"+
-			"<td align='center' height='10' width='10'><input id='gzdj' type='text' /></td>"+
-			"<td align='center' height='10' width='10'><input id='lyfy' type='text' /></td>"+
-			"<td align='center' height='10' width='10'><input id='lygm' type='text' /></td>"+
-			"<td align='center' height='10' width='10'><input id='qmfy' type='text'/></td>"+
-			"<td align='center' height='10' width='10'><input id='jzmj' type='text' /></td>"+
-			"<td align='center' height='10' width='10'><input id='zyzj' type='text' /></td>"+
-			"<td align='center' height='10' width='10'><input id='pmft' type='text' /></td>"+
-			"<td align='center' height='10' width='10'><input id='lyft' type='text' /></td>"+
-			"<td align='center' height='10' width='10'><input id='clft' type='text' /></td>"+
-			"<td align='center' height='10' width='10'><input id='ze' type='text' /></td>"+
-			"<td align='center' height='10' width='10'><input id='jhcb' type='text' /></td>"+
-			"<td align='center' height='10' width='10'><input id='xj' type='text' /></td>"+
-			"<td align='center' height='10' width='10'><input id='dj' type='text' /></td>"+
-			"<td align='center' height='10' width='10'><input id='jhcbs' type='text' /></td>"+
-			"<td align='center' height='10' width='10'><input id='xjs' type='text' /></td>"+
-			"<td align='center' height='10' width='10'><input id='djs' type='text' /></td>"+
+String add="<tr ><td align='center' height='10' width='10'><input id='mc1' type='text' /></td>"+
+			"<td align='center' height='10' width='10'><input id='gzfy1' type='text'/></td>"+
+			"<td align='center' height='10' width='10'><input id='gzgm1' type='text' /></td>"+
+			"<td align='center' height='10' width='10'><input id='cbzj1' type='text' /></td>"+
+			"<td align='center' height='10' width='10'><input id='gzdj1' type='text' /></td>"+
+			"<td align='center' height='10' width='10'><input id='lyfy1' type='text' /></td>"+
+			"<td align='center' height='10' width='10'><input id='lygm1' type='text' /></td>"+
+			"<td align='center' height='10' width='10'><input id='qmfy1' type='text'/></td>"+
+			"<td align='center' height='10' width='10'><input id='jzmj1' type='text' /></td>"+
+			"<td align='center' height='10' width='10'><input id='zyzj1' type='text' /></td>"+
+			"<td align='center' height='10' width='10'><input id='pmft1' type='text' /></td>"+
+			"<td align='center' height='10' width='10'><input id='lyft1' type='text' /></td>"+
+			"<td align='center' height='10' width='10'><input id='clft1' type='text' /></td>"+
+			"<td align='center' height='10' width='10'><input id='ze1' type='text' /></td>"+
+			"<td align='center' height='10' width='10'><input id='jhcb1' type='text' /></td>"+
+			"<td align='center' height='10' width='10'><input id='xj1' type='text' /></td>"+
+			"<td align='center' height='10' width='10'><input id='dj1' type='text' /></td>"+
+			"<td align='center' height='10' width='10'><input id='jhcbs1' type='text' /></td>"+
+			"<td align='center' height='10' width='10'><input id='xjs1' type='text' /></td>"+
+			"<td align='center' height='10' width='10'><input id='djs1' type='text' /></td>"+
 		"</tr>";
 String all=start[0]+add+"</table>";
 %>
@@ -79,36 +79,69 @@ td {
     text-align:center;
     width:50px;
   }
+  input{
+  text-align: center;
+  
+  }
 
 </style>
   </head>
   <script type="text/javascript">
-
+	var yw_guid_xh_value = "";
 
 	function save(){
-	var mc=document.getElementById("mc").value;
-	var gzfy=document.getElementById("gzfy").value;
-	var gzgm=document.getElementById("gzgm").value;
-	var cbzj=document.getElementById("cbzj").value;
-	var gzdj=document.getElementById("gzdj").value;
-	var lyfy=document.getElementById("lyfy").value;
-	var lygm=document.getElementById("lygm").value;
-	var qmfy=document.getElementById("qmfy").value;
-	var jzmj=document.getElementById("jzmj").value;
-	var zyzj=document.getElementById("zyzj").value;
-	var pmft=document.getElementById("pmft").value;
-	var lyft=document.getElementById("lyft").value;
-	var clft=document.getElementById("clft").value;
-	var ze=document.getElementById("ze").value;
-	var jhcb=document.getElementById("jhcb").value;
-	var xj=document.getElementById("xj").value;
-	var dj =document.getElementById("dj").value;
-	var jhcbs=document.getElementById("jhcbs").value;
-	var xjs=document.getElementById("xjs").value;
-	var djs =document.getElementById("djs").value;
-	mc=escape(escape(mc));
+	var sj = yw_guid_xh_value;
+	var dklx =document.getElementById("dklx").value;
+	var jzrq =document.getElementById("jzrq").value;
+	var jzrqs =document.getElementById("jzrqs").value;
+	dklx=escape(escape(dklx));
+	jzrq=escape(escape(jzrq));
+	jzrqs=escape(escape(jzrqs));
 	putClientCommond("fyzcHandle","saveFyzc");
-	putRestParameter("yw_guid","<%=yw_guid%>");
+	putRestParameter("sj",sj);
+	putRestParameter("dklx",dklx);
+	putRestParameter("jzrq",jzrq);
+	putRestParameter("jzrqs",jzrqs);
+	var msg=restRequest();
+	if('success'==msg){
+	alert("保存成功！");
+	document.location.reload();
+	}else{
+	alert("保存失败！");
+	}
+	
+	}
+	
+	function add(){
+	var mc=document.getElementById("mc1").value;
+	var gzfy=document.getElementById("gzfy1").value;
+	var gzgm=document.getElementById("gzgm1").value;
+	var cbzj=document.getElementById("cbzj1").value;
+	var gzdj=document.getElementById("gzdj1").value;
+	var lyfy=document.getElementById("lyfy1").value;
+	var lygm=document.getElementById("lygm1").value;
+	var qmfy=document.getElementById("qmfy1").value;
+	var jzmj=document.getElementById("jzmj1").value;
+	var zyzj=document.getElementById("zyzj1").value;
+	var pmft=document.getElementById("pmft1").value;
+	var lyft=document.getElementById("lyft1").value;
+	var clft=document.getElementById("clft1").value;
+	var ze=document.getElementById("ze1").value;
+	var jhcb=document.getElementById("jhcb1").value;
+	var xj=document.getElementById("xj1").value;
+	var dj =document.getElementById("dj1").value;
+	var jhcbs=document.getElementById("jhcbs1").value;
+	var xjs=document.getElementById("xjs1").value;
+	var djs =document.getElementById("djs1").value;
+	var dklx =document.getElementById("dklx").value;
+	var jzrq =document.getElementById("jzrq").value;
+	var jzrqs =document.getElementById("jzrqs").value;
+	mc=escape(escape(mc));
+	dklx=escape(escape(dklx));
+	jzrq=escape(escape(jzrq));
+	jzrqs=escape(escape(jzrqs));
+	putClientCommond("fyzcHandle","addFyzc");
+	
 	putRestParameter("mc",mc);
 	putRestParameter("gzfy",gzfy);
 	putRestParameter("gzgm",gzgm);
@@ -129,43 +162,37 @@ td {
 	putRestParameter("jhcbs",jhcbs);
 	putRestParameter("xjs",xjs);
 	putRestParameter("djs",djs);
+	putRestParameter("dklx",dklx);
+	putRestParameter("jzrq",jzrq);
+	putRestParameter("jzrqs",jzrqs);
+	
 	var msg=restRequest();
 	if('success'==msg){
-	alert("保存成功！");
+	alert("添加成功！");
 	document.location.reload();
 	}else{
-	alert("保存失败！");
+	alert("添加失败！");
 	}
 	}
 	
-	function set(){
-		var dklx=escape(escape(document.getElementById("dklx").value));
-		var jzrq=escape(escape(document.getElementById("jzrq").value));
-		var jzrqs=escape(escape(document.getElementById("jzrqs").value));
-		putClientCommond("fyzcHandle","set");
-		putRestParameter("dklx",dklx);
-		putRestParameter("jzrq",jzrq);
-		putRestParameter("jzrqs",jzrqs);
-		var msg=restRequest();
-		if('success'==msg){
-		alert("设置成功！");
-		document.location.reload();
-		}else{
-		alert("设置失败！");
+	function chang(yw){
+	if (yw_guid_xh_value != null && yw_guid_xh_value != "") {
+			yw_guid_xh_value = yw_guid_xh_value+"@"+yw.id + "_" + yw.value
+		} else {
+			yw_guid_xh_value = yw.id + "_" + yw.value
 		}
+	
 	}
+	
+
 			
   </script>
   <body>
-  	
-	<div>
-		贷款利息<input id='dklx' type='text' />截止日期一<input id='jzrq' type='text' />截止日期二<input id='jzrqs' type='text' /><button onclick="set()">设置</button>
-	</div>
-	<div>
+  <div id="fixed" style="position: fixed; top: 1px; left: 3px">
+  		&nbsp;
+  		<img src="base/form/images/save-file.png" width="20px" height="20px" title="保存" onClick="save()"  />&nbsp;&nbsp;&nbsp;
+		<img src="base/form/images/add.png" width="20px" height="20px" title="添加" onClick="add();"  />&nbsp;&nbsp;&nbsp;
+	</div><br/>
 		<%=all%>
-	</div>
-	<div id="addtable"  align="left" >
-		<button onclick="save()">保存</button>
-	</div>
   </body>
 </html>
