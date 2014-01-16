@@ -1,3 +1,4 @@
+<script src="web/cbd/yzt/cbjhzhb/js/jquery-1.10.2.js"></script>
 <script type="text/javascript">
 function send(objid){ 
     var keyIndex = "";
