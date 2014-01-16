@@ -57,6 +57,7 @@ public class ZjglBuild {
        		"</tr>");
        return Buffer;
    }
+   
    public static  StringBuffer buildZjlr(List<Map<String, Object>> list){
       StringBuffer stringBuffer = new StringBuffer();
        if (list!=null) {
@@ -105,6 +106,9 @@ public class ZjglBuild {
        return stringBuffer;
        
    }
+   /*****
+    * view
+    */
    public static  StringBuffer buildZjlr_sum(List<Map<String, Object>> list){
        StringBuffer stringBuffer = new StringBuffer();
         if (list!=null) {
@@ -201,7 +205,6 @@ public class ZjglBuild {
        "</td></tr>");
       }else{
           stringBuffer.append("<tr><td class='tr03'>"+
-                  //delNull(String.valueOf(list.get(i).get("YSFY")))+ "</td><td class='tr03'>"+
                   delNull(String.valueOf(list.get(i).get("LJ")))+ "</td><td class='tr03'>"+
                   delZer(String.valueOf(list.get(i).get("JL2")))+ "</td> <td class='tr03'>" +
                      delNull(String.valueOf(list.get(i).get("CQYE")))+ 
@@ -325,6 +328,95 @@ public class ZjglBuild {
       
       return stringBuffer;
   } 
+  
+  public static StringBuffer buildZjzc_father_view(List<Map<String, Object>> list){
+      StringBuffer  stringBuffer=  new StringBuffer();
+      if (list!=null) {
+      for (int i=0;i<list.size();i++){
+          if(i==0){
+        stringBuffer.append("<tr><td  rowspan='8' class='tr04'>"+
+        delNull(String.valueOf(list.get(i).get("LB")))+ 
+       "</td><td rowspan='8' class='tr04'>"+
+       delNull( String.valueOf(list.get(i).get("YSFY")))+
+       "</td><td width:'160px' class='tr04'>" +
+       delNull(String.valueOf(list.get(i).get("LJ")))+
+      "</td><td  class='tr04'>" +
+      delZer(String.valueOf(list.get(i).get("JL2")))+ 
+       "</td><td rowspan='8' class='tr04'>"+
+       delNull(String.valueOf(list.get(i).get("YFSDZ")))+
+       "</td><td rowspan='8' class='tr04'>"+
+       delNull( String.valueOf(list.get(i).get("ZJJD")))+ 
+       "</td><td class='tr04'>"+
+       delNull(String.valueOf(list.get(i).get("CQYE")))+
+       "</td><td class='tr04'>"+
+       delNull( String.valueOf(list.get(i).get("YY")))+ 
+       "</td><td class='tr04'>"+
+       delNull( String.valueOf(list.get(i).get("EY")))+ 
+       "</td><td class='tr04'>"+
+       delNull(String.valueOf(list.get(i).get("SANY")))+
+       "</td><td class='tr04'>"+
+       delNull(String.valueOf(list.get(i).get("SIY")))+ 
+       "</td><td class='tr04'>" +
+       delNull(String.valueOf(list.get(i).get("WY")))+ 
+       "</td><td class='tr04'>" +
+       delNull( String.valueOf(list.get(i).get("LY")))+ 
+       "</td><td class='tr04'>" +
+       delNull(String.valueOf(list.get(i).get("QY")))+
+       "</td><td class='tr04'>" +
+       delNull(String.valueOf(list.get(i).get("BAY")))+  
+       "</td><td class='tr04'>" +
+       delNull(String.valueOf(list.get(i).get("JY")))+ 
+       " </td><td class='tr04'> " +
+       delNull(String.valueOf(list.get(i).get("SIYUE")))+
+       " </td><td class='tr04'> " +
+       delNull(String.valueOf(list.get(i).get("SYY")))+ 
+       " </td><td class='tr04'> " +
+       delNull(String.valueOf(list.get(i).get("SEY")))+ 
+       " </td><td class='tr04'> " +
+       delNull(String.valueOf(list.get(i).get("LRSP")))+ 
+       " </td></tr>");
+      }else{
+          stringBuffer.append("<tr><td class='tr04'>"+
+                 // delNull(String.valueOf(list.get(i).get("YSFY")))+ "</td><td class='tr04'>"+
+                  delNull(String.valueOf(list.get(i).get("LJ")))+ "</td><td class='tr04'>"+
+                  delZer(String.valueOf(list.get(i).get("JL2")))+ "</td>"+
+                    " <td class='tr04'> " +
+                     delNull(String.valueOf(list.get(i).get("CQYE")))+ 
+                     "</td><td class='tr04'> " +
+                     delNull( String.valueOf(list.get(i).get("YY")))+  
+                     " </td><td class='tr04'> " +
+                     delNull( String.valueOf(list.get(i).get("EY")))+  
+                     " </td><td class='tr04'> " +
+                     delNull(String.valueOf(list.get(i).get("SANY")))+  
+                     " </td><td class='tr04'> " +
+                     delNull(String.valueOf(list.get(i).get("SIY")))+   
+                     " </td><td class='tr04'> " +
+                     delNull(String.valueOf(list.get(i).get("WY")))+  
+                     " </td><td class='tr04'> " +
+                     delNull( String.valueOf(list.get(i).get("LY")))+  
+                     " </td><td class='tr04'> " +
+                     delNull(String.valueOf(list.get(i).get("QY")))+   
+                     " </td><td class='tr04'> " +
+                     delNull(String.valueOf(list.get(i).get("BAY")))+  
+                     " </td><td class='tr04'> " +
+                     delNull(String.valueOf(list.get(i).get("JY")))+  
+                     " </td><td class='tr04'> " +
+                     delNull(String.valueOf(list.get(i).get("SIYUE")))+ 
+                     " </td><td class='tr04'> " +
+                     delNull(String.valueOf(list.get(i).get("SYY")))+  
+                     " </td><td class='tr04'> " +
+                     delNull(String.valueOf(list.get(i).get("SEY")))+ 
+                     " </td><td class='tr04'> " +
+                     delNull(String.valueOf(list.get(i).get("LRSP")))+  
+                     " </td></tr>");
+      }
+      }
+      }
+      
+      return stringBuffer;
+  } 
+  
+  
   public static StringBuffer buildZjzc_child(List<Map<String, Object>> list){
        StringBuffer stringBuffer = new StringBuffer();
       if (list!=null) {
@@ -414,6 +506,96 @@ public class ZjglBuild {
       } 
       return stringBuffer;
   } 
+  
+  public static StringBuffer buildZjzc_child_view(List<Map<String, Object>> list){
+      StringBuffer stringBuffer = new StringBuffer();
+     if (list!=null) {
+     for (int i=0;i<list.size();i++){
+         if(i==0){
+             stringBuffer.append("<tr><td  rowspan='8'>"+
+                     delNull(String.valueOf(list.get(i).get("LB")))+
+                     " </td><td rowspan='8'> " +
+                    delNull( String.valueOf(list.get(i).get("YSFY")))+ 
+                    "</td><td >" +
+                    delNull(String.valueOf(list.get(i).get("LJ")))+
+                    "</td><td> " +
+                   delNull(String.valueOf(list.get(i).get("JL2")))+  
+                   "</td><td  > " +
+                    delNull(String.valueOf(list.get(i).get("YFSDZ")))+  
+                    "</td><td > " +
+                    delNull( String.valueOf(list.get(i).get("ZJJD")))+  
+                    "</td><td> " +
+                    delNull(String.valueOf(list.get(i).get("CQYE")))+  
+                    " </td><td> " +
+                    delNull( String.valueOf(list.get(i).get("YY")))+ 
+                    " </td><td> " +
+                    delNull( String.valueOf(list.get(i).get("EY")))+ 
+                    " </td><td> " +
+                    delNull(String.valueOf(list.get(i).get("SANY")))+ 
+                    " </td><td> " +
+                    delNull(String.valueOf(list.get(i).get("SIY")))+  
+                    " </td><td> " +
+                    delNull(String.valueOf(list.get(i).get("WY")))+  
+                    " </td><td> " +
+                    delNull( String.valueOf(list.get(i).get("LY")))+ 
+                    " </td><td> " +
+                    delNull(String.valueOf(list.get(i).get("QY")))+  
+                    " </td><td> " +
+                    delNull(String.valueOf(list.get(i).get("BAY")))+ 
+                    " </td><td> " +
+                    delNull(String.valueOf(list.get(i).get("JY")))+ 
+                    " </td><td> " +
+                    delNull(String.valueOf(list.get(i).get("SIYUE")))+
+                    " </td><td> " +
+                    delNull(String.valueOf(list.get(i).get("SYY")))+  
+                    " </td><td> " +
+                    delNull(String.valueOf(list.get(i).get("SEY")))+ 
+                    " </td><td> " +
+                    delNull(String.valueOf(list.get(i).get("LRSP")))+ 
+                    " </td></tr>");
+                   }else{
+                       stringBuffer.append("<tr><td >" +
+                               delNull(String.valueOf(list.get(i).get("LJ")))+
+                               "</td><td> " +
+                              delNull(String.valueOf(list.get(i).get("LJ2")))+   
+                              " </td><td > " +
+                               delNull(String.valueOf(list.get(i).get("YFSDZ")))+ 
+                               " </td><td > " +
+                               delNull( String.valueOf(list.get(i).get("ZJJD")))+ 
+                               " </td><td> " +
+                               delNull(String.valueOf(list.get(i).get("CQYE")))+ 
+                               " </td><td> " +
+                               delNull( String.valueOf(list.get(i).get("YY")))+  
+                               " </td><td> " +
+                               delNull( String.valueOf(list.get(i).get("EY")))+   
+                               " </td><td> " +
+                               delNull(String.valueOf(list.get(i).get("SANY")))+  
+                               " </td><td> " +
+                               delNull(String.valueOf(list.get(i).get("SIY")))+  
+                               " </td><td> " +
+                               delNull(String.valueOf(list.get(i).get("WY")))+   
+                               " </td><td> " +
+                               delNull( String.valueOf(list.get(i).get("LY")))+  
+                               " </td><td> " +
+                               delNull(String.valueOf(list.get(i).get("QY")))+  
+                               " </td><td> " +
+                               delNull(String.valueOf(list.get(i).get("BAY")))+   
+                               " </td><td> " +
+                               delNull(String.valueOf(list.get(i).get("JY")))+ 
+                               " </td><td> " +
+                               delNull(String.valueOf(list.get(i).get("SIYUE")))+  
+                               " </td><td> " +
+                               delNull(String.valueOf(list.get(i).get("SYY")))+   
+                               " </td><td> " +
+                               delNull(String.valueOf(list.get(i).get("SEY")))+  
+                               " </td><td> " +
+                               delNull(String.valueOf(list.get(i).get("LRSP")))+  
+                               " </td></tr>");
+     }
+     }
+     } 
+     return stringBuffer;
+ } 
   
   public static String delNull(String str){
       if(str.equals("null")||str.equals("0")){
