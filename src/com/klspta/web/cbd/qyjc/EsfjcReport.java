@@ -17,7 +17,7 @@ public class EsfjcReport extends AbstractBaseBean implements IDataClass {
 	private String[][] title = {{"所属<br>区域","40"},{"序号","50"},{"小区名称","180"},{"二手房总量<br>(户)","150"},{"二手房均价<br>(元/㎡)","200"},{"二手房均价涨幅(%)","200"},{"出租量(户)","100"},{"出租房均价(元/月)","200"},{"出租房均价涨幅(%)","150"},{"备注","500"}};
 	private Map<String, Map<String, Map<String, Object>>> showMap = new TreeMap<String, Map<String,Map<String, Object>>>();
 	private String[][] total ={{"zl","total"},{"esfjj","avg"},{"esfjjzf","avg"},{"czl","total"},{"czfjj","avg"},{"czfjjzf","avg"}};
-	private DecimalFormat df = new DecimalFormat("#.00");
+	private DecimalFormat df = new DecimalFormat("0.00");
 	@Override
 	public Map<String, TRBean> getTRBeans(Object[] obj, TRBean trBean) {
 		Map<String, TRBean> trbeans = new TreeMap<String, TRBean>();
@@ -41,7 +41,7 @@ public class EsfjcReport extends AbstractBaseBean implements IDataClass {
 	public void getBody(Object[] obj){
 	    String year=obj[0].toString();
 	    String month=obj[1].toString();
-		String sql = "select t.*,j.ssqy, j.xqmc, j.xqlb,j.bz, t.rowid from esf_zsxx t, esf_jbxx j where t.yw_guid = j.yw_guid and t.year = ? and t.month=?";
+		String sql = "select to_char(t.zl,'fm99999999.00')  as zl ,to_char(t.esfjj,'fm99999999.00') as esfjj ,to_char(t.esfjjzf,'fm99999999.00') as esfjjzf,to_char(t.czl,'fm99999999.00') as czl ,to_char(t.czfjj,'fm99999999.00') as czfjj,to_char(t.czfjjzf,'fm99999999.00') as czfjjzf,j.ssqy, j.xqmc, j.xqlb,j.bz, t.rowid from esf_zsxx t, esf_jbxx j where t.yw_guid = j.yw_guid and t.year = ? and t.month=?";
 		List<Map<String, Object>> resultList = query(sql, YW,new Object []{year,month});
 		for(int i = 0; i < resultList.size(); i++){
 			Map<String, Object> resultMap = resultList.get(i);
@@ -64,6 +64,7 @@ public class EsfjcReport extends AbstractBaseBean implements IDataClass {
 				String value;
 				if(totalMap.containsKey(total[j][0])){
 					value = String.valueOf(totalMap.get(total[j][0]));
+					value = ("null".equals(value)) ? "" : value;
 				}else{
 					value = "";
 				}
@@ -157,7 +158,8 @@ public class EsfjcReport extends AbstractBaseBean implements IDataClass {
 							truevalue += Float.parseFloat(value[t]);
 						}
 						truevalue = truevalue/value.length;
-						tdbean = new TDBean(df.format(truevalue), "100", "20");
+						
+						tdbean = new TDBean(df.format(truevalue).toString(), "100", "20");
 					}
 					trBean.addTDBean(tdbean);
 					
@@ -221,7 +223,7 @@ public class EsfjcReport extends AbstractBaseBean implements IDataClass {
 					truevalue += Float.parseFloat(value[t]);
 				}
 				truevalue = truevalue/value.length;
-				tdbean = new TDBean(df.format(truevalue), "100", "20");
+				tdbean = new TDBean(df.format(truevalue).toString(), "100", "20");
 			}
 			trBean.addTDBean(tdbean);
 		}
@@ -239,6 +241,7 @@ public class EsfjcReport extends AbstractBaseBean implements IDataClass {
 				tr.addTDBean(new TDBean(name,"180","20"));
 				for(int i = 0; i < total.length; i++){
 					String value = String.valueOf(sonMap.get(total[i][0]));
+					value = ("null".equals(value))?"":value;
 					tr.addTDBean(new TDBean(value, "100", "20"));
 				}
 				//tr.addTDBean(new TDBean("", "100", "20"));
@@ -276,7 +279,7 @@ public class EsfjcReport extends AbstractBaseBean implements IDataClass {
 			if(!"total".equals(total[i][1])){
 				value = value/quTotalMap.size();
 			}
-			trBean.addTDBean(new TDBean(df.format(value),"100","20"));
+			trBean.addTDBean(new TDBean(df.format(value).toString(),"100","20"));
 		}
 		trBean.addTDBean(new TDBean("", "100", "20"));
 		//trBean.addTDBean(new TDBean("", "100", "20"));
