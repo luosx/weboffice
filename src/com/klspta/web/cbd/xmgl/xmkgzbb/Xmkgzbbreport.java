@@ -47,7 +47,7 @@ public class Xmkgzbbreport extends AbstractBaseBean implements IDataClass {
 		}
 		
 		StringBuffer sqlDZDL = new StringBuffer();
-		sqlDZDL.append("select t.dzdlydmj,t.dzdljzmj,t.dzdlkzgd t.dzdlbz from xmkgzbb t where t.ydxzlx='4' ");
+		sqlDZDL.append("select t.dzdlydmj,t.dzdljzmj,t.dzdlkzgd,t.dzdlbz from xmkgzbb t where t.ydxzlx='4' ");
 		if(yw_guid != null){ 
 			sqlDZDL.append(" and t.yw_guid = '"+yw_guid+"'");
 		}
