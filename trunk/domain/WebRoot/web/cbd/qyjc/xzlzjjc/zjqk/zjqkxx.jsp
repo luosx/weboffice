@@ -72,20 +72,26 @@ td1 {
 <script type="text/javascript">
 var  date_id_cols_value="";	
 	function save() {
-       date_id_cols_value= escape(escape(date_id_cols_value));
+       // date_id_cols_value= escape(escape(date_id_cols_value));
 		putClientCommond("qyjcManager", "Save_ZjqkXX");
 		putRestParameter("date_id_cols_value", date_id_cols_value);
 		var reslut = restRequest();
 		if (reslut == 'success') {
 			alert('保存成功！');
+			document.location.reload();
 		}
 	}
 
 	function chang(dom){
+	var vale=dom.value;
+	if(dom.value==null||dom.value==""){
+	vale="&nbsp;";
+	}
+    vale=escape(escape(vale));
 	if(date_id_cols_value!=null&&date_id_cols_value!=""){
-	date_id_cols_value=date_id_cols_value+"@"+dom.id+"_"+dom.value;
+	date_id_cols_value=date_id_cols_value+"@"+dom.id+"_"+vale;
 	}else{
-	date_id_cols_value=dom.id+"_"+dom.value;
+	date_id_cols_value=dom.id+"_"+vale;
 	}
 	}
 	
