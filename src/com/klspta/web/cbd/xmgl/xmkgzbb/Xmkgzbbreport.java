@@ -342,6 +342,8 @@ public class Xmkgzbbreport extends AbstractBaseBean implements IDataClass {
 		String dzdlkzgd = String.valueOf(dzdlmap.get("dzdlkzgd"));
 		if("null".equals(dzdlbz)){
 			dzdlbz = "";
+		}if("null".equals(dzdlkzgd)){
+			dzdlkzgd = "";
 		}
 		TRBean trBean_dzdl = new TRBean();
 		trBean_dzdl.setCssStyle("trsingle");
