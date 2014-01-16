@@ -139,7 +139,7 @@ public class BuildModel {
             for (int j = 0; j <cont1.size(); j++) {
                 title="";
                 if(j==0)
-                    title="平均租金（元/天·㎡）";  
+                    title="平均售价（元/天·㎡）";  
                 if(j==1)
                     title="环比增长（%）";
                 if(j==2)
