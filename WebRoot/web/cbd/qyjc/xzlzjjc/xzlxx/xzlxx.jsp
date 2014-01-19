@@ -6,6 +6,8 @@
 					+ request.getServerName() + ":" + request.getServerPort()
 					+ path + "/";
 			String  list= QyjcManager.getInstcne().getList();
+			String reportID = "oldTable";
+			String keyIndex = "1";
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -23,6 +25,7 @@
 	<script src="base/include/jquery-1.10.2.js"></script>
 	<%@ include file="js/reportEdit.jspf"%>
 	<%@ include file="/base/include/ext.jspf" %>
+	<script src="web/cbd/qyjc/xzlzjjc/xzlxx/js/xzlxxRowEditor.js"></script>
 	<style type="text/css">
 table {
 	border: 1px solid #000000;

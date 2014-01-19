@@ -13,13 +13,13 @@ String list = ModelFactory.getZjqk_nd();
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-<base href="<%=basePath%>">
+<base href="<%=basePath%>"/>
 <title>二手房租售情况录入</title>
-<meta http-equiv="pragma" content="no-cache">
-<meta http-equiv="cache-control" content="no-cache">
-<meta http-equiv="expires" content="0">
-<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-<meta http-equiv="description" content="This is my page">
+<meta http-equiv="pragma" content="no-cache"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/>
+<meta http-equiv="keywords" content="keyword1,keyword2,keyword3"/>
+<meta http-equiv="description" content="This is my page"/>
 <%@ include file="/base/include/restRequest.jspf"%>
 </head>
 <style type="text/css">
@@ -114,7 +114,6 @@ function deleteDiv(){
 function save(){
 	  var selt=document.getElementById("selt");
 	  var year=selt.options[selt.selectedIndex].value;
-	  alert(year);
 	   putClientCommond("qyjcManager", "Save_Zjqk");
 		putRestParameter("datepjlm_id_cols_value",datepjlm_id_cols_value);
 		putRestParameter("datepjzj_id_cols_value",datepjzj_id_cols_value);

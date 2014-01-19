@@ -157,7 +157,7 @@ function deleteDiv(){
 			<button onclick="setNewTable()">确定</button>
 			</div>
 			<%=ta %>
-             </div>
+            
   <div id="newTab">
 
    </div>		

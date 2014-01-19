@@ -6,6 +6,8 @@
 					+ request.getServerName() + ":" + request.getServerPort()
 					+ path + "/";
 			String list = ModelFactory.getZjqk();
+			String reportID = "zrbHandle";
+			String keyIndex = "1";
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
@@ -21,6 +23,8 @@
 <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 <meta http-equiv="description" content="This is my page">
 	<%@ include file="/base/include/restRequest.jspf"%>
+	<script src="base/include/jquery-1.10.2.js"></script>
+	<%@ include file="/base/include/reportEdit.jspf"%>
 	<style type="text/css">
 table {
 	border: 1px solid #000000;
@@ -96,6 +100,7 @@ var  date_id_cols_value="";
 	}
 	
 </script>
+
 <body>
 	<div align="center">
 		<button onClick='save()' id='addButton'>保存</button>
