@@ -375,7 +375,7 @@ var bhs = "";
 $(document).ready(function () { 
 		var width = document.body.clientWidth+10;
 		var height = document.body.clientHeight-35;
-       	FixTable("XZLZJ", 1,2, width, height);
+       	FixTable("XZLZJ", 2,2, width, height);
 	});
 </script>
 <body>
