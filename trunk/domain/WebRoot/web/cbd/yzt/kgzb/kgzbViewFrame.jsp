@@ -59,9 +59,13 @@
 				
 			});
 		}	
+		var index = 0;
+		function setIndex(inde){
+			index = inde;
+		}
 	
 		function drawPolygonCallback(s){
-			frames[1].frames[0].setRecord(s);
+			frames[1].frames[index].setRecord(s);
 		}
 	</script>
 	<body onLoad="doOnLoad()" >
