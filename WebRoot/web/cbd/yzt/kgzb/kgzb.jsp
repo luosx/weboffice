@@ -6,6 +6,8 @@
 	String type=request.getParameter("type");
 	type= new String(type.getBytes("iso-8859-1"), "utf-8");
 	String table=new Control().getTable(type).toString();
+	String reportID = "oldTable";
+	String keyIndex = "1";
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -20,7 +22,7 @@
 		<meta http-equiv="description" content="This is my page">
 		<%@ include file="/base/include/ext.jspf" %>
 		<%@ include file="/base/include/restRequest.jspf" %>
-
+		<%@ include file="js/reportEdit.jspf"%>
 <style type="text/css">
 table {
 	border: 1px solid #000000;
@@ -82,6 +84,7 @@ td1 {
 	text-align: center;
 }
 </style>
+<script src="web/cbd/yzt/kgzb/js/kgzbRowEditor.js"></script>
 <script type="text/javascript">
 var newRow;
 var yw_guid='';
@@ -208,14 +211,11 @@ alert("请填写地块名称之后再保存！");
 document.location.reload();
 
 }
-
-
-
 }
 function change(put){
 var vale=put.value;
 if(isNaN(vale)){
-alert("填写类型不对！");
+alert("填写类型不正确！");
 put.value="";
 }
 }

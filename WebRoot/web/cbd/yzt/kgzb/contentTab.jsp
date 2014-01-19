@@ -36,11 +36,11 @@
         items:[
         	{
                 title: '中心区',
-                html: "<iframe width='"+w+"' height='"+h+"' src='web/cbd/yzt/kgzb/kgzb.jsp?type=中心区'/>" 
+                html: "<iframe width='120%' height='"+h+"' src='web/cbd/yzt/kgzb/kgzb.jsp?type=中心区'/>" 
             }
             ,{
                 title: '东扩区',
-                html: "<iframe width='"+w+"' height='"+h+"' src='web/cbd/yzt/kgzb/kgzb.jsp?type=东扩区'/>"
+                html: "<iframe width='120%' height='"+h+"' src='web/cbd/yzt/kgzb/kgzb.jsp?type=东扩区'/>"
             }
            
         ]
