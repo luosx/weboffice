@@ -7,6 +7,7 @@ import com.klspta.base.AbstractBaseBean;
 import com.klspta.base.util.UtilFactory;
 import com.klspta.web.cbd.qyjc.common.BuildModel;
 import com.klspta.web.cbd.qyjc.common.ModelFactory;
+import com.klspta.web.cbd.yzt.zrb.ZrbData;
 
 public class QyjcManager extends AbstractBaseBean {
 		private static QyjcManager qyjcManager;
@@ -47,7 +48,7 @@ public class QyjcManager extends AbstractBaseBean {
 	                "<td id='1_12' height='10' width='100' colspan='1' rowspan='1' class='tr01'>供水</td>" +
 	                "<td id='1_13' height='10' width='100' colspan='1' rowspan='1' class='tr01'>电梯</td>" +
 	                "<td id='1_14' height='10' width='100' colspan='1' rowspan='1' class='tr01'>固定车位（个）</td>" +
-	                "<td id='1_15' height='10' width='100' colspan='1' rowspan='1' class='tr01'>停车位租价（元/月·个）</td>" +
+	                "<td id='1_15' height='10' width='150' colspan='1' rowspan='1' class='tr01'>停车位租价（元/月·个）</td>" +
 	                "<td id='1_16' height='10' width='100' colspan='1' rowspan='1' class='tr01'>使用率</td></tr>  ");
 	        result.append("<tr id='newRow' class='tr02' style='display:none;'>"
 	        +"<td  class='td1'><input  id='bh'/ ></td>"
@@ -104,31 +105,31 @@ public class QyjcManager extends AbstractBaseBean {
 	            String syl = (String) (list.get(i)).get("syl");
 	            String qt = (String) (list.get(i)).get("qt");
 	            
-	            result.append("<tr id=row" + i + "><td class='tr02' >" 
-	            		    + bh + "</td><td class='tr02' >"
-	                        + xzlmc + "</td><td class='tr02' >" 
-	                        + kfs + "</td><td class='tr02' >" 
-	                        + wygs+ "</td><td class='tr02' >"
-	                        + tzf + "</td><td class='tr02' >"
-	                        + cpdw + "</td><td class='tr02' >" 
-	                        + cplx + "</td><td class='tr02' >" 
-	                        + cylx+ "</td><td class='tr02' >"
+	            result.append("<tr id=row" + i + " onclick='showMap(this); return false;' ondblclick='editMap(this); return false;'><td class='tr02' onmouseover='mouseOver(this)' onmouseout='mouseOut(this)'>" 
+	            		    + bh + "</td><td class='tr02' onmouseover='mouseOver(this)' onmouseout='mouseOut(this)'>"
+	                        + xzlmc + "</td><td class='tr02' onmouseover='mouseOver(this)' onmouseout='mouseOut(this)'>" 
+	                        + kfs + "</td><td class='tr02' onmouseover='mouseOver(this)' onmouseout='mouseOut(this)'>" 
+	                        + wygs+ "</td><td class='tr02' onmouseover='mouseOver(this)' onmouseout='mouseOut(this)'>"
+	                        + tzf + "</td><td class='tr02' onmouseover='mouseOver(this)' onmouseout='mouseOut(this)'>"
+	                        + cpdw + "</td><td class='tr02' onmouseover='mouseOver(this)' onmouseout='mouseOut(this)'>" 
+	                        + cplx + "</td><td class='tr02' onmouseover='mouseOver(this)' onmouseout='mouseOut(this)'>" 
+	                        + cylx+ "</td><td class='tr02' onmouseover='mouseOver(this)' onmouseout='mouseOut(this)'>"
 	                        
-	                        + rzqy + "</td><td class='tr02' >"
-	                        + kpsj + "</td><td class='tr02' >" 
-	                        + ysxkz + "</td><td class='tr02' >" 
-	                        + cbcs+ "</td><td class='tr02' >"
-	                        + lc + "</td><td class='tr02' >"
-	                        + bzcg + "</td><td class='tr02' >" 
-	                        + wq + "</td><td class='tr02' >" 
-	                        + cn+ "</td><td class='tr02' >"
+	                        + rzqy + "</td><td class='tr02' onmouseover='mouseOver(this)' onmouseout='mouseOut(this)'>"
+	                        + kpsj + "</td><td class='tr02' onmouseover='mouseOver(this)' onmouseout='mouseOut(this)'>" 
+	                        + ysxkz + "</td><td class='tr02' onmouseover='mouseOver(this)' onmouseout='mouseOut(this)'>" 
+	                        + cbcs+ "</td><td class='tr02' onmouseover='mouseOver(this)' onmouseout='mouseOut(this)'>"
+	                        + lc + "</td><td class='tr02' onmouseover='mouseOver(this)' onmouseout='mouseOut(this)'>"
+	                        + bzcg + "</td><td class='tr02' onmouseover='mouseOver(this)' onmouseout='mouseOut(this)'>" 
+	                        + wq + "</td><td class='tr02' onmouseover='mouseOver(this)' onmouseout='mouseOut(this)'>" 
+	                        + cn+ "</td><td class='tr02' onmouseover='mouseOver(this)' onmouseout='mouseOut(this)'>"
 	                        
-	                        + gd + "</td><td class='tr02' >"
-	                        + gs + "</td><td class='tr02' >" 
-	                        + dt + "</td><td class='tr02' >" 
-	                        + gdcw+ "</td><td class='tr02' >"
-	                        + tcwzj + "</td><td class='tr02' >"
-	                        + syl + "</td><td class='tr02' >" 
+	                        + gd + "</td><td class='tr02' onmouseover='mouseOver(this)' onmouseout='mouseOut(this)'>"
+	                        + gs + "</td><td class='tr02' onmouseover='mouseOver(this)' onmouseout='mouseOut(this)'>" 
+	                        + dt + "</td><td class='tr02' onmouseover='mouseOver(this)' onmouseout='mouseOut(this)'>" 
+	                        + gdcw+ "</td><td class='tr02' onmouseover='mouseOver(this)' onmouseout='mouseOut(this)'>"
+	                        + tcwzj + "</td><td class='tr02' onmouseover='mouseOver(this)' onmouseout='mouseOut(this)'>"
+	                        + syl + "</td><td class='tr02' onmouseover='mouseOver(this)' onmouseout='mouseOut(this)'>" 
 	                        + qt + "</td><td><a href='javascript:modify(" + i
 	                        + ")'>修改</a>&nbsp;&nbsp;<a href=\"javascript:del('" + bh
 	                        + "')\">删除</a></td></tr>");
@@ -439,5 +440,44 @@ public class QyjcManager extends AbstractBaseBean {
     		response("false");
 			// TODO: handle exception
 		}
+    }
+    
+    
+    /**
+     * 
+     * <br>Description:写字楼上图
+     * <br>Author:李国明
+     * <br>Date:2013-12-10
+     * @throws Exception 
+     */
+    public void drawXzl() throws Exception{
+    	String tbbh = request.getParameter("xzlmc");
+    	String polygon = request.getParameter("polygon");
+    	if (tbbh != null) {
+    		tbbh = UtilFactory.getStrUtil().unescape(tbbh);
+    	}else{
+    		response("{error:not primary}");
+    	}
+    	boolean draw = XzlxxData.getInstance().recordGIS(tbbh, polygon);
+    	response(String.valueOf(draw)); 
+    }
+    
+    /**
+     * 
+     * <br>Description:二手房上图
+     * <br>Author:李国明
+     * <br>Date:2013-12-10
+     * @throws Exception 
+     */
+    public void drawEsf() throws Exception{
+    	String tbbh = request.getParameter("xqmc");
+    	String polygon = request.getParameter("polygon");
+    	if (tbbh != null) {
+    		tbbh = UtilFactory.getStrUtil().unescape(tbbh);
+    	}else{
+    		response("{error:not primary}");
+    	}
+    	boolean draw = EsfData.getInstance().recordGIS(tbbh, polygon);
+    	response(String.valueOf(draw)); 
     }
 }
