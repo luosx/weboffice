@@ -36,7 +36,7 @@
         items:[
         	{
                 title: '写字楼信息',
-                html: "<iframe width='"+w+"' height='"+h+"' src='web/cbd/qyjc/xzlzjjc/xzlxx/xzlxx.jsp'/>" 
+                html: "<iframe width='"+w+"' height='"+h+"' src='web/cbd/qyjc/xzlzjjc/xzlxx/xzlxxViewFrame.jsp'/>" 
             }
             ,{
                 title: '租金情况',
@@ -50,10 +50,10 @@
                 html: "<iframe width='"+w+"' height='"+h+"' src='web/cbd/qyjc/xzlzjjc/lmjjcs.jsp'/>"
             },{
                 title: '平均租金趋势分析',
-                html: "<iframe width='"+w+"' height='"+h+"' src='<%=basePath%>web/cbd/tjbb/chart.jsp?xml=xzlzj.xml'/>"
+                html: "<iframe width='100%' height='"+h+"' src='<%=basePath%>web/cbd/tjbb/chart.jsp?xml=xzlzj.xml'/>"
             },{
                 title: '平均售价趋势分析',
-                html: "<iframe width='"+w+"' height='"+h+"' src='<%=basePath%>web/cbd/tjbb/chart.jsp?xml=xzlsj.xml'/>"
+                html: "<iframe width='100%' height='"+h+"' src='<%=basePath%>web/cbd/tjbb/chart.jsp?xml=xzlsj.xml'/>"
             }
         ]
     })
