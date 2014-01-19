@@ -20,8 +20,6 @@ public class BuilTable {
 	
 	public StringBuffer getQyTr(List<Map<String, Object>> list,List<Map<String, Object>> sumList){
 		StringBuffer buffer = new StringBuffer();
-		
-		
 		return buffer;
 	}
 
@@ -29,33 +27,33 @@ public class BuilTable {
 		StringBuffer buffer = new StringBuffer();
 		for(int i=0;i<list.size();i++){
 			int index=1+i;
-			buffer.append("<tr id='"+list.get(i).get("yw_guid")+"'><td>");
+			buffer.append("<tr id='"+list.get(i).get("yw_guid")+"' onclick='showMap(this); return false;' ondblclick='editMap(this); return false;'><td id='' onmouseover='mouseOver(this)' onmouseout='mouseOut(this)'>");
 			buffer.append(index);
-			buffer.append("</td><td>");
+			buffer.append("</td><td  onmouseover='mouseOver(this)' onmouseout='mouseOut(this)'>");
 			buffer.append(delNull(String.valueOf(list.get(i).get("DKMC"))));
-			buffer.append("</td><td>");
+			buffer.append("</td><td  onmouseover='mouseOver(this)' onmouseout='mouseOut(this)'>");
 			buffer.append(delNull(String.valueOf(list.get(i).get("YDXZ"))));
-			buffer.append("</td><td>");
+			buffer.append("</td><td  onmouseover='mouseOver(this)' onmouseout='mouseOut(this)'>");
 			buffer.append(delNull(String.valueOf(list.get(i).get("YDXZDH"))));
-			buffer.append("</td><td>");
+			buffer.append("</td><td  onmouseover='mouseOver(this)' onmouseout='mouseOut(this)'>");
 			buffer.append(delNull(String.valueOf(list.get(i).get("JSYDMJ"))));
-			buffer.append("</td><td>");
+			buffer.append("</td><td  onmouseover='mouseOver(this)' onmouseout='mouseOut(this)'>");
 			buffer.append(delNull(String.valueOf(list.get(i).get("RJL"))));
-			buffer.append("</td><td>");
+			buffer.append("</td><td  onmouseover='mouseOver(this)' onmouseout='mouseOut(this)'>");
 			buffer.append(delNull(String.valueOf(list.get(i).get("GHJZGM"))));
-			buffer.append("</td><td>");
+			buffer.append("</td><td  onmouseover='mouseOver(this)' onmouseout='mouseOut(this)'>");
 			buffer.append(delNull(String.valueOf(list.get(i).get("JZKZGD"))));
-			buffer.append("</td><td>");
+			buffer.append("</td><td  onmouseover='mouseOver(this)' onmouseout='mouseOut(this)'>");
 			buffer.append(delNull(String.valueOf(list.get(i).get("JZMD"))));
-			buffer.append("</td><td>");
+			buffer.append("</td><td  onmouseover='mouseOver(this)' onmouseout='mouseOut(this)'>");
 			buffer.append(delNull(String.valueOf(list.get(i).get("LHL"))));
-			buffer.append("</td><td>");
+			buffer.append("</td><td  onmouseover='mouseOver(this)' onmouseout='mouseOut(this)'> ");
 			buffer.append(delNull(String.valueOf(list.get(i).get("DBZS"))));
-			buffer.append("</td><td>");
+			buffer.append("</td><td v>");
 			buffer.append(delNull(String.valueOf(list.get(i).get("DXMK"))));
-			buffer.append("</td><td>");
+			buffer.append("</td><td  onmouseover='mouseOver(this)' onmouseout='mouseOut(this)'>");
 			buffer.append(delNull(String.valueOf(list.get(i).get("GHSJLY"))));
-			buffer.append("</td><td>");
+			buffer.append("</td><td  onmouseover='mouseOver(this)' onmouseout='mouseOut(this)'>");
 			buffer.append(delNull(String.valueOf(list.get(i).get("BZ"))));
 			buffer.append("</td><td> <img  width='40px' height='40px' src='web/cbd/yzt/kgzb/image/m.png' onclick=\"modify('"+list.get(i).get("yw_guid").toString()+"')\"></img><img  width='40px' height='40px' src='web/cbd/yzt/kgzb/image/d.png' onclick=\"delet('"+list.get(i).get("yw_guid").toString()+"')\"></img></td></tr>");
 		}
@@ -106,6 +104,4 @@ public class BuilTable {
          return f1;
      }
  }
- 
- 
 }
