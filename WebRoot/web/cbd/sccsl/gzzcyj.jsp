@@ -115,6 +115,7 @@ textarea {
 	left: 5px;
 	top: 5px;
 	font-size: 15px;
+	
 }
 
 .table2 {
@@ -158,6 +159,11 @@ textarea {
                 excel.buildTable("fzgzc", "26", "1");
                 excel.buildTable("fzztzsp", "21", "5");
                 
+                excel.buildTable("ztghsj", "30", "1");
+                excel.buildTable("zyjkfcbqk", "30", "5");
+                excel.buildTable("ztcrqk", "30", "9");
+                excel.buildTable("yjcjqk", "37", "1");
+                
 			    var sheet = excel.getSheet();
 			    excel.setSheet(sheet);
 			    excel.showTable();			    
@@ -165,7 +171,55 @@ textarea {
        </script>
 <script type="text/javascript">
 	function sava(){
-	
+		var bqhs = document.getElementById("bqhs").value;
+    	var bbqfwhjmj = document.getElementById("bbqfwhjmj").value;
+    	var bqgm = document.getElementById("bqgm").value;
+    	var kxccrgm = document.getElementById("kxccrgm").value;
+    	var zhbzf = document.getElementById("zhbzf").value;
+    	var azfscdj = document.getElementById("azfscdj").value;
+    	var azfzhjadj = document.getElementById("azfzhjadj").value;
+    	var azfgddj = document.getElementById("azfgddj").value;
+    	var bqpgdj = document.getElementById("bqpgdj").value;
+    	var azfsj = document.getElementById("azfsj").value;
+    	var azfdjxs = document.getElementById("azfdjxs").value;
+    	var fzzbqgm = document.getElementById("fzzbqgm").value;
+    	var fkxccrgm = document.getElementById("fkxccrgm").value;
+    	var fzzfwbqdj = document.getElementById("fzzfwbqdj").value;
+    	var zzd = document.getElementById("zzd").value;
+    	var jsydtjxs = document.getElementById("jsydtjxs").value;
+    	var zkcrjsyd = document.getElementById("zkcrjsyd").value;
+    	var rjl = document.getElementById("rjl").value;
+    	var zkcrjzgm = document.getElementById("zkcrjzgm").value;
+    	var mdj = document.getElementById("mdj").value;
+    	var yjcjj = document.getElementById("yjcjj").value;
+    	putClientCommond("qyjcManager", "updateGZZYJ");
+    	putRestParameter("bqhs", bqhs);
+    	putRestParameter("bbqfwhjmj", bbqfwhjmj);
+    	putRestParameter("bqgm", bqgm);
+    	putRestParameter("kxccrgm", kxccrgm);
+    	putRestParameter("zhbzf", zhbzf);
+    	putRestParameter("azfscdj", azfscdj);
+    	putRestParameter("azfzhjadj", azfzhjadj);
+    	putRestParameter("azfgddj", azfgddj);
+    	putRestParameter("bqpgdj", bqpgdj);
+    	putRestParameter("azfsj", azfsj);
+    	putRestParameter("azfdjxs", azfdjxs);
+    	putRestParameter("fzzbqgm", fzzbqgm);
+    	putRestParameter("fkxccrgm", fkxccrgm);
+    	putRestParameter("fzzfwbqdj", fzzfwbqdj);
+    	putRestParameter("zzd", zzd);
+    	putRestParameter("jsydtjxs", jsydtjxs);
+    	putRestParameter("zkcrjsyd", zkcrjsyd);
+    	putRestParameter("rjl", rjl);
+    	putRestParameter("zkcrjzgm", zkcrjzgm);
+    	putRestParameter("mdj", mdj);
+    	putRestParameter("yjcjj", yjcjj);
+		var result = restRequest();
+		if(result){
+			alert("保存成功");
+		}else {
+			alert("保存失败");
+		}
 	}
 	
 	Ext.onReady(function(){
@@ -312,7 +366,6 @@ textarea {
     	var yjcrdj = (lmcb*1 + mdj*1).toFixed(2);
     	document.getElementById("yjcrdj").innerHTML = yjcrdj;
     	document.getElementById("yjzftdsy").innerHTML = (yjcjj * zkcrjzgm - yjkfzcb).toFixed(0);
-    	
     }
 </script>
 	</head>
@@ -322,7 +375,12 @@ textarea {
 		<img src="base/form/images/exportexcel.png" width="20px" height="20px" title="导出Excel" onClick="print();"  />&nbsp;&nbsp;&nbsp;
 		<img src="web/cbd/framework/images/save.png" width="20px" height="20px" title="保存常量" onClick="sava();"  />&nbsp;&nbsp;&nbsp;
 	</div><br/>
-		<div align="center" style="width: 100%">
+	<div align="center">
+				<h6>
+					微观政策试算
+				</h6>
+			</div>
+		<div align="center" style="width: 100%;height: 70%;border-style:dashed;border-width: 1px;">
 			<div>
 				<h1>
 					住宅搬迁
@@ -721,7 +779,7 @@ textarea {
 			</div>
 		</div>
 		<br />
-		<div align="center" style="width: 100%">
+		<div align="center" style="width: 100%;border-style:dashed;border-width: 1px;height: 35%">
 			<div>
 				<h1>
 					非住宅搬迁
@@ -823,7 +881,7 @@ textarea {
 			</div>
 		</div>
 		<br/>
-		<div align="center" style="width: 100%">
+		<div align="center" style="width: 100%;border-style:dashed;border-width: 1px;height: 50%;">
 			<div>
 				<h1>
 					总体成本情况
@@ -1062,11 +1120,6 @@ textarea {
 					</table>
 				</div>
 			</div>
-		</div>
-		<div id="addtable" style="width: 90%" align="right">
-			<button onclick="save()">
-				保存
-			</button>
 		</div>
 	</body>
 </html>
