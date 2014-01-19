@@ -43,7 +43,16 @@
                 html: "<iframe width='120%' height='"+h+"' src='web/cbd/yzt/kgzb/kgzb.jsp?type=东扩区'/>"
             }
            
-        ]
+        ],
+        listeners:{ 
+            tabchange:function(tp,p){ 
+              if(p.title=='中心区'){ 
+              	parent.setIndex(0);
+              } else {
+              	parent.setIndex(1);
+              }
+            } 
+         } 
     })
   });
   
