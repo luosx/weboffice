@@ -22,6 +22,7 @@
 		<meta http-equiv="description" content="This is my page">
 		<%@ include file="/base/include/ext.jspf" %>
 		<%@ include file="/base/include/restRequest.jspf" %>
+		<script src="base/include/jquery-1.10.2.js"></script>
 		<%@ include file="js/reportEdit.jspf"%>
 <style type="text/css">
 table {
@@ -276,8 +277,16 @@ zxq.style.display="none";
 
 
 </script>
+<script type="text/javascript">
+  	$(document).ready(function () { 
+		var width = document.body.clientWidth+10;
+		var height = document.body.clientHeight-40;
+       	FixTable("oldTable",2,1, width, height);
+       	});
+  
+  </script>
 	</head>
-	<body bgcolor="#FFFFFF" topmargin="0" leftmargin="0" style="overflow: scroll;">
+	<body bgcolor="#FFFFFF" topmargin="0" leftmargin="0" >
      <div align="center" style="margin-top: 5px"><h3><%=type %>控规指标一览表</h3></div>
      <div style="width: 94%" align="left"> <img  width="30px"  height="30px"  src="web/cbd/yzt/kgzb/image/add.png" onclick="addTr()" alt="新增"></img>
      <select id='zxq' style="display: none">
@@ -294,10 +303,10 @@ zxq.style.display="none";
      <option value="E街区">E街区</option>
      </select>
      
-     
-     
      </div>
 	 <%=table %>
+	 
 	</body>
+	
 
 </html>
