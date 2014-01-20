@@ -140,5 +140,11 @@ public class HxxmManager extends AbstractBaseBean {
 	}
 	
 	
+	public void getdkmc(){
+		StringBuffer sqlBuffer = new StringBuffer();
+		sqlBuffer.append("select t.dkmc from dcsjk_kgzb t");
+		List<Map<String, Object>> list = query(sqlBuffer.toString(), YW);
+		response(list);
+	} 
 
 }
