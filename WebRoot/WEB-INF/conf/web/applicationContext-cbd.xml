@@ -89,4 +89,7 @@
 	
 	<!-- 生成储备计划整合表 -->	
 	<bean name="cbjhzhb" class="com.klspta.web.cbd.yzt.cbjhzhb.CbjhManager" scope="prototype"/>
+	<bean name="zafzc" class="com.klspta.web.cbd.swkgl.AzfzcManager" scope="prototype"/>
+	<bean name="tdzcglManager" class="com.klspta.web.cbd.zcgl.tdzcgl.TdzcglManager" scope="prototype"/>
+
 </beans>
