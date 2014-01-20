@@ -68,7 +68,7 @@ public class ScjcManager extends AbstractBaseBean {
     public void delByYwGuid() {
         String yw_guid = request.getParameter("yw_guid");
         String sql = "delete from esf_jbxx t where yw_guid='" + yw_guid + "'";
-        String sql2 = "delet from esf_zsxx t where yw_guid='" + yw_guid + "'";
+        String sql2 = "delete from esf_zsxx t where yw_guid='" + yw_guid + "'";
         this.update(sql, YW);
         this.update(sql2, YW);
         response("success");
@@ -286,7 +286,7 @@ public class ScjcManager extends AbstractBaseBean {
     public void query_year_month(){
         String year = request.getParameter("year");
         String month = request.getParameter("month");
-        StringBuffer buffer = new CBDReportManager().getReport("ESFQK",new Object[] {year,month},"1000px");
+        StringBuffer buffer = new CBDReportManager().getReport("ESFQK",new Object[] {year,month,"true"},"1000px");
         response(buffer.toString());
     }
     
