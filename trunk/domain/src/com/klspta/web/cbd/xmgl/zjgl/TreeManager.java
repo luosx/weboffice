@@ -84,56 +84,78 @@ public class TreeManager extends AbstractBaseBean {
 		buffer.append("{text:'Ⅱ.资金支出',leaf:0,id:'1',");
 		buffer.append("children:[{text:'2.1 一级开发支出',leaf:0,id:'101',");
 		buffer.append("children:[");
+		boolean status = false;
 		for (int i = 0; i < treeType.length; i++) {
-			boolean status=false;
 			if (treeType[i].equals("QQFY")) {
+				if (status) {
+					buffer.append(",");
+				}
 				StringBuffer qqfy = getChaild_tree(yw_guid, "2.1.1 前期费用",
 						"QQFY", year);
-				status=true;
+				buffer.append(qqfy);
+				status = true;
 			} else if (treeType[i].equals("CQFY")) {
+				if (status) {
+					buffer.append(",");
+				}
 				StringBuffer cqfy = getChaild_tree(yw_guid, "2.1.2 拆迁费用",
 						"CQFY", year);
 				buffer.append(cqfy);
-				status=true;
+				status = true;
 			} else if (treeType[i].equals("SZFY")) {
+				if (status) {
+					buffer.append(",");
+				}
 				StringBuffer szfy = getChaild_tree(yw_guid, "2.1.3 市政费用",
 						"SZFY", year);
 				buffer.append(szfy);
-				status=true;
+				status = true;
 			} else if (treeType[i].equals("CWFY")) {
+				if (status) {
+					buffer.append(",");
+				}
 				StringBuffer cwfy = getChaild_tree(yw_guid, "2.1.4 财务费用",
 						"CWFY", year);
 				buffer.append(cwfy);
-				status=true;
+				status = true;
 			} else if (treeType[i].equals("GLFY")) {
+				if (status) {
+					buffer.append(",");
+				}
 				StringBuffer qlfy = getChaild_tree(yw_guid, "2.1.5 管理费",
 						"GLFY", year);
 				buffer.append(qlfy);
 				buffer.append("]}");
-				status=true;
+				status = true;
 			} else if (treeType[i].equals("GLFY")) {
+				if (status) {
+					buffer.append(",");
+				}
 				StringBuffer qlfy = getChaild_tree(yw_guid, "2.1.5 管理费",
 						"GLFY", year);
 				buffer.append(qlfy);
 				buffer.append("]}");
-				status=true;
+				status = true;
 			} else if (treeType[i].equals("CRZJFH")) {
+				if (status) {
+					buffer.append(",");
+				}
 				StringBuffer cyzjfh = getChaild_tree(yw_guid, "2.2 筹融资金返还",
 						"CRZJFH", year);
 				buffer.append(cyzjfh);
-				status=true;
+				status = true;
 			} else if (treeType[i].equals("QTZC")) {
+				if (status) {
+					buffer.append(",");
+				}
 				StringBuffer qtzc = getChaild_tree(yw_guid, "2.3 其他支出", "QTZC",
 						year);
 				buffer.append(qtzc);
-				buffer.append("]}");
-				status=true;
-			}
-			if(i!=treeType.length&&status){
-				buffer.append(",");
-				status=false;
+				
+				status = true;
 			}
 		}
+		buffer.append("]}");
 		return buffer.toString();
 	}
 

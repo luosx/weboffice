@@ -14,6 +14,7 @@ public class Contorl {
 	public static String CRZJFH = "CRZJFH";
 	public static String QTZC = "QTZC";
 
+	
 	private String yw_guid;
 	private String year;
 	private String type[];
@@ -95,10 +96,52 @@ public class Contorl {
 				zjlr_status = "y";
 				zjlr_editor = Edit[i];
 			} else {
-				ZJZCThread = new ZjglThread(this.yw_guid, type[i], this.year,
-						Edit[i]);
-				Thread thread = new Thread(ZJZCThread);
-				thread.start();
+				if (type[i].equals(ZJZC)) {
+					ZJZCThread = new ZjglThread(this.yw_guid,  this.year,ZJZC,
+							Edit[i]);
+					Thread thread = new Thread(ZJZCThread);
+					thread.start();
+				} else if (type[i].equals(YIKFZC)) {
+					YIKFZCThread = new ZjglThread(this.yw_guid,  this.year,YIKFZC,
+							Edit[i]);
+					Thread thread = new Thread(YIKFZCThread);
+					thread.start();
+				} else if (type[i].equals(QQFY)) {
+					QQFYThread = new ZjglThread(this.yw_guid,  this.year,QQFY,
+							Edit[i]);
+					Thread thread = new Thread(QQFYThread);
+					thread.start();
+				} else if (type[i].equals(CQFY)) {
+					CQFYThread = new ZjglThread(this.yw_guid,  this.year,CQFY,
+							Edit[i]);
+					Thread thread = new Thread(CQFYThread);
+					thread.start();
+				} else if (type[i].equals(SZFY)) {
+					SZFYThread = new ZjglThread(this.yw_guid,  this.year,SZFY,
+							Edit[i]);
+					Thread thread = new Thread(SZFYThread);
+					thread.start();
+				} else if (type[i].equals(CWFY)) {
+					CWFYThread = new ZjglThread(this.yw_guid,  this.year,CWFY,
+							Edit[i]);
+					Thread thread = new Thread(CWFYThread);
+					thread.start();
+				} else if (type[i].equals(GLFY)) {
+					GLFYThread = new ZjglThread(this.yw_guid,  this.year,GLFY,
+							Edit[i]);
+					Thread thread = new Thread(GLFYThread);
+					thread.start();
+				} else if (type[i].equals(CRZJFH)) {
+					CRZJFHThread = new ZjglThread(this.yw_guid,  this.year,CRZJFH,
+							Edit[i]);
+					Thread thread = new Thread(CRZJFHThread);
+					thread.start();
+				} else if (type[i].equals(QTZC)) {
+					QTZCHThread = new ZjglThread(this.yw_guid,this.year,QTZC,
+							Edit[i]);
+					Thread thread = new Thread(QTZCHThread);
+					thread.start();
+				}
 			}
 		}
 	}
@@ -216,6 +259,7 @@ public class Contorl {
 	 * @param type
 	 * @return
 	 */
+	
 	public ZjglThread getZjglThread(String type) {
 		if (type.equals(ZJZC)) {
 			return ZJZCThread;
