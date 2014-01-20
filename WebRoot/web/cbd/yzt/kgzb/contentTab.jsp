@@ -36,11 +36,11 @@
         items:[
         	{
                 title: '中心区',
-                html: "<iframe width='120%' height='"+h+"' src='web/cbd/yzt/kgzb/kgzb.jsp?type=中心区'/>" 
+                html: "<iframe width='100%' height='"+h+"' src='web/cbd/yzt/kgzb/kgzb.jsp?type=中心区'/>" 
             }
             ,{
                 title: '东扩区',
-                html: "<iframe width='120%' height='"+h+"' src='web/cbd/yzt/kgzb/kgzb.jsp?type=东扩区'/>"
+                html: "<iframe width='100%' height='"+h+"' src='web/cbd/yzt/kgzb/kgzb.jsp?type=东扩区'/>"
             }
            
         ],
@@ -58,7 +58,7 @@
   
    </script>
   </head>
-	<body bgcolor="#FFFFFF">
+	<body bgcolor="#FFFFFF" >
 		<div id="statusTab" style="width:100%"></div>
 	</body>
 </html>
