@@ -54,7 +54,7 @@ td1 {
 .td0_0 {
 	background-color: #C0C0C0;
 	background-image:
-		url("<%=basePath%>/web/cbd/zxzjgl/zjlyytx/title.png");
+		url("<%=basePath%>/web/cbd/zxzjgl/zjlyytx/title2.jpg");
 	background-repeat: no-repeat;
 	/**
    	 filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='<%=basePath%>/web/cbd/framework/images/titlebbd.jpg',izingMethod='scale');
@@ -88,7 +88,7 @@ td1 {
  	<table width='1200' border='1' cellpadding='1' cellspacing='0'>
  		<tr >
 			<td rowspan="3" colspan="1"  class='tr01'>序号</td>
-			<td rowspan="3" colspan="1"  class='td0_0' height='10' width='150'></td>
+			<td rowspan="3" colspan="1"  class='td0_0' height='10' width='120'></td>
 			<td rowspan="3" colspan="1"  class='tr01'>资金到位总额</td>
 			<td colspan="10" rowspan="1"  class='tr01' >资金支出总额</td>
 			<td rowspan="3" colspan="1"  class='tr01'>资金余额</td>		 		
