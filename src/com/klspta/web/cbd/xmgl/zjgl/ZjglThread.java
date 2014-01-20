@@ -26,11 +26,11 @@ public class ZjglThread implements Runnable {
 
 	}
 
-	public ZjglThread(String yw_guid, String type, String year, String editor) {
+	public ZjglThread(String yw_guid,  String year,String type, String editor) {
 		this.yw_guid = yw_guid;
 		this.type = type;
 		this.year = year;
-		this.year = editor;
+		this.editor = editor;
 
 	}
 
