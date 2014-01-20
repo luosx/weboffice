@@ -52,12 +52,12 @@
                 html: "<iframe width='"+w+"' height='"+h+"' src='web/cbd/zxzjgl/zjlyytx/zjlyytx.jsp'/>"
             }
             ,{
-                title: '附件管理',
-                html: "<iframe width='"+w+"' height='"+h+"' src='web/cbd/swgl/accessorymain.jsp'/>"
+                title: '资金使用-分项目',
+                html: "<iframe width='"+w+"' height='"+h+"' src='web/cbd/zxzjgl/zjsyxm.jsp'/>"
             }
             ,{
-                title: '附件管理',
-                html: "<iframe width='"+w+"' height='"+h+"' src='web/cbd/swgl/accessorymain.jsp'/>"
+                title: '资金使用-各项目汇总',
+                html: "<iframe width='"+w+"' height='"+h+"' src='web/cbd/zxzjgl/zjsyxmhz.jsp'/>"
             }
         ]
     })
