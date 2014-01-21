@@ -173,9 +173,9 @@ td {
                  handler: function(){
                       var res=modifyForm();
                       if(res){
-                        putClientCommond("jzmjbbdfx","setValue");
-                        putRestParameter("json",json);
-                        var result= restRequest();
+                       	putClientCommond("jzmjbbdfx","setValue");
+                     	putRestParameter("json",json);
+                       	var result= restRequest();
                         alert("保存成功");
                         window.location.reload();
                       }else{
@@ -257,18 +257,10 @@ td {
 	              test();
         });
         
-        function getLMBBD(){
-        	var lmbbddstring = "";
-        	for(var i=1;i<tb.rows.length;i++){
-        		lmbbddstring += tb.rows[i].cells[12].innerHTML+":"+tb.rows[i].cells[6].innerHTML+";";
-        	}
-        	lmbbdstring = lmbbddstring.substring(0,lmbbddstring.length-1);
-        	return lmbbdstring;
-        }
+
         
         function modifyForm(){
         	  putClientCommond("jzmjbbdfx","saveBBDpara");
-        	  putRestParameter("LMBBDSTRING",getLMBBD());
         	  putRestParameter("JSQ",Ext.getCmp("JSQ").getValue());
 			  putRestParameter("JSQLL",Ext.getCmp("JSQLL").getValue());
 			  putRestParameter("JSQSFL",Ext.getCmp("JSQSFL").getValue());
@@ -289,6 +281,81 @@ td {
         
         function test(){
               tb=document.getElementById("JZMJBBDFX");
+            var mdj=Number(Ext.getCmp('MDJ').getValue());
+            if(isNaN(mdj)){
+				alert("数字格式错误");
+				return ;
+			}
+			var jscbd=Number(Ext.getCmp('JSCBD').getValue());
+			if(isNaN(jscbd)){
+				alert("数字格式错误");
+				return ;
+			}
+			var glfybfb=Number(Ext.getCmp('GLFYBFB').getValue());
+			if(isNaN(glfybfb)){
+				alert("数字格式错误");
+				return ;
+			}
+			var xsfybfb=Number(Ext.getCmp('XSFYBFB').getValue());
+			if(isNaN(xsfybfb)){
+				alert("数字格式错误");
+				return ;
+			}
+			var qtfybfb=Number(Ext.getCmp('QTFYBFB').getValue());
+			if(isNaN(qtfybfb)){
+				alert("数字格式错误");
+				return ;
+			}
+			var jsqsfl=Number(Ext.getCmp('JSQSFL').getValue());
+			if(isNaN(jsqsfl)){
+				alert("数字格式错误");
+				return ;
+			}
+			var dzxsjgxs=Number(Ext.getCmp('DZXSJGXS').getValue());
+			if(isNaN(dzxsjgxs)){
+				alert("数字格式错误");
+				return ;
+			}
+			var zyzjbl=Number(Ext.getCmp('ZYZJBL').getValue());
+			if(isNaN(zyzjbl)){
+				alert("数字格式错误");
+				return ;
+			}
+			var zsysbl=Number(Ext.getCmp('ZSYSBL').getValue());
+			if(isNaN(zsysbl)){
+				alert("数字格式错误");
+				return ;
+			}
+			var zhyyfl=Number(Ext.getCmp('ZHYYFL').getValue());
+			if(isNaN(zhyyfl)){
+				alert("数字格式错误");
+				return ;
+			}
+			var yyqll=Number(Ext.getCmp('YYQLL').getValue());
+			if(isNaN(yyqll)){
+				alert("数字格式错误");
+				return ;
+			}
+			var czl=Number(Ext.getCmp('CZL').getValue());
+			if(isNaN(czl)){
+				alert("数字格式错误");
+				return ;
+			}
+			var zyzjdyxbfb=Number(Ext.getCmp('ZYZJDYXBFB').getValue());
+			if(isNaN(zyzjdyxbfb)){
+				alert("数字格式错误");
+				return ;
+			}
+			var jsqll=Number(Ext.getCmp('JSQLL').getValue());
+			if(isNaN(jsqll)){
+				alert("数字格式错误");
+				return ;
+			}
+			var jsq=Number(Ext.getCmp('JSQ').getValue());
+			if(isNaN(jsq)){
+				alert("数字格式错误");
+				return ;
+			}
               json='[';
               for(var i=1;i<tb.rows.length;i++){
               if(i==1){
@@ -299,7 +366,7 @@ td {
                  for(var j=1;j<tb.rows[0].cells.length-1;j++){
                     var year=tb.rows[0].cells[j].innerHTML;
                     var cbcb=tb.rows[i].cells[0].innerHTML;
-                    var s=rent(year,cbcb);
+                    var s=rent(year,cbcb,mdj,jscbd,glfybfb,xsfybfb,qtfybfb,jsqsfl,dzxsjgxs,zyzjbl,zsysbl,zhyyfl,yyqll,czl,zyzjdyxbfb,jsqll,jsq);
                     if(j==1){
                       json=json+"cbcb:"+cbcb+",";
                     }
@@ -320,24 +387,9 @@ td {
               json=json+"]";
         }
         
-        function rent(year,cbkfcb){
+        function rent(year,cbkfcb,mdj,jscbd,glfybfb,xsfybfb,qtfybfb,jsqsfl,dzxsjgxs,zyzjbl,zsysbl,zhyyfl,yyqll,czl,zyzjdyxbfb,jsqll,jsq){
             var year = parseInt(year);
             var cbkfcb = parseInt(cbkfcb);
-            var mdj=Number(Ext.getCmp('MDJ').getValue());
-			var jscbd=Number(Ext.getCmp('JSCBD').getValue());
-			var glfybfb=Number(Ext.getCmp('GLFYBFB').getValue());
-			var xsfybfb=Number(Ext.getCmp('XSFYBFB').getValue());
-			var qtfybfb=Number(Ext.getCmp('QTFYBFB').getValue());
-			var jsqsfl=Number(Ext.getCmp('JSQSFL').getValue());
-			var dzxsjgxs=Number(Ext.getCmp('DZXSJGXS').getValue());
-			var zyzjbl=Number(Ext.getCmp('ZYZJBL').getValue());
-			var zsysbl=Number(Ext.getCmp('ZSYSBL').getValue());
-			var zhyyfl=Number(Ext.getCmp('ZHYYFL').getValue());
-			var yyqll=Number(Ext.getCmp('YYQLL').getValue());
-			var czl=Number(Ext.getCmp('CZL').getValue());
-			var zyzjdyxbfb=Number(Ext.getCmp('ZYZJDYXBFB').getValue());
-			var jsqll=Number(Ext.getCmp('JSQLL').getValue());
-			var jsq=Number(Ext.getCmp('JSQ').getValue());
 			var a=0;
 			var rent=0;
 				if(zyzjdyxbfb+dzxsjgxs*zsysbl<1){
@@ -393,7 +445,7 @@ td {
 		<div style="min-width: 1370px; width: 1400px; height: 500px;">
 			<div id="fixed" style="position: fixed; top: 5px; left: 0px">
 				<img src="base/form/images/print.png" width="20px" height="20px"
-					onClick="print()">
+					onClick="print()" title="导出Excel">
 			</div>
 			<div id="paraform" style="float: left"></div>
 			<%=new CBDReportManager().getReport("JZMJBBDFX")%>
