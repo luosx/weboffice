@@ -247,7 +247,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			var min1 = money / shui * (1+zsjzwzjbl+qsyhs);
 			var a1= srkyygfbl * jtykzpsr+jtykzpsr*gjjjnbl;
 			var a2 = (Math.pow(1+gjjdkll/12,12*dkzgnx)-1)/(gjjdkll/12*Math.pow(1+gjjdkll/12,12*dkzgnx));
-			var b1 = a1*a2<gjjdkzged?ai*a2:gjjdkzged*1;
+			var b1 = a1*a2<gjjdkzged?a1*a2:gjjdkzged*1;
 			var c1 = gjjdkll/12*Math.pow(1+gjjdkll/12,12*dkzgnx)/(Math.pow(1+gjjdkll/12,12*dkzgnx)-1);
 			var c2 = Math.pow(1+(sydkjzll*sydkllfd)/12,12*dkzgnx)-1;
 			var c3 = (sydkjzll*sydkllfd)/12*Math.pow(1+(sydkjzll*sydkllfd)/12,12*dkzgnx);
@@ -303,18 +303,62 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
          }
          function tryCol(){
                      var srkyygfbl =  Ext.getCmp("SRKYYGFBL").getValue()/100;
+                     if(isNaN(srkyygfbl)){
+						alert("数字格式错误");
+						return ;
+					 }
                      var ycksj = Ext.getCmp("YCKSJ").getValue();
+                     if(isNaN(ycksj)){
+						alert("数字格式错误");
+						return ;
+					 }
                      var zsjzwzjbl = Ext.getCmp("ZXJZWZJBL").getValue()/100;
+                     if(isNaN(zsjzwzjbl)){
+						alert("数字格式错误");
+						return ;
+					 }
                      var qsyhs = Ext.getCmp("QSYHS").getValue()/100;
+                     if(isNaN(qsyhs)){
+						alert("数字格式错误");
+						return ;
+					 }
                      var gjjjnbl = Ext.getCmp("GJJJNBL").getValue()/100;
+                     if(isNaN(gjjjnbl)){
+						alert("数字格式错误");
+						return ;
+					 }
                      var fwlx = Ext.getCmp("FWLX").getValue();
                      var gflx = Ext.getCmp("GFLX").getValue();
                      var gjjdkzged = Ext.getCmp("GJJDKZGED").getValue();
+                     if(isNaN(gjjdkzged)){
+						alert("数字格式错误");
+						return ;
+					 }
                      var gjjdkll = Ext.getCmp("GJJDKLL").getValue()/100;
+                     if(isNaN(gjjdkll)){
+						alert("数字格式错误");
+						return ;
+					 }
                      var sydkjzll = Ext.getCmp("SYDKJZLL").getValue()/100;
+                     if(isNaN(sydkjzll)){
+						alert("数字格式错误");
+						return ;
+					 }
                      var sydkllfd = Ext.getCmp("SYDKLLFD").getValue()/100;
+                     if(isNaN(sydkllfd)){
+						alert("数字格式错误");
+						return ;
+					 }
                      var zdck = Ext.getCmp("ZDCK").getValue();
+                     if(isNaN(zdck)){
+						alert("数字格式错误");
+						return ;
+					 }
                      var dkzgnx = Ext.getCmp("DKZGNX").getValue();
+                     if(isNaN(dkzgnx)){
+						alert("数字格式错误");
+						return ;
+					 }
                      
                      fill(srkyygfbl,ycksj,zsjzwzjbl,qsyhs,gjjjnbl,fwlx,gflx,gjjdkzged,gjjdkll,sydkjzll,
                   sydkllfd,zdck,dkzgnx);
@@ -343,7 +387,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body >
   <div style="min-width: 1370px;width: 1300px;height: 500px;">
   	<div id="fixed" style="position: fixed; top: 5px; left: 0px">
-		<img src="base/form/images/print.png" width="20px" height="20px" onClick="print()" >
+		<img src="base/form/images/print.png" width="20px" height="20px" onClick="print()" title="导出Excel">
 	</div>
 	<div>
 	  <table width="1305" height="50" style="background-color: #FFFFFF;font-size: 30px">

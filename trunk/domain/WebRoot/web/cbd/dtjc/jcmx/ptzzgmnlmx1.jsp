@@ -482,7 +482,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         		}
         	}
         }
-        function textChange(){
+        function textChange(value){
+        	if(isNaN(value)){
+				alert("数字格式错误");
+				return ;
+			}
         	tryCol();
         }
         
@@ -534,13 +538,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
   <div style="min-width: 1370px;width: 1300px;height: 500px;">
   	<div id="fixed" style="position: fixed; top: 5px; left: 0px">
-		<img src="base/form/images/print.png" width="20px" height="20px" onClick="print()" >
+		<img src="base/form/images/print.png" width="20px" height="20px" onClick="print()" title="导出Excel" >
 		<input type="checkbox" name="checkcl" checked="checked" onclick="CheckClick('checkcl');"/>常量
 		<input type="checkbox" name="checkbl" checked="checked" onclick="CheckClick('checkbl');"/>自变量
 		<input type="checkbox" name="checkybl1" checked="checked" onclick="CheckClick('checkybl1');"/>因变量1
 		<input type="checkbox" name="checkybl2" checked="checked" onclick="CheckClick('checkybl2');"/>因变量2
 	<div>
-    	<img src="web/cbd/framework/images/save.png" onClick="sava()" width="20px"  height="20px">
+    	<img src="web/cbd/framework/images/save.png" onClick="sava()" width="20px"  height="20px"  title="保存">
     	</div>
 	</div>
     
@@ -553,37 +557,37 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<div class="div1">
 		<table width="240" border="1" id="tbcl">
 			<tr class="tr01"><td colspan="2">购房常规涉及参数（常量）</td></tr>
-			<tr class="tr11"><td width="180">装修及置物比例</td><td><input name="zxjzwbl" class="text" onkeyup="textChange();"/></td></tr>
-			<tr class="tr11"><td width="180">契税、印花税</td><td><input name="qsyhs" class="text" onkeyup="textChange();"/></td></tr>
-			<tr class="tr11"><td width="180">营业税</td><td><input name="yys" class="text" onkeyup="textChange();"/></td></tr>
-			<tr class="tr11"><td width="180">手续费</td><td><input name="sxf" class="text" onkeyup="textChange();"/></td></tr>
-			<tr class="tr11"><td width="180">中介费</td><td><input name="zjf" class="text" onkeyup="textChange();"/></td></tr>
-			<tr class="tr11"><td width="180">借款还款期限</td><td><input name="jkhkqx" class="text" onkeyup="textChange();"/></td></tr>
-			<tr class="tr11"><td width="180">公积金贷款最高额度</td><td><input name="gjjdkzged" class="text" onkeyup="textChange();"/></td></tr>
-			<tr class="tr11"><td width="180">贷款年限年龄要求上限</td><td><input name="dknxnlyqsx" class="text" onkeyup="textChange();"/></td></tr>
-			<tr class="tr11"><td width="180">月缴存公积金比例</td><td><input name="yjcgjjbl" class="text" onkeyup="textChange();"/></td></tr>
-			<tr class="tr11"><td width="180">贷款最高年限</td><td><input name="dkzgnx" class="text" onkeyup="textChange();"/></td></tr>
-			<tr class="tr11"><td width="180">公积金贷款利率</td><td><input name="gjjdkll" class="text" onkeyup="textChange();"/></td></tr>
-			<tr class="tr11"><td width="180">商业贷款基准利率</td><td><input name="sydkjzll" class="text" onkeyup="textChange();"/></td></tr>
-			<tr class="tr11"><td width="180">商业贷款利率浮动</td><td><input name="sydkllfd" class="text" onkeyup="textChange();"/></td></tr>
+			<tr class="tr11"><td width="180">装修及置物比例</td><td><input name="zxjzwbl" class="text" onkeyup="textChange(this.value);"/></td></tr>
+			<tr class="tr11"><td width="180">契税、印花税</td><td><input name="qsyhs" class="text" onkeyup="textChange(this.value);"/></td></tr>
+			<tr class="tr11"><td width="180">营业税</td><td><input name="yys" class="text" onkeyup="textChange(this.value);"/></td></tr>
+			<tr class="tr11"><td width="180">手续费</td><td><input name="sxf" class="text" onkeyup="textChange(this.value);"/></td></tr>
+			<tr class="tr11"><td width="180">中介费</td><td><input name="zjf" class="text" onkeyup="textChange(this.value);"/></td></tr>
+			<tr class="tr11"><td width="180">借款还款期限</td><td><input name="jkhkqx" class="text" onkeyup="textChange(this.value);"/></td></tr>
+			<tr class="tr11"><td width="180">公积金贷款最高额度</td><td><input name="gjjdkzged" class="text" onkeyup="textChange(this.value);"/></td></tr>
+			<tr class="tr11"><td width="180">贷款年限年龄要求上限</td><td><input name="dknxnlyqsx" class="text" onkeyup="textChange(this.value);"/></td></tr>
+			<tr class="tr11"><td width="180">月缴存公积金比例</td><td><input name="yjcgjjbl" class="text" onkeyup="textChange(this.value);"/></td></tr>
+			<tr class="tr11"><td width="180">贷款最高年限</td><td><input name="dkzgnx" class="text" onkeyup="textChange(this.value);"/></td></tr>
+			<tr class="tr11"><td width="180">公积金贷款利率</td><td><input name="gjjdkll" class="text" onkeyup="textChange(this.value);"/></td></tr>
+			<tr class="tr11"><td width="180">商业贷款基准利率</td><td><input name="sydkjzll" class="text" onkeyup="textChange(this.value);"/></td></tr>
+			<tr class="tr11"><td width="180">商业贷款利率浮动</td><td><input name="sydkllfd" class="text" onkeyup="textChange(this.value);"/></td></tr>
 		</table>
 	</div>
 	<div class="div2">
 		<table width="240" border="1" id="tbbl">
 			<tr class="tr01"><td colspan="2">拟购住宅房屋情况（自变量1）</td></tr>
-			<tr><td width="180" class="tr02">拟购房屋面积</td><td class="tr06"><input name="ngfwmj" class="text02" onkeyup="textChange();"/></td></tr>
-			<tr><td width="180" class="tr02">拟购房屋单价</td><td class="tr06"><input name="ngfwdj" class="text02" onkeyup="textChange();"/></td></tr>
-			<tr><td width="180" class="tr02">房屋类型</td><td class="tr06"><select name="fwlx" id="fwlx" onchange="textChange();"><option value="新房" selected="selected">新房</option><option value="二手房">二手房</option></select> </td></tr>
-			<tr><td width="180" class="tr02">二手房使用年数</td><td class="tr06"><input name="esfsyns" class="text02" onkeyup="textChange();"/></td></tr>
-			<tr><td width="180" class="tr02">房龄</td><td class="tr06"><input name="fl" class="text02" onkeyup="textChange();"/></td></tr>
-			<tr><td width="180" class="tr02">购房类型</td><td class="tr06"><select name="gflx" id="gflx" onchange="textChange();"><option value="首套" selected="selected">首套</option><option value="二套及以上">二套及以上</option></select> </td></tr>
+			<tr><td width="180" class="tr02">拟购房屋面积</td><td class="tr06"><input name="ngfwmj" class="text02" onkeyup="textChange(this.value);"/></td></tr>
+			<tr><td width="180" class="tr02">拟购房屋单价</td><td class="tr06"><input name="ngfwdj" class="text02" onkeyup="textChange(this.value);"/></td></tr>
+			<tr><td width="180" class="tr02">房屋类型</td><td class="tr06"><select name="fwlx" id="fwlx" onchange="textChange(this.value);"><option value="新房" selected="selected">新房</option><option value="二手房">二手房</option></select> </td></tr>
+			<tr><td width="180" class="tr02">二手房使用年数</td><td class="tr06"><input name="esfsyns" class="text02" onkeyup="textChange(this.value);"/></td></tr>
+			<tr><td width="180" class="tr02">房龄</td><td class="tr06"><input name="fl" class="text02" onkeyup="textChange(this.value);"/></td></tr>
+			<tr><td width="180" class="tr02">购房类型</td><td class="tr06"><select name="gflx" id="gflx" onchange="textChange(this.value);"><option value="首套" selected="selected">首套</option><option value="二套及以上">二套及以上</option></select> </td></tr>
 			<tr class="tr04"><td colspan="2">购房人基本情况模块（自变量2）</td></tr>
-			<tr><td width="180" class="tr02">家庭月可支配收入</td><td class="tr06"><input name="jtykzpsr" class="text02" onkeyup="textChange();"/></td></tr>
-			<tr><td width="180" class="tr02">月用于还贷资金比例</td><td class="tr06"><input name="yyyhdzjbl" class="text02" onkeyup="textChange();"/></td></tr>
-			<tr><td width="180" class="tr02">当前存款</td><td class="tr06"><input name="dqck" class="text02" onkeyup="textChange();"/></td></tr>
-			<tr><td width="180" class="tr02">无息限期借款</td><td class="tr06"><input name="wxxqjk" class="text02" onkeyup="textChange();"/></td></tr>
-			<tr><td width="180" class="tr02">公积金连续缴纳年数</td><td class="tr06"><input name="gjjlxjnns" class="text02" onkeyup="textChange();"/></td></tr>
-			<tr><td width="180" class="tr02">购房人年龄</td><td class="tr06"><input name="gfrnl" class="text02" onkeyup="textChange();"/></td></tr>
+			<tr><td width="180" class="tr02">家庭月可支配收入</td><td class="tr06"><input name="jtykzpsr" class="text02" onkeyup="textChange(this.value);"/></td></tr>
+			<tr><td width="180" class="tr02">月用于还贷资金比例</td><td class="tr06"><input name="yyyhdzjbl" class="text02" onkeyup="textChange(this.value);"/></td></tr>
+			<tr><td width="180" class="tr02">当前存款</td><td class="tr06"><input name="dqck" class="text02" onkeyup="textChange(this.value);"/></td></tr>
+			<tr><td width="180" class="tr02">无息限期借款</td><td class="tr06"><input name="wxxqjk" class="text02" onkeyup="textChange(this.value);"/></td></tr>
+			<tr><td width="180" class="tr02">公积金连续缴纳年数</td><td class="tr06"><input name="gjjlxjnns" class="text02" onkeyup="textChange(this.value);"/></td></tr>
+			<tr><td width="180" class="tr02">购房人年龄</td><td class="tr06"><input name="gfrnl" class="text02" onkeyup="textChange(this.value);"/></td></tr>
 		</table>
 	</div>
 	<!-- 
