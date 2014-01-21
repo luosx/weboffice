@@ -104,7 +104,7 @@ var type=escape(escape("<%=type%>"));
 	alert("删除成功！");
 	}
 }
-function modify(id){
+function modify1(id){
 yw_guid=id;
 if(newRow!=null&&checkedTr!=null){
         checkedTr.style.display = '';
@@ -118,7 +118,7 @@ if(newRow!=null&&checkedTr!=null){
 	    putClientCommond("kgzbmanager","quey");
 		putRestParameter("type",type);
 		putRestParameter("yw_guid",id);
-		var msg=restRequest();
+		msg=restRequest();
 		var oldTable=document.getElementById("oldTable");
 		var index=checkedTr.rowIndex+1;
 		newRow=oldTable.insertRow(index);
@@ -281,7 +281,7 @@ zxq.style.display="none";
   	$(document).ready(function () { 
 		var width = document.body.clientWidth+10;
 		var height = document.body.clientHeight-40;
-       	FixTable("oldTable",2,1, width, height);
+       //	FixTable("oldTable",1,1, width, height);
        	});
   
   </script>
