@@ -30,7 +30,7 @@ String add="<tr ><td align='center' height='10' width='10'><input id='mc1' type=
 			"<td align='center' height='10' width='10'><input id='dj1' type='text' /></td>"+
 			"<td align='center' height='10' width='10'><input id='jhcbs1' type='text' /></td>"+
 			"<td align='center' height='10' width='10'><input id='xjs1' type='text' /></td>"+
-			"<td align='center' height='10' width='10'><input id='djs1' type='text' /></td>"+
+			"<td align='center' height='10' width='10'><input id='djs1' type='text' /></td><td></td>"+
 		"</tr>";
 String all=start[0]+add+"</table>";
 %>
@@ -57,8 +57,7 @@ table {
 	padding: 0;
 	margin: 0 auto;
 	border-collapse: collapse;
-	text-align:center;
-	width:50px;
+	table-layout: fixed;
 }
 
 td {
@@ -67,21 +66,27 @@ td {
 	font-size: 12px;
 	padding: 3px 3px 3px 8px;
 	color: #000000;
-	text-align:center;
-	width:50px;
+	text-align: center;
+	
 }
 
+td1 {
+	border: 1px solid #000000;
+	background: #adadad;
+	font-size: 13px;
+	padding: 3px 3px 3px 8px;
+	color: #fdfdfd;
+}
 
-  .tr01{
-  	background-color: #C0C0C0;
-  	font-weight:bold;
-    line-height: 30px;
-    text-align:center;
-    width:50px;
-  }
+.tr01 {
+	background-color: #C0C0C0;
+	font-weight: bold;
+	line-height: 30px;
+	text-align: center;
+}
   input{
   text-align: center;
-  
+  width: 80px;
   }
 
 </style>
@@ -176,12 +181,29 @@ td {
 	}
 	
 	function chang(yw){
+	if(isNaN(yw.value)){
+		alert("数字格式错误");
+		return ;
+		}
 	if (yw_guid_xh_value != null && yw_guid_xh_value != "") {
 			yw_guid_xh_value = yw_guid_xh_value+"@"+yw.id + "_" + yw.value
 		} else {
 			yw_guid_xh_value = yw.id + "_" + yw.value
 		}
 	
+	}
+	
+	function del(yw_guid) {
+		if (confirm("确定要删除当前记录吗？")) {
+			putClientCommond("fyzcHandle", "delByYwGuid");
+			putRestParameter("yw_guid", yw_guid);
+			var reslut = restRequest();
+			if (reslut == 'success') {
+				alert('删除成功！');
+				window.location.reload();
+			}
+		}
+
 	}
 	
 
