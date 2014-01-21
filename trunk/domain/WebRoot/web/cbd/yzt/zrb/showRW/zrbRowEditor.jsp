@@ -76,7 +76,7 @@ ITableStyle its = new TableStyleEditRow();
   	$(document).ready(function () { 
 		var width = document.body.clientWidth+10;
 		var height = document.body.clientHeight;
-       	FixTable("ZRB", 1,2, width, height);
+       //	FixTable("ZRB", 1,2, width, height);
        	});
   
   </script>
