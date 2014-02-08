@@ -112,7 +112,7 @@ public class JbbReport extends AbstractBaseBean implements IDataClass {
 		Map<String, Object> map = queryList.get(0);
 		TRBean trBean = new TRBean();
 		trBean.setCssStyle("trtotal");
-		TDBean tdtitle = new TDBean(key + "小计","130","20","false");
+		TDBean tdtitle = new TDBean(key + "街区小计","130","20","false");
 		trBean.addTDBean(tdtitle);
 		for(int j = 1; j < shows.length; j++){
 			String value = String.valueOf(map.get(shows[j][0]));
