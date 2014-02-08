@@ -5,6 +5,8 @@
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 	String yw_guid = request.getParameter("yw_guid");
 	String xmmc = request.getParameter("xmmc");
+	String type=request.getParameter("type");
+	String editor=request.getParameter("editor");
 	if(xmmc!=null){
 		xmmc = new String(xmmc.getBytes("iso-8859-1"),"utf-8");
 	}
@@ -45,7 +47,7 @@
             }
             ,{
                 title: '资金管理',
-                html: "<iframe width='"+w+"' height='"+h+"' src='web/cbd/xmgl/zjgl/zjgl.jsp?yw_guid=<%=yw_guid%>&xmmc=<%=xmmc%>'/>"
+                html: "<iframe width='"+w+"' height='"+h+"' src='web/cbd/xmgl/zjgl/zjgl.jsp?yw_guid=<%=yw_guid%>&xmmc=<%=xmmc%>&type=<%=type%>&editor=<%=editor %>'/>"
             }
             ,{
                 title: '档案管理',

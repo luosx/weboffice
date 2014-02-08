@@ -7,7 +7,9 @@
 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 	String yw_guid=request.getParameter("yw_guid");
 	String xmmc=request.getParameter("xmmc");
-   String year=request.getParameter("year");
+   	String year=request.getParameter("year");
+   	String type=request.getParameter("type");
+   	String editor=request.getParameter("editor");
 	String table="";
 	List<Map<String, Object>> lr=null;
 	List<Map<String, Object>> zc=null;
@@ -16,9 +18,17 @@
 	} else {
 		xmmc = "";
 	}
+	
 	if(!yw_guid.equals("")&&!yw_guid.equals("null")){
-	  Contorl contorl=new Contorl(yw_guid,year);
-	  table=contorl.getTextMode();
+		if("all".equals(type)){
+			  Contorl contorl=new Contorl(yw_guid,year);
+			  table=contorl.getTextMode();
+		}else {
+			String types[] = type.split("#");
+			String edirots[] = editor.split("#");
+			Contorl contorl=  new Contorl(yw_guid,year,types,edirots);
+			table= contorl.getTextMode_new();
+		}
    }
 %>
 
