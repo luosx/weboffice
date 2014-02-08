@@ -51,6 +51,9 @@ function ajax2(objid, obj, key, valueIndex){
     putRestParameter("vindex", valueIndex);
     putRestParameter("value", v);
     restRequest();
+    if(2 == valueIndex){
+    	document.location.reload();
+    }
 }
 
 function addFocus(obj_id){
