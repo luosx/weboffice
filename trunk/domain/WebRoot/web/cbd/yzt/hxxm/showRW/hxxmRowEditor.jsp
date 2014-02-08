@@ -173,7 +173,7 @@ ITableStyle its = new TableStyleEditRow();
   	$(document).ready(function () { 
 		var width = document.body.clientWidth;
 		var height = document.body.clientHeight-20;
-       	FixTable("HXXM", 2,2, width, height);
+       	//FixTable("HXXM", 2,2, width, height);
 	});
   </script>
   <body>
