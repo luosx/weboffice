@@ -54,6 +54,6 @@ function print(){
 $(document).ready(function () {
 	var width = document.body.clientWidth;
 	var height = document.body.clientHeight;
-    FixTable("CBJHZHB", 1, width, height);
+    FixTable("CBJHZHB", 1,3, width, height);
 });
 
