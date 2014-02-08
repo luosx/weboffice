@@ -24,7 +24,7 @@ public class ModelFactory {
         List<Map<String, Object>> cont2 = interaction.getCont(year[0], tabName);
         String two_year = buildModel.getMode1(list1, list2, year,cont1,cont2);
         return two_year;
-        }
+    }
   
     
     
@@ -41,7 +41,6 @@ public class ModelFactory {
         List<Map<String, Object>> list = interaction.getXzl_Zjqk_xx();
         String table = buildModel.getZjqkTable(list);
         return  table;
-        
     }
     /*****
      * 
@@ -50,12 +49,14 @@ public class ModelFactory {
      * <br>Date:2014-1-6
      * @return
      */
-    public static String getZjqk_nd(){
+    public static String getZjqk_nd(String year){
         BuildModel buildModel = new BuildModel();
         DataInteraction interaction = new DataInteraction();
         List<Map<String, Object>> list = interaction.getXzl_Zjqk_pjlm();
+        List<Map<String, Object>> cont1 = interaction.getCont(year, "XZLZJQKND_PJLM");
         List<Map<String, Object>> list2 = interaction.getXzl_Zjqk_pjzj();
-        String table = ((BuildModel) buildModel).getZjqkNd(list,list2);
+        List<Map<String, Object>> cont2 = interaction.getCont(year, "XZLZJQKND_PJZJ");
+        String table = ((BuildModel) buildModel).getZjqkNd(list,list2,cont1,cont2);
         return  table;
         
     }
