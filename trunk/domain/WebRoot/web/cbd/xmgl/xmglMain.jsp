@@ -4,6 +4,8 @@
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+String type=request.getParameter("type");
+String editor=request.getParameter("editor");
 Xmmanager hxzm=Xmmanager.getXmmanager();
 List<Map<String, Object>> list=hxzm.getHXXM();
 String yw_guid="";
@@ -11,6 +13,7 @@ String xmmc="";
 if(list.size()>0){
 yw_guid=list.get(0).get("yw_guid").toString();
 xmmc=list.get(0).get("xmname").toString();
+
 }
 
 
@@ -25,6 +28,6 @@ xmmc=list.get(0).get("xmname").toString();
 		<frame id="left" name="left" scrolling="NO" noresize
 			src="<%=basePath%>web/cbd/xmgl/hxxmList.jsp?yw_guid=<%=yw_guid%>&xmmc=<%=xmmc%>" />
 		<frame id="right" name="right" scrolling="NO" noresize
-			src="<%=basePath%>web/cbd/xmgl/contentTab.jsp?yw_guid=<%=yw_guid%>&xmmc=<%=xmmc%>" />		
+			src="<%=basePath%>web/cbd/xmgl/contentTab.jsp?yw_guid=<%=yw_guid%>&xmmc=<%=xmmc%>&type=<%=type%>&editor=<%=editor %>" />		
 	</frameset>
 </html>
