@@ -92,7 +92,7 @@ public class Cbjhzhb extends AbstractBaseBean implements IDataClass {
 	 * <br>Author:黎春行
 	 * <br>Date:2014-1-10
 	 */
-	private void Setfields(){
+	public void Setfields(){
 		//no:不参与统计，null：统计显示为空，sum：显示统计总和为（sum）
 		String[][] fields = {{"xmname","false","no"},{"xmlx","true","null"},{"xmqx","true","null"},{"dkmc","true","null"},{"xmwz","true","null"},{"xmqw","true","null"},{"xmlb","true","null"},{"xmzt","true","null"},{"sfdz","true","null"},{"dzbv","true","null"},{"xmztai","true","null"},{"zd","false","sum"},{"nydmj","true","sum"},{"qzgdmj","true","sum"},{"dctdmj","true","sum"},{"jsydxj","true","sum"},{"jsydjz","true","sum"},{"jsydsf","true","sum"},{"jsydqt","true","sum"},{"ghdzd","true","sum"},
 			{"ghjzxj","true","sum"},{"ghjzjz","true","sum"},{"ghjzsf","true","sum"},{"ghjzqt","true","sum"},{"sxghnf","true","null"},{"sxsqsj","true","null"},{"sxghtj","true","null"},{"sxyspf","true","null"},{"sxhzpf","true","null"},{"sxzdpf","true","null"},{"sxcqxk","true","null"},{"zdzmj","true","sum"},{"ywczdzmj","true","sum"},{"qyzdmj","true","sum"},{"yzdmj","true","sum"},{"jhzdmj","true","sum"},{"cqjzmj","true","sum"},{"cqcqbl","true","sum"},{"cqjhmj","true","sum"},{"JHZCB","true","sum"},
@@ -127,7 +127,7 @@ public class Cbjhzhb extends AbstractBaseBean implements IDataClass {
 			String prekey = key;
 			key = String.valueOf(queryMap.get("xmlx"));
 			if(null == key || "null".equals(key) || "".equals(key)){
-				key = "计划新增项目";
+				key = "未分类";
 			}
 			Map<String, String> subMap = subTotalMap.get(key);
 			//添加小计行
