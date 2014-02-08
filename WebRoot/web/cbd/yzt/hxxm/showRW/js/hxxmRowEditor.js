@@ -40,14 +40,15 @@ function add(){
 	table.init(document.getElementById("HXXM"));
 	Ext.MessageBox.prompt('输入', '项目名称:', function(btn, text){
 		if(btn == 'ok'){
-			var rows = table.addRow(3,4,num);
+			var rows = table.addRow(3,3,num);
 			num++;
 			rows.cells[1].innerHTML = text;
 			//向后台库中添加一笔数据
 			putClientCommond("hxxmHandle","insert");
 	    	putRestParameter("xmmc",escape(escape(text))); 
-	    	parent.parent.document.frames[0].combo.store.loadData(array);
 	    	var result = restRequest();
+	    	parent.parent.document.frames[0].combo.store.loadData(array);
+	    	document.location.reload();
     	}
 	});
 }
