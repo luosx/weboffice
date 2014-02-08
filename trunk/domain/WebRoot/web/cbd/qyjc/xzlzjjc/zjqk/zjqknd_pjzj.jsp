@@ -5,8 +5,8 @@
 			String basePath = request.getScheme() + "://"
 					+ request.getServerName() + ":" + request.getServerPort()
 					+ path + "/";
-
-String list = ModelFactory.getZjqk_nd();
+int year = Calendar.getInstance().get(Calendar.YEAR);
+String list = ModelFactory.getZjqk_nd(year+"");
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -141,7 +141,6 @@ function save(){
 			<option value=2020 >2020年</option>
 		</select>
 		<button onClick="save()" >保存</button>
-		<button onClick="javascript:window.location.href='zjqkxx.jsp'">返回</button>
 		</div>
 		<%=list %>
 		<div id ="newTable" ></div>

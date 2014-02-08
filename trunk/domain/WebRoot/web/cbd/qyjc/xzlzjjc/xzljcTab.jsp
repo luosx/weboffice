@@ -40,15 +40,9 @@
             }
             ,{
                 title: '租金情况',
-                html: "<iframe width='"+w+"' height='"+h+"' src='web/cbd/qyjc/xzlzjjc/zjqk/zjqkxx.jsp'/>"
+                html: "<iframe width='"+w+"' height='"+h+"' src='web/cbd/qyjc/xzlzjjc/zjqk/zjqknd_pjzj.jsp'/>"
             }
             ,{
-                title: '平均租金测算',
-                html: "<iframe width='"+w+"' height='"+h+"' src='web/cbd/qyjc/xzlzjjc/pjzjcs.jsp'/>"
-            },{
-                title: '平均楼面均价测算',
-                html: "<iframe width='"+w+"' height='"+h+"' src='web/cbd/qyjc/xzlzjjc/lmjjcs.jsp'/>"
-            },{
                 title: '平均租金趋势分析',
                 html: "<iframe width='100%' height='"+h+"' src='<%=basePath%>web/cbd/tjbb/chart.jsp?xml=xzlzj.xml'/>"
             },{
