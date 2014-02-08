@@ -366,7 +366,7 @@ td {
                  for(var j=1;j<tb.rows[0].cells.length-1;j++){
                     var year=tb.rows[0].cells[j].innerHTML;
                     var cbcb=tb.rows[i].cells[0].innerHTML;
-                    var s=rent(year,cbcb,mdj,jscbd,glfybfb,xsfybfb,qtfybfb,jsqsfl,dzxsjgxs,zyzjbl,zsysbl,zhyyfl,yyqll,czl,zyzjdyxbfb,jsqll,jsq);
+                    var s=rent(year,cbcb,mdj,jscbd,glfybfb/100,xsfybfb/100,qtfybfb/100,jsqsfl/100,dzxsjgxs,zyzjbl/100,zsysbl/100,zhyyfl/100,yyqll/100,czl/100,zyzjdyxbfb/100,jsqll/100,jsq);
                     if(j==1){
                       json=json+"cbcb:"+cbcb+",";
                     }
