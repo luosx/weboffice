@@ -6,6 +6,7 @@ import java.util.Map;
 import com.klspta.base.AbstractBaseBean;
 import com.klspta.base.util.UtilFactory;
 import com.klspta.web.cbd.qyjc.common.BuildModel;
+import com.klspta.web.cbd.qyjc.common.DataInteraction;
 import com.klspta.web.cbd.qyjc.common.ModelFactory;
 import com.klspta.web.cbd.yzt.zrb.ZrbData;
 
@@ -20,7 +21,7 @@ public class QyjcManager extends AbstractBaseBean {
 	    }
 
 	    public String getList() {
-	        String sql = "select t.bh,t.xzlmc,t.kfs,t.wygs,t.tzf,t.cpdw,t.cplx,t.cylx,t.rzqy,t.kpsj,t.ysxkz,t.cbcs,t.lc,t.bzcg,t.wq,t.cn,t.gd,t.gs,t.dt,t.gdcw,t.tcwzj,t.syl,t.qt from xzlxx t";
+	        String sql = "select t.bh,t.xzlmc,t.kfs,t.wygs,t.tzf,t.sq,t.cpdw,t.cplx,t.cylx,t.rzqy,t.kpsj,t.ysxkz,t.cbcs,t.lc,t.bzcg,t.wq,t.cn,t.gd,t.gs,t.dt,t.gdcw,t.tcwzj,t.syl,t.qt from xzlxx t";
 	        List<Map<String, Object>> list = query(sql, YW);
 	        StringBuffer result = new StringBuffer(
 	                "<table id='XZLZJ' width='3000' border='1' cellpadding='1' cellspacing='0'>" +
@@ -29,6 +30,7 @@ public class QyjcManager extends AbstractBaseBean {
 	                "<td id='0_2' height='10' width='100' colspan='1' rowspan='2' class='tr01'>开发商</td>" +
 	                "<td id='0_3' height='10' width='100' colspan='1' rowspan='2' class='tr01'>物业公司</td>" +
 	                "<td id='0_4' height='10' width='100' colspan='1' rowspan='2' class='tr01'>投资方</td>" +
+	                "<td id='0_4' height='10' width='100' colspan='1' rowspan='2' class='tr01'>商圈</td>" +
 	                "<td id='0_5' height='10' width='100' colspan='3' rowspan='1' class='tr01'>产品</td>" +
 	                "<td id='0_6' height='10' width='100' colspan='14' rowspan='1' class='tr01'>项目</td>" +
 	                "<td id='0_7' height='10' width='300' colspan='1' rowspan='2' class='tr01'>其他</td>" +
@@ -56,6 +58,7 @@ public class QyjcManager extends AbstractBaseBean {
 	        +"<td  class='td1'><input  id='kfs' /></td>"
 	        +"<td  class='td1'><input  id='wygs' /></td>"
 	        +"<td  class='td1'><input  id='tzf' /></td>"
+	        +"<td  class='td1'><input  id='sq' /></td>"
 	        +"<td  class='td1'><input  id='cpdw' /></td>"
 	        +"<td  class='td1'><input  id='cplx' /></td>"
 	        +"<td  class='td1'><input  id='cylx' /></td>"
@@ -84,6 +87,7 @@ public class QyjcManager extends AbstractBaseBean {
 	            String kfs = (String) (list.get(i)).get("kfs");
 	            String wygs = (String) (list.get(i)).get("wygs");
 	            String tzf = (String) (list.get(i)).get("tzf");
+	            String sq = (String) (list.get(i)).get("sq");
 	            String cpdw = (String) (list.get(i)).get("cpdw");
 	            String cplx = (String) (list.get(i)).get("cplx");
 	            String cylx = (String) (list.get(i)).get("cylx");
@@ -111,6 +115,7 @@ public class QyjcManager extends AbstractBaseBean {
 	                        + kfs + "</td><td class='tr02' onmouseover='mouseOver(this)' onmouseout='mouseOut(this)'>" 
 	                        + wygs+ "</td><td class='tr02' onmouseover='mouseOver(this)' onmouseout='mouseOut(this)'>"
 	                        + tzf + "</td><td class='tr02' onmouseover='mouseOver(this)' onmouseout='mouseOut(this)'>"
+	                        + sq + "</td><td class='tr02' onmouseover='mouseOver(this)' onmouseout='mouseOut(this)'>"
 	                        + cpdw + "</td><td class='tr02' onmouseover='mouseOver(this)' onmouseout='mouseOut(this)'>" 
 	                        + cplx + "</td><td class='tr02' onmouseover='mouseOver(this)' onmouseout='mouseOut(this)'>" 
 	                        + cylx+ "</td><td class='tr02' onmouseover='mouseOver(this)' onmouseout='mouseOut(this)'>"
@@ -149,6 +154,7 @@ public class QyjcManager extends AbstractBaseBean {
 		      String kfs = request.getParameter("kfs");
 		      String wygs = request.getParameter("wygs");
 		      String tzf = request.getParameter("tzf");
+		      String sq = request.getParameter("sq");
 		      String cpdw = request.getParameter("cpdw");
 		      String cplx = request.getParameter("cplx");
 		      String cylx = request.getParameter("cylx");
@@ -194,8 +200,8 @@ public class QyjcManager extends AbstractBaseBean {
 		      tcwzj=UtilFactory.getStrUtil().unescape(tcwzj);
 		      syl=UtilFactory.getStrUtil().unescape(syl);
 		      qt=UtilFactory.getStrUtil().unescape(qt);
-			      String insertString="insert into xzlxx (bh,xzlmc,kfs,wygs,tzf,cpdw,cplx,cylx,rzqy,kpsj,ysxkz,cbcs,lc,bzcg,wq,cn,gd,gs,dt,gdcw,tcwzj,syl,qt )values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-			  int    i = update(insertString, YW,new Object[]{bh,xzlmc,kfs,wygs,tzf,cpdw,cplx,cylx,rzqy,kpsj,ysxkz,cbcs,lc,bzcg,wq,cn,gd,gs,dt,gdcw,tcwzj,syl,qt});
+			      String insertString="insert into xzlxx (bh,xzlmc,kfs,wygs,tzf,sq,cpdw,cplx,cylx,rzqy,kpsj,ysxkz,cbcs,lc,bzcg,wq,cn,gd,gs,dt,gdcw,tcwzj,syl,qt )values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+			  int    i = update(insertString, YW,new Object[]{bh,xzlmc,kfs,wygs,tzf,sq,cpdw,cplx,cylx,rzqy,kpsj,ysxkz,cbcs,lc,bzcg,wq,cn,gd,gs,dt,gdcw,tcwzj,syl,qt});
 		        
 		      if(i>0){
 		         response("success");
@@ -209,6 +215,7 @@ public class QyjcManager extends AbstractBaseBean {
 		      String kfs = request.getParameter("kfs");
 		      String wygs = request.getParameter("wygs");
 		      String tzf = request.getParameter("tzf");
+		      String sq = request.getParameter("sq");
 		      String cpdw = request.getParameter("cpdw");
 		      String cplx = request.getParameter("cplx");
 		      String cylx = request.getParameter("cylx");
@@ -255,7 +262,7 @@ public class QyjcManager extends AbstractBaseBean {
 		      syl=UtilFactory.getStrUtil().unescape(syl);
 		      qt=UtilFactory.getStrUtil().unescape(qt);
 		      
-		            String update ="update xzlxx set xzlmc='"+xzlmc+"',kfs='"+kfs+"',wygs='"+wygs+"',tzf='"+tzf+"',cpdw='"
+		            String update ="update xzlxx set xzlmc='"+xzlmc+"',kfs='"+kfs+"',wygs='"+wygs+"',tzf='"+tzf+"',sq='"+sq+"',cpdw='"
 		            				+cpdw+"',cplx='"+cplx+"',cylx='"+cylx+"',rzqy='"+rzqy+"',kpsj='"+kpsj+"',ysxkz='"+ysxkz+"',cbcs='"
 		            				+cbcs+"',lc='"+lc+"',bzcg='"+bzcg+"',wq='"+wq+"',cn='"+cn+"',gd='"+gd+"',gs='"
 		            				+gs+"',dt='"+dt+"',gdcw='"+gdcw+"',tcwzj='"+tcwzj+"',syl='"+syl+"',qt='"+qt+"' where bh = '"+bh+"'";
@@ -369,7 +376,10 @@ public class QyjcManager extends AbstractBaseBean {
             }
         }
         BuildModel buildModel = new BuildModel();
-        String table = buildModel.getZjqkNd(query2, query1);
+        DataInteraction interaction = new DataInteraction();
+        List<Map<String, Object>> cont1 = interaction.getCont(year, "XZLZJQKND_PJLM");
+        List<Map<String, Object>> cont2 = interaction.getCont(year, "XZLZJQKND_PJZJ");
+        String table = buildModel.getZjqkNd(query2, query1,cont1,cont2);
         response(table);
 
 
