@@ -17,7 +17,7 @@ import com.klspta.base.wkt.Polygon;
 import com.klspta.base.wkt.Ring;
 
 public class ZrbData extends AbstractBaseBean implements Runnable {
-    private static final String formName = "JC_ZIRAN";
+    public static final String formName = "JC_ZIRAN";
     private static final String form_gis = "CBD_ZRB";
     private static final ZrbValueChange linkChange = new ZrbValueChange();
     
@@ -159,25 +159,29 @@ public class ZrbData extends AbstractBaseBean implements Runnable {
     	return result == 1 ? true : false;
     }
     
-    public boolean modifyValue(String zrbbh, String field, String value){
+    public boolean modifyValue(String zrbbh, String field, String value, boolean calcu){
     	StringBuffer sqlBuffer = new StringBuffer();
     	sqlBuffer.append(" update ").append(formName);
     	sqlBuffer.append(" t set t.").append(field).append("=? where t.zrbbh=?");
     	int i = update(sqlBuffer.toString(), YW, new Object[]{value, zrbbh});
-    	if(!"zrbbh".equals(field)){
-    		linkChange.add(zrbbh);
-    	}else{
-    		linkChange.modifyguid(zrbbh,value);
+    	if(calcu){
+	    	if(!"zrbbh".equals(field)){
+	    		linkChange.add(zrbbh);
+	    	}else{
+	    		linkChange.modifyguid(zrbbh,value);
+	    	}
+	    	//同步自然斑与空间库数据
+	    	StringBuffer synBuffer = new StringBuffer();
+	    	synBuffer.append("update giser.").append(form_gis);
+	    	synBuffer.append(" a set(a.zdmj, a.lzmj, a.cqgm, a.zzlzmj, a.zzcqgm, a.yjhs, a.fzzlzmj, a.fzzcqgm, a.bz)=(select b.zdmj, b.lzmj, b.cqgm,b.zzlzmj, b.zzcqgm, b.yjhs, b.fzzlzmj, b.fzzcqgm, b.bz from zfjc.");
+	    	synBuffer.append(formName).append(" b where a.ZRBBH = b.zrbbh) where a.ZRBBH in (select zrbbh from zfjc.").append(formName).append(")");
+	    	update(synBuffer.toString(), YW);
     	}
-    	//同步自然斑与空间库数据
-    	StringBuffer synBuffer = new StringBuffer();
-    	synBuffer.append("update giser.").append(form_gis);
-    	synBuffer.append(" a set(a.zdmj, a.lzmj, a.cqgm, a.zzlzmj, a.zzcqgm, a.yjhs, a.fzzlzmj, a.fzzcqgm, a.bz)=(select b.zdmj, b.lzmj, b.cqgm,b.zzlzmj, b.zzcqgm, b.yjhs, b.fzzlzmj, b.fzzcqgm, b.bz from zfjc.");
-    	synBuffer.append(formName).append(" b where a.ZRBBH = b.zrbbh) where a.ZRBBH in (select zrbbh from zfjc.").append(formName).append(")");
-    	update(synBuffer.toString(), YW);
-    	
-    	
     	return i == 1 ? true : false;
+    }
+    
+    public boolean modifyValue(String zrbbh, String field, String value){
+    	return modifyValue(zrbbh, field, value, true);
     }
     
     private void flush(JSONObject jObject,String guid){
@@ -264,7 +268,7 @@ public class ZrbData extends AbstractBaseBean implements Runnable {
         return true;
     }
     
-	private boolean isExit(String formName, String primaryName, String primaryValue, String type){
+	public boolean isExit(String formName, String primaryName, String primaryValue, String type){
 		if("".equals(primaryName) || "".equals(primaryValue)){
 			return false;
 		}
@@ -288,7 +292,7 @@ public class ZrbData extends AbstractBaseBean implements Runnable {
 		this.value = value;
 	}
 	
-	private ZrbData(){
+	ZrbData(){
 		super();
 	}
 }
