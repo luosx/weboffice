@@ -1,5 +1,6 @@
 package com.klspta.web.cbd.yzt.zrb;
 
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,7 +26,11 @@ import com.klspta.web.cbd.yzt.jc.report.TableStyleEditRow;
  * <br>Date:2013-10-18
  */
 public class ZrbManager extends AbstractBaseBean {
-	private String[] fields = new String[]{"yw_guid", "zrbbh","zdmj", "lzmj","cqgm","zzlzmj","zzcqgm","yjhs","fzzlzmj","fzzcqgm","bz"};
+//	private String[][] fields = {{"dkmc","false","null"},{"jsydmj","false","sum"},{"rjl","false","avg"},{"ghjzgm","false","sum"},{"jzkzgd","false","avg"},{"DJZJ","true","sum"},{"DJYJLY","true","sum"},{"DJYJLB","true","null"},{"ZFSYZE","true","sum"},{"ZFSYYJLY","true","sum"}
+//	,{"ZFSYYJLB","true","sum"},{"ZFSYHTYD","true","null"},{"ZFSYWYJ","true","sum"},{"BCFZE","true","sum"},{"BCFYJLY","true","sum"},{"BCFYJLB","true","null"},{"BCFHTYD","true","null"},{"BCFYCSWY","true","sum"},{"DJKJLSJ","true","null"},{"CBZH","true","null"}
+//	,{"ZCMJ","true","sum"},{"CRSJ","true","null"},{"ZBR","true","null"},{"JDSJ","true","null"},{"YJSJ","true","null"},{"KGSJ","true","null"},{"TDXZSJ","true","null"},{"YT","true","null"},{"SFYL","true","null"},{"DGDW","true","null"}
+//	,{"SX","true","null"},{"bz","true","null"}};
+	//private String[][] fields = 
     /**
      * 
      * <br>Description:获取所有自然斑列表
@@ -69,7 +74,7 @@ public class ZrbManager extends AbstractBaseBean {
     	String zrbbh =new String(request.getParameter("key").getBytes("iso-8859-1"), "UTF-8");
     	String index = request.getParameter("vindex");
     	String value = new String(request.getParameter("value").getBytes("iso-8859-1"), "UTF-8");
-    	String field = fields[Integer.parseInt(index)];
+    	String field = ZrbReport.shows[Integer.parseInt(index)][0];
     	//response(String.valueOf(new ZrbData().modifyValue(zrbbh, field, value)));
     	//为添加响应速度，采用多线程
     	//Thread thread = new Thread(new ZrbData(zrbbh, field, value));
@@ -211,5 +216,29 @@ public class ZrbManager extends AbstractBaseBean {
 		List<Map<String, Object>> list = query(sqlBuffer.toString(), YW);
 		response(list);
 	} 
+	
+	public void setZrb() throws Exception{
+		String zrbbh = request.getParameter("zrbbh");
+		zrbbh = (zrbbh == null || zrbbh == "null")? "null" : zrbbh;
+		zrbbh = new String(zrbbh.getBytes("iso-8859-1"), "utf-8");
+		ZrbData zrbData = new ZrbData();
+		boolean isExit = zrbData.isExit(ZrbData.formName, "zrbbh", zrbbh, YW);
+		if(!isExit){
+			zrbData.insertZrb(zrbbh);
+		}
+		String[][] fields = ZrbReport.shows;
+		for(int i = 2; i < fields.length; i++){
+			String value = request.getParameter(fields[i][0]);
+			value = (value == null || value == "null")? "null" : value;
+			value = new String(value.getBytes("iso-8859-1"), "utf-8");
+			if(i < fields.length - 1){
+				zrbData.modifyValue(zrbbh, fields[i][0], value, false);
+			}else{
+				zrbData.modifyValue(zrbbh, fields[i][0], value);
+			}
+		}
+		response("{success:true}");
+	}
+	
 	
 }
