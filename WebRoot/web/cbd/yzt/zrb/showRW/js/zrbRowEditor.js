@@ -3,12 +3,13 @@ var num = 0;
 var table = new tableoper();
 //zrbTable.init(document.getElementById("ZRB"));
 
+
+
 //单击地图定位
 function showMap(objid){
 	if(table.element == undefined){
 		table.init(document.getElementById("ZRB"));
 	}
-	//alert("showMap");
 	var key = objid.cells[1].innerText;
 	//parent.parent.frames['east'].swfobject.getObjectById("FxGIS").clear();
 	//parent.parent.frames['east'].swfobject.getObjectById("FxGIS").findFeature("cbd", "0", key, "ZRBBH");
@@ -29,6 +30,16 @@ function editMap(objid){
 	}
 	var key = objid.cells[1].innerText;
 	zrbbh = key;
+	
+	//编辑基本属性
+	var array = paneloper.getElements();
+	for(var i = 0; i < array.length; i++){
+		var value = objid.cells[i+1].innerText;
+		paneloper.insertValue(array[i], value);
+	}
+	paneloper.show();
+	//form.show();
+	
 	//parent.parent.frames['east'].swfobject.getObjectById("FxGIS").clear();
 	//parent.parent.frames['east'].swfobject.getObjectById("FxGIS").drawPolygon();
 	parent.parent.document.frames[0].swfobject.getObjectById("FxGIS").clear();
@@ -78,25 +89,34 @@ function add(){
 	if(table.element == undefined){
 		table.init(document.getElementById("ZRB"));
 	}
-	Ext.MessageBox.prompt('输入', '请输入自然斑编号(“基本斑编号-自然斑编号“):', function(btn, text){
-		if(btn == 'ok'){
-			//判断自然斑编号是否符合条件
-			var reg = /^\w+-\w+/;
-			if(!reg.test(text)){
-				Ext.MessageBox.alert('提醒', '自然斑编号不规范，正确的自然斑编号应该是“基本斑编号-自然斑编号“，请重新输入', function(btn, text){
-					add();
-				});
-				return;	
-			}
-			var rows = table.addRow(2,3,num);
-			num++;
-			rows.cells[1].innerHTML = text;
-			//向后台库中添加一笔数据
-			putClientCommond("zrbHandle","insertZrb");
-	    	putRestParameter("ZRBBH",escape(escape(text))); 
-	    	var result = restRequest();
-    	}
-	});
+//	Ext.MessageBox.prompt('输入', '请输入自然斑编号(“基本斑编号-自然斑编号“):', function(btn, text){
+//		if(btn == 'ok'){
+//			//判断自然斑编号是否符合条件
+//			var reg = /^\w+-\w+/;
+//			if(!reg.test(text)){
+//				Ext.MessageBox.alert('提醒', '自然斑编号不规范，正确的自然斑编号应该是“基本斑编号-自然斑编号“，请重新输入', function(btn, text){
+//					add();
+//				});
+//				return;	
+//			}
+//			var rows = table.addRow(2,3,num);
+//			num++;
+//			rows.cells[1].innerHTML = text;
+//			//向后台库中添加一笔数据
+//			putClientCommond("zrbHandle","insertZrb");
+//	    	putRestParameter("ZRBBH",escape(escape(text))); 
+//	    	var result = restRequest();
+//    	}
+//	});
+	paneloper.show();
+}
+
+function modify(){
+	var annoations = table.getAnnotations();
+	if(annoations.length > 0){
+		var objid = table.element.rows[annoations[0]];
+		editMap(objid);
+	}
 }
 
 function dele(){

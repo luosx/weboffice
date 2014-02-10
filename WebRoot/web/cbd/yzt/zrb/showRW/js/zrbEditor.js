@@ -40,12 +40,16 @@ function initComponent() {
 							handler : add
 						}, '-', {
 							xtype : 'button',
+							text : '修改',
+							handler : modify
+						}, '-', {
+							xtype : 'button',
 							text : '删除',
 							handler : dele
 						}],
 				items : [{
-					html : "<iframe id='report' width=" + (width - 10)
-							+ " height=" + (height - 57) + " src=" + url
+					html : "<iframe id='report' width=" + (width)
+							+ " height=" + (height) + " src=" + url
 							+ "></iframe>"
 				}]
 			});
@@ -136,6 +140,10 @@ function add(){
 
 function dele(){
 	document.frames['report'].dele();
+}
+
+function modify(){
+	document.frames['report'].modify();
 }
 
 function insertGIS(){
