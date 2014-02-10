@@ -21,16 +21,16 @@ String add="<tr ><td align='center' height='10' width='10'><input id='mc1' type=
 			"<td align='center' height='10' width='10'><input id='qmfy1' type='text'/></td>"+
 			"<td align='center' height='10' width='10'><input id='jzmj1' type='text' /></td>"+
 			"<td align='center' height='10' width='10'><input id='zyzj1' type='text' /></td>"+
+			"<td align='center' height='10' width='10'><input id='ftlx1' type='text' /></td>"+
+			"<td align='center' height='10' width='10'><input id='fymc1' type='text' /></td>"+
+			"<td align='center' height='10' width='10'><input id='ze1' type='text' /></td>"+
 			"<td align='center' height='10' width='10'><input id='pmft1' type='text' /></td>"+
 			"<td align='center' height='10' width='10'><input id='lyft1' type='text' /></td>"+
-			"<td align='center' height='10' width='10'><input id='clft1' type='text' /></td>"+
-			"<td align='center' height='10' width='10'><input id='ze1' type='text' /></td>"+
-			"<td align='center' height='10' width='10'><input id='jhcb1' type='text' /></td>"+
-			"<td align='center' height='10' width='10'><input id='xj1' type='text' /></td>"+
+			"<td align='center' height='10' width='10'><input id='jzft1' type='text' /></td>"+
+			"<td align='center' height='10' width='10'><input id='jkzj1' type='text' /></td>"+
 			"<td align='center' height='10' width='10'><input id='dj1' type='text' /></td>"+
-			"<td align='center' height='10' width='10'><input id='jhcbs1' type='text' /></td>"+
-			"<td align='center' height='10' width='10'><input id='xjs1' type='text' /></td>"+
-			"<td align='center' height='10' width='10'><input id='djs1' type='text' /></td><td></td>"+
+			"<td align='center' height='10' width='10'><input id='bz1' type='text' /></td>"+
+			"<td></td>"+
 		"</tr>";
 String all=start[0]+add+"</table>";
 %>
@@ -86,9 +86,9 @@ td1 {
 }
   input{
   text-align: center;
-  width: 80px;
+  width: 85px;
   }
-
+}
 </style>
   </head>
   <script type="text/javascript">
@@ -96,17 +96,12 @@ td1 {
 
 	function save(){
 	var sj = yw_guid_xh_value;
-	var dklx =document.getElementById("dklx").value;
 	var jzrq =document.getElementById("jzrq").value;
-	var jzrqs =document.getElementById("jzrqs").value;
-	dklx=escape(escape(dklx));
 	jzrq=escape(escape(jzrq));
-	jzrqs=escape(escape(jzrqs));
+	sj=escape(escape(sj));
 	putClientCommond("fyzcHandle","saveFyzc");
 	putRestParameter("sj",sj);
-	putRestParameter("dklx",dklx);
 	putRestParameter("jzrq",jzrq);
-	putRestParameter("jzrqs",jzrqs);
 	var msg=restRequest();
 	if('success'==msg){
 	alert("保存成功！");
@@ -128,23 +123,19 @@ td1 {
 	var qmfy=document.getElementById("qmfy1").value;
 	var jzmj=document.getElementById("jzmj1").value;
 	var zyzj=document.getElementById("zyzj1").value;
+	var ftlx=document.getElementById("ftlx1").value;
+	var fymc=document.getElementById("fymc1").value;
+	var ze=document.getElementById("ze1").value;
 	var pmft=document.getElementById("pmft1").value;
 	var lyft=document.getElementById("lyft1").value;
-	var clft=document.getElementById("clft1").value;
-	var ze=document.getElementById("ze1").value;
-	var jhcb=document.getElementById("jhcb1").value;
-	var xj=document.getElementById("xj1").value;
-	var dj =document.getElementById("dj1").value;
-	var jhcbs=document.getElementById("jhcbs1").value;
-	var xjs=document.getElementById("xjs1").value;
-	var djs =document.getElementById("djs1").value;
-	var dklx =document.getElementById("dklx").value;
+	var jzft=document.getElementById("jzft1").value;
+	var jkzj =document.getElementById("jkzj1").value;
+	var dj=document.getElementById("dj1").value;
+	var bz=document.getElementById("bz1").value;
 	var jzrq =document.getElementById("jzrq").value;
-	var jzrqs =document.getElementById("jzrqs").value;
 	mc=escape(escape(mc));
-	dklx=escape(escape(dklx));
 	jzrq=escape(escape(jzrq));
-	jzrqs=escape(escape(jzrqs));
+	bz=escape(escape(bz));
 	putClientCommond("fyzcHandle","addFyzc");
 	
 	putRestParameter("mc",mc);
@@ -157,19 +148,16 @@ td1 {
 	putRestParameter("qmfy",qmfy);
 	putRestParameter("jzmj",jzmj);
 	putRestParameter("zyzj",zyzj);
+	putRestParameter("ftlx",ftlx);
+	putRestParameter("fymc",fymc);
+	putRestParameter("ze",ze);
 	putRestParameter("pmft",pmft);
 	putRestParameter("lyft",lyft);
-	putRestParameter("clft",clft);
-	putRestParameter("ze",ze);
-	putRestParameter("jhcb",jhcb);
-	putRestParameter("xj",xj);
+	putRestParameter("jzft",jzft);
+	putRestParameter("jkzj",jkzj);
 	putRestParameter("dj",dj);
-	putRestParameter("jhcbs",jhcbs);
-	putRestParameter("xjs",xjs);
-	putRestParameter("djs",djs);
-	putRestParameter("dklx",dklx);
+	putRestParameter("bz",bz);
 	putRestParameter("jzrq",jzrq);
-	putRestParameter("jzrqs",jzrqs);
 	
 	var msg=restRequest();
 	if('success'==msg){
@@ -181,10 +169,7 @@ td1 {
 	}
 	
 	function chang(yw){
-	if(isNaN(yw.value)){
-		alert("数字格式错误");
-		return ;
-		}
+	
 	if (yw_guid_xh_value != null && yw_guid_xh_value != "") {
 			yw_guid_xh_value = yw_guid_xh_value+"@"+yw.id + "_" + yw.value
 		} else {
