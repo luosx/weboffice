@@ -96,7 +96,8 @@ function FixTable(TableID, FixColumnNumber,FixRowNumber, width, height) {
         HeadHeight += $(this).outerHeight(true);
         rowsNumber++;
     });
-    HeadHeight += 2;
+	HeadHeight -= 5;
+    //HeadHeight += 2;
     $("#" + TableID + "_tableHead").css("height", HeadHeight);
     $("#" + TableID + "_tableFix").css("height", HeadHeight);
     var ColumnsWidth = 0;
