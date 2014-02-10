@@ -7,6 +7,8 @@
     String yw_guid= request.getParameter("yw_guid");
     	String xmmc=request.getParameter("xmmc");
     	String year=request.getParameter("year");
+    	String type=request.getParameter("type");
+    	String editor=request.getParameter("editor");
     	if (xmmc != null) {
 		xmmc = new String(xmmc.getBytes("iso-8859-1"), "utf-8");
 	} else {
@@ -249,9 +251,9 @@ function change(){
 var selet=document.getElementById("selet");
 var index=selet.selectedIndex;
 var selet_value=selet.options[index].value;
-var url="<%=basePath%>web/cbd/xmgl/zjgl/zjglcent.jsp?yw_guid=<%=yw_guid%>&xmmc=<%=xmmc%>&year="+selet_value;
+var url="<%=basePath%>web/cbd/xmgl/zjgl/zjglcent.jsp?yw_guid=<%=yw_guid%>&xmmc=<%=xmmc%>&year="+selet_value+"&type=<%=type%>&editor=<%=editor %>";
 parent.right.location.href=url;
-var urltree="<%=basePath%>web/cbd/xmgl/zjgl/zjglTree.jsp?yw_guid=<%= yw_guid%>&xmmc=<%=xmmc%>&year="+selet_value;
+var urltree="<%=basePath%>web/cbd/xmgl/zjgl/zjglTree.jsp?yw_guid=<%= yw_guid%>&xmmc=<%=xmmc%>&year="+selet_value+"&type=<%=type%>&editor=<%=editor %>";
 parent.left.location.href=urltree;
 }
 function  sele_year(){
