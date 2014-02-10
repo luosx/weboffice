@@ -1,14 +1,21 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@page import="com.klspta.model.projectinfo.ProjectInfo"%>
+
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+String name = ProjectInfo.getInstance().getProjectName();
+String loginname1 = ProjectInfo.getInstance()
+		.getProjectLoginName1();
+String loginname2 = ProjectInfo.getInstance()
+		.getProjectLoginName2();
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <meta http-equiv="X-UA-Compatible" content="IE=8">
 <html>
   <head>
-    <title>执法监察系统</title>
+    <title><%=loginname1 %></title>
 <script type="text/javascript">
 function exitFullScreen() 
 { 

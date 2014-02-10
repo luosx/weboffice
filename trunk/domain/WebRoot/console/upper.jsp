@@ -15,7 +15,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 	<head>
-		<title>执法监察系统</title>
+		<title><%=loginname1 %></title>
 		<meta http-equiv="pragma" content="no-cache">
 		<meta http-equiv="cache-control" content="no-cache">
 		<meta http-equiv="expires" content="0">
@@ -32,13 +32,13 @@ body {
 font.style1 {
 	font-family: "微软雅黑";
 	color: #FFFFFF;
-	font-size: 32px;
+	font-size: 20px;
 	font-weight: bolder;
 }
 
 font.style2 {
 	color: #BAF7FF;
-	font-size: 18px;
+	font-size: 15px;
 	font-weight: bolder;
 }
 </style>
