@@ -17,8 +17,8 @@ public class ZjglData extends AbstractBaseBean {
     private  String lr_name[]={"1.1 筹融资金","1.1.1 金融机构贷款","1.1.2 实施主体带资","1.1.3 国有土地收益基金","1.2 出让回笼资金","1.3 其他资金"};
     private  String lr_type[]={"CRZJ","ZRJGDK","SSZTDZ","GYTDSYJJ","CRHLZJ","QTZJ"};
     private  String zc_chaild[]={"总计划审批","贷款审批","实施主体带资审批","国有土地收益基金审批","出让回笼资金审批","其他资金审批","实际支付","已批未付"};
-    private  String zc_parent[]={"2.1.1 前期费用","2.1.2 拆迁费用","2.1.3 市政费用","2.1.4 财务费用","2.1.5 管理费","2.2 筹融资金返还","2.3 其他支出"};
-    private  String zc_type[]={"QQFY","CQFY","SZFY","CWFY","GLFY","CRZJFH","QTZC"};
+    private  String zc_parent[]={"2.1.1 前期费用","2.1.2 拆迁费用","2.1.3 收储费用","2.1.4 市政费用","2.1.5 财务费用","2.1.6 管理费用","2.2 筹融资金返还","2.3 其他支出"};
+    private  String zc_type[]={"QQFY","CQFY","SCFY","SZFY","CWFY","GLFY","CRZJFH","QTZC"};
 
     public List<Map<String, Object>> getZJGL_ZJLR(String yw_guid ,String year) {
         List<Map<String, Object>> list=new ArrayList<Map<String,Object>>();

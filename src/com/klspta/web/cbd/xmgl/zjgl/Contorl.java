@@ -8,6 +8,7 @@ public class Contorl {
 	public static String YIKFZC = "YJKFZC";
 	public static String QQFY = "QQFY";
 	public static String CQFY = "CQFY";
+	public static String SCFY = "SCFY";
 	public static String SZFY = "SZFY";
 	public static String CWFY = "CWFY";
 	public static String GLFY = "GLFY";
@@ -34,6 +35,7 @@ public class Contorl {
 	private ZjglThread GLFYThread;
 	private ZjglThread CRZJFHThread;
 	private ZjglThread QTZCHThread;
+	private ZjglThread SCFYThread;
 
 	private StringBuffer buffer = new StringBuffer();
 
@@ -121,7 +123,12 @@ public class Contorl {
 							Edit[i]);
 					Thread thread = new Thread(SZFYThread);
 					thread.start();
-				} else if (type[i].equals(CWFY)) {
+				} else if (type[i].equals(SCFY)) {
+					SCFYThread = new ZjglThread(this.yw_guid,  this.year,SCFY,
+							Edit[i]);
+					Thread thread = new Thread(SCFYThread);
+					thread.start();
+				}else if (type[i].equals(CWFY)) {
 					CWFYThread = new ZjglThread(this.yw_guid,  this.year,CWFY,
 							Edit[i]);
 					Thread thread = new Thread(CWFYThread);
@@ -166,21 +173,24 @@ public class Contorl {
 		CQFYThread = new ZjglThread(this.yw_guid, CQFY, this.year);
 		Thread thread3 = new Thread(CQFYThread);
 		thread3.start();
-		SZFYThread = new ZjglThread(this.yw_guid, SZFY, this.year);
-		Thread thread4 = new Thread(SZFYThread);
+		SCFYThread = new ZjglThread(this.yw_guid, SCFY, this.year);
+		Thread thread4 = new Thread(SCFYThread);
 		thread4.start();
-		CWFYThread = new ZjglThread(this.yw_guid, CWFY, this.year);
-		Thread thread5 = new Thread(CWFYThread);
+		SZFYThread = new ZjglThread(this.yw_guid, SZFY, this.year);
+		Thread thread5 = new Thread(SZFYThread);
 		thread5.start();
-		GLFYThread = new ZjglThread(this.yw_guid, GLFY, this.year);
-		Thread thread6 = new Thread(GLFYThread);
+		CWFYThread = new ZjglThread(this.yw_guid, CWFY, this.year);
+		Thread thread6 = new Thread(CWFYThread);
 		thread6.start();
-		CRZJFHThread = new ZjglThread(this.yw_guid, CRZJFH, this.year);
-		Thread thread7 = new Thread(CRZJFHThread);
+		GLFYThread = new ZjglThread(this.yw_guid, GLFY, this.year);
+		Thread thread7 = new Thread(GLFYThread);
 		thread7.start();
-		QTZCHThread = new ZjglThread(this.yw_guid, QTZC, this.year);
-		Thread thread8 = new Thread(QTZCHThread);
+		CRZJFHThread = new ZjglThread(this.yw_guid, CRZJFH, this.year);
+		Thread thread8 = new Thread(CRZJFHThread);
 		thread8.start();
+		QTZCHThread = new ZjglThread(this.yw_guid, QTZC, this.year);
+		Thread thread9 = new Thread(QTZCHThread);
+		thread9.start();
 
 	}
 
@@ -206,6 +216,7 @@ public class Contorl {
 		buffer.append(YIKFZCThread.getBuffer());
 		buffer.append(QQFYThread.getBuffer());
 		buffer.append(CQFYThread.getBuffer());
+		buffer.append(SCFYThread.getBuffer());
 		buffer.append(SZFYThread.getBuffer());
 		buffer.append(CWFYThread.getBuffer());
 		buffer.append(GLFYThread.getBuffer());
@@ -269,6 +280,8 @@ public class Contorl {
 			return QQFYThread;
 		} else if (type.equals(CQFY)) {
 			return CQFYThread;
+		} else if (type.equals(SCFY)) {
+			return SCFYThread;
 		} else if (type.equals(SZFY)) {
 			return SZFYThread;
 		} else if (type.equals(CWFY)) {
@@ -279,7 +292,7 @@ public class Contorl {
 			return CRZJFHThread;
 		} else if (type.equals(QTZC)) {
 			return QTZCHThread;
-		}
+		} 
 		return null;
 
 	}

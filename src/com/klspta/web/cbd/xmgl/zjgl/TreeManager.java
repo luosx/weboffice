@@ -49,13 +49,16 @@ public class TreeManager extends AbstractBaseBean {
 		StringBuffer cqfy = getChaild_tree(yw_guid, "2.1.2 拆迁费用", "CQFY", year);
 		buffer.append(cqfy);
 		buffer.append(",");
-		StringBuffer szfy = getChaild_tree(yw_guid, "2.1.3 市政费用", "SZFY", year);
+		StringBuffer scfy = getChaild_tree(yw_guid, "2.1.3 收储费用", "SCFY", year);
+		buffer.append(scfy);
+		buffer.append(",");
+		StringBuffer szfy = getChaild_tree(yw_guid, "2.1.4 市政费用", "SZFY", year);
 		buffer.append(szfy);
 		buffer.append(",");
-		StringBuffer cwfy = getChaild_tree(yw_guid, "2.1.4 财务费用", "CWFY", year);
+		StringBuffer cwfy = getChaild_tree(yw_guid, "2.1.5 财务费用", "CWFY", year);
 		buffer.append(cwfy);
 		buffer.append(",");
-		StringBuffer qlfy = getChaild_tree(yw_guid, "2.1.5 管理费", "GLFY", year);
+		StringBuffer qlfy = getChaild_tree(yw_guid, "2.1.6 管理费用", "GLFY", year);
 		buffer.append(qlfy);
 		buffer.append("]},");
 		StringBuffer cyzjfh = getChaild_tree(yw_guid, "2.2 筹融资金返还", "CRZJFH",
@@ -102,19 +105,27 @@ public class TreeManager extends AbstractBaseBean {
 						"CQFY", year);
 				buffer.append(cqfy);
 				status = true;
+			} else if (treeType[i].equals("SCFY")) {
+				if (status) {
+					buffer.append(",");
+				}
+				StringBuffer scfy = getChaild_tree(yw_guid, "2.1.3 收储费用",
+						"SCFY", year);
+				buffer.append(scfy);
+				status = true;
 			} else if (treeType[i].equals("SZFY")) {
 				if (status) {
 					buffer.append(",");
 				}
-				StringBuffer szfy = getChaild_tree(yw_guid, "2.1.3 市政费用",
+				StringBuffer szfy = getChaild_tree(yw_guid, "2.1.4 市政费用",
 						"SZFY", year);
 				buffer.append(szfy);
 				status = true;
-			} else if (treeType[i].equals("CWFY")) {
+			}else if (treeType[i].equals("CWFY")) {
 				if (status) {
 					buffer.append(",");
 				}
-				StringBuffer cwfy = getChaild_tree(yw_guid, "2.1.4 财务费用",
+				StringBuffer cwfy = getChaild_tree(yw_guid, "2.1.5 财务费用",
 						"CWFY", year);
 				buffer.append(cwfy);
 				status = true;
@@ -122,7 +133,7 @@ public class TreeManager extends AbstractBaseBean {
 				if (status) {
 					buffer.append(",");
 				}
-				StringBuffer qlfy = getChaild_tree(yw_guid, "2.1.5 管理费",
+				StringBuffer qlfy = getChaild_tree(yw_guid, "2.1.6 管理费",
 						"GLFY", year);
 				buffer.append(qlfy);
 				buffer.append("]}");
@@ -131,7 +142,7 @@ public class TreeManager extends AbstractBaseBean {
 				if (status) {
 					buffer.append(",");
 				}
-				StringBuffer qlfy = getChaild_tree(yw_guid, "2.1.5 管理费",
+				StringBuffer qlfy = getChaild_tree(yw_guid, "2.1.7 管理费用",
 						"GLFY", year);
 				buffer.append(qlfy);
 				buffer.append("]}");
