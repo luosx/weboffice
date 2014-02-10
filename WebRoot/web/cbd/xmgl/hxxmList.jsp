@@ -6,6 +6,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   Xmmanager hxzm=Xmmanager.getXmmanager();
 List<Map<String, Object>> list=hxzm.getHXXM();
 String yw_guid = request.getParameter("yw_guid");
+String type=request.getParameter("type");
+String editor=request.getParameter("editor");
 	String xmmc = request.getParameter("xmmc");
 	if (xmmc != null) {
 		xmmc = new String(xmmc.getBytes("iso-8859-1"), "utf-8");
@@ -72,7 +74,7 @@ border-top:1px solid #C1DAD7;
 	                }else{
 	                parentMapTreeId='0';
 	                }
-	                parent.right.location.href="<%=basePath%>web/cbd/xmgl/contentTab.jsp?yw_guid="+nodeid+"&xmmc="+nodetest;
+	                parent.right.location.href="<%=basePath%>web/cbd/xmgl/contentTab.jsp?yw_guid="+nodeid+"&xmmc="+nodetest+"&type=<%=type%>&editor=<%=editor %>";
 	             }
 	         }
 	    });
@@ -92,7 +94,7 @@ border-top:1px solid #C1DAD7;
    				]
     });
    function lint(yw_guid,xmmc){
-    var url=parent.right.location.href=('<%=basePath%>web/cbd/xmgl/contentTab.jsp?yw_guid='+yw_guid+'&xmmc='+xmmc);
+    var url=parent.right.location.href=('<%=basePath%>web/cbd/xmgl/contentTab.jsp?yw_guid='+yw_guid+'&xmmc='+xmmc+'&type=<%=type%>&editor=<%=editor %>');
     document.location.reload();
     }
     });
