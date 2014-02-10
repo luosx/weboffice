@@ -23,7 +23,6 @@ xmmc=list.get(0).get("xmname").toString();
 <head>
 <title>content</title>
 </head>
-
 	<frameset id="zzjg" name="zzjg" cols="200,*" frameborder="no" border="0" framespacing="0" >
 		<frame id="left" name="left" scrolling="NO" noresize
 			src="<%=basePath%>web/cbd/xmgl/hxxmList.jsp?yw_guid=<%=yw_guid%>&xmmc=<%=xmmc%>" />
