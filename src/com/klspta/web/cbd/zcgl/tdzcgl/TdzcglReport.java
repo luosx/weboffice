@@ -24,7 +24,7 @@ public class TdzcglReport extends AbstractBaseBean implements IDataClass{
 		//String[][] firstTitle = {{"项目名称","100","1","3"},{"状态","300","3","3"},{"地块名称","300","1","3"},{"规划情况","400","4","1"}};
 		//String[][] secondTitle = {{"建筑用地面积(公顷)","100","1","2"},{"容积率","100","1","2"},{"规划建筑规模(万㎡)","100","1","2"},{"建筑控制高度(米)","100","1","2"},};
 		//String[][] thirdTitle = {};
-		String[][] firstTitle = {{"项目名称","100","1","3"},{"状态","150","3","3"},{"地块名称","100","1","3"},{"规划情况","400","4","1"},{"地价款情况","1400","14","1"},{"基本情况","800","8","1"},{"期间管理","400","4","1"},{"备注","100","1","3"}};
+		String[][] firstTitle = {{"项目名称","100","1","3"},{"状态","150","3","3"},{"地块名称","100","1","3"},{"用地性质","100","1","3"},{"规划情况","400","4","1"},{"地价款情况","1400","14","1"},{"基本情况","800","8","1"},{"期间管理","400","4","1"},{"备注","100","1","3"}};
 		String[][] secondTitle = {{"建筑用地面积(公顷)","100","1","2"},{"容积率","100","1","2"},{"规划建筑规模(万㎡)","100","1","2"},{"建筑控制高度(米)","100","1","2"},{"地价款","300","3","1"},{"政府收益","500","5","1"},{"补偿费","500","5","1"},
 				{"地价款<br>缴纳时间","100","1","2"},{"储备证号","100","1","2"},{"证载面积<br>（公顷）","100","1","2"},{"出让时间","100","1","2"},{"中标人","100","1","2"},{"协议约定<br>交地时间","100","1","2"},{"土地<br>移交时间","100","1","2"},{"项目<br>开工时间","100","1","2"},
 				{"土地<br>闲置时间","100","1","2"},{"用途","100","1","2"},{"是否盈利","100","1","2"},{"代管单位","100","1","2"},{"时限","100","1","2"}}; 
@@ -37,7 +37,7 @@ public class TdzcglReport extends AbstractBaseBean implements IDataClass{
 	}
 	
 	public void setFields(){
-		String[][] fields = {{"dkmc","false","null"},{"jsydmj","false","sum"},{"rjl","false","avg"},{"ghjzgm","false","sum"},{"jzkzgd","false","avg"},{"DJZJ","true","sum"},{"DJYJLY","true","sum"},{"DJYJLB","true","null"},{"ZFSYZE","true","sum"},{"ZFSYYJLY","true","sum"}
+		String[][] fields = {{"dkmc","false","null"},{"ydxz","false","null"},{"jsydmj","false","sum"},{"rjl","false","avg"},{"ghjzgm","false","sum"},{"jzkzgd","false","avg"},{"DJZJ","true","sum"},{"DJYJLY","true","sum"},{"DJYJLB","true","null"},{"ZFSYZE","true","sum"},{"ZFSYYJLY","true","sum"}
 		,{"ZFSYYJLB","true","sum"},{"ZFSYHTYD","true","null"},{"ZFSYWYJ","true","sum"},{"BCFZE","true","sum"},{"BCFYJLY","true","sum"},{"BCFYJLB","true","null"},{"BCFHTYD","true","null"},{"BCFYCSWY","true","sum"},{"DJKJLSJ","true","null"},{"CBZH","true","null"}
 		,{"ZCMJ","true","sum"},{"CRSJ","true","null"},{"ZBR","true","null"},{"JDSJ","true","null"},{"YJSJ","true","null"},{"KGSJ","true","null"},{"TDXZSJ","true","null"},{"YT","true","null"},{"SFYL","true","null"},{"DGDW","true","null"}
 		,{"SX","true","null"},{"bz","true","null"}};
@@ -85,19 +85,20 @@ public class TdzcglReport extends AbstractBaseBean implements IDataClass{
 		}
 		//获取项目名称
 		Map<String, TRBean>  bodyMap = new TreeMap<String, TRBean>();
-		String sql = "select distinct xmmc from " + form_base;
+		String sql = "select distinct xmmc from " + form_base + " t ,jc_xiangmu j where t.xmmc = j.xmname";
 		List<Map<String, Object>> xmmcList = query(sql, YW);
 		for(int i = 0; i < xmmcList.size(); i++){
 			//根据项目名称生成trs
 			String xmmc = String.valueOf(xmmcList.get(i).get("xmmc"));
 			bodyMap.putAll(getTrBeanMapByXMMC(xmmc, String.valueOf(i)));
+			bodyMap.putAll(getTotal(xmmc));
 		}
 		return bodyMap;
 	}
 	
 	private Map<String, TRBean> getTrBeanMapByXMMC(String xmmc, String preKey){
 		Map<String, TRBean> trBeans = new LinkedHashMap<String, TRBean>();
-		String sql = "select t.*, j.* from " + form_base + " t, " + form_extend + " j where t.dkmc = j.dkmc and t.xmmc = ? ";
+		String sql = "select t.*, j.* from jc_xiangmu x ," + form_base + " t, " + form_extend + " j where t.dkmc = j.dkmc and x.xmname = t.xmmc and t.xmmc = ? ";
 		List<Map<String, Object>> queryList = query(sql, YW, new Object[]{xmmc});
 		/*
 		TRBean trBean = new TRBean();
@@ -116,11 +117,101 @@ public class TdzcglReport extends AbstractBaseBean implements IDataClass{
 		//生成已出让但未入库项目模块
 		trBeans.putAll(getYcrByXMMC(xmmc,preKey,queryList));
 		//生成公共空间项目模块
-		trBeans.putAll(getGGKJByXMMC(xmmc,preKey,queryList));
+		//trBeans.putAll(getGGKJByXMMC(xmmc,preKey,queryList));
 		
 		return trBeans;
 	}
 	
+	/**
+	 * 
+	 * <br>Description:生成项目总计
+	 * <br>Author:李国明
+	 * <br>Date:2014-2-10
+	 * @return
+	 */
+	private Map<String,TRBean> getTotal(String xmmc) {
+		String sql = "select sum(t.djzj) as djzj ,sum(t.djyjly) as djyjly,sum(t.zfsyze) as zfsyze," +
+				"sum(t.zfsyyjly) as zfsyyjly,sum(t.zfsywyj) as zfsywyj,sum(t.bcfze) as bcfze,sum(t.bcfyjly) as bcfyjly," +
+				"sum(t.bcfycswy) as bcfycswyj,sum(t.zcmj) as zcmj,sum(j.jsydmj) as jsydmj,sum(j.rjl) as rjl," +
+				"sum(j.ghjzgm) as ghjzgm,sum(j.jzkzgd) as jzkzgd from jc_xiangmu x ," +
+			form_base + " t, " + form_extend + " j where t.dkmc = j.dkmc and x.xmname = t.xmmc and t.xmmc = ?";
+		List<Map<String,Object>> list = query(sql, YW,new Object[]{xmmc});
+		Map<String,Object> map = list.get(0);
+		Map<String, TRBean>  bodyMap = new TreeMap<String, TRBean>();
+		TRBean trBean = new TRBean();
+		TDBean tdBean = new TDBean("总计","400","20");
+		tdBean.setColspan("4");
+		trBean.addTDBean(tdBean);
+		tdBean = new TDBean("--","100","20");
+		trBean.addTDBean(tdBean);
+		tdBean = new TDBean("--","100","20");
+		trBean.addTDBean(tdBean);
+		tdBean = new TDBean(map.get("jsydmj")==null?"0":map.get("jsydmj").toString(),"100","20");
+		trBean.addTDBean(tdBean);
+		tdBean = new TDBean(map.get("rjl")==null?"0":map.get("rjl").toString(),"100","20");
+		trBean.addTDBean(tdBean);
+		tdBean = new TDBean(map.get("ghjzgm")==null?"":map.get("ghjzgm").toString(),"100","20");
+		trBean.addTDBean(tdBean);
+		tdBean = new TDBean(map.get("jzkzgd")==null?"0":map.get("jzkzgd").toString(),"100","20");
+		trBean.addTDBean(tdBean);
+		tdBean = new TDBean(map.get("djzj")==null?"0":map.get("djzj").toString(),"100","20");
+		trBean.addTDBean(tdBean);
+		tdBean = new TDBean(map.get("djyjly")==null?"0":map.get("djyjly").toString(),"100","20");
+		trBean.addTDBean(tdBean);
+		tdBean = new TDBean("--","100","20");
+		trBean.addTDBean(tdBean);
+		tdBean = new TDBean(map.get("zfsyze")==null?"0":map.get("zfsyze").toString(),"100","20");
+		trBean.addTDBean(tdBean);
+		tdBean = new TDBean(map.get("zfsyyjly")==null?"0":map.get("zfsyyjly").toString(),"100","20");
+		trBean.addTDBean(tdBean);
+		tdBean = new TDBean("--","100","20");
+		trBean.addTDBean(tdBean);
+		tdBean = new TDBean("--","100","20");
+		trBean.addTDBean(tdBean);
+		tdBean = new TDBean(map.get("zfsywyj")==null?"0":map.get("zfsywyj").toString(),"100","20");
+		trBean.addTDBean(tdBean);
+		tdBean = new TDBean(map.get("bcfze")==null?"0":map.get("bcfze").toString(),"100","20");
+		trBean.addTDBean(tdBean);
+		tdBean = new TDBean(map.get("bcfyjly")==null?"0":map.get("bcfyjly").toString(),"100","20");
+		trBean.addTDBean(tdBean);
+		tdBean = new TDBean("--","100","20");
+		trBean.addTDBean(tdBean);
+		tdBean = new TDBean("--","100","20");
+		trBean.addTDBean(tdBean);
+		tdBean = new TDBean(map.get("bcfycswy")==null?"0":map.get("bcfycswy").toString(),"100","20");
+		trBean.addTDBean(tdBean);
+		tdBean = new TDBean("--","100","20");
+		trBean.addTDBean(tdBean);
+		tdBean = new TDBean("--","100","20");
+		trBean.addTDBean(tdBean);
+		tdBean = new TDBean(map.get("zcmj")==null?"0":map.get("zcmj").toString(),"100","20");
+		trBean.addTDBean(tdBean);
+		tdBean = new TDBean("--","100","20");
+		trBean.addTDBean(tdBean);
+		tdBean = new TDBean("--","100","20");
+		trBean.addTDBean(tdBean);
+		tdBean = new TDBean("--","100","20");
+		trBean.addTDBean(tdBean);
+		tdBean = new TDBean("--","100","20");
+		trBean.addTDBean(tdBean);
+		tdBean = new TDBean("--","100","20");
+		trBean.addTDBean(tdBean);
+		tdBean = new TDBean("--","100","20");
+		trBean.addTDBean(tdBean);
+		tdBean = new TDBean("--","100","20");
+		trBean.addTDBean(tdBean);
+		tdBean = new TDBean("--","100","20");
+		trBean.addTDBean(tdBean);
+		tdBean = new TDBean("--","100","20");
+		trBean.addTDBean(tdBean);
+		tdBean = new TDBean("--","100","20");
+		trBean.addTDBean(tdBean);
+		tdBean = new TDBean("--","100","20");
+		trBean.addTDBean(tdBean);
+		bodyMap.put("xiangmutotal", trBean);
+		return bodyMap;
+	}
+
 	/**
 	 * 
 	 * <br>Description:生成已出库模块
@@ -133,7 +224,7 @@ public class TdzcglReport extends AbstractBaseBean implements IDataClass{
 	 */
 	private Map<String, TRBean> getYckByXMMC(String xmmc, String prekey, List<Map<String, Object>> queryList){
 		Map<String, TRBean>  bodyMap = new TreeMap<String, TRBean>();
-		String size = String.valueOf(queryList.size() + 7);
+		String size = String.valueOf(queryList.size() + 6);
 		TRBean trBean = new TRBean();
 		//trBean.setCssStyle("trSingle");
 		
@@ -141,7 +232,7 @@ public class TdzcglReport extends AbstractBaseBean implements IDataClass{
 		tdBean.setRowspan(size);
 		trBean.addTDBean(tdBean);
 		
-		TDBean statuBean = new TDBean("已出库","100","20");
+		TDBean statuBean = new TDBean("已出库","300","20");
 		statuBean.setColspan("3");
 		int num = 1;
 		Vector<TRBean> trbeans = new Vector<TRBean>();
@@ -385,7 +476,9 @@ public class TdzcglReport extends AbstractBaseBean implements IDataClass{
 					}
 				}
 				cqkcBeans.add(tryck);
+				cqkcTotal++;
 				firstTotal++;
+				swgyTotal++;
 			}
 		}
 		
@@ -494,7 +587,7 @@ public class TdzcglReport extends AbstractBaseBean implements IDataClass{
 		TRBean trBean = new TRBean();
 		//trBean.setCssStyle("trSingle");
 				
-		TDBean statuBean = new TDBean("已出让<br/>但未入库项目","100","20");
+		TDBean statuBean = new TDBean("已出让但未入库项目","300","20");
 		statuBean.setColspan("3");
 		int num = 1;
 		Vector<TRBean> trbeans = new Vector<TRBean>();
