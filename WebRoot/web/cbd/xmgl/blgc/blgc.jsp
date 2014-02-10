@@ -3,13 +3,25 @@
 <%@page import="java.util.List"%>
 <%@page import="java.util.Map"%>
 <%@page import="com.klspta.base.util.UtilFactory"%>
+<%@page import="org.springframework.security.core.context.SecurityContextHolder"%>
+<%@page import="com.klspta.console.user.User"%>
+<%@page import="com.klspta.console.role.Role"%>
+<%@page import="com.klspta.console.ManagerFactory"%>
+
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":"
             + request.getServerPort() + path + "/";
     String yw_guid = request.getParameter("yw_guid");
     String xmmc = request.getParameter("xmmc");
-    
+    Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    String userId = ((User)principal).getUserID();
+	User user = ManagerFactory.getUserManager().getUserWithId(userId);
+	List<Role>  role = ManagerFactory.getRoleManager().getRoleWithUserID(userId);
+	String username = user.getFullName();
+	String rolename = role.get(0).getRolename();
+
+	
     if (xmmc != null) {
         xmmc = new String(xmmc.getBytes("iso-8859-1"), "utf-8");
     } else {
@@ -118,6 +130,7 @@ var yw_guid="";
 	 var sj=document.getElementById("sj").value;
 	 var sjbl=document.getElementById("sjbl").value;
 	 var bmjbr=document.getElementById("bmjbr").value;
+	 alert(bmjbr);
 	 var bz=document.getElementById("bz").value;
 	
 	if(sj==null||sj==''||sjbl==null||sjbl==''||bmjbr==null||bmjbr==''){
@@ -146,6 +159,7 @@ var yw_guid="";
 	}
 	}
 	}
+	
 function saves(yw_guid){
 	var sj=document.getElementById("sj1").value;
 	var sjbl=document.getElementById("sjbl1").value;
@@ -235,6 +249,11 @@ function del(bs){
 	document.getElementById("add").style.display="none";
 	
 	}
+	function cancel(){
+	document.getElementById("msg").style.display="none";
+	document.getElementById("add").style.display="";
+	
+	}
 </script>
 	</head>
 	<body bgcolor="#FFFFFF" style="overflow: scroll;">
@@ -297,28 +316,29 @@ function del(bs){
 				<tr id ='msg' style="display: none">
 					<td align="center" class="tr03">
 						<%=list.size() + 1%>
-					</td>
+					<br><br></td>
 					<td align="center">
 						<textarea id='sj' rows="4" cols="1"
 							style="width: 100px; overflow: hidden" onfocus="WdatePicker()"></textarea>
-					</td>
+					<br><br></td>
 					<td align="center">
 						<textarea id='sjbl' rows="4" cols="10"
 							style="width: 370px; overflow: auto"></textarea>
-					</td>
-					<td align="center">
-						<textarea id='bmjbr' rows="4" cols="1"
-							style="width: 120px; overflow: hidden"></textarea>
+					<br><br></td>
+					<td align="center" >
+						<textarea id='bmjbr' style="width: 120px; overflow: hidden" rows="4" cols="10"
+							style="width: 370px; overflow: auto"><%=rolename%>/<%=username%></textarea>
 					</td>
 					<td align="center">
 						<textarea id='bz' rows="4" cols="20"
 							style="width: 200px; overflow: auto"></textarea>
-					</td>
-					<td align="center" class="tr03">
-						<a onclick="save()">
-							保存
+					<br><br></td>
+					<td align="center" class="tr03"><a onclick="save()">保存 
 						</a>
-					</td>
+						<a onclick="cancel()">
+							取消
+						</a>
+					<br><br></td>
 				</tr>
 			</table>
 		  <div align="right" style="width: 96%">	
