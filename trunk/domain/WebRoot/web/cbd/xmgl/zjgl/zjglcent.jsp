@@ -2,6 +2,9 @@
 <%@ page import="com.klspta.web.cbd.xmgl.zjgl.Contorl" %>
 <%@page import="java.util.List" %>
 <%@page import="java.util.Map" %>
+<%@page import="com.klspta.console.ManagerFactory"%>
+<%@page import="com.klspta.console.user.UserAction"%>
+<%@page import="com.klspta.base.rest.ProjectInfo"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -24,8 +27,8 @@
 			  Contorl contorl=new Contorl(yw_guid,year);
 			  table=contorl.getTextMode();
 		}else {
-			String types[] = type.split("#");
-			String edirots[] = editor.split("#");
+			String types[] = type.split("@");
+			String edirots[] = editor.split("@");
 			Contorl contorl=  new Contorl(yw_guid,year,types,edirots);
 			table= contorl.getTextMode_new();
 		}
