@@ -19,7 +19,7 @@ if (xmmc != null) {
 <title>content</title>
 </head>
   <frameset id="main" name="main" cols="0,9,*" frameborder="no" border="0" framespacing="0">
-    <frame id="left" name="left"  src="<%=basePath%>web/cbd/xmgl/zjgl/zjglTree.jsp?yw_guid=<%= yw_guid%>&xmmc=<%=xmmc%>&year=2014" scrolling="No" noresize="noresize" />
+    <frame id="left" name="left"  src="<%=basePath%>web/cbd/xmgl/zjgl/zjglTree.jsp?yw_guid=<%= yw_guid%>&xmmc=<%=xmmc%>&year=2014&type=<%=type%>&editor=<%=editor %>" scrolling="No" noresize="noresize" />
    <frame id="partline" name="partline" src="<%=basePath%>web/cbd/xmgl/zjgl/partline.jsp"  scrolling="No" noresize="noresize" />
     <frame id="right" name="right" src="<%=basePath%>web/cbd/xmgl/zjgl/zjglcent.jsp?yw_guid=<%= yw_guid%>&xmmc=<%=xmmc%>&year=2014&type=<%=type%>&editor=<%=editor %>" />
   </frameset>
