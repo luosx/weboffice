@@ -7,9 +7,22 @@ Paneloper.prototype = {
 	init:function(object, element){
 		this.object = object;
 		this.elements = element;
+		this.monitor();
 	},
 	monitor:function(){
-		
+		//录入自然斑编号时添加验证
+		var obj = this;
+		Ext.getCmp("zrbbh").addListener('change',function(){
+			//判断自然斑编号是否符合条件
+			var reg = /^\w+-\w+/;
+			var text = Ext.getCmp("zrbbh").getValue();
+			if(!reg.test(text)){
+				Ext.MessageBox.alert('提醒', '自然斑编号不规范，正确的自然斑编号应该是“基本斑编号-自然斑编号“，请重新输入', function(btn, text){
+					obj.removeValue("zrbbh");
+				});
+				return;	
+			}
+		});
 	},
 	insertValue:function(name, value){
 		var extObject = Ext.getCmp(name);
