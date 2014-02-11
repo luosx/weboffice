@@ -25,6 +25,10 @@ function showMap(objid){
 
 //双击编辑地图
 function editMap(objid){
+	//没有编辑权限时，直接回退。
+	if(view == "R"){
+		return;
+	}
 	if(table.element == undefined){
 		table.init(document.getElementById("ZRB"));
 	}

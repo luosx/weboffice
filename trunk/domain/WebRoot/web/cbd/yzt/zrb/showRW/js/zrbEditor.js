@@ -3,7 +3,7 @@ var simple;
 var combo;
 var array = new Array();
 var url = basePath
-		+ '/web/cbd/yzt/zrb/showRW/zrbRowEditor.jsp';
+		+ '/web/cbd/yzt/zrb/showRW/zrbRowEditor.jsp?view=' + view;
 var condition = "";
 
 Ext.onReady(function() {
@@ -33,18 +33,22 @@ function initComponent() {
 						}, '-', {
 							xtype : 'button',
 							text : '导入坐标',
+							id:"insertGIS",
 							handler : insertGIS
 						}, '-', {
 							xtype : 'button',
 							text : '添加',
+							id:"add",
 							handler : add
 						}, '-', {
 							xtype : 'button',
 							text : '修改',
+							id:"modify",
 							handler : modify
 						}, '-', {
 							xtype : 'button',
 							text : '删除',
+							id:"dele",
 							handler : dele
 						}],
 				items : [{
@@ -54,6 +58,14 @@ function initComponent() {
 				}]
 			});
 	simple.render(document.body);
+	//确定是否有编辑修改权限，没有权限时隐藏操作按钮
+	if(view == "R"){
+		var toolbar = simple.getTopToolbar();
+		toolbar.remove("insertGIS");
+		toolbar.remove("modify");
+		toolbar.remove("add");
+		toolbar.remove("dele");
+	}
 }
 
 function initFile(){
