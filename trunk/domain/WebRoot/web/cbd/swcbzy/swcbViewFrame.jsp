@@ -30,11 +30,7 @@
 		<script src="<%=layoutPath%>/dhtmlxlayout.js"></script>
 		<script src="<%=toolbarPath%>/dhtmlxtoolbar.js"></script>
 		<script src="<%=toolbarPath%>/patterns/dhtmlxlayout_pattern4j.js"></script>
-<script type="text/javascript">
-	function drawPolygonCallback(s){
-		frames['west'].frames['report'].setRecord(s);
-	}
-</script>
+
 <style type="text/css">
 .div1{
    	float:left;position:relative;left:5px;

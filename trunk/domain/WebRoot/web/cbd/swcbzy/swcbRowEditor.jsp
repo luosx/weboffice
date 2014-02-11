@@ -72,9 +72,9 @@ ITableStyle its = new TableStyleEditRow();
 	</style>
 	<script type="text/javascript">
 		$(document).ready(function () { 
-		var width = document.body.clientWidth-20;
-		var height = document.body.clientHeight-35;
-       	FixTable("SWCBR", 1,1, width, height);
+		var width = document.body.clientWidth;
+		var height = document.body.clientHeight*0.95;
+       	FixTable("SWCBR", 1,1, width, height-30);
 	});
 	</script>
   </head>

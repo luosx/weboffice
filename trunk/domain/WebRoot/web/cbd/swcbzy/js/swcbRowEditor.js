@@ -8,7 +8,7 @@ function showMap(objid){
 	}
 	var key = objid.cells[0].innerText;
 	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").clear();
-	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").findFeature("cbd", "4", key, "TBBH");
+	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").findFeature("cbd", "5", key, "DKMC");
 	if(-1 == key.indexOf("计")){
 		table.addAnnotation(objid.rowIndex);
 	}
@@ -57,7 +57,7 @@ function setRecord(polygon){
     putRestParameter("polygon",polygon); 
     var result = restRequest();
 	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").clear();
-	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").findFeature("cbd", "4", zrbbh, "TBBH");
+	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").findFeature("cbd", "5", zrbbh, "DKMC");
 }
 
 function queryJBB(keyword){
