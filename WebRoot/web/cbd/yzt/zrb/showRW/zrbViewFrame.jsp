@@ -6,6 +6,7 @@
 			+ path + "/";
     String layoutPath = basePath + "base/thirdres/dhtmlx//dhtmlxLayout//codebase";
     String toolbarPath = basePath + "base/thirdres/dhtmlx//dhtmlxToolbar//codebase";
+    String view = request.getParameter("view");
 %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -52,7 +53,7 @@
 			dhxLayout.setEffect("resize", true);
 			dhxLayout.cells("a").attachURL("<%=basePath%>base/fxgis/fx/FxGIS.html?i=false");
 			//dhxLayout.cells("b").setWidth(width * 0.61);
-			dhxLayout.cells("b").attachURL("zrbEditor.jsp");
+			dhxLayout.cells("b").attachURL("zrbEditor.jsp?view=<%=view%>");
 			dhxLayout.cells("b").hideHeader();
 			//dhxLayout.setAutoSize("a;b", "a;b");
 			//页面大小修改时重新刷新
@@ -60,7 +61,7 @@
 				//dhxLayout.cells("a").fixSize(true, false);
 				//dhxLayout.cells(id).getFrame().refresh;
 				//dhxLayout.cells("a").attachURL("<%=basePath%>base/fxgis/fx/FxGIS.html?i=false");
-				dhxLayout.cells("b").attachURL("zrbEditor.jsp");
+				dhxLayout.cells("b").attachURL("zrbEditor.jsp?view=<%=view%>");
 				
 			});
 		}	
