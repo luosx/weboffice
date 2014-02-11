@@ -22,7 +22,7 @@ public class TrFactory {
             StringBuffer stringBuffer = ZjglBuild.buildZjzc_father_sum(li);
             buffer.append(stringBuffer);
             return buffer;
-        }else if(type.equals("YIKFZC")){
+        }else if(type.equals("YJKFZC")){
             List<Map<String, Object>> ls = zjglData.getZC_YJZC_sum(yw_guid,year);
             StringBuffer stringBuffer = ZjglBuild.buildZjzc_father_sum(ls);
             buffer.append(stringBuffer);
@@ -51,7 +51,7 @@ public class TrFactory {
            StringBuffer stringBuffer = ZjglBuild.buildZjzc_father_sum(li);
            buffer.append(stringBuffer);
            return buffer;
-       }else if(type.equals("YIKFZC")){
+       }else if(type.equals("YJKFZC")){
            List<Map<String, Object>> ls = zjglData.getZC_YJZC_sum(yw_guid,year);
            StringBuffer stringBuffer = ZjglBuild.buildZjzc_father_sum(ls);
            buffer.append(stringBuffer);
@@ -80,7 +80,7 @@ public class TrFactory {
           StringBuffer stringBuffer = ZjglBuild.buildZjzc_father_sum(li);
           buffer.append(stringBuffer);
           return buffer;
-      }else if(type.equals("YIKFZC")){
+      }else if(type.equals("YJKFZC")){
           List<Map<String, Object>> ls = zjglData.getZC_YJZC_sum(yw_guid,year);
           StringBuffer stringBuffer = ZjglBuild.buildZjzc_father_sum(ls);
           buffer.append(stringBuffer);
