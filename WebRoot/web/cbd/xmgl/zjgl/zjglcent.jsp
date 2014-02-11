@@ -81,29 +81,29 @@ td1 {
 .tr01 {
 	background-color:#BCD2EF;
 	font-weight: bold;
-	line-height: 30px;
+	line-height: 20px;
 	text-align: center;
 }
 .tr02 {
 	background-color:#FFCC99;
 	font-weight: bold;
-	line-height: 30px;
+	line-height: 15px;
 	text-align: center;
 }
 .tr03 {
 	background-color:#FFCC99;
-	line-height: 20px;
+	line-height: 15px;
 	text-align: center;
 }
 .tr04 {
 	background-color:#CCFFFF;
-	line-height: 30px;
+	line-height: 15px;
 	text-align: center;
 }
 .tr05 {
 	background-color:#FFF69A;
 	background-color:#FFCC99;
-	line-height: 20px;
+	line-height: 15px;
 	text-align: center;
 }
 </style>
