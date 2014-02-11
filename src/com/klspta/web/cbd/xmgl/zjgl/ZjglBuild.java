@@ -166,7 +166,7 @@ public class ZjglBuild {
         delNull(String.valueOf(list.get(i).get("LB")))+ 
        "</td><td rowspan='8' class='tr03'>" +
        delNull( String.valueOf(list.get(i).get("YSFY")))+ 
-       "</td><td width:'160px' class='tr03'>" +
+       "</td><td width:'200px' class='tr03'>" +
        delNull(String.valueOf(list.get(i).get("LJ")))+
       "</td><td  class='tr03'>" +
       delZer(String.valueOf(list.get(i).get("JL2")))+ 
@@ -251,7 +251,7 @@ public class ZjglBuild {
         delNull(String.valueOf(list.get(i).get("LB")))+ 
        "</td><td rowspan='8' class='tr04'><input class='tr04' type='text' style='width:70px;' onchange='addrzxq(this); return false' value='" +
        delNull( String.valueOf(list.get(i).get("YSFY")))+ "'id='"+String.valueOf( list.get(i).get("status"))+"@"+String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) 
-       +"@2'/></td><td width:'160px' class='tr04'>" +
+       +"@2'/></td><td width:'200px' class='tr04'>" +
        delNull(String.valueOf(list.get(i).get("LJ")))+
       "</td><td  class='tr04'>" +
       delZer(String.valueOf(list.get(i).get("JL2")))+ 
@@ -289,7 +289,7 @@ public class ZjglBuild {
        delNull(String.valueOf(list.get(i).get("LRSP")))+ "'id='"+String.valueOf( list.get(i).get("status"))+"@"+String.valueOf( list.get(i).get("lb")) +"@"+String.valueOf( list.get(i).get("sort")) +
        "@20'/></td></tr>");
       }else{
-          stringBuffer.append("<tr><td class='tr04'>"+
+          stringBuffer.append("<tr><td class='tr04' width='200px'>"+
                  // delNull(String.valueOf(list.get(i).get("YSFY")))+ "</td><td class='tr04'>"+
                   delNull(String.valueOf(list.get(i).get("LJ")))+ "</td><td class='tr04'>"+
                   delZer(String.valueOf(list.get(i).get("JL2")))+ "</td>"+
@@ -338,7 +338,7 @@ public class ZjglBuild {
         delNull(String.valueOf(list.get(i).get("LB")))+ 
        "</td><td rowspan='8' class='tr04'>"+
        delNull( String.valueOf(list.get(i).get("YSFY")))+
-       "</td><td width:'160px' class='tr04'>" +
+       "</td><td width:'200px' class='tr04'>" +
        delNull(String.valueOf(list.get(i).get("LJ")))+
       "</td><td  class='tr04'>" +
       delZer(String.valueOf(list.get(i).get("JL2")))+ 
@@ -426,7 +426,7 @@ public class ZjglBuild {
                       delNull(String.valueOf(list.get(i).get("LB")))+
                       " </td><td rowspan='8'><input type='text' style='width:70px;' onchange='addrzxq(this); return false' value='" +
                      delNull( String.valueOf(list.get(i).get("YSFY")))+ "'id='"+String.valueOf( list.get(i).get("status"))+"@"+ String.valueOf( list.get(i).get("lb"))  +"@"+String.valueOf( list.get(i).get("sort")) 
-                     +"@2'/></td><td >" +
+                     +"@2'/></td><td width='200px'>" +
                      delNull(String.valueOf(list.get(i).get("LJ")))+
                      "</td><td><input type='text' style='width:70px;' onchange='addrzxq(this); return false' value='" +
                     delNull(String.valueOf(list.get(i).get("JL2")))+  "'id='"+String.valueOf( list.get(i).get("status"))+"@"+ String.valueOf( list.get(i).get("lb"))  +"@"+String.valueOf( list.get(i).get("sort")) +
@@ -464,7 +464,7 @@ public class ZjglBuild {
                      delNull(String.valueOf(list.get(i).get("LRSP")))+ "'id='"+String.valueOf( list.get(i).get("status"))+"@"+ String.valueOf( list.get(i).get("lb"))  +"@"+String.valueOf( list.get(i).get("sort")) +
                      "@20'/></td></tr>");
                     }else{
-                        stringBuffer.append("<tr><td >" +
+                        stringBuffer.append("<tr><td width='200px'>" +
                                 delNull(String.valueOf(list.get(i).get("LJ")))+ "</td>"+
                                "<td><input type='text' style='width:70px;' onchange='addrzxq(this); return false' value='" +
                                delNull(String.valueOf(list.get(i).get("LJ2")))+  "'id='"+String.valueOf( list.get(i).get("status"))+"@"+ String.valueOf( list.get(i).get("lb"))  +"@"+String.valueOf( list.get(i).get("sort")) +
@@ -516,7 +516,7 @@ public class ZjglBuild {
                      delNull(String.valueOf(list.get(i).get("LB")))+
                      " </td><td rowspan='8'> " +
                     delNull( String.valueOf(list.get(i).get("YSFY")))+ 
-                    "</td><td >" +
+                    "</td><td width='200px'>" +
                     delNull(String.valueOf(list.get(i).get("LJ")))+
                     "</td><td> " +
                    delNull(String.valueOf(list.get(i).get("JL2")))+  
@@ -554,7 +554,7 @@ public class ZjglBuild {
                     delNull(String.valueOf(list.get(i).get("LRSP")))+ 
                     " </td></tr>");
                    }else{
-                       stringBuffer.append("<tr><td >" +
+                       stringBuffer.append("<tr><td width='200px'>" +
                                delNull(String.valueOf(list.get(i).get("LJ")))+
                                "</td><td> " +
                               delNull(String.valueOf(list.get(i).get("LJ2")))+   
