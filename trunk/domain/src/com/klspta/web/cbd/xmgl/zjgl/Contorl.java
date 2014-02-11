@@ -5,7 +5,7 @@ public class Contorl {
 	public static String ZJLR = "ZJLR";
 	// Ⅱ.资金支出\2.1 一级开发支出\前期费用\拆迁费用\市政费用\财务费用\管理费用\筹融资金返还\ 其他支出\Ⅱ.资金支出
 	public static String ZJZC = "ZJZC";
-	public static String YIKFZC = "YJKFZC";
+	public static String YJKFZC = "YJKFZC";
 	public static String QQFY = "QQFY";
 	public static String CQFY = "CQFY";
 	public static String SCFY = "SCFY";
@@ -103,8 +103,8 @@ public class Contorl {
 							Edit[i]);
 					Thread thread = new Thread(ZJZCThread);
 					thread.start();
-				} else if (type[i].equals(YIKFZC)) {
-					YIKFZCThread = new ZjglThread(this.yw_guid,  this.year,YIKFZC,
+				} else if (type[i].equals(YJKFZC)) {
+					YIKFZCThread = new ZjglThread(this.yw_guid,  this.year,YJKFZC,
 							Edit[i]);
 					Thread thread = new Thread(YIKFZCThread);
 					thread.start();
@@ -164,7 +164,7 @@ public class Contorl {
 		ZJZCThread = new ZjglThread(this.yw_guid, ZJZC, this.year);
 		Thread thread = new Thread(ZJZCThread);
 		thread.start();
-		YIKFZCThread = new ZjglThread(this.yw_guid, YIKFZC, this.year);
+		YIKFZCThread = new ZjglThread(this.yw_guid, YJKFZC, this.year);
 		Thread thread1 = new Thread(YIKFZCThread);
 		thread1.start();
 		QQFYThread = new ZjglThread(this.yw_guid, QQFY, this.year);
@@ -274,7 +274,7 @@ public class Contorl {
 	public ZjglThread getZjglThread(String type) {
 		if (type.equals(ZJZC)) {
 			return ZJZCThread;
-		} else if (type.equals(YIKFZC)) {
+		} else if (type.equals(YJKFZC)) {
 			return YIKFZCThread;
 		} else if (type.equals(QQFY)) {
 			return QQFYThread;
