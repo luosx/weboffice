@@ -84,7 +84,7 @@ public class Xmkgzbbreport extends AbstractBaseBean implements IDataClass {
 						String width = "";
 						TDBean tdBean;
 						if(i==2){
-							width ="30px";
+							width ="100px";
 						}else if(3 == i){
 							width = "130px";
 						}else if(0 == i){
@@ -112,7 +112,7 @@ public class Xmkgzbbreport extends AbstractBaseBean implements IDataClass {
 							String width = "";
 							TDBean tdBean;
 							if(i==2){
-								width ="30px";
+								width ="100px";
 							}else if(3 == i){
 								width = "130px";
 							}
