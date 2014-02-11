@@ -29,11 +29,11 @@ input,img {
 </script>
 		<script src="js/swcbEditor.js"></script>
 	</head>
-	<body bgcolor="#FFFFFF" topmargin="0" leftmargin="0">
+	<body bgcolor="#FFFFFF" topmargin="0" leftmargin="0" style="overflow-x:hidden;overflow-y:hidden">
 		<div id="mygrid_container"></div>
 		<div id="update" class="x-hidden">
 			<div id="updateForm"
-				style="width: 100%; height: 100%;"></div>
+				style="width: 100%; height: 90%; margin-left: 10px; margin-top: 5px"></div>
 		</div>
 	</body>
 </html>
