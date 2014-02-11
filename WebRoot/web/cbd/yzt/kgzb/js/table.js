@@ -72,5 +72,4 @@ tableoper.prototype = {
 	getValue:function(row, num){
 		return this.element.rows[row].cells[num].innerText;
 	}
-	
 }

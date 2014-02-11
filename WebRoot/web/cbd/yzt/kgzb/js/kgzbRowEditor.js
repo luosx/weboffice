@@ -1,6 +1,6 @@
 var dkmc = "";
 var num = 0;
-//var table = new tableoper();
+var table = new tableoper();
 //zrbTable.init(document.getElementById("ZRB"));
 
 //单击地图定位
@@ -37,7 +37,7 @@ function editMap(objid){
 
 //导出Excel
 function print(){
-    var curTbl = document.getElementById("oldTable"); 
+    var curTbl = document.getElementById("SWCBR"); 
     try{
     	var oXL = new ActiveXObject("Excel.Application");
     }catch(err){
@@ -76,7 +76,7 @@ function setRecord(polygon){
 
 function add(){
 	if(table.element == undefined){
-		table.init(document.getElementById("oldTable"));
+		table.init(document.getElementById("SWCBR"));
 	}
 	Ext.MessageBox.prompt('输入', '请输入自然斑编号(“基本斑编号-自然斑编号“):', function(btn, text){
 		if(btn == 'ok'){
@@ -127,7 +127,7 @@ function dele(){
 
 //根据用地单位和关键字作过滤
 function queryZrb(keyword){
-	putClientCommond("zrbHandle","getReport");
+	putClientCommond("kgzbmanager","getReport");
 	putRestParameter("keyword",escape(escape(keyword)));
 	myData = restRequest();
   	document.getElementById("show").innerHTML = myData;
