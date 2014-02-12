@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@page import="com.klspta.model.CBDReport.CBDReportManager"%>
 <%
     String path = request.getContextPath();
 			String basePath = request.getScheme() + "://"
@@ -20,48 +21,47 @@
 	<%@ include file="/base/include/restRequest.jspf"%>
 	<script src="base/include/jquery-1.10.2.js"></script>
 	<style type="text/css">
-table {
-	border: 1px solid #000000;
-	padding: 0;
-	margin: 0 auto;
-	border-collapse: collapse;
-}
-input{
-
-
-}
-td {
-	border: 1px solid #000000;
-	background: #fff;
-	font-size: 18px;
-	padding: 3px 3px 3px 8px;
-	color: #000000;
-	text-align:center;
-}
-h1{
-  font-size: 24px;
-  }
-
-td1 {
-	border: 1px solid #000000;
-	background: #adadad;
-	font-size: 18px;
-	padding: 3px 3px 3px 8px;
-	color: #fdfdfd;
-	text-align:center;
-}
-  .tr01{
-  	background-color: #C0C0C0;
-  	font-weight:bold;
-    line-height: 30px;
-    text-align:center;
-  }
-  .tr02{
-  	background-color: #FCFCFC;
-  }
-   .tr03{
-  	background-color: #FCFCFC;
-  }
+  		table{
+		    font-size: 14px;
+		    background-color: #A8CEFF;
+		    border-color:#000000;
+		    /**
+		    border-left:1dp #000000 solid;
+		    border-top:1dp #000000 solid;
+		    **/
+		    color:#000000;
+		    border-collapse: collapse;
+  		}
+  		tr{
+    		border-width: 0px;
+    		text-align:center;
+  		}
+  		td{
+    		text-align:center;
+    		border-color:#000000;
+		    /**
+		    border-bottom:1dp #000000 solid;
+		    border-right:1dp #000000 solid;
+		    **/
+		  }
+		.title{
+		    font-weight:bold;
+		    font-size: 15px;
+		    text-align:center;
+		    line-height: 50px;
+			margin-top: 3px;
+		  }
+	  	.trtotal{
+		  	text-align:center;
+		    font-weight:bold;
+		    line-height: 30px;
+		    background-color: #A8CEFF;
+		   }
+	  	.trsingle{
+		    background-color: #D1E5FB;
+		    line-height: 20px;
+		    text-align:center;
+		   }
 </style>
 </head>
 <script type="text/javascript">
@@ -127,6 +127,8 @@ function shows(){
 	      单位：亿元&nbsp;
 	</div>
 	<div style="margin-left:20px">
+		<%=new CBDReportManager().getReport("ZXCJQK",new Object[]{"false"})%>
+		<!-- 
 		<table id='SWQFZXZJCJQKB' width='1100' border='1' cellpadding='1' cellspacing='0'>
 			<tr class='tr01' >
 				<td id='0_0' height='10' width='50' class='tr01'>序号</td>
@@ -208,7 +210,7 @@ function shows(){
 				<td id='7_6' height='10' width='150' class='tr01'></td>
 			</tr>
 		</table>
+		 -->
 	</div>
-
 </body>
 </html>
