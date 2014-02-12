@@ -33,7 +33,7 @@ function mouseOut(obj){
 
 function addContext(obj_id, key, valueIndex){
     //var obj = document.getElementById(obj_id);
-    var obj = document.getElementById("ZRB").rows(parseInt(obj_id.split("_")[0])).cells(parseInt(obj_id.split("_")[1]));
+    var obj = document.getElementById("SWCBR").rows(parseInt(obj_id.split("_")[0])).cells(parseInt(obj_id.split("_")[1]));
     var modiForm = document.createElement("<form>");
     var modiInput = document.createElement("<input type='text' name='data' id='data' onblur='ajax2(\"" + obj.id + "\", this, \"" + key + "\", \"" + valueIndex + "\")'>");
     modiForm.appendChild(modiInput);

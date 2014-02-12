@@ -5,9 +5,9 @@ var table = new tableoper();
 
 //单击地图定位
 function showMap(objid){
-	//if(table.element == undefined){
-	//	table.init(document.getElementById("oldTable"));
-	//}
+	if(table.element == undefined){
+		table.init(document.getElementById("SWCBR"));
+	}
 	//alert("showMap");
 	var key = objid.cells[1].innerText;
 	//parent.parent.frames['east'].swfobject.getObjectById("FxGIS").clear();
@@ -19,16 +19,28 @@ function showMap(objid){
 
 	//添加选中保存
 	//var num = objid.rowIndex();
-	//table.addAnnotation(objid.rowIndex);
+	table.addAnnotation(objid.rowIndex);
 }
 
 //双击编辑地图
 function editMap(objid){
-//	if(table.element == undefined){
-//		table.init(document.getElementById("oldTable"));
-//	}
+
+	
+	if(table.element == undefined){
+		table.init(document.getElementById("SWCBR"));
+	}
 	var key = objid.cells[1].innerText;
 	dkmc = key;
+	
+
+	
+	//编辑基本属性
+	var array = paneloper.getElements();
+	for(var i = 0; i < array.length; i++){
+		var value = objid.cells[i].innerText;
+		paneloper.insertValue(array[i], value);
+	}
+	paneloper.show();
 	//parent.parent.frames['east'].swfobject.getObjectById("FxGIS").clear();
 	//parent.parent.frames['east'].swfobject.getObjectById("FxGIS").drawPolygon();
 	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").clear();
@@ -78,37 +90,46 @@ function add(){
 	if(table.element == undefined){
 		table.init(document.getElementById("SWCBR"));
 	}
-	Ext.MessageBox.prompt('输入', '请输入自然斑编号(“基本斑编号-自然斑编号“):', function(btn, text){
-		if(btn == 'ok'){
-			//判断自然斑编号是否符合条件
-			var reg = /^\w+-\w+/;
-			if(!reg.test(text)){
-				Ext.MessageBox.alert('提醒', '自然斑编号不规范，正确的自然斑编号应该是“基本斑编号-自然斑编号“，请重新输入', function(btn, text){
-					add();
-				});
-				return;	
-			}
-			var rows = table.addRow(2,3,num);
-			num++;
-			rows.cells[1].innerHTML = text;
-			//向后台库中添加一笔数据
-			putClientCommond("zrbHandle","insertZrb");
-	    	putRestParameter("ZRBBH",escape(escape(text))); 
-	    	var result = restRequest();
-    	}
-	});
+//	Ext.MessageBox.prompt('输入', '请输入自然斑编号(“基本斑编号-自然斑编号“):', function(btn, text){
+//		if(btn == 'ok'){
+//			//判断自然斑编号是否符合条件
+//			var reg = /^\w+-\w+/;
+//			if(!reg.test(text)){
+//				Ext.MessageBox.alert('提醒', '自然斑编号不规范，正确的自然斑编号应该是“基本斑编号-自然斑编号“，请重新输入', function(btn, text){
+//					add();
+//				});
+//				return;	
+//			}
+//			var rows = table.addRow(2,3,num);
+//			num++;
+//			rows.cells[1].innerHTML = text;
+//			//向后台库中添加一笔数据
+//			putClientCommond("zrbHandle","insertZrb");
+//	    	putRestParameter("ZRBBH",escape(escape(text))); 
+//	    	var result = restRequest();
+//    	}
+//	});
+	paneloper.show();
+}
+
+function modify(){
+	var annoations = table.getAnnotations();
+	if(annoations.length > 0){
+		var objid = table.element.rows[annoations[0]];
+		editMap(objid);
+	}
 }
 
 function dele(){
-	Ext.MessageBox.confirm('确认', '系统将删除所有选中自然斑，确定?', function(btn,text){
+	Ext.MessageBox.confirm('确认', '系统将删除所有选中地块，确定?', function(btn,text){
 		if(btn == 'yes'){
 			var choseValue = table.getAnnotations();
 			var choseString = '';
-			while(choseValue.length != 0){
-				choseString += table.getValue(choseValue.pop(),"1") + ",";
+			if(choseValue.length != 0){
+				choseString += table.getValue(choseValue.pop(),"1");
 			}
-			putClientCommond("zrbHandle","delete");
-			putRestParameter("zrbbh",choseString);
+			putClientCommond("kgzbmanager","delet");
+			putRestParameter("dkmc",escape(escape(choseString)));
 			myData = restRequest();
 			if(myData){
 				Ext.MessageBox.alert('提醒', '删除成功！', function(btn, text){
