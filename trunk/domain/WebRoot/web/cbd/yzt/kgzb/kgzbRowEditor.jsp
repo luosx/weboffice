@@ -7,8 +7,6 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 String type=request.getParameter("type");
-type= "中心区";//new String(type.getBytes("iso-8859-1"), "utf-8");
-String table=new Control().getTable(type).toString();
 String reportID = "oldTable";
 String keyIndex = "1";
 ITableStyle its = new TableStyleEditRow();
@@ -27,8 +25,8 @@ ITableStyle its = new TableStyleEditRow();
 	<script src="base/include/jquery-1.10.2.js"></script>
 	<%@ include file="/web/cbd/yzt/kgzb/js/reportEdit.jspf"%>
 	<%@ include file="/base/include/restRequest.jspf"%>
-	<script src="web/cbd/yzt/zrb/showRW/js/table.js"></script>
-	<script src="web/cbd/yzt/zrb/showRW/js/panel.js"></script>
+	<script src="web/cbd/yzt/kgzb/js/table.js"></script>
+	<script src="web/cbd/yzt/kgzb/js/panel.js"></script>
 	<script src="web/cbd/yzt/kgzb/js/kgzbRowEditor.js"></script>
 	<%@ include file="/base/include/ext.jspf" %>
 	<style type="text/css">
@@ -100,60 +98,125 @@ ITableStyle its = new TableStyleEditRow();
 	        },
 	        items   : [
 	        	{
+		            xtype : 'combo',   
+				    fieldLabel : '区域',   
+				    id : 'qy',   
+				    store :[[1,'A街区'],[2,'B街区'],[3,'C街区'],[4,'D街区'],[5,'西北区'],[6,'东北区'],[7,'西南区'],[8,'东南区']],   
+				    width:100,   
+				    value:'',   
+				    triggerAction: "all",   
+				    mode: "local",   
+				    allowBlank:false
+            	},
+	        	{
 	                xtype: 'textfield',
-	                id      : 'zrbbh',
+	                id      : 'dkmc',
 	                value:'',
-	                fieldLabel: '自然斑编号',
+	                fieldLabel: '地块名称',
 	                width :60
             	},{
-		            xtype: 'numberfield',
-	                id      : 'zdmj',
+		            xtype : 'combo',   
+				    fieldLabel : '用地性质',   
+				    id : 'ydxz',   
+				    store :[[1,'居住用地'],[2,'混合使用'],[3,'商务设施'],[4,'市政用地'],[5,'绿化用地'],[6,'文化娱乐'],[7,'中小学用地'],[8,'教育科研'],[9,'商业金融'],[10,'代征绿地'],[11,'代征水域']],   
+				    width:100,   
+				    value:'',   
+				    triggerAction: "all",   
+				    mode: "local",   
+				    allowBlank:false,
+				    listeners:{                
+					    'select': function(){ 
+					    	 var value = Ext.getCmp('ydxz').getRawValue();     
+					    	 if(value=="混合使用"){                
+						     	Ext.getCmp("ydxzdh").setValue("C2、C3、R2");
+						     }else if(value=="居住用地"){
+						     	Ext.getCmp("ydxzdh").setValue("R2");
+						     }else if(value=="商务设施"){
+						     	Ext.getCmp("ydxzdh").setValue("C2、C3");
+						     }else if(value=="市政用地"){
+						     	Ext.getCmp("ydxzdh").setValue("U");
+						     }else if(value=="绿化用地"){
+						     	Ext.getCmp("ydxzdh").setValue("G2");
+						     }else if(value=="中小学用地"){
+						     	Ext.getCmp("ydxzdh").setValue("R5");
+						     }else if(value=="文化娱乐"){
+						     	Ext.getCmp("ydxzdh").setValue("C3");
+						     } else if(value=="教育科研"){
+						     	Ext.getCmp("ydxzdh").setValue("C6");
+						     }else if(value=="商业金融"){
+						     	Ext.getCmp("ydxzdh").setValue("C");
+						     }else if(value=="代征绿地"){
+						     	Ext.getCmp("ydxzdh").setValue("");
+						     }else if(value=="代征水域"){
+						     	Ext.getCmp("ydxzdh").setValue("");
+						     }else{
+						     	Ext.getCmp("ydxzdh").setValue("");
+						     }					                       
+					    }                
+				    } 
+            	},{
+	                xtype: 'textfield',
+	                id      : 'ydxzdh',
 	                value:'',
-	                fieldLabel: '占地面积',
+	                fieldLabel: '用地性质代号',
+	                width :60,
+	                disabled:true 
+            	},{
+	                xtype: 'numberfield',
+	                id      : 'jsydmj',
+	                value:'',
+	                fieldLabel: '建设用地面积(公顷)',
 	                width :60
             	},{
 	                xtype: 'numberfield',
-	                id      : 'lzmj',
+	                id   : 'rjl',
 	                value:'',
-	                fieldLabel: '楼座面积(合计)',
+	                fieldLabel: '容积率',
 	                width :60
             	},{
 	                xtype: 'numberfield',
-	                id      : 'cqgm',
+	                id   : 'ghjzgm',
 	                value:'',
-	                fieldLabel: '拆迁规模(合计)',
+	                fieldLabel: '规划建筑规模(万㎡)',
 	                width :60
             	},{
 	                xtype: 'numberfield',
-	                id   : 'zzlzmj',
+	                id   : 'jzkzgd',
 	                value:'',
-	                fieldLabel: '楼座面积(住宅)',
+	                fieldLabel: '建筑控制高度(米)',
 	                width :60
             	},{
-	                xtype: 'numberfield',
-	                id   : 'zzcqgm',
+	                xtype: 'textfield',
+	                id   : 'jzmd',
 	                value:'',
-	                fieldLabel: '拆迁规模(住宅)',
+	                fieldLabel: '建筑密度',
 	                width :60
             	},{
-	                xtype: 'numberfield',
-	                id   : 'yjhs',
+	                xtype: 'textfield',
+	                id   : 'lhl',
 	                value:'',
-	                fieldLabel: '预计户数',
+	                fieldLabel: '绿化率',
 	                width :60
             	},{
-	                xtype: 'numberfield',
-	                id   : 'fzzlzmj',
+ 					xtype: 'numberfield',
+	                id      : 'nbzs',
 	                value:'',
-	                fieldLabel: '楼座面积(非住宅)',
+	                fieldLabel: '南北纵深(米)',
 	                width :60
             	},{
-	                xtype: 'numberfield',
-	                id   : 'fzzcqgm',
+ 					xtype: 'numberfield',
+	                id      : 'dxmk',
 	                value:'',
-	                fieldLabel: '拆迁规模(非住宅)',
+	                fieldLabel: '东西面宽(米)',
 	                width :60
             	},{
+ 					xtype: 'textfield',
+	                id      : 'ghsjly',
+	                value:'',
+	                fieldLabel: '规划数据来源',
+	                width :60
+            	}
+            	,{
  					xtype: 'textfield',
 	                id      : 'bz',
 	                value:'',
@@ -165,7 +228,7 @@ ITableStyle its = new TableStyleEditRow();
 	            {
 	                text   : '保存',
 	                handler: function() {
-	            			paneloper.setRestUrl("zrbHandle/setZrb");
+	            			paneloper.setRestUrl("kgzbmanager/save");
 							paneloper.save();
 	                	}
 	            	},   
@@ -178,8 +241,8 @@ ITableStyle its = new TableStyleEditRow();
 	        ]
 	  });	
   		form.render("deal");
-  		//form.hide();
-  		var elements = new Array("zrbbh","zdmj","lzmj","cqgm","zzlzmj","zzcqgm","yjhs","fzzlzmj","fzzcqgm","bz");
+  		form.hide();
+  		var elements = new Array("qy","dkmc","ydxz","ydxzdh","jsydmj","rjl","ghjzgm","jzkzgd","jzmd","lhl","nbzs","dxmk","ghsjly","bz");
   		paneloper.init(form,elements);
   		paneloper.hide();
   	}
