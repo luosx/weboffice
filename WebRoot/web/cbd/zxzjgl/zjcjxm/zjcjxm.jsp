@@ -109,6 +109,7 @@ function shows(){
 	<div align="center" style="margin-left: 10px;  width:1100px;">
 	      <h1>商务区分中心资金筹集情况表</h1>
 	</div>
+	<!-- 
 	<div  align="left" style="margin-left: 20px;  width:1100px;">
 	      年份选择 <select id="sel" onchange="shows"> 
 			<option value="2010">2010</option>
@@ -123,6 +124,7 @@ function shows(){
 			<option value="2019" >2019</option>
 			</select>
 	</div>
+	 -->
 	<div  align="right" style="margin-left: 10px;  width:1100px;">
 	      单位：亿元&nbsp;
 	</div>
