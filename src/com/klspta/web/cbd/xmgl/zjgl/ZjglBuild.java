@@ -64,41 +64,41 @@ public class ZjglBuild {
        for (int i=0;i<list.size();i++){
          stringBuffer.append("<tr><td width='200px' class='tr04'>"+
          delNull(String.valueOf( list.get(i).get("lb")))+
-        "</td><td class='tr04'><input class='tr04' type='text' style='width:70px;' onchange='addzjlr(this); return false' value='" +
+        "</td><td class='tr04'><input class='tr04' type='text' style='width:70px;hight:15px;' onchange='addzjlr(this); return false' value='" +
         delNull(String.valueOf(list.get(i).get("ysfy")))+ "'  id='lr@"+String.valueOf( list.get(i).get("status"))+
-        "@2'/></td><td colspan='2' class='tr04'><input class='tr04' type='text' style='width:180px;' onchange='addzjlr(this); return false' value='" +
+        "@2'/></td><td colspan='2' class='tr04'><input class='tr04' type='text' style='width:180px;hight:15px;' onchange='addzjlr(this); return false' value='" +
         delNull( String.valueOf( list.get(i).get("lj")))+ " ' id='lr@"+String.valueOf( list.get(i).get("status"))+
-       "@3'/></td><td class='tr04'><input class='tr04' type='text' style='width:90px;' onchange='addzjlr(this); return false' value='" +
+       "@3'/></td><td class='tr04'><input class='tr04' type='text' style='width:90px;hight:15px;' onchange='addzjlr(this); return false' value='" +
        delNull(String.valueOf(list.get(i).get("YFSDZ")))+  " ' id='lr@"+String.valueOf( list.get(i).get("status"))+
-        "@4'/></td><td class='tr04'><input class='tr04' type='text' style='width:90px;' onchange='addzjlr(this); return false' value='" +
+        "@4'/></td><td class='tr04'><input class='tr04' type='text' style='width:90px;hight:15px;' onchange='addzjlr(this); return false' value='" +
         delNull(String.valueOf( list.get(i).get("ZJJD")))+ " ' id='lr@"+String.valueOf( list.get(i).get("status"))+
-        "@5'/></td><td class='tr04'><input class='tr04' type='text' style='width:90px;' onchange='addzjlr(this); return false' value='" +
+        "@5'/></td><td class='tr04'><input class='tr04' type='text' style='width:90px;hight:15px;' onchange='addzjlr(this); return false' value='" +
         delNull(String.valueOf( list.get(i).get("CQYE")))+ " ' id='lr@"+String.valueOf( list.get(i).get("status"))+
-        "@6'/></td><td class='tr04'><input class='tr04' type='text' style='width:90px;' onchange='addzjlr(this); return false' value='" +
+        "@6'/></td><td class='tr04'><input class='tr04' type='text' style='width:90px;hight:15px;' onchange='addzjlr(this); return false' value='" +
         delNull(String.valueOf( list.get(i).get("YY")))+ " ' id='lr@"+String.valueOf( list.get(i).get("status"))+
-        "@7'/></td><td class='tr04'><input class='tr04' type='text' style='width:90px;' onchange='addzjlr(this); return false' value='" +
+        "@7'/></td><td class='tr04'><input class='tr04' type='text' style='width:90px;hight:15px;' onchange='addzjlr(this); return false' value='" +
         delNull(String.valueOf(list.get(i).get("EY")))+ " ' id='lr@"+String.valueOf( list.get(i).get("status"))+
-        "@8'/></td><td class='tr04'><input class='tr04' type='text' style='width:90px;' onchange='addzjlr(this); return false' value='" +
+        "@8'/></td><td class='tr04'><input class='tr04' type='text' style='width:90px;hight:15px;' onchange='addzjlr(this); return false' value='" +
         delNull(String.valueOf(list.get(i).get("SANY")))+  "' id='lr@"+String.valueOf( list.get(i).get("status"))+
-        "@9'/></td><td class='tr04'><input class='tr04' type='text' style='width:90px;' onchange='addzjlr(this); return false' value='" +
+        "@9'/></td><td class='tr04'><input class='tr04' type='text' style='width:90px;hight:15px;' onchange='addzjlr(this); return false' value='" +
         delNull(String.valueOf(list.get(i).get("SIY")))+  " ' id='lr@"+String.valueOf( list.get(i).get("status"))+
-        "@10'/></td><td class='tr04'><input class='tr04' type='text' style='width:90px;' onchange='addzjlr(this); return false' value='" +
+        "@10'/></td><td class='tr04'><input class='tr04' type='text' style='width:90px;hight:15px;' onchange='addzjlr(this); return false' value='" +
         delNull(String.valueOf(list.get(i).get("WY")))+  " ' id='lr@"+String.valueOf( list.get(i).get("status"))+
-        "@11'/></td><td class='tr04'><input class='tr04' type='text' style='width:90px;' onchange='addzjlr(this); return false' value='" +
+        "@11'/></td><td class='tr04'><input class='tr04' type='text' style='width:90px;hight:15px;' onchange='addzjlr(this); return false' value='" +
         delNull(String.valueOf(list.get(i).get("LY")))+  " ' id='lr@"+String.valueOf( list.get(i).get("status"))+
-        "@12'/></td><td class='tr04'><input class='tr04' type='text' style='width:90px;' onchange='addzjlr(this); return false' value='" +
+        "@12'/></td><td class='tr04'><input class='tr04' type='text' style='width:90px;hight:15px;' onchange='addzjlr(this); return false' value='" +
         delNull(String.valueOf(list.get(i).get("QY")))+ " ' id='lr@"+String.valueOf( list.get(i).get("status"))+
-        "@13'/></td><td class='tr04'><input class='tr04' type='text' style='width:90px;' onchange='addzjlr(this); return false' value='" +
+        "@13'/></td><td class='tr04'><input class='tr04' type='text' style='width:90px;hight:15px;' onchange='addzjlr(this); return false' value='" +
         delNull(String.valueOf(list.get(i).get("BAY")))+  " ' id='lr@"+String.valueOf( list.get(i).get("status"))+
-        "@14'/></td><td class='tr04'><input class='tr04' type='text' style='width:90px;' onchange='addzjlr(this); return false' value='" +
+        "@14'/></td><td class='tr04'><input class='tr04' type='text' style='width:90px;hight:15px;' onchange='addzjlr(this); return false' value='" +
         delNull(String.valueOf(list.get(i).get("JY")))+  " ' id='lr@"+String.valueOf( list.get(i).get("status"))+
-        "@15'/></td><td class='tr04'><input class='tr04' type='text' style='width:90px;' onchange='addzjlr(this); return false' value='" +
+        "@15'/></td><td class='tr04'><input class='tr04' type='text' style='width:90px;hight:15px;' onchange='addzjlr(this); return false' value='" +
         delNull( String.valueOf( list.get(i).get("SIYUE")))+ " ' id='lr@"+String.valueOf( list.get(i).get("status"))+
-        "@16'/></td><td class='tr04'><input class='tr04' type='text' style='width:90px;' onchange='addzjlr(this); return false' value='" +
+        "@16'/></td><td class='tr04'><input class='tr04' type='text' style='width:90px;hight:15px;' onchange='addzjlr(this); return false' value='" +
         delNull(String.valueOf(list.get(i).get("SYY")))+ " ' id='lr@"+String.valueOf( list.get(i).get("status"))+
-        "@17'/></td><td class='tr04'><input class='tr04' type='text' style='width:90px;' onchange='addzjlr(this); return false' value='" +
+        "@17'/></td><td class='tr04'><input class='tr04' type='text' style='width:90px;hight:15px;' onchange='addzjlr(this); return false' value='" +
         delNull(String.valueOf(list.get(i).get("SEY")))+  " ' id='lr@"+String.valueOf( list.get(i).get("status"))+
-        "@18'/></td><td class='tr04'><input class='tr04' type='text' style='width:90px;' onchange='addzjlr(this); return false' value='" +
+        "@18'/></td><td class='tr04'><input class='tr04' type='text' style='width:90px;hight:15px;' onchange='addzjlr(this); return false' value='" +
         delNull(String.valueOf(list.get(i).get("LRSP")))+ " ' id='lr@"+String.valueOf( list.get(i).get("status"))+
         "@19'/></td></tr>" );
        }
