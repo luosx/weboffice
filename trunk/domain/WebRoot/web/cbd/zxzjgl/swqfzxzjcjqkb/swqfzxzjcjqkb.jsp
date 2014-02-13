@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@page import="com.klspta.model.CBDReport.CBDReportManager"%>
 <%
     String path = request.getContextPath();
 			String basePath = request.getScheme() + "://"
@@ -20,48 +21,47 @@
 	<%@ include file="/base/include/restRequest.jspf"%>
 	<script src="base/include/jquery-1.10.2.js"></script>
 	<style type="text/css">
-table {
-	border: 1px solid #000000;
-	padding: 0;
-	margin: 0 auto;
-	border-collapse: collapse;
-}
-input{
-
-
-}
-td {
-	border: 1px solid #000000;
-	background: #fff;
-	font-size: 18px;
-	padding: 3px 3px 3px 8px;
-	color: #000000;
-	text-align:center;
-}
-h1{
-  font-size: 24px;
-  }
-
-td1 {
-	border: 1px solid #000000;
-	background: #adadad;
-	font-size: 18px;
-	padding: 3px 3px 3px 8px;
-	color: #fdfdfd;
-	text-align:center;
-}
-  .tr01{
-  	background-color: #C0C0C0;
-  	font-weight:bold;
-    line-height: 30px;
-    text-align:center;
-  }
-  .tr02{
-  	background-color: #FCFCFC;
-  }
-   .tr03{
-  	background-color: #FCFCFC;
-  }
+  		table{
+		    font-size: 14px;
+		    background-color: #A8CEFF;
+		    border-color:#000000;
+		    /**
+		    border-left:1dp #000000 solid;
+		    border-top:1dp #000000 solid;
+		    **/
+		    color:#000000;
+		    border-collapse: collapse;
+  		}
+  		tr{
+    		border-width: 0px;
+    		text-align:center;
+  		}
+  		td{
+    		text-align:center;
+    		border-color:#000000;
+		    /**
+		    border-bottom:1dp #000000 solid;
+		    border-right:1dp #000000 solid;
+		    **/
+		  }
+		.title{
+		    font-weight:bold;
+		    font-size: 15px;
+		    text-align:center;
+		    line-height: 50px;
+			margin-top: 3px;
+		  }
+	  	.trtotal{
+		  	text-align:center;
+		    font-weight:bold;
+		    line-height: 30px;
+		    background-color: #A8CEFF;
+		   }
+	  	.trsingle{
+		    background-color: #D1E5FB;
+		    line-height: 20px;
+		    text-align:center;
+		   }
 </style>
 </head>
 <script type="text/javascript">
@@ -109,6 +109,7 @@ function shows(){
 	<div align="center" style="margin-left: 10px;  width:800px;">
 	      <h1>商务区分中心资金筹集情况表</h1>
 	</div>
+	<!-- 
 	<div  align="right" style="margin-left: 10px;  width:800px;">
 	      年份选择 <select id="sel" onchange="shows"> 
 			<option value="2010">2010</option>
@@ -123,8 +124,10 @@ function shows(){
 			<option value="2019" >2019</option>
 			</select>
 	</div>
-	
+	 -->
 	<div style="margin-left:20px">
+		<%=new CBDReportManager().getReport("ZJCJQK",new Object[]{"false"})%>
+		<!-- 
 		<table id='SWQFZXZJCJQKB' width='800' border='1' cellpadding='1' cellspacing='0'>
 			<tr class='tr01' >
 				<td id='0_0' height='10' width='230' class='tr01'>资金来源</td>
@@ -176,6 +179,7 @@ function shows(){
 			</tr>
 			
 		</table>
+		 -->
 	</div>
 
 </body>
