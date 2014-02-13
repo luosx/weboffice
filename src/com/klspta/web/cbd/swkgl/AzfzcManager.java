@@ -21,76 +21,73 @@ public class AzfzcManager extends AbstractBaseBean {
 		String sql = "select t.*  from azfzc t ";
 		List<Map<String, Object>> list = query(sql, YW);
 		StringBuffer result = new StringBuffer(
-				"<table id='azftable' name='esftable' ><tr id='-1'><td class='tr01'>序号</td><td class='tr01'>用地名称</td><td  class='tr01'>土地一级开发主体</td><td  class='tr01'>占地面积</td><td width=300 class='tr01'>建设用地</td><td  class='tr01'>规划容积率</td><td class='tr01'>规划建筑规模</td> ");
+				"<table id='azftable' name='esftable' ><tr id='-1'><td class='title'>序号</td><td class='title'>用地名称</td><td  class='title'>土地一级开发主体</td><td  class='title'>占地面积</td><td width=300 class='title'>建设用地</td><td  class='title'>规划容积率</td><td class='title'>规划建筑规模</td> ");
 		result
-				.append("<td class='tr01'>规划用途</td><td  class='tr01'>控高</td><td  class='tr01'>土地成本</td><td  class='tr01'>预计可形成安置房套数</td><td class='tr01'>供地方式</td><td class='tr01'>土地开发建设补偿协议</td><td class='tr01'>土地移交</td><td class='tr01'>安置房建设单位</td><td class='tr01'>土地出让合同</td><td class='tr01'>出让合同约定开工时间</td><td class='tr01'>土地证</td><td class='tr01'>备注</td><td class='tr01'>操作</td></tr> ");
-		String add = "<tr id='newRow' class='tr02' style='display:none;'><td align='center' height='10' width='10'></td>"
-				+ "<td align='center' height='10' width='10'><input id='ydmc' size=10 type='text'/></td>"
-				+ "<td align='center' height='10' width='10'><input id='tdyjkfzt' size=10 type='text' /></td>"
-				+ "<td align='center' height='10' width='5'><input id='zdmj' size=10 type='text' /></td>"
-				+ "<td align='center' height='10' width='5'><input id='jsyd' size=10 type='text' /></td>"
-				+ "<td align='center' height='10' width='5'><input id='ghrjl' size=10 type='text' /></td>"
-				+ "<td align='center' height='10' width='5'><input id='ghjzgm' size=10 type='text' /></td>"
-				+ "<td align='center' height='10' width='5'><input id='ghyt' size=10 type='text'/></td>"
-				+ "<td align='center' height='10' width='5'><input id='kg' size=10 type='text' /></td>"
-				+ "<td align='center' height='10' width='10'><input id='tdcb' size=10 type='text' /></td>"
-				+ "<td align='center' height='10' width='10'><input id='yjkxcazfts' size=10 type='text' /></td>"
-				+ "<td align='center' height='10' width='10'><input id='gdfs' size=10 type='text' /></td>"
-				+ "<td align='center' height='10' width='10'><input id='tdkfjsbcxy' size=10 type='text' /></td>"
-				+ "<td align='center' height='10' width='10'><input id='tdyj' size=10 type='text' /></td>"
-				+ "<td align='center' height='10' width='10'><input id='azfjsdw' size=10 type='text' /></td>"
-				+ "<td align='center' height='10' width='10'><input id='tdcrht' size=10 type='text' /></td>"
-				+ "<td align='center' height='10' width='10'><input id='crhtydkgsj' size=10 type='text' /></td>"
-				+ "<td align='center' height='10' width='10'><input id='tdz' size=10 type='text' /></td>"
-				+ "<td align='center' height='10' width='10'><input id='bz' size=10 type='text' /></td>"
+				.append("<td class='title'>规划用途</td><td  class='title'>控高</td><td  class='title'>土地成本</td><td  class='title'>预计可形成安置房套数</td><td class='title'>供地方式</td><td class='title'>土地开发建设补偿协议</td><td class='title'>土地移交</td><td class='title'>安置房建设单位</td><td class='title'>土地出让合同</td><td class='title'>出让合同约定开工时间</td><td class='title'>土地证</td><td class='title'>备注</td></tr> ");
+		String add = "<tr id='newRow' class='trsingle' style='display:none;'><td align='center' height='10' width='10'></td>"
+				+ "<td align='center' height='10' width='100'><input id='ydmc' size=10 type='text'/></td>"
+				+ "<td align='center' height='10' width='100'><input id='tdyjkfzt' size=10 type='text' /></td>"
+				+ "<td align='center' height='10' width='100'><input id='zdmj' size=10 type='text' /></td>"
+				+ "<td align='center' height='10' width='100'><input id='jsyd' size=10 type='text' /></td>"
+				+ "<td align='center' height='10' width='100'><input id='ghrjl' size=10 type='text' /></td>"
+				+ "<td align='center' height='10' width='100'><input id='ghjzgm' size=10 type='text' /></td>"
+				+ "<td align='center' height='10' width='100'><input id='ghyt' size=10 type='text'/></td>"
+				+ "<td align='center' height='10' width='100'><input id='kg' size=10 type='text' /></td>"
+				+ "<td align='center' height='10' width='100'><input id='tdcb' size=10 type='text' /></td>"
+				+ "<td align='center' height='10' width='100'><input id='yjkxcazfts' size=10 type='text' /></td>"
+				+ "<td align='center' height='10' width='100'><input id='gdfs' size=10 type='text' /></td>"
+				+ "<td align='center' height='10' width='100'><input id='tdkfjsbcxy' size=10 type='text' /></td>"
+				+ "<td align='center' height='10' width='100'><input id='tdyj' size=10 type='text' /></td>"
+				+ "<td align='center' height='10' width='100'><input id='azfjsdw' size=10 type='text' /></td>"
+				+ "<td align='center' height='10' width='100'><input id='tdcrht' size=10 type='text' /></td>"
+				+ "<td align='center' height='10' width='100'><input id='crhtydkgsj' size=10 type='text' /></td>"
+				+ "<td align='center' height='10' width='100'><input id='tdz' size=10 type='text' /></td>"
+				+ "<td align='center' height='10' width='100'><input id='bz' size=10 type='text' /></td>"
 				+ "<td style='display:none;'><input  id='yw_guid'></td>"
-				+ "<td><a href='javascript:save()'>保存</a>&nbsp;&nbsp;<a href='javascript:cancel()'>取消</a></td>  "
 				+ "</tr>";
 		result.append(add);
 		for (int i = 0; i < list.size(); i++) {
 			String rownum = i + 1 + "";
 			String yw_guid = (String) (list.get(i)).get("YW_GUID");
-			result.append("<tr id=row" + i + "><td class='tr02'>" + rownum
-					+ "</td><td class='tr02'>"
+			result.append("<tr id=row" + i + "><td class='trsingle'>" + rownum
+					+ "</td><td class='trsingle'>"
 					+ (String) (list.get(i)).get("YDMC")
-					+ "</td><td class='tr02'>"
+					+ "</td><td class='trsingle'>"
 					+ (String) (list.get(i)).get("TDYJKFZT")
-					+ "</td><td class='tr02'>"
+					+ "</td><td class='trsingle'>"
 					+ (String) (list.get(i)).get("ZDMJ")
-					+ "</td><td class='tr02'>"
+					+ "</td><td class='trsingle'>"
 					+ (String) (list.get(i)).get("JSYD")
-					+ "</td><td class='tr02'>"
+					+ "</td><td class='trsingle'>"
 					+ (String) (list.get(i)).get("GHRJL")
-					+ "</td><td class='tr02'>"
+					+ "</td><td class='trsingle'>"
 					+ (String) (list.get(i)).get("GHJZGM")
-					+ "</td><td class='tr02'>"
+					+ "</td><td class='trsingle'>"
 					+ (String) (list.get(i)).get("GHYT")
-					+ "</td><td class='tr02'>"
+					+ "</td><td class='trsingle'>"
 					+ (String) (list.get(i)).get("KG")
-					+ "</td><td class='tr02'>"
+					+ "</td><td class='trsingle'>"
 					+ (String) (list.get(i)).get("TDCB")
-					+ "</td><td class='tr02'>"
+					+ "</td><td class='trsingle'>"
 					+ (String) (list.get(i)).get("YJKXCAZFTS")
-					+ "</td><td class='tr02'>"
+					+ "</td><td class='trsingle'>"
 					+ (String) (list.get(i)).get("GDFS")
-					+ "</td><td class='tr02'>"
+					+ "</td><td class='trsingle'>"
 					+ (String) (list.get(i)).get("TDKFJSBCXY")
-					+ "</td><td class='tr02'>"
+					+ "</td><td class='trsingle'>"
 					+ (String) (list.get(i)).get("TDYJ")
-					+ "</td><td class='tr02'>"
+					+ "</td><td class='trsingle'>"
 					+ (String) (list.get(i)).get("AZFJSDW")
-					+ "</td><td class='tr02'>"
+					+ "</td><td class='trsingle'>"
 					+ (String) (list.get(i)).get("TDCRHT")
-					+ "</td><td class='tr02'>"
+					+ "</td><td class='trsingle'>"
 					+ (String) (list.get(i)).get("CRHTYDKGSJ")
-					+ "</td><td class='tr02'>"
+					+ "</td><td class='trsingle'>"
 					+ (String) (list.get(i)).get("TDZ")
-					+ "</td><td class='tr02'>"
+					+ "</td><td class='trsingle'>"
 					+ (String) (list.get(i)).get("BZ")
 					+ "</td><td style='display:none;'>" + yw_guid
-					+ "</td><td><a href='javascript:modify(" + i
-					+ ")'>修改</a>&nbsp;&nbsp;<a href=\"javascript:del('"
-					+ yw_guid + "')\">删除</a></td></tr>");
+					+ "</td></tr>");
 
 		}
 
