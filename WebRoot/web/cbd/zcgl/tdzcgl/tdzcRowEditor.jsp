@@ -109,7 +109,7 @@ ITableStyle its = new TableStyleEditRow();
 		                xtype: 'combo',
 		                id      : 'xmmc',
 		                value:'',
-		                store :[[1,'已出库'],[2,'待清理'],[3,'未受偿'],[4,'未供地'],[5,'长期库存'],[6,'已出让未出库']],
+		                store :[],
 		                fieldLabel: '项目名称',  
 		                width:'200'	,
 		                mode: "local",   
