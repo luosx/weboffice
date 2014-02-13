@@ -32,10 +32,12 @@ function initComponent() {
 						}, '-', {
 							xtype : 'button',
 							text : '添加',
+							id : 'add',
 							handler : add
 						}, '-', {
 							xtype : 'button',
 							text : '修改',
+							id:'modify',
 							handler : modify
 						}],
 				items : [{
@@ -45,6 +47,11 @@ function initComponent() {
 				}]
 			});
 	simple.render(document.body);
+	if(view == "R"){
+		var toolbar = simple.getTopToolbar();
+		toolbar.remove("modify");
+		toolbar.remove("add");
+	}
 }
 
 function initFile(){
