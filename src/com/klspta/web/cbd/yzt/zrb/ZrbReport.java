@@ -71,7 +71,6 @@ public class ZrbReport extends AbstractBaseBean implements IDataClass {
 			}
 			list.add(trBean);
 		}
-		
 		return list;
 	}
 	

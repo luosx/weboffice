@@ -152,10 +152,13 @@ public class ZrbData extends AbstractBaseBean implements Runnable {
      * @return
      */
     public boolean delete(String zrb){
-    	String sql = "delete from " + formName + " t where t.zrbbh = ?";
+    	String sql = "delete from jc_jiben where dkmc=?";
+    	update(sql, YW, new Object[]{zrb});
+    	sql = "delete from " + formName + " t where t.zrbbh = ?";
     	String sqlgis = "delete from " + form_gis + " t where t.zrbbh = ?";
     	update(sqlgis, GIS, new Object[]{zrb});
     	int result = update(sql, YW, new Object[]{zrb});
+    	
     	return result == 1 ? true : false;
     }
     
