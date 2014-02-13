@@ -3,6 +3,7 @@
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
+	String view = request.getParameter("view");
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -36,11 +37,11 @@
         items:[
         	{
                 title: '写字楼信息',
-                html: "<iframe width='"+w+"' height='"+h+"' src='web/cbd/qyjc/xzlzjjc/xzlxx/xzlxxViewFrame.jsp'/>" 
+                html: "<iframe width='"+w+"' height='"+h+"' src='web/cbd/qyjc/xzlzjjc/xzlxx/xzlxxViewFrame.jsp?view=<%=view%>'/>" 
             }
             ,{
                 title: '租金情况',
-                html: "<iframe width='"+w+"' height='"+h+"' src='web/cbd/qyjc/xzlzjjc/zjqk/zjqknd_pjzj.jsp'/>"
+                html: "<iframe width='"+w+"' height='"+h+"' src='web/cbd/qyjc/xzlzjjc/zjqk/zjqknd_pjzj.jsp?view=<%=view%>'/>"
             }
             ,{
                 title: '平均租金趋势分析',
