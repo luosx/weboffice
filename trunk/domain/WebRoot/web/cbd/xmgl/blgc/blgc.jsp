@@ -130,7 +130,6 @@ var yw_guid="";
 	 var sj=document.getElementById("sj").value;
 	 var sjbl=document.getElementById("sjbl").value;
 	 var bmjbr=document.getElementById("bmjbr").value;
-	 alert(bmjbr);
 	 var bz=document.getElementById("bz").value;
 	
 	if(sj==null||sj==''||sjbl==null||sjbl==''||bmjbr==null||bmjbr==''){
