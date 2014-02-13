@@ -4,6 +4,7 @@
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
+	String view = request.getParameter("view");
 	
 %>
 
@@ -57,6 +58,7 @@ input,img {
 </style>
 		<script>
 		var basePath="<%=basePath%>";
+		var view = "<%=view%>"
 </script>
 		<script src="js/azfEditor.js"></script>
 	</head>
