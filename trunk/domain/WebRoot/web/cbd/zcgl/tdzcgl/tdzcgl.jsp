@@ -132,7 +132,7 @@ ITableStyle its = new TableStyleEditRow();
   		var status = new Ext.form.ComboBox({
 	 	      fieldLabel: '状态',
 	 	     	id:'zt',
-				store : ["已出库","待清理","未受偿","未供地","长期库存","已出让但未入库项目","公共项目"],
+				store : ["已出库","待清理","未受偿","未供地","长期库存","已出让但未入库项目"],
 				width : 150,
 				displayField : 'state',
 				typeAhead : true,
