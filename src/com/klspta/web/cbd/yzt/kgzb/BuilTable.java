@@ -55,7 +55,7 @@ public class BuilTable {
 			buffer.append(delNull(String.valueOf(list.get(i).get("GHSJLY"))));
 			buffer.append("</td><td  onmouseover='mouseOver(this)' onmouseout='mouseOut(this)'>");
 			buffer.append(delNull(String.valueOf(list.get(i).get("BZ"))));
-			buffer.append("</td><td> <img  width='40px' height='40px' src='web/cbd/yzt/kgzb/image/m.png' onclick=\"modify('"+list.get(i).get("yw_guid").toString()+"')\"></img><img  width='40px' height='40px' src='web/cbd/yzt/kgzb/image/d.png' onclick=\"delet('"+list.get(i).get("yw_guid").toString()+"')\"></img></td></tr>");
+			buffer.append("</td><td> <img  width='40px' height='40px' src='web/cbd/yzt/kgzb/image/m.png' onclick=\"modify1('"+list.get(i).get("yw_guid").toString()+"')\"></img><img  width='40px' height='40px' src='web/cbd/yzt/kgzb/image/d.png' onclick=\"delet('"+list.get(i).get("yw_guid").toString()+"')\"></img></td></tr>");
 		}
 		return buffer;
 	}

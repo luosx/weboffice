@@ -24,13 +24,12 @@ public class KgzbManager extends AbstractBaseBean {
  * <br>Date:2014-1-15
  */
 	public void delet() {
-		String yw_guid = request.getParameter("yw_guid");
-		String type = request.getParameter("type");
-		type = UtilFactory.getStrUtil().unescape(type);
-		String delet = "delete dcsjk_kgzb where yw_guid=? and dqy=? ";
-		int i = update(delet, YW, new Object[] { yw_guid, type });
+		String dkmc = request.getParameter("dkmc");
+		dkmc = UtilFactory.getStrUtil().unescape(dkmc);
+		String delet = "delete dcsjk_kgzb where dkmc=?  ";
+		int i = update(delet, YW, new Object[] { dkmc });
 		if (i == 1) {
-			response("success");
+			response("true");
 		}
 
 	}
@@ -57,26 +56,23 @@ public class KgzbManager extends AbstractBaseBean {
  * <br>Date:2014-1-15
  */
 	public void save() {
-		String type = request.getParameter("type");
-		String yw_guid = request.getParameter("yw_guid");
-		String DKMC = request.getParameter("DKMC");
-		String YDXZDH = request.getParameter("YDXZDH");
-		String YDXZ = request.getParameter("YDXZ");
-		String JSYDMJ = request.getParameter("JSYDMJ");
-		String RJL = request.getParameter("RJL");
-		String GHJZGM = request.getParameter("GHJZGM");
+		String DKMC = request.getParameter("dkmc");
+		String YDXZDH = request.getParameter("ydxzdh");
+		String YDXZ = request.getParameter("ydxz");
+		String JSYDMJ = request.getParameter("jsydmj");
+		String RJL = request.getParameter("rjl");
+		String GHJZGM = request.getParameter("ghjzgm");
 
-		String JZKZGD = request.getParameter("JZKZGD");
-		String JZMD = request.getParameter("JZMD");
-		String LHL = request.getParameter("LHL");
-		String DBZS = request.getParameter("DBZS");
-		String DXMK = request.getParameter("DXMK");
-		String GHSJLY = request.getParameter("GHSJLY");
-		String BZ = request.getParameter("BZ");
-		String QY = request.getParameter("QY");
+		String JZKZGD = request.getParameter("jzkzgd");
+		String JZMD = request.getParameter("jzmd");
+		String LHL = request.getParameter("lhl");
+		String DBZS = request.getParameter("nbzs");
+		String DXMK = request.getParameter("dxmk");
+		String GHSJLY = request.getParameter("ghsjly");
+		String BZ = request.getParameter("bz");
+		String QY = request.getParameter("qy");
 
 		DKMC = UtilFactory.getStrUtil().unescape(DKMC);
-		type = UtilFactory.getStrUtil().unescape(type);
 		BZ = UtilFactory.getStrUtil().unescape(BZ);
 		YDXZ = UtilFactory.getStrUtil().unescape(YDXZ);
 		GHSJLY = UtilFactory.getStrUtil().unescape(GHSJLY);
@@ -88,24 +84,26 @@ public class KgzbManager extends AbstractBaseBean {
 		if (GHJZGM == null || GHJZGM.equals("")) {
 			GHJZGM = "0";
 		}
-		if (yw_guid != null && !yw_guid.equals("")) {
-			String sql = " update  dcsjk_kgzb set DKMC='" + DKMC + "',YDXZDH='"
+		String sql = "select * from dcsjk_kgzb where dkmc=?";
+		List<Map<String,Object>> list = query(sql, YW,new Object[]{DKMC});
+		if (list.size()>0) {
+			sql = " update  dcsjk_kgzb set DKMC='" + DKMC + "',YDXZDH='"
 					+ YDXZDH + "' ,YDXZ='" + YDXZ + "' ,JSYDMJ='" + JSYDMJ
 					+ "',RJL='" + RJL + "',GHJZGM='" + GHJZGM + "',JZKZGD='"
 					+ JZKZGD + "',JZMD='" + JZMD + "',LHL='" + LHL + "',DBZS='"
 					+ DBZS + "',DXMK='" + DXMK + "',GHSJLY='" + GHSJLY
-					+ "',BZ='" + BZ + "' where yw_guid=? and dqy=?";
-			i = update(sql, YW, new Object[] { yw_guid, type });
+					+ "',BZ='" + BZ + "' where dkmc=?";
+			i = update(sql, YW, new Object[] { DKMC });
 		} else {
-			String sql = " insert into  dcsjk_kgzb ( DKMC,YDXZDH,YDXZ ,JSYDMJ,RJL,GHJZGM,JZKZGD,JZMD,LHL,DBZS,DXMK,GHSJLY,BZ,QY,dqy) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+			sql = " insert into  dcsjk_kgzb ( DKMC,YDXZDH,YDXZ ,JSYDMJ,RJL,GHJZGM,JZKZGD,JZMD,LHL,DBZS,DXMK,GHSJLY,BZ,QY) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 			i = update(
 					sql,
 					YW,
 					new Object[] { DKMC, YDXZDH, YDXZ, JSYDMJ, RJL, GHJZGM,
-							JZKZGD, JZMD, LHL, DBZS, DXMK, GHSJLY, BZ, QY, type });
+							JZKZGD, JZMD, LHL, DBZS, DXMK, GHSJLY, BZ, QY});
 		}
 		if (i == 1) {
-			response("success");
+			response("{success:true}");
 		}
 	}
 
