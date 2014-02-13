@@ -47,7 +47,7 @@
 			dhxLayout.setEffect("resize", true);
 			dhxLayout.cells("a").attachURL("<%=basePath%>base/fxgis/framework/gisViewFrame.jsp");
 			//dhxLayout.cells("b").setWidth(width * 0.61);
-			dhxLayout.cells("b").attachURL("xzlxx.jsp");
+			dhxLayout.cells("b").attachURL("xzlxxEditor.jsp");
 			dhxLayout.cells("b").hideHeader();
 			//dhxLayout.setAutoSize("a;b", "a;b");
 			//页面大小修改时重新刷新
@@ -55,13 +55,13 @@
 				//dhxLayout.cells("a").fixSize(true, false);
 				//dhxLayout.cells(id).getFrame().refresh;
 				//dhxLayout.cells("a").attachURL("<%=basePath%>base/fxgis/framework/gisViewFrame.jsp");
-				dhxLayout.cells("b").attachURL("xzlxx.jsp");
+				dhxLayout.cells("b").attachURL("xzlxxEditor.jsp");
 				
 			});
 		}	
 	
 		function drawPolygonCallback(s){
-			frames[1].setRecord(s);
+			frames[1].frames['report'].setRecord(s);
 		}
 	</script>
 	<body onLoad="doOnLoad()" >
