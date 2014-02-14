@@ -9,6 +9,8 @@ function showMap(objid){
 	}
 	var key = objid.cells[1].innerText;
 	xmmc = key;
+	
+	
 	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").clear();
 	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").findFeature("cbd", "5", xmmc, "XMMC");
 
@@ -19,8 +21,19 @@ function showMap(objid){
 
 //双击编辑地图
 function editMap(objid){
+	
+	if(table.element == undefined){
+		table.init(document.getElementById("HXXM"));
+	}
 	var key = objid.cells[1].innerText;
 	xmmc = key;
+	
+	var array = paneloper.getElements();
+	for(var i = 1; i < objid.cells.length-1; i++){
+		var value = objid.cells[i].innerText;	
+		paneloper.insertValue(array[i-1], value);
+	}
+	paneloper.show();
 	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").clear();
 	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").drawPolygon();
 }
@@ -38,19 +51,16 @@ function setRecord(polygon){
 function add(){
 	var table = new tableoper();
 	table.init(document.getElementById("HXXM"));
-	Ext.MessageBox.prompt('输入', '项目名称:', function(btn, text){
-		if(btn == 'ok'){
-			var rows = table.addRow(3,3,num);
-			num++;
-			rows.cells[1].innerHTML = text;
-			//向后台库中添加一笔数据
-			putClientCommond("hxxmHandle","insert");
-	    	putRestParameter("xmmc",escape(escape(text))); 
-	    	var result = restRequest();
-	    	parent.parent.document.frames[0].combo.store.loadData(array);
-	    	document.location.reload();
-    	}
-	});
+
+	paneloper.show();
+}
+
+function update(){
+	var annoations = table.getAnnotations();
+	if(annoations.length > 0){
+		var objid = table.element.rows[annoations[0]];
+		editMap(objid);
+	}
 }
 
 function dele(){

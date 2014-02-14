@@ -17,7 +17,6 @@ function initComponent() {
 
 	simple = new Ext.FormPanel({
 				frame : true,
-				title : '红线项目列表',
 				bodyStyle : 'padding:5px 5px 0',
 				tbar : [{
 							xtype : 'label',
@@ -37,10 +36,17 @@ function initComponent() {
 						}, '-', {
 							xtype : 'button',
 							text : '添加',
+							id : 'add',
 							handler : add
 						}, '-', {
 							xtype : 'button',
+							text : '修改',
+							id : 'update',
+							handler : update
+						},'-', {
+							xtype : 'button',
 							text : '删除',
+							id : 'dele',
 							handler : dele
 						}],
 				items : [{
@@ -50,6 +56,12 @@ function initComponent() {
 				}]
 			});
 	simple.render(document.body);
+	if(view == "R"){
+		var toolbar = simple.getTopToolbar();
+		toolbar.remove("update");
+		toolbar.remove("add");
+		toolbar.remove("dele");
+	}
 }
 
 
@@ -139,6 +151,10 @@ function exportExcel() {
 
 function add(){
 	document.frames['report'].add();
+}
+
+function update(){
+	document.frames['report'].update();
 }
 
 function dele(){
