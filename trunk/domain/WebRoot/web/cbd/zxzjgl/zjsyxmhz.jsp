@@ -11,9 +11,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
   <head>
     <base href="<%=basePath%>">
-    
     <title></title>
-    
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
@@ -21,56 +19,47 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="description" content="This is my page">
 	<%@ include file="/base/include/restRequest.jspf"%>
 	<style type="text/css">
-table {
-	border: 1px solid #000000;
-	padding: 0;
-	margin: 0 auto;
-	border-collapse: collapse;
-}
-input{
-
-
-}
-td {
-	border: 1px solid #000000;
-	background: #fff;
-	font-size: 18px;
-	padding: 3px 3px 3px 8px;
-	color: #000000;
-	text-align:center;
-}
-h1{
-  font-size: 24px;
-  }
-
-td1 {
-	border: 1px solid #000000;
-	background: #adadad;
-	font-size: 18px;
-	padding: 3px 3px 3px 8px;
-	color: #fdfdfd;
-	text-align:center;
-}
-.td0_0 {
-	background-color: #C0C0C0;
-	background-image:
-		url("<%=basePath%>/web/cbd/zxzjgl/zjlyytx/title2.jpg");
-	background-repeat: no-repeat;
-	/**
-   	 filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='<%=basePath%>/web/cbd/framework/images/titlebbd.jpg',izingMethod='scale');
-   **/
-}
-  .tr01{
-  	background-color: #D9D9D9;
-    line-height: 20px;
-    text-align:center;
-  }
-  .tr02{
-  	background-color: #FCFCFC;
-  }
-   .tr03{
-  	background-color: #FCFCFC;
-  }
+  		table{
+		    font-size: 14px;
+		    background-color: #A8CEFF;
+		    border-color:#000000;
+		    /**
+		    border-left:1dp #000000 solid;
+		    border-top:1dp #000000 solid;
+		    **/
+		    color:#000000;
+		    border-collapse: collapse;
+  		}
+  		tr{
+    		border-width: 0px;
+    		text-align:center;
+  		}
+  		td{
+    		text-align:center;
+    		border-color:#000000;
+		    /**
+		    border-bottom:1dp #000000 solid;
+		    border-right:1dp #000000 solid;
+		    **/
+		  }
+		.title{
+		    font-weight:bold;
+		    font-size: 15px;
+		    text-align:center;
+		    line-height: 50px;
+			margin-top: 3px;
+		  }
+	  	.trtotal{
+		  	text-align:center;
+		    font-weight:bold;
+		    line-height: 30px;
+		    background-color: #A8CEFF;
+		   }
+	  	.trsingle{
+		    background-color: #D1E5FB;
+		    line-height: 20px;
+		    text-align:center;
+		   }
 	</style>
   </head>
   <script type="text/javascript">
@@ -85,7 +74,12 @@ td1 {
 	<div align="center" style="margin-left: 10px;  width:1200px;">
 	      <h1>商务区分中心资金使用情况表</h1>
 	</div>
+	<div>
+		<%=new CBDReportManager().getReport("XMZXSY",new Object[]{"false"})%>
+	</div>
+	<!-- 
  	<table width='1200' border='1' cellpadding='1' cellspacing='0'>
+ 		
  		<tr >
 			<td rowspan="3" colspan="1"  class='tr01'>序号</td>
 			<td rowspan="3" colspan="1"  class='td0_0' height='10' width='120'></td>
@@ -213,6 +207,6 @@ td1 {
  		</tr>
  		
  	</table>
-  	 
+ 	 -->
   </body>
 </html>
