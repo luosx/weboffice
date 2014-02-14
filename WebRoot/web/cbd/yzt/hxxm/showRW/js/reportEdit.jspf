@@ -40,7 +40,7 @@ function addContext(obj_id, key, valueIndex){
     var modiForm = document.createElement("<form>");
     var modiInput;
     if(valueIndex != '34'){
-    	modiInput = document.createElement("<input type='text' name='data' id='data' onblur='ajax2(\"" + obj.id + "\", this, \"" + key + "\", \"" + valueIndex + "\")'>");
+    	modiInput = document.createElement("<input type='text' name='data' style='width:50px;' id='data' onblur='ajax2(\"" + obj.id + "\", this, \"" + key + "\", \"" + valueIndex + "\")'>");
    	    modiForm.appendChild(modiInput);
     	obj.appendChild(modiForm);
     	modiInput.innerText = obj.innerText;

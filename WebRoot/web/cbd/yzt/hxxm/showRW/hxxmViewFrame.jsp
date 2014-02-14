@@ -6,6 +6,7 @@
 			+ path + "/";
     String layoutPath = basePath + "base/thirdres/dhtmlx//dhtmlxLayout//codebase";
     String toolbarPath = basePath + "base/thirdres/dhtmlx//dhtmlxToolbar//codebase";
+    String view = request.getParameter("view");
 %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -51,11 +52,11 @@
 			dhxLayout.cells("a").hideHeader();
 			dhxLayout.setEffect("resize", true);
 			dhxLayout.cells("a").attachURL("<%=basePath%>base/fxgis/framework/gisViewFrame.jsp");
-			dhxLayout.cells("b").attachURL("hxxmEditor.jsp");
+			dhxLayout.cells("b").attachURL("hxxmEditor.jsp?view=<%=view%>");
 			dhxLayout.cells("b").hideHeader();
 			//页面大小修改时重新刷新
 			dhxLayout.attachEvent("onPanelResizeFinish", function(){
-				dhxLayout.cells("b").attachURL("hxxmEditor.jsp");
+				dhxLayout.cells("b").attachURL("hxxmEditor.jsp?view=<%=view%>");
 			});
 		}	
 		function drawPolygonCallback(s){
