@@ -69,6 +69,9 @@ public class ZjcjqkReport extends AbstractBaseBean implements IDataClass {
 		bodyList.add(getTrBean("1.3 国有土地收益基金", formatData.get("GYTDSYJJ")));
 		bodyList.add(getTrBean("2 出让回笼资金", formatData.get("CRHLZJ")));
 		bodyList.add(getTrBean("3 其他资金", formatData.get("QTZJ")));
+		TRBean trBean = getTrBean("合计", formatData.get("sum"));
+		trBean.setCssStyle("total");
+		bodyList.add(trBean);
 		return bodyList;
 	}
 	
@@ -88,8 +91,25 @@ public class ZjcjqkReport extends AbstractBaseBean implements IDataClass {
 			tableMap.put("ysfy", ysfy);
 			tableMap.put("he", he);
 			tableMap.put("wdw", wdw);
-			formatData.put(key, tableMap);
+			if(key.equals("CRZJ") || key.equals("ZRJGDK") || key.equals("SSZTDZ") || key.equals("GYTDSYJJ") || key.equals("CRHLZJ") || key.equals("QTZJ")){
+				formatData.put(key, tableMap);
+			}
 		}
+		
+		//添加合计
+		Map<String, String> countMap = new HashMap<String, String>();
+		for(String key : formatData.keySet()){
+			Map<String, String> leafMap = formatData.get(key);
+			for(String leafkey : leafMap.keySet()){
+				String value = "0";
+				if(countMap.containsKey(leafkey)){
+					value = String.valueOf(Long.parseLong(countMap.get(leafkey)) + Long.parseLong(leafMap.get(leafkey)));
+				}
+				countMap.remove(leafkey);
+				countMap.put(leafkey, value);
+			}
+		}
+		formatData.put("sum", countMap);
 		return formatData;
 	}
 	
