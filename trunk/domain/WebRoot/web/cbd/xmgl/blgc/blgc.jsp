@@ -288,11 +288,6 @@ function del(bs){
 							备注
 						</h3>
 					</td>
-					<td align="center" width="100px">
-						<h3>
-							操作
-						</h3>
-					</td>
 				</tr>
 				<%
 				    if (list != null) {
@@ -304,9 +299,7 @@ function del(bs){
 					<td align="center" width="500px"><%=list.get(i).get("sjbl")%></td>
 					<td align="center" width="80px"><%=list.get(i).get("bmjbr")%></td>
 					<td align="center" width="200px"><%=list.get(i).get("bz")%></td>
-					<td align="center" width="200px" class="tr03">
-				    <a onclick="modify('<%=(i+1)%>','<%=list.get(i).get("yw_guid")%>')">修改</a>	<a onclick="del('<%=list.get(i).get("yw_guid")%>')">&nbsp;&nbsp;&nbsp;删除</a>
-					</td>
+					
 				</tr>
 				<%
 				    }
