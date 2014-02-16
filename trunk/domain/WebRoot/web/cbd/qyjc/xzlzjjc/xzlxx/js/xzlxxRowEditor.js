@@ -86,15 +86,15 @@ function add(){
 }
 
 function dele(){
-	Ext.MessageBox.confirm('确认', '系统将删除所有选中自然斑，确定?', function(btn,text){
+	Ext.MessageBox.confirm('确认', '系统将删除所有选中写字楼信息，确定?', function(btn,text){
 		if(btn == 'yes'){
 			var choseValue = table.getAnnotations();
 			var choseString = '';
 			while(choseValue.length != 0){
-				choseString += table.getValue(choseValue.pop(),"1") + ",";
+				choseString += table.getValue(choseValue.pop(),"0") + ",";
 			}
-			putClientCommond("zrbHandle","delete");
-			putRestParameter("zrbbh",choseString);
+			putClientCommond("qyjcManager","del");
+			putRestParameter("bh",choseString);
 			myData = restRequest();
 			if(myData){
 				Ext.MessageBox.alert('提醒', '删除成功！', function(btn, text){
@@ -112,7 +112,7 @@ function dele(){
 
 //根据用地单位和关键字作过滤
 function queryZrb(keyword){
-	putClientCommond("zrbHandle","getReport");
+	putClientCommond("qyjcManager","getReport");
 	putRestParameter("keyword",escape(escape(keyword)));
 	myData = restRequest();
   	document.getElementById("show").innerHTML = myData;

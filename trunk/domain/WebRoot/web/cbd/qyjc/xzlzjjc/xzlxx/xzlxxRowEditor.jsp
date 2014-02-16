@@ -76,8 +76,8 @@ String view = request.getParameter("view");
   	var view = "<%=view%>";
   	var paneloper = new Paneloper();
   	$(document).ready(function () { 
-		var width = document.body.clientWidth;
-		var height = document.body.clientHeight * 0.92;
+		var width = document.body.clientWidth-5;
+		var height = document.body.clientHeight * 0.9;
        	FixTable("XZLZJ", 2,2, width, height);
        	buildPanel();
     });
@@ -362,9 +362,9 @@ String view = request.getParameter("view");
 	        		layout:'form',
 	           		items:[{
 		                xtype: 'textfield',
-		                id   : 'bz',
+		                id   : 'qt',
 		                value:'',
-		                fieldLabel: '备注',
+		                fieldLabel: '其他',
 		                width:'600'
 	            	}]
 	            }]
@@ -373,7 +373,7 @@ String view = request.getParameter("view");
 	            {
 	                text   : '保存',
 	                handler: function() {
-	            			paneloper.setRestUrl("tdzcglManager/add");
+	            			paneloper.setRestUrl("qyjcManager/saveZJXX");
 							paneloper.save();
 	                	}
 	            	},   
@@ -388,7 +388,7 @@ String view = request.getParameter("view");
   		form.render("deal");
   		form.hide();
   		var elements = new Array("bh","xzlmc","kfs","wygs","tzf","sq","cpdw","cplx","cylx","rzqy","kpsj",
-  		"ysxkz","cbcs","lc","bzcg","wq","cn","gd","gs","dt","gdcw","tcwzj","syl","bz");
+  		"ysxkz","cbcs","lc","bzcg","wq","cn","gd","gs","dt","gdcw","tcwzj","syl","qt");
   		paneloper.init(form,elements);
   		paneloper.hide();
   	}
@@ -396,9 +396,9 @@ String view = request.getParameter("view");
   </script>
   <body>
   	<div id='show' style="overflow-x:hidden;overflow-y:hidden">
-  		<%=new CBDReportManager().getReport("XZLZJ",its)%>
+  		<%=new CBDReportManager().getReport("XZLZJ",new Object[]{"%%"},its)%>
   	</div>
-  	<div id="deal" style="position:absolute; left:20px; top:80px; "></div>
+  	<div id="deal" style="position:absolute; left:5px; top:5px; "></div>
   	<form id="attachfile" action="<%=basePath%>service/rest/zrbHandle/update" method="post">
 	</form> 
   </body>
