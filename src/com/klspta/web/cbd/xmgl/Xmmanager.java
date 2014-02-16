@@ -69,6 +69,55 @@ public class Xmmanager extends AbstractBaseBean {
 				new Object[] { yw_guid });
 		return list;
 	}
+	
+	/***************************************************************************
+	 * 
+	 * <br>
+	 * Description:项目管理中——办理过程 <br>
+	 * Author:李国明 <br>
+	 * Date:2014-2-16
+	 */
+	public void getBLGCByKey() {
+		String key = request.getParameter("key");
+		String xmid = request.getParameter("xmid");
+		key = UtilFactory.getStrUtil().unescape(key);
+		String sql  = "";
+		List<Map<String,Object>> list = null;
+		if(key==""){
+			sql = "select * from xmblgc where xmid=? order by blsj";
+			list = query(sql, YW,new Object[]{xmid});
+		}else{
+			sql = "select * from xmblgc where xmid=? and blsj||sjbl||bmjbr||bz like ?  order  by  blsj ";
+			list = query(sql, YW,
+					new Object[] { xmid,"%"+key+"%" });
+		}
+		 
+		StringBuffer sb = new StringBuffer();
+		sb.append("<table width='800' cellpadding='1' cellspacing='0' id='esftable' border='1'>"+
+				"<tr class='title' onclick='showMap(this); return false;' ondblclick='editMap(this); return false;'>"+
+					"<td align='center' width='80px' height='50px' ><h3>序号</h3></td>"+
+					"<td align='center' width='90px'><h3>时间</h3></td>"+
+					"<td align='center' width='500px><h3>事件</h3></td>"+
+					"<td align='center' width='120px'><h3>部门/经办人</h3></td>"+
+					"<td align='center' width='200px'><h3>备注</h3></td>"+
+					"<td align='center' width='200px' style='display: none;><h3>yw_guid</h3></td>"+
+				"</tr>");
+		if (list != null) {
+	        for (int i = 0; i < list.size(); i++) {
+	        	sb.append("<tr align='center' class='trsingle' id='row").append(i).append("' onclick='showMap(this); return false;' ondblclick='editMap(this); return false;'>")
+					.append("<td align='center' width='80px' >").append(i+1).append("</td>")
+					.append("<td align='center' width='80px>").append(list.get(i).get("blsj")).append("</td>")
+					.append("<td align='center' width='500px'>").append(list.get(i).get("sjbl")).append("</td>")
+					.append("<td align='center' width='80px'>").append(list.get(i).get("bmjbr")).append("</td>")
+					.append("<td align='center' width='200px'>").append(list.get(i).get("bz")).append("</td>")
+					.append("<td align='center' width='200px' style='display: none;'>").append(list.get(i).get("yw_guid")).append("</td>")
+				.append("</tr>");
+	        }
+		}
+		sb.append("</table>");
+		response(sb.toString());
+		
+	}
 
 	/***************************************************************************
 	 * 
@@ -78,36 +127,36 @@ public class Xmmanager extends AbstractBaseBean {
 	 * Date:2013-12-16
 	 */
 	public void saveBLGC() {
-		String sj = request.getParameter("sj");
+		String rq = request.getParameter("rq");
 		DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		Date date = null;
 		try {
-			date = format.parse(sj);
+			date = format.parse(rq);
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		String sjbl = request.getParameter("sjbl");
-		String bmjbr = request.getParameter("bmjbr");
+		String sj = request.getParameter("sj");
+		String jbr = request.getParameter("jbr");
 		String bz = request.getParameter("bz");
-		String BS = request.getParameter("BS").trim();
+		String xmid = request.getParameter("xmid").trim();
 		String yw_guid = request.getParameter("yw_guid").trim();
-		sjbl = UtilFactory.getStrUtil().unescape(sjbl);
-		bmjbr = UtilFactory.getStrUtil().unescape(bmjbr);
+		sj = UtilFactory.getStrUtil().unescape(sj);
+		jbr = UtilFactory.getStrUtil().unescape(jbr);
 		bz = UtilFactory.getStrUtil().unescape(bz);
 		int i = 0;
-		if (BS != null && !BS.equals("")) {
-			String sql = "update  xmblgc set blsj='" + sj + "',sjbl='" + sjbl
-					+ "',bmjbr='" + bmjbr + "',bz='" + bz
+		if (yw_guid != null && !"".equals(yw_guid)) {
+			String sql = "update  xmblgc set blsj='" + rq + "',sjbl='" + sj
+					+ "',bmjbr='" + jbr + "',bz='" + bz
 					+ "' where yw_guid=? and  xmid=?";
-			i = update(sql, YW, new Object[] { BS, yw_guid });
+			i = update(sql, YW, new Object[] {  yw_guid,xmid });
 		} else {
 			String sql = "insert into xmblgc (blsj,sjbl,bmjbr,bz,xmid )values(?,?,?,?,?)";
-			i = update(sql, YW, new Object[] { sj, sjbl, bmjbr, bz, yw_guid });
+			i = update(sql, YW, new Object[] { rq, sj, jbr, bz, xmid });
 		}
 		if (i > 0) {
-			response("success");
+			response("{success:true}");
 		} else {
-			response("failure");
+			response("{success:false}");
 		}
 	}
 
@@ -120,13 +169,12 @@ public class Xmmanager extends AbstractBaseBean {
 	 */
 	public void delBLGC() {
 		String yw_guid = request.getParameter("yw_guid").trim();
-		String bs = request.getParameter("bs").trim();
-		String sql = "delete xmblgc where xmid=? and YW_GUID=? ";
-		int i = update(sql, YW, new Object[] { yw_guid, bs });
+		String sql = "delete xmblgc where YW_GUID=? ";
+		int i = update(sql, YW, new Object[] { yw_guid });
 		if (i > 0) {
-			response("success");
+			response("{success:true}");
 		} else {
-			response("failure");
+			response("{success:false");
 		}
 
 	}
