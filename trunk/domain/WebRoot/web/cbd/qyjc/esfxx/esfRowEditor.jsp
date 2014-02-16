@@ -119,7 +119,7 @@ String list = ScjcManager.getInstcne().getList();
             	},{
 		            xtype : 'combo',   
 				    fieldLabel : '小区类型',   
-				    id : 'xqlx',   
+				    id : 'xqlb',   
 				    store :[[1,'老旧房'],[2,'新区房']],   
 				    width:100,   
 				    value:'',   
@@ -132,13 +132,17 @@ String list = ScjcManager.getInstcne().getList();
 	                value:'',
 	                fieldLabel: '备注',
 	                width :60
+            	},{
+ 					xtype: 'hidden',
+	                id      : 'yw_guid',
+	                width :60
             	}
 	        ],
 	        buttons: [
 	            {
 	                text   : '保存',
 	                handler: function() {
-	            			paneloper.setRestUrl("kgzbmanager/save");
+	            			paneloper.setRestUrl("scjcManager/save");
 							paneloper.save();
 	                	}
 	            	},   
@@ -152,14 +156,16 @@ String list = ScjcManager.getInstcne().getList();
 	  });	
   		form.render("deal");
   		form.hide();
-  		var elements = new Array("ssqy","xqmc","xqlx","bz");
+  		var elements = new Array("ssqy","xqmc","xqlb","bz","yw_guid");
   		paneloper.init(form,elements);
   		paneloper.hide();
   	}
   // })
   </script>
   <body>
+  	<div id="show" style="overflow-x:hidden;overflow-y:hidden">
   	<%=list %>
+  	</div>
   	<div id="deal" style="position:absolute; left:100px; top:80px; "></div>
   	<form id="attachfile" action="<%=basePath%>service/rest/zrbHandle/update" method="post">
 	</form> 

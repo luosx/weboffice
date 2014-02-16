@@ -108,15 +108,15 @@ function modify(){
 }
 
 function dele(){
-	Ext.MessageBox.confirm('确认', '系统将删除所有选中地块，确定?', function(btn,text){
+	Ext.MessageBox.confirm('确认', '系统将删除所有选中二手房信息，确定?', function(btn,text){
 		if(btn == 'yes'){
 			var choseValue = table.getAnnotations();
 			var choseString = '';
 			if(choseValue.length != 0){
-				choseString += table.getValue(choseValue.pop(),"1");
+				choseString += table.getValue(choseValue.pop(),"5");
 			}
-			putClientCommond("kgzbmanager","delet");
-			putRestParameter("dkmc",escape(escape(choseString)));
+			putClientCommond("scjcManager","delByYwGuid");
+			putRestParameter("yw_guid",escape(escape(choseString)));
 			myData = restRequest();
 			if(myData){
 				Ext.MessageBox.alert('提醒', '删除成功！', function(btn, text){
@@ -135,7 +135,7 @@ function dele(){
 
 //根据用地单位和关键字作过滤
 function queryZrb(keyword){
-	putClientCommond("kgzbmanager","getReport");
+	putClientCommond("scjcManager","getReport");
 	putRestParameter("keyword",escape(escape(keyword)));
 	myData = restRequest();
   	document.getElementById("show").innerHTML = myData;
