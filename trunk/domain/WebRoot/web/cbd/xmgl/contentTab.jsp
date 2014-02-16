@@ -43,7 +43,7 @@
         items:[
         	{
                 title: '办理经过',
-                html: "<iframe width='"+w+"' height='"+h+"' src='web/cbd/xmgl/blgc/blgc.jsp?yw_guid=<%=yw_guid%>&xmmc=<%=xmmc%>'/>" 
+                html: "<iframe width='"+w+"' height='"+h+"' src='web/cbd/xmgl/blgc/blgcEditor.jsp?yw_guid=<%=yw_guid%>&xmmc=<%=xmmc%>'/>" 
             }
             ,{
                 title: '资金管理',
