@@ -5,9 +5,12 @@ import java.util.Map;
 
 import com.klspta.base.AbstractBaseBean;
 import com.klspta.base.util.UtilFactory;
+import com.klspta.model.CBDReport.CBDReportManager;
+import com.klspta.model.CBDReport.tablestyle.ITableStyle;
 import com.klspta.web.cbd.qyjc.common.BuildModel;
 import com.klspta.web.cbd.qyjc.common.DataInteraction;
 import com.klspta.web.cbd.qyjc.common.ModelFactory;
+import com.klspta.web.cbd.yzt.jc.report.TableStyleEditRow;
 import com.klspta.web.cbd.yzt.zrb.ZrbData;
 
 public class QyjcManager extends AbstractBaseBean {
@@ -144,9 +147,14 @@ public class QyjcManager extends AbstractBaseBean {
 	    }
 		public void del() {
 	        String bh = request.getParameter("bh");
-	        String sql = "delete from xzlxx t where bh='" + bh + "'";
-	        this.update(sql, YW);
-	        response("success");
+	        String[] bhs = bh.split(",");
+	        for(int i=0; i< bhs.length;i++){
+	        	if(bhs[i]!=null && !"".equals(bhs[i])){
+	        		String sql = "delete from xzlxx t where bh='" + bhs[i] + "'";
+	        		this.update(sql, YW);
+	        	}
+	        }
+	        response("{success:true}");
 	    }
 		public void saveZJXX(){
 		      String bh = request.getParameter("bh");
@@ -200,15 +208,26 @@ public class QyjcManager extends AbstractBaseBean {
 		      tcwzj=UtilFactory.getStrUtil().unescape(tcwzj);
 		      syl=UtilFactory.getStrUtil().unescape(syl);
 		      qt=UtilFactory.getStrUtil().unescape(qt);
+		      String sql = "select bh from xzlxx where bh=?";
+		      List<Map<String,Object>> list = query(sql, YW,new Object[]{bh});
+		      int i = 0;
+		      if(list.size()>0){
+		    	  String update ="update xzlxx set xzlmc='"+xzlmc+"',kfs='"+kfs+"',wygs='"+wygs+"',tzf='"+tzf+"',sq='"+sq+"',cpdw='"
+  				+cpdw+"',cplx='"+cplx+"',cylx='"+cylx+"',rzqy='"+rzqy+"',kpsj='"+kpsj+"',ysxkz='"+ysxkz+"',cbcs='"
+  				+cbcs+"',lc='"+lc+"',bzcg='"+bzcg+"',wq='"+wq+"',cn='"+cn+"',gd='"+gd+"',gs='"
+  				+gs+"',dt='"+dt+"',gdcw='"+gdcw+"',tcwzj='"+tcwzj+"',syl='"+syl+"',qt='"+qt+"' where bh = '"+bh+"'";
+		    	  i = update(update, YW);
+		      }else{ 
 			      String insertString="insert into xzlxx (bh,xzlmc,kfs,wygs,tzf,sq,cpdw,cplx,cylx,rzqy,kpsj,ysxkz,cbcs,lc,bzcg,wq,cn,gd,gs,dt,gdcw,tcwzj,syl,qt )values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-			  int    i = update(insertString, YW,new Object[]{bh,xzlmc,kfs,wygs,tzf,sq,cpdw,cplx,cylx,rzqy,kpsj,ysxkz,cbcs,lc,bzcg,wq,cn,gd,gs,dt,gdcw,tcwzj,syl,qt});
-		        
+			      i = update(insertString, YW,new Object[]{bh,xzlmc,kfs,wygs,tzf,sq,cpdw,cplx,cylx,rzqy,kpsj,ysxkz,cbcs,lc,bzcg,wq,cn,gd,gs,dt,gdcw,tcwzj,syl,qt});
+		      }
 		      if(i>0){
-		         response("success");
+		         response("{success:true}");
 		      }else{
-		          response("failure");
+		          response("{success:false}");
 		      }
 		  }
+		
 		public void updateZJXX(){
 		      String bh = request.getParameter("bh");
 		      String xzlmc = request.getParameter("xzlmc");
@@ -262,15 +281,15 @@ public class QyjcManager extends AbstractBaseBean {
 		      syl=UtilFactory.getStrUtil().unescape(syl);
 		      qt=UtilFactory.getStrUtil().unescape(qt);
 		      
-		            String update ="update xzlxx set xzlmc='"+xzlmc+"',kfs='"+kfs+"',wygs='"+wygs+"',tzf='"+tzf+"',sq='"+sq+"',cpdw='"
-		            				+cpdw+"',cplx='"+cplx+"',cylx='"+cylx+"',rzqy='"+rzqy+"',kpsj='"+kpsj+"',ysxkz='"+ysxkz+"',cbcs='"
-		            				+cbcs+"',lc='"+lc+"',bzcg='"+bzcg+"',wq='"+wq+"',cn='"+cn+"',gd='"+gd+"',gs='"
-		            				+gs+"',dt='"+dt+"',gdcw='"+gdcw+"',tcwzj='"+tcwzj+"',syl='"+syl+"',qt='"+qt+"' where bh = '"+bh+"'";
-		      int i = update(update, YW);
+		      String update ="update xzlxx set xzlmc='"+xzlmc+"',kfs='"+kfs+"',wygs='"+wygs+"',tzf='"+tzf+"',sq='"+sq+"',cpdw='"
+				+cpdw+"',cplx='"+cplx+"',cylx='"+cylx+"',rzqy='"+rzqy+"',kpsj='"+kpsj+"',ysxkz='"+ysxkz+"',cbcs='"
+				+cbcs+"',lc='"+lc+"',bzcg='"+bzcg+"',wq='"+wq+"',cn='"+cn+"',gd='"+gd+"',gs='"
+				+gs+"',dt='"+dt+"',gdcw='"+gdcw+"',tcwzj='"+tcwzj+"',syl='"+syl+"',qt='"+qt+"' where bh = '"+bh+"'";
+		      int i = update(update, YW);  
 		      if(i>0){
-		         response("success");
+		         response("{success:true}");
 		      }else{
-		          response("failure");
+		          response("{success:false}");
 		      }
 		  }
 
@@ -489,5 +508,18 @@ public class QyjcManager extends AbstractBaseBean {
     	}
     	boolean draw = EsfData.getInstance().recordGIS(tbbh, polygon);
     	response(String.valueOf(draw)); 
+    }
+    
+    /**
+     * 写字楼信息查询
+     * 李国明
+     * 
+     */
+    public void getReport(){
+    	String keyword = request.getParameter("keyword");
+    	keyword = UtilFactory.getStrUtil().unescape(keyword);
+		ITableStyle its = new TableStyleEditRow();
+		response(String.valueOf(new CBDReportManager().getReport("XZLZJ",
+					new Object[] { "%" + keyword + "%" }, its)));
     }
 }
