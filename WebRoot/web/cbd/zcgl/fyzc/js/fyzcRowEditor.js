@@ -5,13 +5,11 @@ var table = new tableoper();
 //单击地图定位
 function showMap(objid){
 	if(table.element == undefined){
-		table.init(document.getElementById("TDZCGL"));
+		table.init(document.getElementById("FYZC"));
 	}
 	//alert("showMap");
 	var key = objid.cells[1].innerText;
 	table.addAnnotation(objid.rowIndex);
-	//parent.parent.frames['east'].swfobject.getObjectById("FxGIS").clear();
-	//parent.parent.frames['east'].swfobject.getObjectById("FxGIS").findFeature("cbd", "0", key, "ZRBBH");
 	
 }
 
@@ -19,26 +17,21 @@ function showMap(objid){
 function editMap(objid){
 	
 	if(table.element == undefined){
-		table.init(document.getElementById("TDZCGL"));
+		table.init(document.getElementById("FYZC"));
 	}
 	var key = objid.cells[1].innerText;
 	dkmc = key;
 	var array = paneloper2.getElements();
 	for(var i = 0; i < objid.cells.length; i++){
 		var value = objid.cells[i].innerText;	
-		paneloper2.insertValue(array[i+2], value);
+		paneloper2.insertValue(array[i], value);
 	}
-	form2.findById('xmmc').setDisabled(true);  
-
-	//Ext.getCmp("xmmc").getEl().dom.readOnly= true;
 	paneloper2.show();
-	//parent.parent.frames['east'].swfobject.getObjectById("FxGIS").clear();
-	//parent.parent.frames['east'].swfobject.getObjectById("FxGIS").drawPolygon();
 }
 
 //导出Excel
 function print(){
-    var curTbl = document.getElementById("TDZCGL"); 
+    var curTbl = document.getElementById("FYZC"); 
     try{
     	var oXL = new ActiveXObject("Excel.Application");
     }catch(err){
@@ -65,40 +58,35 @@ function print(){
 
 
 function add(){
-	form2.findById('xmmc').setDisabled(false);  
-	form2.findById('dkmc').setDisabled(false);  
 	paneloper2.show();
-	var xmarray = new Array();
-	putClientCommond("hxxmHandle","getHxxmmc");
-	var hxxmmc = restRequest();
-	if(xmarray.length>0){
-		xmarray=[];
-	}
-	for(var i=0;i<hxxmmc.length;i++ ){
-		xmarray.push(hxxmmc[i].XMNAME);
-	}
-	form2.findById('xmmc').store.loadData(xmarray);
 	
-	
-	var dkarray = new Array();
-	putClientCommond("hxxmHandle","getdkmc");
-	hxxmmc = restRequest();
-	if(dkarray.length>0){
-		dkarray=[];
-	}
-	for(var i=0;i<hxxmmc.length;i++ ){
-		dkarray.push(hxxmmc[i].DKMC);
-	}
-	form2.findById('dkmc').store.loadData(dkarray);
-	
-	if(table.element == undefined){
-		table.init(document.getElementById("TDZCGL"));
-	}
 	
 }
 
 function dele(){
-	alert("dele");
+	Ext.MessageBox.confirm('确认', '系统将删除所有选中房源资产，确定?', function(btn,text){
+		if(btn == 'yes'){
+			var choseValue = table.getAnnotations();
+			var choseString = '';
+			if(choseValue.length != 0){
+				choseString += table.getValue(choseValue.pop(),"0")+ ",";
+			}
+			putClientCommond("fyzcHandle","delByYwGuid");
+			putRestParameter("mc",escape(escape(choseString)));
+			myData = restRequest();
+			if(myData){
+				Ext.MessageBox.alert('提醒', '删除成功！', function(btn, text){
+					document.location.reload();
+					return;
+				});
+			}else{
+				Ext.MessageBox.alert('提醒', '删除失败，请联系管理员或重试', function(btn, text){
+					return;
+				});
+			}
+			
+		}
+	});
 }
 
 //根据用地单位和关键字作过滤
@@ -117,4 +105,5 @@ function modify(){
 		editMap(objid);
 	}
 }
+
 
