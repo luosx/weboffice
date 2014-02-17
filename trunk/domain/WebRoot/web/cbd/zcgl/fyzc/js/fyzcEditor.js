@@ -39,6 +39,11 @@ function initComponent() {
 							text : '修改',
 							id:'modify',
 							handler : modify
+						}, '-', {
+							xtype : 'button',
+							text : '删除',
+							id:'delete',
+							handler : dele
 						}],
 				items : [{
 					html : "<iframe id='report' width=" + (width - 10)
@@ -108,7 +113,6 @@ function initFile(){
             }
         }]
 	});
-	//document.getElementById("ext-comp-1014").style.width = '80';
 	document.getElementById("form-file").style.width = '150';
 }
 
@@ -126,7 +130,7 @@ function add(){
 }
 
 function dele(){
-	alert("dele");
+	document.frames['report'].dele();
 }
 
 function insertGIS(){

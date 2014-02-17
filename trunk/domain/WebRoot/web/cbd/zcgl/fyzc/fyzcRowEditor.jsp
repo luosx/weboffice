@@ -78,13 +78,12 @@ String list = Fyzcmanager.getInstcne().getList();
 	</style>
   </head>
   <script type="text/javascript">
-  	var form;
   	var form2;
   	var paneloper2 = new Paneloper();
   	 $(document).ready(function () { 
 		var width = document.body.clientWidth+10;
 		var height = document.body.clientHeight;
-       	FixTable("TDZCGL", 1,3, width, height);
+       	FixTable("FYZC", 1,2, width, height);
        	buildPanel();
     });
   	function buildPanel(){
@@ -96,7 +95,7 @@ String list = Fyzcmanager.getInstcne().getList();
 	  		labelWidth :130,   
 	  		labelAlign : "right",
 	        url:"",
-	        title:"土地资产信息",
+	        title:"房源资产信息",
 	        defaults: {
 	            anchor: '0'
 	        },
@@ -104,424 +103,223 @@ String list = Fyzcmanager.getInstcne().getList();
 	        items : [{
 	        	layout : 'column',
 	        	items : [{
-	        		columnWidth:.5,
+	        		columnWidth:.33,
 	        		layout:'form',
 	        		items:[
 	        		{
-		                xtype: 'combo',
-		                id      : 'xmmc',
+		                xtype: 'textfield',
+		                id      : 'mc',
 		                value:'',
-		                store :[],
-		                fieldLabel: '项目名称',  
-		                width:'200'	,
-		                mode: "local",   
-				    	allowBlank:false
+		                fieldLabel: '名称',  
+		                width:'100'	
 				    }]                
 	            },{
-	            	columnWidth:.5,
+	            	columnWidth:.33,
 		        	layout:'form',
 	            	items:[          		
 		        		{
-		                xtype: 'combo',
-		                id      : 'status',
+		                xtype: 'textfield',
+		                id      : 'gzfyts',
 		                value:'',
-		                store :[[1,'已出库'],[2,'待清理'],[3,'未受偿'],[4,'未供地'],[5,'长期库存'],[6,'已出让未出库']],
-		                fieldLabel: '状态',  
-		                width:'200'	,
-		                mode: "local",   
-				    	allowBlank:false                
+		                fieldLabel: '购置房源套数',  
+		                width:'100'              
+	            	}]
+	            },{
+	        		columnWidth:.33,
+	        		layout:'form',
+	        		items:[{
+		                xtype: 'textfield',
+		                id      : 'gzjzgm',
+		                value:'',
+		                fieldLabel: '购置建筑规模',  
+		                width:'100'	            
 	            	}]
 	            }]
          	},{
 	         	layout : 'column',
 	        	items : [{
-	        		columnWidth:.5,
+					columnWidth:.33,
 	        		layout:'form',
-	        		items:[{
-		                xtype: 'combo',
-		                id      : 'dkmc',
-		                value:'',
-		                disabled:true ,
-		                store :[],
-		                fieldLabel: '地块名称',  
-		                width:'200'	,
-		                mode: "local",   
-				    	allowBlank:false                
+	           		items:[{
+		                xtype: 'numberfield',
+		                id   : 'dycbzj',
+		                value:'', 
+		                fieldLabel: '动用储备资金',
+		                width:'100'
 	            	}]
 	            },{
-	            	columnWidth:.5,
+	            	columnWidth:.33,
 	        		layout:'form',
 	        		items:[
 	            	{
 			            xtype : 'textfield',   
-					    fieldLabel : '用地性质',   
-					    id : 'ydxz',   
-					    value:'',
-					    disabled:true ,  
-					    allowBlank:false, 
-					    disabled:true ,   
-		                width:'200'
+					    fieldLabel : '购置单价',   
+					    id : 'gzdj',   
+					    value:'', 
+		                width:'100'
 					}]
-				}]
-			},{
-				layout:'column',
-				items:[{
-					columnWidth:.5,
+				},{
+					columnWidth:.33,
 	        		layout:'form',
 					items:[{
 		                xtype: 'numberfield',
-		                id      : 'jsydmj',
+		                id      : 'lyfyts',
 		                value:'',
-		                fieldLabel: '建设用地面积(公顷)',
-		                disabled:true ,  
-		                width:'200'
+		                fieldLabel: '利用房源套数',
+		                width:'100'
             		}]
-            	},{
-            		columnWidth:.5,
+            	}]
+			},{
+	           	layout:'column',
+	           	items:[{
+            		columnWidth:.33,
 	        		layout:'form',
 					items:[{
 		                xtype: 'textfield',
-		                id   : 'rjl',
+		                id   : 'lyjzgm',
 		                value:'',
-		                disabled:true ,  
-		                fieldLabel: '容积率',
-		                width:'200'
+		                fieldLabel: '利用建筑规模',
+		                width:'100'
 		            }]
-		         }]
-	      	},{
-	           	layout:'column',
-	           	items:[{
-					columnWidth:.5,
+		         },{
+	            	columnWidth:.33,
 	        		layout:'form',
 	           		items:[{
 		                xtype: 'numberfield',
-		                id   : 'ghjzgm',
+		                id   : 'fyclts',
 		                value:'',
-		                disabled:true ,  
-		                fieldLabel: '规划建筑规模(万㎡)',
-		                width:'200'
-	            	}]
-	            },{
-	            	columnWidth:.5,
-	        		layout:'form',
-	           		items:[{
-		                xtype: 'numberfield',
-		                id   : 'jzkzgd',
-		                value:'',
-		                disabled:true ,  
-		                fieldLabel: '建筑控制高度(米)',
-		                width:'200'
-	            	}]
-            	}]
-	        },{
-	           	layout:'column',
-	           	items:[{
-					columnWidth:.3,
-	        		layout:'form',
-	           		items:[{
-		                xtype: 'numberfield',
-		                id   : 'djkzj',
-		                value:'',
-		                fieldLabel: '地价款总价',
-		                width:'90'
-	            	}]
-	            },{
-	            	columnWidth:.3,
-	        		layout:'form',
-	           		items:[{
-		                xtype: 'numberfield',
-		                id   : 'djkyjn',
-		                value:'',
-		                fieldLabel: '地价款已缴纳',
-		                width:'90'
+		                fieldLabel: '房源存量套数',
+		                width:'100'
 	            	}]
             	},{
-	            	columnWidth:.3,
+	            	columnWidth:.33,
+	        		layout:'form',
+	           		items:[{
+		                xtype: 'numberfield',
+		                id   : 'jzmjcl',
+		                value:'',
+		                fieldLabel: '建筑面积存量',
+		                width:'100'
+	            	}]
+            	}]
+	        },{
+	           	layout:'column',
+	           	items:[{
+					columnWidth:.33,
+	        		layout:'form',
+	           		items:[{
+		                xtype: 'numberfield',
+		                id   : 'zyzjcl',
+		                value:'',
+		                fieldLabel: '占用资金存量',
+		                width:'100'
+	            	}]
+	            },{
+					columnWidth:.33,
+	        		layout:'form',
+	           		items:[{
+		                xtype: 'numberfield',
+		                id   : 'ftlx',
+		                value:'',
+		                fieldLabel: '分摊利息',
+		                width:'90'
+	            	}]
+	            },{
+	            	columnWidth:.33,
 	        		layout:'form',
 	           		items:[{
 		                xtype: 'textfield',
-		                id   : 'djkyjnbl',
+		                id   : 'fymc',
 		                value:'',
-		                fieldLabel: '地价款已缴纳比例',
+		                fieldLabel: '费用名称',
 		                width:'90'
 	            	}]
             	}]
 	        },{
 	           	layout:'column',
 	           	items:[{
-					columnWidth:.3,
+	            	columnWidth:.33,
 	        		layout:'form',
 	           		items:[{
-		                xtype: 'numberfield',
-		                id   : 'zfsyze',
+		                xtype: 'textfield',
+		                id   : 'zje',
 		                value:'',
-		                fieldLabel: '政府收益总额',
-		                width:'90'
-	            	}]
-	            },{
-	            	columnWidth:.3,
-	        		layout:'form',
-	           		items:[{
-		                xtype: 'numberfield',
-		                id   : 'zfsyyjn',
-		                value:'',
-		                fieldLabel: '政府收益已缴纳',
-		                width:'90'
+		                fieldLabel: '总金额',
+		                width:'100'
 	            	}]
             	},{
-	            	columnWidth:.3,
-	        		layout:'form',
-	           		items:[{
-		                xtype: 'textfield',
-		                id   : 'zfsyyjnbl',
-		                value:'',
-		                fieldLabel: '政府收益已缴纳比例',
-		                width:'90'
-	            	}]
-            	}]
-	        },{
-	           	layout:'column',
-	           	items:[{
-					columnWidth:.5,
-	        		layout:'form',
-	           		items:[{
-		                xtype: 'textfield',
-		                id   : 'zfsyydjnsj',
-		                value:'',
-		                fieldLabel: '政府收益预定缴纳时间',
-		                width:'200'
-	            	}]
-	            },{
-	            	columnWidth:.5,
+	            	columnWidth:.33,
 	        		layout:'form',
 	           		items:[{
 		                xtype: 'numberfield',
-		                id   : 'zfsywyj',
+		                id   : 'mpfmft',
 		                value:'',
-		                fieldLabel: '政府收益已产生违约金',
-		                width:'200'
+		                fieldLabel: '每平方米分摊',
+		                width:'100'
+	            	}]
+            	},{
+	            	columnWidth:.33,
+	        		layout:'form',
+	           		items:[{
+		                xtype: 'textfield',
+		                id   : 'ylyfyft',
+		                value:'',
+		                fieldLabel: '已利用房源分摊',
+		                width:'100'
 	            	}]
             	}]
 	        },{
 	           	layout:'column',
 	           	items:[{
-					columnWidth:.3,
+	            	columnWidth:.33,
+	        		layout:'form',
+	           		items:[{
+		                xtype: 'textfield',
+		                id   : 'zjfyft',
+		                value:'',
+		                fieldLabel: '结转房源分摊',
+		                width:'100'
+	            	}]
+            	},{
+					columnWidth:.33,
+	        		layout:'form',
+	           		items:[{
+		                xtype: 'textfield',
+		                id   : 'fwjkzj',
+		                value:'',
+		                fieldLabel: '房屋价款总计',
+		                width:'100'
+	            	}]
+	            },{
+	            	columnWidth:.33,
 	        		layout:'form',
 	           		items:[{
 		                xtype: 'numberfield',
-		                id   : 'bcfze',
+		                id   : 'dqdj',
 		                value:'',
-		                fieldLabel: '补偿费总额',
-		                width:'90'
-	            	}]
-	            },{
-	            	columnWidth:.3,
-	        		layout:'form',
-	           		items:[{
-		                xtype: 'numberfield',
-		                id   : 'bcfyjn',
-		                value:'',
-		                fieldLabel: '补偿费已缴纳',
-		                width:'90'
-	            	}]
-            	},{
-	            	columnWidth:.3,
-	        		layout:'form',
-	           		items:[{
-		                xtype: 'textfield',
-		                id   : 'bcfyjnbl',
-		                value:'',
-		                fieldLabel: '补偿费已缴纳比例',
-		                width:'90'
+		                fieldLabel: '当前单价',
+		                width:'100'
 	            	}]
             	}]
 	        },{
 	           	layout:'column',
 	           	items:[{
-					columnWidth:.5,
-	        		layout:'form',
-	           		items:[{
-		                xtype: 'textfield',
-		                id   : 'bcfydjnsj',
-		                value:'',
-		                fieldLabel: '补偿费预定缴纳时间',
-		                width:'200'
-	            	}]
-	            },{
-	            	columnWidth:.5,
-	        		layout:'form',
-	           		items:[{
-		                xtype: 'numberfield',
-		                id   : 'bcfwyj',
-		                value:'',
-		                fieldLabel: '补偿费已产生违约金',
-		                width:'200'
-	            	}]
-            	}]
-	        },{
-	           	layout:'column',
-	           	items:[{
-					columnWidth:.3,
-	        		layout:'form',
-	           		items:[{
-		                xtype: 'textfield',
-		                id   : 'djkjnsj',
-		                value:'',
-		                fieldLabel: '地价款缴纳时间',
-		                width:'90'
-	            	}]
-	            },{
-	            	columnWidth:.3,
-	        		layout:'form',
-	           		items:[{
-		                xtype: 'textfield',
-		                id   : 'cbzh',
-		                value:'',
-		                fieldLabel: '储备证号',
-		                width:'90'
-	            	}]
-            	},{
-	            	columnWidth:.3,
-	        		layout:'form',
-	           		items:[{
-		                xtype: 'numberfield',
-		                id   : 'zzmj',
-		                value:'',
-		                fieldLabel: '证载面积',
-		                width:'90'
-	            	}]
-            	}]
-	        },{
-	           	layout:'column',
-	           	items:[{
-					columnWidth:.3,
-	        		layout:'form',
-	           		items:[{
-		                xtype: 'textfield',
-		                id   : 'crsj',
-		                value:'',
-		                fieldLabel: '出让时间',
-		                width:'90'
-	            	}]
-	            },{
-	            	columnWidth:.3,
-	        		layout:'form',
-	           		items:[{
-		                xtype: 'textfield',
-		                id   : 'zbr',
-		                value:'',
-		                fieldLabel: '中标人',
-		                width:'90'
-	            	}]
-            	},{
-	            	columnWidth:.3,
-	        		layout:'form',
-	           		items:[{
-		                xtype: 'textfield',
-		                id   : 'xyydjdsj',
-		                value:'',
-		                fieldLabel: '协议约定交地时间',
-		                width:'90'
-	            	}]
-            	}]
-	        },{
-	           	layout:'column',
-	           	items:[{
-					columnWidth:.3,
-	        		layout:'form',
-	           		items:[{
-		                xtype: 'textfield',
-		                id   : 'tdyjsj',
-		                value:'',
-		                fieldLabel: '土地移交时间',
-		                width:'90'
-	            	}]
-	            },{
-	            	columnWidth:.3,
-	        		layout:'form',
-	           		items:[{
-		                xtype: 'textfield',
-		                id   : 'xmkgsj',
-		                value:'',
-		                fieldLabel: '项目开工时间',
-		                width:'90'
-	            	}]
-            	},{
-	            	columnWidth:.3,
-	        		layout:'form',
-	           		items:[{
-		                xtype: 'textfield',
-		                id   : 'tdxzsj',
-		                value:'',
-		                fieldLabel: '土地闲置时间',
-		                width:'90'
-	            	}]
-            	}]
-	        },{
-	           	layout:'column',
-	           	items:[{
-					columnWidth:.5,
-	        		layout:'form',
-	           		items:[{
-		                xtype: 'textfield',
-		                id   : 'yt',
-		                value:'',
-		                fieldLabel: '用途',
-		                width:'200'
-	            	}]
-	            },{
-	            	columnWidth:.5,
-	        		layout:'form',
-	           		items:[{
-		                xtype: 'textfield',
-		                id   : 'sfyl',
-		                value:'',
-		                fieldLabel: '是否盈利',
-		                width:'200'
-	            	}]
-	            }]
-            },{
-            	layout:'column',
-	           	items:[{
-	            	columnWidth:.5,
-	        		layout:'form',
-	           		items:[{
-		                xtype: 'textfield',
-		                id   : 'dgdw',
-		                value:'',
-		                fieldLabel: '代管单位',
-		                width:'200'
-	            	}]
-            	},{
-	            	columnWidth:.5,
-	        		layout:'form',
-	           		items:[{
-		                xtype: 'textfield',
-		                id   : 'sx',
-		                value:'',
-		                fieldLabel: '时限',
-		                width:'200'
-	            	}]
-            	}]
-	        },{
-	           	layout:'column',
-	           	items:[{
-					columnWidth:1,
+	            	columnWidth:.9,
 	        		layout:'form',
 	           		items:[{
 		                xtype: 'textfield',
 		                id   : 'bz',
 		                value:'',
 		                fieldLabel: '备注',
-		                width:'600'
+		                width:'500'
 	            	}]
-	            }]
+            	}]
 	        }], 
 	        buttons: [
 	            {
 	                text   : '保存',
 	                handler: function() {
-	            			paneloper.setRestUrl("tdzcglManager/add");
+	            			paneloper2.setRestUrl("fyzcHandle/addFyzc");
 							paneloper2.save();
 	                	}
 	            	},   
@@ -535,10 +333,8 @@ String list = Fyzcmanager.getInstcne().getList();
 	  });		
   		form2.render("deal2");
   		form2.hide();
-  		var elements2 = new Array("xmmc","status","dkmc","ydxz","jsydmj","rjl","ghjzgm","jzkzgd","djkzj",
-  		"djkyjn","djkyjnbl","zfsyze","zfsyyjn","zfsyyjnbl","zfsyydjnsj","zfsywyj","bcfze","bcfyjn","bcfyjnbl",
-  		"bcfydjnsj","bcfwyj","djkjnsj","cbzh","zzmj","crsj","zbr","xyydjdsj","tdyjsj",
-  		"xmkgsj","tdxzsj","yt","sfyl","dgdw","sx","bz");
+  		var elements2 = new Array("mc","gzfyts","gzjzgm","dycbzj","gzdj","lyfyts","lyjzgm","fyclts","jzmjcl",
+  		"zyzjcl","ftlx","fymc","zje","mpfmft","ylyfyft","zjfyft","fwjkzj","dqdj","bz");
   		paneloper2.init(form2,elements2);
   		paneloper2.hide();
   	}

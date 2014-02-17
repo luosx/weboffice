@@ -44,6 +44,8 @@ Paneloper.prototype = {
 	},
 	save:function(){
 		var obj = this;
+		var jzrq =document.getElementById("jzrq").value;
+		this.object.form.url += "?jzrq=" + jzrq;
 		this.object.form.submit({
 			waitMsg:'正在保存，请稍后...',
 			success:function(){
