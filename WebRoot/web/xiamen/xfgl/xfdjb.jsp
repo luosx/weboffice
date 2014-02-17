@@ -66,10 +66,64 @@
 		}
 				
 			function save(){
-				document.forms[0].submit();
+				//非空验证
+				if(checkNotNull()){
+					document.forms[0].submit();
+				}
 			}
 			function refresh(){
 				document.location.refresh();
+			}
+			function checkNotNull(){
+				var jbr = document.getElementById('jbr');
+				var lxdz = document.getElementById('lxdz');
+				var jbsj = document.getElementById('jbsj');
+				var lxdh = document.getElementById('lxdh');
+				var ldcs = document.getElementById('ldcs');
+				var jbzywt = document.getElementById('jbzywt');
+				var jsr = document.getElementById('jsr');
+				var jlr = document.getElementById('jlr');
+				if(jbr.value == ''){
+					alert('请填写举报人！');
+					jbr.focus();
+					return false;
+				}
+				if(lxdz.value == ''){
+					alert('请填写联系地址！');
+					lxdz.focus();
+					return false;				
+				}
+				if(jbsj.value == ''){
+					alert('请填写举报时间！');
+					jbsj.focus();
+					return false;
+				}
+				if(lxdh.value == ''){
+					alert('请填写联系电话！');
+					lxdh.focus();
+					return false;				
+				}
+				if(ldcs.value == ''){
+					alert('请填写来电次数！');
+					ldcs.focus();
+					return false;
+				}
+				if(jbzywt.value == ''){
+					alert('请填写举报主要问题！');
+					jbzywt.focus();
+					return false;				
+				}
+				if(jsr.value == ''){
+					alert('请填写接收人！');
+					jsr.focus();
+					return false;
+				}
+				if(jlr.value == ''){
+					alert('请填写记录人！');
+					jlr.focus();
+					return false;				
+				}				
+				return true;
 			}
 		</script>
 		
