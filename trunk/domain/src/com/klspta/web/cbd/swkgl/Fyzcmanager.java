@@ -39,36 +39,47 @@ public class Fyzcmanager extends AbstractBaseBean {
 
     public void addFyzc() {
         String mc = request.getParameter("mc");
-        String gzfy = request.getParameter("gzfy");
-        String gzgm = request.getParameter("gzgm");
-        String cbzj = request.getParameter("cbzj");
+        String gzfyts = request.getParameter("gzfyts");
+        String gzjzgm = request.getParameter("gzjzgm");
+        String dycbzj = request.getParameter("dycbzj");
         String gzdj = request.getParameter("gzdj");
-        String lyfy = request.getParameter("lyfy");
-        String lygm = request.getParameter("lygm");
-        String qmfy = request.getParameter("qmfy");
-        String jzmj = request.getParameter("jzmj");
-        String zyzj = request.getParameter("zyzj");
+        String lyfyts = request.getParameter("lyfyts");
+        String lyjzgm = request.getParameter("lyjzgm");
+        String fyclts = request.getParameter("fyclts");
+        String jzmjcl = request.getParameter("jzmjcl");
+        String zyzjcl = request.getParameter("zyzjcl");
         String ftlx = request.getParameter("ftlx");
         String fymc = request.getParameter("fymc");
-        String ze = request.getParameter("ze");
-        String pmft = request.getParameter("pmft");
-        String lyft = request.getParameter("lyft");
-        String jzft = request.getParameter("jzft");
-        String jkzj = request.getParameter("jkzj");
-        String dj = request.getParameter("dj");
+        String zje = request.getParameter("zje");
+        String mpfmft = request.getParameter("mpfmft");
+        String ylyfyft = request.getParameter("ylyfyft");
+        String zjfyft = request.getParameter("zjfyft");
+        String fwjkzj = request.getParameter("fwjkzj");
+        String dqdj = request.getParameter("dqdj");
         String jzrq = request.getParameter("jzrq");
         String bz = request.getParameter("bz");
 
         mc = UtilFactory.getStrUtil().unescape(mc);
         jzrq = UtilFactory.getStrUtil().unescape(jzrq);
         bz = UtilFactory.getStrUtil().unescape(bz);
-        String insertString = "insert into fyzc  (mc, gzfy, gzgm, cbzj, gzdj, lyfy, lygm, qmfy, jzmj,zyzj,ftlx,fymc,ze,pmft, lyft, jzft, jkzj, dj, bz,jzrq)values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-        int i = update(insertString, YW, new Object[] { mc, gzfy, gzgm, cbzj, gzdj, lyfy, lygm, qmfy, jzmj,
-                zyzj, ftlx, fymc, ze, pmft, lyft, jzft, jkzj, dj, bz, jzrq });
+        int i = 0;
+        String sql = "select mc from fyzc where mc=?";
+        List<Map<String,Object>> list = query(sql, YW,new Object[]{mc});
+        if(list.size()>0){
+        	String updateString = "update fyzc set gzfy=?, gzgm=?, cbzj=?, gzdj=?, lyfy=?, lygm=?, qmfy=?" +
+        			", jzmj=?,zyzj=?,ftlx=?,fymc=?,ze=?,pmft=?, lyft=?, jzft=?, jkzj=?, dj=?, bz=?,jzrq=? "+
+        			"where mc=?" ;
+           i = update(updateString, YW, new Object[] {  gzfyts, gzjzgm, dycbzj, gzdj, lyfyts, lyjzgm, fyclts, jzmjcl,
+	        		zyzjcl, ftlx, fymc, zje, mpfmft, ylyfyft, zjfyft, fwjkzj, dqdj, bz, jzrq ,mc});
+        }else{
+	        String insertString = "insert into fyzc  (mc, gzfy, gzgm, cbzj, gzdj, lyfy, lygm, qmfy, jzmj,zyzj,ftlx,fymc,ze,pmft, lyft, jzft, jkzj, dj, bz,jzrq)values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+	        i = update(insertString, YW, new Object[] { mc, gzfyts, gzjzgm, dycbzj, gzdj, lyfyts, lyjzgm, fyclts, jzmjcl,
+	        		zyzjcl, ftlx, fymc, zje, mpfmft, ylyfyft, zjfyft, fwjkzj, dqdj, bz, jzrq });
+        }
         if (i > 0) {
-            response("success");
+            response("{success:true}");
         } else {
-            response("failure");
+            response("{success:false}");
         }
     }
 
@@ -77,9 +88,10 @@ public class Fyzcmanager extends AbstractBaseBean {
         List<Map<String, Object>> list2 = query(sql, YW);
         String jzrq = (String) (list2.get(0)).get("jzrq");
         StringBuffer result = new StringBuffer(
-                "<table width='180%'><tr><td rowspan='2' colspan='1' class='tr01'>名称</td><td colspan='4' rowspan='1' class='tr01'>购置情况</td><td colspan='2' rowspan='1' class='tr01'>利用情况</td><td colspan='3' rowspan='1' class='tr01'>期末存量情况</td><td  class='tr01'><input id='jzrq' style='border:0;background:transparent;' value="
+                "<table id='FYZC' width='2000' border='1' cellpadding='1' cellspacing='0'>" +
+                "<tr class='title' onclick='showMap(this); return false;' ondblclick='editMap(this); return false;'><td rowspan='2' colspan='1' class='tr01'>名称</td><td colspan='4' rowspan='1' class='tr01'>购置情况</td><td colspan='2' rowspan='1' class='tr01'>利用情况</td><td colspan='3' rowspan='1' class='tr01'>期末存量情况</td><td  class='tr01'><input id='jzrq' style='border:0;background:transparent;' value="
                         + jzrq
-                        + "></td><td rowspan='1' colspan='5' class='tr01'>其他费用</td><td rowspan='2' colspan='1' class='tr01'>房屋价款总计</td><td rowspan='2' colspan='1' class='tr01'>当前单价</td><td rowspan='2' colspan='1' class='tr01'>备注</td><td rowspan='2' colspan='1' class='tr01'>操作</td></tr><tr><td colspan='1' rowspan='1' class='tr01'>房源套数</td><td colspan='1' rowspan='1' class='tr01'>建筑规模</td><td colspan='1' rowspan='1' class='tr01'>动用储备资金</td><td colspan='1' rowspan='1' class='tr01'>购置单价</td><td colspan='1' rowspan='1' class='tr01'>房源套数</td><td colspan='1' rowspan='1' class='tr01'>建筑规模</td><td colspan='1' rowspan='1' class='tr01'>房源套数</td><td colspan='1' rowspan='1' class='tr01'>建筑面积</td><td colspan='1' rowspan='1' class='tr01'>占压资金</td><td colspan='1' rowspan='1' class='tr01'>分摊利息</td><td colspan='1' rowspan='1' class='tr01'>费用名称</td><td colspan='1' rowspan='1' class='tr01'>总金额</td><td colspan='1' rowspan='1' class='tr01'>每平米分摊</td><td colspan='1' rowspan='1' class='tr01'>已利用房源分摊</td><td colspan='1' rowspan='1' class='tr01'>结转房源分摊</td></tr>");
+                        + "></td><td rowspan='1' colspan='5' class='tr01'>其他费用</td><td rowspan='2' colspan='1' class='tr01'>房屋价款总计</td><td rowspan='2' colspan='1' class='tr01'>当前单价</td><td rowspan='2' colspan='1' class='tr01'>备注</td></tr><tr><td colspan='1' rowspan='1' class='tr01'>房源套数</td><td colspan='1' rowspan='1' class='tr01'>建筑规模</td><td colspan='1' rowspan='1' class='tr01'>动用储备资金</td><td colspan='1' rowspan='1' class='tr01'>购置单价</td><td colspan='1' rowspan='1' class='tr01'>房源套数</td><td colspan='1' rowspan='1' class='tr01'>建筑规模</td><td colspan='1' rowspan='1' class='tr01'>房源套数</td><td colspan='1' rowspan='1' class='tr01'>建筑面积</td><td colspan='1' rowspan='1' class='tr01'>占压资金</td><td colspan='1' rowspan='1' class='tr01'>分摊利息</td><td colspan='1' rowspan='1' class='tr01'>费用名称</td><td colspan='1' rowspan='1' class='tr01'>总金额</td><td colspan='1' rowspan='1' class='tr01'>每平米分摊</td><td colspan='1' rowspan='1' class='tr01'>已利用房源分摊</td><td colspan='1' rowspan='1' class='tr01'>结转房源分摊</td></tr>");
         String allsql = "select t.mc,t.gzfy,t.gzgm,t.cbzj,t.gzdj,t.jzmj,t.zyzj,t.pmft,t.lyft,t.ze,t.lyfy,t.lygm,t.dj,t.qmfy,t.ftlx,t.fymc,t.jzft,t.jkzj,t.bz,t.yw_guid from fyzc t";
         List<Map<String, Object>> alllist = query(allsql, YW);
         for (int i = 0; i < alllist.size(); i++) {
@@ -103,45 +115,26 @@ public class Fyzcmanager extends AbstractBaseBean {
             String jkzj = (String) (alllist.get(i)).get("jkzj");
             String bz = (String) (alllist.get(i)).get("bz");
             String yw_guid = (String) (alllist.get(i)).get("yw_guid");
-            result.append("<tr><td><input id='" + yw_guid + "_"
-                    + "mc'   style='border:0;background:transparent;' value='" + mc
-                    + "'/></td><td><input id='" + yw_guid + "_"
-                    + "gzfy' onchange='chang(this)' style='border:0;background:transparent;' value='" + gzfy
-                    + "'/></td><td><input id='" + yw_guid + "_"
-                    + "gzgm' onchange='chang(this)' style='border:0;background:transparent;' value='" + gzgm
-                    + "'/></td><td><input id='" + yw_guid + "_"
-                    + "cbzj' onchange='chang(this)' style='border:0;background:transparent;' value='" + cbzj
-                    + "'/></td><td><input id='" + yw_guid + "_"
-                    + "gzdj' onchange=\"chang(this)\" style='border:0;background:transparent;' value='"
-                    + gzdj + "'/></td><td><input id='" + yw_guid + "_"
-                    + "lyfy' onchange='chang(this)' style='border:0;background:transparent;' value='" + lyfy
-                    + "'/></td><td><input id='" + yw_guid + "_"
-                    + "lygm' onchange='chang(this)' style='border:0;background:transparent;' value='" + lygm
-                    + "'/></td><td><input id='" + yw_guid + "_"
-                    + "qmfy' onchange='chang(this)' style='border:0;background:transparent;' value='" + qmfy
-                    + "'/></td><td><input id='" + yw_guid + "_"
-                    + "jzmj' onchange=\"chang(this)\" style='border:0;background:transparent;' value='"
-                    + jzmj + "'/></td><td><input id='" + yw_guid + "_"
-                    + "zyzj' onchange='chang(this)' style='border:0;background:transparent;' value='" + zyzj
-                    + "'/></td><td><input id='" + yw_guid + "_"
-                    + "ftlx' onchange='chang(this)' style='border:0;background:transparent;' value='" + ftlx
-                    + "'/></td><td><input id='" + yw_guid + "_"
-                    + "fymc' onchange='chang(this)' style='border:0;background:transparent;' value='" + fymc
-                    + "'/></td><td><input id='" + yw_guid + "_"
-                    + "ze' onchange=\"chang(this)\" style='border:0;background:transparent;' value='" + ze
-                    + "'/></td><td><input id='" + yw_guid + "_"
-                    + "pmft' onchange='chang(this)' style='border:0;background:transparent;' value='" + pmft
-                    + "'/></td><td><input id='" + yw_guid + "_"
-                    + "lyft' onchange='chang(this)' style='border:0;background:transparent;' value='" + lyft
-                    + "'/></td><td><input id='" + yw_guid + "_"
-                    + "jzft' onchange='chang(this)' style='border:0;background:transparent;' value='" + jzft
-                    + "'/></td><td><input id='" + yw_guid + "_"
-                    + "jkzj' onchange=\"chang(this)\" style='border:0;background:transparent;' value='"
-                    + jkzj + "'/></td><td><input id='" + yw_guid + "_"
-                    + "dj' onchange='chang(this)' style='border:0;background:transparent;' value='" + dj
-                    + "'/></td><td><input id='" + yw_guid + "_"
-                    + "bz' onchange='chang(this)' style='border:0;background:transparent;' value='" + bz
-                    + "'/></td><td><a href=\"javascript:del('" + yw_guid + "')\">删除</a></td></tr>");
+            result.append("<tr class='trsingle' onclick='showMap(this); return false;' ondblclick='editMap(this); return false;'><td>" + mc
+                    + "</td><td>" + gzfy
+                    + "</td><td>" + gzgm
+                    + "</td><td>" + cbzj
+                    + "</td><td>" + gzdj
+                    + "</td><td>" + lyfy
+                    + "</td><td>" + lygm
+                    + "</td><td>" + qmfy
+                    + "</td><td>"+ jzmj
+                    + "</td><td>" + zyzj
+                    + "</td><td>" + ftlx
+                    + "</td><td>" + fymc
+                    + "</td><td>" + ze
+                    + "</td><td>" + pmft
+                    + "</td><td>" + lyft
+                    + "</td><td>" + jzft
+                    + "</td><td>" + jkzj 
+                    + "</td><td>" + dj
+                    + "</td><td>" + bz
+                    + "</td></tr>");
         }
         String sumsql = "select sum(gzfy)as gzfy,sum(gzgm)as gzgm,sum(cbzj)as cbzj,sum(gzdj)as gzdj,sum(lyfy)as lyfy,sum(lygm)as lygm,sum(qmfy)as qmfy,sum(jzmj)as jzmj,sum(zyzj)as zyzj,sum(ftlx)as ftlx,sum(fymc)as fymc,sum(ze)as ze,sum(pmft)as pmft,sum(lyft)as lyft,sum(jzft)as jzft,sum(jkzj)as jkzj,sum(dj)as dj from fyzc t";
         List<Map<String, Object>> sumlist = query(sumsql, YW);
@@ -169,7 +162,7 @@ public class Fyzcmanager extends AbstractBaseBean {
                     + "</td><td class='tr01'>" + sumlygm + "</td><td class='tr01'>" + sumqmfy
                     + "</td><td class='tr01'>" + sumjzmj + "</td><td class='tr01'>" + sumzyzj
                     + "</td><td class='tr01'>" + sumftlx + "</td><td class='tr01'>" + sumfymc
-                    + "</td>v<td class='tr01'>" + sumze + "</td><td class='tr01'>" + sumpmft
+                    + "</td><td class='tr01'>" + sumze + "</td><td class='tr01'>" + sumpmft
                     + "</td><td class='tr01'>" + sumlyft + "</td><td class='tr01'>" + sumjzft
                     + "</td><td class='tr01'>" + jkzj + "</td><td class='tr01'>" + sumdj + "</td><td class='tr01'></td><td class='tr01'></td></tr>");
         }
@@ -178,9 +171,13 @@ public class Fyzcmanager extends AbstractBaseBean {
     }
 
     public void delByYwGuid() {
-        String yw_guid = request.getParameter("yw_guid");
-        String sql = "delete from fyzc t where yw_guid='" + yw_guid + "'";
-        this.update(sql, YW);
+        String mc = request.getParameter("mc");
+        mc = UtilFactory.getStrUtil().unescape(mc);
+        String[] mcs = mc.substring(0, mc.length()-1).split(",");
+        for(int i=0;i<mcs.length;i++){
+        	String sql = "delete from fyzc t where t.mc='" + mcs[i] + "'";
+        	this.update(sql, YW);
+        }
         response("success");
     }
 
