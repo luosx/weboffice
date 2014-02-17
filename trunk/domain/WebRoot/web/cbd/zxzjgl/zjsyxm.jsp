@@ -21,48 +21,47 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="description" content="This is my page">
 	<%@ include file="/base/include/restRequest.jspf"%>
 	<style type="text/css">
-table {
-	border: 1px solid #000000;
-	padding: 0;
-	margin: 0 auto;
-	border-collapse: collapse;
-}
-input{
-
-
-}
-td {
-	border: 1px solid #000000;
-	background: #fff;
-	font-size: 18px;
-	padding: 3px 3px 3px 8px;
-	color: #000000;
-	text-align:center;
-}
-h1{
-  font-size: 24px;
-  }
-
-td1 {
-	border: 1px solid #000000;
-	background: #adadad;
-	font-size: 18px;
-	padding: 3px 3px 3px 8px;
-	color: #fdfdfd;
-	text-align:center;
-}
-  .tr01{
-  	background-color: #C0C0C0;
-  	font-weight:bold;
-    line-height: 30px;
-    text-align:center;
-  }
-  .tr02{
-  	background-color: #FCFCFC;
-  }
-   .tr03{
-  	background-color: #FCFCFC;
-  }
+  		table{
+		    font-size: 14px;
+		    background-color: #A8CEFF;
+		    border-color:#000000;
+		    /**
+		    border-left:1dp #000000 solid;
+		    border-top:1dp #000000 solid;
+		    **/
+		    color:#000000;
+		    border-collapse: collapse;
+  		}
+  		tr{
+    		border-width: 0px;
+    		text-align:center;
+  		}
+  		td{
+    		text-align:center;
+    		border-color:#000000;
+		    /**
+		    border-bottom:1dp #000000 solid;
+		    border-right:1dp #000000 solid;
+		    **/
+		  }
+		.title{
+		    font-weight:bold;
+		    font-size: 15px;
+		    text-align:center;
+		    line-height: 50px;
+			margin-top: 3px;
+		  }
+	  	.trtotal{
+		  	text-align:center;
+		    font-weight:bold;
+		    line-height: 30px;
+		    background-color: #A8CEFF;
+		   }
+	  	.trsingle{
+		    background-color: #D1E5FB;
+		    line-height: 20px;
+		    text-align:center;
+		   }
 	</style>
   </head>
   <script type="text/javascript">
@@ -75,8 +74,12 @@ td1 {
 		<img src="base/form/images/exportexcel.png" width="20px" height="20px" title="导出Excel" onClick="javascript:exportExcel();"  />&nbsp;&nbsp;&nbsp;
 	</div>
 	<div align="center" style="margin-left: 10px;  width:1200px;">
-	      <h1>XX项目储备资金支出情况表</h1>
+	      <h1>公交总公司项目储备资金支出情况表</h1>
 	</div>
+	<div>
+		<%=new CBDReportManager().getReport("XMCBZJ",new Object[]{"公交总公司项目"})%>
+	</div>
+	<!-- 
  	<table width='1100' border='1' cellpadding='1' cellspacing='0'>
  		<tr >
 			<td rowspan="2" colspan="1"  class='tr01'>序号</td>
@@ -183,6 +186,6 @@ td1 {
  			<td class='tr01'></td>
  		</tr>
  	</table>
-  	 
+  	  -->
   </body>
 </html>
