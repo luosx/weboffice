@@ -8,7 +8,7 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 Map<String, String> proMap = JbbManager.getDKMCMap();
 String extPath = basePath + "base/thirdres/ext/";
-String reportID = "HXXM";
+String reportID = "CBJHZHB";
 String keyIndex = "1";
 ITableStyle its = new TableStyleEditRow();
 %>
@@ -79,99 +79,10 @@ ITableStyle its = new TableStyleEditRow();
 	</style>
   </head>
   <script type="text/javascript">
-  	var win;
-  	var winForm;
-  	var table = new tableoper();
-	Ext.onReady(function(){
-		Ext.QuickTips.init();
-    	var leftDs = new Ext.data.ArrayStore({
-	       data: <%=proMap.get("left")%>,
-	       fields: ['value','text']
-	   	}); 
- 		var rightDs = new Ext.data.ArrayStore({ 
-	       fields: ['value','text'],
-	       sortInfo: {
-	           field: 'value',
-	           direction: 'ASC'
-	       }
-	  	});
- 		
- 		winForm = new Ext.form.FormPanel({
-	   		bodyStyle: 'padding:10px;',
-     		width:500,
-        	items:[{
-	          	xtype: 'itemselector',
-	            name: 'itemselector',
-	            imagePath: '<%=extPath%>examples/ux/images/',
-	            fieldLabel: '基本地块列表',
-	            multiselects:[
-	         		{
-	                  width: 180,
-	                  height: 245,
-	                  store: leftDs,
-	                  displayField: 'text',
-	                  valueField: 'value'
-	           		},{
-	           		  width: 180,
-		              height: 245,
-		              store: rightDs,
-		              displayField: 'text',
-	                  valueField: 'value',	
-	                  tbar:[{
-	                  		text: '清空已选列表',
-	                  		handler:function(){
-	                  			winForm.getForm().findField('itemselector').reset();
-	                  		}
-				      }]
-			     	}	
-            	]
-         }],
-       		buttons: [{
-       		text: '保存',
-       		handler: function(){
-       			if(winForm.getForm().isValid()){
-       				var itemselector = winForm.form.findField('itemselector').getValue();
-       				//将选择的基本地块数据保存到数据库
-       				if(obj_id != undefined){
-						table.init(document.getElementById("HXXM"));
-						var row = obj_id.split("_")[0];
-						var cell = obj_id.split("_")[1];
-						table.setValue(row, cell, itemselector);
-       					var key = document.getElementById(row + "_" + "<%=keyIndex%>");
-					    putClientCommond("<%=reportID%>", "update");
-					    putRestParameter("key", key.innerText);
-					    putRestParameter("vindex", cell);
-					    putRestParameter("value", itemselector);
-					    restRequest();
-       				}
-       				win.hide();
-       				document.location.reload();
-       			}
-       		}
-       	},{
-		        text: '取消',
-       		handler: function(){
-				win.hide();
-       		}
-       	}]
-	});
- 		
-   		win = new Ext.Window({
-	    layout: 'fit',
-	    title: '请选择基本地块',
-	    closeAction: 'hide',
-	    width:550,
-	    height:380,
-	    x: 2340,
-	    y: 110,
-	    items:winForm
-		});
-})
-  
-  
   </script>
   <script type="text/javascript">
   	var form;
+  		var table = new tableoper();
   	var paneloper = new Paneloper();
   	$(document).ready(function () { 
 		var width = document.body.clientWidth;
@@ -203,7 +114,7 @@ ITableStyle its = new TableStyleEditRow();
 		                id      : 'XMMC',
 		                value:'',
 		                fieldLabel: '项目名称',
-		                disabled:true,  
+		                readOnly:true,  
 		                width:'80'	            
 	            	}]
 	            },{
@@ -375,6 +286,7 @@ ITableStyle its = new TableStyleEditRow();
 		                xtype: 'textfield',
 		                id   : 'JSYDXJ',
 		                value:'',
+		                readOnly:true,
 		                fieldLabel: '规划建设用地小计',
 		                width:'100'
 	            	}]
@@ -428,6 +340,7 @@ ITableStyle its = new TableStyleEditRow();
 		                xtype: 'textfield',
 		                id   : 'GHJZXJ',
 		                value:'',
+		                 readOnly:true,
 		                fieldLabel: '规划建筑小计',
 		                width:'100'
 	            	}]
