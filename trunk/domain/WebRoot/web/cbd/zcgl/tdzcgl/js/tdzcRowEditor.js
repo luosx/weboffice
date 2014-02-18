@@ -28,8 +28,18 @@ function editMap(objid){
 		var value = objid.cells[i].innerText;	
 		paneloper2.insertValue(array[i+2], value);
 	}
-	form2.findById('xmmc').setDisabled(true);  
-
+	form2.findById('dkmc').setReadOnly(true);  
+	var xmarray = new Array();
+	putClientCommond("hxxmHandle","getHxxmmc");
+	var hxxmmc = restRequest();
+	if(xmarray.length>0){
+		xmarray=[];
+	}
+	for(var i=0;i<hxxmmc.length;i++ ){
+		xmarray.push(hxxmmc[i].XMNAME);
+	}
+	form2.findById('xmmc').store.loadData(xmarray);
+	
 	//Ext.getCmp("xmmc").getEl().dom.readOnly= true;
 	paneloper2.show();
 	//parent.parent.frames['east'].swfobject.getObjectById("FxGIS").clear();
@@ -65,8 +75,8 @@ function print(){
 
 
 function add(){
-	form2.findById('xmmc').setDisabled(false);  
-	form2.findById('dkmc').setDisabled(false);  
+	form2.findById('xmmc').setReadOnly(false);  
+	form2.findById('dkmc').setReadOnly(false);  
 	paneloper2.show();
 	var xmarray = new Array();
 	putClientCommond("hxxmHandle","getHxxmmc");
@@ -98,7 +108,29 @@ function add(){
 }
 
 function dele(){
-	alert("dele");
+	Ext.MessageBox.confirm('确认', '系统将删除所有选中土地资产，确定?', function(btn,text){
+		if(btn == 'yes'){
+			var choseValue = table.getAnnotations();
+			var choseString = '';
+			if(choseValue.length != 0){
+				choseString += table.getValue(choseValue.pop(),"0")+ ",";
+			}
+			putClientCommond("tdzcglManager","deleteByDKMC");
+			putRestParameter("dkmc",escape(escape(choseString)));
+			myData = restRequest();
+			if(myData){
+				Ext.MessageBox.alert('提醒', '删除成功！', function(btn, text){
+					document.location.reload();
+					return;
+				});
+			}else{
+				Ext.MessageBox.alert('提醒', '删除失败，请联系管理员或重试', function(btn, text){
+					return;
+				});
+			}
+			
+		}
+	});
 }
 
 //根据用地单位和关键字作过滤

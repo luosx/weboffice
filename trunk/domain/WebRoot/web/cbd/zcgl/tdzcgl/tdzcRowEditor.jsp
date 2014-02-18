@@ -139,7 +139,6 @@ ITableStyle its = new TableStyleEditRow();
 		                xtype: 'combo',
 		                id      : 'dkmc',
 		                value:'',
-		                disabled:true ,
 		                store :[],
 		                fieldLabel: '地块名称',  
 		                width:'200'	,
@@ -155,9 +154,8 @@ ITableStyle its = new TableStyleEditRow();
 					    fieldLabel : '用地性质',   
 					    id : 'ydxz',   
 					    value:'',
-					    disabled:true ,  
-					    allowBlank:false, 
-					    disabled:true ,   
+					    readOnly : true,
+					    allowBlank:false,  
 		                width:'200'
 					}]
 				}]
@@ -171,7 +169,7 @@ ITableStyle its = new TableStyleEditRow();
 		                id      : 'jsydmj',
 		                value:'',
 		                fieldLabel: '建设用地面积(公顷)',
-		                disabled:true ,  
+		                readOnly : true,
 		                width:'200'
             		}]
             	},{
@@ -181,7 +179,7 @@ ITableStyle its = new TableStyleEditRow();
 		                xtype: 'textfield',
 		                id   : 'rjl',
 		                value:'',
-		                disabled:true ,  
+		                readOnly : true,
 		                fieldLabel: '容积率',
 		                width:'200'
 		            }]
@@ -195,7 +193,7 @@ ITableStyle its = new TableStyleEditRow();
 		                xtype: 'numberfield',
 		                id   : 'ghjzgm',
 		                value:'',
-		                disabled:true ,  
+		                readOnly : true,
 		                fieldLabel: '规划建筑规模(万㎡)',
 		                width:'200'
 	            	}]
@@ -206,7 +204,7 @@ ITableStyle its = new TableStyleEditRow();
 		                xtype: 'numberfield',
 		                id   : 'jzkzgd',
 		                value:'',
-		                disabled:true ,  
+		                readOnly : true,
 		                fieldLabel: '建筑控制高度(米)',
 		                width:'200'
 	            	}]
@@ -519,7 +517,7 @@ ITableStyle its = new TableStyleEditRow();
 	            {
 	                text   : '保存',
 	                handler: function() {
-	            			paneloper.setRestUrl("tdzcglManager/add");
+	            			paneloper2.setRestUrl("tdzcglManager/add");
 							paneloper2.save();
 	                	}
 	            	},   
@@ -542,11 +540,11 @@ ITableStyle its = new TableStyleEditRow();
   	}
   // })
   </script>
-  <body>
-  	<div id='show'>
+  <body  style="overflow-x:hidden;overflow-y:hidden">
+  	<div id='show' >
   		<%=new CBDReportManager().getReport("TDZCGL",its)%>
   	</div>
-  	<div id="deal2" style="position:absolute; left:100px; top:80px; "></div>
+  	<div id="deal2" style="position:absolute; left:5px; top:5px; "></div>
   	<form id="attachfile" action="<%=basePath%>service/rest/zrbHandle/update" method="post">
 	</form> 
   </body>
