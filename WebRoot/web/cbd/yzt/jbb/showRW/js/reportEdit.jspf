@@ -14,11 +14,11 @@ function send(objid){
     }
 }
 
-function modify(obj, key, valueIndex){
-    var modify = obj;
-    var old = modify.innerText;
-    modify.innerHTML = "<font color='blue'>" + old + "</font>";
-    addContext(obj.id, key, valueIndex);
+function modify1(obj, key, valueIndex){
+    //var modify = obj;
+    //var old = modify.innerText;
+   // modify.innerHTML = "<font color='blue'>" + old + "</font>";
+   // addContext(obj.id, key, valueIndex);
 }
 
 var preObjColor;
