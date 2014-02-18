@@ -22,7 +22,7 @@ import com.sun.mail.imap.protocol.Status;
  * <br>Date:2013-12-18
  */
 public class JbbReport extends AbstractBaseBean implements IDataClass {
-	public static String[][] shows = new String[][]{{"dkmc","false"},{"zzsgm","false"},{"zzzsgm","false"},{"zzzshs","false"},{"hjmj","false"},{"fzzzsgm","false"},{"fzzjs","false"},{"zd","true"},{"jsyd","true"},{"rjl","true"},{"jzgm","true"},{"kzgd","true"},{"ghyt","true"},{"gjjzgm","true"},{"jzjzgm","true"},{"szjzgm","true"},{"kfcb","true"},{"lmcb","true"},{"dmcb","true"},{"yjcjj","true"},{"yjzftdsy","true"},{"cxb","true"},{"cqqd","true"},{"cbfgl","true"},{"ssqy","true"}};
+	public static String[][] shows = new String[][]{{"dkmc","false"},{"zzsgm","false"},{"zzzsgm","false"},{"zzzshs","false"},{"hjmj","false"},{"fzzzsgm","false"},{"fzzjs","false"},{"zd","false"},{"jsyd","false"},{"rjl","false"},{"jzgm","false"},{"kzgd","false"},{"ghyt","false"},{"gjjzgm","false"},{"jzjzgm","false"},{"szjzgm","false"},{"kfcb","false"},{"lmcb","false"},{"dmcb","false"},{"yjcjj","false"},{"yjzftdsy","false"},{"cxb","false"},{"cqqd","false"},{"cbfgl","false"},{"ssqy","true"}};
 	private String form_name = "JC_JIBEN";
 	private String isEdit = "true";
 	
