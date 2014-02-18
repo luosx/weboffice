@@ -20,6 +20,7 @@ public class Contorl {
 	private String year;
 	private String type[];
 	private String Edit[];
+	private String rolename;
 	/***************************************************************************
 	 * 资金流入状态标识,编辑状态
 	 */
@@ -72,11 +73,12 @@ public class Contorl {
 	 * @param type
 	 * @param Edit
 	 */
-	public Contorl(String yw_guid, String year, String[] type, String[] Edit) {
+	public Contorl(String yw_guid, String year, String[] type, String[] Edit,String rolename) {
 		this.yw_guid = yw_guid;
 		this.year = year;
 		this.type = type;
 		this.Edit = Edit;
+		this.rolename = rolename;
 		Init(this.type, this.Edit);
 		try {
 			Thread.sleep(1000);
@@ -100,52 +102,52 @@ public class Contorl {
 			} else {
 				if (type[i].equals(ZJZC)) {
 					ZJZCThread = new ZjglThread(this.yw_guid,  this.year,ZJZC,
-							Edit[i]);
+							Edit[i],this.rolename);
 					Thread thread = new Thread(ZJZCThread);
 					thread.start();
 				} else if (type[i].equals(YJKFZC)) {
 					YIKFZCThread = new ZjglThread(this.yw_guid,  this.year,YJKFZC,
-							Edit[i]);
+							Edit[i],this.rolename);
 					Thread thread = new Thread(YIKFZCThread);
 					thread.start();
 				} else if (type[i].equals(QQFY)) {
 					QQFYThread = new ZjglThread(this.yw_guid,  this.year,QQFY,
-							Edit[i]);
+							Edit[i],this.rolename);
 					Thread thread = new Thread(QQFYThread);
 					thread.start();
 				} else if (type[i].equals(CQFY)) {
 					CQFYThread = new ZjglThread(this.yw_guid,  this.year,CQFY,
-							Edit[i]);
+							Edit[i],this.rolename);
 					Thread thread = new Thread(CQFYThread);
 					thread.start();
 				} else if (type[i].equals(SZFY)) {
 					SZFYThread = new ZjglThread(this.yw_guid,  this.year,SZFY,
-							Edit[i]);
+							Edit[i],this.rolename);
 					Thread thread = new Thread(SZFYThread);
 					thread.start();
 				} else if (type[i].equals(SCFY)) {
 					SCFYThread = new ZjglThread(this.yw_guid,  this.year,SCFY,
-							Edit[i]);
+							Edit[i],this.rolename);
 					Thread thread = new Thread(SCFYThread);
 					thread.start();
 				}else if (type[i].equals(CWFY)) {
 					CWFYThread = new ZjglThread(this.yw_guid,  this.year,CWFY,
-							Edit[i]);
+							Edit[i],this.rolename);
 					Thread thread = new Thread(CWFYThread);
 					thread.start();
 				} else if (type[i].equals(GLFY)) {
 					GLFYThread = new ZjglThread(this.yw_guid,  this.year,GLFY,
-							Edit[i]);
+							Edit[i],this.rolename);
 					Thread thread = new Thread(GLFYThread);
 					thread.start();
 				} else if (type[i].equals(CRZJFH)) {
 					CRZJFHThread = new ZjglThread(this.yw_guid,  this.year,CRZJFH,
-							Edit[i]);
+							Edit[i],this.rolename);
 					Thread thread = new Thread(CRZJFHThread);
 					thread.start();
 				} else if (type[i].equals(QTZC)) {
 					QTZCHThread = new ZjglThread(this.yw_guid,this.year,QTZC,
-							Edit[i]);
+							Edit[i],this.rolename);
 					Thread thread = new Thread(QTZCHThread);
 					thread.start();
 				}
@@ -161,34 +163,34 @@ public class Contorl {
 	 * Date:2014-1-16
 	 */
 	public void Init() {
-		ZJZCThread = new ZjglThread(this.yw_guid, ZJZC, this.year);
+		ZJZCThread = new ZjglThread(this.yw_guid, ZJZC, this.year,this.rolename);
 		Thread thread = new Thread(ZJZCThread);
 		thread.start();
-		YIKFZCThread = new ZjglThread(this.yw_guid, YJKFZC, this.year);
+		YIKFZCThread = new ZjglThread(this.yw_guid, YJKFZC, this.year,this.rolename);
 		Thread thread1 = new Thread(YIKFZCThread);
 		thread1.start();
-		QQFYThread = new ZjglThread(this.yw_guid, QQFY, this.year);
+		QQFYThread = new ZjglThread(this.yw_guid, QQFY, this.year,this.rolename);
 		Thread thread2 = new Thread(QQFYThread);
 		thread2.start();
-		CQFYThread = new ZjglThread(this.yw_guid, CQFY, this.year);
+		CQFYThread = new ZjglThread(this.yw_guid, CQFY, this.year,this.rolename);
 		Thread thread3 = new Thread(CQFYThread);
 		thread3.start();
-		SCFYThread = new ZjglThread(this.yw_guid, SCFY, this.year);
+		SCFYThread = new ZjglThread(this.yw_guid, SCFY, this.year,this.rolename);
 		Thread thread4 = new Thread(SCFYThread);
 		thread4.start();
-		SZFYThread = new ZjglThread(this.yw_guid, SZFY, this.year);
+		SZFYThread = new ZjglThread(this.yw_guid, SZFY, this.year,this.rolename);
 		Thread thread5 = new Thread(SZFYThread);
 		thread5.start();
-		CWFYThread = new ZjglThread(this.yw_guid, CWFY, this.year);
+		CWFYThread = new ZjglThread(this.yw_guid, CWFY, this.year,this.rolename);
 		Thread thread6 = new Thread(CWFYThread);
 		thread6.start();
-		GLFYThread = new ZjglThread(this.yw_guid, GLFY, this.year);
+		GLFYThread = new ZjglThread(this.yw_guid, GLFY, this.year,this.rolename);
 		Thread thread7 = new Thread(GLFYThread);
 		thread7.start();
-		CRZJFHThread = new ZjglThread(this.yw_guid, CRZJFH, this.year);
+		CRZJFHThread = new ZjglThread(this.yw_guid, CRZJFH, this.year,this.rolename);
 		Thread thread8 = new Thread(CRZJFHThread);
 		thread8.start();
-		QTZCHThread = new ZjglThread(this.yw_guid, QTZC, this.year);
+		QTZCHThread = new ZjglThread(this.yw_guid, QTZC, this.year,this.rolename);
 		Thread thread9 = new Thread(QTZCHThread);
 		thread9.start();
 
@@ -210,7 +212,7 @@ public class Contorl {
 		StringBuffer title = ZjglBuild.buildTitle(this.year);
 		buffer.append(title);
 		// 资金流入
-		StringBuffer zjlr = TrFactory.getmod(this.yw_guid, this.year);
+		StringBuffer zjlr = TrFactory.getmod(this.yw_guid, this.year,this.rolename);
 		buffer.append(zjlr);
 		buffer.append(ZJZCThread.getBuffer());
 		buffer.append(YIKFZCThread.getBuffer());
@@ -243,11 +245,11 @@ public class Contorl {
 		// 资金流入
 		if (zjlr_status.equals("y")) {
 			if (zjlr_editor.equals("y")) {
-				StringBuffer zjlr = TrFactory.getmod(this.yw_guid, this.year);
+				StringBuffer zjlr = TrFactory.getmod(this.yw_guid, this.year,this.rolename);
 				buffer.append(zjlr);
 			} else {
 				StringBuffer zjlr = TrFactory.getmod_view(this.yw_guid,
-						this.year);
+						this.year,this.rolename);
 				buffer.append(zjlr);
 			}
 

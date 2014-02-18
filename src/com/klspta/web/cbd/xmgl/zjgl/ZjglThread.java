@@ -17,21 +17,22 @@ public class ZjglThread implements Runnable {
 	private String type = "";
 	private String year = "";
 	private String editor = "";
+	private String rolename = "";
 	private StringBuffer buffer = new StringBuffer();
 
-	public ZjglThread(String yw_guid, String type, String year) {
+	public ZjglThread(String yw_guid, String type, String year,String rolename) {
 		this.yw_guid = yw_guid;
 		this.type = type;
 		this.year = year;
-
+		this.rolename = rolename;
 	}
 
-	public ZjglThread(String yw_guid,  String year,String type, String editor) {
+	public ZjglThread(String yw_guid,  String year,String type, String editor,String rolename) {
 		this.yw_guid = yw_guid;
 		this.type = type;
 		this.year = year;
 		this.editor = editor;
-
+		this.rolename = rolename;
 	}
 
 	@Override
@@ -41,10 +42,10 @@ public class ZjglThread implements Runnable {
 				type, this.year);
 		if (this.editor.equals("y")) {
 			this.buffer = TrFactory.getmodel_editor(zc_zjzc, this.yw_guid, type,
-					this.year);
+					this.year,this.rolename);
 		} else {
 			this.buffer = TrFactory.getmodel_view(zc_zjzc, this.yw_guid, type,
-					this.year);
+					this.year,this.rolename);
 		}
 	}
 
