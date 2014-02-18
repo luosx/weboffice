@@ -401,7 +401,7 @@ public class BuildModel {
           buffer.append("</td><td>");
           buffer.append( delNull(String.valueOf(cont1.get(j).get("syy"))));
           buffer.append("</td><td >");
-          buffer.append( delNull(String.valueOf(cont1.get(j).get("sry"))));
+          buffer.append( delNull(String.valueOf(cont1.get(j).get("sey"))));
           buffer.append("</td></tr>");  
           }  
       }
@@ -439,7 +439,7 @@ public class BuildModel {
               buffer.append("</td><td >");
               buffer.append( delNull(String.valueOf(cont2.get(j).get("syy"))));
               buffer.append("</td><td >");
-              buffer.append( delNull(String.valueOf(cont2.get(j).get("sry"))));
+              buffer.append( delNull(String.valueOf(cont2.get(j).get("sey"))));
               buffer.append("</td></tr>");
           }
       }
