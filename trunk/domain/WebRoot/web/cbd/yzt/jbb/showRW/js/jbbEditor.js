@@ -33,6 +33,11 @@ function initComponent() {
 							xtype : 'button',
 							text : '导出Excel',
 							handler : exportExcel
+						}, '-', {
+							xtype : 'button',
+							text : '修改',
+							id : 'modify',
+							handler : update
 						}],
 				items : [{
 					html : "<iframe id='report' width=" + (width - 10)
@@ -41,6 +46,10 @@ function initComponent() {
 				}]
 			});
 	simple.render(document.body);
+	if(view == "R"){
+		var toolbar = simple.getTopToolbar();
+		toolbar.remove("modify");
+	}
 }
 
 
@@ -139,6 +148,10 @@ function insertGIS(){
 	}else{
 		form.style.display = "none";
 	}
+}
+
+function update(){
+	document.frames['report'].update();
 }
 
 

@@ -15,8 +15,19 @@ function showMap(objid){
 
 //双击编辑地图
 function editMap(objid){
+	
+	if(table.element == undefined){
+		table.init(document.getElementById("JBB"));
+	}
 	var key = objid.cells[0].innerText;
 	zrbbh = key;
+	
+	var array = paneloper.getElements();
+	for(var i = 0; i < objid.cells.length-1; i++){
+		var value = objid.cells[i].innerText;	
+		paneloper.insertValue(array[i], value);
+	}
+	paneloper.show();
 	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").clear();
 	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").drawPolygon();
 }
@@ -64,5 +75,13 @@ function queryJBB(keyword){
 	putRestParameter("keyword",escape(escape(keyword)));
 	myData = restRequest();
   	document.getElementById("show").innerHTML = myData;
+  	
 }
 
+function update(){
+	var annoations = table.getAnnotations();
+	if(annoations.length > 0){
+		var objid = table.element.rows[annoations[0]];
+		editMap(objid);
+	}
+}

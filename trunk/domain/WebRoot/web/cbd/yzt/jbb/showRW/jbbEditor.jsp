@@ -4,7 +4,7 @@
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
-	
+	String view = request.getParameter("view");
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -58,6 +58,7 @@ input,img {
 </style>
 		<script>
 		var basePath="<%=basePath%>";
+		var view = "<%=view%>";
 </script>
 		<script src="js/jbbEditor.js"></script>
 	</head>
