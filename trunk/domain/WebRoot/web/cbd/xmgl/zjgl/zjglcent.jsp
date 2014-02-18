@@ -5,6 +5,9 @@
 <%@page import="com.klspta.console.ManagerFactory"%>
 <%@page import="com.klspta.console.user.UserAction"%>
 <%@page import="com.klspta.base.rest.ProjectInfo"%>
+<%@page import="org.springframework.security.core.context.SecurityContextHolder"%>
+<%@page import="com.klspta.console.user.User"%>
+<%@page import="com.klspta.console.role.Role"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -21,7 +24,11 @@
 	} else {
 		xmmc = "";
 	}
-	
+	Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+	String userId = ((User)principal).getUserID();
+	User user = ManagerFactory.getUserManager().getUserWithId(userId);
+	List<Role>  role = ManagerFactory.getRoleManager().getRoleWithUserID(userId);
+	String rolename = role.get(0).getRolename();
 	if(!yw_guid.equals("")&&!yw_guid.equals("null")){
 		if("all".equals(type)){
 			  Contorl contorl=new Contorl(yw_guid,year);
@@ -29,7 +36,7 @@
 		}else {
 			String types[] = type.split("@");
 			String edirots[] = editor.split("@");
-			Contorl contorl=  new Contorl(yw_guid,year,types,edirots);
+			Contorl contorl=  new Contorl(yw_guid,year,types,edirots,rolename);
 			table= contorl.getTextMode_new();
 		}
    }
