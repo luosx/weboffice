@@ -309,10 +309,14 @@ public class Xmmanager extends AbstractBaseBean {
 				String sql = " delete zjgl_tree where  yw_guid=? and parent_id=? and tree_name=? and tree_id=? and rq=?";
 				update(sql, YW, new Object[] { yw_guid, parent_id, tree_text,
 						id, selet_year });
-				String delet = "delete XMZJGL_ZC where yw_guid=? and lb=? and zcstatus=? and rq=?";
-				update(delet, YW, new Object[] { yw_guid, tree_text, parent_id,
-						selet_year });
-
+				if(parent_id.equals("ZJLR")){
+					String delet = "delete XMZJGL_LR where yw_guid=? and lb=? and rq=?";
+					update(delet, YW, new Object[] { yw_guid, tree_text, selet_year });
+				}else{
+					String delet = "delete XMZJGL_ZC where yw_guid=? and lb=? and zcstatus=? and rq=?";
+					update(delet, YW, new Object[] { yw_guid, tree_text, parent_id,
+							selet_year });
+				}
 			}
 		}
 	}

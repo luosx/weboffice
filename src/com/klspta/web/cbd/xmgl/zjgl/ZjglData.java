@@ -93,7 +93,7 @@ public class ZjglData extends AbstractBaseBean {
 	        }
         }else{
         	String sqlString="insert into XMZJGL_LR (yw_guid,status,lb,rq) values(?,?,?,?)";
-            update(sqlString, YW,new Object[]{yw_guid, type,tree_name,year});
+            update(sqlString, YW,new Object[]{yw_guid, tree_name,tree_name,year});
         }
     }
     
