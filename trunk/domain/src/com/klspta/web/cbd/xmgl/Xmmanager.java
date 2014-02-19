@@ -1,5 +1,6 @@
 package com.klspta.web.cbd.xmgl;
 
+import java.io.UnsupportedEncodingException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -213,14 +214,16 @@ public class Xmmanager extends AbstractBaseBean {
 	 * Description:保存资金管理——资金流入 <br>
 	 * Author:朱波海 <br>
 	 * Date:2013-12-17
+	 * @throws Exception 
 	 */
-	public void saveZJGL_ZJLR() {
+	public void saveZJGL_ZJLR() throws Exception {
 
 		String yw_guid = request.getParameter("yw_guid");
 		String val = request.getParameter("val");
 		String cols = request.getParameter("cols");
 		int i = Integer.parseInt(cols);
 		String stye = request.getParameter("stye");
+		stye = new String(stye.getBytes("iso-8859-1"), "UTF-8");
 		String sql = "update xmzjgl_lr set " + ZJGL_LR[i - 1] + "= " + val
 				+ "  where yw_guid=? and status=?";
 		update(sql, YW, new Object[] { yw_guid, stye });
