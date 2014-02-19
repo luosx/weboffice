@@ -40,6 +40,11 @@ public class TreeManager extends AbstractBaseBean {
 	 */
 	public String getTree(String yw_guid, String year) {
 		StringBuffer buffer = new StringBuffer();
+		//add by 黎春行   2014-02-20
+		//buffer.append("{text:'Ⅰ.资金流入',leaf:1,id:'ZJLR',children:[");
+		StringBuffer zjlr = getChaild_tree(yw_guid, "Ⅰ.资金流入", "ZJLR", year);
+		buffer.append(zjlr).append(",");
+		
 		buffer.append("{text:'Ⅱ.资金支出',leaf:0,id:'1',");
 		buffer.append("children:[{text:'2.1 一级开发支出',leaf:0,id:'101',");
 		buffer.append("children:[");
@@ -218,7 +223,7 @@ public class TreeManager extends AbstractBaseBean {
 	public StringBuffer getChaild_tree(String yw_guid, String name,
 			String type, String year) {
 		StringBuffer buffer = new StringBuffer();
-		String sql_qqfy = "  select * from zjgl_tree where yw_guid=? and parent_id=? and rq=?";
+		String sql_qqfy = " select * from zjgl_tree where yw_guid=? and parent_id=? and rq=?";
 		List<Map<String, Object>> list = query(sql_qqfy, YW, new Object[] {
 				yw_guid, type, year });
 		if (list.size() > 0) {
