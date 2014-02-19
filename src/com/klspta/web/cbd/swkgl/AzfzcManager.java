@@ -126,14 +126,14 @@ public class AzfzcManager extends AbstractBaseBean {
 		tdcrht = UtilFactory.getStrUtil().unescape(tdcrht);
 		tdz = UtilFactory.getStrUtil().unescape(tdz);
 		bz = UtilFactory.getStrUtil().unescape(bz);
-		String insertString = "insert into azfzc  (ydmc,tdyjkfzt,zdmj,jsyd,ghrjl,ghjzgm,ghyt,kg,tdcb,yjkxcazfts,gdfs,tdkfjsbcxy,tdyj,azfjsdw,tdcrht,crhtydkgsj,tdz,bz)values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		String insertString = "insert into ZC_AZFZC  (ydmc,tdyjkfzt,zdmj,jsyd,ghrjl,ghjzgm,ghyt,kg,tdcb,yjkxcazfts,gdfs,tdkfjsbcxy,tdyj,azfjsdw,tdcrht,crhtydkgsj,tdz,bz)values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		int i = update(insertString, YW, new Object[] { ydmc, tdyjkfzt, zdmj,
 				jsyd, ghrjl, ghjzgm, ghyt, kg, tdcb, yjkxcazfts, gdfs,
 				tdkfjsbcxy, tdyj, azfjsdw, tdcrht, crhtydkgsj, tdz, bz });
 		if (i > 0) {
-			response("success");
+		    response("{success:true}");
 		} else {
-			response("failure");
+		    response("{success:failure}");
 		}
 	}
 
