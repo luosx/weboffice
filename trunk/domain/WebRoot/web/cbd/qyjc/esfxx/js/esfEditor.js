@@ -44,6 +44,11 @@ function initComponent() {
 							text : '删除',
 							id:"dele",
 							handler : dele
+						}, '-', {
+							xtype : 'button',
+							text : '租售信息录入',
+							id:"zsxxlr",
+							handler : zsxxlr
 						}],
 				items : [{
 					html : "<iframe id='report' width=" + (width)
@@ -59,6 +64,7 @@ function initComponent() {
 		toolbar.remove("modify");
 		toolbar.remove("add");
 		toolbar.remove("dele");
+		toolbar.remove("zsxxlr");
 	}
 }
 
@@ -70,6 +76,10 @@ function query() {
 
 function exportExcel() {
 	document.frames['report'].print();
+}
+
+function zsxxlr() {
+	document.frames['report'].zsxxlr();
 }
 
 function add(){

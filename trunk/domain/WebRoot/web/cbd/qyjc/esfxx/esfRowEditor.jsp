@@ -120,7 +120,7 @@ String list = ScjcManager.getInstcne().getList();
 		            xtype : 'combo',   
 				    fieldLabel : '小区类型',   
 				    id : 'xqlb',   
-				    store :[[1,'老旧房'],[2,'新区房']],   
+				    store :[[1,'老旧房'],[2,'新居房']],   
 				    width:100,   
 				    value:'',   
 				    triggerAction: "all",   

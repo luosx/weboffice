@@ -65,6 +65,10 @@ function print(){
     //设置excel可见属性 
 }
 
+function zsxxlr(){
+	window.parent.location.href="esfscjczsqk.jsp";
+}
+
 //上图
 function setRecord(polygon){
 	putClientCommond("kgzbmanager","drawZrb");
