@@ -1099,7 +1099,7 @@ ITableStyle its = new TableStyleEditRow();
 	            {
 	                text   : '保存',
 	                handler: function() {
-	            			paneloper.setRestUrl("");
+	            			paneloper.setRestUrl("cbjhzhb/modify");
 							paneloper.save();
 	                	}
 	            	},   
