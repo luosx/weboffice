@@ -307,7 +307,7 @@ ITableStyle its = new TableStyleEditRow();
 	            {
 	                text   : '保存',
 	                handler: function() {
-	            			paneloper2.setRestUrl("tdzcglManager/addAZF");
+	            			paneloper2.setRestUrl("zafzc/addAZFzc");
 							paneloper2.save();
 	                	}
 	            	},   
