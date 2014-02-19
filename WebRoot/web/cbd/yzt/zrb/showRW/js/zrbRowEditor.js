@@ -15,8 +15,8 @@ function showMap(objid){
 	//parent.parent.frames['east'].swfobject.getObjectById("FxGIS").findFeature("cbd", "0", key, "ZRBBH");
 	//parent.parent.dhxLayout.cells("a").getFrame().contentWindow.document.swfobject.getObjectById("FxGIS").clear();
 	//parent.parent.dhxLayout.cells("a").getFrame().contentWindow.document.swfobject.getObjectById("FxGIS").findFeature("cbd", "0", key, "ZRBBH");
-	parent.parent.document.frames[0].swfobject.getObjectById("FxGIS").clear();
-	parent.parent.document.frames[0].swfobject.getObjectById("FxGIS").findFeature("cbd", "3", key, "ZRBBH");
+	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").clear();
+	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").findFeature("cbd", "3", key, "ZRBBH");
 
 	//添加选中保存
 	//var num = objid.rowIndex();
@@ -46,8 +46,8 @@ function editMap(objid){
 	
 	//parent.parent.frames['east'].swfobject.getObjectById("FxGIS").clear();
 	//parent.parent.frames['east'].swfobject.getObjectById("FxGIS").drawPolygon();
-	parent.parent.document.frames[0].swfobject.getObjectById("FxGIS").clear();
-	parent.parent.document.frames[0].swfobject.getObjectById("FxGIS").drawPolygon();
+	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").clear();
+	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").drawPolygon();
 }
 
 //导出Excel
@@ -85,8 +85,8 @@ function setRecord(polygon){
     var result = restRequest();
 	//parent.parent.frames['east'].swfobject.getObjectById("FxGIS").clear();
 	//parent.parent.frames['east'].swfobject.getObjectById("FxGIS").findFeature("cbd", "0", zrbbh, "ZRBBH");
-    parent.parent.document.frames[0].swfobject.getObjectById("FxGIS").clear();
-	parent.parent.document.frames[0].swfobject.getObjectById("FxGIS").findFeature("cbd", "3", zrbbh, "ZRBBH");
+    parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").clear();
+	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").findFeature("cbd", "3", zrbbh, "ZRBBH");
 }
 
 function add(){
