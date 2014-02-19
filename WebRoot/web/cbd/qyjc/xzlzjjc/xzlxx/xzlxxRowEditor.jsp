@@ -88,8 +88,8 @@ String view = request.getParameter("view");
 	        autoHeight: true,
 	        frame:true,
 	        bodyStyle:'padding:5px 0px 0',
-	        width: 800,
-	  		labelWidth :130,   
+	        width: 650,
+	  		labelWidth :100,   
 	  		labelAlign : "right",
 	        url:"",
 	        title:"土地资产信息",
@@ -365,7 +365,7 @@ String view = request.getParameter("view");
 		                id   : 'qt',
 		                value:'',
 		                fieldLabel: '其他',
-		                width:'600'
+		                width:'500'
 	            	}]
 	            }]
 	        }], 
@@ -395,7 +395,7 @@ String view = request.getParameter("view");
   // })
   </script>
   <body>
-  	<div id='show' style="overflow-x:hidden;overflow-y:hidden">
+  	<div id='show'>
   		<%=new CBDReportManager().getReport("XZLZJ",new Object[]{"%%"},its)%>
   	</div>
   	<div id="deal" style="position:absolute; left:5px; top:5px; "></div>
