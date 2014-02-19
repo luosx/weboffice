@@ -147,27 +147,5 @@ public class TdzcglManager extends AbstractBaseBean {
 
 	}
 	
-	public void addAZF(){
-	    String ydmc = request.getParameter("ydmc");
-	    String tdyjkfzt = request.getParameter("tdyjkfzt");
-	    String zdmj = request.getParameter("zdmj");
-	    String jsyd = request.getParameter("jsyd");
-	    String ghrjl = request.getParameter("ghrjl");
-	    String ghjzgm = request.getParameter("ghjzgm");
-	    String ghyt = request.getParameter("ghyt");
-	    String kg = request.getParameter("kg");
-	    String tdcb = request.getParameter("tdcb");
-	    String yjkxcazfts = request.getParameter("yjkxcazfts");
-	    String gdfs = request.getParameter("gdfs");
-	    String tdkfjsbcxy = request.getParameter("tdkfjsbcxy");
-	    String tdyj = request.getParameter("tdyj");
-	    String azfjsdw = request.getParameter("azfjsdw");
-	    String tdcrht = request.getParameter("tdcrht");
-	    String crhtydkgsj = request.getParameter("crhtydkgsj");
-	    String tdz = request.getParameter("tdz");
-	    String bz = request.getParameter("bz");
-	    String sql = "insert into ZC_AZFZC(ydmc,tdyjkfzt,zdmj,jsyd,ghrjl,ghjzgm,ghyt,kg,tdcb,yjkxcazfts,gdfs,tdkfjsbcxy,tdyj,azfjsdw,tdcrht,crhtydkgsj,tdz,bz) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-	    this.update(sql, YW, new Object[]{ydmc,tdyjkfzt,zdmj,jsyd,ghrjl,ghjzgm,ghyt,kg,tdcb,yjkxcazfts,gdfs,tdkfjsbcxy,tdyj,azfjsdw,tdcrht,crhtydkgsj,tdz,bz});
-	    response("{success:true}");
-	}
+
 }
