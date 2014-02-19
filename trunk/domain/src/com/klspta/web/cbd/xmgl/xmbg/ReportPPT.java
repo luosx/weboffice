@@ -56,7 +56,6 @@ public class ReportPPT extends AbstractBaseBean {
 		String sql = "select t.xmname from jc_xiangmu t where t.yw_guid = ?";
 		String xmmc = String.valueOf(query(sql, YW, new Object[]{yw_guid}).get(0).get("xmname"));
 		
-		
 		java.awt.Dimension pgsize = ppt.getPageSize();
 		int pgx = pgsize.width;
 		int pgy = pgsize.height;
@@ -80,6 +79,8 @@ public class ReportPPT extends AbstractBaseBean {
 	    	String dirpath = classPath.substring(0, classPath.lastIndexOf("WEB-INF/classes"));
 	    	dirpath=dirpath+"model/accessory/dzfj/download/";
 	    	//file_Path = dirpath + bean.getFile_path();
+	    	
+	    	
 	    	switch (i) {
 			case 0:
 				setPicture(10, 10, pgx/2, pgy/2, file_Path, Picture.JPEG, slide);
@@ -125,11 +126,17 @@ public class ReportPPT extends AbstractBaseBean {
 		slide.addShape(txt);
 	}
 	
-	public void setPicture(int left, int top, int width, int height, String path, int format,Slide slide) throws Exception{
-		int idx = ppt.addPicture(new File(path), format);
-		Picture picture = new Picture(idx);
-		picture.setAnchor(new java.awt.Rectangle(left, top, width, height));
-		slide.addShape(picture);
+	public void setPicture(int left, int top, int width, int height, String path, int format,Slide slide){
+		//判断path是否存在，不存在时，不添加file
+		try {
+			int idx = ppt.addPicture(new File(path), format);
+			Picture picture = new Picture(idx);
+			picture.setAnchor(new java.awt.Rectangle(left, top, width, height));
+			slide.addShape(picture);
+		} catch (Exception e) {
+			System.out.println("文件服务器（ftp、ser-U）没有启动，请启动文件服务器");
+		}
+
 	}
 	
 	public void setPicture(int left, int top, int width, int height, byte[] data, int format,Slide slide) throws Exception{
