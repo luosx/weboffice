@@ -21,4 +21,22 @@ public class CbjhManager extends AbstractBaseBean {
     	exec.shutdown();
     }
 	
+    String[] str = {"XMLX","XMQX","DKMC","XMWZ","XMQW","XMLB","XMZT","SFDZ","DZBV","XMZTAI",
+      		"ZMJ","NYDMJ","QZGDMJ","DCTDMJ","JSYDXJ","JSYDJZ","JSYDSF","JSYDQT","GHDZD","GHJZXJ","GHJZJZ","GHJZSF",
+      		"GHJZQT","SXGHNF","SXSQSJ","SXGHTJ","SXYSPF","SXHZPF","SXZDPF","SXCQXK","ZDZMJ","YWCZDZMJ","QYZDMJ","YZDMJ",
+      		"JHZDMJ","CQJZMJ","CQCQBL","CQJHMJ","TZJHTZ","TZYWC","YTZXJ","YTZSZX","YTZFZX","YTZQY","JHXJ","JHZCB",
+      		"JHSZX","JHFZX","JHQY","ZJHLXJ","ZJHLSZX","ZJHLFZX","ZJHLQY","LJWCKF","XCYSMJ","SFJHWC","JHWCSJ","JHWCMJ",
+      		"GHYDXJ","GHYDJZ","GHYDSF","GHYDQT","WCGHJZXJ","WCGHJZJZ","WCGHJZSF","WCGHJZQT","WCKFQBCD","WCKFPX",
+      		"LJGYMJ","DNGYMJ","SFJMNGY","JHGYSJ","JHGYMJ","GHYDMJXJ","GHYDMJJZ","GHYDMJSF","GHYDMJQT","GHJZGMXJ",
+      		"GHJZGMJZ","GHJZGMSF","GHJZGMQT","SXGYQBCD","SXGYPX","ZYWT","SFXCFW","GDJTX","XZLY","BZ"};
+    
+    public void modify(){
+    	String xmmc = request.getParameter("XMMC");
+    	String sql = "";
+    	for(int i=0; i< str.length;i++){
+    		sql = "update jc_cbjhzhb set "+str[i]+"=? where xmmc = ?";
+    		update(sql,YW,new Object[]{request.getParameter(str[i]),xmmc});
+    	}
+    	response("{success:true}");
+    }
 }
