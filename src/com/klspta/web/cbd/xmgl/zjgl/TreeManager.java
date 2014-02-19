@@ -223,7 +223,7 @@ public class TreeManager extends AbstractBaseBean {
 	public StringBuffer getChaild_tree(String yw_guid, String name,
 			String type, String year) {
 		StringBuffer buffer = new StringBuffer();
-		String sql_qqfy = " select * from zjgl_tree where yw_guid=? and parent_id=? and rq=?";
+		String sql_qqfy = " select * from zjgl_tree where yw_guid=? and parent_id=? and rq=? order by tree_name";
 		List<Map<String, Object>> list = query(sql_qqfy, YW, new Object[] {
 				yw_guid, type, year });
 		if (list.size() > 0) {
