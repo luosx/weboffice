@@ -132,20 +132,19 @@ ITableStyle its = new TableStyleEditRow();
        			if(winForm.getForm().isValid()){
        				var itemselector = winForm.form.findField('itemselector').getValue();
        				//将选择的基本地块数据保存到数据库
-       				if(obj_id != undefined){
-						table.init(document.getElementById("HXXM"));
-						var row = obj_id.split("_")[0];
-						var cell = obj_id.split("_")[1];
-						table.setValue(row, cell, itemselector);
-       					var key = document.getElementById(row + "_" + "<%=keyIndex%>");
-					    putClientCommond("<%=reportID%>", "update");
-					    putRestParameter("key", key.innerText);
-					    putRestParameter("vindex", cell);
+       				if(itemselector != ""){
+       					Ext.getCmp("jbdk").setValue(itemselector);
+					    putClientCommond("hxxmHandle", "getCQSJ");
 					    putRestParameter("value", itemselector);
-					    restRequest();
+					    var mydata = restRequest();
+					    Ext.getCmp("zzsgm").setValue(mydata[0].ZZSGM);
+					    Ext.getCmp("zzzsgm").setValue(mydata[0].ZZZSGM);
+					    Ext.getCmp("zzzshs").setValue(mydata[0].ZZZSHS);
+					    Ext.getCmp("hjmj").setValue(mydata[0].HJMJ);
+					    Ext.getCmp("fzzzsgm").setValue(mydata[0].FZZZSGM);
+					    Ext.getCmp("fzzjs").setValue(mydata[0].FZZJS);
        				}
        				win.hide();
-       				document.location.reload();
        			}
        		}
        	},{
@@ -162,8 +161,8 @@ ITableStyle its = new TableStyleEditRow();
 	    closeAction: 'hide',
 	    width:550,
 	    height:380,
-	    x: 2340,
-	    y: 110,
+	    x: 10,
+	    y: 10,
 	    items:winForm
 		});
 })
@@ -184,8 +183,8 @@ ITableStyle its = new TableStyleEditRow();
 	        autoHeight: true,
 	        frame:true,
 	        bodyStyle:'padding:5px 0px 0',
-	        width: 800,
-	  		labelWidth :130,   
+	        width: 700,
+	  		labelWidth :110,   
 	  		labelAlign : "right",
 	        url:"",
 	        title:"红线项目信息",
@@ -303,7 +302,7 @@ ITableStyle its = new TableStyleEditRow();
 					    fieldLabel : '总征收规模',   
 					    id : 'zzsgm',   
 					    value:'',
-					    disabled:true,
+					    readOnly:true,
 		                width:'100'
 					}]
 				},{
@@ -314,7 +313,7 @@ ITableStyle its = new TableStyleEditRow();
 			            xtype : 'textfield',   
 					    fieldLabel : '住宅征收规模',   
 					    id : 'zzzsgm',   
-					    disabled:true,
+					    readOnly:true,
 					    value:'',
 		                width:'100'
 					}]
@@ -326,7 +325,7 @@ ITableStyle its = new TableStyleEditRow();
 			            xtype : 'textfield',   
 					    fieldLabel : '住宅征收户数',   
 					    id : 'zzzshs',
-					    disabled:true,   
+					    readOnly:true,   
 					    value:'',
 		                width:'100'
 					}]
@@ -341,7 +340,7 @@ ITableStyle its = new TableStyleEditRow();
 			            xtype : 'textfield',   
 					    fieldLabel : '户均面积',   
 					    id : 'hjmj', 
-					    disabled:true,  
+					    readOnly:true,  
 					    value:'',
 		                width:'100'
 					}]
@@ -352,7 +351,7 @@ ITableStyle its = new TableStyleEditRow();
 		                xtype: 'numberfield',
 		                id      : 'fzzzsgm',
 		                value:'',
-		                disabled:true,
+		                readOnly:true,
 		                fieldLabel: '非住宅征收规模', 
 		                width:'100'
             		}]
@@ -363,7 +362,7 @@ ITableStyle its = new TableStyleEditRow();
 		                xtype: 'textfield',
 		                id   : 'fzzjs',
 		                value:'', 
-		                disabled:true,
+		                readOnly:true,
 		                fieldLabel: '非住宅家数',
 		                width:'100'
 		            }]
@@ -566,12 +565,30 @@ ITableStyle its = new TableStyleEditRow();
 		                width:'100'
 	            	}]
             	}]
+	        },{
+	           	layout:'column',
+	           	items:[{
+	            	columnWidth:.8,
+	        		layout:'form',
+	           		items:[{
+		                xtype: 'textfield',
+		                id   : 'jbdk',
+		                value:'',
+		                fieldLabel: '基本地块',
+		                width:'400',
+		                listeners:{                 
+			                'focus':function(){                           
+			                	win.show();               
+			                }                
+		                } 
+	            	}]
+            	}]
 	        }], 
 	        buttons: [
 	            {
 	                text   : '保存',
 	                handler: function() {
-	            			paneloper.setRestUrl("");
+	            			paneloper.setRestUrl("hxxmHandle/modify");
 							paneloper.save();
 	                	}
 	            	},   
@@ -589,7 +606,7 @@ ITableStyle its = new TableStyleEditRow();
   		     "jzjzgm", "szjzgm", "zzsgm", "zzzsgm", "zzzshs", "hjmj", "fzzzsgm", 
 			 "fzzjs", "kfcb", "lmcb", "dmcb","yjcjj","yjzftdsy","cxb",  "cqqd", "cbfgl", 
 			 "zzcqfy", "qycqfy", "qtfy", "azftzcb", "zzhbtzcb", "cqhbtz","qtfyzb","lmcjj",
-			 "fwsj", "zj");
+			 "fwsj", "zj","jbdk");
   		paneloper.init(form,elements);
   		paneloper.hide();
   	}

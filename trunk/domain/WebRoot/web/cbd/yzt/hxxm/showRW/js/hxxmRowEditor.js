@@ -12,7 +12,7 @@ function showMap(objid){
 	
 	
 	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").clear();
-	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").findFeature("cbd", "5", xmmc, "XMMC");
+	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").findFeature("cbd", "6", xmmc, "XMMC");
 
 		//添加选中保存
 	//var num = objid.rowIndex();
@@ -29,7 +29,7 @@ function editMap(objid){
 	xmmc = key;
 	
 	var array = paneloper.getElements();
-	for(var i = 1; i < objid.cells.length-1; i++){
+	for(var i = 1; i < objid.cells.length; i++){
 		var value = objid.cells[i].innerText;	
 		paneloper.insertValue(array[i-1], value);
 	}
@@ -45,7 +45,7 @@ function setRecord(polygon){
     putRestParameter("polygon",polygon); 
     var result = restRequest();
 	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").clear();
-	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").findFeature("cbd", "5", xmmc, "XMMC");
+	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").findFeature("cbd", "6", xmmc, "XMMC");
 }
 
 function add(){
