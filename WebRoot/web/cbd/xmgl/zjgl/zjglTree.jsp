@@ -93,7 +93,7 @@ scrollbar-3dlight-color:#D4D0C8;
              buttons: [{
                     text:'保存', handler: function() {
                      win.hide(); 
-                     var tree_name=  Ext.getCmp("tree_name").getValue();
+                     var tree_name = Ext.getCmp("tree_name").getValue();
                     var selet= document.getElementById("selet");
                     var selet_year=selet.options[selet.selectedIndex].value;
                      var lef=new Ext.tree.TreeNode({ 
@@ -149,22 +149,27 @@ scrollbar-3dlight-color:#D4D0C8;
 	   var RighrClickMenu=new Ext.menu.Menu({
 	   
 	   items:[{
-		   		   text:"添加支出费用",
+		   		   text:"添加费用",
 		   		   pressed:true,
-		   		   handler:function(tree){ }
+		   		   handler:function(tree){ 
+  				   		sign_tree='N';
+		   		   		updateForm.getForm().reset();
+                       	win.show(); 
+                       	win.setTitle('添加费用')
+		   		   }
 	   		   }
 	   		   ]
 	   });
 	   
 	      var leaf_RighrClickMenu=new Ext.menu.Menu({
 	   	  items:[{
-	   		     text:"添加支出费用",
+	   		     text:"添加费用",
 		   		   pressed:true,
 		   		   handler:function(tree){
 		   		           sign_tree='N';
 		   		   		   updateForm.getForm().reset();
                              win.show(); 
-                             win.setTitle('添加支出费用')
+                             win.setTitle('添加费用')
 		   		         }
 	   		   },
 	   		   {
@@ -221,7 +226,7 @@ scrollbar-3dlight-color:#D4D0C8;
      //表单FormPanel
         var form = new Ext.form.FormPanel({
         renderTo: 'mapTree',
-        title   : '资金支出操作树',
+        title   : '资金操作树',
         autoHeight: true,
         width   : 210,
        
