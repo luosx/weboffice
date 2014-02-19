@@ -69,7 +69,7 @@ public class RoleManager extends AbstractBaseBean{
     
     public List<Role> getRoleWithUserID(String roleid){
         List<Role> rs = usermap.get(roleid);
-        if(rs == null){
+        //if(rs == null){
             rs = new ArrayList<Role>();
             String sql = "select ROLE_ID from map_user_role t where t.user_id = ?";
             List<Map<String, Object>> ls = query(sql, CORE, new Object[] {roleid});
@@ -79,7 +79,7 @@ public class RoleManager extends AbstractBaseBean{
                 rs.add(rolemap.get((String)map.get("ROLE_ID")));//改为ROLE_ID
             }
             usermap.put(roleid, rs);
-        }
+        //}
         return rs;
     }
    
