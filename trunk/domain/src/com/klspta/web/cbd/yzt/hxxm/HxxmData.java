@@ -92,9 +92,17 @@ public class HxxmData extends AbstractBaseBean {
      */
     public boolean delete(String xmmc){
     	String sql = "delete from "+ form_gis + " t where t.xmmc=? ";
-    	int result = update(sql,GIS, new Object[]{xmmc});
-    	sql = "delete from " + formName + " t where t.xmname = ?";
-    	result = update(sql, YW, new Object[]{xmmc});
+    	int result = 0;
+    	try{
+    		result = update(sql,GIS, new Object[]{xmmc});
+    	}catch (Exception e) {
+    		
+		}finally{
+			sql = "delete from " + formName + " t where t.xmname = ?";
+        	result = update(sql, YW, new Object[]{xmmc});
+			sql = "delete from zcgl_tdzcgl z where z.xmmc = ?";
+        	update(sql,YW, new Object[]{xmmc});
+		}
     	return result == 1 ? true : false;
     }
 

@@ -147,4 +147,58 @@ public class HxxmManager extends AbstractBaseBean {
 		response(list);
 	} 
 
+	public void getCQSJ(){
+		String value = request.getParameter("value");
+		String[] dkmcs = value.split(",");
+		String sql = "select sum(zzsgm) as zzsgm,sum(zzzsgm) as zzzsgm ,sum(zzzshs) as zzzshs,sum(hjmj)" +
+				" as hjmj,sum(fzzzsgm) as fzzzsgm,sum(fzzjs) as fzzjs from jc_jiben where dkmc in (";
+		for(int i=0;i<dkmcs.length ;i++){
+			if(i==dkmcs.length-1){
+				sql += " ?)";
+			}else {
+				sql += " ?,";
+			}
+		}
+		List<Map<String,Object>> list = query(sql, YW,dkmcs);
+		response(list);
+	}
+	String[] items = {"xmmc","zd","jsyd","rjl", "jzgm","ghyt", "gjjzgm",
+	     "jzjzgm", "szjzgm", "zzsgm", "zzzsgm", "zzzshs", "hjmj", "fzzzsgm", 
+	 "fzzjs", "kfcb", "lmcb", "dmcb","yjcjj","yjzftdsy","cxb",  "cqqd", "cbfgl", 
+	 "zzcqfy", "qycqfy", "qtfy", "azftzcb", "zzhbtzcb", "cqhbtz","qtfyzb","lmcjj",
+	 "fwsj", "zj","jbdk"};
+	public void modify(){
+		String[] values = new String[items.length];
+		String[] values1 = new String[items.length];
+		String insertsql = "insert into jc_xiangmu (xmname,zd,jsyd,rjl,jzgm,ghyt,gjjzgm,jzjzgm,szjzgm,zzsgm,zzzsgm,zzzshs," +
+				"hjmj,fzzzsgm,fzzjs,kfcb,lmcb,dmcb,yjcjj,yjzftdsy,cxb,cqqd,cbfgl,zzcqfy,qycqfy,qtfy,azftzcb,zzhbtzcb," +
+				"cqhbtz,qtfyzb,lmcjj,fwsj,zj,dkmc) values (";
+		String updatesql = "update jc_xiangmu set zd=?,jsyd=?,rjl=?,jzgm=?,ghyt=?,gjjzgm=?,jzjzgm=?,szjzgm=?,zzsgm=?,zzzsgm=?,zzzshs=?," +
+		"hjmj=?,fzzzsgm=?,fzzjs=?,kfcb=?,lmcb=?,dmcb=?,yjcjj=?,yjzftdsy=?,cxb=?,cqqd=?,cbfgl=?,zzcqfy=?,qycqfy=?,qtfy=?,azftzcb=?,zzhbtzcb=?," +
+		"cqhbtz=?,qtfyzb=?,lmcjj=?,fwsj=?,zj=?,dkmc=? where xmname=?";
+		for( int i=0;i<items.length;i++){
+			values[i] = request.getParameter(items[i]);
+			if(i==items.length-1){
+				values1[i] = request.getParameter(items[0]);
+			}else {
+				values1[i] = request.getParameter(items[i+1]);
+			}
+			insertsql +="?,";
+		}
+		insertsql = insertsql.substring(0,insertsql.length()-1);
+		insertsql += ")";
+		String sql = "select xmname from jc_xiangmu where xmname = ?";
+		List<Map<String,Object>> list = query(sql, YW,new Object[]{request.getParameter("xmmc")});
+		int i = 0; 
+		if(list.size()>0){
+			i = update(updatesql, YW,values1 );
+		}else{
+			i = update(insertsql,YW,values);
+		}
+		if(i==1){
+			response("{success:true}");
+		}else {
+			response("{success:false}");
+		}
+	}
 }
