@@ -275,7 +275,7 @@ public class Xmmanager extends AbstractBaseBean {
 	 * Date:2013-12-25
 	 */
 	public void saveZjglTree() {
-		String st[] = { "QQFY", "CQFY", "SZFY", "CWFY", "GLFY", "CRZJFH",
+		String st[] = {"ZJLR", "QQFY", "CQFY", "SZFY", "CWFY", "GLFY", "CRZJFH",
 				"QTZC" };
 		String yw_guid = request.getParameter("yw_guid").trim();
 		String parent_id = request.getParameter("parent_id");
@@ -296,7 +296,7 @@ public class Xmmanager extends AbstractBaseBean {
 	}
 
 	public void delt_tree() {
-		String st[] = { "QQFY", "CQFY", "SZFY", "CWFY", "GLFY", "CRZJFH",
+		String st[] = {"ZJLR", "QQFY", "CQFY", "SZFY", "CWFY", "GLFY", "CRZJFH",
 				"QTZC" };
 		String yw_guid = request.getParameter("yw_guid").trim();
 		String parent_id = request.getParameter("parent_id");
@@ -318,7 +318,7 @@ public class Xmmanager extends AbstractBaseBean {
 	}
 
 	public void modify_tree() {
-		String st[] = { "QQFY", "CQFY", "SZFY", "CWFY", "GLFY", "CRZJFH",
+		String st[] = {"ZJLR", "QQFY", "CQFY", "SZFY", "CWFY", "GLFY", "CRZJFH",
 				"QTZC" };
 		String yw_guid = request.getParameter("yw_guid").trim();
 		String parent_id = request.getParameter("parent_id");
