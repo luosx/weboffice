@@ -22,19 +22,25 @@ public class ZjglData extends AbstractBaseBean {
 
     public List<Map<String, Object>> getZJGL_ZJLR(String yw_guid ,String year) {
         List<Map<String, Object>> list=new ArrayList<Map<String,Object>>();
-        String sql = "select * from  xmzjgl_lr_view where  yw_guid=? and rq=? order by  sort";
+        String sql = "select * from xmzjgl_lr_view where yw_guid=? and rq=? order by yw_guid";
         List<Map<String, Object>> querys = query(sql, YW, new Object[] { yw_guid,year });
       //  String sqlString="  select  yw_guid,lb,status,YSFY,ZJJD,CQYE,YFSDZ,yy,ey,sany,siy,wy,ly,qy,bay,jy,siyue,syy,sey,(cqye+yy+ey+sany+siy+wy+ly+qy+bay+jy+siyue+syy+sey) as LJ,(yy+ey+sany+siy+wy+ly+qy+bay+jy+siyue+syy+sey) as LRSP,ZCSTATUS,SORT from xmzjgl_lr_view where yw_guid=? and (sort='2'or sort='3' or sort='4')";
-       String sq= "select '1.1 筹融资金' as lb,'CRZJ' as status,' " +yw_guid+" ' as yw_guid,sum(YSFY) as YSFY,sum(ZJJD)as ZJJD ,sum(CQYE)as CQYE ,sum(YFSDZ)as YFSDZ,sum(yy)as yy ,sum(ey)as ey,sum(sany)as sany,sum(siy)as siy,sum(wy)as wy,sum(ly)as ly,sum(qy)as qy,sum(bay)as bay,sum(jy)as jy,sum(siyue)as siyue,sum(syy)as syy,sum(sey)as sey,sum((cqye+yy+ey+sany+siy+wy+ly+qy+bay+jy+siyue+syy+sey)) as LJ,sum((yy+ey+sany+siy+wy+ly+qy+bay+jy+siyue+syy+sey)) as LRSP FROM xmzjgl_lr_view where yw_guid=? and rq=? and (sort='2'or sort='3' or sort='4')";
-        List<Map<String, Object>> query = query(sq, YW,new Object[]{yw_guid,year});
-        if(querys.size()==6){
-            list.add(query.get(0));
-            list.add(querys.get(1));
-            list.add(querys.get(2));
-            list.add(querys.get(3));
-            list.add(querys.get(4));
-            list.add(querys.get(5));
+//       String sq= "select '1.1 筹融资金' as lb,'CRZJ' as status,' " +yw_guid+" ' as yw_guid,sum(YSFY) as YSFY,sum(ZJJD)as ZJJD ,sum(CQYE)as CQYE ,sum(YFSDZ)as YFSDZ,sum(yy)as yy ,sum(ey)as ey,sum(sany)as sany,sum(siy)as siy,sum(wy)as wy,sum(ly)as ly,sum(qy)as qy,sum(bay)as bay,sum(jy)as jy,sum(siyue)as siyue,sum(syy)as syy,sum(sey)as sey,sum((cqye+yy+ey+sany+siy+wy+ly+qy+bay+jy+siyue+syy+sey)) as LJ,sum((yy+ey+sany+siy+wy+ly+qy+bay+jy+siyue+syy+sey)) as LRSP FROM xmzjgl_lr_view where yw_guid=? and rq=? and (sort='2'or sort='3' or sort='4')";
+//        List<Map<String, Object>> query = query(sq, YW,new Object[]{yw_guid,year});
+//        if(querys.size()==6){
+//            list.add(query.get(0));
+//            list.add(querys.get(1));
+//            list.add(querys.get(2));
+//            list.add(querys.get(3));
+//            list.add(querys.get(4));
+//            list.add(querys.get(5));
+//        }
+        //20140220 change by 黎春行
+        for(int i = 0; i < querys.size(); i++){
+        	list.add(querys.get(i));
         }
+        
+        
        return list;
     }
 
@@ -80,9 +86,14 @@ public class ZjglData extends AbstractBaseBean {
         }
     }
     public void saveNode(String tree_name,String type,String yw_guid,String year){
-        for(int j=0;j<zc_chaild.length;j++){
-            String sqlString="insert into XMZJGL_ZC (yw_guid,status,lb,lj,zcstatus,sort ,rq) values(?,?,?,?,?,?,?)";
-            update(sqlString, YW,new Object[]{yw_guid, type,tree_name,zc_chaild[j],type,(j+1),year});
+    	if(!type.equals("ZJLR")){
+	        for(int j=0;j<zc_chaild.length;j++){
+	            String sqlString="insert into XMZJGL_ZC (yw_guid,status,lb,lj,zcstatus,sort ,rq) values(?,?,?,?,?,?,?)";
+	            update(sqlString, YW,new Object[]{yw_guid, type,tree_name,zc_chaild[j],type,(j+1),year});
+	        }
+        }else{
+        	String sqlString="insert into XMZJGL_LR (yw_guid,status,lb,rq) values(?,?,?,?)";
+            update(sqlString, YW,new Object[]{yw_guid, type,tree_name,year});
         }
     }
     
