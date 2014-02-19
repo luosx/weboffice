@@ -222,7 +222,7 @@ String list = Fyzcmanager.getInstcne().getList();
 		                id   : 'ftlx',
 		                value:'',
 		                fieldLabel: '分摊利息',
-		                width:'90'
+		                width:'100'
 	            	}]
 	            },{
 	            	columnWidth:.33,
@@ -232,7 +232,7 @@ String list = Fyzcmanager.getInstcne().getList();
 		                id   : 'fymc',
 		                value:'',
 		                fieldLabel: '费用名称',
-		                width:'90'
+		                width:'100'
 	            	}]
             	}]
 	        },{
