@@ -5,6 +5,7 @@
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 	String yw_guid = request.getParameter("yw_guid");
 	String xmmc = request.getParameter("xmmc");
+	String view = request.getParameter("view");
 	if(xmmc!=null){
 		xmmc = new String(xmmc.getBytes("iso-8859-1"),"utf-8");
 	}
@@ -40,12 +41,12 @@
         frame:true,
         items:[
         	{
-                title: '航道图',
-                html: "<iframe width='"+w+"' height='"+h+"' src='service/rest/proProgress/init'/>"
+                title: '房源资产',
+                html: "<iframe width='"+w+"' height='"+h+"' src='web/cbd/zcgl/fyzc/fyzcEditor.jsp?view=<%=view%>'/>"
             }
             ,{
-                title: '曲线分析',
-                html: "<iframe width='"+w+"' height='"+h+"' src='web/cbd/tjbb/sjfxt.jsp'/>"
+                title: '附件管理',
+                html: "<iframe width='"+w+"' height='"+h+"' src='web/cbd/swgl/azfaccessorymain.jsp'/>"
             }
         ]
     })

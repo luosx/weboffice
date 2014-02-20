@@ -344,7 +344,7 @@ String list = Fyzcmanager.getInstcne().getList();
   	<div id='show'>
   		<%=list %>
   	</div>
-  	<div id="deal2" style="position:absolute; left:100px; top:80px; "></div>
+  	<div id="deal2" style="position:absolute; left:5px; top:5px; "></div>
   	<form id="attachfile" action="<%=basePath%>service/rest/zrbHandle/update" method="post">
 	</form> 
   </body>
