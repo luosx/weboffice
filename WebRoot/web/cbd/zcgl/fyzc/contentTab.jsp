@@ -40,12 +40,12 @@
         frame:true,
         items:[
         	{
-                title: '房源资产',
-                html: "<iframe width='"+w+"' height='"+h+"' src='web/cbd/zcgl/fyzc/fyzcEditor.jsp'/>"
+                title: '航道图',
+                html: "<iframe width='"+w+"' height='"+h+"' src='service/rest/proProgress/init'/>"
             }
             ,{
-                title: '附件管理',
-                html: "<iframe width='"+w+"' height='"+h+"' src='web/cbd/swgl/accessorymain.jsp'/>"
+                title: '曲线分析',
+                html: "<iframe width='"+w+"' height='"+h+"' src='web/cbd/tjbb/sjfxt.jsp'/>"
             }
         ]
     })
