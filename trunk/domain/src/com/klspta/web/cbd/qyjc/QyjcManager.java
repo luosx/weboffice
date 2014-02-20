@@ -522,4 +522,11 @@ public class QyjcManager extends AbstractBaseBean {
 		response(String.valueOf(new CBDReportManager().getReport("XZLZJ",
 					new Object[] { "%" + keyword + "%" }, its)));
     }
+    
+    public void getXZLMC(){
+    	StringBuffer sqlBuffer = new StringBuffer();
+		sqlBuffer.append("select t.XZLMC as xzlmc from xzlxx t");
+		List<Map<String, Object>> list = query(sqlBuffer.toString(), YW);
+		response(list);
+    }
 }
