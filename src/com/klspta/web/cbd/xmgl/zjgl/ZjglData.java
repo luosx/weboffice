@@ -84,7 +84,7 @@ public class ZjglData extends AbstractBaseBean {
         }
     }
     public void saveNode(String tree_name,String type,String yw_guid,String year){
-    	if(!type.equals("ZJLR")){
+    	if(!(type.equals("ZJLR") || tree_name.startsWith("1") )){
 	        for(int j=0;j<zc_chaild.length;j++){
 	            String sqlString="insert into XMZJGL_ZC (yw_guid,status,lb,lj,zcstatus,sort ,rq) values(?,?,?,?,?,?,?)";
 	            update(sqlString, YW,new Object[]{yw_guid, type,tree_name,zc_chaild[j],type,(j+1),year});

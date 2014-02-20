@@ -288,14 +288,14 @@ public class Xmmanager extends AbstractBaseBean {
 		tree_name = UtilFactory.getStrUtil().unescape(tree_name).trim();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd_HHmmss");
 		String date = dateFormat.format(new Date());
-		for (int i = 0; i < st.length; i++) {
-			if (selct_id.equals(st[i])) {
+		//for (int i = 0; i < st.length; i++) {
+		//	if (selct_id.equals(st[i])) {
 				String sql = " insert into zjgl_tree (yw_guid,parent_id,tree_name,tree_id,rq)values (?,?,?,?,?)";
 				update(sql, YW, new Object[] { yw_guid, selct_id, tree_name,
 						date, selet_year });
-				new ZjglData().saveNode(tree_name, st[i], yw_guid, selet_year);
-			}
-		}
+				new ZjglData().saveNode(tree_name, selct_id, yw_guid, selet_year);
+		//	}
+		//}
 	}
 
 	public void delt_tree() {
