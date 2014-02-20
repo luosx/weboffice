@@ -16,12 +16,12 @@ public class KgzbInsertGIS extends AbstractInsertGIS {
 			String wkt = buildWKT(inputStream);
 			String srid = getSrid(form_gis);
             //判断对应zrbbh是否存在,存在用update 否则 用 insert
-            boolean isExit = isExit(form_gis, "TBBH", guid, GIS);
+            boolean isExit = isExit(form_gis, "DKMC", guid, GIS);
             String sql = "";
             if(isExit){
-            	sql = "update " + form_gis + " t set t.SHAPE=sde.st_geometry ('" + wkt + "', " + srid + ") where t.DKBH='" + guid + "'";
+            	sql = "update " + form_gis + " t set t.SHAPE=sde.st_geometry ('" + wkt + "', " + srid + ") where t.DKMC='" + guid + "'";
             }else{
-                sql = "INSERT INTO "+ form_gis+"(OBJECTID,DKBH,SHAPE) VALUES ((select nvl(max(OBJECTID)+1,1) from "+form_gis+"),'"
+                sql = "INSERT INTO "+ form_gis+"(OBJECTID,DKMC,SHAPE) VALUES ((select nvl(max(OBJECTID)+1,1) from "+form_gis+"),'"
                 	+ guid + "',sde.st_geometry ('" + wkt + "', " + srid + "))";
             }
             update(sql, GIS);
