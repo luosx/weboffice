@@ -10,6 +10,7 @@ Ext.onReady(function() {
 			width = document.body.clientWidth;
 			height = document.body.clientHeight;
 			initComponent();
+			initFile();
 		});
 
 function initComponent() {
@@ -29,6 +30,11 @@ function initComponent() {
 							xtype : 'button',
 							text : '导出Excel',
 							handler : exportExcel
+						}, '-', {
+							xtype : 'button',
+							text : '导入坐标',
+							id:"insertGIS",
+							handler : insertGIS
 						}, '-', {
 							xtype : 'button',
 							text : '添加',
@@ -61,7 +67,76 @@ function initComponent() {
 		toolbar.remove("dele");
 	}
 }
-
+function initFile(){
+	 combo = new Ext.form.ComboBox({
+	 	      fieldLabel: '地块编号',
+	 	     	id:'dkbh',
+				store : array,
+				width : 150,
+				displayField : 'state',
+				typeAhead : true,
+				mode : 'local',
+				forceSelection : true,
+				triggerAction : 'all',
+				emptyText : "-请选择地块编号-",
+				selectOnFocus : true
+			});
+	var fp = new Ext.FormPanel({
+		renderTo: 'fi-form',
+        fileUpload: true,
+        width: 300,
+        frame: true,
+        title: '坐标导入',
+        autoHeight: true,
+        bodyStyle: 'padding: 10px 10px 0 10px;',
+        labelWidth: 70,
+        defaults: {
+            anchor: '95%',
+            allowBlank: false,
+            msgTarget: 'side'
+        },
+		items: [
+			combo,{
+            xtype: 'fileuploadfield',
+            id: 'form-file',
+            emptyText: '请选择txt文件位置',
+            fieldLabel: '文件位置',
+            name: 'file-path',
+            buttonText: '',
+            buttonCfg: {
+                iconCls: 'upload-icon'
+            }
+        }],
+        buttons: [{
+            text: '保存',
+            handler: function(){
+				var guid = Ext.getCmp('dkbh').getValue();
+                if(fp.getForm().isValid()){
+	                fp.getForm().submit({
+	                    url: basePath + "service/rest/gisfactory/getGis?type=5&guid="+guid,
+	                    waitMsg: '坐标串正在导入...',
+	                    success: function(fp, o){
+	                        //msg('Success', 'Processed file "'+o.result.file+'" on the server');
+	                    	document.getElementById("fi-form").style.display = "none";
+	                    	alert("导入成功");
+	                    	parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").clear();
+							parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").findFeature("cbd", "5", key, "DKMC");
+	                    	fp.getForm().reset();
+	                	}
+	                });
+                }
+            }
+        },{
+            text: '取消',
+            handler: function(){
+                document.getElementById("fi-form").style.display = "none";
+                fp.getForm().reset();
+            }
+        }]
+	});
+	//document.getElementById("ext-comp-1014").style.width = '80';
+	document.getElementById("form-file").style.width = '150';
+}
 
 function query() {
 	var keyword = Ext.getCmp("keyword").getValue();
@@ -83,7 +158,24 @@ function dele(){
 function modify(){
 	document.frames['report'].modify();
 }
-
+function insertGIS(){
+	putClientCommond("kgzbmanager","getDKBH");
+	var dkbh = restRequest();
+	if(array.length>0){
+		array=[];
+	}
+	for(var i=0;i<dkbh.length;i++ ){
+		array.push(dkbh[i].DKMC);
+	}
+	combo.store.loadData(array);
+	var form = document.getElementById("fi-form");
+	var display = form.style.display;
+	if(display == "none"){
+		form.style.display = "";
+	}else{
+		form.style.display = "none";
+	}
+}
 
 
 
