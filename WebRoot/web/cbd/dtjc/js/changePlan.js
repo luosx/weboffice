@@ -127,6 +127,10 @@ function changeProject(){
 //添加融资需求
 function addrzxq(check){
 	var value = check.value;
+	if(isNaN(value)){
+		alert("数字格式错误");
+		return ;
+	}
 	var changeCell = check.parentNode.cellIndex;
 	//计算年度和季度
 	var moveTable = document.getElementById("planTable");
@@ -150,6 +154,10 @@ function addrzxq(check){
 //添加权益资金注入
 function addzjzr(check){
 	var value = check.value;
+	if(isNaN(value)){
+		alert("数字格式错误");
+		return ;
+	}
 	var changeCell = check.parentNode.cellIndex;
 	//计算年度和季度
 	var moveTable = document.getElementById("planTable");
@@ -171,6 +179,10 @@ function addzjzr(check){
 
 function addkg(check){
 	var value = check.value;
+	if(isNaN(value)){
+		alert("数字格式错误");
+		return ;
+	}
 	var changeCell = check.parentNode.cellIndex;
 	var changeRow = check.parentNode.parentNode.rowIndex;
 	//计算年度和季度
@@ -199,6 +211,11 @@ function addkg(check){
 
 function addtz(check){
 	var value = check.value;
+	if(isNaN(value)){
+		alert("数字格式错误");
+		return ;
+	}
+		
 	var changeCell = check.parentNode.cellIndex;
 	var changeRow = check.parentNode.parentNode.rowIndex;
 	//计算年度和季度
