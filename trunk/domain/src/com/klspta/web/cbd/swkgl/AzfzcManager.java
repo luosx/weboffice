@@ -126,10 +126,20 @@ public class AzfzcManager extends AbstractBaseBean {
 		tdcrht = UtilFactory.getStrUtil().unescape(tdcrht);
 		tdz = UtilFactory.getStrUtil().unescape(tdz);
 		bz = UtilFactory.getStrUtil().unescape(bz);
+		String sql = "select ydmc from zc_azfzc where ydmc =?";
+		List<Map<String,Object>> list = query(sql, YW,new Object[]{ydmc});
+		int i = 0;
+		if(list.size()==0){
 		String insertString = "insert into ZC_AZFZC  (ydmc,tdyjkfzt,zdmj,jsyd,ghrjl,ghjzgm,ghyt,kg,tdcb,yjkxcazfts,gdfs,tdkfjsbcxy,tdyj,azfjsdw,tdcrht,crhtydkgsj,tdz,bz)values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-		int i = update(insertString, YW, new Object[] { ydmc, tdyjkfzt, zdmj,
+		i = update(insertString, YW, new Object[] { ydmc, tdyjkfzt, zdmj,
 				jsyd, ghrjl, ghjzgm, ghyt, kg, tdcb, yjkxcazfts, gdfs,
 				tdkfjsbcxy, tdyj, azfjsdw, tdcrht, crhtydkgsj, tdz, bz });
+		}else {
+			String insertString = "update zc_azfzc  set tdyjkfzt=?,zdmj=?,jsyd=?,ghrjl=?,ghjzgm=?,ghyt=?,kg=?,tdcb=?,yjkxcazfts=?,gdfs=?,tdkfjsbcxy=?,tdyj=?,azfjsdw=?,tdcrht=?,crhtydkgsj=?,tdz=?,bz=? where ydmc=?";
+			i = update(insertString, YW, new Object[] {  tdyjkfzt, zdmj,
+					jsyd, ghrjl, ghjzgm, ghyt, kg, tdcb, yjkxcazfts, gdfs,
+					tdkfjsbcxy, tdyj, azfjsdw, tdcrht, crhtydkgsj, tdz, bz ,ydmc});
+		}
 		if (i > 0) {
 		    response("{success:true}");
 		} else {

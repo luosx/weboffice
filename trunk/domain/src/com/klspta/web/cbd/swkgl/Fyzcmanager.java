@@ -139,23 +139,23 @@ public class Fyzcmanager extends AbstractBaseBean {
         String sumsql = "select sum(gzfy)as gzfy,sum(gzgm)as gzgm,sum(cbzj)as cbzj,sum(gzdj)as gzdj,sum(lyfy)as lyfy,sum(lygm)as lygm,sum(qmfy)as qmfy,sum(jzmj)as jzmj,sum(zyzj)as zyzj,sum(ftlx)as ftlx,sum(fymc)as fymc,sum(ze)as ze,sum(pmft)as pmft,sum(lyft)as lyft,sum(jzft)as jzft,sum(jkzj)as jkzj,sum(dj)as dj from fyzc t";
         List<Map<String, Object>> sumlist = query(sumsql, YW);
         for (int i = 0; i < sumlist.size(); i++) {
-            String sumgzfy = (String) (sumlist.get(i)).get("gzfy").toString();
-            String sumgzgm = (String) (sumlist.get(i)).get("gzgm").toString();
-            String sumcbzj = (String) (sumlist.get(i)).get("cbzj").toString();
-            String sumgzdj = (String) (sumlist.get(i)).get("gzdj").toString();
-            String sumlyfy = (String) (sumlist.get(i)).get("lyfy").toString();
-            String sumlygm = (String) (sumlist.get(i)).get("lygm").toString();
-            String sumqmfy = (String) (sumlist.get(i)).get("qmfy").toString();
-            String sumjzmj = (String) (sumlist.get(i)).get("jzmj").toString();
-            String sumzyzj = (String) (sumlist.get(i)).get("zyzj").toString();
-            String sumftlx = (String) (sumlist.get(i)).get("ftlx").toString();
-            String sumfymc = (String) (sumlist.get(i)).get("fymc").toString();
-            String sumze = (String) (sumlist.get(i)).get("ze").toString();
-            String sumpmft = (String) (sumlist.get(i)).get("pmft").toString();
-            String sumlyft = (String) (sumlist.get(i)).get("lyft").toString();
-            String sumjzft = (String) (sumlist.get(i)).get("jzft").toString();
-            String jkzj = (String) (sumlist.get(i)).get("jkzj").toString();
-            String sumdj = (String) (sumlist.get(i)).get("dj").toString();
+            String sumgzfy = (String) (sumlist.get(i)).get("gzfy")==null?"":(sumlist.get(i)).get("gzfy").toString();
+            String sumgzgm = (String) (sumlist.get(i)).get("gzgm")==null?"":(sumlist.get(i)).get("gzgm").toString();
+            String sumcbzj = (String) (sumlist.get(i)).get("cbzj")==null?"":(sumlist.get(i)).get("cbzj").toString();
+            String sumgzdj = (String) (sumlist.get(i)).get("gzdj")==null?"":(sumlist.get(i)).get("gzdj").toString();
+            String sumlyfy = (String) (sumlist.get(i)).get("lyfy")==null?"":(sumlist.get(i)).get("lyfy").toString();
+            String sumlygm = (String) (sumlist.get(i)).get("lygm")==null?"":(sumlist.get(i)).get("lygm").toString();
+            String sumqmfy = (String) (sumlist.get(i)).get("qmfy")==null?"":(sumlist.get(i)).get("qmfy").toString();
+            String sumjzmj = (String) (sumlist.get(i)).get("jzmj")==null?"":(sumlist.get(i)).get("jzmj").toString();
+            String sumzyzj = (String) (sumlist.get(i)).get("zyzj")==null?"":(sumlist.get(i)).get("zyzj").toString();
+            String sumftlx = (String) (sumlist.get(i)).get("ftlx")==null?"":(sumlist.get(i)).get("ftlx").toString();
+            String sumfymc = (String) (sumlist.get(i)).get("fymc")==null?"":(sumlist.get(i)).get("fymc").toString();
+            String sumze = (String) (sumlist.get(i)).get("ze")==null?"":(sumlist.get(i)).get("ze").toString();
+            String sumpmft = (String) (sumlist.get(i)).get("pmft")==null?"":(sumlist.get(i)).get("pmft").toString();
+            String sumlyft = (String) (sumlist.get(i)).get("lyft")==null?"":(sumlist.get(i)).get("lyft").toString();
+            String sumjzft = (String) (sumlist.get(i)).get("jzft")==null?"":(sumlist.get(i)).get("jzft").toString();
+            String jkzj = (String) (sumlist.get(i)).get("jkzj")==null?"":(sumlist.get(i)).get("jkzj").toString();
+            String sumdj = (String) (sumlist.get(i)).get("dj")==null?"":(sumlist.get(i)).get("dj").toString();
             result.append("<tr><td class='tr01'>总计</td><td class='tr01'>" + sumgzfy
                     + "</td><td class='tr01'>" + sumgzgm + "</td><td class='tr01'>" + sumcbzj
                     + "</td><td class='tr01'>" + sumgzdj + "</td><td class='tr01'>" + sumlyfy
