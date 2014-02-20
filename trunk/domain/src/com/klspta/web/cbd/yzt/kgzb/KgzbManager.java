@@ -148,4 +148,18 @@ public class KgzbManager extends AbstractBaseBean {
     	boolean draw = KgzbData.getInstance().recordGIS(dkmc, polygon);
     	response(String.valueOf(draw)); 
     }
+    /**
+	 * 
+	 * <br>
+	 * Description:获取地块名称 <br>
+	 * Author:侯文超 <br>
+	 * Date:2014-02-20
+	 * 
+	 */
+	public void getDKBH() {
+		StringBuffer sqlBuffer = new StringBuffer();
+		sqlBuffer.append("select t.dkmc as dkmc from dcsjk_kgzb t");
+		List<Map<String, Object>> list = query(sqlBuffer.toString(), YW);
+		response(list);
+	}
 }
