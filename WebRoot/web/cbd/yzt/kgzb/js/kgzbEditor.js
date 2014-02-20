@@ -120,7 +120,7 @@ function initFile(){
 	                    	document.getElementById("fi-form").style.display = "none";
 	                    	alert("导入成功");
 	                    	parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").clear();
-							parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").findFeature("cbd", "5", key, "DKMC");
+							parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").findFeature("cbd", "5", guid, "DKMC");
 	                    	fp.getForm().reset();
 	                	}
 	                });
