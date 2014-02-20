@@ -1,5 +1,6 @@
 package com.klspta.web.cbd.xmgl.zjgl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -39,6 +40,10 @@ public class TreeManager extends AbstractBaseBean {
 	 * @return
 	 */
 	public String getTree(String yw_guid, String year) {
+		
+		String  returnString = buildTreeBuffer(getBeanList(yw_guid, year), "0").toString();
+		return returnString;
+		/*
 		StringBuffer buffer = new StringBuffer();
 		//add by 黎春行   2014-02-20
 		//buffer.append("{text:'Ⅰ.资金流入',leaf:1,id:'ZJLR',children:[");
@@ -74,6 +79,7 @@ public class TreeManager extends AbstractBaseBean {
 		buffer.append(qtzc);
 		buffer.append("]}");
 		return buffer.toString();
+		*/
 	}
 
 	/***************************************************************************
@@ -223,7 +229,7 @@ public class TreeManager extends AbstractBaseBean {
 	public StringBuffer getChaild_tree(String yw_guid, String name,
 			String type, String year) {
 		StringBuffer buffer = new StringBuffer();
-		String sql_qqfy = " select * from zjgl_tree where yw_guid=? and parent_id=? and rq=? order by tree_name";
+		String sql_qqfy = " select * from zjgl_tree where yw_guid=? and parent_id=? and rq=?";
 		List<Map<String, Object>> list = query(sql_qqfy, YW, new Object[] {
 				yw_guid, type, year });
 		if (list.size() > 0) {
@@ -243,9 +249,42 @@ public class TreeManager extends AbstractBaseBean {
 			buffer.append("]}");
 		} else {
 			buffer.append("{text:'" + name + "',leaf:1,id:'" + type + "'}");
-
 		}
 		return buffer;
+	}
+	
+	public List<XmzjglTreeBean> getBeanList(String yw_guid , String year){
+		String sql = "select t.* from zjgl_tree t where (t.yw_guid=? and t.rq=?) or t.rq='all' order by t.parent_id, t.sort,t.tree_name";
+		List<XmzjglTreeBean> arrayList = new ArrayList<XmzjglTreeBean>();
+		List<Map<String, Object>> queryList = query(sql, YW, new Object[]{yw_guid, year});
+		for(int i = 0; i < queryList.size(); i++){
+			arrayList.add(new XmzjglTreeBean(queryList.get(i)));
+		}
+		return arrayList;
+	}
+	
+	public StringBuffer buildTreeBuffer(List<XmzjglTreeBean> treeList, String key){
+		StringBuffer stringBuffer = new StringBuffer();
+		for(int i = 0; i < treeList.size(); i++){
+			XmzjglTreeBean xmBean = treeList.get(i);
+			if(xmBean.getParent_id().equals(key)){
+				StringBuffer childString = buildTreeBuffer(treeList, xmBean.getTree_id()); 
+				if(childString.length() != 0){
+					stringBuffer.append("{text:'").append(xmBean.getTree_name()).append("',leaf:0,id:'").append(xmBean.getTree_id()).append("'");
+					stringBuffer.append(",children:[").append(childString.toString()).append("]");
+				}else{
+					stringBuffer.append("{text:'").append(xmBean.getTree_name()).append("',leaf:1,id:'").append(xmBean.getTree_id()).append("'");
+				}
+				stringBuffer.append("},");
+			}else{
+				continue;
+			}
+		}
+		if(stringBuffer.length() > 1){
+			return new StringBuffer(stringBuffer.substring(0, stringBuffer.length() - 1));
+		}else{
+			return stringBuffer;
+		}
 	}
 
 }
