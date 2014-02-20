@@ -57,7 +57,7 @@
 			dhxLayout.attachEvent("onPanelResizeFinish", function(){
 				//dhxLayout.cells("a").fixSize(true, false);
 				//dhxLayout.cells(id).getFrame().refresh;
-				//dhxLayout.cells("a").attachURL("<%=basePath%>base/fxgis/fx/FxGIS.html?i=false");
+				//dhxLayout.cells("a").attachURL("<%=basePath%>base/fxgis/framework/gisViewFrame.jsp");
 				dhxLayout.cells("b").attachURL("jbbEditor.jsp?view=<%=view%>");
 			});
 		}	
