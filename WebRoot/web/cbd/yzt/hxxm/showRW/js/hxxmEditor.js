@@ -66,9 +66,6 @@ function initComponent() {
 
 
 function initFile(){
-	
-	
-	
 	 combo = new Ext.form.ComboBox({
 	 	      fieldLabel: '项目名称',
 	 	     	id:'zrbbh',
@@ -123,6 +120,8 @@ function initFile(){
 	                        //msg('Success', 'Processed file "'+o.result.file+'" on the server');
 	                    	document.getElementById("fi-form").style.display = "none";
 	                    	alert("导入成功");
+	                    	parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").clear();
+							parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").findFeature("cbd", "6", guid, "XMMC");
 	                    	fp.getForm().reset();
 	                	}
 	                });
