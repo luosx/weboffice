@@ -120,6 +120,8 @@ function initFile(){
 	                        //msg('Success', 'Processed file "'+o.result.file+'" on the server');
 	                    	document.getElementById("fi-form").style.display = "none";
 	                    	alert("导入成功");
+							parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").clear();
+							parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").findFeature("cbd", "3", guid, "ZRBBH");
 	                    	fp.getForm().reset();
 	                	}
 	                });
