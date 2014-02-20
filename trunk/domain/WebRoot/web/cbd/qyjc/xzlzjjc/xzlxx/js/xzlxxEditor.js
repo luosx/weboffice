@@ -32,6 +32,11 @@ function initComponent() {
 							handler : exportExcel
 						}, '-', {
 							xtype : 'button',
+							text : '导入坐标',
+							id : 'insertGIS',
+							handler : insertGIS
+						}, '-', {
+							xtype : 'button',
 							text : '添加',
 							id:"add",
 							handler : add
@@ -65,8 +70,8 @@ function initComponent() {
 
 function initFile(){
 	 combo = new Ext.form.ComboBox({
-	 	      fieldLabel: '自然斑编号',
-	 	     	id:'zrbbh',
+	 	      fieldLabel: '写字楼名称',
+	 	     	id:'xzlmc',
 				store : array,
 				width : 150,
 				displayField : 'state',
@@ -74,7 +79,7 @@ function initFile(){
 				mode : 'local',
 				forceSelection : true,
 				triggerAction : 'all',
-				emptyText : "-请选择自然斑编号-",
+				emptyText : "-请选择写字楼编号-",
 				selectOnFocus : true
 			});
 	var fp = new Ext.FormPanel({
@@ -106,15 +111,17 @@ function initFile(){
         buttons: [{
             text: '保存',
             handler: function(){
-				var guid = Ext.getCmp('zrbbh').getValue();
+				var guid = Ext.getCmp('xzlmc').getValue();
                 if(fp.getForm().isValid()){
 	                fp.getForm().submit({
-	                    url: basePath + "service/rest/gisfactory/getGis?type=1&guid="+guid,
+	                    url: basePath + "service/rest/gisfactory/getGis?type=4&guid="+guid,
 	                    waitMsg: '坐标串正在导入...',
 	                    success: function(fp, o){
 	                        //msg('Success', 'Processed file "'+o.result.file+'" on the server');
 	                    	document.getElementById("fi-form").style.display = "none";
 	                    	alert("导入成功");
+							parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").clear();
+							parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").findFeature("cbd", "7", guid, "XZLMC");
 	                    	fp.getForm().reset();
 	                	}
 	                });
@@ -154,13 +161,13 @@ function modify(){
 }
 
 function insertGIS(){
-	putClientCommond("zrbHandle","getZRBBH");
+	putClientCommond("qyjcManager","getXZLMC");
 	var zrbbh = restRequest();
 	if(array.length>0){
 		array=[];
 	}
 	for(var i=0;i<zrbbh.length;i++ ){
-		array.push(zrbbh[i].ZRBBH);
+		array.push(zrbbh[i].XZLMC);
 	}
 	combo.store.loadData(array);
 	var form = document.getElementById("fi-form");
