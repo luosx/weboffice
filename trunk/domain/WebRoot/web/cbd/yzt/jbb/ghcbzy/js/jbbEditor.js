@@ -11,9 +11,8 @@ Ext.onReady(function() {
 function initComponent() {
 
 	simple = new Ext.FormPanel({
-				frame : true,
 				title : '基本斑列表',
-				bodyStyle : 'padding:5px 5px 0',
+				bodyStyle : 'padding:0px 0px 0',
 				tbar : [{
 							xtype : 'label',
 							text : '关键字：'
@@ -27,7 +26,7 @@ function initComponent() {
 							handler : exportExcel
 						}],
 				items : [{
-					html : "<iframe id='report' width=" + (width - 50)
+					html : "<iframe id='report' width=" + (width - 10)
 							+ " height=" + (height - 80) + " src=" + url
 							+ "></iframe>"
 				}]
