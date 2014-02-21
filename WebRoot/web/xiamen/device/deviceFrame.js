@@ -217,6 +217,7 @@ Ext.onReady(function() {
 		Ext.getCmp("treePanel").topToolbar.hide();
 		Ext.getCmp("timeSelector").show();
 		Ext.getCmp("treePanel").setTitle("设备列表");
+		tree.setHeight(335);
 		method = "TRACK";
 	}
 });
