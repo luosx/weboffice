@@ -1,6 +1,7 @@
 package com.klspta.web.cbd.jtfx.scjc;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -154,7 +155,9 @@ public class ScjcManager extends AbstractBaseBean {
      * @return
      */
     public String getList2() {
-        String sql = "select t.xqmc,t2.zl,t2.esfjj,t2.czl,t2.czfjj,t.yw_guid  from esf_jbxx t ,esf_zsxx t2 where t.yw_guid=t2.yw_guid and month='1' and year='2014' order by t.dateflag desc";
+    	String year = Calendar.getInstance().get(Calendar.YEAR)+"";		
+    	String month = Calendar.getInstance().get(Calendar.MONTH)+1+"";
+        String sql = "select t.xqmc,t2.zl,t2.esfjj,t2.czl,t2.czfjj,t.yw_guid  from esf_jbxx t ,esf_zsxx t2 where t.yw_guid=t2.yw_guid and month='"+month+"' and year='"+year+"' order by t.dateflag desc";
         List<Map<String, Object>> list = query(sql, YW);
         String newTable = "";
         if (list.size() > 0) {
@@ -164,7 +167,7 @@ public class ScjcManager extends AbstractBaseBean {
             List<Map<String, Object>> query = query(selSql, YW);
             for (int j = 0; j < query.size(); j++) {
                 String insert = "insert into esf_zsxx (yw_guid,month,year) values(?,?,?) ";
-                update(insert, YW, new Object[] { query.get(j).get("yw_guid"), "1", "2014" });
+                update(insert, YW, new Object[] { query.get(j).get("yw_guid"), month,year });
             }
 
             // 插入完成之后，
@@ -224,8 +227,8 @@ public class ScjcManager extends AbstractBaseBean {
                         esfjjzf = result;}
 
                     }
-                    String upda = "update esf_zsxx set " + type + "='" + value +",esfjjzf='"+esfjjzf+"'" 
-                            + "' where yw_guid=? and month=?  and year=?";
+                    String upda = "update esf_zsxx set " + type + "='" + value +"',esfjjzf='"+esfjjzf+"'" 
+                            + " where yw_guid=? and month=?  and year=?";
                     this.update(upda, YW, new Object[] { yw_guid, month, year });
                 }
                 if (xh.equals("3")) {
@@ -263,8 +266,8 @@ public class ScjcManager extends AbstractBaseBean {
                         czfjjzf = result;}
 
                     }
-                    String upda = "update esf_zsxx set " + type + "='" + value + ",czfjjzf ='"+czfjjzf+"'"
-                            + "' where yw_guid=? and month=?  and year=?";
+                    String upda = "update esf_zsxx set " + type + "='" + value + "',czfjjzf ='"+czfjjzf+"'"
+                            + " where yw_guid=? and month=?  and year=?";
                     this.update(upda, YW, new Object[] { yw_guid, month, year });
                     
                 }
