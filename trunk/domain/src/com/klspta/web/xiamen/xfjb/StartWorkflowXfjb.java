@@ -21,6 +21,9 @@ import com.klspta.console.ManagerFactory;
  * <br>Date:2013-11-18
  */
 public class StartWorkflowXfjb extends AbstractBaseBean {
+	
+	//用于删除因为工作流创建而插入的空数据
+	private static String delString = "delete from xfdjb t where t.xzq is null";
 	/**
 	 * 
 	 * <br>
@@ -31,6 +34,8 @@ public class StartWorkflowXfjb extends AbstractBaseBean {
 	 * @throws Exception
 	 */
 	public void initWorkflow() throws Exception {
+		//用于删除因为工作流创建而插入的空数据
+		update(delString, YW);
 		//1、获取参数 启动流程
 		String yw_guid = UtilFactory.getStrUtil().getGuid();
 		String userId = request.getParameter("userId");
