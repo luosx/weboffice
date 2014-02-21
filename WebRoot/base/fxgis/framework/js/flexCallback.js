@@ -21,13 +21,16 @@ function getInitMapLayerVisiable(){
 }
 //画点 回调方法
 function drawPointCallback(s){
-	tempValue=eval('('+s+')');
-	var point = tempValue.x + ','+ tempValue.y;
-	window.open("/domain/model/fxgiscomponents/djfx/pointfx.jsp?point="+point,"","height=300, width=350, top=200,left=300,location=no,scrollbars=yes");
+	parent.drawPolygonCallback(s);
+	//tempValue=eval('('+s+')');
+	//var point = tempValue.x + ','+ tempValue.y;
+	//window.open("/domain/model/fxgiscomponents/djfx/pointfx.jsp?point="+point,"","height=300, width=350, top=200,left=300,location=no,scrollbars=yes");
 }
 
 //画面 回调方法
 function drawPolygonCallback(s){
+	parent.parent.drawPolygonCallback(s);
+	/*
 	tempValue=eval('(' + s + ')');					
 	var zb = ''+tempValue.rings+'';
 	var zbs = zb.split(',');
@@ -36,6 +39,7 @@ function drawPolygonCallback(s){
 		points += zbs[i]+','+zbs[i+1]+';';
 	}
 	window.open("/domain/model/fxgiscomponents/djfx/polygonfx.jsp?points="+points,"","height=800, width=700, top=200,left=300,location=no,scrollbars=yes");	
+	*/
 }
 
 
