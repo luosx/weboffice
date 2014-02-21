@@ -1,4 +1,4 @@
-<%@ page language="java" pageEncoding="utf-8"%>
+﻿<%@ page language="java" pageEncoding="utf-8"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="com.klspta.base.util.UtilFactory"%>
 <%@page import="com.klspta.console.ManagerFactory"%>
@@ -66,64 +66,62 @@
 		}
 				
 			function save(){
-				//非空验证
-				if(checkNotNull()){
+				if(checkdata()){
 					document.forms[0].submit();
 				}
 			}
 			function refresh(){
 				document.location.refresh();
 			}
-			function checkNotNull(){
-				var jbr = document.getElementById('jbr');
-				var lxdz = document.getElementById('lxdz');
-				var jbsj = document.getElementById('jbsj');
-				var lxdh = document.getElementById('lxdh');
-				var ldcs = document.getElementById('ldcs');
-				var jbzywt = document.getElementById('jbzywt');
-				var jsr = document.getElementById('jsr');
-				var jlr = document.getElementById('jlr');
-				if(jbr.value == ''){
-					alert('请填写举报人！');
-					jbr.focus();
+			function checkdata(){
+			
+				var reg = /^(\d{3,4}?[-]\d{7,8}?)|(\d{11})$/;//电话正则表达式
+				
+				var var_jbr=document.getElementById("jbr").value; //举报人
+				var var_lxdz=document.getElementById("lxdz").value; //联系地址
+				var var_jbsj=document.getElementById("jbsj").value; //举报时间
+				var var_lxdh=document.getElementById("lxdh").value; //联系电话
+				var var_ldcs=document.getElementById("ldcs").value; //来电次数
+				var var_jbzywt=document.getElementById("jbzywt").value;//举报主要问题 
+				var var_zbyblqk=document.getElementById("zbyblqk").value;//值班员办理情况 
+				var var_jsr=document.getElementById("jsr").value; //接收人
+				var var_jlr=document.getElementById("jlr").value; //记录人
+				if(var_jbr==""){
+					alert("请填写举报人！");
 					return false;
-				}
-				if(lxdz.value == ''){
-					alert('请填写联系地址！');
-					lxdz.focus();
-					return false;				
-				}
-				if(jbsj.value == ''){
-					alert('请填写举报时间！');
-					jbsj.focus();
+				}else if(var_lxdz==""){
+					alert("请填写联系地址！");
 					return false;
-				}
-				if(lxdh.value == ''){
-					alert('请填写联系电话！');
-					lxdh.focus();
-					return false;				
-				}
-				if(ldcs.value == ''){
-					alert('请填写来电次数！');
-					ldcs.focus();
+				}else if(var_jbsj==""){
+					alert("请填写举报时间！");
 					return false;
-				}
-				if(jbzywt.value == ''){
-					alert('请填写举报主要问题！');
-					jbzywt.focus();
-					return false;				
-				}
-				if(jsr.value == ''){
-					alert('请填写接收人！');
-					jsr.focus();
+				}else if(var_lxdh==""){
+					alert("请填写联系电话！");
 					return false;
+				}else if(var_ldcs==""){
+					alert("请填写来电次数！");
+					return false;
+				}else if(var_jbzywt==""){
+					alert("请填写举报主要问题！");
+					return false;
+				}else if(var_zbyblqk==""){
+					alert("请填写值班员办理情况！");
+					return false;
+				}else if(var_jsr==""){
+					alert("请填写接收人！");
+					return false;
+				}else if(var_jlr==""){
+					alert("请填写记录人！");
+					return false;
+				}else{
+					if(!reg.test(var_lxdh)){
+						alert("联系电话格式不正确。（例如010-12345678或者13812345678）");
+						var_lxdh='';
+						return false;
+					}else{
+						return true;
+					}
 				}
-				if(jlr.value == ''){
-					alert('请填写记录人！');
-					jlr.focus();
-					return false;				
-				}				
-				return true;
 			}
 		</script>
 		
@@ -196,7 +194,7 @@
 <td>联系电话</td>
 <td><input class="noborder" name="lxdh" id="lxdh" style="width: 95%"/></td>
 <td>来电次数</td>
-<td><input class="noborder" name="ldcs" id="ldcs" style="width: 95%"/></td>
+<td><input class="noborder" name="ldcs" id="ldcs" value="1" style="width: 95%"/></td>
 </tr>
 <tr>
 <td align="center">举<br />报<br />主<br />要<br />问<br />题</td>
