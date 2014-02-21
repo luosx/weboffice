@@ -19,8 +19,6 @@ function showMap(objid){
 
 //双击编辑地图
 function editMap(objid){
-
-	
 	if(table.element == undefined){
 		table.init(document.getElementById("ESFXX"));
 	}
@@ -55,7 +53,7 @@ function print(){
     var sel = document.body.createTextRange(); 
     sel.moveToElementText(curTbl); 
     //把表格中的内容移到TextRange中 
-    sel.select(); 
+    //sel.select(); 
     //全选TextRange中内容 
     sel.execCommand("Copy"); 
     //复制TextRange中内容  
