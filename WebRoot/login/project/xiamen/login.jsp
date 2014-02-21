@@ -50,10 +50,10 @@
     <td height="595" valign="top" background="../../images/login.jpg">
     <table width="1000" border="0" cellspacing="0" cellpadding="0">
       <tr>
-      <td  colspan="2"><div style="margin-top: 6%;margin-left: 25%"><font class="style1"><%=loginname1 %></font></div></td>
+      <td  colspan="2"><div style="margin-top: 60px;margin-left: 25%"><font class="style1"><%=loginname1 %></font></div></td>
       </tr>
       <tr>
-      <td colspan="2" ><div style="margin-top: 1%;margin-left: 26%" ><font class="style2"><%=loginname2 %></font></div></td>
+      <td colspan="2" ><div style="margin-top: 10px;margin-left: 26%" ><font class="style2"><%=loginname2 %></font></div></td>
       </tr>
       <tr>
         <td width="707" height="134">&nbsp;</td>
