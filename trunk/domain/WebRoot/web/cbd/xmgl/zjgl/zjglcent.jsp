@@ -73,8 +73,10 @@ td {
 	text-align: center;
 }
 input{
-border:none;
-height: 25px;
+	border: 1px solid #6933F2;
+	height: 25px;
+	align:left;
+	width:100px;
 }
 
 td1 {
@@ -105,7 +107,6 @@ td1 {
 .tr04 {
 	background-color:#CCFFFF;
 	line-height: 15px;
-	text-align: center;
 }
 .tr05 {
 	background-color:#FFF69A;
