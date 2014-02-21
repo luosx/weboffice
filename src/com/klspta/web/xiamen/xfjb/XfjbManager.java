@@ -11,6 +11,9 @@ import com.klspta.model.CBDReport.CBDReportManager;
 import com.klspta.web.xiamen.xchc.Cgreport;
 
 public class XfjbManager extends AbstractBaseBean {
+	
+	//用于删除因为工作流创建而插入的空数据
+	private static String delString = "delete from xfdjb t where t.xzq is null";
 	/**
 	 * 
 	 * <br>Description:根据登陆人员获取对应的待处理信访案件
@@ -19,6 +22,9 @@ public class XfjbManager extends AbstractBaseBean {
 	 * @throws Exception
 	 */
 	public void getXfjbDcl() throws Exception {
+		//用于删除因为工作流创建而插入的空数据
+		update(delString, YW);
+		
 		String userId = request.getParameter("userId");
 		String keyWord = request.getParameter("keyWord");
 		String condition = request.getParameter("condition");
@@ -53,32 +59,35 @@ public class XfjbManager extends AbstractBaseBean {
 	 * @throws Exception
 	 */
 	public void getXfjbYcl() throws Exception{
-	String userId = request.getParameter("userId");
-	String keyWord = request.getParameter("keyWord");
-	String condition = request.getParameter("condition");
-	// 获取参数
-	String fullName = ManagerFactory.getUserManager().getUserWithId(userId)
-			.getFullName();
-	// 获取数据
-	String sql = "select distinct t.yw_guid,t.bh,t.xzq,t.jbr,t.jbxs,t.lxdz,t.jbzywt,to_char(t.jbsj, 'yyyy-MM-dd')as jbsj ,t.lxdh ,t.jsr,t.jlr,j.activityname as ajblzt, j.wfinsid from xfdjb t inner join workflow.v_hist_task j on t.yw_guid=j.yw_guid where j.assignee_=?";
-	if(condition!=null && !"".equals(condition)){
-        condition = UtilFactory.getStrUtil().unescape(condition);
-        condition="(select * from xfdjb where "+condition+")";
-        sql = "select distinct t.yw_guid,t.bh,t.xzq,t.jbr,t.jbxs,t.lxdz,t.jbzywt,to_char(t.jbsj, 'yyyy-MM-dd')as jbsj ,t.lxdh ,t.jsr,t.jlr,j.activityname as ajblzt, j.wfinsid from "+condition+" t inner join workflow.v_hist_task j on t.yw_guid=j.yw_guid where j.assignee_=?";
-    }
-	if (keyWord != null && !"".equals(keyWord)) {
-		keyWord = UtilFactory.getStrUtil().unescape(keyWord);
-		sql += "and (t.xzq||t.bh||t.jbr||t.jbxs||t.jbsj||t.JSR||t.JLR||t.lxdz||t.jbzywt||t.lxdh like '%"
-				+ keyWord + "%')";
-	}
-	sql += " order by jbsj desc";
-	List<Map<String, Object>> result = query(sql, YW,
-			new String[] { fullName });
-	int i = 0;
-	for (Map<String, Object> map : result) {
-		map.put("INDEX", i++);
-	}
-	response(result);
+		//用于删除因为工作流创建而插入的空数据
+		update(delString, YW);
+		
+		String userId = request.getParameter("userId");
+		String keyWord = request.getParameter("keyWord");
+		String condition = request.getParameter("condition");
+		// 获取参数
+		String fullName = ManagerFactory.getUserManager().getUserWithId(userId)
+				.getFullName();
+		// 获取数据
+		String sql = "select distinct t.yw_guid,t.bh,t.xzq,t.jbr,t.jbxs,t.lxdz,t.jbzywt,to_char(t.jbsj, 'yyyy-MM-dd')as jbsj ,t.lxdh ,t.jsr,t.jlr,j.activityname as ajblzt, j.wfinsid from xfdjb t inner join workflow.v_hist_task j on t.yw_guid=j.yw_guid where j.assignee_=?";
+		if(condition!=null && !"".equals(condition)){
+	        condition = UtilFactory.getStrUtil().unescape(condition);
+	        condition="(select * from xfdjb where "+condition+")";
+	        sql = "select distinct t.yw_guid,t.bh,t.xzq,t.jbr,t.jbxs,t.lxdz,t.jbzywt,to_char(t.jbsj, 'yyyy-MM-dd')as jbsj ,t.lxdh ,t.jsr,t.jlr,j.activityname as ajblzt, j.wfinsid from "+condition+" t inner join workflow.v_hist_task j on t.yw_guid=j.yw_guid where j.assignee_=?";
+	    }
+		if (keyWord != null && !"".equals(keyWord)) {
+			keyWord = UtilFactory.getStrUtil().unescape(keyWord);
+			sql += "and (t.xzq||t.bh||t.jbr||t.jbxs||t.jbsj||t.JSR||t.JLR||t.lxdz||t.jbzywt||t.lxdh like '%"
+					+ keyWord + "%')";
+		}
+		sql += " order by jbsj desc";
+		List<Map<String, Object>> result = query(sql, YW,
+				new String[] { fullName });
+		int i = 0;
+		for (Map<String, Object> map : result) {
+			map.put("INDEX", i++);
+		}
+		response(result);
 	}
 
 	/**
@@ -89,6 +98,9 @@ public class XfjbManager extends AbstractBaseBean {
 	 */
 	
 	public void getXfjbBlz(){
+		//用于删除因为工作流创建而插入的空数据
+		update(delString, YW);
+		
 		String keyWord = request.getParameter("keyWord");
 		//String userId = request.getParameter("userId");
 		String condition = request.getParameter("condition");
@@ -118,6 +130,9 @@ public class XfjbManager extends AbstractBaseBean {
 	 * <br>Date:2013-11-20
 	 */
 	public void getXFEndList(){
+		//用于删除因为工作流创建而插入的空数据
+		update(delString, YW);
+		
 		String keyWord = request.getParameter("keyWord");
 		//String userId = request.getParameter("userId");
         String condition = request.getParameter("condition");
