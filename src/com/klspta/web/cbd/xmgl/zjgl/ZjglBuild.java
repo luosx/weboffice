@@ -38,7 +38,7 @@ public class ZjglBuild {
 	public static StringBuffer buildTitle(String year) {
 		StringBuffer Buffer = new StringBuffer();
 		Buffer
-				.append("<table  width='1900px'>"
+				.append("<table  width='1900px' id='table'>"
 						+ "<tr class='tr01' style='text-align:center' >"
 						+ "<td rowspan='3' align='center' width='20%' class='tr01'><div  width='200px'>类别<div></td>"
 						+ "<td rowspan='3'  align='center' width='80px' class='tr01'>预算费用</td>"
