@@ -104,13 +104,15 @@ public class TrFactory {
     */
    public static StringBuffer getmod(String yw_guid,String year,String rolename){
         StringBuffer buffer = new StringBuffer();
-        //总计
+        //总计 20140221 delete by lichunxing 
         List<Map<String, Object>> query=zjglData.getLR_sum(yw_guid,year);
-        List<Map<String, Object>> list = zjglData. getZJGL_ZJLR(yw_guid,year);
+//        List<Map<String, Object>> list = zjglData. getZJGL_ZJLR(yw_guid,year);
         StringBuffer stringBufZJ = ZjglBuild.buildZjlr_sum(query);
         buffer.append(stringBufZJ);
-        StringBuffer stringBuffer = ZjglBuild.buildZjlr(list);
-        buffer.append(stringBuffer);
+//        StringBuffer stringBuffer = ZjglBuild.buildZjlr(list);
+//        buffer.append(stringBuffer);
+        List<Map<String, Object>> list = zjglData. getZJGL_ZJLR(yw_guid,year);
+        buffer.append(ZjglBuild.buildZjlrTR(list, "ZJLR", "write").get(0));
         return buffer;
         
     }
@@ -121,11 +123,13 @@ public class TrFactory {
         StringBuffer buffer = new StringBuffer();
         //总计
         List<Map<String, Object>> query=zjglData.getLR_sum(yw_guid,year);
-        List<Map<String, Object>> list = zjglData. getZJGL_ZJLR(yw_guid,year);
+//        List<Map<String, Object>> list = zjglData. getZJGL_ZJLR(yw_guid,year);
         StringBuffer stringBufZJ = ZjglBuild.buildZjlr_sum(query);
         buffer.append(stringBufZJ);
-        StringBuffer stringBuffer = ZjglBuild.buildZjlr_sum(list);
-        buffer.append(stringBuffer);
+//        StringBuffer stringBuffer = ZjglBuild.buildZjlr_sum(list);
+//        buffer.append(stringBuffer);
+        List<Map<String, Object>> list = zjglData. getZJGL_ZJLR(yw_guid,year);
+        buffer.append(ZjglBuild.buildZjlrTR(list, "ZJLR", "read").get(0));
         return buffer;
         
     }

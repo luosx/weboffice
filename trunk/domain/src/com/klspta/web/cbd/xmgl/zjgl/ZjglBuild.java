@@ -1,6 +1,8 @@
 package com.klspta.web.cbd.xmgl.zjgl;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -133,6 +135,95 @@ public class ZjglBuild {
 		return stringBuffer;
 
 	}
+	
+	/**
+	 * 
+	 * <br>Description:根据动态树结构生成资金流入节点
+	 * <br>Author:黎春行
+	 * <br>Date:2014-2-21
+	 * @param list 数据源
+	 * @param key  根节点
+	 * @param status 类型（只读（read） 、编辑（write））
+	 * @return
+	 */
+	public static List<Object> buildZjlrTR(List<Map<String, Object>> list, String key, String status){
+		StringBuffer stringBuffer = new StringBuffer();
+		List<Object> returnObject = new ArrayList<Object>();
+		List<Map<String, Object>> getMapList = new ArrayList<Map<String,Object>>();
+		for(int i = 0; i < list.size(); i++){
+			Map<String, Object> resuMap = list.get(i);
+			if((key.equals(getValue(resuMap, "parent_id")))){
+				String childkey = getValue(resuMap, "tree_id");
+				List<Object> childList = buildZjlrTR(list, childkey, status);
+				StringBuffer childString = (StringBuffer)childList.get(0);
+				if(childString.length() == 0){
+					getMapList.add(resuMap);
+					stringBuffer.append(buildTr(resuMap, status));
+				}else{
+					String[] names = {"ysfy", "lj","YFSDZ","ZJJD","CQYE","yy","ey","sany","siy","wy","ly","qy","bay","jy","siyue","syy","sey","lrsp"};
+					Map<String, Object> sumMap = new HashMap<String, Object>();
+					List<Map<String, Object>> child = (List)childList.get(1);
+					sumMap.put("tree_name", getValue(resuMap, "tree_name"));
+					for(int j = 0; j < child.size(); j++){
+						Map<String, Object> childMap = child.get(j);
+						for(int t = 0; t < names.length; t++){
+							String beginValue = getValue(sumMap, names[t]);
+							String childValue = getValue(childMap, names[t]);
+							String value = String.valueOf(Long.parseLong(beginValue) + Long.parseLong(childValue));
+							sumMap.put(names[t], value);
+						}
+					}
+					getMapList.add(sumMap);
+					stringBuffer.append(buildTr(sumMap, "read"));
+					stringBuffer.append(childString);
+				}
+			}
+		}
+		returnObject.add(stringBuffer);
+		returnObject.add(getMapList);
+		return returnObject;
+	}
+	
+	private static StringBuffer buildTr(Map<String, Object> trMap , String status){
+		String[] names = {"tree_name", "ysfy", "lj","YFSDZ","ZJJD","CQYE","yy","ey","sany","siy","wy","ly","qy","bay","jy","siyue","syy","sey","lrsp"};
+		StringBuffer stringBuffer = new StringBuffer();
+		stringBuffer.append("<tr>");
+		for(int i = 0; i < names.length; i++){
+			if("read".equals(status)){
+				if("lj".equals(names[i])){
+					stringBuffer.append("<td class='tr02' colspan='2'>").append(getValue(trMap, names[i])).append("</td>");
+				}else{
+					stringBuffer.append("<td class='tr02' >").append(getValue(trMap, names[i])).append("</td>");
+				}
+			}else if(i == 0){
+				if("lj".equals(names[i])){
+					stringBuffer.append("<td class='tr04' colspan='2'>").append(getValue(trMap, names[i])).append("</td>");
+				}else{
+					stringBuffer.append("<td class='tr04' >").append(getValue(trMap, names[i])).append("</td>");
+				}
+			}else{
+				if("lj".equals(names[i])){
+					stringBuffer.append("<td class='tr04' colspan='2' >").append("<input class='tr04' width=1%  type='text' ");
+					stringBuffer.append("onchange='addzjlr(this); return false;' value='").append(getValue(trMap, names[i])).append("' id='lr@");
+					stringBuffer.append(getValue(trMap, "status")).append("@").append(i).append("'/></td>");
+				}else{
+					stringBuffer.append("<td class='tr04' >").append("<input class='tr04' type='text' width=100%  ");
+					stringBuffer.append("onchange='addzjlr(this); return false;' value='").append(getValue(trMap, names[i])).append("' id='lr@");
+					stringBuffer.append(getValue(trMap, "status")).append("@").append(i).append("'/></td>");
+				}
+			}
+		}
+		stringBuffer.append("</tr>");
+		return stringBuffer;
+	}
+	
+	private static String getValue(Map<String, Object> map, String key){
+		String value = String.valueOf(map.get(key));
+		value = ("null".equals(value))?"0":value;
+		return value;
+	}
+	
+	
 
 	/***************************************************************************
 	 * view
