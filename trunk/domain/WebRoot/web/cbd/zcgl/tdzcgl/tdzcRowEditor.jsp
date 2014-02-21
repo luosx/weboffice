@@ -540,7 +540,7 @@ ITableStyle its = new TableStyleEditRow();
   	}
   // })
   </script>
-  <body  style="overflow-x:hidden;overflow-y:hidden">
+  <body  >
   	<div id='show' >
   		<%=new CBDReportManager().getReport("TDZCGL",its)%>
   	</div>
