@@ -29,7 +29,7 @@
    </script>
 </head>
 <body>
-	<div align="right"><img src="base/form/images/back1.png" width="50px" height="50px" title="地图" onClick="javascript:window.location.href='sy.jsp'"  /></div>
+	<div style="position:absolute; bottom: 20px;right: 20px" align="right"><img src="base/form/images/back1.png"  width="50px" height="50px" title="地图" onClick="javascript:window.location.href='sy.jsp'"  /></div>
    <div align="center" style="width: 100%;height: 95%">
      	<img src="web/cbd/sy/zkj.png" height="460px" width="850px" border="0" usemap="#planetmap" alt="总体设计图" />
               <map name="planetmap"  id="planetmap">  
