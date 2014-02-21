@@ -4,6 +4,7 @@
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+//basePath = "http://127.0.0.1:8080/domain/";
 //用来标识是不是信访中的地图标注
 String dtbzflag=request.getParameter("dtbzflag");
 //用来标识是不是外业巡查成果展现

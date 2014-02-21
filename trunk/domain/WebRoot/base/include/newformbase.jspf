@@ -82,8 +82,7 @@ var isDefaultBean = false;
 var parameter;
 function requestData(){
 	var cusparameter = location.href.substring(location.href.indexOf("?")+1);
-	var activityName ="<%=activityName%>";
-	activityName = encodeURI(encodeURI(activityName));
+	activityName = encodeURI(encodeURI("<%=activityName%>"));
 	parameter = "_formName=<%= _$personalJSPath%>&_key=<%=_$key%>&_keyfield=<%=_$keyfield%>&_jdbcname=<%=_$jdbcname%>&activityName="+activityName+"&" + cusparameter;
     var json = null;
     var path = "<%=_$basePath%>";
@@ -112,7 +111,6 @@ function setupSaveButton(){
 }
 function formSave()
 {
-	
 	isshowSave=false;
 	save();
 }
