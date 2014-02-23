@@ -42,7 +42,7 @@ public class EsfjcReport extends AbstractBaseBean implements IDataClass {
 	public void getBody(Object[] obj){
 	    String year=obj[0].toString();
 	    String month=obj[1].toString();
-		String sql = "select to_char(t.zl,'fm99999999.00')  as zl ,to_char(t.esfjj,'fm99999999.00') as esfjj ,to_char(t.esfjjzf,'fm99999999.00') as esfjjzf,to_char(t.czl,'fm99999999.00') as czl ,to_char(t.czfjj,'fm99999999.00') as czfjj,to_char(t.czfjjzf,'fm99999999.00') as czfjjzf,j.ssqy, j.xqmc, j.xqlb,j.bz, t.rowid from esf_zsxx t, esf_jbxx j where t.yw_guid = j.yw_guid and t.year = ? and t.month=?";
+		String sql = "select to_char(t.zl,'fm99999999.00')  as zl ,to_char(t.esfjj,'fm99999999.00') as esfjj ,to_char(t.esfjjzf,'fm99999999.00') as esfjjzf,to_char(t.czl,'fm99999999.00') as czl ,to_char(t.czfjj,'fm99999999.00') as czfjj,to_char(t.czfjjzf,'fm99999999.00') as czfjjzf,j.ssqy, j.xqmc, j.xqlb,j.bz, t.rowid from esf_zsxx t right join esf_jbxx j on t.yw_guid = j.yw_guid and and t.year = ? and t.month=?";
 		List<Map<String, Object>> resultList = query(sql, YW,new Object []{year,month});
 		for(int i = 0; i < resultList.size(); i++){
 			Map<String, Object> resultMap = resultList.get(i);
