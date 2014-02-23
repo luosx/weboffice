@@ -9,9 +9,14 @@ import java.util.Set;
 import java.util.TreeMap;
 
 import com.klspta.base.AbstractBaseBean;
+import com.klspta.base.util.UtilFactory;
+import com.klspta.model.CBDReport.CBDReportManager;
 import com.klspta.model.CBDReport.bean.TDBean;
 import com.klspta.model.CBDReport.bean.TRBean;
 import com.klspta.model.CBDReport.dataClass.IDataClass;
+import com.klspta.model.CBDReport.tablestyle.ITableStyle;
+import com.klspta.web.cbd.yzt.jc.report.TableStyleEditRow;
+import com.klspta.web.cbd.yzt.zrb.ZrbReport;
 
 public class EsfjcReport extends AbstractBaseBean implements IDataClass {
 	private String[][] title = {{"所属<br>区域","40"},{"序号","50"},{"小区名称","180"},{"二手房总量<br>(户)","150"},{"二手房均价<br>(元/㎡)","200"},{"二手房均价涨幅(%)","200"},{"出租量(户)","100"},{"出租房均价(元/月)","200"},{"出租房均价涨幅(%)","150"},{"备注","500"}};
@@ -42,8 +47,20 @@ public class EsfjcReport extends AbstractBaseBean implements IDataClass {
 	public void getBody(Object[] obj){
 	    String year=obj[0].toString();
 	    String month=obj[1].toString();
-		String sql = "select to_char(t.zl,'fm99999999.00')  as zl ,to_char(t.esfjj,'fm99999999.00') as esfjj ,to_char(t.esfjjzf,'fm99999999.00') as esfjjzf,to_char(t.czl,'fm99999999.00') as czl ,to_char(t.czfjj,'fm99999999.00') as czfjj,to_char(t.czfjjzf,'fm99999999.00') as czfjjzf,j.ssqy, j.xqmc, j.xqlb,j.bz, t.rowid from esf_zsxx t right join esf_jbxx j on t.yw_guid = j.yw_guid and t.year = ? and t.month=?";
-		List<Map<String, Object>> resultList = query(sql, YW,new Object []{year,month});
+	    String sql = "";
+	    List<Map<String, Object>> resultList = null;
+	    if(obj.length>=4){
+	    	sql = "select t.* from (select to_char(t.zl,'fm99999999.00')  as zl ,to_char(t.esfjj,'fm99999999.00') as esfjj ,"+
+    		"to_char(t.esfjjzf,'fm99999999.00') as esfjjzf,to_char(t.czl,'fm99999999.00') as czl ,"+
+    		"to_char(t.czfjj,'fm99999999.00') as czfjj,to_char(t.czfjjzf,'fm99999999.00') as czfjjzf,"+
+    		"j.ssqy as ssqy , j.xqmc as xqmc, j.xqlb as xqlb,j.bz as bz from esf_zsxx t right join esf_jbxx j on t.yw_guid = j.yw_guid "+
+    		"and t.year = ? and t.month=? ) t  where (t.zl||t.esfjj||t.czl||t.czfjj||t.ssqy||t.xqmc||t.xqlb||t.bz) like ?";
+	    	resultList = query(sql, YW,new Object []{year,month,"%"+obj[3].toString()+"%"});
+	    }else{
+	    	sql = "select to_char(t.zl,'fm99999999.00')  as zl ,to_char(t.esfjj,'fm99999999.00') as esfjj ,to_char(t.esfjjzf,'fm99999999.00') as esfjjzf,to_char(t.czl,'fm99999999.00') as czl ,to_char(t.czfjj,'fm99999999.00') as czfjj,to_char(t.czfjjzf,'fm99999999.00') as czfjjzf,j.ssqy, j.xqmc, j.xqlb,j.bz, t.rowid from esf_zsxx t right join esf_jbxx j on t.yw_guid = j.yw_guid and t.year = ? and t.month=?";
+	    	resultList = query(sql, YW,new Object []{year,month});
+	    }
+	    
 		for(int i = 0; i < resultList.size(); i++){
 			Map<String, Object> resultMap = resultList.get(i);
 			String xqmc = String.valueOf(resultMap.get("xqmc"));
@@ -287,4 +304,6 @@ public class EsfjcReport extends AbstractBaseBean implements IDataClass {
 		//trBean.addTDBean(new TDBean("", "100", "20"));
 		return trBean;
 	}
+	
+
 }
