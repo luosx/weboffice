@@ -9,6 +9,8 @@ import java.util.Map;
 import com.klspta.base.AbstractBaseBean;
 import com.klspta.base.util.UtilFactory;
 import com.klspta.model.CBDReport.CBDReportManager;
+import com.klspta.model.CBDReport.tablestyle.ITableStyle;
+import com.klspta.web.cbd.yzt.jc.report.TableStyleEditRow;
 
 /**
  * <br>
@@ -37,10 +39,15 @@ public class ScjcManager extends AbstractBaseBean {
 
     public void getReport() {
         String keyword = request.getParameter("keyword");
-        if (keyword != null && !keyword.equals("")) {
-            keyword = UtilFactory.getStrUtil().unescape(keyword);
-        }
-        response(getList(keyword));
+        String year = request.getParameter("year");
+        String month = request.getParameter("month");
+        keyword = UtilFactory.getStrUtil().unescape(keyword);
+		ITableStyle its = new TableStyleEditRow();
+		response(String.valueOf(new CBDReportManager().getReport("ESFQK", new Object[]{year,month,"false",keyword},its,"1000px")));
+//        if (keyword != null && !keyword.equals("")) {
+//            keyword = UtilFactory.getStrUtil().unescape(keyword);
+//        }
+//        response(getList(keyword));
     }
 
     public String getList(String keyord) {
@@ -111,11 +118,17 @@ public class ScjcManager extends AbstractBaseBean {
 
     public void delByYwGuid() {
         try {
-            String yw_guid = request.getParameter("yw_guid");
-            String sql = "delete from esf_jbxx t where yw_guid='" + yw_guid + "'";
-            String sql2 = "delete from esf_zsxx t where yw_guid='" + yw_guid + "'";
-            this.update(sql, YW);
-            this.update(sql2, YW);
+            String yw_guid = request.getParameter("xqmc");
+            String[] xqmcs = yw_guid.split(",");
+            List<Map<String,Object>> list = null;
+	            for(int i = 0; i < xqmcs.length;i++){
+	            	String sql = "select yw_guid from esf_jbxx where xqmc = ?";
+	            	list = query(sql, YW,new Object[]{xqmcs[i]});
+		            sql = "delete from esf_jbxx t where yw_guid='" + list.get(0).get("yw_guid") + "'";
+		            this.update(sql, YW);
+		            sql = "delete from esf_zsxx t where yw_guid='" + list.get(0).get("yw_guid") + "'";
+		            this.update(sql, YW);
+            }
             response("{success:true}");
         } catch (Exception e) {
             response("{success:false}");
@@ -123,25 +136,42 @@ public class ScjcManager extends AbstractBaseBean {
     }
 
     public void save() {
-        String yw_guid = request.getParameter("yw_guid");
+        String year = request.getParameter("year");
+        String month = request.getParameter("month");
+        String esfzl = request.getParameter("esfzl");
+        String esfjj = request.getParameter("esfjj");
+        String czl = request.getParameter("czl");
+        String czfjj = request.getParameter("czfjj");
         String ssqy = UtilFactory.getStrUtil().unescape(request.getParameter("ssqy"));
         String xqmc = UtilFactory.getStrUtil().unescape(request.getParameter("xqmc"));
         String xqlb = UtilFactory.getStrUtil().unescape(request.getParameter("xqlb"));
         String bz = UtilFactory.getStrUtil().unescape(request.getParameter("bz"));
-        if (!yw_guid.equals("") && yw_guid != null) {
+        String sql = "select yw_guid from esf_jbxx where xqmc=?";
+        List<Map<String,Object>> list = query(sql, YW,new Object[]{xqmc});
+        sql = "select t.yw_guid from esf_zsxx t,esf_jbxx j where t.yw_guid = j.yw_guid and j.xqmc=? and t.year=? and t.month=?";
+        List<Map<String ,Object>> list1 = query(sql, YW,new Object[]{xqmc,year,month});
+        if (list.size()!=0) {
             String update = "update esf_jbxx set ssqy='" + ssqy + "',xqmc='" + xqmc + "',xqlb='" + xqlb
                     + "',bz='" + bz + "'where yw_guid=?";
-            this.update(update, YW, new Object[] { yw_guid });
+            this.update(update, YW, new Object[] { list.get(0).get("yw_guid") });
+            if(list1.size()!=0){
+            	update = "update esf_zsxx set zl=?,esfjj=?,czl=?,czfjj=? where yw_guid=? and year=? and month=?";
+            	update(update, YW,new Object[]{esfzl,esfjj,czl,czfjj,list.get(0).get("yw_guid"),year,month});
+            }else {
+            	update = "insert into esf_zsxx(yw_guid,year,month,zl,esfjj,czl,czfjj)values(?,?,?,?,?,?,?)";
+                this.update(update, YW, new Object[] { list.get(0).get("yw_guid"), year, month ,esfzl,esfjj,czl,czfjj});
+            }
         } else {
-
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd_hhmmss");
             String format = dateFormat.format(new Date());
-
             String insertSql = "insert into esf_jbxx(ssqy,xqmc,xqlb,bz,yw_guid) values(?,?,?,?,?)";
             this.update(insertSql, YW, new Object[] { ssqy, xqmc, xqlb, bz, format });
-            String intserSql2 = "insert into esf_zsxx(yw_guid,year,month)values(?,?,?)";
-            this.update(intserSql2, YW, new Object[] { format, "2014", "1" });
+            String intserSql2 = "insert into esf_zsxx(yw_guid,year,month,zl,esfjj,czl,czfjj)values(?,?,?,?,?,?,?)";
+            this.update(intserSql2, YW, new Object[] { format, year, month ,esfzl,esfjj,czl,czfjj});
         }
+        
+        
+        
         response("{success:true}");
 
     }
@@ -352,9 +382,12 @@ public class ScjcManager extends AbstractBaseBean {
     public void query_year_month() {
         String year = request.getParameter("year");
         String month = request.getParameter("month");
-        StringBuffer buffer = new CBDReportManager().getReport("ESFQK", new Object[] { year, month, "true" },
+        ITableStyle its = new TableStyleEditRow();
+        StringBuffer buffer = new CBDReportManager().getReport("ESFQK", new Object[] { year, month, "false" },its,
                 "1000px");
         response(buffer.toString());
     }
-
+//
+    
+    
 }
