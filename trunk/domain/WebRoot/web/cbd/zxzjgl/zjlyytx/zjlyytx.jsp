@@ -97,7 +97,25 @@ function shows(){
 	putClientCommond("swqfzxzjcqkbManager","getlistByYear");
 	putRestParameter("year",year);
 	var list = restRequest();
-}	
+}
+
+function change(day){
+		var yearObj = document.getElementById("year");
+		var year = yearObj.options[yearObj.selectedIndex].text;
+		var news=document.getElementById("news");
+		var table=document.getElementById("ZXSYQK");
+		putClientCommond("ZjglManager", "selectYear");
+		putRestParameter("year", year);
+		var reslut = restRequest();
+		deleteDiv();
+		news.innerHTML=reslut;
+}
+
+function deleteDiv() {
+		var my = document.getElementById("ZXSYQK");
+		if (my != null)
+			my.parentNode.removeChild(my);
+	}	
 </script>
 
 <body>
@@ -109,10 +127,8 @@ function shows(){
 	<div align="center" style="margin-left: 10px;  width:1200px;">
 	      <h1>商务区分中心资金使用情况表</h1>
 	</div>
-	<div  align="right" style="margin-left: 10px;  width:1200px;">
-	<%=new CBDReportManager().getReport("ZXSYQK",new Object[]{"false"})%>
-	<!-- 
-	      年份选择 <select id="sel" onchange="shows"> 
+	<div align="center">
+	      年份选择 <select id="year" onchange="change(this.options[this.options.selectedIndex].value)"> 
 			<option value="2010">2010</option>
 			<option value="2011">2011</option>
 			<option value="2012">2012</option>
@@ -125,119 +141,14 @@ function shows(){
 			<option value="2019" >2019</option>
 			</select>
 	</div>
+	<div  align="right" style="margin-left: 10px;  width:1200px;">
+	<%=new CBDReportManager().getReport("ZXSYQK",new Object[]{"2014","false"})%>
+	 </div>
+	<div id="news"></div>
 	
-	<div style="margin-left:20px">
-		<table id='SWQFZXZJCJQKB' width='1200' border='1' cellpadding='1' cellspacing='0'>
-			<tr class='tr01' >
-				<td id='0_0' height='10' width='170' class='td0_0' rowspan="3"></td>
-				<td id='0_1' height='10' width='120' class='tr01' rowspan="3">资金到位总额</td>
-				<td id='0_2' height='10'  class='tr01' colspan="7">资金支出总额</td>
-				<td id='0_3' height='10'  class='tr01' colspan="3">资金余额</td>
-			</tr>
-			<tr class='tr01' >
-				<td id='0_10' height='10' width='100' class='tr01' rowspan="2">合计</td>
-				<td id='0_11' height='10' class='tr01' colspan="6">储备开发支出（亿元）</td>
-				<td id='0_12' height='10' class='tr01' colspan="3">储备开发成本外支出（亿元）</td>
-			</tr>
-			<tr class='tr01' >
-				<td id='0_20' height='10' width='90' class='tr01' >小计</td>
-				<td id='0_21' height='10' width='90' class='tr01' >前期费用</td>
-				<td id='0_22' height='10' width='90' class='tr01' >拆迁费用</td>
-				<td id='0_23' height='10' width='90' class='tr01' >市政费用</td>
-				<td id='0_24' height='10' width='90' class='tr01' >财务费用</td>
-				<td id='0_25' height='10' width='90' class='tr01' >管理费</td>
-				<td id='0_20' height='10' width='90' class='tr01' >小计</td>
-				<td id='0_21' height='10' width='90' class='tr01' >筹融资金返还</td>
-				<td id='0_22' height='10' width='90' class='tr01' >其他支出</td>
-			</tr>
-			<tr class='tr02' >
-				<td id='2_0' height='10' width='170' class='tr02'>金融机构贷款</td>
-				<td id='0_20' height='10' width='90' class='tr02' ></td>
-				<td id='0_21' height='10' width='90' class='tr02' ></td>
-				<td id='0_22' height='10' width='90' class='tr02' ></td>
-				<td id='0_23' height='10' width='90' class='tr02' ></td>
-				<td id='0_24' height='10' width='90' class='tr02' ></td>
-				<td id='0_25' height='10' width='90' class='tr02' ></td>
-				<td id='0_20' height='10' width='90' class='tr02' ></td>
-				<td id='0_21' height='10' width='90' class='tr02' ></td>
-				<td id='0_22' height='10' width='90' class='tr02' ></td>
-				<td id='0_21' height='10' width='90' class='tr02' ></td>
-				<td id='0_22' height='10' width='90' class='tr02' ></td>
-			</tr>
-			<tr class='tr02' >
-				<td id='3_0' height='10' width='170' class='tr02'>实施主体带资</td>
-				<td id='0_20' height='10' width='90' class='tr02' ></td>
-				<td id='0_21' height='10' width='90' class='tr02' ></td>
-				<td id='0_22' height='10' width='90' class='tr02' ></td>
-				<td id='0_23' height='10' width='90' class='tr02' ></td>
-				<td id='0_24' height='10' width='90' class='tr02' ></td>
-				<td id='0_25' height='10' width='90' class='tr02' ></td>
-				<td id='0_20' height='10' width='90' class='tr02' ></td>
-				<td id='0_21' height='10' width='90' class='tr02' ></td>
-				<td id='0_22' height='10' width='90' class='tr02' ></td>
-				<td id='0_21' height='10' width='90' class='tr02' ></td>
-				<td id='0_22' height='10' width='90' class='tr02' ></td>
-			</tr>
-			<tr class='tr02' >
-				<td id='4_0' height='10' width='170' class='tr02'>国有土地收益基金</td>
-				<td id='0_20' height='10' width='90' class='tr02' ></td>
-				<td id='0_21' height='10' width='90' class='tr02' ></td>
-				<td id='0_22' height='10' width='90' class='tr02' ></td>
-				<td id='0_23' height='10' width='90' class='tr02' ></td>
-				<td id='0_24' height='10' width='90' class='tr02' ></td>
-				<td id='0_25' height='10' width='90' class='tr02' ></td>
-				<td id='0_20' height='10' width='90' class='tr02' ></td>
-				<td id='0_21' height='10' width='90' class='tr02' ></td>
-				<td id='0_22' height='10' width='90' class='tr02' ></td>
-				<td id='0_21' height='10' width='90' class='tr02' ></td>
-				<td id='0_22' height='10' width='90' class='tr02' ></td>
-			</tr>
-			<tr class='tr02' >
-				<td id='5_0' height='10' width='170' class='tr02'>出让回笼资金</td>
-				<td id='0_20' height='10' width='90' class='tr02' ></td>
-				<td id='0_21' height='10' width='90' class='tr02' ></td>
-				<td id='0_22' height='10' width='90' class='tr02' ></td>
-				<td id='0_23' height='10' width='90' class='tr02' ></td>
-				<td id='0_24' height='10' width='90' class='tr02' ></td>
-				<td id='0_25' height='10' width='90' class='tr02' ></td>
-				<td id='0_20' height='10' width='90' class='tr02' ></td>
-				<td id='0_21' height='10' width='90' class='tr02' ></td>
-				<td id='0_22' height='10' width='90' class='tr02' ></td>
-				<td id='0_21' height='10' width='90' class='tr02' ></td>
-				<td id='0_22' height='10' width='90' class='tr02' ></td>
-			</tr>
-			<tr class='tr02' >
-				<td id='6_0' height='10' width='170' class='tr02'>其他资金</td>
-				<td id='0_20' height='10' width='90' class='tr02' ></td>
-				<td id='0_21' height='10' width='90' class='tr02' ></td>
-				<td id='0_22' height='10' width='90' class='tr02' ></td>
-				<td id='0_23' height='10' width='90' class='tr02' ></td>
-				<td id='0_24' height='10' width='90' class='tr02' ></td>
-				<td id='0_25' height='10' width='90' class='tr02' ></td>
-				<td id='0_20' height='10' width='90' class='tr02' ></td>
-				<td id='0_21' height='10' width='90' class='tr02' ></td>
-				<td id='0_22' height='10' width='90' class='tr02' ></td>
-				<td id='0_21' height='10' width='90' class='tr02' ></td>
-				<td id='0_22' height='10' width='90' class='tr02' ></td>
-			</tr>
-			<tr class='tr01' >
-				<td id='7_0' height='10' width='170' class='tr01'>合计</td>
-				<td id='0_20' height='10' width='90' class='tr01' ></td>
-				<td id='0_21' height='10' width='90' class='tr01' ></td>
-				<td id='0_22' height='10' width='90' class='tr01' ></td>
-				<td id='0_23' height='10' width='90' class='tr01' ></td>
-				<td id='0_24' height='10' width='90' class='tr01' ></td>
-				<td id='0_25' height='10' width='90' class='tr01' ></td>
-				<td id='0_20' height='10' width='90' class='tr01' ></td>
-				<td id='0_21' height='10' width='90' class='tr01' ></td>
-				<td id='0_22' height='10' width='90' class='tr01' ></td>
-				<td id='0_21' height='10' width='90' class='tr01' ></td>
-				<td id='0_22' height='10' width='90' class='tr01' ></td>
-			</tr>
-			
-		</table>
-		 -->
-	</div>
+	
+		 
+	
 
 </body>
 </html>
