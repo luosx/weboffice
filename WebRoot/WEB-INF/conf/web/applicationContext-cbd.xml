@@ -91,5 +91,6 @@
 	<bean name="cbjhzhb" class="com.klspta.web.cbd.yzt.cbjhzhb.CbjhManager" scope="prototype"/>
 	<bean name="zafzc" class="com.klspta.web.cbd.swkgl.AzfzcManager" scope="prototype"/>
 	<bean name="tdzcglManager" class="com.klspta.web.cbd.zcgl.tdzcgl.TdzcglManager" scope="prototype"/>
-
+	<!-- 中心资金管理 -->
+	<bean name="ZjglManager" class="com.klspta.web.cbd.dtjc.zxzjgl.ZjglManager" scope="prototype"/>
 </beans>
