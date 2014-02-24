@@ -226,10 +226,10 @@ if (!xmid.equals("") && !xmid.equals("null")) {
 				%>
 				<tr align="center" id='row<%=i%>' class="trsingle" onclick='showMap(this); return false;' ondblclick='editMap(this); return false;'>
 					<td align="center" width="80px" ><%=i+1%></td>
-					<td align="center" width="80px"><%=list.get(i).get("blsj")%></td>
-					<td align="center" width="500px"><%=list.get(i).get("sjbl")%></td>
-					<td align="center" width="80px"><%=list.get(i).get("bmjbr")%></td>
-					<td align="center" width="200px"><%=list.get(i).get("bz")%></td>
+					<td align="center" width="80px"><%=list.get(i).get("blsj")==null?"":list.get(i).get("blsj")%></td>
+					<td align="center" width="500px"><%=list.get(i).get("sjbl")==null?"":list.get(i).get("sjbl")%></td>
+					<td align="center" width="80px"><%=list.get(i).get("bmjbr")==null?"":list.get(i).get("bmjbr")%></td>
+					<td align="center" width="200px"><%=list.get(i).get("bz")==null?"":list.get(i).get("bz")%></td>
 					<td align="center" width="200px" style="display: none;"><%=list.get(i).get("yw_guid")%></td>
 				</tr>
 				<%
