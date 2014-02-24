@@ -42,6 +42,11 @@
         frame:true,
         items:[
         	{
+                title: '用地指标',
+                html: "<iframe width='"+w+"' height='"+h+"' src='web/cbd/xmgl/xmkgzb/xmkgzbb.jsp?yw_guid=<%=yw_guid%>&xmmc=<%=xmmc%>'/>"
+            }
+            ,
+        	{
                 title: '办理经过',
                 html: "<iframe width='"+w+"' height='"+h+"' src='web/cbd/xmgl/blgc/blgcEditor.jsp?yw_guid=<%=yw_guid%>&xmmc=<%=xmmc%>'/>" 
             }
@@ -52,9 +57,6 @@
             ,{
                 title: '档案管理',
                 html: "<iframe width='"+w+"' height='"+h+"' src='web/cbd/xmgl/dagl/accessorymain.jsp?yw_guid=<%=yw_guid%>&xmmc=<%=xmmc%>'/>"
-            },{
-                title: '控规表',
-                html: "<iframe width='"+w+"' height='"+h+"' src='web/cbd/xmgl/xmkgzb/xmkgzbb.jsp?yw_guid=<%=yw_guid%>&xmmc=<%=xmmc%>'/>"
             }
         ]
     })
