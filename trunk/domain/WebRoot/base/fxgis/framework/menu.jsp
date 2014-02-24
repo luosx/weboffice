@@ -1,6 +1,7 @@
 <%@ page language="java" pageEncoding="utf-8"%>
 <%@page import="com.klspta.web.xuzhouNW.xfjb.manager.XfAction"%>
 <%@page import="com.klspta.web.xuzhouNW.dtxc.PADDataManager"%>
+<%@page import="java.util.Map.Entry"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -27,6 +28,7 @@ if(yw_guid==null||"null".equals(yw_guid)){
 		pra="dolocation=true&p="+pDataList.getCjzb(yw_guid)+"&i=false";
 	}
 }
+
 String url=basePath+"base/fxgis/fx/FxGIS.html?debug=true&i=false";
 
 if(year != null && !"null".equals(year)){
@@ -36,6 +38,8 @@ if(year != null && !"null".equals(year)){
 if(flag!=null&&!flag.equals("null")||dtbzflag!=null&&!dtbzflag.equals("null")){
   url=basePath+"base/fxgis/fx/FxGIS.html?"+pra;
 }
+
+String preParameters=request.getQueryString();
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -244,7 +248,7 @@ Ext.onReady(function(){
   <body>
   <div id="toolbar" style="width:100%;height:40"></div>
   <div id="mapDiv">
-  <iframe id="lower" name="lower"  style="width: 100%;height:100%; overflow: auto;" src=<%=url%>></iframe>
+  <iframe id="lower" name="lower"  style="width: 100%;height:100%; overflow: auto;" src=<%=url%>&<%=preParameters %>></iframe>
 </div>
     <div id="result-win" class="x-hidden">    </div>
     <div id="result-tabs"></div>
