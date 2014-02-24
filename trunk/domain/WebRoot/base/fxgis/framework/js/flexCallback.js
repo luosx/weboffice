@@ -49,6 +49,9 @@ function identifyCallback(s){
 	var attributes = tempValue.attributes;
 	var attritable = '<table border="1" cellpadding="0" cellspacing="0" width="330"  style="text-align:center; vertical-align:middle;font-family: 宋体, Arial; font-size: 12px;border-collapse:collapse;border:1px #000 solid;" >';
 	for(var attr in attributes){
+		if("Null" == attributes[attr]){
+			attributes[attr] = "";
+		}
 		attritable+='<tr><td>'+attr+'</td><td>'+attributes[attr]+'</td></tr>';
 	}
 	attritable+='</table>';
