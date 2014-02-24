@@ -118,7 +118,7 @@ td1 {
 </style>
 <script type="text/javascript">
   	$(document).ready(function () { 
-		var width = document.body.clientWidth;
+		var width = document.body.clientWidth ;
 		var height = document.body.clientHeight * 0.9;
        	FixTable("table", 0,3, width, height);
     });
