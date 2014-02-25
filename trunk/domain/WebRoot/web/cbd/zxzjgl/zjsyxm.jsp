@@ -104,6 +104,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  	  for(var i=0;i<list.length;i++){
 	  		xmname.options.add(new Option(list[i].XMNAME,list[i].XMNAME))
 	  	  }
+	  	  change();
 	  }
 	  function change(){
 	  	putClientCommond("ZjglManager","getReport");
