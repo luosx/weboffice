@@ -93,93 +93,93 @@ public class TreeManager extends AbstractBaseBean {
 	 * @param year
 	 * @return
 	 */
-	public String getTree(String yw_guid, String year, String[] treeType) {
-		StringBuffer buffer = new StringBuffer();
-		buffer.append("{text:'Ⅱ.资金支出',leaf:0,id:'1',");
-		buffer.append("children:[{text:'2.1 一级开发支出',leaf:0,id:'101',");
-		buffer.append("children:[");
-		boolean status = false;
-		for (int i = 0; i < treeType.length; i++) {
-			if (treeType[i].equals("QQFY")) {
-				if (status) {
-					buffer.append(",");
-				}
-				StringBuffer qqfy = getChaild_tree(yw_guid, "2.1.1 前期费用",
-						"QQFY", year);
-				buffer.append(qqfy);
-				status = true;
-			} else if (treeType[i].equals("CQFY")) {
-				if (status) {
-					buffer.append(",");
-				}
-				StringBuffer cqfy = getChaild_tree(yw_guid, "2.1.2 拆迁费用",
-						"CQFY", year);
-				buffer.append(cqfy);
-				status = true;
-			} else if (treeType[i].equals("SCFY")) {
-				if (status) {
-					buffer.append(",");
-				}
-				StringBuffer scfy = getChaild_tree(yw_guid, "2.1.3 收储费用",
-						"SCFY", year);
-				buffer.append(scfy);
-				status = true;
-			} else if (treeType[i].equals("SZFY")) {
-				if (status) {
-					buffer.append(",");
-				}
-				StringBuffer szfy = getChaild_tree(yw_guid, "2.1.4 市政费用",
-						"SZFY", year);
-				buffer.append(szfy);
-				status = true;
-			}else if (treeType[i].equals("CWFY")) {
-				if (status) {
-					buffer.append(",");
-				}
-				StringBuffer cwfy = getChaild_tree(yw_guid, "2.1.5 财务费用",
-						"CWFY", year);
-				buffer.append(cwfy);
-				status = true;
-			} else if (treeType[i].equals("GLFY")) {
-				if (status) {
-					buffer.append(",");
-				}
-				StringBuffer qlfy = getChaild_tree(yw_guid, "2.1.6 管理费",
-						"GLFY", year);
-				buffer.append(qlfy);
-				buffer.append("]}");
-				status = true;
-			} else if (treeType[i].equals("GLFY")) {
-				if (status) {
-					buffer.append(",");
-				}
-				StringBuffer qlfy = getChaild_tree(yw_guid, "2.1.7 管理费用",
-						"GLFY", year);
-				buffer.append(qlfy);
-				buffer.append("]}");
-				status = true;
-			} else if (treeType[i].equals("CRZJFH")) {
-				if (status) {
-					buffer.append(",");
-				}
-				StringBuffer cyzjfh = getChaild_tree(yw_guid, "2.2 筹融资金返还",
-						"CRZJFH", year);
-				buffer.append(cyzjfh);
-				status = true;
-			} else if (treeType[i].equals("QTZC")) {
-				if (status) {
-					buffer.append(",");
-				}
-				StringBuffer qtzc = getChaild_tree(yw_guid, "2.3 其他支出", "QTZC",
-						year);
-				buffer.append(qtzc);
-				
-				status = true;
-			}
-		}
-		buffer.append("]}");
-		return buffer.toString();
-	}
+//	public String getTree(String yw_guid, String year, String[] treeType) {
+//		StringBuffer buffer = new StringBuffer();
+//		buffer.append("{text:'Ⅱ.资金支出',leaf:0,id:'1',");
+//		buffer.append("children:[{text:'2.1 一级开发支出',leaf:0,id:'101',");
+//		buffer.append("children:[");
+//		boolean status = false;
+//		for (int i = 0; i < treeType.length; i++) {
+//			if (treeType[i].equals("QQFY")) {
+//				if (status) {
+//					buffer.append(",");
+//				}
+//				StringBuffer qqfy = getChaild_tree(yw_guid, "2.1.1 前期费用",
+//						"QQFY", year);
+//				buffer.append(qqfy);
+//				status = true;
+//			} else if (treeType[i].equals("CQFY")) {
+//				if (status) {
+//					buffer.append(",");
+//				}
+//				StringBuffer cqfy = getChaild_tree(yw_guid, "2.1.2 拆迁费用",
+//						"CQFY", year);
+//				buffer.append(cqfy);
+//				status = true;
+//			} else if (treeType[i].equals("SCFY")) {
+//				if (status) {
+//					buffer.append(",");
+//				}
+//				StringBuffer scfy = getChaild_tree(yw_guid, "2.1.3 收储费用",
+//						"SCFY", year);
+//				buffer.append(scfy);
+//				status = true;
+//			} else if (treeType[i].equals("SZFY")) {
+//				if (status) {
+//					buffer.append(",");
+//				}
+//				StringBuffer szfy = getChaild_tree(yw_guid, "2.1.4 市政费用",
+//						"SZFY", year);
+//				buffer.append(szfy);
+//				status = true;
+//			}else if (treeType[i].equals("CWFY")) {
+//				if (status) {
+//					buffer.append(",");
+//				}
+//				StringBuffer cwfy = getChaild_tree(yw_guid, "2.1.5 财务费用",
+//						"CWFY", year);
+//				buffer.append(cwfy);
+//				status = true;
+//			} else if (treeType[i].equals("GLFY")) {
+//				if (status) {
+//					buffer.append(",");
+//				}
+//				StringBuffer qlfy = getChaild_tree(yw_guid, "2.1.6 管理费",
+//						"GLFY", year);
+//				buffer.append(qlfy);
+//				buffer.append("]}");
+//				status = true;
+//			} else if (treeType[i].equals("GLFY")) {
+//				if (status) {
+//					buffer.append(",");
+//				}
+//				StringBuffer qlfy = getChaild_tree(yw_guid, "2.1.7 管理费用",
+//						"GLFY", year);
+//				buffer.append(qlfy);
+//				buffer.append("]}");
+//				status = true;
+//			} else if (treeType[i].equals("CRZJFH")) {
+//				if (status) {
+//					buffer.append(",");
+//				}
+//				StringBuffer cyzjfh = getChaild_tree(yw_guid, "2.2 筹融资金返还",
+//						"CRZJFH", year);
+//				buffer.append(cyzjfh);
+//				status = true;
+//			} else if (treeType[i].equals("QTZC")) {
+//				if (status) {
+//					buffer.append(",");
+//				}
+//				StringBuffer qtzc = getChaild_tree(yw_guid, "2.3 其他支出", "QTZC",
+//						year);
+//				buffer.append(qtzc);
+//				
+//				status = true;
+//			}
+//		}
+//		buffer.append("]}");
+//		return buffer.toString();
+//	}
 
 	/***************************************************************************
 	 * 
