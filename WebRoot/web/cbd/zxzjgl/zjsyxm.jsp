@@ -106,6 +106,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  	  }
 	  	  change();
 	  }
+	  
 	  function change(){
 	  	putClientCommond("ZjglManager","getReport");
 	  	var obj = document.getElementById("xmname");
