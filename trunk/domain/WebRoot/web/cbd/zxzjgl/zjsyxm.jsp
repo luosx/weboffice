@@ -2,6 +2,7 @@
 <%@page import="com.klspta.model.CBDReport.CBDReportManager"%>
 <%@page import="com.klspta.model.CBDReport.tablestyle.ITableStyle"%>
 <%@page import="com.klspta.web.cbd.yzt.jc.report.TableStyleEditRow"%>
+<%@page import="com.klspta.web.cbd.dtjc.zxzjgl.ZjglManager"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -65,18 +66,70 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</style>
   </head>
   <script type="text/javascript">
-  
+  function exportExcel(){
+		    var curTbl = document.getElementById("XMCBZJ"); 
+ 			try{
+		    	var oXL = new ActiveXObject("Excel.Application");
+		    }catch(err){
+		    	Ext.Msg.alert('提示','Excel生成失败，请先确定系统已安装office，并在浏览器的\'工具\' - Internet选项 -安全 - 自定义级别 - ActiveX控件和插件 - 对未标记为可安全执行脚本的ActiveX控件.. 标记为\'启用\'');
+		    	return;
+		    } 
+		    //创建AX对象excel 
+		    var oWB = oXL.Workbooks.Add(); 
+		    //获取workbook对象 
+		    var oSheet = oWB.ActiveSheet; 
+		    //激活当前sheet 
+		    var sel = document.body.createTextRange(); 
+		    sel.moveToElementText(curTbl); 
+		    //把表格中的内容移到TextRange中 
+		    sel.select(); 
+		    //全选TextRange中内容 
+		    sel.execCommand("Copy"); 
+		    //复制TextRange中内容 
+		    //oSheet.Paste(); 
+		    oSheet.Paste(); 
+		    //粘贴到活动的EXCEL中       
+		    oXL.Visible = true; 
+		    //设置excel可见属性 
+		}
+	 
+	  function init(){
+	   	  var xmname = document.getElementById("xmname");
+		  putClientCommond("ZjglManager","getList");
+		  var list = restRequest();
+		  list=eval(list);
+	  	  var obj=document.getElementById("tablename");
+	  	  obj.innerHTML="<h1>"+list[0].XMNAME+"储备资金支出情况表</h1>";
+	  	  for(var i=0;i<list.length;i++){
+	  		xmname.options.add(new Option(list[i].XMNAME,list[i].XMNAME))
+	  	  }
+	  }
+	  function change(){
+	  	putClientCommond("ZjglManager","getReport");
+	  	var obj = document.getElementById("xmname");
+	  	var xmname=obj.options[obj.selectedIndex].value;
+	  	var name=document.getElementById("tablename");
+	  	name.innerHTML="<h1>"+xmname+"储备资金支出情况表</h1>";
+	  	putRestParameter("xmname",escape(escape(xmname)));
+	  	var table=document.getElementById("center");
+	  	var reslut = restRequest();
+		table.innerHTML = reslut;
+	  }
   </script>
-  <body>
+  <body onload="init();">
   <div id="fixed" style="position: fixed; top: 2px; left: 20px">
   		&nbsp;
   		
 		<img src="base/form/images/exportexcel.png" width="20px" height="20px" title="导出Excel" onClick="javascript:exportExcel();"  />&nbsp;&nbsp;&nbsp;
 	</div>
-	<div align="center" style="margin-left: 10px;  width:1200px;">
-	      <h1>公交总公司项目储备资金支出情况表</h1>
+	<div id="tablename" align="center" style="margin-left: 10px;  width:1000px;">
+	      <h1 >储备资金支出情况表</h1>
 	</div>
-	<div>
+	<div align="left" style="margin-left: 15px;  width:1000px;">
+	    项目选择：<select id="xmname" onchange="change()" ></select>
+	      
+	</div>
+	<div id="center">
 		<%=new CBDReportManager().getReport("XMCBZJ",new Object[]{"公交总公司项目"})%>
 	</div>
 	<!-- 
