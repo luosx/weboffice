@@ -37,10 +37,10 @@ public class TdzcglReport extends AbstractBaseBean implements IDataClass{
 	}
 	
 	public void setFields(){
-		String[][] fields = {{"dkmc","false","null"},{"ydxz","false","null"},{"jsydmj","false","sum"},{"rjl","false","avg"},{"ghjzgm","false","sum"},{"jzkzgd","false","avg"},{"DJZJ","true","sum"},{"DJYJLY","true","sum"},{"DJYJLB","true","null"},{"ZFSYZE","true","sum"},{"ZFSYYJLY","true","sum"}
-		,{"ZFSYYJLB","true","sum"},{"ZFSYHTYD","true","null"},{"ZFSYWYJ","true","sum"},{"BCFZE","true","sum"},{"BCFYJLY","true","sum"},{"BCFYJLB","true","null"},{"BCFHTYD","true","null"},{"BCFYCSWY","true","sum"},{"DJKJLSJ","true","null"},{"CBZH","true","null"}
-		,{"ZCMJ","true","sum"},{"CRSJ","true","null"},{"ZBR","true","null"},{"JDSJ","true","null"},{"YJSJ","true","null"},{"KGSJ","true","null"},{"TDXZSJ","true","null"},{"YT","true","null"},{"SFYL","true","null"},{"DGDW","true","null"}
-		,{"SX","true","null"},{"bz","true","null"}};
+		String[][] fields = {{"dkmc","false","null"},{"ydxz","false","null"},{"jsydmj","false","sum"},{"rjl","false","avg"},{"ghjzgm","false","sum"},{"jzkzgd","false","avg"},{"DJZJ","false","sum"},{"DJYJLY","false","sum"},{"DJYJLB","false","null"},{"ZFSYZE","false","sum"},{"ZFSYYJLY","false","sum"}
+		,{"ZFSYYJLB","false","sum"},{"ZFSYHTYD","false","null"},{"ZFSYWYJ","false","sum"},{"BCFZE","false","sum"},{"BCFYJLY","false","sum"},{"BCFYJLB","false","null"},{"BCFHTYD","false","null"},{"BCFYCSWY","false","sum"},{"DJKJLSJ","false","null"},{"CBZH","false","null"}
+		,{"ZCMJ","false","sum"},{"CRSJ","false","null"},{"ZBR","false","null"},{"JDSJ","false","null"},{"YJSJ","false","null"},{"KGSJ","false","null"},{"TDXZSJ","false","null"},{"YT","false","null"},{"SFYL","false","null"},{"DGDW","false","null"}
+		,{"SX","false","null"},{"bz","false","null"}};
 		this.fields = fields;
 	}
 	
