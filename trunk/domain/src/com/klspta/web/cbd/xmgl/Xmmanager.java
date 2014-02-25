@@ -306,13 +306,13 @@ public class Xmmanager extends AbstractBaseBean {
 		String id = request.getParameter("id");
 		String selet_year = request.getParameter("selet_year");
 		String tree_text = request.getParameter("tree_text");
+		String roorId = request.getParameter("rootId");
 		tree_text = UtilFactory.getStrUtil().unescape(tree_text).trim();
 		for (int i = 0; i < st.length; i++) {
-			if (parent_id.equals(st[i])) {
-				String sql = " delete zjgl_tree where  yw_guid=? and parent_id=? and tree_name=? and tree_id=? and rq=?";
-				update(sql, YW, new Object[] { yw_guid, parent_id, tree_text,
-						id, selet_year });
-				if(parent_id.equals("ZJLR")){
+			String sql = " delete zjgl_tree where  yw_guid=? and parent_id=? and tree_name=? and tree_id=? and rq=?";
+			update(sql, YW, new Object[] { yw_guid, parent_id, tree_text,
+					id, selet_year });
+				if(roorId.equals("ZJLR")){
 					String delet = "delete XMZJGL_LR where yw_guid=? and lb=? and rq=?";
 					update(delet, YW, new Object[] { yw_guid, tree_text, selet_year });
 				}else{
@@ -320,7 +320,7 @@ public class Xmmanager extends AbstractBaseBean {
 					update(delet, YW, new Object[] { yw_guid, tree_text, parent_id,
 							selet_year });
 				}
-			}
+			
 		}
 	}
 

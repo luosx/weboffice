@@ -15,32 +15,32 @@ public class TrFactory {
     /******
      * 资金指出-入口1-old
      */
-   public static StringBuffer getmodel(List<Map<String, Object>> list, String yw_guid, String type,String year,String rolename) {
-        StringBuffer buffer = new StringBuffer();
-        if(type.equals("ZJZC")){
-            List<Map<String, Object>> li = zjglData.getZC_sum(yw_guid,year);
-            StringBuffer stringBuffer = ZjglBuild.buildZjzc_father_sum(li);
-            buffer.append(stringBuffer);
-            return buffer;
-        }else if(type.equals("YJKFZC")){
-            List<Map<String, Object>> ls = zjglData.getZC_YJZC_sum(yw_guid,year);
-            StringBuffer stringBuffer = ZjglBuild.buildZjzc_father_sum(ls);
-            buffer.append(stringBuffer);
-            return buffer;
-        }else{
-        if (list != null||list.size()>0) {
-            StringBuffer fatehr = buildFather(yw_guid, type,year ,rolename);
-            StringBuffer chaild = buildChild(yw_guid, list, type,year,rolename);
-            buffer.append(fatehr);
-            buffer.append(chaild);
-            return buffer;
-        } else {
-            StringBuffer fatehr = buildFather(yw_guid, type,year,rolename);
-            buffer.append(fatehr);
-            return buffer;
-        }
-        }
-    }
+//   public static StringBuffer getmodel(List<Map<String, Object>> list, String yw_guid, String type,String year,String rolename) {
+//        StringBuffer buffer = new StringBuffer();
+//        if(type.equals("ZJZC")){
+//            List<Map<String, Object>> li = zjglData.getZC_sum(yw_guid,year);
+//            StringBuffer stringBuffer = ZjglBuild.buildZjzc_father_sum(li);
+//            buffer.append(stringBuffer);
+//            return buffer;
+//        }else if(type.equals("YJKFZC")){
+//            List<Map<String, Object>> ls = zjglData.getZC_YJZC_sum(yw_guid,year);
+//            StringBuffer stringBuffer = ZjglBuild.buildZjzc_father_sum(ls);
+//            buffer.append(stringBuffer);
+//            return buffer;
+//        }else{
+//        if (list != null||list.size()>0) {
+//            StringBuffer fatehr = buildFather(yw_guid, type,year ,rolename);
+//            StringBuffer chaild = buildChild(yw_guid, list, type,year,rolename);
+//            buffer.append(fatehr);
+//            buffer.append(chaild);
+//            return buffer;
+//        } else {
+//            StringBuffer fatehr = buildFather(yw_guid, type,year,rolename);
+//            buffer.append(fatehr);
+//            return buffer;
+//        }
+//        }
+//    }
    /******
     * 资金指出-入口2-new 查看
     */
