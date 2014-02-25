@@ -126,7 +126,7 @@ function shows(){
 			</select>
 	</div>
 	 -->
-	<div  align="right" style="margin-left: 10px;  width:1100px;">
+	<div  align="right" style="margin-left: 10px;  width:1000px;">
 	      单位：亿元&nbsp;
 	</div>
 	<div style="margin-left:20px">
