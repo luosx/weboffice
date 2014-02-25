@@ -75,20 +75,34 @@ public class ZxcjqkReport extends AbstractBaseBean implements IDataClass {
 			TRBean trBean = new TRBean();
 			Map<String, String> xmData = formatMap.get(key);
 			if("合计".equals(key)){
-				trBean.setCssStyle("trtotal");
+				continue;
+				//trBean.setCssStyle("trtotal");
 			}else{
 				trBean.setCssStyle("trSingle");
 			}
-			trBean.addTDBean(new TDBean(String.valueOf(i), "80", "20"));
+			trBean.addTDBean(new TDBean(getValue(String.valueOf(i)), "80", "20"));
 			trBean.addTDBean(new TDBean(key,"150","20"));
-			trBean.addTDBean(new TDBean(String.valueOf(xmData.get("CRZJ")), "150","20"));
-			trBean.addTDBean(new TDBean(String.valueOf(xmData.get("ZRJGDK")), "200","20"));
-			trBean.addTDBean(new TDBean(String.valueOf(xmData.get("SSZTDZ")), "200","20"));
-			trBean.addTDBean(new TDBean(String.valueOf(xmData.get("GYTDSYJJ")), "200","20"));
-			trBean.addTDBean(new TDBean(String.valueOf(xmData.get("CRHLZJ")), "150","20"));
-			trBean.addTDBean(new TDBean(String.valueOf(xmData.get("QTZJ")), "150","20"));
+			trBean.addTDBean(new TDBean(getValue(String.valueOf(xmData.get("CRZJ"))), "150","20"));
+			trBean.addTDBean(new TDBean(getValue(String.valueOf(xmData.get("ZRJGDK"))), "200","20"));
+			trBean.addTDBean(new TDBean(getValue(String.valueOf(xmData.get("SSZTDZ"))), "200","20"));
+			trBean.addTDBean(new TDBean(getValue(String.valueOf(xmData.get("GYTDSYJJ"))), "200","20"));
+			trBean.addTDBean(new TDBean(getValue(String.valueOf(xmData.get("CRHLZJ"))), "150","20"));
+			trBean.addTDBean(new TDBean(getValue(String.valueOf(xmData.get("QTZJ"))), "150","20"));
 			trBeans.add(trBean);
 		}
+		TRBean trBean = new TRBean();
+		Map<String, String> xmData = formatMap.get("合计");
+		trBean.addTDBean(new TDBean(getValue(String.valueOf(i)), "80", "20"));
+		trBean.addTDBean(new TDBean("合计","150","20"));
+		trBean.addTDBean(new TDBean(getValue(String.valueOf(xmData.get("CRZJ"))), "150","20"));
+		trBean.addTDBean(new TDBean(getValue(String.valueOf(xmData.get("ZRJGDK"))), "200","20"));
+		trBean.addTDBean(new TDBean(getValue(String.valueOf(xmData.get("SSZTDZ"))), "200","20"));
+		trBean.addTDBean(new TDBean(getValue(String.valueOf(xmData.get("GYTDSYJJ"))), "200","20"));
+		trBean.addTDBean(new TDBean(getValue(String.valueOf(xmData.get("CRHLZJ"))), "150","20"));
+		trBean.addTDBean(new TDBean(getValue(String.valueOf(xmData.get("QTZJ"))), "150","20"));
+		trBeans.add(trBean);
+		
+		
 		return trBeans;
 	}
 	
@@ -122,6 +136,8 @@ public class ZxcjqkReport extends AbstractBaseBean implements IDataClass {
 					tableData.put(type, value);
 					if (sumData.containsKey(type)) {
 						String sumValue = sumData.get(type);
+						sumValue = ("null".equals(sumValue)) ? "0" : sumValue;
+						value = ("null".equals(value)) ? "0" : value;
 						sumValue = String.valueOf(Long.parseLong(sumValue) + Long.parseLong(value));
 						sumData.remove(type);
 						sumData.put(type, sumValue);
@@ -135,6 +151,10 @@ public class ZxcjqkReport extends AbstractBaseBean implements IDataClass {
 		}
 		formatData.put("合计", sumData);
 		return formatData;
+	}
+	
+	private String getValue(String value){
+		return ("null".equals(value))?"0":value;
 	}
 
 }
