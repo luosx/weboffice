@@ -58,6 +58,19 @@ Ext.onReady(function() {
         defaults: {width: 135},
       //  defaultType: 'textfield',
         items: [{
+                fieldLabel: '地图服务',
+                xtype: 'combo',
+                id: 'dtService',
+                store: dtServiceData,
+                mode:"local", 
+                displayField:'TEXT',
+	            valueField: 'VALUE',
+	            //hiddenName: "URL",
+	            emptyText:'请选择图层...',
+                accelerate: true,
+                triggerAction:'all',
+                editable:false 
+            },{
                 fieldLabel: '查询关键字',
                 id:'keywork',
                 width: 200,
@@ -77,8 +90,7 @@ Ext.onReady(function() {
 function chaxun(){
 parent.center.frames["lower"].swfobject.getObjectById("FxGIS").clear();
 	//获取选择的地图服务、输入的关键字
-      //var dtService = locationForm.get('dtService').getValue();
-      var dtService="xm_wp@0@TBBH,TBMJ@图斑编号,图斑面积";
+      var dtService = locationForm.get('dtService').getValue();
       var arr=dtService.split("@");
       var keywork = locationForm.get('keywork').getValue();
       keywork=keywork.replace(/[ ]/g,""); 
@@ -93,8 +105,8 @@ parent.center.frames["lower"].swfobject.getObjectById("FxGIS").clear();
       queryfields=field.split(",");
       where = keywork;
       var fields =field;
+      
       parent.center.frames["lower"].swfobject.getObjectById("FxGIS").findFeature(serviceid,layerid,where,fields);//图行查询
-    
  }
 }
 function findExecuteCallback(s){
@@ -112,12 +124,12 @@ function panel(){
         statusTab = new Ext.Panel({
             renderTo:"status_grid",
             width:width,
-            height:height-10, 
+            height:height-100, 
             layout:"accordion",
             layoutConfig: {animate: true }, 
              items:[{
-             collapsible : false,
-               html: "<iframe id='cxjg' style='height:"+(scrHeight-80)+"PX; width:350px;' src='queryData.jsp'/>"
+             collapsible : true,
+               html: "<iframe id='cxjg' style='height:"+(scrHeight-95)+"PX; width:350px;' src='queryData.jsp'/>"
             }
             ]
         });
@@ -127,6 +139,8 @@ function panel(){
 	</head>
 	<body bgcolor="#FFFFFF">
 		<div id="form-ct" style="width: 100%; height: 18%;"></div>
-		<div id="status_grid" style="width: 100%; height: 85%;"></div>
+		<div id="status_grid" style="width: 100%; height: 30%;"></div>
+		<!--  <iframe id="lower" name="lower"  style="width: 100%;height:100%; overflow: auto;" src=""></iframe>
+		-->
 	</body>
 </html>
