@@ -44,11 +44,11 @@
      fieldsArray[0]={name: 'feature.geometry'}
      columnArray[0]=  {header: '标注',width:width*0.12,renderer: biaoZhu};
      for(var i=1;i<parent.queryfieldsinfo.length+1;i++){
-      fieldsArray[i]= {name:'feature.attributes.'+parent.queryfields[i-1]};
-      columnArray[i]={header:parent.queryfieldsinfo[i-1],dataIndex:'feature.attributes.'+parent.queryfields[i-1],width:width*(1/(parent.queryfieldsinfo.length+2))}   
+      fieldsArray[i]= {name:'feature.attributes.'+parent.queryfieldsinfo[i-1]};
+      columnArray[i]={header:parent.queryfieldsinfo[i-1],dataIndex:'feature.attributes.'+parent.queryfieldsinfo[i-1],width:width*(1/(parent.queryfieldsinfo.length+2))}   
      }
 	 fieldsArray[parent.queryfieldsinfo.length+1]={name: 'feature.geometry'};
-	 columnArray[parent.queryfieldsinfo.length+1]={header: '叠加分析',width:width*0.25,renderer:djfx};
+	// columnArray[parent.queryfieldsinfo.length+1]={header: '叠加分析',width:width*0.25,renderer:djfx};
      var queryfieldsinfo = parent.queryfieldsinfo;
      store = new Ext.data.JsonStore({
      proxy: new Ext.ux.data.PagingMemoryProxy(d),
