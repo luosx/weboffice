@@ -119,7 +119,12 @@ public class ZjcjqkReport extends AbstractBaseBean implements IDataClass {
 		trBean.setCssStyle("trSingle");
 		trBean.addTDBean(new TDBean(firstValue,"200","20"));
 		for(int i = 0; i < names.length; i++){
-			trBean.addTDBean(new TDBean(values.get(names[i]), "100", "20"));
+			if(values != null && values.containsKey(names[i])){
+				trBean.addTDBean(new TDBean(values.get(names[i]), "100", "20"));
+			}else{
+				trBean.addTDBean(new TDBean( " ", "100", "20"));
+			}
+			
 		}
 		return trBean;
 	}
