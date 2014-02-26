@@ -99,8 +99,8 @@ public class Xmkgzbbreport extends AbstractBaseBean implements IDataClass {
 							width = "140px";
 						}else if(7 == i){
 							width = "100px";
-						}else if(7 == i){
-							width = "3000px";
+						}else if(8 == i){
+							width = "300px";
 						}
 						tdBean = new TDBean(value, width, "","");
 						trBean.addTDBean(tdBean);
@@ -150,8 +150,8 @@ public class Xmkgzbbreport extends AbstractBaseBean implements IDataClass {
 					width = "140px";
 				}else if(7 == i){
 					width = "100px";
-				}else if(7 == i){
-					width = "3000px";
+				}else if(8 == i){
+					width = "300px";
 				}
 				tdBean = new TDBean(value, width, "","");
 				trBean.addTDBean(tdBean);
@@ -162,17 +162,17 @@ public class Xmkgzbbreport extends AbstractBaseBean implements IDataClass {
 		
 		TRBean trBean_jyxjsyd = new TRBean();
 		trBean_jyxjsyd.setCssStyle("title");
-		TDBean tdname11=new TDBean("经营性建设用地小计","","");
+		TDBean tdname11=new TDBean("经营性建设用地小计","310","","");
 		tdname11.setColspan("4");
 		trBean_jyxjsyd.addTDBean(tdname11);
 		
-		TDBean tdname12=new TDBean(""+ydmj_jyxjsyd,"","");
+		TDBean tdname12=new TDBean(""+ydmj_jyxjsyd,"140","","");
 		trBean_jyxjsyd.addTDBean(tdname12);
 		
-		TDBean tdname13=new TDBean(ydmj_jyxjsyd!=0?String.format("%.2f", jzmj_jyxjsyd/ydmj_jyxjsyd):"0","","");
+		TDBean tdname13=new TDBean(ydmj_jyxjsyd!=0?String.format("%.2f", jzmj_jyxjsyd/ydmj_jyxjsyd):"0","80","","");
 		trBean_jyxjsyd.addTDBean(tdname13);
 		
-		TDBean tdname14=new TDBean(""+jzmj_jyxjsyd,"","");
+		TDBean tdname14=new TDBean(""+jzmj_jyxjsyd,"140","","");
 		trBean_jyxjsyd.addTDBean(tdname14);
 		
 		TDBean tdname15=new TDBean("","","");
@@ -213,8 +213,8 @@ public class Xmkgzbbreport extends AbstractBaseBean implements IDataClass {
 							width = "140px";
 						}else if(7 == i){
 							width = "100px";
-						}else if(7 == i){
-							width = "3000px";
+						}else if(8 == i){
+							width = "300px";
 						}
 						tdBean = new TDBean(value, width, "","");
 						trBean.addTDBean(tdBean);
@@ -225,17 +225,17 @@ public class Xmkgzbbreport extends AbstractBaseBean implements IDataClass {
 		}
 		TRBean trBean_fjyxjsyd = new TRBean();
 		trBean_fjyxjsyd.setCssStyle("title");
-		TDBean tdname21=new TDBean("非经营性建设用地小计","","");
+		TDBean tdname21=new TDBean("非经营性建设用地小计","310","","");
 		tdname21.setColspan("4");
 		trBean_fjyxjsyd.addTDBean(tdname21);
 		
-		TDBean tdname22=new TDBean(""+ydmj_fjyxjsyd,"","");
+		TDBean tdname22=new TDBean(""+ydmj_fjyxjsyd,"140","","");
 		trBean_fjyxjsyd.addTDBean(tdname22);
 		
-		TDBean tdname23=new TDBean(ydmj_fjyxjsyd!=0?String.format("%.2f", jzmj_fjyxjsyd/ydmj_fjyxjsyd):"0","","");
+		TDBean tdname23=new TDBean(ydmj_fjyxjsyd!=0?String.format("%.2f", jzmj_fjyxjsyd/ydmj_fjyxjsyd):"0","80","","");
 		trBean_fjyxjsyd.addTDBean(tdname23);
 		
-		TDBean tdname24=new TDBean(""+jzmj_fjyxjsyd,"","");
+		TDBean tdname24=new TDBean(""+jzmj_fjyxjsyd,"140","","");
 		trBean_fjyxjsyd.addTDBean(tdname24);
 		
 		TDBean tdname25=new TDBean("","","");
@@ -246,17 +246,17 @@ public class Xmkgzbbreport extends AbstractBaseBean implements IDataClass {
 		
 		TRBean trBean_jsyd = new TRBean();
 		trBean_jsyd.setCssStyle("title");
-		TDBean tdname31=new TDBean("建设用地小计","","");
+		TDBean tdname31=new TDBean("建设用地小计","310","","");
 		tdname31.setColspan("4");
 		trBean_jsyd.addTDBean(tdname31);
 		
-		TDBean tdname32=new TDBean(""+(ydmj_fjyxjsyd+ydmj_jyxjsyd),"","");
+		TDBean tdname32=new TDBean(""+(ydmj_fjyxjsyd+ydmj_jyxjsyd),"140","","");
 		trBean_jsyd.addTDBean(tdname32);
 		
-		TDBean tdname33=new TDBean((ydmj_fjyxjsyd+ydmj_jyxjsyd)!=0?String.format("%.2f", (jzmj_fjyxjsyd+jzmj_jyxjsyd)/(ydmj_fjyxjsyd+ydmj_jyxjsyd)):"0","","");
+		TDBean tdname33=new TDBean((ydmj_fjyxjsyd+ydmj_jyxjsyd)!=0?String.format("%.2f", (jzmj_fjyxjsyd+jzmj_jyxjsyd)/(ydmj_fjyxjsyd+ydmj_jyxjsyd)):"0","80","","");
 		trBean_jsyd.addTDBean(tdname33);
 		
-		TDBean tdname34=new TDBean(""+(jzmj_fjyxjsyd+jzmj_jyxjsyd),"","");
+		TDBean tdname34=new TDBean(""+(jzmj_fjyxjsyd+jzmj_jyxjsyd),"140","","");
 		trBean_jsyd.addTDBean(tdname34);
 		
 		TDBean tdname35=new TDBean("","","");
@@ -297,8 +297,8 @@ public class Xmkgzbbreport extends AbstractBaseBean implements IDataClass {
 							width = "140px";
 						}else if(7 == i){
 							width = "100px";
-						}else if(7 == i){
-							width = "3000px";
+						}else if(8 == i){
+							width = "300px";
 						}
 						tdBean = new TDBean(value, width, "","true");
 						trBean.addTDBean(tdBean);
@@ -310,17 +310,17 @@ public class Xmkgzbbreport extends AbstractBaseBean implements IDataClass {
 		
 		TRBean trBean_dzldjsy = new TRBean();
 		trBean_dzldjsy.setCssStyle("trsingle");
-		TDBean tdname41=new TDBean("代征绿地及水域","","");
+		TDBean tdname41=new TDBean("代征绿地及水域","310","","");
 		tdname41.setColspan("4");
 		trBean_dzldjsy.addTDBean(tdname41);
 		
-		TDBean tdname42=new TDBean(""+ydmj_dzldjsy,"","");
+		TDBean tdname42=new TDBean(""+ydmj_dzldjsy,"140","","");
 		trBean_dzldjsy.addTDBean(tdname42);
 		
-		TDBean tdname43=new TDBean("--","","");
+		TDBean tdname43=new TDBean("--","80","","");
 		trBean_dzldjsy.addTDBean(tdname43);
 		
-		TDBean tdname44=new TDBean(""+jzmj_dzldjsy,"","");
+		TDBean tdname44=new TDBean(""+jzmj_dzldjsy,"140","","");
 		trBean_dzldjsy.addTDBean(tdname44);
 		
 		TDBean tdname45=new TDBean("","","");
@@ -347,17 +347,17 @@ public class Xmkgzbbreport extends AbstractBaseBean implements IDataClass {
 		}
 		TRBean trBean_dzdl = new TRBean();
 		trBean_dzdl.setCssStyle("trsingle");
-		TDBean tdname51=new TDBean("代征道路","","");
+		TDBean tdname51=new TDBean("代征道路","310","","");
 		tdname51.setColspan("4");
 		trBean_dzdl.addTDBean(tdname51);
 		
-		TDBean tdname52=new TDBean(""+ydmj_dzdl,"","","true");
+		TDBean tdname52=new TDBean(""+ydmj_dzdl,"140","","true");
 		trBean_dzdl.addTDBean(tdname52);
 		
-		TDBean tdname53=new TDBean("--","","");
+		TDBean tdname53=new TDBean("--","80","","");
 		trBean_dzdl.addTDBean(tdname53);
 		
-		TDBean tdname54=new TDBean(""+jzmj_dzdl,"","","true");
+		TDBean tdname54=new TDBean(""+jzmj_dzdl,"140","","true");
 		trBean_dzdl.addTDBean(tdname54);
 		
 		TDBean tdname55=new TDBean(dzdlkzgd,"","","true");
@@ -370,17 +370,17 @@ public class Xmkgzbbreport extends AbstractBaseBean implements IDataClass {
 		
 		TRBean trBean_dzd = new TRBean();
 		trBean_dzd.setCssStyle("trsingle");
-		TDBean tdname61=new TDBean("代征地小计","","");
+		TDBean tdname61=new TDBean("代征地小计","310","","");
 		tdname61.setColspan("4");
 		trBean_dzd.addTDBean(tdname61);
 		
-		TDBean tdname62=new TDBean(""+(ydmj_dzdl+ydmj_dzldjsy),"","");
+		TDBean tdname62=new TDBean(""+(ydmj_dzdl+ydmj_dzldjsy),"140","","");
 		trBean_dzd.addTDBean(tdname62);
 		
-		TDBean tdname63=new TDBean("--","","");
+		TDBean tdname63=new TDBean("--","80","","");
 		trBean_dzd.addTDBean(tdname63);
 		
-		TDBean tdname64=new TDBean(""+(jzmj_dzdl+jzmj_dzldjsy),"","");
+		TDBean tdname64=new TDBean(""+(jzmj_dzdl+jzmj_dzldjsy),"140","","");
 		trBean_dzd.addTDBean(tdname64);
 		
 		TDBean tdname65=new TDBean("","","");
@@ -391,17 +391,17 @@ public class Xmkgzbbreport extends AbstractBaseBean implements IDataClass {
 		
 		TRBean trBean_zj = new TRBean();
 		trBean_zj.setCssStyle("title");
-		TDBean tdname71=new TDBean("总计","","");
+		TDBean tdname71=new TDBean("总计","310","","");
 		tdname71.setColspan("4");
 		trBean_zj.addTDBean(tdname71);
 		
-		TDBean tdname72=new TDBean(""+(ydmj_jyxjsyd+ydmj_fjyxjsyd+ydmj_dzldjsy+ydmj_dzdl),"","");
+		TDBean tdname72=new TDBean(""+(ydmj_jyxjsyd+ydmj_fjyxjsyd+ydmj_dzldjsy+ydmj_dzdl),"140","","");
 		trBean_zj.addTDBean(tdname72);
 		
-		TDBean tdname73=new TDBean((ydmj_jyxjsyd+ydmj_fjyxjsyd+ydmj_dzldjsy+ydmj_dzdl)!=0?String.format("%.2f", (jzmj_jyxjsyd+jzmj_fjyxjsyd+jzmj_dzldjsy+jzmj_dzdl)/(ydmj_jyxjsyd+ydmj_fjyxjsyd+ydmj_dzldjsy+ydmj_dzdl)):"0","","");
+		TDBean tdname73=new TDBean((ydmj_jyxjsyd+ydmj_fjyxjsyd+ydmj_dzldjsy+ydmj_dzdl)!=0?String.format("%.2f", (jzmj_jyxjsyd+jzmj_fjyxjsyd+jzmj_dzldjsy+jzmj_dzdl)/(ydmj_jyxjsyd+ydmj_fjyxjsyd+ydmj_dzldjsy+ydmj_dzdl)):"0","80","","");
 		trBean_zj.addTDBean(tdname73);
 		
-		TDBean tdname74=new TDBean(""+(jzmj_jyxjsyd+jzmj_fjyxjsyd+jzmj_dzldjsy+jzmj_dzdl),"","");
+		TDBean tdname74=new TDBean(""+(jzmj_jyxjsyd+jzmj_fjyxjsyd+jzmj_dzldjsy+jzmj_dzdl),"140","","");
 		trBean_zj.addTDBean(tdname74);
 		
 		TDBean tdname75=new TDBean("","","");
