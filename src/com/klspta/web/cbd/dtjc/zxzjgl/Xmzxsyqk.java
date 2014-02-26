@@ -138,7 +138,8 @@ public class Xmzxsyqk extends AbstractBaseBean implements IDataClass {
 			for(String leafkey : leafMap.keySet()){
 				String value = "0";
 				if(countMap.containsKey(leafkey)){
-					value = String.valueOf(Long.parseLong(countMap.get(leafkey)) + Long.parseLong(leafMap.get(leafkey)));
+					long num = Long.parseLong(countMap.get(leafkey)==null||"null".equals(countMap.get(leafkey))?"0":countMap.get(leafkey)) + Long.parseLong(leafMap.get(leafkey)==null||"null".equals(leafMap.get(leafkey))?"0":leafMap.get(leafkey));
+					value = String.valueOf(num);
 				}else{
 					value = leafMap.get(leafkey);
 				}
