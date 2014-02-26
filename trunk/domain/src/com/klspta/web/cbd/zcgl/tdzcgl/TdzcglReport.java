@@ -68,30 +68,44 @@ public class TdzcglReport extends AbstractBaseBean implements IDataClass{
 	
 	@Override
 	public Map<String, TRBean> getTRBeans(Object[] obj, TRBean trBean) {
+		String xmmc = ""; 
 		Map<String, TRBean>  bodyMap = new TreeMap<String, TRBean>();
 		List<TRBean> titles = buildTitle();
+		//判断是否定义项目名称
+		if(obj != null && obj.length > 0){
+			xmmc = String.valueOf(obj[0]);
+		}
 		for(int i = 0; i < titles.size(); i++){
 			bodyMap.put("000" + i, titles.get(i));
 		}
 		
-		bodyMap.putAll(getBody());
+		bodyMap.putAll(getBody(xmmc));
 		
 		return bodyMap;
 	}
 	
-	public Map<String, TRBean> getBody(){
+	public Map<String, TRBean> getBody(String xmmcs){
 		if(fields == null){
 			setFields();
 		}
 		//获取项目名称
 		Map<String, TRBean>  bodyMap = new TreeMap<String, TRBean>();
-		String sql = "select distinct xmmc from " + form_base + " t ,jc_xiangmu j where t.xmmc = j.xmname";
-		List<Map<String, Object>> xmmcList = query(sql, YW);
-		for(int i = 0; i < xmmcList.size(); i++){
-			//根据项目名称生成trs
-			String xmmc = String.valueOf(xmmcList.get(i).get("xmmc"));
-			bodyMap.putAll(getTrBeanMapByXMMC(xmmc, String.valueOf(i)));
-			bodyMap.putAll(getTotal(xmmc));
+		if("".equals(xmmcs)){
+			String sql = "select distinct xmmc from " + form_base + " t ,jc_xiangmu j where t.xmmc = j.xmname";
+			List<Map<String, Object>> xmmcList = query(sql, YW);
+			for(int i = 0; i < xmmcList.size(); i++){
+				//根据项目名称生成trs
+				String xmmc = String.valueOf(xmmcList.get(i).get("xmmc"));
+				bodyMap.putAll(getTrBeanMapByXMMC(xmmc, String.valueOf(i)));
+				bodyMap.putAll(getTotal(xmmc));
+			}
+		}else{
+			String[] name = xmmcs.split(",");
+			for(int i = 0; i < name.length; i++){
+				String xmmc = name[i];
+				bodyMap.putAll(getTrBeanMapByXMMC(xmmc, String.valueOf(i)));
+				bodyMap.putAll(getTotal(xmmc));
+			}
 		}
 		return bodyMap;
 	}
@@ -100,6 +114,9 @@ public class TdzcglReport extends AbstractBaseBean implements IDataClass{
 		Map<String, TRBean> trBeans = new LinkedHashMap<String, TRBean>();
 		String sql = "select t.*, j.* from jc_xiangmu x ," + form_base + " t, " + form_extend + " j where t.dkmc = j.dkmc and x.xmname = t.xmmc and t.xmmc = ? ";
 		List<Map<String, Object>> queryList = query(sql, YW, new Object[]{xmmc});
+		if(queryList.size() == 0){
+			return trBeans;
+		}
 		/*
 		TRBean trBean = new TRBean();
 		trBean.addTDBean(new TDBean("11","2","3"));

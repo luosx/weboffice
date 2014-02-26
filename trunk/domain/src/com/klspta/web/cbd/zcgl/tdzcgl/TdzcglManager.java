@@ -1,11 +1,15 @@
 package com.klspta.web.cbd.zcgl.tdzcgl;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Map;
 
 import com.klspta.base.AbstractBaseBean;
 import com.klspta.base.util.UtilFactory;
+import com.klspta.model.CBDReport.CBDReportManager;
+import com.klspta.model.CBDReport.tablestyle.ITableStyle;
 import com.klspta.web.cbd.yzt.cbjhzhb.Cbjhzhb;
+import com.klspta.web.cbd.yzt.jc.report.TableStyleEditRow;
 
 /**
  * 
@@ -147,5 +151,10 @@ public class TdzcglManager extends AbstractBaseBean {
 
 	}
 	
+	public void query() throws Exception{
+		String xmmcs = UtilFactory.getStrUtil().unescape(request.getParameter("xmmc"));
+		ITableStyle its = new TableStyleEditRow();
+		response(new CBDReportManager().getReport("TDZCGL",new Object[]{xmmcs},its).toString());
+	}
 
 }
