@@ -56,6 +56,7 @@ String preParameters=request.getQueryString();
 <script type="text/javascript">
 var yw_guid='<%=yw_guid%>';
 var basePath='<%=basePath%>';
+var operation = true;
  var view;
 Ext.onReady(function(){
  view=new Ext.Viewport({
@@ -141,6 +142,12 @@ Ext.onReady(function(){
 								icon : '<%=basePath%>base/fxgis/framework/images/isearch.png',
 								tooltip : '属性查询',
 								handler : identify
+								},{		
+							    text : '地块标记',
+								cls : 'x-btn-text-icon',
+								icon : '<%=basePath%>base/fxgis/framework/images/isearch.png',
+								tooltip : '地块标记',
+								handler : annotation
 								},{
 							     text : '图斑查询',
 								cls : 'x-btn-text-icon',
