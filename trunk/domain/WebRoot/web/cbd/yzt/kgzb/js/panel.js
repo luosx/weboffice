@@ -45,7 +45,7 @@ Paneloper.prototype = {
 	save:function(){
 		var obj = this;
 		var value = Ext.getCmp("ydxzdh").getValue();
-		this.object.form.url += "?ydxzdh=" + value;
+		this.object.form.url += "?ydxzdh=" + escape(escape(value));
 		this.object.form.submit({
 			waitMsg:'正在保存，请稍后...',
 			success:function(){
