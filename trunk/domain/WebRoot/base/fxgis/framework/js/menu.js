@@ -34,12 +34,22 @@ frames["lower"].swfobject.getObjectById("FxGIS").zoomToNextExtent();
 //清除
 function clear(){
 frames["lower"].swfobject.getObjectById("FxGIS").clear();
+operation = true;
 }
 
 //属性查询
 function identify(){
 frames["lower"].swfobject.getObjectById("FxGIS").panmap();
 frames["lower"].swfobject.getObjectById("FxGIS").identify();
+operation = true;
+//parent.document.getElementById("east").src="/domain/model/fxgiscomponents/infoQuery/sxcxList.jsp";
+}
+
+//选中高亮显示
+function annotation(){
+frames["lower"].swfobject.getObjectById("FxGIS").panmap();
+frames["lower"].swfobject.getObjectById("FxGIS").identify();
+operation = false;
 //parent.document.getElementById("east").src="/domain/model/fxgiscomponents/infoQuery/sxcxList.jsp";
 }
 

@@ -45,6 +45,9 @@ function drawPolygonCallback(s){
 
 //属性查询 回调方法
 function identifyCallback(s){
+	if(!operation){
+		return; 
+	}
 	tempValue = eval('(' + s + ')');
 	var attributes = tempValue.attributes;
 	var attritable = '<table border="1" cellpadding="0" cellspacing="0" width="330"  style="text-align:center; vertical-align:middle;font-family: 宋体, Arial; font-size: 12px;border-collapse:collapse;border:1px #000 solid;" >';
