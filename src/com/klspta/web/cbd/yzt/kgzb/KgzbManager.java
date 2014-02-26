@@ -75,6 +75,7 @@ public class KgzbManager extends AbstractBaseBean {
 		DKMC = UtilFactory.getStrUtil().unescape(DKMC);
 		BZ = UtilFactory.getStrUtil().unescape(BZ);
 		YDXZ = UtilFactory.getStrUtil().unescape(YDXZ);
+		YDXZDH = UtilFactory.getStrUtil().unescape(YDXZDH);
 		GHSJLY = UtilFactory.getStrUtil().unescape(GHSJLY);
 		int i = 0;
 
