@@ -175,9 +175,10 @@ public class Xmkgzbbreport extends AbstractBaseBean implements IDataClass {
 		TDBean tdname14=new TDBean(""+jzmj_jyxjsyd,"140","","");
 		trBean_jyxjsyd.addTDBean(tdname14);
 		
-		TDBean tdname15=new TDBean("","","");
+		TDBean tdname15=new TDBean("","100","","");
 		trBean_jyxjsyd.addTDBean(tdname15);
-		trBean_jyxjsyd.addTDBean(tdname15);
+		TDBean tdname16=new TDBean("","300","","");
+		trBean_jyxjsyd.addTDBean(tdname16);
 		
 		list.add(trBean_jyxjsyd);
 		
@@ -238,9 +239,10 @@ public class Xmkgzbbreport extends AbstractBaseBean implements IDataClass {
 		TDBean tdname24=new TDBean(""+jzmj_fjyxjsyd,"140","","");
 		trBean_fjyxjsyd.addTDBean(tdname24);
 		
-		TDBean tdname25=new TDBean("","","");
+		TDBean tdname25=new TDBean("","100","","");
 		trBean_fjyxjsyd.addTDBean(tdname25);
-		trBean_fjyxjsyd.addTDBean(tdname25);
+		TDBean tdname26=new TDBean("","300","","");
+		trBean_fjyxjsyd.addTDBean(tdname26);
 		
 		list.add(trBean_fjyxjsyd);
 		
@@ -259,9 +261,10 @@ public class Xmkgzbbreport extends AbstractBaseBean implements IDataClass {
 		TDBean tdname34=new TDBean(""+(jzmj_fjyxjsyd+jzmj_jyxjsyd),"140","","");
 		trBean_jsyd.addTDBean(tdname34);
 		
-		TDBean tdname35=new TDBean("","","");
+		TDBean tdname35=new TDBean("","100","","");
 		trBean_jsyd.addTDBean(tdname35);
-		trBean_jsyd.addTDBean(tdname35);
+		TDBean tdname36=new TDBean("","300","","");
+		trBean_jsyd.addTDBean(tdname36);
 		
 		list.add(trBean_jsyd);
 		
@@ -323,9 +326,10 @@ public class Xmkgzbbreport extends AbstractBaseBean implements IDataClass {
 		TDBean tdname44=new TDBean(""+jzmj_dzldjsy,"140","","");
 		trBean_dzldjsy.addTDBean(tdname44);
 		
-		TDBean tdname45=new TDBean("","","");
+		TDBean tdname45=new TDBean("","100","","");
 		trBean_dzldjsy.addTDBean(tdname45);
-		trBean_dzldjsy.addTDBean(tdname45);
+		TDBean tdname46=new TDBean("","300","","");
+		trBean_dzldjsy.addTDBean(tdname46);
 		
 		list.add(trBean_dzldjsy);
 		
@@ -360,10 +364,10 @@ public class Xmkgzbbreport extends AbstractBaseBean implements IDataClass {
 		TDBean tdname54=new TDBean(""+jzmj_dzdl,"140","","true");
 		trBean_dzdl.addTDBean(tdname54);
 		
-		TDBean tdname55=new TDBean(dzdlkzgd,"","","true");
+		TDBean tdname55=new TDBean(dzdlkzgd,"100","","true");
 		trBean_dzdl.addTDBean(tdname55);
 		
-		TDBean tdname56=new TDBean(dzdlbz,"","","true");
+		TDBean tdname56=new TDBean(dzdlbz,"300","","true");
 		trBean_dzdl.addTDBean(tdname56);
 		
 		list.add(trBean_dzdl);
@@ -383,9 +387,10 @@ public class Xmkgzbbreport extends AbstractBaseBean implements IDataClass {
 		TDBean tdname64=new TDBean(""+(jzmj_dzdl+jzmj_dzldjsy),"140","","");
 		trBean_dzd.addTDBean(tdname64);
 		
-		TDBean tdname65=new TDBean("","","");
+		TDBean tdname65=new TDBean("","100","","");
 		trBean_dzd.addTDBean(tdname65);
-		trBean_dzd.addTDBean(tdname65);
+		TDBean tdname66=new TDBean("","300","","");
+		trBean_dzd.addTDBean(tdname66);
 		
 		list.add(trBean_dzd);
 		
@@ -404,9 +409,10 @@ public class Xmkgzbbreport extends AbstractBaseBean implements IDataClass {
 		TDBean tdname74=new TDBean(""+(jzmj_jyxjsyd+jzmj_fjyxjsyd+jzmj_dzldjsy+jzmj_dzdl),"140","","");
 		trBean_zj.addTDBean(tdname74);
 		
-		TDBean tdname75=new TDBean("","","");
+		TDBean tdname75=new TDBean("","100","","");
 		trBean_zj.addTDBean(tdname75);
-		trBean_zj.addTDBean(tdname75);
+		TDBean tdname76=new TDBean("","300","","");
+		trBean_zj.addTDBean(tdname76);
 		
 		list.add(trBean_zj);
 		return list;
