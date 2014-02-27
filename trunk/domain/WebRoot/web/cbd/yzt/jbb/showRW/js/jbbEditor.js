@@ -16,7 +16,6 @@ function initComponent() {
 
 	simple = new Ext.FormPanel({
 				frame : true,
-				title : '基本斑列表',
 				bodyStyle : 'padding:5px 5px 0',
 				tbar : [{
 							xtype : 'label',
