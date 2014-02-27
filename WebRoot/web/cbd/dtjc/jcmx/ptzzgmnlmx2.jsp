@@ -391,7 +391,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</div>
 	<div>
 	  <table width="1305" height="50" style="background-color: #FFFFFF;font-size: 30px">
-	   <tr><td ><h1>北京地区普通住宅房屋购买能力综合分析模型2</h1></td>
+	   <tr><td ><h1>北京地区普通住宅房屋购买能力综合分析（群体购买力模型）</h1></td>
 	   </tr>
 	   <tr><td style="text-align:right;">单位：万元，平方米，万元/平方米</td></tr>
 	  </table>

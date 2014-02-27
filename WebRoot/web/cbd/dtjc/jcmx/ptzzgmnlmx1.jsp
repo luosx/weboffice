@@ -554,7 +554,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     
 	<div>
 	  <table width="1305" height="60" style="background-color: #FFFFFF;font-size: 30px">
-	   <tr><td><h1>北京地区普通住宅房屋购买能力综合分析模型1</h1></td></tr>
+	   <tr><td><h1>北京地区普通住宅房屋购买能力综合分析（个体购买力模型）</h1></td></tr>
 	  </table>
 	</div>
 	<!--<div class="div1" id="clparaform"></div>-->
