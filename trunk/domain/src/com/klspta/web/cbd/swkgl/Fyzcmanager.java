@@ -180,5 +180,64 @@ public class Fyzcmanager extends AbstractBaseBean {
         }
         response("success");
     }
+    
+    
+    public void quryKeyWord(){
+        String keyword = request.getParameter("keyword");
+        keyword = UtilFactory.getStrUtil().unescape(keyword);
+        String sql = "select distinct jzrq from fyzc";
+        List<Map<String, Object>> list2 = query(sql, YW);
+        String jzrq = (String) (list2.get(0)).get("jzrq");
+        StringBuffer result = new StringBuffer(
+                "<table id='FYZC' width='2000' border='1' cellpadding='1' cellspacing='0'>" +
+                "<tr class='title' onclick='showMap(this); return false;' ondblclick='editMap(this); return false;'><td rowspan='2' colspan='1' class='tr01'>名称</td><td colspan='4' rowspan='1' class='tr01'>购置情况</td><td colspan='2' rowspan='1' class='tr01'>利用情况</td><td colspan='3' rowspan='1' class='tr01'>期末存量情况</td><td  class='tr01'><input id='jzrq' style='border:0;background:transparent;' value="
+                        + jzrq
+                        + "></td><td rowspan='1' colspan='5' class='tr01'>其他费用</td><td rowspan='2' colspan='1' class='tr01'>房屋价款总计</td><td rowspan='2' colspan='1' class='tr01'>当前单价</td><td rowspan='2' colspan='1' class='tr01'>备注</td></tr><tr><td colspan='1' rowspan='1' class='tr01'>房源套数</td><td colspan='1' rowspan='1' class='tr01'>建筑规模</td><td colspan='1' rowspan='1' class='tr01'>动用储备资金</td><td colspan='1' rowspan='1' class='tr01'>购置单价</td><td colspan='1' rowspan='1' class='tr01'>房源套数</td><td colspan='1' rowspan='1' class='tr01'>建筑规模</td><td colspan='1' rowspan='1' class='tr01'>房源套数</td><td colspan='1' rowspan='1' class='tr01'>建筑面积</td><td colspan='1' rowspan='1' class='tr01'>占压资金</td><td colspan='1' rowspan='1' class='tr01'>分摊利息</td><td colspan='1' rowspan='1' class='tr01'>费用名称</td><td colspan='1' rowspan='1' class='tr01'>总金额</td><td colspan='1' rowspan='1' class='tr01'>每平米分摊</td><td colspan='1' rowspan='1' class='tr01'>已利用房源分摊</td><td colspan='1' rowspan='1' class='tr01'>结转房源分摊</td></tr>");
+        String qurysql = "select t.mc,t.gzfy,t.gzgm,t.cbzj,t.gzdj,t.jzmj,t.zyzj,t.pmft,t.lyft,t.ze,t.lyfy,t.lygm,t.dj,t.qmfy,t.ftlx,t.fymc,t.jzft,t.jkzj,t.bz,t.yw_guid from fyzc t where t.mc like '%"+keyword+"%'";
+        List<Map<String, Object>> qurylist = query(qurysql, YW);
+        for (int i = 0; i < qurylist.size(); i++) {
+            String mc = (String) (qurylist.get(i)).get("mc");
+            String gzfy = (String) (qurylist.get(i)).get("gzfy");
+            String gzgm = (String) (qurylist.get(i)).get("gzgm");
+            String cbzj = (String) (qurylist.get(i)).get("cbzj");
+            String gzdj = (String) (qurylist.get(i)).get("gzdj");
+            String jzmj = (String) (qurylist.get(i)).get("jzmj");
+            String zyzj = (String) (qurylist.get(i)).get("zyzj");
+            String pmft = (String) (qurylist.get(i)).get("pmft");
+            String lyft = (String) (qurylist.get(i)).get("lyft");
+            String ze = (String) (qurylist.get(i)).get("ze");
+            String lyfy = (String) (qurylist.get(i)).get("lyfy");
+            String lygm = (String) (qurylist.get(i)).get("lygm");
+            String dj = (String) (qurylist.get(i)).get("dj");
+            String qmfy = (String) (qurylist.get(i)).get("qmfy");
+            String ftlx = (String) (qurylist.get(i)).get("ftlx");
+            String fymc = (String) (qurylist.get(i)).get("fymc");
+            String jzft = (String) (qurylist.get(i)).get("jzft");
+            String jkzj = (String) (qurylist.get(i)).get("jkzj");
+            String bz = (String) (qurylist.get(i)).get("bz");
+            result.append("<tr class='trsingle' onclick='showMap(this); return false;' ondblclick='editMap(this); return false;'><td>" + mc
+                    + "</td><td>" + gzfy
+                    + "</td><td>" + gzgm
+                    + "</td><td>" + cbzj
+                    + "</td><td>" + gzdj
+                    + "</td><td>" + lyfy
+                    + "</td><td>" + lygm
+                    + "</td><td>" + qmfy
+                    + "</td><td>"+ jzmj
+                    + "</td><td>" + zyzj
+                    + "</td><td>" + ftlx
+                    + "</td><td>" + fymc
+                    + "</td><td>" + ze
+                    + "</td><td>" + pmft
+                    + "</td><td>" + lyft
+                    + "</td><td>" + jzft
+                    + "</td><td>" + jkzj 
+                    + "</td><td>" + dj
+                    + "</td><td>" + bz
+                    + "</td></tr>");
+        }
+        result.append("<tr><td class='tr01'>总计</td><td class='tr01'></td><td class='tr01'></td><td class='tr01'></td><td class='tr01'></td><td class='tr01'></td><td class='tr01'></td><td class='tr01'></td><td class='tr01'></td><td class='tr01'></td><td class='tr01'></td><td class='tr01'></td><td class='tr01'></td><td class='tr01'></td><td class='tr01'></td><td class='tr01'></td><td class='tr01'></td><td class='tr01'></td><td class='tr01'></td><td class='tr01'></td></tr></table>");
+        response(result.toString().replaceAll("null", ""));
+    }
 
 }
