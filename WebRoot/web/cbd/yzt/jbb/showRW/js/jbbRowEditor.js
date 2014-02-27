@@ -76,6 +76,10 @@ function queryJBB(keyword){
 	myData = restRequest();
   	document.getElementById("show").innerHTML = myData;
   	
+  	var width = document.body.clientWidth+10;
+	var height = document.body.clientHeight-10;
+    FixTable("JBB", 1,2, width, height);
+  	
 }
 
 function update(){
