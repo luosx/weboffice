@@ -77,13 +77,11 @@ function dele(){
 
 //根据用地单位和关键字作过滤
 function queryZrb(keyword){
-	putClientCommond("zrbHandle","getReport");
+	putClientCommond("zafzc","getReport");
 	putRestParameter("keyword",escape(escape(keyword)));
-	putRestParameter("type","reader");
 	myData = restRequest();
   	document.getElementById("show").innerHTML = myData;
 }
-
 function modify(){
 	var annoations = table.getAnnotations();
 	if(annoations.length > 0){
