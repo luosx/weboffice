@@ -41,7 +41,7 @@ td {
 }
 input{
 border:none;
-width: 50px;
+width: 40px;
 }
 
 td1 {
