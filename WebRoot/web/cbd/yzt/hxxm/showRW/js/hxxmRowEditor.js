@@ -122,5 +122,9 @@ function queryHxxm(keyword){
 	putRestParameter("keyword",escape(escape(keyword)));
 	myData = restRequest();
   	document.getElementById("show").innerHTML = myData;
+  	
+  	var width = document.body.clientWidth;
+	var height = document.body.clientHeight-20;
+   	FixTable("HXXM", 1,2, width, height);
 }
 
