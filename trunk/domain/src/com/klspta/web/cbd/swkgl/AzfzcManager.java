@@ -5,6 +5,9 @@ import java.util.Map;
 
 import com.klspta.base.AbstractBaseBean;
 import com.klspta.base.util.UtilFactory;
+import com.klspta.model.CBDReport.CBDReportManager;
+import com.klspta.model.CBDReport.tablestyle.ITableStyle;
+import com.klspta.web.cbd.yzt.jc.report.TableStyleEditRow;
 
 public class AzfzcManager extends AbstractBaseBean {
 
@@ -200,5 +203,12 @@ public class AzfzcManager extends AbstractBaseBean {
 			response("false");
 			// TODO: handle exception
 		}
+	}
+	public void getReport(){
+		String keyword = request.getParameter("keyword");
+		keyword=UtilFactory.getStrUtil().unescape(keyword);
+		ITableStyle its = new TableStyleEditRow();
+		 StringBuffer buffer = new CBDReportManager().getReport("AZFZC",new Object[]{"%"+keyword+"%"},its);
+		 response(buffer.toString());
 	}
 }
