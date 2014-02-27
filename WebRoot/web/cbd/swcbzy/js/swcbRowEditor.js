@@ -66,5 +66,9 @@ function queryJBB(keyword){
 	putRestParameter("type","reader");
 	myData = restRequest();
   	document.getElementById("show").innerHTML = myData;
+  	
+  	var width = document.body.clientWidth;
+	var height = document.body.clientHeight*0.95;
+  	FixTable("SWCBR", 1,1, width, height-30);
 }
 
