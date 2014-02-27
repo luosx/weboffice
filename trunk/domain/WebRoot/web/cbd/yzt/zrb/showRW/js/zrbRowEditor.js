@@ -155,6 +155,10 @@ function queryZrb(keyword){
 	putRestParameter("keyword",escape(escape(keyword)));
 	myData = restRequest();
   	document.getElementById("show").innerHTML = myData;
+  	
+  	var width = document.body.clientWidth;
+	var height = document.body.clientHeight * 0.82;
+    FixTable("ZRB", 1,2, width, height);
 }
 
 
