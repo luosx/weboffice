@@ -91,7 +91,7 @@ function dele(){
 
 //根据用地单位和关键字作过滤
 function queryZrb(keyword){
-	putClientCommond("zrbHandle","getReport");
+	putClientCommond("fyzcHandle","quryKeyWord");
 	putRestParameter("keyword",escape(escape(keyword)));
 	putRestParameter("type","reader");
 	myData = restRequest();
