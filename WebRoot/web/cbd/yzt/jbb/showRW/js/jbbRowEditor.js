@@ -6,8 +6,8 @@ function showMap(objid){
 		table.init(document.getElementById("JBB"));
 	}
 	var key = objid.cells[0].innerText;
-	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").clear();
-	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").findFeature("cbd", "4", key, "TBBH");
+	parent.parent.document.frames['reportmap'].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").clear();
+	parent.parent.document.frames['reportmap'].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").findFeature("cbd", "4", key, "TBBH");
 	if(-1 == key.indexOf("计")){
 		table.addAnnotation(objid.rowIndex);
 	}
@@ -16,18 +16,8 @@ function showMap(objid){
 //双击编辑地图
 function editMap(objid){
 	
-	if(table.element == undefined){
-		table.init(document.getElementById("JBB"));
-	}
-	var key = objid.cells[0].innerText;
-	zrbbh = key;
 	
-	var array = paneloper.getElements();
-	for(var i = 0; i < objid.cells.length-1; i++){
-		var value = objid.cells[i].innerText;	
-		paneloper.insertValue(array[i], value);
-	}
-	paneloper.show();
+	
 	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").clear();
 	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").drawPolygon();
 }
@@ -86,6 +76,17 @@ function update(){
 	var annoations = table.getAnnotations();
 	if(annoations.length > 0){
 		var objid = table.element.rows[annoations[0]];
-		editMap(objid);
+		if(table.element == undefined){
+			table.init(document.getElementById("JBB"));
+		}
+		var key = objid.cells[0].innerText;
+		zrbbh = key;
+		
+		var array = paneloper.getElements();
+		for(var i = 0; i < objid.cells.length-1; i++){
+			var value = objid.cells[i].innerText;	
+			paneloper.insertValue(array[i], value);
+		}
+		paneloper.show();
 	}
 }
