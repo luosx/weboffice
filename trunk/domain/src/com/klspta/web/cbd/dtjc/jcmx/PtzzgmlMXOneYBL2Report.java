@@ -38,7 +38,7 @@ public class PtzzgmlMXOneYBL2Report extends AbstractBaseBean implements IDataCla
 		
 		trbean = new TRBean();
 		trbean.setCssStyle("tr11");
-		tdbean = new TDBean("没有偿还公积金本息","250","");
+		tdbean = new TDBean("每月偿还公积金本息","250","");
 		tdbean1 = new TDBean("","250","");
 		tdbean.setColspan("2");
 		tdbean1.setColspan("2");
