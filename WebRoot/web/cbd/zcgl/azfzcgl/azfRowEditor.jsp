@@ -330,7 +330,7 @@ ITableStyle its = new TableStyleEditRow();
   </script>
   <body>
   	<div id='show'>
-  		<%=new CBDReportManager().getReport("AZFZC",its)%>
+  		<%=new CBDReportManager().getReport("AZFZC",new Object[]{"%%"},its)%>
   	</div>
   	<div id="deal2" style="position:absolute; left:5px; top:5px; "></div>
   	<form id="attachfile" action="<%=basePath%>service/rest/zrbHandle/update" method="post">
