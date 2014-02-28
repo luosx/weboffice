@@ -18,7 +18,6 @@ function initComponent() {
 
 	simple = new Ext.FormPanel({
 				frame : true,
-				title : '控规指标表',
 				bodyStyle : 'padding:5px 5px 0',
 				tbar : [{
 							xtype : 'label',
