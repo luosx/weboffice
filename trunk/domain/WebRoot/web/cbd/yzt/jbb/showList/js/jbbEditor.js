@@ -14,7 +14,7 @@ function initComponent() {
 
 	simple = new Ext.FormPanel({
 				frame : true,
-				title : '基本斑列表',
+				title : '基本地块列表',
 				bodyStyle : 'padding:5px 5px 0',
 				tbar : [{
 							xtype : 'label',
@@ -51,7 +51,7 @@ function initFile() {
 		title : '坐标导入',
 		autoHeight : true,
 		bodyStyle : 'padding: 10px 10px 0 10px;',
-		labelWidth : 70,
+		labelWidth : 80,
 		defaults : {
 			anchor : '95%',
 			allowBlank : false,
@@ -61,7 +61,7 @@ function initFile() {
 					xtype : 'textfield',
 					id : 'zrbbh',
 					width : 190,
-					fieldLabel : '基本斑编号'
+					fieldLabel : '基本地块编号'
 				}, {
 					xtype : 'fileuploadfield',
 					id : 'form-file',
