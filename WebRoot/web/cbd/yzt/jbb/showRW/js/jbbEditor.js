@@ -54,7 +54,7 @@ function initComponent() {
 
 function initFile(){
 	 combo = new Ext.form.ComboBox({
-	 	      fieldLabel: '基本斑编号',
+	 	      fieldLabel: '基本地块编号',
 	 	     	id:'zrbbh',
 				store : array,
 				width : 150,
@@ -74,7 +74,7 @@ function initFile(){
         title: '坐标导入',
         autoHeight: true,
         bodyStyle: 'padding: 10px 10px 0 10px;',
-        labelWidth: 70,
+        labelWidth: 80,
         defaults: {
             anchor: '95%',
             allowBlank: false,
