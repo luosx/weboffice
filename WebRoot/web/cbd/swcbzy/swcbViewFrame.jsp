@@ -1,71 +1,62 @@
-<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
-	String path = request.getContextPath();
-	String basePath = request.getScheme() + "://"
-			+ request.getServerName() + ":" + request.getServerPort()
-			+ path + "/";
-    String layoutPath = basePath + "base/thirdres/dhtmlx//dhtmlxLayout//codebase";
-    String toolbarPath = basePath + "base/thirdres/dhtmlx//dhtmlxToolbar//codebase";
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
+
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
+  <head>
+    <base href="<%=basePath%>">
+    
+    <title>My JSP 'JbbViewFrameTest.jsp' starting page</title>
+    
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">    
+	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+	<meta http-equiv="description" content="This is my page">
+	<%@ include file="/base/include/ext.jspf"%>
+	<!--
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	-->
 
-	<head>
-		<title></title>
-
-		<%@ include file="/base/include/ext.jspf"%>
-				<link rel="stylesheet" type="text/css"
-			href="<%=basePath%>base/form/css/styles.css">
-		<link rel="stylesheet" type="text/css"
-			href="<%=layoutPath%>/dhtmlxlayout.css">
-		<link rel="stylesheet" type="text/css"
-			href="<%=toolbarPath%>/skins/dhtmlxtoolbar_dhx_skyblue.css">
-		<link rel="stylesheet" type="text/css"
-			href="<%=layoutPath%>/skins/dhtmlxlayout_dhx_blue.css">
-		<link rel="stylesheet" type="text/css"
-			href="<%=layoutPath%>/skins/dhtmlxlayout_dhx_skyblue.css">
-		<%@ include file="/base/include/restRequest.jspf"%>
-		<script src="<%=layoutPath%>/dhtmlxcommon.js"></script>
-		<script src="<%=layoutPath%>/dhtmlxcontainer.js"></script>
-		<script src="<%=layoutPath%>/dhtmlxlayout.js"></script>
-		<script src="<%=toolbarPath%>/dhtmlxtoolbar.js"></script>
-		<script src="<%=toolbarPath%>/patterns/dhtmlxlayout_pattern4j.js"></script>
-
-<style type="text/css">
-.div1{
-   	float:left;position:relative;left:5px;
-   }
-   .div2{
-   	float:left;margin-left:10px;position:relative;left:0px;
-   }
-</style>
-	</head>
-	<script type="text/javascript">
-		function doOnLoad(){
-			dhxLayout = new dhtmlXLayoutObject("parentId", "2U");
-			dhxLayout.cells("a").setWidth(600);
-			dhxLayout.cells("a").hideHeader();
-			dhxLayout.setEffect("resize", true);
-			dhxLayout.cells("a").attachURL("<%=basePath%>base/fxgis/framework/gisViewFrame.jsp");
-			//dhxLayout.cells("b").setWidth(width * 0.61);
-			dhxLayout.cells("b").attachURL("swcbEditor.jsp");
-			dhxLayout.cells("b").hideHeader();
-			//dhxLayout.setAutoSize("a;b", "a;b");
-			//页面大小修改时重新刷新
-			dhxLayout.attachEvent("onPanelResizeFinish", function(){
-				//dhxLayout.cells("a").fixSize(true, false);
-				//dhxLayout.cells(id).getFrame().refresh;
-				//dhxLayout.cells("a").attachURL("<%=basePath%>base/fxgis/fx/FxGIS.html?i=false");
-				dhxLayout.cells("b").attachURL("swcbEditor.jsp");
-				
-			});
-		}	
-	
-		function drawPolygonCallback(s){
-			frames[1].frames['report'].setRecord(s);
-		}
-	</script>
-	<body onLoad="doOnLoad()" >
-		<div id="parentId" style="top: 0px; left: 0px; width: 100%; height: 100%;overflow-x:hidden;overflow-y:hidden"></div>
-	</body>
+  </head>
+  <script type="text/javascript">
+  		var gisurl = "<%=basePath%>/base/fxgis/framework/gisViewFrame.jsp";
+  		var url = "<%=basePath%>/web/cbd/swcbzy/swcbEditor.jsp";
+  		Ext.onReady(function(){
+  			Ext.state.Manager.setProvider(new Ext.state.CookieProvider());
+  			var	width = document.body.clientWidth;
+			var	height = document.body.clientHeight;
+          new Ext.Viewport({
+              layout: "border",
+              items:[{
+                 region:"center",
+                 width:width * 0.8,
+                 split:true,
+                 layout:'fit',
+                 layoutConfig:{
+                    animate:true
+                	},
+                 html:"<iframe id='reportmap' width=100% height=100% src=" + gisurl
+							+ "></iframe>"
+            },{
+                 title:'实物储备资源',
+                 region:'east',
+                 width:width * 0.6,
+                 split:true,
+                 layout:'fit',
+                 collapsible: true,
+                 layoutConfig:{
+                    animate:true
+                	},
+                 html:"<iframe id='reportlist' width=100% height=100% src=" + url
+							+ "></iframe>"
+            }]
+           });
+        });
+  </script>
+  <body>
+  </body>
 </html>

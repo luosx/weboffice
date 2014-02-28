@@ -12,7 +12,6 @@ function initComponent() {
 
 	simple = new Ext.FormPanel({
 				frame : true,
-				title : '实物储备资源列表',
 				
 				bodyStyle : 'padding:5px 5px 0',
 				tbar : [{
