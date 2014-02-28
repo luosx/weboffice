@@ -440,14 +440,24 @@ td {
 			    oXL.Visible = true; 
 			    //设置excel可见属性 
 		}
+		function CheckClick(){
+        	
+        		if(paraform.style.display==""){
+        			paraform.style.display="none"; 
+        		}else{
+        			paraform.style.display=""; 
+        		}
+        	}
+        	
   </script>
 	<body>
 		<div style="min-width: 1370px; width: 1400px; height: 500px;">
 			<div id="fixed" style="position: fixed; top: 5px; left: 0px">
 				<img src="base/form/images/print.png" width="20px" height="20px"
 					onClick="print()" title="导出Excel">
+					<input type="checkbox" name="check"  onclick="CheckClick();"/>基础参数设置
 			</div>
-			<div id="paraform" style="float: left"></div>
+			<div id="paraform" style="float: left" style="display: none" ></div>
 			<%=new CBDReportManager().getReport("JZMJBBDFX")%>
 		</div>
 	</body>
