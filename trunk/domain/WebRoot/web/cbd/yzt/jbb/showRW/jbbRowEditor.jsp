@@ -22,12 +22,13 @@ ITableStyle its = new TableStyleEditRow();
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
+	<%@ include file="/base/include/ext.jspf" %>
 	<script src="web/cbd/yzt/jbb/showRW/js/table.js"></script>
 	<script src="web/cbd/yzt/jbb/showRW/js/panel.js"></script>
 	<script src="web/cbd/yzt/jbb/showRW/js/jbbRowEditor.js"></script>
 	<%@ include file="/base/include/restRequest.jspf"%>
 	<script src="base/include/jquery-1.10.2.js"></script>
-	<%@ include file="/base/include/ext.jspf" %>
+	
 	<%@ include file="/web/cbd/yzt/jbb/showRW/js/reportEdit.jspf"%>
 	<style type="text/css">
   		table{

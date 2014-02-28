@@ -16,6 +16,7 @@
 		<meta http-equiv="expires" content="0">
 		<%@ include file="/base/include/ext.jspf"%>
 		<%@ include file="/base/include/restRequest.jspf"%>
+		
 		<script src="DatePicker.js"></script>
 		<style>
 input,img {
@@ -55,6 +56,7 @@ input,img {
     color: #777;
 }
 </style>
+<script src="web/cbd/yzt/zrb/showRW/js/table.js"></script>
 		<script>
 		var basePath="<%=basePath%>";
 		var view = "<%=view%>";

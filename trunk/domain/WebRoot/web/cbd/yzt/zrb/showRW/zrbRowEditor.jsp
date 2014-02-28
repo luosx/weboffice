@@ -187,7 +187,7 @@ String view = request.getParameter("view");
   	<div id='show' style="overflow-x:hidden;overflow-y:hidden">
   		<%=new CBDReportManager().getReport("ZRB",new Object[]{"false"},its)%>
   	</div>
-  	<div id="deal" style="position:absolute; left:100px; top:80px; "></div>
+  	<div id="deal" style="position:absolute; left:5px; top:5px; "></div>
   	<form id="attachfile" action="<%=basePath%>service/rest/zrbHandle/update" method="post">
 	</form> 
   </body>
