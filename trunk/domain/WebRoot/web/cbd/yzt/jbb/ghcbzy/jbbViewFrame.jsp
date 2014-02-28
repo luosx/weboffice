@@ -28,7 +28,7 @@ System.out.println(type);
   </head>
   <script type="text/javascript">
   		var gisurl = "<%=basePath%>/base/fxgis/framework/gisViewFrame.jsp";
-  		var url = "<%=basePath%>/web/cbd/yzt/jbb/showRW/jbbEditor.jsp?type=<%=type%>";
+  		var url = "<%=basePath%>/web/cbd/yzt/jbb/ghcbzy/jbbEditor.jsp?type=<%=type%>";
   		Ext.onReady(function(){
   			Ext.state.Manager.setProvider(new Ext.state.CookieProvider());
   			var	width = document.body.clientWidth;
