@@ -1,5 +1,4 @@
 <%@ page language="java" pageEncoding="utf-8"%>
-<%@page import="com.klspta.base.util.UtilFactory"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
@@ -17,7 +16,6 @@
 		<meta http-equiv="expires" content="0">
 		<%@ include file="/base/include/ext.jspf"%>
 		<%@ include file="/base/include/restRequest.jspf"%>
-		<script src="DatePicker.js"></script>
 		<style>
 input,img {
 	vertical-align: middle;
