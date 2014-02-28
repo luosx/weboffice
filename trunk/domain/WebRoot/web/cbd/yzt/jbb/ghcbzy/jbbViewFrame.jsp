@@ -9,6 +9,8 @@ System.out.println(type);
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
+   <meta http-equiv="X-UA-Compatible" content="IE=5" >
+<META HTTP-EQUIV="expires" CONTENT="0">
     <base href="<%=basePath%>">
     
     <title>My JSP 'JbbViewFrameTest.jsp' starting page</title>
