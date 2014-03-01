@@ -6,17 +6,7 @@ function showVideo(s){
 function getInitMapLayerVisiable(){ 
     putClientCommond("mapconfig", "getInitMapService");
     var result = restRequest();
-    var jsonData = new Dictionary();
-    var flag;
-    for(var i=0;i<result.length;i++){
-    	if(result[i].FLAG=='true'){
-    		flag = true;
-    	}else{
-    		flag = false;
-    	}
-    	jsonData.put(result[i].SERVERID,result[i].LAYERID,result[i].TYPE,flag);
-    }
-    return jsonData.toStr();
+    return result;
     //return "[{\"servicename\":\"jz_yw\",\"visiableids\":[0]},{\"servicename\":\"jz_xz\",\"visiableids\":[]},{\"servicename\":\"jz_jsydgzq\",\"visiableids\":[]},{\"servicename\":\"jz_tdytq\",\"visiableids\":[]},{\"servicename\":\"jz_yx\",\"visiableids\":[0]}]";
 }
 //画点 回调方法
