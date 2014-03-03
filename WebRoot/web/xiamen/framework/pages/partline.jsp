@@ -31,9 +31,9 @@ parent.frames['right'].location.reload();
 function show()
 {
 
-	if(parent.content.cols=="0,9,*"){
-		 frameshow.src="<%=resourcePath%>/images/left/partline_right.png";
-		 oa_tree.title="显示";
+	if(parent.content.cols=="0,9,*" || parent.content.cols=="0,0,*"){
+		 frameshow.src="<%=resourcePath%>/images/left/partline_left.png";
+		 oa_tree.title="隐藏";
 		 parent.content.cols="211,9,*";
 		}
 }
