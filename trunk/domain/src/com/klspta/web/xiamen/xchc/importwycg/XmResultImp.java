@@ -32,7 +32,7 @@ public class XmResultImp extends  AResultImp {
 	private Map<String, String[][]> saveMap = getCondition();
 	private String form_name = "DC_YDQKDCB";
 	private String gis_name = "dlgzwyr";
-	private String srid_name = "dlgzwpr";
+	private String srid_name = "dlgzyswftb_zfjc_2012r";
 	private String yw_guid = "";
 	private String imsi = "";
 	public XmResultImp(String formName, String gisName,HttpServletRequest request) {
@@ -80,8 +80,16 @@ public class XmResultImp extends  AResultImp {
 	private Map<String,String[][]> getCondition(){
 		Map<String, String[][]> saveMap = new HashMap<String, String[][]>();
 		// String[][] ywStrings = new String[]{{"xznyd","xznyd"},{"xzwlyd","xzwlyd"},"ghjinzh","ygspmj","ygspbl","yggdbl","yggdmj","ghjbnt","ghfuh","ghxianzh","ghbufh","ghyoutj","ghyunx","xzjsyd","xzgd","taskType","taskid","endDate","beginDate","dfccqk","jsqk","wflx","area","wfwglx","zbs","sfwf","xcqkms","yddw","xy","picture","ydsj","ydqk"}; 
-		String[][] ywStrings = new String[][]{{"xznyd","xznyd"},{"xzwlyd","xzwlyd"},{"taskid","yw_guid"},{"ydsj","ydsj"},{"yddw","yddw"},{"area","mj"},{"zbs","zb"},{"jsqk","jsqk"},{"wfwglx","wfwglx"},{"dfccqk","dfccqk"},{"xcqkms","xcqkms"},{"ydqk","ydqk"},{"ygspmj","ygspmj"},{"ygspbl","ygspbl"},{"yggdbl","yggdbl"},{"yggdmj","yggdmj"},{"beginDate","beginDate"},{"taskType","taskType"},{"endDate","endDate"},{"wflx","wflx"},{"sfwf","sfwf"}
-		                                        ,{"ydxmmc","ydxmmc"},{"ydzt","ydzt"},{"ydwz","ydwz"},{"zdmj","zdmj"},{"gdmj","gdmj"},{"jzmj","jzmj"},{"jzxz","jzxz"},{"fhgh","fhgh"},{"fxsj","fxsj"},{"zzqk","zzqk"},{"zztzsbh","zztzsbh"},{"wjzzhjxzz","wjzzhjxzz"},{"yydspqcz","yydspqcz"},{"yt","yt"},{"imsi","imsi"}};
+		String[][] ywStrings = new String[][]{{"xznyd","xznyd"},{"xzwlyd","xzwlyd"},{"taskid","yw_guid"},{"ydsj","ydsj"},{"yddw","yddw"},
+												{"area","mj"},{"zbs","zb"},{"jsqk","jsqk"},{"wfwglx","wfwglx"},{"dfccqk","dfccqk"},
+												{"xcqkms","xcqkms"},{"ydqk","ydqk"},{"ygspmj","ygspmj"},{"ygspbl","ygspbl"},{"yggdbl","yggdbl"},
+												{"yggdmj","yggdmj"},{"beginDate","beginDate"},{"taskType","taskType"},{"endDate","endDate"},{"wflx","wflx"},
+												{"sfwf","sfwf"},{"ydxmmc","ydxmmc"},{"ydzt","ydzt"},{"ydwz","ydwz"},{"zdmj","zdmj"},
+												{"gdmj","gdmj"},{"jzmj","jzmj"},{"jzxz","jzxz"},{"fhgh","fhgh"},{"fxsj","fxsj"},
+												{"zzqk","zzqk"},{"zztzsbh","zztzsbh"},{"wjzzhjxzz","wjzzhjxzz"},{"yydspqcz","yydspqcz"},{"yt","yt"},
+												{"gdpzwh","PHJGPZWH"},{"gdpzyt","PHJGPZYT"},{"gdyddw","PHJGYDDW"},{"gdtdzl","PHJGTDZL"},{"gdpzrq","PHJGPZRQ"},
+												{"gdgtsbz","PHJGGTSBZ"},{"gddwlx","PHJGDWLX"},{"gdtdxzdan","PHJGTDXZ"},{"gdtdxzduo","PHJGTDXZDUO"},{"gdqdfs","PHJGHDFS"},{"gdsjydbmbz","PHJGSJYDBMBZ"},
+												{"gdxmmc","PHJGXMMC"},{"imsi","imsi"}};
 		String[][] gisStrings = new String[][]{{"taskType","tasktype"},{"ydxmmc","用地项目"},{"ydzt","用地主体"},{"ydwz","用地位置"},{"fxsj","发现时间"},{"taskid", "yw_guid"}};
 		saveMap.put("yw", ywStrings);
 		saveMap.put("gis", gisStrings);
@@ -152,6 +160,7 @@ public class XmResultImp extends  AResultImp {
 		String primaryName = "";
 		String primaryValue = "";
 		String insertValue = "";
+		String value = "";
 		String[][] impFields = saveMap.get("yw");
 		Object[] valueObjects = new Object[impFields.length + 2];
 		int num = 0;
@@ -164,7 +173,11 @@ public class XmResultImp extends  AResultImp {
 				insertNames.append(impFields[i][1]).append(",");
 				updatenames.append(impFields[i][1]).append("=?,");
 				insertValue += "?,";
-				String value = root.element(impFields[i][0]).getText();
+				if(root.element(impFields[i][0]) == null){
+					value = "";
+				}else{
+					value = root.element(impFields[i][0]).getText();
+				}
 				valueObjects[num] = value;
 				num++;
 			}
@@ -199,7 +212,6 @@ public class XmResultImp extends  AResultImp {
 			sql.append(insertValue).append("'").append(primaryValue).append("')");
 			update(sql.toString(), YW, valueObjects);
 		}
-		
 		return 1;
 	}
 	
@@ -281,7 +293,6 @@ public class XmResultImp extends  AResultImp {
 			sql.append(insertValue).append(shapeValue).append(",'").append(primaryValue).append("',").append(objectId).append(")");
 			update(sql.toString(), GIS, valueObjects);
 		}
-		
 		return 1;
 	}
 	
@@ -309,12 +320,9 @@ public class XmResultImp extends  AResultImp {
         File f = new File(filePath);
         File[] files = f.listFiles();
         //数据更新前删除旧的数据
-        String sql= "delete from atta_accessory where yw_guid = ?";
+        String sql= "delete from atta_accessory t where t.parent_file_id = '0' and t.file_type = 'file' and t.yw_guid = ?";
         update(sql, CORE, new Object[] { yw_guid });
         for (int i = 0; i < files.length; i++) {
-            //if (files[i].getAbsolutePath().endsWith(".txt")) {
-            //    continue;
-            //}
             accUpload(files[i]);
         }
 	}
@@ -327,38 +335,42 @@ public class XmResultImp extends  AResultImp {
      * @param file
      */
     private void accUpload(File file) {
-    	
         File[] files = file.listFiles();
+        //上传图片
+        if(file.getAbsolutePath().endsWith("picture")){
+        	for (int i = 0; i < files.length; i++) {
+                dealAcc(files[i]);
+            }
+            String sql = "select file_id,file_name from atta_accessory where yw_guid=?";
+            List<Map<String, Object>> list = query(sql, CORE, new Object[] { yw_guid });
+            StringBuffer sb = new StringBuffer();
+            for (int i = 0; i < list.size(); i++) {
+                Map<String, Object> map = list.get(i);
+                if (map.get("file_name").toString().endsWith("jpg")) {
+                    if (i == list.size() - 1) {
+                        sb.append(map.get("file_id"));
+                    } else {
+                        sb.append(map.get("file_id")).append(",");
+                    }
+                }
+            }
+            sql = "update "+form_name+" set zpbh=? where yw_guid=?";
+            update(sql, YW, new Object[] { sb.toString(), yw_guid });
+            return ;
+        }
+        //上传txt文本
         if(file.getAbsolutePath().endsWith("txt")){
             dealAcc(file);
             return;
         }
+        //shape文件夹不上传
         if(files == null || file.getAbsolutePath().endsWith("shape")){
         	return ;
         }
+        //上传剩余的文件夹
         for (int i = 0; i < files.length; i++) {
-            if (files[i].getAbsolutePath().endsWith(".xml")) {
-                continue;
-            }
             dealAcc(files[i]);
         }
-        String sql = "select file_id,file_name from atta_accessory where yw_guid=?";
-        List<Map<String, Object>> list = query(sql, CORE, new Object[] { yw_guid });
-        StringBuffer sb = new StringBuffer();
-        for (int i = 0; i < list.size(); i++) {
-            Map<String, Object> map = list.get(i);
-            if (map.get("file_name").toString().endsWith("jpg")) {
-                if (i == list.size() - 1) {
-                    sb.append(map.get("file_id"));
-                } else {
-                    sb.append(map.get("file_id")).append(",");
-                }
-            }
-        }
-        
-        
-        sql = "update "+form_name+" set zpbh=? where yw_guid=?";
-        update(sql, YW, new Object[] { sb.toString(), yw_guid });
     }
     
     /**
@@ -379,6 +391,23 @@ public class XmResultImp extends  AResultImp {
             String sql = "insert into atta_accessory(file_id,file_type,file_name,file_path,yw_guid) values(?,?,?,?,?)";
             update(sql, CORE, new Object[] { file_id, "file", filename, newFilePath, yw_guid});
         }
+        if(file.getAbsolutePath().endsWith("txt")&&yw_guid.startsWith("XC")&&!folderIsExit()){
+        	String addsql = "insert into atta_accessory(file_id,file_type,file_name,file_path,yw_guid,user_id) values(?,?,?,?,?,?)";
+            for (int i = 0; i < 4; i++) {
+            	if(i == 0){
+            		update(addsql, CORE, new Object[] { new UID().toString().replaceAll(":", "-"), "folder", "责令停止违法行为通知书", "", yw_guid,1});
+            	}
+            	if(i == 1){
+            		update(addsql, CORE, new Object[] { new UID().toString().replaceAll(":", "-"), "folder", "现场勘察记录", "", yw_guid,1});
+            	}
+            	if(i == 2){
+            		update(addsql, CORE, new Object[] { new UID().toString().replaceAll(":", "-"), "folder", "巡查信息记录单", "", yw_guid,1});
+            	}
+            	if(i == 3){
+            		update(addsql, CORE, new Object[] { new UID().toString().replaceAll(":", "-"), "folder", "照片资料", "", yw_guid,1});
+            	}
+			}
+        }
     }
     
     private List<Map<String,Object>> getXzq(String imsi){
@@ -386,4 +415,16 @@ public class XmResultImp extends  AResultImp {
         List<Map<String,Object>> list = query(sql,YW,new Object[]{imsi});
         return list;       
     }
+    
+    private boolean folderIsExit() {
+    	boolean flag = true;
+    	String sql = "select t.file_id from atta_accessory t where t.file_type = 'folder' and t.yw_guid = ?";
+        List<Map<String,Object>> list = query(sql,CORE,new Object[]{yw_guid});
+        if(list.size() > 0){
+        	
+        }else{
+        	flag = false;
+        }
+		return flag;
+	}
 }
