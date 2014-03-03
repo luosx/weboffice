@@ -65,11 +65,22 @@ public class JbbManager extends AbstractBaseBean {
 		String cxb = request.getParameter("cxb");
 		String cqqd = request.getParameter("cqqd");
 		String cbfgl = request.getParameter("cbfgl");
+		String ssqy = request.getParameter("ssqy");
 		
 		String sql = "update jc_jiben set zd=?,jsyd=?,rjl=?,jzgm=?,kzgd=?,ghyt=?,gjjzgm=?,jzjzgm=?,szjzgm=?,kfcb=?,"+
-  		                 "lmcb=?,dmcb=?,yjcjj=?,yjzftdsy=?,cxb=?,cqqd=?,cbfgl=? where dkmc=?" ;
+  		                 "lmcb=?,dmcb=?,yjcjj=?,yjzftdsy=?,cxb=?,cqqd=?,cbfgl=?,ssqy=? where dkmc=?" ;
   		    int i = update(sql,YW,new Object[]{zd, jsyd,rjl,jzgm,kzgd,ghyt,gjjzgm,jzjzgm,szjzgm,kfcb,
-                        lmcb,dmcb,yjcjj,yjzftdsy,cxb,cqqd,cbfgl,dkbh}); 
+                        lmcb,dmcb,yjcjj,yjzftdsy,cxb,cqqd,cbfgl,ssqy,dkbh}); 
+  		    if("民生改善区".equals(ssqy)){
+  		    	sql = "update cbd_jbb set gnfq=2 where tbbh=?";
+  		    }else if("城市形象提升区".equals(ssqy)){
+  		    	sql = "update cbd_jbb set gnfq=3 where tbbh=?";
+  		    }else if("产业功能改造区".equals(ssqy)){
+  		    	sql = "update cbd_jbb set gnfq=1 where tbbh=?";
+  		    }else if("保留微调区".equals(ssqy)){
+  		    	sql = "update cbd_jbb set gnfq=4 where tbbh=?";
+  		    }
+  		    update(sql,GIS,new Object[]{dkbh});
   		    if(i==1){
   		    	response("{success:true}");
   		    }else {
