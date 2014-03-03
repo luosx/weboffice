@@ -32,6 +32,6 @@
 	<bean name="deviceMonitor" class="com.klspta.web.xiamen.device.DeviceMonitor" scope="prototype"/>
 	<!-- 轨迹回放 -->
 	<bean name="location" class="com.klspta.web.xiamen.device.DevicePlayBack" />
-	<!-- 成果回传 -->
-	<bean name="wyrw" class="com.klspta.model.wyrw.WyrwManager" scope="prototype"/>
+	<!-- 问题反馈 -->
+	<bean name="xxfkManager" class="com.klspta.web.xiamen.xxfk.XxfkManager" scope="prototype"/>
 </beans>
