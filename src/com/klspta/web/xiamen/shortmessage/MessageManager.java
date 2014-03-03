@@ -5,11 +5,14 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.commons.lang.StringUtils;
 
 import com.jasson.im.api.APIClient;
 import com.klspta.base.AbstractBaseBean;
+import com.klspta.base.util.UtilFactory;
 import com.klspta.console.ManagerFactory;
 import com.klspta.console.user.User;
 
@@ -209,5 +212,46 @@ public class MessageManager extends AbstractBaseBean {
             receivers = fullnames;
         }               
         return receivers;       
+    }
+    
+    public void checkUsersMobilephone(){
+    	String users = request.getParameter("users");
+    	String[] usernames = null;
+    	String[] userphones = null;
+    	String msgWrong = "";
+    	String msgRight = "";
+    	if(users != null && !"".equals(users)){
+    		users = UtilFactory.getStrUtil().unescape(users);
+    		usernames = users.split(",");
+    		userphones = new String[usernames.length];
+            for(int i=0;i<usernames.length;i++){
+                String username = usernames[i].substring(usernames[i].indexOf("(")+1, usernames[i].indexOf(")"));
+                try {
+                    User user = ManagerFactory.getUserManager().getUserWithName(username);
+                    userphones[i] = user.getMobilephone();
+                    if(checkPhone(userphones[i])){
+                    	msgRight = msgRight + usernames[i] +",";
+                    }else{
+                    	msgWrong = msgWrong + user.getFullName() +",";
+                    }
+                } catch (Exception e) {                  
+                    e.printStackTrace();
+                }              
+            }         
+    	}
+    	if(!"".equals(msgRight)){
+    		msgRight = msgRight.substring(0, msgRight.length()-1);
+    	}
+    	if(!"".equals(msgWrong)){
+    		msgWrong = msgWrong.substring(0, msgWrong.length()-1);
+    	}
+    	response(msgWrong+"的电话号码不对!请提醒他修改！#"+msgRight);
+    }
+    
+    private boolean checkPhone(String mobilephone){
+    	String reg = "^[1]([3,5,8][0-9]{1}|45|47)[0-9]{8}$";
+    	Pattern pattern = Pattern.compile(reg);
+    	Matcher matcher = pattern.matcher(mobilephone);
+    	return matcher.find();
     }
 }
