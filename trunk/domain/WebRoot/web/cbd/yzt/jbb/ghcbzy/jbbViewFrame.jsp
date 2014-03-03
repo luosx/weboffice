@@ -27,8 +27,20 @@ System.out.println(type);
 
   </head>
   <script type="text/javascript">
-  		var gisurl = "<%=basePath%>/base/fxgis/framework/gisViewFrame.jsp";
+  		var type = "<%=type%>";
+  		var gisurl ;
   		var url = "<%=basePath%>/web/cbd/yzt/jbb/ghcbzy/jbbEditor.jsp?type=<%=type%>";
+  		if(type=="1"){
+  			gisurl = "<%=basePath%>/base/fxgis/framework/gisViewFrame.jsp?filter=cbd,4,gnfq='1'";
+  		}else if(type=="2"){
+  			gisurl = "<%=basePath%>/base/fxgis/framework/gisViewFrame.jsp?filter=cbd,4,gnfq='2'";
+  		}else if(type=="3"){
+  			gisurl = "<%=basePath%>/base/fxgis/framework/gisViewFrame.jsp?filter=cbd,4,gnfq='3'";
+  		}else if(type=="4"){
+  			gisurl = "<%=basePath%>/base/fxgis/framework/gisViewFrame.jsp?filter=cbd,4,gnfq='4'";
+  		}else {
+  			gisurl = "<%=basePath%>/base/fxgis/framework/gisViewFrame.jsp";
+  		}
   		Ext.onReady(function(){
   			Ext.state.Manager.setProvider(new Ext.state.CookieProvider());
   			var	width = document.body.clientWidth;
