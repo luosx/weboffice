@@ -280,12 +280,16 @@ String fullname = ((User)principal).getFullName();
 			          buttons: [{
 			            text: '保存',
 			            handler: function(){
+			            	var var_myData;
 			                if(winForm.getForm().isValid()){  
 			                	var users = winForm.form.findField('itemselector').getValue();
 			                    if(users!=''&& users.substring(0,1)==','){
 			                    	users = users.substring(1,users.length);
+			                    	var_myData = checkusersmobilephone(users);
 			                    }
-			                    Ext.getCmp('users').setValue(users);  
+			                    var var_myData = var_myData.split("#");
+			                    alert(var_myData[0]);
+			                    Ext.getCmp('users').setValue(var_myData[1]);  
 			                 }		
 						   win.hide();
 			              }
@@ -302,7 +306,13 @@ String fullname = ((User)principal).getFullName();
             putRestParameter("keyWord",escape(escape(keyWord)));
             var myData = restRequest(); 	   		
 	   		winForm.getForm().findField('itemselector').restore(myData);
-        }        
+        }
+        function checkusersmobilephone(users){
+        	putClientCommond("messageManager","checkUsersMobilephone");
+            putRestParameter("users",escape(escape(users)));
+            var myData = restRequest();
+            return myData;
+        }         
        
   </script>
   <body>

@@ -38,6 +38,9 @@
             },{
                 title: '外业核查',
                 html: "<iframe width='"+w+"' height='"+h+"' src='hccglist.jsp'/>"
+            },{
+                title: '批后监管',
+                html: "<iframe width='"+w+"' height='"+h+"' src='<%=basePath%>web/xiamen/phjg/phjgList.jsp'/>"
             }
         ]
     })

@@ -214,7 +214,7 @@
 </script>
 </head>
 <body bgcolor="#FFFFFF" topmargin="0" leftmargin="0">
-	<div id="mygrid_container" style="width: 100%; height: 85%;"></div>	
+	<div id="mygrid_container" style="width: 100%; height: 85%;"></div>
 	<div id="importWin" class="x-hidden">
 		<div id="importForm"></div>
 	</div>

@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@page import="org.springframework.security.core.context.SecurityContextHolder"%>
 <%@page import="com.klspta.console.user.User"%>
 <%@page import="com.klspta.web.xiamen.phjg.PhjgManager"%>
@@ -66,7 +66,7 @@
 			    listeners:{
 		  			rowdblclick : function(grid, rowIndex, e)
 					{
-						showMap(grid.getStore().getAt(rowIndex).data.OBJECTID);
+						showDetail(grid.getStore().getAt(rowIndex).data.YW_GUID);
 					}
         		},
 		        stripeRows: true,
@@ -90,12 +90,8 @@
 	
 
 	
-	function showMap(id){
-  		//putClientCommond("phjg","getWkt");
-	    //putRestParameter("objectId",id);
-		//var res = restRequest();
-		//var jsonstring=JSON.stringify(res);   
-		var url = "<%=basePath%>web/xiamen/phjg/location.jsp?objectId="+id;  
+	function showDetail(id){
+	    var url = "/domain/web/xiamen/xchc/cglb/xjclyjframe.jsp?zfjcType=12&yw_guid="+id;     
 		var height = window.screen.availHeight;
 		var width = window.screen.availWidth;
 		window.open(url,"","width="+width+",height="+height);
@@ -150,6 +146,6 @@
 </head>
 <body bgcolor="#FFFFFF" topmargin="0" leftmargin="0">
 	<div id="mygrid_container" style="width: 100%; height: 85%;"></div>	
-	<div style="font-size:12px;text-align:left;margin-top:10px;">说明：双击每一条记录可以查看项目的位置</div>
+	<div style="font-size:12px;text-align:left;margin-top:10px;">说明：双击每一条记录可以查看详细信息</div>
 </body>
 </html>
