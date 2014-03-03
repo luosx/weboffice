@@ -29,19 +29,7 @@ function editMap(objid){
 	if(view == "R"){
 		return;
 	}
-	if(table.element == undefined){
-		table.init(document.getElementById("ZRB"));
-	}
-	var key = objid.cells[1].innerText;
-	zrbbh = key;
 	
-	//编辑基本属性
-	var array = paneloper.getElements();
-	for(var i = 0; i < array.length; i++){
-		var value = objid.cells[i+1].innerText;
-		paneloper.insertValue(array[i], value);
-	}
-	paneloper.show();
 	//form.show();
 	
 	//parent.parent.frames['east'].swfobject.getObjectById("FxGIS").clear();
@@ -119,7 +107,19 @@ function modify(){
 	var annoations = table.getAnnotations();
 	if(annoations.length > 0){
 		var objid = table.element.rows[annoations[0]];
-		editMap(objid);
+		if(table.element == undefined){
+			table.init(document.getElementById("ZRB"));
+		}
+		var key = objid.cells[1].innerText;
+		zrbbh = key;
+		
+		//编辑基本属性
+		var array = paneloper.getElements();
+		for(var i = 0; i < array.length; i++){
+			var value = objid.cells[i+1].innerText;
+			paneloper.insertValue(array[i], value);
+		}
+		paneloper.show();	
 	}
 }
 
