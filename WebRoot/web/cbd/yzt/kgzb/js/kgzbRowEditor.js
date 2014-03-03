@@ -26,21 +26,7 @@ function showMap(objid){
 function editMap(objid){
 
 	
-	if(table.element == undefined){
-		table.init(document.getElementById("SWCBR"));
-	}
-	var key = objid.cells[1].innerText;
-	dkmc = key;
 	
-
-	
-	//编辑基本属性
-	var array = paneloper.getElements();
-	for(var i = 0; i < array.length; i++){
-		var value = objid.cells[i].innerText;
-		paneloper.insertValue(array[i], value);
-	}
-	paneloper.show();
 	//parent.parent.frames['east'].swfobject.getObjectById("FxGIS").clear();
 	//parent.parent.frames['east'].swfobject.getObjectById("FxGIS").drawPolygon();
 	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").clear();
@@ -116,7 +102,21 @@ function modify(){
 	var annoations = table.getAnnotations();
 	if(annoations.length > 0){
 		var objid = table.element.rows[annoations[0]];
-		editMap(objid);
+		if(table.element == undefined){
+			table.init(document.getElementById("SWCBR"));
+		}
+		var key = objid.cells[1].innerText;
+		dkmc = key;
+		
+	
+		
+		//编辑基本属性
+		var array = paneloper.getElements();
+		for(var i = 0; i < array.length; i++){
+			var value = objid.cells[i].innerText;
+			paneloper.insertValue(array[i], value);
+		}
+		paneloper.show();
 	}
 }
 
