@@ -79,7 +79,7 @@ ITableStyle its = new TableStyleEditRow();
   	var paneloper = new Paneloper();
   	$(document).ready(function () { 
 		var width = document.body.clientWidth+10;
-		var height = document.body.clientHeight-10;
+		var height = document.body.clientHeight;
        	FixTable("JBB", 1,2, width, height);
        	buildPanel();
 	});
@@ -374,6 +374,20 @@ ITableStyle its = new TableStyleEditRow();
 		                width:'100'
 	            	}]
             	}]
+	        },{
+	           	layout:'column',
+	           	items:[{
+					columnWidth:.5,
+	        		layout:'form',
+	           		items:[{
+		                xtype: 'combo',
+		                id   : 'ssqy',
+		                value:'',
+		                store:[[0,"民生改善区"],[1,"城市形象提升区"],[2,"产业功能改造区"],[3,"保留微调区"]],
+		                fieldLabel: '所属区域',
+		                width:'200'
+	            	}]
+	            }]
 	        }], 
 	        buttons: [
 	            {
