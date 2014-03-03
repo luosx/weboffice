@@ -90,7 +90,8 @@ body {
 				<td width="100%"  background="<%=resourcePath%>images/top/bg_w.png">
 			
 					<%out.print(ManagerFactory.getMenuManager().getMenuCode(user,"",1));%>
-					<span style="font-size:12px;position:relative;top:5px;width:98%;text-align:right"><%=fullName%>,<%=today%>,星期<%=day%></span>
+					<span style="font-size:12px;position:relative;top:5px;width:92%;text-align:right"><%=fullName%>,<%=today%>,星期<%=day%></span>
+					<span style="font-size:12px;position:relative;top:5px;cursor:pointer;"><a onclick="fankui()" style="color:red;">反馈</a></span>
 				</td>
 				
 				<td width=1950" align="left" style="background:url(<%=resourcePath%>images/top/bg_w.png);cursor:pointer;">			
@@ -196,7 +197,7 @@ function openPage(obj,url){
 		}	
 		openObj=obj;
 	}
-	top.content.document.getElementById("content").cols="0,9,*";	
+	top.content.document.getElementById("content").cols="0,0,*";	
 	parent.content.right.location.href='<%=basePath%>'+url; 
 	
 	/*
@@ -232,6 +233,13 @@ function openPage(obj,url){
 	//打开地图
 	function openMap(){
 		parent.content.right.location.href="<%=basePath%>base/fxgis/framework/gisViewFrame.jsp?closemenu=*closeMenu*";
-		top.content.content.cols="0,9,*"; 
+		top.content.content.cols="0,0,*"; 
+	}
+	//反馈功能模块
+	function fankui(){
+		var url = "/domain/web/xiamen/xxfk/xxfkList.jsp";     
+		var height = window.screen.availHeight;
+		var width = window.screen.availWidth-5;
+		window.open(url,"","width="+width+",height="+height);
 	}
 </script>
