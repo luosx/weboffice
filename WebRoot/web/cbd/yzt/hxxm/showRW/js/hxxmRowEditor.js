@@ -22,18 +22,7 @@ function showMap(objid){
 //双击编辑地图
 function editMap(objid){
 	
-	if(table.element == undefined){
-		table.init(document.getElementById("HXXM"));
-	}
-	var key = objid.cells[1].innerText;
-	xmmc = key;
 	
-	var array = paneloper.getElements();
-	for(var i = 1; i < objid.cells.length; i++){
-		var value = objid.cells[i].innerText;	
-		paneloper.insertValue(array[i-1], value);
-	}
-	paneloper.show();
 	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").clear();
 	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").drawPolygon();
 }
@@ -59,7 +48,18 @@ function update(){
 	var annoations = table.getAnnotations();
 	if(annoations.length > 0){
 		var objid = table.element.rows[annoations[0]];
-		editMap(objid);
+		if(table.element == undefined){
+		table.init(document.getElementById("HXXM"));
+		}
+		var key = objid.cells[1].innerText;
+		xmmc = key;
+		
+		var array = paneloper.getElements();
+		for(var i = 1; i < objid.cells.length; i++){
+			var value = objid.cells[i].innerText;	
+			paneloper.insertValue(array[i-1], value);
+		}
+		paneloper.show();
 	}
 }
 
