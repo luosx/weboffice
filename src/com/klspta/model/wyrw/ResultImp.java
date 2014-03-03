@@ -233,13 +233,13 @@ public class ResultImp extends AResultImp {
             Element gh = ghs.element("num" + index);
             while(gh!=null){
                 String ghGuid = gh.element("YW_GUID").getText();
-                String ghtdytfqdm = gh.element("TDYTFQDM").getText();
+                String ghtdytqlxdm = gh.element("TDYTQLXDM").getText();
                 String ghdlmc = gh.element("GHDLMC").getText();
                 String ghxzqmc = gh.element("XZQMC").getText();
                 String ghmj = gh.element("MJ").getText();
                 //插入数据库
                 sql = "insert into  gh_xxdl  values(?,?,?,?,?)";
-                update(sql, YW, new Object[] { ghGuid, ghtdytfqdm, ghdlmc, ghxzqmc, ghmj });
+                update(sql, YW, new Object[] { ghGuid, ghtdytqlxdm, ghdlmc, ghxzqmc, ghmj });
                 index++;
                 gh = ghs.element("num" + index);
             }

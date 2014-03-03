@@ -336,7 +336,7 @@ public class Djfx extends AbstractBaseBean implements IDataClass{
         list.add(trb2);          
         
         
-        List<Map<String,Object>> ghList = analysis.analysis("dlgztdytqr", "TDYTFQDM", wkt);
+        List<Map<String,Object>> ghList = analysis.analysis("dlgztdytqr", "TDYTQLXDM", wkt);
         double fhghmj = 0;
         double bfhghmj = 0;
         double zyjbntmj = 0;
@@ -345,7 +345,7 @@ public class Djfx extends AbstractBaseBean implements IDataClass{
         
         for(int i=0;i<ghList.size();i++){
             Map<String,Object> ghMap = ghList.get(i);
-            String tdytqlxdm = (String)ghMap.get("tdytfqdm");            
+            String tdytqlxdm = (String)ghMap.get("tdytqlxdm");            
             double ghdlmj = 0;
             if(ghMap.get("area")!=null){
                 ghdlmj = Double.parseDouble(ghMap.get("area").toString());              
