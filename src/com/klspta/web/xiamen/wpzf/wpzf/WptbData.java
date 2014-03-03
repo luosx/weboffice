@@ -161,7 +161,7 @@ public class WptbData extends AbstractBaseBean implements IwptbData {
     @Override
     public List<Map<String, Object>> getWpxf(String where) {
         StringBuffer sqlBuffer = new StringBuffer();
-        sqlBuffer.append("select t.yw_guid, t.ygspmj,t.ygspbl,t.yggdmj,t.yggdbl,t.nydmj,t.gdmj,t.jsydmj,t.wlydmj,t.yxjsq,t.ytjjsq,t.xzjsq,t.jzjsq,t.fhghmj,t.bfhghmj,t.zyjbntmj,d.xjxzqhmc,d.xjxzqhdm,d.tbbh,d.dlbm,d.dlmc,d.qsxz,d.qsdwdm,d.qsdwmc,d.tbmj,d.tblx,d.tfh from wpzfjc t inner join zfjcgis.dlgzwpr d on t.tbbh = d.tbbh and t.xjxzqhdm = d.xjxzqhdm");
+        sqlBuffer.append("select t.yw_guid, t.ygspmj,t.ygspbl,t.yggdmj,t.yggdbl,t.nydmj,t.gdmj,t.jsydmj,t.wlydmj,t.yxjsq,t.ytjjsq,t.xzjsq,t.jzjsq,t.fhghmj,t.bfhghmj,t.zyjbntmj,d.xjxzqhmc,d.xjxzqhdm,d.tbbh,d.dlbm,d.dlmc,d.qsxz,d.qsdwdm,d.qsdwmc,d.tbmj,d.tblx,d.tfh from wpzfjc t inner join zfjcgis.dlgzyswftb_zfjc_2012r d on t.tbbh = d.tbbh and t.xjxzqhdm = d.xjxzqhdm");
         if(where != null && !"null".equals(where)){         
             where = UtilFactory.getStrUtil().unescape(where);           
             String[] wheres = where.split("@");
@@ -228,7 +228,7 @@ public class WptbData extends AbstractBaseBean implements IwptbData {
     @Override
     public List<Map<String, Object>> getWpsb(String where) {
         StringBuffer sqlBuffer = new StringBuffer();
-        sqlBuffer.append("select t.yw_guid, t.ygspmj,t.ygspbl,t.yggdmj,t.yggdbl,t.nydmj,t.gdmj,t.jsydmj,t.wlydmj,t.yxjsq,t.ytjjsq,t.xzjsq,t.jzjsq,t.fhghmj,t.bfhghmj,t.zyjbntmj,d.xjxzqhmc,d.xjxzqhdm,d.tbbh,d.dlbm,d.dlmc,d.qsxz,d.qsdwdm,d.qsdwmc,d.tbmj,d.tblx,d.tfh from wpzfjc t inner join zfjcgis.dlgzwpr d on t.tbbh = d.tbbh and t.xjxzqhdm = d.xjxzqhdm and t.iswf='1'");
+        sqlBuffer.append("select t.yw_guid, t.ygspmj,t.ygspbl,t.yggdmj,t.yggdbl,t.nydmj,t.gdmj,t.jsydmj,t.wlydmj,t.yxjsq,t.ytjjsq,t.xzjsq,t.jzjsq,t.fhghmj,t.bfhghmj,t.zyjbntmj,d.xjxzqhmc,d.xjxzqhdm,d.tbbh,d.dlbm,d.dlmc,d.qsxz,d.qsdwdm,d.qsdwmc,d.tbmj,d.tblx,d.tfh from wpzfjc t inner join zfjcgis.dlgzyswftb_zfjc_2012r d on t.tbbh = d.tbbh and t.xjxzqhdm = d.xjxzqhdm and t.iswf='1'");
         if(where != null && !"null".equals(where)){         
             where = UtilFactory.getStrUtil().unescape(where);           
             String[] wheres = where.split("@");

@@ -61,7 +61,7 @@ public class WptbManager extends AbstractBaseBean {
 	
 	public void getWkt(){
 	    String objectId = request.getParameter("objectId"); 
-	    String sql = "select sde.st_astext(t.shape) wkt from dlgzwpr t where t.objectid = ?";
+	    String sql = "select sde.st_astext(t.shape) wkt from dlgzyswftb_zfjc_2012r t where t.objectid = ?";
 	    List<Map<String,Object>> list = query(sql,GIS,new Object[]{objectId});
 	    String wkt = (String)(list.get(0)).get("wkt");
 	    Polygon polygon = new Polygon(wkt);

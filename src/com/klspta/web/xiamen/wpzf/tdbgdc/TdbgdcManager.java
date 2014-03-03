@@ -110,7 +110,7 @@ public class TdbgdcManager extends AbstractBaseBean {
     public void getWkt(){
         String tbbh = request.getParameter("tbbh"); 
         String xzdm = request.getParameter("xzdm"); 
-        String sql = "select sde.st_astext(t.shape) wkt from dlgzbgdcr t where t.jcbh = ? and t.xzqdm = ?";
+        String sql = "select sde.st_astext(t.shape) wkt from dlgzjctb_2013r t where t.jcbh = ? and t.xzqdm = ?";
         List<Map<String,Object>> list = query(sql,GIS,new Object[]{tbbh,xzdm});
         String wkt = (String)(list.get(0)).get("wkt");
         Polygon polygon = new Polygon(wkt);
