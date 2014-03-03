@@ -17,7 +17,9 @@ function showMap(objid){
 function editMap(objid){
 	
 	
-	
+	if(view=="R"){
+		return ;
+	}
 	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").clear();
 	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").drawPolygon();
 }
