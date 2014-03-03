@@ -213,6 +213,7 @@ Ext.onReady(function() {
 		}]
 	});
 	// init
+	tree.setHeight(435);
 	if (type == "showTrack") {
 		Ext.getCmp("treePanel").topToolbar.hide();
 		Ext.getCmp("timeSelector").show();
