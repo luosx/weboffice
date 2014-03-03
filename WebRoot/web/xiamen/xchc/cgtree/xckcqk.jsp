@@ -75,8 +75,55 @@ input{
 					实地巡查情况表
 			</div>
 			<br>
-	<form method="post">
-		<%if(yw_guid.indexOf("XC")==-1){ %>
+		<form method="post">
+		<%if(yw_guid.startsWith("XC")){ %>
+		<table  width="600px" cellspacing="0" cellpadding="0" align='center' border='1' style="text-align: center; border-left:1px solid #2C2B29; border-top:1px solid #2C2B29; border-bottom:none; background:#ffffff">
+		 <tr>
+		 	<td>用地项目名称</td>
+		 	<td><input type="text" name="ydxmmc" id="ydxmmc" ></td>
+		 	<td>用地主体</td>
+		 	<td><input type="text" name="ydzt" id="ydzt" ></td>
+		 </tr>
+		 <tr>
+		 	<td>用地位置</td>
+		 	<td colspan="3"><input type="text" name="ydwz" id="ydwz" ></td>
+		 </tr>  
+		 <tr>
+		 	<td>占地面积</td>
+		 	<td><input type="text" name="zdmj" id="zdmj" ></td>
+		 	<td>耕地面积</td>
+		 	<td><input type="text" name="gdmj" id="gdmj" ></td>
+		 </tr> 
+		 <tr>
+		 	<td>建筑面积(m2)</td>
+		 	<td><input type="text" name="jzmj" id="jzmj" ></td>
+		 	<td>建筑现状</td>
+		 	<td><input type="text" name="jzxz" id="jzxz" ></td>
+		 </tr>  
+		 <tr>
+		 	<td>用途</td>
+		 	<td><input type="text" name="yt" id="yt" ></td>
+		 	<td>是否符合<br>土地利用<br>总体规划</td>
+		 	<td><select name="fhgh" id="fhgh"><option value="是">是</option><option value="否">否</option></select></td>
+		 </tr>
+		  <tr>
+		 	<td>发现时间</td>
+		 	<td><input type="text" name="fxsj" id="fxsj" style="background:white url(<%=basePath%>base/form/DatePicker/skin/datePicker.gif) no-repeat right;" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})" readonly></td>
+		 	<td>制止情况</td>
+		 	<td><input type="text" name="zzqk" id="zzqk" ></td>
+		 </tr>
+		 <tr>
+		 	<td>制止通知书编号</td>
+		 	<td colspan="3"><input type="text" name="zztzsbh" id="zztzsbh" ></td>
+		 </tr> 
+		  <tr>
+		 	<td>违建制止后<br>继续制止</td>
+		 	<td><input type="text" name="wjzzhjxzz" id="wjzzhjxzz" ></td>
+		 	<td>有用地审批<br>且超占</td>
+		 	<td><input type="text" name="yydspqcz" id="yydspqcz" ></td>
+		 </tr> 
+		</table>
+		<%}else{ %>
 		<table width="600px" cellspacing="0" cellpadding="0" align='center' border='1' style="text-align: center; border-left:1px solid #2C2B29; border-top:1px solid #2C2B29; border-bottom:none; background:#ffffff">
 			<tr>
 				<td width="15%">
@@ -185,53 +232,6 @@ input{
 				</td>
 			</tr>
 		</table>
-		<%}else{ %>
-		<table  width="600px" cellspacing="0" cellpadding="0" align='center' border='1' style="text-align: center; border-left:1px solid #2C2B29; border-top:1px solid #2C2B29; border-bottom:none; background:#ffffff">
-		 <tr>
-		 	<td>用地项目名称</td>
-		 	<td><input type="text" name="ydxmmc" id="ydxmmc" ></td>
-		 	<td>用地主体</td>
-		 	<td><input type="text" name="ydzt" id="ydzt" ></td>
-		 </tr>
-		 <tr>
-		 	<td>用地位置</td>
-		 	<td colspan="3"><input type="text" name="ydwz" id="ydwz" ></td>
-		 </tr>  
-		 <tr>
-		 	<td>占地面积</td>
-		 	<td><input type="text" name="zdmj" id="zdmj" ></td>
-		 	<td>耕地面积</td>
-		 	<td><input type="text" name="gdmj" id="gdmj" ></td>
-		 </tr> 
-		 <tr>
-		 	<td>建筑面积(m2)</td>
-		 	<td><input type="text" name="jzmj" id="jzmj" ></td>
-		 	<td>建筑现状</td>
-		 	<td><input type="text" name="jzxz" id="jzxz" ></td>
-		 </tr>  
-		 <tr>
-		 	<td>用途</td>
-		 	<td><input type="text" name="yt" id="yt" ></td>
-		 	<td>是否符合<br>土地利用<br>总体规划</td>
-		 	<td><select name="fhgh" id="fhgh"><option value="是">是</option><option value="否">否</option></select></td>
-		 </tr>
-		  <tr>
-		 	<td>发现时间</td>
-		 	<td><input type="text" name="fxsj" id="fxsj" style="background:white url(<%=basePath%>base/form/DatePicker/skin/datePicker.gif) no-repeat right;" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})" readonly></td>
-		 	<td>制止情况</td>
-		 	<td><input type="text" name="zzqk" id="zzqk" ></td>
-		 </tr>
-		 <tr>
-		 	<td>制止通知书编号</td>
-		 	<td colspan="3"><input type="text" name="zztzsbh" id="zztzsbh" ></td>
-		 </tr> 
-		  <tr>
-		 	<td>违建制止后<br>继续制止</td>
-		 	<td><input type="text" name="wjzzhjxzz" id="wjzzhjxzz" ></td>
-		 	<td>有用地审批<br>且超占</td>
-		 	<td><input type="text" name="yydspqcz" id="yydspqcz" ></td>
-		 </tr> 
-		</table>		
 		<%} %>
 		</form>
 		<% 
