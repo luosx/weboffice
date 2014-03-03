@@ -88,7 +88,7 @@ public class XchcData extends AbstractBaseBean implements IxchcData {
         //sqlBuffer.append(xzq);
         String xzqSql = XzqHandle.getXzqSql(userId, sql, "impxzqbm");
         sqlBuffer.append(xzqSql);
-        sqlBuffer.append(" and t.guid not like 'XC%'");
+        sqlBuffer.append(" and t.guid not like 'XC%' and t.guid not like 'PHJG%'");
         if (keyword != null) {
             keyword = UtilFactory.getStrUtil().unescape(keyword);
              sqlBuffer.append(" and").append(queryString).append(" like '%");
