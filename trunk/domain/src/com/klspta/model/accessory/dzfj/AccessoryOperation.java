@@ -32,7 +32,7 @@ public class AccessoryOperation extends AbstractBaseBean  {
         return accessoryOperation;
     }
     public List<AccessoryBean> getAccessorylistByYwGuid(String yw_guid) {
-        String sql = "select * from atta_accessory t where t.yw_guid =?";
+        String sql = "select * from atta_accessory t where t.yw_guid =? order by t.file_type desc";
         
      Object args[] = {yw_guid};
    	List <AccessoryBean> ls=new ArrayList<AccessoryBean>();

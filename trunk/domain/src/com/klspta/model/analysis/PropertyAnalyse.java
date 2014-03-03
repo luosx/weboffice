@@ -42,7 +42,7 @@ public class PropertyAnalyse extends AbstractBaseBean {
         } else {
             ms.append("<td><SPAN style='COLOR:red'>未供地</SPAN>").append("</td></tr>");
         }               
-        sql = "select * from dlgztdytqr t where sde.st_contains (t.shape,sde.st_geometry(?,?))=1 and t.tdytfqdm ='010'";       
+        sql = "select * from dlgztdytqr t where sde.st_contains (t.shape,sde.st_geometry(?,?))=1 and t.tdytqlxdm ='010'";       
         ls = query(sql,GIS,new Object[]{wkt,srid});    
         ms.append("<tr><td>规划情况：</td>");
         if (ls.size() > 0) {
@@ -50,12 +50,12 @@ public class PropertyAnalyse extends AbstractBaseBean {
         } else {
             ms.append("<td><SPAN style='COLOR:green'>未占用基本农田</SPAN>").append("</td></tr>");
         }             
-        sql = "select t.year from dlgzwpr t where sde.st_contains (t.shape,sde.st_geometry(?,?))=1";
+        sql = "select t.tbbh from dlgzyswftb_zfjc_2012r t where sde.st_contains (t.shape,sde.st_geometry(?,?))=1";
         ls = query(sql,GIS,new Object[]{wkt,srid});
         ms.append("<tr><td>卫片情况：</td>");
         if (ls.size() > 0) {
             Map<String, Object> map = ls.get(0);
-            ms.append("<td><SPAN style='COLOR:green'>发现"+map.get("year")+"年度卫片执法检查").append(
+            ms.append("<td><SPAN style='COLOR:green'>发现2012年度卫片执法检查").append(
                     "</SPAN></td></tr>");
         }else {
             ms.append("<td><SPAN style='COLOR:green'>年度卫片执法检查未发现</SPAN></td></tr>");
@@ -131,7 +131,7 @@ public class PropertyAnalyse extends AbstractBaseBean {
         xzsb.append("</table>");        
         
         //规划
-        List<Map<String,Object>> ghList = analysis.analysis("dlgztdytqr", "TDYTFQDM", wkt);
+        List<Map<String,Object>> ghList = analysis.analysis("dlgztdytqr", "TDYTQLXDM", wkt);
         double fhghmj = 0;
         double bfhghmj = 0;
         double zyjbntmj = 0;
@@ -140,7 +140,7 @@ public class PropertyAnalyse extends AbstractBaseBean {
         
         for(int i=0;i<ghList.size();i++){
             Map<String,Object> ghMap = ghList.get(i);
-            String tdytqlxdm = (String)ghMap.get("tdytfqdm");            
+            String tdytqlxdm = (String)ghMap.get("tdytqlxdm");            
             double ghdlmj = 0;
             if(ghMap.get("area")!=null){
                 ghdlmj = Double.parseDouble(ghMap.get("area").toString());              
