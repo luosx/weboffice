@@ -65,7 +65,7 @@
 			    listeners:{
 		  			rowdblclick : function(grid, rowIndex, e)
 					{
-				   		showDetail(rowIndex);
+				   		showView_ck(rowIndex);
 					}
         		},
 		        stripeRows: true,
