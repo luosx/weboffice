@@ -9,13 +9,16 @@ String resourcePath=basePath+"web/"+name+"/framework";
 <html>
 <head>
 <title>left</title>
+<meta http-equiv="X-UA-Compatible" content="IE=7" >
 </head>
 <script>
 function turn(){
+alert(parent.content.cols);
  if(parent.content.cols=="211,9,*"){
  frameshow.src="<%=resourcePath%>/images/left/partline_right.png";
  oa_tree.title="显示";
  parent.content.cols="0,9,*";
+ alert(parent.content.cols);
 }
 else{
 frameshow.src="<%=resourcePath%>/images/left/partline_left.png";
