@@ -42,6 +42,10 @@
         frame:true,
         items:[
         	{
+        		title: '一览表',
+        		html: "<iframe width='"+w+"' height='"+h+"' src='web/cbd/xmgl/zjgl/mergepage.jsp?yw_guid=<%=yw_guid%>&xmmc=<%=xmmc%>'/>"
+        	},
+        	{
                 title: '用地指标',
                 html: "<iframe width='"+w+"' height='"+h+"' src='web/cbd/xmgl/xmkgzb/xmkgzbb.jsp?yw_guid=<%=yw_guid%>&xmmc=<%=xmmc%>'/>"
             }
