@@ -29,10 +29,10 @@
    </script>
 </head>
 <body>
-	<div style="position:absolute; bottom: 20px;right: 20px" align="right"><img src="base/form/images/back1.png"  width="50px" height="50px" title="地图" onClick="javascript:window.location.href='sy.jsp'"  /></div>
+	<div style="position:absolute; bottom: 20px;right: 30px" align="right"><img src="base/form/images/back1.png"  width="50px" height="50px" title="地图" onClick="javascript:window.location.href='sy.jsp'"  /></div>
    <div align="center" style="width: 100%;height: 95%">
      	<img src="web/cbd/sy/zkj.png" height="460px" width="850px" border="0" usemap="#planetmap" alt="总体设计图" />
-              <map name="planetmap"  id="planetmap">  
+              <map name="planetmap"  id="planetmap"><!--  
               <area shape="circle" coords="55,65,40" href ="<%=basePath%>web/cbd/jtfx/scjc/scdcb.jsp?flag=zs" alt="二手房市场监测" />  
               <area shape="circle" coords="160,65,40" href ="<%=basePath%>" alt="搬迁政策研究" /> 
               <area shape="circle"   coords="265,65,40" href ="<%=basePath%>web/cbd/sccsl/xzljcTab.jsp" alt="写字楼租金监测" />
@@ -41,7 +41,7 @@
                <area shape="circle" coords="580,65,40" href ="<%=basePath%>" alt="项目报告" /> 
                <area shape="circle" coords="685,65,40" href ="<%=basePath%>" alt="土地资产管理" /> 
                <area shape="circle" coords="790,65,40" href ="<%=basePath%>" alt="房源资产管理" /> 
-              </map>
+              --></map>
               </div>
               <div align="center"><h3>系统总体设计图</h3></div>
 </body>
