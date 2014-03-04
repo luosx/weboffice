@@ -183,7 +183,7 @@ window.onload=function()
 	}
 function openPage(obj,url){
 	top.content.document.getElementById("content").cols="0,9,*";
-	
+	top.content.document.getElementById("content").rows=top.content.document.getElementById("content").rows;
 	if(openObj!=obj)
 	{		
 		obj.style.background="url('<%=resourcePath%>/images/top/bg_w_hc.png')";	
@@ -203,7 +203,9 @@ function openPage(obj,url){
     if(autoExtend != -1){
         var isAuto = url.substring(autoExtend+11,autoExtend+15);
         if(isAuto){
-            top.content.content.cols="0,0,*"; 
+            //top.content.content.cols="0,0,*"; 
+            top.content.document.getElementById("content").cols="0,0,*";
+            top.content.document.getElementById("content").rows=top.content.document.getElementById("content").rows;
        }
     }         
 }
@@ -230,6 +232,8 @@ function openPage(obj,url){
 	//打开地图
 	function openMap(){
 		parent.content.right.location.href="<%=basePath%>web/cbd/map/map.jsp?closemenu=*closeMenu*";
-		top.content.content.cols="0,9,*"; 
+		//top.content.content.cols="0,9,*"; 
+		top.content.document.getElementById("content").cols="0,9,*";
+        top.content.document.getElementById("content").rows=top.content.document.getElementById("content").rows;
 	}
 </script>

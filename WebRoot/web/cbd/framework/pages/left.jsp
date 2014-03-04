@@ -65,7 +65,9 @@ function openPage(url){
     if(autoExtend != -1){
         var isAuto = url.substring(autoExtend+11,autoExtend+15);
         if(isAuto){
-            top.content.content.cols="0,0,*"; 
+           // top.content.content.cols="0,0,*"; 
+            top.content.document.getElementById("content").cols="0,0,*";
+            top.content.document.getElementById("content").rows=top.content.document.getElementById("content").rows;
         }
     }       
     }

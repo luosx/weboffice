@@ -49,7 +49,6 @@ function showImage()
 	if(width>document.getElementById("showimage").scrollLeft)
 	{
 		t=setTimeout("showImage()",10);
-		
 	}
 	else
 	{
