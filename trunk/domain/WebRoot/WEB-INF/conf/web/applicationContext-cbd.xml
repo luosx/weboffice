@@ -83,7 +83,8 @@
 	
 	<!-- 生成PPT -->	
 	<bean name="xmbg" class="com.klspta.web.cbd.xmgl.xmbg.XmbgManager" scope="prototype"/>
-	
+	<!-- 项目管理 -->
+	<bean name="XmgljgManager" class="com.klspta.web.cbd.dtjc.kfgl.XmgljgManager" scope="prototype"/>
 	<!-- 生成计划报表（年度计划、季度计划） -->	
 	<bean name="jh" class="com.klspta.web.cbd.dtjc.tjbh.JhManager" scope="prototype"/>
 	
