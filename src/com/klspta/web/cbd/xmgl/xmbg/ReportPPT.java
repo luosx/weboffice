@@ -30,7 +30,7 @@ public class ReportPPT extends AbstractBaseBean {
 		
 		Slide slide = buildSlide();
 		setSlideSize(800, 600);
-		
+		setPicture(25, 25, 25, 25, "G:\\domain\\src\\com\\klspta\\web\\cbd\\xmgl\\xmbg\\logo.jpg",Picture.JPEG, slide);
 		setPicture(10, 10, pgx/2, pgy/2, "G:\\domain\\src\\com\\klspta\\web\\cbd\\xmgl\\xmbg\\图片1.jpg", Picture.JPEG, slide);
 		setPicture(pgx/2 + 30, 10, pgx/2, pgy/2, "G:\\domain\\src\\com\\klspta\\web\\cbd\\xmgl\\xmbg\\图片2.jpg", Picture.JPEG, slide);
 		setPicture(10, pgy/2 + 30, pgx/2, pgy/2, "G:\\domain\\src\\com\\klspta\\web\\cbd\\xmgl\\xmbg\\图片3.jpg", Picture.JPEG, slide);
@@ -55,6 +55,12 @@ public class ReportPPT extends AbstractBaseBean {
 	public SlideShow buildPPT(String yw_guid, String file_id) throws Exception{
 		String sql = "select t.xmname from jc_xiangmu t where t.yw_guid = ?";
 		String xmmc = String.valueOf(query(sql, YW, new Object[]{yw_guid}).get(0).get("xmname"));
+		String sql2 = "select t.loginname1 from core_projectname t where t.use = 'yes'";
+		String xtmc = String.valueOf(query(sql2, CORE, new Object[]{}).get(0).get("loginname1"));
+		StringBuffer title1 = new StringBuffer();
+		StringBuffer title2 = new StringBuffer();
+		title1.append(xtmc);
+		title2.append(xmmc).append("卫星遥感图");
 		
 		java.awt.Dimension pgsize = ppt.getPageSize();
 		int pgx = pgsize.width;
@@ -62,6 +68,40 @@ public class ReportPPT extends AbstractBaseBean {
 		
 		Slide slide = buildSlide();
 		setSlideSize(800, 600);
+
+		TextBox txt1 = new TextBox();
+		RichTextRun rt1 = txt1.getTextRun().getRichTextRuns()[0];
+		rt1.setFontSize(16);
+		rt1.setAlignment(TextBox.AlignLeft);
+		txt1.setAnchor(new java.awt.Rectangle(50,25,pgx,30));
+		txt1.setText(title1.toString());
+		
+		TextBox txt2 = new TextBox();
+		RichTextRun rt2 = txt2.getTextRun().getRichTextRuns()[0];
+		rt2.setFontSize(14);
+		rt2.setAlignment(TextBox.AlignCenter);
+		txt2.setAnchor(new java.awt.Rectangle(25,50,pgx/2-10,20));
+		txt2.setText(title2.toString());
+		
+		TextBox txt3 = new TextBox();
+		RichTextRun rt3 = txt3.getTextRun().getRichTextRuns()[0];
+		rt3.setFontSize(14);
+		rt3.setAlignment(TextBox.AlignCenter);
+		txt3.setAnchor(new java.awt.Rectangle(25,pgy/2+30,pgx/2-10,20));
+		txt3.setText(title2.toString());
+		
+		TextBox txt4 = new TextBox();
+		RichTextRun rt4 = txt4.getTextRun().getRichTextRuns()[0];
+		rt4.setFontSize(14);
+		rt4.setAlignment(TextBox.AlignCenter );
+		txt4.setAnchor(new java.awt.Rectangle(pgx/2+25,50,pgx/2-10,20));
+		txt4.setText(title2.toString());
+		
+		setText(slide, txt1);
+		setText(slide, txt2);
+		setText(slide, txt3);
+		setText(slide, txt4);
+		setPicture(25, 25, 25, 25, "G:\\domain\\src\\com\\klspta\\web\\cbd\\xmgl\\xmbg\\logo.jpg", Picture.JPEG, slide);
 		
 		String[] file_ids = file_id.split(",");
 		int num = file_ids.length > 3 ? 3 : file_ids.length;
@@ -83,13 +123,13 @@ public class ReportPPT extends AbstractBaseBean {
 	    	
 	    	switch (i) {
 			case 0:
-				setPicture(10, 10, pgx/2, pgy/2, file_Path, Picture.JPEG, slide);
+				setPicture(35, 75, pgx/2-10, pgy/2-50, file_Path, Picture.JPEG, slide);
 				break;
 			case 1:
-				setPicture(pgx/2 + 30, 10, pgx/2, pgy/2, file_Path, Picture.JPEG, slide);
+				setPicture(pgx/2 + 55, 75, pgx/2-10, pgy/2-25, file_Path, Picture.JPEG, slide);
 				break;
 			case 2:
-				setPicture(10, pgy/2 + 30, pgx/2, pgy/2, file_Path, Picture.JPEG, slide);
+				setPicture(35, pgy/2 +55, pgx/2-10, pgy/2-25, file_Path, Picture.JPEG, slide);
 				break;
 			default:
 				break;
@@ -107,7 +147,7 @@ public class ReportPPT extends AbstractBaseBean {
 		RichTextRun rt = txt.getTextRun().getRichTextRuns()[0];
 		rt.setFontSize(14);
 		rt.setAlignment(TextBox.AlignLeft);
-		txt.setAnchor(new java.awt.Rectangle(pgx/2 + 30,pgy/2 + 30,pgx/2,pgy/2));
+		txt.setAnchor(new java.awt.Rectangle(pgx/2 + 55,pgy/2 + 55,pgx/2-10,pgy/2-25));
 		txt.setText(description.toString());
 		setText(slide, txt);
 		
