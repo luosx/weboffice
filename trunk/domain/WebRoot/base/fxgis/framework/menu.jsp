@@ -12,6 +12,7 @@ String dtbzflag=request.getParameter("dtbzflag");
 String flag=request.getParameter("flag");
 String yw_guid=request.getParameter("yw_guid");
 String year = request.getParameter("year");
+String filter = request.getParameter("filter");
 String pra = "";
 if(yw_guid==null||"null".equals(yw_guid)){
 	pra="dolocation=true&p={\"rings\":[[[38688372,4431495],[38688350,4431440],[38688372,4431390],[38688402,4431431],[38688430,4431431],[38688414,4431494],[38688372,4431495]]],\"spatialReference\":{\"wkid\":2362}}&i=false";
@@ -30,7 +31,9 @@ if(yw_guid==null||"null".equals(yw_guid)){
 }
 
 String url=basePath+"base/fxgis/fx/FxGIS.html?debug=true&i=false";
-
+if(filter!=null){
+	url += "&filter="+filter;
+}
 if(year != null && !"null".equals(year)){
 	pra = "initFunction=[{\"name\":\"findFeature\",\"parameters\":\"jz_yw,0,"+yw_guid+",OBJECTID\"}]&i=false";
 }
@@ -45,6 +48,7 @@ String preParameters=request.getQueryString();
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
+  <meta http-equiv="X-UA-Compatible" content="IE=7" >
     <base href="<%=basePath%>">
     <title>中上</title>
 	<%@ include file="/base/include/ext.jspf" %>
@@ -212,6 +216,13 @@ Ext.onReady(function(){
 											icon : '<%=basePath%>base/fxgis/framework/images/showVertices.png',
 											tooltip : '面标记',
 											handler : drawPolygon
+										},{
+									    	text : '导出图片',
+											id : 'exportMap',
+											cls : 'x-btn-text-icon',
+											icon : '<%=basePath%>base/fxgis/framework/images/showVertices.png',
+											tooltip : '导出图片',
+											handler : exportMap
 										}]
 							           },
 							           /*
