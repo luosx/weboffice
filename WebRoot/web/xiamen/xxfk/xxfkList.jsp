@@ -182,6 +182,7 @@
 			        buttons: [
 			            {
 			                text   : '保存',
+			                id: 'savebtn',
 			                handler: function() {
 									winForm.form.submit({ 
 										waitMsg: '正在保存,请稍候... ', 		
@@ -235,7 +236,14 @@
 				
 				Ext.getCmp('yw_guid').setValue(myData[0].YW_GUID); 
 				Ext.getCmp('enterFlag').setValue("new");  
-				win.show();			
+				win.show();
+				Ext.getCmp('wtfkdw').setDisabled(false);			
+				Ext.getCmp('wtfkr').setDisabled(false);			
+				Ext.getCmp('wtfkms').setDisabled(false);	
+				Ext.getCmp('wtfksj').setDisabled(false);
+				Ext.getCmp('wtjdxq').setDisabled(true);			
+				Ext.getCmp('wtjdry').setDisabled(true);			
+				Ext.getCmp('wtjdsj').setDisabled(true);			
 			}
 			
 			function modifyXxfk(id){
@@ -255,6 +263,14 @@
 				Ext.getCmp('yw_guid').setValue(myData[0].YW_GUID); 
 				Ext.getCmp('enterFlag').setValue("update"); 
 				win.show();
+				Ext.getCmp('wtjdxq').setDisabled(false);			
+				Ext.getCmp('wtjdry').setDisabled(false);			
+				Ext.getCmp('wtjdsj').setDisabled(false);
+				if("09D31706EB0B487EB605F64386D573F8" == "<%=userId%>"){//只有王峰可以回复问题
+					Ext.getCmp('savebtn').setDisabled(false);
+				}else{
+					Ext.getCmp('savebtn').setDisabled(true);
+				}	
 			}
 			
 			function query(){
