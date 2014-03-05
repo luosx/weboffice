@@ -101,7 +101,8 @@ public class ReportPPT extends AbstractBaseBean {
 		setText(slide, txt2);
 		setText(slide, txt3);
 		setText(slide, txt4);
-		setPicture(25, 25, 25, 25, "G:\\domain\\src\\com\\klspta\\web\\cbd\\xmgl\\xmbg\\logo.jpg", Picture.JPEG, slide);
+		setPicture(25, 25, 25, 25, "D:\\domain\\src\\com\\klspta\\web\\cbd\\xmgl\\xmbg\\logo.jpg", Picture.JPEG, slide);
+
 		
 		String[] file_ids = file_id.split(",");
 		int num = file_ids.length > 3 ? 3 : file_ids.length;
@@ -126,7 +127,7 @@ public class ReportPPT extends AbstractBaseBean {
 				setPicture(35, 75, pgx/2-10, pgy/2-50, file_Path, Picture.JPEG, slide);
 				break;
 			case 1:
-				setPicture(pgx/2 + 55, 75, pgx/2-10, pgy/2-25, file_Path, Picture.JPEG, slide);
+				setPicture(pgx/2 + 55, 75, pgx/2-10, pgy/2-50, file_Path, Picture.JPEG, slide);
 				break;
 			case 2:
 				setPicture(35, pgy/2 +55, pgx/2-10, pgy/2-25, file_Path, Picture.JPEG, slide);
