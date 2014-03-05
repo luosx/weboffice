@@ -37,6 +37,11 @@ frames["lower"].swfobject.getObjectById("FxGIS").clear();
 operation = true;
 }
 
+function findFeature(name, layer, key, keyname){
+	frames["lower"].swfobject.getObjectById("FxGIS").findFeature(name, layer, key, keyname);
+}
+
+
 //属性查询
 function identify(){
 frames["lower"].swfobject.getObjectById("FxGIS").panmap();
@@ -213,6 +218,11 @@ frames["lower"].swfobject.getObjectById("FxGIS").drawPoint("");
 /*面标记*/
 function drawPolygon(){
 frames["lower"].swfobject.getObjectById("FxGIS").drawPolygon();
+}
+
+/*导出图片*/
+function exportMap(){
+frames["lower"].swfobject.getObjectById("FxGIS").exportMap();
 }
 
 //按ESC退出全屏
