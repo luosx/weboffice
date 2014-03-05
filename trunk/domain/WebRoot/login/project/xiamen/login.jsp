@@ -50,7 +50,7 @@
     <td height="595" valign="top" background="../../images/login.jpg">
     <table width="1000" border="0" cellspacing="0" cellpadding="0">
       <tr>
-      <td  colspan="2"><div style="margin-top: 60px;margin-left: 25%"><font class="style1"><%=loginname1 %></font></div></td>
+      <td  colspan="2"><div id="loginname1" style="margin-top: 60px;margin-left: 25%"><font class="style1"><%=loginname1 %></font></div></td>
       </tr>
       <tr>
       <td colspan="2" ><div style="margin-top: 10px;margin-left: 26%" ><font class="style2"><%=loginname2 %></font></div></td>
@@ -102,6 +102,12 @@ function MM_preloadImages(){
 var d=document; if(d.images){ if(!d.MM_p) d.MM_p=new Array();
 var i,j=d.MM_p.length,a=MM_preloadImages.arguments; for(i=0; i<a.length; i++)
 if (a[i].indexOf("#")!=0){ d.MM_p[j]=new Image; d.MM_p[j++].src=a[i];}}
+if(screen.width ==1364&&screen.height==768){
+document.getElementById('loginname1').style.marginTop='67px';
+}
+if(screen.width ==1440&&screen.height==900){
+document.getElementById('loginname1').style.marginTop='68px';
+}
 }
 function MM_swapImage() { //v3.0
 var i,j=0,x,a=MM_swapImage.arguments; document.MM_sr=new Array; for(i=0;i<(a.length-2);i+=3)
