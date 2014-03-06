@@ -2,6 +2,7 @@
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+String view = request.getParameter("view");
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -24,7 +25,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   <script type="text/javascript">
   		var gisurl = "<%=basePath%>/base/fxgis/framework/gisViewFrame.jsp";
-  		var url = "<%=basePath%>/web/cbd/yzt/zrb/showRW/zrbEditor.jsp";
+  		var url = "<%=basePath%>/web/cbd/yzt/zrb/showRW/zrbEditor.jsp?view=<%=view%>";
   		Ext.onReady(function(){
   			Ext.state.Manager.setProvider(new Ext.state.CookieProvider());
   			var	width = document.body.clientWidth;
@@ -42,7 +43,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                  html:"<iframe id='reportmap' width=100% height=100% src=" + gisurl
 							+ "></iframe>"
             },{
-                 title:'规划指标表',
+                 title:'自然斑列表',
                  region:'east',
                  width:width * 0.6,
                  split:true,
