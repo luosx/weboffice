@@ -53,6 +53,7 @@
                                     margins:'0 0 0 0'
 								}]
 					});
+					top.content.content.cols="0,9,*";
 		});
 	
 	</script>
