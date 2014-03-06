@@ -31,13 +31,13 @@ System.out.println(type);
   		var gisurl ;
   		var url = "<%=basePath%>/web/cbd/yzt/jbb/ghcbzy/jbbEditor.jsp?type=<%=type%>";
   		if(type=="1"){
-  			gisurl = "<%=basePath%>/base/fxgis/framework/gisViewFrame.jsp?filter=cbd,4,gnfq='1'";
+  			gisurl = "<%=basePath%>/base/fxgis/framework/gisViewFrame.jsp?filter=cbd,4,gnfq||1";
   		}else if(type=="2"){
-  			gisurl = "<%=basePath%>/base/fxgis/framework/gisViewFrame.jsp?filter=cbd,4,gnfq='2'";
+  			gisurl = "<%=basePath%>/base/fxgis/framework/gisViewFrame.jsp?filter=cbd,4,gnfq||2";
   		}else if(type=="3"){
-  			gisurl = "<%=basePath%>/base/fxgis/framework/gisViewFrame.jsp?filter=cbd,4,gnfq='3'";
+  			gisurl = "<%=basePath%>/base/fxgis/framework/gisViewFrame.jsp?filter=cbd,4,gnfq||3";
   		}else if(type=="4"){
-  			gisurl = "<%=basePath%>/base/fxgis/framework/gisViewFrame.jsp?filter=cbd,4,gnfq='4'";
+  			gisurl = "<%=basePath%>/base/fxgis/framework/gisViewFrame.jsp?filter=cbd,4,gnfq||4";
   		}else {
   			gisurl = "<%=basePath%>/base/fxgis/framework/gisViewFrame.jsp";
   		}

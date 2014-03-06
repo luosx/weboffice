@@ -11,7 +11,7 @@ Ext.onReady(function() {
 function initComponent() {
 
 	simple = new Ext.FormPanel({
-				bodyStyle : 'padding:0px 0px 0',
+				bodyStyle : 'padding:5px 5px 0',
 				tbar : [{
 							xtype : 'label',
 							text : '关键字：'
@@ -26,7 +26,7 @@ function initComponent() {
 						}],
 				items : [{
 					html : "<iframe id='report' width=" + (width - 10)
-							+ " height=" + (height - 80) + " src=" + url
+							+ " height=" + (height - 57) + " src=" + url
 							+ "></iframe>"
 				}]
 			});
