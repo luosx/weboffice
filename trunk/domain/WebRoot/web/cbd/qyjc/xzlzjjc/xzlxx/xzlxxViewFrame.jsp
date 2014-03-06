@@ -2,6 +2,7 @@
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+String view = request.getParameter("view");
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -24,7 +25,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   <script type="text/javascript">
   		var gisurl = "<%=basePath%>/base/fxgis/framework/gisViewFrame.jsp";
-  		var url = "<%=basePath%>/web/cbd/qyjc/xzlzjjc/xzlxx/xzlxxEditor.jsp";
+  		var url = "<%=basePath%>/web/cbd/qyjc/xzlzjjc/xzlxx/xzlxxEditor.jsp?view=<%=view%>";
   		Ext.onReady(function(){
   			Ext.state.Manager.setProvider(new Ext.state.CookieProvider());
   			var	width = document.body.clientWidth;
