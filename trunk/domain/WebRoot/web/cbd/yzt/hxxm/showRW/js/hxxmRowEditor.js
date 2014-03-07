@@ -21,7 +21,11 @@ function showMap(objid){
 
 //双击编辑地图
 function editMap(objid){
-	
+	if(table.element == undefined){
+		table.init(document.getElementById("HXXM"));
+	}
+	var key = objid.cells[1].innerText;
+	xmmc = key;
 	
 	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").clear();
 	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").drawPolygon();
