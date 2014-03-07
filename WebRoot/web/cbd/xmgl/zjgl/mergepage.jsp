@@ -140,6 +140,7 @@
 			<div>
 				<img
 					src='<%=basePath%>//model//accessory//dzfj//download//<%=filepath%>'
+					onerror="this.src='<%=basePath%>/web/cbd/framework/images/defult.jpg'"
 					width='450px' height='250px' border='0'>
 			</div>
 		</div>
@@ -150,6 +151,7 @@
 			<div>
 				<img
 					src='<%=basePath%>//model//accessory//dzfj//download//<%=filepath1%>'
+					onerror="this.src='<%=basePath%>/web/cbd/framework/images/defult.jpg'"
 					width='450px' height='250px' border='0'>
 			</div>
 		</div>
@@ -160,6 +162,7 @@
 			<div>
 				<img
 					src='<%=basePath%>//model//accessory//dzfj//download//<%=filepath2%>'
+					onerror="this.src='<%=basePath%>/web/cbd/framework/images/defult.jpg'"
 					height='250px' width='450px' border='0'>
 			</div>
 		</div>
