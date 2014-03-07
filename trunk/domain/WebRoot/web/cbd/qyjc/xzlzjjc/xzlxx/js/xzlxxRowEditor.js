@@ -24,6 +24,12 @@ function showMap(objid){
 //双击编辑地图
 function editMap(objid){
 	
+	if(table.element == undefined){
+		table.init(document.getElementById("XZLZJ"));
+	}
+	//alert("showMap");
+	xzlmc = objid.cells[1].innerText;
+	
 	//parent.parent.frames['east'].swfobject.getObjectById("FxGIS").clear();
 	//parent.parent.frames['east'].swfobject.getObjectById("FxGIS").drawPolygon();
 	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").clear();
