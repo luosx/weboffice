@@ -85,7 +85,7 @@ td {
   	$(document).ready(function () { 
 		var width = document.body.clientWidth;
 		var height = document.body.clientHeight * 0.95;
-       	FixTable("SWCBR", 1,1, width, height-30);
+       	FixTable("SWCBR", 1,1, width, height-5);
        	buildPanel();
     });
   //	Ext.onReady(function(){
