@@ -24,7 +24,9 @@ function showMap(objid){
 
 //双击编辑地图
 function editMap(objid){
-	
+	if(view == "R"){
+		return;
+	}
 	//parent.parent.frames['east'].swfobject.getObjectById("FxGIS").clear();
 	//parent.parent.frames['east'].swfobject.getObjectById("FxGIS").drawPolygon();
 	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").clear();
