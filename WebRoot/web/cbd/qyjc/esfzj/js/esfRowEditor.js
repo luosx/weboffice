@@ -86,7 +86,7 @@ function dele(year,month){
 				choseString += table.getValue(choseValue.pop(),"1") + ",";
 			}
 			putClientCommond("scjcManager","delByYwGuid");
-			putRestParameter("xqmc",choseString);
+			putRestParameter("xqmc",escape(escape(choseString)));
 			putRestParameter("year",year);
 			putRestParameter("month",month);
 			myData = restRequest();
