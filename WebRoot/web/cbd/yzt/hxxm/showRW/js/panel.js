@@ -12,7 +12,6 @@ Paneloper.prototype = {
 	monitor:function(){
 		//录入自然斑编号时添加验证
 		var obj = this;
-
 	},
 	insertValue:function(name, value){
 		var extObject = Ext.getCmp(name);

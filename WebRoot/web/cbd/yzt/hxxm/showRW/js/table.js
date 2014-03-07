@@ -37,6 +37,9 @@ tableoper.prototype = {
 	},
 	//添加选中标记
 	addAnnotation:function(row){
+		if(this.element==null){
+			this.element = document.getElementById("HXXM");
+		}
 		var color = this.element.rows[row].style.backgroundColor;
 		if(color != "#d1e5fb" && color != ""){
 			this.chose[row] = '';
@@ -79,6 +82,20 @@ tableoper.prototype = {
 	setValue:function(row, num, value){
 		this.element.rows[row].cells[num].innerHTML = "<div id='0' style='display:none;width:10'></div>" + value;
 		return true;
+	},
+	toAnnotation:function(s){
+		var tempValue = eval('(' + s + ')');
+		var hxxmmc = tempValue[0].attributes.项目名称;
+		this.findRowByfiled(hxxmmc);
+	},
+	findRowByfiled:function(field){
+		var dom = document.getElementById("HXXM");
+		for(var i=0;i<dom.rows.length;i++){
+			if(dom.rows[i].cells[1].innerText==field){
+				this.init(dom);
+				this.addAnnotation(i);
+			}
+		}
 	}
 	
 }
