@@ -156,7 +156,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                  width:80
               },
               items: [
-              	 {id: "SRKYYGFBL",fieldLabel:"收入可用于购房比例(50)"},
+              	 {id: "SRKYYGFBL",fieldLabel:"收入可用于购房比例(%)"},
                  {id: "FWLX", fieldLabel: "房屋类型"},
                  {id: "GFLX", fieldLabel: "购房类型"},
                  {id: "SFGFK", fieldLabel: "首付购房款（%）"},
