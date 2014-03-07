@@ -119,7 +119,9 @@ public class ScjcManager extends AbstractBaseBean {
     public void delByYwGuid() {
         try {
             String yw_guid = request.getParameter("xqmc");
+            yw_guid = UtilFactory.getStrUtil().unescape(yw_guid);
             String[] xqmcs = yw_guid.split(",");
+           
             List<Map<String,Object>> list = null;
 	            for(int i = 0; i < xqmcs.length;i++){
 	            	String sql = "select yw_guid from esf_jbxx where xqmc = ?";
