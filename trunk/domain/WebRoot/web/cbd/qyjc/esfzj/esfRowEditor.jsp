@@ -13,6 +13,7 @@ String keyIndex = "1";
 ITableStyle its = new TableStyleEditRow();
 String year = Calendar.getInstance().get(Calendar.YEAR)+"";		
 String month = Calendar.getInstance().get(Calendar.MONTH)+1+"";
+String view = request.getParameter("view");
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -77,6 +78,7 @@ String month = Calendar.getInstance().get(Calendar.MONTH)+1+"";
   </head>
   <script type="text/javascript">
   	var form;
+  	var view = "<%=view%>";
   	var paneloper = new Paneloper();
   	$(document).ready(function () { 
 		var width = document.body.clientWidth;
