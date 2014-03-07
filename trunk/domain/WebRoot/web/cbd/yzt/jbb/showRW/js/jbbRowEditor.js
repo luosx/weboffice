@@ -20,6 +20,10 @@ function editMap(objid){
 	if(view=="R"){
 		return ;
 	}
+	if(table.element == undefined){
+		table.init(document.getElementById("JBB"));
+	}
+	zrbbh = objid.cells[0].innerText;
 	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").clear();
 	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").drawPolygon();
 }
