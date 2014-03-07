@@ -57,6 +57,9 @@ String view = request.getParameter("view");
             }]
            });
         });
+        function drawPolygonCallback(s){
+			frames[1].frames['report'].setRecord(s);
+		}
   </script>
   <body>
   </body>

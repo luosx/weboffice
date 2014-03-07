@@ -29,7 +29,10 @@ function editMap(objid){
 	if(view == "R"){
 		return;
 	}
-	
+	if(table.element == undefined){
+		table.init(document.getElementById("ZRB"));
+	}
+	 zrbbh = objid.cells[1].innerText;
 	//form.show();
 	
 	//parent.parent.frames['east'].swfobject.getObjectById("FxGIS").clear();

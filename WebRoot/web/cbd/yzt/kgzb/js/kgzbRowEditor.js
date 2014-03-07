@@ -28,7 +28,10 @@ function editMap(objid){
 	if(view=="R"){
 		return ;
 	}
-	
+	if(table.element == undefined){
+		table.init(document.getElementById("SWCBR"));
+	}
+	dkmc = objid.cells[1].innerText;
 	//parent.parent.frames['east'].swfobject.getObjectById("FxGIS").clear();
 	//parent.parent.frames['east'].swfobject.getObjectById("FxGIS").drawPolygon();
 	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").clear();
