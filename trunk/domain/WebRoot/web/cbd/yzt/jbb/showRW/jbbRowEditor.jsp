@@ -8,6 +8,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 String reportID = "jbbHandle";
 String keyIndex = "0";
 ITableStyle its = new TableStyleEditRow();
+String view = request.getParameter("view");
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -76,6 +77,7 @@ ITableStyle its = new TableStyleEditRow();
   </head>
   <script type="text/javascript">
   	var form;
+  	var view = "<%=view%>";
   	var paneloper = new Paneloper();
   	$(document).ready(function () { 
 		var width = document.body.clientWidth+10;
