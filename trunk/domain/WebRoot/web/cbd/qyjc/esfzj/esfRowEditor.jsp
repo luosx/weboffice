@@ -150,6 +150,7 @@ String month = Calendar.getInstance().get(Calendar.MONTH)+1+"";
 		                xtype: 'textfield',
 		                id      : 'esfzl',
 		                value:'',
+		                disabled:true,
 		                fieldLabel: '二手房总量',
 		                width :100
 	                }]
@@ -163,6 +164,7 @@ String month = Calendar.getInstance().get(Calendar.MONTH)+1+"";
 		                xtype: 'textfield',
 		                id      : 'esfjj',
 		                value:'',
+		                disabled:true,
 		                fieldLabel: '二手房均价',
 		                width :100
 	                }]	                
@@ -187,6 +189,7 @@ String month = Calendar.getInstance().get(Calendar.MONTH)+1+"";
 		                xtype: 'textfield',
 		                id      : 'czl',
 		                value:'',
+		                disabled:true,
 		                fieldLabel: '出租量',
 		                width :100
 	                }]	                
@@ -197,6 +200,7 @@ String month = Calendar.getInstance().get(Calendar.MONTH)+1+"";
 		                xtype: 'textfield',
 		                id      : 'czfjj',
 		                value:'',
+		                disabled:true,
 		                fieldLabel: '出租房均价',
 		                width :100
 	                }]

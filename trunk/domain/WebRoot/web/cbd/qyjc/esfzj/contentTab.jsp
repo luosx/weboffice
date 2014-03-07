@@ -36,11 +36,11 @@
         frame:true,
         items:[
         	{
-                title: '二手房监测',
+                title: '二手房租金情况',
                 html: "<iframe width='"+w+"' height='"+h+"' src='web/cbd/qyjc/esfzj/esfViewFrame.jsp?view=<%=view%>'/>" 
             }
             ,{
-                title: '二手房租售情况录入',
+                title: '二手房租信息维护',
                 html: "<iframe width='"+w+"' height='"+h+"' src='web/cbd/qyjc/esfxx/esfscjczsqk.jsp?view=<%=view%>'/>"
             }
             ,{
