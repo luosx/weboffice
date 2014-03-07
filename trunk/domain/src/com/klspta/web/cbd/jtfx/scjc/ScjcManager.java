@@ -389,7 +389,14 @@ public class ScjcManager extends AbstractBaseBean {
                 "1000px");
         response(buffer.toString());
     }
-//
+    
+    public void queryByname(){
+        StringBuffer sqlBuffer = new StringBuffer();
+        sqlBuffer.append("select t.ssqy,t.xqlb from esf_jbxx t");
+        List<Map<String, Object>> list = query(sqlBuffer.toString(), YW);
+        response(list);
+    }
+
     
     
 }
