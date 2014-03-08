@@ -38,6 +38,7 @@ if(year != null && !"null".equals(year)){
 if(flag!=null&&!flag.equals("null")||dtbzflag!=null&&!dtbzflag.equals("null")){
   url=basePath+"base/fxgis/fx/FxGIS.html?"+pra;
 }
+
 String preParameters=request.getQueryString();
 %>
 
