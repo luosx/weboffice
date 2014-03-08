@@ -82,14 +82,15 @@ body {
             putRestParameter("users",escape(escape("("+username+")")));
             var myData = restRequest();
             var var_myData = myData.split("#");
-            if(""!=var_myData[1]){//电话号码错误
+            if(""==var_myData[1]){//电话号码错误
             	alert(var_myData[0]);
             }else{
             	putClientCommond("messageManager","send");
-            	putRestParameter("guid","12336举报");//任务编号
-            	putRestParameter("users","("+username+")");//组织人员
-            	putRestParameter("content",userfullname+"你好，有12336举报案件移交给你需要办理！");//消息内容
-            	putRestParameter("fullname","<%=fullName%>");//发送人
+            	putRestParameter("flag","12336");//标识
+            	putRestParameter("guid",escape(escape("12336举报")));//任务编号
+            	putRestParameter("users",escape(escape(userfullname+"("+username+")")));//组织人员
+            	putRestParameter("content",escape(escape(userfullname+"你好，有12336举报案件移交给你需要办理！")));//消息内容
+            	putRestParameter("fullname",escape(escape("<%=fullName%>")));//发送人
             	putRestParameter("userId","<%=userId%>");//发送人
             	var myData = restRequest();
             	transferworkflow();
@@ -339,8 +340,15 @@ body {
 				%>
 				<input type="button" class='btn' value="关 闭" onclick="closeWin()"
 					style="width: 61px; height: 22px" />
+				<%
+					if (isEnd) {
+					}else{
+				%>
 				&nbsp;&nbsp;&nbsp;
 				<input type="checkbox" id="sendmessage"/>发送短信<br/>
+				<%
+					}
+				%>
 			</form>
 		</div>
 	</body>
