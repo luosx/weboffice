@@ -34,4 +34,6 @@
 	<bean name="location" class="com.klspta.web.xiamen.device.DevicePlayBack" />
 	<!-- 问题反馈 -->
 	<bean name="xxfkManager" class="com.klspta.web.xiamen.xxfk.XxfkManager" scope="prototype"/>
+	<!-- 回传分析 -->
+	<bean name="xcanalysis" class="com.klspta.web.xiamen.xchc.XcAnalysis" scope="prototype"/>
 </beans>
