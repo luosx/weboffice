@@ -5,6 +5,6 @@ import java.util.Map;
 
 public interface IphjgData {
 	
-	public List<Map<String, Object>> getList(String where);
+	public List<Map<String, Object>> getList(String userId,String where);
 
 }
