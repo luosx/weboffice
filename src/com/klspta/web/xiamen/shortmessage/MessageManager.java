@@ -55,8 +55,6 @@ public class MessageManager extends AbstractBaseBean {
         String users = request.getParameter("users");
         //手机号
         String phones = request.getParameter("phones");
-        //获取所有电话
-        String[] allPersonphone = getAllpersonphone(users,phones);
         
         //消息内容
         String content = request.getParameter("content");
@@ -71,6 +69,16 @@ public class MessageManager extends AbstractBaseBean {
         
         //发送人
         String fullname = request.getParameter("fullname");
+        String userId = request.getParameter("userId");
+        String flag = request.getParameter("flag");
+        if(flag != null&&flag != "null"&&"12336".equals(flag)){
+        	xcbh = UtilFactory.getStrUtil().unescape(xcbh);
+        	users = UtilFactory.getStrUtil().unescape(users);
+        	content = UtilFactory.getStrUtil().unescape(content);
+        	fullname = UtilFactory.getStrUtil().unescape(fullname);
+        }
+        //获取所有电话
+        String[] allPersonphone = getAllpersonphone(users,phones);
         
         if(isauto!=null){
             content +="发送人："+autoname;
@@ -85,7 +93,12 @@ public class MessageManager extends AbstractBaseBean {
         }
 
         String fsr_name = fullname;
-        User user = ManagerFactory.getUserManager().getUserWithFullName(fsr_name);
+        User user = null;
+		try {
+			user = ManagerFactory.getUserManager().getUserWithId(userId);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
         String fsr_id = user.getUserID();
         String[] jsrys = getReceiver(users,phones);
         String jsry = StringUtils.join(jsrys,",");
