@@ -36,10 +36,10 @@
 						{name:'YW_GUID'},
 						{name:'DXBH'},
 						{name:'DXNR'},
-						{name:'FSSJ'},
-						{name:'FSR_NAME'},
-						{name:'FSR_ID'},
 						{name:'JSRY'},
+						{name:'FSR_NAME'},
+						{name:'FSSJ'},
+						{name:'FSR_ID'},
 						{name:'FSR_XZQH'}									
 					]
 			});
@@ -156,10 +156,10 @@
 				{name:'YW_GUID'},
 				{name:'DXBH'},
 				{name:'DXNR'},
-				{name:'FSSJ'},
-				{name:'FSR_NAME'},
-				{name:'FSR_ID'},
 				{name:'JSRY'},
+				{name:'FSR_NAME'},
+				{name:'FSSJ'},
+				{name:'FSR_ID'},
 				{name:'FSR_XZQH'}			
 			]
 		});

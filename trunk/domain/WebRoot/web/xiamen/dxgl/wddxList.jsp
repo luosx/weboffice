@@ -41,10 +41,10 @@
 						{name:'YW_GUID'},
 						{name:'DXBH'},
 						{name:'DXNR'},
+						{name:'JSRY'},
 						{name:'FSSJ'},
 						{name:'FSR_NAME'},
 						{name:'FSR_ID'},
-						{name:'JSRY'},
 						{name:'FSR_XZQH'}									
 					]
 			});
@@ -162,10 +162,10 @@
 				{name:'YW_GUID'},
 				{name:'DXBH'},
 				{name:'DXNR'},
+				{name:'JSRY'},
 				{name:'FSSJ'},
 				{name:'FSR_NAME'},
 				{name:'FSR_ID'},
-				{name:'JSRY'},
 				{name:'FSR_XZQH'}			
 			]
 		});
