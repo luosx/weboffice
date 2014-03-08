@@ -391,9 +391,11 @@ public class ScjcManager extends AbstractBaseBean {
     }
     
     public void queryByname(){
+    	String xqmc = request.getParameter("xqmc");
+    	xqmc = UtilFactory.getStrUtil().unescape(xqmc);
         StringBuffer sqlBuffer = new StringBuffer();
-        sqlBuffer.append("select t.ssqy,t.xqlb from esf_jbxx t");
-        List<Map<String, Object>> list = query(sqlBuffer.toString(), YW);
+        sqlBuffer.append("select t.ssqy,t.xqlb from esf_jbxx t where xqmc=?");
+        List<Map<String, Object>> list = query(sqlBuffer.toString(), YW,new Object[]{xqmc});
         response(list);
     }
 
