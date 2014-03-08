@@ -14,7 +14,7 @@ public class PhjgManager extends AbstractBaseBean {
 		String userId = request.getParameter("userid");
 		String keyword = request.getParameter("keyword");
 		IphjgData phjgData = new PhjgData();
-		List<Map<String, Object>> phjgList = phjgData.getList(keyword);
+		List<Map<String, Object>> phjgList = phjgData.getList(userId,keyword);
 		response(phjgList);
 	}
 	
