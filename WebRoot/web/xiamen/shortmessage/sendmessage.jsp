@@ -25,6 +25,7 @@ if(ydwz!=null){
 String zdmj = request.getParameter("zdmj");
 Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 String fullname = ((User)principal).getFullName();
+String userId = ((User)principal).getId();
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -56,7 +57,7 @@ String fullname = ((User)principal).getFullName();
               title:"发送短信",
               height: 600,
               width: 800,
-              url:'<%=basePath%>/service/rest/messageManager/send',
+              url:'<%=basePath%>/service/rest/messageManager/send?userId=<%=userId%>',
               labelWidth: 80,
               labelAlign: "right",
               buttonAlign:"center",
@@ -283,13 +284,21 @@ String fullname = ((User)principal).getFullName();
 			            	var var_myData;
 			                if(winForm.getForm().isValid()){  
 			                	var users = winForm.form.findField('itemselector').getValue();
-			                    if(users!=''&& users.substring(0,1)==','){
-			                    	users = users.substring(1,users.length);
-			                    	var_myData = checkusersmobilephone(users);
+			                    if(users!=''){
+			                    	if(users.substring(0,1)==','){
+			                    		users = users.substring(1,users.length);
+			                    	}
+			                    	var_myData = checkusersmobilephone(users);//验证电话号码是否正确
+			                    	var_myData = var_myData.split("#");
+				                    if("的电话号码不对!请提醒他修改！" == var_myData[0]){//没有错误的电话号码
+				                    	
+				                    }else{
+				                    	alert(var_myData[0]);//电话号码错误的提示出来
+				                    }
+				                    Ext.getCmp('users').setValue(var_myData[1]);//电话号码正确的添加到发送名单中
+			                    }else{
+			                    	Ext.getCmp('users').setValue("");
 			                    }
-			                    var var_myData = var_myData.split("#");
-			                    alert(var_myData[0]);
-			                    Ext.getCmp('users').setValue(var_myData[1]);  
 			                 }		
 						   win.hide();
 			              }
