@@ -58,6 +58,6 @@
 	<frameset id="main" frameborder="no" border="0"
 		framespacing="0">
 		<frame id="lower" name="lower" scrolling="NO" noresize
-			src="<%=basePath%>model/resourcetree/resourceTree.jsp?<%=sb.toString()%>&edit=<%=edit%>&zfjcType=<%=zfjcType %>>"/>
+			src="<%=basePath%>model/resourcetree/resourceTree.jsp?<%=sb.toString()%>&edit=<%=edit%>&zfjcType=<%=zfjcType %>"/>
 	</frameset>
 </html>
