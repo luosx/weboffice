@@ -111,14 +111,21 @@ function dele(year,month){
 }
 
 function modify(){
+	
+	
 	var annoations = table.getAnnotations();
 	if(annoations.length > 0){
 		var objid = table.element.rows[annoations[0]];
 		if(table.element == undefined){
-		table.init(document.getElementById("ESFQK"));
+			table.init(document.getElementById("ESFQK"));
 		}
 		var key = objid.cells[1].innerText;
 		xqmc = key;
+		putClientCommond("scjcManager","queryByname");
+		putRestParameter("xqmc",escape(escape(xqmc)));
+		var hxxmmc = restRequest();
+		form.findById('ssqy').setValue(hxxmmc[0].SSQY);
+		form.findById('xqlb').setValue(hxxmmc[0].XQLB);
 		var array = paneloper.getElements();
 		for(var i = 1; i < objid.cells.length; i++){
 			var value = objid.cells[i].innerText;
