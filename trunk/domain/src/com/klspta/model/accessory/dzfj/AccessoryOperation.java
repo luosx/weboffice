@@ -448,28 +448,12 @@ public class AccessoryOperation extends AbstractBaseBean  {
         return false;
     }
     
-    public String  getFilePathByywguid(String yw_guid){
-        String filepath = "";
+    public List<Map<String,Object>> getList(String yw_guid){
+        List<Map<String,Object>> result = null;
         String sql = "select file_path from atta_accessory where yw_guid=? and file_type='file'";
-        List<Map<String, Object>> list = query(sql, CORE, new Object[]{yw_guid});
-        filepath = list.get(0).get("file_path").toString();
-        return filepath;
+        result = query(sql, CORE, new Object[]{yw_guid});
+        return result;
     }
     
-    public String  getFilePathByywguid1(String yw_guid){
-        String filepath = "";
-        String sql = "select file_path from atta_accessory where yw_guid=? and file_type='file'";
-        List<Map<String, Object>> list = query(sql, CORE, new Object[]{yw_guid});
-        filepath = list.get(1).get("file_path").toString();
-        return filepath;
-    }
-    
-    public String  getFilePathByywguid2(String yw_guid){
-        String filepath = "";
-        String sql = "select file_path from atta_accessory where yw_guid=? and file_type='file'";
-        List<Map<String, Object>> list = query(sql, CORE, new Object[]{yw_guid});
-        filepath = list.get(2).get("file_path").toString();
-        return filepath;
-    }
     
 }
