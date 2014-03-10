@@ -139,29 +139,32 @@
 			<h1><%=name1%></h1>
 			<hr>
 		</div>
-		<div class="div1">
-			<div align="center">
-				<input id="nameone" style='border-left: 0px; border-top: 0px; border-right: 0px; border-bottom: 1px' value="<%=map.get("nameone") %>">
+			<div style="margin-left:auto;margin-right:auto;width:1000px;height:300px;" >
+				<div class="div1">
+					<div align="center">
+						<input id="nameone" style='border-left: 0px; border-top: 0px; border-right: 0px; border-bottom: 1px' value="<%=map.get("nameone") %>">
+					</div>
+					<div>
+						<img
+							src='<%=basePath%>//model//accessory//dzfj//download//<%=firstpath%>'
+							onerror="this.src='<%=basePath%>/web/cbd/framework/images/defult.jpg'"
+							height='275px' width='475px'  style="border:5 solid #D0D0D0">
+					</div>
+				</div>
+				<div class="div2" align="center">
+					<div align="center">
+						<input id="nametwo" style='border-left: 0px; border-top: 0px; border-right: 0px; border-bottom: 1px' value="<%=map.get("nametwo") %>">
+					</div>
+					<div>
+						<img
+							src='<%=basePath%>//model//accessory//dzfj//download//<%=secondpath%>'
+							onerror="this.src='<%=basePath%>/web/cbd/framework/images/defult.jpg'"
+							height='275px' width='475px'  style="border:5 solid #D0D0D0">
+					</div>
+				</div>
 			</div>
-			<div>
-				<img
-					src='<%=basePath%>//model//accessory//dzfj//download//<%=firstpath%>'
-					onerror="this.src='<%=basePath%>/web/cbd/framework/images/defult.jpg'"
-					height='275px' width='475px'  style="border:5 solid #D0D0D0">
-			</div>
-		</div>
-		<div class="div2">
-			<div align="center">
-				<input id="nametwo" style='border-left: 0px; border-top: 0px; border-right: 0px; border-bottom: 1px' value="<%=map.get("nametwo") %>">
-			</div>
-			<div>
-				<img
-					src='<%=basePath%>//model//accessory//dzfj//download//<%=secondpath%>'
-					onerror="this.src='<%=basePath%>/web/cbd/framework/images/defult.jpg'"
-					height='275px' width='475px'  style="border:5 solid #D0D0D0">
-			</div>
-		</div>
-		<div class="div3">
+		<div style="margin-left:auto;margin-right:auto;width:1000px;height:300px;" >
+		<div class="div3" align="center">
 			<div>
 				<input id="namethree" style='border-left: 0px; border-top: 0px; border-right: 0px; border-bottom: 1px' value="<%=map.get("namethree") %>">
 			</div>
@@ -220,6 +223,7 @@
 					</td>
 				</tr>
 			</table>
+		</div>
 		</div>
 	</div>
 </body>
