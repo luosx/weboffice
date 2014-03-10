@@ -17,12 +17,17 @@
 	if (xmmc != null) {
 		xmmc = new String(xmmc.getBytes("iso-8859-1"), "utf-8");
 	}
-	String filepath = AccessoryOperation.getInstance()
-			.getFilePathByywguid(yw_guid);
-	String filepath1 = AccessoryOperation.getInstance()
-			.getFilePathByywguid1(yw_guid);
-	String filepath2 = AccessoryOperation.getInstance()
-			.getFilePathByywguid2(yw_guid);
+	List<Map<String,Object>> listpath = AccessoryOperation.getInstance().getList(yw_guid);
+	String firstpath = "";
+	String secondpath = "";
+	String threepath = "";	
+	if(listpath!=null){
+		for(int i=0;i<listpath.size();i++){
+			firstpath = listpath.get(0).toString();
+			secondpath = listpath.get(1).toString();
+			threepath = listpath.get(2).toString();
+		}
+	}
 	List<Map<String,Object>> list = new XmgljgManager().getList();
 	Map<String,Object> map = null;
 	if(list!=null){
@@ -132,6 +137,7 @@
 
 		<div>
 			<h1><%=name1%></h1>
+			<hr>
 		</div>
 		<div class="div1">
 			<div align="center">
@@ -139,9 +145,9 @@
 			</div>
 			<div>
 				<img
-					src='<%=basePath%>//model//accessory//dzfj//download//<%=filepath%>'
+					src='<%=basePath%>//model//accessory//dzfj//download//<%=firstpath%>'
 					onerror="this.src='<%=basePath%>/web/cbd/framework/images/defult.jpg'"
-					width='450px' height='250px' border='0'>
+					height='275px' width='475px'  style="border:5 solid #D0D0D0">
 			</div>
 		</div>
 		<div class="div2">
@@ -150,9 +156,9 @@
 			</div>
 			<div>
 				<img
-					src='<%=basePath%>//model//accessory//dzfj//download//<%=filepath1%>'
+					src='<%=basePath%>//model//accessory//dzfj//download//<%=secondpath%>'
 					onerror="this.src='<%=basePath%>/web/cbd/framework/images/defult.jpg'"
-					width='450px' height='250px' border='0'>
+					height='275px' width='475px'  style="border:5 solid #D0D0D0">
 			</div>
 		</div>
 		<div class="div3">
@@ -161,11 +167,13 @@
 			</div>
 			<div>
 				<img
-					src='<%=basePath%>//model//accessory//dzfj//download//<%=filepath2%>'
+					src='<%=basePath%>//model//accessory//dzfj//download//<%=threepath%>'
 					onerror="this.src='<%=basePath%>/web/cbd/framework/images/defult.jpg'"
-					height='250px' width='450px' border='0'>
+					height='275px' width='475px'  style="border:5 solid #D0D0D0">
 			</div>
 		</div>
+		<div>&nbsp;</div>
+		<div>&nbsp;</div>
 		<div>&nbsp;</div>
 		<div class="div4">
 
