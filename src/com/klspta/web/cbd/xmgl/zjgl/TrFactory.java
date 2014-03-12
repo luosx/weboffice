@@ -57,17 +57,24 @@ public class TrFactory {
            buffer.append(stringBuffer);
            return buffer;
        }else{
-       if (list != null||list.size()>0) {
-           StringBuffer fatehr = buildFather_view(yw_guid, type,year);
-           StringBuffer chaild = buildChild_view(yw_guid, list, type,year);
-           buffer.append(fatehr);
-           buffer.append(chaild);
-           return buffer;
-       } else {
-           StringBuffer fatehr = buildFather_view(yw_guid, type,year);
-           buffer.append(fatehr);
-           return buffer;
-       }
+	       if (list != null||list.size()>0) {
+	    	   if("1".equals(yw_guid)){
+		           StringBuffer fatehr = buildFather_view(yw_guid, type,year);
+		        //   StringBuffer chaild = buildChild_view(yw_guid, list, type,year);
+		           buffer.append(fatehr);
+		         //  buffer.append(chaild);
+	    	   }else{
+	    		   StringBuffer fatehr = buildFather_view(yw_guid, type,year);
+			       StringBuffer chaild = buildChild_view(yw_guid, list, type,year);
+			       buffer.append(fatehr);
+			       buffer.append(chaild);
+	    	   }
+	           return buffer;
+	       } else {
+	           StringBuffer fatehr = buildFather_view(yw_guid, type,year);
+	           buffer.append(fatehr);
+	           return buffer;
+	       }
        }
    }
   /******
@@ -86,17 +93,17 @@ public class TrFactory {
           buffer.append(stringBuffer);
           return buffer;
       }else{
-      if (list != null||list.size()>0) {
-          StringBuffer fatehr = buildFather_editor(yw_guid, type,year,rolename);
-          StringBuffer chaild = buildChild_editor(yw_guid, list, type,year,rolename);
-          buffer.append(fatehr);
-          buffer.append(chaild);
-          return buffer;
-      } else {
-          StringBuffer fatehr = buildFather_editor(yw_guid, type,year,rolename);
-          buffer.append(fatehr);
-          return buffer;
-      }
+	      if (list != null||list.size()>0) {
+	          StringBuffer fatehr = buildFather_editor(yw_guid, type,year,rolename);
+	          StringBuffer chaild = buildChild_editor(yw_guid, list, type,year,rolename);
+	          buffer.append(fatehr);
+	          buffer.append(chaild);
+	          return buffer;
+	      } else {
+	          StringBuffer fatehr = buildFather_editor(yw_guid, type,year,rolename);
+	          buffer.append(fatehr);
+	          return buffer;
+	      }
       }
   }
    /******
@@ -216,6 +223,7 @@ public class TrFactory {
        StringBuffer buffer = new StringBuffer();
        if (list != null) {
            for (int i = 0; i < list.size(); i++) {
+        	   
                String tree_name = list.get(i).get("tree_name").toString();
                List<Map<String, Object>> query = zjglData. getZJGL_child(yw_guid,tree_name,type,year);
                StringBuffer stringBuffer = ZjglBuild.buildZjzc_child_view(query);
