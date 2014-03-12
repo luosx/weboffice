@@ -58,6 +58,9 @@
             ,{
                 title: '资金使用-各项目汇总',
                 html: "<iframe width='"+w+"' height='"+h+"' src='web/cbd/zxzjgl/zjsyxmhz.jsp'/>"
+            },{
+                title: '资金管理明细表',
+                html: "<iframe width='"+w+"' height='"+h+"' src='web/cbd/zxzjgl/zjglmxb.jsp'/>"
             }
         ]
     })
