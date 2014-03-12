@@ -5,6 +5,12 @@
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 	String zttId = request.getParameter("zttbh");
+	String img = "";
+	if(zttId.equals("1")){
+		img = basePath + "web/cbd/framework/images/xzqd.jpg";
+	}if(zttId.equals("2")){
+		img = basePath + "web/cbd/framework/images/cbqd.jpg";
+	}
 	String url = basePath + ZttDeal.getInstance().getMapURL(zttId);
 %>
 <html>
@@ -14,10 +20,12 @@
 		<meta http-equiv="expires" content="0">
 		<script type="text/javascript">
 //alert.show('<%=url%>');
-document.location.href='<%=url%>'
+//document.location.href='<%=url%>'
 
 </script>
 	</head>
 	<body>
+	<iframe width="100%" height="100%" src='<%=url%>'></iframe>
+	<div style="position:absolute; bottom:20px; right:30px; width:50px; height:50px;border: 0"><img src=<%=img%>></div>
 	</body>
 </html>
