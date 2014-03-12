@@ -40,7 +40,7 @@
                 html: "<iframe width='"+w+"' height='"+h+"' src='web/cbd/qyjc/esfzj/esfViewFrame.jsp?view=<%=view%>'/>" 
             }
             ,{
-                title: '二手房租信息维护',
+                title: '二手房租售信息维护',
                 html: "<iframe width='"+w+"' height='"+h+"' src='web/cbd/qyjc/esfxx/esfscjczsqk.jsp?view=<%=view%>'/>"
             }
             ,{
