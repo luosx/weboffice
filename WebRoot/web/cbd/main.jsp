@@ -9,6 +9,10 @@ String name1 = ProjectInfo.getInstance().getProjectLoginName1();
 
 <html>
   <head>
+  <meta http-equiv="X-UA-Compatible" content="IE=7" >
+  <META HTTP-EQUIV="pragma" CONTENT="no-cache"> 
+<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache, must-revalidate"> 
+<META HTTP-EQUIV="expires" CONTENT="0">
     <title><%=name1 %></title>
 </head>
   	<frameset id="index" name="index" rows="106,32,*" frameborder="no" border="0"  framespacing="0" >
