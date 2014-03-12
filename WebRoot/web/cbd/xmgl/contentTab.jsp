@@ -43,7 +43,7 @@
         items:[
         	{
         		title: '一览表',
-        		html: "<iframe width='"+w+"' height='"+h+"' src='web/cbd/xmgl/zjgl/mergepage.jsp?yw_guid=<%=yw_guid%>&xmmc=<%=xmmc%>'/>"
+        		html: "<iframe width='"+w+"' height='"+h+"' src='web/cbd/xmgl/ylb/ylb.jsp?yw_guid=<%=yw_guid%>&xmmc=<%=xmmc%>'/>"
         	},
         	{
                 title: '用地指标',
