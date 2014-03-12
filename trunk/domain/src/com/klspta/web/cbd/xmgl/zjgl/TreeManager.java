@@ -22,9 +22,17 @@ public class TreeManager extends AbstractBaseBean {
 
 	public List<Map<String, Object>> getZC_tree(String yw_guid, String type,
 			String year) {
-		String sql = "select *  from zjgl_tree where yw_guid=? and parent_id=? and rq=?";
-		List<Map<String, Object>> list = query(sql, YW, new Object[] { yw_guid,
-				type, year });
+		String sql = "";
+		List<Map<String, Object>> list = null;
+		if("1".equals(yw_guid)){
+			sql = "select *  from zjgl_tree where rq='all'";
+			list = query(sql, YW);
+		}else{
+			sql = "select *  from zjgl_tree where yw_guid=? and parent_id=? and rq=?";
+			list = query(sql, YW, new Object[] { yw_guid,
+					type, year });
+		}
+		
 		return list;
 	}
 
