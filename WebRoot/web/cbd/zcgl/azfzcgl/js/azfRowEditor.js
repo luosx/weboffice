@@ -72,7 +72,31 @@ function add(){
 }
 
 function dele(){
-	alert("dele");
+	Ext.MessageBox.confirm('确认', '系统将删除所有选中安置房资产，确定?', function(btn,text){
+		if(btn == 'yes'){
+			var choseValue = table.getAnnotations();
+			var choseString = '';
+			alert(choseValue);
+			if(choseValue.length != 0){
+				choseString += table.getValue(choseValue.pop(),"1")+ ",";
+			}
+			putClientCommond("zafzc","delByDkmc");
+			putRestParameter("dkmc",escape(escape(choseString)));
+			alert(choseString);
+			myData = restRequest();
+			if(myData){
+				Ext.MessageBox.alert('提醒', '删除成功！', function(btn, text){
+					document.location.reload();
+					return;
+				});
+			}else{
+				Ext.MessageBox.alert('提醒', '删除失败，请联系管理员或重试', function(btn, text){
+					return;
+				});
+			}
+			
+		}
+	});
 }
 
 //根据用地单位和关键字作过滤
