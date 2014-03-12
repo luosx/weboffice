@@ -21,7 +21,7 @@ public class AzfzcManager extends AbstractBaseBean {
 	}
 
 	public String getList() {
-		String sql = "select t.*  from azfzc t ";
+		String sql = "select t.*  from zc_azfzc t ";
 		List<Map<String, Object>> list = query(sql, YW);
 		StringBuffer result = new StringBuffer(
 				"<table id='azftable' name='esftable' ><tr id='-1'><td class='title'>序号</td><td class='title'>用地名称</td><td  class='title'>土地一级开发主体</td><td  class='title'>占地面积</td><td width=300 class='title'>建设用地</td><td  class='title'>规划容积率</td><td class='title'>规划建筑规模</td> ");
@@ -181,7 +181,7 @@ public class AzfzcManager extends AbstractBaseBean {
 		tdcrht = UtilFactory.getStrUtil().unescape(tdcrht);
 		tdz = UtilFactory.getStrUtil().unescape(tdz);
 		bz = UtilFactory.getStrUtil().unescape(bz);
-		String insertString = "update azfzc  set ydmc=?,tdyjkfzt=?,zdmj=?,jsyd=?,ghrjl=?,ghjzgm=?,ghyt=?,kg=?,tdcb=?,yjkxcazfts=?,gdfs=?,tdkfjsbcxy=?,tdyj=?,azfjsdw=?,tdcrht=?,crhtydkgsj=?,tdz=?,bz=? where yw_guid=?";
+		String insertString = "update zc_azfzc  set ydmc=?,tdyjkfzt=?,zdmj=?,jsyd=?,ghrjl=?,ghjzgm=?,ghyt=?,kg=?,tdcb=?,yjkxcazfts=?,gdfs=?,tdkfjsbcxy=?,tdyj=?,azfjsdw=?,tdcrht=?,crhtydkgsj=?,tdz=?,bz=? where yw_guid=?";
 		int i = update(insertString, YW, new Object[] { ydmc, tdyjkfzt, zdmj,
 				jsyd, ghrjl, ghjzgm, ghyt, kg, tdcb, yjkxcazfts, gdfs,
 				tdkfjsbcxy, tdyj, azfjsdw, tdcrht, crhtydkgsj, tdz, bz ,yw_guid});
@@ -196,8 +196,23 @@ public class AzfzcManager extends AbstractBaseBean {
 	public void delByYwGuid() {
 		try {
 			String yw_guid = request.getParameter("yw_guid");
-			String sql = "delete from azfzc where yw_guid=?";
+			String sql = "delete from zc_azfzc where yw_guid=?";
 			update(sql, YW, new Object[] { yw_guid });
+			response("success");
+		} catch (Exception e) {
+			response("false");
+			// TODO: handle exception
+		}
+	}
+	public void delByDkmc(){
+		try {
+			String dkmc = request.getParameter("dkmc");
+			dkmc=UtilFactory.getStrUtil().unescape(dkmc);
+			String[] dkmcs = dkmc.substring(0, dkmc.length()-1).split(",");
+			for(int i=0;i<dkmcs.length;i++){
+			String sql = "delete from zc_azfzc where ydmc='"+dkmcs[i]+"'";
+			this.update(sql, YW, new Object[] {});
+			}
 			response("success");
 		} catch (Exception e) {
 			response("false");
