@@ -137,12 +137,33 @@ ITableStyle its = new TableStyleEditRow();
 					    putClientCommond("hxxmHandle", "getCQSJ");
 					    putRestParameter("value", itemselector);
 					    var mydata = restRequest();
+					    Ext.getCmp("zd").setValue(mydata[0].ZD);
+					    Ext.getCmp("jsyd").setValue(mydata[0].JSYD);
+					    Ext.getCmp("rjl").setValue(mydata[0].RJL);
+					    Ext.getCmp("jzgm").setValue(mydata[0].JZGM);
+					    Ext.getCmp("gjjzgm").setValue(mydata[0].GJJZGM);
+					    Ext.getCmp("jzjzgm").setValue(mydata[0].JZJZGM);
+					    Ext.getCmp("szjzgm").setValue(mydata[0].SZJZGM);
 					    Ext.getCmp("zzsgm").setValue(mydata[0].ZZSGM);
 					    Ext.getCmp("zzzsgm").setValue(mydata[0].ZZZSGM);
 					    Ext.getCmp("zzzshs").setValue(mydata[0].ZZZSHS);
 					    Ext.getCmp("hjmj").setValue(mydata[0].HJMJ);
 					    Ext.getCmp("fzzzsgm").setValue(mydata[0].FZZZSGM);
 					    Ext.getCmp("fzzjs").setValue(mydata[0].FZZJS);
+					    Ext.getCmp("kfcb").setValue(mydata[0].KFCB);
+					    Ext.getCmp("lmcb").setValue(mydata[0].LMCB);
+					    Ext.getCmp("dmcb").setValue(mydata[0].DMCB);
+					    if(Ext.getCmp("yjcjj").getValue()!=''){
+					    	var yjzftdsy = Ext.getCmp('yjcjj').getValue()*1*parseInt(mydata[0].JZGM)/10000-mydata[0].KFCB*1;
+					    	Ext.getCmp("yjzftdsy").setValue(yjzftdsy);
+					    	Ext.getCmp("cxb").setValue((yjzftdsy/(Ext.getCmp('yjcjj').getValue()*1*parseInt(mydata[0].JZGM)/100)).toFixed(2)+"%");
+					    }
+					    var cqqd = mydata[0].ZZSGM/mydata[0].ZD;
+					    Ext.getCmp("cqqd").setValue(cqqd.toFixed(2));
+					    var cbfgl = mydata[0].JZGM*2.4/mydata[0].KFCB;
+					    Ext.getCmp("cbfgl").setValue(cbfgl.toFixed(2));
+					    var dmcb = mydata[0].KFCB/mydata[0].JSYD*10000;
+					    Ext.getCmp("dmcb").setValue(dmcb.toFixed(2));
        				}
        				win.hide();
        			}
@@ -208,10 +229,11 @@ ITableStyle its = new TableStyleEditRow();
             		columnWidth:.33,
 	        		layout:'form',
 					items:[{
-		                xtype: 'textfield',
+		                xtype: 'numberfield',
 		                id   : 'zd',
 		                value:'', 
 		                fieldLabel: '占地',
+		                readOnly : true,
 		                width:'100'
 		            }]
 		         },{
@@ -221,6 +243,7 @@ ITableStyle its = new TableStyleEditRow();
 		                xtype: 'numberfield',
 		                id   : 'jsyd',
 		                value:'',  
+		                readOnly : true,
 		                fieldLabel: '建设用地',
 		                width:'100'
 		            }]
@@ -231,9 +254,10 @@ ITableStyle its = new TableStyleEditRow();
 					columnWidth:.33,
 	        		layout:'form',
 	           		items:[{
-		                xtype: 'numberfield',
+		                xtype: 'textfield',
 		                id   : 'rjl',
 		                value:'',
+		                readOnly : true,
 		                fieldLabel: '容积率',
 		                width:'100'
 	            	}]
@@ -241,9 +265,10 @@ ITableStyle its = new TableStyleEditRow();
 	            	columnWidth:.33,
 	        		layout:'form',
 	           		items:[{
-		                xtype: 'textfield',
+		                xtype: 'numberfield',
 		                id   : 'jzgm',
 		                value:'',
+		                readOnly : true,
 		                fieldLabel: '建筑规模',
 		                width:'100'
 	            	}]
@@ -264,9 +289,10 @@ ITableStyle its = new TableStyleEditRow();
 	            	columnWidth:.33,
 	        		layout:'form',
 	           		items:[{
-		                xtype: 'textfield',
+		                xtype: 'numberfield',
 		                id   : 'gjjzgm',
 		                value:'',
+		                readOnly : true,
 		                fieldLabel: '公建建筑规模',
 		                width:'100'
 	            	}]
@@ -274,9 +300,11 @@ ITableStyle its = new TableStyleEditRow();
 	            	columnWidth:.33,
 	        		layout:'form',
 	           		items:[{
-		                xtype: 'textfield',
+	           		
+		                xtype: 'numberfield',
 		                id   : 'jzjzgm',
 		                value:'',
+		                readOnly : true,
 		                fieldLabel: '居住建筑规模',
 		                width:'100'
 	            	}]
@@ -284,10 +312,11 @@ ITableStyle its = new TableStyleEditRow();
 					columnWidth:.33,
 	        		layout:'form',
 	           		items:[{
-		                xtype: 'textfield',
+		                xtype: 'numberfield',
 		                id   : 'szjzgm',
 		                value:'',
-		                fieldLabel: '市政建筑规模',
+		                readOnly : true,
+						fieldLabel:	'市政建筑规模',
 		                width:'100'
 	            	}]
 	            }]
@@ -298,11 +327,11 @@ ITableStyle its = new TableStyleEditRow();
 	        		layout:'form',
 	        		items:[
 	            	{
-			            xtype : 'textfield',   
+			            xtype : 'numberfield',   
 					    fieldLabel : '总征收规模',   
 					    id : 'zzsgm',   
+					    readOnly : true,
 					    value:'',
-					    readOnly:true,
 		                width:'100'
 					}]
 				},{
@@ -310,7 +339,7 @@ ITableStyle its = new TableStyleEditRow();
 	        		layout:'form',
 	        		items:[
 	            	{
-			            xtype : 'textfield',   
+			            xtype : 'numberfield',   
 					    fieldLabel : '住宅征收规模',   
 					    id : 'zzzsgm',   
 					    readOnly:true,
@@ -322,7 +351,7 @@ ITableStyle its = new TableStyleEditRow();
 	        		layout:'form',
 	        		items:[
 	            	{
-			            xtype : 'textfield',   
+			            xtype : 'numberfield',   
 					    fieldLabel : '住宅征收户数',   
 					    id : 'zzzshs',
 					    readOnly:true,   
@@ -337,7 +366,7 @@ ITableStyle its = new TableStyleEditRow();
 	        		layout:'form',
 	        		items:[
 	            	{
-			            xtype : 'textfield',   
+			            xtype : 'numberfield',   
 					    fieldLabel : '户均面积',   
 					    id : 'hjmj', 
 					    readOnly:true,  
@@ -359,7 +388,7 @@ ITableStyle its = new TableStyleEditRow();
             		columnWidth:.33,
 	        		layout:'form',
 					items:[{
-		                xtype: 'textfield',
+		                xtype: 'numberfield',
 		                id   : 'fzzjs',
 		                value:'', 
 		                readOnly:true,
@@ -373,30 +402,33 @@ ITableStyle its = new TableStyleEditRow();
 	            	columnWidth:.33,
 	        		layout:'form',
 	           		items:[{
-		                xtype: 'textfield',
+		                xtype: 'numberfield',
 		                id   : 'kfcb',
 		                value:'',
 		                fieldLabel: '开发成本',
+		                readOnly : true,
 		                width:'100'
 	            	}]
             	},{
 	            	columnWidth:.33,
 	        		layout:'form',
 	           		items:[{
-		                xtype: 'textfield',
+		                xtype: 'numberfield',
 		                id   : 'lmcb',
 		                value:'',
 		                fieldLabel: '楼面成本',
+		                readOnly : true,
 		                width:'100'
 	            	}]
             	},{
 					columnWidth:.33,
 	        		layout:'form',
 	           		items:[{
-		                xtype: 'textfield',
+		                xtype: 'numberfield',
 		                id   : 'dmcb',
 		                value:'',
 		                fieldLabel: '地面成本',
+		                readOnly : true,
 		                width:'100'
 	            	}]
 	            }]
@@ -406,7 +438,7 @@ ITableStyle its = new TableStyleEditRow();
 	            	columnWidth:.33,
 	        		layout:'form',
 	           		items:[{
-		                xtype: 'textfield',
+		                xtype: 'numberfield',
 		                id   : 'yjcjj',
 		                value:'',
 		                fieldLabel: '预计成交价',
@@ -416,10 +448,11 @@ ITableStyle its = new TableStyleEditRow();
 	            	columnWidth:.33,
 	        		layout:'form',
 	           		items:[{
-		                xtype: 'textfield',
+		                xtype: 'numberfield',
 		                id   : 'yjzftdsy',
 		                value:'',
 		                fieldLabel: '预计政府土地收益',
+		                readOnly : true,
 		                width:'100'
 	            	}]
             	},{
@@ -430,6 +463,7 @@ ITableStyle its = new TableStyleEditRow();
 		                id   : 'cxb',
 		                value:'',
 		                fieldLabel: '存蓄比',
+		                readOnly : true,
 		                width:'100'
 	            	}]
 	            }]
@@ -439,10 +473,11 @@ ITableStyle its = new TableStyleEditRow();
 	            	columnWidth:.33,
 	        		layout:'form',
 	           		items:[{
-		                xtype: 'textfield',
+		                xtype: 'numberfield',
 		                id   : 'cqqd',
 		                value:'',
 		                fieldLabel: '拆迁强度',
+		                readOnly : true,
 		                width:'100'
 	            	}]
             	},{
@@ -453,13 +488,14 @@ ITableStyle its = new TableStyleEditRow();
 		                id   : 'cbfgl',
 		                value:'',
 		                fieldLabel: '成本覆盖率',
+		                readOnly : true,
 		                width:'100'
 	            	}]
             	},{
 	            	columnWidth:.33,
 	        		layout:'form',
 	           		items:[{
-		                xtype: 'textfield',
+		                xtype: 'numberfield',
 		                id   : 'zzcqfy',
 		                value:'',
 		                fieldLabel: '住宅拆迁费用',
@@ -472,7 +508,7 @@ ITableStyle its = new TableStyleEditRow();
 	            	columnWidth:.33,
 	        		layout:'form',
 	           		items:[{
-		                xtype: 'textfield',
+		                xtype: 'numberfield',
 		                id   : 'qycqfy',
 		                value:'',
 		                fieldLabel: '企业拆迁费用',
@@ -482,7 +518,7 @@ ITableStyle its = new TableStyleEditRow();
 	            	columnWidth:.33,
 	        		layout:'form',
 	           		items:[{
-		                xtype: 'textfield',
+		                xtype: 'numberfield',
 		                id   : 'qtfy',
 		                value:'',
 		                fieldLabel: '其他费用',
@@ -492,7 +528,7 @@ ITableStyle its = new TableStyleEditRow();
 	            	columnWidth:.33,
 	        		layout:'form',
 	           		items:[{
-		                xtype: 'textfield',
+		                xtype: 'numberfield',
 		                id   : 'azftzcb',
 		                value:'',
 		                fieldLabel: '安置房投资成本',
@@ -505,7 +541,7 @@ ITableStyle its = new TableStyleEditRow();
 	            	columnWidth:.33,
 	        		layout:'form',
 	           		items:[{
-		                xtype: 'textfield',
+		                xtype: 'numberfield',
 		                id   : 'zzhbtzcb',
 		                value:'',
 		                fieldLabel: '住宅货币投资成本',
@@ -515,7 +551,7 @@ ITableStyle its = new TableStyleEditRow();
 	            	columnWidth:.33,
 	        		layout:'form',
 	           		items:[{
-		                xtype: 'textfield',
+		                xtype: 'numberfield',
 		                id   : 'cqhbtz',
 		                value:'',
 		                fieldLabel: '拆迁货币投资',
@@ -538,7 +574,7 @@ ITableStyle its = new TableStyleEditRow();
 	            	columnWidth:.33,
 	        		layout:'form',
 	           		items:[{
-		                xtype: 'textfield',
+		                xtype: 'numberfield',
 		                id   : 'lmcjj',
 		                value:'',
 		                fieldLabel: '楼面成交价',
@@ -548,7 +584,7 @@ ITableStyle its = new TableStyleEditRow();
 	            	columnWidth:.33,
 	        		layout:'form',
 	           		items:[{
-		                xtype: 'textfield',
+		                xtype: 'numberfield',
 		                id   : 'fwsj',
 		                value:'',
 		                fieldLabel: '房屋售价',
@@ -558,7 +594,7 @@ ITableStyle its = new TableStyleEditRow();
 	            	columnWidth:.33,
 	        		layout:'form',
 	           		items:[{
-		                xtype: 'textfield',
+		                xtype: 'numberfield',
 		                id   : 'zj',
 		                value:'',
 		                fieldLabel: '租金',
