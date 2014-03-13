@@ -12,6 +12,16 @@ Paneloper.prototype = {
 	monitor:function(){
 		//录入自然斑编号时添加验证
 		var obj = this;
+		Ext.getCmp("yjcjj").addListener('change',function(){
+			var yjcjj =  parseInt(Ext.getCmp('yjcjj').getValue());
+			var kfcb = Ext.getCmp('kfcb').getValue();
+			var jzgm = Ext.getCmp('jzgm').getValue();
+			if(kfcb!="" && jzgm!=""){
+				var yjzftdsy = yjcjj*parseInt(jzgm)/10000-parseInt(kfcb);
+	    		Ext.getCmp("yjzftdsy").setValue(yjzftdsy);
+	    		Ext.getCmp("cxb").setValue((parseInt(yjzftdsy)/(yjcjj*parseInt(jzgm)/100)).toFixed(2)+"%");
+			}
+		});
 	},
 	insertValue:function(name, value){
 		var extObject = Ext.getCmp(name);
