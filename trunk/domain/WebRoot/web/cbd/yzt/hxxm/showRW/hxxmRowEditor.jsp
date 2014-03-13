@@ -161,7 +161,7 @@ ITableStyle its = new TableStyleEditRow();
 					    var cqqd = mydata[0].ZZSGM/mydata[0].ZD;
 					    Ext.getCmp("cqqd").setValue(cqqd.toFixed(2));
 					    var cbfgl = mydata[0].JZGM*2.4/mydata[0].KFCB;
-					    Ext.getCmp("cbfgl").setValue(cbfgl.toFixed(2));
+					    Ext.getCmp("cbfgl").setValue((cbfgl/100).toFixed(2)+"%");
 					    var dmcb = mydata[0].KFCB/mydata[0].JSYD*10000;
 					    Ext.getCmp("dmcb").setValue(dmcb.toFixed(2));
        				}
