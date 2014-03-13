@@ -90,7 +90,14 @@ public class JbbReport extends AbstractBaseBean implements IDataClass {
 		StringBuffer sqlBuffer = new StringBuffer();
 		sqlBuffer.append("select ");
 		for(int i = 1; i < shows.length - 1; i++){
-			sqlBuffer.append("sum(t.").append(shows[i][0]).append(") as ").append(shows[i][0]).append(",");
+			if(shows[i][0].equals("zd")||shows[i][0].equals("jsyd")||shows[i][0].equals("rjl")||shows[i][0].equals("jzgm")||
+					shows[i][0].equals("kzgd")||shows[i][0].equals("ghyt")||shows[i][0].equals("gjjzgm")||shows[i][0].equals("jzjzgm")||shows[i][0].equals("szjzgm")){
+				sqlBuffer.append("sum(t.").append(shows[i][0]).append(")/10000 as ").append(shows[i][0]).append(",");
+
+			}else{
+				sqlBuffer.append("sum(t.").append(shows[i][0]).append(") as ").append(shows[i][0]).append(",");
+		
+			}
 		}
 		//sqlBuffer.append("sum(t.").append(shows[shows.length - 1][0]).append(") as ").append(shows[shows.length - 1][0]).append(" from ");
 		sqlBuffer.append("' ' as ").append(shows[shows.length - 1][0]).append(" from ");
@@ -138,7 +145,13 @@ public class JbbReport extends AbstractBaseBean implements IDataClass {
 		StringBuffer sqlBuffer = new StringBuffer();
 		sqlBuffer.append("select ");
 		for(int i = 0; i < shows.length - 1; i++){
+		if(shows[i][0].equals("zd")||shows[i][0].equals("jsyd")||shows[i][0].equals("rjl")||shows[i][0].equals("jzgm")||
+				shows[i][0].equals("kzgd")||shows[i][0].equals("ghyt")||shows[i][0].equals("gjjzgm")||shows[i][0].equals("jzjzgm")||shows[i][0].equals("szjzgm")){
+			sqlBuffer.append("t.").append(shows[i][0]).append("/10000,");
+
+		}else{
 			sqlBuffer.append("t.").append(shows[i][0]).append(",");
+		}
 		}
 		sqlBuffer.append("t.").append(shows[shows.length - 1][0]).append(" from ");
 		sqlBuffer.append(form_name).append(" t ");
@@ -187,11 +200,12 @@ public class JbbReport extends AbstractBaseBean implements IDataClass {
 	
 
 	public List<TRBean> getSub(Map queryMap){
-		String sql = "select sum(t.zzsgm) as zzsgm, sum(t.zzzsgm) as zzzsgm, sum(t.zzzshs) as zzzshs, sum(t.hjmj) as hjmj, sum(t.fzzzsgm) as fzzzsgm, sum(t.fzzjs) as fzzjs,sum(t.zd), sum(t.jsyd), sum(t.rjl), sum(t.jzgm),'' as kzgd, sum(t.ghyt), sum(t.gjjzgm), sum(t.jzjzgm), sum(t.szjzgm),sum(t.kfcb), sum(t.lmcb), sum(t.dmcb),sum(t.yjcjj),sum(t.yjzftdsy),sum(t.cxb),sum(t.cqqd),sum(t.cbfgl),''as cbfgl from jc_jiben t  ";
+		String sql = "select sum(t.zzsgm) as zzsgm, sum(t.zzzsgm) as zzzsgm, sum(t.zzzshs) as zzzshs, sum(t.hjmj) as hjmj, sum(t.fzzzsgm) as fzzzsgm, sum(t.fzzjs) as fzzjs,sum(t.zd)/10000 as zd, sum(t.jsyd)/10000 as jsyd, sum(t.rjl)/10000 as rjl, sum(t.jzgm)/10000 as jzgm,'' as kzgd, sum(t.ghyt)/10000 as ghyt, sum(t.gjjzgm)/10000 as gjjzgm, sum(t.jzjzgm)/10000 as jzjzgm, sum(t.szjzgm)/10000 as szjzgm,sum(t.kfcb) as kfcb, sum(t.lmcb) as lmcb, sum(t.dmcb) as dmcb,sum(t.yjcjj) as yjcjj,sum(t.yjzftdsy) as yjzftdsy,sum(t.cxb) as cxb,sum(t.cqqd) as cqqd,sum(t.cbfgl) as cbfgl,''as cbfgl from jc_jiben t  ";
 		if(queryMap != null && !queryMap.isEmpty()){
 			sql += String.valueOf(queryMap.get("query"));
 		}
 		List<Map<String, Object>> queryList = query(sql.toString(), YW);
+		System.out.println(queryList);
 		List<TRBean> list = new ArrayList<TRBean>();
 		TRBean trBean = new TRBean();
 		trBean.setCssStyle("trtotal");
