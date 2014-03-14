@@ -81,7 +81,7 @@ Paneloper.prototype = {
 		
 		Ext.getCmp("ghyt").addListener('change',function(){
 			//判断自然斑编号是否符合条件
-			putClientCommond("jbbHandle","getlistByYear");
+			putClientCommond("jbbHandle","getZZZSBZXS");
 			var list = restRequest();
 			var bcf = list[0].BCF;
 			var bzf = list[0].BZF;
@@ -102,7 +102,7 @@ Paneloper.prototype = {
 		});
 		Ext.getCmp("jzgm").addListener('change',function(){
 			//判断自然斑编号是否符合条件
-			putClientCommond("jbbHandle","getlistByYear");
+			putClientCommond("jbbHandle","getZZZSBZXS");
 			var list = restRequest();
 			var bcf = list[0].BCF;
 			var bzf = list[0].BZF;
@@ -131,7 +131,7 @@ Paneloper.prototype = {
 		});
 		Ext.getCmp("zzzsgm").addListener('change',function(){
 			//判断自然斑编号是否符合条件
-			putClientCommond("jbbHandle","getlistByYear");
+			putClientCommond("jbbHandle","getZZZSBZXS");
 			var list = restRequest();
 			var bcf = list[0].BCF;
 			var bzf = list[0].BZF;
@@ -152,7 +152,7 @@ Paneloper.prototype = {
 		});
 		Ext.getCmp("hjmj").addListener('change',function(){
 			//判断自然斑编号是否符合条件
-			putClientCommond("jbbHandle","getlistByYear");
+			putClientCommond("jbbHandle","getZZZSBZXS");
 			var list = restRequest();
 			var bcf = list[0].BCF;
 			var bzf = list[0].BZF;
@@ -173,7 +173,7 @@ Paneloper.prototype = {
 		});
 		Ext.getCmp("fzzzsgm").addListener('change',function(){
 			//判断自然斑编号是否符合条件
-			putClientCommond("jbbHandle","getlistByYear");
+			putClientCommond("jbbHandle","getZZZSBZXS");
 			var list = restRequest();
 			var bcf = list[0].BCF;
 			var bzf = list[0].BZF;
