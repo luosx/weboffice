@@ -96,7 +96,7 @@ Paneloper.prototype = {
 			if(ghyt==("混合")){
 				Ext.getCmp("kfcb").setValue((((zzzsgm*(hjmj*bcf+bzf)/hjmj + fzzzsgm*fzzbcbz)*1.12 + jzgm*480/10000 )+
 	             ( (zzzsgm*(hjmj*bcf+bzf)/hjmj + fzzzsgm*fzzbcbz)*1.12 + jzgm*480/10000 )*0.0665*2 )*1.03);
-			}else if(ghyt==("住宅")){
+			}else if(ghyt==("居住")){
 				Ext.getCmp("kfcb").setValue(((fzzzsgm*fzzbcbz*1.12+jzgm*480/10000)+((fzzzsgm*fzzbcbz)*1.12+jzgm*480/10000)*0.0665*2)*1.03);
 			}
 		});
@@ -117,7 +117,7 @@ Paneloper.prototype = {
 			if(ghyt==("混合")){
 				Ext.getCmp("kfcb").setValue((((zzzsgm*(hjmj*bcf+bzf)/hjmj + fzzzsgm*fzzbcbz)*1.12 + jzgm*480/10000 )+
 	             ( (zzzsgm*(hjmj*bcf+bzf)/hjmj + fzzzsgm*fzzbcbz)*1.12 + jzgm*480/10000 )*0.0665*2 )*1.03);
-			}else if(ghyt==("住宅")){
+			}else if(ghyt==("居住")){
 				Ext.getCmp("kfcb").setValue(((fzzzsgm*fzzbcbz*1.12+jzgm*480/10000)+((fzzzsgm*fzzbcbz)*1.12+jzgm*480/10000)*0.0665*2)*1.03);
 			}
 			var kfcb = Ext.getCmp("kfcb").getValue();
@@ -146,7 +146,7 @@ Paneloper.prototype = {
 			if(ghyt==("混合")){
 				Ext.getCmp("kfcb").setValue((((zzzsgm*(hjmj*bcf+bzf)/hjmj + fzzzsgm*fzzbcbz)*1.12 + jzgm*480/10000 )+
 	             ( (zzzsgm*(hjmj*bcf+bzf)/hjmj + fzzzsgm*fzzbcbz)*1.12 + jzgm*480/10000 )*0.0665*2 )*1.03);
-			}else if(ghyt==("住宅")){
+			}else if(ghyt==("居住")){
 				Ext.getCmp("kfcb").setValue(((fzzzsgm*fzzbcbz*1.12+jzgm*480/10000)+((fzzzsgm*fzzbcbz)*1.12+jzgm*480/10000)*0.0665*2)*1.03);
 			}
 		});
@@ -167,7 +167,7 @@ Paneloper.prototype = {
 			if(ghyt==("混合")){
 				Ext.getCmp("kfcb").setValue((((zzzsgm*(hjmj*bcf+bzf)/hjmj + fzzzsgm*fzzbcbz)*1.12 + jzgm*480/10000 )+
 	             ( (zzzsgm*(hjmj*bcf+bzf)/hjmj + fzzzsgm*fzzbcbz)*1.12 + jzgm*480/10000 )*0.0665*2 )*1.03);
-			}else if(ghyt==("住宅")){
+			}else if(ghyt==("居住")){
 				Ext.getCmp("kfcb").setValue(((fzzzsgm*fzzbcbz*1.12+jzgm*480/10000)+((fzzzsgm*fzzbcbz)*1.12+jzgm*480/10000)*0.0665*2)*1.03);
 			}
 		});
@@ -188,7 +188,7 @@ Paneloper.prototype = {
 			if(ghyt==("混合")){
 				Ext.getCmp("kfcb").setValue((((zzzsgm*(hjmj*bcf+bzf)/hjmj + fzzzsgm*fzzbcbz)*1.12 + jzgm*480/10000 )+
 	             ( (zzzsgm*(hjmj*bcf+bzf)/hjmj + fzzzsgm*fzzbcbz)*1.12 + jzgm*480/10000 )*0.0665*2 )*1.03);
-			}else if(ghyt==("住宅")){
+			}else if(ghyt==("居住")){
 				Ext.getCmp("kfcb").setValue(((fzzzsgm*fzzbcbz*1.12+jzgm*480/10000)+((fzzzsgm*fzzbcbz)*1.12+jzgm*480/10000)*0.0665*2)*1.03);
 			}
 		});
