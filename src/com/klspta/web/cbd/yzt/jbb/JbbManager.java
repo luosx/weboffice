@@ -228,4 +228,19 @@ public class JbbManager extends AbstractBaseBean {
 		List<Map<String, Object>> list = query(sqlBuffer.toString(), YW);
 		response(list);
 	}
+	/**
+	 * 
+	 * <br>
+	 * Description:获取住宅征收标准系数 <br>
+	 * Author:侯文超 <br>
+	 * Date:2014-03-14
+	 * 
+	 * @throws Exception
+	 */
+	public void getZZZSBZXS() {
+		StringBuffer sqlBuffer = new StringBuffer();
+		sqlBuffer.append("select t.bzf,t.bzf,t.hj,t.zzzsbz from zzzsbz t");
+		List<Map<String, Object>> list = query(sqlBuffer.toString(), YW);
+		response(list);
+	}
 }
