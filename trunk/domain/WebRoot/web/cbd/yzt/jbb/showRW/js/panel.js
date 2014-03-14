@@ -93,10 +93,10 @@ Paneloper.prototype = {
 			var zzzsgm = Ext.getCmp("zzzsgm").getValue();
 			var hjmj = Ext.getCmp("hjmj").getValue();
 			var fzzzsgm = Ext.getCmp("fzzzsgm").getValue();
-			if(ghyt.equils("混合")){
+			if(ghyt==("混合")){
 				Ext.getCmp("kfcb").setValue((((zzzsgm*(hjmj*bcf+bzf)/hjmj + fzzzsgm*fzzbcbz)*1.12 + jzgm*480/10000 )+
 	             ( (zzzsgm*(hjmj*bcf+bzf)/hjmj + fzzzsgm*fzzbcbz)*1.12 + jzgm*480/10000 )*0.0665*2 )*1.03);
-			}else if(ghyt.equils("住宅")){
+			}else if(ghyt==("住宅")){
 				Ext.getCmp("kfcb").setValue(((fzzzsgm*fzzbcbz*1.12+jzgm*480/10000)+((fzzzsgm*fzzbcbz)*1.12+jzgm*480/10000)*0.0665*2)*1.03);
 			}
 		});
@@ -114,10 +114,10 @@ Paneloper.prototype = {
 			var zzzsgm = Ext.getCmp("zzzsgm").getValue();
 			var hjmj = Ext.getCmp("hjmj").getValue();
 			var fzzzsgm = Ext.getCmp("fzzzsgm").getValue();
-			if(ghyt.equils("混合")){
+			if(ghyt==("混合")){
 				Ext.getCmp("kfcb").setValue((((zzzsgm*(hjmj*bcf+bzf)/hjmj + fzzzsgm*fzzbcbz)*1.12 + jzgm*480/10000 )+
 	             ( (zzzsgm*(hjmj*bcf+bzf)/hjmj + fzzzsgm*fzzbcbz)*1.12 + jzgm*480/10000 )*0.0665*2 )*1.03);
-			}else if(ghyt.equils("住宅")){
+			}else if(ghyt==("住宅")){
 				Ext.getCmp("kfcb").setValue(((fzzzsgm*fzzbcbz*1.12+jzgm*480/10000)+((fzzzsgm*fzzbcbz)*1.12+jzgm*480/10000)*0.0665*2)*1.03);
 			}
 			var kfcb = Ext.getCmp("kfcb").getValue();
@@ -143,10 +143,10 @@ Paneloper.prototype = {
 			var zzzsgm = Ext.getCmp("zzzsgm").getValue();
 			var hjmj = Ext.getCmp("hjmj").getValue();
 			var fzzzsgm = Ext.getCmp("fzzzsgm").getValue();
-			if(ghyt.equils("混合")){
+			if(ghyt==("混合")){
 				Ext.getCmp("kfcb").setValue((((zzzsgm*(hjmj*bcf+bzf)/hjmj + fzzzsgm*fzzbcbz)*1.12 + jzgm*480/10000 )+
 	             ( (zzzsgm*(hjmj*bcf+bzf)/hjmj + fzzzsgm*fzzbcbz)*1.12 + jzgm*480/10000 )*0.0665*2 )*1.03);
-			}else if(ghyt.equils("住宅")){
+			}else if(ghyt==("住宅")){
 				Ext.getCmp("kfcb").setValue(((fzzzsgm*fzzbcbz*1.12+jzgm*480/10000)+((fzzzsgm*fzzbcbz)*1.12+jzgm*480/10000)*0.0665*2)*1.03);
 			}
 		});
@@ -164,10 +164,10 @@ Paneloper.prototype = {
 			var zzzsgm = Ext.getCmp("zzzsgm").getValue();
 			var hjmj = Ext.getCmp("hjmj").getValue();
 			var fzzzsgm = Ext.getCmp("fzzzsgm").getValue();
-			if(ghyt.equils("混合")){
+			if(ghyt==("混合")){
 				Ext.getCmp("kfcb").setValue((((zzzsgm*(hjmj*bcf+bzf)/hjmj + fzzzsgm*fzzbcbz)*1.12 + jzgm*480/10000 )+
 	             ( (zzzsgm*(hjmj*bcf+bzf)/hjmj + fzzzsgm*fzzbcbz)*1.12 + jzgm*480/10000 )*0.0665*2 )*1.03);
-			}else if(ghyt.equils("住宅")){
+			}else if(ghyt==("住宅")){
 				Ext.getCmp("kfcb").setValue(((fzzzsgm*fzzbcbz*1.12+jzgm*480/10000)+((fzzzsgm*fzzbcbz)*1.12+jzgm*480/10000)*0.0665*2)*1.03);
 			}
 		});
@@ -185,10 +185,10 @@ Paneloper.prototype = {
 			var zzzsgm = Ext.getCmp("zzzsgm").getValue();
 			var hjmj = Ext.getCmp("hjmj").getValue();
 			var fzzzsgm = Ext.getCmp("fzzzsgm").getValue();
-			if(ghyt.equils("混合")){
+			if(ghyt==("混合")){
 				Ext.getCmp("kfcb").setValue((((zzzsgm*(hjmj*bcf+bzf)/hjmj + fzzzsgm*fzzbcbz)*1.12 + jzgm*480/10000 )+
 	             ( (zzzsgm*(hjmj*bcf+bzf)/hjmj + fzzzsgm*fzzbcbz)*1.12 + jzgm*480/10000 )*0.0665*2 )*1.03);
-			}else if(ghyt.equils("住宅")){
+			}else if(ghyt==("住宅")){
 				Ext.getCmp("kfcb").setValue(((fzzzsgm*fzzbcbz*1.12+jzgm*480/10000)+((fzzzsgm*fzzbcbz)*1.12+jzgm*480/10000)*0.0665*2)*1.03);
 			}
 		});
