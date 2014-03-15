@@ -98,6 +98,13 @@ String view = request.getParameter("view");
 	        },
 	        items   : [
 	        	{
+ 					xtype: 'hidden',
+	                id      : 'yw_guid',
+	                value:'',
+	                fieldLabel: '主键',
+	                width :60
+            	}
+	        	,{
 	                xtype: 'textfield',
 	                id      : 'zrbbh',
 	                value:'',
@@ -177,7 +184,7 @@ String view = request.getParameter("view");
 	  });	
   		form.render("deal");
   		//form.hide();
-  		var elements = new Array("zrbbh","zdmj","lzmj","cqgm","zzlzmj","zzcqgm","yjhs","fzzlzmj","fzzcqgm","bz");
+  		var elements = new Array("yw_guid","zrbbh","zdmj","lzmj","cqgm","zzlzmj","zzcqgm","yjhs","fzzlzmj","fzzcqgm","bz");
   		paneloper.init(form,elements);
   		paneloper.hide();
   	}
