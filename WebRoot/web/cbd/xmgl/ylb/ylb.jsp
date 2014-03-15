@@ -11,7 +11,6 @@
     String yw_guid = request.getParameter("yw_guid");
     String tree = AccessoryBean.transfer(AccessoryOperation.getInstance()
             .getAccessorylistByYwGuid(yw_guid));
-    System.out.println(tree + "-----------------");
 	request.setCharacterEncoding("utf-8");
 	response.setCharacterEncoding("UTF-8");
     String treePath = basePath + "base/thirdres/dhtmlx//dhtmlxTree//codebase";
@@ -61,6 +60,7 @@ html,body {
 	</head>
 	<script>
   var dhxLayout,tree;
+  var i = 1;
 function doOnLoad() {
     //parent.dhxLayout.cells("b").hideHeader();
     dhxLayout = new dhtmlXLayoutObject("parentId", "2U","dhx_skyblue");
@@ -117,15 +117,13 @@ function doOnLoad() {
           	    var fileid=file_name.substring(0,file_name.indexOf('.'));//add by 李亚栓 上传word文档时，传文档名称fileid
           		dhxLayout.cells("b").attachURL("<%=basePath%>/model/webOffice/webOffice_read.jsp?file_id="+fileid+"."+"&file_type="+file_type);
            }else
-           if(file_type=='swf'||file_type=='SWF'){
-        	   
-        	   dhxLayout.cells("b").attachURL("<%=basePath%>/model/accessory/dzfj/need_jsp/flash.jsp?file_id="+id+"&file_type="+file_type);
-           }
-           else{
-           		alert(id);
-                 dhxLayout.cells("b").document.getElementById("img1").scr("");
-           }
-           }
+	           if(file_type=='swf'||file_type=='SWF'){
+	        	   dhxLayout.cells("b").attachURL("<%=basePath%>/model/accessory/dzfj/need_jsp/flash.jsp?file_id="+id+"&file_type="+file_type);
+	           }
+	           else{
+	           		
+	           }
+	        }
      else{
 
            }
@@ -142,7 +140,9 @@ function isHaveAccessory(a){
     }
 }
 
-
+function setImg(){
+	alert("456");
+}
 
 function getName(name){
 	var newName=window.showModalDialog("<%=basePath%>model/accessory/dzfj/need_jsp/input.jsp?name="+escape(name),window,'dialogWidth:400px;dialogHeight:0px;status:no');
@@ -153,29 +153,7 @@ function getName(name){
 	}
 		
 }
-function deleteFile(){
- if(confirm("此文件将彻底删除，不可恢复，确定吗？") == true) {
-   var file_id=tree.getSelectedItemId();
-   var yw_guid='<%=yw_guid%>';
-   /*
-	var path = "<%=basePath%>";
-    var actionName = "accessoryAction";
-    var actionMethod = "deleteFile";
-    var parameter="yw_guid="+yw_guid+"&file_id="+file_id;
-	var result = ajaxRequest(path,actionName,actionMethod,parameter);
-	*/
-	putClientCommond("accessoryAction", "deleteFile");
-   	putRestParameter("yw_guid", yw_guid);
-   	putRestParameter("file_id", file_id);
-   	result = restRequest();
-	
-	document.location.reload(); 
-   //parent.location.reload();   
-   parent.Ext.getCmp("west_tree").getNodeById(file_id).remove() ;                
-  }else{
-  	return false;
-  }
-}
+
 
 function upload(){
 var file_id=tree.getSelectedItemId();

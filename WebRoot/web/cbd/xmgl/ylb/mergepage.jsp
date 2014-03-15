@@ -9,16 +9,18 @@
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 	String xmmc = request.getParameter("xmmc");
+	String yw_guid = request.getParameter("yw_guid");
 	String reportID = "XMKGZBBCX";
 	String file_id = request.getParameter("id");
 	String paths = "";
 	String temp_file_path = "";
+	String realPath=request.getRealPath("/")+"model//accessory//dzfj//download//";
 	if(file_id!=null){
 		AccessoryBean bean=new AccessoryBean();
 		bean.setFile_id(file_id);
 		bean.setFile_type("file");
 		temp_file_path = basePath+"model//accessory//dzfj//download//"+AccessoryOperation.getInstance().download(bean,realPath);
-		paths = "../../../accessory/dzfj/need_jsp/down.jsp?flag="+flag+"&file_path="+temp_file_path;
+		paths = "../../../accessory/dzfj/need_jsp/down.jsp?flag=0&file_path="+temp_file_path;
 	}
 	else{
 		paths = basePath + "/model/accessory/dzfj/download/" +yw_guid+".zip";
@@ -26,7 +28,6 @@
 	String keyIndex = "1";
 	String name = ProjectInfo.getInstance().PROJECT_NAME;
 	String name1 = ProjectInfo.getInstance().getProjectLoginName1();
-	String yw_guid = request.getParameter("yw_guid");
 	if (xmmc != null) {
 		xmmc = new String(xmmc.getBytes("iso-8859-1"), "utf-8");
 	}
@@ -139,7 +140,9 @@
 				alert('保存成功！');
 				window.location.reload();
 			}
-
+	}
+	function setImg(){
+		alert("123");
 	}
 </script>
 </head>
@@ -158,9 +161,9 @@
 					</div>
 					<div>
 						<img id="img1"
-							src='<%=basePath%>//model//accessory//dzfj//download//<%=firstpath%>'
+							src = "";
 							onerror="this.src='<%=basePath%>/web/cbd/framework/images/defult.jpg'"
-							height='275px' width='475px'  style="border:5 solid #D0D0D0">
+							height='275px' width='475px'  style="border:3 solid #D0D0D0">
 					</div>
 				</div>
 				<div class="div2" align="center">
@@ -168,10 +171,10 @@
 						<input id="nametwo" style='border-left: 0px; border-top: 0px; border-right: 0px; border-bottom: 1px' value="<%=map.get("nametwo") %>">
 					</div>
 					<div>
-						<img
-							src='<%=basePath%>//model//accessory//dzfj//download//<%=secondpath%>'
+						<img id="img2"
+							src = "";
 							onerror="this.src='<%=basePath%>/web/cbd/framework/images/defult.jpg'"
-							height='275px' width='475px'  style="border:5 solid #D0D0D0">
+							height='275px' width='475px'  style="border:3 solid #D0D0D0">
 					</div>
 				</div>
 			</div>
@@ -181,10 +184,10 @@
 				<input id="namethree" style='border-left: 0px; border-top: 0px; border-right: 0px; border-bottom: 1px' value="<%=map.get("namethree") %>">
 			</div>
 			<div>
-				<img
-					src='<%=basePath%>//model//accessory//dzfj//download//<%=threepath%>'
+				<img id="img3"
+					src = "";
 					onerror="this.src='<%=basePath%>/web/cbd/framework/images/defult.jpg'"
-					height='275px' width='475px'  style="border:5 solid #D0D0D0">
+					height='275px' width='475px'  style="border:3 solid #D0D0D0">
 			</div>
 		</div>
 		<div>&nbsp;</div>
