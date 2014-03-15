@@ -42,7 +42,6 @@ table td {
 }
 
 input {
-	border: none;
 	width: 70px;
 }
 
@@ -121,7 +120,7 @@ textarea {
 .table2 {
 	width: 30%;
 	float: left;
-	margin-left: 10px;
+	margin-left: 30px;
 	position: relative;
 	left: 0px;
 	top: 5px;
@@ -138,7 +137,9 @@ textarea {
 	font-size: 15px;
 }
 .text{
-   		width:80px;height:25px;border: none;text-align: center;
+	border-color:#6933F2;
+	line-height: 15px;
+   		width:80px;height:25px;border-width: 1px;text-align: center;
    }
 </style>
 <script type="text/javascript">
