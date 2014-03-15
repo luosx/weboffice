@@ -128,20 +128,20 @@ textarea {
 	</head>
 	<body bgcolor="#FFFFFF" style="overflow: hidden;">
 		<div align="center" style="width:100%">
+			<div align="center"><h1>CBD规划储备资源成本分析汇总表</h1></div>
 			<table width="100%" cellpadding="0" cellspacing="0">
 				<tr align="center" class="tr11">
 					
-					<td width="25%" >开发成本</td>
-					<td width="25%">楼面成本</td>
-					<td width="25%">地面保本点</td>
-					<td width="25%">地面成本</td>
+					<td width="25%" >开发成本(亿元)</td>
+					<td width="25%">楼面成本(元/㎡)</td>
+					<td width="25%">地面成本(元/㎡)</td>
+					<td width="25%">租金保本点(元/㎡·日)</td>
 				</tr>
 				<tr align="center">
 					<td width="25%"><%=list.get("KFCB") %></td>
 					<td width="25%"><%=list.get("LMCB") %></td>
-					<td width="25%"><%=list.get("BBD") %></td>
 					<td width="25%"><%=list.get("DMCB") %></td>
-					
+					<td width="25%"><%=list.get("BBD") %></td>		
 				</tr>
 			</table>
 		</div>
