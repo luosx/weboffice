@@ -313,6 +313,17 @@ String list = Fyzcmanager.getInstcne().getList();
 		                fieldLabel: '备注',
 		                width:'500'
 	            	}]
+            	},{
+	            	columnWidth:.9,
+	        		layout:'form',
+	           		items:[{
+		                xtype: 'textfield',
+		                id   : 'yw_guid',
+		                value:'',
+		                hidden:true,
+		                fieldLabel: 'yw_guid',
+		                width:'500'
+	            	}]
             	}]
 	        }], 
 	        buttons: [
@@ -334,7 +345,7 @@ String list = Fyzcmanager.getInstcne().getList();
   		form2.render("deal2");
   		form2.hide();
   		var elements2 = new Array("mc","gzfyts","gzjzgm","dycbzj","gzdj","lyfyts","lyjzgm","fyclts","jzmjcl",
-  		"zyzjcl","ftlx","fymc","zje","mpfmft","ylyfyft","zjfyft","fwjkzj","dqdj","bz");
+  		"zyzjcl","ftlx","fymc","zje","mpfmft","ylyfyft","zjfyft","fwjkzj","dqdj","bz","yw_guid");
   		paneloper2.init(form2,elements2);
   		paneloper2.hide();
   	}
