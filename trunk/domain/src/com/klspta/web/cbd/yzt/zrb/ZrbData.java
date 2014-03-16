@@ -34,6 +34,10 @@ public class ZrbData extends AbstractBaseBean implements Runnable {
     	return zrbData;
     }
 
+    public ZrbValueChange getZrbValueChange(){
+    	return linkChange;
+    }
+    
     /**
      * 保存自然斑列表
      */
@@ -143,6 +147,43 @@ public class ZrbData extends AbstractBaseBean implements Runnable {
     	return result == 1 ? true : false;
     }
     
+    public boolean insertZrb(HttpServletRequest request,boolean isinsert){
+    	String yw_guid = request.getParameter("yw_guid");
+    	String zrbbh = request.getParameter("zrbbh");
+    	String zdmj =request.getParameter("zdmj");
+    	String lzmj = request.getParameter("lzmj");
+    	String cqgm = request.getParameter("cqgm");
+    	String zzlzmj = request.getParameter("zzlzmj");
+    	String zzcqgm = request.getParameter("zzcqgm");
+    	String yjhs = request.getParameter("yjhs");
+    	String fzzlzmj = request.getParameter("fzzlzmj");
+    	String fzzcqgm = request.getParameter("fzzcqgm");
+    	String bz = request.getParameter("bz");
+    	String sql = "";
+    	int i = 0;
+    	if(isinsert){
+    		sql = "select * from jc_ziran where zrbbh = '" + zrbbh + "'";
+    		List<Map<String,Object>> list = query(sql, YW);
+    		if(list!=null && list.size()>0 ){
+    			return false;
+    		}
+    		sql = "insert into jc_ziran (zrbbh,zdmj,lzmj,cqgm,zzlzmj,zzcqgm,yjhs,fzzlzmj,fzzcqgm,bz) values (?,?,?,?,?,?,?,?,?,?)";
+    		i = update(sql, YW,new Object[]{zrbbh,zdmj,lzmj,cqgm,zzlzmj,zzcqgm,yjhs,fzzlzmj,fzzcqgm,bz});
+    	}else{
+    		sql = "select * from jc_ziran where yw_guid = ? and zrbbh = ?";
+    		List<Map<String,Object>> list = query(sql, YW,new Object[]{yw_guid,zrbbh});
+    		if(list!= null){
+    			if(list.size()==0){
+    				sql = "update cbd_zrb set zrbbh = ? where yw_guid = ?";
+    				update(sql, GIS,new Object[]{zrbbh,yw_guid});
+    			}
+    		}
+    		sql = "update jc_ziran set zrbbh=?,zdmj=?,lzmj=?,cqgm=?,zzlzmj=?,zzcqgm=?,yjhs=?,fzzlzmj=?,fzzcqgm=?,bz=? where yw_guid=?";
+    		i = update(sql, YW,new Object[]{zrbbh,zdmj,lzmj,cqgm,zzlzmj,zzcqgm,yjhs,fzzlzmj,fzzcqgm,bz,yw_guid});
+    	}
+    	return i==1 ?true:false;
+    }
+    
     /**
      * 
      * <br>Description:TODO 方法功能描述
@@ -152,8 +193,7 @@ public class ZrbData extends AbstractBaseBean implements Runnable {
      * @return
      */
     public boolean delete(String zrb){
-    	String sql = "delete from jc_jiben where dkmc=?";
-    	update(sql, YW, new Object[]{zrb});
+    	String sql = "";
     	sql = "delete from " + formName + " t where t.zrbbh = ?";
     	String sqlgis = "delete from " + form_gis + " t where t.zrbbh = ?";
     	update(sqlgis, GIS, new Object[]{zrb});
@@ -166,6 +206,7 @@ public class ZrbData extends AbstractBaseBean implements Runnable {
     	StringBuffer sqlBuffer = new StringBuffer();
     	sqlBuffer.append(" update ").append(formName);
     	sqlBuffer.append(" t set t.").append(field).append("=? where t.zrbbh=?");
+    	//linkChange.add(zrbbh);
     	int i = update(sqlBuffer.toString(), YW, new Object[]{value, zrbbh});
     	if(calcu){
 	    	if(!"zrbbh".equals(field)){
@@ -180,6 +221,7 @@ public class ZrbData extends AbstractBaseBean implements Runnable {
 	    	synBuffer.append(formName).append(" b where a.ZRBBH = b.zrbbh) where a.ZRBBH in (select zrbbh from zfjc.").append(formName).append(")");
 	    	update(synBuffer.toString(), YW);
     	}
+    	
     	return i == 1 ? true : false;
     }
     
@@ -219,7 +261,7 @@ public class ZrbData extends AbstractBaseBean implements Runnable {
      * @return
      * @throws Exception 
      */
-    public boolean recordGIS(String tbbh, String polygons) throws Exception{
+    public boolean recordGIS(String tbbh,String yw_guid ,String polygons) throws Exception{
     	JSONObject json = UtilFactory.getJSONUtil().jsonToObject(polygons);
     	String rings = json.getString("rings");
     	rings = rings.replace("]]]", "]");
@@ -250,13 +292,13 @@ public class ZrbData extends AbstractBaseBean implements Runnable {
                 srid = rs.get(0).get("srid") + "";
             }
             //判断对应zrbbh是否存在,存在用update 否则 用 insert
-            boolean isExit = isExit(form_gis, "ZRBBH", tbbh, GIS);
+            boolean isExit = isExit(form_gis, "yw_guid", yw_guid, GIS);
             String sql = "";
             if(isExit){
-            	sql = "update " + form_gis + " t set t.SHAPE=sde.st_geometry ('" + wkt + "', " + srid + ") where t.ZRBBH='" + tbbh + "'";
+            	sql = "update " + form_gis + " t set t.SHAPE=sde.st_geometry ('" + wkt + "', " + srid + ") where t.yw_guid='" + yw_guid + "'";
             }else{
-                sql = "INSERT INTO "+ form_gis+"(OBJECTID,ZRBBH,SHAPE) VALUES ((select nvl(max(OBJECTID)+1,1) from "+form_gis+"),'"
-                	+ tbbh + "',sde.st_geometry ('" + wkt + "', " + srid + "))";
+                sql = "INSERT INTO "+ form_gis+"(OBJECTID,yw_guid,ZRBBH,SHAPE) VALUES ((select nvl(max(OBJECTID)+1,1) from "+form_gis+"),'"
+                	+yw_guid+"','"+ tbbh + "',sde.st_geometry ('" + wkt + "', " + srid + "))";
             }
             update(sql, GIS);
             
@@ -265,6 +307,7 @@ public class ZrbData extends AbstractBaseBean implements Runnable {
             update(updatesql, YW);
             
         } catch (Exception e) {
+        	System.out.println(e.getMessage());
             System.out.println("采集坐标出错");
             return false;
         }
@@ -275,7 +318,7 @@ public class ZrbData extends AbstractBaseBean implements Runnable {
 		if("".equals(primaryName) || "".equals(primaryValue)){
 			return false;
 		}
-		String sql = "select " + primaryName + " from " + formName + " where " + primaryName + "='" + primaryValue + "'";
+		String sql = "select " + primaryName + " from " + formName + " where " + primaryName + "='" + primaryValue+"'";
 		List<Map<String, Object>> list = query(sql, type);
 		if(list.size() > 0){
 			return true;
