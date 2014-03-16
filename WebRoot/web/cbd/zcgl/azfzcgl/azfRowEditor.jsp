@@ -83,7 +83,7 @@ ITableStyle its = new TableStyleEditRow();
   	 $(document).ready(function () { 
 		var width = document.body.clientWidth+10;
 		var height = document.body.clientHeight;
-       	FixTable("AZFZC", 2,1, width, height);
+       //	FixTable("AZFZC", 2,1, width, height);
        	buildPanel();
     });
   	function buildPanel(){
@@ -302,6 +302,20 @@ ITableStyle its = new TableStyleEditRow();
 		                width:'100'
 	            	}]
             	}]
+	        },{
+	           	layout:'column',
+	           	items:[{
+					columnWidth:.33,
+	        		layout:'form',
+	           		items:[{
+		                xtype: 'textfield',
+		                id   : 'yw_guid',
+		                value:'',
+		                hidden:true,
+		                fieldLabel: 'yw_guid',
+		                width:'100'
+	            	}]
+	            }]
 	        }], 
 	        buttons: [
 	            {
@@ -322,13 +336,23 @@ ITableStyle its = new TableStyleEditRow();
   		form2.render("deal2");
   		form2.hide();
   		var elements2 = new Array("ydmc","tdyjkfzt","zdmj","jsyd","ghrjl","ghjzgm","ghyt","kg","tdcb","yjkxcazfts","gdfs",
-  		"tdkfjsbcxy","tdyj","azfjsdw","tdcrht","crhtydkgsj","tdz","bz");
+  		"tdkfjsbcxy","tdyj","azfjsdw","tdcrht","crhtydkgsj","tdz","bz","yw_guid");
   		paneloper2.init(form2,elements2);
   		paneloper2.hide();
   	}
   // })
+  function hideywguid(){
+  		var obj = document.getElementById("AZFZC");
+  		var rowlength = obj.rows.length;
+  		for(var i=0;i< rowlength;i++){
+  			obj.rows[i].cells[obj.rows[i].cells.length-1].style.display="none";
+  		}
+  		var width = document.body.clientWidth + 10;
+		var height = document.body.clientHeight ;
+       	FixTable("AZFZC", 2,1, width, height);
+  	}
   </script>
-  <body>
+  <body onload="hideywguid();">
   	<div id='show'>
   		<%=new CBDReportManager().getReport("AZFZC",new Object[]{"%%"},its)%>
   	</div>
