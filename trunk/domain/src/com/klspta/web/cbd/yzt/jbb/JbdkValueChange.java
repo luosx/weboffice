@@ -9,10 +9,19 @@ import com.klspta.base.AbstractBaseBean;
 public class JbdkValueChange extends AbstractBaseBean {
 	private String source_name = "JC_JIBEN";
 	private String impress_name = "JC_XIANGMU";
-	private String fields = "jsyd,rjl,jzgm,gjjzgm,jzjzgm,szjzgm,zzsgm,zzzsgm,zzzshs,hjmj,fzzzsgm,fzzjs,kfcb,dmcb,yjcjj,yjzftdsy,cxb,cqqd,cbfgl";
-	private String sql = "select sum(t.zzsgm) as zzsgm,  sum(t.zzzsgm) as zzzsgm, sum(t.zzzshs) as zzzshs, trunc(decode(sum(t.zzzshs),0,0,sum(t.zzzsgm)/sum(t.zzzshs)),2) as hjmj, sum(t.fzzzsgm) as fzzzsgm,"+
-						" sum(t.fzzjs) as fzzjs, sum(t.kfcb) as kfcb, sum(t.dmcb) as dmcb,sum(t.yjcjj) as yjcjj, sum(t.yjzftdsy) as yjzfdsy, sum(t.cxb)"+
-						" as cxb, sum(t.cqqd) as cqqd, sum(t.cbfgl) as cbfgl from jc_jiben t where t.dkmc in ";
+	private String fields = "zd,jsyd,rjl,jzgm,gjjzgm,jzjzgm,szjzgm,zzsgm,zzzsgm,zzzshs,hjmj,fzzzsgm,fzzjs,kfcb,dmcb,yjcjj,yjzftdsy,cxb,cqqd,cbfgl";
+	private String sql =  "select round(sum(t.zzsgm),2) as zzsgm, round(sum(t.zzzsgm),2) as zzzsgm, round(sum(t.zzzshs),2) as zzzshs, "
+		+ "case when sum(t.zzzshs)=0 then 0 else round(sum(t.zzzsgm)/sum(t.zzzshs)*10000,2) end as hjmj,"
+		+ " round(sum(t.fzzzsgm),2) as fzzzsgm, round(sum(t.fzzjs),2) as fzzjs,round(sum(t.zd),2) as zd,"
+		+ "round(sum(t.jsyd),2) as jsyd, case when sum(t.jsyd)=0 then 0 else  round(sum(t.jzgm)/sum(t.jsyd),2) end as rjl,"
+		+ " round(sum(t.jzgm),2) as jzgm,'--' as kzgd, '--' as ghyt, round(sum(t.gjjzgm),2) as gjjzgm,"
+		+ " round(sum(t.jzjzgm),2) as jzjzgm, round(sum(t.szjzgm),2) as szjzgm,"
+		+ "round(sum(t.szjzgm),2) as szjzgm,round(sum(t.kfcb),2) as kfcb,  round(sum(t.lmcb),2) as lmcb , "
+		+ "case when sum(t.jsyd)=0 then 0 when sum(t.kfcb)=0 then 0 else round(sum(t.kfcb)/sum(t.jsyd)*10000,2) end as dmcb,round(avg(t.yjcjj),2) as yjcjj,"
+		+ "round(avg(t.yjcjj)*sum(t.jzgm)/10000-sum(t.kfcb),2) as yjzftdsy,"
+		+ "case when (avg(t.yjcjj)*sum(t.jzgm))=0 then '0' when avg(t.yjcjj)*sum(t.jzgm)=0 then '0' else round(((avg(t.yjcjj)*sum(t.jzgm)/10000-sum(t.kfcb))/"
+		+ "(avg(t.yjcjj)*sum(t.jzgm)/10000))*100,2)||'%' end as cxb,case when sum(t.zd)=0 then 0 else round(sum(t.zzsgm)/sum(t.zd),2) end as cqqd,"
+		+ "case when sum(t.kfcb)=0 then '0' when sum(t.jzgm)=0 then '0' else round((sum(t.jzgm)*2.4/sum(t.kfcb))*100,2)||'%' end as cbfgl,'--' as gnfq from jc_jiben t where t.dkmc in ";
 	public boolean add(String ywGuid) {
 		//根据地块编号找到对应项目编号
 		String jbdkSql = "select t.dkmc,t.xmname from " + impress_name + " t where  t.dkmc like '%" + ywGuid + "%'";
@@ -64,7 +73,7 @@ public class JbdkValueChange extends AbstractBaseBean {
 		Map<String, Object> resultMap = resultList.get(0);
 		for(int i = 0; i < field.length; i++){
 			String fieldValue = String.valueOf(resultMap.get(field[i]));
-			fieldValue = fieldValue=="null"?"0":fieldValue;
+			fieldValue = fieldValue=="null"||"%".equals(fieldValue)?"0":fieldValue;
 			values[i] = fieldValue;
 		}
 		values[field.length] = xmmc;
