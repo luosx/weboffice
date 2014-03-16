@@ -81,6 +81,8 @@ public class JbbManager extends AbstractBaseBean {
   		    	sql = "update cbd_jbb set gnfq=4 where tbbh=?";
   		    }
   		    update(sql,GIS,new Object[]{dkbh});
+  		    JbdkValueChange jbdkValueChange = new JbdkValueChange();
+  		    jbdkValueChange.add(dkbh);
   		    if(i==1){
   		    	response("{success:true}");
   		    }else {
@@ -192,7 +194,7 @@ public class JbbManager extends AbstractBaseBean {
 	public Map<String, Object> getJHCB() {
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<Map<String, Object>> result = null;
-		String sql = "select sum(j.kfcb) as kfcb ,round(sum(j.kfcb)/sum(j.jzgm),1)*10000 as lmcb ,round(sum(j.kfcb)/sum(j.jsyd),1)*10000 as dmcb from jc_jiben j where j.ssqy in(?,?,?)";
+		String sql = "select sum(j.kfcb)/10000 as kfcb ,round(sum(j.kfcb)/sum(j.jzgm),1) as lmcb ,round(sum(j.kfcb)/sum(j.jsyd),1) as dmcb from jc_jiben j where j.ssqy in(?,?,?)";
 		result = query(sql, YW, new Object[] { "产业功能改造区", "民生改善区", "城市形象提升区" });
 
 		map.put("KFCB", result.get(0).get("KFCB") == null ? "0" : result.get(0)

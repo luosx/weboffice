@@ -27,7 +27,7 @@ public class JbbData extends AbstractBaseBean   {
 	public List<Map<String, Object>> getAllList(HttpServletRequest request) {
 		if(jbbList == null){
 		    StringBuffer sql = new StringBuffer();
-		    sql.append("select rownum xh,t.* from ").append(formName).append(" t") ;
+		    sql.append("select rownum xh,t.* from ").append(formName).append(" t prder by t.dkmc") ;
 	        List<Map<String, Object>> resultList = query(sql.toString(), YW);
 	        jbbList = addZrb(resultList);
 		}
