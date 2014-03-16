@@ -38,6 +38,7 @@ public class Fyzcmanager extends AbstractBaseBean {
     }
 
     public void addFyzc() {
+    	String yw_guid = request.getParameter("yw_guid");
         String mc = request.getParameter("mc");
         String gzfyts = request.getParameter("gzfyts");
         String gzjzgm = request.getParameter("gzjzgm");
@@ -65,12 +66,12 @@ public class Fyzcmanager extends AbstractBaseBean {
         int i = 0;
         String sql = "select mc from fyzc where mc=?";
         List<Map<String,Object>> list = query(sql, YW,new Object[]{mc});
-        if(list.size()>0){
-        	String updateString = "update fyzc set gzfy=?, gzgm=?, cbzj=?, gzdj=?, lyfy=?, lygm=?, qmfy=?" +
+        if(!"".equals(yw_guid) ||!"null".equals(yw_guid)|| yw_guid!=null){
+        	String updateString = "update fyzc set mc=?, gzfy=?, gzgm=?, cbzj=?, gzdj=?, lyfy=?, lygm=?, qmfy=?" +
         			", jzmj=?,zyzj=?,ftlx=?,fymc=?,ze=?,pmft=?, lyft=?, jzft=?, jkzj=?, dj=?, bz=?,jzrq=? "+
-        			"where mc=?" ;
-           i = update(updateString, YW, new Object[] {  gzfyts, gzjzgm, dycbzj, gzdj, lyfyts, lyjzgm, fyclts, jzmjcl,
-	        		zyzjcl, ftlx, fymc, zje, mpfmft, ylyfyft, zjfyft, fwjkzj, dqdj, bz, jzrq ,mc});
+        			"where yw_guid=?" ;
+           i = update(updateString, YW, new Object[] { mc, gzfyts, gzjzgm, dycbzj, gzdj, lyfyts, lyjzgm, fyclts, jzmjcl,
+	        		zyzjcl, ftlx, fymc, zje, mpfmft, ylyfyft, zjfyft, fwjkzj, dqdj, bz, jzrq ,yw_guid});
         }else{
 	        String insertString = "insert into fyzc  (mc, gzfy, gzgm, cbzj, gzdj, lyfy, lygm, qmfy, jzmj,zyzj,ftlx,fymc,ze,pmft, lyft, jzft, jkzj, dj, bz,jzrq)values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	        i = update(insertString, YW, new Object[] { mc, gzfyts, gzjzgm, dycbzj, gzdj, lyfyts, lyjzgm, fyclts, jzmjcl,
@@ -91,7 +92,7 @@ public class Fyzcmanager extends AbstractBaseBean {
                 "<table id='FYZC' width='2000' border='1' cellpadding='1' cellspacing='0'>" +
                 "<tr class='title' onclick='showMap(this); return false;' ondblclick='editMap(this); return false;'><td rowspan='2' colspan='1' class='tr01'>名称</td><td colspan='4' rowspan='1' class='tr01'>购置情况</td><td colspan='2' rowspan='1' class='tr01'>利用情况</td><td colspan='3' rowspan='1' class='tr01'>期末存量情况</td><td  class='tr01'><input id='jzrq' style='border:0;background:transparent;' value="
                         + jzrq
-                        + "></td><td rowspan='1' colspan='5' class='tr01'>其他费用</td><td rowspan='2' colspan='1' class='tr01'>房屋价款总计</td><td rowspan='2' colspan='1' class='tr01'>当前单价</td><td rowspan='2' colspan='1' class='tr01'>备注</td></tr><tr><td colspan='1' rowspan='1' class='tr01'>房源套数</td><td colspan='1' rowspan='1' class='tr01'>建筑规模</td><td colspan='1' rowspan='1' class='tr01'>动用储备资金</td><td colspan='1' rowspan='1' class='tr01'>购置单价</td><td colspan='1' rowspan='1' class='tr01'>房源套数</td><td colspan='1' rowspan='1' class='tr01'>建筑规模</td><td colspan='1' rowspan='1' class='tr01'>房源套数</td><td colspan='1' rowspan='1' class='tr01'>建筑面积</td><td colspan='1' rowspan='1' class='tr01'>占压资金</td><td colspan='1' rowspan='1' class='tr01'>分摊利息</td><td colspan='1' rowspan='1' class='tr01'>费用名称</td><td colspan='1' rowspan='1' class='tr01'>总金额</td><td colspan='1' rowspan='1' class='tr01'>每平米分摊</td><td colspan='1' rowspan='1' class='tr01'>已利用房源分摊</td><td colspan='1' rowspan='1' class='tr01'>结转房源分摊</td></tr>");
+                        + "></td><td rowspan='1' colspan='5' class='tr01'>其他费用</td><td rowspan='2' colspan='1' class='tr01'>房屋价款总计</td><td rowspan='2' colspan='1' class='tr01'>当前单价</td><td rowspan='2' colspan='1' class='tr01'>备注</td><td rowspan='2' colspan='1' style='display:none;' class='tr01'>yw_guid</td></tr><tr><td colspan='1' rowspan='1' class='tr01'>房源套数</td><td colspan='1' rowspan='1' class='tr01'>建筑规模</td><td colspan='1' rowspan='1' class='tr01'>动用储备资金</td><td colspan='1' rowspan='1' class='tr01'>购置单价</td><td colspan='1' rowspan='1' class='tr01'>房源套数</td><td colspan='1' rowspan='1' class='tr01'>建筑规模</td><td colspan='1' rowspan='1' class='tr01'>房源套数</td><td colspan='1' rowspan='1' class='tr01'>建筑面积</td><td colspan='1' rowspan='1' class='tr01'>占压资金</td><td colspan='1' rowspan='1' class='tr01'>分摊利息</td><td colspan='1' rowspan='1' class='tr01'>费用名称</td><td colspan='1' rowspan='1' class='tr01'>总金额</td><td colspan='1' rowspan='1' class='tr01'>每平米分摊</td><td colspan='1' rowspan='1' class='tr01'>已利用房源分摊</td><td colspan='1' rowspan='1' class='tr01'>结转房源分摊</td></tr>");
         String allsql = "select t.mc,t.gzfy,t.gzgm,t.cbzj,t.gzdj,t.jzmj,t.zyzj,t.pmft,t.lyft,t.ze,t.lyfy,t.lygm,t.dj,t.qmfy,t.ftlx,t.fymc,t.jzft,t.jkzj,t.bz,t.yw_guid from fyzc t";
         List<Map<String, Object>> alllist = query(allsql, YW);
         for (int i = 0; i < alllist.size(); i++) {
@@ -134,28 +135,29 @@ public class Fyzcmanager extends AbstractBaseBean {
                     + "</td><td>" + jkzj 
                     + "</td><td>" + dj
                     + "</td><td>" + bz
+                    + "</td><td style='display:none;'>" + yw_guid
                     + "</td></tr>");
         }
         String sumsql = "select sum(gzfy)as gzfy,sum(gzgm)as gzgm,sum(cbzj)as cbzj,sum(gzdj)as gzdj,sum(lyfy)as lyfy,sum(lygm)as lygm,sum(qmfy)as qmfy,sum(jzmj)as jzmj,sum(zyzj)as zyzj,sum(ftlx)as ftlx,sum(fymc)as fymc,sum(ze)as ze,sum(pmft)as pmft,sum(lyft)as lyft,sum(jzft)as jzft,sum(jkzj)as jkzj,sum(dj)as dj from fyzc t";
         List<Map<String, Object>> sumlist = query(sumsql, YW);
         for (int i = 0; i < sumlist.size(); i++) {
-            String sumgzfy = (String) (sumlist.get(i)).get("gzfy")==null?"":(sumlist.get(i)).get("gzfy").toString();
-            String sumgzgm = (String) (sumlist.get(i)).get("gzgm")==null?"":(sumlist.get(i)).get("gzgm").toString();
-            String sumcbzj = (String) (sumlist.get(i)).get("cbzj")==null?"":(sumlist.get(i)).get("cbzj").toString();
-            String sumgzdj = (String) (sumlist.get(i)).get("gzdj")==null?"":(sumlist.get(i)).get("gzdj").toString();
-            String sumlyfy = (String) (sumlist.get(i)).get("lyfy")==null?"":(sumlist.get(i)).get("lyfy").toString();
-            String sumlygm = (String) (sumlist.get(i)).get("lygm")==null?"":(sumlist.get(i)).get("lygm").toString();
-            String sumqmfy = (String) (sumlist.get(i)).get("qmfy")==null?"":(sumlist.get(i)).get("qmfy").toString();
-            String sumjzmj = (String) (sumlist.get(i)).get("jzmj")==null?"":(sumlist.get(i)).get("jzmj").toString();
-            String sumzyzj = (String) (sumlist.get(i)).get("zyzj")==null?"":(sumlist.get(i)).get("zyzj").toString();
-            String sumftlx = (String) (sumlist.get(i)).get("ftlx")==null?"":(sumlist.get(i)).get("ftlx").toString();
-            String sumfymc = (String) (sumlist.get(i)).get("fymc")==null?"":(sumlist.get(i)).get("fymc").toString();
-            String sumze = (String) (sumlist.get(i)).get("ze")==null?"":(sumlist.get(i)).get("ze").toString();
-            String sumpmft = (String) (sumlist.get(i)).get("pmft")==null?"":(sumlist.get(i)).get("pmft").toString();
-            String sumlyft = (String) (sumlist.get(i)).get("lyft")==null?"":(sumlist.get(i)).get("lyft").toString();
-            String sumjzft = (String) (sumlist.get(i)).get("jzft")==null?"":(sumlist.get(i)).get("jzft").toString();
-            String jkzj = (String) (sumlist.get(i)).get("jkzj")==null?"":(sumlist.get(i)).get("jkzj").toString();
-            String sumdj = (String) (sumlist.get(i)).get("dj")==null?"":(sumlist.get(i)).get("dj").toString();
+            String sumgzfy =  (sumlist.get(i)).get("gzfy")==null?"":(sumlist.get(i)).get("gzfy").toString();
+            String sumgzgm =  (sumlist.get(i)).get("gzgm")==null?"":(sumlist.get(i)).get("gzgm").toString();
+            String sumcbzj =  (sumlist.get(i)).get("cbzj")==null?"":(sumlist.get(i)).get("cbzj").toString();
+            String sumgzdj =  (sumlist.get(i)).get("gzdj")==null?"":(sumlist.get(i)).get("gzdj").toString();
+            String sumlyfy =  (sumlist.get(i)).get("lyfy")==null?"":(sumlist.get(i)).get("lyfy").toString();
+            String sumlygm =  (sumlist.get(i)).get("lygm")==null?"":(sumlist.get(i)).get("lygm").toString();
+            String sumqmfy =  (sumlist.get(i)).get("qmfy")==null?"":(sumlist.get(i)).get("qmfy").toString();
+            String sumjzmj =  (sumlist.get(i)).get("jzmj")==null?"":(sumlist.get(i)).get("jzmj").toString();
+            String sumzyzj =  (sumlist.get(i)).get("zyzj")==null?"":(sumlist.get(i)).get("zyzj").toString();
+            String sumftlx =  (sumlist.get(i)).get("ftlx")==null?"":(sumlist.get(i)).get("ftlx").toString();
+            String sumfymc =  (sumlist.get(i)).get("fymc")==null?"":(sumlist.get(i)).get("fymc").toString();
+            String sumze =  (sumlist.get(i)).get("ze")==null?"":(sumlist.get(i)).get("ze").toString();
+            String sumpmft =  (sumlist.get(i)).get("pmft")==null?"":(sumlist.get(i)).get("pmft").toString();
+            String sumlyft =  (sumlist.get(i)).get("lyft")==null?"":(sumlist.get(i)).get("lyft").toString();
+            String sumjzft =  (sumlist.get(i)).get("jzft")==null?"":(sumlist.get(i)).get("jzft").toString();
+            String jkzj =  (sumlist.get(i)).get("jkzj")==null?"":(sumlist.get(i)).get("jkzj").toString();
+            String sumdj =  (sumlist.get(i)).get("dj")==null?"":(sumlist.get(i)).get("dj").toString();
             result.append("<tr><td class='tr01'>总计</td><td class='tr01'>" + sumgzfy
                     + "</td><td class='tr01'>" + sumgzgm + "</td><td class='tr01'>" + sumcbzj
                     + "</td><td class='tr01'>" + sumgzdj + "</td><td class='tr01'>" + sumlyfy
@@ -171,11 +173,11 @@ public class Fyzcmanager extends AbstractBaseBean {
     }
 
     public void delByYwGuid() {
-        String mc = request.getParameter("mc");
-        mc = UtilFactory.getStrUtil().unescape(mc);
-        String[] mcs = mc.substring(0, mc.length()-1).split(",");
+        String yw_guid = request.getParameter("yw_guid");
+        yw_guid = UtilFactory.getStrUtil().unescape(yw_guid);
+        String[] mcs = yw_guid.substring(0, yw_guid.length()-1).split(",");
         for(int i=0;i<mcs.length;i++){
-        	String sql = "delete from fyzc t where t.mc='" + mcs[i] + "'";
+        	String sql = "delete from fyzc t where t.yw_guid='" + mcs[i] + "'";
         	this.update(sql, YW);
         }
         response("success");
