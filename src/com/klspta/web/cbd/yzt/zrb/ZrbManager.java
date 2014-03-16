@@ -69,24 +69,24 @@ public class ZrbManager extends AbstractBaseBean {
         }
     }
     
-    
-    public void update() throws Exception{
-    	String zrbbh =new String(request.getParameter("key").getBytes("iso-8859-1"), "UTF-8");
-    	String index = request.getParameter("vindex");
-    	String value = new String(request.getParameter("value").getBytes("iso-8859-1"), "UTF-8");
-    	String field = ZrbReport.shows[Integer.parseInt(index)][0];
-    	//response(String.valueOf(new ZrbData().modifyValue(zrbbh, field, value)));
-    	//为添加响应速度，采用多线程
-    	//Thread thread = new Thread(new ZrbData(zrbbh, field, value));
-    	//thread.run();
-    	ZrbData zrbData = ZrbData.getInstance();
-    	zrbData.setChange(zrbbh, field, value);
-    	ExecutorService exec = Executors.newCachedThreadPool();
-    	exec.execute(zrbData);
-    	exec.shutdown();
-    	//zrbData.run();
-    	
-    }
+//    
+//    public void update() throws Exception{
+//    	String zrbbh =new String(request.getParameter("key").getBytes("iso-8859-1"), "UTF-8");
+//    	String index = request.getParameter("vindex");
+//    	String value = new String(request.getParameter("value").getBytes("iso-8859-1"), "UTF-8");
+//    	String field = ZrbReport.shows[Integer.parseInt(index)][0];
+//    	//response(String.valueOf(new ZrbData().modifyValue(zrbbh, field, value)));
+//    	//为添加响应速度，采用多线程
+//    	//Thread thread = new Thread(new ZrbData(zrbbh, field, value));
+//    	//thread.run();
+//    	ZrbData zrbData = ZrbData.getInstance();
+//    	zrbData.setChange(zrbbh, field, value);
+//    	ExecutorService exec = Executors.newCachedThreadPool();
+//    	exec.execute(zrbData);
+//    	exec.shutdown();
+//    	//zrbData.run();
+//    	
+//    }
     
     /**
      * 
@@ -94,19 +94,19 @@ public class ZrbManager extends AbstractBaseBean {
      * <br>Author:黎春行
      * <br>Date:2013-12-12
      */
-    public void insertZrb(){
-    	String zrbBH = request.getParameter("ZRBBH");
-    	if (zrbBH != null) {
-    		zrbBH = UtilFactory.getStrUtil().unescape(zrbBH);
-	        if (ZrbData.getInstance().insertZrb(zrbBH)) {
-	            response("{success:true}");
-	        } else {
-	            response("{success:false}");
-	        }
-    	}else{
-    		response("{success:false}");
-    	}
-    }
+//    public void insertZrb(){
+//    	String zrbBH = request.getParameter("ZRBBH");
+//    	if (zrbBH != null) {
+//    		zrbBH = UtilFactory.getStrUtil().unescape(zrbBH);
+//	        if (ZrbData.getInstance().insertZrb(zrbBH)) {
+//	            response("{success:true}");
+//	        } else {
+//	            response("{success:false}");
+//	        }
+//    	}else{
+//    		response("{success:false}");
+//    	}
+//    }
     
     /**
      * 
@@ -117,13 +117,15 @@ public class ZrbManager extends AbstractBaseBean {
      */
     public void drawZrb() throws Exception{
     	String tbbh = request.getParameter("tbbh");
+    	String yw_guid = request.getParameter("yw_guid");
     	String polygon = request.getParameter("polygon");
     	if (tbbh != null) {
     		tbbh = UtilFactory.getStrUtil().unescape(tbbh);
+    		yw_guid = UtilFactory.getStrUtil().unescape(yw_guid);
     	}else{
     		response("{error:not primary}");
     	}
-    	boolean draw = ZrbData.getInstance().recordGIS(tbbh, polygon);
+    	boolean draw = ZrbData.getInstance().recordGIS(tbbh,yw_guid, polygon);
     	response(String.valueOf(draw)); 
     }
     
@@ -186,6 +188,7 @@ public class ZrbManager extends AbstractBaseBean {
     	String zrbs =new String(request.getParameter("zrbbh").getBytes("iso-8859-1"),"utf-8");
     	String[] zrbArray = zrbs.split(",");
     	for(int i = 0; i < zrbArray.length; i++){
+    		zrbData.getZrbValueChange().add(zrbArray[i]);
     		result = result && zrbData.delete(zrbArray[i]);
     	}
     	response(String.valueOf(result));
@@ -219,25 +222,37 @@ public class ZrbManager extends AbstractBaseBean {
 	
 	public void setZrb() throws Exception{
 		String zrbbh = request.getParameter("zrbbh");
+		String yw_guid = request.getParameter("yw_guid");
+		yw_guid = (yw_guid == null || yw_guid == "null")?"null":yw_guid;
 		zrbbh = (zrbbh == null || zrbbh == "null")? "null" : zrbbh;
 		zrbbh = new String(zrbbh.getBytes("iso-8859-1"), "utf-8");
 		ZrbData zrbData = new ZrbData();
-		boolean isExit = zrbData.isExit(ZrbData.formName, "zrbbh", zrbbh, YW);
-		if(!isExit){
-			zrbData.insertZrb(zrbbh);
+		//boolean isExit = zrbData.isExit(ZrbData.formName, "yw_guid", yw_guid, YW);
+		boolean isinsrt = false;
+		if(yw_guid == null || yw_guid == "null" || "".equals(yw_guid)){
+			isinsrt = zrbData.insertZrb(request,true);
+		}else {
+			isinsrt = zrbData.insertZrb(request,false);
 		}
-		String[][] fields = ZrbReport.shows;
-		for(int i = 2; i < fields.length; i++){
-			String value = request.getParameter(fields[i][0]);
-			value = (value == null || value == "null")? "null" : value;
-			value = new String(value.getBytes("iso-8859-1"), "utf-8");
-			if(i < fields.length - 1){
-				zrbData.modifyValue(zrbbh, fields[i][0], value, false);
-			}else{
-				zrbData.modifyValue(zrbbh, fields[i][0], value);
-			}
+//		String[][] fields = ZrbReport.shows;
+		if(isinsrt){
+			zrbData.getZrbValueChange().add(zrbbh);
 		}
-		response("{success:true}");
+//		for(int i = 2; i < fields.length; i++){
+//			String value = request.getParameter(fields[i][0]);
+//			value = (value == null || value == "null")? "null" : value;
+//			value = new String(value.getBytes("iso-8859-1"), "utf-8");
+//			if(i < fields.length - 1){
+//				zrbData.modifyValue(zrbbh, fields[i][0], value, false);
+//			}else{
+//				zrbData.modifyValue(zrbbh, fields[i][0], value,false);
+//			}
+//		}
+		if(isinsrt){
+			response("{success:true}");
+		}else{
+			response("{success:false}");
+		}
 	}
 	
 	
