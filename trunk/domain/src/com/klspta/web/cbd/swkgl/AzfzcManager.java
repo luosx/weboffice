@@ -100,6 +100,7 @@ public class AzfzcManager extends AbstractBaseBean {
 	}
 
 	public void addAZFzc() {
+		String yw_guid = request.getParameter("yw_guid");
 		String ydmc = request.getParameter("ydmc");
 		String tdyjkfzt = request.getParameter("tdyjkfzt");
 		String zdmj = request.getParameter("zdmj");
@@ -119,6 +120,7 @@ public class AzfzcManager extends AbstractBaseBean {
 		String tdz = request.getParameter("tdz");
 		String bz = request.getParameter("bz");
 
+		yw_guid = UtilFactory.getStrUtil().unescape(yw_guid);
 		ydmc = UtilFactory.getStrUtil().unescape(ydmc);
 		tdyjkfzt = UtilFactory.getStrUtil().unescape(tdyjkfzt);
 		ghyt = UtilFactory.getStrUtil().unescape(ghyt);
@@ -129,19 +131,17 @@ public class AzfzcManager extends AbstractBaseBean {
 		tdcrht = UtilFactory.getStrUtil().unescape(tdcrht);
 		tdz = UtilFactory.getStrUtil().unescape(tdz);
 		bz = UtilFactory.getStrUtil().unescape(bz);
-		String sql = "select ydmc from zc_azfzc where ydmc =?";
-		List<Map<String,Object>> list = query(sql, YW,new Object[]{ydmc});
 		int i = 0;
-		if(list.size()==0){
-		String insertString = "insert into ZC_AZFZC  (ydmc,tdyjkfzt,zdmj,jsyd,ghrjl,ghjzgm,ghyt,kg,tdcb,yjkxcazfts,gdfs,tdkfjsbcxy,tdyj,azfjsdw,tdcrht,crhtydkgsj,tdz,bz)values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-		i = update(insertString, YW, new Object[] { ydmc, tdyjkfzt, zdmj,
+		if("".equals(yw_guid) || "null".equals(yw_guid)|| yw_guid == null){
+			String insertString = "insert into ZC_AZFZC  (ydmc,tdyjkfzt,zdmj,jsyd,ghrjl,ghjzgm,ghyt,kg,tdcb,yjkxcazfts,gdfs,tdkfjsbcxy,tdyj,azfjsdw,tdcrht,crhtydkgsj,tdz,bz)values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+			i = update(insertString, YW, new Object[] { ydmc, tdyjkfzt, zdmj,
 				jsyd, ghrjl, ghjzgm, ghyt, kg, tdcb, yjkxcazfts, gdfs,
 				tdkfjsbcxy, tdyj, azfjsdw, tdcrht, crhtydkgsj, tdz, bz });
 		}else {
-			String insertString = "update zc_azfzc  set tdyjkfzt=?,zdmj=?,jsyd=?,ghrjl=?,ghjzgm=?,ghyt=?,kg=?,tdcb=?,yjkxcazfts=?,gdfs=?,tdkfjsbcxy=?,tdyj=?,azfjsdw=?,tdcrht=?,crhtydkgsj=?,tdz=?,bz=? where ydmc=?";
-			i = update(insertString, YW, new Object[] {  tdyjkfzt, zdmj,
+			String insertString = "update zc_azfzc  set ydmc=?, tdyjkfzt=?,zdmj=?,jsyd=?,ghrjl=?,ghjzgm=?,ghyt=?,kg=?,tdcb=?,yjkxcazfts=?,gdfs=?,tdkfjsbcxy=?,tdyj=?,azfjsdw=?,tdcrht=?,crhtydkgsj=?,tdz=?,bz=? where yw_guid=?";
+			i = update(insertString, YW, new Object[] { ydmc, tdyjkfzt, zdmj,
 					jsyd, ghrjl, ghjzgm, ghyt, kg, tdcb, yjkxcazfts, gdfs,
-					tdkfjsbcxy, tdyj, azfjsdw, tdcrht, crhtydkgsj, tdz, bz ,ydmc});
+					tdkfjsbcxy, tdyj, azfjsdw, tdcrht, crhtydkgsj, tdz, bz ,yw_guid});
 		}
 		if (i > 0) {
 		    response("{success:true}");
@@ -196,8 +196,12 @@ public class AzfzcManager extends AbstractBaseBean {
 	public void delByYwGuid() {
 		try {
 			String yw_guid = request.getParameter("yw_guid");
-			String sql = "delete from zc_azfzc where yw_guid=?";
-			update(sql, YW, new Object[] { yw_guid });
+			yw_guid=UtilFactory.getStrUtil().unescape(yw_guid);
+			String[] yw_guids = yw_guid.substring(0, yw_guid.length()-1).split(",");
+			for(int i=0;i<yw_guids.length;i++){
+			String sql = "delete from zc_azfzc where yw_guid='"+yw_guids[i]+"'";
+			this.update(sql, YW, new Object[] {});
+			}
 			response("success");
 		} catch (Exception e) {
 			response("false");
