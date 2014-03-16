@@ -135,10 +135,10 @@ function dele(){
 			var choseValue = table.getAnnotations();
 			var choseString = '';
 			while(choseValue.length != 0){
-				choseString += table.getValue(choseValue.pop(),"1") + ",";
+				choseString += table.getValue(choseValue.pop(),"11") + ",";
 			}
 			putClientCommond("zrbHandle","delete");
-			putRestParameter("zrbbh",choseString);
+			putRestParameter("yw_guid",choseString);
 			myData = restRequest();
 			if(myData){
 				Ext.MessageBox.alert('提醒', '删除成功！', function(btn, text){
