@@ -1,4 +1,5 @@
 var zrbbh = "";
+var yw_guid = "";
 var num = 0;
 var table = new tableoper();
 //zrbTable.init(document.getElementById("ZRB"));
@@ -33,6 +34,7 @@ function editMap(objid){
 		table.init(document.getElementById("ZRB"));
 	}
 	 zrbbh = objid.cells[1].innerText;
+	 yw_guid = objid.cells[11].innerText;
 	//form.show();
 	
 	//parent.parent.frames['east'].swfobject.getObjectById("FxGIS").clear();
@@ -58,7 +60,7 @@ function print(){
     var sel = document.body.createTextRange(); 
     sel.moveToElementText(curTbl); 
     //把表格中的内容移到TextRange中 
-    sel.select(); 
+    //sel.select(); 
     //全选TextRange中内容 
     sel.execCommand("Copy"); 
     //复制TextRange中内容  
@@ -72,6 +74,7 @@ function print(){
 function setRecord(polygon){
 	putClientCommond("zrbHandle","drawZrb");
     putRestParameter("tbbh",escape(escape(zrbbh))); 
+    putRestParameter("yw_guid",escape(escape(yw_guid))); 
     putRestParameter("polygon",polygon); 
     var result = restRequest();
 	//parent.parent.frames['east'].swfobject.getObjectById("FxGIS").clear();
