@@ -185,8 +185,8 @@ public class ZrbManager extends AbstractBaseBean {
     public void delete() throws Exception{
     	boolean result = true;
     	ZrbData zrbData = ZrbData.getInstance();
-    	String zrbs =new String(request.getParameter("zrbbh").getBytes("iso-8859-1"),"utf-8");
-    	String[] zrbArray = zrbs.split(",");
+    	String yw_guids =new String(request.getParameter("yw_guid").getBytes("iso-8859-1"),"utf-8");
+    	String[] zrbArray = yw_guids.split(",");
     	for(int i = 0; i < zrbArray.length; i++){
     		zrbData.getZrbValueChange().add(zrbArray[i]);
     		result = result && zrbData.delete(zrbArray[i]);
