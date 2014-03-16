@@ -11,7 +11,9 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import com.klspta.base.AbstractBaseBean;
 import com.klspta.web.cbd.qyjc.XzlInsertGIS;
 import com.klspta.web.cbd.yzt.hxxm.HxxmInsertGIS;
+import com.klspta.web.cbd.yzt.hxxm.HxxmswInsertGIS;
 import com.klspta.web.cbd.yzt.jbb.JbbInsertGIS;
+import com.klspta.web.cbd.yzt.jbb.JbbswInsertGIS;
 import com.klspta.web.cbd.yzt.zrb.ZrbInsertGIS;
 import com.klspta.web.cbd.yzt.kgzb.KgzbInsertGIS;
 
@@ -21,6 +23,8 @@ public class GisFactory extends AbstractBaseBean{
 	public final static int TYPE_HXXM = 3;
 	public final static int TYPE_XZL = 4;
 	public final static int TYPE_KGZB = 5;
+	public final static int TYPE_HXXMSW = 6;
+	public final static int TYPE_JBBSW = 7;
 	
 	public void getGis() throws Exception{
 		request.setCharacterEncoding("utf-8");
@@ -59,6 +63,12 @@ public class GisFactory extends AbstractBaseBean{
 				break;
 			case TYPE_KGZB:
 				insertCIS = new KgzbInsertGIS();
+				break;
+			case TYPE_HXXMSW:
+				insertCIS = new HxxmswInsertGIS();
+				break;
+			case TYPE_JBBSW:
+				insertCIS = new JbbswInsertGIS();
 				break;
 			default:
 				insertCIS = new ZrbInsertGIS();
