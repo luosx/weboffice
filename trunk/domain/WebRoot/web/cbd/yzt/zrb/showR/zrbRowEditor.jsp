@@ -74,13 +74,22 @@ ITableStyle its = new TableStyleEditRow();
 	</style>
   </head>
   <script type="text/javascript">
-  $(document).ready(function () { 
-		var width = document.body.clientWidth+10;
+
+  	function hideywguid(){
+  		var obj = document.getElementById("ZRB");
+  		var rowlength = obj.rows.length;
+  		for(var i=0;i< rowlength;i++){
+  			if(i!=1){
+  				obj.rows[i].cells[obj.rows[i].cells.length-1].style.display="none";
+  				obj.rows[i].cells[obj.rows[i].cells.length-1].innerText;
+  			}
+  		}
+  		var width = document.body.clientWidth;
 		var height = document.body.clientHeight;
        	FixTable("ZRB", 1,2, width, height);
-       	});
-  </script>
-  <body>
+  	}
+  	  </script>
+  <body onload="hideywguid();">
   	<div id='show'>
   		<%=new CBDReportManager().getReport("ZRB",new Object[]{"false"},its)%>
   	</div>

@@ -77,8 +77,8 @@ String view = request.getParameter("view");
   	var paneloper = new Paneloper();
   	$(document).ready(function () { 
 		var width = document.body.clientWidth;
-		var height = document.body.clientHeight * 0.82;
-       	FixTable("ZRB", 1,2, width, height);
+		var height = document.body.clientHeight * 0.85;
+       //	FixTable("ZRB", 1,2, width, height);
        	buildPanel();
     });
   //	Ext.onReady(function(){
@@ -97,14 +97,8 @@ String view = request.getParameter("view");
 	            anchor: '0'
 	        },
 	        items   : [
+	        	
 	        	{
- 					xtype: 'hidden',
-	                id      : 'yw_guid',
-	                value:'',
-	                fieldLabel: '主键',
-	                width :60
-            	}
-	        	,{
 	                xtype: 'textfield',
 	                id      : 'zrbbh',
 	                value:'',
@@ -164,6 +158,13 @@ String view = request.getParameter("view");
 	                value:'',
 	                fieldLabel: '备注',
 	                width :60
+            	},{
+ 					xtype: 'textfield',
+	                id      : 'yw_guid',
+	                value:'',
+	                hidden : true,
+	                fieldLabel: '主键',
+	                width :60
             	}
 	        ],
 	        buttons: [
@@ -184,13 +185,26 @@ String view = request.getParameter("view");
 	  });	
   		form.render("deal");
   		//form.hide();
-  		var elements = new Array("yw_guid","zrbbh","zdmj","lzmj","cqgm","zzlzmj","zzcqgm","yjhs","fzzlzmj","fzzcqgm","bz");
+  		var elements = new Array("zrbbh","zdmj","lzmj","cqgm","zzlzmj","zzcqgm","yjhs","fzzlzmj","fzzcqgm","bz","yw_guid");
   		paneloper.init(form,elements);
   		paneloper.hide();
   	}
   // })
+  	function hideywguid(){
+  		var obj = document.getElementById("ZRB");
+  		var rowlength = obj.rows.length;
+  		for(var i=0;i< rowlength;i++){
+  			if(i!=1){
+  				obj.rows[i].cells[obj.rows[i].cells.length-1].style.display="none";
+  				obj.rows[i].cells[obj.rows[i].cells.length-1].innerText;
+  			}
+  		}
+  		var width = document.body.clientWidth;
+		var height = document.body.clientHeight * 0.95;
+       	FixTable("ZRB", 1,2, width, height);
+  	}
   </script>
-  <body>
+  <body onload="hideywguid();">
   	<div id='show' style="overflow-x:hidden;overflow-y:hidden">
   		<%=new CBDReportManager().getReport("ZRB",new Object[]{"false"},its)%>
   	</div>
