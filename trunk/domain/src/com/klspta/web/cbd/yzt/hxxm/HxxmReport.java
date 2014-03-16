@@ -89,10 +89,17 @@ public class HxxmReport extends AbstractBaseBean implements IDataClass {
 	}
 
 	public List<TRBean> getSub(Map queryMap) {
-		String sql = "select sum(t.zzsgm) as zzsgm, sum(t.zzzsgm) as zzzsgm, sum(t.zzzshs) as zzzshs,trunc(decode(sum(t.zzzshs),0,0,sum(t.zzzsgm)/sum(t.zzzshs)),2) as hjmj,sum(t.fzzzsgm) as fzzzsgm, "
-				+ "sum(t.fzzjs) as fzzjs, sum(t.zd) as zd, sum(t.jsyd) as jsyd,round(sum(t.jzgm)/sum(t.jsyd),2)/100||'%' as rjl, sum(t.jzgm) as jzgm, ''as ghyt, sum(t.gjjzgm) as gjjzgm, sum(t.jzjzgm) as jzjzgm,sum(t.szjzgm) as szjzgm,"
-				+ "sum(t.kfcb) as kfcb,sum(t.lmcb) as lmcb,round(sum(t.kfcb)/sum(jzgm),2) as dmcb,avg(t.yjcjj) as yjcjj,avg(t.yjcjj)*sum(t.jzgm)/10000 - sum(t.kfcb) as yjzftdsy,round((avg(t.yjcjj)*sum(t.jzgm)/10000 - sum(t.kfcb)) /(avg(t.yjcjj)*sum(t.jzgm)/10000),2)/100||'%' as cxb,round(sum(t.zzsgm)/sum(t.zd),2) as cqqd,round(sum(t.jzgm)*2.4/sum(kfcb),2)/100||'%' as cbfgl"
-				+ ",sum(t.zzcqfy) as zzcqfy,sum(t.qycqfy) as qycqfy,sum(t.qtfy) as qtfy,sum(t.azftzcb) as azftzcb,sum(t.zzhbtzcb) as zzhbtzcb,sum(t.cqhbtz) as cqhbtz,'' as qtfyzb,sum(t.lmcjj) as lmcjj,sum(t.fwsj) as fwsj,sum(t.zj) as zj,''as dk from JC_XIANGMU t ";
+		String sql = "select sum(t.zzsgm) as zzsgm, sum(t.zzzsgm) as zzzsgm, sum(t.zzzshs) as zzzshs," +
+				"case when sum(t.zzzshs)=0 then 0 else trunc(decode(sum(t.zzzshs),0,0,sum(t.zzzsgm)/sum(t.zzzshs)),2) end as hjmj," +
+				"sum(t.fzzzsgm) as fzzzsgm, sum(t.fzzjs) as fzzjs, sum(t.zd) as zd, sum(t.jsyd) as jsyd," +
+       " case when sum(t.jsyd)=0 then '0' else  round(sum(t.jzgm)/sum(t.jsyd),2)/100||'%' end as rjl, " +
+       " sum(t.jzgm) as jzgm, '--'as ghyt, sum(t.gjjzgm) as gjjzgm, sum(t.jzjzgm) as jzjzgm,sum(t.szjzgm) as szjzgm," +
+       "  sum(t.kfcb) as kfcb,sum(t.lmcb) as lmcb,case when sum(t.jzgm)=0 then 0 else round(sum(t.kfcb)/sum(jzgm),2) end as dmcb,round(avg(t.yjcjj),2) as yjcjj," +
+       " avg(t.yjcjj)*sum(t.jzgm)/10000 - sum(t.kfcb) as yjzftdsy,case when avg(t.yjcjj)*sum(t.jzgm)=0 then '0' else round((avg(t.yjcjj)*sum(t.jzgm)/10000 - sum(t.kfcb)) /(avg(t.yjcjj)*sum(t.jzgm)/10000),2)/100||'%' end as cxb," +
+      "  case when sum(t.zd)=0 then 0 else round(sum(t.zzsgm)/sum(t.zd),2) end as cqqd,case when sum(kfcb)=0 then '0' else round(sum(t.jzgm)*2.4/sum(kfcb),2)/100||'%' end as cbfgl" +
+      "  ,sum(t.zzcqfy) as zzcqfy,sum(t.qycqfy) as qycqfy,sum(t.qtfy) as qtfy,sum(t.azftzcb) as azftzcb," +
+       " sum(t.zzhbtzcb) as zzhbtzcb,sum(t.cqhbtz) as cqhbtz,'' as qtfyzb,sum(t.lmcjj) as lmcjj," +
+       " sum(t.fwsj) as fwsj,sum(t.zj) as zj,''as dk from JC_XIANGMU t ";
 		if (queryMap != null && !queryMap.isEmpty()) {
 			sql += String.valueOf(queryMap.get("query"));
 		}
