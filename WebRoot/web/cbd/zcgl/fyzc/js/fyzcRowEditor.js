@@ -69,10 +69,10 @@ function dele(){
 			var choseValue = table.getAnnotations();
 			var choseString = '';
 			if(choseValue.length != 0){
-				choseString += table.getValue(choseValue.pop(),"0")+ ",";
+				choseString += table.getValue(choseValue.pop(),"19")+ ",";
 			}
 			putClientCommond("fyzcHandle","delByYwGuid");
-			putRestParameter("mc",escape(escape(choseString)));
+			putRestParameter("yw_guid",escape(escape(choseString)));
 			myData = restRequest();
 			if(myData){
 				Ext.MessageBox.alert('提醒', '删除成功！', function(btn, text){
