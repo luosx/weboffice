@@ -76,13 +76,11 @@ function dele(){
 		if(btn == 'yes'){
 			var choseValue = table.getAnnotations();
 			var choseString = '';
-			alert(choseValue);
 			if(choseValue.length != 0){
-				choseString += table.getValue(choseValue.pop(),"1")+ ",";
+				choseString += table.getValue(choseValue.pop(),"19")+ ",";
 			}
-			putClientCommond("zafzc","delByDkmc");
-			putRestParameter("dkmc",escape(escape(choseString)));
-			alert(choseString);
+			putClientCommond("zafzc","delByYwGuid");
+			putRestParameter("yw_guid",escape(escape(choseString)));
 			myData = restRequest();
 			if(myData){
 				Ext.MessageBox.alert('提醒', '删除成功！', function(btn, text){
