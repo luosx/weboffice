@@ -13,17 +13,17 @@ import com.klspta.model.CBDReport.dataClass.IDataClass;
 
 public class ZrbReport extends AbstractBaseBean implements IDataClass {
 	private String[][] title1 = new String[][] { { "序号", "80" ,"2","1"},
-			{ "自然斑编号", "100","2","1" }, { "占地面积（㎡）", "120","2","1" }, { "总计", "200" ,"1","2"},
-			{ "住宅拆迁（户、人、㎡）", "300" ,"1","3"}, { "非住宅拆迁（㎡）", "240","1","2" }, { "备注", "100" ,"2","1"},
+			{ "自然斑编号", "100","2","1" }, { "占地面积（㎡）", "140","2","1" }, { "总计", "200" ,"1","2"},
+			{ "住宅拆迁（户、人、㎡）", "300" ,"1","3"}, { "非住宅拆迁（㎡）", "280","1","2" }, { "备注", "100" ,"2","1"},
 			{ "yw_guid", "100","2","1" } };
 	private String[][] title2 = new String[][] { { "楼座面积", "100" },
 			{ "拆迁规模", "100" }, { "住宅楼座面积", "100" }, { "住宅拆迁规模", "100" },
-			{ "预计户数", "100" }, { "非住宅楼座面积", "120" }, { "非住宅拆迁规模", "120" } };
-	public static String[][] shows = new String[][] { { "zrbbh", "true" },
-			{ "zdmj", "true" }, { "lzmj", "true" }, { "cqgm", "true" },
-			{ "zzlzmj", "true" }, { "zzcqgm", "true" }, { "yjhs", "true" },
-			{ "fzzlzmj", "true" }, { "fzzcqgm", "true" }, { "bz", "true" },
-			{ "yw_guid", "false" } };
+			{ "预计户数", "100" }, { "非住宅楼座面积", "140" }, { "非住宅拆迁规模", "140" } };
+	public static String[][] shows = new String[][] { { "zrbbh", "true","100" },
+			{ "zdmj", "true","140" }, { "lzmj", "true" ,"100"}, { "cqgm", "true" ,"100"},
+			{ "zzlzmj", "true" ,"100"}, { "zzcqgm", "true" ,"100"}, { "yjhs", "true" ,"100"},
+			{ "fzzlzmj", "true","140" }, { "fzzcqgm", "true","140" }, { "bz", "true","100" },
+			{ "yw_guid", "false" ,"100"} };
 	private String form_name = "JC_ZIRAN";
 	private String isEdit = "true";
 
@@ -53,7 +53,7 @@ public class ZrbReport extends AbstractBaseBean implements IDataClass {
 		TRBean trbean = new TRBean();
 		TDBean tdbean = null;
 		for(int i=0;i<title1.length;i++){
-			tdbean = new TDBean(title1[i][0],title1[i][0],"");
+			tdbean = new TDBean(title1[i][0],title1[i][1],"");
 			tdbean.setRowspan(title1[i][2]);
 			tdbean.setColspan(title1[i][3]);
 			tdbean.setStyle("title");
@@ -62,7 +62,7 @@ public class ZrbReport extends AbstractBaseBean implements IDataClass {
 		trbeans.put("0001", trbean);
 		trbean= new TRBean();
 		for(int i=0;i<title2.length;i++){
-			tdbean = new TDBean(title2[i][0],title2[i][0],"");
+			tdbean = new TDBean(title2[i][0],title2[i][1],"");
 			tdbean.setStyle("title");
 			trbean.addTDBean(tdbean);
 		}
@@ -97,9 +97,9 @@ public class ZrbReport extends AbstractBaseBean implements IDataClass {
 					value = "";
 				}
 				if ("true".equals(isEdit)) {
-					tdBean = new TDBean(value, "80", "20", shows[i][1]);
+					tdBean = new TDBean(value, shows[i][2], shows[i][1]);
 				} else {
-					tdBean = new TDBean(value, "80", "20", "false");
+					tdBean = new TDBean(value, shows[i][2], "false");
 				}
 				trBean.addTDBean(tdBean);
 			}
