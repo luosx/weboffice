@@ -36,12 +36,12 @@ public class JbbReport extends AbstractBaseBean implements IDataClass {
 		+ "(avg(t.yjcjj)*sum(t.jzgm)/10000))*100,2)||'%' end as cxb,case when sum(t.zd)=0 then 0 else round(sum(t.zzsgm)/sum(t.zd),2) end as cqqd,"
 		+ "case when sum(t.kfcb)=0 then '0' else round((sum(t.jzgm)*2.4/sum(t.kfcb))*100,2)||'%' end as cbfgl,'--' as gnfq from jc_jiben t  ";
 	public static String[][] shows = new String[][] { { "dkmc", "false" },
-			{ "zzsgm", "false" }, { "zzzsgm", "false" }, { "zzzshs", "false" },
-			{ "hjmj", "false" }, { "fzzzsgm", "false" }, { "fzzjs", "false" },
 			{ "zd", "false" }, { "jsyd", "false" }, { "rjl", "false" },
 			{ "jzgm", "false" }, { "kzgd", "false" }, { "ghyt", "false" },
-			{ "gjjzgm", "false" }, { "jzjzgm", "false" },
-			{ "szjzgm", "false" }, { "kfcb", "false" }, { "lmcb", "false" },
+			{ "gjjzgm", "false" }, { "jzjzgm", "false" },{ "szjzgm", "false" }, 
+			{ "zzsgm", "false" }, { "zzzsgm", "false" }, { "zzzshs", "false" },
+			{ "hjmj", "false" }, { "fzzzsgm", "false" }, { "fzzjs", "false" },
+			{ "kfcb", "false" }, { "lmcb", "false" },
 			{ "dmcb", "false" }, { "yjcjj", "false" }, { "yjzftdsy", "false" },
 			{ "cxb", "false" }, { "cqqd", "false" }, { "cbfgl", "false" },
 			{ "ssqy", "false" } };
