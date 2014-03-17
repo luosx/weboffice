@@ -237,7 +237,7 @@ function openPage(obj,url){
 	}
 	//反馈功能模块
 	function fankui(){
-		var url = "/domain/web/xiamen/xxfk/xxfkList.jsp";     
+		var url = "/domain/web/xiamen/xxfk/xxfkTab.jsp";     
 		var height = window.screen.availHeight;
 		var width = window.screen.availWidth-5;
 		window.open(url,"","width="+width+",height="+height);
