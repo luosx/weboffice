@@ -24,9 +24,10 @@ public abstract class AbstractInsertGIS extends AbstractBaseBean{
 		double beginX = 0;
 		double beginY = 0;
 		while ((readline = bufferedReader.readLine()) != null) {
-			if(readline.contains("于端点")){
+			if(readline.contains("于端点:")){
 				double x = 0;
 				double y = 0;
+				readline = readline.replace("	", " ");
 				String[] strings = readline.split(" ");
 				for(int i = 0; i < strings.length; i++){
 					String points = strings[i];
@@ -48,6 +49,32 @@ public abstract class AbstractInsertGIS extends AbstractBaseBean{
 				}
 				Point point = new Point(x, y);
 				ring.putPoint(point);
+			}else if(readline.contains("于端点")){
+				double x = 0;
+				double y = 0;
+				readline = readline.replace("	", " ");
+				String[] strings = readline.split(" ");
+				for(int i = 0; i < strings.length; i++){
+					String points = strings[i];
+					if(points.contains("X=")){
+						points = points.substring(2);
+						x = Double.parseDouble(points);
+						if(beginX == 0){
+							beginX = x;
+						}
+						System.out.println(points);
+					}else if (points.contains("Y=")) {
+						points = points.substring(2);
+						y = Double.parseDouble(points);
+						if(beginY == 0){
+							beginY = y;
+						}
+						System.out.println(points);
+					}
+				}
+				Point point = new Point(x, y);
+				ring.putPoint(point);
+			
 			}
 		}
 		Point point = new Point(beginX, beginY);
