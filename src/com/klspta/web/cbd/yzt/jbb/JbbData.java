@@ -246,18 +246,18 @@ public class JbbData extends AbstractBaseBean   {
                 srid = rs.get(0).get("srid") + "";
             }
             //判断对应tbbh是否存在,存在用update 否则 用 insert
-            boolean isExit = isExit("CBD_JBB3D", "THHB", tbbh, GIS);
+            boolean isExit = isExit("CBD_JBB3D", "TBBH", tbbh, GIS);
             String sql = "";
             if(isExit){
-            	sql = "update " + "CBD_JBB3D" + " t set t.SHAPE=sde.st_geometry ('" + wkt + "', " + srid + ") where t.THHB='" + tbbh + "'";
+            	sql = "update " + "CBD_JBB3D" + " t set t.SHAPE=sde.st_geometry ('" + wkt + "', " + srid + ") where t.TBBH='" + tbbh + "'";
             }else{
-                sql = "INSERT INTO "+ "CBD_JBB3D"+"(OBJECTID,THHB,GISER_CBD_,SHAPE) VALUES ((select nvl(max(OBJECTID)+1,1) from "+"CBD_JBB3D"+"),'"
-                	+ tbbh + "','0',sde.st_geometry ('" + wkt + "', " + srid + "))";
+                sql = "INSERT INTO "+ "CBD_JBB3D"+"(OBJECTID,TBBH,SHAPE) VALUES ((select nvl(max(OBJECTID)+1,1) from "+"CBD_JBB3D"+"),'"
+                	+ tbbh + "',sde.st_geometry ('" + wkt + "', " + srid + "))";
             }
             update(sql, GIS);
             
             //更新自然斑面积
-            String updatesql = "update zfjc." + formName + " a set(a.zd)=(select trunc(b.shape.area) from giser." + form_gis + " b where b.thhb = a.dkmc) where a.dkmc in (select tbbh from giser." + "CBD_JBB3D" + ")";
+            String updatesql = "update zfjc." + formName + " a set(a.zd)=(select trunc(b.shape.area) from giser." + form_gis + " b where b.TBBH = a.dkmc) where a.dkmc in (select tbbh from giser." + "CBD_JBB3D" + ")";
             update(updatesql, YW);
             
         } catch (Exception e) {
