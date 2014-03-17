@@ -8,7 +8,6 @@ import com.klspta.base.AbstractBaseBean;
 import com.klspta.base.util.UtilFactory;
 import com.klspta.model.CBDReport.CBDReportManager;
 import com.klspta.model.CBDReport.tablestyle.ITableStyle;
-import com.klspta.web.cbd.yzt.cbjhzhb.Cbjhzhb;
 import com.klspta.web.cbd.yzt.jc.report.TableStyleEditRow;
 
 /**
@@ -38,6 +37,14 @@ public class TdzcglManager extends AbstractBaseBean {
 			{ "DGDW", "false", "null" }, { "SX", "false", "null" },
 			{ "bz", "false", "null" } };
 
+	private static TdzcglManager tdzcglManager;
+
+    public static TdzcglManager getInstcne() {
+        if (tdzcglManager == null) {
+        	tdzcglManager = new TdzcglManager();
+        }
+        return tdzcglManager;
+    }
 	/**
 	 * 
 	 * <br>
@@ -151,10 +158,149 @@ public class TdzcglManager extends AbstractBaseBean {
 
 	}
 	
+	
+	private Object checkNull(Object obj){
+		if(obj==null){
+			return 0;
+		}
+		return obj;
+	}	
 	public void query() throws Exception{
 		String xmmcs = UtilFactory.getStrUtil().unescape(request.getParameter("xmmc"));
 		ITableStyle its = new TableStyleEditRow();
 		response(new CBDReportManager().getReport("TDZCGL",new Object[]{xmmcs},its).toString());
 	}
+	public String getGzfqqkhzbList() {
+        String sql = "select  t.zd,t.jsyd,t.jzgm,t.kfcb,t.lmbbd,t.ssqy  from jc_jiben t ";
+        List<Map<String, Object>> list = query(sql, YW);
+        
+        double zd1 = 0 ;
+        double zd2 = 0 ;
+        double zd3 = 0;
+        double zd4 = 0;
+        
+        double jsyd1 = 0;
+        double jsyd2 = 0;
+        double jsyd3 = 0;
+        double jsyd4 = 0;
+        
+        double jzgm1 = 0;
+        double jzgm2 = 0;
+        double jzgm3 = 0;
+        double jzgm4 = 0;
+        
+        double kfcb1 = 0;
+        double kfcb2 = 0;
+        double kfcb3 = 0;
+        double kfcb4 = 0;
+        
+        double lmbbd1 = 0;
+        double lmbbd2 = 0;
+        double lmbbd3 = 0;
+        double lmbbd4 = 0;
+        
+        for(int num=0;num<list.size();num++){
+			Map<String, Object> map = list.get(num);
+			String ssqy =String.valueOf(map.get("ssqy"));
+			if(ssqy.equals("产业功能改造区")){
+				zd1 += Double.valueOf(String.valueOf( checkNull(map.get("zd"))));
+				jsyd1 += Double.valueOf(String.valueOf(  checkNull(map.get("jsyd"))));
+				jzgm1 += Double.valueOf(String.valueOf( checkNull( map.get("jzgm"))));
+				kfcb1 += Double.valueOf(String.valueOf(  checkNull(map.get("kfcb"))));
+				lmbbd1 += Double.valueOf(String.valueOf(  checkNull(map.get("lmbbd"))));
+			}else if(ssqy.equals("民生改善区")){
+				zd2 += Double.valueOf(String.valueOf(  checkNull(map.get("zd"))));
+				jsyd2 += Double.valueOf(String.valueOf( checkNull( map.get("jsyd"))));
+				jzgm2 += Double.valueOf(String.valueOf(  checkNull(map.get("jzgm"))));
+				kfcb2 += Double.valueOf(String.valueOf(  checkNull(map.get("kfcb"))));
+				lmbbd2 += Double.valueOf(String.valueOf(  checkNull(map.get("lmbbd"))));
+			}else if(ssqy.equals("城市形象提升区")){
+				zd3 += Double.valueOf(String.valueOf(  checkNull(map.get("zd"))));
+				jsyd3 += Double.valueOf(String.valueOf(  checkNull(map.get("jsyd"))));
+				jzgm3 += Double.valueOf(String.valueOf( checkNull( map.get("jzgm"))));
+				kfcb3 += Double.valueOf(String.valueOf(  checkNull(map.get("kfcb"))));
+				lmbbd3 += Double.valueOf(String.valueOf( checkNull( map.get("lmbbd"))));
+			}else if(ssqy.equals("保留微调区")){
+				zd4 += Double.valueOf(String.valueOf( checkNull( map.get("zd"))));
+				jsyd4 += Double.valueOf(String.valueOf( checkNull( map.get("jsyd"))));
+				jzgm4 += Double.valueOf(String.valueOf( checkNull( map.get("jzgm"))));
+				kfcb4 += Double.valueOf(String.valueOf( checkNull( map.get("kfcb"))));
+				lmbbd4 += Double.valueOf(String.valueOf(  checkNull(map.get("lmbbd"))));
+			}
+        }
+        StringBuffer result = new StringBuffer(
+        	"<table id='SWQFZXZJCJQKB' width='900' border='1' cellpadding='1' cellspacing='0'>"
+			+"<tr class='tr01' >"
+				+"<td id='0_0' height='10' width='50' class='tr01'>序号</td>"
+				+"<td id='0_1' height='10' width='150' class='tr01'>类型</td>"
+				+"<td id='0_2' height='10' width='100' class='tr01'>占地<br/>（公顷）</td>"
+				+"<td id='0_3' height='10' width='100' class='tr01'>建设用地<br/>（公顷）</td>"
+				+"<td id='0_4' height='10' width='100' class='tr01'>建筑规模<br/>（万㎡）</td>"
+				+"<td id='0_5' height='10' width='100' class='tr01'>开发成本<br/>（亿元）</td>"
+				+"<td id='0_6' height='10' width='150' class='tr01'>楼面成本<br/>（万元/㎡）</td>"
+				+"<td id='0_7' height='10' width='150' class='tr01'>租金保本点</td>"
+			+"</tr>"
+			+"<tr class='tr02' >"
+				+"<td id='1_0' height='10' width='50' class='tr02'>1</td>"
+				+"<td id='1_1' height='10' width='150' class='tr02'>产业功能改造区</td>"
+				+"<td id='1_2' height='10' width='100' class='tr02'>"+zd1+"</td>"
+				+"<td id='1_3' height='10' width='100' class='tr02'>"+jsyd1+"</td>"
+				+"<td id='1_4' height='10' width='100' class='tr02'>"+jzgm1+"</td>"
+				+"<td id='1_5' height='10' width='100' class='tr02'>"+kfcb1+"</td>"
+				+"<td id='1_6' height='10' width='150' class='tr02'>"+(jzgm1!=0?(kfcb1/jzgm1):0)+"</td>"
+				+"<td id='1_7' height='10' width='150' class='tr02'>"+lmbbd1+"</td>"
+			+"</tr>"
+			+"<tr class='tr02' >"
+				+"<td id='2_0' height='10' width='50' class='tr02'>2</td>"
+				+"<td id='2_1' height='10' width='150' class='tr02'>民生改造区</td>"
+				+"<td id='2_2' height='10' width='100' class='tr02'>"+zd2+"</td>"
+				+"<td id='2_3' height='10' width='100' class='tr02'>"+jsyd2+"</td>"
+				+"<td id='2_4' height='10' width='100' class='tr02'>"+jzgm2+"</td>"
+				+"<td id='2_5' height='10' width='100' class='tr02'>"+kfcb2+"</td>"
+				+"<td id='2_6' height='10' width='150' class='tr02'>"+(jzgm2!=0?(kfcb2/jzgm2):0)+"</td>"
+				+"<td id='2_7' height='10' width='150' class='tr02'>"+lmbbd2+"</td>"
+			+"</tr>"
+			+"<tr class='tr02' >"
+				+"<td id='3_0' height='10' width='50' class='tr02'>3</td>"
+				+"<td id='3_1' height='10' width='150' class='tr02'>城市形象提升区</td>"
+				+"<td id='3_2' height='10' width='100' class='tr02'>"+zd3+"</td>"
+				+"<td id='3_3' height='10' width='100' class='tr02'>"+jsyd3+"</td>"
+				+"<td id='3_4' height='10' width='100' class='tr02'>"+jzgm3+"</td>"
+				+"<td id='3_5' height='10' width='100' class='tr02'>"+kfcb3+"</td>"
+				+"<td id='3_6' height='10' width='150' class='tr02'>"+(jzgm3!=0?(kfcb3/jzgm3):0)+"</td>"
+				+"<td id='3_7' height='10' width='150' class='tr02'>"+lmbbd3+"</td>"
+			+"</tr>"
+			+"<tr class='tr03' >"
+				+"<td id='4_0' height='10' width='200' colspan=2 class='tr03'>纳入规划储备资源小计</td>"
+				+"<td id='4_1' height='10' width='100' class='tr03'>"+(zd1+zd2+zd3)+"</td>"
+				+"<td id='4_2' height='10' width='100' class='tr03'>"+(jsyd1+jsyd2+jsyd3)+"</td>"
+				+"<td id='4_3' height='10' width='100' class='tr03'>"+(jzgm1+jzgm2+jzgm3)+"</td>"
+				+"<td id='4_4' height='10' width='100' class='tr03'>"+(kfcb1+kfcb2+kfcb3)+"</td>"
+				+"<td id='4_5' height='10' width='150' class='tr03'>"+((jzgm1+jzgm2+jzgm3)!=0?((kfcb1+kfcb2+kfcb3)/(jzgm1+jzgm2+jzgm3)):0)+"</td>"
+				+"<td id='4_6' height='10' width='150' class='tr03'>"+(lmbbd1+lmbbd2+lmbbd3)+"</td>"
+			+"</tr>"
+			+"<tr class='tr02' >"
+				+"<td id='5_0' height='10' width='50' class='tr02'>4</td>"
+				+"<td id='5_1' height='10' width='150' class='tr02'>保留微调区</td>"
+				+"<td id='5_2' height='10' width='100' class='tr02'>"+zd4+"</td>"
+				+"<td id='5_3' height='10' width='100' class='tr02'>"+jsyd4+"</td>"
+				+"<td id='5_4' height='10' width='100' class='tr02'>"+jzgm4+"</td>"
+				+"<td id='5_5' height='10' width='100' class='tr02'>"+kfcb4+"</td>"
+				+"<td id='5_6' height='10' width='150' class='tr02'>"+(jzgm4!=0?(kfcb4/jzgm4):0)+"</td>"
+				+"<td id='5_7' height='10' width='150' class='tr02'>"+lmbbd4+"</td>"
+			+"</tr>"
+			+"<tr class='tr03' >"
+				+"<td id='6_0' height='10' width='200' colspan=2 class='tr03'>合计</td>"
+				+"<td id='6_1' height='10' width='100' class='tr03'>"+(zd1+zd2+zd3+zd4)+"</td>"
+				+"<td id='6_2' height='10' width='100' class='tr03'>"+(jsyd1+jsyd2+jsyd3+jsyd4)+"</td>"
+				+"<td id='6_3' height='10' width='100' class='tr03'>"+(jzgm1+jzgm2+jzgm3+jzgm4)+"</td>"
+				+"<td id='6_4' height='10' width='100' class='tr03'>"+(kfcb1+kfcb2+kfcb3+kfcb4)+"</td>"
+				+"<td id='6_5' height='10' width='150' class='tr03'>"+((jzgm1+jzgm2+jzgm3+jzgm4)!=0?((kfcb1+kfcb2+kfcb3+kfcb4)/(jzgm1+jzgm2+jzgm3+jzgm4)):0)+"</td>"
+				+"<td id='6_6' height='10' width='150' class='tr03'>"+(lmbbd1+lmbbd2+lmbbd3+lmbbd4)+"</td>"
+			+"</tr>"
+			
+			+"</table>");
+        return  result.toString().replaceAll("null", "").replaceAll("\r\n", " ; ");
+        }
 
 }
