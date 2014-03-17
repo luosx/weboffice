@@ -241,7 +241,7 @@ public class TdzcglReport extends AbstractBaseBean implements IDataClass{
 	 */
 	private Map<String, TRBean> getYckByXMMC(String xmmc, String prekey, List<Map<String, Object>> queryList){
 		Map<String, TRBean>  bodyMap = new TreeMap<String, TRBean>();
-		String size = String.valueOf(queryList.size() + 5);
+		String size = String.valueOf(queryList.size() + 6);
 		TRBean trBean = new TRBean();
 		//trBean.setCssStyle("trSingle");
 		
@@ -298,10 +298,16 @@ public class TdzcglReport extends AbstractBaseBean implements IDataClass{
 		
 		statuBean.setRowspan(String.valueOf(num));
 		trBean.addTDBean(statuBean);
-		for(int i = 0; i < subTotal.size(); i++){
-			trBean.addTDBean(new TDBean(subTotal.get(i),"100","20"));
+		if(subTotal.isEmpty()){
+			trBean.addTDBean(new TDBean("小计","100","20"));
+			for(int i = 0; i < 32; i++){
+				trBean.addTDBean(new TDBean(" ","100","20"));
+			}
+		}else{
+			for(int i = 0; i < subTotal.size(); i++){
+				trBean.addTDBean(new TDBean(subTotal.get(i),"100","20"));
+			}
 		}
-		
 		bodyMap.put(prekey + "01", trBean);
 		for(int i = 0; i < trbeans.size(); i++){
 			bodyMap.put(prekey + "01" + (i+1), trbeans.get(i));
@@ -512,7 +518,7 @@ public class TdzcglReport extends AbstractBaseBean implements IDataClass{
 		trBean.addTDBean(tdBean);
 		if(dqlTo.isEmpty()){
 			trBean.addTDBean(new TDBean("小计","100","20"));
-			for(int i = 0; i < 31; i++){
+			for(int i = 0; i < 32; i++){
 				trBean.addTDBean(new TDBean(" ","100","20"));
 			}
 		}else{
@@ -532,7 +538,7 @@ public class TdzcglReport extends AbstractBaseBean implements IDataClass{
 		trBean.addTDBean(tdBean);
 		if(wscTo.isEmpty()){
 			trBean.addTDBean(new TDBean("小计","100","20"));
-			for(int i = 0; i < 31; i++){
+			for(int i = 0; i < 32; i++){
 				trBean.addTDBean(new TDBean("","100","20"));
 			}
 		}else{
@@ -555,7 +561,7 @@ public class TdzcglReport extends AbstractBaseBean implements IDataClass{
 		trBean.addTDBean(tdBean);
 		if(wgdTo.isEmpty()){
 			trBean.addTDBean(new TDBean("小计","100","20"));
-			for(int i = 0; i < 31; i++){
+			for(int i = 0; i < 32; i++){
 				trBean.addTDBean(new TDBean(" ","100","20"));
 			}
 		}else{
@@ -575,7 +581,7 @@ public class TdzcglReport extends AbstractBaseBean implements IDataClass{
 		trBean.addTDBean(tdBean);
 		if(cqkcTo.isEmpty()){
 			trBean.addTDBean(new TDBean("小计","100","20"));
-			for(int i = 0; i < 31; i++){
+			for(int i = 0; i < 32; i++){
 				trBean.addTDBean(new TDBean("","100","20"));
 			}
 		}else{
@@ -653,10 +659,16 @@ public class TdzcglReport extends AbstractBaseBean implements IDataClass{
 		
 		statuBean.setRowspan(String.valueOf(num));
 		trBean.addTDBean(statuBean);
-		for(int i = 0; i < subTotal.size(); i++){
-			trBean.addTDBean(new TDBean(subTotal.get(i),"100","20"));
+		if(subTotal.isEmpty()){
+			trBean.addTDBean(new TDBean("小计","100","20"));
+			for(int i = 0; i < 32; i++){
+				trBean.addTDBean(new TDBean("","100","20"));
+			}
+		}else{
+			for(int i = 0; i < subTotal.size(); i++){
+				trBean.addTDBean(new TDBean(subTotal.get(i),"100","20"));
+			}
 		}
-		
 		bodyMap.put(prekey + "06", trBean);
 		for(int i = 0; i < trbeans.size(); i++){
 			bodyMap.put(prekey + "06" + (i+1), trbeans.get(i));
@@ -674,7 +686,7 @@ public class TdzcglReport extends AbstractBaseBean implements IDataClass{
 	 */
 	private Map<String, TRBean> getGGKJByXMMC(String xmmc, String prekey, List<Map<String, Object>> queryList){
 		Map<String, TRBean>  bodyMap = new TreeMap<String, TRBean>();
-		String size = String.valueOf(queryList.size() + 6);
+		String size = String.valueOf(queryList.size() + 5);
 		TRBean trBean = new TRBean();
 		//trBean.setCssStyle("trSingle");
 		TDBean statuBean = new TDBean("公共空间","100","20");
