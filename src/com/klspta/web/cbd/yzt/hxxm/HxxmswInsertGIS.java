@@ -7,7 +7,7 @@ import com.klspta.model.CBDinsertGIS.AbstractInsertGIS;
 
 public class HxxmswInsertGIS extends AbstractInsertGIS {
 	
-	 private static final String form_gis = "CBD_XMSW";
+	 private static final String form_gis = "CBD_HXXMsD";
 	 private static final String formName = "JC_XIANGMU";
 
 	@Override
