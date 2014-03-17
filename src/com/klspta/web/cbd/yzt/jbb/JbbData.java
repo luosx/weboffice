@@ -215,7 +215,58 @@ public class JbbData extends AbstractBaseBean   {
         }
         return true;
     }
-    
+    public boolean recordGIS(String tbbh, String polygons,String type) throws Exception{
+    	JSONObject json = UtilFactory.getJSONUtil().jsonToObject(polygons);
+    	String rings = json.getString("rings");
+    	rings = rings.replace("]]]", "]");
+    	rings = rings.replace("[[[", "[");
+    	String wkt = "4326";
+    	String[] allPoint = rings.split(",");
+		Polygon polygon = new Polygon();
+		Ring ring = new Ring();
+    	if(allPoint.length > 2){
+    		for(int i = 0; i < allPoint.length; i+=2){
+    			allPoint[i] = allPoint[i].replace("[", "");
+    			double x = Double.parseDouble(allPoint[i]);
+    			allPoint[i+1] = allPoint[i+1].replace("]", "");
+    			double y = Double.parseDouble(allPoint[i + 1]);
+    			Point point = new Point(x, y);
+    			ring.putPoint(point);
+    		}
+    		Point p2 = new Point(Double.parseDouble(allPoint[0]), Double.parseDouble(allPoint[1]));
+            ring.putPoint(p2);
+            polygon.addRing(ring);
+            wkt = polygon.toWKT();
+    	}
+        String querySrid = "select t.srid from sde.st_geometry_columns t where upper(t.table_name) = ?";
+        String srid = null;
+        List<Map<String, Object>> rs = query(querySrid, GIS, new Object[]{"CBD_JBB3D"});
+        try {
+            if (rs.size() > 0) {
+                srid = rs.get(0).get("srid") + "";
+            }
+            //判断对应tbbh是否存在,存在用update 否则 用 insert
+            boolean isExit = isExit("CBD_JBB3D", "THHB", tbbh, GIS);
+            String sql = "";
+            if(isExit){
+            	sql = "update " + "CBD_JBB3D" + " t set t.SHAPE=sde.st_geometry ('" + wkt + "', " + srid + ") where t.THHB='" + tbbh + "'";
+            }else{
+                sql = "INSERT INTO "+ "CBD_JBB3D"+"(OBJECTID,THHB,GISER_CBD_,SHAPE) VALUES ((select nvl(max(OBJECTID)+1,1) from "+"CBD_JBB3D"+"),'"
+                	+ tbbh + "','0',sde.st_geometry ('" + wkt + "', " + srid + "))";
+            }
+            update(sql, GIS);
+            
+            //更新自然斑面积
+            String updatesql = "update zfjc." + formName + " a set(a.zd)=(select trunc(b.shape.area) from giser." + form_gis + " b where b.thhb = a.dkmc) where a.dkmc in (select tbbh from giser." + "CBD_JBB3D" + ")";
+            update(updatesql, YW);
+            
+        } catch (Exception e) {
+        	System.out.println(e.getMessage());
+            System.out.println("采集坐标出错");
+            return false;
+        }
+        return true;
+    }
 	private boolean isExit(String formName, String primaryName, String primaryValue, String type){
 		if("".equals(primaryName) || "".equals(primaryValue)){
 			return false;

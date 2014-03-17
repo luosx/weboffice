@@ -246,6 +246,18 @@ public class JbbReport extends AbstractBaseBean implements IDataClass {
 	}
 
 	public List<TRBean> getSub(Map queryMap) {
+		String sql = "select round(sum(t.zzsgm),2) as zzsgm, round(sum(t.zzzsgm),2) as zzzsgm, round(sum(t.zzzshs),2) as zzzshs, "
+			+ "case when sum(t.zzzshs)=0 then 0 else round(sum(t.zzzsgm)/sum(t.zzzshs)*10000,2) end as hjmj,"
+			+ " round(sum(t.fzzzsgm),2) as fzzzsgm, round(sum(t.fzzjs),2) as fzzjs,round(sum(t.zd),2) as zd,"
+			+ "round(sum(t.jsyd),2) as jsyd, case when sum(t.jsyd)=0 then 0 else  round(sum(t.jzgm)/sum(t.jsyd),2) end as rjl,"
+			+ " round(sum(t.jzgm),2) as jzgm,'--' as kzgd, '--' as ghyt, round(sum(t.gjjzgm),2) as gjjzgm,"
+			+ " round(sum(t.jzjzgm),2) as jzjzgm, round(sum(t.szjzgm),2) as szjzgm,"
+			+ "round(sum(t.szjzgm),2) as szjzgm,round(sum(t.kfcb),2) as kfcb,  round(sum(t.lmcb),2) as lmcb , "
+			+ "case when sum(t.jsyd)=0 then 0 else round(sum(t.kfcb)/sum(t.jsyd)*10000,2) end as dmcb,round(avg(t.yjcjj),2) as yjcjj,"
+			+ "round(avg(t.yjcjj)*sum(t.jzgm)/10000-sum(t.kfcb),2) as yjzftdsy,"
+			+ "case when (avg(t.yjcjj)*sum(t.jzgm))=0 then '0' else round(((avg(t.yjcjj)*sum(t.jzgm)/10000-sum(t.kfcb))/"
+			+ "(avg(t.yjcjj)*sum(t.jzgm)/10000))*100,2)||'%' end as cxb,case when sum(t.zd)=0 then 0 else round(sum(t.zzsgm)/sum(t.zd),2) end as cqqd,"
+			+ "case when sum(t.kfcb)=0 then '0' else round((sum(t.jzgm)*2.4/sum(t.kfcb))*100,2)||'%' end as cbfgl,'--' as gnfq from jc_jiben t  ";
 		if (queryMap != null && !queryMap.isEmpty()) {
 			sql += String.valueOf(queryMap.get("query"));
 		}
