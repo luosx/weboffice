@@ -147,11 +147,11 @@ public class TdzcglReport extends AbstractBaseBean implements IDataClass{
 	 * @return
 	 */
 	private Map<String,TRBean> getTotal(String xmmc) {
-		String sql = "select sum(t.djzj) as djzj ,sum(t.djyjly) as djyjly,sum(t.zfsyze) as zfsyze," +
-				"sum(t.zfsyyjly) as zfsyyjly,sum(t.zfsywyj) as zfsywyj,sum(t.bcfze) as bcfze,sum(t.bcfyjly) as bcfyjly," +
-				"sum(t.bcfycswy) as bcfycswyj,sum(t.zcmj) as zcmj,sum(j.jsydmj) as jsydmj,sum(j.rjl) as rjl," +
-				"sum(j.ghjzgm) as ghjzgm,sum(j.jzkzgd) as jzkzgd from jc_xiangmu x ," +
-			form_base + " t, " + form_extend + " j where t.dkmc = j.dkmc and x.xmname = t.xmmc and t.xmmc = ?";
+		String sql = "select sum(t.djzj) as djzj ,sum(t.djyjly) as djyjly,sum(t.zfsyze) as zfsyze,sum(t.zfsyyjly) as zfsyyjly,"+
+				"sum(t.zfsywyj) as zfsywyj,sum(t.bcfze) as bcfze,sum(t.bcfyjly) as bcfyjly,sum(t.bcfycswy) as bcfycswyj,"+
+				"sum(t.zcmj) as zcmj,sum(j.jsydmj) as jsydmj,round(sum(j.ghjzgm)/sum(jsydmj),2) as rjl,sum(j.ghjzgm) as ghjzgm,"+
+				"'--' as jzkzgd from jc_xiangmu x ,ZCGL_TDZCGL t, dcsjk_kgzb j "+
+				"where t.dkmc = j.dkmc and x.xmname = t.xmmc and t.xmmc = ?";
 		List<Map<String,Object>> list = query(sql, YW,new Object[]{xmmc});
 		Map<String,Object> map = list.get(0);
 		Map<String, TRBean>  bodyMap = new TreeMap<String, TRBean>();
@@ -241,7 +241,7 @@ public class TdzcglReport extends AbstractBaseBean implements IDataClass{
 	 */
 	private Map<String, TRBean> getYckByXMMC(String xmmc, String prekey, List<Map<String, Object>> queryList){
 		Map<String, TRBean>  bodyMap = new TreeMap<String, TRBean>();
-		String size = String.valueOf(queryList.size() + 6);
+		String size = String.valueOf(queryList.size() + 5);
 		TRBean trBean = new TRBean();
 		//trBean.setCssStyle("trSingle");
 		
