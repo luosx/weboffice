@@ -149,12 +149,18 @@ public class JbbManager extends AbstractBaseBean {
 	public void drawZrb() throws Exception {
 		String tbbh = request.getParameter("tbbh");
 		String polygon = request.getParameter("polygon");
+		String type = request.getParameter("type");
 		if (tbbh != null) {
 			tbbh = UtilFactory.getStrUtil().unescape(tbbh);
 		} else {
 			response("{error:not primary}");
 		}
-		boolean draw = new JbbData().recordGIS(tbbh, polygon);
+		boolean draw = false;
+		if("3d".equals(type)){
+			draw = new JbbData().recordGIS(tbbh, polygon,type);
+		}else{
+			draw = new JbbData().recordGIS(tbbh, polygon);
+		}
 		response(String.valueOf(draw));
 	}
 

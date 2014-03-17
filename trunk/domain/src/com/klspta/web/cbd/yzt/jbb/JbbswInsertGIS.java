@@ -7,7 +7,7 @@ import com.klspta.model.CBDinsertGIS.AbstractInsertGIS;
 
 public class JbbswInsertGIS extends AbstractInsertGIS {
 	
-	 private static final String form_gis = "CBD_JBBSW";
+	 private static final String form_gis = "CBD_JBB3D";
 
 	@Override
 	public boolean insertGIS(InputStream inputStream, String guid) {
