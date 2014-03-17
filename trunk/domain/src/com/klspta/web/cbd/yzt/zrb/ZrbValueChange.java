@@ -13,7 +13,7 @@ public class ZrbValueChange extends AbstractBaseBean  {
 	private String impress_name = "JC_JIBEN";
 	//private String fields = "dkmc,zzsgm";
 	private String fields = "dkmc,zd,zzsgm,zzzsgm,zzzshs,hjmj,fzzzsgm";
-	private String sql = "select round(sum(t.zdmj)/10000,2) as zd ,round(sum(t.lzmj)/10000,2) as zzsgm, round(sum(t.zzcqgm)/10000,2) as zzzsgm, round(sum(t.yjhs),2) as zzzshs ,  CEIL(decode(sum(t.yjhs),0,0,(sum(t.zzcqgm)/sum(t.yjhs)))) as hjmj, round(sum(t.fzzcqgm)/10000,2) as fzzzsgm    from jc_ziran t where t.zrbbh like ?";
+	private String sql = "select round(sum(t.zdmj)/10000,2) as zd ,round((sum(t.zzcqgm)+sum(t.fzzcqgm))/10000,2) as zzsgm, round(sum(t.zzcqgm)/10000,2) as zzzsgm, round(sum(t.yjhs),2) as zzzshs ,  CEIL(decode(sum(t.yjhs),0,0,(sum(t.zzcqgm)/sum(t.yjhs)))) as hjmj, round(sum(t.fzzcqgm)/10000,2) as fzzzsgm    from jc_ziran t where t.zrbbh like ?";
 	private  JbdkValueChange jbdkValueChange = new JbdkValueChange();
 	
 	public boolean add(String dkmc) {
