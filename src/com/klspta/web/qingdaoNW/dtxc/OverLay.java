@@ -34,7 +34,7 @@ public class OverLay extends AbstractBaseBean {
 	public JSONObject executeTask(String coords) throws Exception {
 		coords = coordsToWKT(coords);
 		String geourl = getGeoServices();
-		//geourl="http://127.0.0.1:8399/arcgis/rest/services/SEU/GPServer/OVERLAY/execute";
+		// geourl="http://127.0.0.1:8399/arcgis/rest/services/SEU/GPServer/OVERLAY/execute";
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("f", "pjson");
 		params.put("INPUT_POLYGON", coords);
@@ -45,7 +45,7 @@ public class OverLay extends AbstractBaseBean {
 
 	private JSONObject areaResults(JSONObject json) throws Exception {
 		List<JSONObject> polygons = new ArrayList<JSONObject>();
-		List<Integer> polygonsIndex = new ArrayList<Integer>();
+		List<Integer> polygonsIndex = new ArrayList<Integer>();// 存储每个图层图斑的序列
 		int index = 0;
 		for (int i = 0; i < json.getJSONArray("results").size(); i++) {
 			JSONObject value = (JSONObject) json.getJSONArray("results").get(i);
@@ -62,24 +62,30 @@ public class OverLay extends AbstractBaseBean {
 			polygonsIndex.add(index);
 		}
 		String geometryurl = getGeometry();
-		//geometryurl="http://127.0.0.1:8399/arcgis/rest/services/Geometry/GeometryServer";
+		// geometryurl="http://127.0.0.1:8399/arcgis/rest/services/Geometry/GeometryServer";
 		geometryurl += "/areasAndLengths";
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("f", "json");
 		params.put("sr", "2364");
-	    params.put("polygons", polygons.toString());
+		params.put("polygons", polygons.toString());
 		String result = sendPostHttp(geometryurl, params);
 		JSONArray areas = UtilFactory.getJSONUtil().jsonToObject(result).getJSONArray("areas");
-		int index1 = 0;
+		int index1 = 0;// 标记返回面积数组的游标
 		for (int i = 0; i < polygonsIndex.size(); i++) {
 			int index2 = polygonsIndex.get(i);
 			if (index2 - index == 0) {
 				continue;
 			}
 			double area = 0;
+			int index3 = 0;// 标记图斑在图层里面的游标
 			for (int j = index1; j < index2; j++) {
+				// 累加图层面积
 				area = area + Double.parseDouble(areas.getString(j));
+				// 图斑加入叠加面积字段
+				json.getJSONArray("results").getJSONObject(i).getJSONObject("value").getJSONArray("features")
+						.getJSONObject(index3).put("F_AREA", areas.getString(j));
 				index1++;
+				index3++;
 			}
 			json.getJSONArray("results").getJSONObject(i).put("F_AREA", area);
 		}
@@ -87,12 +93,25 @@ public class OverLay extends AbstractBaseBean {
 	}
 
 	private String coordsToWKT(String coords) {
+		String[] cs = coords.split(",");
+		if (cs.length == 0) {
+			return null;
+		}
 		StringBuilder str = new StringBuilder();
-		str
-				.append("{\"features\":[{\"geometry\":{\"rings\":[[[40536806.190814316,4011619.3428660976],[40522849.39206739,3989791.1742097605],[40539782.75926746,3989791.1742097605]]],\"spatialReference\":{\"wkid\":2364}}}],\"geometryType\":\"esriGeometryPolygon\"}");
+		str.append("{\"features\":[{\"geometry\":{\"rings\":[[");
+		for (int i = 0; i < cs.length; i = i + 2) {
+			str.append("[");
+			str.append(cs[i]);
+			str.append(",");
+			str.append(cs[i + 1]);
+			str.append("],");
+		}
+		str.deleteCharAt(str.length() - 1);
+		str.append("]],\"spatialReference\":{\"wkid\":2364}}}],\"geometryType\":\"esriGeometryPolygon\"}");
 		return str.toString();
 	}
 
+	// /////////////////////////////////发GET POST请求//////////////////////
 	private String sendGetHttp(String url, Map<String, String> param) {
 		StringBuilder result = new StringBuilder();
 		Iterator<Entry<String, String>> iter = param.entrySet().iterator();
@@ -122,12 +141,12 @@ public class OverLay extends AbstractBaseBean {
 		}
 		return result.toString();
 	}
-	
-	private String sendPostHttp(String url, Map<String, String> param){
+
+	private String sendPostHttp(String url, Map<String, String> param) {
 		StringBuilder result = new StringBuilder();
 		Iterator<Entry<String, String>> iter = param.entrySet().iterator();
 		url += "?";
-		String parameters="";
+		String parameters = "";
 		while (iter.hasNext()) {
 			Map.Entry<String, String> entry = (Map.Entry<String, String>) iter.next();
 			Object key = entry.getKey();
@@ -140,11 +159,11 @@ public class OverLay extends AbstractBaseBean {
 			connection.setUseCaches(false);
 			connection.setDoOutput(true);
 			connection.setRequestMethod("POST");
-			byte[] b = parameters.getBytes(); 
-			connection.getOutputStream().write(b, 0, b.length); 
-			connection.getOutputStream().flush(); 
-			connection.getOutputStream().close(); 
-			BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream(),"UTF-8")); 
+			byte[] b = parameters.getBytes();
+			connection.getOutputStream().write(b, 0, b.length);
+			connection.getOutputStream().flush();
+			connection.getOutputStream().close();
+			BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream(), "UTF-8"));
 			String lines;
 			while ((lines = in.readLine()) != null) {
 				result.append(lines);
