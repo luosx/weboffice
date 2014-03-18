@@ -7,6 +7,7 @@ import java.util.Map;
 import com.klspta.base.AbstractBaseBean;
 import com.klspta.base.util.UtilFactory;
 import com.klspta.model.CBDReport.CBDReportManager;
+import com.klspta.web.cbd.xmgl.zjgl.ZjglData; 
 
 public class ZjglManager extends AbstractBaseBean{
 	
@@ -35,8 +36,14 @@ public class ZjglManager extends AbstractBaseBean{
     public void getReport(){
 		String xmname = request.getParameter("xmname");
 		xmname=UtilFactory.getStrUtil().unescape(xmname);
-		 StringBuffer buffer = new CBDReportManager().getReport("XMCBZJ", new Object[] { xmname,"false" });
-		 response(buffer.toString());
+		 
+			 String sql =" select t.yw_guid from jc_xiangmu t where t.xmname = '"+xmname+"'";
+			 List<Map<String, Object>> list = query(sql, YW);
+			 String yw_guid = (String) list.get(0).get("yw_guid");
+			 new ZjglData().setMX(yw_guid,"2014");
+			 StringBuffer buffer = new CBDReportManager().getReport("XMCBZJ", new Object[] { xmname,"false" });
+			 response(buffer.toString());
+		 
 	}
     
 }
