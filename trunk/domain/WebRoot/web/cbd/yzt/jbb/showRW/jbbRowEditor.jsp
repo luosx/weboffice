@@ -419,8 +419,7 @@ String view = request.getParameter("view");
 	  });		
   		form.render("deal");
   		form.hide();
-  		var elements = new Array("jbdkbh","zzsgm","zzzsgm","zzzshs","hjmj","fzzzsgm","fzzjs","zd",
-  		                          "jsyd","rjl","jzgm","kzgd","ghyt","gjjzgm","jzjzgm","szjzgm","kfcb",
+  		var elements = new Array("jbdkbh","zd", "jsyd","rjl","jzgm","kzgd","ghyt","gjjzgm","jzjzgm","szjzgm","zzsgm","zzzsgm","zzzshs","hjmj","fzzzsgm","fzzjs","kfcb",
   		                          "lmcb","dmcb","yjcjj","yjzftdsy","cxb","cqqd","cbfgl");
   		paneloper.init(form,elements);
   		paneloper.hide();
