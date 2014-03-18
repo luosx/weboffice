@@ -232,22 +232,22 @@ public class TdzcglManager extends AbstractBaseBean {
         int hsq =Integer.valueOf(String.valueOf( checkNull(list0.get(0).get("hsq"))));
         
         int lmcb = 0;
-        lmcb =((int) (jzgm1!=0?(kfcb1/jzgm1):0))/1*1000;
+        lmcb =((int) (jzgm1!=0?(kfcb1/jzgm1):0)*10)/1*1000;
         String sql1 ="select t.bbd from bbdfxjg t where t.lmcb = '"+lmcb+"' and t.tzhsq = '"+hsq+"'";
         List<Map<String, Object>> list1 = query(sql1, YW);
         lmbbd1 =Double.valueOf(a.format(Double.valueOf(String.valueOf( checkNull( list1.get(0).get("bbd"))))));
         
-        lmcb =((int) (jzgm2!=0?(kfcb2/jzgm2):0))/1*1000;
+        lmcb =((int) (jzgm2!=0?(kfcb2/jzgm2):0)*10)/1*1000;
         String sql2 ="select t.bbd from bbdfxjg t where t.lmcb = '"+lmcb+"' and t.tzhsq = '"+hsq+"'";
         List<Map<String, Object>> list2 = query(sql2, YW);
         lmbbd2 =Double.valueOf(a.format(Double.valueOf(String.valueOf( checkNull( list2.get(0).get("bbd"))))));
         
-        lmcb =((int) (jzgm3!=0?(kfcb3/jzgm3):0))/1*1000;
+        lmcb =((int) (jzgm3!=0?(kfcb3/jzgm3):0)*10)/1*1000;
         String sql3 ="select t.bbd from bbdfxjg t where t.lmcb = '"+lmcb+"' and t.tzhsq = '"+hsq+"'";
         List<Map<String, Object>> list3 = query(sql3, YW);
         lmbbd3 =Double.valueOf(a.format(Double.valueOf(String.valueOf( checkNull( list3.get(0).get("bbd"))))));
         
-        lmcb =((int) (jzgm4!=0?(kfcb4/jzgm4):0))/1*1000;
+        lmcb =((int) (jzgm4!=0?(kfcb4/jzgm4):0)*10)/1*1000;
         String sql4 ="select t.bbd from bbdfxjg t where t.lmcb = '"+lmcb+"' and t.tzhsq = '"+hsq+"'";
         List<Map<String, Object>> list4 = query(sql4, YW);
         lmbbd4 =Double.valueOf(a.format(Double.valueOf(String.valueOf( checkNull( list4.get(0).get("bbd"))))));
