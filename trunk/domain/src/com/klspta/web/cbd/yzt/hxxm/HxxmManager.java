@@ -102,12 +102,13 @@ public class HxxmManager extends AbstractBaseBean {
     	//String guid = new String(request.getParameter("guid").getBytes("ISO-8859-1"),"UTF-8");
     	String guid = request.getParameter("guid");
 		String polygon = request.getParameter("polygon");
+		String type = request.getParameter("type");
     	if (guid != null) {
     		guid = UtilFactory.getStrUtil().unescape(guid);
     	}else{
     		response("{error:not primary}");
     	}
-    	boolean draw = new HxxmData().recordGIS(guid, polygon);
+    	boolean draw = new HxxmData().recordGIS(guid, polygon,type);
     	response(String.valueOf(draw)); 
 	}
 	

@@ -265,23 +265,23 @@ public class HxxmData extends AbstractBaseBean {
     	}
         String querySrid = "select t.srid from sde.st_geometry_columns t where upper(t.table_name) = ?";
         String srid = null;
-        List<Map<String, Object>> rs = query(querySrid, GIS, new Object[]{"CBD_XMSW"});
+        List<Map<String, Object>> rs = query(querySrid, GIS, new Object[]{"CBD_HXXM3D"});
         try {
             if (rs.size() > 0) {
                 srid = rs.get(0).get("srid") + "";
             }
             //判断对应zrbbh是否存在,存在用update 否则 用 insert
-            boolean isExit = isExit("CBD_XMSW", "xmmc", tbbh, GIS);
+            boolean isExit = isExit("CBD_HXXM3D", "XMNAME", tbbh, GIS);
             String sql = "";
             if(isExit){
-            	sql = "update " + "CBD_XMSW" + " t set t.SHAPE=sde.st_geometry ('" + wkt + "', " + srid + ") where t.xmmc='" + tbbh + "'";
+            	sql = "update " + "CBD_HXXM3D" + " t set t.SHAPE=sde.st_geometry ('" + wkt + "', " + srid + ") where t.XMNAME='" + tbbh + "'";
             }else{
-                sql = "INSERT INTO "+ "CBD_XMSW"+"(OBJECTID,xmmc,SHAPE) VALUES ((select nvl(max(OBJECTID)+1,1) from "+"CBD_XMSW"+"),'"
+                sql = "INSERT INTO "+ "CBD_HXXM3D"+"(OBJECTID,XMNAME,SHAPE) VALUES ((select nvl(max(OBJECTID)+1,1) from "+"CBD_HXXM3D"+"),'"
                 	+ tbbh + "',sde.st_geometry ('" + wkt + "', " + srid + "))";
             }
             update(sql, GIS);
             
-            String updatesql = "update zfjc." + formName + " a set(a.zd)=(select trunc(b.shape.area, 2)/10000 from giser." + "CBD_XMSW" + " b where b.xmmc = a.xmname) where a.xmname in (select xmmc from giser." + "CBD_XMSW" + ")";
+            String updatesql = "update zfjc." + formName + " a set(a.zd)=(select trunc(b.shape.area, 2)/10000 from giser." + "CBD_HXXM3D" + " b where b.XMNAME = a.xmname) where a.xmname in (select XMNAME from giser." + "CBD_HXXM3D" + ")";
             update(updatesql, YW);
         } catch (Exception e) {
         	e.printStackTrace();
