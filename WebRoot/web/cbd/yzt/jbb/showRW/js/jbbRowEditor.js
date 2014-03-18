@@ -87,7 +87,10 @@ function update(){
 		}
 		var key = objid.cells[0].innerText;
 		zrbbh = key;
-		
+		putClientCommond("jbbHandle","querySsqyByname");
+		putRestParameter("dkmc",escape(escape(zrbbh)));
+		var hxxmmc = restRequest();
+		form.findById('ssqy').setValue(hxxmmc[0].SSQY);
 		var array = paneloper.getElements();
 		for(var i = 0; i < objid.cells.length-1; i++){
 			var value = objid.cells[i].innerText;	
