@@ -98,14 +98,14 @@ function initFile(){
 				var guid = Ext.getCmp('zrbbh').getValue();
                 if(fp.getForm().isValid()){
 	                fp.getForm().submit({
-	                    url: basePath + "service/rest/gisfactory/getGis?type=7&guid="+guid,
+	                    url: basePath + "service/rest/gisfactory/getGis?type=2&guid="+guid,
 	                    waitMsg: '坐标串正在导入...',
 	                    success: function(fp, o){
 	                        //msg('Success', 'Processed file "'+o.result.file+'" on the server');
 	                    	document.getElementById("fi-form").style.display = "none";
 	                    	alert("导入成功");
 	                    	parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").clear();
-							parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").findFeature("cbd", "4", guid, "TBBH");
+							parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").findFeature("cbdswt", "0", guid, "TBBH");
 	                    	fp.getForm().reset();
 	                	}
 	                });
