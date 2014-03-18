@@ -610,14 +610,14 @@ public class TdzcglReport extends AbstractBaseBean implements IDataClass{
 		TRBean trBean = new TRBean();
 		//trBean.setCssStyle("trSingle");
 				
-		TDBean statuBean = new TDBean("已出让但未入库项目","300","20");
+		TDBean statuBean = new TDBean("已出让但未入库","300","20");
 		statuBean.setColspan("3");
 		int num = 1;
 		Vector<TRBean> trbeans = new Vector<TRBean>();
 		Vector<String> subTotal = new Vector<String>();
 		for(int i = 0; i < queryList.size(); i++){
 			Map<String, Object> queryMap = queryList.get(i);
-			if("已出让但未入库项目".equals(String.valueOf(queryMap.get("THIRSTA")))){
+			if("已出让但未入库".equals(String.valueOf(queryMap.get("THIRSTA")))){
 				TRBean tryck = new TRBean();
 				tryck.setCssStyle("trSingle");
 				for(int j = 0; j < fields.length; j++){
