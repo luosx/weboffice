@@ -25,15 +25,15 @@ ITableStyle its = new TableStyleEditRow();
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
-	<script src="web/cbd/yzt/hxxm/showRW/js/table.js"></script>
-	<script src="web/cbd/yzt/hxxm/showRW/js/panel.js"></script>
-	<script src="web/cbd/yzt/hxxm/showRW/js/hxxmRowEditor.js"></script>
+	<script src="web/cbd/yzt/swdt/hxxm/showRW/js/table.js"></script>
+	<script src="web/cbd/yzt/swdt/hxxm/showRW/js/panel.js"></script>
+	<script src="web/cbd/yzt/swdt/hxxm/showRW/js/hxxmRowEditor.js"></script>
 	<%@ include file="/base/include/ext.jspf" %>
 	<script type="text/javascript" src="<%=extPath%>examples/ux/MultiSelect.js"></script>
 	<script type="text/javascript" src="<%=extPath%>examples/ux/ItemSelector.js"></script>
 	<link rel="stylesheet" type="text/css" href="<%=extPath%>examples/ux/css/MultiSelect.css"/>
 	<%@ include file="/base/include/restRequest.jspf"%>
-	<%@ include file="/web/cbd/yzt/hxxm/showRW/js/reportEdit.jspf"%>
+	<%@ include file="/web/cbd/yzt/swdt/hxxm/showRW/js/reportEdit.jspf"%>
 	<script src="base/include/jquery-1.10.2.js"></script>
 	<style type="text/css">
   		table{
