@@ -200,7 +200,7 @@ public class TdzcglManager extends AbstractBaseBean {
         double lmbbd2 = 0;
         double lmbbd3 = 0;
         double lmbbd4 = 0;
-        DecimalFormat a = new DecimalFormat("#.0000000000");
+        DecimalFormat a = new DecimalFormat("#.00");
         for(int num=0;num<list.size();num++){
 			Map<String, Object> map = list.get(num);
 			String ssqy =String.valueOf(map.get("ssqy"));
@@ -267,7 +267,7 @@ public class TdzcglManager extends AbstractBaseBean {
 			+"<tr class='tr02' >"
 				+"<td id='1_0' height='10' width='50' class='tr02'>1</td>"
 				+"<td id='1_1' height='10' width='150' class='tr02'>产业功能改造区</td>"
-				+"<td id='1_2' height='10' width='100' class='tr02'>"+zd1+"</td>"
+				+"<td id='1_2' height='10' width='100' class='tr02'>"+Double.valueOf(a.format(zd1/1000))+"</td>"
 				+"<td id='1_3' height='10' width='100' class='tr02'>"+jsyd1+"</td>"
 				+"<td id='1_4' height='10' width='100' class='tr02'>"+jzgm1+"</td>"
 				+"<td id='1_5' height='10' width='100' class='tr02'>"+kfcb1+"</td>"
@@ -277,7 +277,7 @@ public class TdzcglManager extends AbstractBaseBean {
 			+"<tr class='tr02' >"
 				+"<td id='2_0' height='10' width='50' class='tr02'>2</td>"
 				+"<td id='2_1' height='10' width='150' class='tr02'>民生改造区</td>"
-				+"<td id='2_2' height='10' width='100' class='tr02'>"+zd2+"</td>"
+				+"<td id='2_2' height='10' width='100' class='tr02'>"+Double.valueOf(a.format(zd2/1000))+"</td>"
 				+"<td id='2_3' height='10' width='100' class='tr02'>"+jsyd2+"</td>"
 				+"<td id='2_4' height='10' width='100' class='tr02'>"+jzgm2+"</td>"
 				+"<td id='2_5' height='10' width='100' class='tr02'>"+kfcb2+"</td>"
@@ -287,7 +287,7 @@ public class TdzcglManager extends AbstractBaseBean {
 			+"<tr class='tr02' >"
 				+"<td id='3_0' height='10' width='50' class='tr02'>3</td>"
 				+"<td id='3_1' height='10' width='150' class='tr02'>城市形象提升区</td>"
-				+"<td id='3_2' height='10' width='100' class='tr02'>"+zd3+"</td>"
+				+"<td id='3_2' height='10' width='100' class='tr02'>"+Double.valueOf(a.format(zd3/1000))+"</td>"
 				+"<td id='3_3' height='10' width='100' class='tr02'>"+jsyd3+"</td>"
 				+"<td id='3_4' height='10' width='100' class='tr02'>"+jzgm3+"</td>"
 				+"<td id='3_5' height='10' width='100' class='tr02'>"+kfcb3+"</td>"
@@ -296,7 +296,7 @@ public class TdzcglManager extends AbstractBaseBean {
 			+"</tr>"
 			+"<tr class='tr03' >"
 				+"<td id='4_0' height='10' width='200' colspan=2 class='tr03'>纳入规划储备资源小计</td>"
-				+"<td id='4_1' height='10' width='100' class='tr03'>"+(zd1+zd2+zd3)+"</td>"
+				+"<td id='4_1' height='10' width='100' class='tr03'>"+Double.valueOf(a.format((zd1+zd2+zd3)/1000))+"</td>"
 				+"<td id='4_2' height='10' width='100' class='tr03'>"+(jsyd1+jsyd2+jsyd3)+"</td>"
 				+"<td id='4_3' height='10' width='100' class='tr03'>"+(jzgm1+jzgm2+jzgm3)+"</td>"
 				+"<td id='4_4' height='10' width='100' class='tr03'>"+(kfcb1+kfcb2+kfcb3)+"</td>"
@@ -306,7 +306,7 @@ public class TdzcglManager extends AbstractBaseBean {
 			+"<tr class='tr02' >"
 				+"<td id='5_0' height='10' width='50' class='tr02'>4</td>"
 				+"<td id='5_1' height='10' width='150' class='tr02'>保留微调区</td>"
-				+"<td id='5_2' height='10' width='100' class='tr02'>"+zd4+"</td>"
+				+"<td id='5_2' height='10' width='100' class='tr02'>"+Double.valueOf(a.format(zd4/1000))+"</td>"
 				+"<td id='5_3' height='10' width='100' class='tr02'>"+jsyd4+"</td>"
 				+"<td id='5_4' height='10' width='100' class='tr02'>"+jzgm4+"</td>"
 				+"<td id='5_5' height='10' width='100' class='tr02'>"+kfcb4+"</td>"
@@ -315,7 +315,7 @@ public class TdzcglManager extends AbstractBaseBean {
 			+"</tr>"
 			+"<tr class='tr03' >"
 				+"<td id='6_0' height='10' width='200' colspan=2 class='tr03'>合计</td>"
-				+"<td id='6_1' height='10' width='100' class='tr03'>"+(zd1+zd2+zd3+zd4)+"</td>"
+				+"<td id='6_1' height='10' width='100' class='tr03'>"+Double.valueOf(a.format((zd1+zd2+zd3+zd4)/1000))+"</td>"
 				+"<td id='6_2' height='10' width='100' class='tr03'>"+(jsyd1+jsyd2+jsyd3+jsyd4)+"</td>"
 				+"<td id='6_3' height='10' width='100' class='tr03'>"+(jzgm1+jzgm2+jzgm3+jzgm4)+"</td>"
 				+"<td id='6_4' height='10' width='100' class='tr03'>"+(kfcb1+kfcb2+kfcb3+kfcb4)+"</td>"
