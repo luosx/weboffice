@@ -1,6 +1,7 @@
 package com.klspta.web.cbd.zcgl.tdzcgl;
 
 import java.io.UnsupportedEncodingException;
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Map;
 
@@ -199,30 +200,30 @@ public class TdzcglManager extends AbstractBaseBean {
         double lmbbd2 = 0;
         double lmbbd3 = 0;
         double lmbbd4 = 0;
-        
+        DecimalFormat a = new DecimalFormat("#.0000000000");
         for(int num=0;num<list.size();num++){
 			Map<String, Object> map = list.get(num);
 			String ssqy =String.valueOf(map.get("ssqy"));
 			if(ssqy.equals("产业功能改造区")){
-				zd1 += Double.valueOf(String.valueOf( checkNull(map.get("zd"))));
-				jsyd1 += Double.valueOf(String.valueOf(  checkNull(map.get("jsyd"))));
-				jzgm1 += Double.valueOf(String.valueOf( checkNull( map.get("jzgm"))));
-				kfcb1 += Double.valueOf(String.valueOf(  checkNull(map.get("kfcb"))));
+				zd1 += Double.valueOf(a.format(Double.valueOf(String.valueOf( checkNull(map.get("zd"))))));
+				jsyd1 += Double.valueOf(a.format(Double.valueOf(String.valueOf(  checkNull(map.get("jsyd"))))));
+				jzgm1 += Double.valueOf(a.format(Double.valueOf(String.valueOf( checkNull( map.get("jzgm"))))));
+				kfcb1 += Double.valueOf(a.format(Double.valueOf(String.valueOf(  checkNull(map.get("kfcb"))))));
 			}else if(ssqy.equals("民生改善区")){
-				zd2 += Double.valueOf(String.valueOf(  checkNull(map.get("zd"))));
-				jsyd2 += Double.valueOf(String.valueOf( checkNull( map.get("jsyd"))));
-				jzgm2 += Double.valueOf(String.valueOf(  checkNull(map.get("jzgm"))));
-				kfcb2 += Double.valueOf(String.valueOf(  checkNull(map.get("kfcb"))));
+				zd2 += Double.valueOf(a.format(Double.valueOf(String.valueOf(  checkNull(map.get("zd"))))));
+				jsyd2 +=Double.valueOf(a.format( Double.valueOf(String.valueOf( checkNull( map.get("jsyd"))))));
+				jzgm2 += Double.valueOf(a.format(Double.valueOf(String.valueOf(  checkNull(map.get("jzgm"))))));
+				kfcb2 += Double.valueOf(a.format(Double.valueOf(String.valueOf(  checkNull(map.get("kfcb"))))));
 			}else if(ssqy.equals("城市形象提升区")){
-				zd3 += Double.valueOf(String.valueOf(  checkNull(map.get("zd"))));
-				jsyd3 += Double.valueOf(String.valueOf(  checkNull(map.get("jsyd"))));
-				jzgm3 += Double.valueOf(String.valueOf( checkNull( map.get("jzgm"))));
-				kfcb3 += Double.valueOf(String.valueOf(  checkNull(map.get("kfcb"))));
+				zd3 +=Double.valueOf(a.format( Double.valueOf(String.valueOf(  checkNull(map.get("zd"))))));
+				jsyd3 += Double.valueOf(a.format(Double.valueOf(String.valueOf(  checkNull(map.get("jsyd"))))));
+				jzgm3 += Double.valueOf(a.format(Double.valueOf(String.valueOf( checkNull( map.get("jzgm"))))));
+				kfcb3 += Double.valueOf(a.format(Double.valueOf(String.valueOf(  checkNull(map.get("kfcb"))))));
 			}else if(ssqy.equals("保留微调区")){
-				zd4 += Double.valueOf(String.valueOf( checkNull( map.get("zd"))));
-				jsyd4 += Double.valueOf(String.valueOf( checkNull( map.get("jsyd"))));
-				jzgm4 += Double.valueOf(String.valueOf( checkNull( map.get("jzgm"))));
-				kfcb4 += Double.valueOf(String.valueOf( checkNull( map.get("kfcb"))));
+				zd4 += Double.valueOf(a.format(Double.valueOf(String.valueOf( checkNull( map.get("zd"))))));
+				jsyd4 += Double.valueOf(a.format(Double.valueOf(String.valueOf( checkNull( map.get("jsyd"))))));
+				jzgm4 += Double.valueOf(a.format(Double.valueOf(String.valueOf( checkNull( map.get("jzgm"))))));
+				kfcb4 +=Double.valueOf(a.format( Double.valueOf(String.valueOf( checkNull( map.get("kfcb"))))));
 			}
         }
         
@@ -234,22 +235,22 @@ public class TdzcglManager extends AbstractBaseBean {
         lmcb =((int) (jzgm1!=0?(kfcb1/jzgm1):0))/1000*1000;
         String sql1 ="select t.bbd from bbdfxjg t where t.lmcb = '"+lmcb+"' and t.tzhsq = '"+hsq+"'";
         List<Map<String, Object>> list1 = query(sql1, YW);
-        lmbbd1 =Double.valueOf(String.valueOf( checkNull( list1.get(0).get("bbd"))));
+        lmbbd1 =Double.valueOf(a.format(Double.valueOf(String.valueOf( checkNull( list1.get(0).get("bbd"))))));
         
         lmcb =((int) (jzgm2!=0?(kfcb2/jzgm2):0))/1000*1000;
         String sql2 ="select t.bbd from bbdfxjg t where t.lmcb = '"+lmcb+"' and t.tzhsq = '"+hsq+"'";
         List<Map<String, Object>> list2 = query(sql2, YW);
-        lmbbd2 =Double.valueOf(String.valueOf( checkNull( list2.get(0).get("bbd"))));
+        lmbbd2 =Double.valueOf(a.format(Double.valueOf(String.valueOf( checkNull( list2.get(0).get("bbd"))))));
         
         lmcb =((int) (jzgm3!=0?(kfcb3/jzgm3):0))/1000*1000;
         String sql3 ="select t.bbd from bbdfxjg t where t.lmcb = '"+lmcb+"' and t.tzhsq = '"+hsq+"'";
         List<Map<String, Object>> list3 = query(sql3, YW);
-        lmbbd3 =Double.valueOf(String.valueOf( checkNull( list3.get(0).get("bbd"))));
+        lmbbd3 =Double.valueOf(a.format(Double.valueOf(String.valueOf( checkNull( list3.get(0).get("bbd"))))));
         
         lmcb =((int) (jzgm4!=0?(kfcb4/jzgm4):0))/1000*1000;
         String sql4 ="select t.bbd from bbdfxjg t where t.lmcb = '"+lmcb+"' and t.tzhsq = '"+hsq+"'";
         List<Map<String, Object>> list4 = query(sql4, YW);
-        lmbbd4 =Double.valueOf(String.valueOf( checkNull( list4.get(0).get("bbd"))));
+        lmbbd4 =Double.valueOf(a.format(Double.valueOf(String.valueOf( checkNull( list4.get(0).get("bbd"))))));
         
         StringBuffer result = new StringBuffer(
         	"<table id='SWQFZXZJCJQKB' width='900' border='1' cellpadding='1' cellspacing='0'>"
@@ -261,7 +262,7 @@ public class TdzcglManager extends AbstractBaseBean {
 				+"<td id='0_4' height='10' width='100' class='tr01'>建筑规模<br/>（万㎡）</td>"
 				+"<td id='0_5' height='10' width='100' class='tr01'>开发成本<br/>（亿元）</td>"
 				+"<td id='0_6' height='10' width='150' class='tr01'>楼面成本<br/>（万元/㎡）</td>"
-				+"<td id='0_7' height='10' width='150' class='tr01'>租金保本点</td>"
+				+"<td id='0_7' height='10' width='150' class='tr01'>租金保本点<br/>（元/㎡·日）</td>"
 			+"</tr>"
 			+"<tr class='tr02' >"
 				+"<td id='1_0' height='10' width='50' class='tr02'>1</td>"
@@ -270,7 +271,7 @@ public class TdzcglManager extends AbstractBaseBean {
 				+"<td id='1_3' height='10' width='100' class='tr02'>"+jsyd1+"</td>"
 				+"<td id='1_4' height='10' width='100' class='tr02'>"+jzgm1+"</td>"
 				+"<td id='1_5' height='10' width='100' class='tr02'>"+kfcb1+"</td>"
-				+"<td id='1_6' height='10' width='150' class='tr02'>"+(jzgm1!=0?(kfcb1/jzgm1):0)+"</td>"
+				+"<td id='1_6' height='10' width='150' class='tr02'>"+Double.valueOf(a.format((jzgm1!=0?(kfcb1/jzgm1):0)))+"</td>"
 				+"<td id='1_7' height='10' width='150' class='tr02'>"+lmbbd1+"</td>"
 			+"</tr>"
 			+"<tr class='tr02' >"
@@ -280,7 +281,7 @@ public class TdzcglManager extends AbstractBaseBean {
 				+"<td id='2_3' height='10' width='100' class='tr02'>"+jsyd2+"</td>"
 				+"<td id='2_4' height='10' width='100' class='tr02'>"+jzgm2+"</td>"
 				+"<td id='2_5' height='10' width='100' class='tr02'>"+kfcb2+"</td>"
-				+"<td id='2_6' height='10' width='150' class='tr02'>"+(jzgm2!=0?(kfcb2/jzgm2):0)+"</td>"
+				+"<td id='2_6' height='10' width='150' class='tr02'>"+Double.valueOf(a.format((jzgm2!=0?(kfcb2/jzgm2):0)))+"</td>"
 				+"<td id='2_7' height='10' width='150' class='tr02'>"+lmbbd2+"</td>"
 			+"</tr>"
 			+"<tr class='tr02' >"
@@ -290,7 +291,7 @@ public class TdzcglManager extends AbstractBaseBean {
 				+"<td id='3_3' height='10' width='100' class='tr02'>"+jsyd3+"</td>"
 				+"<td id='3_4' height='10' width='100' class='tr02'>"+jzgm3+"</td>"
 				+"<td id='3_5' height='10' width='100' class='tr02'>"+kfcb3+"</td>"
-				+"<td id='3_6' height='10' width='150' class='tr02'>"+(jzgm3!=0?(kfcb3/jzgm3):0)+"</td>"
+				+"<td id='3_6' height='10' width='150' class='tr02'>"+Double.valueOf(a.format((jzgm3!=0?(kfcb3/jzgm3):0)))+"</td>"
 				+"<td id='3_7' height='10' width='150' class='tr02'>"+lmbbd3+"</td>"
 			+"</tr>"
 			+"<tr class='tr03' >"
@@ -299,7 +300,7 @@ public class TdzcglManager extends AbstractBaseBean {
 				+"<td id='4_2' height='10' width='100' class='tr03'>"+(jsyd1+jsyd2+jsyd3)+"</td>"
 				+"<td id='4_3' height='10' width='100' class='tr03'>"+(jzgm1+jzgm2+jzgm3)+"</td>"
 				+"<td id='4_4' height='10' width='100' class='tr03'>"+(kfcb1+kfcb2+kfcb3)+"</td>"
-				+"<td id='4_5' height='10' width='150' class='tr03'>"+((jzgm1+jzgm2+jzgm3)!=0?((kfcb1+kfcb2+kfcb3)/(jzgm1+jzgm2+jzgm3)):0)+"</td>"
+				+"<td id='4_5' height='10' width='150' class='tr03'>"+Double.valueOf(a.format(((jzgm1+jzgm2+jzgm3)!=0?((kfcb1+kfcb2+kfcb3)/(jzgm1+jzgm2+jzgm3)):0)))+"</td>"
 				+"<td id='4_6' height='10' width='150' class='tr03'>--</td>"
 			+"</tr>"
 			+"<tr class='tr02' >"
@@ -309,7 +310,7 @@ public class TdzcglManager extends AbstractBaseBean {
 				+"<td id='5_3' height='10' width='100' class='tr02'>"+jsyd4+"</td>"
 				+"<td id='5_4' height='10' width='100' class='tr02'>"+jzgm4+"</td>"
 				+"<td id='5_5' height='10' width='100' class='tr02'>"+kfcb4+"</td>"
-				+"<td id='5_6' height='10' width='150' class='tr02'>"+(jzgm4!=0?(kfcb4/jzgm4):0)+"</td>"
+				+"<td id='5_6' height='10' width='150' class='tr02'>"+Double.valueOf(a.format((jzgm4!=0?(kfcb4/jzgm4):0)))+"</td>"
 				+"<td id='5_7' height='10' width='150' class='tr02'>"+lmbbd4+"</td>"
 			+"</tr>"
 			+"<tr class='tr03' >"
@@ -318,7 +319,7 @@ public class TdzcglManager extends AbstractBaseBean {
 				+"<td id='6_2' height='10' width='100' class='tr03'>"+(jsyd1+jsyd2+jsyd3+jsyd4)+"</td>"
 				+"<td id='6_3' height='10' width='100' class='tr03'>"+(jzgm1+jzgm2+jzgm3+jzgm4)+"</td>"
 				+"<td id='6_4' height='10' width='100' class='tr03'>"+(kfcb1+kfcb2+kfcb3+kfcb4)+"</td>"
-				+"<td id='6_5' height='10' width='150' class='tr03'>"+((jzgm1+jzgm2+jzgm3+jzgm4)!=0?((kfcb1+kfcb2+kfcb3+kfcb4)/(jzgm1+jzgm2+jzgm3+jzgm4)):0)+"</td>"
+				+"<td id='6_5' height='10' width='150' class='tr03'>"+Double.valueOf(a.format(((jzgm1+jzgm2+jzgm3+jzgm4)!=0?((kfcb1+kfcb2+kfcb3+kfcb4)/(jzgm1+jzgm2+jzgm3+jzgm4)):0)))+"</td>"
 				+"<td id='6_6' height='10' width='150' class='tr03'>--</td>"
 			+"</tr>"
 			
