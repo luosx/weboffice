@@ -25,7 +25,7 @@ String view = request.getParameter("view");
   </head>
   <script type="text/javascript">
   		var gisurl = "<%=basePath%>/base/fxgis/framework/gisViewFrame.jsp";
-  		var url = "<%=basePath%>/web/cbd/yzt/jbb/showRW/jbbEditor.jsp?view=<%=view%>";
+  		var url = "<%=basePath%>/web/cbd/yzt/swdt/jbb/showRW/jbbEditor.jsp?view=<%=view%>";
   		Ext.onReady(function(){
   			Ext.state.Manager.setProvider(new Ext.state.CookieProvider());
   			var	width = document.body.clientWidth;
