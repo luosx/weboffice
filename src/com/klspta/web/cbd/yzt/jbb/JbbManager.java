@@ -251,4 +251,12 @@ public class JbbManager extends AbstractBaseBean {
 		List<Map<String, Object>> list = query(sqlBuffer.toString(), YW);
 		response(list);
 	}
+	
+	
+	public void querySsqyByname(){
+		String dkmc = request.getParameter("dkmc");
+		String sql = "select ssqy from jc_jiben where dkmc = ?";
+		List<Map<String ,Object>> result = query(sql, YW,new Object[]{dkmc});
+		response(result);
+	}
 }
