@@ -1,0 +1,11 @@
+<%
+	String _$esriPath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath()+ "/gisapp/arcgis/";
+%>
+<script type="text/javascript">
+var $esriPath='<%=request.getServerName() + ":" + request.getServerPort() + request.getContextPath()+ "/gisapp/arcgis/" %>';
+</script>					
+    <link rel="stylesheet" type="text/css" href="<%=_$esriPath %>/js/dojo/dijit/themes/tundra/tundra.css">
+    <script type="text/javascript" src="<%=_$esriPath %>/js/dojo/dojo/dojo.xd.js"></script>
+    <script type="text/javascript" src="<%=_$esriPath %>js/esri/esri.js"></script>
+	<script type="text/javascript" src="<%=_$esriPath %>js/esri/geometry.js"></script>
+    <script type="text/javascript" src="<%=_$esriPath %>js/arcgis.js"></script>
