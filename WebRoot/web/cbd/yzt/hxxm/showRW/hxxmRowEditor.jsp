@@ -137,6 +137,7 @@ ITableStyle its = new TableStyleEditRow();
 					    putClientCommond("hxxmHandle", "getCQSJ");
 					    putRestParameter("value", itemselector);
 					    var mydata = restRequest();
+					    Ext.getCmp("xh").setValue(mydata[0].XH);
 					    Ext.getCmp("zd").setValue(mydata[0].ZD);
 					    Ext.getCmp("jsyd").setValue(mydata[0].JSYD);
 					    Ext.getCmp("rjl").setValue(mydata[0].RJL);
@@ -216,17 +217,27 @@ ITableStyle its = new TableStyleEditRow();
 	        items : [{
 	         	layout : 'column',
 	        	items : [{
-	        		columnWidth:.33,
+	            	columnWidth:.50,
+	        		layout:'form',
+	           		items:[{
+		                xtype: 'numberfield',
+		                id   : 'xh',
+		                value:'',
+		                fieldLabel: '序号',
+		                width:'200'
+	            	}]
+            	},{
+	        		columnWidth:.50,
 	        		layout:'form',
 	        		items:[{
 		                xtype: 'textfield',
 		                id      : 'xmmc',
 		                value:'',
 		                fieldLabel: '项目名称',  
-		                width:'100'	            
+		                width:'200'	            
 	            	}]
 	            },{
-            		columnWidth:.33,
+            		columnWidth:.50,
 	        		layout:'form',
 					items:[{
 		                xtype: 'numberfield',
@@ -234,10 +245,10 @@ ITableStyle its = new TableStyleEditRow();
 		                value:'', 
 		                fieldLabel: '占地',
 		                readOnly : true,
-		                width:'100'
+		                width:'200'
 		            }]
 		         },{
-            		columnWidth:.33,
+            		columnWidth:.50,
 	        		layout:'form',
 					items:[{
 		                xtype: 'numberfield',
@@ -245,7 +256,7 @@ ITableStyle its = new TableStyleEditRow();
 		                value:'',  
 		                readOnly : true,
 		                fieldLabel: '建设用地',
-		                width:'100'
+		                width:'200'
 		            }]
 		         }]
 		      },{
@@ -638,7 +649,7 @@ ITableStyle its = new TableStyleEditRow();
 	  });		
   		form.render("deal");
   		form.hide();
-  		var elements = new Array("xmmc","zd","jsyd","rjl", "jzgm","ghyt", "gjjzgm",
+  		var elements = new Array("xh","xmmc","zd","jsyd","rjl", "jzgm","ghyt", "gjjzgm",
   		     "jzjzgm", "szjzgm", "zzsgm", "zzzsgm", "zzzshs", "hjmj", "fzzzsgm", 
 			 "fzzjs", "kfcb", "lmcb", "dmcb","yjcjj","yjzftdsy","cxb",  "cqqd", "cbfgl", 
 			 "zzcqfy", "qycqfy", "qtfy", "azftzcb", "zzhbtzcb", "cqhbtz","qtfyzb","lmcjj",

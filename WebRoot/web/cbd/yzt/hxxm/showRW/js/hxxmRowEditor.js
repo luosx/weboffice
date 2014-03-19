@@ -59,9 +59,9 @@ function update(){
 		xmmc = key;
 		
 		var array = paneloper.getElements();
-		for(var i = 1; i < objid.cells.length; i++){
+		for(var i = 0; i < objid.cells.length; i++){
 			var value = objid.cells[i].innerText;	
-			paneloper.insertValue(array[i-1], value);
+			paneloper.insertValue(array[i], value);
 		}
 		paneloper.show();
 	}
