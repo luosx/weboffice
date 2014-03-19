@@ -1,5 +1,8 @@
 package com.klspta.web.cbd.yzt.cbjhzhb;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -33,10 +36,33 @@ public class CbjhManager extends AbstractBaseBean {
     public void modify(){
     	String xmmc = request.getParameter("XMMC");
     	String sql = "";
+    	String data = "";
     	for(int i=0; i< str.length;i++){
-    		sql = "update jc_cbjhzhb set "+str[i]+"=? where xmmc = ?";
-    		update(sql,YW,new Object[]{request.getParameter(str[i]),xmmc});
+    	    data = request.getParameter(str[i]);
+    		sql = "update jc_cbjhzhb set "+str[i]+"=? where xmmc = '"+xmmc+"'";
+    		this.update(sql,YW,new Object[]{data});
     	}
     	response("{success:true}");
+    }
+    
+    public void getName(){
+        String sql = "select t.dkmc from dcsjk_kgzb t";
+        List<Map<String, Object>> getList = query(sql, YW);
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("DKMC", "");
+        getList.add(map);
+        response(getList);
+    }
+    
+    public void save(){
+        String dkmcs = request.getParameter("dkmc");
+        String[] dkmc = dkmcs.split(",");
+        String del = "delete from cbzy_dkm where 1=1";
+        this.update(del, YW);
+        String sql = "insert into cbzy_dkm dkmc values(?)";
+        for(int i=0;i<dkmc.length;i++){
+            this.update(sql, YW, new Object[]{dkmc[i]});
+        }
+        response("{success:true}");
     }
 }
