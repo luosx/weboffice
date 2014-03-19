@@ -118,17 +118,15 @@ public class ScjcManager extends AbstractBaseBean {
 
     public void delByYwGuid() {
         try {
-            String yw_guid = request.getParameter("xqmc");
+            String yw_guid = request.getParameter("yw_guid");
             yw_guid = UtilFactory.getStrUtil().unescape(yw_guid);
             String[] xqmcs = yw_guid.split(",");
            
             List<Map<String,Object>> list = null;
 	            for(int i = 0; i < xqmcs.length;i++){
-	            	String sql = "select yw_guid from esf_jbxx where xqmc = ?";
-	            	list = query(sql, YW,new Object[]{xqmcs[i]});
-		            sql = "delete from esf_jbxx t where yw_guid='" + list.get(0).get("yw_guid") + "'";
+		            String sql = "delete from esf_jbxx t where yw_guid='" + xqmcs[i] + "'";
 		            this.update(sql, YW);
-		            sql = "delete from esf_zsxx t where yw_guid='" + list.get(0).get("yw_guid") + "'";
+		            sql = "delete from esf_zsxx t where yw_guid='" + xqmcs[i] + "'";
 		            this.update(sql, YW);
             }
             response("{success:true}");
@@ -138,6 +136,7 @@ public class ScjcManager extends AbstractBaseBean {
     }
 
     public void save() {
+    	String yw_guid = request.getParameter("yw_guid");
         String year = request.getParameter("year");
         String month = request.getParameter("month");
         String esfzl = request.getParameter("esfzl");
@@ -148,28 +147,21 @@ public class ScjcManager extends AbstractBaseBean {
         String xqmc = UtilFactory.getStrUtil().unescape(request.getParameter("xqmc"));
         String xqlb = UtilFactory.getStrUtil().unescape(request.getParameter("xqlb"));
         String bz = UtilFactory.getStrUtil().unescape(request.getParameter("bz"));
-        String sql = "select yw_guid from esf_jbxx where xqmc=?";
-        List<Map<String,Object>> list = query(sql, YW,new Object[]{xqmc});
-        sql = "select t.yw_guid from esf_zsxx t,esf_jbxx j where t.yw_guid = j.yw_guid and j.xqmc=? and t.year=? and t.month=?";
-        List<Map<String ,Object>> list1 = query(sql, YW,new Object[]{xqmc,year,month});
-        if (list.size()!=0) {
-            String update = "update esf_jbxx set ssqy='" + ssqy + "',xqmc='" + xqmc + "',xqlb='" + xqlb
-                    + "',bz='" + bz + "'where yw_guid=?";
-            this.update(update, YW, new Object[] { list.get(0).get("yw_guid") });
-            if(list1.size()!=0){
-            	update = "update esf_zsxx set zl=?,esfjj=?,czl=?,czfjj=? where yw_guid=? and year=? and month=?";
-            	update(update, YW,new Object[]{esfzl,esfjj,czl,czfjj,list.get(0).get("yw_guid"),year,month});
-            }else {
-            	update = "insert into esf_zsxx(yw_guid,year,month,zl,esfjj,czl,czfjj)values(?,?,?,?,?,?,?)";
-                this.update(update, YW, new Object[] { list.get(0).get("yw_guid"), year, month ,esfzl,esfjj,czl,czfjj});
-            }
-        } else {
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd_hhmmss");
+
+        if ("".equals(yw_guid) || yw_guid==null || "null".equals(yw_guid)) {
+        	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd_hhmmss");
             String format = dateFormat.format(new Date());
             String insertSql = "insert into esf_jbxx(ssqy,xqmc,xqlb,bz,yw_guid) values(?,?,?,?,?)";
             this.update(insertSql, YW, new Object[] { ssqy, xqmc, xqlb, bz, format });
             String intserSql2 = "insert into esf_zsxx(yw_guid,year,month,zl,esfjj,czl,czfjj)values(?,?,?,?,?,?,?)";
             this.update(intserSql2, YW, new Object[] { format, year, month ,esfzl,esfjj,czl,czfjj});
+           
+        } else {
+        	 String update = "update esf_jbxx set ssqy='" + ssqy + "',xqmc='" + xqmc + "',xqlb='" + xqlb
+             + "',bz='" + bz + "'where yw_guid=?";
+		     this.update(update, YW, new Object[] {yw_guid});
+		     	update = "update esf_zsxx set zl=?,esfjj=?,czl=?,czfjj=? where yw_guid=? and year=? and month=?";
+		     	update(update, YW,new Object[]{esfzl,esfjj,czl,czfjj,yw_guid,year,month});
         }
         
         
@@ -391,10 +383,13 @@ public class ScjcManager extends AbstractBaseBean {
     }
     
     public void queryByname(){
-    	String xqmc = request.getParameter("xqmc");
+    	String xqmc = request.getParameter("yw_guid");
+    	if(xqmc==null || "null".equals(xqmc)){
+    		xqmc="";
+    	}
     	xqmc = UtilFactory.getStrUtil().unescape(xqmc);
         StringBuffer sqlBuffer = new StringBuffer();
-        sqlBuffer.append("select t.ssqy,t.xqlb from esf_jbxx t where xqmc=?");
+        sqlBuffer.append("select t.ssqy,t.xqlb from esf_jbxx t where yw_guid=?");
         List<Map<String, Object>> list = query(sqlBuffer.toString(), YW,new Object[]{xqmc});
         response(list);
     }
