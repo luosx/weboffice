@@ -89,10 +89,10 @@ function dele(year,month){
 			var choseValue = table.getAnnotations();
 			var choseString = '';
 			while(choseValue.length != 0){
-				choseString += table.getValue(choseValue.pop(),"1") + ",";
+				choseString += table.getValue(choseValue.pop(),"9") + ",";
 			}
 			putClientCommond("scjcManager","delByYwGuid");
-			putRestParameter("xqmc",escape(escape(choseString)));
+			putRestParameter("yw_guid",escape(escape(choseString)));
 			putRestParameter("year",year);
 			putRestParameter("month",month);
 			myData = restRequest();
@@ -111,18 +111,16 @@ function dele(year,month){
 }
 
 function modify(){
-	
-	
 	var annoations = table.getAnnotations();
 	if(annoations.length > 0){
 		var objid = table.element.rows[annoations[0]];
 		if(table.element == undefined){
 			table.init(document.getElementById("ESFQK"));
 		}
-		var key = objid.cells[1].innerText;
+		var key = objid.cells[9].innerText;
 		xqmc = key;
 		putClientCommond("scjcManager","queryByname");
-		putRestParameter("xqmc",escape(escape(xqmc)));
+		putRestParameter("yw_guid",escape(escape(xqmc)));
 		var hxxmmc = restRequest();
 		form.findById('ssqy').setValue(hxxmmc[0].SSQY);
 		form.findById('xqlb').setValue(hxxmmc[0].XQLB);
