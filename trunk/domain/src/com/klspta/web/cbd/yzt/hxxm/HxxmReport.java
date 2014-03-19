@@ -42,10 +42,13 @@ public class HxxmReport extends AbstractBaseBean implements IDataClass {
 		if (obj.length > 0) {
 			queryMap = (Map<String, Object>) obj[0];
 		}
-		trbeans.put("00", getSub(queryMap).get(0));
+		trbeans.put("000", getSub(queryMap).get(0));
 		List<TRBean> trbeanList = getBody(queryMap);
-		for (int i = 0; i < trbeanList.size(); i++) {
-			trbeans.put(i + "1", trbeanList.get(i));
+		for (int i = 1; i < trbeanList.size()+1; i++) {
+			String key = String.valueOf(i);
+			key = "00" + i;
+			key = key.substring(key.length() - 2, key.length());
+			trbeans.put(key, trbeanList.get(i-1));
 		}
 		return trbeans;
 	}
