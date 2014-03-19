@@ -81,9 +81,9 @@ String view = request.getParameter("view");
   	var view = "<%=view%>";
   	var paneloper = new Paneloper();
   	$(document).ready(function () { 
-		var width = document.body.clientWidth;
-		var height = document.body.clientHeight * 0.95;
-       	FixTable("ESFQK", 0,1, width-5, height-30);
+		//var width = document.body.clientWidth;
+		//var height = document.body.clientHeight * 0.95;
+       	//FixTable("ESFQK", 0,1, width-5, height-30);
        	buildPanel();
     });
   //	Ext.onReady(function(){
@@ -233,6 +233,17 @@ String view = request.getParameter("view");
 		                fieldLabel: '备注',
 		                width :300
 	                }]
+            	},{
+	        		columnWidth:1,
+	        		layout:'form',
+	        		items:[{
+	 					xtype: 'textarea',
+		                id      : 'yw_guid',
+		                value:'',
+		                hidden:true,
+		                fieldLabel: '备注',
+		                width :300
+	                }]
             	}]
             }],
 	        buttons: [
@@ -253,13 +264,26 @@ String view = request.getParameter("view");
 	  });	
   		form.render("deal");
   		form.hide();
-  		var elements = new Array("ssqy","xqlb","xqmc","esfzl","esfjj","esfjjzf","czl","czfjj","czfjjzf","bz");
+  		var elements = new Array("ssqy","xqlb","xqmc","esfzl","esfjj","esfjjzf","czl","czfjj","czfjjzf","bz","yw_guid");
   		paneloper.init(form,elements);
   		paneloper.hide();
   	}
   // })
+  function hideywguid(){
+  		var obj = document.getElementById("ESFQK");
+  		var rowlength = obj.rows.length;
+  		for(var i=0;i< rowlength;i++){
+  			//if(i!=1){
+  				obj.rows[i].cells[obj.rows[i].cells.length-1].style.display="none";
+  				obj.rows[i].cells[obj.rows[i].cells.length-1].innerText;
+  			//}
+  		}
+  		var width = document.body.clientWidth;
+		var height = document.body.clientHeight * 0.95;
+       	FixTable("ESFQK", 0,1, width-5, height-30);
+  	}
   </script>
-  <body>
+  <body onload="hideywguid();">
   	<div id="show" style="overflow-x:hidden;overflow-y:hidden">
   	<%=new CBDReportManager().getReport("ESFQK",new Object[] {year,month,"false"},its,"1000px")%>
   	</div>
