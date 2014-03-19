@@ -30,6 +30,10 @@ function initComponent() {
 							xtype : 'button',
 							text : '选择地块',
 							handler : select
+						},{
+							xtype : 'button',
+							text : '删除地块',
+							handler : delet
 						}],
 				items : [{
 					html : "<iframe id='report' width=" + (width)
@@ -89,7 +93,7 @@ function select(){
         		var rows = grid.getSelectionModel().getSelections();
         		var dkmc = "";
         		for(var i=0;i<rows.length;i++){
-        			dkmc = dkmc + rows[i].get("DKMC")+",";
+        			dkmc = dkmc + escape(escape(rows[i].get("DKMC")))+",";
         		}
         		putClientCommond("cbjhzhb","save");
         		putRestParameter("dkmc", dkmc);
@@ -111,6 +115,68 @@ function select(){
 	win.show();
 }
 
+
+function delet(){
+	putClientCommond("cbjhzhb","getName2");
+ 	var myData = restRequest();
+	var	store = new Ext.data.JsonStore({
+		proxy: new Ext.ux.data.PagingMemoryProxy(myData),
+		remoteSort:true,
+		fields: [
+			{name: 'DKMC'}
+		]
+		});
+    store.load({params:{start:0, limit:myData[0].length}});
+	var	    	sm = new Ext.grid.CheckboxSelectionModel({handleMouseDown:Ext.emptyFn});
+   grid = new Ext.grid.GridPanel({
+    	store: store,
+    	sm:sm,
+    	columns: [
+    		new Ext.grid.RowNumberer(),
+    		sm,
+           	{header: '地块名称',dataIndex:'DKMC',width:130, sortable: true}
+    	],
+        stripeRows: true,
+        height: 500,
+        title: '',
+        stateId: 'grid'
+	});	
+	win = new Ext.Window({
+		layout: 'fit',
+        title: '地块选择',
+        closeAction: 'hide',
+        width:200,
+        height:300,
+        x: 40,
+        y: 50,
+        items:[grid],
+        buttons:[{
+        	text:'删除',
+        	handler:function(){
+        		var rows = grid.getSelectionModel().getSelections();
+        		var dkmc = "";
+        		for(var i=0;i<rows.length;i++){
+        			dkmc = dkmc + escape(escape(rows[i].get("DKMC")))+",";
+        		}
+        		putClientCommond("cbjhzhb","delet");
+        		putRestParameter("dkmc", dkmc);
+        		var myData2 = restRequest();
+        		if(myData2.success){
+        		  Ext.Msg.alert("提示","删除成功",function(){
+        			  document.location.reload();
+        		  });
+        		
+        		}
+        	}
+        },{
+        	text:'关闭',
+        	handler:function(){
+        	 	win.hide();
+        	}	
+        }]
+        });
+	win.show();
+}
 
 
 
