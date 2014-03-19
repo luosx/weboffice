@@ -178,7 +178,7 @@ public class HxxmManager extends AbstractBaseBean {
 		String insertsql = "insert into jc_xiangmu (xmname,xh,zd,jsyd,rjl,jzgm,ghyt,gjjzgm,jzjzgm,szjzgm,zzsgm,zzzsgm,zzzshs," +
 				"hjmj,fzzzsgm,fzzjs,kfcb,lmcb,dmcb,yjcjj,yjzftdsy,cxb,cqqd,cbfgl,zzcqfy,qycqfy,qtfy,azftzcb,zzhbtzcb," +
 				"cqhbtz,qtfyzb,lmcjj,fwsj,zj,dkmc) values (";
-		String updatesql = "update jc_xiangmu set zd=?,jsyd=?,rjl=?,jzgm=?,ghyt=?,gjjzgm=?,jzjzgm=?,szjzgm=?,zzsgm=?,zzzsgm=?,zzzshs=?," +
+		String updatesql = "update jc_xiangmu set xh=?,zd=?,jsyd=?,rjl=?,jzgm=?,ghyt=?,gjjzgm=?,jzjzgm=?,szjzgm=?,zzsgm=?,zzzsgm=?,zzzshs=?," +
 		"hjmj=?,fzzzsgm=?,fzzjs=?,kfcb=?,lmcb=?,dmcb=?,yjcjj=?,yjzftdsy=?,cxb=?,cqqd=?,cbfgl=?,zzcqfy=?,qycqfy=?,qtfy=?,azftzcb=?,zzhbtzcb=?," +
 		"cqhbtz=?,qtfyzb=?,lmcjj=?,fwsj=?,zj=?,dkmc=? where xmname=?";
 		for( int i=0;i<items.length;i++){
