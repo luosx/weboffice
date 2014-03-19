@@ -7,6 +7,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import com.klspta.base.AbstractBaseBean;
+import com.klspta.base.util.UtilFactory;
 
 
 public class CbjhManager extends AbstractBaseBean {
@@ -55,13 +56,32 @@ public class CbjhManager extends AbstractBaseBean {
     }
     
     public void save(){
-        String dkmcs = request.getParameter("dkmc");
+        String dkmcs = UtilFactory.getStrUtil().unescape(request.getParameter("dkmc"));
         String[] dkmc = dkmcs.split(",");
         String del = "delete from cbzy_dkm where 1=1";
         this.update(del, YW);
         String sql = "insert into cbzy_dkm dkmc values(?)";
         for(int i=0;i<dkmc.length;i++){
             this.update(sql, YW, new Object[]{dkmc[i]});
+        }
+        response("{success:true}");
+    }
+    
+    public void getName2(){
+        String sql = "select t.dkmc from cbzy_dkm t";
+        List<Map<String, Object>> getList = query(sql, YW);
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("DKMC", "");
+        getList.add(map);
+        response(getList);
+    }
+    
+    public void delet(){
+        String dkmcs = UtilFactory.getStrUtil().unescape(request.getParameter("dkmc"));
+        String[] dkmc = dkmcs.split(",");
+        String del = "delete from cbzy_dkm where dkmc=?";
+        for(int i=0;i<dkmc.length;i++){
+            this.update(del, YW, new Object[]{dkmc[i]});
         }
         response("{success:true}");
     }
