@@ -151,7 +151,7 @@ public class HxxmManager extends AbstractBaseBean {
 	public void getCQSJ(){
 		String value = request.getParameter("value");
 		String[] dkmcs = value.split(",");
-		String sql = "select sum(zd) as zd ,sum(jsyd) as jsyd,round(sum(jzgm)/sum(jsyd)/100,2)||'%' as rjl,sum(jzgm) as jzgm," +
+		String sql = "select xh,sum(zd) as zd ,sum(jsyd) as jsyd,round(sum(jzgm)/sum(jsyd)/100,2)||'%' as rjl,sum(jzgm) as jzgm," +
 				"sum(gjjzgm)as gjjzgm ,sum(jzjzgm) as jzjzgm ,sum(szjzgm) as szjzgm,sum(kfcb) as kfcb," +
 				"round(sum(kfcb)/sum(jzgm),2)*10000 as lmcb,round(sum(kfcb)/sum(jsyd),2)*10000 as lmcb,"+
 				"sum(zzsgm) as zzsgm,sum(zzzsgm) as zzzsgm ,sum(zzzshs) as zzzshs,sum(hjmj)" +
@@ -167,7 +167,7 @@ public class HxxmManager extends AbstractBaseBean {
 		response(list);
 	}
 	
-	String[] items = {"xmmc","zd","jsyd","rjl", "jzgm","ghyt", "gjjzgm",
+	String[] items = {"xmmc","xh","zd","jsyd","rjl", "jzgm","ghyt", "gjjzgm",
 	     "jzjzgm", "szjzgm", "zzsgm", "zzzsgm", "zzzshs", "hjmj", "fzzzsgm", 
 	 "fzzjs", "kfcb", "lmcb", "dmcb","yjcjj","yjzftdsy","cxb",  "cqqd", "cbfgl", 
 	 "zzcqfy", "qycqfy", "qtfy", "azftzcb", "zzhbtzcb", "cqhbtz","qtfyzb","lmcjj",
@@ -175,7 +175,7 @@ public class HxxmManager extends AbstractBaseBean {
 	public void modify(){
 		String[] values = new String[items.length];
 		String[] values1 = new String[items.length];
-		String insertsql = "insert into jc_xiangmu (xmname,zd,jsyd,rjl,jzgm,ghyt,gjjzgm,jzjzgm,szjzgm,zzsgm,zzzsgm,zzzshs," +
+		String insertsql = "insert into jc_xiangmu (xmname,xh,zd,jsyd,rjl,jzgm,ghyt,gjjzgm,jzjzgm,szjzgm,zzsgm,zzzsgm,zzzshs," +
 				"hjmj,fzzzsgm,fzzjs,kfcb,lmcb,dmcb,yjcjj,yjzftdsy,cxb,cqqd,cbfgl,zzcqfy,qycqfy,qtfy,azftzcb,zzhbtzcb," +
 				"cqhbtz,qtfyzb,lmcjj,fwsj,zj,dkmc) values (";
 		String updatesql = "update jc_xiangmu set zd=?,jsyd=?,rjl=?,jzgm=?,ghyt=?,gjjzgm=?,jzjzgm=?,szjzgm=?,zzsgm=?,zzzsgm=?,zzzshs=?," +
