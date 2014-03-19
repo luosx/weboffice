@@ -8,11 +8,13 @@ String name = ProjectInfo.getInstance().PROJECT_NAME;
 
 <html>
   <head>
-    <title>执法监察系统</title>
+    <title>指挥调度监控中心</title>
+
 </head>
-  	<frameset id="index" name="index" rows="106,32,*" frameborder="no" border="0"  framespacing="0" >
-		<frame id="flash" name="flash" scrolling="NO" noresize src="<%=basePath%>web/<%=name%>/framework/pages/flash.jsp" />
-		<frame id="menu" name="menu" scrolling="NO" noresize src="<%=basePath%>web/<%=name%>/framework/pages/menu.jsp" />
-		<frame id="content" name="content" scrolling="NO" noresize src="<%=basePath%>web/<%=name%>/framework/pages/content.jsp" />
-	</frameset>
+
+<frameset id="index" rows="90,*" frameborder="no" border="0"  framespacing="0" >
+		<frame id="top" name="top" scrolling="NO" noresize src="<%=basePath%>web/nanjingBus/framework/menu.jsp" />
+		<frame id="content" name="content" scrolling="NO" noresize src="<%=basePath%>web/nanjingBus/baiduMap/baiduMap.jsp" />
+
+</frameset>
 </html>
