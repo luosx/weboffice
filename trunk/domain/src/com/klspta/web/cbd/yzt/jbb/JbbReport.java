@@ -60,9 +60,9 @@ public class JbbReport extends AbstractBaseBean implements IDataClass {
 		Map<String, TRBean> trbeans = new TreeMap<String, TRBean>();
 		Map<String, List<TRBean>> buildMap = new TreeMap<String, List<TRBean>>();
 		if (obj.length > 1) {
-			trbeans.put("00", getSub((Map<String, Object>) obj[1]).get(0));
+			trbeans.put("000", getSub((Map<String, Object>) obj[1]).get(0));
 		} else {
-			trbeans.put("00", getSub(null).get(0));
+			trbeans.put("000", getSub(null).get(0));
 		}
 		// 添加所有纳入规划储备库数据
 		buildMap.putAll(getByStatus(obj, "是"));
@@ -70,7 +70,10 @@ public class JbbReport extends AbstractBaseBean implements IDataClass {
 		for (String key : keySet) {
 			List<TRBean> trBeans = buildMap.get(key);
 			for (int i = 0; i < trBeans.size(); i++) {
-				trbeans.put("11" + key + i, trBeans.get(i));
+				String key1 = String.valueOf(i);
+				key1 = "00" + i;
+				key1 = key1.substring(key1.length() - 2, key1.length());
+				trbeans.put(key +key1 + i, trBeans.get(i));
 			}
 		}
 		// 添加所有未纳入规划储备库数据
