@@ -20,7 +20,7 @@ import com.klspta.model.CBDReport.dataClass.IDataClass;
  * Date:2013-12-18
  */
 public class HxxmReport extends AbstractBaseBean implements IDataClass {
-	public static String[][] shows = new String[][] { { "rownum", "false" },
+	public static String[][] shows = new String[][] { { "xh", "false" },
 			{ "xmname", "false" }, { "zd", "false" }, { "jsyd", "false" },
 			{ "rjl", "false" }, { "jzgm", "false" }, { "ghyt", "false" },
 			{ "GJJZGM", "false" }, { "JZJZGM", "false" },
@@ -52,7 +52,7 @@ public class HxxmReport extends AbstractBaseBean implements IDataClass {
 
 	public List<TRBean> getBody(Map queryMap) {
 		StringBuffer sqlBuffer = new StringBuffer();
-		sqlBuffer.append("select rownum,");
+		sqlBuffer.append("select t.xh,");
 		for (int i = 1; i < shows.length - 1; i++) {
 			sqlBuffer.append("t.").append(shows[i][0]).append(",");
 		}
@@ -62,7 +62,7 @@ public class HxxmReport extends AbstractBaseBean implements IDataClass {
 		if (queryMap != null && !queryMap.isEmpty()) {
 			sqlBuffer.append(String.valueOf(queryMap.get("query")));
 		}
-		// sqlBuffer.append(" order by t.zrbbh,t.yw_guid");
+		sqlBuffer.append(" order by t.xh");
 		List<Map<String, Object>> queryList = query(sqlBuffer.toString(), YW);
 		List<TRBean> list = new ArrayList<TRBean>();
 		for (int num = 0; num < queryList.size(); num++) {
