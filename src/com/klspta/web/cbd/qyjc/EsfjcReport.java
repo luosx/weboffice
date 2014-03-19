@@ -19,7 +19,7 @@ import com.klspta.web.cbd.yzt.jc.report.TableStyleEditRow;
 import com.klspta.web.cbd.yzt.zrb.ZrbReport;
 
 public class EsfjcReport extends AbstractBaseBean implements IDataClass {
-	private String[][] title = {{"所属<br>区域","40"},{"序号","50"},{"小区名称","180"},{"二手房总量<br>(户)","150"},{"二手房均价<br>(元/㎡)","200"},{"二手房均价涨幅(%)","200"},{"出租量(户)","100"},{"出租房均价(元/月)","200"},{"出租房均价涨幅(%)","150"},{"备注","500"}};
+	private String[][] title = {{"所属<br>区域","40"},{"序号","50"},{"小区名称","180"},{"二手房总量<br>(户)","150"},{"二手房均价<br>(元/㎡)","200"},{"二手房均价涨幅(%)","200"},{"出租量(户)","100"},{"出租房均价(元/月)","200"},{"出租房均价涨幅(%)","150"},{"备注","500"},{"yw_guid","100"}};
 	private Map<String, Map<String, Map<String, Object>>> showMap = new TreeMap<String, Map<String,Map<String, Object>>>();
 	private String[][] total ={{"zl","total"},{"esfjj","avg"},{"esfjjzf","avg"},{"czl","total"},{"czfjj","avg"},{"czfjjzf","avg"}};
 	private DecimalFormat df = new DecimalFormat("0.00");
@@ -53,17 +53,17 @@ public class EsfjcReport extends AbstractBaseBean implements IDataClass {
 	    	sql = "select t.* from (select to_char(t.zl,'fm99999999.00')  as zl ,to_char(t.esfjj,'fm99999999.00') as esfjj ,"+
     		"to_char(t.esfjjzf,'fm99999999.00') as esfjjzf,to_char(t.czl,'fm99999999.00') as czl ,"+
     		"to_char(t.czfjj,'fm99999999.00') as czfjj,to_char(t.czfjjzf,'fm99999999.00') as czfjjzf,"+
-    		"j.ssqy as ssqy , j.xqmc as xqmc, j.xqlb as xqlb,j.bz as bz from esf_zsxx t right join esf_jbxx j on t.yw_guid = j.yw_guid "+
+    		"j.ssqy as ssqy , j.xqmc as xqmc, j.xqlb as xqlb,j.bz as bz,t.yw_guid from esf_zsxx t right join esf_jbxx j on t.yw_guid = j.yw_guid "+
     		"and t.year = ? and t.month=? ) t  where (t.zl||t.esfjj||t.czl||t.czfjj||t.ssqy||t.xqmc||t.xqlb||t.bz) like ?";
 	    	resultList = query(sql, YW,new Object []{year,month,"%"+obj[3].toString()+"%"});
 	    }else{
-	    	sql = "select to_char(t.zl,'fm99999999.00')  as zl ,to_char(t.esfjj,'fm99999999.00') as esfjj ,to_char(t.esfjjzf,'fm99999999.00') as esfjjzf,to_char(t.czl,'fm99999999.00') as czl ,to_char(t.czfjj,'fm99999999.00') as czfjj,to_char(t.czfjjzf,'fm99999999.00') as czfjjzf,j.ssqy, j.xqmc, j.xqlb,j.bz, t.rowid from esf_zsxx t right join esf_jbxx j on t.yw_guid = j.yw_guid and t.year = ? and t.month=?";
+	    	sql = "select to_char(t.zl,'fm99999999.00')  as zl ,to_char(t.esfjj,'fm99999999.00') as esfjj ,to_char(t.esfjjzf,'fm99999999.00') as esfjjzf,to_char(t.czl,'fm99999999.00') as czl ,to_char(t.czfjj,'fm99999999.00') as czfjj,to_char(t.czfjjzf,'fm99999999.00') as czfjjzf,j.ssqy, j.xqmc, j.xqlb,j.bz,t.yw_guid, t.rowid from esf_zsxx t right join esf_jbxx j on t.yw_guid = j.yw_guid and t.year = ? and t.month=?";
 	    	resultList = query(sql, YW,new Object []{year,month});
 	    }
 	    
 		for(int i = 0; i < resultList.size(); i++){
 			Map<String, Object> resultMap = resultList.get(i);
-			String xqmc = String.valueOf(resultMap.get("xqmc"));
+			String xqmc = "null".equals(String.valueOf(resultMap.get("xqmc")))?"   ":String.valueOf(resultMap.get("xqmc"));
 			String ssqy = String.valueOf(resultMap.get("ssqy"));
 			String xqlb = String.valueOf(resultMap.get("xqlb"));
 			String keytype = ssqy + "-" + xqlb;
@@ -184,6 +184,7 @@ public class EsfjcReport extends AbstractBaseBean implements IDataClass {
 				}
 				//trBean.addTDBean(new TDBean("", "100", "20"));
 				trBean.addTDBean(new TDBean("", "100", "20",obj[2].toString()));
+				trBean.addTDBean(new TDBean("", "100", "20",obj[2].toString()));
 				trbeans.put(ssqy, trBean);
 				//添加详细数据
 				trbeans.putAll(getsubTotalBeans(key,obj));
@@ -264,7 +265,8 @@ public class EsfjcReport extends AbstractBaseBean implements IDataClass {
 					tr.addTDBean(new TDBean(value, "100", "20"));
 				}
 				//tr.addTDBean(new TDBean("", "100", "20"));
-				tr.addTDBean(new TDBean(String.valueOf(sonMap.get("bz")), "1000", "20",obj[2].toString()));
+				tr.addTDBean(new TDBean("null".equals(String.valueOf(sonMap.get("bz")))?"":String.valueOf(sonMap.get("bz")), "1000", "20",obj[2].toString()));
+				tr.addTDBean(new TDBean(String.valueOf(sonMap.get("yw_guid")), "1000", "20",obj[2].toString()));
 				trbeans.put(key + name, tr);
 				num++;
 			}
