@@ -12,7 +12,7 @@ function showMap(objid){
 	
 	
 	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").clear();
-	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").findFeature("cbdswt", "1", xmmc, "XMNAME");
+	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").findFeature("cbd", "17", xmmc, "XMNAME");
 
 		//添加选中保存
 	//var num = objid.rowIndex();
@@ -39,7 +39,7 @@ function setRecord(polygon){
     putRestParameter("type","3d"); 
     var result = restRequest();
 	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").clear();
-	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").findFeature("cbdswt", "1", xmmc, "XMNAME");
+	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").findFeature("cbd", "17", xmmc, "XMNAME");
 }
 
 function add(){

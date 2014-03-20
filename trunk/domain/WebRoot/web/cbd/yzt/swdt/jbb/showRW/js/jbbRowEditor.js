@@ -7,7 +7,7 @@ function showMap(objid){
 	}
 	var key = objid.cells[0].innerText;
 	parent.parent.document.frames['reportmap'].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").clear();
-	parent.parent.document.frames['reportmap'].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").findFeature("cbdswt", "0", key, "TBBH");
+	parent.parent.document.frames['reportmap'].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").findFeature("cbd", "16", key, "TBBH");
 	if(-1 == key.indexOf("计")){
 		table.addAnnotation(objid.rowIndex);
 	}
@@ -36,7 +36,7 @@ function setRecord(polygon){
     putRestParameter("type","3d"); 
     var result = restRequest();
 	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").clear();
-	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").findFeature("cbdswt", "0", key, "TBBH");
+	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").findFeature("cbd", "16", key, "TBBH");
 }
 
 //导出Excel
