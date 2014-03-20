@@ -55,7 +55,7 @@
              	 <area shape="circle" coords="40,305,30"  href ="<%=basePath%>/web/cbd/zcgl/tdzcgl/tdzcEditor.jsp?view=R" alt="土地储备库" />
              	 <area shape="circle" coords="250,305,30" href ="<%=basePath%>web/cbd/qyjc/esfzj/contentTab.jsp?closeMenu=*closeMenu*&view=R" alt="规划储备资源" />
              	 <area shape="circle" coords="530,305,30" href ="<%=basePath%>web/cbd/yzt/cbjhzhb/xmcbEditor.jsp" alt="红线储备资源" />
-             	 <area shape="circle" coords="735,305,30" href ="<%=basePath%>/web/cbd/zcgl/tdzcgl/tdzcEditor.jsp?view=R" alt="实物储备资源" />
+             	 <area shape="circle" coords="735,305,30" href ="<%=basePath%>web/cbd/swcbzy/swcbViewFrame.jsp?closeMenu=*closeMenu*" alt="实物储备资源" />
              	 <area shape="circle" coords="40,405,30"  href ="<%=basePath%>/web/cbd/yzt/zrb/showR/zrbEditor.jsp" alt="底层数据库" />
              	 <area shape="rect" coords="345,375,430,405" href ="<%=basePath%>web/cbd/yzt/jbb/showList/jbbEditor.jsp" alt="基本地块数据库" />
              	 <area shape="rect" coords="345,405,430,435" href ="<%=basePath%>/web/cbd/yzt/zrb/showR/zrbEditor.jsp" alt="自然斑数据库" />
