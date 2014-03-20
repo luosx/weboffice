@@ -156,7 +156,6 @@ public class TdzcglManager extends AbstractBaseBean {
 		} catch (Exception e) {
 			response("{success:false}");
 		}
-
 	}
 	
 	
@@ -172,7 +171,7 @@ public class TdzcglManager extends AbstractBaseBean {
 		response(new CBDReportManager().getReport("TDZCGL",new Object[]{xmmcs},its).toString());
 	}
 	public String getGzfqqkhzbList() {
-        String sql = "select  t.zd,t.jsyd,t.jzgm,t.kfcb,t.ssqy  from jc_jiben t ";
+        String sql = "select  round(t.zd,2) as zd ,round(t.jsyd,2) as jsyd,round(t.jzgm,2),round(t.kfcb,2) as kfcb,t.ssqy  from jc_jiben t ";
         List<Map<String, Object>> list = query(sql, YW);
         
         double zd1 = 0 ;
@@ -231,26 +230,43 @@ public class TdzcglManager extends AbstractBaseBean {
         List<Map<String, Object>> list0 = query(getbbd, YW);
         int hsq =Integer.valueOf(String.valueOf( checkNull(list0.get(0).get("hsq"))));
         
+        sql = "select max(to_number(bbd)) as bbd from bbdfxjg where tzhsq ='"+hsq+"'";
+        List<Map<String,Object>> maxbbd = query(sql, YW);
+        double mbbd = Double.valueOf(a.format(Double.valueOf(String.valueOf( checkNull( maxbbd.get(0).get("bbd"))))));
+        
         int lmcb = 0;
         lmcb =((int) (jzgm1!=0?(kfcb1/jzgm1):0)*10)/1*1000;
         String sql1 ="select t.bbd from bbdfxjg t where t.lmcb = '"+lmcb+"' and t.tzhsq = '"+hsq+"'";
         List<Map<String, Object>> list1 = query(sql1, YW);
-        lmbbd1 =Double.valueOf(a.format(Double.valueOf(String.valueOf( checkNull( list1.get(0).get("bbd"))))));
-        
+        if(list1!=null && list1.size()>0){
+        	lmbbd1 =Double.valueOf(a.format(Double.valueOf(String.valueOf( checkNull( list1.get(0).get("bbd"))))));
+        }else {
+	    	lmbbd4 = mbbd;
+	    }
         lmcb =((int) (jzgm2!=0?(kfcb2/jzgm2):0)*10)/1*1000;
         String sql2 ="select t.bbd from bbdfxjg t where t.lmcb = '"+lmcb+"' and t.tzhsq = '"+hsq+"'";
         List<Map<String, Object>> list2 = query(sql2, YW);
-        lmbbd2 =Double.valueOf(a.format(Double.valueOf(String.valueOf( checkNull( list2.get(0).get("bbd"))))));
-        
+        if(list2!=null && list2.size()>0){
+	        lmbbd2 =Double.valueOf(a.format(Double.valueOf(String.valueOf( checkNull( list2.get(0).get("bbd"))))));
+		}else {
+	    	lmbbd4 = mbbd;
+	    }
         lmcb =((int) (jzgm3!=0?(kfcb3/jzgm3):0)*10)/1*1000;
         String sql3 ="select t.bbd from bbdfxjg t where t.lmcb = '"+lmcb+"' and t.tzhsq = '"+hsq+"'";
         List<Map<String, Object>> list3 = query(sql3, YW);
-        lmbbd3 =Double.valueOf(a.format(Double.valueOf(String.valueOf( checkNull( list3.get(0).get("bbd"))))));
-        
+        if(list3!=null && list3.size()>0){
+        	lmbbd3 =Double.valueOf(a.format(Double.valueOf(String.valueOf( checkNull( list3.get(0).get("bbd"))))));
+        }else {
+        	lmbbd4 = mbbd;
+        }	
         lmcb =((int) (jzgm4!=0?(kfcb4/jzgm4):0)*10)/1*1000;
         String sql4 ="select t.bbd from bbdfxjg t where t.lmcb = '"+lmcb+"' and t.tzhsq = '"+hsq+"'";
         List<Map<String, Object>> list4 = query(sql4, YW);
-        lmbbd4 =Double.valueOf(a.format(Double.valueOf(String.valueOf( checkNull( list4.get(0).get("bbd"))))));
+        if(list4!=null && list4.size()>0){
+        	lmbbd4 =Double.valueOf(a.format(Double.valueOf(String.valueOf( checkNull( list4.get(0).get("bbd"))))));
+        }else {
+        	lmbbd4 = mbbd;
+        }
         
         StringBuffer result = new StringBuffer(
         	"<table id='SWQFZXZJCJQKB' width='900' border='1' cellpadding='1' cellspacing='0'>"
@@ -267,59 +283,59 @@ public class TdzcglManager extends AbstractBaseBean {
 			+"<tr class='tr02' >"
 				+"<td id='1_0' height='10' width='50' class='tr02'>1</td>"
 				+"<td id='1_1' height='10' width='150' class='tr02'>产业功能改造区</td>"
-				+"<td id='1_2' height='10' width='100' class='tr02'>"+Double.valueOf(a.format(zd1/1000))+"</td>"
-				+"<td id='1_3' height='10' width='100' class='tr02'>"+jsyd1+"</td>"
-				+"<td id='1_4' height='10' width='100' class='tr02'>"+jzgm1+"</td>"
-				+"<td id='1_5' height='10' width='100' class='tr02'>"+kfcb1+"</td>"
-				+"<td id='1_6' height='10' width='150' class='tr02'>"+Double.valueOf(a.format((jzgm1!=0?(kfcb1/jzgm1):0)))+"</td>"
+				+"<td id='1_2' height='10' width='100' class='tr02'>"+String.format("%.2f", zd1)+"</td>"
+				+"<td id='1_3' height='10' width='100' class='tr02'>"+String.format("%.2f", jsyd1)+"</td>"
+				+"<td id='1_4' height='10' width='100' class='tr02'>"+String.format("%.2f", jzgm1)+"</td>"
+				+"<td id='1_5' height='10' width='100' class='tr02'>"+String.format("%.2f", kfcb1)+"</td>"
+				+"<td id='1_6' height='10' width='150' class='tr02'>"+String.format("%.2f", Double.valueOf(a.format((jzgm1!=0?(kfcb1/jzgm1):0))))+"</td>"
 				+"<td id='1_7' height='10' width='150' class='tr02'>"+lmbbd1+"</td>"
 			+"</tr>"
 			+"<tr class='tr02' >"
 				+"<td id='2_0' height='10' width='50' class='tr02'>2</td>"
 				+"<td id='2_1' height='10' width='150' class='tr02'>民生改造区</td>"
-				+"<td id='2_2' height='10' width='100' class='tr02'>"+Double.valueOf(a.format(zd2/1000))+"</td>"
-				+"<td id='2_3' height='10' width='100' class='tr02'>"+jsyd2+"</td>"
-				+"<td id='2_4' height='10' width='100' class='tr02'>"+jzgm2+"</td>"
-				+"<td id='2_5' height='10' width='100' class='tr02'>"+kfcb2+"</td>"
-				+"<td id='2_6' height='10' width='150' class='tr02'>"+Double.valueOf(a.format((jzgm2!=0?(kfcb2/jzgm2):0)))+"</td>"
+				+"<td id='2_2' height='10' width='100' class='tr02'>"+String.format("%.2f", zd2)+"</td>"
+				+"<td id='2_3' height='10' width='100' class='tr02'>"+String.format("%.2f", jsyd2)+"</td>"
+				+"<td id='2_4' height='10' width='100' class='tr02'>"+String.format("%.2f", jzgm2)+"</td>"
+				+"<td id='2_5' height='10' width='100' class='tr02'>"+String.format("%.2f", kfcb2)+"</td>"
+				+"<td id='2_6' height='10' width='150' class='tr02'>"+String.format("%.2f", Double.valueOf(a.format((jzgm2!=0?(kfcb2/jzgm2):0))))+"</td>"
 				+"<td id='2_7' height='10' width='150' class='tr02'>"+lmbbd2+"</td>"
 			+"</tr>"
 			+"<tr class='tr02' >"
 				+"<td id='3_0' height='10' width='50' class='tr02'>3</td>"
 				+"<td id='3_1' height='10' width='150' class='tr02'>城市形象提升区</td>"
-				+"<td id='3_2' height='10' width='100' class='tr02'>"+Double.valueOf(a.format(zd3/1000))+"</td>"
-				+"<td id='3_3' height='10' width='100' class='tr02'>"+jsyd3+"</td>"
-				+"<td id='3_4' height='10' width='100' class='tr02'>"+jzgm3+"</td>"
-				+"<td id='3_5' height='10' width='100' class='tr02'>"+kfcb3+"</td>"
-				+"<td id='3_6' height='10' width='150' class='tr02'>"+Double.valueOf(a.format((jzgm3!=0?(kfcb3/jzgm3):0)))+"</td>"
+				+"<td id='3_2' height='10' width='100' class='tr02'>"+String.format("%.2f", zd3)+"</td>"
+				+"<td id='3_3' height='10' width='100' class='tr02'>"+String.format("%.2f", jsyd3)+"</td>"
+				+"<td id='3_4' height='10' width='100' class='tr02'>"+String.format("%.2f", jzgm3)+"</td>"
+				+"<td id='3_5' height='10' width='100' class='tr02'>"+String.format("%.2f", kfcb3)+"</td>"
+				+"<td id='3_6' height='10' width='150' class='tr02'>"+String.format("%.2f", Double.valueOf(a.format((jzgm3!=0?(kfcb3/jzgm3):0))))+"</td>"
 				+"<td id='3_7' height='10' width='150' class='tr02'>"+lmbbd3+"</td>"
 			+"</tr>"
 			+"<tr class='tr03' >"
 				+"<td id='4_0' height='10' width='200' colspan=2 class='tr03'>纳入规划储备资源小计</td>"
-				+"<td id='4_1' height='10' width='100' class='tr03'>"+Double.valueOf(a.format((zd1+zd2+zd3)/1000))+"</td>"
-				+"<td id='4_2' height='10' width='100' class='tr03'>"+(jsyd1+jsyd2+jsyd3)+"</td>"
-				+"<td id='4_3' height='10' width='100' class='tr03'>"+(jzgm1+jzgm2+jzgm3)+"</td>"
-				+"<td id='4_4' height='10' width='100' class='tr03'>"+(kfcb1+kfcb2+kfcb3)+"</td>"
-				+"<td id='4_5' height='10' width='150' class='tr03'>"+Double.valueOf(a.format(((jzgm1+jzgm2+jzgm3)!=0?((kfcb1+kfcb2+kfcb3)/(jzgm1+jzgm2+jzgm3)):0)))+"</td>"
+				+"<td id='4_1' height='10' width='100' class='tr03'>"+String.format("%.2f", (zd1+zd2+zd3))+"</td>"
+				+"<td id='4_2' height='10' width='100' class='tr03'>"+String.format("%.2f", (jsyd1+jsyd2+jsyd3))+"</td>"
+				+"<td id='4_3' height='10' width='100' class='tr03'>"+String.format("%.2f", (jzgm1+jzgm2+jzgm3))+"</td>"
+				+"<td id='4_4' height='10' width='100' class='tr03'>"+String.format("%.2f", (kfcb1+kfcb2+kfcb3))+"</td>"
+				+"<td id='4_5' height='10' width='150' class='tr03'>"+String.format("%.2f", Double.valueOf(a.format(((jzgm1+jzgm2+jzgm3)!=0?((kfcb1+kfcb2+kfcb3)/(jzgm1+jzgm2+jzgm3)):0))))+"</td>"
 				+"<td id='4_6' height='10' width='150' class='tr03'>--</td>"
 			+"</tr>"
 			+"<tr class='tr02' >"
 				+"<td id='5_0' height='10' width='50' class='tr02'>4</td>"
 				+"<td id='5_1' height='10' width='150' class='tr02'>保留微调区</td>"
-				+"<td id='5_2' height='10' width='100' class='tr02'>"+Double.valueOf(a.format(zd4/1000))+"</td>"
-				+"<td id='5_3' height='10' width='100' class='tr02'>"+jsyd4+"</td>"
-				+"<td id='5_4' height='10' width='100' class='tr02'>"+jzgm4+"</td>"
-				+"<td id='5_5' height='10' width='100' class='tr02'>"+kfcb4+"</td>"
-				+"<td id='5_6' height='10' width='150' class='tr02'>"+Double.valueOf(a.format((jzgm4!=0?(kfcb4/jzgm4):0)))+"</td>"
+				+"<td id='5_2' height='10' width='100' class='tr02'>"+String.format("%.2f", Double.valueOf(a.format(zd4/1000)))+"</td>"
+				+"<td id='5_3' height='10' width='100' class='tr02'>"+String.format("%.2f", jsyd4)+"</td>"
+				+"<td id='5_4' height='10' width='100' class='tr02'>"+String.format("%.2f", jzgm4)+"</td>"
+				+"<td id='5_5' height='10' width='100' class='tr02'>"+String.format("%.2f", kfcb4)+"</td>"
+				+"<td id='5_6' height='10' width='150' class='tr02'>"+String.format("%.2f", Double.valueOf(a.format((jzgm4!=0?(kfcb4/jzgm4):0))))+"</td>"
 				+"<td id='5_7' height='10' width='150' class='tr02'>"+lmbbd4+"</td>"
 			+"</tr>"
 			+"<tr class='tr03' >"
 				+"<td id='6_0' height='10' width='200' colspan=2 class='tr03'>合计</td>"
-				+"<td id='6_1' height='10' width='100' class='tr03'>"+Double.valueOf(a.format((zd1+zd2+zd3+zd4)/1000))+"</td>"
-				+"<td id='6_2' height='10' width='100' class='tr03'>"+(jsyd1+jsyd2+jsyd3+jsyd4)+"</td>"
-				+"<td id='6_3' height='10' width='100' class='tr03'>"+(jzgm1+jzgm2+jzgm3+jzgm4)+"</td>"
-				+"<td id='6_4' height='10' width='100' class='tr03'>"+(kfcb1+kfcb2+kfcb3+kfcb4)+"</td>"
-				+"<td id='6_5' height='10' width='150' class='tr03'>"+Double.valueOf(a.format(((jzgm1+jzgm2+jzgm3+jzgm4)!=0?((kfcb1+kfcb2+kfcb3+kfcb4)/(jzgm1+jzgm2+jzgm3+jzgm4)):0)))+"</td>"
+				+"<td id='6_1' height='10' width='100' class='tr03'>"+String.format("%.2f", Double.valueOf(a.format((zd1+zd2+zd3+zd4)/1000)))+"</td>"
+				+"<td id='6_2' height='10' width='100' class='tr03'>"+String.format("%.2f", (jsyd1+jsyd2+jsyd3+jsyd4))+"</td>"
+				+"<td id='6_3' height='10' width='100' class='tr03'>"+String.format("%.2f", (jzgm1+jzgm2+jzgm3+jzgm4))+"</td>"
+				+"<td id='6_4' height='10' width='100' class='tr03'>"+String.format("%.2f", (kfcb1+kfcb2+kfcb3+kfcb4))+"</td>"
+				+"<td id='6_5' height='10' width='150' class='tr03'>"+String.format("%.2f", Double.valueOf(a.format(((jzgm1+jzgm2+jzgm3+jzgm4)!=0?((kfcb1+kfcb2+kfcb3+kfcb4)/(jzgm1+jzgm2+jzgm3+jzgm4)):0))))+"</td>"
 				+"<td id='6_6' height='10' width='150' class='tr03'>--</td>"
 			+"</tr>"
 			
