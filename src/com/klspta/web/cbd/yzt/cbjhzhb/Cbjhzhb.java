@@ -110,17 +110,20 @@ public class Cbjhzhb extends AbstractBaseBean implements IDataClass {
 	 * @return
 	 */
 	private Map<String, TRBean> buildBody(){
+		
 		Map<String, TRBean> trBeans = new LinkedHashMap<String, TRBean>();
 		if(fields == null){
 			Setfields();
 		}
-		String querySql = "select t.* , j.* from " + form_base + " t left join " + form_extend + " j on j.xmmc = t.xmname order by j.xmlx desc,t.xmname ";
+		String querySql = "select t.* , j.* from " + form_base + " t left join " + form_extend + " j on j.xmmc = t.xmname order by j.xmlx desc ";
 		Map<String, Map<String, String>> subTotalMap = new HashMap<String, Map<String,String>>();
 		Map<String, String> totalMap = new HashMap<String, String>();
 		String key = "";
 		List<Map<String, Object>> queryList = query(querySql, YW);
 		int num = 1;
+		int totaltount = 0;
 		for(int i = 0; i < queryList.size(); i++){
+			System.out.println(queryList.get(i).get("xmlx"));
 			TRBean trbean = new TRBean();
 			trbean.setCssStyle("trsingle");
 			Map<String, Object> queryMap = queryList.get(i);
@@ -133,7 +136,8 @@ public class Cbjhzhb extends AbstractBaseBean implements IDataClass {
 			//添加小计行
 			if(!"".equals(prekey) && !prekey.equals(key)){
 				num = 1;
-				trBeans.put("0" + (i+1), getTotal(subTotalMap, prekey));
+				totaltount++;
+				trBeans.put("00" + (i+1), getTotal(subTotalMap, prekey));
 			}
 				//添加合计
 				if(subMap == null){
@@ -189,15 +193,15 @@ public class Cbjhzhb extends AbstractBaseBean implements IDataClass {
 				value = (value == "null") ? "" : value;
 				trbean.addTDBean(new TDBean(value, "100", "20", field[1]));
 			}
-			trBeans.put("0" + (i+1) + "00", trbean);
+			trBeans.put("0" + totaltount +"0"+ (i+3) , trbean);
 			num++;
 		}
 		
 		//添加最后一个小计
 		String prekey = "计划新增项目";
-		trBeans.put("0" + (queryList.size() + 1) , getTotal(subTotalMap, prekey));
+		trBeans.put("9" + (queryList.size() + 1) , getTotal(subTotalMap, prekey));
 		//添加合计
-		trBeans.put("0" + (queryList.size() + 2) , getTotal(subTotalMap, "合计"));
+		trBeans.put("9" + (queryList.size() + 2) , getTotal(subTotalMap, "合计"));
 		
 		return  trBeans;
 	}
