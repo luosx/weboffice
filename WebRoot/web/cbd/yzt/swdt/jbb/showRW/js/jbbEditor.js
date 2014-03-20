@@ -105,7 +105,7 @@ function initFile(){
 	                    	document.getElementById("fi-form").style.display = "none";
 	                    	alert("导入成功");
 	                    	parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").clear();
-							parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").findFeature("cbdswt", "0", guid, "TBBH");
+							parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").findFeature("cbd", "16", guid, "TBBH");
 	                    	fp.getForm().reset();
 	                	}
 	                });

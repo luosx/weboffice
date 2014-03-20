@@ -194,9 +194,7 @@ ITableStyle its = new TableStyleEditRow();
   	var form;
   	var paneloper = new Paneloper();
   	$(document).ready(function () { 
-		var width = document.body.clientWidth;
-		var height = document.body.clientHeight-20;
-       	FixTable("HXXM", 2,2, width, height);
+
        	buildPanel();
 	});
 	function buildPanel(){
@@ -646,8 +644,21 @@ ITableStyle its = new TableStyleEditRow();
   		paneloper.init(form,elements);
   		paneloper.hide();
   	}
+  		function hideywguid(){
+  		var obj = document.getElementById("HXXM");
+  		var rowlength = obj.rows.length;
+  		for(var i=0;i< rowlength;i++){
+  			if(i!=1){
+  				obj.rows[i].cells[obj.rows[i].cells.length-1].style.display="none";
+  				obj.rows[i].cells[obj.rows[i].cells.length-1].innerText;
+  			}
+  		}
+  		var width = document.body.clientWidth;
+		var height = document.body.clientHeight-20;
+       	FixTable("HXXM", 2,2, width, height);
+  	}
   </script>
-  <body>
+  <body onload="hideywguid();">
   	<div id='show'>
   		<%=new CBDReportManager().getReport("HXXM",new Object[]{},its)%>
   	</div>
