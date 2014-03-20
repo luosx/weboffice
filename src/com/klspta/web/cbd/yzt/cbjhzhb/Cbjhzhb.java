@@ -123,7 +123,6 @@ public class Cbjhzhb extends AbstractBaseBean implements IDataClass {
 		int num = 1;
 		int totaltount = 0;
 		for(int i = 0; i < queryList.size(); i++){
-			System.out.println(queryList.get(i).get("xmlx"));
 			TRBean trbean = new TRBean();
 			trbean.setCssStyle("trsingle");
 			Map<String, Object> queryMap = queryList.get(i);
@@ -137,7 +136,11 @@ public class Cbjhzhb extends AbstractBaseBean implements IDataClass {
 			if(!"".equals(prekey) && !prekey.equals(key)){
 				num = 1;
 				totaltount++;
-				trBeans.put("00" + (i+1), getTotal(subTotalMap, prekey));
+				if(i+3<10){
+					trBeans.put("0"+totaltount +"0" + (i+3), getTotal(subTotalMap, prekey));
+				}else{
+					trBeans.put("0"+totaltount + (i+3), getTotal(subTotalMap, prekey));
+				}
 			}
 				//添加合计
 				if(subMap == null){
@@ -165,23 +168,22 @@ public class Cbjhzhb extends AbstractBaseBean implements IDataClass {
 						
 						if(subMap.containsKey(keyname)){
 							String oldvalue = subMap.get(keyname);
-							String newValue = String.valueOf(Float.parseFloat(oldvalue) + value);
-							subMap.put(keyname, newValue);
+							String newValue = String.valueOf(String.format("%.2f", Float.parseFloat(oldvalue) + value));
+							subMap.put(keyname,  newValue);
 						}else{
-							subMap.put(keyname, String.valueOf(value));
+							subMap.put(keyname,  String.valueOf(String.format("%.2f", value)));
 						}
 						
 						if(totalMap.containsKey(keyname)){
 							String oldvalue = totalMap.get(keyname);
-							String newValue = String.valueOf(Float.parseFloat(oldvalue) + value);
+							String newValue = String.valueOf(String.format("%.2f", Float.parseFloat(oldvalue) + value));
 							totalMap.put(keyname, newValue);
 						}else{
-							totalMap.put(keyname, String.valueOf(value));
+							totalMap.put(keyname,String.valueOf(String.format("%.2f", value)));
 						}
 						
 						subTotalMap.put(key, subMap);
 					}
-				
 			}
 			subTotalMap.put("合计", totalMap);
 			// 添加展现行
@@ -191,9 +193,17 @@ public class Cbjhzhb extends AbstractBaseBean implements IDataClass {
 				String[] field = fields[t];
 				String value = String.valueOf(queryMap.get(field[0]));
 				value = (value == "null") ? "" : value;
-				trbean.addTDBean(new TDBean(value, "100", "20", field[1]));
+				if(fields[t][2].equals("sum") && !"null".equals(value) && !"".equals(value)){
+					trbean.addTDBean(new TDBean(value.equals("---")?value:String.valueOf(String.format("%.2f", Float.parseFloat(value))), "100", "20", field[1]));
+				}else{
+					trbean.addTDBean(new TDBean(value, "100", "20", field[1]));
+				}
 			}
-			trBeans.put("0" + totaltount +"0"+ (i+3) , trbean);
+			if(i+3<10 && i+3+totaltount<10){
+				trBeans.put("0" + totaltount +"0"+ (i+3+totaltount) , trbean);
+			}else{
+				trBeans.put("0" + totaltount + (i+3+totaltount) , trbean);
+			}
 			num++;
 		}
 		
