@@ -47,42 +47,60 @@ public class CbjhManager extends AbstractBaseBean {
     }
     
     public void getName(){
-        String sql = "select t.dkmc from dcsjk_kgzb t";
+        String sql = "select t.dkmc from dcsjk_kgzb t ";
         List<Map<String, Object>> getList = query(sql, YW);
-        Map<String, Object> map = new HashMap<String, Object>();
-        map.put("DKMC", "");
-        getList.add(map);
+        //Map<String, Object> map = new HashMap<String, Object>();
+        //getList.add(map);
         response(getList);
     }
     
     public void save(){
-        String dkmcs = UtilFactory.getStrUtil().unescape(request.getParameter("dkmc"));
+        String dkmcs = request.getParameter("dkmc");
+        dkmcs = UtilFactory.getStrUtil().unescape(dkmcs);
         String[] dkmc = dkmcs.split(",");
-        String del = "delete from cbzy_dkm where 1=1";
-        this.update(del, YW);
+//        String del = "delete from cbzy_dkm where 1=1";
+//        this.update(del, YW);
         String sql = "insert into cbzy_dkm dkmc values(?)";
         for(int i=0;i<dkmc.length;i++){
             this.update(sql, YW, new Object[]{dkmc[i]});
         }
         response("{success:true}");
     }
-    
-    public void getName2(){
-        String sql = "select t.dkmc from cbzy_dkm t";
+    /**
+     * 获取实物储备资源地块
+     * 李国明
+     * 2014-3-21
+     */
+    public void getSelectName(){
+    	String sql = "select t.dkmc from cbzy_dkm t";
         List<Map<String, Object>> getList = query(sql, YW);
-        Map<String, Object> map = new HashMap<String, Object>();
-        map.put("DKMC", "");
-        getList.add(map);
+       // Map<String, Object> map = new HashMap<String, Object>();
+        //getList.add(map);
         response(getList);
     }
     
-    public void delet(){
-        String dkmcs = UtilFactory.getStrUtil().unescape(request.getParameter("dkmc"));
-        String[] dkmc = dkmcs.split(",");
-        String del = "delete from cbzy_dkm where dkmc=?";
-        for(int i=0;i<dkmc.length;i++){
-            this.update(del, YW, new Object[]{dkmc[i]});
-        }
-        response("{success:true}");
+    /**
+     * 删除储备资源地块
+     * 李国明
+     * 2014-3-21
+     */
+    public void delSelectName(){
+    	String dkmcs = request.getParameter("dkmc");
+    	dkmcs = UtilFactory.getStrUtil().unescape(dkmcs);
+    	String[] dkmc = dkmcs.split(",");
+    	String sql = "delete from cbzy_dkm where dkmc in (";
+    	for(int i =0 ; i < dkmc.length ; i++){
+    		if(i==dkmc.length-1){
+    			sql += "?)";
+    		}else{
+    			sql += "?,";
+    		}
+    	}
+    	int i = update(sql,YW,dkmc);
+    	if(i>0){
+    		response("{success:true}");
+    	}else{
+    		response("{success:false}");
+    	}
     }
 }
