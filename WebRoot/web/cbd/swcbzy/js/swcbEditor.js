@@ -2,7 +2,9 @@ var data;
 var simple;
 var condition = "";
 var win;
+var win2;
 var	grid;
+var grid2;
 Ext.onReady(function() {
 			width = document.body.clientWidth;
 			height = document.body.clientHeight;
@@ -28,12 +30,12 @@ function initComponent() {
 							handler : exportExcel
 						},{
 							xtype : 'button',
-							text : '选择地块',
+							text : '添加地块',
 							handler : select
 						},{
 							xtype : 'button',
 							text : '删除地块',
-							handler : delet
+							handler : del
 						}],
 				items : [{
 					html : "<iframe id='report' width=" + (width)
@@ -71,7 +73,7 @@ function select(){
     	columns: [
     		new Ext.grid.RowNumberer(),
     		sm,
-           	{header: '地块名称',dataIndex:'DKMC',width:130, sortable: true}
+           	{header: '地块名称',dataIndex:'DKMC',width:140, sortable: true}
     	],
         stripeRows: true,
         height: 500,
@@ -83,9 +85,9 @@ function select(){
         title: '地块选择',
         closeAction: 'hide',
         width:200,
-        height:300,
+        height:350,
         x: 40,
-        y: 50,
+        y: 60,
         items:[grid],
         buttons:[{
         	text:'保存',
@@ -93,10 +95,10 @@ function select(){
         		var rows = grid.getSelectionModel().getSelections();
         		var dkmc = "";
         		for(var i=0;i<rows.length;i++){
-        			dkmc = dkmc + escape(escape(rows[i].get("DKMC")))+",";
+        			dkmc = dkmc + rows[i].get("DKMC")+",";
         		}
         		putClientCommond("cbjhzhb","save");
-        		putRestParameter("dkmc", dkmc);
+        		putRestParameter("dkmc",escape(escape(dkmc)) );
         		var myData2 = restRequest();
         		if(myData2.success){
         		  Ext.Msg.alert("提示","保存成功",function(){
@@ -115,9 +117,8 @@ function select(){
 	win.show();
 }
 
-
-function delet(){
-	putClientCommond("cbjhzhb","getName2");
+function del(){
+	putClientCommond("cbjhzhb","getSelectName");
  	var myData = restRequest();
 	var	store = new Ext.data.JsonStore({
 		proxy: new Ext.ux.data.PagingMemoryProxy(myData),
@@ -125,41 +126,41 @@ function delet(){
 		fields: [
 			{name: 'DKMC'}
 		]
-		});
+	});
     store.load({params:{start:0, limit:myData[0].length}});
-	var	    	sm = new Ext.grid.CheckboxSelectionModel({handleMouseDown:Ext.emptyFn});
-   grid = new Ext.grid.GridPanel({
+    var	    	sm = new Ext.grid.CheckboxSelectionModel({handleMouseDown:Ext.emptyFn});
+   grid2 = new Ext.grid.GridPanel({
     	store: store,
     	sm:sm,
     	columns: [
     		new Ext.grid.RowNumberer(),
     		sm,
-           	{header: '地块名称',dataIndex:'DKMC',width:130, sortable: true}
+           	{header: '地块名称',dataIndex:'DKMC',width:140, sortable: true}
     	],
         stripeRows: true,
         height: 500,
         title: '',
-        stateId: 'grid'
+        stateId: 'grid2'
 	});	
-	win = new Ext.Window({
+	win2 = new Ext.Window({
 		layout: 'fit',
         title: '地块选择',
         closeAction: 'hide',
         width:200,
-        height:300,
+        height:350,
         x: 40,
-        y: 50,
-        items:[grid],
+        y: 60,
+        items:[grid2],
         buttons:[{
         	text:'删除',
         	handler:function(){
-        		var rows = grid.getSelectionModel().getSelections();
+        		var rows = grid2.getSelectionModel().getSelections();
         		var dkmc = "";
         		for(var i=0;i<rows.length;i++){
-        			dkmc = dkmc + escape(escape(rows[i].get("DKMC")))+",";
+        			dkmc = dkmc + rows[i].get("DKMC")+",";
         		}
-        		putClientCommond("cbjhzhb","delet");
-        		putRestParameter("dkmc", dkmc);
+        		putClientCommond("cbjhzhb","delSelectName");
+        		putRestParameter("dkmc",escape(escape(dkmc)) );
         		var myData2 = restRequest();
         		if(myData2.success){
         		  Ext.Msg.alert("提示","删除成功",function(){
@@ -171,12 +172,13 @@ function delet(){
         },{
         	text:'关闭',
         	handler:function(){
-        	 	win.hide();
+        	 	win2.hide();
         	}	
         }]
         });
-	win.show();
+	win2.show();
 }
+
 
 
 
