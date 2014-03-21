@@ -3,6 +3,8 @@ package com.klspta.web.cbd.yzt.hxxm;
 
 
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -89,7 +91,7 @@ public class HxxmManager extends AbstractBaseBean {
     public void delete() throws Exception{
     	boolean result = false;
     	HxxmData hxxmData = new HxxmData();
-    	String hxxms =new String(request.getParameter("xmmc").getBytes("iso-8859-1"),"utf-8");
+    	String hxxms =new String(request.getParameter("yw_guid").getBytes("iso-8859-1"),"utf-8");
     	String[] hxxmArray = hxxms.split(",");
     	for(int i = 0; i < hxxmArray.length; i++){
     		result = result || hxxmData.delete(hxxmArray[i]);
@@ -171,34 +173,39 @@ public class HxxmManager extends AbstractBaseBean {
 	     "jzjzgm", "szjzgm", "zzsgm", "zzzsgm", "zzzshs", "hjmj", "fzzzsgm", 
 	 "fzzjs", "kfcb", "lmcb", "dmcb","yjcjj","yjzftdsy","cxb",  "cqqd", "cbfgl", 
 	 "zzcqfy", "qycqfy", "qtfy", "azftzcb", "zzhbtzcb", "cqhbtz","qtfyzb","lmcjj",
-	 "fwsj", "zj","jbdk"};
+	 "fwsj", "zj","jbdk","yw_guid"};
 	public void modify(){
+		String yw_guid = request.getParameter("yw_guid");
 		String[] values = new String[items.length];
-		String[] values1 = new String[items.length];
 		String insertsql = "insert into jc_xiangmu (xmname,xh,zd,jsyd,rjl,jzgm,ghyt,gjjzgm,jzjzgm,szjzgm,zzsgm,zzzsgm,zzzshs," +
 				"hjmj,fzzzsgm,fzzjs,kfcb,lmcb,dmcb,yjcjj,yjzftdsy,cxb,cqqd,cbfgl,zzcqfy,qycqfy,qtfy,azftzcb,zzhbtzcb," +
-				"cqhbtz,qtfyzb,lmcjj,fwsj,zj,dkmc) values (";
-		String updatesql = "update jc_xiangmu set xh=?,zd=?,jsyd=?,rjl=?,jzgm=?,ghyt=?,gjjzgm=?,jzjzgm=?,szjzgm=?,zzsgm=?,zzzsgm=?,zzzshs=?," +
+				"cqhbtz,qtfyzb,lmcjj,fwsj,zj,dkmc,yw_guid) values (";
+		String updatesql = "update jc_xiangmu set xmname=?,xh=?,zd=?,jsyd=?,rjl=?,jzgm=?,ghyt=?,gjjzgm=?,jzjzgm=?,szjzgm=?,zzsgm=?,zzzsgm=?,zzzshs=?," +
 		"hjmj=?,fzzzsgm=?,fzzjs=?,kfcb=?,lmcb=?,dmcb=?,yjcjj=?,yjzftdsy=?,cxb=?,cqqd=?,cbfgl=?,zzcqfy=?,qycqfy=?,qtfy=?,azftzcb=?,zzhbtzcb=?," +
-		"cqhbtz=?,qtfyzb=?,lmcjj=?,fwsj=?,zj=?,dkmc=? where xmname=?";
+		"cqhbtz=?,qtfyzb=?,lmcjj=?,fwsj=?,zj=?,dkmc=? where yw_guid=?";
 		for( int i=0;i<items.length;i++){
 			values[i] = request.getParameter(items[i]);
-			if(i==items.length-1){
-				values1[i] = request.getParameter(items[0]);
-			}else {
-				values1[i] = request.getParameter(items[i+1]);
+			if(items[i].equals("xh")){
+				if(Integer.parseInt(values[i])<10){
+					values[i] = "0" + values[i];
+				}
 			}
 			insertsql +="?,";
 		}
 		insertsql = insertsql.substring(0,insertsql.length()-1);
 		insertsql += ")";
-		String sql = "select xmname from jc_xiangmu where xmname = ?";
-		List<Map<String,Object>> list = query(sql, YW,new Object[]{request.getParameter("xmmc")});
-		int i = 0; 
-		if(list.size()>0){
-			i = update(updatesql, YW,values1 );
-		}else{
+		int i = 0;
+		if("".equals(yw_guid) || yw_guid==null || "null".equals(yw_guid)){
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd_hhmmss");
+            String format = dateFormat.format(new Date());
+            values[values.length-1] = format;
+            String sql = "insert into jc_cbjhzhb (yw_guid,xmmc) values (?,?)";
+            update(sql, YW,new Object[]{format,values[0]});
 			i = update(insertsql,YW,values);
+		}else{
+			i = update(updatesql, YW,values );
+			String sql = "update jc_cbjhzhb set xmmc = ? where yw_guid=?";
+			update(sql,YW,new Object[]{values[0],yw_guid});
 		}
 		if(i==1){
 			response("{success:true}");
