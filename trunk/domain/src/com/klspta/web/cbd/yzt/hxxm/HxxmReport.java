@@ -32,7 +32,7 @@ public class HxxmReport extends AbstractBaseBean implements IDataClass {
 			{ "ZZCQFY", "false" }, { "QYCQFY", "false" }, { "QTFY", "false" },
 			{ "AZFTZCB", "false" }, { "ZZHBTZCB", "false" },
 			{ "CQHBTZ", "false" }, { "QTFYZB", "false" }, { "LMCJJ", "false" },
-			{ "FWSJ", "false" }, { "ZJ", "false" }, { "DKMC", "false" } };
+			{ "FWSJ", "false" }, { "ZJ", "false" }, { "DKMC", "false" } ,{"yw_guid","false"}};
 	private String form_name = "JC_XIANGMU";
 
 	@Override
@@ -46,8 +46,12 @@ public class HxxmReport extends AbstractBaseBean implements IDataClass {
 		List<TRBean> trbeanList = getBody(queryMap);
 		for (int i = 1; i < trbeanList.size()+1; i++) {
 			String key = String.valueOf(i);
-			key = "00" + i;
-			key = key.substring(key.length() - 2, key.length());
+			if(i<10){
+				key = "00" + i;
+			}else{
+				key = "0" + i;
+			}
+			//key = key.substring(key.length() - 2, key.length());
 			trbeans.put(key, trbeanList.get(i-1));
 		}
 		return trbeans;
@@ -56,7 +60,7 @@ public class HxxmReport extends AbstractBaseBean implements IDataClass {
 	public List<TRBean> getBody(Map queryMap) {
 		StringBuffer sqlBuffer = new StringBuffer();
 		sqlBuffer.append("select t.xh,");
-		for (int i = 1; i < shows.length - 1; i++) {
+		for (int i = 1; i < shows.length - 1 ; i++) {
 			sqlBuffer.append("t.").append(shows[i][0]).append(",");
 		}
 		sqlBuffer.append("t.").append(shows[shows.length - 1][0]).append(
@@ -102,7 +106,7 @@ public class HxxmReport extends AbstractBaseBean implements IDataClass {
       "  case when sum(t.zd)=0 then 0 else round(sum(t.zzsgm)/sum(t.zd),2) end as cqqd,case when sum(kfcb)=0 then '0' else round(sum(t.jzgm)*2.4/sum(kfcb),2)||'%' end as cbfgl" +
       "  ,round(sum(t.zzcqfy),2) as zzcqfy,round(sum(t.qycqfy),2) as qycqfy,round(sum(t.qtfy),2) as qtfy,round(sum(t.azftzcb),2) as azftzcb," +
        " round(sum(t.zzhbtzcb),2) as zzhbtzcb,round(sum(t.cqhbtz),2) as cqhbtz,'' as qtfyzb,round(sum(t.lmcjj),2) as lmcjj," +
-       " round(sum(t.fwsj),2) as fwsj,round(sum(t.zj),2) as zj,''as dk from JC_XIANGMU t ";
+       " round(sum(t.fwsj),2) as fwsj,round(sum(t.zj),2) as zj,''as dk,'' as yw_guid from JC_XIANGMU t ";
 		if (queryMap != null && !queryMap.isEmpty()) {
 			sql += String.valueOf(queryMap.get("query"));
 		}
