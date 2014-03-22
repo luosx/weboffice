@@ -19,6 +19,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		top.content.content.cols="0,9,*"; 
 	}
 	Ext.onReady(function() {
+			putClientCommond("mapconfig","updateMapService");
+			putRestParameter("serverid","cbd,cbdyx,kgt");
+			putRestParameter("layerid","cbd:4,cbdyx:1,kgt:0");
+			var myData = restRequest();
 			border = new Ext.Viewport({
 						layout : "border",
 						items : [{
