@@ -247,7 +247,7 @@ public class JbbManager extends AbstractBaseBean {
 	 */
 	public void getZZZSBZXS() {
 		StringBuffer sqlBuffer = new StringBuffer();
-		sqlBuffer.append("select t.bzf,t.bzf,t.hj,t.zzzsbz from zzzsbz t");
+		sqlBuffer.append("select t.bcf,t.bzf,t.zzzsbz from zzzsbz t");
 		List<Map<String, Object>> list = query(sqlBuffer.toString(), YW);
 		response(list);
 	}
