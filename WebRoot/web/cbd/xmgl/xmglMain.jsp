@@ -6,14 +6,18 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 String type=request.getParameter("type");
 String editor=request.getParameter("editor");
+String yw_guid=request.getParameter("xmmc");
+String xmmc=request.getParameter("yw_guid");
+List<Map<String, Object>> list = null;
+if(yw_guid == null || xmmc == null){
 Xmmanager hxzm=Xmmanager.getXmmanager();
-List<Map<String, Object>> list=hxzm.getHXXM();
-String yw_guid="";
-String xmmc="";
-if(list.size()>0){
-yw_guid=list.get(0).get("yw_guid").toString();
-xmmc=list.get(0).get("xmname").toString();
+list=hxzm.getHXXM();
+}
 
+if(list!= null && list.size()>0){
+yw_guid=list.get(1).get("yw_guid").toString();
+xmmc=list.get(1).get("xmname").toString();
+	
 }
 
 
