@@ -20,6 +20,41 @@ Paneloper.prototype = {
 			var jzjzgm = Ext.getCmp("jzjzgm").getValue();
 			var szjzgm = Ext.getCmp("szjzgm").getValue();
 			Ext.getCmp("jzgm").setValue(gjjzgm*1+jzjzgm*1+szjzgm*1);
+			putClientCommond("jbbHandle","getZZZSBZXS");
+			var list = restRequest();
+			var bcf = list[0].BCF;
+			var bzf = list[0].BZF;
+			var fzzbcbz = list[0].ZZZSBZ;
+			
+			var jzgm = Ext.getCmp("jzgm").getValue()*1;
+			var zzzsgm = Ext.getCmp("zzzsgm").getValue()*1;
+			var hjmj = Ext.getCmp("hjmj").getValue()*1;
+			var fzzzsgm = Ext.getCmp("fzzzsgm").getValue()*1;
+			if(zzzsgm!="" && zzzsgm != "0"){
+				var a = (zzzsgm*(hjmj*bcf+parseInt(bzf)))/hjmj;
+				var b = fzzzsgm*fzzbcbz;
+				var c = (a + b)*1.12 + jzgm*480/10000;
+				Ext.getCmp("kfcb").setValue(((c +  c *0.0665*2 )*1.03).toFixed(0));
+			}else {
+				Ext.getCmp("kfcb").setValue((((fzzzsgm*fzzbcbz*1.12+jzgm*480/10000)+((fzzzsgm*fzzbcbz)*1.12+jzgm*480/10000)*0.0665*2)*1.03).toFixed(0));
+			}
+			var kfcb = Ext.getCmp("kfcb").getValue();
+			var yjcjj = Ext.getCmp("yjcjj").getValue();
+			var jzgm = Ext.getCmp("jzgm").getValue();
+			var jsyd = Ext.getCmp("jsyd").getValue();
+			Ext.getCmp("lmcb").setValue((kfcb*1/jzgm*10000).toFixed(2));
+			Ext.getCmp("dmcb").setValue((kfcb*1/jsyd*10000).toFixed(2));
+			Ext.getCmp("cbfgl").setValue((jzgm*2.4/kfcb*100).toFixed(0)+"%");	
+			Ext.getCmp("yjzftdsy").setValue(((yjcjj*jzgm/10000-kfcb)).toFixed(0));
+			
+			var yjzftdsy = Ext.getCmp("yjzftdsy").getValue();
+			Ext.getCmp("cxb").setValue((yjzftdsy/(yjcjj*jzgm/10000)*100).toFixed(2)+"%");
+			
+			if(Ext.getCmp("jsyd").getValue()!=""){
+				Ext.getCmp("rjl").setValue((Ext.getCmp("jzgm").getValue()/Ext.getCmp("jsyd").getValue()).toFixed(1));
+			}else{
+				Ext.getCmp("rjl").setValue("0");
+			}
 		});
 		Ext.getCmp("jzjzgm").addListener('change',function(){
 			//判断自然斑编号是否符合条件
@@ -27,6 +62,40 @@ Paneloper.prototype = {
 			var jzjzgm = Ext.getCmp("jzjzgm").getValue();
 			var szjzgm = Ext.getCmp("szjzgm").getValue();
 			Ext.getCmp("jzgm").setValue(gjjzgm*1+jzjzgm*1+szjzgm*1);
+			putClientCommond("jbbHandle","getZZZSBZXS");
+			var list = restRequest();
+			var bcf = list[0].BCF;
+			var bzf = list[0].BZF;
+			var fzzbcbz = list[0].ZZZSBZ;
+			
+			var jzgm = Ext.getCmp("jzgm").getValue()*1;
+			var zzzsgm = Ext.getCmp("zzzsgm").getValue()*1;
+			var hjmj = Ext.getCmp("hjmj").getValue()*1;
+			var fzzzsgm = Ext.getCmp("fzzzsgm").getValue()*1;
+			if(zzzsgm!="" && zzzsgm != "0"){
+				var a = (zzzsgm*(hjmj*bcf+parseInt(bzf)))/hjmj;
+				var b = fzzzsgm*fzzbcbz;
+				var c = (a + b)*1.12 + jzgm*480/10000;
+				Ext.getCmp("kfcb").setValue(((c +  c *0.0665*2 )*1.03).toFixed(0));
+			}else {
+				Ext.getCmp("kfcb").setValue((((fzzzsgm*fzzbcbz*1.12+jzgm*480/10000)+((fzzzsgm*fzzbcbz)*1.12+jzgm*480/10000)*0.0665*2)*1.03).toFixed(0));
+			}
+			var kfcb = Ext.getCmp("kfcb").getValue();
+			var yjcjj = Ext.getCmp("yjcjj").getValue();
+			var jzgm = Ext.getCmp("jzgm").getValue();
+			var jsyd = Ext.getCmp("jsyd").getValue();
+			Ext.getCmp("lmcb").setValue((kfcb*1/jzgm*10000).toFixed(2));
+			Ext.getCmp("dmcb").setValue((kfcb*1/jsyd*10000).toFixed(2));
+			Ext.getCmp("cbfgl").setValue((jzgm*2.4/kfcb*100).toFixed(0)+"%");	
+			Ext.getCmp("yjzftdsy").setValue(((yjcjj*jzgm/10000-kfcb)).toFixed(0));
+			
+			var yjzftdsy = Ext.getCmp("yjzftdsy").getValue();
+			Ext.getCmp("cxb").setValue((yjzftdsy/(yjcjj*jzgm/10000)*100).toFixed(2)+"%");
+			if(Ext.getCmp("jsyd").getValue()!=""){
+				Ext.getCmp("rjl").setValue(Ext.getCmp("jzgm").getValue()/Ext.getCmp("jsyd").getValue());
+			}else{
+				Ext.getCmp("rjl").setValue("0");
+			}
 		});
 		Ext.getCmp("szjzgm").addListener('change',function(){
 			//判断自然斑编号是否符合条件
@@ -34,12 +103,46 @@ Paneloper.prototype = {
 			var jzjzgm = Ext.getCmp("jzjzgm").getValue();
 			var szjzgm = Ext.getCmp("szjzgm").getValue();
 			Ext.getCmp("jzgm").setValue(gjjzgm*1+jzjzgm*1+szjzgm*1);
+			putClientCommond("jbbHandle","getZZZSBZXS");
+			var list = restRequest();
+			var bcf = list[0].BCF;
+			var bzf = list[0].BZF;
+			var fzzbcbz = list[0].ZZZSBZ;
+			
+			var jzgm = Ext.getCmp("jzgm").getValue()*1;
+			var zzzsgm = Ext.getCmp("zzzsgm").getValue()*1;
+			var hjmj = Ext.getCmp("hjmj").getValue()*1;
+			var fzzzsgm = Ext.getCmp("fzzzsgm").getValue()*1;
+			if(zzzsgm!="" && zzzsgm != "0"){
+				var a = (zzzsgm*(hjmj*bcf+parseInt(bzf)))/hjmj;
+				var b = fzzzsgm*fzzbcbz;
+				var c = (a + b)*1.12 + jzgm*480/10000;
+				Ext.getCmp("kfcb").setValue(((c +  c *0.0665*2 )*1.03).toFixed(0));
+			}else {
+				Ext.getCmp("kfcb").setValue((((fzzzsgm*fzzbcbz*1.12+jzgm*480/10000)+((fzzzsgm*fzzbcbz)*1.12+jzgm*480/10000)*0.0665*2)*1.03).toFixed(0));
+			}
+			var kfcb = Ext.getCmp("kfcb").getValue();
+			var yjcjj = Ext.getCmp("yjcjj").getValue();
+			var jzgm = Ext.getCmp("jzgm").getValue();
+			var jsyd = Ext.getCmp("jsyd").getValue();
+			Ext.getCmp("lmcb").setValue((kfcb*1/jzgm*10000).toFixed(2));
+			Ext.getCmp("dmcb").setValue((kfcb*1/jsyd*10000).toFixed(2));
+			Ext.getCmp("cbfgl").setValue((jzgm*2.4/kfcb*100).toFixed(0)+"%");	
+			Ext.getCmp("yjzftdsy").setValue(((yjcjj*jzgm/10000-kfcb)).toFixed(0));
+			
+			var yjzftdsy = Ext.getCmp("yjzftdsy").getValue();
+			Ext.getCmp("cxb").setValue((yjzftdsy/(yjcjj*jzgm/10000)*100).toFixed(2)+"%");
+			if(Ext.getCmp("jsyd").getValue()!=""){
+				Ext.getCmp("rjl").setValue(Ext.getCmp("jzgm").getValue()/Ext.getCmp("jsyd").getValue());
+			}else{
+				Ext.getCmp("rjl").setValue("0");
+			}
 		});
 		Ext.getCmp("zd").addListener('change',function(){
 			//判断自然斑编号是否符合条件
 			var zd = Ext.getCmp("zd").getValue();
 			var zzsgm = Ext.getCmp("zzsgm").getValue();
-			Ext.getCmp("cqqd").setValue((zd*1/zzsgm*1).toFixed(2));
+			Ext.getCmp("cqqd").setValue((zzsgm*1/zd*1).toFixed(1));
 		});
 		Ext.getCmp("kfcb").addListener('change',function(){
 			//判断自然斑编号是否符合条件
@@ -47,11 +150,10 @@ Paneloper.prototype = {
 			var jzgm = Ext.getCmp("jzgm").getValue();
 			var jsyd = Ext.getCmp("jsyd").getValue();
 			var yjcjj = Ext.getCmp("yjcjj").getValue();
-			Ext.getCmp("lmcb").setValue((kfcb*1/jzgm*1).toFixed(2));
-			Ext.getCmp("dmcb").setValue((kfcb*1/jsyd*1).toFixed(2));
+			Ext.getCmp("lmcb").setValue((kfcb*1/jzgm*10000).toFixed(2));
+			Ext.getCmp("dmcb").setValue((kfcb*1/jsyd*10000).toFixed(2));
 			Ext.getCmp("yjzftdsy").setValue((yjcjj*jzgm/10000-kfcb));
-			Ext.getCmp("cbfgl").setValue((jzgm/kfcb).toFixed(2));
-			
+			Ext.getCmp("cbfgl").setValue((jzgm/kfcb).toFixed(2));	
 		});
 		
 		Ext.getCmp("yjcjj").addListener('change',function(){
@@ -77,121 +179,10 @@ Paneloper.prototype = {
 			var kfcb = Ext.getCmp("kfcb").getValue();
 			var jsyd = Ext.getCmp("jzgm").getValue();
 			Ext.getCmp("dmcb").setValue((kfcb*1/jsyd*1).toFixed(2));
+			Ext.getCmp("rjl").setValue(Ext.getCmp("jzgm").getValue()/Ext.getCmp("jsyd").getValue());
 		});
 		
-		Ext.getCmp("ghyt").addListener('change',function(){
-			//判断自然斑编号是否符合条件
-			putClientCommond("jbbHandle","getZZZSBZXS");
-			var list = restRequest();
-			var bcf = list[0].BCF;
-			var bzf = list[0].BZF;
-			var hj = list[0].HJ;
-			var fzzbcbz = list[0].ZZZSBZ;
-			
-			var ghyt = Ext.getCmp("ghyt").getValue();
-			var jzgm = Ext.getCmp("jzgm").getValue();
-			var zzzsgm = Ext.getCmp("zzzsgm").getValue();
-			var hjmj = Ext.getCmp("hjmj").getValue();
-			var fzzzsgm = Ext.getCmp("fzzzsgm").getValue();
-			if(ghyt==("混合")){
-				Ext.getCmp("kfcb").setValue((((zzzsgm*(hjmj*bcf+bzf)/hjmj + fzzzsgm*fzzbcbz)*1.12 + jzgm*480/10000 )+
-	             ( (zzzsgm*(hjmj*bcf+bzf)/hjmj + fzzzsgm*fzzbcbz)*1.12 + jzgm*480/10000 )*0.0665*2 )*1.03);
-			}else if(ghyt==("居住")){
-				Ext.getCmp("kfcb").setValue(((fzzzsgm*fzzbcbz*1.12+jzgm*480/10000)+((fzzzsgm*fzzbcbz)*1.12+jzgm*480/10000)*0.0665*2)*1.03);
-			}
-		});
-		Ext.getCmp("jzgm").addListener('change',function(){
-			//判断自然斑编号是否符合条件
-			putClientCommond("jbbHandle","getZZZSBZXS");
-			var list = restRequest();
-			var bcf = list[0].BCF;
-			var bzf = list[0].BZF;
-			var hj = list[0].HJ;
-			var fzzbcbz = list[0].ZZZSBZ;
-			
-			var ghyt = Ext.getCmp("ghyt").getValue();
-			var jzgm = Ext.getCmp("jzgm").getValue();
-			var zzzsgm = Ext.getCmp("zzzsgm").getValue();
-			var hjmj = Ext.getCmp("hjmj").getValue();
-			var fzzzsgm = Ext.getCmp("fzzzsgm").getValue();
-			if(ghyt==("混合")){
-				Ext.getCmp("kfcb").setValue((((zzzsgm*(hjmj*bcf+bzf)/hjmj + fzzzsgm*fzzbcbz)*1.12 + jzgm*480/10000 )+
-	             ( (zzzsgm*(hjmj*bcf+bzf)/hjmj + fzzzsgm*fzzbcbz)*1.12 + jzgm*480/10000 )*0.0665*2 )*1.03);
-			}else if(ghyt==("居住")){
-				Ext.getCmp("kfcb").setValue(((fzzzsgm*fzzbcbz*1.12+jzgm*480/10000)+((fzzzsgm*fzzbcbz)*1.12+jzgm*480/10000)*0.0665*2)*1.03);
-			}
-			var kfcb = Ext.getCmp("kfcb").getValue();
-			var yjcjj = Ext.getCmp("yjcjj").getValue();
-			Ext.getCmp("lmcb").setValue((kfcb*1/jzgm*1).toFixed(2).toFixed(2));
-			Ext.getCmp("yjzftdsy").setValue((yjcjj*jzgm/10000-kfcb));
-			
-			var yjzftdsy = Ext.getCmp("yjzftdsy").getValue();
-			Ext.getCmp("cxb").setValue(yjzftdsy/(yjcjj*jzgm/10000).toFixed(2));
-			Ext.getCmp("cbfgl").setValue((jzgm/kfcb).toFixed(2))
-		});
-		Ext.getCmp("zzzsgm").addListener('change',function(){
-			//判断自然斑编号是否符合条件
-			putClientCommond("jbbHandle","getZZZSBZXS");
-			var list = restRequest();
-			var bcf = list[0].BCF;
-			var bzf = list[0].BZF;
-			var hj = list[0].HJ;
-			var fzzbcbz = list[0].ZZZSBZ;
-			
-			var ghyt = Ext.getCmp("ghyt").getValue();
-			var jzgm = Ext.getCmp("jzgm").getValue();
-			var zzzsgm = Ext.getCmp("zzzsgm").getValue();
-			var hjmj = Ext.getCmp("hjmj").getValue();
-			var fzzzsgm = Ext.getCmp("fzzzsgm").getValue();
-			if(ghyt==("混合")){
-				Ext.getCmp("kfcb").setValue((((zzzsgm*(hjmj*bcf+bzf)/hjmj + fzzzsgm*fzzbcbz)*1.12 + jzgm*480/10000 )+
-	             ( (zzzsgm*(hjmj*bcf+bzf)/hjmj + fzzzsgm*fzzbcbz)*1.12 + jzgm*480/10000 )*0.0665*2 )*1.03);
-			}else if(ghyt==("居住")){
-				Ext.getCmp("kfcb").setValue(((fzzzsgm*fzzbcbz*1.12+jzgm*480/10000)+((fzzzsgm*fzzbcbz)*1.12+jzgm*480/10000)*0.0665*2)*1.03);
-			}
-		});
-		Ext.getCmp("hjmj").addListener('change',function(){
-			//判断自然斑编号是否符合条件
-			putClientCommond("jbbHandle","getZZZSBZXS");
-			var list = restRequest();
-			var bcf = list[0].BCF;
-			var bzf = list[0].BZF;
-			var hj = list[0].HJ;
-			var fzzbcbz = list[0].ZZZSBZ;
-			
-			var ghyt = Ext.getCmp("ghyt").getValue();
-			var jzgm = Ext.getCmp("jzgm").getValue();
-			var zzzsgm = Ext.getCmp("zzzsgm").getValue();
-			var hjmj = Ext.getCmp("hjmj").getValue();
-			var fzzzsgm = Ext.getCmp("fzzzsgm").getValue();
-			if(ghyt==("混合")){
-				Ext.getCmp("kfcb").setValue((((zzzsgm*(hjmj*bcf+bzf)/hjmj + fzzzsgm*fzzbcbz)*1.12 + jzgm*480/10000 )+
-	             ( (zzzsgm*(hjmj*bcf+bzf)/hjmj + fzzzsgm*fzzbcbz)*1.12 + jzgm*480/10000 )*0.0665*2 )*1.03);
-			}else if(ghyt==("居住")){
-				Ext.getCmp("kfcb").setValue(((fzzzsgm*fzzbcbz*1.12+jzgm*480/10000)+((fzzzsgm*fzzbcbz)*1.12+jzgm*480/10000)*0.0665*2)*1.03);
-			}
-		});
-		Ext.getCmp("fzzzsgm").addListener('change',function(){
-			//判断自然斑编号是否符合条件
-			putClientCommond("jbbHandle","getZZZSBZXS");
-			var list = restRequest();
-			var bcf = list[0].BCF;
-			var bzf = list[0].BZF;
-			var hj = list[0].HJ;
-			var fzzbcbz = list[0].ZZZSBZ;
-			
-			var ghyt = Ext.getCmp("ghyt").getValue();
-			var jzgm = Ext.getCmp("jzgm").getValue();
-			var zzzsgm = Ext.getCmp("zzzsgm").getValue();
-			var hjmj = Ext.getCmp("hjmj").getValue();
-			var fzzzsgm = Ext.getCmp("fzzzsgm").getValue();
-			if(ghyt==("混合")){
-				Ext.getCmp("kfcb").setValue((((zzzsgm*(hjmj*bcf+bzf)/hjmj + fzzzsgm*fzzbcbz)*1.12 + jzgm*480/10000 )+
-	             ( (zzzsgm*(hjmj*bcf+bzf)/hjmj + fzzzsgm*fzzbcbz)*1.12 + jzgm*480/10000 )*0.0665*2 )*1.03);
-			}else if(ghyt==("居住")){
-				Ext.getCmp("kfcb").setValue(((fzzzsgm*fzzbcbz*1.12+jzgm*480/10000)+((fzzzsgm*fzzbcbz)*1.12+jzgm*480/10000)*0.0665*2)*1.03);
-			}
-		});
+
 	},
 	insertValue:function(name, value){
 		var extObject = Ext.getCmp(name);
