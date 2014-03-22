@@ -121,7 +121,7 @@ String view = request.getParameter("view");
 					    fieldLabel : '总征收规模',   
 					    id : 'zzsgm',   
 					    value:'',
-					    disabled:true,
+					    readOnly:true,
 		                width:'100'
 					}]
 				},{
@@ -132,7 +132,7 @@ String view = request.getParameter("view");
 			            xtype : 'textfield',   
 					    fieldLabel : '住宅征收规模',   
 					    id : 'zzzsgm',   
-					    disabled:true,
+					    readOnly:true,
 					    value:'',
 		                width:'100'
 					}]
@@ -147,7 +147,7 @@ String view = request.getParameter("view");
 			            xtype : 'textfield',   
 					    fieldLabel : '住宅征收户数',   
 					    id : 'zzzshs',
-					    disabled:true,   
+					    readOnly:true,  
 					    value:'',
 		                width:'100'
 					}]
@@ -159,7 +159,7 @@ String view = request.getParameter("view");
 			            xtype : 'textfield',   
 					    fieldLabel : '户均面积',   
 					    id : 'hjmj', 
-					    disabled:true,  
+					    readOnly:true,
 					    value:'',
 		                width:'100'
 					}]
@@ -170,7 +170,7 @@ String view = request.getParameter("view");
 		                xtype: 'numberfield',
 		                id      : 'fzzzsgm',
 		                value:'',
-		                disabled:true,
+		                readOnly:true,
 		                fieldLabel: '非住宅征收规模', 
 		                width:'100'
             		}]
@@ -184,7 +184,7 @@ String view = request.getParameter("view");
 		                xtype: 'textfield',
 		                id   : 'fzzjs',
 		                value:'', 
-		                disabled:true,
+		                readOnly:true,
 		                fieldLabel: '非住宅家数',
 		                width:'100'
 		            }]
@@ -218,7 +218,7 @@ String view = request.getParameter("view");
 		                xtype: 'numberfield',
 		                id   : 'rjl',
 		                value:'',
-		                disabled:true,
+		                readOnly:true,
 		                fieldLabel: '容积率',
 		                width:'100'
 	            	}]
@@ -230,7 +230,6 @@ String view = request.getParameter("view");
 		                id   : 'jzgm',
 		                value:'',
 		                readOnly:true,
-		                disabled:true,
 		                fieldLabel: '建筑规模',
 		                width:'100'
 	            	}]
@@ -241,7 +240,7 @@ String view = request.getParameter("view");
 		                xtype: 'textfield',
 		                id   : 'kzgd',
 		                value:'',
-		                disabled:true,
+		                readOnly:true,
 		                fieldLabel: '控制高度',
 		                width:'100'
 	            	}]
@@ -298,7 +297,7 @@ String view = request.getParameter("view");
 		                xtype: 'textfield',
 		                id   : 'kfcb',
 		                value:'',
-		                disabled:true,
+		                readOnly:true,
 		                fieldLabel: '开发成本',
 		                width:'100'
 	            	}]
@@ -309,7 +308,7 @@ String view = request.getParameter("view");
 		                xtype: 'textfield',
 		                id   : 'lmcb',
 		                value:'',
-		                disabled:true,
+		               	readOnly:true,
 		                fieldLabel: '楼面成本',
 		                width:'100'
 	            	}]
@@ -323,7 +322,7 @@ String view = request.getParameter("view");
 		                xtype: 'textfield',
 		                id   : 'dmcb',
 		                value:'',
-		                disabled:true,
+		                readOnly:true,
 		                fieldLabel: '地面成本',
 		                width:'100'
 	            	}]
@@ -344,7 +343,7 @@ String view = request.getParameter("view");
 		                xtype: 'textfield',
 		                id   : 'yjzftdsy',
 		                value:'',
-		                disabled:true,
+		                readOnly:true,
 		                fieldLabel: '预计政府土地收益',
 		                width:'100'
 	            	}]
@@ -358,7 +357,7 @@ String view = request.getParameter("view");
 		                xtype: 'textfield',
 		                id   : 'cxb',
 		                value:'',
-		                disabled:true,
+		                readOnly:true,
 		                fieldLabel: '存蓄比',
 		                width:'100'
 	            	}]
@@ -369,7 +368,6 @@ String view = request.getParameter("view");
 		                xtype: 'textfield',
 		                id   : 'cqqd',
 		                value:'',
-		                disabled:true,
 		                readOnly : true,
 		                fieldLabel: '拆迁强度',
 		                width:'100'
@@ -381,7 +379,7 @@ String view = request.getParameter("view");
 		                xtype: 'textfield',
 		                id   : 'cbfgl',
 		                value:'',
-		                disabled:true,
+		               	readOnly:true,
 		                fieldLabel: '成本覆盖率',
 		                width:'100'
 	            	}]
