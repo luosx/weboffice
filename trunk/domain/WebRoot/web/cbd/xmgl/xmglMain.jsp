@@ -1,13 +1,16 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@page import="com.klspta.model.projectinfo.ProjectInfo"%>
 <%@ page import="com.klspta.web.cbd.xmgl.Xmmanager" %>
+<%@page import="com.klspta.base.util.UtilFactory"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 String type=request.getParameter("type");
 String editor=request.getParameter("editor");
-String yw_guid=request.getParameter("xmmc");
-String xmmc=request.getParameter("yw_guid");
+String xmmc=request.getParameter("xmmc");
+xmmc = UtilFactory.getStrUtil().unescape(xmmc);
+String yw_guid=request.getParameter("yw_guid");
+System.out.println(xmmc);
 List<Map<String, Object>> list = null;
 if(yw_guid == null || xmmc == null){
 Xmmanager hxzm=Xmmanager.getXmmanager();
