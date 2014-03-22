@@ -42,6 +42,10 @@ System.out.println(type);
   			gisurl = "<%=basePath%>/base/fxgis/framework/gisViewFrame.jsp";
   		}
   		Ext.onReady(function(){
+  			putClientCommond("mapconfig","updateMapService");
+			putRestParameter("serverid","cbd,cbdyx");
+			putRestParameter("layerid","cbd:4,cbdyx:1");
+			var myData = restRequest();
   			Ext.state.Manager.setProvider(new Ext.state.CookieProvider());
   			var	width = document.body.clientWidth;
 			var	height = document.body.clientHeight;
