@@ -18,6 +18,7 @@ String view = request.getParameter("view");
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
 	<%@ include file="/base/include/ext.jspf"%>
+	<%@ include file="/base/include/restRequest.jspf"%>
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
@@ -27,6 +28,10 @@ String view = request.getParameter("view");
   		var gisurl = "<%=basePath%>/base/fxgis/framework/gisViewFrame.jsp";
   		var url = "<%=basePath%>/web/cbd/yzt/hxxm/showRW/hxxmEditor.jsp?view=<%=view%>";
   		Ext.onReady(function(){
+  			putClientCommond("mapconfig","updateMapService");
+			putRestParameter("serverid","cbd,cbdyx");
+			putRestParameter("layerid","cbd:6,cbdyx:1");
+			var myData = restRequest();
   			Ext.state.Manager.setProvider(new Ext.state.CookieProvider());
   			var	width = document.body.clientWidth;
 			var	height = document.body.clientHeight;
