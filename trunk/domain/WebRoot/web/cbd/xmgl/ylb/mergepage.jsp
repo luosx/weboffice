@@ -9,38 +9,33 @@
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 	String xmmc = request.getParameter("xmmc");
-	String yw_guid = request.getParameter("yw_guid");
 	String reportID = "XMKGZBBCX";
-	String file_id = request.getParameter("id");
-	String paths = "";
-	String temp_file_path = "";
-	String realPath=request.getRealPath("/")+"model//accessory//dzfj//download//";
-	if(file_id!=null){
-		AccessoryBean bean=new AccessoryBean();
-		bean.setFile_id(file_id);
-		bean.setFile_type("file");
-		temp_file_path = basePath+"model//accessory//dzfj//download//"+AccessoryOperation.getInstance().download(bean,realPath);
-		paths = "../../../accessory/dzfj/need_jsp/down.jsp?flag=0&file_path="+temp_file_path;
-	}
-	else{
-		paths = basePath + "/model/accessory/dzfj/download/" +yw_guid+".zip";
-	}
 	String keyIndex = "1";
 	String name = ProjectInfo.getInstance().PROJECT_NAME;
 	String name1 = ProjectInfo.getInstance().getProjectLoginName1();
+	String yw_guid = request.getParameter("yw_guid");
 	if (xmmc != null) {
 		xmmc = new String(xmmc.getBytes("iso-8859-1"), "utf-8");
 	}
-	//String firstpath = "";
-	//String secondpath = "";
-	//String threepath = "";	
-	//if(listpath!=null){
-	//	for(int i=0;i<listpath.size();i++){
-	//		firstpath = listpath.get(0).toString();
-	//		secondpath = listpath.get(1).toString();
-	//		threepath = listpath.get(2).toString();
-	//	}
-	//}
+	List<Map<String,Object>> listpath = AccessoryOperation.getInstance().getList(yw_guid);
+	System.out.print(listpath.size());
+	String firstpath = "";
+	String secondpath = "";
+	String threepath = "";	
+	if(listpath!=null && listpath.size()>0){
+		//for(int i=0;i<listpath.size();i++){
+			if(listpath.size()>=3){
+				firstpath = listpath.get(0).get("file_path").toString();
+				secondpath = listpath.get(1).get("file_path").toString();
+				threepath = listpath.get(2).get("file_path").toString();
+			}else if(listpath.size()>=2){
+				firstpath = listpath.get(0).get("file_path").toString();
+				secondpath = listpath.get(1).get("file_path").toString();
+			}else {
+				firstpath = listpath.get(0).get("file_path").toString();
+			}
+		//}
+	}
 	List<Map<String,Object>> list = new XmgljgManager().getList();
 	Map<String,Object> map = null;
 	if(list!=null){
@@ -140,9 +135,7 @@
 				alert('保存成功！');
 				window.location.reload();
 			}
-	}
-	function setImg(){
-		alert("123");
+
 	}
 </script>
 </head>
@@ -157,37 +150,37 @@
 			<div style="margin-left:auto;margin-right:auto;width:1000px;height:300px;" >
 				<div class="div1">
 					<div align="center">
-						<input id="nameone" style='border-left: 0px; border-top: 0px; border-right: 0px; border-bottom: 1px' value="<%=map.get("nameone") %>">
+						<input id="nameone" style='border-left: 0px; border-top: 0px; border-right: 0px; border-bottom: 1px' value="">
 					</div>
 					<div>
 						<img id="img1"
-							src = "";
+							src='<%=basePath%>//model//accessory//dzfj//download//<%=firstpath%>'
 							onerror="this.src='<%=basePath%>/web/cbd/framework/images/defult.jpg'"
-							height='275px' width='475px'  style="border:3 solid #D0D0D0">
+							height='275px' width='375px'  style="border:5 solid #D0D0D0">
 					</div>
 				</div>
 				<div class="div2" align="center">
 					<div align="center">
-						<input id="nametwo" style='border-left: 0px; border-top: 0px; border-right: 0px; border-bottom: 1px' value="<%=map.get("nametwo") %>">
+						<input id="nametwo" style='border-left: 0px; border-top: 0px; border-right: 0px; border-bottom: 1px' value="">
 					</div>
 					<div>
-						<img id="img2"
-							src = "";
+						<img id='img2'
+							src='<%=basePath%>//model//accessory//dzfj//download//<%=secondpath%>'
 							onerror="this.src='<%=basePath%>/web/cbd/framework/images/defult.jpg'"
-							height='275px' width='475px'  style="border:3 solid #D0D0D0">
+							height='275px' width='375px'  style="border:5 solid #D0D0D0">
 					</div>
 				</div>
 			</div>
 		<div style="margin-left:auto;margin-right:auto;width:1000px;height:300px;" >
 		<div class="div3" align="center">
 			<div>
-				<input id="namethree" style='border-left: 0px; border-top: 0px; border-right: 0px; border-bottom: 1px' value="<%=map.get("namethree") %>">
+				<input id="namethree" style='border-left: 0px; border-top: 0px; border-right: 0px; border-bottom: 1px' value="">
 			</div>
 			<div>
-				<img id="img3"
-					src = "";
+				<img id='img3'
+					src='<%=basePath%>//model//accessory//dzfj//download//<%=threepath%>'
 					onerror="this.src='<%=basePath%>/web/cbd/framework/images/defult.jpg'"
-					height='275px' width='475px'  style="border:3 solid #D0D0D0">
+					height='275px' width='375px'  style="border:5 solid #D0D0D0">
 			</div>
 		</div>
 		<div>&nbsp;</div>
@@ -198,39 +191,39 @@
 			<table>
 
 				<tr>
-					<td>项目名称： <input type="text" id="xmmc" class="ab" value="<%=map.get("xmmc") %>"> 项目
+					<td>项目名称： <input type="text" id="xmmc" style="width: 200px;border: 0 solid 1px;border-top: none;border-left: none;border-right: none;text-align:center;" value="<%=xmmc %>"> 
 					</td>
 				</tr>
 				<tr>
-					<td>开发主体： <input type="text" id="kfzt" class="ab" value="<%=map.get("kfzt") %>"></td>
+					<td>开发主体： <input type="text" id="kfzt" class="ab" value="<%=map.get("kfzt")==null?"":map.get("kfzt") %>"></td>
 				</tr>
 				<tr>
-					<td>项目区位：东至 <input type="text" id="dz" class="ab" value="<%=map.get("dz") %>"> ;南至
-						<input type="text" id="nz" class="ab" value="<%=map.get("nz") %>"> ;</td>
+					<td>项目区位：东至 <input type="text" id="dz" class="ab" value="<%=map.get("dz")==null?"": map.get("dz")%>"> ;南至
+						<input type="text" id="nz" class="ab" value="<%=map.get("nz")==null?"": map.get("nz") %>"> ;</td>
 				</tr>
 				<tr>
-					<td>西至 <input type="text" id="xz" class="ab" value="<%=map.get("xz") %>"> ;北至 <input
-						type="text" id="bz" class="ab" value="<%=map.get("bz") %>"> .</td>
+					<td>西至 <input type="text" id="xz" class="ab" value="<%=map.get("xz")==null?"": map.get("xz") %>"> ;北至 <input
+						type="text" id="bz" class="ab" value="<%=map.get("bz")==null?"": map.get("bz") %>"> .</td>
 				</tr>
 				<tr>
-					<td>规划情况：占地面积 <input type="text" id="zdmj" class="ab" value="<%=map.get("zdmj") %>">
-						公顷; 建设用地 <input type="text" id="jsyd" class="ab" value="<%=map.get("jsyd") %>"> 公顷;</td>
+					<td>规划情况：占地面积 <input type="text" id="zdmj" class="ab" value="<%=map.get("zdmj")==null?"": map.get("zdmj") %>">
+						公顷; 建设用地 <input type="text" id="jsyd" class="ab" value="<%=map.get("jsyd")==null?"": map.get("jsyd") %>"> 公顷;</td>
 				</tr>
 				<tr>
-					<td>建筑规模 <input type="text" id="jzgm" class="ab" value="<%=map.get("jzgm") %>"> 万㎡;
-						容积率 <input type="text" id="rjl" class="ab" value="<%=map.get("rjl") %>"> .</td>
+					<td>建筑规模 <input type="text" id="jzgm" class="ab" value="<%=map.get("jzgm") ==null?"": map.get("jzgm")%>"> 万㎡;
+						容积率 <input type="text" id="rjl" class="ab" value="<%=map.get("rjl")==null?"": map.get("rjl") %>"> .</td>
 				</tr>
 				<tr>
-					<td>现状情况：住宅拆迁 <input type="text" id="zzcq" class="ab" value="<%=map.get("zzcq") %>">
-						户, <input type="text" id="cqmj" class="ab" value="<%=map.get("cqmj") %>"> 万㎡;</td>
+					<td>现状情况：住宅拆迁 <input type="text" id="zzcq" class="ab" value="<%=map.get("zzcq")==null?"": map.get("zzcq") %>">
+						户, <input type="text" id="cqmj" class="ab" value="<%=map.get("cqmj") ==null?"": map.get("cqmj")%>"> 万㎡;</td>
 				</tr>
 				<tr>
-					<td>非住宅拆迁 <input type="text" id="fzzcq" class="ab" value="<%=map.get("fzzcq") %>"> 家,
-						<input type="text" id="fcqmj" class="ab" value="<%=map.get("fcqmj") %>"> 万㎡;</td>
+					<td>非住宅拆迁 <input type="text" id="fzzcq" class="ab" value="<%=map.get("fzzcq") ==null?"": map.get("fzzcq")%>"> 家,
+						<input type="text" id="fcqmj" class="ab" value="<%=map.get("fcqmj")==null?"": map.get("fcqmj") %>"> 万㎡;</td>
 				</tr>
 				<tr>
-					<td>相关进展： <input type="text" id="xgjz" value="<%=map.get("xgjz") %>"
-						style='border-left: 0px; border-top: 0px; border-right: 0px; border-bottom: 1px'>
+					<td>相关进展： <input type="text" id="xgjz"  value="<%=map.get("xgjz")==null?"":map.get("xgjz") %>"
+						style='border: 0 solid 1px;border-top: none;border-left: none;border-right: none;width: 300px;text-align:center;'>
 					</td>
 				</tr>
 				<tr>
