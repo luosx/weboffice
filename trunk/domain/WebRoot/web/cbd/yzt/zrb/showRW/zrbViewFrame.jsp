@@ -27,6 +27,10 @@ String view = request.getParameter("view");
   		var gisurl = "<%=basePath%>/base/fxgis/framework/gisViewFrame.jsp";
   		var url = "<%=basePath%>/web/cbd/yzt/zrb/showRW/zrbEditor.jsp?view=<%=view%>";
   		Ext.onReady(function(){
+  			putClientCommond("mapconfig","updateMapService");
+			putRestParameter("serverid","cbd,cbdyx");
+			putRestParameter("layerid","cbd:3,cbdyx:1");
+			var myData = restRequest();
   			Ext.state.Manager.setProvider(new Ext.state.CookieProvider());
   			var	width = document.body.clientWidth;
 			var	height = document.body.clientHeight;
