@@ -28,6 +28,7 @@
 		<script type="text/javascript" src="<%=extPath%>/examples/ux/PagingMemoryProxy.js"></script>
 		<script type="text/javascript" src="<%=extPath%>/examples/ux/ProgressBarPager.js"></script>
 		<script type="text/javascript">
+			var my_yw_guid;
 			var winForm;
 			var myData;
 			var grid;
@@ -36,7 +37,7 @@
 			var win;
 			var tab;
 			Ext.onReady(function(){
-				putClientCommond("xxfkManager","getAllXxfk");
+				putClientCommond("xxfkManager","getAllYjjy");
 				myData = restRequest();
 				store = new Ext.data.JsonStore({
 					proxy: new Ext.ux.data.PagingMemoryProxy(myData),
@@ -111,7 +112,7 @@
 			        frame: true,
 			        bodyStyle: 'padding:5px 0px 0',
 			        width: 500,
-			        url: "<%=basePath%>service/rest/xxfkManager/saveOneXxfk?userId=<%=userId%>",
+			        url: "<%=basePath%>service/rest/xxfkManager/saveOneYjjy?userId=<%=userId%>",
 			        defaults: {
 			            anchor: '95%',
 			            allowBlank: true,
@@ -213,8 +214,14 @@
 				    defaults:{autoScroll:true},
 				    items:[
 				     winForm,{
-				     title:'图片附件',//width='"+w+"' height='"+h+"'
-				     html:"<iframe width='100%' height='100%' src='<%=basePath%>web/xiamen/xxfk/accessorymain.jsp'/>"
+				     title:'图片附件',
+				     html:"<iframe id='accessory' width='100%' height='100%' src='<%=basePath%>/model/accessory/dzfj/accessorymain.jsp'/>",
+				     listeners:{  
+				     	activate:function(tab){  
+				       		window.frames["accessory"].location.href='<%=basePath%>/model/accessory/dzfj/accessorymain.jsp?yw_guid='+my_yw_guid;
+				       		tab.getUpdater().refresh();  
+				     	}  
+				     }
 				    }]
 				   });
 				 tab.items.items[0].setTitle("基本信息");
@@ -226,6 +233,15 @@
 	                height:400,
 	                x: 80,
 	                y: 110,
+	                listeners:{  
+                   		"show":function(){
+                   			if(tab.activeTab==tab.items.items[0]){
+	                  			
+	                  		}else{
+	               	   			tab.setActiveTab(tab.items.items[0]);
+	                  		}
+                   		}
+	             	},  
 	                items:tab
 				});     
 			})
@@ -235,7 +251,7 @@
 			}
 			
 			function createXxfk(){
-				putClientCommond("xxfkManager","getOneXxfk");
+				putClientCommond("xxfkManager","getOneYjjy");
 				putRestParameter("userId","<%=userId%>");
 				myData = restRequest();
 				Ext.getCmp('wtfkdw').setValue(myData[0].WTFKDW); 
@@ -248,9 +264,8 @@
 				Ext.getCmp('wtjdsj').setValue(myData[0].WTJDSJ);
 				
 				Ext.getCmp('yw_guid').setValue(myData[0].YW_GUID); 
-				Ext.getCmp('enterFlag').setValue("new");  
-				myData[0].YW_GUID="12345"
-				tab.items.items[1].html="<iframe width='100%' height='100%' src='<%=basePath%>web/xiamen/xxfk/accessorymain.jsp?yw_guid="+myData[0].YW_GUID+"'/>"
+				Ext.getCmp('enterFlag').setValue("new");
+				my_yw_guid = myData[0].YW_GUID;  
 				win.show();
 				Ext.getCmp('wtfkdw').setDisabled(false);			
 				Ext.getCmp('wtfkr').setDisabled(false);			
@@ -262,7 +277,7 @@
 			}
 			
 			function modifyXxfk(id){
-				putClientCommond("xxfkManager","getOneXxfk");
+				putClientCommond("xxfkManager","getOneYjjy");
 				putRestParameter("userId","<%=userId%>");
 				putRestParameter("yw_guid",id);
 				myData = restRequest();
@@ -277,7 +292,7 @@
 				
 				Ext.getCmp('yw_guid').setValue(myData[0].YW_GUID); 
 				Ext.getCmp('enterFlag').setValue("update"); 
-				
+				my_yw_guid = myData[0].YW_GUID;
 				win.show();
 				Ext.getCmp('wtjdxq').setDisabled(false);			
 				Ext.getCmp('wtjdry').setDisabled(false);			
@@ -291,7 +306,7 @@
 			
 			function query(){
 				var keyword=Ext.getCmp('keyword').getValue();
-				putClientCommond("xxfkManager","getAllXxfk");
+				putClientCommond("xxfkManager","getAllYjjy");
 				putRestParameter("keyword",escape(escape(keyword)));
 				myData = restRequest(); 
 	         	var store = new Ext.data.JsonStore({
