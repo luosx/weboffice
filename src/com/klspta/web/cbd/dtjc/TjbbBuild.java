@@ -46,7 +46,12 @@ public class TjbbBuild {
 
 	public static StringBuffer buildTable(String userId) {
 		TjbbData tjbbData = new TjbbData();
-		List<Map<String, Object>> userInfo = tjbbData.getPlanByUserId(userId);
+		List<Map<String, Object>> userInfo = null;
+		if(userId==null){
+			userInfo = tjbbData.getPlanByUserId();
+		}else{
+			userInfo = tjbbData.getPlanByUserId(userId);
+		}
 		if (userInfo.size() < 1) {
 			return buildTable();
 		} else {

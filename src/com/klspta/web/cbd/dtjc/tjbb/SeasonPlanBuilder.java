@@ -4,7 +4,10 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.security.core.context.SecurityContextHolder;
+
 import com.klspta.base.AbstractBaseBean;
+import com.klspta.console.user.User;
 import com.klspta.model.CBDReport.bean.TDBean;
 import com.klspta.model.CBDReport.bean.TRBean;
 import com.klspta.model.CBDReport.dataClass.IDataClass;
@@ -36,7 +39,7 @@ public class SeasonPlanBuilder extends AbstractBaseBean implements IDataClass {
     }
 
     private List<Map<String, Object>> getXmmc() {
-        String sql = "select distinct(xmname) as xmmc from jc_xiangmu t";
+        String sql = "select projects as xmmc from user_projects t ";
         List<Map<String, Object>> list = query(sql, YW);
         return list;
     }
@@ -322,62 +325,62 @@ public class SeasonPlanBuilder extends AbstractBaseBean implements IDataClass {
      */
     private void buildKftl(Map<String, TRBean> trbeans, List<Map<String, Object>> ndList,
             List<Map<String, Object>> xmList) {
-        int count = xmList.size();
-        String xmmc = "";
+        String xmmc = xmList.get(0).get("xmmc").toString();
+        String[] xmmcs = xmmc.split(",");
+        int count = xmmcs.length;
         for (int i = 0; i < count; i++) {
-            xmmc = xmList.get(i).get("xmmc").toString();
             TRBean trbeanHs = new TRBean();
             TDBean tdBean = new TDBean(i + 1 + "", "", "");
             tdBean.setRowspan("8");
             trbeanHs.addTDBean(tdBean);
             tdBean = new TDBean("户数", "45", "");
             trbeanHs.addTDBean(tdBean);
-            tdBean = new TDBean(xmmc, "200", "");
+            tdBean = new TDBean(xmmcs[i], "200", "");
             tdBean.setRowspan("8");
             trbeanHs.addTDBean(tdBean);
-            putSingle(xmmc, "hx_kftl", new String[] { "hs", "hsz" }, ndList, trbeanHs);
+            putSingle(xmmcs[i], "hx_kftl", new String[] { "hs", "hsz" }, ndList, trbeanHs);
             trbeans.put("kftlhs" + i, trbeanHs);
 
             TRBean trbeanDl = new TRBean();
             tdBean = new TDBean("地量", "45", "");
             trbeanDl.addTDBean(tdBean);
-            putSingle(xmmc, "hx_kftl", new String[] { "dl", "dlz" }, ndList, trbeanDl);
+            putSingle(xmmcs[i], "hx_kftl", new String[] { "dl", "dlz" }, ndList, trbeanDl);
             trbeans.put("kftldl" + i, trbeanDl);
 
             TRBean trbeanGm = new TRBean();
             tdBean = new TDBean("规模", "45", "");
             trbeanGm.addTDBean(tdBean);
-            putSingle(xmmc, "hx_kftl", new String[] { "gm", "gmz" }, ndList, trbeanGm);
+            putSingle(xmmcs[i], "hx_kftl", new String[] { "gm", "gmz" }, ndList, trbeanGm);
             trbeans.put("kftlgm" + i, trbeanGm);
 
             TRBean trbeanTz = new TRBean();
             tdBean = new TDBean("投资", "45", "");
             trbeanTz.addTDBean(tdBean);
-            putSingle(xmmc, "hx_kftl", new String[] { "tz", "tzz" }, ndList, trbeanTz);
+            putSingle(xmmcs[i], "hx_kftl", new String[] { "tz", "tzz" }, ndList, trbeanTz);
             trbeans.put("kftltz" + i, trbeanTz);
 
             TRBean trbeanZ = new TRBean();
             tdBean = new TDBean("住", "45", "");
             trbeanZ.addTDBean(tdBean);
-            putSingle(xmmc, "hx_kftl", new String[] { "zhu", "zhuz" }, ndList, trbeanZ);
+            putSingle(xmmcs[i], "hx_kftl", new String[] { "zhu", "zhuz" }, ndList, trbeanZ);
             trbeans.put("kftlz" + i, trbeanZ);
 
             TRBean trbeanQ = new TRBean();
             tdBean = new TDBean("企", "45", "");
             trbeanQ.addTDBean(tdBean);
-            putSingle(xmmc, "hx_kftl", new String[] { "qi", "qiz" }, ndList, trbeanQ);
+            putSingle(xmmcs[i], "hx_kftl", new String[] { "qi", "qiz" }, ndList, trbeanQ);
             trbeans.put("kftlq" + i, trbeanQ);
 
             TRBean trbeanLm = new TRBean();
             tdBean = new TDBean("楼面", "45", "");
             trbeanLm.addTDBean(tdBean);
-            putSingle(xmmc, "hx_kftl", new String[] { "lm", "'——'" }, ndList, trbeanLm);
+            putSingle(xmmcs[i], "hx_kftl", new String[] { "lm", "'——'" }, ndList, trbeanLm);
             trbeans.put("kftllm" + i, trbeanLm);
 
             TRBean trbeanCj = new TRBean();
             tdBean = new TDBean("成交", "45", "");
             trbeanCj.addTDBean(tdBean);
-            putSingle(xmmc, "hx_kftl", new String[] { "cj", "'——'" }, ndList, trbeanCj);
+            putSingle(xmmcs[i], "hx_kftl", new String[] { "cj", "'——'" }, ndList, trbeanCj);
             trbeans.put("kftlcj" + i, trbeanCj);
         }
     }
@@ -393,50 +396,50 @@ public class SeasonPlanBuilder extends AbstractBaseBean implements IDataClass {
      */
     private void buildGdtl(Map<String, TRBean> trbeans, List<Map<String, Object>> ndList,
             List<Map<String, Object>> xmList) {
-        int count = xmList.size();
-        String xmmc = "";
-        for (int i = 0; i < count; i++) {
-            xmmc = xmList.get(i).get("xmmc").toString();
+    	 String xmmc = xmList.get(0).get("xmmc").toString();
+         String[] xmmcs = xmmc.split(",");
+         int count = xmmcs.length;
+         for (int i = 0; i < count; i++) {
             TRBean trbeanDl = new TRBean();
             TDBean tdBean = new TDBean(i + 1 + "", "", "");
             tdBean.setRowspan("6");
             trbeanDl.addTDBean(tdBean);
             tdBean = new TDBean("地量", "45", "");
             trbeanDl.addTDBean(tdBean);
-            tdBean = new TDBean(xmmc, "200", "");
+            tdBean = new TDBean(xmmcs[i], "200", "");
             tdBean.setRowspan("6");
             trbeanDl.addTDBean(tdBean);
-            putSingle(xmmc, "hx_gdtl", new String[] { "dl", "dlz" }, ndList, trbeanDl);
+            putSingle(xmmcs[i], "hx_gdtl", new String[] { "dl", "dlz" }, ndList, trbeanDl);
             trbeans.put("gdtlhs" + i, trbeanDl);
 
             TRBean trbeanGm = new TRBean();
             tdBean = new TDBean("规模", "45", "");
             trbeanGm.addTDBean(tdBean);
-            putSingle(xmmc, "hx_gdtl", new String[] { "gm", "gmz" }, ndList, trbeanGm);
+            putSingle(xmmcs[i], "hx_gdtl", new String[] { "gm", "gmz" }, ndList, trbeanGm);
             trbeans.put("gdtlgm" + i, trbeanGm);
 
             TRBean trbeanCb = new TRBean();
             tdBean = new TDBean("成本", "45", "");
             trbeanCb.addTDBean(tdBean);
-            putSingle(xmmc, "hx_gdtl", new String[] { "cb", "cbz" }, ndList, trbeanCb);
+            putSingle(xmmcs[i], "hx_gdtl", new String[] { "cb", "cbz" }, ndList, trbeanCb);
             trbeans.put("gdtlcb" + i, trbeanCb);
 
             TRBean trbeanSy = new TRBean();
             tdBean = new TDBean("收益", "45", "");
             trbeanSy.addTDBean(tdBean);
-            putSingle(xmmc, "hx_gdtl", new String[] { "sy", "syz" }, ndList, trbeanSy);
+            putSingle(xmmcs[i], "hx_gdtl", new String[] { "sy", "syz" }, ndList, trbeanSy);
             trbeans.put("gdtlsy" + i, trbeanSy);
 
             TRBean trbeanZj = new TRBean();
             tdBean = new TDBean("总价", "45", "");
             trbeanZj.addTDBean(tdBean);
-            putSingle(xmmc, "hx_gdtl", new String[] { "zj", "zjz" }, ndList, trbeanZj);
+            putSingle(xmmcs[i], "hx_gdtl", new String[] { "zj", "zjz" }, ndList, trbeanZj);
             trbeans.put("gdtlzj" + i, trbeanZj);
 
             TRBean trbeanZuj = new TRBean();
             tdBean = new TDBean("租金", "45", "");
             trbeanZuj.addTDBean(tdBean);
-            putSingle(xmmc, "hx_gdtl", new String[] { "zuj", "'——'" }, ndList, trbeanZuj);
+            putSingle(xmmcs[i], "hx_gdtl", new String[] { "zuj", "'——'" }, ndList, trbeanZuj);
             trbeans.put("gdtlzuj" + i, trbeanZuj);
         }
     }

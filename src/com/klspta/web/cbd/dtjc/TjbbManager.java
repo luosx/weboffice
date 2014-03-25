@@ -30,12 +30,13 @@ public class TjbbManager extends AbstractBaseBean {
 	 * <br>Date:2013-10-29
 	 */
 	public static StringBuffer getPlan(){
-		return TjbbBuild.buildTable();
+		return TjbbBuild.buildTable(null);
 	}
 	
 	public static StringBuffer getPlan(String userId){
 		return TjbbBuild.buildTable(userId);
 	}
+	
 	
 	/**
 	 * 
@@ -117,12 +118,13 @@ public class TjbbManager extends AbstractBaseBean {
 	 * <br>Date:2013-11-5
 	 */
 	public void setProjectsByUserId(){
-		String userId = request.getParameter("userId");
+		//String userId = request.getParameter("userId");
 		String beginYear = request.getParameter("beginYear");
 		String endYear = request.getParameter("endYear");
 		String projects = UtilFactory.getStrUtil().unescape(request.getParameter("itemselector"));
 		TjbbData tjbbData = new TjbbData();
-		tjbbData.saveProjectsByUserid(userId, beginYear, endYear, projects);
+	//	tjbbData.saveProjectsByUserid(userId, beginYear, endYear, projects);
+		tjbbData.saveProjectsByUserid(beginYear, endYear, projects);
 	}
 	/**
 	 * 
