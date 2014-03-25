@@ -370,7 +370,7 @@ public class QyjcManager extends AbstractBaseBean {
                 for (int i = 0; i < query.size(); i++) {
 //                    String insert = "insert into XZLZJQKND_PJZJ (yw_guid,rq) values(?,?)";
 //                    update(insert, YW, new Object[] { list.get(i).get("yw_guid"), year });
-                	insert.append("into XZLZJQKND_PJZJ (yw_guid,rq) values('").append(list.get(i).get("yw_guid")).append("','").append(year).append("') ");
+                	insert.append("into XZLZJQKND_PJZJ (yw_guid,rq) values('").append(query.get(i).get("yw_guid")).append("','").append(year).append("') ");
                 }
                 insert.append("select 'a','b' from dual");
                 update(insert.toString(), YW);
@@ -386,7 +386,7 @@ public class QyjcManager extends AbstractBaseBean {
             if (query.size() > 0) {
             	StringBuffer insert = new StringBuffer("insert all ");
                 for (int i = 0; i < query.size(); i++) {
-                	insert.append("into XZLZJQKND_PJLM (yw_guid,rq) values('").append(list.get(i).get("yw_guid")).append("','").append(year).append("') ");
+                	insert.append("into XZLZJQKND_PJLM (yw_guid,rq) values('").append(query.get(i).get("yw_guid")).append("','").append(year).append("') ");
                 }
                 insert.append("select 'a','b' from dual");
                 update(insert.toString(), YW);
