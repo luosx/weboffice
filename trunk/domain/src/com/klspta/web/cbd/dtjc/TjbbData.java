@@ -188,9 +188,20 @@ public class TjbbData extends AbstractBaseBean {
 		return query(sql, YW, new Object[]{userId});
 	}
 	
+	public List<Map<String, Object>> getPlanByUserId(){
+		String sql = "select t.* from user_projects t ";
+		return query(sql, YW, new Object[]{});
+	}
+	
 	public String saveProjectsByUserid(String userId, String minyear, String maxyear, String projects){
 		String sql = "merge into user_projects t using (select id as userid  from core.core_users where id = ?)  s  on (t.userid = s.userid) when matched then update set t.minyear = ?, t.maxyear = ?, t.projects = ? when not matched then insert(t.userid, t.minyear, t.maxyear,t.projects) values (?,?,?,?)";
 		update(sql, YW, new Object[]{userId, minyear, maxyear, projects, userId, minyear, maxyear, projects});
+		return null;
+	}
+	
+	public String saveProjectsByUserid( String minyear, String maxyear, String projects){
+		String sql = "update set t.minyear = ?, t.maxyear = ?, t.projects = ? ";
+		update(sql, YW, new Object[]{  minyear, maxyear, projects});
 		return null;
 	}
 	
