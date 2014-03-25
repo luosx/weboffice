@@ -35,13 +35,14 @@
         activeTab: 0,            
         frame:true,
         items:[
+       	 	{
+                title: '租售情况',
+                html: "<iframe width='"+w+"' height='"+h+"' src='web/cbd/qyjc/esfxx/esfscjczsqk.jsp?view=<%=view%>'/>"
+            }
+            ,
         	{
                 title: '二手房信息',
                 html: "<iframe width='"+w+"' height='"+h+"' src='web/cbd/qyjc/esfzj/esfViewFrame.jsp?view=<%=view%>'/>" 
-            }
-            ,{
-                title: '租售情况',
-                html: "<iframe width='"+w+"' height='"+h+"' src='web/cbd/qyjc/esfxx/esfscjczsqk.jsp?view=<%=view%>'/>"
             }
             ,{
                 title: '二手房租金趋势分析',
