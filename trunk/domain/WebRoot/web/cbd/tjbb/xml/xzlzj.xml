@@ -12,7 +12,7 @@
         </title>
         <axes>
           <y_axis position="Left">
-            <scale minimum="0" maximum="10" major_interval="1" show_last_label="false" />
+            <scale minimum="0" maximum="25" major_interval="1" show_last_label="false" />
             <title enabled="true">
               <text>资金(元/天/平方米 || 千元)</text>
             </title>
@@ -57,32 +57,32 @@
       </data_plot_settings>
       <data>
         <series id="0" name="租金" type="Line" color="yellow">
-          <point name="2013年2月" y="0" />
-          <point name="2013年3月" y="0" />
-          <point name="2013年4月" y="0" />
-          <point name="2013年5月" y="0" />
-          <point name="2013年6月" y="0" />
-          <point name="2013年7月" y="0" />
-          <point name="2013年8月" y="0" />
-          <point name="2013年9月" y="0" />
-          <point name="2013年10月" y="0" />
-          <point name="2013年11月" y="0" />
-          <point name="2013年12月" y="0" />
-          <point name="2014年1月" y="0" />
+          <point name="2013年4月" y="1.93862068965517241379310344827586206897" />
+          <point name="2013年5月" y="2.00655172413793103448275862068965517241" />
+          <point name="2013年6月" y="1.97" />
+          <point name="2013年7月" y="1.89517241379310344827586206896551724138" />
+          <point name="2013年8月" y="1.87517241379310344827586206896551724138" />
+          <point name="2013年9月" y="1.88724137931034482758620689655172413793" />
+          <point name="2013年10月" y="1.93448275862068965517241379310344827586" />
+          <point name="2013年11月" y="1.94310344827586206896551724137931034483" />
+          <point name="2013年12月" y="1.95689655172413793103448275862068965517" />
+          <point name="2014年1月" y="0.4275862068965517241379310344827586206897" />
+          <point name="2014年2月" y="0.4251724137931034482758620689655172413793" />
+          <point name="2014年3月" y="0.2634482758620689655172413793103448275862" />
         </series>
         <series id="1" name="保本点" type="Line" color="red">
-          <point name="2013年2月" y="6.9" />
-          <point name="2013年3月" y="6.9" />
-          <point name="2013年4月" y="6.9" />
-          <point name="2013年5月" y="6.9" />
-          <point name="2013年6月" y="6.9" />
-          <point name="2013年7月" y="6.9" />
-          <point name="2013年8月" y="6.9" />
-          <point name="2013年9月" y="6.9" />
-          <point name="2013年10月" y="6.9" />
-          <point name="2013年11月" y="6.9" />
-          <point name="2013年12月" y="6.9" />
-          <point name="2014年1月" y="6.9" />
+          <point name="2013年4月" y="15.6" />
+          <point name="2013年5月" y="15.6" />
+          <point name="2013年6月" y="15.6" />
+          <point name="2013年7月" y="15.6" />
+          <point name="2013年8月" y="15.6" />
+          <point name="2013年9月" y="15.6" />
+          <point name="2013年10月" y="15.6" />
+          <point name="2013年11月" y="15.6" />
+          <point name="2013年12月" y="15.6" />
+          <point name="2014年1月" y="15.6" />
+          <point name="2014年2月" y="15.6" />
+          <point name="2014年3月" y="15.6" />
         </series>
       </data>
     </chart>
