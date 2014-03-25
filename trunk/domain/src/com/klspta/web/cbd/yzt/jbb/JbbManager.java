@@ -72,15 +72,20 @@ public class JbbManager extends AbstractBaseBean {
   		    int i = update(sql,YW,new Object[]{zd, jsyd,rjl,jzgm,kzgd,ghyt,gjjzgm,jzjzgm,szjzgm,kfcb,
                         lmcb,dmcb,yjcjj,yjzftdsy,cxb,cqqd,cbfgl,ssqy,dkbh}); 
   		    if("民生改善区".equals(ssqy)){
-  		    	sql = "update cbd_jbb set gnfq=2 where tbbh=?";
+  		    	sql = "update cbd_jbb set zd=?,jsyd=?,rjl=?,jzgm=?,ghyt=?,gjjzgm=?,jzjzgm=?,szjzgm=?,kfcb=?,"+
+  		                 "lmcb=?,dmcb=?,yjcjj=?,yjzftdsy=?,cxb=?,cqqd=?,cbfgl=?, gnfq='2' where tbbh=?";
   		    }else if("城市形象提升区".equals(ssqy)){
-  		    	sql = "update cbd_jbb set gnfq=3 where tbbh=?";
+  		    	sql = "update cbd_jbb set zd=?,jsyd=?,rjl=?,jzgm=?,ghyt=?,gjjzgm=?,jzjzgm=?,szjzgm=?,kfcb=?,"+
+  		                 "lmcb=?,dmcb=?,yjcjj=?,yjzftdsy=?,cxb=?,cqqd=?,cbfgl=?, gnfq='3' where tbbh=?";
   		    }else if("产业功能改造区".equals(ssqy)){
-  		    	sql = "update cbd_jbb set gnfq=1 where tbbh=?";
+  		    	sql = "update cbd_jbb set zd=?,jsyd=?,rjl=?,jzgm=?,ghyt=?,gjjzgm=?,jzjzgm=?,szjzgm=?,kfcb=?,"+
+  		                 "lmcb=?,dmcb=?,yjcjj=?,yjzftdsy=?,cxb=?,cqqd=?,cbfgl=?, gnfq='1' where tbbh=?";
   		    }else if("保留微调区".equals(ssqy)){
-  		    	sql = "update cbd_jbb set gnfq=4 where tbbh=?";
+  		    	sql = "update cbd_jbb set zd=?,jsyd=?,rjl=?,jzgm=?,ghyt=?,gjjzgm=?,jzjzgm=?,szjzgm=?,kfcb=?,"+
+  		                 "lmcb=?,dmcb=?,yjcjj=?,yjzftdsy=?,cxb=?,cqqd=?,cbfgl=?, gnfq='4' where tbbh=?";
   		    }
-  		    update(sql,GIS,new Object[]{dkbh});
+  		    update(sql,GIS,new Object[]{zd, jsyd,rjl,jzgm,ghyt,gjjzgm,jzjzgm,szjzgm,kfcb,
+                    lmcb,dmcb,yjcjj,yjzftdsy,cxb,cqqd,cbfgl,dkbh});
   		    JbdkValueChange jbdkValueChange = new JbdkValueChange();
   		    jbdkValueChange.add(dkbh);
   		    if(i==1){
