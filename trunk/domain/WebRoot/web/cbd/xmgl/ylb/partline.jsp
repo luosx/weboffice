@@ -15,12 +15,15 @@ function turn(){
  if(parent.main.cols=="211,9,*"){
  frameshow.src="<%=resourcePath%>/images/left/partline_right.png";
  oa_tree.title="显示";
- parent.main.cols="0,9,*";
+ parent.document.getElementById("main").cols="0,9,*";
+ parent.document.getElementById("main").rows = parent.document.getElementById("main").rows;
 }
 else{
 frameshow.src="<%=resourcePath%>/images/left/partline_left.png";
 oa_tree.title="隐藏";
-parent.main.cols="211,9,*";} 
+parent.document.getElementById("main").cols="211,9,*";
+parent.document.getElementById("main").rows = parent.document.getElementById("main").rows;
+} 
 }
 function show()
 {
@@ -28,7 +31,8 @@ function show()
 	if(parent.content.cols=="0,9,*"){
 		 frameshow.src="<%=resourcePath%>/images/left/partline_right.png";
 		 oa_tree.title="显示";
-		 parent.main.cols="211,9,*";
+		 parent.document.getElementById("main").cols="211,9,*";
+		 parent.document.getElementById("main").rows = parent.document.getElementById("main").rows;
 		}
 }
 </script>

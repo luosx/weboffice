@@ -8,9 +8,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 String type=request.getParameter("type");
 String editor=request.getParameter("editor");
 String xmmc=request.getParameter("xmmc");
-xmmc = UtilFactory.getStrUtil().unescape(xmmc);
+if(xmmc!=null){
+	xmmc = UtilFactory.getStrUtil().unescape(xmmc);
+}
 String yw_guid=request.getParameter("yw_guid");
-System.out.println(xmmc);
 List<Map<String, Object>> list = null;
 if(yw_guid == null || xmmc == null){
 Xmmanager hxzm=Xmmanager.getXmmanager();
@@ -18,8 +19,8 @@ list=hxzm.getHXXM();
 }
 
 if(list!= null && list.size()>0){
-yw_guid=list.get(1).get("yw_guid").toString();
-xmmc=list.get(1).get("xmname").toString();
+yw_guid=list.get(0).get("yw_guid").toString();
+xmmc=list.get(0).get("xmname").toString();
 	
 }
 
