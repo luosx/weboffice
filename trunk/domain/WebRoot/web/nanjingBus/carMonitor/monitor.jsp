@@ -60,7 +60,23 @@ function ShowMenu(obj,noid){
 function showSearchPage1(){
 	parent.showSearchPage();
 }
-//以下控制menu出现和消失，并调用父页面的函数来修改该iframe的大小
+//点击2路向服务器发请求，并获取到2路所有公交车的相关信息并动态添加出选项元素并打开。
+function showMyBuses(lineId,spanId){
+	$.post("/domain/service/rest/getCarMenu/getBusList",
+			function(data){
+				//alert(data);
+				var str = "";
+				var jsonObj = eval("("+data+")");
+				for(var sub in jsonObj){
+					var subObj = jsonObj[sub];
+					$("#"+spanId).append("<h2 onclick='parent.displayBusOnMap("+subObj.location+")'>"+subObj.busCard+"("+subObj.status+")"+"</h2>");
+				}
+				$("#"+spanId).removeClass();
+				//alert($("#"+spanId).html());
+				parent.displayBusLineOnMap("2");
+				
+	});
+}
 
 
 </script>
@@ -79,20 +95,10 @@ function showSearchPage1(){
 		<h2 onClick="javascript:ShowMenu(this,'NO03')"> - 暂留2-1</h2>
 	
 	</span>
-        
-	<h1 onClick="javascript:ShowMenu(this,'NO1')"> - 信息维护</h1>
-	<span id="NO1" class="no">
-		<h2 onClick="javascript:ShowMenu(this,'NO10')"> - 暂留2-1</h2>
-	
-		<h2 onClick="javascript:ShowMenu(this,'NO11')"> - 暂留2-2</h2>
-	
-	</span>
     
-	<h1 onClick="javascript:ShowMenu(this,'NO2')"> - 暂留3</h1>
-	<span id="NO2" class="no">
-		<h2 onClick="javascript:ShowMenu(this,'NO20')"> - 暂留3-1</h2>
-
-		<h2 onClick="javascript:ShowMenu(this,'NO21')"> - 暂留3-2</h2>
+	<h1 onClick="showMyBuses(2,'NO2')"> - 2路</h1>
+	<span id="NO2" >
+		
 
 	</span>
 

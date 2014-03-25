@@ -110,10 +110,12 @@ map.setCurrentCity("南京"); // 设置地图显示的城市 此项是必须设�
 
 //公交查询系列功能
 
+var searchResult = null;
 var busline = new BMap.BusLineSearch(map,{
     renderOptions:{map:map},
         onGetBusListComplete: function(result){
            if(result) {
+        	   
         	   $("#menuFrame")[0].contentWindow.showResult(result);
             // var fstLine = result.getBusListItem(0);//获取第一个公交列表显示到map上
             // busline.getBusLine(fstLine);
@@ -121,17 +123,53 @@ var busline = new BMap.BusLineSearch(map,{
            }
         }
 });
+
+var busline1 = new BMap.BusLineSearch(map,{
+    renderOptions:{map:map},
+        onGetBusListComplete: function(result){
+           if(result) {
+        	   searchResult = result;
+        	   
+             var fstLine = result.getBusListItem(0);//获取第一个公交列表显示到map上
+            // alert(fstLine);
+             busline1.getBusLine(fstLine);
+             //alert(result);
+           }
+        }
+});
+
 function busSearch(name){
     var busName = name;
     busline.getBusList(busName);
 }
 
+function busSearch1(name){
+    var busName = name;
+    busline1.getBusList(busName);
+}
 //展现该路公交，由searchPage.jsp调用
 //function showThisLine(lineNum){
 //	busline.
 //}
 
 
+
+
+
+//地图上展现被点选的车辆的公交路线
+function displayBusLineOnMap(line){
+	busSearch1(line);
+	//var firstLine = searchResult.getBusListItem(0);
+	//busLine1.getBusLine(firstLine);
+}
+//地图上展现被点选的车辆
+function displayBusOnMap(x,y){
+	
+	var pt = new BMap.Point(x,y);
+	var myIcon = new BMap.Icon("images/greenCar.png", new BMap.Size(40,40));
+	var marker2 = new BMap.Marker(pt,{icon:myIcon});  // 创建标注
+	map.addOverlay(marker2);              // 将标注添加到地图中
+}
 
 </script>
 
