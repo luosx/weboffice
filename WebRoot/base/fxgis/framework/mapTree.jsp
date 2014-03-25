@@ -149,7 +149,7 @@ checked[j].disable();
 
 function changeLayer(node,checked){
   var attr=node.attributes;
-  parent.frames["center"].frames["lower"].swfobject.getObjectById("FxGIS").setLayerVisiableById(attr.serverid,checked+'',attr.layerid);
+  parent.frames["center"].frames["lower"].swfobject.getObjectById("FxGIS").setLayerVisiableById(attr.serverid,checked+'',parseInt(attr.layerid));
 }
 
 /*根据图层树的选中情况，控制图层的显示*/

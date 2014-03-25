@@ -34,6 +34,17 @@ function drawPolygonCallback(s) {
 
 // 属性查询 回调方法
 function identifyCallback(s) {
+	if(!userOtherMethod){
+	}else{
+		if(parent.parent.frames["reportlist"]==null){
+			var tempValue = eval('(' + s + ')');
+			var hxxmmc = tempValue[0].attributes.XMMC;
+			var yw_guid = tempValue[0].attributes.YW_GUID;
+			parent.document.location.href=basePath+"web/cbd/xmgl/xmglMain.jsp?xmmc="+escape(escape(hxxmmc))+"&yw_guid="+yw_guid+"&closeMenu=*closeMenu*&type=ZJLR@ZJZC@YJKFZC@QQFY@CQFY@SCFY@SZFY@CWFY@GLFY@CRZJFH@QTZC&editor=n@n@n@n@n@n@n@n@n@n@n";
+		}//else{
+			//parent.parent.frames["reportlist"].frames["report"].table.toAnnotation(s);
+		//}
+	}
 	if (!operation) {
 		return;
 	}
@@ -77,8 +88,9 @@ function showWindow(mes) {
 	if (!win) {
 		win = new Ext.Window({
 					renderTo : Ext.getBody(),
+					id:'wind',
 					layout : 'fit',
-					title:'属性叠加分析',
+					title:'属性查询',
 					width : 450,
 					height : 400,
 					plain : true,
@@ -92,11 +104,10 @@ function showWindow(mes) {
 							}]
 				});
 	} else {
-		win.items.removeAt(0);
+		win.items.removeAt(0);		
 		win.items.add("pan", tabs);
 		win.doLayout();
 	}
-
 	win.show();
 }
 
