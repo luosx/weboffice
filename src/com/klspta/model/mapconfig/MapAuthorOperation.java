@@ -23,7 +23,7 @@ import com.klspta.console.maptree.MapTreeManager;
 public class MapAuthorOperation extends AbstractBaseBean {
     
     /**
-     * 
+//     * 
      * <br>Description:地图授权
      * <br>Author:黎春行
      * <br>Date:2012-7-10
@@ -106,15 +106,15 @@ public class MapAuthorOperation extends AbstractBaseBean {
      * <br>Author:黎春行
      * <br>Date:2012-7-16
      */
-/*    public void getExtTreeByUserid(){
-        String userid = request.getParameter("userid");
-        String tree = "";
-        tree = MapTreeManager.getInstance().getExtTreeByMapTreeList(MapTreeManager.getInstance().getMemoMapTreeBeanListByUserId(userid));
-        if(tree==null){
-            tree="";
-        }
-        response(tree);
-    }*/
+//    public void getExtTreeByUserid(){
+//        String userid = request.getParameter("userid");
+//        String tree = "";
+//        tree = MapTreeManager.getInstance().getExtTreeByMapTreeList(MapTreeManager.getInstance().getMemoMapTreeBeanListByUserId(userid));
+//        if(tree==null){
+//            tree="";
+//        }
+//        response(tree);
+//    }
     
     public void getExtTreeByUserid(){
         String userid = request.getParameter("userid");
