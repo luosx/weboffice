@@ -87,7 +87,7 @@ td {
   	$(document).ready(function () { 
 		var width = document.body.clientWidth;
 		var height = document.body.clientHeight * 0.95;
-       	FixTable("SWCBR", 1,1, width, height-5);
+       	FixTable("KGZB", 1,1, width, height-5);
        	buildPanel();
     });
   //	Ext.onReady(function(){
@@ -333,7 +333,7 @@ td {
   </script>
 	<body>
 		<div id='show' style="overflow-x: hidden; overflow-y: hidden">
-			<%=new CBDReportManager().getReport("SWCBR",
+			<%=new CBDReportManager().getReport("KGZB",
 							new Object[] { "%%" }, its)%>
 		</div>
 		<div id="deal" style="position: absolute; left: 5px; top: 5px;"></div>
