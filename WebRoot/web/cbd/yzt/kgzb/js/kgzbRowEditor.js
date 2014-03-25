@@ -6,7 +6,7 @@ var table = new tableoper();
 //单击地图定位
 function showMap(objid){
 	if(table.element == undefined){
-		table.init(document.getElementById("SWCBR"));
+		table.init(document.getElementById("KGZB"));
 	}
 	//alert("showMap");
 	var key = objid.cells[1].innerText;
@@ -29,7 +29,7 @@ function editMap(objid){
 		return ;
 	}
 	if(table.element == undefined){
-		table.init(document.getElementById("SWCBR"));
+		table.init(document.getElementById("KGZB"));
 	}
 	dkmc = objid.cells[1].innerText;
 	//parent.parent.frames['east'].swfobject.getObjectById("FxGIS").clear();
@@ -40,7 +40,7 @@ function editMap(objid){
 
 //导出Excel
 function print(){
-    var curTbl = document.getElementById("SWCBR"); 
+    var curTbl = document.getElementById("KGZB"); 
     try{
     	var oXL = new ActiveXObject("Excel.Application");
     }catch(err){
@@ -79,7 +79,7 @@ function setRecord(polygon){
 
 function add(){
 	if(table.element == undefined){
-		table.init(document.getElementById("SWCBR"));
+		table.init(document.getElementById("KGZB"));
 	}
 //	Ext.MessageBox.prompt('输入', '请输入自然斑编号(“基本斑编号-自然斑编号“):', function(btn, text){
 //		if(btn == 'ok'){
@@ -108,7 +108,7 @@ function modify(){
 	if(annoations.length > 0){
 		var objid = table.element.rows[annoations[0]];
 		if(table.element == undefined){
-			table.init(document.getElementById("SWCBR"));
+			table.init(document.getElementById("KGZB"));
 		}
 		var key = objid.cells[1].innerText;
 		dkmc = key;
@@ -160,7 +160,7 @@ function queryZrb(keyword){
   	
   	var width = document.body.clientWidth;
 	var height = document.body.clientHeight * 0.95;
-   	FixTable("SWCBR", 1,1, width, height-30);
+   	FixTable("KGZB", 1,1, width, height-30);
   	
 }
 

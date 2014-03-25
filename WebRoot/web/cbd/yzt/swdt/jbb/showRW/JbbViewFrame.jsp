@@ -30,7 +30,7 @@ String view = request.getParameter("view");
   		Ext.onReady(function(){
   			putClientCommond("mapconfig","updateMapService");
 			putRestParameter("serverid","cbd,cbdyx,kgt");
-			putRestParameter("layerid","cbd:16");
+			putRestParameter("layerid","cbd:16,cbdyx:8");
 			var myData = restRequest();
   			Ext.state.Manager.setProvider(new Ext.state.CookieProvider());
   			var	width = document.body.clientWidth;
