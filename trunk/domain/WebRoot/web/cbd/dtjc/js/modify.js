@@ -57,7 +57,7 @@ Ext.onReady(function(){
 	                xtype: 'numberfield',
 	                id      : 'xmhs',
 	                value:'',
-	                fieldLabel: '项目户数',
+	                fieldLabel: '拆迁户数',
 	                readOnly:true,
 	                width :60
 	                }]},{
@@ -93,7 +93,7 @@ Ext.onReady(function(){
 	                xtype: 'numberfield',
 	                id      : 'xmdl',
 	                value:'',
-	                fieldLabel: '地量总数',
+	                fieldLabel: '占地面积',
 	                readOnly:true,
 	                width :60
 	                }]},{
@@ -130,7 +130,7 @@ Ext.onReady(function(){
 	                xtype: 'numberfield',
 	                id      : 'xmgm',
 	                value:'',
-	                fieldLabel: '规模总数',
+	                fieldLabel: '建筑规模',
 	                readOnly:true,
 	                width :60
 	                }]},{
@@ -166,7 +166,7 @@ Ext.onReady(function(){
 	                xtype: 'numberfield',
 	                id      : 'xmtz',
 	                value:'',
-	                fieldLabel: '投资总数',
+	                fieldLabel: '货币投资',
 	                readOnly:true,
 	                width :60
 	                }]},{
@@ -202,7 +202,7 @@ Ext.onReady(function(){
 	                xtype: 'numberfield',
 	                id      : 'xmz',
 	                value:'',
-	                fieldLabel: '住总数',
+	                fieldLabel: '住宅',
 	                readOnly:true,
 	                width :60
 	                }]},{
@@ -239,7 +239,7 @@ Ext.onReady(function(){
 	                xtype: 'numberfield',
 	                id      : 'xmq',
 	                value:'',
-	                fieldLabel: '企总数',
+	                fieldLabel: '非住宅',
 	                readOnly:true,
 	                width :60
 	                }]},{
@@ -274,7 +274,7 @@ Ext.onReady(function(){
 	           	    xtype: 'numberfield',
 	                id      : 'lm',
 	                value:'',
-	                fieldLabel: '楼面',
+	                fieldLabel: '楼面成本',
 	                readOnly:true,
 	                width : 60
            	  	}]},
@@ -286,7 +286,7 @@ Ext.onReady(function(){
 	                id      : 'cj',
 	                value:'',
 	                minValue:0,
-	                fieldLabel: '成交',
+	                fieldLabel: '成交价',
 	                readOnly:true,
 	                width : 60
            	  	}]}
@@ -432,7 +432,7 @@ Ext.onReady(function(){
 	                xtype: 'numberfield',
 	                id      : 'gdxmdl',
 	                value:'',
-	                fieldLabel: '项目地量',
+	                fieldLabel: '占地面积',
 	                 readOnly:true,
 	                width :60
 	                }]},{
@@ -468,7 +468,7 @@ Ext.onReady(function(){
 	                xtype: 'numberfield',
 	                id      : 'gdxmgm',
 	                value:'',
-	                fieldLabel: '项目规模',
+	                fieldLabel: '建筑规模',
 	                 readOnly:true,
 	                width :60
 	                }]},{
@@ -541,7 +541,7 @@ Ext.onReady(function(){
 	                xtype: 'numberfield',
 	                id      : 'gdcjj',
 	                value:'',
-	                fieldLabel: '楼面成交价',
+	                fieldLabel: '成交价',
 	                readOnly:true,
 	                width :60
 	                }]},{
@@ -706,7 +706,7 @@ form3.render("deal");
 	  	  
 	 if(info[0]!=null){
 		  Ext.getCmp("gdxmdl").setValue(info[0].ZD);
-		  Ext.getCmp("gdxmgm").setValue(info[0].GM);
+		  Ext.getCmp("gdxmgm").setValue(info[0].JZGM);
 		  Ext.getCmp("gdlmcb").setValue(info[0].LMCB);
 		  Ext.getCmp("gdzujin").setValue(info[0].ZJ); 
 		  Ext.getCmp("gdxmzujin").setValue(info[0].ZJ); 
@@ -756,9 +756,9 @@ form3.render("deal");
 	  	  Ext.getCmp("nd").setValue(nd);
 	  	  Ext.getCmp("jd").setValue(jd);
 	 if(info[0]!=null){
-	   	  Ext.getCmp("xmhs").setValue(info[0].HS);
+	   	  Ext.getCmp("xmhs").setValue(info[0].ZZZSHS);
 	  	  Ext.getCmp("xmdl").setValue(info[0].ZD);
-	  	  Ext.getCmp("xmgm").setValue(info[0].GM);
+	  	  Ext.getCmp("xmgm").setValue(info[0].JZGM);
 	  	  Ext.getCmp("xmz").setValue(info[0].ZZCQFY);
 	  	  Ext.getCmp("xmq").setValue(info[0].QYCQFY);
 	  	  Ext.getCmp("xmtz").setValue(info[0].CQHBTZ);

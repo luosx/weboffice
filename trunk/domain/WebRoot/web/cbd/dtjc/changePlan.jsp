@@ -424,7 +424,7 @@ Map<String, String> proMap = TjbbManager.getProjectByUserId(userId);
 		<input type="button" value="删除安置房项目" onClick="deleteAZFProject(); return false"/>
 	</div>
 	<div id="body" style=" overflow-x:scroll; height:100%;">
-		<%=TjbbManager.getPlan(userId)%>
+		<%=TjbbManager.getPlan()%>
 	</div>
 	
 	<div id="itemselector" class="form" ></div>
