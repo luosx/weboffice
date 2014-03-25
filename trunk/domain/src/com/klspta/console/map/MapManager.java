@@ -145,7 +145,7 @@ public class MapManager extends AbstractBaseBean {
             iterRoleTreeMap = getRoleTreeMapBeans(roleid).iterator();
             while (iterRoleTreeMap.hasNext()) {
                 RoleTreeMapBean rtm = iterRoleTreeMap.next();
-                if(treeBeans.get(rtm.getTreeid()).getLeafFlag().equals("0")){
+                if(treeBeans.get(rtm.getTreeid()).getParentTreeId().equals("0")){
                     list.put(rtm.getTreeid(), treeBeans.get(rtm.getTreeid()));
                 }
             }
