@@ -42,6 +42,7 @@ td {
 input{
 border:none;
 width: 40px;
+text-align: left;
 }
 
 td1 {
@@ -70,6 +71,9 @@ var datepjlm_id_cols_value="";
 
 function chang(dom){
 if(!isNaN(dom.value)){
+	if(trim(dom.value)==""){
+		dom.value=0;
+	}
 	if(datepjlm_id_cols_value!=null&&datepjlm_id_cols_value!=""){
 		 datepjlm_id_cols_value=datepjlm_id_cols_value+"@"+dom.id+"_"+dom.value
 	}else{
@@ -82,6 +86,9 @@ if(!isNaN(dom.value)){
 	}
 function cha(dom){
 if(!isNaN(dom.value)){
+	if(trim(dom.value)==""){
+		dom.value=0;
+	}
 	if(datepjzj_id_cols_value!=null&&datepjzj_id_cols_value!=""){
 		 datepjzj_id_cols_value=datepjzj_id_cols_value+"@"+dom.id+"_"+dom.value
 	}else{
@@ -124,6 +131,18 @@ function save(){
 			alert('保存成功！');
 		}
 	  }
+	  
+	  
+function trim(str){   
+     str = str.replace(/^(\s|\u00A0)+/,'');   
+     for(var i=str.length-1; i>=0; i--){   
+         if(/\S/.test(str.charAt(i))){   
+             str = str.substring(0, i+1);   
+             break;   
+         }   
+     }   
+     return str;   
+ } 
 </script>
 <body>
 	<div align="center">

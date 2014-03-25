@@ -63,17 +63,19 @@ width: 50px;
 var date_id_cols_value="";
 
 function chang(dom){
-if(!isNaN(dom.value)){
-	if(date_id_cols_value!=null&&date_id_cols_value!=""){
-		 date_id_cols_value=date_id_cols_value+"@"+dom.id+"_"+dom.value
+	if(!isNaN(dom.value)){
+		if(date_id_cols_value!=null&&date_id_cols_value!=""){
+			 date_id_cols_value=date_id_cols_value+"@"+dom.id+"_"+dom.value
+		}else if(date_id_cols_value==""){
+			date_id_cols_value=date_id_cols_value+"@"+dom.id+"_0";
+		}else{
+		 date_id_cols_value=dom.id+"_"+dom.value
+		}
 	}else{
-	 date_id_cols_value=dom.id+"_"+dom.value
+		alert("写入数据有误！");
+		dom.value="";
 	}
-	}else{
-	alert("写入数据有误！");
-	dom.value="";
-	}
-	}
+}
 function newtab(){
 	var selt=document.getElementById("selt");
 	var year=selt.options[selt.selectedIndex].value;
