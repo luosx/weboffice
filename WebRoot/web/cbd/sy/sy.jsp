@@ -17,6 +17,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script type="text/javascript">
 	function openMap(){
 		top.content.content.cols="0,9,*"; 
+		frames["mapTree"].location.href="<%=basePath%>base/fxgis/framework/mapTree.jsp";
 	}
 	Ext.onReady(function() {
 			putClientCommond("mapconfig","updateMapService");
@@ -63,7 +64,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <div style="position:absolute; bottom:20px; right:30px; width:50px; height:50px;" align="right"><img src="<%=basePath%>/base/form/images/go.png" width="50px" height="50px" title="系统设计图" onClick="javascript:window.location.href='jgs.jsp'"  /></div>
 <iframe id="mapTree" name="mapTree"
 			style="width: 100%; height: 100%; overflow: auto;"
-			src="<%=basePath%>base/fxgis/framework/mapTree.jsp"></iframe>
+			src=""></iframe>
 		<iframe id="center" name="center"
 			style="width: 100%; height: 100%; overflow: auto; border: 0px"
 			src="<%=basePath%>base/fxgis/framework/menu.jsp"></iframe>
