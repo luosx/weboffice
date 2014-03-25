@@ -297,7 +297,6 @@ String view = request.getParameter("view");
 		                xtype: 'textfield',
 		                id   : 'kfcb',
 		                value:'',
-		                readOnly:true,
 		                fieldLabel: '开发成本',
 		                width:'100'
 	            	}]
