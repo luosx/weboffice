@@ -31,12 +31,11 @@ if(yw_guid==null||"null".equals(yw_guid)){
 }
 
 String url=basePath+"base/fxgis/fx/FxGIS.html?debug=true&i=false";
-if(filter!=null){
-	url += "&filter="+filter;
-}
+
 if(year != null && !"null".equals(year)){
 	pra = "initFunction=[{\"name\":\"findFeature\",\"parameters\":\"jz_yw,0,"+yw_guid+",OBJECTID\"}]&i=false";
 }
+
 
 if(flag!=null&&!flag.equals("null")||dtbzflag!=null&&!dtbzflag.equals("null")){
   url=basePath+"base/fxgis/fx/FxGIS.html?"+pra;
@@ -61,6 +60,9 @@ String preParameters=request.getQueryString();
 var yw_guid='<%=yw_guid%>';
 var basePath='<%=basePath%>';
 var operation = true;
+
+//是否调用其他方法
+var userOtherMethod = false;
  var view;
 Ext.onReady(function(){
  view=new Ext.Viewport({
@@ -146,19 +148,20 @@ Ext.onReady(function(){
 								icon : '<%=basePath%>base/fxgis/framework/images/isearch.png',
 								tooltip : '属性查询',
 								handler : identify
-								},{		
-							    text : '地块标记',
-								cls : 'x-btn-text-icon',
-								icon : '<%=basePath%>base/fxgis/framework/images/isearch.png',
-								tooltip : '地块标记',
-								handler : annotation
-								},{
-							     text : '图斑查询',
-								cls : 'x-btn-text-icon',
-								icon : '<%=basePath%>base/fxgis/framework/images/ygfx.png',
-								tooltip : '图斑查询',
-								handler:tbQuery							
 							},{
+								text : '图层透视',
+								cls : 'x-btn-text-icon',
+								icon : '<%=basePath%>base/fxgis/framework/images/torch.png',
+								tooltip : '图层透视',
+								handler : doShutter
+							},{
+						    	text : '列表定位',
+								cls : 'x-btn-text-icon',
+								icon : '<%=basePath%>base/fxgis/framework/images/showVertices.png',
+								tooltip : '列表定位',
+								handler : tomodel
+							},
+							{
 								xtype : 'splitbutton',
 								text : '工具箱',							
 								handler : function(){
@@ -184,12 +187,6 @@ Ext.onReady(function(){
 											icon : '<%=basePath%>base/fxgis/framework/images/legend.png',
 											tooltip : '地图图例',
 											handler : legend
-										},{
-											text : '图层透视',
-											cls : 'x-btn-text-icon',
-											icon : '<%=basePath%>base/fxgis/framework/images/torch.png',
-											tooltip : '图层透视',
-											handler : doShutter
 										},{
 											text : '多窗口对比',
 											cls : 'x-btn-text-icon',
@@ -223,7 +220,20 @@ Ext.onReady(function(){
 											icon : '<%=basePath%>base/fxgis/framework/images/showVertices.png',
 											tooltip : '导出图片',
 											handler : exportMap
-										}]
+										},{		
+										    text : '地块标记',
+											cls : 'x-btn-text-icon',
+											icon : '<%=basePath%>base/fxgis/framework/images/isearch.png',
+											tooltip : '地块标记',
+											handler : annotation
+										},{
+										     text : '图斑查询',
+											cls : 'x-btn-text-icon',
+											icon : '<%=basePath%>base/fxgis/framework/images/ygfx.png',
+											tooltip : '图斑查询',
+											handler:tbQuery							
+										}
+										]
 							           },
 							           /*
 							           {

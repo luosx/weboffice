@@ -58,6 +58,14 @@ operation = false;
 //parent.document.getElementById("east").src="/domain/model/fxgiscomponents/infoQuery/sxcxList.jsp";
 }
 
+//cbd点图对于表或者模块
+function tomodel(){
+	frames["lower"].swfobject.getObjectById("FxGIS").panmap();
+	frames["lower"].swfobject.getObjectById("FxGIS").identify();
+	operation = false;
+	userOtherMethod = true;
+}
+
 //压盖分析
 function glandAnalyse(){
 parent.Ext.getCmp('east-panel').expand();
