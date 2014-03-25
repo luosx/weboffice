@@ -193,6 +193,7 @@ public class AccessoryOperation extends AbstractBaseBean  {
     private AccessoryBean uploadAccessory(AccessoryBean accessoryBean) throws Exception {
         FTPClient client = FTPOperation.getInstance().getFTPClient();
         String file_path = accessoryBean.getFile_path();
+        System.out.println(file_path+"-----------");
         try {
             File file = new File(file_path);
             //上传
