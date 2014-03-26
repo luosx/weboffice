@@ -4,7 +4,7 @@
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
-	String img = "web/cbd/framework/images/gzfqfbt.png";
+	String img =  basePath + "web/cbd/framework/images/gzfqfbt.png";
 	String url = basePath + ZttDeal.getInstance().getMapURL("3");
 %>
 <html>
