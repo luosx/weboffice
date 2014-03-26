@@ -629,7 +629,7 @@ public class TdzcglReport extends AbstractBaseBean implements IDataClass{
 						if(subTotal.size() > j){
 							subTotal.remove(j);
 						}
-						subTotal.add("小计");
+						subTotal.add(j,"小计");
 					}else{
 						String totalValue;
 						if(j >= subTotal.size()){
