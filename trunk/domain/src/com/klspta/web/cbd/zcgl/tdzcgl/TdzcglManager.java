@@ -150,8 +150,11 @@ public class TdzcglManager extends AbstractBaseBean {
 		try {
 			String dkmc = request.getParameter("dkmc");
 			dkmc = UtilFactory.getStrUtil().unescape(dkmc);
-			String sql = "delete from ZCGL_TDZCGL where dkmc=?";
-			update(sql, YW, new Object[] { dkmc });
+			String[] dkmcs = dkmc.split(",");
+			for(int i = 0;i<dkmcs.length;i++ ){
+				String sql = "delete from ZCGL_TDZCGL where dkmc=?";
+				update(sql, YW, new Object[] { dkmcs[i] });
+			}
 			response("{success:true}");
 		} catch (Exception e) {
 			response("{success:false}");
@@ -171,7 +174,7 @@ public class TdzcglManager extends AbstractBaseBean {
 		response(new CBDReportManager().getReport("TDZCGL",new Object[]{xmmcs},its).toString());
 	}
 	public String getGzfqqkhzbList() {
-        String sql = "select  round(t.zd,2) as zd ,round(t.jsyd,2) as jsyd,round(t.jzgm,2),round(t.kfcb,2) as kfcb,t.ssqy  from jc_jiben t ";
+        String sql = "select  round(t.zd,2) as zd ,round(t.jsyd,2) as jsyd,round(t.jzgm,2) as jzgm,round(t.kfcb,2) as kfcb,t.ssqy  from jc_jiben t ";
         List<Map<String, Object>> list = query(sql, YW);
         
         double zd1 = 0 ;
@@ -199,6 +202,8 @@ public class TdzcglManager extends AbstractBaseBean {
         double lmbbd2 = 0;
         double lmbbd3 = 0;
         double lmbbd4 = 0;
+        double lmbbxj = 0;
+        double lmbbzj = 0;
         DecimalFormat a = new DecimalFormat("#.00");
         for(int num=0;num<list.size();num++){
 			Map<String, Object> map = list.get(num);
@@ -235,37 +240,54 @@ public class TdzcglManager extends AbstractBaseBean {
         double mbbd = Double.valueOf(a.format(Double.valueOf(String.valueOf( checkNull( maxbbd.get(0).get("bbd"))))));
         
         int lmcb = 0;
-        lmcb =((int) (jzgm1!=0?(kfcb1/jzgm1):0)*10)/1*1000;
+        lmcb =(jzgm1!=0?(int)((kfcb1/jzgm1)*10):0)/1*1000;
         String sql1 ="select t.bbd from bbdfxjg t where t.lmcb = '"+lmcb+"' and t.tzhsq = '"+hsq+"'";
         List<Map<String, Object>> list1 = query(sql1, YW);
         if(list1!=null && list1.size()>0){
         	lmbbd1 =Double.valueOf(a.format(Double.valueOf(String.valueOf( checkNull( list1.get(0).get("bbd"))))));
         }else {
-	    	lmbbd4 = mbbd;
+	    	lmbbd1 = mbbd;
 	    }
-        lmcb =((int) (jzgm2!=0?(kfcb2/jzgm2):0)*10)/1*1000;
+        lmcb =(jzgm2!=0?(int)((kfcb2/jzgm2)*10):0)/1*1000;
         String sql2 ="select t.bbd from bbdfxjg t where t.lmcb = '"+lmcb+"' and t.tzhsq = '"+hsq+"'";
         List<Map<String, Object>> list2 = query(sql2, YW);
         if(list2!=null && list2.size()>0){
 	        lmbbd2 =Double.valueOf(a.format(Double.valueOf(String.valueOf( checkNull( list2.get(0).get("bbd"))))));
 		}else {
-	    	lmbbd4 = mbbd;
+	    	lmbbd2 = mbbd;
 	    }
-        lmcb =((int) (jzgm3!=0?(kfcb3/jzgm3):0)*10)/1*1000;
+        lmcb =(jzgm3!=0?(int)((kfcb3/jzgm3)*10):0)/1*1000;
         String sql3 ="select t.bbd from bbdfxjg t where t.lmcb = '"+lmcb+"' and t.tzhsq = '"+hsq+"'";
         List<Map<String, Object>> list3 = query(sql3, YW);
         if(list3!=null && list3.size()>0){
         	lmbbd3 =Double.valueOf(a.format(Double.valueOf(String.valueOf( checkNull( list3.get(0).get("bbd"))))));
         }else {
-        	lmbbd4 = mbbd;
+        	lmbbd3 = mbbd;
         }	
-        lmcb =((int) (jzgm4!=0?(kfcb4/jzgm4):0)*10)/1*1000;
+        lmcb =(jzgm4!=0?(int)((kfcb4/jzgm4)*10):0)/1*1000;
         String sql4 ="select t.bbd from bbdfxjg t where t.lmcb = '"+lmcb+"' and t.tzhsq = '"+hsq+"'";
         List<Map<String, Object>> list4 = query(sql4, YW);
         if(list4!=null && list4.size()>0){
         	lmbbd4 =Double.valueOf(a.format(Double.valueOf(String.valueOf( checkNull( list4.get(0).get("bbd"))))));
         }else {
         	lmbbd4 = mbbd;
+        }
+        lmcb = ((jzgm1+jzgm2+jzgm3)!=0?(int)(((kfcb1+kfcb2+kfcb3)/(jzgm1+jzgm2+jzgm3))*10):0)/1*1000;
+        String sql5 ="select t.bbd from bbdfxjg t where t.lmcb = '"+lmcb+"' and t.tzhsq = '"+hsq+"'";
+        List<Map<String, Object>> list5 = query(sql5, YW);
+        if(list5!=null && list5.size()>0){
+        	lmbbxj =Double.valueOf(a.format(Double.valueOf(String.valueOf( checkNull( list5.get(0).get("bbd"))))));
+        }else {
+        	lmbbxj = mbbd;
+        }
+        
+        lmcb = ((jzgm1+jzgm2+jzgm3+jzgm4)!=0?(int)(((kfcb1+kfcb2+kfcb3+kfcb4)/(jzgm1+jzgm2+jzgm3+jzgm4))*10):0)/1*1000;
+        String sql6 ="select t.bbd from bbdfxjg t where t.lmcb = '"+lmcb+"' and t.tzhsq = '"+hsq+"'";
+        List<Map<String, Object>> list6 = query(sql6, YW);
+        if(list6!=null && list6.size()>0){
+        	lmbbzj =Double.valueOf(a.format(Double.valueOf(String.valueOf( checkNull( list6.get(0).get("bbd"))))));
+        }else {
+        	lmbbzj = mbbd;
         }
         
         StringBuffer result = new StringBuffer(
@@ -317,12 +339,12 @@ public class TdzcglManager extends AbstractBaseBean {
 				+"<td id='4_3' height='10' width='100' class='tr03'>"+String.format("%.2f", (jzgm1+jzgm2+jzgm3))+"</td>"
 				+"<td id='4_4' height='10' width='100' class='tr03'>"+String.format("%.2f", (kfcb1+kfcb2+kfcb3))+"</td>"
 				+"<td id='4_5' height='10' width='150' class='tr03'>"+String.format("%.2f", Double.valueOf(a.format(((jzgm1+jzgm2+jzgm3)!=0?((kfcb1+kfcb2+kfcb3)/(jzgm1+jzgm2+jzgm3)):0))))+"</td>"
-				+"<td id='4_6' height='10' width='150' class='tr03'>--</td>"
+				+"<td id='4_6' height='10' width='150' class='tr03'>"+lmbbxj+"</td>"
 			+"</tr>"
 			+"<tr class='tr02' >"
 				+"<td id='5_0' height='10' width='50' class='tr02'>4</td>"
 				+"<td id='5_1' height='10' width='150' class='tr02'>保留微调区</td>"
-				+"<td id='5_2' height='10' width='100' class='tr02'>"+String.format("%.2f", Double.valueOf(a.format(zd4/1000)))+"</td>"
+				+"<td id='5_2' height='10' width='100' class='tr02'>"+String.format("%.2f", Double.valueOf(a.format(zd4)))+"</td>"
 				+"<td id='5_3' height='10' width='100' class='tr02'>"+String.format("%.2f", jsyd4)+"</td>"
 				+"<td id='5_4' height='10' width='100' class='tr02'>"+String.format("%.2f", jzgm4)+"</td>"
 				+"<td id='5_5' height='10' width='100' class='tr02'>"+String.format("%.2f", kfcb4)+"</td>"
@@ -331,12 +353,12 @@ public class TdzcglManager extends AbstractBaseBean {
 			+"</tr>"
 			+"<tr class='tr03' >"
 				+"<td id='6_0' height='10' width='200' colspan=2 class='tr03'>合计</td>"
-				+"<td id='6_1' height='10' width='100' class='tr03'>"+String.format("%.2f", Double.valueOf(a.format((zd1+zd2+zd3+zd4)/1000)))+"</td>"
+				+"<td id='6_1' height='10' width='100' class='tr03'>"+String.format("%.2f", Double.valueOf(a.format(zd1+zd2+zd3+zd4)))+"</td>"
 				+"<td id='6_2' height='10' width='100' class='tr03'>"+String.format("%.2f", (jsyd1+jsyd2+jsyd3+jsyd4))+"</td>"
 				+"<td id='6_3' height='10' width='100' class='tr03'>"+String.format("%.2f", (jzgm1+jzgm2+jzgm3+jzgm4))+"</td>"
 				+"<td id='6_4' height='10' width='100' class='tr03'>"+String.format("%.2f", (kfcb1+kfcb2+kfcb3+kfcb4))+"</td>"
 				+"<td id='6_5' height='10' width='150' class='tr03'>"+String.format("%.2f", Double.valueOf(a.format(((jzgm1+jzgm2+jzgm3+jzgm4)!=0?((kfcb1+kfcb2+kfcb3+kfcb4)/(jzgm1+jzgm2+jzgm3+jzgm4)):0))))+"</td>"
-				+"<td id='6_6' height='10' width='150' class='tr03'>--</td>"
+				+"<td id='6_6' height='10' width='150' class='tr03'>"+lmbbzj+"</td>"
 			+"</tr>"
 			
 			+"</table>");
