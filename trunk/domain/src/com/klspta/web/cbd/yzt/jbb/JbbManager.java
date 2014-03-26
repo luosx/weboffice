@@ -84,6 +84,9 @@ public class JbbManager extends AbstractBaseBean {
   		    	sql = "update cbd_jbb set zd=?,jsyd=?,rjl=?,jzgm=?,ghyt=?,gjjzgm=?,jzjzgm=?,szjzgm=?,kfcb=?,"+
   		                 "lmcb=?,dmcb=?,yjcjj=?,yjzftdsy=?,cxb=?,cqqd=?,cbfgl=?, gnfq='4' where tbbh=?";
   		    }
+  		    if("--".equals(lmcb)){
+  		    	lmcb = "0";
+  		    }
   		    update(sql,GIS,new Object[]{zd, jsyd,rjl,jzgm,ghyt,gjjzgm,jzjzgm,szjzgm,kfcb,
                     lmcb,dmcb,yjcjj,yjzftdsy,cxb,cqqd,cbfgl,dkbh});
   		    JbdkValueChange jbdkValueChange = new JbdkValueChange();
@@ -205,7 +208,7 @@ public class JbbManager extends AbstractBaseBean {
 	public Map<String, Object> getJHCB() {
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<Map<String, Object>> result = null;
-		String sql = "select sum(j.kfcb)/10000 as kfcb ,round(sum(j.kfcb)/sum(j.jzgm),1) as lmcb ,round(sum(j.kfcb)/sum(j.jsyd),1) as dmcb from jc_jiben j where j.ssqy in(?,?,?)";
+		String sql = "select sum(j.kfcb) as kfcb ,round(sum(j.kfcb)/sum(j.jzgm),2) as lmcb ,round(sum(j.kfcb)/sum(j.jsyd),2) as dmcb from jc_jiben j where j.ssqy in(?,?,?)";
 		result = query(sql, YW, new Object[] { "产业功能改造区", "民生改善区", "城市形象提升区" });
 
 		map.put("KFCB", result.get(0).get("KFCB") == null ? "0" : result.get(0)
@@ -215,7 +218,8 @@ public class JbbManager extends AbstractBaseBean {
 		map.put("DMCB", result.get(0).get("DMCB") == null ? "0" : result.get(0)
 				.get("DMCB").toString());
 		sql = "select b.bbd as bbd from sys_parameter s,bbdfxjg b where b.lmcb=? and s.hsq = b.tzhsq";
-		result = query(sql, YW, new Object[] { map.get("LMCB").toString() });
+		double lmcb = Double.valueOf(String.valueOf( map.get("LMCB")));
+		result = query(sql, YW, new Object[] { (int)(lmcb*10)/1*1000 });
 		if (result.size() > 0) {
 			map.putAll(result.get(0));
 		} else {
