@@ -19,7 +19,7 @@ Paneloper.prototype = {
 			var gjjzgm = Ext.getCmp("gjjzgm").getValue();
 			var jzjzgm = Ext.getCmp("jzjzgm").getValue();
 			var szjzgm = Ext.getCmp("szjzgm").getValue();
-			Ext.getCmp("jzgm").setValue(gjjzgm*1+jzjzgm*1+szjzgm*1);
+			Ext.getCmp("jzgm").setValue((gjjzgm*1+jzjzgm*1+szjzgm*1).toFixed(2));
 			putClientCommond("jbbHandle","getZZZSBZXS");
 			var list = restRequest();
 			var bcf = list[0].BCF;
@@ -42,18 +42,34 @@ Paneloper.prototype = {
 			var yjcjj = Ext.getCmp("yjcjj").getValue();
 			var jzgm = Ext.getCmp("jzgm").getValue();
 			var jsyd = Ext.getCmp("jsyd").getValue();
-			Ext.getCmp("lmcb").setValue((kfcb*1/jzgm*10000).toFixed(2));
-			Ext.getCmp("dmcb").setValue((kfcb*1/jsyd*10000).toFixed(2));
+			
+			if(jsyd=="" || jsyd=="0"){
+				Ext.getCmp("dmcb").setValue("--");
+			}else{
+				Ext.getCmp("dmcb").setValue((kfcb*1/jsyd*10000).toFixed(2));
+			}
 			Ext.getCmp("cbfgl").setValue((jzgm*2.4/kfcb*100).toFixed(0)+"%");	
 			Ext.getCmp("yjzftdsy").setValue(((yjcjj*jzgm/10000-kfcb)).toFixed(0));
 			
 			var yjzftdsy = Ext.getCmp("yjzftdsy").getValue();
-			Ext.getCmp("cxb").setValue((yjzftdsy/(yjcjj*jzgm/10000)*100).toFixed(2)+"%");
+			if(jzgm=="" || jzgm == "0"){
+				Ext.getCmp("lmcb").setValue("--");
+				
+			}else{
+				Ext.getCmp("lmcb").setValue((kfcb*1/jzgm*10000).toFixed(2));
+
+			}
+			
+			if(yjcjj*jzgm==0){
+				Ext.getCmp("cxb").setValue("--");
+			}else{
+				Ext.getCmp("cxb").setValue((yjzftdsy/(yjcjj*jzgm/10000)*100).toFixed(2)+"%");
+			}
 			
 			if(Ext.getCmp("jsyd").getValue()!=""){
 				Ext.getCmp("rjl").setValue((Ext.getCmp("jzgm").getValue()/Ext.getCmp("jsyd").getValue()).toFixed(1));
 			}else{
-				Ext.getCmp("rjl").setValue("0");
+				Ext.getCmp("rjl").setValue("--");
 			}
 		});
 		Ext.getCmp("jzjzgm").addListener('change',function(){
@@ -61,7 +77,7 @@ Paneloper.prototype = {
 			var gjjzgm = Ext.getCmp("gjjzgm").getValue();
 			var jzjzgm = Ext.getCmp("jzjzgm").getValue();
 			var szjzgm = Ext.getCmp("szjzgm").getValue();
-			Ext.getCmp("jzgm").setValue(gjjzgm*1+jzjzgm*1+szjzgm*1);
+			Ext.getCmp("jzgm").setValue((gjjzgm*1+jzjzgm*1+szjzgm*1).toFixed(2));
 			putClientCommond("jbbHandle","getZZZSBZXS");
 			var list = restRequest();
 			var bcf = list[0].BCF;
@@ -84,17 +100,33 @@ Paneloper.prototype = {
 			var yjcjj = Ext.getCmp("yjcjj").getValue();
 			var jzgm = Ext.getCmp("jzgm").getValue();
 			var jsyd = Ext.getCmp("jsyd").getValue();
-			Ext.getCmp("lmcb").setValue((kfcb*1/jzgm*10000).toFixed(2));
-			Ext.getCmp("dmcb").setValue((kfcb*1/jsyd*10000).toFixed(2));
+			if(jsyd=="" || jsyd=="0"){
+				Ext.getCmp("dmcb").setValue("--");
+			}else{
+				Ext.getCmp("dmcb").setValue((kfcb*1/jsyd*10000).toFixed(2));
+			}
 			Ext.getCmp("cbfgl").setValue((jzgm*2.4/kfcb*100).toFixed(0)+"%");	
 			Ext.getCmp("yjzftdsy").setValue(((yjcjj*jzgm/10000-kfcb)).toFixed(0));
 			
 			var yjzftdsy = Ext.getCmp("yjzftdsy").getValue();
-			Ext.getCmp("cxb").setValue((yjzftdsy/(yjcjj*jzgm/10000)*100).toFixed(2)+"%");
-			if(Ext.getCmp("jsyd").getValue()!=""){
-				Ext.getCmp("rjl").setValue(Ext.getCmp("jzgm").getValue()/Ext.getCmp("jsyd").getValue());
+			if(jzgm=="" || jzgm == "0"){
+				Ext.getCmp("lmcb").setValue("--");
+				
 			}else{
-				Ext.getCmp("rjl").setValue("0");
+				Ext.getCmp("lmcb").setValue((kfcb*1/jzgm*10000).toFixed(2));
+
+			}
+			
+			if(yjcjj*jzgm==0){
+				Ext.getCmp("cxb").setValue("--");
+			}else{
+				Ext.getCmp("cxb").setValue((yjzftdsy/(yjcjj*jzgm/10000)*100).toFixed(2)+"%");
+			}
+			
+			if(Ext.getCmp("jsyd").getValue()!=""){
+				Ext.getCmp("rjl").setValue((Ext.getCmp("jzgm").getValue()/Ext.getCmp("jsyd").getValue()).toFixed(1));
+			}else{
+				Ext.getCmp("rjl").setValue("--");
 			}
 		});
 		Ext.getCmp("szjzgm").addListener('change',function(){
@@ -102,7 +134,7 @@ Paneloper.prototype = {
 			var gjjzgm = Ext.getCmp("gjjzgm").getValue();
 			var jzjzgm = Ext.getCmp("jzjzgm").getValue();
 			var szjzgm = Ext.getCmp("szjzgm").getValue();
-			Ext.getCmp("jzgm").setValue(gjjzgm*1+jzjzgm*1+szjzgm*1);
+			Ext.getCmp("jzgm").setValue((gjjzgm*1+jzjzgm*1+szjzgm*1).toFixed(2));
 			putClientCommond("jbbHandle","getZZZSBZXS");
 			var list = restRequest();
 			var bcf = list[0].BCF;
@@ -125,17 +157,33 @@ Paneloper.prototype = {
 			var yjcjj = Ext.getCmp("yjcjj").getValue();
 			var jzgm = Ext.getCmp("jzgm").getValue();
 			var jsyd = Ext.getCmp("jsyd").getValue();
-			Ext.getCmp("lmcb").setValue((kfcb*1/jzgm*10000).toFixed(2));
-			Ext.getCmp("dmcb").setValue((kfcb*1/jsyd*10000).toFixed(2));
+			if(jsyd=="" || jsyd=="0"){
+				Ext.getCmp("dmcb").setValue("--");
+			}else{
+				Ext.getCmp("dmcb").setValue((kfcb*1/jsyd*10000).toFixed(2));
+			}
 			Ext.getCmp("cbfgl").setValue((jzgm*2.4/kfcb*100).toFixed(0)+"%");	
 			Ext.getCmp("yjzftdsy").setValue(((yjcjj*jzgm/10000-kfcb)).toFixed(0));
 			
 			var yjzftdsy = Ext.getCmp("yjzftdsy").getValue();
-			Ext.getCmp("cxb").setValue((yjzftdsy/(yjcjj*jzgm/10000)*100).toFixed(2)+"%");
-			if(Ext.getCmp("jsyd").getValue()!=""){
-				Ext.getCmp("rjl").setValue(Ext.getCmp("jzgm").getValue()/Ext.getCmp("jsyd").getValue());
+			if(jzgm=="" || jzgm == "0"){
+				Ext.getCmp("lmcb").setValue("--");
+				
 			}else{
-				Ext.getCmp("rjl").setValue("0");
+				Ext.getCmp("lmcb").setValue((kfcb*1/jzgm*10000).toFixed(2));
+
+			}
+			
+			if(yjcjj*jzgm==0){
+				Ext.getCmp("cxb").setValue("--");
+			}else{
+				Ext.getCmp("cxb").setValue((yjzftdsy/(yjcjj*jzgm/10000)*100).toFixed(2)+"%");
+			}
+			
+			if(Ext.getCmp("jsyd").getValue()!=""){
+				Ext.getCmp("rjl").setValue((Ext.getCmp("jzgm").getValue()/Ext.getCmp("jsyd").getValue()).toFixed(1));
+			}else{
+				Ext.getCmp("rjl").setValue("--");
 			}
 		});
 		Ext.getCmp("zd").addListener('change',function(){
@@ -152,7 +200,7 @@ Paneloper.prototype = {
 			var yjcjj = Ext.getCmp("yjcjj").getValue();
 			Ext.getCmp("lmcb").setValue((kfcb*1/jzgm*10000).toFixed(2));
 			Ext.getCmp("dmcb").setValue((kfcb*1/jsyd*10000).toFixed(2));
-			Ext.getCmp("yjzftdsy").setValue((yjcjj*jzgm/10000-kfcb));
+			Ext.getCmp("yjzftdsy").setValue((yjcjj*jzgm/10000-kfcb).toFixed(0));
 			Ext.getCmp("cbfgl").setValue((jzgm/kfcb).toFixed(2));	
 		});
 		
@@ -161,17 +209,25 @@ Paneloper.prototype = {
 			var kfcb = Ext.getCmp("kfcb").getValue();
 			var jzgm = Ext.getCmp("jzgm").getValue();
 			var yjcjj = Ext.getCmp("yjcjj").getValue();
-			Ext.getCmp("yjzftdsy").setValue((yjcjj*jzgm/10000-kfcb));
+			Ext.getCmp("yjzftdsy").setValue((yjcjj*jzgm/10000-kfcb).toFixed(0));
 			
 			var yjzftdsy = Ext.getCmp("yjzftdsy").getValue();
-			Ext.getCmp("cxb").setValue(yjzftdsy/(yjcjj*jzgm/10000).toFixed(2));
+			if(yjcjj*jzgm==0){
+				Ext.getCmp("cxb").setValue("--");
+			}else{
+				Ext.getCmp("cxb").setValue((yjzftdsy/(yjcjj*jzgm/10000)*100).toFixed(2)+"%");
+			}
 		});
 		Ext.getCmp("yjzftdsy").addListener('change',function(){
 			//判断自然斑编号是否符合条件
 			var yjzftdsy = Ext.getCmp("yjzftdsy").getValue();
 			var jzgm = Ext.getCmp("jzgm").getValue();
 			var yjcjj = Ext.getCmp("yjcjj").getValue();
-			Ext.getCmp("cxb").setValue(yjzftdsy/(yjcjj*jzgm/10000).toFixed(2));
+			if(yjcjj*jzgm==0){
+				Ext.getCmp("cxb").setValue("--");
+			}else{
+				Ext.getCmp("cxb").setValue((yjzftdsy/(yjcjj*jzgm/10000)*100).toFixed(2)+"%");
+			}
 		});
 		
 		Ext.getCmp("jsyd").addListener('change',function(){
@@ -179,7 +235,7 @@ Paneloper.prototype = {
 			var kfcb = Ext.getCmp("kfcb").getValue();
 			var jsyd = Ext.getCmp("jzgm").getValue();
 			Ext.getCmp("dmcb").setValue((kfcb*1/jsyd*1).toFixed(2));
-			Ext.getCmp("rjl").setValue(Ext.getCmp("jzgm").getValue()/Ext.getCmp("jsyd").getValue());
+			Ext.getCmp("rjl").setValue((Ext.getCmp("jzgm").getValue()/Ext.getCmp("jsyd").getValue()).toFixed(1));
 		});
 		
 
