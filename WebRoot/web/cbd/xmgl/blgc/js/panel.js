@@ -44,7 +44,6 @@ Paneloper.prototype = {
 	},
 	save:function(){
 		var obj = this;
-		alert(xmid);
 		this.object.form.url += "?xmid=" + xmid;
 		this.object.form.submit({
 			waitMsg:'正在保存，请稍后...',

@@ -121,7 +121,6 @@ function queryZrb(keyword){
 	putRestParameter("key",escape(escape(keyword)));
 	putRestParameter("xmid",xmid);
 	myData = restRequest();
-	alert(myData);
   	document.getElementById("show").innerHTML = myData;
 }
 
