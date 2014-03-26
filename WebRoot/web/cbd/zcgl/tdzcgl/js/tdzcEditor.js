@@ -39,6 +39,11 @@ function initComponent() {
 							text : '修改',
 							id:'modify',
 							handler : modify
+						}, '-', {
+							xtype : 'button',
+							text : '删除',
+							id:'dele',
+							handler : dele
 						}],
 				items : [{
 					html : "<iframe id='report' width=" + (width - 10)
@@ -51,6 +56,7 @@ function initComponent() {
 		var toolbar = simple.getTopToolbar();
 		toolbar.remove("modify");
 		toolbar.remove("add");
+		toolbar.remove("dele");
 	}
 }
 
@@ -126,7 +132,7 @@ function add(){
 }
 
 function dele(){
-	alert("dele");
+	document.frames['report'].dele();
 }
 
 function insertGIS(){
