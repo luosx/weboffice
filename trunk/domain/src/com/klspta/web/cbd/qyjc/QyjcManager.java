@@ -347,6 +347,38 @@ public class QyjcManager extends AbstractBaseBean {
         }
         response("success");
     }
+    
+    /*****
+     * 
+     * <br>Description:按年度保存二手房租金及售价
+     * <br>Author:李国明
+     * <br>Date:2014-3-25
+     */
+    public void Save_Esf_Zjqk() {
+        String datepjlm_id_cols_value = request.getParameter("datepjlm_id_cols_value");
+        String datepjzj_id_cols_value = request.getParameter("datepjzj_id_cols_value");
+        String year = request.getParameter("year");
+        if (datepjlm_id_cols_value != null && !datepjlm_id_cols_value.equals("")) {
+            String[] split = datepjlm_id_cols_value.split("@");
+            for (int i = 0; i < split.length; i++) {
+                String[] split2 = split[i].split(":");
+                String update = "update ESFZJQKND_PJLM set " + split2[1] + "='" + split2[2]
+                        + "'  where yw_guid=? and rq=?";
+                update(update, YW, new Object[] { split2[0], year });
+            }
+        }
+        if (datepjzj_id_cols_value != null && !datepjzj_id_cols_value.equals("")) {
+            String[] split = datepjzj_id_cols_value.split("@");
+            for (int i = 0; i < split.length; i++) {
+                String[] split2 = split[i].split(":");
+                String update = "update ESFZJQKND_PJZJ set " + split2[1] + "='" + split2[2]
+                        + "'  where yw_guid=? and rq=?";
+                update(update, YW, new Object[] { split2[0], year });
+            }
+        }
+        response("success");
+    }
+
 
     /****
      * 
@@ -400,8 +432,61 @@ public class QyjcManager extends AbstractBaseBean {
         List<Map<String, Object>> cont2 = interaction.getCont(year, "XZLZJQKND_PJZJ");
         String table = buildModel.getZjqkNd(query2, query1,cont1,cont2);
         response(table);
-
-
+    }
+    
+    
+    /****
+     * 
+     * <br>Description:
+     * <br>Author:朱波海
+     * <br>Date:2014-1-7
+     */
+    public void getTable_ESF() {
+        String year = request.getParameter("year");
+        String sqlString = "select *  from ESF_JBXX t";
+        List<Map<String, Object>> list = query(sqlString, YW);
+        List<Map<String, Object>> query1 = null;
+        List<Map<String, Object>> query2 = null;
+        String que1 = "select * from ESF_JBXX t,ESFZJQKND_PJZJ t2 where t.yw_guid=t2.yw_guid and t2.rq=?";
+        query1 = query(que1, YW, new Object[] { year });
+        if (query1.size() != list.size()) {
+            String sqldiff = "select  distinct t2.yw_guid from esf_JBXX t2 where t2.yw_guid  not in (select yw_guid from ESFZJQKND_PJZJ where rq=? )";
+            List<Map<String, Object>> query = query(sqldiff, YW, new Object[] { year });
+            if (query.size() > 0) {
+            	StringBuffer insert = new StringBuffer("insert all ");
+                for (int i = 0; i < query.size(); i++) {
+//                    String insert = "insert into XZLZJQKND_PJZJ (yw_guid,rq) values(?,?)";
+//                    update(insert, YW, new Object[] { list.get(i).get("yw_guid"), year });
+                	insert.append("into ESFZJQKND_PJZJ (yw_guid,rq) values('").append(query.get(i).get("yw_guid")).append("','").append(year).append("') ");
+                }
+                insert.append("select 'a','b' from dual");
+                update(insert.toString(), YW);
+                String sql2 = "select * from ESF_JBXX t,ESFZJQKND_PJZJ t2 where t2.yw_guid=t.yw_guid and t2.rq=?";
+                query1 = query(sql2, YW, new Object[] { year });
+            }
+        }
+        String que2 = "select * from ESF_JBXX t,ESFZJQKND_PJLM t2 where t.yw_guid=t2.yw_guid and t2.rq=?";
+        query2 = query(que2, YW, new Object[] { year });
+        if (query2.size() != list.size()) {
+            String sqldiff = "select  distinct t2.yw_guid from esf_jbxx t2 where t2.yw_guid  not in (select yw_guid from ESFZJQKND_PJLM where rq=? )";
+            List<Map<String, Object>> query = query(sqldiff, YW, new Object[] { year });
+            if (query.size() > 0) {
+            	StringBuffer insert = new StringBuffer("insert all ");
+                for (int i = 0; i < query.size(); i++) {
+                	insert.append("into ESFZJQKND_PJLM (yw_guid,rq) values('").append(query.get(i).get("yw_guid")).append("','").append(year).append("') ");
+                }
+                insert.append("select 'a','b' from dual");
+                update(insert.toString(), YW);
+                String sql = "select * from ESF_JBXX t,ESFZJQKND_PJLM t2 where t2.yw_guid=t.yw_guid and t2.rq=?";
+                query2 = query(sql, YW, new Object[] { year });
+            }
+        }
+        BuildModel buildModel = new BuildModel();
+        DataInteraction interaction = new DataInteraction();
+        List<Map<String, Object>> cont1 = interaction.getCont(year, "ESFZJQKND_PJLM");
+        List<Map<String, Object>> cont2 = interaction.getCont(year, "ESFZJQKND_PJZJ");
+        String table = buildModel.getZjqkNd(query2, query1,cont1,cont2);
+        response(table);
     }
 
     /****
