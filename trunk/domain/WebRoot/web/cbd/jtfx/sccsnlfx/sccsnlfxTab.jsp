@@ -43,10 +43,6 @@
                 title: '租金',
                 html: "<iframe width='"+w+"' height='"+h+"' src='<%=basePath%>web/cbd/tjbb/chart.jsp?xml=xzlzj.xml'/>" 
             }
-            ,{
-                title: '售价',
-                html: "<iframe width='"+w+"' height='"+h+"' src='<%=basePath%>web/cbd/tjbb/chart.jsp?xml=xzlsj.xml'/>"
-            }
             
         ]
     })
