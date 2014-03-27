@@ -127,9 +127,9 @@ textarea {
 </script>
 	</head>
 	<body bgcolor="#FFFFFF" style="overflow: hidden;">
-		<div align="center" style="width:100%">
+		<div align="center" style="width:100%;height: 100%" >
 			<div align="center"><h1>CBD规划储备资源成本分析汇总表</h1></div>
-			<table width="100%" cellpadding="0" cellspacing="0">
+			<table width="100%" height="70%" cellpadding="0" cellspacing="0">
 				<tr align="center" class="tr11">
 					
 					<td width="25%" >开发成本(亿元)</td>
