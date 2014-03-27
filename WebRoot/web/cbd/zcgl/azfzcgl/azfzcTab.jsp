@@ -4,6 +4,7 @@
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 	String view = request.getParameter("view");
+	String yw_guid = "azf";
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -41,7 +42,7 @@
             }
             ,{
                 title: '附件管理',
-                html: "<iframe width='"+w+"' height='"+h+"' src='web/cbd/swgl/azfaccessorymain.jsp'/>"
+                html: "<iframe width='"+w+"' height='"+h+"' src='web/cbd/zcgl/azfzcgl/dagl/accessorymain.jsp?yw_guid=<%=yw_guid%>'/>"
             }
         ]
     })

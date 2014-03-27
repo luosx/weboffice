@@ -15,7 +15,6 @@ function initComponent() {
 
 	simple = new Ext.FormPanel({
 				frame : true,
-				title : '土地资产列表',
 				bodyStyle : 'padding:0 0 0',
 				overflow:'auto',
 				tbar : [{
