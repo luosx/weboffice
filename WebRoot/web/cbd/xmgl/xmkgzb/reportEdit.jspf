@@ -3,10 +3,20 @@
 function send(objid){ 
     var keyIndex = "";
     var valueIndex = "";
+    var rowIndex = "";
+    var dzxzlx = "";
     var oldV="";
     var obj = document.getElementById(objid);
     keyIndex = obj.id.split('_')[0] + "_" + "<%=keyIndex%>";
     valueIndex = obj.id.split('_')[1];
+    rowIndex = obj.id.split('_')[0];
+   	var tobj = document.getElementById("XMKGZBBCX");
+   	
+    if(tobj.rows[rowIndex].cells[0].innerText=="代征绿地及水域"){
+    	ydxzlx = "3";
+    }else{
+    	ydxzlx = "4";
+    }
     var key = document.getElementById(keyIndex).innerText;
     var objDiv = obj.firstChild;
     if(objDiv.id == "0" || objDiv.id == ""){
@@ -45,6 +55,7 @@ function addContext(obj_id, key, valueIndex){
 }
 
 function ajax2(objid, obj, key, valueIndex){
+	var tobj = document.getElementById("XMKGZBBCX");
     var v=obj.value;
     var p=obj.parentNode.parentNode;
     //不是数字是，提示保存出错
@@ -58,6 +69,7 @@ function ajax2(objid, obj, key, valueIndex){
 	  putRestParameter("key", "<%=yw_guid%>");
 	  putRestParameter("vindex", valueIndex);
 	  putRestParameter("value", v);
+	  putRestParameter("ydxzlx", ydxzlx);
 	  restRequest();
     }
 }

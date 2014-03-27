@@ -138,12 +138,13 @@
 	}
 </script>
 	</head>
-	<body bgcolor="#6F94C3">
+	<body bgcolor="#FFFFFF">
 
 		<div align="center" style="width: 100%; margin-top: 20px;">
+		<div style="border: 1 solid #000000;width: 780px;">
 			<div align="center"
 				style="width: 780px; height: 50px; background-color: #FFFFFF;">
-				<div align="center" style="width: 780px;">
+				<div align="center" style="width: 780px;margin-top: 5px;">
 					<div align="left">
 						<div class="div3">
 							<img width="25" height="25"
@@ -152,11 +153,11 @@
 						<div class="div4" style="margin-top: 6px;">
 							<h2><%=name1%></h2>
 						</div>
-
 					</div>
 				</div>
 				<hr>
 			</div>
+			
 			<div align="center"
 				style="width: 780px; height: 300px; background-color: #FFFFFF;">
 
@@ -172,7 +173,7 @@
 						<img id="img1"
 							src='<%=basePath%>//model//accessory//dzfj//download//<%=firstpath%>'
 							onerror="this.src='<%=basePath%>/web/cbd/framework/images/defult.jpg'"
-							height='275px' width='375px' style="border: 3 solid #D0D0D0">
+							height='275px' width='375px' style="border: 1 solid #D0D0D0">
 					</div>
 				</div>
 				<div class="div2" align="center">
@@ -186,7 +187,7 @@
 						<img id='img2'
 							src='<%=basePath%>//model//accessory//dzfj//download//<%=secondpath%>'
 							onerror="this.src='<%=basePath%>/web/cbd/framework/images/defult.jpg'"
-							height='275px' width='375px' style="border: 3 solid #D0D0D0">
+							height='275px' width='375px' style="border: 1 solid #D0D0D0">
 					</div>
 				</div>
 			</div>
@@ -202,7 +203,7 @@
 						<img id='img3'
 							src='<%=basePath%>//model//accessory//dzfj//download//<%=threepath%>'
 							onerror="this.src='<%=basePath%>/web/cbd/framework/images/defult.jpg'"
-							height='275px' width='375px' style="border: 3 solid #D0D0D0">
+							height='275px' width='375px' style="border: 1 solid #D0D0D0">
 					</div>
 				</div>
 				<div class="div4">
@@ -235,7 +236,8 @@
 						</tr>
 						<tr>
 							<td>
-								西至
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;西至
 								<input type="text" id="xz" class="ab"
 									value="<%=map.get("xz") == null ? "" : map.get("xz")%>">
 								;北至
@@ -251,7 +253,7 @@
 									value="<%=map.get("zdmj") == null ? "" : map.get("zdmj")%>">
 								公顷;
 								<br />
-								建设用地
+								&nbsp;&nbsp;&nbsp;&nbsp;建设用地
 								<input type="text" id="jsyd" class="ab"
 									value="<%=map.get("jsyd") == null ? "" : map.get("jsyd")%>">
 								公顷;
@@ -259,18 +261,20 @@
 						</tr>
 						<tr>
 							<td>
-								建筑规模
-								<input type="text" id="jzgm" class="ab"
-									value="<%=map.get("jzgm") == null ? "" : map.get("jzgm")%>">
+								&nbsp;&nbsp;&nbsp;&nbsp;建筑规模
+								<input type="text" id="jzgm" 
+									value="<%=map.get("jzgm") == null ? "" : map.get("jzgm")%>" 
+									style='border: 0 solid 1px; border-top: none; border-left: none; border-right: none; width: 70px; text-align: center;'>
 								万㎡; 容积率
 								<input type="text" id="rjl" class="ab"
-									value="<%=map.get("rjl") == null ? "" : map.get("rjl")%>">
+									value="<%=map.get("rjl") == null ? "" : map.get("rjl")%>"
+									style='border: 0 solid 1px; border-top: none; border-left: none; border-right: none; width: 70px; text-align: center;'>
 								.
 							</td>
 						</tr>
 						<tr>
 							<td>
-								现状住宅
+								&nbsp;&nbsp;&nbsp;&nbsp;现状住宅
 								<input type="text" id="zzcq" class="ab"
 									value="<%=map.get("zzcq") == null ? "" : map.get("zzcq")%>">
 								户,
@@ -281,7 +285,7 @@
 						</tr>
 						<tr>
 							<td>
-								现状非住宅
+								&nbsp;&nbsp;&nbsp;&nbsp;现状非住宅
 								<input type="text" id="fzzcq" class="ab"
 									value="<%=map.get("fzzcq") == null ? "" : map.get("fzzcq")%>">
 								家,
@@ -306,6 +310,7 @@
 							</td>
 						</tr>
 					</table>
+				</div>
 				</div>
 			</div>
 		</div>
