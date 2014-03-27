@@ -223,7 +223,7 @@ public class BuildModel {
   */
   public String getZjqkTable(List<Map<String, Object>> list){
       StringBuffer buffer = new StringBuffer();
-      buffer.append("<table align='center' width='100%'  id='firstTable'><tr id='title' class='tr01'><td  width='50px' class='tr01'>编号</td><td  width='180px' class='tr01'>写字楼名称</td><td width='180px' class='tr01'>地址</td><td width='50px' class='tr01'>城区</td><td  width='50px' class='tr01'>商圈</td><td width='50px' class='tr01'>地铁</td><td  width='54px' class='tr01'>出租价格</td><td width='50px' class='tr01'>售价</td><td width='50px' class='tr01'>租售比</td><td width='160px'  class='tr01'>可租售面积</td> <td width='200px' class='tr01'>信息</td></tr>");
+      buffer.append("<table align='center'  id='firstTable'><tr id='title' class='tr01'><td  width='50px' class='tr01'>编号</td><td  width='180px' class='tr01'>写字楼名称</td><td width='180px' class='tr01'>地址</td><td width='50px' class='tr01'>城区</td><td  width='50px' class='tr01'>商圈</td><td width='50px' class='tr01'>地铁</td><td  width='54px' class='tr01'>出租价格</td><td width='50px' class='tr01'>售价</td><td width='50px' class='tr01'>租售比</td><td width='160px'  class='tr01'>可租售面积</td> <td width='200px' class='tr01'>信息</td></tr>");
      for(int i=0;i<list.size();i++){
        buffer.append("<tr>");
        buffer.append("<td class='tr04'> ");

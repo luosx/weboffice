@@ -481,7 +481,7 @@ public class QyjcManager extends AbstractBaseBean {
                 query2 = query(sql, YW, new Object[] { year });
             }
         }
-        BuildModel buildModel = new BuildModel();
+        com.klspta.web.cbd.qyjc.esf.common.BuildModel buildModel = new com.klspta.web.cbd.qyjc.esf.common.BuildModel();
         DataInteraction interaction = new DataInteraction();
         List<Map<String, Object>> cont1 = interaction.getCont(year, "ESFZJQKND_PJLM");
         List<Map<String, Object>> cont2 = interaction.getCont(year, "ESFZJQKND_PJZJ");

@@ -26,7 +26,7 @@ public class TdzcglReport extends AbstractBaseBean implements IDataClass{
 		//String[][] thirdTitle = {};
 		String[][] firstTitle = {{"项目名称","100","1","3"},{"状态","150","3","3"},{"地块名称","100","1","3"},{"用地性质","100","1","3"},{"规划情况","400","4","1"},{"地价款情况","1400","14","1"},{"基本情况","800","8","1"},{"期间管理","400","4","1"},{"备注","100","1","3"}};
 		String[][] secondTitle = {{"建筑用地面积(公顷)","100","1","2"},{"容积率","100","1","2"},{"规划建筑规模(万㎡)","100","1","2"},{"建筑控制高度(米)","100","1","2"},{"地价款","300","3","1"},{"政府收益","500","5","1"},{"补偿费","500","5","1"},
-				{"地价款<br>缴纳时间","100","1","2"},{"储备证号","100","1","2"},{"证载面积<br>（公顷）","100","1","2"},{"出让时间","100","1","2"},{"中标人","100","1","2"},{"协议约定<br>交地时间","100","1","2"},{"土地<br>移交时间","100","1","2"},{"项目<br>开工时间","100","1","2"},
+				{"地价款<br>缴纳时间","100","1","2"},{"储备证号","200","1","2"},{"证载面积<br>（公顷）","100","1","2"},{"出让时间","100","1","2"},{"中标人","100","1","2"},{"协议约定<br>交地时间","100","1","2"},{"土地<br>移交时间","100","1","2"},{"项目<br>开工时间","100","1","2"},
 				{"土地<br>闲置时间","100","1","2"},{"用途","100","1","2"},{"是否盈利","100","1","2"},{"代管单位","100","1","2"},{"时限","100","1","2"}}; 
 		String[][] thirdTitle = {{"总价","100","1","1"},{"已缴纳<br>万元","100","1","1"},{"已缴纳<br>比例","100","1","1"},{"总额<br>万元","100","1","1"},{"已缴纳<br>万元","100","1","1"},{"已缴纳<br>比例","100","1","1"},{"合同约定<br>缴纳时间","100","1","1"},
 				{"已产生的<br>违约金<br>（万元）","100","1","1"},{"总额<br>（万元）","100","1","1"},{"已缴纳<br>万元","100","1","1"},{"已缴纳<br>比例","100","1","1"},{"合同约定<br>缴纳时间","100","1","1"},{"已产生的<br>违约费用<br>（万元）","100","1","1"}};
@@ -263,7 +263,11 @@ public class TdzcglReport extends AbstractBaseBean implements IDataClass{
 					String[] field = fields[j];
 					String value = String.valueOf(queryMap.get(field[0]));
 					value = (value == "null")?"":value;
-					tryck.addTDBean(new TDBean(value,"100","20",field[1]));
+					if("CBZH".equals(fields[0])){
+						tryck.addTDBean(new TDBean(value,"100","20",field[1]));
+					}else{
+						tryck.addTDBean(new TDBean(value,"100","20",field[1]));
+					}
 					if(j == 0){
 						if(subTotal.size() > j){
 							subTotal.remove(j);
@@ -353,7 +357,11 @@ public class TdzcglReport extends AbstractBaseBean implements IDataClass{
 					String[] field = fields[j];
 					String value = String.valueOf(queryMap.get(field[0]));
 					value = (value == "null")?"":value;
-					tryck.addTDBean(new TDBean(value,"100","20",field[1]));
+					if("CBZH".equals(fields[0])){
+						tryck.addTDBean(new TDBean(value,"100","20",field[1]));
+					}else{
+						tryck.addTDBean(new TDBean(value,"100","20",field[1]));
+					}
 					if(j == 0){
 						if(dqlTo.size() > j){
 							dqlTo.remove(j);
@@ -392,7 +400,11 @@ public class TdzcglReport extends AbstractBaseBean implements IDataClass{
 					String[] field = fields[j];
 					String value = String.valueOf(queryMap.get(field[0]));
 					value = (value == "null")?"":value;
-					tryck.addTDBean(new TDBean(value,"100","20",field[1]));
+					if("CBZH".equals(fields[0])){
+						tryck.addTDBean(new TDBean(value,"100","20",field[1]));
+					}else{
+						tryck.addTDBean(new TDBean(value,"100","20",field[1]));
+					}
 					if(j == 0){
 						if(wscTo.size() > j){
 							wscTo.remove(j);
@@ -431,7 +443,11 @@ public class TdzcglReport extends AbstractBaseBean implements IDataClass{
 					String[] field = fields[j];
 					String value = String.valueOf(queryMap.get(field[0]));
 					value = (value == "null")?"":value;
-					tryck.addTDBean(new TDBean(value,"100","20",field[1]));
+					if("CBZH".equals(fields[0])){
+						tryck.addTDBean(new TDBean(value,"100","20",field[1]));
+					}else{
+						tryck.addTDBean(new TDBean(value,"100","20",field[1]));
+					}
 					if(j == 0){
 						if(wgdTo.size() > j){
 							wgdTo.remove(j);
@@ -470,7 +486,11 @@ public class TdzcglReport extends AbstractBaseBean implements IDataClass{
 					String[] field = fields[j];
 					String value = String.valueOf(queryMap.get(field[0]));
 					value = (value == "null")?"":value;
-					tryck.addTDBean(new TDBean(value,"100","20",field[1]));
+					if("CBZH".equals(fields[0])){
+						tryck.addTDBean(new TDBean(value,"100","20",field[1]));
+					}else{
+						tryck.addTDBean(new TDBean(value,"100","20",field[1]));
+					}
 					if(j == 0){
 						if(cqkcTo.size() > j){
 							cqkcTo.remove(j);
@@ -624,7 +644,11 @@ public class TdzcglReport extends AbstractBaseBean implements IDataClass{
 					String[] field = fields[j];
 					String value = String.valueOf(queryMap.get(field[0]));
 					value = (value == "null")?"":value;
-					tryck.addTDBean(new TDBean(value,"100","20",field[1]));
+					if("CBZH".equals(fields[0])){
+						tryck.addTDBean(new TDBean(value,"100","20",field[1]));
+					}else{
+						tryck.addTDBean(new TDBean(value,"100","20",field[1]));
+					}
 					if(j == 0){
 						if(subTotal.size() > j){
 							subTotal.remove(j);

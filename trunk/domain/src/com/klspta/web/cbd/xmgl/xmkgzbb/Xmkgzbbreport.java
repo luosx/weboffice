@@ -37,7 +37,7 @@ public class Xmkgzbbreport extends AbstractBaseBean implements IDataClass {
 	private List<TRBean> getBody(Map queryMap){
 		StringBuffer sqlBuffer = new StringBuffer();
 		String yw_guid = "";
-		sqlBuffer.append("select rownum,t1.dkmc,t1.ydxzdh,t1.ydxz,t1.jsydmj,t1.rjl,t1.ghjzgm,t1.jzkzgd,t1.bz,t2.ydxzlx from  DCSJK_KGZB t1,XMKGZBB t2 where t1.dkmc=t2.dkbh and t1.dqy=t2.qy and t1.qy=t2.xqy ");
+		sqlBuffer.append("select rownum,t1.dkmc,t1.ydxzdh,t1.ydxz,t1.jsydmj,t1.rjl,t1.ghjzgm,t1.jzkzgd,t1.bz,t2.ydxzlx from  DCSJK_KGZB t1,XMKGZBB t2 where t1.dkmc=t2.dkbh and  t1.qy=t2.xqy ");
 		
 		if(queryMap != null && !queryMap.isEmpty()){ 
 			sqlBuffer.append(" and ");
@@ -52,9 +52,15 @@ public class Xmkgzbbreport extends AbstractBaseBean implements IDataClass {
 			sqlDZDL.append(" and t.yw_guid = '"+yw_guid+"'");
 		}
 		
+		StringBuffer sqlDZLDSY = new StringBuffer();
+		sqlDZLDSY.append("select t.dzdlydmj,t.dzdljzmj,t.dzdlkzgd,t.dzdlbz from xmkgzbb t where t.ydxzlx='3' ");
+		if(yw_guid != null){ 
+			sqlDZLDSY.append(" and t.yw_guid = '"+yw_guid+"'");
+		}
+		
 		List<Map<String, Object>> queryList = query(sqlBuffer.toString(), YW);
 		List<Map<String, Object>> dzdllist = query(sqlDZDL.toString(), YW);
-		
+		List<Map<String, Object>> dzldsylist = query(sqlDZLDSY.toString(), YW);
 		List<TRBean> list = new ArrayList<TRBean>();
 		double ydmj_jyxjsyd = 0;
 		double jzmj_jyxjsyd = 0;
@@ -311,24 +317,41 @@ public class Xmkgzbbreport extends AbstractBaseBean implements IDataClass {
 			
 		}
 		
+		if(dzldsylist.size()==0){
+			String ydxzlx = "3";
+			String insertString="insert into xmkgzbb (ydxzlx,yw_guid )values(?,?)";
+		    update(insertString, YW,new Object[]{ydxzlx,yw_guid});
+		    dzdllist = query(sqlDZDL.toString(), YW);
+		}
+		Map<String, Object> dzldmap = dzldsylist.get(0);
+		ydmj_dzldjsy = Double.valueOf(String.valueOf( dzldmap.get("dzdlydmj"))).doubleValue();
+		jzmj_dzldjsy = Double.valueOf(String.valueOf( dzldmap.get("dzdljzmj"))).doubleValue();
+		String dzldbz = String.valueOf(dzldmap.get("dzdlbz"));
+		String dzldkzgd = String.valueOf(dzldmap.get("dzdlkzgd"));
+		if("null".equals(dzldbz)){
+			dzldbz = "";
+		}if("null".equals(dzldkzgd)){
+			dzldkzgd = "";
+		}
+		
 		TRBean trBean_dzldjsy = new TRBean();
 		trBean_dzldjsy.setCssStyle("trsingle");
 		TDBean tdname41=new TDBean("代征绿地及水域","310","","");
 		tdname41.setColspan("4");
 		trBean_dzldjsy.addTDBean(tdname41);
 		
-		TDBean tdname42=new TDBean(""+ydmj_dzldjsy,"140","","");
+		TDBean tdname42=new TDBean(""+ydmj_dzldjsy,"140","","true");
 		trBean_dzldjsy.addTDBean(tdname42);
 		
 		TDBean tdname43=new TDBean("--","80","","");
 		trBean_dzldjsy.addTDBean(tdname43);
 		
-		TDBean tdname44=new TDBean(""+jzmj_dzldjsy,"140","","");
+		TDBean tdname44=new TDBean(""+jzmj_dzldjsy,"140","","true");
 		trBean_dzldjsy.addTDBean(tdname44);
 		
-		TDBean tdname45=new TDBean("","100","","");
+		TDBean tdname45=new TDBean("","100","","true");
 		trBean_dzldjsy.addTDBean(tdname45);
-		TDBean tdname46=new TDBean("","300","","");
+		TDBean tdname46=new TDBean("","300","","true");
 		trBean_dzldjsy.addTDBean(tdname46);
 		
 		list.add(trBean_dzldjsy);

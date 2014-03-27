@@ -138,7 +138,7 @@ public class Fyzcmanager extends AbstractBaseBean {
                     + "</td><td style='display:none;'>" + yw_guid
                     + "</td></tr>");
         }
-        String sumsql = "select sum(gzfy)as gzfy,sum(gzgm)as gzgm,sum(cbzj)as cbzj,sum(gzdj)as gzdj,sum(lyfy)as lyfy,sum(lygm)as lygm,sum(qmfy)as qmfy,sum(jzmj)as jzmj,sum(zyzj)as zyzj,sum(ftlx)as ftlx,sum(fymc)as fymc,sum(ze)as ze,sum(pmft)as pmft,sum(lyft)as lyft,sum(jzft)as jzft,sum(jkzj)as jkzj,sum(dj)as dj from fyzc t";
+        String sumsql = "select sum(gzfy)as gzfy,sum(gzgm)as gzgm,sum(cbzj)as cbzj,sum(gzdj)as gzdj,sum(lyfy)as lyfy,sum(lygm)as lygm,sum(qmfy)as qmfy,sum(jzmj)as jzmj,sum(zyzj)as zyzj,sum(ftlx)as ftlx,'--' as fymc,sum(ze)as ze,sum(pmft)as pmft,sum(lyft)as lyft,sum(jzft)as jzft,sum(jkzj)as jkzj,sum(dj)as dj from fyzc t";
         List<Map<String, Object>> sumlist = query(sumsql, YW);
         for (int i = 0; i < sumlist.size(); i++) {
             String sumgzfy =  (sumlist.get(i)).get("gzfy")==null?"":(sumlist.get(i)).get("gzfy").toString();

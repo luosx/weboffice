@@ -153,7 +153,7 @@ public class HxxmManager extends AbstractBaseBean {
 	public void getCQSJ(){
 		String value = request.getParameter("value");
 		String[] dkmcs = value.split(",");
-		String sql = "select xh,sum(zd) as zd ,sum(jsyd) as jsyd,round(sum(jzgm)/sum(jsyd)/100,2)||'%' as rjl,sum(jzgm) as jzgm," +
+		String sql = "select sum(zd) as zd ,sum(jsyd) as jsyd,round(sum(jzgm)/sum(jsyd)/100,2)||'%' as rjl,sum(jzgm) as jzgm," +
 				"sum(gjjzgm)as gjjzgm ,sum(jzjzgm) as jzjzgm ,sum(szjzgm) as szjzgm,sum(kfcb) as kfcb," +
 				"round(sum(kfcb)/sum(jzgm),2)*10000 as lmcb,round(sum(kfcb)/sum(jsyd),2)*10000 as lmcb,"+
 				"sum(zzsgm) as zzsgm,sum(zzzsgm) as zzzsgm ,sum(zzzshs) as zzzshs,sum(hjmj)" +
