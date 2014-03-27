@@ -44,7 +44,7 @@ String view = request.getParameter("view");
                  html:"<iframe id='reportmap' width=100% height=100% src=" + gisurl
 							+ "></iframe>"
             },{
-                 title:'红线项目表',
+                 title:'',
                  region:'east',
                  width:width * 0.6,
                  split:true,
