@@ -3,12 +3,8 @@
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
-	String yw_guid = request.getParameter("yw_guid");
-	String xmmc = request.getParameter("xmmc");
+	String yw_guid = "fyzc";
 	String view = request.getParameter("view");
-	if(xmmc!=null){
-		xmmc = new String(xmmc.getBytes("iso-8859-1"),"utf-8");
-	}
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -46,7 +42,7 @@
             }
             ,{
                 title: '附件管理',
-                html: "<iframe width='"+w+"' height='"+h+"' src='web/cbd/swgl/azfaccessorymain.jsp'/>"
+                html: "<iframe width='"+w+"' height='"+h+"' src='web/cbd/zcgl/fyzc/dagl/accessorymain.jsp?yw_guid=<%=yw_guid%>'/>"
             }
         ]
     })
