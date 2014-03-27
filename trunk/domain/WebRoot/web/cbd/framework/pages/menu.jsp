@@ -98,7 +98,7 @@ body {
 				<td width=1950" align="left" style="background:url(<%=resourcePath%>images/top/bg_w.png);cursor:pointer;">			
 					<div style="border:1px soild black;background:url(<%=resourcePath%>images/top/navrightbc.png);width:151px;height:25px;margin-top:1px;">
 						<span style="color:#285290;font-size:12px;margin-top:5px;display:block;margin-left:26px;">
-						<a onclick="openMap()">地图</a>&nbsp;&nbsp;&nbsp;&nbsp;
+						<!-- <a onclick="openMap()">地图</a>&nbsp;&nbsp;&nbsp;&nbsp; -->
 						<a class="logout"  style="color:#285290;" href="#" onclick="top.location.href='<%=basePath %>j_spring_security_logout';return false;">注销</a>
 						&nbsp;&nbsp;&nbsp;&nbsp;<a onclick="closeWindow()">退出</a>
 						</span>
