@@ -22,6 +22,30 @@
 input,img {
 	vertical-align: middle;
 }
+.x-form-file-wrap {
+    position: relative;
+    height: 22px;
+}
+.x-form-file-wrap .x-form-file {
+	position: absolute;
+	right: 0;
+	-moz-opacity: 0;
+	filter:alpha(opacity: 0);
+	opacity: 0;
+	z-index: 2;
+    height: 22px;
+}
+.x-form-file-wrap .x-form-file-btn {
+	position: absolute;
+	right: 0;
+	z-index: 1;
+}
+.x-form-file-wrap .x-form-file-text {
+    position: absolute;
+    left: 0;
+    z-index: 3;
+    color: #777;
+}
 </style>
 		<script>
 		var basePath="<%=basePath%>";
@@ -30,7 +54,7 @@ input,img {
 </script>
 		<script src="js/jbbEditor.js"></script>
 	</head>
-	<body bgcolor="#FFFFFF" topmargin="0" leftmargin="0">
+	<body bgcolor="#FFFFFF" topmargin="0" leftmargin="0" style="overflow-x:hidden;overflow-y:hidden">
 		<div id="mygrid_container"></div>
 		<div id="update" class="x-hidden">
 			<div id="updateForm"
