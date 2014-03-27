@@ -89,17 +89,12 @@ function showMyBuses(lineId,spanId){
 		<a onClick="showSearchPage1();"><h2 > - 根据公交信息查询</h2></a>
 	
 		<h2 onClick="javascript:ShowMenu(this,'NO01')"> - 根据GPS编号查询</h2>
-		
-		<h2 onClick="javascript:ShowMenu(this,'NO02')"> - 暂留1-1</h2>
-	
-		<h2 onClick="javascript:ShowMenu(this,'NO03')"> - 暂留2-1</h2>
 	
 	</span>
     
 	<h1 onClick="showMyBuses(2,'NO2')"> - 2路</h1>
 	<span id="NO2" >
-		
-
+	
 	</span>
 
 <!--  </div>

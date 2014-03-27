@@ -14,9 +14,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 body, html,#allmap {width: 100%;height: 100%;overflow: hidden;margin:0;}
 .anchorBL{  display:none;}
  
-#legend1 {border:0;background-color:#15161B;opacity:0.3;width:280px;height:404px;position:absolute; left:1086px; top:132px}
+#legend1 {border:0;background-color:#15161B;opacity:0.3;width:280px;height:404px;position:absolute; left:1086px; top:132px;border-radius:10px 10px 5px 5px}
 #menu {opacity:0.8;width:280px;height:404px;position:absolute;left:1086px;top:132px;display:block;}
-#tit {width:100%;height:20px;background-color:#15161B;opacity:0.5}
+#tit {cursor:move;width:100%;height:20px;background-color:#15161B;opacity:0.5;border-radius:10px 10px 0 0}
 #menuFrame {border:0;width:100%;height:100%}
 #d_iframe {width:100%;height:384px}
 </style>

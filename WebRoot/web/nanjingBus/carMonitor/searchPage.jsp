@@ -12,9 +12,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 <style type="text/css">
 	
-	h1 { cursor:pointer; color:#FFF; font-size:12px; padding:5px 0 3px 10px; border:#C60 1px solid; margin-top:1px;  background-color:#F93;}
-	#searchResult {border:2px solid black;width:200px;height:200px;overflow-y:auto; overflow-x:auto}
-
+	h1 {  color:#FFF; font-size:12px; padding:5px 0 3px 10px; border:#C60 1px solid; margin-top:1px;  background-color:#F93;text-align:center;}
+	#searchResult {border:2px solid black;width:90%;height:230px;overflow-y:auto; overflow-x:auto;margin-left: auto; margin-right: auto;}
+	span {text-decoration:none;font-size:13px}
+	a{text-decoration:none;color:#ffffff}
+	button{cursor:pointer;}
+	#search_div {margin-left: auto; margin-right: auto;text-align: center}
+	#search{background-color:#6F7071;color:#FFFFFF;opacity:0.8;border:0;width:50px;height:22px;border-radius:4px 4px 4px 4px}
+	#back {background-color:#6F7071;color:#FFFFFF;opacity:0.8;border:0;width:80px;height:22px;border-radius:4px 4px 4px 4px}
 </style>
 <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=q3i2iXOKCWLVGY4hddgk92I9"></script>
 <script src="../framework/js/jquery-1.8.1.js" type="text/javascript" language="javascript"></script>
@@ -22,14 +27,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </head>
 <body>
 	<h1>公交线路查询</h1>
-	</br>
-	查询：<input id="busInfo" /><button id="search" onclick="search();">搜索</button>
-	</br></br></br>
 	
+	<div id="search_div">
+		<input id="busInfo" />&nbsp&nbsp<button id="search" onclick="search();">搜索</button>
 	
-	<div id="searchResult"></div>
-	<button id="back" onclick="backToMain();">返回</button>
-
+		</br></br>
+	
+		<div id="searchResult"></div>
+		</br>
+		<button id="back" onclick="backToMain();">返回</button>
+	</div>
 </html>
 <script type="text/javascript">
 function backToMain(){
@@ -68,7 +75,7 @@ function showResult(result){
 	var innerHtml = "";
 	for(var i=0;i<result.getNumBusList();i++){
 		var busListItem = result.getBusListItem(i);
-		innerHtml = innerHtml + "<a href='javascript:showResultOnMap("+i+");'>"+busListItem.name+"</a></br>";
+		innerHtml = innerHtml + "<a href='javascript:showResultOnMap("+i+");'><span>"+busListItem.name+"</span></a></br>";
 		
 	}
 	$("#searchResult").html(innerHtml);
