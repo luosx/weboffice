@@ -176,7 +176,7 @@ conditionMap.put("query", " t2.yw_guid = '" + yw_guid + "'");
 	<div align="center" style="margin-top: 15px;  width:800px;">
 	      <h1><%=xmmc%>控规指标表</h1>
 	</div>
-	<div align="center" id="center" style="position:absolute; top:65px; left: 20px;">
+	<div align="center" id="center" style="margin-top:65px; ">
   		<%=new CBDReportManager().getReport("XMKGZBBCX",new Object[]{conditionMap},its)%>
   	</div>
   </body>
