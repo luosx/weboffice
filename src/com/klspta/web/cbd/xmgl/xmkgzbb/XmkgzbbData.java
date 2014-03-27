@@ -65,13 +65,13 @@ public class XmkgzbbData extends AbstractBaseBean {
     	int result = update(sql, YW, new Object[]{dk});
     	return result == 1 ? true : false;
     }
-	public boolean modifyValue(String yw_guid, String field, String value){
+	public boolean modifyValue(String yw_guid, String field, String value,String ydxzlx){
     	StringBuffer sqlBuffer = new StringBuffer();
     	sqlBuffer.append(" update ").append(formName);
     	sqlBuffer.append(" t set t.").append(field);
     	sqlBuffer.append("='"+value);
-    	sqlBuffer.append("' where t.ydxzlx='4' and t.yw_guid=?");
-    	int i = update(sqlBuffer.toString(), YW, new Object[]{ yw_guid});
+    	sqlBuffer.append("' where t.yw_guid=? and t.ydxzlx=?");
+    	int i = update(sqlBuffer.toString(), YW, new Object[]{ yw_guid,ydxzlx});
      	return i == 1 ? true : false;
     }
 	

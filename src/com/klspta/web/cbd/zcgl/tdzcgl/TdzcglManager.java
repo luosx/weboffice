@@ -136,11 +136,20 @@ public class TdzcglManager extends AbstractBaseBean {
 					crsj, zbr, xyydjdsj, tdyjsj, xmkgsj, tdxzsj, yt, sfyl,
 					dgdw, sx, bz, xmmc, dkmc });
 		}
+		if("已出库".equals(status)){
+			sql = "update CBD_KGZB set STATUS='1' where dkmc = ?";
+		}else if("待清理".equals(status) || "未受偿".equals(status) || "未供地".equals(status) || "长期库存".equals(status) ){
+			sql = "update CBD_KGZB set STATUS='2' where dkmc = ?";
+		}else{
+			sql = "update CBD_KGZB set STATUS='3' where dkmc = ?";
+		}
+		update(sql, GIS,new Object[]{dkmc});
 		response("{success:true}");
 	}
 
 	public void getGHSJByDKMC() {
 		String dkmc = request.getParameter("dkmc");
+		dkmc = UtilFactory.getStrUtil().unescape(dkmc);
 		String sql = "select * from dcsjk_kgzb where dkmc = ?";
 		List<Map<String, Object>> list = query(sql, YW, new Object[] { dkmc });
 		response(list);
@@ -154,6 +163,8 @@ public class TdzcglManager extends AbstractBaseBean {
 			for(int i = 0;i<dkmcs.length;i++ ){
 				String sql = "delete from ZCGL_TDZCGL where dkmc=?";
 				update(sql, YW, new Object[] { dkmcs[i] });
+				sql = "update CBD_KGZB set STATUS='' where dkmc=?";
+				update(sql, GIS,new Object[]{dkmcs[i]});
 			}
 			response("{success:true}");
 		} catch (Exception e) {
