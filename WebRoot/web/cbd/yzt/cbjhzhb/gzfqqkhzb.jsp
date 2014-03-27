@@ -62,7 +62,7 @@ td1 {
 </style>
 <script type="text/javascript">
 function exportExcel(){
-		    var curTbl = document.getElementById("XZLZJ"); 
+		    var curTbl = document.getElementById("SWQFZXZJCJQKB"); 
  			try{
 		    	var oXL = new ActiveXObject("Excel.Application");
 		    }catch(err){
@@ -94,8 +94,8 @@ function exportExcel(){
   		
 		<img src="base/form/images/exportexcel.png" width="20px" height="20px" title="导出Excel" onClick="javascript:exportExcel();"  />&nbsp;&nbsp;&nbsp;
 	</div>
-	<div align="center" style="margin-left: 10px; margin-top: 20px; width:900px;">
-	      <h2 >CBD改造分区情况汇总表</h2>
+	<div align="center" style="margin-left: 10px; margin-top: 20px; width:900px;font-size: 20px;">
+	      <h4 >CBD改造分区情况汇总表</h4>
 	</div>
 	<div align="center" style="margin-left: 10px;top: 2px;  width:900px;">
 	      <%=list%>
