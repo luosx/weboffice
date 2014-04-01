@@ -8,11 +8,13 @@ function showMap(objid){
 		table.init(document.getElementById("TDZCGL"));
 	}
 	//alert("showMap");
-	var key = objid.cells[1].innerText;
-	table.addAnnotation(objid.rowIndex);
+	var key = objid.cells[0].innerText;
+	
 	//parent.parent.frames['east'].swfobject.getObjectById("FxGIS").clear();
 	//parent.parent.frames['east'].swfobject.getObjectById("FxGIS").findFeature("cbd", "0", key, "ZRBBH");
-	
+	parent.parent.frames[0].frames['center'].swfobject.getObjectById("FxGIS").clear();
+	parent.parent.frames[0].frames['center'].swfobject.getObjectById("FxGIS").findFeature("cbd", "5", key, "DKMC");
+	table.addAnnotation(objid.rowIndex);
 }
 
 //双击编辑地图
