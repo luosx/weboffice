@@ -152,7 +152,6 @@ String view = request.getParameter("view");
 		                xtype: 'textfield',
 		                id      : 'esfzl',
 		                value:'',
-		                disabled:true,
 		                fieldLabel: '二手房总量',
 		                width :100
 	                }]
@@ -191,7 +190,6 @@ String view = request.getParameter("view");
 		                xtype: 'textfield',
 		                id      : 'czl',
 		                value:'',
-		                disabled:true,
 		                fieldLabel: '出租量',
 		                width :100
 	                }]	                
@@ -280,7 +278,7 @@ String view = request.getParameter("view");
   		}
   		var width = document.body.clientWidth;
 		var height = document.body.clientHeight * 0.95;
-       	FixTable("ESFQK", 0,1, width-5, height-30);
+       	FixTable("ESFQK", 0,1, width, height);
   	}
   </script>
   <body onload="hideywguid();">

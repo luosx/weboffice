@@ -141,6 +141,17 @@ function queryZrb(year,month,keyword){
 	putRestParameter("month",month);
 	myData = restRequest();
   	document.getElementById("show").innerHTML = myData;
+  	var obj = document.getElementById("ESFQK");
+	var rowlength = obj.rows.length;
+	for(var i=0;i< rowlength;i++){
+		//if(i!=1){
+			obj.rows[i].cells[obj.rows[i].cells.length-1].style.display="none";
+			obj.rows[i].cells[obj.rows[i].cells.length-1].innerText;
+		//}
+	}
+	var width = document.body.clientWidth;
+	var height = document.body.clientHeight * 0.95;
+   	FixTable("ESFQK", 0,1, width, height);
 }
 
 

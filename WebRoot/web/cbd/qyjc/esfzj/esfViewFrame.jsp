@@ -29,7 +29,7 @@ String view = request.getParameter("view");
   		var url = "<%=basePath%>/web/cbd/qyjc/esfzj/esfEditor.jsp?view=<%=view%>";
   		Ext.onReady(function(){
   			putClientCommond("mapconfig","updateMapService");
-			putRestParameter("serverid","cbd,cbdyx,kgt");
+			putRestParameter("serverid","cbd,cbdyx");
 			putRestParameter("layerid","cbd:8,cbdyx:1");
 			var myData = restRequest();
   			Ext.state.Manager.setProvider(new Ext.state.CookieProvider());
