@@ -90,7 +90,7 @@ function initComponent() {
 						  		}
 								var width = document.body.clientWidth;
 								var height = document.body.clientHeight * 0.95;
-						       	document.frames['report'].FixTable("ESFQK", 0,1, width-20, height-30);
+						       	document.frames['report'].FixTable("ESFQK", 0,1, width-10, height-25);
 						    }}
 						}
 						],

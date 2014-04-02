@@ -160,7 +160,7 @@ String view = request.getParameter("view");
 					columnWidth:.33,
 	        		layout:'form',
 					items:[{
-		                xtype: 'numberfield',
+		                xtype: 'textfield',
 		                id      : 'sq',
 		                value:'',
 		                fieldLabel: '商圈', 
@@ -193,7 +193,7 @@ String view = request.getParameter("view");
             		columnWidth:.33,
 	        		layout:'form',
 					items:[{
-		                xtype: 'numberfield',
+		                xtype: 'textfield',
 		                id   : 'cylx',
 		                value:'',  
 		                fieldLabel: '产业类型',
@@ -206,7 +206,7 @@ String view = request.getParameter("view");
 					columnWidth:.33,
 	        		layout:'form',
 	           		items:[{
-		                xtype: 'numberfield',
+		                xtype: 'textfield',
 		                id   : 'rzqy',
 		                value:'',
 		                fieldLabel: '入住企业',
