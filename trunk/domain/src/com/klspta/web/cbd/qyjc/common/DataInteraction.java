@@ -99,7 +99,7 @@ public class DataInteraction extends AbstractBaseBean {
 	 */
 	public List<Map<String, Object>> getXzl_Zjqk_pjlm() {
 		
-		String sql = "select * from XZLXX t,XZLZJQKND_PJLM t2 where t2.yw_guid=t.yw_guid and t2.rq='2014'";
+		String sql = "select * from XZLXX t left join XZLZJQKND_PJLM t2 on t2.yw_guid=t.yw_guid and t2.rq='2014'";
 		List<Map<String, Object>> query = query(sql, YW);
 		return query;
 
@@ -115,7 +115,7 @@ public class DataInteraction extends AbstractBaseBean {
 	 * @return
 	 */
 	public List<Map<String, Object>> getXzl_Zjqk_pjzj() {
-		String sql = "select * from XZLXX t,XZLZJQKND_PJZJ t2 where t2.yw_guid=t.yw_guid and t2.rq='2014'";
+		String sql = "select * from XZLXX t left join XZLZJQKND_PJZJ t2 on t2.yw_guid=t.yw_guid and t2.rq='2014'";
 		List<Map<String, Object>> query = query(sql, YW);
 		return query;
 
@@ -196,5 +196,4 @@ public class DataInteraction extends AbstractBaseBean {
 			return f1;
 		}
 	}
-
 }

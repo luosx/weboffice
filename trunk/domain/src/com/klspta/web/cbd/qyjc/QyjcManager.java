@@ -206,7 +206,7 @@ public class QyjcManager extends AbstractBaseBean {
 		      dt=UtilFactory.getStrUtil().unescape(dt);
 		      gdcw=UtilFactory.getStrUtil().unescape(gdcw);
 		      tcwzj=UtilFactory.getStrUtil().unescape(tcwzj);
-		      syl=UtilFactory.getStrUtil().unescape(syl);
+		      //syl=UtilFactory.getStrUtil().unescape(syl);
 		      qt=UtilFactory.getStrUtil().unescape(qt);
 		      String sql = "select bh from xzlxx where bh=?";
 		      List<Map<String,Object>> list = query(sql, YW,new Object[]{bh});
