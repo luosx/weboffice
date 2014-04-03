@@ -87,7 +87,8 @@
 	<bean name="XmgljgManager" class="com.klspta.web.cbd.dtjc.kfgl.XmgljgManager" scope="prototype"/>
 	<!-- 生成计划报表（年度计划、季度计划） -->	
 	<bean name="jh" class="com.klspta.web.cbd.dtjc.tjbh.JhManager" scope="prototype"/>
-	
+	<!-- 微观效果分析 -->	
+	<bean name="wgfxmanager" class="com.klspta.web.cbd.qyjc.WgfxManager" scope="prototype"/>
 	<!-- 生成储备计划整合表 -->	
 	<bean name="cbjhzhb" class="com.klspta.web.cbd.yzt.cbjhzhb.CbjhManager" scope="prototype"/>
 	<bean name="zafzc" class="com.klspta.web.cbd.swkgl.AzfzcManager" scope="prototype"/>
