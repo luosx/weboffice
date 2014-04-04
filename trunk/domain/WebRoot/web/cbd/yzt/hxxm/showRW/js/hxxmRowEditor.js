@@ -28,8 +28,14 @@ function editMap(objid){
 	xmmc = key;
 	
 	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").clear();
-	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").drawPolygon();
+	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").drawPolygonMultiple();
 }
+
+function end(){
+	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").drawPolygonMultipleEnd();
+	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").findFeature("cbd", "6", xmmc, "XMMC");
+}
+
 
 //上图
 function setRecord(polygon){

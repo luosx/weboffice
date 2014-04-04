@@ -48,6 +48,11 @@ function initComponent() {
 							text : '删除',
 							id : 'dele',
 							handler : dele
+						}, '-', {
+							xtype : 'button',
+							text : '结束',
+							id:"end",
+							handler : end
 						}],
 				items : [{
 					html : "<iframe id='report' width=" + (width - 10)
@@ -158,6 +163,10 @@ function update(){
 
 function dele(){
 	document.frames['report'].dele();
+}
+
+function end(){
+	document.frames['report'].end();
 }
 
 function insertGIS(){

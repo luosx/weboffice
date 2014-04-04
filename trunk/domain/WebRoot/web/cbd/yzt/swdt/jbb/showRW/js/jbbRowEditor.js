@@ -25,7 +25,7 @@ function editMap(objid){
 	}
 	zrbbh = objid.cells[0].innerText;
 	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").clear();
-	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").drawPolygon();
+	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").drawPolygonMultiple();
 }
 
 //上图
@@ -96,4 +96,10 @@ function update(){
 		}
 		paneloper.show();
 	}
+}
+
+
+function end(){
+	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").drawPolygonMultipleEnd();
+	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").findFeature("cbd", "3", key, "自然斑编号");
 }

@@ -28,7 +28,7 @@ function editMap(objid){
 	xmmc = key;
 	
 	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").clear();
-	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").drawPolygon();
+	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").drawPolygonMultiple();
 }
 
 //上图
@@ -131,5 +131,10 @@ function queryHxxm(keyword){
   	var width = document.body.clientWidth;
 	var height = document.body.clientHeight-20;
    	FixTable("HXXM", 1,2, width, height);
+}
+
+function end(){
+	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").drawPolygonMultipleEnd();
+	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").findFeature("cbd", "17", xmmc, "XMNAME");
 }
 

@@ -37,6 +37,11 @@ function initComponent() {
 							text : '修改',
 							id : 'modify',
 							handler : update
+						}, '-', {
+							xtype : 'button',
+							text : '结束',
+							id:"end",
+							handler : end
 						}],
 				items : [{
 					html : "<iframe id='report' width=" + (width - 10)
@@ -130,6 +135,10 @@ function query() {
 
 function exportExcel() {
 	document.frames['report'].print();
+}
+
+function end(){
+	document.frames['report'].end();
 }
 
 function insertGIS(){
