@@ -22,6 +22,11 @@ function showMap(objid){
 	table.addAnnotation(objid.rowIndex);
 }
 
+function end(){
+	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").drawPolygonMultipleEnd();
+	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").findFeature("cbd", "5", dkmc, "DKMC");
+}
+
 //双击编辑地图
 function editMap(objid){
 
@@ -35,7 +40,7 @@ function editMap(objid){
 	//parent.parent.frames['east'].swfobject.getObjectById("FxGIS").clear();
 	//parent.parent.frames['east'].swfobject.getObjectById("FxGIS").drawPolygon();
 	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").clear();
-	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").drawPolygon();
+	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").drawPolygonMultiple();
 }
 
 //导出Excel

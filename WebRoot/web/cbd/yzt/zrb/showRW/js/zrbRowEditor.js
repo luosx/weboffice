@@ -40,7 +40,7 @@ function editMap(objid){
 	//parent.parent.frames['east'].swfobject.getObjectById("FxGIS").clear();
 	//parent.parent.frames['east'].swfobject.getObjectById("FxGIS").drawPolygon();
 	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").clear();
-	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").drawPolygon();
+	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").drawPolygonMultiple();
 }
 
 //导出Excel
@@ -167,4 +167,8 @@ function queryZrb(keyword){
     FixTable("ZRB", 1,2, width, height);
 }
 
+function end(){
+	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").drawPolygonMultipleEnd();
+	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").findFeature("cbd", "3", key, "自然斑编号");
+}
 

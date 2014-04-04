@@ -48,6 +48,11 @@ function initComponent() {
 							text : '删除',
 							id : 'dele',
 							handler : dele
+						}, '-', {
+							xtype : 'button',
+							text : '结束',
+							id:"end",
+							handler : end
 						}],
 				items : [{
 					html : "<iframe id='report' width=" + (width - 10)
@@ -64,6 +69,9 @@ function initComponent() {
 	}
 }
 
+function end(){
+	document.frames['report'].end();
+}
 
 function initFile(){
 	 combo = new Ext.form.ComboBox({

@@ -37,6 +37,11 @@ function initComponent() {
 							text : '修改',
 							id : 'modify',
 							handler : update
+						}, '-', {
+							xtype : 'button',
+							text : '结束',
+							id:"end",
+							handler : end
 						}],
 				items : [{
 					html : "<iframe id='report' width=" + (width - 10)
@@ -51,6 +56,10 @@ function initComponent() {
 	}
 }
 
+
+function end(){
+	document.frames['report'].end();
+}
 
 function initFile(){
 	 combo = new Ext.form.ComboBox({
