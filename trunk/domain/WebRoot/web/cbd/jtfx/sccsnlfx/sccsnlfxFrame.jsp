@@ -29,10 +29,10 @@
 	<body >
 	<div style="width: 100%;height: 100%;">
 		<iframe id="west" name="west" class="div1" 
-			style="width: 98%; height: 15%; overflow: auto; " src="sccsnlfxinfo.jsp"></iframe>
+			style="width: 98%; height: 20%; overflow: auto; " src="sccsnlfxinfo.jsp"></iframe>
 		
 		<iframe id="east" name="east" class="div2"
-			style="width: 98%; height: 75%; overflow: auto; border: 0px;float: left;margin-left: 10px;margin-top: 20px" src="sccsnlfxTab.jsp"></iframe>
+			style="width: 98%; height: 70%; overflow: auto; border: 0px;float: left;margin-left: 10px;margin-top: 20px" src="sccsnlfxTab.jsp"></iframe>
 	</div>
 	</body>
 </html>
