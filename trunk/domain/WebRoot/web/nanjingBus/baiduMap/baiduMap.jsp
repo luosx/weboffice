@@ -28,7 +28,7 @@ body, html,#allmap {width: 100%;height: 100%;overflow: hidden;margin:0;}
 <body>
 	<div id="allmap"></div>
 
-	<iframe  id='legend1'></iframe>
+	<div id="menu_back"><iframe  id='legend1'></iframe></div>
 	<div id="menu">
 		
 		<div id="tit"></div>
@@ -45,9 +45,11 @@ var isShow = false;
 function showMenu(){
 	if(isShow==false){
 		$("#menu").css('display','block');
+		$("#menu_back").css('display','block');
 		isShow = true;
 	}else{
 		$("#menu").css('display','none');
+		$("#menu_back").css('display','none');
 		isShow = false;
 	}
 }
@@ -163,10 +165,17 @@ function displayBusLineOnMap(line){
 	//busLine1.getBusLine(firstLine);
 }
 //地图上展现被点选的车辆
-function displayBusOnMap(x,y){
+function displayBusOnMap(x,y,towards,isRunning){
+	var url = "images/";
+	if(isRunning){
+		url = url + "g_";
+	}else{
+		url = url + "r_";
+	}
+	url = url + towards + ".png";
 	
 	var pt = new BMap.Point(x,y);
-	var myIcon = new BMap.Icon("images/greenCar.png", new BMap.Size(40,40));
+	var myIcon = new BMap.Icon(url, new BMap.Size(40,40));
 	var marker2 = new BMap.Marker(pt,{icon:myIcon});  // 创建标注
 	map.addOverlay(marker2);              // 将标注添加到地图中
 }
