@@ -193,7 +193,7 @@ public class HxxmData extends AbstractBaseBean {
     	String rings = json.getString("rings");
     	rings = rings.replace("]]]", "]");
     	rings = rings.replace("[[[", "[");
-    	String wkt = "4326";
+    	String wkt = "2437";
     	String[] allPoint = rings.split(",");
 		Polygon polygon = new Polygon();
 		Ring ring = new Ring();
@@ -206,8 +206,8 @@ public class HxxmData extends AbstractBaseBean {
     			Point point = new Point(x, y);
     			ring.putPoint(point);
     		}
-    		Point p2 = new Point(Double.parseDouble(allPoint[0]), Double.parseDouble(allPoint[1]));
-            ring.putPoint(p2);
+    		//Point p2 = new Point(Double.parseDouble(allPoint[0]), Double.parseDouble(allPoint[1]));
+            //ring.putPoint(p2);
             polygon.addRing(ring);
             wkt = polygon.toWKT();
     	}
@@ -243,7 +243,7 @@ public class HxxmData extends AbstractBaseBean {
     	String rings = json.getString("rings");
     	rings = rings.replace("]]]", "]");
     	rings = rings.replace("[[[", "[");
-    	String wkt = "4326";
+    	String wkt = "2437";
     	String[] allPoint = rings.split(",");
 		Polygon polygon = new Polygon();
 		Ring ring = new Ring();
