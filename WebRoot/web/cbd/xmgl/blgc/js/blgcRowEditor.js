@@ -77,7 +77,7 @@ function add(){
 	if(table.element == undefined){
 		table.init(document.getElementById("esftable"));
 	}
-	Ext.getCmp("jbr").setValue(rolename+"/"+username);
+	//Ext.getCmp("jbr").setValue(rolename+"/"+username);
 	paneloper.show();
 }
 
