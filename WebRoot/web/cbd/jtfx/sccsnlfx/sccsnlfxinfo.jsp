@@ -77,6 +77,7 @@ textarea {
 	background-color: #FFFFFF;
 	text-align: center;
 	line-height: 30px;
+	font-size: 20px;
 }
 
 .tr07 {
@@ -89,6 +90,7 @@ textarea {
 	background-color: #C0C0C0;
 	text-align: center;
 	line-height: 25px;
+	font-size: 20px;
 }
 
 .tr16 {
@@ -128,7 +130,7 @@ textarea {
 	</head>
 	<body bgcolor="#FFFFFF" style="overflow: hidden;">
 		<div align="center" style="width:100%;height: 100%" >
-			<div align="center"><h1>CBD规划储备资源成本分析汇总表</h1></div>
+			<div align="center"><h2>CBD规划储备资源成本分析汇总表</h2></div>
 			<table width="100%" height="70%" cellpadding="0" cellspacing="0">
 				<tr align="center" class="tr11">
 					
@@ -137,7 +139,7 @@ textarea {
 					<td width="25%">地面成本(元/㎡)</td>
 					<td width="25%">租金保本点(元/㎡·日)</td>
 				</tr>
-				<tr align="center">
+				<tr align="center" class="tr06">
 					<td width="25%"><%=list.get("KFCB") %></td>
 					<td width="25%"><%=list.get("LMCB") %></td>
 					<td width="25%"><%=list.get("DMCB") %></td>
