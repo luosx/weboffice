@@ -1,4 +1,4 @@
-/*¹«ÓÃ²¿·Ö*/
+/*ï¿½ï¿½ï¿½Ã²ï¿½ï¿½ï¿½*/
 html, body, form
 {
     height: 100%;
@@ -113,7 +113,7 @@ div.CommonContainerScroll
     right: 29px;
     z-index: 100000;
 }
-/*toopTip²¿·Ö*/
+/*toopTipï¿½ï¿½ï¿½ï¿½*/
 div.ToolTipContainer
 {
 }
@@ -169,7 +169,7 @@ table.tableBG
     width: 100px;
 }
 
-/*¶¥²¿¿ªÊ¼*/
+/*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼*/
 .FormTop
 {
     height: 70px;
@@ -344,10 +344,10 @@ div.TopBottomSplitter div.TopBottomSplitterInner
     border-bottom: 1px solid #fff;
     cursor: pointer;
 }
-/*¶¥²¿½áÊø*/
+/*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½*/
 
 
-/*ÓÒ±ß¶¥²¿¿ªÊ¼*/
+/*ï¿½Ò±ß¶ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼*/
 div.RightContentMainContainer
 {
     height: 100%;
@@ -411,8 +411,8 @@ div.RightTopInfo div.right span.fullscreen
 div.RightContentContainer
 {
 }
-/*ÓÒ±ß¶¥²¿½áÊø*/
-/*ÓÒ²àµ¯³öÊ½²Ëµ¥¿ªÊ¼*/
+/*ï¿½Ò±ß¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½*/
+/*ï¿½Ò²àµ¯ï¿½ï¿½Ê½ï¿½Ëµï¿½ï¿½ï¿½Ê¼*/
 div.PointContainer
 {
     width: 187px;
@@ -443,7 +443,7 @@ div.RightPopupOKBtn
 {
     padding-left: 3px;
 }
-/*×ó²Ëµ¥¿ªÊ¼*/
+/*ï¿½ï¿½Ëµï¿½ï¿½ï¿½Ê¼*/
 DIV.PanelBar1_CustomCss
 {
 }
@@ -569,7 +569,7 @@ DIV.PanelBar1_CustomCss .rpRootGroup .rpLink .rpOut .rpText
     margin-top: 2px;
     color: #c2e5ef; /*margin-left: 30px;*/
 }
-/*Òþ²Ø´óÍ¼±ê¿ªÊ¼*/
+/*ï¿½ï¿½ï¿½Ø´ï¿½Í¼ï¿½ê¿ªÊ¼*/
 /*
 DIV.PanelBar1_CustomCss .rpItem .rpSlide .rpLevel1 .rpItem
 {
@@ -612,7 +612,7 @@ DIV.PanelBar1_CustomCss .rpLevel1 .rpItem .rpOut .rpText
     padding-left: 0px;
 }
 */
-/*Òþ²Ø´óÍ¼±ê½áÊø*/
+/*ï¿½ï¿½ï¿½Ø´ï¿½Í¼ï¿½ï¿½ï¿½ï¿½ï¿½*/
 DIV.PanelBar1_CustomCss .rpRootGroup .rpFirst .rpLink
 {
     background-image: url('../images/leftmenubg2.png');
@@ -647,7 +647,7 @@ DIV.PanelBar1_CustomCss .rpItem .rpGroup .rpText:hover
 {
     color: #FFCC66;
 }
-/*×ó²Ëµ¥½áÊø*/
+/*ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½ï¿½*/
 /*MiddleFrame.aspx*/
 div.MiddleFrame_Container
 {
@@ -710,7 +710,7 @@ div.Left_PanelBar_Container div.LeftList
 {
 }
 
-/*Ê×Ò³Ôª¼þ-Êý¾Ý²É¼¯Çé¿ö*/
+/*ï¿½ï¿½Ò³Ôªï¿½ï¿½-ï¿½ï¿½Ý²É¼ï¿½ï¿½ï¿½ï¿½*/
 .Recent24HourRecords, .Recent24HourRecords a
 {
     text-decoration: underline;
@@ -748,19 +748,19 @@ div.DataInfoHeader table td
     text-align: center;
     empty-cells: show;
 }
-div.DataInfoHeader table.GetData td /*Êý¾Ý²É¼¯Çé¿ö*/
+div.DataInfoHeader table.GetData td /*ï¿½ï¿½Ý²É¼ï¿½ï¿½ï¿½ï¿½*/
 {
     width: 15%;
 }
-div.DataInfoHeader table.RecentData td /*×îÐÂÊý¾Ý*/
+div.DataInfoHeader table.RecentData td /*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½*/
 {
     width: 12.5%;
 }
-div.DataInfoHeader table.GetData td.SpecialItem /*Êý¾Ý²É¼¯Çé¿ö*/
+div.DataInfoHeader table.GetData td.SpecialItem /*ï¿½ï¿½Ý²É¼ï¿½ï¿½ï¿½ï¿½*/
 {
     width: 20%;
 }
-div.DataInfoHeader table.RecentData td.SpecialItem /*×îÐÂÊý¾Ý*/
+div.DataInfoHeader table.RecentData td.SpecialItem /*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½*/
 {
     width: 12.5%;
 }
@@ -807,7 +807,7 @@ div.DataInfoHeader table tr.DataFooter td
 {
     background-image: none;
 }
-/*ÆøÏóÊý¾Ý*/
+/*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½*/
 div.weatherContainer
 {
     font-size: 12px;
@@ -859,7 +859,7 @@ div.RadGrid_Customer .rgHeader a
 {
     color: #ffffff;
 }
-/*ÍêÕû¸ßÁÁÏÔÊ¾*/
+/*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾*/
 div.RadGrid_Customer .rgSelectedRow {
     background-color: #ffcb60 !important;
 }
@@ -899,7 +899,7 @@ div.RadGrid_Customer2 table th, div.RadGrid_Customer2 table td, div.RadGrid_Cust
     border-top: 1px solid #fff;
     border-left: 1px solid #fff;
 }
-/*RadGridÖÐµÄHeaderCell*/
+/*RadGridï¿½Ðµï¿½HeaderCell*/
 div.RadGrid_Customer th.rgHeader_Customer
 {
     background-image: none;
@@ -1067,7 +1067,7 @@ div.RadTabStrip_Customer div.rtsLevel1 .rtsLI
 {
     /*margin-left:2px;*/
 }
-/*Ò»°ãTableµÄÑùÊ½*/
+/*Ò»ï¿½ï¿½Tableï¿½ï¿½ï¿½ï¿½Ê½*/
 
 table.Table_Customer
 {
@@ -1135,7 +1135,7 @@ table.Table_Customer3 td
     height: 25px;
     text-align: center;
 }
-/*×óÓÒ¿ò¼ÜTable*/
+/*ï¿½ï¿½ï¿½Ò¿ï¿½ï¿½Table*/
 table.TableFrame_Customer
 {
 }
@@ -1154,7 +1154,7 @@ div.RadSiteMap_Customer
     background-position: bottom;
     background-repeat: repeat-x;
 }
-/*Ñ¡ÔñÉÏÏÂ²âµãµÄ×óÓÒ¼ýÍ·*/
+/*Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½Â²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò¼ï¿½Í·*/
 img.leftArrow
 {
     position: fixed;
@@ -1175,7 +1175,7 @@ img.rightArrow
 {
     color: #000;
 }
-/*ÏÔÊ¾Í¼±í*/
+/*ï¿½ï¿½Ê¾Í¼ï¿½ï¿½*/
 div.ChartObj
 {
     background-color: #e8f5fe;
@@ -1240,14 +1240,14 @@ div.mainmenus ul li
 }
 div.mainmenus li.menu1
 {
-    width:62px;
+    width:150px;
     background-image:url('../images/menu1.gif');
     background-repeat:no-repeat;
     float:left;
 }
 div.mainmenus li.menu1hover
 {
-    width:62px;
+    width:150px;
     background-image:url('../images/menu1_1.gif');
     background-repeat:no-repeat;
     float:left;
@@ -1352,7 +1352,7 @@ div.mainmenus li.menu7hover
 
 
 
-/*¿ªÊ¼£ºÒ»°ãTableµÄÑùÊ½*/
+/*ï¿½ï¿½Ê¼ï¿½ï¿½Ò»ï¿½ï¿½Tableï¿½ï¿½ï¿½ï¿½Ê½*/
 table.Table_Customer7 {
     border: 0px solid #FFFFFF;
     border-collapse: collapse;
@@ -1400,4 +1400,4 @@ table.Table_Customer7 {
             text-align: center;
             background-color: #d2e5f4;
         }
-/*½áÊø£ºÒ»°ãTableµÄÑùÊ½*/
+/*ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Tableï¿½ï¿½ï¿½ï¿½Ê½*/
