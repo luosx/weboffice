@@ -279,8 +279,8 @@ public class ZrbData extends AbstractBaseBean implements Runnable {
     			Point point = new Point(x, y);
     			ring.putPoint(point);
     		}
-    		Point p2 = new Point(Double.parseDouble(allPoint[0]), Double.parseDouble(allPoint[1]));
-            ring.putPoint(p2);
+//    		Point p2 = new Point(Double.parseDouble(allPoint[0]), Double.parseDouble(allPoint[1]));
+//            ring.putPoint(p2);
             polygon.addRing(ring);
             wkt = polygon.toWKT();
     	}
