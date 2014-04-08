@@ -188,7 +188,7 @@ public class Xmmanager extends AbstractBaseBean {
 	 * Date:2013-12-16
 	 */
 	public List<Map<String, Object>> getHXXM() {
-		String sql = "select xmname,yw_guid,rownum from jc_xiangmu ";
+		String sql = "select xmname,yw_guid,rownum from jc_xiangmu order by xh";
 		List<Map<String, Object>> list = query(sql, YW);
 		return list;
 
