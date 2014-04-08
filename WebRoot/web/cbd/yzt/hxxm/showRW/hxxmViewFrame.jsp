@@ -63,6 +63,7 @@ String view = request.getParameter("view");
            });
         });
         function drawPolygonMultipleCallback(s){
+        	alert(s);
 			frames[1].frames['report'].setRecord(s);
 		}
   </script>
