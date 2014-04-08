@@ -69,7 +69,11 @@ function showMyBuses(lineId,spanId){
 				var jsonObj = eval("("+data+")");
 				for(var sub in jsonObj){
 					var subObj = jsonObj[sub];
-					$("#"+spanId).append("<h2 onclick='parent.displayBusOnMap("+subObj.location+")'>"+subObj.busCard+"("+subObj.status+")"+"</h2>");
+					var isRunning = "false";
+					if(subObj.status=="在运行"){
+						isRunning = "true";
+					}
+					$("#"+spanId).append("<h2 onclick='parent.displayBusOnMap("+subObj.location+","+subObj.towards+","+isRunning+")'>"+subObj.busCard+"("+subObj.status+")"+"</h2>");
 				}
 				$("#"+spanId).removeClass();
 				//alert($("#"+spanId).html());
