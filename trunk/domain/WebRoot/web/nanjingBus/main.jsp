@@ -15,6 +15,5 @@ String name = ProjectInfo.getInstance().PROJECT_NAME;
 <frameset id="index" rows="90,*" frameborder="no" border="0"  framespacing="0" >
 		<frame id="top" name="top" scrolling="NO" noresize src="<%=basePath%>web/nanjingBus/framework/menu.jsp" />
 		<frame id="content" name="content" scrolling="NO" noresize src="<%=basePath%>web/nanjingBus/baiduMap/baiduMap.jsp" />
-
 </frameset>
 </html>
