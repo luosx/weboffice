@@ -34,8 +34,14 @@ function editMap(objid){
 	//parent.parent.frames['east'].swfobject.getObjectById("FxGIS").clear();
 	//parent.parent.frames['east'].swfobject.getObjectById("FxGIS").drawPolygon();
 	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").clear();
-	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").drawPolygon();
+	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").drawPolygonMultiple();
 }
+
+function end(){
+	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").drawPolygonMultipleEnd();
+	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").findFeature("cbd", "8", xqmc, "XQMC");
+}
+
 
 //导出Excel
 function print(){

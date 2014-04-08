@@ -45,7 +45,12 @@ function initComponent() {
 							text : '删除',
 							id:"dele",
 							handler : dele
-						} , '-' ,{
+						} , '-', {
+							xtype : 'button',
+							text : '结束',
+							id:"end",
+							handler : end
+						}, '-' ,{
 							xtype : 'label',
 							text : '年：'
 						},{
@@ -121,6 +126,10 @@ function query() {
 
 function exportExcel() {
 	document.frames['report'].print();
+}
+
+function end(){
+	document.frames['report'].end();
 }
 
 function zsxxlr() {
