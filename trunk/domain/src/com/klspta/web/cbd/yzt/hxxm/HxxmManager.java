@@ -15,6 +15,7 @@ import com.klspta.base.AbstractBaseBean;
 import com.klspta.base.util.UtilFactory;
 import com.klspta.model.CBDReport.CBDReportManager;
 import com.klspta.model.CBDReport.tablestyle.ITableStyle;
+import com.klspta.web.cbd.yzt.jbb.JbbData;
 import com.klspta.web.cbd.yzt.jbb.JbbReport;
 import com.klspta.web.cbd.yzt.jc.report.TableStyleEditRow;
 
@@ -110,7 +111,13 @@ public class HxxmManager extends AbstractBaseBean {
     	}else{
     		response("{error:not primary}");
     	}
-    	boolean draw = new HxxmData().recordGIS(guid, polygon,type);
+    	boolean draw = false;
+		if("3d".equals(type)){
+			draw = new HxxmData().recordGIS(guid, polygon,type);
+		}else{
+			draw = new HxxmData().recordGIS(guid, polygon);
+		}
+    	
     	response(String.valueOf(draw)); 
 	}
 	

@@ -168,7 +168,7 @@ public class JbbData extends AbstractBaseBean   {
     	String rings = json.getString("rings");
     	rings = rings.replace("]]]", "]");
     	rings = rings.replace("[[[", "[");
-    	String wkt = "4326";
+    	String wkt = "2437";
     	String[] allPoint = rings.split(",");
 		Polygon polygon = new Polygon();
 		Ring ring = new Ring();
@@ -220,7 +220,7 @@ public class JbbData extends AbstractBaseBean   {
     	String rings = json.getString("rings");
     	rings = rings.replace("]]]", "]");
     	rings = rings.replace("[[[", "[");
-    	String wkt = "4326";
+    	String wkt = "2437";
     	String[] allPoint = rings.split(",");
 		Polygon polygon = new Polygon();
 		Ring ring = new Ring();
