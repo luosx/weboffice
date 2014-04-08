@@ -62,7 +62,7 @@ String list = Fyzcmanager.getInstcne().getList();
 		    font-weight:bold;
 		    font-size: 15px;
 		    text-align:center;
-		    line-height: 50px;
+		    line-height: 30px;
 			margin-top: 3px;
 		  }
 	  	.trtotal{
@@ -78,16 +78,253 @@ String list = Fyzcmanager.getInstcne().getList();
 	</style>
   </head>
   <script type="text/javascript">
-  	var form2;
+  var form2;
+  var form1;
   	var paneloper2 = new Paneloper();
   	 $(document).ready(function () { 
 		var width = document.body.clientWidth+10;
 		var height = document.body.clientHeight;
-       	FixTable("FYZC", 1,2, width, height);
-       	buildPanel();
+       	FixTable("FYZC", 1,3, width, height);
+       	buildPanel1();
+       	buildPanel2();
     });
-  	function buildPanel(){
+  	function buildPanel1(){
 	  form2 = new Ext.form.FormPanel({
+	        autoHeight: true,
+	        frame:true,
+	        bodyStyle:'padding:5px 0px 0',
+	        width: 800,
+	  		labelWidth :130,   
+	  		labelAlign : "right",
+	        url:"",
+	        title:"房源资产信息",
+	        defaults: {
+	            anchor: '0'
+	        },
+	        layout:'form',
+	        items : [{
+	        	layout : 'column',
+	        	items : [{
+	        		columnWidth:.33,
+	        		layout:'form',
+	        		items:[
+	        		{
+		                xtype: 'textfield',
+		                id      : 'mc',
+		                value:'',
+		                fieldLabel: '名称',  
+		                width:'100'	
+				    }]                
+	            },{
+	            	columnWidth:.33,
+		        	layout:'form',
+	            	items:[          		
+		        		
+		                xtype: 'textfield',
+		                id      : 'gzfyly',
+		                value:'',
+		                fieldLabel: '购置房源套数',  
+		                width:'100'              
+	            	}]
+	            },{
+	            	columnWidth:.33,
+		        	layout:'form',
+	            	items:[          		
+		        		{
+		                xtype: 'textfield',
+		                id      : 'gzfyts',
+		                value:'',
+		                fieldLabel: '购置房源套数',  
+		                width:'100'              
+	            	}]
+	            },{
+	        		columnWidth:.33,
+	        		layout:'form',
+	        		items:[{
+		                xtype: 'textfield',
+		                id      : 'gzjzgm',
+		                value:'',
+		                fieldLabel: '购置建筑规模',  
+		                width:'100'	            
+	            	}]
+	            }]
+         	},{
+	         	layout : 'column',
+	        	items : [{
+					columnWidth:.33,
+	        		layout:'form',
+	           		items:[{
+		                xtype: 'numberfield',
+		                id   : 'dycbzj',
+		                value:'', 
+		                fieldLabel: '动用储备资金',
+		                width:'100'
+	            	}]
+	            },{
+	            	columnWidth:.33,
+	        		layout:'form',
+	        		items:[
+	            	{
+			            xtype : 'textfield',   
+					    fieldLabel : '购置单价',   
+					    id : 'gzdj',   
+					    value:'', 
+		                width:'100'
+					}]
+				},{
+					columnWidth:.33,
+	        		layout:'form',
+					items:[{
+		                xtype: 'numberfield',
+		                id      : 'lyfyts',
+		                value:'',
+		                fieldLabel: '利用房源套数',
+		                width:'100'
+            		}]
+            	}]
+			},{
+	           	layout:'column',
+	           	items:[{
+            		columnWidth:.33,
+	        		layout:'form',
+					items:[{
+		                xtype: 'textfield',
+		                id   : 'lyjzgm',
+		                value:'',
+		                fieldLabel: '利用建筑规模',
+		                width:'100'
+		            }]
+		         },{
+	            	columnWidth:.33,
+	        		layout:'form',
+	           		items:[{
+		                xtype: 'numberfield',
+		                id   : 'fyclts',
+		                value:'',
+		                fieldLabel: '房源存量套数',
+		                width:'100'
+	            	}]
+            	},{
+	            	columnWidth:.33,
+	        		layout:'form',
+	           		items:[{
+		                xtype: 'numberfield',
+		                id   : 'jzmjcl',
+		                value:'',
+		                fieldLabel: '建筑面积存量',
+		                width:'100'
+	            	}]
+            	}]
+	        },{
+	           	layout:'column',
+	           	items:[{
+					columnWidth:.33,
+	        		layout:'form',
+	           		items:[{
+		                xtype: 'numberfield',
+		                id   : 'zyzjcl',
+		                value:'',
+		                fieldLabel: '占用资金存量',
+		                width:'100'
+	            	}]
+	            },{
+					columnWidth:.33,
+	        		layout:'form',
+	           		items:[{
+		                xtype: 'numberfield',
+		                id   : 'ftlx',
+		                value:'',
+		                fieldLabel: '分摊利息',
+		                width:'100'
+	            	}]
+	            },{
+	            	columnWidth:.33,
+	        		layout:'form',
+	           		items:[{
+		                xtype: 'textfield',
+		                id   : 'fymc',
+		                value:'',
+		                fieldLabel: '费用名称',
+		                width:'100'
+	            	}]
+            	}]
+	        },{
+	           	layout:'column',
+	           	items:[{
+	            	columnWidth:.33,
+	        		layout:'form',
+	           		items:[{
+		                xtype: 'textfield',
+		                id   : 'zje',
+		                value:'',
+		                fieldLabel: '总金额',
+		                width:'100'
+	            	}]
+            	},{
+	            	columnWidth:.33,
+	        		layout:'form',
+	           		items:[{
+		                xtype: 'numberfield',
+		                id   : 'mpfmft',
+		                value:'',
+		                fieldLabel: '每平方米分摊',
+		                width:'100'
+	            	}]
+            	},{
+	            	columnWidth:.33,
+	        		layout:'form',
+	           		items:[{
+		                xtype: 'textfield',
+		                id   : 'ylyfyft',
+		                value:'',
+		                fieldLabel: '已利用房源分摊',
+		                width:'100'
+	            	}]
+            	}]
+	        },{
+	           	layout:'column',
+	           	items:[{
+	            	columnWidth:.9,
+	        		layout:'form',
+	           		items:[{
+		                xtype: 'textfield',
+		                id   : 'bz',
+		                value:'',
+		                fieldLabel: '备注',
+		                width:'500'
+	            	}]
+            	},{
+	            	columnWidth:.9,
+	        		layout:'form',
+	           		items:[{
+		                xtype: 'textfield',
+		                id   : 'yw_guid',
+		                value:'',
+		                hidden:true,
+		                fieldLabel: 'yw_guid',
+		                width:'500'
+	            	}]
+            	}]
+	        }], 
+	        buttons: [
+	            {
+	                text   : '保存',
+	                handler: function() {
+	            			paneloper2.setRestUrl("fyzcHandle/addFyzc");
+							paneloper2.save();
+	                	}
+	            	},   
+	            	{
+	                	text   : '取消',
+	                	handler: function() {
+	            			paneloper2.cancel();
+	                	}
+	            	}
+	        ]
+	  });		
+  	}
+  	function buildPanel2(){
+	  form1 = new Ext.form.FormPanel({
 	        autoHeight: true,
 	        frame:true,
 	        bodyStyle:'padding:5px 0px 0',
@@ -330,26 +567,62 @@ String list = Fyzcmanager.getInstcne().getList();
 	            {
 	                text   : '保存',
 	                handler: function() {
-	            			paneloper2.setRestUrl("fyzcHandle/addFyzc");
-							paneloper2.save();
 	                	}
 	            	},   
 	            	{
 	                	text   : '取消',
 	                	handler: function() {
-	            			paneloper2.cancel();
 	                	}
 	            	}
 	        ]
 	  });		
-  		form2.render("deal2");
-  		form2.hide();
-  		var elements2 = new Array("mc","gzfyts","gzjzgm","dycbzj","gzdj","lyfyts","lyjzgm","fyclts","jzmjcl",
-  		"zyzjcl","ftlx","fymc","zje","mpfmft","ylyfyft","zjfyft","fwjkzj","dqdj","bz","yw_guid");
-  		paneloper2.init(form2,elements2);
-  		paneloper2.hide();
   	}
-  // })
+  	var win;
+function showWindow() {
+	var tabs = new Ext.TabPanel({
+				id : 'pan',
+				autoTabs : true,
+				activeTab : 0,
+				height : 400,
+				enableTabScroll : true,
+				deferredRender : false,
+				border : false,
+				scrollDuration : 0.35,
+				scrollIncrement : 100,
+				animScroll : true,
+				defaults : {
+					autoScroll : true
+				}
+			});
+		tabs.add(form2).show();
+		tabs.add(form1).show();
+	if (!win) {
+		win = new Ext.Window({
+					renderTo : Ext.getBody(),
+					id:'wind',
+					layout : 'fit',
+					title:'属性查询',
+					width : 450,
+					height : 400,
+					plain : true,
+					closeAction : 'hide',
+					items : tabs,
+					buttons : [{
+								text : '关闭',
+								handler : function() {
+									win.hide();
+								}
+							}]
+				});
+	} else {
+		win.items.removeAt(0);		
+		win.items.add("pan", tabs);
+		win.doLayout();
+	}
+	win.show();
+	
+}
+  
   </script>
   <body>
   	<div id='show'>

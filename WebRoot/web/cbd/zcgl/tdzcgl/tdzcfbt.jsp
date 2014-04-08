@@ -19,7 +19,7 @@
 </script>
 	</head>
 	<body>
-	<iframe width="100%" height="100%" src='<%=url%>'></iframe>
+	<iframe id="center" width="100%" height="100%" src='<%=url%>'></iframe>
 	<div style="position:absolute; bottom:20px; right:30px; width:30px; height:30px;border: 0"><img src=<%=img%>></div>
 	</body>
 </html>

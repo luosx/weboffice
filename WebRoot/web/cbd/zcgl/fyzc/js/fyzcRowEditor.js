@@ -58,9 +58,7 @@ function print(){
 
 
 function add(){
-	paneloper2.show();
-	
-	
+	showWindow();
 }
 
 function dele(){
