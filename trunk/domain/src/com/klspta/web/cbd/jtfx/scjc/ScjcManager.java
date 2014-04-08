@@ -140,9 +140,7 @@ public class ScjcManager extends AbstractBaseBean {
         String year = request.getParameter("year");
         String month = request.getParameter("month");
         String esfzl = request.getParameter("esfzl");
-        String esfjj = request.getParameter("esfjj");
         String czl = request.getParameter("czl");
-        String czfjj = request.getParameter("czfjj");
         String ssqy = UtilFactory.getStrUtil().unescape(request.getParameter("ssqy"));
         String xqmc = UtilFactory.getStrUtil().unescape(request.getParameter("xqmc"));
         String xqlb = UtilFactory.getStrUtil().unescape(request.getParameter("xqlb"));
@@ -153,21 +151,21 @@ public class ScjcManager extends AbstractBaseBean {
             String format = dateFormat.format(new Date());
             String insertSql = "insert into esf_jbxx(ssqy,xqmc,xqlb,bz,yw_guid) values(?,?,?,?,?)";
             this.update(insertSql, YW, new Object[] { ssqy, xqmc, xqlb, bz, format });
-            String intserSql2 = "insert into esf_zsxx(yw_guid,year,month,zl,esfjj,czl,czfjj)values(?,?,?,?,?,?,?)";
-            this.update(intserSql2, YW, new Object[] { format, year, month ,esfzl,esfjj,czl,czfjj});
-           
+            String intserSql2 = "insert into esf_zsxx(yw_guid,year,month,zl,czl)values(?,?,?,?,?)";
+            this.update(intserSql2, YW, new Object[] { format, year, month ,esfzl,czl});           
         } else {
         	 String update = "update esf_jbxx set ssqy='" + ssqy + "',xqmc='" + xqmc + "',xqlb='" + xqlb
              + "',bz='" + bz + "'where yw_guid=?";
 		     this.update(update, YW, new Object[] {yw_guid});
-		     	update = "update esf_zsxx set zl=?,esfjj=?,czl=?,czfjj=? where yw_guid=? and year=? and month=?";
-		     	update(update, YW,new Object[]{esfzl,esfjj,czl,czfjj,yw_guid,year,month});
-        }
-        
-        
-        
+		     update = "MERGE INTO esf_zsxx p USING (select '"+yw_guid+"' as yw_guid ,'"+year+"' as year,'"+month+"' as  month from dual ) np  " +
+		     		" ON (p.yw_guid = np.yw_guid and p.year=np.year and p.month=np.month) " +
+		     		"  WHEN MATCHED THEN  UPDATE SET p.zl = ?,  p.czl = ? " +
+		     		" WHERE p.year = ? and p.month=?  WHEN NOT MATCHED THEN" +
+		     		"  INSERT (yw_guid,zl,czl,year,month)  VALUES (?,?,?,?,?)";
+		     //	update = "update esf_zsxx set zl=?,czl=? where yw_guid=? and year=? and month=?";
+		     	update(update, YW,new Object[]{esfzl,czl,year,month,yw_guid,esfzl,czl,year,month});
+        }       
         response("{success:true}");
-
     }
 
     /**
