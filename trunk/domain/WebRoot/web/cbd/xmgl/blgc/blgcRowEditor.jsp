@@ -186,7 +186,7 @@ if (!xmid.equals("") && !xmid.equals("null")) {
   // })
   </script>
   <body>
-  	<div id="show" align="left"  style="overflow-x:hidden;overflow-y:hidden">
+  	<div id="show" align="center"  style="overflow-x:hidden;overflow-y:hidden">
 			<table width="800" cellpadding="1" cellspacing="0" id='esftable' border='1'>
 				<tr class="title" onclick="showMap(this); return false;" ondblclick='editMap(this); return false;'>
 					<td align="center" width="80px" height="50px" >
