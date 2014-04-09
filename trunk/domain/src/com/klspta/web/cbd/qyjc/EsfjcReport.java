@@ -35,8 +35,8 @@ public class EsfjcReport extends AbstractBaseBean implements IDataClass {
 			{ "czl", "total" }, { "czfjj", "avg" } };
 	private String[] months = { "yy", "ey", "sy", "siy", "wy", "ly", "qy",
 			"bay", "jy", "shiy", "syy", "sey" };
-	private DecimalFormat df = new DecimalFormat("0.00");
-	private DecimalFormat df1 = new DecimalFormat("0");
+	//private DecimalFormat df = new DecimalFormat("0.00");
+	private DecimalFormat df1 = new DecimalFormat("0.00");
 	Map<String, List<Map<String, Object>>> cont1 = null;
 	Map<String, List<Map<String, Object>>> cont2 = null;
 
@@ -343,7 +343,7 @@ public class EsfjcReport extends AbstractBaseBean implements IDataClass {
 							.equals(value[t])) ? "0" : value[t];
 					truevalue += Float.parseFloat(value[t]);
 				}
-				truevalue = truevalue / value.length - 1;
+				truevalue = truevalue / value.length;
 				tdbean = new TDBean(df1.format(truevalue).toString(), "100",
 						"20", obj[2].toString());
 			}
