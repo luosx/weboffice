@@ -198,11 +198,11 @@ function textChange(){
 }
 
 function init(){
-	var pgjkone = document.getElementById("bcdj").value*20/1000;
-	var pgjktwo = document.getElementById("bcdj").value*40/1000;
-	var pgjkthree = document.getElementById("bcdj").value*60/1000;
-	var pgjkfour = document.getElementById("bcdj").value*80/1000;
-	var pgjkfive = document.getElementById("bcdj").value*50/1000;
+	var pgjkone = document.getElementById("bcdj").value*20/10000;
+	var pgjktwo = document.getElementById("bcdj").value*40/10000;
+	var pgjkthree = document.getElementById("bcdj").value*60/10000;
+	var pgjkfour = document.getElementById("bcdj").value*80/10000;
+	var pgjkfive = document.getElementById("bcdj").value*50/10000;
 	var ybbzf = document.getElementById("ybbzf").value*1;
 	var jlbzf = document.getElementById("jlbzf").value*1;
 	var tsrqbzf = document.getElementById("tsrqbzf").value*1;
@@ -294,13 +294,13 @@ function set(pgjkone,pgjktwo,pgjkthree,pgjkfour,pgjkfive,ybbzf,jlbzf,tsrqbzf,gfb
 	document.getElementById("bcfive").innerHTML =  bcfive+'万元';
 	var bcsone = (bcone/20).toFixed(1);
 	document.getElementById("bcsone").innerHTML =  bcsone+'万元/平方米';
-	var bcstwo = (bcone/40).toFixed(1);
+	var bcstwo = (bctwo/40).toFixed(1);
 	document.getElementById("bcstwo").innerHTML =  bcstwo+'万元/平方米';
-	var bcsthree = (bcone/60).toFixed(1);
+	var bcsthree = (bcthree/60).toFixed(1);
 	document.getElementById("bcsthree").innerHTML =  bcsthree+'万元/平方米';
-	var bcsfour = (bcone/80).toFixed(1);
+	var bcsfour = (bcfour/80).toFixed(1);
 	document.getElementById("bcsfour").innerHTML =  bcsfour+'万元/平方米';
-	var bcsfive = (bcone/50).toFixed(1);
+	var bcsfive = (bcfive/50).toFixed(1);
 	document.getElementById("bcsfive").innerHTML =  bcsfive+'万元/平方米';
 }
 </script>
@@ -311,9 +311,10 @@ function set(pgjkone,pgjktwo,pgjkthree,pgjkfour,pgjkfive,ybbzf,jlbzf,tsrqbzf,gfb
 		<img src="base/form/images/exportexcel.png" width="20px" height="20px" title="导出Excel" onClick="print();"  />&nbsp;&nbsp;&nbsp;
 		<img src="web/cbd/framework/images/save.png" width="20px" height="20px" title="保存常量" onClick="save();"  />&nbsp;&nbsp;&nbsp;
 	</div>
-	<div align="center">
+	<div align="center"  style="font-size: 25px;">
 	<h1>住宅搬迁安置补偿政策设计</h1>
 	</div>
+	<br>
 	<table align="center" id="zcsj"  cellpadding="0" cellspacing="0" width="90%"> 
 		<tr class="tr01">
 			<td align="center">类别</td>
@@ -358,7 +359,7 @@ function set(pgjkone,pgjktwo,pgjkthree,pgjkfour,pgjkfive,ybbzf,jlbzf,tsrqbzf,gfb
 			<td>万元/户</td>
 		</tr>
 	</table>
-	<div align="center"><h2>住宅搬迁安置补偿微观实施效果</h2></div>
+	<div align="center" style="font-size: 25px;"><h2>住宅搬迁安置补偿微观实施效果</h2></div>
 	<table align="center" id="ssxg"  cellpadding="0" cellspacing="0" width="90%">
 		<tr class="tr01">
 			<td rowspan="3">序号</td>
@@ -381,9 +382,9 @@ function set(pgjkone,pgjktwo,pgjkthree,pgjkfour,pgjkfive,ybbzf,jlbzf,tsrqbzf,gfb
 			<td>10%</td>
 			<td>100%</td>
 		</tr>
-		<tr align="center">
+		<tr class="tr06">
 			<td>1</td>
-			<td rowspan="9">实施<br>效果</td>
+			<td rowspan="9">实<br>施<br>效<br>果</td>
 			<td>评估价款</td>
 			<td id="pgjkone"></td>
 			<td id="pgjktwo"></td>
@@ -391,7 +392,7 @@ function set(pgjkone,pgjktwo,pgjkthree,pgjkfour,pgjkfive,ybbzf,jlbzf,tsrqbzf,gfb
 			<td id="pgjkfour"></td>
 			<td id="pgjkfive"></td>
 		</tr>
-		<tr align="center">
+		<tr class="tr06">
 			<td rowspan="2">2</td>
 			<td rowspan="2">征收补偿补助款<br>（货币补偿）</td>
 			<td bgcolor="#FFDC35" id="hbbcone"></td>
@@ -400,14 +401,14 @@ function set(pgjkone,pgjktwo,pgjkthree,pgjkfour,pgjkfive,ybbzf,jlbzf,tsrqbzf,gfb
 			<td bgcolor="#FFDC35" id="hbbcfour"></td>
 			<td bgcolor="#FFDC35" id="hbbcfive"></td>
 		</tr>
-		<tr align="center">
+		<tr class="tr06">
 			<td id="bcbzone"></td>
 			<td id="bcbztwo"></td>
 			<td id="bcbzthree"></td>
 			<td id="bcbzfour"></td>
 			<td id="bcbzfive"></td>
 		</tr>
-		<tr align="center">
+		<tr class="tr06">
 			<td>3</td>
 			<td>可购买安置房</td>
 			<td bgcolor="#80FFFF" id="kgmazfone"></td>
@@ -416,7 +417,7 @@ function set(pgjkone,pgjktwo,pgjkthree,pgjkfour,pgjkfive,ybbzf,jlbzf,tsrqbzf,gfb
 			<td bgcolor="#80FFFF" id="kgmazffour"></td>
 			<td bgcolor="#80FFFF" id="kgmazffive"></td>
 		</tr>
-		<tr align="center">
+		<tr class="tr06">
 			<td>4</td>
 			<td>实际对接系数(k1)</td>
 			<td id="k1one"></td>
@@ -425,7 +426,7 @@ function set(pgjkone,pgjktwo,pgjkthree,pgjkfour,pgjkfive,ybbzf,jlbzf,tsrqbzf,gfb
 			<td id="k1four"></td>
 			<td id="k1five"></td>
 		</tr>
-		<tr align="center">
+		<tr class="tr06">
 			<td>5</td>
 			<td>安置房购房款</td>
 			<td id="gfkone"></td>
@@ -434,7 +435,7 @@ function set(pgjkone,pgjktwo,pgjkthree,pgjkfour,pgjkfive,ybbzf,jlbzf,tsrqbzf,gfb
 			<td id="gfkfour"></td>
 			<td id="gfkfive"></td>
 		</tr>
-		<tr align="center">
+		<tr class="tr06">
 			<td>6</td>
 			<td>征收结余款</td>
 			<td bgcolor="#FFCBB3" id="zsjyone"></td>
@@ -443,7 +444,7 @@ function set(pgjkone,pgjktwo,pgjkthree,pgjkfour,pgjkfive,ybbzf,jlbzf,tsrqbzf,gfb
 			<td bgcolor="#FFCBB3" id="zsjyfour"></td>
 			<td bgcolor="#FFCBB3" id="zsjyfive"></td>
 		</tr>
-		<tr align="center">
+		<tr class="tr06">
 			<td rowspan="2">7</td>
 			<td rowspan="2">安置补偿市值</td>
 			<td id="bcone"></td>
@@ -452,7 +453,7 @@ function set(pgjkone,pgjktwo,pgjkthree,pgjkfour,pgjkfive,ybbzf,jlbzf,tsrqbzf,gfb
 			<td id="bcfour"></td>
 			<td id="bcfive"></td>
 		</tr>
-		<tr align="center">
+		<tr class="tr06">
 			<td id="bcsone"></td>
 			<td id="bcstwo"></td>
 			<td id="bcsthree"></td>
