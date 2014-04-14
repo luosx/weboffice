@@ -45,7 +45,7 @@
             }
             ,{
                 title: '季度安排',
-                html: "<iframe width='"+w+"' height='"+h+"' src='web/cbd/dtjc/tjbh/jdjhreport.jsp'/>"
+                html: "<iframe width='"+w+"' height='"+h+"' src='web/cbd/dtjc/weboffice/jdjhreport.jsp'/>"
             },{
                 title: '年度安排',
                 html: "<iframe width='"+w+"' height='"+h+"' src='web/cbd/dtjc/tjbh/ndjhreport.jsp'/>"

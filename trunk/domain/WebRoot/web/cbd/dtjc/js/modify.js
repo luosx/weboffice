@@ -1,3 +1,5 @@
+var nd;
+var jd;
 Ext.onReady(function(){           
      form2 = new Ext.form.FormPanel({
         autoHeight: true,
@@ -296,7 +298,7 @@ Ext.onReady(function(){
 	                id      : 'sm',
 	                value:'',
 	                fieldLabel: '',
-	                html:'<div style="color:red">&nbsp&nbsp&nbsp&nbsp&nbsp地量:公顷&nbsp&nbsp&nbsp规模:万m2&nbsp&nbsp&nbsp住企投资:亿元&nbsp&nbsp&nbsp楼面成交:万元/m2</div>',
+	                html:'<div style="color:red">&nbsp&nbsp&nbsp&nbsp&nbsp地量:公顷&nbsp&nbsp&nbsp规模:万m2&nbsp&nbsp&nbsp住、企、投资:亿元&nbsp&nbsp&nbsp楼面成交:万元/m2</div>',
 	                readOnly:true
            		 }       
         ],
@@ -309,7 +311,7 @@ Ext.onReady(function(){
 							waitMsg: '正在保存,请稍候... ', 		
 							success:function(){ 
 							 Ext.Msg.alert('提示','保存成功。',function(){
-							        form2.form.url=restUrl+'planManager/updateKftl';
+							        form2.form.url=restUrl+'planManager/updateKftl?year='+nd+'&jd='+jd;
 	  							    Ext.getCmp("btnkf").setText("修改开发体量");
 	  							    window.location.reload();
 							 });
@@ -539,9 +541,9 @@ Ext.onReady(function(){
            	  	layout : "form",   
            	  	items : [{
 	                xtype: 'numberfield',
-	                id      : 'gdcjj',
+	                id      : 'gdxmsy',
 	                value:'',
-	                fieldLabel: '成交价',
+	                fieldLabel: '项目收益',
 	                readOnly:true,
 	                width :60
 	                }]},{
@@ -596,20 +598,18 @@ Ext.onReady(function(){
                 fieldLabel: '总价',
                    readOnly:true,
                  width : 60
-            }]},
-	            {
-	            columnWidth: .33, 
-           	  	layout : "form",
-           	  	items :[  {
+            }]} ,
+           	 {
+           	    columnWidth: .33, 
+           	  	layout : "form",   
+           	  	items :[     {
                 xtype: 'numberfield',
                 id      : 'gdzjbl',
                 value:'',
-                minValue:0,
-	            maxValue:100,
                 fieldLabel: '总价%',
                    readOnly:true,
                  width : 60
-          		  }]}
+            }]}
             ]},{
    			 layout : "column", 
            	 items:[{
@@ -636,7 +636,7 @@ Ext.onReady(function(){
 	                id      : 'gdsm',
 	                value:'',
 	                fieldLabel: '',
-	                html:'<div style="color:red">&nbsp&nbsp地量:公顷&nbsp&nbsp规模:万m2&nbsp&nbsp成本收益:亿元&nbsp&nbsp&nbsp总价:万元/m2&nbsp&nbsp&nbsp租金:元/m2/天</div>',
+	                html:'<div style="color:red">&nbsp&nbsp占地面积:公顷&nbsp&nbsp规模:万m2&nbsp&nbsp成本、收益:亿元&nbsp&nbsp&nbsp楼面成本、总价:万元/m2&nbsp&nbsp&nbsp租金:元/m2/天</div>',
 	                readOnly:true
            		 }            
         ],
@@ -649,8 +649,9 @@ Ext.onReady(function(){
 							waitMsg: '正在保存,请稍候... ', 		
 							success:function(){ 
 							 Ext.Msg.alert('提示','保存成功。',function(){
-							 	  form3.form.url=restUrl+'planManager/updateGdtl';
-	  							    Ext.getCmp("btnkf").setText("修改供地体量");
+							 	  form3.form.url=restUrl+'planManager/updateGdtl?year='+this.nd+'&jd='+this.jd;
+	  							    Ext.getCmp("btngd").setText("修改供地体量");
+	  							    window.location.reload();      
 							 });
 							
 							}, 
@@ -684,7 +685,8 @@ Ext.onReady(function(){
 	 	});
 	   Ext.getCmp("gdgmbl").addListener('change',function(){   
 	 	Ext.getCmp("gdgm").setValue(Ext.getCmp("gdxmgm").getValue()*Ext.getCmp("gdgmbl").getValue()/100);
-	 	Ext.getCmp("gdcb").setValue(Ext.getCmp("gdgm").getValue()*Ext.getCmp("gdlmcb").getValue());
+	 	Ext.getCmp("gdcb").setValue(Ext.getCmp("gdgm").getValue()*(Ext.getCmp("gdlmcb").getValue()));
+	 	Ext.getCmp("gdsy").setValue((Ext.getCmp("gdxmsy").getValue()-Ext.getCmp("gdlmcb").getValue())*Ext.getCmp("gdgm").getValue()); 
 	 	Ext.getCmp("gdcbbl").setValue(Ext.getCmp("gdgmbl").getValue());
 	 	Ext.getCmp("gdsybl").setValue(Ext.getCmp("gdgmbl").getValue());
 	 	Ext.getCmp("gdzjbl").setValue(Ext.getCmp("gdgmbl").getValue());
@@ -694,6 +696,8 @@ form3.render("deal");
 })
 
  function dealGdtl(xmmc,nd,jd){
+ 	this.nd=nd;
+ 	this.jd=jd;
  	 form3.show();
  	 form2.hide();
  	 //form3.render("deal");
@@ -707,12 +711,12 @@ form3.render("deal");
 	 if(info[0]!=null){
 		  Ext.getCmp("gdxmdl").setValue(info[0].ZD);
 		  Ext.getCmp("gdxmgm").setValue(info[0].JZGM);
-		  Ext.getCmp("gdlmcb").setValue(info[0].LMCB);
+		  Ext.getCmp("gdlmcb").setValue(info[0].LMCB/10000);
 		  Ext.getCmp("gdzujin").setValue(info[0].ZJ); 
 		  Ext.getCmp("gdxmzujin").setValue(info[0].ZJ); 
-		  Ext.getCmp("gdcjj").setValue(info[0].LMCJJ);
+		  Ext.getCmp("gdxmsy").setValue(info[0].LMCJJ);
 		  Ext.getCmp("gdfwsj").setValue(info[0].FWSJ); 
-		  Ext.getCmp("gdsy").setValue(Ext.getCmp("gdcjj").getValue()-Ext.getCmp("gdlmcb").getValue()); 
+		  
 		  Ext.getCmp("gdzj").setValue(info[0].FWSJ); 
 	 }
 	  putClientCommond("planManager","queryGdtl");
@@ -721,7 +725,7 @@ form3.render("deal");
 	  putRestParameter("jd",jd);
 	  var sinData= restRequest();
 	  if(sinData[0]!=null){
-	  		   form3.form.url=restUrl+'planManager/updateGdtl';
+	  		   form3.form.url=restUrl+'planManager/updateGdtl?year='+nd+'&jd='+jd;
 	  		    Ext.getCmp("btngd").setText("修改供地体量");
 			    Ext.getCmp("gddl").setValue(sinData[0].DL);
 			    Ext.getCmp("gddlbl").setValue(sinData[0].DLZ);
@@ -747,6 +751,8 @@ form3.render("deal");
 
  function dealKftl(xmmc,nd,jd){
  	// form3.render("deal");
+ 	this.nd=nd;
+ 	this.jd=jd;
  	 form2.show();
  	 form3.hide();
  	 putClientCommond("planManager","getXm");
@@ -759,10 +765,10 @@ form3.render("deal");
 	   	  Ext.getCmp("xmhs").setValue(info[0].ZZZSHS);
 	  	  Ext.getCmp("xmdl").setValue(info[0].ZD);
 	  	  Ext.getCmp("xmgm").setValue(info[0].JZGM);
-	  	  Ext.getCmp("xmz").setValue(info[0].ZZCQFY);
-	  	  Ext.getCmp("xmq").setValue(info[0].QYCQFY);
 	  	  Ext.getCmp("xmtz").setValue(info[0].CQHBTZ);
-	  	  Ext.getCmp("lm").setValue(info[0].LMCB);
+	  	  Ext.getCmp("xmz").setValue(info[0].ZZHBTZCB);
+	  	  Ext.getCmp("xmq").setValue(info[0].QYCQFY);	  
+	  	  Ext.getCmp("lm").setValue(info[0].LMCB/10000);
 	  	  Ext.getCmp("cj").setValue(info[0].LMCJJ);
 	 }
 	  putClientCommond("planManager","queryKftl");
@@ -771,7 +777,7 @@ form3.render("deal");
 	  putRestParameter("jd",jd);
 	  var sinData= restRequest();
 	  if(sinData[0]!=null){
-	  		   form2.form.url=restUrl+'planManager/updateKftl';
+	  		   form2.form.url=restUrl+'planManager/updateKftl?year='+nd+'&jd='+jd;
 	  		    Ext.getCmp("btnkf").setText("修改开发体量");
 	            Ext.getCmp("hs").setValue(sinData[0].HS);
 			    Ext.getCmp("dl").setValue(sinData[0].DL);
@@ -785,7 +791,7 @@ form3.render("deal");
 			    Ext.getCmp("tzbl").setValue(sinData[0].TZZ);
 			    Ext.getCmp("zbl").setValue(sinData[0].ZHUZ);
 			    Ext.getCmp("qbl").setValue(sinData[0].QIZ);
-			    Ext.getCmp("lm").setValue(sinData[0].LM);
+			    Ext.getCmp("lm").setValue(sinData[0].LM/10000);
 			    Ext.getCmp("cj").setValue(sinData[0].CJ);
 	  }else{
 			 Ext.getCmp("hs").reset();

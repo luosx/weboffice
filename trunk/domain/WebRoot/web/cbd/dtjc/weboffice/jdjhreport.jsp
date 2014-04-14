@@ -142,21 +142,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			
 		}
   </script>
-  <body >
+  <body onload="loadoffice();">
     <div id="fixed" style="position: fixed; top: 5px; left: 0px">
 		<img src="base/form/images/print.png" width="20px" height="20px" onClick="print()" >
 	</div>
   	<div id='show' style="display:none">
   	</div>
   	<div class="proccess" id="loading"><b>正在加载中。。。</b></div> 
-  </body>
+  </body >
   <script type="text/javascript">
-  		Ext.onReady(function(){
-  			putClientCommond("jh","getJdjhReport");
-  			myData = restRequest();
-  			document.getElementById("show").innerHTML = myData;
-  			document.getElementById("loading").style.display = "none";
-  			document.getElementById("show").style.display = "";
-  		})
+  		var file_type='xlsx';
+  		var file_name = '土地储备规划实施决策系统.xlsx';
+  		function loadoffice(){
+  			
+          	    var fileid=file_name.substring(0,file_name.indexOf('.'));//add by 李亚栓 上传word文档时，传文档名称fileid
+          		window.location.href="<%=basePath%>/model/webOffice/webOffice_read.jsp?file_id="+fileid+"."+"&file_type="+file_type;
+           	
+  		}
   </script>
 </html>
