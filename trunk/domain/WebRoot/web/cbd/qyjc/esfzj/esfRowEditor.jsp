@@ -119,12 +119,35 @@ String view = request.getParameter("view");
 					    allowBlank:false
 					 }]
 				},{
+		            columnWidth:.5,
+	        		layout:'form',
+	        		items:[{
+		                xtype: 'textfield',
+		                id      : 'xh',
+		                value:'',
+		                disabled:true,
+		                fieldLabel: '序号',
+		                width :100
+	                }]
+            	},{
+                	layout : 'column',
+    	        	items : [{
+    	        		columnWidth:.5,
+    	        		layout:'form',
+    	        		items:[{
+    		                xtype: 'textfield',
+    		                id      : 'xqmc',
+    		                value:'',
+    		                fieldLabel: '小区名称',
+    		                width :100
+    	                }]	                
+                	},{
 					columnWidth:.5,
 	        		layout:'form',
 	        		items:[{
 						xtype : 'combo',   
-					    fieldLabel : '小区类型',   
-					    id : 'xqlb',   
+					    fieldLabel : '住房性质',   
+					    id : 'xz',   
 					    store :[[1,'老旧房'],[2,'新居房']],   
 					    width:100,   
 					    value:'',   
@@ -134,15 +157,27 @@ String view = request.getParameter("view");
 					}]
 				}]
             },{
+		            columnWidth:.5,
+	        		layout:'form',
+	        		items:[{
+		                xtype: 'textfield',
+		                id      : 'jsnd',
+		                value:'',
+		                fieldLabel: '建设年代',
+		                width :100
+	                }]
+            	}]
+            },{
             	layout : 'column',
 	        	items : [{
 	        		columnWidth:.5,
 	        		layout:'form',
 	        		items:[{
 		                xtype: 'textfield',
-		                id      : 'xqmc',
+		                id      : 'jzlx',
 		                value:'',
-		                fieldLabel: '小区名称',
+
+		                fieldLabel: '房屋、建筑类型',
 		                width :100
 	                }]	                
             	},{
@@ -150,99 +185,113 @@ String view = request.getParameter("view");
 	        		layout:'form',
 	        		items:[{
 		                xtype: 'textfield',
-		                id      : 'esfzl',
-		                value:'',
-		                fieldLabel: '二手房总量',
-		                width :100
-	                }]
-            	}]
-            },{
-            	layout : 'column',
-	        	items : [{
-	        		columnWidth:.5,
-	        		layout:'form',
-	        		items:[{
-		                xtype: 'textfield',
-		                id      : 'esfjj',
+		                id      : 'wyf',
 		                value:'',
 		                disabled:true,
-		                fieldLabel: '二手房均价',
+		                fieldLabel: '物业费',
 		                width :100
-	                }]	                
+	                }]
             	},{
 		            columnWidth:.5,
 	        		layout:'form',
 	        		items:[{
 		                xtype: 'textfield',
-		                id      : 'esfjjzf',
+		                id      : 'ldzs',
 		                value:'',
 		                disabled:true,
-		                fieldLabel: '二手房均价涨幅',
+		                fieldLabel: '楼栋总数',
 		                width :100
 	                }]
-            	}]
-            },{
-            	layout : 'column',
-	        	items : [{
-	        		columnWidth:.5,
-	        		layout:'form',
-	        		items:[{
-		                xtype: 'textfield',
-		                id      : 'czl',
-		                value:'',
-		                fieldLabel: '出租量',
-		                width :100
-	                }]	                
             	},{
 		            columnWidth:.5,
 	        		layout:'form',
 	        		items:[{
 		                xtype: 'textfield',
-		                id      : 'czfjj',
+		                id      : 'fwzs',
 		                value:'',
 		                disabled:true,
-		                fieldLabel: '出租房均价',
+		                fieldLabel: '房屋总数',
 		                width :100
 	                }]
-            	}]
-            },{
-            	layout : 'column',
-	        	items : [{
-	        		columnWidth:.5,
+            	},{
+		            columnWidth:.5,
 	        		layout:'form',
 	        		items:[{
 		                xtype: 'textfield',
-		                id      : 'czfjjzf',
+		                id      : 'lczk',
 		                value:'',
 		                disabled:true,
-		                fieldLabel: '出租房均价涨幅',
+		                fieldLabel: '楼层状况',
 		                width :100
-	                }]	                
-            	}]
-            },{
-            	layout : 'column',
-	        	items : [{
-	        		columnWidth:1,
-	        		layout:'form',
-	        		items:[{
-	 					xtype: 'textarea',
-		                id      : 'bz',
-		                value:'',
-		                fieldLabel: '备注',
-		                width :300
 	                }]
             	},{
-	        		columnWidth:1,
+		            columnWidth:.5,
 	        		layout:'form',
 	        		items:[{
-	 					xtype: 'textarea',
-		                id      : 'yw_guid',
+		                xtype: 'textfield',
+		                id      : 'rjl',
 		                value:'',
-		                hidden:true,
-		                fieldLabel: '备注',
-		                width :300
+		                disabled:true,
+		                fieldLabel: '容积率',
+		                width :100
 	                }]
-            	}]
+            	},{
+		            columnWidth:.5,
+	        		layout:'form',
+	        		items:[{
+		                xtype: 'textfield',
+		                id      : 'lhl',
+		                value:'',
+		                disabled:true,
+		                fieldLabel: '绿化率',
+		                width :100
+	                }]
+            	},{
+		            columnWidth:.5,
+	        		layout:'form',
+	        		items:[{
+		                xtype: 'textfield',
+		                id      : 'tcw',
+		                value:'',
+		                disabled:true,
+		                fieldLabel: '停车位',
+		                width :100
+	                }]
+            	},{
+		            columnWidth:.5,
+	        		layout:'form',
+	        		items:[{
+		                xtype: 'textfield',
+		                id      : 'kfs',
+		                value:'',
+		                disabled:true,
+		                fieldLabel: '开发商',
+		                width :100
+	                }]
+            	},{
+		            columnWidth:.5,
+	        		layout:'form',
+	        		items:[{
+		                xtype: 'textfield',
+		                id      : 'wygs',
+		                value:'',
+		                disabled:true,
+		                fieldLabel: '物业公司',
+		                width :100
+	                }]
+            	},{
+		            columnWidth:.5,
+	        		layout:'form',
+	        		items:[{
+		                xtype: 'textfield',
+		                id      : 'dz',
+		                value:'',
+		                disabled:true,
+		                fieldLabel: '地址',
+		                width :100
+	                }]
+            	}
+            	]
             }],
 	        buttons: [
 	            {
@@ -262,13 +311,14 @@ String view = request.getParameter("view");
 	  });	
   		form.render("deal");
   		form.hide();
-  		var elements = new Array("ssqy","xqlb","xqmc","esfzl","esfjj","esfjjzf","czl","czfjj","czfjjzf","bz","yw_guid");
+		var elements = new Array("ssqy","xh","xqmc","xz","jzlx","wyf","ldzs","fwzs","lczk","rjl","lhl",
+									"tcw","kfs","wygs","dz","yw_guid");
   		paneloper.init(form,elements);
   		paneloper.hide();
   	}
   // })
-  function hideywguid(){
-  		var obj = document.getElementById("ESFQK");
+   function hideywguid(){
+ 		var obj = document.getElementById("ESFQK");
   		var rowlength = obj.rows.length;
   		for(var i=0;i< rowlength;i++){
   			//if(i!=1){
@@ -277,7 +327,7 @@ String view = request.getParameter("view");
   			//}
   		}
   		var width = document.body.clientWidth;
-		var height = document.body.clientHeight * 0.95;
+    	var height = document.body.clientHeight * 0.95;
        	FixTable("ESFQK", 0,1, width, height);
   	}
   </script>
