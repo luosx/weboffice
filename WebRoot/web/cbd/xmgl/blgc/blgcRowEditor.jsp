@@ -106,7 +106,7 @@ if (!xmid.equals("") && !xmid.equals("null")) {
   	$(document).ready(function () { 
 		var width = document.body.clientWidth;
 		var height = document.body.clientHeight * 0.95;
-       //	FixTable("esftable", 0,1, width, height-30);
+       	FixTable("esftable", 0,1, width, height-30);
        	buildPanel();
     });
   //	Ext.onReady(function(){
@@ -146,7 +146,6 @@ if (!xmid.equals("") && !xmid.equals("null")) {
 				    id : 'jbr',   
 				    width:100,   
 				    value:'',   
-				    readOnly:true,
 				    allowBlank:false
             	},{
  					xtype: 'textfield',
@@ -186,7 +185,7 @@ if (!xmid.equals("") && !xmid.equals("null")) {
   // })
   </script>
   <body>
-  	<div id="show" align="center"  style="overflow-x:hidden;overflow-y:hidden">
+  	<div id="show" align="center" >
 			<table width="800" cellpadding="1" cellspacing="0" id='esftable' border='1'>
 				<tr class="title" onclick="showMap(this); return false;" ondblclick='editMap(this); return false;'>
 					<td align="center" width="80px" height="50px" >

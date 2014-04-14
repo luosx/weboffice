@@ -99,9 +99,9 @@
 		var nz = escape(escape(document.getElementById("nz").value));
 		var xz = escape(escape(document.getElementById("xz").value));
 		var bz = escape(escape(document.getElementById("bz").value));
-		var nameone = escape(escape(document.getElementById("nameone").value));
-		var nametwo = escape(escape(document.getElementById("nametwo").value));
-		var namethree = escape(escape(document.getElementById("namethree").value));
+	//	var nameone = escape(escape(document.getElementById("nameone").value));
+	//	var nametwo = escape(escape(document.getElementById("nametwo").value));
+	//	var namethree = escape(escape(document.getElementById("namethree").value));
 		var zdmj = document.getElementById("zdmj").value;
 		var jsyd = document.getElementById("jsyd").value;
 		var jzgm = document.getElementById("jzgm").value;
@@ -127,9 +127,9 @@
 		putRestParameter("fzzcq", fzzcq);
 		putRestParameter("fcqmj", fcqmj);
 		putRestParameter("xgjz", xgjz);
-		putRestParameter("nameone", nameone);
-		putRestParameter("nametwo", nametwo);
-		putRestParameter("namethree", namethree);
+		//putRestParameter("nameone", nameone);
+		//putRestParameter("nametwo", nametwo);
+		//putRestParameter("namethree", namethree);
 		var reslut = restRequest();
 			if (reslut == 'success') {
 				alert('保存成功！');
@@ -141,176 +141,176 @@
 	<body bgcolor="#FFFFFF">
 
 		<div align="center" style="width: 100%; margin-top: 20px;">
-		<div style="border: 1 solid #000000;width: 780px;">
-			<div align="center"
-				style="width: 780px; height: 50px; background-color: #FFFFFF;">
-				<div align="center" style="width: 780px;margin-top: 5px;">
-					<div align="left">
-						<div class="div3">
-							<img width="25" height="25"
-								src="<%=basePath%>web/cbd/framework/images/log.png">
-						</div>
-						<div class="div4" style="margin-top: 6px;">
-							<h2><%=name1%></h2>
+			<div style="border: 1 solid #000000; width: 780px;">
+				<div align="center"
+					style="width: 780px; height: 50px; background-color: #FFFFFF;">
+					<div align="center" style="width: 780px; margin-top: 5px;">
+						<div align="left">
+							<div class="div3">
+								<img width="25" height="25"
+									src="<%=basePath%>web/cbd/framework/images/log.png">
+							</div>
+							<div class="div4" style="margin-top: 6px;">
+								<h2><%=name1%></h2>
+							</div>
 						</div>
 					</div>
+					<hr>
 				</div>
-				<hr>
-			</div>
-			
-			<div align="center"
-				style="width: 780px; height: 300px; background-color: #FFFFFF;">
 
-				<div class="div1">
-					<!--
+				<div align="center"
+					style="width: 780px; height: 300px; background-color: #FFFFFF;">
+
+					<div class="div1">
+						<!--
 					<div align="center">
 						<input id="nameone"
 							style='border-left: 0px; border-top: 0px; border-right: 0px; border-bottom: 1px'
 							value="">
 					</div>
 					-->
-					<div>
-						<img id="img1"
-							src='<%=basePath%>//model//accessory//dzfj//download//<%=firstpath%>'
-							onerror="this.src='<%=basePath%>/web/cbd/framework/images/defult.jpg'"
-							height='275px' width='375px' style="border: 1 solid #D0D0D0">
+						<div ondrop="drop(event)" ondragover="allowDrop(event)">
+							<img id="img1" draggable="true" ondragstart="drag(event)"
+								src='<%=basePath%>//model//accessory//dzfj//download//<%=firstpath%>'
+								onerror="this.src='<%=basePath%>/web/cbd/framework/images/defult.jpg'"
+								height='275px' width='375px' style="border: 1 solid #D0D0D0">
+						</div>
 					</div>
-				</div>
-				<div class="div2" align="center">
-					<!--<div align="center">
+					<div class="div2" align="center">
+						<!--<div align="center">
 						<input id="nametwo"
 							style='border-left: 0px; border-top: 0px; border-right: 0px; border-bottom: 1px'
 							value="">
 					</div>
 					-->
-					<div>
-						<img id='img2'
-							src='<%=basePath%>//model//accessory//dzfj//download//<%=secondpath%>'
-							onerror="this.src='<%=basePath%>/web/cbd/framework/images/defult.jpg'"
-							height='275px' width='375px' style="border: 1 solid #D0D0D0">
+						<div>
+							<img id='img2'
+								src='<%=basePath%>//model//accessory//dzfj//download//<%=secondpath%>'
+								onerror="this.src='<%=basePath%>/web/cbd/framework/images/defult.jpg'"
+								height='275px' width='375px' style="border: 1 solid #D0D0D0">
+						</div>
 					</div>
 				</div>
-			</div>
-			<div style="background-color: #FFFFFF; width: 780px; height: 300px;">
-				<div class="div3" align="center">
-					<!--<div>
+				<div style="background-color: #FFFFFF; width: 780px; height: 300px;">
+					<div class="div3" align="center">
+						<!--<div>
 						<input id="namethree"
 							style='border-left: 0px; border-top: 0px; border-right: 0px; border-bottom: 1px'
 							value="">
 					</div>
 					-->
-					<div>
-						<img id='img3'
-							src='<%=basePath%>//model//accessory//dzfj//download//<%=threepath%>'
-							onerror="this.src='<%=basePath%>/web/cbd/framework/images/defult.jpg'"
-							height='275px' width='375px' style="border: 1 solid #D0D0D0">
+						<div>
+							<img id='img3'
+								src='<%=basePath%>//model//accessory//dzfj//download//<%=threepath%>'
+								onerror="this.src='<%=basePath%>/web/cbd/framework/images/defult.jpg'"
+								height='275px' width='375px' style="border: 1 solid #D0D0D0">
+						</div>
 					</div>
-				</div>
-				<div class="div4">
-					<table>
-						<tr>
-							<td>
-								项目名称：
-								<input type="text" id="xmmc"
-									style="width: 200px; border: 0 solid 1px; border-top: none; border-left: none; border-right: none; text-align: center;"
-									value="<%=xmmc%>">
-							</td>
-						</tr>
-						<tr>
-							<td>
-								开发主体：
-								<input type="text" id="kfzt" class="ab"
-									value="<%=map.get("kfzt") == null ? "" : map.get("kfzt")%>">
-							</td>
-						</tr>
-						<tr>
-							<td>
-								项目区位：东至
-								<input type="text" id="dz" class="ab"
-									value="<%=map.get("dz") == null ? "" : map.get("dz")%>">
-								;南至
-								<input type="text" id="nz" class="ab"
-									value="<%=map.get("nz") == null ? "" : map.get("nz")%>">
-								;
-							</td>
-						</tr>
-						<tr>
-							<td>
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;西至
-								<input type="text" id="xz" class="ab"
-									value="<%=map.get("xz") == null ? "" : map.get("xz")%>">
-								;北至
-								<input type="text" id="bz" class="ab"
-									value="<%=map.get("bz") == null ? "" : map.get("bz")%>">
-								.
-							</td>
-						</tr>
-						<tr>
-							<td>
-								规划情况：占地面积
-								<input type="text" id="zdmj" class="ab"
-									value="<%=map.get("zdmj") == null ? "" : map.get("zdmj")%>">
-								公顷;
-								<br />
-								&nbsp;&nbsp;&nbsp;&nbsp;建设用地
-								<input type="text" id="jsyd" class="ab"
-									value="<%=map.get("jsyd") == null ? "" : map.get("jsyd")%>">
-								公顷;
-							</td>
-						</tr>
-						<tr>
-							<td>
-								&nbsp;&nbsp;&nbsp;&nbsp;建筑规模
-								<input type="text" id="jzgm" 
-									value="<%=map.get("jzgm") == null ? "" : map.get("jzgm")%>" 
-									style='border: 0 solid 1px; border-top: none; border-left: none; border-right: none; width: 70px; text-align: center;'>
-								万㎡; 容积率
-								<input type="text" id="rjl" class="ab"
-									value="<%=map.get("rjl") == null ? "" : map.get("rjl")%>"
-									style='border: 0 solid 1px; border-top: none; border-left: none; border-right: none; width: 70px; text-align: center;'>
-								.
-							</td>
-						</tr>
-						<tr>
-							<td>
-								&nbsp;&nbsp;&nbsp;&nbsp;现状住宅
-								<input type="text" id="zzcq" class="ab"
-									value="<%=map.get("zzcq") == null ? "" : map.get("zzcq")%>">
-								户,
-								<input type="text" id="cqmj" class="ab"
-									value="<%=map.get("cqmj") == null ? "" : map.get("cqmj")%>">
-								万㎡;
-							</td>
-						</tr>
-						<tr>
-							<td>
-								&nbsp;&nbsp;&nbsp;&nbsp;现状非住宅
-								<input type="text" id="fzzcq" class="ab"
-									value="<%=map.get("fzzcq") == null ? "" : map.get("fzzcq")%>">
-								家,
-								<input type="text" id="fcqmj" class="ab"
-									value="<%=map.get("fcqmj") == null ? "" : map.get("fcqmj")%>">
-								万㎡;
-							</td>
-						</tr>
-						<tr>
-							<td>
-								相关进展：
-								<input type="text" id="xgjz"
-									value="<%=map.get("xgjz") == null ? "" : map.get("xgjz")%>"
-									style='border: 0 solid 1px; border-top: none; border-left: none; border-right: none; width: 300px; text-align: center;'>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<button onClick='add()'>
-									保存
-								</button>
-							</td>
-						</tr>
-					</table>
-				</div>
+					<div class="div4">
+						<table>
+							<tr>
+								<td>
+									项目名称：
+									<input type="text" id="xmmc"
+										style="width: 200px; border: 0 solid 1px; border-top: none; border-left: none; border-right: none; text-align: center;"
+										value="<%=xmmc%>">
+								</td>
+							</tr>
+							<tr>
+								<td>
+									开发主体：
+									<input type="text" id="kfzt" class="ab"
+										value="<%=map.get("kfzt") == null ? "" : map.get("kfzt")%>">
+								</td>
+							</tr>
+							<tr>
+								<td>
+									项目区位：东至
+									<input type="text" id="dz" class="ab"
+										value="<%=map.get("dz") == null ? "" : map.get("dz")%>">
+									;南至
+									<input type="text" id="nz" class="ab"
+										value="<%=map.get("nz") == null ? "" : map.get("nz")%>">
+									;
+								</td>
+							</tr>
+							<tr>
+								<td>
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;西至
+									<input type="text" id="xz" class="ab"
+										value="<%=map.get("xz") == null ? "" : map.get("xz")%>">
+									;北至
+									<input type="text" id="bz" class="ab"
+										value="<%=map.get("bz") == null ? "" : map.get("bz")%>">
+									.
+								</td>
+							</tr>
+							<tr>
+								<td>
+									规划情况：占地面积
+									<input type="text" id="zdmj" class="ab"
+										value="<%=map.get("zdmj") == null ? "" : map.get("zdmj")%>">
+									公顷;
+									<br />
+									&nbsp;&nbsp;&nbsp;&nbsp;建设用地
+									<input type="text" id="jsyd" class="ab"
+										value="<%=map.get("jsyd") == null ? "" : map.get("jsyd")%>">
+									公顷;
+								</td>
+							</tr>
+							<tr>
+								<td>
+									&nbsp;&nbsp;&nbsp;&nbsp;建筑规模
+									<input type="text" id="jzgm"
+										value="<%=map.get("jzgm") == null ? "" : map.get("jzgm")%>"
+										style='border: 0 solid 1px; border-top: none; border-left: none; border-right: none; width: 70px; text-align: center;'>
+									万㎡; 容积率
+									<input type="text" id="rjl" class="ab"
+										value="<%=map.get("rjl") == null ? "" : map.get("rjl")%>"
+										style='border: 0 solid 1px; border-top: none; border-left: none; border-right: none; width: 70px; text-align: center;'>
+									.
+								</td>
+							</tr>
+							<tr>
+								<td>
+									&nbsp;&nbsp;&nbsp;&nbsp;现状住宅
+									<input type="text" id="zzcq" class="ab"
+										value="<%=map.get("zzcq") == null ? "" : map.get("zzcq")%>">
+									户,
+									<input type="text" id="cqmj" class="ab"
+										value="<%=map.get("cqmj") == null ? "" : map.get("cqmj")%>">
+									万㎡;
+								</td>
+							</tr>
+							<tr>
+								<td>
+									&nbsp;&nbsp;&nbsp;&nbsp;现状非住宅
+									<input type="text" id="fzzcq" class="ab"
+										value="<%=map.get("fzzcq") == null ? "" : map.get("fzzcq")%>">
+									家,
+									<input type="text" id="fcqmj" class="ab"
+										value="<%=map.get("fcqmj") == null ? "" : map.get("fcqmj")%>">
+									万㎡;
+								</td>
+							</tr>
+							<tr>
+								<td>
+									相关进展：
+									<input type="text" id="xgjz"
+										value="<%=map.get("xgjz") == null ? "" : map.get("xgjz")%>"
+										style='border: 0 solid 1px; border-top: none; border-left: none; border-right: none; width: 300px; text-align: center;'>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<button onClick='add()'>
+										保存
+									</button>
+								</td>
+							</tr>
+						</table>
+					</div>
 				</div>
 			</div>
 		</div>
