@@ -9,14 +9,14 @@ import com.klspta.base.AbstractBaseBean;
 public class JbdkValueChange extends AbstractBaseBean {
 	private String source_name = "JC_JIBEN";
 	private String impress_name = "JC_XIANGMU";
-	private String fields = "zd,jsyd,rjl,jzgm,gjjzgm,jzjzgm,szjzgm,zzsgm,zzzsgm,zzzshs,hjmj,fzzzsgm,fzzjs,kfcb,dmcb,yjcjj,yjzftdsy,cxb,cqqd,cbfgl";
+	private String fields = "zd,jsyd,rjl,jzgm,gjjzgm,jzjzgm,szjzgm,zzsgm,zzzsgm,zzzshs,hjmj,fzzzsgm,fzzjs,kfcb,lmcb,dmcb,yjcjj,yjzftdsy,cxb,cqqd,cbfgl";
 	private String sql =  "select round(sum(t.zzsgm),2) as zzsgm, round(sum(t.zzzsgm),2) as zzzsgm, round(sum(t.zzzshs),2) as zzzshs, "
 		+ "case when sum(t.zzzshs)=0 then 0 else round(sum(t.zzzsgm)/sum(t.zzzshs)*10000,2) end as hjmj,"
 		+ " round(sum(t.fzzzsgm),2) as fzzzsgm, round(sum(t.fzzjs),2) as fzzjs,round(sum(t.zd),2) as zd,"
 		+ "round(sum(t.jsyd),2) as jsyd, case when sum(t.jsyd)=0 then 0 else  round(sum(t.jzgm)/sum(t.jsyd),2) end as rjl,"
 		+ " round(sum(t.jzgm),2) as jzgm,'--' as kzgd, '--' as ghyt, round(sum(t.gjjzgm),2) as gjjzgm,"
 		+ " round(sum(t.jzjzgm),2) as jzjzgm, round(sum(t.szjzgm),2) as szjzgm,"
-		+ "round(sum(t.szjzgm),2) as szjzgm,round(sum(t.kfcb),2) as kfcb,  round(sum(t.lmcb),2) as lmcb , "
+		+ "round(sum(t.szjzgm),2) as szjzgm,round(sum(t.kfcb),2) as kfcb,case when sum(t.jzgm)=0 then 0 else round(sum(t.kfcb)/sum(t.jzgm)*10000,2) end as lmcb , "
 		+ "case when sum(t.jsyd)=0 then 0 when sum(t.kfcb)=0 then 0 else round(sum(t.kfcb)/sum(t.jsyd)*10000,2) end as dmcb,round(avg(t.yjcjj),2) as yjcjj,"
 		+ "round(avg(t.yjcjj)*sum(t.jzgm)/10000-sum(t.kfcb),2) as yjzftdsy,"
 		+ "case when (avg(t.yjcjj)*sum(t.jzgm))=0 then '0' when avg(t.yjcjj)*sum(t.jzgm)=0 then '0' else round(((avg(t.yjcjj)*sum(t.jzgm)/10000-sum(t.kfcb))/"

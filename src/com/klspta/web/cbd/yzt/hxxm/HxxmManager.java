@@ -162,7 +162,7 @@ public class HxxmManager extends AbstractBaseBean {
 		String[] dkmcs = value.split(",");
 		String sql = "select sum(zd) as zd ,sum(jsyd) as jsyd,round(sum(jzgm)/sum(jsyd)/100,2)||'%' as rjl,sum(jzgm) as jzgm," +
 				"sum(gjjzgm)as gjjzgm ,sum(jzjzgm) as jzjzgm ,sum(szjzgm) as szjzgm,sum(kfcb) as kfcb," +
-				"round(sum(kfcb)/sum(jzgm),2)*10000 as lmcb,round(sum(kfcb)/sum(jsyd),2)*10000 as lmcb,"+
+				"round(sum(kfcb)/sum(jsyd),2)*10000 as dmcb,round(sum(kfcb)/sum(jzgm),2)*10000 as lmcb,"+
 				"sum(zzsgm) as zzsgm,sum(zzzsgm) as zzzsgm ,sum(zzzshs) as zzzshs,sum(hjmj)" +
 				" as hjmj,sum(fzzzsgm) as fzzzsgm,sum(fzzjs) as fzzjs from jc_jiben where dkmc in (";
 		for(int i=0;i<dkmcs.length ;i++){
@@ -193,7 +193,7 @@ public class HxxmManager extends AbstractBaseBean {
 		for( int i=0;i<items.length;i++){
 			values[i] = request.getParameter(items[i]);
 			if(items[i].equals("xh")){
-				if(Integer.parseInt(values[i])<10){
+				if(Integer.parseInt("".equals(values[i])?"0":values[i])<10){
 					values[i] = "0" + values[i];
 				}
 			}

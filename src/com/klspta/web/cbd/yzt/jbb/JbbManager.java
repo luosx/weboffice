@@ -48,6 +48,12 @@ public class JbbManager extends AbstractBaseBean {
 
 	public void modify(){
 		String dkbh = request.getParameter("jbdkbh");
+		String zzsgm = request.getParameter("zzsgm");
+		String zzzsgm = request.getParameter("zzzsgm");
+		String zzzshs = request.getParameter("zzzshs");
+		String hjmj = request.getParameter("hjmj");
+		String fzzzsgm = request.getParameter("fzzzsgm");
+		String fzzjs = request.getParameter("fzzjs");
 		String zd = request.getParameter("zd");
 		String jsyd = request.getParameter("jsyd");
 		String jzgm = request.getParameter("jzgm");
@@ -73,22 +79,22 @@ public class JbbManager extends AbstractBaseBean {
                         lmcb,dmcb,yjcjj,yjzftdsy,cxb,cqqd,cbfgl,ssqy,dkbh}); 
   		    if("民生改善区".equals(ssqy)){
   		    	sql = "update cbd_jbb set zd=?,jsyd=?,rjl=?,jzgm=?,ghyt=?,gjjzgm=?,jzjzgm=?,szjzgm=?,kfcb=?,"+
-  		                 "lmcb=?,dmcb=?,yjcjj=?,yjzftdsy=?,cxb=?,cqqd=?,cbfgl=?, gnfq='2' where tbbh=?";
+  		                 "lmcb=?,dmcb=?,yjcjj=?,yjzftdsy=?,cxb=?,cqqd=?,cbfgl=?, gnfq='2',zzsgm=?,zzzsgm=?,zzzshs=?,hjmj=?,fzzzsgm=?,fzzjs=? where tbbh=?";
   		    }else if("城市形象提升区".equals(ssqy)){
   		    	sql = "update cbd_jbb set zd=?,jsyd=?,rjl=?,jzgm=?,ghyt=?,gjjzgm=?,jzjzgm=?,szjzgm=?,kfcb=?,"+
-  		                 "lmcb=?,dmcb=?,yjcjj=?,yjzftdsy=?,cxb=?,cqqd=?,cbfgl=?, gnfq='3' where tbbh=?";
+  		                 "lmcb=?,dmcb=?,yjcjj=?,yjzftdsy=?,cxb=?,cqqd=?,cbfgl=?, gnfq='3',zzsgm=?,zzzsgm=?,zzzshs=?,hjmj=?,fzzzsgm=?,fzzjs=? where tbbh=?";
   		    }else if("产业功能改造区".equals(ssqy)){
   		    	sql = "update cbd_jbb set zd=?,jsyd=?,rjl=?,jzgm=?,ghyt=?,gjjzgm=?,jzjzgm=?,szjzgm=?,kfcb=?,"+
-  		                 "lmcb=?,dmcb=?,yjcjj=?,yjzftdsy=?,cxb=?,cqqd=?,cbfgl=?, gnfq='1' where tbbh=?";
+  		                 "lmcb=?,dmcb=?,yjcjj=?,yjzftdsy=?,cxb=?,cqqd=?,cbfgl=?, gnfq='1',zzsgm=?,zzzsgm=?,zzzshs=?,hjmj=?,fzzzsgm=?,fzzjs=? where tbbh=?";
   		    }else if("保留微调区".equals(ssqy)){
   		    	sql = "update cbd_jbb set zd=?,jsyd=?,rjl=?,jzgm=?,ghyt=?,gjjzgm=?,jzjzgm=?,szjzgm=?,kfcb=?,"+
-  		                 "lmcb=?,dmcb=?,yjcjj=?,yjzftdsy=?,cxb=?,cqqd=?,cbfgl=?, gnfq='4' where tbbh=?";
+  		                 "lmcb=?,dmcb=?,yjcjj=?,yjzftdsy=?,cxb=?,cqqd=?,cbfgl=?, gnfq='4',zzsgm=?,zzzsgm=?,zzzshs=?,hjmj=?,fzzzsgm=?,fzzjs=? where tbbh=?";
   		    }
   		    if("--".equals(lmcb)){
   		    	lmcb = "0";
   		    }
   		    update(sql,GIS,new Object[]{zd, jsyd,rjl,jzgm,ghyt,gjjzgm,jzjzgm,szjzgm,kfcb,
-                    lmcb,dmcb,yjcjj,yjzftdsy,cxb,cqqd,cbfgl,dkbh});
+                    lmcb,dmcb,yjcjj,yjzftdsy,cxb,cqqd,cbfgl,zzsgm,zzzsgm,zzzshs,hjmj,fzzzsgm,fzzjs,dkbh});
   		    JbdkValueChange jbdkValueChange = new JbdkValueChange();
   		    jbdkValueChange.add(dkbh);
   		    if(i==1){
