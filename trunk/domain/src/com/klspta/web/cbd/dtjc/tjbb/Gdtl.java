@@ -81,16 +81,16 @@ public class Gdtl extends AbstractBaseBean {
     public void update() {
         String xmmc = request.getParameter("gdxmmc");
         String year = request.getParameter("year");
-        String dl = request.getParameter("dl")==""?"0":request.getParameter("dl");
-        String gm = request.getParameter("gm")==""?"0":request.getParameter("gm");
-        String cb = request.getParameter("cb")==""?"0":request.getParameter("cb");
-        String sy = request.getParameter("sy")==""?"0":request.getParameter("sy");
-        String zj = request.getParameter("zj")==""?"0":request.getParameter("zj");
-        String dlz = request.getParameter("dlbl")==""?"0":request.getParameter("dlbl");
-        String gmz = request.getParameter("gmbl")==""?"0":request.getParameter("gmbl");
-        String cbz = request.getParameter("cbbl")==""?"0":request.getParameter("cbbl");
-        String syz = request.getParameter("sybl")==""?"0":request.getParameter("sybl");
-        String zjz = request.getParameter("zjbl")==""?"0":request.getParameter("zjbl");
+        String dl = request.getParameter("gddl")==""?"0":request.getParameter("gddl");
+        String gm = request.getParameter("gdgm")==""?"0":request.getParameter("gdgm");
+        String cb = request.getParameter("gdcb")==""?"0":request.getParameter("gdcb");
+        String sy = request.getParameter("gdsy")==""?"0":request.getParameter("gdsy");
+        String zj = request.getParameter("gdzj")==""?"0":request.getParameter("gdzj");
+        String dlz = request.getParameter("gddlbl")==""?"0":request.getParameter("gddlbl");
+        String gmz = request.getParameter("gdgmbl")==""?"0":request.getParameter("gdgmbl");
+        String cbz = request.getParameter("gdcbbl")==""?"0":request.getParameter("gdcbbl");
+        String syz = request.getParameter("gdsybl")==""?"0":request.getParameter("gdsybl");
+        String zjz = request.getParameter("gdzjbl")==""?"0":request.getParameter("gdzjbl");
         String zujin = request.getParameter("zujin")==""?"0":request.getParameter("zujin");
         String season = request.getParameter("jd");
         String xmbh = getXmbh(xmmc);

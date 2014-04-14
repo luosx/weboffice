@@ -200,7 +200,7 @@ public class TjbbData extends AbstractBaseBean {
 	}
 	
 	public String saveProjectsByUserid( String minyear, String maxyear, String projects){
-		String sql = "update set t.minyear = ?, t.maxyear = ?, t.projects = ? ";
+		String sql = "update user_projects t set t.minyear = ?, t.maxyear = ?, t.projects = ? ";
 		update(sql, YW, new Object[]{  minyear, maxyear, projects});
 		return null;
 	}
