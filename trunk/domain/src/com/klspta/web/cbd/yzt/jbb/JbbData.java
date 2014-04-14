@@ -257,8 +257,8 @@ public class JbbData extends AbstractBaseBean   {
             update(sql, GIS);
             
             //更新自然斑面积
-            String updatesql = "update zfjc." + formName + " a set(a.zd)=(select trunc(b.shape.area) from giser." + form_gis + " b where b.TBBH = a.dkmc) where a.dkmc in (select tbbh from giser." + "CBD_JBB3D" + ")";
-            update(updatesql, YW);
+         /*   String updatesql = "update zfjc." + formName + " a set(a.zd)=(select trunc(b.shape.area) from giser." + form_gis + " b where b.TBBH = a.dkmc) where a.dkmc in (select tbbh from giser." + "CBD_JBB3D" + ")";
+            update(updatesql, YW);*/
             
         } catch (Exception e) {
         	System.out.println(e.getMessage());
