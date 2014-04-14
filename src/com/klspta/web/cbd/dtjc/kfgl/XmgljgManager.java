@@ -30,9 +30,9 @@ public class XmgljgManager extends AbstractBaseBean{
 	    String nz = UtilFactory.getStrUtil().unescape(request.getParameter("nz"));
 	    String xz = UtilFactory.getStrUtil().unescape(request.getParameter("xz"));
 	    String bz = UtilFactory.getStrUtil().unescape(request.getParameter("bz"));
-	    String nameone = UtilFactory.getStrUtil().unescape(request.getParameter("nameone"));
-	    String nametwo = UtilFactory.getStrUtil().unescape(request.getParameter("nametwo"));
-	    String namethree = UtilFactory.getStrUtil().unescape(request.getParameter("namethree"));
+	    //String nameone = UtilFactory.getStrUtil().unescape(request.getParameter("nameone"));
+	    //String nametwo = UtilFactory.getStrUtil().unescape(request.getParameter("nametwo"));
+	    //String namethree = UtilFactory.getStrUtil().unescape(request.getParameter("namethree"));
 	    String zdmj = request.getParameter("zdmj");
 	    String jsyd = request.getParameter("jsyd");
 	    String jzgm = request.getParameter("jzgm");
@@ -42,8 +42,8 @@ public class XmgljgManager extends AbstractBaseBean{
 	    String fzzcq = request.getParameter("fzzcq");
 	    String fcqmj = request.getParameter("fcqmj");
 	    String xgjz = UtilFactory.getStrUtil().unescape(request.getParameter("xgjz"));
-	    String sql = "update XMGL_YLB set xmmc=?,kfzt=?,dz=?,nz=?,xz=?,bz=?,zdmj=?,jsyd=?,jzgm=?,rjl=?,zzcq=?,cqmj=?,fzzcq=?,fcqmj=?,xgjz=?,nameone=?,nametwo=?,namethree=?";
-	    this.update(sql, YW, new Object[]{xmmc,kfzt,dz,nz,xz,bz,zdmj,jsyd,jzgm,rjl,zzcq,cqmj,fzzcq,fcqmj,xgjz,nameone,nametwo,namethree});
+	    String sql = "update XMGL_YLB set xmmc=?,kfzt=?,dz=?,nz=?,xz=?,bz=?,zdmj=?,jsyd=?,jzgm=?,rjl=?,zzcq=?,cqmj=?,fzzcq=?,fcqmj=?,xgjz=?";
+	    this.update(sql, YW, new Object[]{xmmc,kfzt,dz,nz,xz,bz,zdmj,jsyd,jzgm,rjl,zzcq,cqmj,fzzcq,fcqmj,xgjz});
 	    response("success");
 	}
 	

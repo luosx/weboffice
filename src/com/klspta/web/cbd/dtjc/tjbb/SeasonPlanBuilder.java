@@ -1,5 +1,7 @@
 package com.klspta.web.cbd.dtjc.tjbb;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,9 +35,17 @@ public class SeasonPlanBuilder extends AbstractBaseBean implements IDataClass {
     }
 
     private List<Map<String, Object>> getNd() {
-        String sql = "select distinct(nd) from hx_sx order by nd";
+        String sql = "select minyear,maxyear from user_projects";
         List<Map<String, Object>> list = query(sql, YW);
-        return list;
+        int minyear = Integer.parseInt(list.get(0).get("minyear").toString());
+        int maxyear = Integer.parseInt(list.get(0).get("maxyear").toString());
+        List<Map<String,Object>> result = new ArrayList<Map<String,Object>>();
+        for(int i=minyear ; i <= maxyear;i++){
+        	Map<String,Object> map = new HashMap<String, Object>();
+        	map.put("nd", i);
+        	result.add(map);
+        }
+        return result;
     }
 
     private List<Map<String, Object>> getXmmc() {

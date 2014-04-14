@@ -26,7 +26,7 @@ public class PlanManager extends AbstractBaseBean {
      */
     public void getXm(){
         String xmmc=request.getParameter("xmmc").toString();
-        String sql="select zd,zzzshs,jzgm,zzcqfy,qycqfy,cqhbtz,lmcb,lmcjj,zj,lmcjj,fwsj from jc_xiangmu where xmname=?";
+        String sql="select zd,zzzshs,jzgm,zzcqfy,zzhbtzcb,qycqfy,cqhbtz,lmcb,lmcjj,zj,lmcjj,fwsj from jc_xiangmu where xmname=?";
         List<Map<String,Object>> list=query(sql,YW,new Object[]{UtilFactory.getStrUtil().unescape(xmmc)});
         response(list);
     }
