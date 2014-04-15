@@ -10,6 +10,7 @@ Map<String, String> proMap = JbbManager.getDKMCMap();
 String extPath = basePath + "base/thirdres/ext/";
 String reportID = "HXXM";
 String keyIndex = "1";
+String view = request.getParameter("view");
 ITableStyle its = new TableStyleEditRow();
 %>
 

@@ -21,6 +21,9 @@ function showMap(objid){
 
 //双击编辑地图
 function editMap(objid){
+	if("R"==view){
+		return ;
+	}
 	if(table.element == undefined){
 		table.init(document.getElementById("HXXM"));
 	}
