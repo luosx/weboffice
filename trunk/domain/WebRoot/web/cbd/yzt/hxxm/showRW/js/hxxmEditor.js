@@ -3,7 +3,7 @@ var simple;
 var combo;
 var array = new Array();
 var url = basePath
-		+ 'web/cbd/yzt/hxxm/showRW/hxxmRowEditor.jsp';
+		+ 'web/cbd/yzt/hxxm/showRW/hxxmRowEditor.jsp?view='+view;
 var condition = "";
 
 Ext.onReady(function() {
@@ -66,6 +66,7 @@ function initComponent() {
 		toolbar.remove("update");
 		toolbar.remove("add");
 		toolbar.remove("dele");
+		toolbar.remove("end");
 	}
 }
 

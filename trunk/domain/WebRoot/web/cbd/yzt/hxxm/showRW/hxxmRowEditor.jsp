@@ -9,6 +9,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 Map<String, String> proMap = JbbManager.getDKMCMap();
 String extPath = basePath + "base/thirdres/ext/";
 String reportID = "HXXM";
+String view = request.getParameter("view");
 String keyIndex = "1";
 ITableStyle its = new TableStyleEditRow();
 %>
