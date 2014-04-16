@@ -151,12 +151,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	<div class="proccess" id="loading"><b>正在加载中。。。</b></div> 
   </body >
   <script type="text/javascript">
-  		var file_type='xlsx';
-  		var file_name = '土地储备规划实施决策系统.xlsx';
+  		var file_type='xls';
+  		var file_name = '土地储备规划实施决策系统.xls';
   		function loadoffice(){
   			
           	    var fileid=file_name.substring(0,file_name.indexOf('.'));//add by 李亚栓 上传word文档时，传文档名称fileid
-          		window.location.href="<%=basePath%>/model/webOffice/webOffice_read.jsp?file_id="+fileid+"."+"&file_type="+file_type;
+          		window.location.href="<%=basePath%>/model/webOffice/webOffice_read.jsp?file_id="+fileid+"&file_type="+file_type+"&moreFeatures=true";
            	
   		}
   </script>
