@@ -66,9 +66,10 @@ function dele(){
 		if(btn == 'yes'){
 			var choseValue = table.getAnnotations();
 			var choseString = '';
-			if(choseValue.length != 0){
-				choseString += table.getValue(choseValue.pop(),"19")+ ",";
+			while(choseValue.length != 0){
+				choseString += table.getValue(choseValue.pop(),"23")+ ",";
 			}
+			//alert(choseString);
 			putClientCommond("fyzcHandle","delByYwGuid");
 			putRestParameter("yw_guid",escape(escape(choseString)));
 			myData = restRequest();
@@ -91,17 +92,13 @@ function dele(){
 function queryZrb(keyword){
 	putClientCommond("fyzcHandle","quryKeyWord");
 	putRestParameter("keyword",escape(escape(keyword)));
-	putRestParameter("type","reader");
-	myData = restRequest();
-  	document.getElementById("show").innerHTML = myData;
+	//putRestParameter("type","reader");
+	var thisData = restRequest();
+  	document.getElementById("show").innerHTML = thisData;
 }
 
 function modify(){
-	var annoations = table.getAnnotations();
-	if(annoations.length > 0){
-		var objid = table.element.rows[annoations[0]];
-		editMap(objid);
-	}
+	showModifyWindow();
 }
 
 
