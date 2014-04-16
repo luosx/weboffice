@@ -13,6 +13,8 @@ Paneloper.prototype = {
 		//录入自然斑编号时添加验证
 		var obj = this;
 		
+		
+		//监听增加
 	},
 	insertValue:function(name, value){
 		var extObject = Ext.getCmp(name);
@@ -44,8 +46,8 @@ Paneloper.prototype = {
 	},
 	save:function(){
 		var obj = this;
-		var jzrq =document.getElementById("jzrq").value;
-		this.object.form.url += "?jzrq=" + jzrq;
+		//var jzrq =document.getElementById("jzrq").value;
+		//this.object.form.url += "?jzrq=" + jzrq;
 		this.object.form.submit({
 			waitMsg:'正在保存，请稍后...',
 			success:function(){
@@ -73,5 +75,29 @@ Paneloper.prototype = {
 	setRestUrl:function(url){
 		this.object.form.url=restUrl + url;
 	}
+	
+}
+
+
+
+
+//主项目修改菜单的Listener增加
+function initListener(){
+	var guid = Ext.getCmp("yw_guid_modify");
+	guid.on("select",function(){
+		alert("!!!!");
+		//alert(this.get("value"));
+	});
+	
+//	var guid = document.getElementById("yw_guid_modify");;
+//	guid.onchange = function(){
+//		alert(guid.value);
+//	};
+	
+}
+
+
+//子项目修改菜单的Listener增加
+function initListener_sub(){
 	
 }
