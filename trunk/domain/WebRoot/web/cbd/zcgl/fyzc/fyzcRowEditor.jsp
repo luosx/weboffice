@@ -1038,6 +1038,7 @@ function showModifyWindow() {
 					text : '删除',
 					width : '75',
 					handler : function(){
+						paneloper22_delMain.setRestUrl("fyzcHandle/delByYwGuid");
 						paneloper22_delMain.save();
 					}
 				} ]
@@ -1069,6 +1070,7 @@ function showModifyWindow() {
 					text : '删除',
 					width : '75',
 					handler : function(){
+						paneloper22_delSub.setRestUrl("fyzcHandle/delSub");
 						paneloper22_delSub.save();
 					}
 				} ]
@@ -1102,11 +1104,11 @@ function showModifyWindow() {
 		);
 		var elements22_delMain = new Array("yw_guid_delMain");
 		paneloper22_delMain.init(form_delMain,elements22_delMain);
-		paneloper22_delMain.setRestUrl("fyzcHandle/delByYwGuid");
+		
 		
 		var elements22_delSub = new Array("fymc_delSub");
 		paneloper22_delSub.init(form_delMain,elements22_delSub);
-		paneloper22_delSub.setRestUrl("fyzcHandle/delSub");
+		
 	}
 	
 	
