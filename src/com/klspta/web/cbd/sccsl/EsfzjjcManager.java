@@ -11,10 +11,13 @@ import com.klspta.base.util.UtilFactory;
 public class EsfzjjcManager extends AbstractBaseBean {
 
 	public List<Map<String, Object>> getESFData() {
-		String sql = "select t.ssqy as ssqy,t.xh as xh,t.xqmc as xqmc,t.xz as xz,t.jsnd as jsnd,t.qw as qw,t.jzlx as jzlx,t.wyf as wyf," +
+		String sql = "select t.ssqy as ssqy,rownum as xh,t.xqmc as xqmc,t.xz as xz,t.jsnd as jsnd,t.qw as qw,t.jzlx as jzlx,t.wyf as wyf," +
 				"t.ldzs as ldzs,t.fwzs as fwzs,t.lczk as lczk,t.rjl as rjl,t.lhl as lhl," +
-				"t.tcw as tcw,t.kfs as kfs,t.wygs as wygs,t.dz as dz from esf_jbxx t order by to_number(t.xh)";
+				"t.tcw as tcw,t.kfs as kfs,t.wygs as wygs,t.dz as dz,t.yw_guid as yw_guid from esf_jbxx t order by t.ssqy";
 		List<Map<String, Object>> result = query(sql, YW);
+		for(int i=0 ; i < result.size();i++){
+			result.get(i).put("XH", i+1+"");
+		}
 		return result;
 	}
 
