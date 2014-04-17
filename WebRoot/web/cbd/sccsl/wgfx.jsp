@@ -359,7 +359,9 @@ function set(pgjkone,pgjktwo,pgjkthree,pgjkfour,pgjkfive,ybbzf,jlbzf,tsrqbzf,gfb
 			<td>万元/户</td>
 		</tr>
 	</table>
+	<br>
 	<div align="center" style="font-size: 25px;"><h2>住宅搬迁安置补偿微观实施效果</h2></div>
+	<br>
 	<table align="center" id="ssxg"  cellpadding="0" cellspacing="0" width="90%">
 		<tr class="tr01">
 			<td rowspan="3">序号</td>

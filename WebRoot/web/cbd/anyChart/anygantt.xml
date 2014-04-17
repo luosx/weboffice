@@ -152,7 +152,7 @@
     </period_styles>
   </styles>
   <resource_chart>
-    <resources><resource id="1" name="国华热电厂项目一期" /><resource id="2" name="联合大学商学院项目" /><resource id="3" name="国华热电厂项目三期" /><resource id="4" name="公交总公司项目" /><resource id="5" name="国华热电厂项目二期" /></resources>
-    <periods><period resource_id="1" start="2012/10/01" end="2013/07/01" style="yellow" /><period resource_id="1" start="2013/07/01" end="2015/10/01" style="red" /><period resource_id="1" start="2015/10/01" end="2017/10/01" style="blue" /><period resource_id="2" start="2013/10/01" end="2014/07/01" style="yellow" /><period resource_id="2" start="2014/07/01" end="2014/10/01" style="red" /><period resource_id="2" start="2014/10/01" end="2016/10/01" style="blue" /><period resource_id="3" start="2013/04/01" end="2014/01/01" style="yellow" /><period resource_id="3" start="2014/01/01" end="2015/04/01" style="red" /><period resource_id="3" start="2015/04/01" end="2017/04/01" style="blue" /><period resource_id="4" start="2012/04/01" end="2013/01/01" style="yellow" /><period resource_id="4" start="2013/01/01" end="2014/10/01" style="red" /><period resource_id="4" start="2014/10/01" end="2016/10/01" style="blue" /><period resource_id="5" start="2012/10/01" end="2013/07/01" style="yellow" /><period resource_id="5" start="2013/07/01" end="2015/04/01" style="red" /><period resource_id="5" start="2015/04/01" end="2017/04/01" style="blue" /></periods>
+    <resources><resource id="1" name="CBD中心区遗留八块的（不含NE03）" /></resources>
+    <periods><period resource_id="1" start="2012/07/01" end="2013/04/01" style="yellow" /><period resource_id="1" start="2013/04/01" end="2013/07/01" style="red" /><period resource_id="1" start="2013/07/01" end="2015/07/01" style="blue" /></periods>
   </resource_chart>
 </anygantt>
