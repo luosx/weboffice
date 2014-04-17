@@ -913,6 +913,8 @@ function showModifyWindow() {
 			num = num + 1;
 		}
 		data = myData;
+		
+		
 		buildForm();
 		buildPanel1();
 		tabs = new Ext.TabPanel({
@@ -975,6 +977,217 @@ function showModifyWindow() {
 	}
 	
 	
+	//以下是删除功能部分
+		var form_delMain;
+		var data_delMain = new Array();
+		var paneloper22_delMain = new Paneloper();
+		
+		
+		var data_delSub = new Array();
+		var paneloper22_delSub = new Paneloper();
+		
+	function buildForm_delMain() {
+		//这是下拉菜单的数据源
+		var store_delMain = new Ext.data.SimpleStore({ 
+			fields : [ "value", "text" ],
+			data : data_delMain
+		});
+			
+		var store_delSub = new Ext.data.SimpleStore({ 
+			fields : [ "value", "text" ],
+			data : data_delSub
+		});
+		form_delMain = new Ext.form.FormPanel({
+			autoHeight : true,
+			frame : true,
+			bodyStyle : 'padding:5px 0px 0',
+			width : 800,
+			labelWidth : 130,
+			labelAlign : "right",
+			url : "",
+			title : "项目删除",
+			defaults : {
+				anchor : '0'
+			},
+			layout : 'form',
+			items : [ {
+				layout : 'column',
+				items : [  {
+					columnWidth : 1,
+					layout : 'form',
+					items : [ {
+						xtype : 'combo',
+						id : 'mc_delMain',
+						store : store_delMain,
+						mode : "local",
+						displayField : "text",
+						valueField : "value",
+						forceSelection : true,
+						fieldLabel : '房源筹集项目',
+						width : '140',
+						listeners : {
+							"select" : function(){
+								var guid_del = this.value;
+								$("#yw_guid_delMain").val(guid_del);
+							}
+						}
+					} ]
+				},{
+					xtype : 'button',
+					id : 'button_delMain',
+					text : '删除',
+					width : '75',
+					handler : function(){
+						paneloper22_delMain.save();
+					}
+				} ]
+			},{
+				layout : 'column',
+				items : [  {
+					columnWidth : 1,
+					layout : 'form',
+					items : [ {
+						xtype : 'combo',
+						id : 'mc_delSub',
+						store : store_delSub,
+						mode : "local",
+						displayField : "text",
+						valueField : "value",
+						forceSelection : true,
+						fieldLabel : '房源使用项目',
+						width : '140',
+						listeners : {
+							"select" : function(){
+								var guid_del = this.value;
+								$("#fymc_delSub").val(guid_del);
+							}
+						}
+					} ]
+				},{
+					xtype : 'button',
+					id : 'button_delSub',
+					text : '删除',
+					width : '75',
+					handler : function(){
+						paneloper22_delSub.save();
+					}
+				} ]
+			},{
+				layout : 'column',
+				items : [  {
+					columnWidth : 1,
+					layout : 'form',
+					items : [ {
+						xtype : 'hidden',
+						id : 'yw_guid_delMain',
+						value: '',
+						width : '65'
+						
+					} ]
+				},{
+					columnWidth : 1,
+					layout : 'form',
+					items : [ {
+						xtype : 'hidden',
+						id : 'fymc_delSub',
+						value: '',
+						width : '65'
+						
+					} ]
+				} ]
+			}]
+					
+				
+			} 
+		);
+		var elements22_delMain = new Array("yw_guid_delMain");
+		paneloper22_delMain.init(form_delMain,elements22_delMain);
+		paneloper22_delMain.setRestUrl("fyzcHandle/delByYwGuid");
+		
+		var elements22_delSub = new Array("fymc_delSub");
+		paneloper22_delSub.init(form_delMain,elements22_delSub);
+		paneloper22_delSub.setRestUrl("fyzcHandle/delSub");
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	var win_del;
+	var tabs_del;
+	function showWindow_del() {
+		var myData = new Array();
+		var num = 0;
+		_resetParameters();
+		putClientCommond("fyzcHandle", "getAllMc");
+		var jsonObj = restRequest();
+
+		for ( var i = 0; i < jsonObj.length; i++) {
+
+			myData[num] = [ jsonObj[i].YW_GUID, jsonObj[i].MC ];
+			num = num + 1;
+		}
+		data_delMain = myData;
+		
+		_resetParameters();
+		putClientCommond("fyzcHandle", "getfymc");
+		var data_fymc = restRequest();
+		
+		for(var i=0;i<data_fymc.length;i++){
+			data_delSub[i] = [data_fymc[i].FYMC,data_fymc[i].FYMC];
+		}
+		
+		buildForm_delMain();
+		tabs_del = new Ext.TabPanel({
+			id : 'pan_del',
+			autoTabs : true,
+			activeTab : 0,
+			height : 500,
+			enableTabScroll : true,
+			deferredRender : false,
+			border : false,
+			scrollDuration : 0.35,
+			scrollIncrement : 100,
+			animScroll : true,
+			defaults : {
+				autoScroll : true
+			},
+			items : [ form_delMain ]
+
+		});
+
+		//tabs.add(form2);
+		//tabs.add(form1);
+		if (!win_del) {
+			win_del = new Ext.Window({
+				renderTo : Ext.getBody(),
+				id : 'wind_del',
+				layout : 'fit',
+				title : '删除窗口',
+				width : 440,
+				height : 170,
+				plain : true,
+				closeAction : 'hide',
+				items : tabs_del,
+				buttons : [ {
+					text : '关闭',
+					handler : function() {
+						win_del.hide();
+					}
+				} ]
+			});
+		} else {
+			win_del.items.removeAt(0);
+			win_del.items.add("pan_del", tabs_del);
+			win_del.doLayout();
+		}
+		win_del.show();
+
+	}
 	
 </script>
 <body>

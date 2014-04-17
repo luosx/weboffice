@@ -62,30 +62,37 @@ function add(){
 }
 
 function dele(){
-	Ext.MessageBox.confirm('确认', '系统将删除所有选中房源资产，确定?', function(btn,text){
-		if(btn == 'yes'){
-			var choseValue = table.getAnnotations();
-			var choseString = '';
-			while(choseValue.length != 0){
-				choseString += table.getValue(choseValue.pop(),"23")+ ",";
-			}
-			//alert(choseString);
-			putClientCommond("fyzcHandle","delByYwGuid");
-			putRestParameter("yw_guid",escape(escape(choseString)));
-			myData = restRequest();
-			if(myData){
-				Ext.MessageBox.alert('提醒', '删除成功！', function(btn, text){
-					document.location.reload();
-					return;
-				});
-			}else{
-				Ext.MessageBox.alert('提醒', '删除失败，请联系管理员或重试', function(btn, text){
-					return;
-				});
-			}
-			
-		}
-	});
+	showWindow_del();
+//	Ext.MessageBox.confirm('确认', '系统将删除所有选中房源资产，确定?', function(btn,text){
+//		if(btn == 'yes'){
+//			var choseValue = table.getAnnotations();
+//			var choseString = '';
+//			while(choseValue.length != 0){
+//				var row = choseValue.pop();
+//				var col = (table.element.rows[row].cells.length-1)+"";
+//				//var rows = table.element.rows[row];
+//				
+//				//alert(rows.length);
+//				//choseString += table.element.rows[row].cells[col].innerText + ",";
+//				choseString += table.getValue(row,col)+ ",";
+//			}
+//			//alert(choseString);
+//			putClientCommond("fyzcHandle","delByYwGuid");
+//			putRestParameter("yw_guid",escape(escape(choseString)));
+//			myData = restRequest();
+//			if(myData){
+//				Ext.MessageBox.alert('提醒', '删除成功！', function(btn, text){
+//					document.location.reload();
+//					return;
+//				});
+//			}else{
+//				Ext.MessageBox.alert('提醒', '删除失败，请联系管理员或重试', function(btn, text){
+//					return;
+//				});
+//			}
+//			
+//		}
+//	});
 }
 
 //根据用地单位和关键字作过滤
