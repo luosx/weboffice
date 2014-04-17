@@ -28,19 +28,8 @@ public class FlexXmlBean {
      */
     private List<FlexWidgetBean> widgetList;
 
-    public String toXml(Map<String, String> layerMap, Map<String, String> widgetMap) {
-        StringBuffer flexBuffer = new StringBuffer("<?xml version=\"1.0\" ?>\n<configuration>\n");
-        flexBuffer.append(fbb.toXMl());
-        flexBuffer.append(" <geometryservice url=").append("\"").append(geometryservice).append("\"/>\n");
-        flexBuffer.append(fmb.toXMl(layerMap));
-        for (int i = 0; i < widgetList.size(); i++) {
-            flexBuffer.append(widgetList.get(i).toXMl(widgetMap));
-        }
-        flexBuffer.append("</configuration>");
-        return flexBuffer.toString();
-    }
 
-    public Document toXml2(Map<String, String> layerMap, Map<String, String> widgetMap) {
+    public Document getXml(Map<String, String> layerMap, Map<String, String> widgetMap) {
         Document document = DocumentHelper.createDocument();
         Element root = document.addElement("configuration");
         fbb.addXMl(root);

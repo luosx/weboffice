@@ -10,6 +10,13 @@ import org.dom4j.io.XMLWriter;
 import com.klspta.base.AbstractBaseBean;
 import com.klspta.console.ManagerFactory;
 
+/**
+ * 
+ * <br>Title:Flex相关调用人口
+ * <br>Description:
+ * <br>Author:陈强峰
+ * <br>Date:2014-4-17
+ */
 public class FlexAction extends AbstractBaseBean {
 
     /**
@@ -86,30 +93,15 @@ public class FlexAction extends AbstractBaseBean {
 
     /**
      * 
-     * <br>Description:测试xml
+     * <br>Description:获取角色xml信息
      * <br>Author:陈强峰
      * <br>Date:2014-4-16
      */
-    public void test() {
-        String roleId = request.getParameter("roleId");
-        try {
-            response(ManagerFactory.getFlexManage().getRoleXML(roleId));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * 
-     * <br>Description:测试xml
-     * <br>Author:陈强峰
-     * <br>Date:2014-4-16
-     */
-    public void test2() {
+    public void getXmlString() {
         String roleId = request.getParameter("roleId");
         XMLWriter xmlWriter = null;
         StringWriter out = null;
-        String xml="";
+        String xml = "";
         try {
             Document document = ManagerFactory.getFlexManage().getRoleXMLDom(roleId);
             out = new StringWriter(1024);
@@ -140,5 +132,4 @@ public class FlexAction extends AbstractBaseBean {
         }
         response(xml);
     }
-
 }

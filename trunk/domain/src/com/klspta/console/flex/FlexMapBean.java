@@ -13,6 +13,7 @@ import org.dom4j.Element;
  * <br>Date:2014-4-10
  */
 public class FlexMapBean extends AbsFlex {
+
     private String wraparound180 = "";
 
     private String initialextent = "";
@@ -24,7 +25,7 @@ public class FlexMapBean extends AbsFlex {
     private String addarcgisbasemaps = "";
 
     /**
-     * 图层集合
+     *地图图层集合
      */
     private List<FlexLayerBean> layerList;
 
@@ -36,28 +37,14 @@ public class FlexMapBean extends AbsFlex {
         this.addarcgisbasemaps = check(map.get("map_addarcgisbasemaps"));
     }
 
-    public String toXMl(Map<String, String> roleLayerMap) {
-        StringBuffer baseBuffer = new StringBuffer();
-        baseBuffer.append(" <map");
-        baseBuffer.append(" wraparound180=\"").append(wraparound180).append("\"");
-        baseBuffer.append(" initialextent=\"").append(initialextent).append("\"");
-        baseBuffer.append(" fullextent=\"").append(fullextent).append("\"");
-        baseBuffer.append(" top=\"").append(top).append("\"");
-        baseBuffer.append(" addarcgisbasemaps=\"").append(addarcgisbasemaps).append("\">\n");
-        baseBuffer.append("   <operationallayers>\n");
-        FlexLayerBean flexLayerBean = null;
-        for (int i = 0; i < layerList.size(); i++) {
-            flexLayerBean = layerList.get(i);
-            if (!roleLayerMap.containsKey(flexLayerBean.getLayerId())) {
-                continue;
-            }
-            baseBuffer.append(flexLayerBean.toXMl());
-        }
-        baseBuffer.append("   </operationallayers>\n");
-        baseBuffer.append(" </map>").append("\n");
-        return baseBuffer.toString();
-    }
-
+    /**
+     * 
+     * <br>Description:添加图层元素
+     * <br>Author:陈强峰
+     * <br>Date:2014-4-17
+     * @param root
+     * @param roleLayerMap
+     */
     public void addXML(Element root, Map<String, String> roleLayerMap) {
         Element element = root.addElement("map");
         element.addAttribute("wraparound180", wraparound180);

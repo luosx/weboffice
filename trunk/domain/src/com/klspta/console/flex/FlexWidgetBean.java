@@ -48,8 +48,6 @@ public class FlexWidgetBean extends AbsFlex {
      */
     private String size = "";
 
-    private String groupLabel = "";
-
     private String label = "";
 
     private String icon = "";
@@ -68,6 +66,9 @@ public class FlexWidgetBean extends AbsFlex {
 
     private String bottom = "";
 
+    /**
+     * 子组件集合
+     */
     private List<FlexWidgetBean> childList;
 
     public FlexWidgetBean(Map<String, Object> map) {
@@ -96,97 +97,12 @@ public class FlexWidgetBean extends AbsFlex {
 
     /**
      * 
-     * <br>Description:生成xml
+     * <br>Description:添加元素入口
      * <br>Author:陈强峰
      * <br>Date:2014-4-17
-     * @param roleWidgetMap
-     * @return
+     * @param root
+     * @param roleWidgetMap 权限MAP
      */
-    public String toXMl(Map<String, String> roleWidgetMap) {
-        StringBuffer widgetBuffer = new StringBuffer();
-        if (type.equals("widget")) {
-            widgetToXml(widgetBuffer, roleWidgetMap);
-        } else if (type.equals("group")) {
-            groupToXml(widgetBuffer, roleWidgetMap);
-        } else if (type.equals("container")) {
-            containerToXml(widgetBuffer, roleWidgetMap);
-        }
-        return widgetBuffer.toString();
-    }
-
-    /**
-     * 
-     * <br>Description:容器生成xml
-     * <br>Author:陈强峰
-     * <br>Date:2014-4-17
-     * @param widgetBuffer
-     * @param roleWidgetBeans
-     * @return
-     */
-    private String containerToXml(StringBuffer widgetBuffer, Map<String, String> roleWidgetBeans) {
-
-        if (childList.size() > 0) {
-            widgetBuffer.append(" <widgetcontainer");
-            if (layout.length() > 0) {
-                widgetBuffer.append(" layout=\"").append(layout).append("\"");
-            }
-            if (paneltype.length() > 0) {
-                widgetBuffer.append(" paneltype=\"").append(paneltype).append("\"");
-            }
-            widgetBuffer.append(" initialstate=\"").append(initialstate).append("\"");
-            widgetBuffer.append(" size=\"").append(size).append("\">\n");
-            for (int i = 0; i < childList.size(); i++) {
-                widgetBuffer.append(childList.get(i).toXMl(roleWidgetBeans));
-            }
-        }
-        widgetBuffer.append(" </widgetcontainer>\n");
-        return widgetBuffer.toString();
-    }
-
-    /**
-     * 
-     * <br>Description:组件组生成xml
-     * <br>Author:陈强峰
-     * <br>Date:2014-4-17
-     * @param widgetBuffer
-     * @param roleWidgetBeans
-     * @return
-     */
-    private String groupToXml(StringBuffer widgetBuffer, Map<String, String> roleWidgetBeans) {
-        widgetBuffer.append("  <widgetgroup");
-        widgetBuffer.append(" label=\"").append(groupLabel).append("\">\n");
-        for (int i = 0; i < childList.size(); i++) {
-            widgetBuffer.append(childList.get(i).toXMl(roleWidgetBeans));
-        }
-        widgetBuffer.append("  </widgetgroup>\n");
-        return widgetBuffer.toString();
-    }
-
-    /**
-     * 
-     * <br>Description:组件生产xml
-     * <br>Author:陈强峰
-     * <br>Date:2014-4-17
-     * @param widgetBuffer
-     * @param roleWidgetBeans
-     * @return
-     */
-    private String widgetToXml(StringBuffer widgetBuffer, Map<String, String> roleWidgetBeans) {
-        if (roleWidgetBeans.containsKey(getWidgetId())) {
-            widgetBuffer.append("   <widget");
-            widgetBuffer.append(" label=\"").append(label).append("\"");
-            widgetBuffer.append(" icon=\"").append(icon).append("\"");
-            widgetBuffer.append(" config=\"").append(config).append("\"");
-            widgetBuffer.append(" url=\"").append(url).append("\"");
-            widgetBuffer.append(" left=\"").append(left).append("\"");
-            widgetBuffer.append(" right=\"").append(right).append("\"");
-            widgetBuffer.append(" top=\"").append(top).append("\"");
-            widgetBuffer.append(" bottom=\"").append(bottom).append("\"");
-            widgetBuffer.append(" preload=\"").append(preload).append("\"/>\n");
-        }
-        return widgetBuffer.toString();
-    }
-
     public void addXML(Element root, Map<String, String> roleWidgetMap) {
         if (type.equals("widget")) {
             addWidgetToXml(root, roleWidgetMap);
@@ -197,6 +113,14 @@ public class FlexWidgetBean extends AbsFlex {
         }
     }
 
+    /**
+     * 
+     * <br>Description:添加组件容器元素
+     * <br>Author:陈强峰
+     * <br>Date:2014-4-17
+     * @param root
+     * @param roleWidgetMap
+     */
     private void addWidgetToXml(Element root, Map<String, String> roleWidgetMap) {
         if (roleWidgetMap.containsKey(widgetId)) {
             Element element = root.addElement("widget");
@@ -211,7 +135,14 @@ public class FlexWidgetBean extends AbsFlex {
             element.addAttribute("preload", preload);
         }
     }
-
+    /**
+     * 
+     * <br>Description:添加组件组元素
+     * <br>Author:陈强峰
+     * <br>Date:2014-4-17
+     * @param root
+     * @param roleWidgetMap
+     */
     private void addGroupToXml(Element root, Map<String, String> roleWidgetMap) {
         Element element = root.addElement("widgetgroup");
         element.addAttribute("label", label);
@@ -219,7 +150,14 @@ public class FlexWidgetBean extends AbsFlex {
             childList.get(i).addXML(element, roleWidgetMap);
         }
     }
-
+    /**
+     * 
+     * <br>Description:添加组件元素
+     * <br>Author:陈强峰
+     * <br>Date:2014-4-17
+     * @param root
+     * @param roleWidgetMap
+     */
     private void addContainerToXml(Element root, Map<String, String> roleWidgetMap) {
         if (childList.size() > 0) {
             Element element = root.addElement("widgetcontainer");
