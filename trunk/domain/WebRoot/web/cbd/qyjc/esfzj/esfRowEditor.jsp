@@ -61,7 +61,7 @@ String view = request.getParameter("view");
 		    font-weight:bold;
 		    font-size: 15px;
 		    text-align:center;
-		    line-height: 30px;
+		    line-height: 50px;
 			margin-top: 3px;
 		  }
 	  	.trtotal{
@@ -328,7 +328,7 @@ String view = request.getParameter("view");
   		}
   		var width = document.body.clientWidth;
     	var height = document.body.clientHeight * 0.95;
-       	FixTable("ESFQK", 0,1, width, height);
+       	FixTable("ESFQK", 3,1, width, height);
   	}
   </script>
   <body onload="hideywguid();">

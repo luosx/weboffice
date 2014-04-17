@@ -118,7 +118,6 @@ function doOnLoad() {
 		myToolbar.enableItem('download');
 		
 		 var file_name=treeArray[tree_id][3];
-		
            var file_type='';
            if(file_name.indexOf('.')>0){
             file_type=file_name.substring(file_name.indexOf('.')+1,file_name.length);

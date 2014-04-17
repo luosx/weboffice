@@ -12,7 +12,7 @@
         </title>
         <axes>
           <y_axis position="Left">
-            <scale minimum="0" maximum="100" major_interval="10" show_last_label="false" />
+            <scale minimum="0" maximum="10000" major_interval="1000" show_last_label="false" />
             <title enabled="true">
               <text>租金( 元/月)</text>
             </title>
@@ -57,18 +57,18 @@
       </data_plot_settings>
       <data>
         <series id="0" name="租金" type="Line" color="yellow">
-          <point name="2014年3月" y="0" />
-          <point name="2014年4月" y="0" />
-          <point name="2014年5月" y="0" />
-          <point name="2014年6月" y="0" />
-          <point name="2014年7月" y="0" />
-          <point name="2014年8月" y="0" />
-          <point name="2014年9月" y="0" />
-          <point name="2014年10月" y="0" />
-          <point name="2014年11月" y="0" />
-          <point name="2014年12月" y="0" />
-          <point name="2014年1月" y="0" />
-          <point name="2014年2月" y="16.5" />
+          <point name="2013年4月" y="7310.105263157894736842105263157894736842" />
+          <point name="2013年5月" y="7287.526315789473684210526315789473684211" />
+          <point name="2013年6月" y="6996.578947368421052631578947368421052632" />
+          <point name="2013年7月" y="7258.684210526315789473684210526315789474" />
+          <point name="2013年8月" y="7231.526315789473684210526315789473684211" />
+          <point name="2013年9月" y="7301.947368421052631578947368421052631579" />
+          <point name="2013年10月" y="7716.894736842105263157894736842105263158" />
+          <point name="2013年11月" y="7418.105263157894736842105263157894736842" />
+          <point name="2013年12月" y="7538.368421052631578947368421052631578947" />
+          <point name="2014年1月" y="7436.947368421052631578947368421052631579" />
+          <point name="2014年2月" y="216.421052631578947368421052631578947368" />
+          <point name="2014年3月" y="217.789473684210526315789473684210526316" />
         </series>
       </data>
     </chart>
