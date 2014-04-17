@@ -13,5 +13,6 @@
 		<bean id="userAction" class="com.klspta.console.user.UserAction" scope="prototype" />
 		<!-- 菜单树 -->
 		<bean id="menuAction" class="com.klspta.console.menu.MenuAction" scope="prototype" />
-		
+		<!-- 菜单树 -->
+		<bean id="flexAction" class="com.klspta.console.flex.FlexAction" scope="prototype" />
 </beans>   
