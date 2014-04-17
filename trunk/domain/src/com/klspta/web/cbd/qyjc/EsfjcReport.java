@@ -15,7 +15,7 @@ public class EsfjcReport extends AbstractBaseBean implements IDataClass{
 	
 	private final static String[] TITLE= {"所属区域","序号","小区名称","性质","建设年代","区位","房屋、建筑类型","物业费",
 											"楼栋总数","房屋总数","楼层状况","容积率","绿化率","停车位","开发商",
-											 "物业公司","地址"};
+											 "物业公司","地址","yw_guid"};
 	
 //	所属区域  	序号  	小区名称  	性质 	建设年代  	区位 	房屋、建筑类型	"物业费	(元/平米•月）"
 //	"楼栋总数（栋）"	"房屋总数（户）"  	楼层状况                 容积率  	绿化率	  停车位	       开发商	物业公司	地址
@@ -23,7 +23,7 @@ public class EsfjcReport extends AbstractBaseBean implements IDataClass{
 	public Map<String, TRBean> getTRBeans(Object[] obj, TRBean trBean) {
 		Map<String, TRBean> trbeans = new LinkedHashMap<String, TRBean>();
 		buildTitle(trbeans);
-		//buildESF(trbeans);
+		buildESF(trbeans);
 		return trbeans;
 	}
 
@@ -32,7 +32,26 @@ public class EsfjcReport extends AbstractBaseBean implements IDataClass{
 		TRBean trbean = null;
 		TDBean tdbean = null;
 		int i= 0;
+		int bkqljf = 0;
+		int dkqljf = 0;
+		int yqljf = 0;
+		int yqxjf = 0;
+		int dkqxjf = 0;
+		String ssqy = "";
 		if(esf!=null){
+			for(int j=0; j< esf.size();j++){
+				if("CBD北控区老旧房".equals(esf.get(j).get("SSQY"))){
+					bkqljf++;
+				}else if("CBD东扩区老旧房".equals(esf.get(j).get("SSQY"))){
+					dkqljf++;
+				}else if("CBD东扩区新居房".equals(esf.get(j).get("SSQY"))){
+					dkqxjf++;
+				}else if("CBD原区老旧房".equals(esf.get(j).get("SSQY"))){
+					yqljf++;
+				}else if("CBD原区新居房".equals(esf.get(j).get("SSQY"))){
+					yqxjf++;
+				}
+			}
 			for(Map<String,Object> map : esf){
 				trbean = new TRBean();
 				Set<String> keyset = map.keySet();
@@ -41,9 +60,28 @@ public class EsfjcReport extends AbstractBaseBean implements IDataClass{
 						tdbean = new TDBean(map.get(key)==null?"":map.get(key).toString(),"300","");
 						trbean.addTDBean(tdbean);
 					}else{
-						tdbean = new TDBean(map.get(key)==null?"":map.get(key).toString(),"120","");
-						trbean.addTDBean(tdbean);
+						if("SSQY".equals(key)){
+							if("".equals(ssqy) || !ssqy.equals(map.get("SSQY"))){
+								tdbean = new TDBean(map.get(key)==null?"":map.get(key).toString(),"120","");
+								if("CBD北控区老旧房".equals(map.get(key))){
+									tdbean.setRowspan(bkqljf+"");
+								}else if("CBD东扩区老旧房".equals(map.get(key))){
+									tdbean.setRowspan(dkqljf+"");
+								}else if("CBD东扩区新居房".equals(map.get(key))){
+									tdbean.setRowspan(dkqxjf+"");
+								}else if("CBD原区老旧房".equals(map.get(key))){
+									tdbean.setRowspan(yqljf+"");
+								}else if("CBD原区新居房".equals(map.get(key))){
+									tdbean.setRowspan(yqxjf+"");
+								}
+								trbean.addTDBean(tdbean);	
+							}
+						}else{
+							tdbean = new TDBean(map.get(key)==null?"":map.get(key).toString(),"120","");
+							trbean.addTDBean(tdbean);
+						}
 					}
+					ssqy = map.get("SSQY").toString();
 				}
 				trbeans.put("esf"+i, trbean);
 				i++;
@@ -60,6 +98,7 @@ public class EsfjcReport extends AbstractBaseBean implements IDataClass{
 		//	tdBean.setRowspan("2");
 			trbean.addTDBean(tdBean);
 		}
+		trbean.setCssStyle("tr01");
 		trbeans.put("title1", trbean);
 	}
 }
