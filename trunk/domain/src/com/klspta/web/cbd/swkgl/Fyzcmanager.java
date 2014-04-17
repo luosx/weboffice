@@ -32,8 +32,11 @@ public class Fyzcmanager extends AbstractBaseBean {
 	public void saveFyzc() {
 		String sj = request.getParameter("sj");
 		String jzrq = request.getParameter("jzrq");
+		
 		jzrq = UtilFactory.getStrUtil().unescape(jzrq);
 		sj = UtilFactory.getStrUtil().unescape(sj);
+		
+		
 		if (sj != null && !sj.equals("")) {
 			String[] date = sj.split("@");
 			for (int i = 0; i < date.length; i++) {
@@ -61,10 +64,13 @@ public class Fyzcmanager extends AbstractBaseBean {
 		String zj = request.getParameter("zj_child");
 		String yw_guid = request.getParameter("yw_guid_child");
 		
-		fymc = fymc.equals("")?"无":fymc;
-		
+
 		fymc = UtilFactory.getStrUtil().unescape(fymc);
 
+		fymc = fymc.equals("")?"无":fymc;
+		
+		fymc = fymc.replace(" ", "");
+		
 		int i = 0;
 
 		if ("".equals(yw_guid) || "null".equals(yw_guid) || yw_guid == null) {
@@ -208,6 +214,9 @@ public class Fyzcmanager extends AbstractBaseBean {
 		
 		mc = UtilFactory.getStrUtil().unescape(mc);
 		gzly = UtilFactory.getStrUtil().unescape(gzly);
+		mc = mc.replace(" ","");
+		gzly = gzly.replace(" ", "");
+		
 
 		int i = 0;
 		// String sql = "select mc from fyzc where mc=?";
@@ -542,24 +551,58 @@ public class Fyzcmanager extends AbstractBaseBean {
 	}
 
 	public void delByYwGuid() {
-		String yw_guid = request.getParameter("yw_guid");
+		String yw_guid = request.getParameter("yw_guid_delMain");
 		yw_guid = UtilFactory.getStrUtil().unescape(yw_guid);
-		String[] mcs = yw_guid.substring(0, yw_guid.length() - 1).split(",");
+		//String[] mcs = yw_guid.substring(0, yw_guid.length() - 1).split(",");
+		System.out.println(yw_guid);
 		try {
-			for (int i = 0; i < mcs.length; i++) {
+			//for (int i = 0; i < mcs.length; i++) {
 				String sql_sub = "delete from fyzc_fy t where t.parent_id='"
-						+ mcs[i] + "'";
+						+ yw_guid + "'";
 				this.update(sql_sub, YW);
-				String sql = "delete from fyzc t where t.yw_guid='" + mcs[i]
+				String sql = "delete from fyzc t where t.yw_guid='" + yw_guid
 						+ "'";
 				this.update(sql, YW);
-			}
-			response("success");
+			//}
+			response("{success:true}");
 		} catch (Exception e) {
-			response("false");
+			response("{success:false}");
 		}
 
 	}
+	
+	
+	/*
+	 * public void flushData(String yw_guid, String parent_id, String fy,
+			String jzgm, String dj)
+	 * */
+	public void delSub(){
+		
+		try {
+			String fymc = request.getParameter("fymc_delSub");
+		
+			fymc = UtilFactory.getStrUtil().unescape(fymc);
+			
+			String querySQL = "select * from fyzc_fy where fymc='" + fymc + "'";
+			List<Map<String,Object>> list = query(querySQL, YW);
+		
+			String sql;
+			for(Map<String,Object> m:list){
+				sql = "select fwdj from fyzc where yw_guid='" + m.get("PARENT_ID") + "'";
+				flushData(m.get("YW_GUID").toString(),m.get("PARENT_ID").toString(),"0","0",query(sql,YW).get(0).get("FWDJ").toString());
+			}
+			String delSQL = "delete from fyzc_fy where fymc='" + fymc + "'";
+			update(delSQL,YW);
+			
+			response("{success:true}");
+		} catch (Exception e) {
+			e.printStackTrace();
+			response("{success:false}");
+		}
+	}
+	
+	
+	
 
 	public void quryKeyWord() {
 		String keyword = UtilFactory.getStrUtil().unescape(
@@ -624,6 +667,11 @@ public class Fyzcmanager extends AbstractBaseBean {
 		String sql = "select distinct fymc from fyzc_fy ";
 		return query(sql, YW);
 	}
+	
+	public void getfymc(){
+		String sql = "select distinct fymc from fyzc_fy ";
+		response(query(sql, YW));
+	}
 
 	/**
 	 * 获取所有房源资产项目的数据
@@ -648,8 +696,9 @@ public class Fyzcmanager extends AbstractBaseBean {
 	public String getFirstTile() {
 		List<Map<String, Object>> list = getfyxm();
 		StringBuffer stringBuffer = new StringBuffer();
+		int width = list.size()*420 + 960;
 		stringBuffer
-				.append("<table id='FYZC' width='1800' border='1' cellpadding='1' cellspacing='0'>");
+				.append("<table id='FYZC' width='"+width+"' border='1' cellpadding='1' cellspacing='0'>");
 		stringBuffer
 				.append("<tr class='title'><td rowspan='3' class='tr01'>名      称</td><td colspan='6' rowspan='2'"
 						+ " class='tr01'>房源筹集情况</td><td colspan='"
