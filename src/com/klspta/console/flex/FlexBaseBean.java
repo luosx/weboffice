@@ -11,7 +11,7 @@ import org.dom4j.Element;
  * <br>Author:陈强峰
  * <br>Date:2014-4-10
  */
-public class FlexBaseBean extends AbsFlex{
+public class FlexBaseBean extends AbsFlex {
 
     private String title = "";
 
@@ -20,7 +20,7 @@ public class FlexBaseBean extends AbsFlex{
     private String logo = "";
 
     private String style_colors = "";
-    
+
     private String style_alpha = "";
 
     public FlexBaseBean(Map<String, Object> map) {
@@ -33,20 +33,11 @@ public class FlexBaseBean extends AbsFlex{
 
     /**
      * 
-     * <br>Description:转成flexXml配置项
+     * <br>Description:添加元素
      * <br>Author:陈强峰
-     * <br>Date:2014-4-10
-     * @return
+     * <br>Date:2014-4-17
+     * @param root
      */
-    public String toXMl() {
-        StringBuffer baseBuffer = new StringBuffer();
-        baseBuffer.append(" <title>").append(title).append("</title>").append("\n");
-        baseBuffer.append(" <subtitle>").append(subtitle).append("</subtitle>").append("\n");
-        baseBuffer.append(" <logo>").append(logo).append("</logo>").append("\n");
-       // baseBuffer.append(" <style>").append(style).append("</style>").append("\n");
-        return baseBuffer.toString();
-    }
-    
     public void addXMl(Element root) {
         Element element = root.addElement("title");
         element.addText(title);
@@ -58,6 +49,6 @@ public class FlexBaseBean extends AbsFlex{
         Element elementColor = element.addElement("colors");
         elementColor.addText(style_colors);
         Element elementAlpha = element.addElement("alpha");
-        elementColor.addText(style_colors);
+        elementAlpha.addText(style_alpha);
     }
 }

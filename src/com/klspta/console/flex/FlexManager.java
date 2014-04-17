@@ -8,7 +8,6 @@ import java.util.Map;
 import org.dom4j.Document;
 
 import com.klspta.base.AbstractBaseBean;
-import com.klspta.model.report.ReportManage;
 
 /**
  * 
@@ -20,11 +19,11 @@ import com.klspta.model.report.ReportManage;
 public class FlexManager extends AbstractBaseBean {
     public static FlexManager instance;
 
-    private Map<String, Map<String, String>> roleLayerBeans = new HashMap<String, Map<String, String>>();
+    private Map<String, Map<String, String>> roleLayerMaps = new HashMap<String, Map<String, String>>();
 
-    private Map<String, Map<String, String>> roleWidgetBeans = new HashMap<String, Map<String, String>>();
+    private Map<String, Map<String, String>> roleWidgetMaps = new HashMap<String, Map<String, String>>();
 
-    private Map<String, String> roleXmlBeans = new HashMap<String, String>();
+    private Map<String, Document> roleXmlBeans = new HashMap<String, Document>();
 
     private FlexXmlBean fxb;
 
@@ -113,39 +112,24 @@ public class FlexManager extends AbstractBaseBean {
 
     /**
      * 
-     * <br>Description:根据角色获取相应xml
-     * <br>Author:陈强峰
-     * <br>Date:2014-4-14
-     * @param roleId
-     */
-    public String getRoleXML(String roleId) {
-        String xml = roleXmlBeans.get(roleId);
-        if (xml == null) {
-            if (roleLayerBeans.containsKey(roleId) && roleWidgetBeans.containsKey(roleId)) {
-
-            } else {
-                refreshWithRoleId(roleId);
-            }
-            xml = fxb.toXml(roleLayerBeans.get(roleId), roleWidgetBeans.get(roleId));
-            roleXmlBeans.put(roleId, xml);
-        }
-        return xml;
-    }
-
-    /**
-     * 
      * <br>Description:根据角色获取相应xmlDom
      * <br>Author:陈强峰
      * <br>Date:2014-4-14
      * @param roleId
      */
     public Document getRoleXMLDom(String roleId) {
-        if (roleLayerBeans.containsKey(roleId) && roleWidgetBeans.containsKey(roleId)) {
-
-        } else {
-            refreshWithRoleId(roleId);
+        Document xmlDocument = roleXmlBeans.get(roleId);
+        if (xmlDocument == null) {
+            if (!roleLayerMaps.containsKey(roleId)) {
+                refreshRoleLayer(roleId);
+            }
+            if (!roleWidgetMaps.containsKey(roleId)) {
+                refreshRoleWidget(roleId);
+            }
+            xmlDocument = fxb.getXml(roleLayerMaps.get(roleId), roleWidgetMaps.get(roleId));
+            roleXmlBeans.put(roleId, xmlDocument);
         }
-        return fxb.toXml2(roleLayerBeans.get(roleId), roleWidgetBeans.get(roleId));
+        return xmlDocument;
     }
 
     /**
@@ -177,8 +161,8 @@ public class FlexManager extends AbstractBaseBean {
             }
         }
         roleXmlBeans.remove(roleId);
-        roleLayerBeans.remove(roleId);
-        roleLayerBeans.put(roleId, map);
+        roleLayerMaps.remove(roleId);
+        roleLayerMaps.put(roleId, map);
     }
 
     /**
@@ -200,8 +184,8 @@ public class FlexManager extends AbstractBaseBean {
             }
         }
         roleXmlBeans.remove(roleId);
-        roleWidgetBeans.remove(roleId);
-        roleWidgetBeans.put(roleId, map);
+        roleWidgetMaps.remove(roleId);
+        roleWidgetMaps.put(roleId, map);
     }
 
     /**
@@ -214,12 +198,12 @@ public class FlexManager extends AbstractBaseBean {
      * @return
      */
     public String getLayerCheckTreeByRoleId(String roleId) {
-        if (roleLayerBeans.containsKey(roleId)) {
+        if (roleLayerMaps.containsKey(roleId)) {
 
         } else {
             refreshRoleLayer(roleId);
         }
-        Map<String, String> roleLayerMap = roleLayerBeans.get(roleId);
+        Map<String, String> roleLayerMap = roleLayerMaps.get(roleId);
         StringBuffer flexBuffer = new StringBuffer();
         flexBuffer.append("[{text:'组件',checked:false,leaf:0,children:[");
         List<FlexLayerBean> layerList = fxb.getFmb().getLayerList();
@@ -249,7 +233,7 @@ public class FlexManager extends AbstractBaseBean {
      * @return
      */
     public String getWidgetCheckTreeByRoleId(String roleId) {
-        if (roleWidgetBeans.containsKey(roleId)) {
+        if (roleWidgetMaps.containsKey(roleId)) {
 
         } else {
             refreshRoleWidget(roleId);
@@ -264,7 +248,7 @@ public class FlexManager extends AbstractBaseBean {
             if (firstNode.getType().endsWith("widget")) {
                 flexBuffer.append("leaf:1,");
                 flexBuffer.append("checked:").append(
-                        roleWidgetBeans.get(roleId).containsKey(firstNode.getWidgetId()) ? "true" : "false");
+                        roleWidgetMaps.get(roleId).containsKey(firstNode.getWidgetId()) ? "true" : "false");
             } else {
                 flexBuffer.append("leaf:0");
                 flexBuffer.append(",checked:false");
@@ -281,6 +265,15 @@ public class FlexManager extends AbstractBaseBean {
         return flexBuffer.toString();
     }
 
+    /**
+     * 
+     * <br>Description:添加子节点
+     * <br>Author:陈强峰
+     * <br>Date:2014-4-17
+     * @param flexBuffer
+     * @param fwb
+     * @param roleId
+     */
     private void appendChild(StringBuffer flexBuffer, FlexWidgetBean fwb, String roleId) {
         flexBuffer.append(",children:[");
         List<FlexWidgetBean> list = fwb.getChildList();
@@ -291,7 +284,7 @@ public class FlexManager extends AbstractBaseBean {
             if (firstNode.getType().endsWith("widget")) {
                 flexBuffer.append("leaf:1,");
                 flexBuffer.append("checked:").append(
-                        roleWidgetBeans.get(roleId).containsKey(firstNode.getWidgetId()) ? "true" : "false");
+                        roleWidgetMaps.get(roleId).containsKey(firstNode.getWidgetId()) ? "true" : "false");
             } else {
                 flexBuffer.append("leaf:0");
                 flexBuffer.append(",checked:false");
@@ -351,8 +344,4 @@ public class FlexManager extends AbstractBaseBean {
         return count;
     }
 
-    public static void main(String[] args) {
-        FlexManager fm = new FlexManager();
-        System.out.println(fm.getRoleXML("B3F69476CAD54881B3DE73C8FB914E61"));
-    }
 }
