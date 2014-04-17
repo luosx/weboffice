@@ -11,7 +11,7 @@
 	<head>
 		<base href="<%=basePath%>">
 
-		<title>执法监察系统</title>
+		<title>flex授权</title>
 
 		<meta http-equiv="pragma" content="no-cache">
 		<meta http-equiv="cache-control" content="no-cache">
