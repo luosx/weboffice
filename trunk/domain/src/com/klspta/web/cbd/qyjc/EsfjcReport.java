@@ -63,11 +63,13 @@ public class EsfjcReport extends AbstractBaseBean implements IDataClass{
 				for(String key : keyset){
 					if("QT".equals(key)){
 						tdbean = new TDBean(map.get(key)==null?"":map.get(key).toString(),"300","");
+						tdbean.setStyle("trsingle");
 						trbean.addTDBean(tdbean);
 					}else{
 						if("SSQY".equals(key)){
 							if("".equals(ssqy) || !ssqy.equals(map.get("SSQY"))){
 								tdbean = new TDBean(map.get(key)==null?"":map.get(key).toString(),"120","");
+								tdbean.setStyle("trsingle");
 								if("CBD北控区老旧房".equals(map.get(key))){
 									tdbean.setRowspan(bkqljf+"");
 								}else if("CBD东扩区老旧房".equals(map.get(key))){
@@ -83,6 +85,7 @@ public class EsfjcReport extends AbstractBaseBean implements IDataClass{
 							}
 						}else{
 							tdbean = new TDBean(map.get(key)==null?"":map.get(key).toString(),"120","");
+							tdbean.setStyle("trsingle");
 							trbean.addTDBean(tdbean);
 						}
 					}
