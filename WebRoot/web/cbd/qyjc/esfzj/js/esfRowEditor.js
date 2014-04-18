@@ -9,7 +9,15 @@ function showMap(objid){
 		table.init(document.getElementById("ESFQK"));
 	}
 	//alert("showMap");
-	var key = objid.cells[1].innerText;
+	if(objid.cells.length - objid.nextSibling.cells.length >0 ){
+		var key = objid.cells[2].innerText;
+	}else{
+		var key = objid.cells[1].innerText;
+	}
+	
+	
+	//alert(objid.nextSibling);
+	//alert(key);
 	//parent.parent.frames['east'].swfobject.getObjectById("FxGIS").clear();
 	//parent.parent.frames['east'].swfobject.getObjectById("FxGIS").findFeature("cbd", "0", key, "ZRBBH");
 	//parent.parent.dhxLayout.cells("a").getFrame().contentWindow.document.swfobject.getObjectById("FxGIS").clear();
@@ -24,13 +32,20 @@ function showMap(objid){
 
 //双击编辑地图
 function editMap(objid){
+	//alert(view);
 	if(view == "R"){
 		return;
 	}
 	if(table.element == undefined){
 		table.init(document.getElementById("ESFQK"));
 	}
-	xqmc = objid.cells[1].innerText;
+	if(objid.cells.length - objid.nextSibling.cells.length >0 ){
+		var xqmc = objid.cells[2].innerText;
+	}else{
+		var xqmc = objid.cells[1].innerText;
+	}
+	alert(xqmc);
+	//xqmc = objid.cells[1].innerText;
 	//parent.parent.frames['east'].swfobject.getObjectById("FxGIS").clear();
 	//parent.parent.frames['east'].swfobject.getObjectById("FxGIS").drawPolygon();
 	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").clear();
