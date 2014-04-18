@@ -44,9 +44,10 @@ Paneloper.prototype = {
 	},
 	save:function(){
 		var obj = this;
-		var year = parent.Ext.getCmp("year").lastSelectionText;
-		var month = parent.Ext.getCmp("month").lastSelectionText;
-		this.object.form.url += "?year=" + year + "&month=" + month;
+//		var year = parent.Ext.getCmp("year").lastSelectionText;
+//		var month = parent.Ext.getCmp("month").lastSelectionText;
+//		this.object.form.url += "?year=" + year + "&month=" + month;
+		
 		this.object.form.submit({
 			waitMsg:'正在保存，请稍后...',
 			success:function(){

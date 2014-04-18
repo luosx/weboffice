@@ -111,7 +111,8 @@ String view = request.getParameter("view");
 			            xtype : 'combo',   
 					    fieldLabel : '所属区域',   
 					    id : 'ssqy',   
-					    store :[[1,'CBD中心区'],[2,'CBD东扩区']],   
+					    store :[[1,'CBD北控区老旧房'],[2,'CBD东扩区老旧房'],[3,'CBD东扩区新居房'],[4,'CBD原区新居房'],
+					            [5,'CBD原区老旧房']],   
 					    width:100,   
 					    value:'',   
 					    triggerAction: "all",   
@@ -119,17 +120,21 @@ String view = request.getParameter("view");
 					    allowBlank:false
 					 }]
 				},{
-		            columnWidth:.5,
+					columnWidth:.5,
 	        		layout:'form',
 	        		items:[{
-		                xtype: 'textfield',
-		                id      : 'xh',
-		                value:'',
-		                disabled:true,
-		                fieldLabel: '序号',
-		                width :100
-	                }]
-            	},{
+						xtype : 'combo',   
+					    fieldLabel : '住房性质',   
+					    id : 'xz',   
+					    store :[[1,'老旧'],[2,'新居']],   
+					    width:100,   
+					    value:'',   
+					    triggerAction: "all",   
+					    mode: "local",   
+					    allowBlank:false
+					}]
+				}]
+            },{
                 	layout : 'column',
     	        	items : [{
     	        		columnWidth:.5,
@@ -142,27 +147,12 @@ String view = request.getParameter("view");
     		                width :100
     	                }]	                
                 	},{
-					columnWidth:.5,
-	        		layout:'form',
-	        		items:[{
-						xtype : 'combo',   
-					    fieldLabel : '住房性质',   
-					    id : 'xz',   
-					    store :[[1,'老旧房'],[2,'新居房']],   
-					    width:100,   
-					    value:'',   
-					    triggerAction: "all",   
-					    mode: "local",   
-					    allowBlank:false
-					}]
-				}]
-            },{
 		            columnWidth:.5,
 	        		layout:'form',
 	        		items:[{
 		                xtype: 'textfield',
 		                id      : 'jsnd',
-		                value:'',
+		                value:'年',
 		                fieldLabel: '建设年代',
 		                width :100
 	                }]
@@ -187,8 +177,17 @@ String view = request.getParameter("view");
 		                xtype: 'textfield',
 		                id      : 'wyf',
 		                value:'',
-		                disabled:true,
 		                fieldLabel: '物业费',
+		                width :100
+	                }]
+            	},{
+		            columnWidth:.5,
+	        		layout:'form',
+	        		items:[{
+		                xtype: 'textfield',
+		                id      : 'qw',
+		                value:'',
+		                fieldLabel: '区位',
 		                width :100
 	                }]
             	},{
@@ -198,7 +197,6 @@ String view = request.getParameter("view");
 		                xtype: 'textfield',
 		                id      : 'ldzs',
 		                value:'',
-		                disabled:true,
 		                fieldLabel: '楼栋总数',
 		                width :100
 	                }]
@@ -209,7 +207,6 @@ String view = request.getParameter("view");
 		                xtype: 'textfield',
 		                id      : 'fwzs',
 		                value:'',
-		                disabled:true,
 		                fieldLabel: '房屋总数',
 		                width :100
 	                }]
@@ -220,7 +217,6 @@ String view = request.getParameter("view");
 		                xtype: 'textfield',
 		                id      : 'lczk',
 		                value:'',
-		                disabled:true,
 		                fieldLabel: '楼层状况',
 		                width :100
 	                }]
@@ -231,7 +227,6 @@ String view = request.getParameter("view");
 		                xtype: 'textfield',
 		                id      : 'rjl',
 		                value:'',
-		                disabled:true,
 		                fieldLabel: '容积率',
 		                width :100
 	                }]
@@ -242,8 +237,7 @@ String view = request.getParameter("view");
 		                xtype: 'textfield',
 		                id      : 'lhl',
 		                value:'',
-		                disabled:true,
-		                fieldLabel: '绿化率',
+		                fieldLabel: '绿化率%',
 		                width :100
 	                }]
             	},{
@@ -253,7 +247,6 @@ String view = request.getParameter("view");
 		                xtype: 'textfield',
 		                id      : 'tcw',
 		                value:'',
-		                disabled:true,
 		                fieldLabel: '停车位',
 		                width :100
 	                }]
@@ -264,7 +257,6 @@ String view = request.getParameter("view");
 		                xtype: 'textfield',
 		                id      : 'kfs',
 		                value:'',
-		                disabled:true,
 		                fieldLabel: '开发商',
 		                width :100
 	                }]
@@ -275,7 +267,6 @@ String view = request.getParameter("view");
 		                xtype: 'textfield',
 		                id      : 'wygs',
 		                value:'',
-		                disabled:true,
 		                fieldLabel: '物业公司',
 		                width :100
 	                }]
@@ -286,13 +277,21 @@ String view = request.getParameter("view");
 		                xtype: 'textfield',
 		                id      : 'dz',
 		                value:'',
-		                disabled:true,
 		                fieldLabel: '地址',
 		                width :100
 	                }]
             	}
             	]
-            }],
+            },{
+	            columnWidth:.5,
+        		layout:'form',
+        		items:[{
+	                xtype: 'hidden',
+	                id      : 'yw_guid',
+	                value:'',
+	                width :100
+                }]
+        	}],
 	        buttons: [
 	            {
 	                text   : '保存',
@@ -311,7 +310,7 @@ String view = request.getParameter("view");
 	  });	
   		form.render("deal");
   		form.hide();
-		var elements = new Array("ssqy","xh","xqmc","xz","jzlx","wyf","ldzs","fwzs","lczk","rjl","lhl",
+		var elements = new Array("ssqy","xqmc","jzlx","wyf","ldzs","fwzs","lczk","rjl","lhl",
 									"tcw","kfs","wygs","dz","yw_guid");
   		paneloper.init(form,elements);
   		paneloper.hide();
@@ -333,7 +332,7 @@ String view = request.getParameter("view");
   </script>
   <body onload="hideywguid();">
   	<div id="show" style="overflow-x:hidden;overflow-y:hidden">
-  	<%=new CBDReportManager().getReport("ESFQK",new Object[] {year,month,"false"},its,"1000px")%>
+  	<%=new CBDReportManager().getReport("ESFQK",new Object[] {"false"},its,"1000px")%>
   	</div>
   	<div id="deal" style="position:absolute; left:5px; top:5px; "></div>
   	<form id="attachfile" action="<%=basePath%>service/rest/zrbHandle/update" method="post">

@@ -15,7 +15,7 @@ function showMap(objid){
 	//parent.parent.dhxLayout.cells("a").getFrame().contentWindow.document.swfobject.getObjectById("FxGIS").clear();
 	//parent.parent.dhxLayout.cells("a").getFrame().contentWindow.document.swfobject.getObjectById("FxGIS").findFeature("cbd", "0", key, "ZRBBH");
 	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").clear();
-	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").findFeature("cbd", "8", key, "XQMC");
+	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").findFeature("cbd", "objid.cells[objid.cells.length-2]", key, "XQMC");
 
 	//添加选中保存
 	//var num = objid.rowIndex();
@@ -89,18 +89,19 @@ function add(){
 	paneloper.show();
 }
 
-function dele(year,month){
+function dele(){
 	Ext.MessageBox.confirm('确认', '系统将删除所有选中二手房，确定?', function(btn,text){
 		if(btn == 'yes'){
 			var choseValue = table.getAnnotations();
 			var choseString = '';
 			while(choseValue.length != 0){
-				choseString += table.getValue(choseValue.pop(),"9") + ",";
+				var temp = choseValue.pop();
+				choseString += table.getValue(temp,table.element.rows[temp].cells.length-1) + ",";
 			}
 			putClientCommond("scjcManager","delByYwGuid");
 			putRestParameter("yw_guid",escape(escape(choseString)));
-			putRestParameter("year",year);
-			putRestParameter("month",month);
+//			putRestParameter("year",year);
+//			putRestParameter("month",month);
 			myData = restRequest();
 			if(myData){
 				Ext.MessageBox.alert('提醒', '删除成功！', function(btn, text){
@@ -123,28 +124,44 @@ function modify(){
 		if(table.element == undefined){
 			table.init(document.getElementById("ESFQK"));
 		}
-		var key = objid.cells[9].innerText;
+		var key = objid.cells[objid.cells.length-1].innerText;
 		xqmc = key;
 		putClientCommond("scjcManager","queryByname");
 		putRestParameter("yw_guid",escape(escape(xqmc)));
 		var hxxmmc = restRequest();
 		form.findById('ssqy').setValue(hxxmmc[0].SSQY);
-		form.findById('xqlb').setValue(hxxmmc[0].XQLB);
-		var array = paneloper.getElements();
-		for(var i = 1; i < objid.cells.length; i++){
-			var value = objid.cells[i].innerText;
-			paneloper.insertValue(array[i+1], value);
-		}
+		form.findById('xz').setValue(hxxmmc[0].XZ);
+		form.findById('xqmc').setValue(hxxmmc[0].XQMC);
+		form.findById('jsnd').setValue(hxxmmc[0].JSND);
+		form.findById('jzlx').setValue(hxxmmc[0].JZLX);
+		form.findById('wyf').setValue(hxxmmc[0].WYF);
+		form.findById('qw').setValue(hxxmmc[0].QW);
+		form.findById('ldzs').setValue(hxxmmc[0].LDZS);
+		form.findById('fwzs').setValue(hxxmmc[0].FWZS);
+		form.findById('lczk').setValue(hxxmmc[0].LCZK);
+		form.findById('rjl').setValue(hxxmmc[0].RJL);
+		form.findById('lhl').setValue(hxxmmc[0].LHL);
+		form.findById('tcw').setValue(hxxmmc[0].TCW);
+		form.findById('kfs').setValue(hxxmmc[0].KFS);
+		form.findById('wygs').setValue(hxxmmc[0].WYGS);
+		form.findById('dz').setValue(hxxmmc[0].DZ);
+		form.findById('yw_guid').setValue(hxxmmc[0].YW_GUID);
+
+//		var array = paneloper.getElements();
+//		for(var i = 1; i < objid.cells.length; i++){
+//			var value = objid.cells[i].innerText;
+//			paneloper.insertValue(array[i+1], value);
+//		}
 		paneloper.show();
 	}
 }
 
 //根据用地单位和关键字作过滤
-function queryZrb(year,month,keyword){
+function queryZrb(keyword){
 	putClientCommond("scjcManager","getReport");
 	putRestParameter("keyword",escape(escape(keyword)));
-	putRestParameter("year",year);
-	putRestParameter("month",month);
+//	putRestParameter("year",year);
+//	putRestParameter("month",month);
 	myData = restRequest();
   	document.getElementById("show").innerHTML = myData;
   	var obj = document.getElementById("ESFQK");
