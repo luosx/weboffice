@@ -1,8 +1,6 @@
 package com.klspta.web.cbd.jtfx.scjc;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -39,11 +37,12 @@ public class ScjcManager extends AbstractBaseBean {
 
     public void getReport() {
         String keyword = request.getParameter("keyword");
-        String year = request.getParameter("year");
-        String month = request.getParameter("month");
+//        String year = request.getParameter("year");
+//        String month = request.getParameter("month");
         keyword = UtilFactory.getStrUtil().unescape(keyword);
+        
 		ITableStyle its = new TableStyleEditRow();
-		response(String.valueOf(new CBDReportManager().getReport("ESFQK", new Object[]{year,month,"false",keyword},its,"1000px")));
+		response(String.valueOf(new CBDReportManager().getReport("ESFQK", new Object[]{"false",keyword},its,"1000px")));
 //        if (keyword != null && !keyword.equals("")) {
 //            keyword = UtilFactory.getStrUtil().unescape(keyword);
 //        }
@@ -122,12 +121,11 @@ public class ScjcManager extends AbstractBaseBean {
             yw_guid = UtilFactory.getStrUtil().unescape(yw_guid);
             String[] xqmcs = yw_guid.split(",");
            
-            List<Map<String,Object>> list = null;
-	            for(int i = 0; i < xqmcs.length;i++){
+            for(int i = 0; i < xqmcs.length;i++){
 		            String sql = "delete from esf_jbxx t where yw_guid='" + xqmcs[i] + "'";
 		            this.update(sql, YW);
-		            sql = "delete from esf_zsxx t where yw_guid='" + xqmcs[i] + "'";
-		            this.update(sql, YW);
+//		            sql = "delete from esf_zsxx t where yw_guid='" + xqmcs[i] + "'";
+//		            this.update(sql, YW);
             }
             response("{success:true}");
         } catch (Exception e) {
@@ -137,33 +135,53 @@ public class ScjcManager extends AbstractBaseBean {
 
     public void save() {
     	String yw_guid = request.getParameter("yw_guid");
-        String year = request.getParameter("year");
-        String month = request.getParameter("month");
-        String esfzl = request.getParameter("esfzl");
-        String czl = request.getParameter("czl");
-        String ssqy = UtilFactory.getStrUtil().unescape(request.getParameter("ssqy"));
-        String xqmc = UtilFactory.getStrUtil().unescape(request.getParameter("xqmc"));
-        String xqlb = UtilFactory.getStrUtil().unescape(request.getParameter("xqlb"));
-        String bz = UtilFactory.getStrUtil().unescape(request.getParameter("bz"));
-
+//        String year = request.getParameter("year");
+//        String month = request.getParameter("month");
+//        String esfzl = request.getParameter("esfzl");
+//        String czl = request.getParameter("czl");
+//        String ssqy = UtilFactory.getStrUtil().unescape(request.getParameter("ssqy"));
+//        String xqmc = UtilFactory.getStrUtil().unescape(request.getParameter("xqmc"));
+//        String xqlb = UtilFactory.getStrUtil().unescape(request.getParameter("xqlb"));
+//        String bz = UtilFactory.getStrUtil().unescape(request.getParameter("bz"));
+    	String ssqy = UtilFactory.getStrUtil().unescape(request.getParameter("ssqy"));
+    	String xqmc = UtilFactory.getStrUtil().unescape(request.getParameter("xqmc"));
+    	String xz = UtilFactory.getStrUtil().unescape(request.getParameter("xz"));
+    	String jsnd = UtilFactory.getStrUtil().unescape(request.getParameter("jsnd"));
+    	String qw = UtilFactory.getStrUtil().unescape(request.getParameter("qw"));
+    	String jzlx = UtilFactory.getStrUtil().unescape(request.getParameter("jzlx"));
+    	String wyf = UtilFactory.getStrUtil().unescape(request.getParameter("wyf"));
+    	String ldzs = UtilFactory.getStrUtil().unescape(request.getParameter("ldzs"));
+    	String fwzs = UtilFactory.getStrUtil().unescape(request.getParameter("fwzs"));
+    	String lczk = UtilFactory.getStrUtil().unescape(request.getParameter("lczk"));
+    	String rjl = UtilFactory.getStrUtil().unescape(request.getParameter("rjl"));
+    	String lhl = UtilFactory.getStrUtil().unescape(request.getParameter("lhl"));
+    	String tcw = UtilFactory.getStrUtil().unescape(request.getParameter("tcw"));
+    	String kfs = UtilFactory.getStrUtil().unescape(request.getParameter("kfs"));
+    	String wygs = UtilFactory.getStrUtil().unescape(request.getParameter("wygs"));
+    	String dz = UtilFactory.getStrUtil().unescape(request.getParameter("dz"));
+    	
         if ("".equals(yw_guid) || yw_guid==null || "null".equals(yw_guid)) {
-        	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd_hhmmss");
-            String format = dateFormat.format(new Date());
-            String insertSql = "insert into esf_jbxx(ssqy,xqmc,xqlb,bz,yw_guid) values(?,?,?,?,?)";
-            this.update(insertSql, YW, new Object[] { ssqy, xqmc, xqlb, bz, format });
-            String intserSql2 = "insert into esf_zsxx(yw_guid,year,month,zl,czl)values(?,?,?,?,?)";
-            this.update(intserSql2, YW, new Object[] { format, year, month ,esfzl,czl});           
+//        	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd_hhmmss");
+//            String format = dateFormat.format(new Date());
+            String insertSql = 
+            	"insert into esf_jbxx(ssqy,xqmc,xz,jsnd,qw,jzlx,wyf,ldzs,fwzs,lczk,rjl,lhl,tcw,kfs,wygs,dz)" +
+            		" values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            this.update(insertSql, YW, new Object[] { ssqy,xqmc,xz,jsnd,qw,jzlx,wyf,ldzs,fwzs,lczk,rjl,lhl,tcw,kfs,wygs,dz});
+//            String intserSql2 = "insert into esf_zsxx(yw_guid,year,month,zl,czl)values(?,?,?,?,?)";
+//            this.update(intserSql2, YW, new Object[] { format, year, month ,esfzl,czl});           
         } else {
-        	 String update = "update esf_jbxx set ssqy='" + ssqy + "',xqmc='" + xqmc + "',xqlb='" + xqlb
-             + "',bz='" + bz + "'where yw_guid=?";
+        	 String update = "update esf_jbxx set ssqy='" + ssqy + "',xqmc='" + xqmc + "',xz='" + xz
+             + "',jsnd='" + jsnd + "',qw='"+qw +"',jzlx='"+jzlx +"',wyf='"+wyf +"',ldzs='"+ldzs 
+             +"',fwzs='"+fwzs +"',lczk='"+lczk +"',rjl='"+rjl +"',lhl='"+lhl +"',tcw='"+tcw +"',kfs='"+kfs 
+             +"',wygs='"+wygs +"',dz='"+dz+"' where yw_guid=?";
 		     this.update(update, YW, new Object[] {yw_guid});
-		     update = "MERGE INTO esf_zsxx p USING (select '"+yw_guid+"' as yw_guid ,'"+year+"' as year,'"+month+"' as  month from dual ) np  " +
-		     		" ON (p.yw_guid = np.yw_guid and p.year=np.year and p.month=np.month) " +
-		     		"  WHEN MATCHED THEN  UPDATE SET p.zl = ?,  p.czl = ? " +
-		     		" WHERE p.year = ? and p.month=?  WHEN NOT MATCHED THEN" +
-		     		"  INSERT (yw_guid,zl,czl,year,month)  VALUES (?,?,?,?,?)";
-		     //	update = "update esf_zsxx set zl=?,czl=? where yw_guid=? and year=? and month=?";
-		     	update(update, YW,new Object[]{esfzl,czl,year,month,yw_guid,esfzl,czl,year,month});
+//		     update = "MERGE INTO esf_zsxx p USING (select '"+yw_guid+"' as yw_guid ,'"+year+"' as year,'"+month+"' as  month from dual ) np  " +
+//		     		" ON (p.yw_guid = np.yw_guid and p.year=np.year and p.month=np.month) " +
+//		     		"  WHEN MATCHED THEN  UPDATE SET p.zl = ?,  p.czl = ? " +
+//		     		" WHERE p.year = ? and p.month=?  WHEN NOT MATCHED THEN" +
+//		     		"  INSERT (yw_guid,zl,czl,year,month)  VALUES (?,?,?,?,?)";
+//		     //	update = "update esf_zsxx set zl=?,czl=? where yw_guid=? and year=? and month=?";
+//		     	update(update, YW,new Object[]{esfzl,czl,year,month,yw_guid,esfzl,czl,year,month});
         }       
         response("{success:true}");
     }
@@ -387,7 +405,11 @@ public class ScjcManager extends AbstractBaseBean {
     	}
     	xqmc = UtilFactory.getStrUtil().unescape(xqmc);
         StringBuffer sqlBuffer = new StringBuffer();
-        sqlBuffer.append("select t.ssqy,t.xqlb from esf_jbxx t where yw_guid=?");
+        sqlBuffer.append("select t.ssqy as ssqy,t.xz as xz,t.xqmc as xqmc,t.jsnd as jsnd," +
+        		"t.qw as qw,t.jzlx as jzlx,t.wyf as wyf,t.ldzs as ldzs,t.fwzs as fwzs,t.lczk as lczk," +
+        		"t.rjl as rjl,t.lhl as lhl,t.tcw as tcw,t.kfs as kfs,t.wygs as wygs,t.dz as dz,t.yw_guid as yw_guid " +
+        		"from esf_jbxx t " +
+        		"where yw_guid=?");
         List<Map<String, Object>> list = query(sqlBuffer.toString(), YW,new Object[]{xqmc});
         response(list);
     }

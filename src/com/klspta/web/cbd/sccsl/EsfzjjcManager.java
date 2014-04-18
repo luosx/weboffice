@@ -21,32 +21,21 @@ public class EsfzjjcManager extends AbstractBaseBean {
 		return result;
 	}
 
-	public Map<String, Object> getESFData(String yw_guid) {
+	public List<Map<String, Object>> getESFData(String keyword) {
 		List<Map<String, Object>> result = null;
-		Calendar cal = Calendar.getInstance();
-		String month = cal.get(Calendar.MONTH) + 1 + "";
-		String year = cal.get(Calendar.YEAR) + "";
-		String sql = "select k.* from ESF_ZSXX k,ESF_JBXX t where t.yw_guid='"
-				+ yw_guid + "' and t.bh=k.bh and k.year='" + year
-				+ "' and k.month='" + month + "'";
-		if (query(sql, YW).size() > 0) {
-			sql = "select t.*,k.zj,k.sj from ESF_JBXX t , ESF_ZSXX k where "
-					+ " t.bh=k.bh and k.year=? and k.month=? and  t.yw_guid='"
-					+ yw_guid + "'";
-			result = query(sql, YW, new Object[] { year, month });
-		} else {
-			sql = "select * from ESF_JBXX where yw_guid='" + yw_guid + "'";
+		if(!"".equals(keyword)){
+			String sql = "select t.ssqy as ssqy,rownum as xh,t.xqmc as xqmc,t.xz as xz,t.jsnd as jsnd,t.qw as qw,t.jzlx as jzlx,t.wyf as wyf," +
+				"t.ldzs as ldzs,t.fwzs as fwzs,t.lczk as lczk,t.rjl as rjl,t.lhl as lhl," +
+				"t.tcw as tcw,t.kfs as kfs,t.wygs as wygs,t.dz as dz,t.yw_guid as yw_guid from esf_jbxx t " +
+				"where t.ssqy like '"+keyword+"' or t.xqmc like '" +keyword+"' or t.xz like '"+keyword+"' or t.jsnd like '"+keyword+
+				"' or t.qw like '"+keyword+"' or t.jzlx like '"+keyword+"' or t.wyf like '"+keyword+"' or t.tcw like '"+keyword+
+				"' or t.kfs like '"+keyword+"' or t.wygs like '"+keyword+"' or t.dz like '"+keyword+"' order by t.ssqy";
 			result = query(sql, YW);
-			for (int i = 0; i < result.size(); i++) {
-				result.get(i).put("ZJ", null);
-				result.get(i).put("SJ", null);
+			for(int i=0 ; i < result.size();i++){
+				result.get(i).put("XH", i+1+"");
 			}
-		}
-
-		if (result.size() > 0) {
-			return result.get(0);
-		}
-		return null;
+		}else result = getESFData();
+		return result;
 	}
 
 	public void getXZL() {
