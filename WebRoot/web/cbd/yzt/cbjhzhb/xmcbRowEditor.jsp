@@ -124,7 +124,7 @@ ITableStyle its = new TableStyleEditRow();
 		                xtype: 'combo',
 		                id   : 'XMLX',
 		                value:'', 
-		                store:[[1,"计划新增项目"],[2,"结转项目"]],
+		                store:[[1,"计划新增项目"],[2,"结转项目"],[3,"前期研究项目"]],
 		                fieldLabel: '项目类型',
 		                width:'100',
 		                mode: "local",   
@@ -134,7 +134,7 @@ ITableStyle its = new TableStyleEditRow();
             		columnWidth:.3,
 	        		layout:'form',
 					items:[{
-		                xtype: 'numberfield',
+		                xtype: 'textfield',
 		                id   : 'XMQX',
 		                value:'',  
 		                fieldLabel: '区县',
