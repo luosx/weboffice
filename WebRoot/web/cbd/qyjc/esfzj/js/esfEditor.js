@@ -10,8 +10,8 @@ Ext.onReady(function() {
 			width = document.body.clientWidth;
 			height = document.body.clientHeight;
 			initComponent();
-			Ext.getCmp("year").setValue(year);
-		 Ext.getCmp("month").setValue(month);
+//			Ext.getCmp("year").setValue(year);
+//		 Ext.getCmp("month").setValue(month);
 		});
 
 function initComponent() {
@@ -49,32 +49,8 @@ function initComponent() {
 							xtype : 'button',
 							text : '结束',
 							id:"end",
-							handler : end
-						}, '-' ,{
-							xtype : 'label',
-							text : '年：'
-						},{
-							xtype : 'combo',   
-						    id : 'year',   
-						    store :[[1,'2010'],[2,'2011'],[3,'2012'],[4,'2013'],[5,'2014'],[6,'2015'],[7,'2016'],[8,'2017'],[9,'2018'],[10,'2019']
-						    ,[11,'2020'],[12,'2021'],[13,'2022'],[14,'2023'],[15,'2024'],[16,'2025'],[17,'2026'],[18,'2027'],[19,'2028'],[20,'2029'],[21,'2030']],   
-						    width:50,   
-						    value:'',   
-						    triggerAction: "all",   
-						    mode: "local",   
-						    allowBlank:false
-						}, '-' ,{
-							xtype : 'label',
-							text : '月：'
-						},{
-							xtype : 'combo',   
-						    id : 'month',   
-						    store :[[1,'1'],[2,'2'],[3,'3'],[4,'4'],[5,'5'],[6,'6'],[7,'7'],[8,'8'],[9,'9'],[10,'10'],[11,'11'],[12,'12']],   
-						    width:50,   
-						    value:'',   
-						    triggerAction: "all",   
-						    mode: "local",   
-						    allowBlank:false,
+							handler : end,
+						
 						    listeners:{'select':function(){
 								var year = Ext.getCmp("year").lastSelectionText;
 								var month = Ext.getCmp("month").lastSelectionText;
@@ -118,10 +94,9 @@ function initComponent() {
 
 
 function query() {
-	var year = Ext.getCmp("year").getValue();
-	var month = Ext.getCmp("month").getValue();
+
 	var keyword = Ext.getCmp("keyword").getValue();
-	document.frames['report'].queryZrb(year,month,keyword);
+	document.frames['report'].queryZrb(keyword);
 }
 
 function exportExcel() {
@@ -141,9 +116,7 @@ function add(){
 }
 
 function dele(){
-	var year = Ext.getCmp("year").getValue();
-	var month = Ext.getCmp("month").getValue();
-	document.frames['report'].dele(year,month);
+	document.frames['report'].dele();
 }
 
 function modify(){
