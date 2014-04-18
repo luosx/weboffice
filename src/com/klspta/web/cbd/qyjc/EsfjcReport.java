@@ -14,7 +14,7 @@ import com.klspta.web.cbd.sccsl.EsfzjjcManager;
 public class EsfjcReport extends AbstractBaseBean implements IDataClass{
 	
 	private final static String[] TITLE= {"所属区域","序号","小区名称","性质","建设年代","区位","房屋、建筑类型","物业费",
-											"楼栋总数","房屋总数","楼层状况","容积率","绿化率","停车位","开发商",
+											"楼栋总数","房屋总数","楼层状况","容积率","绿化率（%）","停车位","开发商",
 											 "物业公司","地址","yw_guid"};
 	
 //	所属区域  	序号  	小区名称  	性质 	建设年代  	区位 	房屋、建筑类型	"物业费	(元/平米•月）"
@@ -23,12 +23,17 @@ public class EsfjcReport extends AbstractBaseBean implements IDataClass{
 	public Map<String, TRBean> getTRBeans(Object[] obj, TRBean trBean) {
 		Map<String, TRBean> trbeans = new LinkedHashMap<String, TRBean>();
 		buildTitle(trbeans);
-		buildESF(trbeans);
+		buildESF(obj,trbeans);
 		return trbeans;
 	}
 
-	private void buildESF(Map<String, TRBean> trbeans) {
-		List<Map<String, Object>> esf = new EsfzjjcManager().getESFData();
+	private void buildESF(Object[] obj,Map<String, TRBean> trbeans) {
+		List<Map<String, Object>> esf = null;
+		if(obj.length>1){
+			esf = new EsfzjjcManager().getESFData(obj[1].toString());
+		}else{
+			esf = new EsfzjjcManager().getESFData();
+		}
 		TRBean trbean = null;
 		TDBean tdbean = null;
 		int i= 0;
