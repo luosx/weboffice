@@ -366,7 +366,7 @@ public class ZjglBuild {
 									+ String.valueOf(list.get(i).get("sort"))
 									+ "@7'/></td>");
 					for (int j = 0; j < items.length; j++) {
-						if(j+1==month  ||  "资金部".equals(rolename) || "资金部部长".equals(rolename)){
+						if(j+1==month  ||  "市场部".equals(rolename) || "市场部部长".equals(rolename)){
 						stringBuffer
 								.append("<td class='tr04'><input class='tr04' type='text' style='width:70px;' onchange='addrzxq(this); return false' value='"
 										+ delNull(String.valueOf(list.get(i)
@@ -424,7 +424,7 @@ public class ZjglBuild {
 									+ String.valueOf(list.get(i).get("sort"))
 									+ "@7'/></td>");
 					for (int j = 0; j < items.length; j++) {
-						if(j+1==month  ||  "资金部".equals(rolename) || "资金部部长".equals(rolename)){
+						if(j+1==month  ||  "市场部".equals(rolename) || "市场部部长".equals(rolename)){
 						stringBuffer
 								.append("<td class='tr04'><input class='tr04' type='text' style='width:70px;' onchange='addrzxq(this); return false' value='"
 										+ delNull(String.valueOf(list.get(i)
@@ -583,7 +583,7 @@ public class ZjglBuild {
 									+ String.valueOf(list.get(i).get("sort"))
 									+ "@7'/></td>");
 					for (int j = 0; j < items.length; j++) {
-						if(j+1 == month ||  "资金部".equals(rolename) || "资金部部长".equals(rolename)){
+						if(j+1 == month ||  "市场部".equals(rolename) || "市场部部长".equals(rolename)){
 						stringBuffer
 								.append("<td><input type='text' style='width:70px;' onchange='addrzxq(this); return false' value='"
 										+ delNull(String.valueOf(list.get(i)
@@ -662,7 +662,7 @@ public class ZjglBuild {
 									+ String.valueOf(list.get(i).get("sort"))
 									+ "@7'/></td>");
 					for (int j = 0; j < items.length; j++) {
-						if(j+1==month || "资金部".equals(rolename) || "资金部部长".equals(rolename)){
+						if(j+1==month || "市场部".equals(rolename) || "市场部部长".equals(rolename)){
 						stringBuffer
 								.append("<td><input type='text' style='width:70px;' onchange='addrzxq(this); return false' value='"
 										+ delNull(String.valueOf(list.get(i)
