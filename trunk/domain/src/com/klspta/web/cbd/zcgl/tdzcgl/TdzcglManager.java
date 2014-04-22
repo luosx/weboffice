@@ -337,7 +337,7 @@ public class TdzcglManager extends AbstractBaseBean {
 			+"</tr>"
 			+"<tr class='tr02' >"
 				+"<td id='2_0' height='10' width='50' class='tr02'>2</td>"
-				+"<td id='2_1' height='10' width='150' class='tr02'>民生改造区</td>"
+				+"<td id='2_1' height='10' width='150' class='tr02'>民生改善区</td>"
 				+"<td id='2_2' height='10' width='100' class='tr02'>"+String.format("%.2f", zd2)+"</td>"
 				+"<td id='2_3' height='10' width='100' class='tr02'>"+String.format("%.2f", jsyd2)+"</td>"
 				+"<td id='2_4' height='10' width='100' class='tr02'>"+String.format("%.2f", jzgm2)+"</td>"
