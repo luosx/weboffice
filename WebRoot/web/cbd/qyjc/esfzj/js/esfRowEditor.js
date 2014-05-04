@@ -8,22 +8,14 @@ function showMap(objid){
 	if(table.element == undefined){
 		table.init(document.getElementById("ESFQK"));
 	}
-	//alert("showMap");
+	var key ;
 	if(objid.cells.length - objid.nextSibling.cells.length >0 ){
-		var key = objid.cells[2].innerText;
+		key = objid.cells[2].innerText;
 	}else{
-		var key = objid.cells[1].innerText;
+		key = objid.cells[1].innerText;
 	}
-	
-	
-	//alert(objid.nextSibling);
-	//alert(key);
-	//parent.parent.frames['east'].swfobject.getObjectById("FxGIS").clear();
-	//parent.parent.frames['east'].swfobject.getObjectById("FxGIS").findFeature("cbd", "0", key, "ZRBBH");
-	//parent.parent.dhxLayout.cells("a").getFrame().contentWindow.document.swfobject.getObjectById("FxGIS").clear();
-	//parent.parent.dhxLayout.cells("a").getFrame().contentWindow.document.swfobject.getObjectById("FxGIS").findFeature("cbd", "0", key, "ZRBBH");
 	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").clear();
-	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").findFeature("cbd", "objid.cells[objid.cells.length-2]", key, "XQMC");
+	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").findFeature("cbd", "8", key, "XQMC");
 
 	//添加选中保存
 	//var num = objid.rowIndex();
@@ -40,14 +32,10 @@ function editMap(objid){
 		table.init(document.getElementById("ESFQK"));
 	}
 	if(objid.cells.length - objid.nextSibling.cells.length >0 ){
-		var xqmc = objid.cells[2].innerText;
+		xqmc = objid.cells[2].innerText;
 	}else{
-		var xqmc = objid.cells[1].innerText;
+		xqmc = objid.cells[1].innerText;
 	}
-	alert(xqmc);
-	//xqmc = objid.cells[1].innerText;
-	//parent.parent.frames['east'].swfobject.getObjectById("FxGIS").clear();
-	//parent.parent.frames['east'].swfobject.getObjectById("FxGIS").drawPolygon();
 	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").clear();
 	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").drawPolygonMultiple();
 }
@@ -60,7 +48,7 @@ function end(){
 
 //导出Excel
 function print(){
-    var curTbl = document.getElementById("ESFQK"); 
+  var curTbl = document.getElementById("ESFQK"); 
     try{
     	var oXL = new ActiveXObject("Excel.Application");
     }catch(err){
@@ -111,7 +99,7 @@ function dele(){
 			var choseString = '';
 			while(choseValue.length != 0){
 				var temp = choseValue.pop();
-				choseString += table.getValue(temp,table.element.rows[temp].cells.length-1) + ",";
+				choseString += table.getValue(temp,table.element.rows[temp].cells.length-2) + ",";
 			}
 			putClientCommond("scjcManager","delByYwGuid");
 			putRestParameter("yw_guid",escape(escape(choseString)));
@@ -139,7 +127,7 @@ function modify(){
 		if(table.element == undefined){
 			table.init(document.getElementById("ESFQK"));
 		}
-		var key = objid.cells[objid.cells.length-1].innerText;
+		var key = objid.cells[objid.cells.length-2].innerText;
 		xqmc = key;
 		putClientCommond("scjcManager","queryByname");
 		putRestParameter("yw_guid",escape(escape(xqmc)));
@@ -175,8 +163,6 @@ function modify(){
 function queryZrb(keyword){
 	putClientCommond("scjcManager","getReport");
 	putRestParameter("keyword",escape(escape(keyword)));
-//	putRestParameter("year",year);
-//	putRestParameter("month",month);
 	myData = restRequest();
   	document.getElementById("show").innerHTML = myData;
   	var obj = document.getElementById("ESFQK");
@@ -184,12 +170,12 @@ function queryZrb(keyword){
 	for(var i=0;i< rowlength;i++){
 		//if(i!=1){
 			obj.rows[i].cells[obj.rows[i].cells.length-1].style.display="none";
-			obj.rows[i].cells[obj.rows[i].cells.length-1].innerText;
+			obj.rows[i].cells[obj.rows[i].cells.length-2].style.display="none";
 		//}
 	}
 	var width = document.body.clientWidth;
 	var height = document.body.clientHeight * 0.95;
-   	FixTable("ESFQK", 0,1, width, height);
+   	FixTable("ESFQK", 3,1, width, height);
 }
 
 

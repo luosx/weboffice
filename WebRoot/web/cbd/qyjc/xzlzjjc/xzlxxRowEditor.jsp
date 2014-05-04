@@ -22,11 +22,11 @@ String view = request.getParameter("view");
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
 	<script src="base/include/jquery-1.10.2.js"></script>
-	<%@ include file="/web/cbd/qyjc/xzlzjjc/xzlxx/js/reportEdit.jspf"%>
+	<%@ include file="/web/cbd/qyjc/xzlzjjc/js/reportEdit.jspf"%>
 	<%@ include file="/base/include/restRequest.jspf"%>
-	<script src="web/cbd/qyjc/xzlzjjc/xzlxx/js/table.js"></script>
-	<script src="web/cbd/qyjc/xzlzjjc/xzlxx/js/panel.js"></script>
-	<script src="web/cbd/qyjc/xzlzjjc/xzlxx/js/xzlxxRowEditor.js"></script>
+	<script src="web/cbd/qyjc/xzlzjjc/js/table.js"></script>
+	<script src="web/cbd/qyjc/xzlzjjc/js/panel.js"></script>
+	<script src="web/cbd/qyjc/xzlzjjc/js/xzlxxRowEditor.js"></script>
 	<%@ include file="/base/include/ext.jspf" %>
 	<style type="text/css">
   		table{
@@ -76,9 +76,7 @@ String view = request.getParameter("view");
   	var view = "<%=view%>";
   	var paneloper = new Paneloper();
   	$(document).ready(function () { 
-		var width = document.body.clientWidth-5;
-		var height = document.body.clientHeight * 0.9;
-       	FixTable("XZLZJ", 2,2, width, height);
+
        	buildPanel();
     });
   //	Ext.onReady(function(){
@@ -358,14 +356,24 @@ String view = request.getParameter("view");
 	        },{
 	           	layout:'column',
 	           	items:[{
-					columnWidth:1,
+					columnWidth:0.5,
 	        		layout:'form',
 	           		items:[{
 		                xtype: 'textfield',
 		                id   : 'qt',
 		                value:'',
 		                fieldLabel: '其他',
-		                width:'500'
+		                width:'200'
+	            	}]
+	            },{
+					columnWidth:0.5,
+	        		layout:'form',
+	           		items:[{
+		                xtype: 'textfield',
+		                id   : 'url',
+		                value:'',
+		                fieldLabel: '超链接',
+		                width:'200'
 	            	}]
 	            }]
 	        }], 
@@ -388,15 +396,25 @@ String view = request.getParameter("view");
   		form.render("deal");
   		form.hide();
   		var elements = new Array("bh","xzlmc","kfs","wygs","tzf","sq","cpdw","cplx","cylx","rzqy","kpsj",
-  		"ysxkz","cbcs","lc","bzcg","wq","cn","gd","gs","dt","gdcw","tcwzj","syl","qt");
+  		"ysxkz","cbcs","lc","bzcg","wq","cn","gd","gs","dt","gdcw","tcwzj","syl","qt","url");
   		paneloper.init(form,elements);
   		paneloper.hide();
   	}
+  	function hideywguid(){
+	 		var obj = document.getElementById("XZLXX");
+	  		var rowlength = obj.rows.length;
+	  		for(var i=0;i< rowlength;i++){
+	  			obj.rows[i].cells[obj.rows[i].cells.length-1].style.display="none";
+	  		}
+			var width = document.body.clientWidth-5;
+			var height = document.body.clientHeight * 0.9;
+       		FixTable("XZLXX", 2,2, width, height);
+	  	}
   // })
   </script>
-  <body>
+  <body onload="hideywguid();">
   	<div id='show'>
-  		<%=new CBDReportManager().getReport("XZLZJ",new Object[]{"%%"},its)%>
+  		<%=new CBDReportManager().getReport("XZLXX",new Object[]{"%%"},its)%>
   	</div>
   	<div id="deal" style="position:absolute; left:5px; top:5px; "></div>
   	<form id="attachfile" action="<%=basePath%>service/rest/zrbHandle/update" method="post">

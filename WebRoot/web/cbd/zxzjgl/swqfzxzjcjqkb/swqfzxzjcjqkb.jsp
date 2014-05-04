@@ -63,10 +63,15 @@
 		    line-height: 20px;
 		    text-align:center;
 		   }
-</style>
-</head>
-<script type="text/javascript">
-	function exportExcel(){
+		.tr02{
+			background-color: #D1E5FB;
+		    line-height: 20px;
+		    text-align:left;
+		   }
+	</style>
+	</head>
+	<script type="text/javascript">
+		function exportExcel(){
 		    var curTbl = document.getElementById("XZLZJ"); 
  			try{
 		    	var oXL = new ActiveXObject("Excel.Application");
@@ -92,96 +97,87 @@
 		    oXL.Visible = true; 
 		    //设置excel可见属性 
 		}
-function shows(){
-	var year = document.getElementById("sel").value;
-	year=escape(escape(year));
-	putClientCommond("swqfzxzjcqkbManager","getlistByYear");
-	putRestParameter("year",year);
-	var list = restRequest();
-}	
-</script>
-
-<body>
-<div id="fixed" style="position: fixed; top: 2px; left: 20px">
-  		&nbsp;
-  		
-		<img src="base/form/images/exportexcel.png" width="20px" height="20px" title="导出Excel" onClick="javascript:exportExcel();"  />&nbsp;&nbsp;&nbsp;
-	</div>
-	<div align="center" style="margin-left: 10px;  width:800px;">
-	      <h1>商务区分中心资金筹集情况表</h1>
-	</div>
-	<!-- 
-	<div  align="right" style="margin-left: 10px;  width:800px;">
-	      年份选择 <select id="sel" onchange="shows"> 
-			<option value="2010">2010</option>
-			<option value="2011">2011</option>
-			<option value="2012">2012</option>
-			<option value="2013">2013</option>
-			<option  value="2014" selected="selected">2014</option>
-			<option value="2015">2015</option>
-			<option value="2016">2016</option>
-			<option value="2017">2017</option>
-			<option value="2018">2018</option>
-			<option value="2019" >2019</option>
-			</select>
-	</div>
-	 -->
-	<div style="margin-left:20px">
-		<%=new CBDReportManager().getReport("ZJCJQK",new Object[]{"false"})%>
-		<!-- 
-		<table id='SWQFZXZJCJQKB' width='800' border='1' cellpadding='1' cellspacing='0'>
-			<tr class='tr01' >
-				<td id='0_0' height='10' width='230' class='tr01'>资金来源</td>
-				<td id='0_1' height='10' width='190' class='tr01'>总额（亿元）</td>
-				<td id='0_2' height='10' width='190' class='tr01'>已到位（亿元）</td>
-				<td id='0_3' height='10' width='190' class='tr01'>未到位（亿元）</td>
-			</tr>
-			<tr class='tr02' >
-				<td id='1_0' height='10' width='230' class='tr02'>1 筹融资金</td>
-				<td id='1_1' height='10' width='190' class='tr02'>0</td>
-				<td id='1_2' height='10' width='190' class='tr02'>0</td>
-				<td id='1_3' height='10' width='190' class='tr02'>0</td>
-			</tr>
-			<tr class='tr02' >
-				<td id='2_0' height='10' width='230' class='tr02'>1.1 金融机构贷款</td>
-				<td id='2_1' height='10' width='190' class='tr02'>0</td>
-				<td id='2_2' height='10' width='190' class='tr02'>0</td>
-				<td id='2_3' height='10' width='190' class='tr02'>0</td>
-			</tr>
-			<tr class='tr02' >
-				<td id='3_0' height='10' width='230' class='tr02'>1.2 实施主体带资</td>
-				<td id='3_1' height='10' width='190' class='tr02'>0</td>
-				<td id='3_2' height='10' width='190' class='tr02'>0</td>
-				<td id='3_3' height='10' width='190' class='tr02'>0</td>
-			</tr>
-			<tr class='tr02' >
-				<td id='4_0' height='10' width='230' class='tr02'>1.3 国有土地收益基金</td>
-				<td id='4_1' height='10' width='190' class='tr02'>0</td>
-				<td id='4_2' height='10' width='190' class='tr02'>0</td>
-				<td id='4_3' height='10' width='190' class='tr02'>0</td>
-			</tr>
-			<tr class='tr02' >
-				<td id='5_0' height='10' width='230' class='tr02'>2 出让回笼资金</td>
-				<td id='5_1' height='10' width='190' class='tr02'>0</td>
-				<td id='5_2' height='10' width='190' class='tr02'>0</td>
-				<td id='5_3' height='10' width='190' class='tr02'>0</td>
-			</tr>
-			<tr class='tr02' >
-				<td id='6_0' height='10' width='230' class='tr02'>3 其他资金</td>
-				<td id='6_1' height='10' width='190' class='tr02'>0</td>
-				<td id='6_2' height='10' width='190' class='tr02'>0</td>
-				<td id='6_3' height='10' width='190' class='tr02'>0</td>
-			</tr>
-			<tr class='tr01' >
-				<td id='7_0' height='10' width='230' class='tr01'>合计</td>
-				<td id='7_1' height='10' width='190' class='tr01'>0</td>
-				<td id='7_2' height='10' width='190' class='tr01'>0</td>
-				<td id='7_3' height='10' width='190' class='tr01'>0</td>
-			</tr>
-			
-		</table>
-		 -->
-	</div>
-
-</body>
+		function shows(){
+			var year = document.getElementById("sel").value;
+			year=escape(escape(year));
+			putClientCommond("swqfzxzjcqkbManager","getlistByYear");
+			putRestParameter("year",year);
+			var list = restRequest();
+		}	
+		function floatLeft(){
+			var obj = document.getElementById("ZJCJQK");
+	  		var rowlength = obj.rows.length;
+	  		for(var i=1 ; i < rowlength-1; i++){
+				obj.rows[i].cells[0].className="tr02";
+	  		}
+		}
+	</script>
+	
+	<body onload="floatLeft();">
+	<div id="fixed" style="position: fixed; top: 2px; left: 20px">
+	  		&nbsp;
+	  		
+			<img src="base/form/images/exportexcel.png" width="20px" height="20px" title="导出Excel" onClick="javascript:exportExcel();"  />&nbsp;&nbsp;&nbsp;
+		</div>
+		<div align="center" style="margin-left: 10px;  width:800px;">
+		      <h1>商务区分中心资金筹集情况表</h1>
+		</div>
+		<div style="margin-left:20px">
+			<%=new CBDReportManager().getReport("ZJCJQK",new Object[]{"false"})%>
+			<!-- 
+			<table id='SWQFZXZJCJQKB' width='800' border='1' cellpadding='1' cellspacing='0'>
+				<tr class='tr01' >
+					<td id='0_0' height='10' width='230' class='tr01'>资金来源</td>
+					<td id='0_1' height='10' width='190' class='tr01'>总额（亿元）</td>
+					<td id='0_2' height='10' width='190' class='tr01'>已到位（亿元）</td>
+					<td id='0_3' height='10' width='190' class='tr01'>未到位（亿元）</td>
+				</tr>
+				<tr class='tr02' >
+					<td id='1_0' height='10' width='230' class='tr03' >1 筹融资金</td>
+					<td id='1_1' height='10' width='190' class='tr02'>0</td>
+					<td id='1_2' height='10' width='190' class='tr02'>0</td>
+					<td id='1_3' height='10' width='190' class='tr02'>0</td>
+				</tr>
+				<tr class='tr02' >
+					<td id='2_0' height='10' width='230' class='tr03'>1.1 金融机构贷款</td>
+					<td id='2_1' height='10' width='190' class='tr02'>0</td>
+					<td id='2_2' height='10' width='190' class='tr02'>0</td>
+					<td id='2_3' height='10' width='190' class='tr02'>0</td>
+				</tr>
+				<tr class='tr02' >
+					<td id='3_0' height='10' width='230' class='tr03'>1.2 实施主体带资</td>
+					<td id='3_1' height='10' width='190' class='tr02'>0</td>
+					<td id='3_2' height='10' width='190' class='tr02'>0</td>
+					<td id='3_3' height='10' width='190' class='tr02'>0</td>
+				</tr>
+				<tr class='tr02' >
+					<td id='4_0' height='10' width='230' class='tr03'>1.3 国有土地收益基金</td>
+					<td id='4_1' height='10' width='190' class='tr02'>0</td>
+					<td id='4_2' height='10' width='190' class='tr02'>0</td>
+					<td id='4_3' height='10' width='190' class='tr02'>0</td>
+				</tr>
+				<tr class='tr02' >
+					<td id='5_0' height='10' width='230' class='tr03'>2 出让回笼资金</td>
+					<td id='5_1' height='10' width='190' class='tr02'>0</td>
+					<td id='5_2' height='10' width='190' class='tr02'>0</td>
+					<td id='5_3' height='10' width='190' class='tr02'>0</td>
+				</tr>
+				<tr class='tr02' >
+					<td id='6_0' height='10' width='230' class='tr03'>3 其他资金</td>
+					<td id='6_1' height='10' width='190' class='tr02'>0</td>
+					<td id='6_2' height='10' width='190' class='tr02'>0</td>
+					<td id='6_3' height='10' width='190' class='tr02'>0</td>
+				</tr>
+				<tr class='tr01' >
+					<td id='7_0' height='10' width='230' class='tr01'>合计</td>
+					<td id='7_1' height='10' width='190' class='tr01'>0</td>
+					<td id='7_2' height='10' width='190' class='tr01'>0</td>
+					<td id='7_3' height='10' width='190' class='tr01'>0</td>
+				</tr>
+				
+			</table>
+			 -->
+		</div>
+	
+	</body>
 </html>

@@ -37,7 +37,7 @@
         items:[
        	 	{
                 title: '租售情况',
-                html: "<iframe width='"+w+"' height='"+h+"' src='web/cbd/qyjc/esfxx/zjqknd_pjzj.jsp?view=<%=view%>'/>"
+                html: "<iframe width='"+w+"' height='"+h+"' src='web/cbd/qyjc/esfzj/zjqknd_pjzj.jsp?view=<%=view%>'/>"
             }
             ,
         	{

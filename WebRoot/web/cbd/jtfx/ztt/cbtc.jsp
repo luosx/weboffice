@@ -15,7 +15,7 @@ String img = basePath + "web/cbd/framework/images/cbsptl.png";
 </script>
 </head>
 <body>
-<iframe src="<%=basePath%>base/fxgis/fx/tongchou.html?i=false&initFunction=[{$name$:$setLayerVisiable$,$json$:$[{\\$servicename\\$:\\$cbd\\$,\\$visiableids\\$:[4]},{\\$servicename\\$:\\$cbdyx\\$,\\$visiableids\\$:[1]}]$}]" width="100%" height="100%"></iframe>
+<iframe id='gis' src="<%=basePath%>base/fxgis/fx/tongchou.html?i=false&initFunction=[{$name$:$setLayerVisiable$,$json$:$[{\\$servicename\\$:\\$cbd\\$,\\$visiableids\\$:[4]},{\\$servicename\\$:\\$cbdyx\\$,\\$visiableids\\$:[1]}]$}]" width="100%" height="100%"></iframe>
 <div style="position:absolute; bottom:20px; right:30px; width:50px; height:50px;border: 0"><img src=<%=img%>></div>
 </body>
 </html>

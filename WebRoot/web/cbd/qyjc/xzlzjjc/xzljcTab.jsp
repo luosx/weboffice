@@ -36,12 +36,12 @@
         frame:true,
         items:[{
                 title: '租金情况',
-                html: "<iframe width='"+w+"' height='"+h+"' src='web/cbd/qyjc/xzlzjjc/zjqk/zjqknd_pjzj.jsp?view=<%=view%>'/>"
+                html: "<iframe width='"+w+"' height='"+h+"' src='web/cbd/qyjc/xzlzjjc/zjqknd_pjzj.jsp?view=<%=view%>'/>"
             }
         	,
         	{
                 title: '写字楼信息',
-                html: "<iframe width='"+w+"' height='"+h+"' src='web/cbd/qyjc/xzlzjjc/xzlxx/xzlxxViewFrame.jsp?view=<%=view%>'/>" 
+                html: "<iframe width='"+w+"' height='"+h+"' src='web/cbd/qyjc/xzlzjjc/xzlxxViewFrame.jsp?view=<%=view%>'/>" 
             }
             ,{
                 title: '平均租金趋势分析',

@@ -2,8 +2,6 @@
 <%@page import="com.klspta.model.CBDReport.CBDReportManager"%>
 <%@page import="com.klspta.model.CBDReport.tablestyle.ITableStyle"%>
 <%@page import="com.klspta.web.cbd.yzt.jc.report.TableStyleEditRow"%>
-<%@page import="com.klspta.web.cbd.yzt.kgzb.Control"%>
-<%@page import="com.klspta.web.cbd.jtfx.scjc.ScjcManager"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -27,7 +25,7 @@ String view = request.getParameter("view");
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
 	<script src="base/include/jquery-1.10.2.js"></script>
-	<%@ include file="/web/cbd/qyjc/esfxx/js/reportEdit.jspf"%>
+	<%@ include file="/web/cbd/qyjc/esfzj/js/reportEdit.jspf"%>
 	<%@ include file="/base/include/restRequest.jspf"%>
 	<script src="web/cbd/qyjc/esfzj/js/table.js"></script>
 	<script src="web/cbd/qyjc/esfzj/js/panel.js"></script>
@@ -280,8 +278,7 @@ String view = request.getParameter("view");
 		                fieldLabel: '地址',
 		                width :100
 	                }]
-            	}
-            	]
+            	}]
             },{
 	            columnWidth:.5,
         		layout:'form',
@@ -290,6 +287,17 @@ String view = request.getParameter("view");
 	                id      : 'yw_guid',
 	                value:'',
 	                width :100
+                }]
+        	}
+        	,{
+	            columnWidth:.5,
+        		layout:'form',
+        		items:[{
+	                xtype: 'textfield',
+	                id      : 'url',
+	                fieldLabel: '超链接',
+	                value:'',
+	                width :200
                 }]
         	}],
 	        buttons: [
@@ -311,24 +319,21 @@ String view = request.getParameter("view");
   		form.render("deal");
   		form.hide();
 		var elements = new Array("ssqy","xqmc","jzlx","wyf","ldzs","fwzs","lczk","rjl","lhl",
-									"tcw","kfs","wygs","dz","yw_guid");
+									"tcw","kfs","wygs","dz","yw_guid","url");
   		paneloper.init(form,elements);
   		paneloper.hide();
-  	}
-  // })
-   function hideywguid(){
- 		var obj = document.getElementById("ESFQK");
-  		var rowlength = obj.rows.length;
-  		for(var i=0;i< rowlength;i++){
-  			//if(i!=1){
-  				obj.rows[i].cells[obj.rows[i].cells.length-1].style.display="none";
-  				obj.rows[i].cells[obj.rows[i].cells.length-1].innerText;
-  			//}
   		}
-  		var width = document.body.clientWidth;
-    	var height = document.body.clientHeight * 0.95;
-       	FixTable("ESFQK", 3,1, width, height);
-  	}
+	   function hideywguid(){
+	 		var obj = document.getElementById("ESFQK");
+	  		var rowlength = obj.rows.length;
+	  		for(var i=0;i< rowlength;i++){
+	  			obj.rows[i].cells[obj.rows[i].cells.length-1].style.display="none";
+				obj.rows[i].cells[obj.rows[i].cells.length-2].style.display="none";
+	  		}
+	  		var width = document.body.clientWidth;
+	    	var height = document.body.clientHeight * 0.95;
+	       	FixTable("ESFQK", 3,1, width, height);
+	  	}
   </script>
   <body onload="hideywguid();">
   	<div id="show" style="overflow-x:hidden;overflow-y:hidden">
