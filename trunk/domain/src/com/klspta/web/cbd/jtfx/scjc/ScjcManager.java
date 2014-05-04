@@ -37,16 +37,9 @@ public class ScjcManager extends AbstractBaseBean {
 
     public void getReport() {
         String keyword = request.getParameter("keyword");
-//        String year = request.getParameter("year");
-//        String month = request.getParameter("month");
         keyword = UtilFactory.getStrUtil().unescape(keyword);
-        
 		ITableStyle its = new TableStyleEditRow();
 		response(String.valueOf(new CBDReportManager().getReport("ESFQK", new Object[]{"false",keyword},its,"1000px")));
-//        if (keyword != null && !keyword.equals("")) {
-//            keyword = UtilFactory.getStrUtil().unescape(keyword);
-//        }
-//        response(getList(keyword));
     }
 
     public String getList(String keyord) {
@@ -135,14 +128,6 @@ public class ScjcManager extends AbstractBaseBean {
 
     public void save() {
     	String yw_guid = request.getParameter("yw_guid");
-//        String year = request.getParameter("year");
-//        String month = request.getParameter("month");
-//        String esfzl = request.getParameter("esfzl");
-//        String czl = request.getParameter("czl");
-//        String ssqy = UtilFactory.getStrUtil().unescape(request.getParameter("ssqy"));
-//        String xqmc = UtilFactory.getStrUtil().unescape(request.getParameter("xqmc"));
-//        String xqlb = UtilFactory.getStrUtil().unescape(request.getParameter("xqlb"));
-//        String bz = UtilFactory.getStrUtil().unescape(request.getParameter("bz"));
     	String ssqy = UtilFactory.getStrUtil().unescape(request.getParameter("ssqy"));
     	String xqmc = UtilFactory.getStrUtil().unescape(request.getParameter("xqmc"));
     	String xz = UtilFactory.getStrUtil().unescape(request.getParameter("xz"));
@@ -159,21 +144,22 @@ public class ScjcManager extends AbstractBaseBean {
     	String kfs = UtilFactory.getStrUtil().unescape(request.getParameter("kfs"));
     	String wygs = UtilFactory.getStrUtil().unescape(request.getParameter("wygs"));
     	String dz = UtilFactory.getStrUtil().unescape(request.getParameter("dz"));
+    	String url = request.getParameter("url");
     	
         if ("".equals(yw_guid) || yw_guid==null || "null".equals(yw_guid)) {
 //        	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd_hhmmss");
 //            String format = dateFormat.format(new Date());
             String insertSql = 
-            	"insert into esf_jbxx(ssqy,xqmc,xz,jsnd,qw,jzlx,wyf,ldzs,fwzs,lczk,rjl,lhl,tcw,kfs,wygs,dz)" +
-            		" values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-            this.update(insertSql, YW, new Object[] { ssqy,xqmc,xz,jsnd,qw,jzlx,wyf,ldzs,fwzs,lczk,rjl,lhl,tcw,kfs,wygs,dz});
+            	"insert into esf_jbxx(ssqy,xqmc,xz,jsnd,qw,jzlx,wyf,ldzs,fwzs,lczk,rjl,lhl,tcw,kfs,wygs,dz,url)" +
+            		" values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            this.update(insertSql, YW, new Object[] { ssqy,xqmc,xz,jsnd,qw,jzlx,wyf,ldzs,fwzs,lczk,rjl,lhl,tcw,kfs,wygs,dz,url});
 //            String intserSql2 = "insert into esf_zsxx(yw_guid,year,month,zl,czl)values(?,?,?,?,?)";
 //            this.update(intserSql2, YW, new Object[] { format, year, month ,esfzl,czl});           
         } else {
         	 String update = "update esf_jbxx set ssqy='" + ssqy + "',xqmc='" + xqmc + "',xz='" + xz
              + "',jsnd='" + jsnd + "',qw='"+qw +"',jzlx='"+jzlx +"',wyf='"+wyf +"',ldzs='"+ldzs 
              +"',fwzs='"+fwzs +"',lczk='"+lczk +"',rjl='"+rjl +"',lhl='"+lhl +"',tcw='"+tcw +"',kfs='"+kfs 
-             +"',wygs='"+wygs +"',dz='"+dz+"' where yw_guid=?";
+             +"',wygs='"+wygs +"',dz='"+dz+"',url='"+url+"' where yw_guid=?";
 		     this.update(update, YW, new Object[] {yw_guid});
 //		     update = "MERGE INTO esf_zsxx p USING (select '"+yw_guid+"' as yw_guid ,'"+year+"' as year,'"+month+"' as  month from dual ) np  " +
 //		     		" ON (p.yw_guid = np.yw_guid and p.year=np.year and p.month=np.month) " +
