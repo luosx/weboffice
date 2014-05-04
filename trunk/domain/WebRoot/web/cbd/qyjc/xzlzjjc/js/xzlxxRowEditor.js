@@ -6,7 +6,7 @@ var table = new tableoper();
 //单击地图定位
 function showMap(objid){
 	if(table.element == undefined){
-		table.init(document.getElementById("XZLZJ"));
+		table.init(document.getElementById("XZLXX"));
 	}
 	//alert("showMap");
 	var key = objid.cells[1].innerText;
@@ -31,7 +31,7 @@ function end(){
 function editMap(objid){
 	
 	if(table.element == undefined){
-		table.init(document.getElementById("XZLZJ"));
+		table.init(document.getElementById("XZLXX"));
 	}
 	//alert("showMap");
 	xzlmc = objid.cells[1].innerText;
@@ -44,7 +44,7 @@ function editMap(objid){
 
 //导出Excel
 function print(){
-    var curTbl = document.getElementById("XZLZJ"); 
+    var curTbl = document.getElementById("XZLXX"); 
     try{
     	var oXL = new ActiveXObject("Excel.Application");
     }catch(err){
@@ -81,7 +81,7 @@ function setRecord(polygon){
 
 function add(){
 	if(table.element == undefined){
-		table.init(document.getElementById("XZLZJ"));
+		table.init(document.getElementById("XZLXX"));
 	}
 	paneloper.show();
 }
@@ -117,10 +117,14 @@ function queryZrb(keyword){
 	putRestParameter("keyword",escape(escape(keyword)));
 	myData = restRequest();
   	document.getElementById("show").innerHTML = myData;
-  	
-  	var width = document.body.clientWidth-5;
+  	var obj = document.getElementById("XZLXX");
+ 	var rowlength = obj.rows.length;
+ 	for(var i=0;i< rowlength;i++){
+	  	obj.rows[i].cells[obj.rows[i].cells.length-1].style.display="none";
+ 	}
+	var width = document.body.clientWidth-5;
 	var height = document.body.clientHeight * 0.9;
-    FixTable("XZLZJ", 2,2, width, height);
+	FixTable("XZLXX", 2,2, width, height);
 }
 
 
@@ -129,7 +133,7 @@ function modify(){
 	if(annoations.length > 0){
 		var objid = table.element.rows[annoations[0]];
 		if(table.element == undefined){
-		table.init(document.getElementById("XZLZJ"));
+		table.init(document.getElementById("XZLXX"));
 		}
 		var key = objid.cells[1].innerText;
 		xzlmc = key;

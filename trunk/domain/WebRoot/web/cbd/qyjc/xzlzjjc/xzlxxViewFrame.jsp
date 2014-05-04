@@ -26,7 +26,7 @@ String view = request.getParameter("view");
   </head>
   <script type="text/javascript">
   		var gisurl = "<%=basePath%>/base/fxgis/framework/gisViewFrame.jsp";
-  		var url = "<%=basePath%>/web/cbd/qyjc/xzlzjjc/xzlxx/xzlxxEditor.jsp?view=<%=view%>";
+  		var url = "<%=basePath%>/web/cbd/qyjc/xzlzjjc/xzlxxEditor.jsp?view=<%=view%>";
   		Ext.onReady(function(){
   			putClientCommond("mapconfig","updateMapService");
 			putRestParameter("serverid","cbd,cbdyx");

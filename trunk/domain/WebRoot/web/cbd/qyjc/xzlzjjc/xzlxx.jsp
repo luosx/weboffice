@@ -277,7 +277,7 @@ var bhs = "";
 		}
 		selectedTr = document.getElementById("row" + i);
 		selectedTr.style.display = 'none';
-		var tb = document.getElementById("XZLZJ");
+		var tb = document.getElementById("XZLXX");
 		newRow = tb.insertRow(i + 3);
 		var c0 = newRow.insertCell(0);
 		bhs=selectedTr.cells[0].childNodes[0].nodeValue;
@@ -350,7 +350,7 @@ var bhs = "";
 		newRow.parentNode.removeChild(newRow);
 	}
 	function exportExcel(){
-		    var curTbl = document.getElementById("XZLZJ"); 
+		    var curTbl = document.getElementById("XZLXX"); 
  			try{
 		    	var oXL = new ActiveXObject("Excel.Application");
 		    }catch(err){
@@ -381,7 +381,7 @@ var bhs = "";
 $(document).ready(function () { 
 		var width = document.body.clientWidth+10;
 		var height = document.body.clientHeight-35;
-       	FixTable("XZLZJ", 2,2, width, height);
+       	FixTable("XZLXX", 2,2, width, height);
 	});
 </script>
 <body>

@@ -3,7 +3,7 @@ var simple;
 var combo;
 var array = new Array();
 var url = basePath
-		+ '/web/cbd/qyjc/xzlzjjc/xzlxx/xzlxxRowEditor.jsp?view=' + view;
+		+ '/web/cbd/qyjc/xzlzjjc/xzlxxRowEditor.jsp?view=' + view;
 var condition = "";
 
 Ext.onReady(function() {
