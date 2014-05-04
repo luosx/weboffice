@@ -274,4 +274,20 @@ public class JbbManager extends AbstractBaseBean {
 		List<Map<String ,Object>> result = query(sql, YW,new Object[]{dkmc});
 		response(result);
 	}
+	
+	public void getJbdkTree(){
+		String sql = "select t.dkmc from JC_JIBEN t order by t.dkmc asc";
+		List<Map<String, Object>> list = query(sql, YW);
+		Map<String,Object> map = null;
+		StringBuffer tree = new StringBuffer("[{text:'基本地块列表',checked:true,leaf:0,id:0,children:[");
+		for(int i = 0; i < list.size()-1; i++){
+			map = list.get(i);
+			tree.append("{text:'"+map.get("dkmc")+"',checked:true,leaf:1,id:'"+map.get("dkmc")+"',parentId:0},");
+		}
+		map = list.get(list.size()-1);
+		tree.append("{text:'"+map.get("dkmc")+"',checked:true,leaf:1,id:'"+map.get("dkmc")+"',parentId:0}");
+		tree.append("]}]");
+		response(tree.toString());
+	}
+	
 }
