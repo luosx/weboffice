@@ -13,34 +13,41 @@ import com.klspta.web.cbd.sccsl.XzlzjjcManager;
 
 public class XzlxxReport extends AbstractBaseBean implements IDataClass{
 	
-	private final static String[] TITLE= {"编号","写字楼名称","开发商","物业公司","投资方"};
+	private final static String[] TITLE= {"编号","写字楼名称","开发商","物业公司","投资方","商圈","url"};
 	private final static String[] TITLE_XM ={"产品定位","产品类型","产业类型","入住企业","开盘时间","预售许可证","成本测算","楼层","标准层高(米)","外墙","采暖","供电","供水","电梯","固定车位(个)","停车位租价","使用率"};
 	
 	@Override
 	public Map<String, TRBean> getTRBeans(Object[] obj, TRBean trBean) {
 		Map<String, TRBean> trbeans = new LinkedHashMap<String, TRBean>();
 		buildTitle(trbeans);
-		buildXZL(trbeans);
+		buildXZL(trbeans,obj);
 		return trbeans;
 	}
 
-	private void buildXZL(Map<String, TRBean> trbeans) {
-		List<Map<String, Object>> xzl = new XzlzjjcManager().getXZLData();
+	private void buildXZL(Map<String, TRBean> trbeans , Object[] obj) {
+		List<Map<String, Object>> xzl = new XzlzjjcManager().getXZLData(obj);
 		TRBean trbean = null;
 		TDBean tdbean = null;
 		int i= 0;
 		if(xzl!=null){
 			for(Map<String,Object> map : xzl){
 				trbean = new TRBean();
+				trbean.setCssStyle("trsingle");
 				Set<String> keyset = map.keySet();
 				for(String key : keyset){
 					if("QT".equals(key)){
 						tdbean = new TDBean(map.get(key)==null?"":map.get(key).toString(),"300","");
 						trbean.addTDBean(tdbean);
 					}else{
-						tdbean = new TDBean(map.get(key)==null?"":map.get(key).toString(),"120","");
-						trbean.addTDBean(tdbean);
+						if("XZLMC".equals(key) && map.get("url")!=null){
+							tdbean = new TDBean(map.get(key)==null?"":"<a href='"+map.get("url")+"' target='_blank'>"+map.get(key).toString()+"</a>","120","");
+							trbean.addTDBean(tdbean);
+						}else{
+							tdbean = new TDBean(map.get(key)==null?"":map.get(key).toString(),"120","");
+							trbean.addTDBean(tdbean);
+						}
 					}
+					
 				}
 				trbeans.put("xzl"+i, trbean);
 				i++;

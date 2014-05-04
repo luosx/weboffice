@@ -182,6 +182,7 @@ public class QyjcManager extends AbstractBaseBean {
 		      String tcwzj = request.getParameter("tcwzj");
 		      String syl = request.getParameter("syl");
 		      String qt = request.getParameter("qt");
+		      String url = request.getParameter("url");
 		      
 		      bh=UtilFactory.getStrUtil().unescape(bh);
 		      xzlmc=UtilFactory.getStrUtil().unescape(xzlmc);
@@ -215,11 +216,11 @@ public class QyjcManager extends AbstractBaseBean {
 		    	  String update ="update xzlxx set xzlmc='"+xzlmc+"',kfs='"+kfs+"',wygs='"+wygs+"',tzf='"+tzf+"',sq='"+sq+"',cpdw='"
   				+cpdw+"',cplx='"+cplx+"',cylx='"+cylx+"',rzqy='"+rzqy+"',kpsj='"+kpsj+"',ysxkz='"+ysxkz+"',cbcs='"
   				+cbcs+"',lc='"+lc+"',bzcg='"+bzcg+"',wq='"+wq+"',cn='"+cn+"',gd='"+gd+"',gs='"
-  				+gs+"',dt='"+dt+"',gdcw='"+gdcw+"',tcwzj='"+tcwzj+"',syl='"+syl+"',qt='"+qt+"' where bh = '"+bh+"'";
+  				+gs+"',dt='"+dt+"',gdcw='"+gdcw+"',tcwzj='"+tcwzj+"',syl='"+syl+"',qt='"+qt+"',url='"+url+"' where bh = '"+bh+"'";
 		    	  i = update(update, YW);
 		      }else{ 
-			      String insertString="insert into xzlxx (bh,xzlmc,kfs,wygs,tzf,sq,cpdw,cplx,cylx,rzqy,kpsj,ysxkz,cbcs,lc,bzcg,wq,cn,gd,gs,dt,gdcw,tcwzj,syl,qt )values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-			      i = update(insertString, YW,new Object[]{bh,xzlmc,kfs,wygs,tzf,sq,cpdw,cplx,cylx,rzqy,kpsj,ysxkz,cbcs,lc,bzcg,wq,cn,gd,gs,dt,gdcw,tcwzj,syl,qt});
+			      String insertString="insert into xzlxx (bh,xzlmc,kfs,wygs,tzf,sq,cpdw,cplx,cylx,rzqy,kpsj,ysxkz,cbcs,lc,bzcg,wq,cn,gd,gs,dt,gdcw,tcwzj,syl,qt,url )values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+			      i = update(insertString, YW,new Object[]{bh,xzlmc,kfs,wygs,tzf,sq,cpdw,cplx,cylx,rzqy,kpsj,ysxkz,cbcs,lc,bzcg,wq,cn,gd,gs,dt,gdcw,tcwzj,syl,qt,url});
 		      }
 		      if(i>0){
 		         response("{success:true}");
@@ -604,7 +605,7 @@ public class QyjcManager extends AbstractBaseBean {
     	String keyword = request.getParameter("keyword");
     	keyword = UtilFactory.getStrUtil().unescape(keyword);
 		ITableStyle its = new TableStyleEditRow();
-		response(String.valueOf(new CBDReportManager().getReport("XZLZJ",
+		response(String.valueOf(new CBDReportManager().getReport("XZLXX",
 					new Object[] { "%" + keyword + "%" }, its)));
     }
     

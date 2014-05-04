@@ -11,13 +11,12 @@ import net.sf.json.JSONArray;
 
 import com.klspta.base.AbstractBaseBean;
 import com.klspta.base.util.UtilFactory;
-import com.klspta.web.cbd.yzt.utilList.IData;
 
-public class ScjcData extends AbstractBaseBean implements IData{
+public class ScjcData extends AbstractBaseBean {
     private static final String formName = "ZSQK";
     public static List<Map<String, Object>> List;
 
-    @Override
+   
     public List<Map<String, Object>> getAllList(HttpServletRequest request) {
         StringBuffer sql = new StringBuffer();
         sql.append("select * from ").append(formName);
@@ -26,7 +25,7 @@ public class ScjcData extends AbstractBaseBean implements IData{
         return List;
     }
 
-    @Override
+   
     public List<Map<String, Object>> getQuery(HttpServletRequest request) {
         // TODO Auto-generated method stub
         return null;

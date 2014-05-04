@@ -2,24 +2,26 @@ package com.klspta.web.cbd.sccsl;
 
 import java.text.DecimalFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
-
-import javax.xml.crypto.Data;
 
 import com.klspta.base.AbstractBaseBean;
 import com.klspta.base.util.UtilFactory;
 
 public class XzlzjjcManager extends AbstractBaseBean {
 
-	public List<Map<String, Object>> getXZLData() {
-		String sql = "select t.*,k.zj,k.sj from xzlxx t left join xzlzjqk k on t.bh=k.bh and k.year=? and k.month=? ";
-		Calendar cal = Calendar.getInstance();
-		String month = cal.get(Calendar.MONTH) + 1 + "";
-		String year = cal.get(Calendar.YEAR) + "";
-		List<Map<String, Object>> result = query(sql, YW, new Object[] { year,
-				month });
+	public List<Map<String, Object>> getXZLData(Object[] obj) {
+		List<Map<String, Object>> result = null;
+		if(obj.length > 0){
+			String sql = "select t.bh,t.xzlmc,t.kfs,t.wygs,t.tzf,t.sq,t.cpdw,t.cplx,t.cylx,t.rzqy,t.kpsj,t.ysxkz," +
+					"t.cbcs,t.lc,t.bzcg,t.wq,t.cn,t.gd,t.gs,t.gdcw,t.dt,t.tcwzj,t.syl,t.qt,t.url from xzlxx t " +
+					"where t.bh||t.xzlmc||t.kfs||t.wygs||t.tzf||t.sq||t.cpdw||t.cplx||t.cylx||t.rzqy||t.kpsj||t.ysxkz||t.cbcs||t.lc||t.bzcg||t.wq||t.cn||t.gd||t.gs||t.gdcw||t.dt||t.tcwzj||t.syl||t.qt like ?";
+			result = query(sql, YW, new Object[] {obj[0] });
+		}else{
+			String sql = "select t.bh,t.xzlmc,t.kfs,t.wygs,t.tzf,t.sq,t.cpdw,t.cplx,t.cylx,t.rzqy,t.kpsj,t.ysxkz," +
+			"t.cbcs,t.lc,t.bzcg,t.wq,t.cn,t.gd,t.gs,t.gdcw,t.dt,t.tcwzj,t.syl,t.qt from xzlxx t ";
+			result = query(sql, YW);
+		}
 		return result;
 	}
 
@@ -51,13 +53,13 @@ public class XzlzjjcManager extends AbstractBaseBean {
 		return null;
 	}
 
-	public void getXZL() {
+	/*public void getXZL() {
 		List<Map<String, Object>> result = getXZLData();
 		for (int i = 0; i < result.size(); i++) {
 			result.get(i).put("XIANGXI", i);
 		}
 		response(result);
-	}
+	}*/
 
 	public void saveXzlzj() {
 		String zj = request.getParameter("zj");
