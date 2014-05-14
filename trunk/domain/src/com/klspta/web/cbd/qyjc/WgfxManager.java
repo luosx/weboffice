@@ -32,7 +32,7 @@ public class WgfxManager extends AbstractBaseBean{
     }
     
     public List<Map<String,Object>> getList() {
-        String sql = "select bcdj,jlgfzb,djxs,azfsj,asfshij,zsbzf,ybbzf,jlbzf,tsrqbzf,gfbt from zzzsbz ";
+        String sql = "select bcdj,jlgfzb,djxs,azfsj,asfshij,zsbzf,ybbzf,jlbzf,tsrqbzf,gfbt,bl1,bl2,bl3,bl4 from zzzsbz ";
         return query(sql, YW);
     }
     
