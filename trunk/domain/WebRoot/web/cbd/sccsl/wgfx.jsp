@@ -14,8 +14,6 @@
 	if(list.size()>0){
 		map = list.get(0);
 	}
-
-
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -48,6 +46,16 @@ input {
 	border: 0;
 }
 
+.input1 {
+	background-color: #969696;
+	width: 30px;
+	text-align: right;
+	border: 0;
+	font-weight: bold;
+	font-size: 15px;
+	margin-top: 3px;
+}
+
 textarea {
 	border: none;
 }
@@ -60,6 +68,30 @@ textarea {
 	text-align: center;
 	line-height: 30px;
 	margin-top: 3px;
+}
+
+.tr01_td_left {
+	background-color: #969696;
+	font-weight: bold;
+	font-size: 15px;
+	text-align: right;
+	line-height: 30px;
+	margin-top: 3px;
+	width: 8%;
+	border-right-style: hidden;
+	border-right-width: 0px;
+}
+
+.tr01_td_right {
+	background-color: #969696;
+	font-weight: bold;
+	font-size: 15px;
+	text-align: left;
+	line-height: 30px;
+	margin-top: 3px;
+	width: 8%;
+	border-left-style: hidden;
+	border-left-width: 0px;
 }
 
 .tr02 {
@@ -148,16 +180,16 @@ textarea {
 </style>
 <script type="text/javascript">
 function print(){	  
-			    var excel = new ReportExcel();
-			    excel.Init();
-			    excel.setCells(50);
-			    excel.setRows(20);
-			    excel.buildTable("zcsj", "2", "1");
-                excel.buildTable("ssxg", "7", "1");
-			    var sheet = excel.getSheet();
-			    excel.setSheet(sheet);
-			    excel.showTable();			    
-		    }
+	 var excel = new ReportExcel();
+	 excel.Init();
+	 excel.setCells(50);
+	 excel.setRows(20);
+	 excel.buildTable("zcsj", "2", "1");
+	          excel.buildTable("ssxg", "7", "1");
+	 var sheet = excel.getSheet();
+	 excel.setSheet(sheet);
+	 excel.showTable();			    
+}
 function save(){
 	var bcdj = document.getElementById("bcdj").value;
 	var jlgfzb = document.getElementById("jlgfzb").value;
@@ -181,12 +213,11 @@ function save(){
 	putRestParameter("tsrqbzf", tsrqbzf);
 	putRestParameter("gfbt", gfbt);
 	var result = restRequest();
-		if(result){
-			alert("保存成功");
-		}else {
-			alert("保存失败");
-		}
-	
+	if(result){
+		alert("保存成功");
+	}else {
+		alert("保存失败");
+	}
 }
 
 Ext.onReady(function(){
@@ -198,11 +229,17 @@ function textChange(){
 }
 
 function init(){
+	var bl1 = document.getElementById("bl1").value*1;
+	var bl2 = document.getElementById("bl2").value*1;
+	var bl3 = document.getElementById("bl3").value*1;
+	var bl4 = document.getElementById("bl4").value*1;
+	var bl5 = bl1*1 + bl2*1 + bl3*1 + bl4*1 ;
+	var pjfwjzmj = bl1/100 * 20 + bl2/100 * 40 + bl3/100 * 60 + bl4/100 * 80 ;
 	var pgjkone = document.getElementById("bcdj").value*20/10000;
 	var pgjktwo = document.getElementById("bcdj").value*40/10000;
 	var pgjkthree = document.getElementById("bcdj").value*60/10000;
 	var pgjkfour = document.getElementById("bcdj").value*80/10000;
-	var pgjkfive = document.getElementById("bcdj").value*50/10000;
+	var pgjkfive = document.getElementById("bcdj").value*pjfwjzmj/10000;
 	var ybbzf = document.getElementById("ybbzf").value*1;
 	var jlbzf = document.getElementById("jlbzf").value*1;
 	var tsrqbzf = document.getElementById("tsrqbzf").value*1;
@@ -211,15 +248,18 @@ function init(){
 	var djxs = document.getElementById("djxs").value*1;
 	var azfsj = document.getElementById("azfsj").value*1;
 	var asfshij = document.getElementById("asfshij").value*1;
-	set(pgjkone,pgjktwo,pgjkthree,pgjkfour,pgjkfive,ybbzf,jlbzf,tsrqbzf,gfbt,jlgfzb,djxs,azfsj,asfshij);
+	
+	set(pgjkone,pgjktwo,pgjkthree,pgjkfour,pgjkfive,ybbzf,jlbzf,tsrqbzf,gfbt,jlgfzb,djxs,azfsj,asfshij,pjfwjzmj,bl5);
 }
 
-function set(pgjkone,pgjktwo,pgjkthree,pgjkfour,pgjkfive,ybbzf,jlbzf,tsrqbzf,gfbt,jlgfzb,djxs,azfsj,asfshij){
+function set(pgjkone,pgjktwo,pgjkthree,pgjkfour,pgjkfive,ybbzf,jlbzf,tsrqbzf,gfbt,jlgfzb,djxs,azfsj,asfshij,pjfwjzmj,bl5){
 	document.getElementById("pgjkone").innerHTML = pgjkone+'万元';
 	document.getElementById("pgjktwo").innerHTML = pgjktwo+'万元';
 	document.getElementById("pgjkthree").innerHTML = pgjkthree+'万元';
 	document.getElementById("pgjkfour").innerHTML = pgjkfour+'万元';
 	document.getElementById("pgjkfive").innerHTML = pgjkfive+'万元';
+	document.getElementById("pjfwjzmj").innerHTML = pjfwjzmj;
+	document.getElementById("blzj").innerHTML = bl5 + '%';
 	var zsbzf = ybbzf+jlbzf+tsrqbzf+gfbt;
 	document.getElementById("zsbzf").innerHTML = zsbzf;
 	var hbbcone = pgjkone+zsbzf;
@@ -240,7 +280,7 @@ function set(pgjkone,pgjktwo,pgjkthree,pgjkfour,pgjkfive,ybbzf,jlbzf,tsrqbzf,gfb
 	document.getElementById("bcbzthree").innerHTML =  bcbzthree+'万元/平方米';
 	var bcbzfour = (hbbcfour/80).toFixed(1);
 	document.getElementById("bcbzfour").innerHTML =  bcbzfour+'万元/平方米';
-	var bcbzfive = (hbbcfive/50).toFixed(1);
+	var bcbzfive = (hbbcfive/pjfwjzmj).toFixed(1);
 	document.getElementById("bcbzfive").innerHTML =  bcbzfive+'万元/平方米';
 	var kgmazfone = djxs*20+jlgfzb;
 	document.getElementById("kgmazfone").innerHTML =  kgmazfone+'平方米';
@@ -250,7 +290,7 @@ function set(pgjkone,pgjktwo,pgjkthree,pgjkfour,pgjkfive,ybbzf,jlbzf,tsrqbzf,gfb
 	document.getElementById("kgmazfthree").innerHTML =  kgmazfthree+'平方米';
 	var kgmazffour = djxs*80+jlgfzb;
 	document.getElementById("kgmazffour").innerHTML =  kgmazffour+'平方米';
-	var kgmazffive = djxs*50+jlgfzb;
+	var kgmazffive = djxs*pjfwjzmj+jlgfzb;
 	document.getElementById("kgmazffive").innerHTML =  kgmazffive+'平方米';
 	var k1one = (kgmazfone/20).toFixed(2);
 	document.getElementById("k1one").innerHTML =  k1one+'- -';
@@ -260,38 +300,38 @@ function set(pgjkone,pgjktwo,pgjkthree,pgjkfour,pgjkfive,ybbzf,jlbzf,tsrqbzf,gfb
 	document.getElementById("k1three").innerHTML =  k1three+'- -';
 	var k1four = (kgmazffour/80).toFixed(2);
 	document.getElementById("k1four").innerHTML =  k1four+'- -';
-	var k1five = (kgmazffive/50).toFixed(2);
+	var k1five = (kgmazffive/pjfwjzmj).toFixed(2);
 	document.getElementById("k1five").innerHTML =  k1five+'- -';
 	var gfkone = kgmazfone*azfsj/10000;
-	document.getElementById("gfkone").innerHTML =  gfkone+'万元';
+	document.getElementById("gfkone").innerHTML =  gfkone.toFixed(2)+'万元';
 	var gfktwo = kgmazftwo*azfsj/10000;
-	document.getElementById("gfktwo").innerHTML =  gfktwo+'万元';
+	document.getElementById("gfktwo").innerHTML =  gfktwo.toFixed(2)+'万元';
 	var gfkthree = kgmazfthree*azfsj/10000;
-	document.getElementById("gfkthree").innerHTML =  gfkthree+'万元';
+	document.getElementById("gfkthree").innerHTML =  gfkthree.toFixed(2)+'万元';
 	var gfkfour = kgmazffour*azfsj/10000;
-	document.getElementById("gfkfour").innerHTML =  gfkfour+'万元';
+	document.getElementById("gfkfour").innerHTML =  gfkfour.toFixed(2)+'万元';
 	var gfkfive = kgmazffive*azfsj/10000;
-	document.getElementById("gfkfive").innerHTML =  gfkfive+'万元';
+	document.getElementById("gfkfive").innerHTML =  gfkfive.toFixed(2)+'万元';
 	var zsjyone = hbbcone-gfkone;
-	document.getElementById("zsjyone").innerHTML =  zsjyone+'万元';
+	document.getElementById("zsjyone").innerHTML =  zsjyone.toFixed(2)+'万元';
 	var zsjytwo = hbbctwo-gfktwo;
-	document.getElementById("zsjytwo").innerHTML =  zsjytwo+'万元';
+	document.getElementById("zsjytwo").innerHTML =  zsjytwo.toFixed(2)+'万元';
 	var zsjythree = hbbcthree-gfkthree;
-	document.getElementById("zsjythree").innerHTML =  zsjythree+'万元';
+	document.getElementById("zsjythree").innerHTML =  zsjythree.toFixed(2)+'万元';
 	var zsjyfour = hbbcfour-gfkfour;
-	document.getElementById("zsjyfour").innerHTML =  zsjyfour+'万元';
+	document.getElementById("zsjyfour").innerHTML =  zsjyfour.toFixed(2)+'万元';
 	var zsjyfive = hbbcfive-gfkfive;
-	document.getElementById("zsjyfive").innerHTML =  zsjyfive+'万元';
+	document.getElementById("zsjyfive").innerHTML =  zsjyfive.toFixed(2)+'万元';
 	var bcone = kgmazfone*asfshij/10000+zsjyone;
-	document.getElementById("bcone").innerHTML =  bcone+'万元';
+	document.getElementById("bcone").innerHTML =  bcone.toFixed(2)+'万元';
 	var bctwo = kgmazftwo*asfshij/10000+zsjytwo;
-	document.getElementById("bctwo").innerHTML =  bctwo+'万元';
+	document.getElementById("bctwo").innerHTML =  bctwo.toFixed(2)+'万元';
 	var bcthree = kgmazfthree*asfshij/10000+zsjythree;
-	document.getElementById("bcthree").innerHTML =  bcthree+'万元';
+	document.getElementById("bcthree").innerHTML =  bcthree.toFixed(2)+'万元';
 	var bcfour = kgmazffour*asfshij/10000+zsjyfour;
-	document.getElementById("bcfour").innerHTML =  bcfour+'万元';
+	document.getElementById("bcfour").innerHTML =  bcfour.toFixed(2)+'万元';
 	var bcfive = kgmazffive*asfshij/10000+zsjyfive;
-	document.getElementById("bcfive").innerHTML =  bcfive+'万元';
+	document.getElementById("bcfive").innerHTML =  bcfive.toFixed(2)+'万元';
 	var bcsone = (bcone/20).toFixed(1);
 	document.getElementById("bcsone").innerHTML =  bcsone+'万元/平方米';
 	var bcstwo = (bctwo/40).toFixed(1);
@@ -300,7 +340,7 @@ function set(pgjkone,pgjktwo,pgjkthree,pgjkfour,pgjkfive,ybbzf,jlbzf,tsrqbzf,gfb
 	document.getElementById("bcsthree").innerHTML =  bcsthree+'万元/平方米';
 	var bcsfour = (bcfour/80).toFixed(1);
 	document.getElementById("bcsfour").innerHTML =  bcsfour+'万元/平方米';
-	var bcsfive = (bcfive/50).toFixed(1);
+	var bcsfive = (bcfive/pjfwjzmj).toFixed(1);
 	document.getElementById("bcsfive").innerHTML =  bcsfive+'万元/平方米';
 }
 </script>
@@ -367,99 +407,99 @@ function set(pgjkone,pgjktwo,pgjkthree,pgjkfour,pgjkfive,ybbzf,jlbzf,tsrqbzf,gfb
 			<td rowspan="3">序号</td>
 			<td rowspan="3">类别</td>
 			<td rowspan="3">科目</td>
-			<td colspan="4">房屋建筑面积（平方米）</td>
+			<td colspan="8">房屋建筑面积（平方米）</td>
 			<td>平均</td>
 		</tr>
-		<tr class="tr01">
-			<td>20</td>
-			<td>40</td>
-			<td>60</td>
-			<td>80</td>
-			<td>50</td>
+		<tr class="tr01"> 
+			<td colspan="2">20</td>
+			<td colspan="2">40</td>
+			<td colspan="2">60</td>
+			<td colspan="2">80</td>
+			<td  id="pjfwjzmj">50</td>
 		</tr>
 		<tr class="tr01">
-			<td>20%</td>
-			<td>20%</td>
-			<td>50%</td>
-			<td>10%</td>
-			<td>100%</td>
+			<td class="tr01_td_left"><input class="input1" id="bl1" value="<%=map.get("bl1") %>" onkeyup="textChange();"></input></td><td class="tr01_td_right">%</td>
+			<td class="tr01_td_left"><input class="input1" id="bl2" value="<%=map.get("bl2") %>" onkeyup="textChange();"></input></td><td class="tr01_td_right">%</td>
+			<td class="tr01_td_left"><input class="input1" id="bl3" value="<%=map.get("bl3") %>" onkeyup="textChange();"></input></td><td class="tr01_td_right">%</td>
+			<td class="tr01_td_left"><input class="input1" id="bl4" value="<%=map.get("bl4") %>" onkeyup="textChange();"></input></td><td class="tr01_td_right">%</td>
+			<td id="blzj">%</td>
 		</tr>
 		<tr class="tr06">
 			<td>1</td>
 			<td rowspan="9">实<br>施<br>效<br>果</td>
 			<td>评估价款</td>
-			<td id="pgjkone"></td>
-			<td id="pgjktwo"></td>
-			<td id="pgjkthree"></td>
-			<td id="pgjkfour"></td>
+			<td colspan="2" id="pgjkone"></td>
+			<td colspan="2" id="pgjktwo"></td>
+			<td colspan="2" id="pgjkthree"></td>
+			<td colspan="2" id="pgjkfour"></td>
 			<td id="pgjkfive"></td>
 		</tr>
 		<tr class="tr06">
 			<td rowspan="2">2</td>
 			<td rowspan="2">征收补偿补助款<br>（货币补偿）</td>
-			<td bgcolor="#FFDC35" id="hbbcone"></td>
-			<td bgcolor="#FFDC35" id="hbbctwo"></td>
-			<td bgcolor="#FFDC35" id="hbbcthree"></td>
-			<td bgcolor="#FFDC35" id="hbbcfour"></td>
+			<td colspan="2" bgcolor="#FFDC35" id="hbbcone"></td>
+			<td colspan="2" bgcolor="#FFDC35" id="hbbctwo"></td>
+			<td colspan="2" bgcolor="#FFDC35" id="hbbcthree"></td>
+			<td colspan="2" bgcolor="#FFDC35" id="hbbcfour"></td>
 			<td bgcolor="#FFDC35" id="hbbcfive"></td>
 		</tr>
 		<tr class="tr06">
-			<td id="bcbzone"></td>
-			<td id="bcbztwo"></td>
-			<td id="bcbzthree"></td>
-			<td id="bcbzfour"></td>
+			<td colspan="2" id="bcbzone"></td>
+			<td colspan="2" id="bcbztwo"></td>
+			<td colspan="2" id="bcbzthree"></td>
+			<td colspan="2" id="bcbzfour"></td>
 			<td id="bcbzfive"></td>
 		</tr>
 		<tr class="tr06">
 			<td>3</td>
 			<td>可购买安置房</td>
-			<td bgcolor="#80FFFF" id="kgmazfone"></td>
-			<td bgcolor="#80FFFF" id="kgmazftwo"></td>
-			<td bgcolor="#80FFFF" id="kgmazfthree"></td>
-			<td bgcolor="#80FFFF" id="kgmazffour"></td>
+			<td colspan="2" bgcolor="#80FFFF" id="kgmazfone"></td>
+			<td colspan="2" bgcolor="#80FFFF" id="kgmazftwo"></td>
+			<td colspan="2" bgcolor="#80FFFF" id="kgmazfthree"></td>
+			<td colspan="2" bgcolor="#80FFFF" id="kgmazffour"></td>
 			<td bgcolor="#80FFFF" id="kgmazffive"></td>
 		</tr>
 		<tr class="tr06">
 			<td>4</td>
 			<td>实际对接系数(k1)</td>
-			<td id="k1one"></td>
-			<td id="k1two"></td>
-			<td id="k1three"></td>
-			<td id="k1four"></td>
+			<td colspan="2" id="k1one"></td>
+			<td colspan="2" id="k1two"></td>
+			<td colspan="2" id="k1three"></td>
+			<td colspan="2" id="k1four"></td>
 			<td id="k1five"></td>
 		</tr>
 		<tr class="tr06">
 			<td>5</td>
 			<td>安置房购房款</td>
-			<td id="gfkone"></td>
-			<td id="gfktwo"></td>
-			<td id="gfkthree"></td>
-			<td id="gfkfour"></td>
+			<td colspan="2" id="gfkone"></td>
+			<td colspan="2" id="gfktwo"></td>
+			<td colspan="2" id="gfkthree"></td>
+			<td colspan="2" id="gfkfour"></td>
 			<td id="gfkfive"></td>
 		</tr>
 		<tr class="tr06">
 			<td>6</td>
 			<td>征收结余款</td>
-			<td bgcolor="#FFCBB3" id="zsjyone"></td>
-			<td bgcolor="#FFCBB3" id="zsjytwo"></td>
-			<td bgcolor="#FFCBB3" id="zsjythree"></td>
-			<td bgcolor="#FFCBB3" id="zsjyfour"></td>
+			<td colspan="2" bgcolor="#FFCBB3" id="zsjyone"></td>
+			<td colspan="2" bgcolor="#FFCBB3" id="zsjytwo"></td>
+			<td colspan="2" bgcolor="#FFCBB3" id="zsjythree"></td>
+			<td colspan="2" bgcolor="#FFCBB3" id="zsjyfour"></td>
 			<td bgcolor="#FFCBB3" id="zsjyfive"></td>
 		</tr>
 		<tr class="tr06">
 			<td rowspan="2">7</td>
 			<td rowspan="2">安置补偿市值</td>
-			<td id="bcone"></td>
-			<td id="bctwo"></td>
-			<td id="bcthree"></td>
-			<td id="bcfour"></td>
+			<td colspan="2" id="bcone"></td>
+			<td colspan="2" id="bctwo"></td>
+			<td colspan="2" id="bcthree"></td>
+			<td colspan="2" id="bcfour"></td>
 			<td id="bcfive"></td>
 		</tr>
 		<tr class="tr06">
-			<td id="bcsone"></td>
-			<td id="bcstwo"></td>
-			<td id="bcsthree"></td>
-			<td id="bcsfour"></td>
+			<td colspan="2" id="bcsone"></td>
+			<td colspan="2" id="bcstwo"></td>
+			<td colspan="2" id="bcsthree"></td>
+			<td colspan="2" id="bcsfour"></td>
 			<td id="bcsfive"></td>
 		</tr>
 	</table>
