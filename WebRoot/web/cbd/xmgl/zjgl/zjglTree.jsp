@@ -237,7 +237,7 @@ scrollbar-3dlight-color:#D4D0C8;
 	   		if(id=="YJKFZC"||id=="ZJZC"){
 	   			return ;
 	   		}
-	   		if(id=="QQFY"||id=="ZJLR"||id=="CQFY"||id=="SZFY"||id=="CWFY"||id=="GLFY"||id=="CRZJFH"||id=="QTZC"){
+	   		if(id=="QQFY"||id=="ZJLR"||id=="CQFY"||id=="SCFY"||id=="SZFY"||id=="CWFY"||id=="GLFY"||id=="CRZJFH"||id=="QTZC"){
 	   			for(var i=0;i<array.length;i++){
 	   				if(id==array[i] && editors[i]=="y"){
 	   					view = true;
@@ -248,7 +248,7 @@ scrollbar-3dlight-color:#D4D0C8;
 	   					}
 	   				}
 	   			}
-	   		}else if(parentId=="QQFY"||parentId=="ZJLR"||parentId=="CQFY"||parentId=="SZFY"||parentId=="CWFY"||parentId=="GLFY"||parentId=="CRZJFH"||parentId=="QTZC"){
+	   		}else if(parentId=="QQFY"||parentId=="ZJLR"||parentId=="CQFY"||parentId=="SCFY"||parentId=="SZFY"||parentId=="CWFY"||parentId=="GLFY"||parentId=="CRZJFH"||parentId=="QTZC"){
 	   			for(var i=0;i<array.length;i++){
 	   				if(parentId==array[i] && editors[i]=="y"){
 	   					view = true;

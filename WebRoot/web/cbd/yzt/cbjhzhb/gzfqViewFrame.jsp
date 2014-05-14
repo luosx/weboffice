@@ -46,7 +46,7 @@ String view = request.getParameter("view");
             },{
                  title:'',
                  region:'east',
-                 width:width * 0.6,
+                 width:width * 0.4,
                  split:true,
                  layout:'fit',
                  collapsible: true,

@@ -83,6 +83,7 @@ ITableStyle its = new TableStyleEditRow();
   	var win;
   	var winForm;
   	var table = new tableoper();
+  	var view = "<%=view%>";
 	Ext.onReady(function(){
 		Ext.QuickTips.init();
     	var leftDs = new Ext.data.ArrayStore({

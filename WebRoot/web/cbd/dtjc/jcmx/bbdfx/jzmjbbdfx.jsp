@@ -450,7 +450,7 @@ td {
         	}
         	
   </script>
-	<body>
+	<body style="float: inherit">
 		<div style="min-width: 1370px; width: 1400px; height: 500px;">
 			<div id="fixed" style="position: fixed; top: 5px; left: 0px">
 				<img src="base/form/images/print.png" width="20px" height="20px"

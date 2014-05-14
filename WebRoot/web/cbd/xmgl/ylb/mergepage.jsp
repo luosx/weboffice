@@ -1,7 +1,6 @@
 <%@page import="com.klspta.web.cbd.dtjc.kfgl.XmgljgManager"%>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@page import="com.klspta.model.accessory.dzfj.*"%>
-<%@page import="com.klspta.base.util.bean.ftputil.*"%>
 <%@page import="com.klspta.model.projectinfo.ProjectInfo"%>
 <%
 	String path = request.getContextPath();
@@ -9,9 +8,6 @@
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 	String xmmc = request.getParameter("xmmc");
-	String reportID = "XMKGZBBCX";
-	String keyIndex = "1";
-	String name = ProjectInfo.getInstance().PROJECT_NAME;
 	String name1 = ProjectInfo.getInstance().getProjectLoginName1();
 	String yw_guid = request.getParameter("yw_guid");
 	if (xmmc != null) {
@@ -37,10 +33,12 @@
 		}
 		//}
 	}
-	List<Map<String, Object>> list = new XmgljgManager().getList();
+	List<Map<String, Object>> list = new XmgljgManager().getList(yw_guid);
 	Map<String, Object> map = null;
-	if (list != null) {
+	if (list !=null && list.size()>0) {
 		map = list.get(0);
+	}else{
+		map = new HashMap<String,Object>();
 	}
 %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -127,6 +125,7 @@
 		putRestParameter("fzzcq", fzzcq);
 		putRestParameter("fcqmj", fcqmj);
 		putRestParameter("xgjz", xgjz);
+		putRestParameter("yw_guid", "<%=yw_guid%>");
 		//putRestParameter("nameone", nameone);
 		//putRestParameter("nametwo", nametwo);
 		//putRestParameter("namethree", namethree);
