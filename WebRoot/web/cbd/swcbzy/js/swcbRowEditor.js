@@ -6,7 +6,7 @@ function showMap(objid){
 	if(table.element == undefined){
 		table.init(document.getElementById("SWCBR"));
 	}
-	var key = objid.cells[0].innerText;
+	var key = objid.cells[1].innerText;
 	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").clear();
 	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").findFeature("cbd", "5", key, "DKMC");
 	if(-1 == key.indexOf("计")){

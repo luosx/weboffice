@@ -1,5 +1,6 @@
 var xzlmc = "";
 var num = 0;
+var lock = false;
 var table = new tableoper();
 //zrbTable.init(document.getElementById("ZRB"));
 
@@ -10,15 +11,16 @@ function showMap(objid){
 	}
 	//alert("showMap");
 	var key = objid.cells[1].innerText;
-	//parent.parent.frames['east'].swfobject.getObjectById("FxGIS").clear();
-	//parent.parent.frames['east'].swfobject.getObjectById("FxGIS").findFeature("cbd", "0", key, "ZRBBH");
-	//parent.parent.dhxLayout.cells("a").getFrame().contentWindow.document.swfobject.getObjectById("FxGIS").clear();
-	//parent.parent.dhxLayout.cells("a").getFrame().contentWindow.document.swfobject.getObjectById("FxGIS").findFeature("cbd", "0", key, "ZRBBH");
+	if(-1 == key.indexOf("计")){
+		table.addAnnotation(objid.rowIndex);
+	}
+	
+	if(table.isLock == lock){
+		return ;
+	}
+	lock = table.isLock;
 	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").clear();
 	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").findFeature("cbd", "7", key, "XZLMC");
-
-	//添加选中保存
-	table.addAnnotation(objid.rowIndex);
 }
 
 function end(){

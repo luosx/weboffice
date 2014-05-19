@@ -1,5 +1,6 @@
 var xmmc = "";
 var num = 0;
+var lock = false;
 var table = new tableoper();
 //单击地图定位
 function showMap(objid){
@@ -9,14 +10,17 @@ function showMap(objid){
 	}
 	var key = objid.cells[1].innerText;
 	xmmc = key;
-	
+	if(-1 == key.indexOf("计")){
+		table.addAnnotation(objid.rowIndex);
+	}
+	if(table.isLock == lock){
+		return ;
+	}
+	lock = table.isLock;
 	
 	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").clear();
 	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").findFeature("cbd", "6", xmmc, "XMMC");
 
-		//添加选中保存
-	//var num = objid.rowIndex();
-	table.addAnnotation(objid.rowIndex);
 }
 
 //双击编辑地图

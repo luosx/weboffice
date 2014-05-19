@@ -1,6 +1,7 @@
 var xqmc = "";
 var num = 0;
 var table = new tableoper();
+var lock = false;
 //zrbTable.init(document.getElementById("ZRB"));
 
 //单击地图定位
@@ -14,12 +15,16 @@ function showMap(objid){
 	}else{
 		key = objid.cells[1].innerText;
 	}
+	if(-1 == key.indexOf("计")){
+		table.addAnnotation(objid.rowIndex);
+	}
+	
+	if(table.isLock == lock){
+		return ;
+	}
+	lock = table.isLock;
 	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").clear();
 	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").findFeature("cbd", "8", key, "XQMC");
-
-	//添加选中保存
-	//var num = objid.rowIndex();
-	table.addAnnotation(objid.rowIndex);
 }
 
 //双击编辑地图

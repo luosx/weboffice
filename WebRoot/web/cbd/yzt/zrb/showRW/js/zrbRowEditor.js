@@ -2,6 +2,7 @@ var zrbbh = "";
 var yw_guid = "";
 var num = 0;
 var table = new tableoper();
+var lock = false;
 //zrbTable.init(document.getElementById("ZRB"));
 
 
@@ -12,16 +13,15 @@ function showMap(objid){
 		table.init(document.getElementById("ZRB"));
 	}
 	var key = objid.cells[1].innerText;
-	//parent.parent.frames['east'].swfobject.getObjectById("FxGIS").clear();
-	//parent.parent.frames['east'].swfobject.getObjectById("FxGIS").findFeature("cbd", "0", key, "ZRBBH");
-	//parent.parent.dhxLayout.cells("a").getFrame().contentWindow.document.swfobject.getObjectById("FxGIS").clear();
-	//parent.parent.dhxLayout.cells("a").getFrame().contentWindow.document.swfobject.getObjectById("FxGIS").findFeature("cbd", "0", key, "ZRBBH");
+	if(-1 == key.indexOf("计")){
+		table.addAnnotation(objid.rowIndex);
+	}
+	if(table.isLock == lock){
+		return ;
+	}
+	lock = table.isLock;
 	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").clear();
 	parent.parent.document.frames[0].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").findFeature("cbd", "3", key, "自然斑编号");
-
-	//添加选中保存
-	//var num = objid.rowIndex();
-	table.addAnnotation(objid.rowIndex);
 }
 
 //双击编辑地图
