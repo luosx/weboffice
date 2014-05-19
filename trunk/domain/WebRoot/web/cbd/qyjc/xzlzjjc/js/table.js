@@ -36,12 +36,21 @@ tableoper.prototype = {
 	//添加选中标记
 	addAnnotation:function(row){
 		var color = this.element.rows[row].style.backgroundColor;
-		if(color != "#d1e5fb" && color != ""){
-			this.chose[row] = '';
-			this.changeColor(row,"#d1e5fb");
+		if(!this.isLock){
+			if(color != "#d1e5fb" && color != ""){
+				this.chose[row] = '';
+				this.changeColor(row,"#d1e5fb");
+			}else{
+				this.chose[row] = true;
+				this.isLock = true;
+				this.changeColor(row,"#E4F7D6");
+			}
 		}else{
-			this.chose[row] = true;
-			this.changeColor(row,"#E4F7D6");
+			if(color != "#d1e5fb" && color != ""){
+				this.chose[row] = '';
+				this.isLock = false;
+				this.changeColor(row,"#d1e5fb");
+			}
 		}
 	},
 	//删除选中标记

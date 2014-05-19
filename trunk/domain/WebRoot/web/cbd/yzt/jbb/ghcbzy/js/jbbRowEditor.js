@@ -1,5 +1,6 @@
 var zrbbh = "";
 var table = new tableoper();
+var lock = false;
 //单击地图定位
 function showMap(objid){
 	//alert("showMap");
@@ -7,11 +8,16 @@ function showMap(objid){
 		table.init(document.getElementById("JBB"));
 	}
 	var key = objid.cells[0].innerText;
-	parent.parent.document.frames['reportmap'].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").clear();
-	parent.parent.document.frames['reportmap'].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").findFeature("cbd", "4", key, "TBBH");
 	if(-1 == key.indexOf("计")){
 		table.addAnnotation(objid.rowIndex);
 	}
+	
+	if(table.isLock == lock){
+		return ;
+	}
+	lock = table.isLock;
+	parent.parent.document.frames['reportmap'].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").clear();
+	parent.parent.document.frames['reportmap'].frames['center'].frames["lower"].swfobject.getObjectById("FxGIS").findFeature("cbd", "4", key, "TBBH");
 }
 
 //双击编辑地图
