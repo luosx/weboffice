@@ -30,6 +30,7 @@ public class Cbjhzhb extends AbstractBaseBean implements IDataClass {
 	public static String[][] fields;
 	public static String form_extend = "jc_cbjhzhb";
 	private static String form_base = "jc_xiangmu";
+	private static String[] sort = { "结转项目", "计划新增项目", "前期研究项目","未分类" };
 
 	/**
 	 * 
@@ -224,7 +225,6 @@ public class Cbjhzhb extends AbstractBaseBean implements IDataClass {
 	 * @return
 	 */
 	private Map<String, TRBean> buildBody() {
-
 		Map<String, TRBean> trBeans = new LinkedHashMap<String, TRBean>();
 		if (fields == null) {
 			Setfields();
@@ -236,110 +236,135 @@ public class Cbjhzhb extends AbstractBaseBean implements IDataClass {
 		Map<String, String> totalMap = new HashMap<String, String>();
 		String key = "";
 		List<Map<String, Object>> queryList = query(querySql, YW);
-		int num = 1;
 		int totaltount = 0;
-		for (int i = 0; i < queryList.size(); i++) {
-			TRBean trbean = new TRBean();
-			trbean.setCssStyle("trsingle");
-			Map<String, Object> queryMap = queryList.get(i);
-			String prekey = key;
-			key = String.valueOf(queryMap.get("xmlx"));
-			if (null == key || "null".equals(key) || "".equals(key)) {
-				key = "未分类";
-			}
-			Map<String, String> subMap = subTotalMap.get(key);
-			// 添加小计行
-			if (!"".equals(prekey) && !prekey.equals(key)) {
-				num = 1;
-				totaltount++;
-				if (i + 3 < 10) {
-					trBeans.put("0" + totaltount + "0" + (i + 3), getTotal(
-							subTotalMap, prekey));
-				} else {
-					trBeans.put("0" + totaltount + (i + 3), getTotal(
-							subTotalMap, prekey));
-				}
-			}
-			// 添加合计
-			if (subMap == null) {
-				subMap = new HashMap<String, String>();
-			}
-			for (int t = 0; t < fields.length; t++) {
-				String[] field = fields[t];
-				if (field[2].equals("no")) {
+		for (int z = 0; z < sort.length; z++) {
+			int num = 1;
+			totaltount ++ ;
+			for (int i = 0; i < queryList.size(); i++) {
+				TRBean trbean = new TRBean();
+				trbean.setCssStyle("trsingle");
+				Map<String, Object> queryMap = queryList.get(i);
+				key = String.valueOf(queryMap.get("xmlx"));
+				// 添加小计行
+				if (i == queryList.size() - 1 && !sort[z].equals(key)) {
+					totaltount++;
+					if(subTotalMap.get(sort[z])!=null){
+						if (i + 3 < 10) {
+							trBeans.put("0" + totaltount + "0" + (i + 3), getTotal(
+									subTotalMap, sort[z]));
+						} else {
+							trBeans.put("0" + totaltount + (i + 3), getTotal(
+									subTotalMap, sort[z]));
+						}
+					}
 					continue;
-				} else if (field[2].equals("null")) {
-					if (!subMap.containsKey(field[0])) {
-						subMap.put(field[0], "---");
+				}
+				if (null == key || "null".equals(key) || "".equals(key)) {
+					key = "未分类";
+					if(!"未分类".equals(sort[z])){
+						continue;
 					}
-					if (!totalMap.containsKey(field[0])) {
-						totalMap.put(field[0], "---");
+				}else if(!sort[z].equals(key)){
+					continue;
+				}
+				Map<String, String> subMap = subTotalMap.get(sort[z]);
+		
+				// -----------------添加合计开始----------
+				if (subMap == null) {
+					subMap = new HashMap<String, String>();
+				}
+				for (int t = 0; t < fields.length; t++) {
+					String[] field = fields[t];
+					if (field[2].equals("no")) {
+						continue;
+					} else if (field[2].equals("null")) {
+						if (!subMap.containsKey(field[0])) {
+							subMap.put(field[0], "---");
+						}
+						if (!totalMap.containsKey(field[0])) {
+							totalMap.put(field[0], "---");
+						}
+					} else {
+						String keyname = field[0];
+						String newvalue = String.valueOf(queryMap.get(keyname));
+						float value = 0;
+						try {
+							value = Float.parseFloat(newvalue);
+						} catch (Exception e) {
+						}
+
+						if (subMap.containsKey(keyname)) {
+							String oldvalue = subMap.get(keyname);
+							String newValue = String
+									.valueOf(String.format("%.2f", Float
+											.parseFloat(oldvalue)
+											+ value));
+							subMap.put(keyname, newValue);
+						} else {
+							subMap.put(keyname, String.valueOf(String.format(
+									"%.2f", value)));
+						}
+
+						if (totalMap.containsKey(keyname)) {
+							String oldvalue = totalMap.get(keyname);
+							String newValue = String
+									.valueOf(String.format("%.2f", Float
+											.parseFloat(oldvalue)
+											+ value));
+							totalMap.put(keyname, newValue);
+						} else {
+							totalMap.put(keyname, String.valueOf(String.format(
+									"%.2f", value)));
+						}
+
+						subTotalMap.put(key, subMap);
 					}
+				}
+				subTotalMap.put("合计", totalMap);
+				// -----------------添加合计结束----------
+
+				// ----------------添加展现行开始-------------
+				TDBean tdBean = new TDBean(String.valueOf(num), "50", "20");
+				trbean.addTDBean(tdBean);
+				for (int t = 0; t < fields.length; t++) {
+					String[] field = fields[t];
+					String value = String.valueOf(queryMap.get(field[0]));
+					value = (value == "null") ? "" : value;
+					if (fields[t][2].equals("sum") && !"null".equals(value)
+							&& !"".equals(value)) {
+						trbean.addTDBean(new TDBean(value.equals("---") ? value
+								: String.valueOf(String.format("%.2f", Float
+										.parseFloat(value))), "100", "20",
+								field[1]));
+					} else {
+						trbean.addTDBean(new TDBean(value, "100", "20",
+								field[1]));
+					}
+				}
+				if (i + 3 < 10 && i + 3 + totaltount < 10) {
+					trBeans.put("0" + totaltount + "0" + (i + 3 + totaltount),
+							trbean);
 				} else {
-					String keyname = field[0];
-					String newvalue = String.valueOf(queryMap.get(keyname));
-					float value = 0;
-					try {
-						value = Float.parseFloat(newvalue);
-					} catch (Exception e) {
+					trBeans
+							.put("0" + totaltount + (i + 3 + totaltount),
+									trbean);
+				}
+				// ----------------添加展现行结束-------------
+				num++;
+				if (i == queryList.size() - 1 ) {
+					totaltount++;
+					if(subTotalMap.get(sort[z])!=null){
+						if (i + 3 < 10) {
+							trBeans.put("0" + totaltount + "0" + (i + 3), getTotal(
+									subTotalMap, sort[z]));
+						} else {
+							trBeans.put("0" + totaltount + (i + 3), getTotal(
+									subTotalMap, sort[z]));
+						}
 					}
-
-					if (subMap.containsKey(keyname)) {
-						String oldvalue = subMap.get(keyname);
-						String newValue = String.valueOf(String.format("%.2f",
-								Float.parseFloat(oldvalue) + value));
-						subMap.put(keyname, newValue);
-					} else {
-						subMap.put(keyname, String.valueOf(String.format(
-								"%.2f", value)));
-					}
-
-					if (totalMap.containsKey(keyname)) {
-						String oldvalue = totalMap.get(keyname);
-						String newValue = String.valueOf(String.format("%.2f",
-								Float.parseFloat(oldvalue) + value));
-						totalMap.put(keyname, newValue);
-					} else {
-						totalMap.put(keyname, String.valueOf(String.format(
-								"%.2f", value)));
-					}
-
-					subTotalMap.put(key, subMap);
 				}
 			}
-			subTotalMap.put("合计", totalMap);
-			// 添加展现行
-			TDBean tdBean = new TDBean(String.valueOf(num), "50", "20");
-			trbean.addTDBean(tdBean);
-			for (int t = 0; t < fields.length; t++) {
-				String[] field = fields[t];
-				String value = String.valueOf(queryMap.get(field[0]));
-				value = (value == "null") ? "" : value;
-				if (fields[t][2].equals("sum") && !"null".equals(value)
-						&& !"".equals(value)) {
-					trbean
-							.addTDBean(new TDBean(value.equals("---") ? value
-									: String.valueOf(String.format("%.2f",
-											Float.parseFloat(value))), "100",
-									"20", field[1]));
-				} else {
-					trbean.addTDBean(new TDBean(value, "100", "20", field[1]));
-				}
-			}
-			if (i + 3 < 10 && i + 3 + totaltount < 10) {
-				trBeans.put("0" + totaltount + "0" + (i + 3 + totaltount),
-						trbean);
-			} else {
-				trBeans.put("0" + totaltount + (i + 3 + totaltount), trbean);
-			}
-			num++;
 		}
-
-		// 添加最后一个小计
-		String prekey = "计划新增项目";
-		trBeans
-				.put("9" + (queryList.size() + 1),
-						getTotal(subTotalMap, prekey));
 		// 添加合计
 		trBeans.put("9" + (queryList.size() + 2), getTotal(subTotalMap, "合计"));
 
