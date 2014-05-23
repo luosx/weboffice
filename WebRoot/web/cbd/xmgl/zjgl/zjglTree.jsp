@@ -23,9 +23,7 @@
 <html>
 	<head>
 		<base href="<%=basePath%>">
-
 		<title>outlookBar</title>
-
 		<meta http-equiv="pragma" content="no-cache">
 		<meta http-equiv="cache-control" content="no-cache">
 		<meta http-equiv="expires" content="0">
@@ -102,25 +100,27 @@ scrollbar-3dlight-color:#D4D0C8;
                          isLeaf:'ture'
                                  });
                         if(sign_tree=="Y"){
-                           selected_leaf.setText(tree_name) ;
-	   		             var   tree_text=escape(escape(tree_name));
-		                      putClientCommond("xmmanager","modify_tree");
-		   				     	putRestParameter("yw_guid",' <%=yw_guid%>');
-			   		           putRestParameter("id", selectMenuTreeId);
-			   		           putRestParameter("parent_id", parentMenuTreeId);
-			   		           putRestParameter("tree_text", tree_text);
-			   		            putRestParameter("selet_year", selet_year);
-    				    	    var result = restRequest();
-                            	parent.right.location.reload();
-                            }else{
+                           	selected_leaf.setText(tree_name) ;
+	   		           		var  tree_text=escape(escape(tree_name));
+		                 	putClientCommond("xmmanager","modify_tree");
+	   				     	putRestParameter("yw_guid",' <%=yw_guid%>');
+		   		            putRestParameter("id", selectMenuTreeId);
+			   		        putRestParameter("parent_id", parentMenuTreeId);
+			   		        putRestParameter("tree_text", tree_text);
+			   		        putRestParameter("selet_year", selet_year);
+			   		        putRestParameter("rootID", rootID);
+    				    	var result = restRequest();
+                            parent.right.location.reload();
+                         }else{
                             selected_leaf.appendChild(lef);  
                             if(tree_name!=null&&tree_name!=''){
 		                    tree_name=escape(escape(tree_name));
 		                    putClientCommond("xmmanager","saveZjglTree");
 		   					putRestParameter("yw_guid",' <%=yw_guid%>');
-			   		        putRestParameter("id", selectMenuTreeId);
+			   		        putRestParameter("tree_id", selectMenuTreeId);
 			   		        putRestParameter("parent_id", parentMenuTreeId);
 			   		        putRestParameter("tree_name", tree_name);
+			   		        putRestParameter("rootID", rootID);
 			   		        putRestParameter("selet_year", selet_year);
     					var result = restRequest();
     					document.location.reload();

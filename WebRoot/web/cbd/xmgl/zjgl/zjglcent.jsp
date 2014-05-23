@@ -8,6 +8,7 @@
 <%@page import="org.springframework.security.core.context.SecurityContextHolder"%>
 <%@page import="com.klspta.console.user.User"%>
 <%@page import="com.klspta.console.role.Role"%>
+<%@page import="com.klspta.web.cbd.xmgl.zjgl.ReportManager"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -36,8 +37,9 @@
 		}else {
 			String types[] = type.split("@");
 			String edirots[] = editor.split("@");
-			Contorl contorl=  new Contorl(yw_guid,year,types,edirots,rolename);
-			table= contorl.getTextMode_new();
+			//Contorl contorl=  new Contorl(yw_guid,year,types,edirots,rolename);
+			//table= contorl.getTextMode_new();
+			table = new ReportManager().getTree(yw_guid,year,rolename);
 		}
    }
 %>
@@ -88,26 +90,36 @@ td1 {
 	color: #fdfdfd;
 }
 
-.tr01 {
-	background-color:#BCD2EF;
-	font-weight: bold;
-	line-height: 20px;
-	text-align: center;
-}
-.tr02 {
-	background-color:#FFCC99;
+.title{
+	background-color:#95DD9E;
 	font-weight: bold;
 	line-height: 15px;
 	text-align: center;
 }
+
 .tr03 {
+	background-color:#FFFFCC;
+	font-weight: bold;
+	line-height: 15px;
+	text-align: center;
+}
+.tr02 {
+	background-color:#CCFFFF;
+	font-weight: bold;
+	line-height: 15px;
+	text-align: center;
+}
+.tr01 {
 	background-color:#FFCC99;
+	font-weight: bold;
 	line-height: 15px;
 	text-align: center;
 }
 .tr04 {
-	background-color:#CCFFFF;
+	background-color:#C7EDCC;
+	font-weight: bold;
 	line-height: 15px;
+	text-align: center;
 }
 .tr05 {
 	background-color:#FFF69A;
@@ -122,52 +134,51 @@ td1 {
 		var height = document.body.clientHeight * 0.9;
        	FixTable("table", 0,3, width, height);
     });
-function addrzxq(check){
-
+	function addrzxq(check){
 		var val = check.value;
-if(!isNaN(val)){ 
-		var id=check.id;
-		var ids=id.split("@");
-		var status=ids[0];
-		var lb=ids[1];
-		lb=escape(escape(lb));
-		var sort=ids[2];
-		var cols=ids[3];
-putClientCommond("xmmanager","saveZJGL_ZJZC");
-	putRestParameter("yw_guid","<%=yw_guid%>");
-	putRestParameter("val",val);
-	putRestParameter("status",status);
-	putRestParameter("lb",lb);
-	putRestParameter("sort",sort);
-	putRestParameter("cols",cols);
-	var msg=restRequest(); 
-	}else{
-	alert("请填写有效数据！");
-	check.value="";
+		if(!isNaN(val)){ 
+			var id=check.id;
+			var ids=id.split("@");
+			var status=ids[0];
+			var lb=ids[1];
+			lb=escape(escape(lb));
+			var sort=ids[2];
+			var cols=ids[3];
+			putClientCommond("xmmanager","saveZJGL_ZJZC");
+			putRestParameter("yw_guid","<%=yw_guid%>");
+			putRestParameter("val",val);
+			putRestParameter("status",status);
+			putRestParameter("lb",lb);
+			putRestParameter("sort",sort);
+			putRestParameter("cols",cols);
+			var msg=restRequest(); 
+		}else{
+			alert("请填写有效数据！");
+			check.value="";
+		}
 	}
-	}
-function addzjlr(check){
-		 var val = check.value;
-if(!isNaN(val)){  
-		 var id=check.id;
-		 var ids=id.split("@");
-		 var stye=ids[1];
-		 var cols=ids[2];
-putClientCommond("xmmanager","saveZJGL_ZJLR");
-	putRestParameter("yw_guid","<%=yw_guid%>");
-	putRestParameter("cols",cols);
-	putRestParameter("stye",stye);
-	putRestParameter("val",val);
-	var msg=restRequest(); 
-	}else{
-	alert("请填写有效数据！");
-	check.value="";
-	}
- }
+	function addzjlr(check){
+		var val = check.value;
+		if(!isNaN(val)){  
+			var id=check.id;
+			var ids=id.split("@");
+			var stye=ids[1];
+			var cols=ids[2];
+			putClientCommond("xmmanager","saveZJGL_ZJLR");
+			putRestParameter("yw_guid","<%=yw_guid%>");
+			putRestParameter("cols",cols);
+			putRestParameter("stye",stye);
+			putRestParameter("val",val);
+			var msg=restRequest(); 
+		}else{
+			alert("请填写有效数据！");
+			check.value="";
+		}
+ 	 }
  
- function addds(){
- alert("");
- }
+	 function change(){
+	 	
+	 }
  
   function FixTable(TableID, FixColumnNumber,FixRowNumber, width, height) {
     if ($("#" + TableID + "_tableLayout").length != 0) {
@@ -243,5 +254,4 @@ putClientCommond("xmmanager","saveZJGL_ZJLR");
 	 <div align="center" style="margin-top: 10px;"><h3><%=xmmc%>-资金管理</h3></div>
 	   <%=table%>
 	</body>
-
 </html>
