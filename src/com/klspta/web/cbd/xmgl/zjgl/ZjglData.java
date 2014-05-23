@@ -21,66 +21,40 @@ public class ZjglData extends AbstractBaseBean {
 			"CRHLZJ", "QTZJ" };
 	private String zc_chaild[] = { "总计划审批", "贷款审批", "实施主体带资审批", "国有土地收益基金审批",
 			"出让回笼资金审批", "其他资金审批", "实际支付", "已批未付" };
-	private String zc_parent[] = { "2.1.1 前期费用", "2.1.2 拆迁费用", "2.1.3 收储费用",
+	private String zc_parent[] = {"Ⅱ.资金支出", "2.1 一级开发支出" ,"2.1.1 前期费用", "2.1.2 拆迁费用", "2.1.3 收储费用",
 			"2.1.4 市政费用", "2.1.5 财务费用", "2.1.6 管理费用", "2.2 筹融资金返还", "2.3 其他支出" };
-	private String zc_type[] = { "QQFY", "CQFY", "SCFY", "SZFY", "CWFY",
+	private String zc_type[] = {"ZJZC", "YJKFZC", "QQFY", "CQFY", "SCFY", "SZFY", "CWFY",
 			"GLFY", "CRZJFH", "QTZC" };
+	private String zc_parent_id[] = {"0", "ZJZC", "YJKFZC", "YJKFZC", "YJKFZC", "YJKFZC", "YJKFZC", "YJKFZC", "ZJZC", "ZJZC"};
 
 	public List<Map<String, Object>> getZJGL_ZJLR(String yw_guid, String year) {
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 		String sql = "";
 		List<Map<String,Object>> querys = null;
-		sql = "select * from xmzjgl_lr_view where yw_guid=? and rq=? order by lb desc";
+		sql = "select * from xmzjgl_lr_view where yw_guid=? and rq=? order by tree_name desc";
 		querys = query(sql, YW, new Object[] {
 				yw_guid, year });
-		// String sqlString=" select
-		// yw_guid,lb,status,YSFY,ZJJD,CQYE,YFSDZ,yy,ey,sany,siy,wy,ly,qy,bay,jy,siyue,syy,sey,(cqye+yy+ey+sany+siy+wy+ly+qy+bay+jy+siyue+syy+sey)
-		// as LJ,(yy+ey+sany+siy+wy+ly+qy+bay+jy+siyue+syy+sey) as
-		// LRSP,ZCSTATUS,SORT from xmzjgl_lr_view where yw_guid=? and
-		// (sort='2'or sort='3' or sort='4')";
-		// String sq= "select '1.1 筹融资金' as lb,'CRZJ' as status,' " +yw_guid+" '
-		// as yw_guid,sum(YSFY) as YSFY,sum(ZJJD)as ZJJD ,sum(CQYE)as CQYE
-		// ,sum(YFSDZ)as YFSDZ,sum(yy)as yy ,sum(ey)as ey,sum(sany)as
-		// sany,sum(siy)as siy,sum(wy)as wy,sum(ly)as ly,sum(qy)as qy,sum(bay)as
-		// bay,sum(jy)as jy,sum(siyue)as siyue,sum(syy)as syy,sum(sey)as
-		// sey,sum((cqye+yy+ey+sany+siy+wy+ly+qy+bay+jy+siyue+syy+sey)) as
-		// LJ,sum((yy+ey+sany+siy+wy+ly+qy+bay+jy+siyue+syy+sey)) as LRSP FROM
-		// xmzjgl_lr_view where yw_guid=? and rq=? and (sort='2'or sort='3' or
-		// sort='4')";
-		// List<Map<String, Object>> query = query(sq, YW,new
-		// Object[]{yw_guid,year});
-		// if(querys.size()==6){
-		// list.add(query.get(0));
-		// list.add(querys.get(1));
-		// list.add(querys.get(2));
-		// list.add(querys.get(3));
-		// list.add(querys.get(4));
-		// list.add(querys.get(5));
-		// }
-		// 20140220 change by 黎春行
 		for (int i = querys.size() - 1; i >= 0; i--) {
 			list.add(querys.get(i));
 		}
 		return list;
 	}
 
-	public List<Map<String, Object>> getZJGL_father(String yw_guid,
-			String type, String year) {
+	public List<Map<String, Object>> getZJGL_father(String yw_guid,String type, String year) {
 		int cols[] = { 0, 0, 0, 0, 0, 0, 0, 0 };
 		List<Map<String, Object>> list =null;
 		if(!"1".equals(yw_guid)){
-			String sql = "select * from  XMZJGL_ZC_view where status=? and yw_guid=?  and rq=? and zcstatus is  null order by  sort";
+			String sql = "select * from  XMZJGL_ZC_view where tree_id=? and yw_guid=?  and rq=? and zcstatus is  null order by  sort";
 			list = query(sql, YW, new Object[] { type,
 					yw_guid, year });
 		}else{
-			String sql = "select t.lb as lb,  t.lj as lj, sum(t.YSFY) as ysfy,sum(t.ZJJD) as zjjd ,sum(t.CQYE) as cqye,sum(t.YFSDZ) as yfsdz,"+
+			String sql = "select t.tree_name as tree_name,  t.lj as lj, sum(t.YSFY) as ysfy,sum(t.ZJJD) as zjjd ,sum(t.CQYE) as cqye,sum(t.YFSDZ) as yfsdz,"+
            "sum(t.yy) as yy ,sum(t.ey) as ey,sum(t.sany) as sany,sum(t.siy) as siy,"+
           "sum(t.wy) as wy,sum(t.ly) as ly,sum(t.qy) as qy,sum(t.bay) as bay,sum(t.jy) as jy"+
           ",sum(t.siyue) as siyue,sum(t.syy) as syy ,sum(t.sey) as sey ,sum(t.LRSP) as lrsp,sum(t.jl2) as jl2 "+
-           "from xmzjgl_zc_view t,jc_xiangmu j  where t.status=? and t.yw_guid=j.yw_guid  and t.rq=?"+
-           "group by t.lb,t.lj";
-			list = query(sql, YW, new Object[] { type,
-					 year });
+           "from xmzjgl_zc_view t,jc_xiangmu j  where t.tree_id=? and t.yw_guid=j.yw_guid  and t.rq=?"+
+           "group by t.tree_name,t.lj";
+			list = query(sql, YW, new Object[] { type,year });
 		}
 		
 		if (list.size() == 8) {
@@ -93,29 +67,31 @@ public class ZjglData extends AbstractBaseBean {
 			list.get(7).remove("JL2");
 			list.get(7).put("JL2",
 					cols[1] + cols[2] + cols[3] + cols[4] + cols[5] - cols[6]);
+			list.get(0).remove("YFSDZ");
+			list.get(0).put("YFSDZ", cols[6]+"");
+			list.get(0).remove("ZJJD");
+			double ysfy = Double.parseDouble(list.get(0).get("YSFY")==null? "0" :list.get(0).get("YSFY").toString());
+			list.get(0).put("ZJJD",ysfy==0? "0" : cols[6]/ysfy +"");
 		}
 		return list;
 	}
 
-	public List<Map<String, Object>> getZJGL_child(String yw_guid,
-			String tree_name, String type, String year) {
+	public List<Map<String, Object>> getZJGL_child(String yw_guid,String tree_name, String parent_id, String year) {
 		String sql = "";
 		List<Map<String, Object>> list = null;
 		if("1".equals(yw_guid)){
-			sql = "select t.lb as lb,  t.lj as lj, sum(t.YSFY) as ysfy,sum(t.ZJJD) as zjjd ,sum(t.CQYE) as cqye,sum(t.YFSDZ) as yfsdz,"+
+			sql = "select t.tree_name as tree_name,  t.lj as lj, sum(t.YSFY) as ysfy,sum(t.ZJJD) as zjjd ,sum(t.CQYE) as cqye,sum(t.YFSDZ) as yfsdz,"+
            "sum(t.yy) as yy ,sum(t.ey) as ey,sum(t.sany) as sany,sum(t.siy) as siy,"+
           "sum(t.wy) as wy,sum(t.ly) as ly,sum(t.qy) as qy,sum(t.bay) as bay,sum(t.jy) as jy"+
           ",sum(t.siyue) as siyue,sum(t.syy) as syy ,sum(t.sey) as sey ,sum(t.LRSP) as lrsp "+
-           "from xmzjgl_zc_view t,jc_xiangmu j  where t.status=? and t.yw_guid=j.yw_guid  and t.rq=?"+
-           "group by t.lb,t.lj";
-			list = query(sql, YW, new Object[] {  type, year });
+           "from xmzjgl_zc_view t,jc_xiangmu j  where t.parent_id=? and t.yw_guid=j.yw_guid  and t.rq=?"+
+           "group by t.tree_name,t.lj";
+			list = query(sql, YW, new Object[] {  parent_id, year });
 		}else{
-			sql = "select * from  XMZJGL_ZC_view where status=? and yw_guid=? and lb=? and rq=? " +
-					"and zcstatus is not null order by  sort ";
-			list = query(sql, YW, new Object[] { type,
-					yw_guid, tree_name, year });
+			sql = "select * from  XMZJGL_ZC_view where parent_id=? and yw_guid=? and tree_name=? and rq=? " +
+					" order by  sort ";
+			list = query(sql, YW, new Object[] { parent_id, yw_guid, tree_name, year });
 		}
-		
 		return list;
 	}
 
@@ -128,18 +104,10 @@ public class ZjglData extends AbstractBaseBean {
 			} else {
 				for (int i = 0; i < zc_parent.length; i++) {
 					for (int j = 0; j < zc_chaild.length; j++) {
-						String sqlString = "insert into XMZJGL_ZC (yw_guid,status,lb,lj,sort,rq) values(?,?,?,?,?,?)";
-						update(sqlString, YW, new Object[] { yw_guid,
-								zc_type[i], zc_parent[i], zc_chaild[j],
-								(j + 1), year });
+						String sqlString = "insert into XMZJGL_ZC (yw_guid,tree_id,tree_name,lj,sort,rq,parent_id) values(?,?,?,?,?,?,?)";
+						update(sqlString, YW, new Object[] { yw_guid,zc_type[i], zc_parent[i], zc_chaild[j], (j + 1), year ,zc_parent_id[i]});
 					}
 				}
-				// for(int k=0;k<lr_name.length;k++){
-				// String sqlString="insert into XMZJGL_LR
-				// (yw_guid,status,lb,sort,rq) values(?,?,?,?,?)";
-				// update(sqlString, YW,new
-				// Object[]{yw_guid,lr_type[k],lr_name[k],(k+1),year});
-				// }
 			}
 		}
 	}
@@ -148,12 +116,12 @@ public class ZjglData extends AbstractBaseBean {
 			String year) {
 		if (!(type.equals("ZJLR") || tree_name.startsWith("1"))) {
 			for (int j = 0; j < zc_chaild.length; j++) {
-				String sqlString = "insert into XMZJGL_ZC (yw_guid,status,lb,lj,zcstatus,sort ,rq) values(?,?,?,?,?,?,?)";
+				String sqlString = "insert into XMZJGL_ZC (yw_guid,tree_id,tree_name,lj,zcstatus,sort ,rq) values(?,?,?,?,?,?,?)";
 				update(sqlString, YW, new Object[] { yw_guid, type, tree_name,
 						zc_chaild[j], type, (j + 1), year });
 			}
 		} else {
-			String sqlString = "insert into XMZJGL_LR (yw_guid,status,lb,rq) values(?,?,?,?)";
+			String sqlString = "insert into XMZJGL_LR (yw_guid,tree_id,tree_name,rq) values(?,?,?,?)";
 			update(sqlString, YW, new Object[] { yw_guid, tree_name, tree_name,
 					year });
 		}
@@ -163,11 +131,14 @@ public class ZjglData extends AbstractBaseBean {
 		String sql = "";
 		List<Map<String,Object>> query = null;
 		if(!"1".equals(yw_guid)){
-			sql = "select 'Ⅰ.资金流入' as lb,sum(ysfy) as ysfy,sum(lj) as lj,sum(yfsdz)as yfsdz,sum(zjjd) as zjjd,sum(cqye)as cqye ,sum(yy)as yy,sum(ey)as ey,sum(sany)as sany,sum(siy)as siy,sum(wy)as wy,sum(ly)as ly ,sum(qy)as qy ,sum(bay)as bay,sum(jy)as jy,sum(siyue)as siyue,sum(syy)as syy,sum(sey)as sey ,sum(lrsp)as lrsp   from xmzjgl_lr_view t where yw_guid=? and rq=?";
+			sql = "select 'Ⅰ.资金流入' as tree_name,sum(ysfy) as ysfy,sum(lj) as lj,sum(yfsdz)as yfsdz,sum(zjjd) as zjjd," +
+					"sum(cqye)as cqye ,sum(yy)as yy,sum(ey)as ey,sum(sany)as sany,sum(siy)as siy,sum(wy)as wy,sum(ly)as ly ," +
+					"sum(qy)as qy ,sum(bay)as bay,sum(jy)as jy,sum(siyue)as siyue,sum(syy)as syy,sum(sey)as sey ," +
+					"sum(lrsp)as lrsp   from xmzjgl_lr_view t where yw_guid=? and rq=?";
 			query = query(sql, YW, new Object[] {
 					yw_guid, year });
 		}else{
-			sql = "select 'Ⅰ.资金流入' as lb,sum(t.ysfy) as ysfy,sum(t.lj) as lj,sum(t.yfsdz)as yfsdz," +
+			sql = "select 'Ⅰ.资金流入' as tree_name,sum(t.ysfy) as ysfy,sum(t.lj) as lj,sum(t.yfsdz)as yfsdz," +
 					"sum(t.zjjd) as zjjd,sum(t.cqye)as cqye ,sum(t.yy)as yy,sum(t.ey)as ey,sum(t.sany)as sany," +
 					"sum(t.siy)as siy,sum(t.wy)as wy,sum(t.ly)as ly ,sum(t.qy)as qy ,sum(t.bay)as bay,sum(t.jy)as jy," +
 					"sum(t.siyue)as siyue,sum(t.syy)as syy,sum(t.sey)as sey ,sum(t.lrsp)as lrsp   " +
@@ -182,61 +153,109 @@ public class ZjglData extends AbstractBaseBean {
 		int cols[] = { 0, 0, 0, 0, 0, 0, 0, 0 };
 		if ("1".equals(yw_guid)) {
 			for (int i = 1; i < 9; i++) {
-				String sql = "select 'Ⅱ.资金支出' as lb,sum(ysfy) as ysfy,'"
+				String sql = "select 'Ⅱ.资金支出' as tree_name,sum(ysfy) as ysfy,'"
 						+ zc_chaild[i - 1]
-						+ "' as lj,sum(jl2) as jl2 ,sum(yfsdz)as yfsdz,sum(zjjd) as zjjd,sum(cqye)as cqye ,sum(yy)as yy,sum(ey)as ey,sum(sany)as sany,sum(siy)as siy,sum(wy)as wy,sum(ly)as ly ,sum(qy)as qy ,sum(bay)as bay,sum(jy)as jy,sum(siyue)as siyue,sum(syy)as syy,sum(sey)as sey ,sum(lrsp)as lrsp   from XMZJGL_ZC_view t,jc_xiangmu j  where t.yw_guid=j.yw_guid  and sort=? and rq=?";
-				List<Map<String, Object>> query = query(sql, YW, new Object[] {
-						i, year });
+						+ "' as lj,sum(jl2) as jl2 ,sum(yfsdz)as yfsdz,sum(zjjd) as zjjd,sum(cqye)as cqye ,sum(yy)as yy," +
+								"sum(ey)as ey,sum(sany)as sany,sum(siy)as siy,sum(wy)as wy,sum(ly)as ly ,sum(qy)as qy ," +
+								"sum(bay)as bay,sum(jy)as jy,sum(siyue)as siyue,sum(syy)as syy,sum(sey)as sey ," +
+								"sum(lrsp)as lrsp   from XMZJGL_ZC_view t,jc_xiangmu j  where t.yw_guid=j.yw_guid  and sort=?" +
+								" and rq=?";
+				List<Map<String, Object>> query = query(sql, YW, new Object[] {i, year });
 				list.add(query.get(0));
-				cols[i - 1] = Integer
-						.parseInt(query.get(0).get("JL2") == null ? "0" : query
-								.get(0).get("JL2").toString());
+				cols[i - 1] = Integer.parseInt(query.get(0).get("JL2") == null ? "0" : query.get(0).get("JL2").toString());
 			}
 		} else {
 			for (int i = 1; i < 9; i++) {
-				String sql = "select 'Ⅱ.资金支出' as lb,sum(ysfy) as ysfy,'"
+				String sql = "select 'Ⅱ.资金支出' as tree_name,sum(ysfy) as ysfy,'"
 						+ zc_chaild[i - 1]
-						+ "' as lj,sum(jl2) as jl2 ,sum(yfsdz)as yfsdz,sum(zjjd) as zjjd,sum(cqye)as cqye ,sum(yy)as yy,sum(ey)as ey,sum(sany)as sany,sum(siy)as siy,sum(wy)as wy,sum(ly)as ly ,sum(qy)as qy ,sum(bay)as bay,sum(jy)as jy,sum(siyue)as siyue,sum(syy)as syy,sum(sey)as sey ,sum(lrsp)as lrsp   from XMZJGL_ZC_view t where yw_guid=? and sort=? and rq=?";
-				List<Map<String, Object>> query = query(sql, YW, new Object[] {
-						yw_guid, i, year });
+						+ "' as lj,sum(jl2) as jl2 ,sum(yfsdz)as yfsdz,sum(zjjd) as zjjd,sum(cqye)as cqye ,sum(yy)as yy," +
+								"sum(ey)as ey,sum(sany)as sany,sum(siy)as siy,sum(wy)as wy,sum(ly)as ly ,sum(qy)as qy ," +
+								"sum(bay)as bay,sum(jy)as jy,sum(siyue)as siyue,sum(syy)as syy,sum(sey)as sey ,sum(lrsp)as lrsp" +
+								"   from XMZJGL_ZC_view t where yw_guid=? and sort=? and rq=?";
+				List<Map<String, Object>> query = query(sql, YW, new Object[] { yw_guid, i, year });
 				list.add(query.get(0));
-				cols[i - 1] = Integer
-						.parseInt(query.get(0).get("JL2") == null ? "0" : query
-								.get(0).get("JL2").toString());
+				cols[i - 1] = Integer.parseInt(query.get(0).get("JL2") == null ? "0" : query.get(0).get("JL2").toString());
 			}
 		}
 		list.get(0).remove("JL2");
 		list.get(0).put("JL2", cols[1] + cols[2] + cols[3] + cols[4] + cols[5]);
 		list.get(7).remove("JL2");
-		list.get(7).put("JL2",
-				cols[1] + cols[2] + cols[3] + cols[4] + cols[5] - cols[6]);
+		list.get(7).put("JL2", cols[1] + cols[2] + cols[3] + cols[4] + cols[5] - cols[6]);
+		list.get(0).remove("YFSDZ");
+		list.get(0).put("YFSDZ", cols[6]+"");
+		list.get(0).remove("ZJJD");
+		double ysfy = Double.parseDouble(list.get(0).get("YSFY")==null? "0" :list.get(0).get("YSFY").toString());
+		list.get(0).put("ZJJD",ysfy==0? "0" : cols[6]/ysfy +"");
 		return list;
 	}
 
-	public List<Map<String, Object>> getZC_YJZC_sum(String yw_guid, String year) {
+	public List<Map<String, Object>> getZC_YJZC_sum(String yw_guid, String year,String type) {
 		int cols[] = { 0, 0, 0, 0, 0, 0, 0, 0 };
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 		if ("1".equals(yw_guid)) {
 			for (int i = 1; i < 9; i++) {
-				String sql = "select '2.1 一级开发支出' as lb,sum(ysfy) as ysfy,'"
+				String sql = "select '"+type+"' as tree_name,sum(ysfy) as ysfy,'"
 						+ zc_chaild[i - 1]
 						+ "' as lj,sum(jl2) as jl2 ,sum(yfsdz)as yfsdz,sum(zjjd) as zjjd," +
 								"sum(cqye)as cqye ,sum(yy)as yy,sum(ey)as ey,sum(sany)as sany," +
 								"sum(siy)as siy,sum(wy)as wy,sum(ly)as ly ,sum(qy)as qy ," +
 								"sum(bay)as bay,sum(jy)as jy,sum(siyue)as siyue,sum(syy)as syy," +
 								"sum(sey)as sey ,sum(lrsp)as lrsp   from XMZJGL_ZC_view t,jc_xiangmu j " +
-								" where t.yw_guid=j.yw_guid  and sort=? and (status !='QTZC' and status !='CRZJFH' and rq=?)";
-				List<Map<String, Object>> query = query(sql, YW, new Object[] {
-						
-						i, year });
+								" where ( t.yw_guid=j.yw_guid  and sort=? and tree_id !='QTZC' and tree_id !='CRZJFH' and rq=?)" +
+								" or (t.yw_guid=j.yw_guid  and sort=? and parent_id in ('QQFY','CQFY,'SZFY','SCFY','GLFY','CWFY' and rq = ?) ";
+				List<Map<String, Object>> query = query(sql, YW, new Object[] { i, year,i,year });
 				list.add(query.get(0));
-				cols[i - 1] = Integer
-						.parseInt(query.get(0).get("JL2") == null ? "0" : query
-								.get(0).get("JL2").toString());
+				cols[i - 1] = Integer.parseInt(query.get(0).get("JL2") == null ? "0" : query.get(0).get("JL2").toString());
 			}
 		} else {
 			for (int i = 1; i < 9; i++) {
-				String sql = "select '2.1 一级开发支出' as lb,sum(ysfy) as ysfy,'"
+				String sql = "select '"+type+"' as tree_name,sum(ysfy) as ysfy,'"
+						+ zc_chaild[i - 1]
+						+ "' as lj,sum(jl2) as jl2 ,sum(yfsdz)as yfsdz,sum(zjjd)" +
+								" as zjjd,sum(cqye)as cqye ,sum(yy)as yy,sum(ey)as" +
+								" ey,sum(sany)as sany,sum(siy)as siy,sum(wy)as wy,sum(ly)as ly ," +
+								"sum(qy)as qy ,sum(bay)as bay,sum(jy)as jy,sum(siyue)as siyue," +
+								"sum(syy)as syy,sum(sey)as sey ,sum(lrsp)as lrsp  " +
+								" from XMZJGL_ZC_view t where ( yw_guid=? and sort=? and " +
+								"tree_id !='QTZC' and tree_id !='CRZJFH' and rq=?) or ( yw_guid=? " +
+								"and sort=? and parent_id in ('QQFY','CQFY','SZFY','SCFY','GLFY','CWFY') and rq = ?)";
+				List<Map<String, Object>> query = query(sql, YW, new Object[] { yw_guid, i, year ,yw_guid,i,year });
+				list.add(query.get(0));
+				cols[i - 1] = Integer.parseInt(query.get(0).get("JL2") == null ? "0" : query.get(0).get("JL2").toString());
+			}
+		}
+		list.get(0).remove("JL2");
+		list.get(0).put("JL2", cols[1] + cols[2] + cols[3] + cols[4] + cols[5]);
+		list.get(7).remove("JL2");
+		list.get(7).put("JL2",cols[1] + cols[2] + cols[3] + cols[4] + cols[5] - cols[6]);
+		list.get(0).remove("YFSDZ");
+		list.get(0).put("YFSDZ", cols[6]+"");
+		list.get(0).remove("ZJJD");
+		double ysfy = Double.parseDouble(list.get(0).get("YSFY")==null? "0" :list.get(0).get("YSFY").toString());
+		list.get(0).put("ZJJD",ysfy==0? "0" : cols[6]/ysfy +"");
+		return list;
+	}
+	
+	public List<Map<String, Object>> getZC_3JZC_sum(String yw_guid, String year,String type) {
+		int cols[] = { 0, 0, 0, 0, 0, 0, 0, 0 };
+		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+		if ("1".equals(yw_guid)) {
+			for (int i = 1; i < 9; i++) {
+				String sql = "select '"+type+"' as tree_name,sum(ysfy) as ysfy,'"
+						+ zc_chaild[i - 1]
+						+ "' as lj,sum(jl2) as jl2 ,sum(yfsdz)as yfsdz,sum(zjjd) as zjjd," +
+								"sum(cqye)as cqye ,sum(yy)as yy,sum(ey)as ey,sum(sany)as sany," +
+								"sum(siy)as siy,sum(wy)as wy,sum(ly)as ly ,sum(qy)as qy ," +
+								"sum(bay)as bay,sum(jy)as jy,sum(siyue)as siyue,sum(syy)as syy," +
+								"sum(sey)as sey ,sum(lrsp)as lrsp   from XMZJGL_ZC_view t,jc_xiangmu j " +
+								" where t.yw_guid=j.yw_guid  and sort=? and (parent_id = '"+type+"' and rq=?)";
+				List<Map<String, Object>> query = query(sql, YW, new Object[] { i, year });
+				list.add(query.get(0));
+				cols[i - 1] = Integer.parseInt(query.get(0).get("JL2") == null ? "0" : query.get(0).get("JL2").toString());
+			}
+		} else {
+			for (int i = 1; i < 9; i++) {
+				String sql = "select '"+type+"' as tree_name,sum(ysfy) as ysfy,'"
 						+ zc_chaild[i - 1]
 						+ "' as lj,sum(jl2) as jl2 ,sum(yfsdz)as yfsdz,sum(zjjd)" +
 								" as zjjd,sum(cqye)as cqye ,sum(yy)as yy,sum(ey)as" +
@@ -244,21 +263,21 @@ public class ZjglData extends AbstractBaseBean {
 								"sum(qy)as qy ,sum(bay)as bay,sum(jy)as jy,sum(siyue)as siyue," +
 								"sum(syy)as syy,sum(sey)as sey ,sum(lrsp)as lrsp  " +
 								" from XMZJGL_ZC_view t where yw_guid=? and sort=? and " +
-								"(status !='QTZC' and status !='CRZJFH' and rq=?)";
-				List<Map<String, Object>> query = query(sql, YW, new Object[] {
-						yw_guid, i, year });
+								"(parent_id = '"+type+"' and rq=?)";
+				List<Map<String, Object>> query = query(sql, YW, new Object[] { yw_guid, i, year });
 				list.add(query.get(0));
-				cols[i - 1] = Integer
-						.parseInt(query.get(0).get("JL2") == null ? "0" : query
-								.get(0).get("JL2").toString());
+				cols[i - 1] = Integer.parseInt(query.get(0).get("JL2") == null ? "0" : query.get(0).get("JL2").toString());
 			}
 		}
 		list.get(0).remove("JL2");
 		list.get(0).put("JL2", cols[1] + cols[2] + cols[3] + cols[4] + cols[5]);
 		list.get(7).remove("JL2");
-		list.get(7).put("JL2",
-				cols[1] + cols[2] + cols[3] + cols[4] + cols[5] - cols[6]);
+		list.get(7).put("JL2",cols[1] + cols[2] + cols[3] + cols[4] + cols[5] - cols[6]);
+		list.get(0).remove("YFSDZ");
+		list.get(0).put("YFSDZ", cols[6]+"");
+		list.get(0).remove("ZJJD");
+		double ysfy = Double.parseDouble(list.get(0).get("YSFY")==null? "0" :list.get(0).get("YSFY").toString());
+		list.get(0).put("ZJJD",ysfy==0? "0" : cols[6]/ysfy +"");
 		return list;
 	}
-
 }

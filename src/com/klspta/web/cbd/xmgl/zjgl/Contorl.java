@@ -81,7 +81,7 @@ public class Contorl {
 		this.type = type;
 		this.Edit = Edit;
 		this.rolename = rolename;
-		new ZjglData().setMX(this.yw_guid, this.year);
+		
 		Init(this.type, this.Edit);
 		try {
 			Thread.sleep(2000);
