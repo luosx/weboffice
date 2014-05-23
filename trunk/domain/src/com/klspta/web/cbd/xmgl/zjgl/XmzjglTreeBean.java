@@ -10,6 +10,7 @@ public class XmzjglTreeBean {
 	private String tree_name = "";
 	private String sort = "";
 	private String rq = "";
+	private String leval = "";
 	
 	public XmzjglTreeBean(Map<String, Object> map) {
 		super();
@@ -20,6 +21,7 @@ public class XmzjglTreeBean {
 		setTree_name(getValue(map, "tree_name"));
 		setSort(getValue(map, "sort"));
 		setRq(getValue(map, "rq"));
+		setLeval(getValue(map, "leval"));
 	}
 	
 	private String getValue(Map<String, Object> map, String name){
@@ -71,4 +73,11 @@ public class XmzjglTreeBean {
 		this.rq = rq;
 	}
 	
+	public String getLeval(){
+		return leval;
+	}
+	
+	public void setLeval(String leval){
+		this.leval = leval;
+	}
 }
