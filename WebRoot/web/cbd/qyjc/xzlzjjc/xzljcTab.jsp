@@ -45,10 +45,10 @@
             }
             ,{
                 title: '平均租金趋势分析',
-                html: "<iframe width='100%' height='"+h+"' src='<%=basePath%>web/cbd/tjbb/chart.jsp?xml=xzlzj.xml'/>"
+                html: "<iframe width='100%' height='"+h+"' src='<%=basePath%>web/cbd/qyjc/xzlzjjc/xzlzjqsfxFrame.jsp'/>"
             },{
                 title: '平均售价趋势分析',
-                html: "<iframe width='100%' height='"+h+"' src='<%=basePath%>web/cbd/tjbb/chart.jsp?xml=xzlsj.xml'/>"
+                html: "<iframe width='100%' height='"+h+"' src='<%=basePath%>web/cbd/qyjc/xzlzjjc/xzlsjqsfxFrame.jsp'/>"
             }
         ]
     })

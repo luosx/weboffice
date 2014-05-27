@@ -67,9 +67,9 @@ public class TrFactory {
 	      if (list != null && list.size()>0) {
 	    	  List<Map<String, Object>> ls = zjglData.getZC_3JZC_sum(yw_guid,year,type);
 	          StringBuffer fatehr = ZjglBuild.buildZjzc_father_sum(ls,3);
-	          StringBuffer chaild = buildChild_editor(yw_guid, list, type,year,rolename);
+	          StringBuffer child = buildChild_editor(yw_guid, list, type,year,rolename);
 	          buffer.append(fatehr);
-	          buffer.append(chaild);
+	          buffer.append(child);
 	          return buffer;
 	      } else {
 	          StringBuffer fatehr = buildFather_editor(yw_guid, type,year,rolename);

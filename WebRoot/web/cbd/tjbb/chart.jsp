@@ -2,8 +2,8 @@
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-String xml=request.getParameter("xml");
-
+String xml = request.getParameter("xml");
+String lbxx = java.net.URLDecoder.decode(request.getParameter("lbxx"),"UTF-8");
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -25,6 +25,7 @@ String xml=request.getParameter("xml");
 	function generateXml(){
 		putClientCommond("staticReport","getReportData");
 		putRestParameter("xml","<%=xml%>");
+		putRestParameter("lbxx",escape(escape("<%=lbxx%>")));
 		restRequest();
 	}
 
