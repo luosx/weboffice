@@ -28,6 +28,21 @@ public class ScjcManager extends AbstractBaseBean {
      */
     private static ScjcManager scjcManager;
 
+    public void getesfTree(){
+		String sql = "select t.xqmc from esf_jbxx t";
+		List<Map<String, Object>> list = query(sql, YW);
+		Map<String,Object> map = null;
+		StringBuffer tree = new StringBuffer("[{text:'基本信息列表',checked:true,leaf:0,id:0,children:[");
+		for(int i = 0; i < list.size()-1; i++){
+			map = list.get(i);
+			tree.append("{text:'"+map.get("xqmc")+"',checked:true,leaf:1,id:'"+map.get("xqmc")+"',parentId:0},");
+		}
+		map = list.get(list.size()-1);
+		tree.append("{text:'"+map.get("xqmc")+"',checked:true,leaf:1,id:'"+map.get("xqmc")+"',parentId:0}");
+		tree.append("]}]");
+		response(tree.toString());
+	}
+    
     public static ScjcManager getInstcne() {
         if (scjcManager == null) {
             scjcManager = new ScjcManager();
@@ -398,8 +413,8 @@ public class ScjcManager extends AbstractBaseBean {
         		"where yw_guid=?");
         List<Map<String, Object>> list = query(sqlBuffer.toString(), YW,new Object[]{xqmc});
         response(list);
-    }
-
+    }   
     
+   
     
 }

@@ -46,10 +46,10 @@
             }
             ,{
                 title: '二手房租金趋势分析',
-                html: "<iframe width='100%' height='"+h+"' src='<%=basePath%>web/cbd/tjbb/chart.jsp?xml=esfzj.xml'/>"
+                html: "<iframe width='100%' height='"+h+"' src='<%=basePath%>web/cbd/qyjc/esfzj/esfzjqsfxFrame.jsp'/>"
             },{
                 title: '二手房售价趋势分析',
-                html: "<iframe width='100%' height='"+h+"' src='<%=basePath%>web/cbd/tjbb/chart.jsp?xml=esfsj.xml'/>"
+                html: "<iframe width='100%' height='"+h+"' src='<%=basePath%>web/cbd/qyjc/esfzj/esfsjqsfxFrame.jsp'/>"
             }
         ]
     })

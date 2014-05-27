@@ -14,6 +14,7 @@ import org.jdom.input.SAXBuilder;
 import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
 import com.klspta.base.AbstractBaseBean;
+import com.klspta.base.util.UtilFactory;
 
 public class StatisReport extends AbstractBaseBean {
 	// 住宅征收规模
@@ -80,6 +81,10 @@ public class StatisReport extends AbstractBaseBean {
 	 */
 	public void getReportData() {
 		String xml = request.getParameter("xml");
+		String lbxx = request.getParameter("lbxx");
+		if(lbxx != null){
+			lbxx = UtilFactory.getStrUtil().unescape(lbxx);
+		}
 		try {
 			yw_guid = request.getParameter("yw_guid");
 		} catch (Exception e) {
@@ -102,29 +107,28 @@ public class StatisReport extends AbstractBaseBean {
 		} else if (TZBL.equals(xml)) {
 			getTzbl();
 		} else if (XZLZJ.equals(xml)) {
-			getXzlzj();
+			getXzlzj(lbxx);
 		} else if (XZLZJ_ALL.equals(xml)) {
-			getXzlzj();
+			getXzlzj(lbxx);
 		} else if (ESFZJ.equals(xml)) {
-			getEsfzj();
+			getEsfzj(lbxx);
 		} else if (XZLSJ.equals(xml)) {
-			getXzlsj();
+			getXzlsj(lbxx);
 		} else if (ESFSJ.equals(xml)) {
-			getEsfsj();
+			getEsfsj(lbxx);
 		}
 	}
 
-	private void getEsfzj() {
+	private void getEsfzj(String lbxx) {
 		String[] names = { "租金" };
 		String[] colors = { "yellow" };
 		String[] alias = { "zj" };
 		String[] column = new String[12];
-		String[] months = new String[] { "YY", "EY", "SY", "SIY", "WY", "LY",
-				"QY", "BAY", "JY", "SHIY", "SYY", "SEY" };
+		String[] months = new String[] { "YY", "EY", "SY", "SIY", "WY", "LY","QY", "BAY", "JY", "SHIY", "SYY", "SEY" };
 		int[] array1 = null;
 		int[] array2 = null;
-
 		int month = Calendar.getInstance().get(Calendar.MONTH) + 1;
+		
 		if (month == 12) {
 			array1 = new int[12];
 			for (int i = 1; i <= 12; i++) {
@@ -153,8 +157,7 @@ public class StatisReport extends AbstractBaseBean {
 		// String sql1 = "select avg(k.czfjj) as zj from esf_zsxx k where
 		// k.year='"+year+"' and k.month=? ";
 		// generateReportESF(names,colors,alias,array1,array2,sql1,"esfzj","Line");
-		generateReport(names, colors, alias, array1, array2, months, "esfzj",
-				"Line", "esfzjqknd_pjzj");
+		generateReport(names, colors, alias, array1, array2, months, "esfzj","Line", "esfzjqknd_pjzj",lbxx);
 	}
 
 	/**
@@ -164,7 +167,7 @@ public class StatisReport extends AbstractBaseBean {
 	 * Author:李国明 <br>
 	 * Date:2013-12-12
 	 */
-	private void getEsfsj() {
+	private void getEsfsj(String lbxx) {
 		String[] names = { "售价" };
 		String[] colors = { "yellow" };
 		String[] alias = { "sj" };
@@ -205,7 +208,7 @@ public class StatisReport extends AbstractBaseBean {
 //		generateReportESF(names, colors, alias, array1, array2, sql1, "esfsj",
 //				"Line");
 		generateReportSJ(names, colors, alias, array1, array2, months, "esfsj",
-				"Line","esfzjqknd_pjlm");
+				"Line","esfzjqknd_pjlm",lbxx);
 	}
 
 	/**
@@ -215,7 +218,7 @@ public class StatisReport extends AbstractBaseBean {
 	 * Author:李国明 <br>
 	 * Date:2013-12-12
 	 */
-	private void getXzlzj() {
+	private void getXzlzj(String lbxx) {
 		String[] names = { "租金", "保本点" };
 		String[] colors = { "yellow", "red" };
 		String[] alias = { "zj", "bbd" };
@@ -224,7 +227,13 @@ public class StatisReport extends AbstractBaseBean {
 				"QY", "BAY", "JY", "SHIY", "SYY", "SEY" };
 		int[] array1 = null;
 		int[] array2 = null;
-
+		String[] lbxx_j = lbxx.split(",");
+		String sql_lbxx = "select yw_guid from esf_jbxx t where XQMC='";
+		for(String lbxx_d:lbxx_j){
+			sql_lbxx += lbxx_d; 
+		}
+		
+		
 		int month = Calendar.getInstance().get(Calendar.MONTH) + 1;
 		if (month == 12) {
 			array1 = new int[12];
@@ -250,7 +259,7 @@ public class StatisReport extends AbstractBaseBean {
 			}
 		}
 		generateReport(names, colors, alias, array1, array2, months, "xzlzj",
-				"Line", "xzlzjqknd_pjzj");
+				"Line", "xzlzjqknd_pjzj",lbxx);
 	}
 
 	/**
@@ -260,7 +269,7 @@ public class StatisReport extends AbstractBaseBean {
 	 * Author:李国明 <br>
 	 * Date:2013-12-10
 	 */
-	private void getXzlsj() {
+	private void getXzlsj(String lbxx) {
 		String[] names = { "售价" };
 		String[] colors = { "yellow" };
 		String[] alias = { "sj" };
@@ -295,7 +304,7 @@ public class StatisReport extends AbstractBaseBean {
 			}
 		}
 		generateReportSJ(names, colors, alias, array1, array2, months, "xzlsj",
-				"Line","xzlzjqknd_pjlm");
+				"Line","xzlzjqknd_pjlm",lbxx);
 	}
 
 	/**
@@ -596,7 +605,35 @@ public class StatisReport extends AbstractBaseBean {
 	 */
 	private void generateReport(String[] names, String[] colors,
 			String[] alias, int[] array1, int[] array2, String[] column,
-			String xml, String type, String tablename) {
+			String xml, String type, String tablename,String lbxx) 
+	{
+		String[] lbxx_z = null;
+		String sql_w = null;
+		//选择条件的编写
+		if("esfzjqknd_pjzj".equals(tablename)){
+			lbxx_z = lbxx.split(",");
+			sql_w = "select YW_GUID from esf_jbxx t where XQMC='";
+			for(String lbxx_d:lbxx_z){
+				
+				if(lbxx_d.equals(lbxx_z[lbxx_z.length-1])){
+					sql_w += lbxx_d+"'";
+				}else{
+					sql_w += lbxx_d+"'or XQMC='";
+				}
+			}
+		}else{
+			lbxx_z = lbxx.split(",");
+			sql_w = "select YW_GUID from xzlxx t where xzlmc='";
+			for(String lbxx_d:lbxx_z){
+				
+				if(lbxx_d.equals(lbxx_z[lbxx_z.length-1])){
+					sql_w += lbxx_d+"'";
+				}else{
+					sql_w += lbxx_d+"'or XZLMC='";
+				}
+			}
+		}
+		
 		List<Object> allListzj = new ArrayList<Object>();
 		List<Object> allList = new ArrayList<Object>();
 		List<Map<String, Object>> listzj1 = null;
@@ -609,7 +646,7 @@ public class StatisReport extends AbstractBaseBean {
 				sql1 += "avg(" + column[i] + ") as " + column[i] + ",";
 			}
 			sql1 += "avg(" + column[11] + ") as " + column[11] + " from "
-					+ tablename + " where rq=?";
+					+ tablename + " where rq=? and YW_GUID in ("+sql_w+")";
 			listzj1 = query(sql1, YW, new Object[] { year + "" });
 			allListzj.add(listzj1);
 		} else {
@@ -619,7 +656,7 @@ public class StatisReport extends AbstractBaseBean {
 			}
 			sql1 += "avg(" + column[array1[array1.length - 1] - 1] + ") as "
 					+ column[array1[array1.length - 1] - 1] + " from "
-					+ tablename + " where rq=?";
+					+ tablename + " where rq=? and YW_GUID in ("+sql_w+")";
 			listzj1 = query(sql1, YW, new Object[] { year - 1 + "" });
 			allListzj.add(listzj1);
 			for (int i = 0; i < array2.length - 1; i++) {
@@ -628,7 +665,7 @@ public class StatisReport extends AbstractBaseBean {
 			}
 			sql2 += "avg(" + column[array2[array2.length - 1] - 1] + ") as "
 					+ column[array2[array2.length - 1] - 1] + " from "
-					+ tablename + " where rq=?";
+					+ tablename + " where rq=? and YW_GUID in ("+sql_w+")";
 			listzj2 = query(sql2, YW, new Object[] { year + "" });
 			allListzj.add(listzj2);
 			allList.add(allListzj);
@@ -720,7 +757,6 @@ public class StatisReport extends AbstractBaseBean {
 				for (int j = 0; j < array2.length; j++) {
 					map = result.get(0);
 					e1 = new Element("point");
-					System.out.println(map.get(column[array1[j] - 1]));
 					e1.setAttribute("name", year + "年" + array2[j] + "月");
 					e1.setAttribute("y", map.get("bbd") == null ? "0" : map
 							.get("bbd").toString());
@@ -741,7 +777,35 @@ public class StatisReport extends AbstractBaseBean {
 	 */
 	private void generateReportSJ(String[] names, String[] colors,
 			String[] alias, int[] array1, int[] array2, String[] column,
-			String xml, String type ,String tablename) {
+			String xml, String type ,String tablename,String lbxx) 
+	{
+		String[] lbxx_z = null;
+		String sql_w = null;
+		//选择条件的编写
+		if("esfzjqknd_pjlm".equals(tablename)){
+			lbxx_z = lbxx.split(",");
+			sql_w = "select YW_GUID from esf_jbxx t where XQMC='";
+			for(String lbxx_d:lbxx_z){
+				
+				if(lbxx_d.equals(lbxx_z[lbxx_z.length-1])){
+					sql_w += lbxx_d+"'";
+				}else{
+					sql_w += lbxx_d+"'or XQMC='";
+				}
+			}
+		}else{
+			lbxx_z = lbxx.split(",");
+			sql_w = "select YW_GUID from xzlxx t where xzlmc='";
+			for(String lbxx_d:lbxx_z){
+				
+				if(lbxx_d.equals(lbxx_z[lbxx_z.length-1])){
+					sql_w += lbxx_d+"'";
+				}else{
+					sql_w += lbxx_d+"'or XZLMC='";
+				}
+			}
+		}
+		
 		List<Object> allListsj = new ArrayList<Object>();
 		List<Map<String, Object>> listsj1 = null;
 		List<Map<String, Object>> listsj2 = null;
@@ -754,7 +818,7 @@ public class StatisReport extends AbstractBaseBean {
 				sql1 += "avg(" + column[i] + ") as " + column[i] + ",";
 			}
 			sql1 += "avg(" + column[11] + ") as " + column[11]
-					+ " from "+tablename+" where rq=?";
+					+ " from "+tablename+" where rq=? and YW_GUID in ("+sql_w+")";
 			listsj1 = query(sql1, YW, new Object[] { year + "" });
 			allListsj.add(listsj1);
 		} else {
@@ -766,7 +830,7 @@ public class StatisReport extends AbstractBaseBean {
 			}
 			sql1 += "avg(" + column[array1[array1.length - 1] - 1] + ") as "
 					+ column[array1[array1.length - 1] - 1]
-					+ " from "+tablename+" where rq=?";
+					+ " from "+tablename+" where rq=? and YW_GUID in ("+sql_w+")";
 			listsj1 = query(sql1, YW, new Object[] { year - 1 + "" });
 			allListsj.add(listsj1);
 			for (int i = 0; i < array2.length - 1; i++) {
@@ -775,7 +839,7 @@ public class StatisReport extends AbstractBaseBean {
 			}
 			sql2 += "avg(" + column[array2[array2.length - 1] - 1] + ") as "
 					+ column[array2[array2.length - 1] - 1]
-					+ " from "+tablename+" where rq=?";
+					+ " from "+tablename+" where rq=? and YW_GUID in ("+sql_w+")";
 			listsj2 = query(sql2, YW, new Object[] { year + "" });
 			allListsj.add(listsj2);
 		}
@@ -815,7 +879,6 @@ public class StatisReport extends AbstractBaseBean {
 			for (int j = 0; j < array2.length; j++) {
 				map = ((List<Map<String, Object>>) allListsj.get(1)).get(0);
 				e1 = new Element("point");
-				System.out.println(map.get(column[array1[j] - 1]));
 				e1.setAttribute("name", year + "年" + array2[j] + "月");
 				e1.setAttribute("y",
 						map.get(column[array2[j] - 1]) == null ? "0" : map.get(

@@ -251,8 +251,7 @@ public class Contorl {
 				StringBuffer zjlr = TrFactory.getmod(this.yw_guid, this.year,this.rolename);
 				buffer.append(zjlr);
 			} else {
-				StringBuffer zjlr = TrFactory.getmod_view(this.yw_guid,
-						this.year,this.rolename);
+				StringBuffer zjlr = TrFactory.getmod_view(this.yw_guid,this.year,this.rolename);
 				buffer.append(zjlr);
 			}
 
