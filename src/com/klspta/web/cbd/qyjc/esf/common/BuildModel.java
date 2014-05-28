@@ -281,9 +281,9 @@ public class BuildModel {
       for(int i=0;i<list.size();i++){
           buffer.append("<tr>");
         
-          buffer.append("<td rowspan='2' class='tr04'> ");
+          buffer.append("<td rowspan='2' class='tr04'><a href='"+delNull(String.valueOf(list.get(i).get("URL")))+"' target='_blank'> ");
           buffer.append(delNull(String.valueOf(list.get(i).get("XQMC"))));
-          buffer.append("</td> ");
+          buffer.append("</a></td> ");
           buffer.append("<td class='tr04'>售价</td>");
           buffer.append("<td> <input id='"+list.get(i).get("yw_guid")+":YY' onchange='chang(this)' value=' ");
           buffer.append(delNull(String.valueOf(list.get(i).get("YY"))));
