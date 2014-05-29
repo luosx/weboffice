@@ -45,6 +45,7 @@ conditionMap.put("query", " where t.ssqy like '%" + query + "%'");
 	<meta http-equiv="description" content="This is my page">
 	<script src="web/cbd/yzt/jbb/ghcbzy/js/table.js"></script>
 	<script src="web/cbd/yzt/jbb/ghcbzy/js/panel.js"></script>
+
 	<script src="web/cbd/yzt/jbb/ghcbzy/js/jbbRowEditor.js"></script>
 	<script src="base/include/jquery-1.10.2.js"></script>
 	<%@ include file="/base/include/restRequest.jspf"%>
