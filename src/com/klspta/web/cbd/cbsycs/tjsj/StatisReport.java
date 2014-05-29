@@ -227,11 +227,7 @@ public class StatisReport extends AbstractBaseBean {
 				"QY", "BAY", "JY", "SHIY", "SYY", "SEY" };
 		int[] array1 = null;
 		int[] array2 = null;
-		String[] lbxx_j = lbxx.split(",");
-		String sql_lbxx = "select yw_guid from esf_jbxx t where XQMC='";
-		for(String lbxx_d:lbxx_j){
-			sql_lbxx += lbxx_d; 
-		}
+
 		
 		
 		int month = Calendar.getInstance().get(Calendar.MONTH) + 1;
@@ -610,7 +606,7 @@ public class StatisReport extends AbstractBaseBean {
 		String sql_w = null;
 		//选择条件的编写
 		if("esfzjqknd_pjzj".equals(tablename)){
-			if("".equals(lbxx)){
+			if(lbxx != null && "".equals(lbxx)){
 				sql_w = "select yw_guid from esf_jbxx";
 			}else{
 				lbxx_z = lbxx.split(",");
@@ -625,7 +621,7 @@ public class StatisReport extends AbstractBaseBean {
 				}
 			}
 		}else{
-			if("".equals(lbxx)){
+			if(lbxx != null && "".equals(lbxx)){
 				sql_w = "select YW_GUID from xzlxx";
 			}else{
 				lbxx_z = lbxx.split(",");
@@ -790,7 +786,7 @@ public class StatisReport extends AbstractBaseBean {
 		String sql_w = null;
 		//选择条件的编写
 		if("esfzjqknd_pjlm".equals(tablename)){
-			if("".equals(lbxx)){
+			if(lbxx!=null && "".equals(lbxx)){
 				sql_w = "select YW_GUID from esf_jbxx ";
 			}else{
 				lbxx_z = lbxx.split(",");
@@ -805,7 +801,7 @@ public class StatisReport extends AbstractBaseBean {
 				}
 			}
 		}else{
-			if("".equals(lbxx)){
+			if(lbxx!= null && "".equals(lbxx)){
 				sql_w = "select YW_GUID from xzlxx t";
 			}else{
 				lbxx_z = lbxx.split(",");
