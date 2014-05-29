@@ -26,6 +26,7 @@ String view = request.getParameter("view");
 	<%@ include file="/base/include/ext.jspf" %>
 	<script src="web/cbd/yzt/jbb/showRW/js/table.js"></script>
 	<script src="web/cbd/yzt/jbb/showRW/js/panel.js"></script>
+	<script src="web/cbd/yzt/jbb/showRW/js/test.js"></script>
 	<script src="web/cbd/yzt/jbb/showRW/js/jbbRowEditor.js"></script>
 	<%@ include file="/base/include/restRequest.jspf"%>
 	<script src="base/include/jquery-1.10.2.js"></script>
