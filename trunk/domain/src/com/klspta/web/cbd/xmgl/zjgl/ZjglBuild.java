@@ -133,9 +133,9 @@ public class ZjglBuild {
 							+ "@lrsp'>" + delNull(String.valueOf(list.get(i).get("LRSP"))));
 					stringBuffer.append("</td></tr>");
 				} else if(i != list.size() -1){
-					stringBuffer.append("<tr><td width:'240px'  class='"+sytle+"'>"
+					stringBuffer.append("<tr><td width:'240px'  class='"+sytle+"' ><span font-style:oblique;>"
 							+ delNull(String.valueOf(list.get(i).get("LJ")))
-							+ "</td><td class='"+sytle+"' id='" + String.valueOf(list.get(i).get("tree_id"))
+							+ "</span></td><td class='"+sytle+"' id='" + String.valueOf(list.get(i).get("tree_id"))
 							+ "@" + String.valueOf(list.get(i).get("tree_name"))
 							+ "@"+String.valueOf(list.get(i).get("parent_id"))
 							+ "@" + String.valueOf(list.get(i).get("sort"))

@@ -21,6 +21,8 @@ public class ZjglData extends AbstractBaseBean {
 	private String lr_type[] = {"ZJLR", "CRZJ", "JRJGDK", "SSZTDZ", "GYTDSYJJ", "CRHLZJ", "QTZJ" };
 	private String lr_parent_id[] = {"0", "ZJLR", "CRZJ", "CRZJ", "CRZJ", "ZJLR", "ZJLR"};
 	
+	private String lr_leval[] = {"1","2","3","3","3","2","2"};
+	
 	private String zc_chaild[] = { "总计划审批", "贷款审批", "实施主体带资审批", "国有土地收益基金审批",
 			"出让回笼资金审批", "其他资金审批", "实际支付", "已批未付" };
 	private String zc_parent[] = {"Ⅱ.资金支出", "2.1 一级开发支出" ,"2.1.1 前期费用", "2.1.2 拆迁费用", "2.1.3 收储费用",
@@ -28,6 +30,8 @@ public class ZjglData extends AbstractBaseBean {
 	private String zc_type[] = {"ZJZC", "YJKFZC", "QQFY", "CQFY", "SCFY", "SZFY", "CWFY",
 			"GLFY", "CRZJFH", "QTZC" };
 	private String zc_parent_id[] = {"0", "ZJZC", "YJKFZC", "YJKFZC", "YJKFZC", "YJKFZC", "YJKFZC", "YJKFZC", "ZJZC", "ZJZC"};
+	
+	private String zc_leval[] = {"1", "2" ,"3" ,"3" ,"3", "3", "3", "3", "2", "2"};
 	
 	static String[] months = {"CQYE", "YY", "EY", "SANY", "SIY", "WY", "LY", "QY","BAY", "JY", "SIYUE", "SYY", "SEY" ,"LRSP" };
 
@@ -155,8 +159,8 @@ public class ZjglData extends AbstractBaseBean {
 			} else {
 				for (int i = 0; i < zc_parent.length; i++) {
 					for (int j = 0; j < zc_chaild.length; j++) {
-						String sqlString = "insert into XMZJGL_ZC (yw_guid,tree_id,tree_name,lj,sort,rq,parent_id) values(?,?,?,?,?,?,?)";
-						update(sqlString, YW, new Object[] { yw_guid,zc_type[i], zc_parent[i], zc_chaild[j], (j + 1), year ,zc_parent_id[i]});
+						String sqlString = "insert into XMZJGL_ZC (yw_guid,tree_id,tree_name,lj,sort,rq,parent_id,leval) values(?,?,?,?,?,?,?,?)";
+						update(sqlString, YW, new Object[] { yw_guid,zc_type[i], zc_parent[i], zc_chaild[j], (j + 1), year ,zc_parent_id[i],zc_leval[i]});
 					}
 				}
 			}
@@ -172,8 +176,8 @@ public class ZjglData extends AbstractBaseBean {
 			if (query.size() > 0) {
 			} else {
 				for (int i = 0; i < lr_name.length; i++) {
-					String sqlString = "insert into XMZJGL_LR (yw_guid, tree_id, tree_name, rq,parent_id) values(?,?,?,?,?)";
-					update(sqlString, YW, new Object[] { yw_guid, lr_type[i], lr_name[i], year ,lr_parent_id[i]});
+					String sqlString = "insert into XMZJGL_LR (yw_guid, tree_id, tree_name, rq,parent_id, leval) values(?,?,?,?,?,?)";
+					update(sqlString, YW, new Object[] { yw_guid, lr_type[i], lr_name[i], year ,lr_parent_id[i], lr_leval[i]});
 				}
 			}
 		}
