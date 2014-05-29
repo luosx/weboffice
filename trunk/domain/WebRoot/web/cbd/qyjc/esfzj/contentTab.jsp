@@ -46,7 +46,7 @@
             }
             ,{
                 title: '二手房租金趋势分析',
-                html: "<iframe width='100%' height='"+h+"' src='<%=basePath%>web/cbd/qyjc/esfzj/esfzjqsfxFrame.jsp'/>"
+                html: "<iframe width='100%' height='"+h+"' src='<%=basePath%>web/cbd/qyjc/esfzj/esfzjFrame.jsp'/>"
             },{
                 title: '二手房售价趋势分析',
                 html: "<iframe width='100%' height='"+h+"' src='<%=basePath%>web/cbd/qyjc/esfzj/esfsjqsfxFrame.jsp'/>"

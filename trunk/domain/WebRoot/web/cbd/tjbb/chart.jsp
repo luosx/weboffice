@@ -4,6 +4,7 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 String xml = request.getParameter("xml");
 String lbxx = java.net.URLDecoder.decode(request.getParameter("lbxx"),"UTF-8");
+System.out.println(lbxx);
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
