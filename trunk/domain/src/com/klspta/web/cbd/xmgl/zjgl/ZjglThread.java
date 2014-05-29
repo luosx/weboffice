@@ -38,8 +38,8 @@ public class ZjglThread implements Runnable {
 	@Override
 	public void run() {
 		TreeManager Manager = new TreeManager();
-		List<Map<String, Object>> zc_zjzc = Manager.getZC_tree(this.yw_guid,
-				type, this.year);
+		List<Map<String, Object>> zc_zjzc = null;//Manager.getZC_tree(this.yw_guid,
+			//	type, this.year);
 		if (this.editor.equals("y")) {
 			this.buffer = TrFactory.getmodel_editor(zc_zjzc, this.yw_guid, type,
 					this.year,this.rolename);

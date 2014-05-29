@@ -4,13 +4,17 @@ import java.io.UnsupportedEncodingException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 import com.klspta.base.AbstractBaseBean;
 import com.klspta.base.util.UtilFactory;
 import com.klspta.web.cbd.xmgl.zjgl.TreeManager;
+import com.klspta.web.cbd.xmgl.zjgl.XmzjglTreeBean;
 import com.klspta.web.cbd.xmgl.zjgl.ZjglData;
 
 public class Xmmanager extends AbstractBaseBean {
@@ -18,7 +22,7 @@ public class Xmmanager extends AbstractBaseBean {
 			"CQYE", "YY", "EY", "SANY", "SIY", "WY", "LY", "QY", "BAY", "JY",
 			"SIYUE", "SYY", "SEY", "LRSP" };
 
-	public static String ZJGL_ZC[] = { "LB", "YSFY", "LJ", "JL2", "YFSDZ",
+	public static String ZJGL_ZC[] = { "LB", "YSFY",  "YFSDZ",
 			"ZJJD", "CQYE", "YY", "EY", "SANY", "SIY", "WY", "LY", "QY", "BAY",
 			"JY", "SIYUE", "SYY", "SEY", "LRSP" };
 
@@ -217,16 +221,23 @@ public class Xmmanager extends AbstractBaseBean {
 	 * @throws Exception 
 	 */
 	public void saveZJGL_ZJLR() throws Exception {
-
 		String yw_guid = request.getParameter("yw_guid");
+		String year = request.getParameter("year");
 		String val = request.getParameter("val");
-		String cols = request.getParameter("cols");
-		int i = Integer.parseInt(cols);
-		String stye = request.getParameter("stye");
-		stye = new String(stye.getBytes("iso-8859-1"), "UTF-8");
-		String sql = "update xmzjgl_lr set " + ZJGL_LR[i - 1] + "= " + val
-				+ "  where yw_guid=? and status=?";
-		update(sql, YW, new Object[] { yw_guid, stye });
+		val = UtilFactory.getStrUtil().unescape(val);
+		String[] values = val.split(":");
+		String sql = "";
+		for(int i =0 ; i < values.length ; i++){
+			String[] idsvalue = values[i].split("_");
+			String ids[] = idsvalue[0].split("@");
+			String value = idsvalue[1];
+			String tree_id = ids[0];
+			String column = ids[2];
+			sql = "update xmzjgl_lr set " + column + "=? where yw_guid =? and  tree_id=? and rq = ?";
+			update(sql, YW, new Object[]{value,yw_guid,tree_id,year});
+			
+		}
+		response("true");
 	}
 
 	/***************************************************************************
@@ -257,17 +268,31 @@ public class Xmmanager extends AbstractBaseBean {
 	 */
 	public void saveZJGL_ZJZC() {
 		String yw_guid = request.getParameter("yw_guid");
+		String year = request.getParameter("year");
 		String val = request.getParameter("val");
-		String status = request.getParameter("status");
-		String lb = request.getParameter("lb");
-		lb = UtilFactory.getStrUtil().unescape(lb);
-		String sort = request.getParameter("sort");
-		String cols = request.getParameter("cols");
-		int i = Integer.parseInt(cols);
-		String sql = "update xmzjgl_zc set " + ZJGL_ZC[i - 1] + "= " + val
-				+ "  where yw_guid=? and status=? and lb=? and sort=?";
-		update(sql, YW, new Object[] { yw_guid, status, lb, sort });
-
+		val = UtilFactory.getStrUtil().unescape(val);
+		String[] values = val.split(":");
+		String sql = "";
+		for(int i =0 ; i < values.length ; i++){
+			String[] idsvalue = values[i].split("#");
+			String ids[] = idsvalue[0].split("@");
+			if(ids.length == 5){
+				String value = idsvalue[1];
+				String tree_id = ids[0];
+				String sort = ids[3];
+				String column = ids[4];
+				sql = "update xmzjgl_zc set " + column + "=? where yw_guid =? and  tree_id=? and sort=? and rq = ?";
+				update(sql, YW, new Object[]{value,yw_guid,tree_id,sort,year});
+			}else if(ids.length==4){
+				String value = idsvalue[1];
+				String tree_id = ids[0];
+				String column = ids[3];
+				sql = "update xmzjgl_lr set " + column + "=? where yw_guid =? and  tree_id=? and rq = ?";
+				update(sql, YW, new Object[]{value,yw_guid,tree_id,year});
+			}
+			
+		}
+		response("true");
 	}
 
 	/***************************************************************************
@@ -278,24 +303,29 @@ public class Xmmanager extends AbstractBaseBean {
 	 * Date:2013-12-25
 	 */
 	public void saveZjglTree() {
-		String st[] = {"ZJLR", "QQFY", "CQFY", "SZFY", "CWFY", "GLFY", "CRZJFH",
-				"QTZC" };
+		String st[] = {"总计划审批", "贷款审批", "实施主体带资审批", "国有土地收益基金审批", "出让回笼资金审批", "其他资金审批", "实际支付",
+				"已批未付" };
 		String yw_guid = request.getParameter("yw_guid").trim();
-		String parent_id = request.getParameter("parent_id");
-		String selct_id = request.getParameter("id");
+		String parent_id = request.getParameter("tree_id");
 		String selet_year = request.getParameter("selet_year");
 		String tree_name = request.getParameter("tree_name");
 		tree_name = UtilFactory.getStrUtil().unescape(tree_name).trim();
+		String roorId = request.getParameter("rootID");
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd_HHmmss");
 		String date = dateFormat.format(new Date());
-		//for (int i = 0; i < st.length; i++) {
-		//	if (selct_id.equals(st[i])) {
-				String sql = " insert into zjgl_tree (yw_guid,parent_id,tree_name,tree_id,rq)values (?,?,?,?,?)";
-				update(sql, YW, new Object[] { yw_guid, selct_id, tree_name,
-						date, selet_year });
-				new ZjglData().saveNode(tree_name, selct_id, yw_guid, selet_year);
-		//	}
-		//}
+		if(roorId.equals("ZJLR")){
+			String sql = "select leval from xmzjgl_lr where tree_id=? and yw_guid=? and rq=?";
+			int leval = Integer.parseInt(query(sql, YW,new Object[]{parent_id,yw_guid,selet_year}).get(0).get("leval").toString());
+			sql = " insert into xmzjgl_lr (yw_guid,parent_id,tree_id,tree_name,rq,leval)values (?,?,?,?,?,?)";
+			update(sql, YW, new Object[] { yw_guid, parent_id, date,tree_name,selet_year ,leval + 1 + ""});
+		}else{
+			String sql = "select leval from xmzjgl_zc where tree_id=? and yw_guid=? and rq=?";
+			int leval = Integer.parseInt(query(sql, YW,new Object[]{parent_id,yw_guid,selet_year}).get(0).get("leval").toString());
+			sql = " insert into xmzjgl_zc (yw_guid,parent_id,tree_id,tree_name,rq,lj,sort,leval)values (?,?,?,?,?,?,?,?)";
+			for(int i = 1; i <= st.length ; i++){
+				update(sql, YW, new Object[] { yw_guid, parent_id, date,tree_name,selet_year ,st[i-1],i ,leval + 1 + ""});
+			}
+		}
 	}
 
 	public void delt_tree() {
@@ -303,59 +333,36 @@ public class Xmmanager extends AbstractBaseBean {
 				"QTZC" };
 		String yw_guid = request.getParameter("yw_guid").trim();
 		String parent_id = request.getParameter("parent_id");
-		String id = request.getParameter("id");
 		String selet_year = request.getParameter("selet_year");
 		String tree_text = request.getParameter("tree_text");
+		tree_text = UtilFactory.getStrUtil().unescape(tree_text);
 		String roorId = request.getParameter("rootId");
 		tree_text = UtilFactory.getStrUtil().unescape(tree_text).trim();
-		for (int i = 0; i < st.length; i++) {
-			String sql = " delete zjgl_tree where  yw_guid=? and parent_id=? and tree_name=? and tree_id=? and rq=?";
-			update(sql, YW, new Object[] { yw_guid, parent_id, tree_text,
-					id, selet_year });
-				if(roorId.equals("ZJLR")){
-					String delet = "delete XMZJGL_LR where yw_guid=? and lb=? and rq=?";
-					update(delet, YW, new Object[] { yw_guid, tree_text, selet_year });
-				}else{
-					String delet = "delete XMZJGL_ZC where yw_guid=? and lb=? and zcstatus=? and rq=?";
-					update(delet, YW, new Object[] { yw_guid, tree_text, parent_id,
-							selet_year });
-				}
-			
+		if(roorId.equals("ZJLR")){
+			String delet = "delete XMZJGL_LR where yw_guid=? and tree_name=? and parent_id=? and rq=?  ";
+			update(delet, YW, new Object[] { yw_guid, tree_text, parent_id,selet_year });
+		}else{
+			String delet = "delete XMZJGL_ZC where yw_guid=? and tree_name=? and parent_id=? and rq=?  ";
+			update(delet, YW, new Object[] { yw_guid, tree_text, parent_id,selet_year });
 		}
 	}
 
 	public void modify_tree() {
-		String st[] = {"ZJLR", "QQFY", "CQFY", "SZFY", "CWFY", "GLFY", "CRZJFH",
-				"QTZC" };
 		String yw_guid = request.getParameter("yw_guid").trim();
 		String parent_id = request.getParameter("parent_id");
-		String id = request.getParameter("id");
 		String selet_year = request.getParameter("selet_year");
 		String tree_text = request.getParameter("tree_text");
 		tree_text = UtilFactory.getStrUtil().unescape(tree_text).trim();
-		for (int i = 0; i < st.length; i++) {
-			if (!id.equals(st[i]) && parent_id.equals(st[i])) {
-				String sql = " update zjgl_tree set tree_name='"
-						+ tree_text
-						+ "'  where  yw_guid=? and parent_id=? and tree_id=? and rq=?";
-				update(sql, YW, new Object[] { yw_guid, parent_id, id,
-						selet_year });
-				String delet = "update XMZJGL_ZC set lb='" + tree_text
-						+ "' where yw_guid=? and  zcstatus=? and rq=?";
-				update(delet, YW,
-						new Object[] { yw_guid, parent_id, selet_year });
-
-			}
+		String rootId = request.getParameter("rootID");
+		if("ZJZC".equals(rootId)){
+			String delet = "update XMZJGL_ZC set tree_name=? where yw_guid=? and parent_id =? and rq = ?";
+			update(delet, YW,new Object[] {  tree_text ,yw_guid,parent_id,selet_year });
+		}else{
+			String delet = "update XMZJGL_LR set tree_name=? where yw_guid=? and parent_id =? and rq = ?";
+			update(delet, YW,new Object[] {  tree_text ,yw_guid,parent_id,selet_year });
 		}
-
 	}
 
-	public void getTree() {
-		String yw_guid = request.getParameter("yw_guid");
-		String rq = request.getParameter("rq");
-		String tree = new TreeManager().getTree(yw_guid, rq);
-		response(tree);
-	}
 
 	public String dellNull(String str) {
 		if (str.equals("null")) {
@@ -364,5 +371,68 @@ public class Xmmanager extends AbstractBaseBean {
 			return str;
 		}
 
+	}
+	
+	
+	public void getTreeMap(){
+		String yw_guid = request.getParameter("yw_guid");
+		String year = request.getParameter("year");
+		response(bulidTreeMap(yw_guid, year));
+	}
+	
+	public void getTreeMapLR(){
+		String yw_guid = request.getParameter("yw_guid");
+		String year = request.getParameter("year");
+		response(bulidTreeMapLR(yw_guid, year));
+	}
+	
+	public List<XmzjglTreeBean> getBeanList(String yw_guid , String year,String sql){
+		List<XmzjglTreeBean> arrayList = new ArrayList<XmzjglTreeBean>();
+		List<Map<String, Object>> queryList = query(sql, YW, new Object[]{yw_guid, year});
+		for(int i = 0; i < queryList.size(); i++){
+			arrayList.add(new XmzjglTreeBean(queryList.get(i)));
+		}
+		return arrayList;
+	}
+	
+	public List<Map<String,Object>> bulidTreeMap(String yw_guid,String year){
+		List<Map<String,Object>> result = new ArrayList<Map<String,Object>>();
+		String sql_zc = "select distinct tree_id as tree_id,tree_name as tree_name ,parent_id as parent_id,leval as leval from xmzjgl_zc where tree_id  in (select distinct parent_id from xmzjgl_zc where yw_guid=? and rq=?) and yw_guid=? and rq=? order by leval asc";
+		List<Map<String,Object>> treeList = query(sql_zc, YW,new Object[]{yw_guid, year, yw_guid, year});
+		sql_zc = "select distinct t.yw_guid ,t.tree_id, t.tree_name,t.rq,t.parent_id,t.leval  from xmzjgl_zc t where t.yw_guid=? and t.rq=? order by t.parent_id, t.tree_name";
+		List<XmzjglTreeBean> treebean = getBeanList(yw_guid, year, sql_zc);
+		Map<String,Object> treeMap = new TreeMap<String, Object>();
+		for(int i = 0; i < treeList.size(); i++){
+			String childs = "";
+			for(int j = 0; j < treebean.size() ; j++){
+				if(treebean.get(j).getParent_id().equals(treeList.get(i).get("tree_id").toString())){
+					childs += treebean.get(j).getTree_id()+"@" + treebean.get(j).getTree_name() + "@" + treebean.get(j).getParent_id() + ",";
+				}
+			}
+			treeMap.put(treeList.get(i).get("TREE_ID").toString()+"@"+treeList.get(i).get("TREE_NAME").toString()+"@"+treeList.get(i).get("PARENT_ID").toString(),childs.substring(0,childs.length()-1));
+		}
+		result.add(treeMap);
+		return result;
+	}
+	
+
+	public List<Map<String,Object>> bulidTreeMapLR(String yw_guid,String year){
+		List<Map<String,Object>> result = new ArrayList<Map<String,Object>>();
+		String sql_zc = "select distinct tree_id as tree_id,tree_name as tree_name ,parent_id as parent_id,leval as leval from xmzjgl_lr where tree_id  in (select distinct parent_id from xmzjgl_lr where yw_guid=? and rq=?) and yw_guid=? and rq=? order by leval asc";
+		List<Map<String,Object>> treeList = query(sql_zc, YW,new Object[]{yw_guid, year, yw_guid, year});
+		sql_zc = "select distinct t.yw_guid ,t.tree_id, t.tree_name,t.rq,t.parent_id,t.leval  from xmzjgl_lr t where t.yw_guid=? and t.rq=? order by t.parent_id, t.tree_name";
+		List<XmzjglTreeBean> treebean = getBeanList(yw_guid, year, sql_zc);
+		Map<String,Object> treeMap = new TreeMap<String, Object>();
+		for(int i = 0; i < treeList.size(); i++){
+			String childs = "";
+			for(int j = 0; j < treebean.size() ; j++){
+				if(treebean.get(j).getParent_id().equals(treeList.get(i).get("tree_id").toString())){
+					childs += treebean.get(j).getTree_id()+"@" + treebean.get(j).getTree_name() + "@" + treebean.get(j).getParent_id() + ",";
+				}
+			}
+			treeMap.put(treeList.get(i).get("TREE_ID").toString()+"@"+treeList.get(i).get("TREE_NAME").toString()+"@"+treeList.get(i).get("PARENT_ID").toString(),childs.substring(0,childs.length()-1));
+		}
+		result.add(treeMap);
+		return result;
 	}
 }
