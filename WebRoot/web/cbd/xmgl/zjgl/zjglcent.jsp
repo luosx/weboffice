@@ -338,6 +338,9 @@ td1 {
 }
 
 </script>
+<script type="text/javascript">
+	
+</script>
 	</head>
 	<body onload="init();" bgcolor="#FFFFFF" topmargin="0" leftmargin="0" style="overflow-x:hidden;overflow-y:hidden;">
 	<div style="position:absolute; z-index:2008;"><img width="30" height="30" src="" onclick="sava();"></div>

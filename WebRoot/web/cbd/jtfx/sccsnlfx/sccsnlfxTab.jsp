@@ -41,7 +41,7 @@
         items:[
         	{
                 title: '租金',
-                html: "<iframe width='"+w+"' height='"+h+"' src='<%=basePath%>web/cbd/tjbb/chart.jsp?xml=xzlzj.xml'/>" 
+                html: "<iframe width='"+w+"' height='"+h+"' src='<%=basePath%>web/cbd/jtfx/sccsnlfx/sccsnlzjqsfxFrame.jsp'/>" 
             }
             
         ]
