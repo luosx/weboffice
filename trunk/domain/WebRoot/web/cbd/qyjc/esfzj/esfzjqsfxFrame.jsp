@@ -45,7 +45,7 @@
 	    animate: true,
 	    //enableDD: true,
 	    autoHeight: false,
-	    width: 600,
+	    width: 200,
 	    border: false,
 	    margins: '2 2 0 2',
 	    containerScroll: true,
@@ -63,11 +63,10 @@
 	   				n++;
 	   			}
       		}
-      		var url = "<%=basePath%>web/cbd/tjbb/chart.jsp";
-      		treeTextList=encodeURI(treeTextList);
-      		//treeTextList=encodeURI(treeTextList);
-      		//document.getElementById("xxtj").src=url;
-      		post(url,{xml:'esfzj.xml',lbxx:treeTextList});
+      		var url = "<%=basePath%>web/cbd/tjbb/chart.jsp?xml=esfzj.xml&lbxx="+treeTextList;
+      		url=encodeURI(url);
+      		url=encodeURI(url);
+      		document.getElementById("xxtj").src=url;
 		 	treeTextList="";
         }},
 		root:node	
@@ -91,28 +90,14 @@
      left.getRootNode().expand(true);
 });
 
-  
-  function post(URL, PARAMS) {      
-	    var temp = document.createElement("form");      
-	    temp.action = URL;      
-	    temp.method = "post";      
-	    temp.style.display = "none";      
-	    for (var x in PARAMS) {      
-	        var opt = document.createElement("textarea");      
-	        opt.name = x;      
-	        opt.value = PARAMS[x];      
-	        // alert(opt.name)      
-	        temp.appendChild(opt);      
-	    }      
-	    document.body.appendChild(temp);      
-	    temp.submit();      
-	    return temp;      
-	}      
-	     
+    
+	function init(){
+		document.getElementById("center1").innerHTML="<iframe id='xxtj' name='xxtj' style='width: 100%; height: 380px; overflow: auto;' src='<%=basePath%>web/cbd/tjbb/chart.jsp?xml=esfzj.xml&lbxx='></iframe>";
+	}
 
 </script>
 	</head>
-	<body>
+	<body onload="init();">
 		<div id="west" class="x-hide-display"></div>
 		<div id="center1"></div>
 		

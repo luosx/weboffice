@@ -59,17 +59,17 @@
 	   				if(n>0){
 	   					treeTextList+=",";
 	   				}
-	   				treeTextList+=nodes[i].text;
+	   				treeTextList+=nodes[i].id;
 	   				n++;
 	   			}
       		}
-      		var url = null;
-      		var conn = Ext.lib.Ajax.getConnectionObject().conn;
+      		//var url = null;
+      		//var conn = Ext.lib.Ajax.getConnectionObject().conn;
       		//conn.open("POST", '<%=basePath%>web/cbd/tjbb/chart.jsp?xml=xzlsj.xml',false);
       		//url=encodeURI(treeTextList);
       		//conn.send(url);
       		url = "<%=basePath%>web/cbd/tjbb/chart.jsp?xml=xzlsj.xml&lbxx="+treeTextList;
-      		url=encodeURI(treeTextList);
+      		url=encodeURI(url);
       		url=encodeURI(url);
       		document.getElementById("xxtj").src=url;
 		 	treeTextList="";

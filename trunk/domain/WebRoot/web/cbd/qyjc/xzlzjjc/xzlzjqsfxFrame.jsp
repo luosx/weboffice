@@ -59,7 +59,7 @@
 	   				if(n>0){
 	   					treeTextList+=",";
 	   				}
-	   				treeTextList+=nodes[i].text;
+	   				treeTextList+=nodes[i].id;
 	   				n++;
 	   			}
       		}
