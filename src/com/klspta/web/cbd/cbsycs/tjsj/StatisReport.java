@@ -603,33 +603,40 @@ public class StatisReport extends AbstractBaseBean {
 	 * Author:李国明 <br>
 	 * Date:2013-12-12
 	 */
-	private void generateReport(String[] names, String[] colors,
-			String[] alias, int[] array1, int[] array2, String[] column,
+	private void generateReport(String[] names, String[] colors, String[] alias, int[] array1, int[] array2, String[] column,
 			String xml, String type, String tablename,String lbxx) 
 	{
 		String[] lbxx_z = null;
 		String sql_w = null;
 		//选择条件的编写
 		if("esfzjqknd_pjzj".equals(tablename)){
-			lbxx_z = lbxx.split(",");
-			sql_w = "select YW_GUID from esf_jbxx t where XQMC='";
-			for(String lbxx_d:lbxx_z){
-				
-				if(lbxx_d.equals(lbxx_z[lbxx_z.length-1])){
-					sql_w += lbxx_d+"'";
-				}else{
-					sql_w += lbxx_d+"'or XQMC='";
+			if("".equals(lbxx)){
+				sql_w = "select yw_guid from esf_jbxx";
+			}else{
+				lbxx_z = lbxx.split(",");
+				sql_w = "select YW_GUID from esf_jbxx t where XQMC='";
+				for(String lbxx_d:lbxx_z){
+					
+					if(lbxx_d.equals(lbxx_z[lbxx_z.length-1])){
+						sql_w += lbxx_d+"'";
+					}else{
+						sql_w += lbxx_d+"'or XQMC='";
+					}
 				}
 			}
 		}else{
-			lbxx_z = lbxx.split(",");
-			sql_w = "select YW_GUID from xzlxx t where xzlmc='";
-			for(String lbxx_d:lbxx_z){
-				
-				if(lbxx_d.equals(lbxx_z[lbxx_z.length-1])){
-					sql_w += lbxx_d+"'";
-				}else{
-					sql_w += lbxx_d+"'or XZLMC='";
+			if("".equals(lbxx)){
+				sql_w = "select YW_GUID from xzlxx";
+			}else{
+				lbxx_z = lbxx.split(",");
+				sql_w = "select YW_GUID from xzlxx t where bh='";
+				for(String lbxx_d:lbxx_z){
+					
+					if(lbxx_d.equals(lbxx_z[lbxx_z.length-1])){
+						sql_w += lbxx_d+"'";
+					}else{
+						sql_w += lbxx_d+"'or bh='";
+					}
 				}
 			}
 		}
@@ -783,25 +790,33 @@ public class StatisReport extends AbstractBaseBean {
 		String sql_w = null;
 		//选择条件的编写
 		if("esfzjqknd_pjlm".equals(tablename)){
-			lbxx_z = lbxx.split(",");
-			sql_w = "select YW_GUID from esf_jbxx t where XQMC='";
-			for(String lbxx_d:lbxx_z){
-				
-				if(lbxx_d.equals(lbxx_z[lbxx_z.length-1])){
-					sql_w += lbxx_d+"'";
-				}else{
-					sql_w += lbxx_d+"'or XQMC='";
+			if("".equals(lbxx)){
+				sql_w = "select YW_GUID from esf_jbxx ";
+			}else{
+				lbxx_z = lbxx.split(",");
+				sql_w = "select YW_GUID from esf_jbxx t where XQMC='";
+				for(String lbxx_d:lbxx_z){
+					
+					if(lbxx_d.equals(lbxx_z[lbxx_z.length-1])){
+						sql_w += lbxx_d+"'";
+					}else{
+						sql_w += lbxx_d+"'or XQMC='";
+					}
 				}
 			}
 		}else{
-			lbxx_z = lbxx.split(",");
-			sql_w = "select YW_GUID from xzlxx t where xzlmc='";
-			for(String lbxx_d:lbxx_z){
-				
-				if(lbxx_d.equals(lbxx_z[lbxx_z.length-1])){
-					sql_w += lbxx_d+"'";
-				}else{
-					sql_w += lbxx_d+"'or XZLMC='";
+			if("".equals(lbxx)){
+				sql_w = "select YW_GUID from xzlxx t";
+			}else{
+				lbxx_z = lbxx.split(",");
+				sql_w = "select YW_GUID from xzlxx t where bh='";
+				for(String lbxx_d:lbxx_z){
+					
+					if(lbxx_d.equals(lbxx_z[lbxx_z.length-1])){
+						sql_w += lbxx_d+"'";
+					}else{
+						sql_w += lbxx_d+"'or bh='";
+					}
 				}
 			}
 		}
