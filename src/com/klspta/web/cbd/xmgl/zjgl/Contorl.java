@@ -53,7 +53,7 @@ public class Contorl {
 	public Contorl(String yw_guid, String year) {
 		this.yw_guid = yw_guid;
 		this.year = year;
-		new ZjglData().setMX(this.yw_guid, this.year);
+		//new ZjglData().setMX(this.yw_guid, this.year);
 		Init();
 		
 		try {
@@ -211,7 +211,7 @@ public class Contorl {
 
 	public String getTextMode() {
 		// 是否项目初始化
-		new ZjglData().setMX(this.yw_guid, this.year);
+		//new ZjglData().setMX(this.yw_guid, this.year);
 		StringBuffer title = ZjglBuild.buildTitle(this.year);
 		buffer.append(title);
 		// 资金流入
