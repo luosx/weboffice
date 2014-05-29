@@ -63,6 +63,8 @@ public class CbjhManager extends AbstractBaseBean {
         String sql = "insert into cbzy_dkm dkmc values(?)";
         for(int i=0;i<dkmc.length;i++){
             this.update(sql, YW, new Object[]{dkmc[i]});
+            sql = "update cbd_kgzb set swcb=1 where dkmc = ?";
+            this.update(sql, GIS,new Object[]{dkmc[i]});
         }
         response("{success:true}");
     }
