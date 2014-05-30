@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<%@page import="com.klspta.web.cbd.xmgl.zjgl.TreeManager"%>
+<%@page import="com.klspta.web.cbd.zcgl.zcfz.TreeManager"%>
+
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":"
@@ -274,10 +275,10 @@ scrollbar-3dlight-color:#D4D0C8;
 	   				}
 	   			}
 	   		}
-	   	//	if(!view){
-	   	//	alert("您无权限编辑此项!请与管理员联系");
-	   	//		return;
-	   		//}
+	   		if(!view){
+	   			alert("您无权限编辑此项!请与管理员联系");
+	   			return;
+	   		}
 	   		selected_leaf=node;
    			e.preventDefault();
    			node.select();
@@ -323,13 +324,13 @@ scrollbar-3dlight-color:#D4D0C8;
 
 });
 function change(){
-	var selet=document.getElementById("selet");
-	var index=selet.selectedIndex;
-	var selet_value=selet.options[index].value;
-	var url="<%=basePath%>web/cbd/xmgl/zjgl/zjglcent.jsp?yw_guid=<%=yw_guid%>&xmmc=<%=xmmc%>&year="+selet_value+"&type=<%=type%>&editor=<%=editor %>";
-	parent.right.location.href=url;
-	var urltree="<%=basePath%>web/cbd/xmgl/zjgl/zjglTree.jsp?yw_guid=<%= yw_guid%>&xmmc=<%=xmmc%>&year="+selet_value+"&type=<%=type%>&editor=<%=editor %>";
-	parent.left.location.href=urltree;
+var selet=document.getElementById("selet");
+var index=selet.selectedIndex;
+var selet_value=selet.options[index].value;
+var url="<%=basePath%>web/cbd/xmgl/zjgl/zjglcent.jsp?yw_guid=<%=yw_guid%>&xmmc=<%=xmmc%>&year="+selet_value+"&type=<%=type%>&editor=<%=editor %>";
+parent.right.location.href=url;
+var urltree="<%=basePath%>web/cbd/xmgl/zjgl/zjglTree.jsp?yw_guid=<%= yw_guid%>&xmmc=<%=xmmc%>&year="+selet_value+"&type=<%=type%>&editor=<%=editor %>";
+parent.left.location.href=urltree;
 }
 function  sele_year(){
 var slet=document.getElementById("selet");
