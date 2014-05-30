@@ -28,6 +28,7 @@
   var mydata;
   Ext.onReady(function(){
   	putClientCommond("qyjcManager", "getxzlTree");
+  	
     mydata = restRequest();
     
   	node= new Ext.tree.AsyncTreeNode({
@@ -67,9 +68,33 @@
       		url=encodeURI(url);
       		url=encodeURI(url);
       		document.getElementById("xxtj").src=url;
+      		
 		 	treeTextList="";
         }},
-		root:node	
+		root:node,
+		buttons: [{
+                    text:'保存', handler: function() {
+                    	var nodes=left.getChecked();
+			      		var n=0;
+			      		for(i=0;i<nodes.length;i++){
+			      			if(nodes[i].text=="基本信息列表"){//如果是父节点，则不加入treeTextList
+			               	}else{
+				   				if(n>0){
+				   					treeTextList+=",";
+				   				}
+				   				treeTextList+=nodes[i].id;
+				   				n++;
+				   			}
+			      		}
+			      		putClientCommond("qyjcManager", "savexzlTree");
+			      		putRestParameter("items",treeTextList );
+    					msg = restRequest();
+			      		if(msg){
+			      			treeTextList = "";
+			      			alert("保存成功");
+			      		}
+                    }
+                 }]	
 	});
     
 	var center = new Ext.Panel({
