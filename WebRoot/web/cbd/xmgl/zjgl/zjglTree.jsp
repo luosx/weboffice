@@ -98,7 +98,7 @@ scrollbar-3dlight-color:#D4D0C8;
                      var lef=new Ext.tree.TreeNode({ 
                          text:tree_name,
                          isLeaf:'ture'
-                                 });
+                       });
                         if(sign_tree=="Y"){
                            	selected_leaf.setText(tree_name) ;
 	   		           		var  tree_text=escape(escape(tree_name));
