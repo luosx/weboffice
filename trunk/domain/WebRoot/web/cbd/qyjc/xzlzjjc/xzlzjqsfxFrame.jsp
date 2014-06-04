@@ -21,15 +21,77 @@
 		<meta http-equiv="description" content="This is my page">
 		<%@ include file="/base/include/ext.jspf"%>
 		<%@ include file="/base/include/restRequest.jspf"%>
+		<script src="web/cbd/qyjc/xzlzjjc/js/quickmsg.js"></script>
+		<style type="css/text">
+			.msg .x-box-mc {   
+				font-size:14px;   
+			}   
+            #msg-div {   
+            position:absolute;   
+            left:650px;   
+            top:410px;   
+            width:300px;   
+            z-index:99;   
+            float:left;
+			}   
+
+			.msg-close{  
+				width:10px; 
+				height:10px; 
+				position:absolute; top:5px; right:10px;cursor:hand;   
+			}   
+			.msg-h{   
+			 float:left;
+				font-size:13px;   
+				color:#2870b2;   
+				font-weight:bold;   
+				margin:10px 0;   
+ 			}  
+		</style>
 		<script type="text/javascript">
   var left;
   var treeTextList="";
   var node;
   var mydata;
+  var closeImageUrl="<%=basePath %>web/cbd/framework/images/save.png";
   Ext.onReady(function(){
+  
   	putClientCommond("qyjcManager", "getxzlTree");
-  	
     mydata = restRequest();
+    
+    
+     
+    NodeMouseoverPlugin = Ext.extend(Object, {  
+		   	init: function(tree) {  
+		       if (!tree.rendered) {  
+		           tree.on('render', function() {this.init(tree)}, this);  
+		           return;  
+		       }  
+		       this.tree = tree;  
+		       tree.body.on('mouseover', this.onTreeMouseover, this, {delegate: 'div.x-tree-node-el'});  
+		    	tree.body.on('mouseout', this.onTreeMouseout, this, {delegate: 'div.x-tree-node-el'});  
+		   },  
+  
+		   onTreeMouseover: function(e, t) {  
+		    /** 
+		       var nodeEl = Ext.fly(t).up('div.x-tree-node-el'); 
+		    **/  
+		    var nodeId = t.getAttribute('ext:tree-node-id');//t.getAttributeNS('ext', 'tree-node-id');  
+		   console.log('node id ' + nodeId);  
+		    if (nodeId) {  
+		        this.tree.fireEvent('mouseover', this.tree.getNodeById(nodeId), e);  
+		    }  
+		   },  
+		onTreeMouseout : function(e , t) {  
+		    /** 
+		       var nodeEl = Ext.fly(t).up('div.x-tree-node-el'); 
+		    **/  
+		    var nodeId = t.getAttribute('ext:tree-node-id');//t.getAttributeNS('ext', 'tree-node-id');  
+		    if (nodeId) {  
+		        this.tree.fireEvent('mouseout', this.tree.getNodeById(nodeId), e);  
+		    }  
+		}  
+});  
     
   	node= new Ext.tree.AsyncTreeNode({
 	    expanded: true,
@@ -41,12 +103,13 @@
 		id:'west',
 		title:"基本信息列表",
 		collapsible: true,
+		plugins: new NodeMouseoverPlugin(),  
 	    useArrows: true,
 	    autoScroll: true,
 	    animate: true,
 	    //enableDD: true,
 	    autoHeight: false,
-	    width: 200,
+	    width: 300,
 	    border: false,
 	    margins: '2 2 0 2',
 	    containerScroll: true,
@@ -70,7 +133,27 @@
       		document.getElementById("xxtj").src=url;
       		
 		 	treeTextList="";
-        }},
+        	},'mouseover' : function(node) {  
+        		if(node.id==0){
+        			return ;
+        		}
+        		putClientCommond("qyjcManager", "getFloatTable");
+        		putRestParameter("bh",node.id);
+        		putRestParameter("tablename","xzlzjqknd_pjzj");
+    			mydata = restRequest();
+                Ext.QuickMsg.show('', mydata ,'100px', 2, Ext.get('fl'), [0, 0], 't-t', true, false);   
+                var oSon = window.document.getElementById("fl");  
+			     if (oSon == null) return;  
+			     with (oSon){  
+			      //innerText = guoguo.value;  
+			      style.display = "block";  
+			      style.pixelLeft = window.event.clientX + window.document.body.scrollLeft + 6;  
+			   
+		          style.pixelTop = window.event.clientY + window.document.body.scrollTop + 9;  
+			   
+			     } 
+                
+				}},
 		root:node,
 		buttons: [{
                     text:'保存', handler: function() {
@@ -96,6 +179,8 @@
                     }
                  }]	
 	});
+   
+    
     
 	var center = new Ext.Panel({
 		region:"center",
@@ -116,15 +201,16 @@
 });
 
 function init(){
-	document.getElementById("center1").innerHTML="<iframe id='xxtj' name='xxtj' style='width: 100%; height: 380px; overflow: auto;' src='<%=basePath%>web/cbd/tjbb/chart.jsp?xml=xzlzj.xml&lbxx='></iframe>";
+	document.getElementById("center1").innerHTML="<iframe id='xxtj' name='xxtj' style='z-index:20;width: 100%; height: 380px;' src='<%=basePath%>web/cbd/tjbb/chart.jsp?xml=xzlzj.xml&lbxx='></iframe>";
 }
 </script>
 	</head>
 	<body onload="init();">
-		<div id="west" class="x-hide-display"></div>
-		<div id="center1">
-
+		<div id="fl"  style="position:absolute; z-index:5808;"></div>
+		<div id="west" ></div>
+		<div id="center1"  style="position:absolute; z-index:0; ">
 		</div>
 
+	
 	</body>
 </html>

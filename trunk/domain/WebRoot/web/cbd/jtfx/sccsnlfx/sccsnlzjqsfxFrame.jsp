@@ -26,13 +26,14 @@
   var treeTextList="";
   var node;
   var mydata;
+  var unSelectNodeName = "";
   Ext.onReady(function(){
   	putClientCommond("qyjcManager", "getxzlTree");
     mydata = restRequest();
     
   	node= new Ext.tree.AsyncTreeNode({
 	    expanded: true,
-	    children:  mydata                                   
+	   children:  mydata                  
 	});
   
   	left = new Ext.tree.TreePanel({
@@ -51,6 +52,15 @@
 	    containerScroll: true,
 	    rootVisible: false,
 	    listeners:{'checkchange':function(node,checked){
+	    
+	    
+	    //	获取未选中节点
+	    //	if(!checked){
+	    //		unSelectNodeName = unSelectNodeName + node.id + ",";
+	    //	}else{
+	    //		unSelectNodeName = unSelectNodeName.replace(node.id + ",", "");
+	    //	}
+	    	
 			var nodes=left.getChecked();
       		var n=0;
       		for(i=0;i<nodes.length;i++){
@@ -59,7 +69,7 @@
 	   				if(n>0){
 	   					treeTextList+=",";
 	   				}
-	   				treeTextList+=nodes[i].text;
+	   				treeTextList+=nodes[i].id;
 	   				n++;
 	   			}
       		}
@@ -69,7 +79,30 @@
       		document.getElementById("xxtj").src=url;
 		 	treeTextList="";
         }},
-		root:node	
+		root:node,
+		buttons: [{
+                    text:'保存', handler: function() {
+                    	var nodes=left.getChecked();
+			      		var n=0;
+			      		for(i=0;i<nodes.length;i++){
+			      			if(nodes[i].text=="基本信息列表"){//如果是父节点，则不加入treeTextList
+			               	}else{
+				   				if(n>0){
+				   					treeTextList+=",";
+				   				}
+				   				treeTextList+=nodes[i].id;
+				   				n++;
+				   			}
+			      		}
+			      		putClientCommond("qyjcManager", "savexzlTree");
+			      		putRestParameter("items",treeTextList );
+    					msg = restRequest();
+			      		if(msg){
+			      			treeTextList = "";
+			      			alert("保存成功");
+			      		}
+                    }
+                 }]		
 	});
     
 	var center = new Ext.Panel({
@@ -91,7 +124,7 @@
 });
 
 function init(){
-	document.getElementById("center1").innerHTML="<iframe id='xxtj' name='xxtj' style='width: 100%; height: 300px; overflow: auto;' src='<%=basePath%>web/cbd/tjbb/chart.jsp?xml=xzlzj.xml&lbxx='></iframe>";
+	document.getElementById("center1").innerHTML="<iframe id='xxtj' name='xxtj' style='width: 100%; height: 380px; overflow: auto;' src='<%=basePath%>web/cbd/tjbb/chart.jsp?xml=xzlzj.xml&lbxx='></iframe>";
 }
 </script>
 	</head>

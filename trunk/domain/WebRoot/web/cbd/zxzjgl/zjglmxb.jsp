@@ -1,17 +1,14 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%@ page import="com.klspta.web.cbd.xmgl.zjgl.Contorl" %>
+<%@ page language="java" pageEncoding="UTF-8"%>
 <%@page import="java.util.List" %>
 <%@page import="java.util.Map" %>
 <%@page import="com.klspta.console.ManagerFactory"%>
-<%@page import="com.klspta.console.user.UserAction"%>
-<%@page import="com.klspta.base.rest.ProjectInfo"%>
 <%@page import="org.springframework.security.core.context.SecurityContextHolder"%>
 <%@page import="com.klspta.console.user.User"%>
 <%@page import="com.klspta.console.role.Role"%>
+<%@page import="com.klspta.web.cbd.zxzjgl.ReportManager"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-	String yw_guid="1";
    	String year="2014";
 	String table="";
 	List<Map<String, Object>> lr=null;
@@ -22,11 +19,10 @@
 	User user = ManagerFactory.getUserManager().getUserWithId(userId);
 	List<Role>  role = ManagerFactory.getRoleManager().getRoleWithUserID(userId);
 	String rolename = role.get(0).getRolename();
-	String types[] = "ZJLR@ZJZC@YJKFZC@QQFY@CQFY@SZFY@CWFY@GLFY@CRZJFH@QTZC".split("@");
-	String edirots[] = "n@n@n@n@n@n@n@n@n@n".split("@");
-	Contorl contorl=  new Contorl(yw_guid,year,types,edirots,rolename);
-	table= contorl.getTextMode_new();
-	System.out.print(table);
+	//String types[] = "ZJLR@ZJZC@YJKFZC@QQFY@CQFY@SZFY@CWFY@GLFY@CRZJFH@QTZC".split("@");
+	//String edirots[] = "n@n@n@n@n@n@n@n@n@n".split("@");
+	ReportManager re  = new ReportManager();
+	table = re.getReport( year, rolename);
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -62,9 +58,11 @@ td {
 }
 input{
 	border: 1px solid #6933F2;
-	height: 25px;
-	align:left;
+	height: 20px;
+	align:center;
 	width:100px;
+	padding: 0px;
+	
 }
 
 td1 {
@@ -75,26 +73,36 @@ td1 {
 	color: #fdfdfd;
 }
 
-.tr01 {
-	background-color:#BCD2EF;
-	font-weight: bold;
-	line-height: 20px;
-	text-align: center;
-}
-.tr02 {
-	background-color:#FFCC99;
+.title{
+	background-color:#95DD9E;
 	font-weight: bold;
 	line-height: 15px;
 	text-align: center;
 }
+
 .tr03 {
+	background-color:#FFFFCC;
+	font-weight: bold;
+	line-height: 15px;
+	text-align: center;
+}
+.tr02 {
+	background-color:#CCFFFF;
+	font-weight: bold;
+	line-height: 15px;
+	text-align: center;
+}
+.tr01 {
 	background-color:#FFCC99;
+	font-weight: bold;
 	line-height: 15px;
 	text-align: center;
 }
 .tr04 {
-	background-color:#CCFFFF;
+	background-color:#C7EDCC;
+	font-weight: bold;
 	line-height: 15px;
+	text-align: center;
 }
 .tr05 {
 	background-color:#FFF69A;
@@ -109,52 +117,7 @@ td1 {
 		var height = document.body.clientHeight * 0.9;
        	FixTable("table", 0,3, width, height);
     });
-function addrzxq(check){
 
-		var val = check.value;
-if(!isNaN(val)){ 
-		var id=check.id;
-		var ids=id.split("@");
-		var status=ids[0];
-		var lb=ids[1];
-		lb=escape(escape(lb));
-		var sort=ids[2];
-		var cols=ids[3];
-putClientCommond("xmmanager","saveZJGL_ZJZC");
-	putRestParameter("yw_guid","<%=yw_guid%>");
-	putRestParameter("val",val);
-	putRestParameter("status",status);
-	putRestParameter("lb",lb);
-	putRestParameter("sort",sort);
-	putRestParameter("cols",cols);
-	var msg=restRequest(); 
-	}else{
-	alert("请填写有效数据！");
-	check.value="";
-	}
-	}
-function addzjlr(check){
-		 var val = check.value;
-if(!isNaN(val)){  
-		 var id=check.id;
-		 var ids=id.split("@");
-		 var stye=ids[1];
-		 var cols=ids[2];
-putClientCommond("xmmanager","saveZJGL_ZJLR");
-	putRestParameter("yw_guid","<%=yw_guid%>");
-	putRestParameter("cols",cols);
-	putRestParameter("stye",stye);
-	putRestParameter("val",val);
-	var msg=restRequest(); 
-	}else{
-	alert("请填写有效数据！");
-	check.value="";
-	}
- }
- 
- function addds(){
- alert("");
- }
  
   function FixTable(TableID, FixColumnNumber,FixRowNumber, width, height) {
     if ($("#" + TableID + "_tableLayout").length != 0) {
