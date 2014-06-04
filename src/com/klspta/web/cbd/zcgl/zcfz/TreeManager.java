@@ -22,7 +22,7 @@ public class TreeManager extends AbstractBaseBean {
 
 	public String getZC_tree(String year) {
 		String sql = "select distinct t.tree_id, t.tree_name,t.rq,t.parent_id  from zcfz_zc t order by t.parent_id, t.tree_name";
-		String  returnString = buildTreeBuffer(getBeanList(sql, year), "0").toString();
+		String  returnString = buildTreeBuffer(getBeanList(year, sql), "0").toString();
 		return returnString;
 	}
 	
@@ -40,7 +40,7 @@ public class TreeManager extends AbstractBaseBean {
 
 	public String getFZ_tree(String year) {
 		String sql = "select distinct t.tree_id, t.tree_name,t.rq,t.parent_id  from zcfz_fz t order by t.parent_id, t.tree_name";
-		String  returnString = buildTreeBuffer(getBeanList(sql, year), "0").toString();
+		String  returnString = buildTreeBuffer(getBeanList(year, sql), "0").toString();
 		return returnString;
 	}
 
@@ -61,7 +61,6 @@ public class TreeManager extends AbstractBaseBean {
 
 
 	/***************************************************************************
-	 * 
 	 * <br>
 	 * Description:父节点 <br>
 	 * Author:朱波海 <br>

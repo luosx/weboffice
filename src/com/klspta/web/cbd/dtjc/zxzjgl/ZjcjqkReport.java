@@ -77,12 +77,12 @@ public class ZjcjqkReport extends AbstractBaseBean implements IDataClass {
 	
 	private Map<String, Map<String, String>> formatData(String condition){
 		Map<String, Map<String, String>> formatData = new TreeMap<String, Map<String,String>>();
-		String sql = "select sum(t.ysfy) as ysfy, sum((t.yy + t.ey + t.sany + t.siy + t.wy + t.ly + t.qy + t.bay + t.jy + t.siy + t.syy + t.sey )) as he, t.lb, t.status from XMZJGL_LR t group by t.status, t.lb";
+		String sql = "select sum(t.ysfy) as ysfy, sum((t.yy + t.ey + t.sany + t.siy + t.wy + t.ly + t.qy + t.bay + t.jy + t.siy + t.syy + t.sey )) as he, t.tree_name, t.tree_id from XMZJGL_LR t group by t.tree_id, t.tree_name";
 		List<Map<String, Object>> dwjeResult = query(sql, YW);
 		for(int i = 0; i < dwjeResult.size(); i++){
 			Map<String, Object> dwjeMap = dwjeResult.get(i);
 			Map<String, String> tableMap = new HashMap<String, String>();
-			String key = String.valueOf(dwjeMap.get("status"));
+			String key = String.valueOf(dwjeMap.get("tree_id"));
 			String ysfy = String.valueOf(dwjeMap.get("ysfy"));
 			ysfy = ("null".equals(ysfy) || ysfy == null)?"0":ysfy;
 			String he = String.valueOf(dwjeMap.get("he"));

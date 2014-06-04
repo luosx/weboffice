@@ -98,12 +98,12 @@ public class Xmzxsyqk extends AbstractBaseBean implements IDataClass {
 		}
 		
 		//计算资金支出总额
-		sql = "select t.status, t.lb, J.XMNAME, sum(t.yy) as he from XMZJGL_ZC t right join JC_XIANGMU J ON t.yw_guid = j.yw_guid  group by t.status, t.lb, t.yw_guid,j.xmname";
+		sql = "select t.tree_id, t.tree_name, J.XMNAME, sum(t.yy) as he from XMZJGL_ZC t right join JC_XIANGMU J ON t.yw_guid = j.yw_guid  group by t.tree_id, t.tree_name, t.yw_guid,j.xmname";
 		List<Map<String, Object>> dwjeResult = query(sql, YW);
 		for(int i = 0; i < dwjeResult.size(); i++){
 			Map<String, Object> dwjeMap = dwjeResult.get(i);
 			Map<String, String> xmMap;
-			String key = String.valueOf(dwjeMap.get("status"));
+			String key = String.valueOf(dwjeMap.get("tree_id"));
 			String value = String.valueOf(dwjeMap.get("he"));
 			String xmname = String.valueOf(dwjeMap.get("xmname"));
 			if(formatData.containsKey(xmname)){

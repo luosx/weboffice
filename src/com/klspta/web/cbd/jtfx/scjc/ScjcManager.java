@@ -29,19 +29,56 @@ public class ScjcManager extends AbstractBaseBean {
     private static ScjcManager scjcManager;
 
     public void getesfTree(){
-		String sql = "select t.xqmc from esf_jbxx t";
+		String sql = "select t.xqmc,t.xh from esf_jbxx t";
 		List<Map<String, Object>> list = query(sql, YW);
+		sql = "select t.xqmc , t.xh from esf_jbxx t where t.xh not in (select xh from esf_code) ";
+		List<Map<String, Object>> list1 = query(sql, YW);
 		Map<String,Object> map = null;
+		Map<String,Object> map1 = null;
 		StringBuffer tree = new StringBuffer("[{text:'基本信息列表',checked:true,leaf:0,id:0,children:[");
+		boolean isChecked = true;
 		for(int i = 0; i < list.size()-1; i++){
+			isChecked = true;
 			map = list.get(i);
-			tree.append("{text:'"+map.get("xqmc")+"',checked:true,leaf:1,id:'"+map.get("xqmc")+"',parentId:0},");
+			for(int j = 0 ; j < list1.size() ; j++){
+				map1 = list1.get(j);
+				if(map.get("xh").toString().equals(map1.get("xh").toString())){
+					isChecked = false;
+				}					
+			}
+			if(isChecked){
+				tree.append("{text:'"+map.get("xqmc")+"',checked:true,qtip:'我是提示1',leaf:1,id:'"+map.get("xh")+"',parentId:0},");
+			}else{
+				tree.append("{text:'"+map.get("xqmc")+"',checked:false,qtip:'我是提示1',leaf:1,id:'"+map.get("xh")+"',parentId:0},");
+			}
 		}
 		map = list.get(list.size()-1);
-		tree.append("{text:'"+map.get("xqmc")+"',checked:true,leaf:1,id:'"+map.get("xqmc")+"',parentId:0}");
+		for(int j = 0 ; j < list1.size() ; j++){
+			map1 = list1.get(j);
+			if(map.get("xh").toString().equals(map1.get("xh").toString())){
+				isChecked = false;
+			}					
+		}
+		if(isChecked){
+			tree.append("{text:'"+map.get("xqmc")+"',checked:true,qtip : '我是提示1',leaf:1,id:'"+map.get("xh")+"',parentId:0}");
+		}else{
+			tree.append("{text:'"+map.get("xqmc")+"',checked:false,qtip : '我是提示1',leaf:1,id:'"+map.get("xh")+"',parentId:0}");
+		}
 		tree.append("]}]");
 		response(tree.toString());
 	}
+    
+    public void saveesfTree(){
+    	String items = request.getParameter("items");
+    	String[] bhs = items.split(",");
+    	String sql = "delete from esf_code where 1=1";
+    	update(sql, YW);
+    	sql = "insert into esf_code (xh) values (?)";
+    	for(int i = 0; i< bhs.length; i++){
+    		update(sql, YW,new Object[]{bhs[i]});
+    	}
+    	response("true");
+    }
     
     public static ScjcManager getInstcne() {
         if (scjcManager == null) {

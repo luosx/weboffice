@@ -88,7 +88,7 @@ public class XmcbzjzcqkReport extends AbstractBaseBean implements IDataClass {
 			Map<String, String> xmMap = new TreeMap<String, String>();
 			String xj = "0";
 			String sjzc = "0";
-			String key = String.valueOf(resultMap.get("status"));
+			String key = String.valueOf(resultMap.get("tree_id"));
 			String status = String.valueOf(resultMap.get("lj"));
 			if(formatdata.containsKey(key)){
 				xmMap = formatdata.get(key);
