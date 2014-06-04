@@ -606,23 +606,23 @@ public class StatisReport extends AbstractBaseBean {
 		String sql_w = null;
 		//选择条件的编写
 		if("esfzjqknd_pjzj".equals(tablename)){
-			if(lbxx != null && "".equals(lbxx)){
-				sql_w = "select yw_guid from esf_jbxx";
+			if(lbxx == null || "".equals(lbxx)){
+				sql_w = "select t.YW_GUID from esf_jbxx t,esf_code j where t.xh=j.xh";
 			}else{
 				lbxx_z = lbxx.split(",");
-				sql_w = "select YW_GUID from esf_jbxx t where XQMC='";
+				sql_w = "select YW_GUID from esf_jbxx t where xh='";
 				for(String lbxx_d:lbxx_z){
 					
 					if(lbxx_d.equals(lbxx_z[lbxx_z.length-1])){
 						sql_w += lbxx_d+"'";
 					}else{
-						sql_w += lbxx_d+"'or XQMC='";
+						sql_w += lbxx_d+"'or xh='";
 					}
 				}
 			}
 		}else{
-			if(lbxx != null && "".equals(lbxx)){
-				sql_w = "select YW_GUID from xzlxx";
+			if(lbxx == null || "".equals(lbxx)){
+				sql_w = "select t.YW_GUID from xzlxx t,xzlxx_code j where t.bh=j.bh";
 			}else{
 				lbxx_z = lbxx.split(",");
 				sql_w = "select YW_GUID from xzlxx t where bh='";
@@ -786,23 +786,23 @@ public class StatisReport extends AbstractBaseBean {
 		String sql_w = null;
 		//选择条件的编写
 		if("esfzjqknd_pjlm".equals(tablename)){
-			if(lbxx!=null && "".equals(lbxx)){
-				sql_w = "select YW_GUID from esf_jbxx ";
+			if(lbxx == null || "".equals(lbxx)){
+				sql_w = "select t.YW_GUID from esf_jbxx t,esf_code j where t.xh=j.xh";
 			}else{
 				lbxx_z = lbxx.split(",");
-				sql_w = "select YW_GUID from esf_jbxx t where XQMC='";
+				sql_w = "select YW_GUID from esf_jbxx t where xh='";
 				for(String lbxx_d:lbxx_z){
 					
 					if(lbxx_d.equals(lbxx_z[lbxx_z.length-1])){
 						sql_w += lbxx_d+"'";
 					}else{
-						sql_w += lbxx_d+"'or XQMC='";
+						sql_w += lbxx_d+"'or xh='";
 					}
 				}
 			}
 		}else{
-			if(lbxx!= null && "".equals(lbxx)){
-				sql_w = "select YW_GUID from xzlxx t";
+			if(lbxx == null || "".equals(lbxx)){
+				sql_w = "select t.YW_GUID from xzlxx t,xzlxx_code j where t.bh=j.bh";
 			}else{
 				lbxx_z = lbxx.split(",");
 				sql_w = "select YW_GUID from xzlxx t where bh='";

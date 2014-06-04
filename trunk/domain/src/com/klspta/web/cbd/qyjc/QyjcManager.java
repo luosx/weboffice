@@ -1,5 +1,6 @@
 package com.klspta.web.cbd.qyjc;
 
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
@@ -11,10 +12,10 @@ import com.klspta.web.cbd.qyjc.common.BuildModel;
 import com.klspta.web.cbd.qyjc.common.DataInteraction;
 import com.klspta.web.cbd.qyjc.common.ModelFactory;
 import com.klspta.web.cbd.yzt.jc.report.TableStyleEditRow;
-import com.klspta.web.cbd.yzt.zrb.ZrbData;
 
 public class QyjcManager extends AbstractBaseBean {
 		private static QyjcManager qyjcManager;
+		private static String months[]  = {"YY", "EY", "SY", "SIY", "WY", "LY", "QY", "BAY", "JY", "SHIY", "SYY", "SEY"};
 
 	    public static QyjcManager getInstcne() {
 	        if (qyjcManager == null) {
@@ -25,22 +26,71 @@ public class QyjcManager extends AbstractBaseBean {
 	    public void getxzlTree(){
 			String sql = "select t.xzlmc,t.bh from xzlxx t";
 			List<Map<String, Object>> list = query(sql, YW);
+			sql = "select t.xzlmc , t.bh from xzlxx t where t.bh not in (select bh from xzlxx_code) ";
+			List<Map<String, Object>> list1 = query(sql, YW);
 			Map<String,Object> map = null;
-			StringBuffer tree = new StringBuffer("[{text:'基本信息列表',checked:true,leaf:0,id:0,children:[");
+			Map<String,Object> map1 = null;
+			StringBuffer tree = new StringBuffer("[{text:'写字楼列表',checked:true,leaf:0,id:'0',children:[");
+			boolean isChecked = true;
 			for(int i = 0; i < list.size()-1; i++){
+				isChecked = true;
 				map = list.get(i);
-				tree.append("{text:'"+map.get("xzlmc")+"',checked:true,leaf:1,id:'"+map.get("bh")+"',parentId:0},");
+				for(int j = 0 ; j < list1.size() ; j++){
+					map1 = list1.get(j);
+					if(map.get("bh").toString().equals(map1.get("bh").toString())){
+						isChecked = false;
+					}					
+				}
+				if(isChecked){
+					tree.append("{text:'"+map.get("xzlmc")+"',checked:true,qtip:'我是提示1',leaf:1,id:'"+map.get("bh")+"',parentId:0},");
+				}else{
+					tree.append("{text:'"+map.get("xzlmc")+"',checked:false,qtip:'我是提示1',leaf:1,id:'"+map.get("bh")+"',parentId:0},");
+				}
 			}
 			map = list.get(list.size()-1);
-			tree.append("{text:'"+map.get("xzlmc")+"',checked:true,leaf:1,id:'"+map.get("bh")+"',parentId:0}");
+			for(int j = 0 ; j < list1.size() ; j++){
+				map1 = list1.get(j);
+				if(map.get("bh").toString().equals(map1.get("bh").toString())){
+					isChecked = false;
+				}					
+			}
+			if(isChecked){
+				tree.append("{text:'"+map.get("xzlmc")+"',checked:true,qtip : '我是提示1',leaf:1,id:'"+map.get("bh")+"',parentId:0}");
+			}else{
+				tree.append("{text:'"+map.get("xzlmc")+"',checked:false,qtip : '我是提示1',leaf:1,id:'"+map.get("bh")+"',parentId:0}");
+			}
 			tree.append("]}]");
 			response(tree.toString());
 		}
 	    
 	    public void savexzlTree(){
-	    	String times = request.getParameter("items");
-	    	
+	    	String items = request.getParameter("items");
+	    	String[] bhs = items.split(",");
+	    	String sql = "delete from xzlxx_code where 1=1";
+	    	update(sql, YW);
+	    	sql = "insert into xzlxx_code (bh) values (?)";
+	    	for(int i = 0; i< bhs.length; i++){
+	    		update(sql, YW,new Object[]{bhs[i]});
+	    	}
+	    	response("true");
 	    }
+	    
+	    public void getFloatTable(){
+	    	String bh = request.getParameter("bh");
+	    	String tablename = request.getParameter("tablename");
+	    	String year = Calendar.getInstance().get(Calendar.YEAR) + "";
+	    	int month = Calendar.getInstance().get(Calendar.MONTH) ;
+	    	String sql = "select " + months[month] + " from xzlxx x, "+tablename+" z where x.yw_guid = z.yw_guid and x.bh=? and z.rq=?";
+	    	List<Map<String, Object>> result = query(sql, YW, new Object[]{bh, year});
+	    	StringBuffer stringBuffer = new StringBuffer();
+	    	stringBuffer.append("<table style='width:70px;font-size:10px;' cellspacing='0' cellpadding='0'>");
+	    	stringBuffer.append("<tr>");
+	    	String type = "xzlzjqknd_pjzj".equals(tablename) ? "租金":"售价";
+	    	stringBuffer.append("<td style='background-color:#efefef' mce_style='background-color:#efefef'  width='20%'>" + type + "</td>");   
+	    	stringBuffer.append("<td style='background-color:#efefef' mce_style='background-color:#efefef'  width='20%'>" + result.get(0).get(months[month]) + "</td>");   
+	    	stringBuffer.append("</tr></table>");
+	    	response(stringBuffer.toString());
+	    } 
 
 	    public String getList() {
 	        String sql = "select t.bh,t.xzlmc,t.kfs,t.wygs,t.tzf,t.sq,t.cpdw,t.cplx,t.cylx,t.rzqy,t.kpsj,t.ysxkz,t.cbcs,t.lc,t.bzcg,t.wq,t.cn,t.gd,t.gs,t.dt,t.gdcw,t.tcwzj,t.syl,t.qt from xzlxx t";

@@ -114,7 +114,7 @@ public class ZxcjqkReport extends AbstractBaseBean implements IDataClass {
 	 * @return
 	 */
 	private Map<String, Map<String, String>> formatData(String year){
-		String sql = "select t.yw_guid, t.lb, t.status, j.xmname, (t.yy + t.ey + t.sany + t.siy + t.wy + t.ly + t.qy + t.bay + t.jy + t.siyue + t.syy + t.sey) as he  from xmzjgl_lr t right join  jc_xiangmu j on j.yw_guid = t.yw_guid order by t.yw_guid,t.lb";
+		String sql = "select t.yw_guid, t.tree_name, t.tree_id, j.xmname, (t.yy + t.ey + t.sany + t.siy + t.wy + t.ly + t.qy + t.bay + t.jy + t.siyue + t.syy + t.sey) as he  from xmzjgl_lr t right join  jc_xiangmu j on j.yw_guid = t.yw_guid order by t.yw_guid,t.tree_name";
 		List<Map<String , Object>> dataList = query(sql, YW);
 		Map<String, Map<String, String>> formatData = new TreeMap<String, Map<String,String>>();
 		Map<String, String> sumData = new TreeMap<String, String>();
@@ -131,7 +131,7 @@ public class ZxcjqkReport extends AbstractBaseBean implements IDataClass {
 				if(!preXmmc.equals(xmmc)){
 					break;
 				}else{
-					String type = String.valueOf(data.get("status"));
+					String type = String.valueOf(data.get("tree_id"));
 					String value = String.valueOf(data.get("he"));
 					tableData.put(type, value);
 					if (sumData.containsKey(type)) {

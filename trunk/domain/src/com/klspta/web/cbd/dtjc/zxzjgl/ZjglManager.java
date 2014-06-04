@@ -1,5 +1,6 @@
 package com.klspta.web.cbd.dtjc.zxzjgl;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,7 +41,8 @@ public class ZjglManager extends AbstractBaseBean{
 			 String sql =" select t.yw_guid from jc_xiangmu t where t.xmname = '"+xmname+"'";
 			 List<Map<String, Object>> list = query(sql, YW);
 			 String yw_guid = (String) list.get(0).get("yw_guid");
-			 new ZjglData().setMX(yw_guid,"2014");
+			 String year = Calendar.getInstance().get(Calendar.YEAR) + "";
+			 new ZjglData().setMXZC(yw_guid, year);
 			 StringBuffer buffer = new CBDReportManager().getReport("XMCBZJ", new Object[] { xmname,"false" });
 			 response(buffer.toString());
 		 

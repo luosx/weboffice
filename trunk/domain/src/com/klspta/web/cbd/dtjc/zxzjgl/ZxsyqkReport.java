@@ -83,12 +83,12 @@ public class ZxsyqkReport extends AbstractBaseBean implements IDataClass {
 		Map<String, Map<String, String>> formatData = new TreeMap<String, Map<String,String>>();
 		
 		//添加资金到位总额
-		String dwjeSql = "select sum((t.yy + t.ey + t.sany + t.siy + t.wy + t.ly + t.qy + t.bay + t.jy + t.siy + t.syy + t.sey )) as he , t.status, t.lb from XMZJGL_LR t where t.rq=? group by t.status, t.lb";
+		String dwjeSql = "select sum((t.yy + t.ey + t.sany + t.siy + t.wy + t.ly + t.qy + t.bay + t.jy + t.siy + t.syy + t.sey )) as he , t.tree_id, t.tree_name from XMZJGL_LR t where t.rq=? group by t.tree_id, t.tree_name";
 		List<Map<String, Object>> dwjeResult = query(dwjeSql, YW,new Object[]{condition});
 		for(int i = 0; i < dwjeResult.size(); i++){
 			Map<String, Object> dwjeMap = dwjeResult.get(i);
 			Map<String, String> tableMap = new HashMap<String, String>();
-			String key = String.valueOf(dwjeMap.get("status"));
+			String key = String.valueOf(dwjeMap.get("tree_id"));
 			String value = String.valueOf(dwjeMap.get("he"));
 			tableMap.put("zjdwze", value);
 			if(key.equals("CRHLZJ") || key.equals("ZRJGDK") || key.equals("GYTDSYJJ") || key.equals("QTZJ") || key.equals("SSZTDZ")){
@@ -97,7 +97,7 @@ public class ZxsyqkReport extends AbstractBaseBean implements IDataClass {
 		}
 		
 		//添加资金支出总额
-		String zczeSql = "select t.status, t.lj , sum(t.yy) as he from XMZJGL_ZC t where t.rq=?  group by t.status, t.lj";
+		String zczeSql = "select t.tree_id, t.lj , sum(t.yy) as he from XMZJGL_ZC t where t.rq=?  group by t.tree_id, t.lj";
 		List<Map<String, Object>> zczeResult = query(zczeSql, YW,new Object[]{condition});
 		for(int i = 0; i < zczeResult.size(); i++){
 			Map<String, Object> zczeMap = zczeResult.get(i);
@@ -123,7 +123,7 @@ public class ZxsyqkReport extends AbstractBaseBean implements IDataClass {
 				}else{
 					tableMap = new HashMap<String, String>();
 				}
-				tableMap.put(String.valueOf(zczeMap.get("status")), String.valueOf(zczeMap.get("he")));
+				tableMap.put(String.valueOf(zczeMap.get("tree_id")), String.valueOf(zczeMap.get("he")));
 				formatData.remove(mainKey);
 				formatData.put(mainKey, tableMap);
 			}
