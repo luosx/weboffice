@@ -1,21 +1,17 @@
 package com.klspta.web.cbd.xmgl;
 
-import java.io.UnsupportedEncodingException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
 import com.klspta.base.AbstractBaseBean;
 import com.klspta.base.util.UtilFactory;
-import com.klspta.web.cbd.xmgl.zjgl.TreeManager;
 import com.klspta.web.cbd.xmgl.zjgl.XmzjglTreeBean;
-import com.klspta.web.cbd.xmgl.zjgl.ZjglData;
 
 public class Xmmanager extends AbstractBaseBean {
 	public static String ZJGL_LR[] = { "LB", "YSFY", "LJ", "YFSDZ", "ZJJD",
@@ -329,8 +325,6 @@ public class Xmmanager extends AbstractBaseBean {
 	}
 
 	public void delt_tree() {
-		String st[] = {"ZJLR", "QQFY", "CQFY", "SZFY", "CWFY", "GLFY", "CRZJFH",
-				"QTZC" };
 		String yw_guid = request.getParameter("yw_guid").trim();
 		String parent_id = request.getParameter("parent_id");
 		String selet_year = request.getParameter("selet_year");
@@ -388,7 +382,12 @@ public class Xmmanager extends AbstractBaseBean {
 	
 	public List<XmzjglTreeBean> getBeanList(String yw_guid , String year,String sql){
 		List<XmzjglTreeBean> arrayList = new ArrayList<XmzjglTreeBean>();
-		List<Map<String, Object>> queryList = query(sql, YW, new Object[]{yw_guid, year});
+		List<Map<String, Object>> queryList = null;
+		if(yw_guid == null){
+			queryList = query(sql, YW, new Object[]{year});
+		}else{
+			queryList = query(sql, YW, new Object[]{yw_guid, year});
+		}
 		for(int i = 0; i < queryList.size(); i++){
 			arrayList.add(new XmzjglTreeBean(queryList.get(i)));
 		}
@@ -397,10 +396,20 @@ public class Xmmanager extends AbstractBaseBean {
 	
 	public List<Map<String,Object>> bulidTreeMap(String yw_guid,String year){
 		List<Map<String,Object>> result = new ArrayList<Map<String,Object>>();
-		String sql_zc = "select distinct tree_id as tree_id,tree_name as tree_name ,parent_id as parent_id,leval as leval from xmzjgl_zc where tree_id  in (select distinct parent_id from xmzjgl_zc where yw_guid=? and rq=?) and yw_guid=? and rq=? order by leval asc";
-		List<Map<String,Object>> treeList = query(sql_zc, YW,new Object[]{yw_guid, year, yw_guid, year});
-		sql_zc = "select distinct t.yw_guid ,t.tree_id, t.tree_name,t.rq,t.parent_id,t.leval  from xmzjgl_zc t where t.yw_guid=? and t.rq=? order by t.parent_id, t.tree_name";
-		List<XmzjglTreeBean> treebean = getBeanList(yw_guid, year, sql_zc);
+		String sql_zc = "";
+		List<Map<String,Object>> treeList = null;
+		List<XmzjglTreeBean> treebean = null;
+		if(yw_guid == null){
+			sql_zc = "select distinct tree_id as tree_id,tree_name as tree_name ,parent_id as parent_id,leval as leval from xmzjgl_zc where tree_id  in (select distinct parent_id from xmzjgl_zc where rq=?) and rq=? order by leval asc";
+			treeList = query(sql_zc, YW,new Object[]{ year,  year});
+			sql_zc = "select distinct t.yw_guid ,t.tree_id, t.tree_name,t.rq,t.parent_id,t.leval  from xmzjgl_zc t where  t.rq=? order by t.parent_id, t.tree_name";
+			treebean = getBeanList(null, year, sql_zc);
+		}else{
+			sql_zc = "select distinct tree_id as tree_id,tree_name as tree_name ,parent_id as parent_id,leval as leval from xmzjgl_zc where tree_id  in (select distinct parent_id from xmzjgl_zc where yw_guid=? and rq=?) and yw_guid=? and rq=? order by leval asc";
+			treeList = query(sql_zc, YW,new Object[]{yw_guid, year, yw_guid, year});
+			sql_zc = "select distinct t.yw_guid ,t.tree_id, t.tree_name,t.rq,t.parent_id,t.leval  from xmzjgl_zc t where t.yw_guid=? and t.rq=? order by t.parent_id, t.tree_name";
+			treebean = getBeanList(yw_guid, year, sql_zc);
+		}
 		Map<String,Object> treeMap = new TreeMap<String, Object>();
 		for(int i = 0; i < treeList.size(); i++){
 			String childs = "";
@@ -418,10 +427,20 @@ public class Xmmanager extends AbstractBaseBean {
 
 	public List<Map<String,Object>> bulidTreeMapLR(String yw_guid,String year){
 		List<Map<String,Object>> result = new ArrayList<Map<String,Object>>();
-		String sql_zc = "select distinct tree_id as tree_id,tree_name as tree_name ,parent_id as parent_id,leval as leval from xmzjgl_lr where tree_id  in (select distinct parent_id from xmzjgl_lr where yw_guid=? and rq=?) and yw_guid=? and rq=? order by leval asc";
-		List<Map<String,Object>> treeList = query(sql_zc, YW,new Object[]{yw_guid, year, yw_guid, year});
-		sql_zc = "select distinct t.yw_guid ,t.tree_id, t.tree_name,t.rq,t.parent_id,t.leval  from xmzjgl_lr t where t.yw_guid=? and t.rq=? order by t.parent_id, t.tree_name";
-		List<XmzjglTreeBean> treebean = getBeanList(yw_guid, year, sql_zc);
+		String sql_zc = null;
+		List<Map<String,Object>> treeList = null;
+		List<XmzjglTreeBean> treebean = null;
+		if(yw_guid == null){
+			sql_zc = "select distinct tree_id as tree_id,tree_name as tree_name ,parent_id as parent_id,leval as leval from xmzjgl_lr where tree_id  in (select distinct parent_id from xmzjgl_lr where rq=?)  and rq=? order by leval asc";
+			treeList = query(sql_zc, YW,new Object[]{year,  year});
+			sql_zc = "select distinct t.yw_guid ,t.tree_id, t.tree_name,t.rq,t.parent_id,t.leval  from xmzjgl_lr t where t.rq=? order by t.parent_id, t.tree_name";
+			treebean = getBeanList(null, year, sql_zc);
+		}else{
+			sql_zc = "select distinct tree_id as tree_id,tree_name as tree_name ,parent_id as parent_id,leval as leval from xmzjgl_lr where tree_id  in (select distinct parent_id from xmzjgl_lr where yw_guid=? and rq=?) and yw_guid=? and rq=? order by leval asc";
+			treeList = query(sql_zc, YW,new Object[]{yw_guid, year, yw_guid, year});
+			sql_zc = "select distinct t.yw_guid ,t.tree_id, t.tree_name,t.rq,t.parent_id,t.leval  from xmzjgl_lr t where t.yw_guid=? and t.rq=? order by t.parent_id, t.tree_name";
+			treebean = getBeanList(yw_guid, year, sql_zc);
+		}
 		Map<String,Object> treeMap = new TreeMap<String, Object>();
 		for(int i = 0; i < treeList.size(); i++){
 			String childs = "";

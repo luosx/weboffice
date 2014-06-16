@@ -49,38 +49,24 @@ public class ZjglData extends AbstractBaseBean {
 	}
 
 	public List<Map<String, Object>> getZJZC_father(String yw_guid,String type, String year) {
-		int cols[] = { 0, 0, 0, 0, 0, 0, 0, 0 };
 		List<Map<String, Object>> list =null;
 		if("1".equals(yw_guid)){
-//			String sql = "select t.tree_name as tree_name,  t.lj as lj, sum(t.YSFY) as ysfy,sum(t.ZJJD) as zjjd ,sum(t.CQYE) as cqye,sum(t.YFSDZ) as yfsdz,"+
-//           "sum(t.yy) as yy ,sum(t.ey) as ey,sum(t.sany) as sany,sum(t.siy) as siy,"+
-//          "sum(t.wy) as wy,sum(t.ly) as ly,sum(t.qy) as qy,sum(t.bay) as bay,sum(t.jy) as jy"+
-//          ",sum(t.siyue) as siyue,sum(t.syy) as syy ,sum(t.sey) as sey ,sum(t.LRSP) as lrsp,sum(t.jl2) as jl2 "+
-//           "from xmzjgl_zc_view t,jc_xiangmu j  where t.tree_id=? and t.yw_guid=j.yw_guid  and t.rq=?"+
-//           "group by t.tree_name,t.lj";
 			String sql = "select t.tree_name as tree_name ,t.tree_id as tree_id ,t.sort as sort,t.parent_id as parent_id from xmzjgl_zc_view t,jc_xiangmu j  where t.tree_id=? and t.yw_guid=j.yw_guid  and t.rq=? ";
 			list = query(sql, YW, new Object[] { type,year });
 		}else{
-			String sql = "select t.tree_name as tree_name,t.tree_id as tree_id ,t.lj as lj,t.sort as sort,t.parent_id as parent_id from  XMZJGL_ZC_view t where tree_id=? and yw_guid=?  and rq=? order by  sort";
+			String sql = "select t.tree_name as tree_name,t.tree_id as tree_id ,t.lj as lj,t.sort as sort,t.parent_id as parent_id,t.leval as leval from  XMZJGL_ZC_view t where tree_id=? and yw_guid=?  and rq=? order by  sort";
 			list = query(sql, YW, new Object[] { type, yw_guid, year });
 		}
 		return list;
 	}
 	
 	public List<Map<String, Object>> getZJLR_father(String yw_guid,String type, String year) {
-		int cols[] = { 0, 0, 0, 0, 0, 0, 0, 0 };
 		List<Map<String, Object>> list =null;
 		if("1".equals(yw_guid)){
-//			String sql = "select t.tree_name as tree_name,  t.lj as lj, sum(t.YSFY) as ysfy,sum(t.ZJJD) as zjjd ,sum(t.CQYE) as cqye,sum(t.YFSDZ) as yfsdz,"+
-//           "sum(t.yy) as yy ,sum(t.ey) as ey,sum(t.sany) as sany,sum(t.siy) as siy,"+
-//          "sum(t.wy) as wy,sum(t.ly) as ly,sum(t.qy) as qy,sum(t.bay) as bay,sum(t.jy) as jy"+
-//          ",sum(t.siyue) as siyue,sum(t.syy) as syy ,sum(t.sey) as sey ,sum(t.LRSP) as lrsp,sum(t.jl2) as jl2 "+
-//           "from xmzjgl_zc_view t,jc_xiangmu j  where t.tree_id=? and t.yw_guid=j.yw_guid  and t.rq=?"+
-//           "group by t.tree_name,t.lj";
 			String sql = "select t.tree_name as tree_name ,t.tree_id as tree_id , t.parent_id as parent_id from xmzjgl_lr_view t,jc_xiangmu j  where t.tree_id=? and t.yw_guid=j.yw_guid  and t.rq=? ";
 			list = query(sql, YW, new Object[] { type,year });
 		}else{
-			String sql = "select t.tree_name as tree_name,t.tree_id as tree_id ,t.lj as lj,t.parent_id as parent_id from  XMZJGL_LR_view t where tree_id=? and yw_guid=?  and rq=? ";
+			String sql = "select t.tree_name as tree_name,t.tree_id as tree_id ,t.lj as lj,t.parent_id as parent_id,t.leval as leval from  XMZJGL_LR_view t where tree_id=? and yw_guid=?  and rq=? ";
 			list = query(sql, YW, new Object[] { type, yw_guid, year });
 		}
 		return list;
@@ -146,6 +132,17 @@ public class ZjglData extends AbstractBaseBean {
 		}else{
 			sql = "select * from  XMZJGL_LR_view where parent_id=? and yw_guid=? and tree_name=? and rq=? ";
 			list = query(sql, YW, new Object[] { parent_id, yw_guid, tree_name, year });
+			int yfsdz = 0;
+			for( int i = 0; i < months.length - 1; i++){
+					yfsdz  += Integer.parseInt(list.get(0).get(months[i]).toString());
+			}
+			yfsdz += Integer.parseInt(list.get(0).get("cqye").toString());
+			list.get(0).remove("yfsdz");
+			list.get(0).put("yfsdz", yfsdz+"");
+			list.get(0).remove("ZJJD");
+			double ysfy = Double.parseDouble(list.get(0).get("YSFY")==null? "0" :list.get(0).get("YSFY").toString());
+			DecimalFormat df = new DecimalFormat("#.00");
+			list.get(0).put("ZJJD",ysfy==0? "0" : df.format(yfsdz/ysfy*100) +"%");
 		}
 		return list;
 	}

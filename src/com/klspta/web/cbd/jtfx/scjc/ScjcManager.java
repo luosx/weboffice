@@ -27,6 +27,7 @@ public class ScjcManager extends AbstractBaseBean {
      * @return
      */
     private static ScjcManager scjcManager;
+    private static String months[]  = {"YY", "EY", "SY", "SIY", "WY", "LY", "QY", "BAY", "JY", "SHIY", "SYY", "SEY"};
 
     public void getesfTree(){
 		String sql = "select t.xqmc,t.xh from esf_jbxx t";
@@ -35,7 +36,7 @@ public class ScjcManager extends AbstractBaseBean {
 		List<Map<String, Object>> list1 = query(sql, YW);
 		Map<String,Object> map = null;
 		Map<String,Object> map1 = null;
-		StringBuffer tree = new StringBuffer("[{text:'基本信息列表',checked:true,leaf:0,id:0,children:[");
+		StringBuffer tree = new StringBuffer("[{text:'基本信息列表',checked:true,leaf:0,id:'0',children:[");
 		boolean isChecked = true;
 		for(int i = 0; i < list.size()-1; i++){
 			isChecked = true;
@@ -93,6 +94,24 @@ public class ScjcManager extends AbstractBaseBean {
 		ITableStyle its = new TableStyleEditRow();
 		response(String.valueOf(new CBDReportManager().getReport("ESFQK", new Object[]{"false",keyword},its,"1000px")));
     }
+    
+    public void getFloatTable(){
+    	String bh = request.getParameter("bh");
+    	String tablename = request.getParameter("tablename");
+    	String year = Calendar.getInstance().get(Calendar.YEAR) + "";
+    	int month = Calendar.getInstance().get(Calendar.MONTH) ;
+    	String sql = "select " + months[month] + " from esf_jbxx x, "+tablename+" z where x.yw_guid = z.yw_guid and x.xh=? and z.rq=?";
+    	List<Map<String, Object>> result = query(sql, YW, new Object[]{bh, year});
+    	StringBuffer stringBuffer = new StringBuffer();
+    	stringBuffer.append("<table style='width:70px;font-size:10px;' cellspacing='0' cellpadding='0'>");
+    	stringBuffer.append("<tr>");
+    	String type = "esfzjqknd_pjzj".equals(tablename) ? "租金":"售价";
+    	stringBuffer.append("<td style='background-color:#efefef' mce_style='background-color:#efefef'  width='20%'>" + type + "</td>");   
+    	stringBuffer.append("<td style='background-color:#efefef' mce_style='background-color:#efefef'  width='20%'>" + result.get(0).get(months[month]) + "</td>");   
+    	stringBuffer.append("</tr></table>");
+    	response(stringBuffer.toString());
+    } 
+
 
     public String getList(String keyord) {
         String sql = "";

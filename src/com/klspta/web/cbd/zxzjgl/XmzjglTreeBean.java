@@ -3,22 +3,21 @@ package com.klspta.web.cbd.zxzjgl;
 import java.util.Map;
 
 public class XmzjglTreeBean {
-	private String tree_id = "";
-	private String yw_guid = "";
-	private String parent_id = "";
+	private String treeID = "";
+	private String ywGuid = "";
+	private String parentID = "";
 	private String common = "";
-	private String tree_name = "";
+	private String treeName = "";
 	private String sort = "";
 	private String rq = "";
 	private String leval = "";
 	
 	public XmzjglTreeBean(Map<String, Object> map) {
-		super();
-		setTree_id(getValue(map, "tree_id"));
-		setYw_guid(getValue(map, "yw_guid"));
-		setParent_id(getValue(map, "parent_id"));
+		setTreeID(getValue(map, "tree_id"));
+		setYwGuid(getValue(map, "yw_guid"));
+		setParentID(getValue(map, "parent_id"));
 		setCommon(getValue(map, "common"));
-		setTree_name(getValue(map, "tree_name"));
+		setTreeName(getValue(map, "tree_name"));
 		setSort(getValue(map, "sort"));
 		setRq(getValue(map, "rq"));
 		setLeval(getValue(map, "leval"));
@@ -26,27 +25,27 @@ public class XmzjglTreeBean {
 	
 	private String getValue(Map<String, Object> map, String name){
 		String value = String.valueOf(map.get(name));
-		value = ("null".equals(value))?"":value;
+		value = ("null".equals(value)) ? "" : value;
 		return value;
 	}
 	
-	public String getTree_id() {
-		return tree_id;
+	public String getTreeID() {
+		return treeID;
 	}
-	public void setTree_id(String treeId) {
-		tree_id = treeId;
+	public void setTreeID(String treeID) {
+	    this.treeID = treeID;
 	}
-	public String getYw_guid() {
-		return yw_guid;
+	public String getYwGuid() {
+		return ywGuid;
 	}
-	public void setYw_guid(String ywGuid) {
-		yw_guid = ywGuid;
+	public void setYwGuid(String ywGuid) {
+	    this.ywGuid = ywGuid;
 	}
-	public String getParent_id() {
-		return parent_id;
+	public String getParentID() {
+		return parentID;
 	}
-	public void setParent_id(String parentId) {
-		parent_id = parentId;
+	public void setParentID(String parentID) {
+		this.parentID = parentID;
 	}
 	public String getCommon() {
 		return common;
@@ -54,11 +53,11 @@ public class XmzjglTreeBean {
 	public void setCommon(String common) {
 		this.common = common;
 	}
-	public String getTree_name() {
-		return tree_name;
+	public String getTreeName() {
+		return treeName;
 	}
-	public void setTree_name(String treeName) {
-		tree_name = treeName;
+	public void setTreeName(String treeName) {
+	    this.treeName = treeName;
 	}
 	public String getSort() {
 		return sort;
