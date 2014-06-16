@@ -1,8 +1,6 @@
 package com.klspta.web.cbd.xmgl.zjgl;
 
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -45,6 +43,7 @@ public class ZjglBuild {
 						+ "<td  rowspan='3'  align='center' width='80px' class='title'>"
 						+ year
 						+ "年度流入/审批</td>"
+						+ "<td rowspan='3'  align='center' width='80px' style='display:none'  class='title'>等级</td>"
 						+ "</tr>"
 						+
 
@@ -72,6 +71,33 @@ public class ZjglBuild {
 						+ "<td align='center' width='83px' class='title'>十一月</td>"
 						+ "<td align='center' width='83px' class='title'>十二月</td> "
 						+ "</tr>");
+		return Buffer;
+	}
+	
+	public static StringBuffer buildSum(){
+		StringBuffer Buffer = new StringBuffer();
+		Buffer.append("<tr class='title'>"
+		+ "<td align='center' width='130px' class='tr01'>Ⅲ.账面余额</td>"
+		+ "<td align='center' width='130px' id='ysfy' class='tr01'>0</td>"
+		+ "<td align='center' width='300px' colspan='2' id='jl2' class='tr01'>0</td>"
+		+ "<td align='center' width='83px' id='yfsdz' class='tr01'>0</td>"
+		+ "<td align='center' width='83px' id='zjjd' class='tr01'>--</td>"
+		+ "<td align='center' width='83px' id='cqye' class='tr01'>0</td>"
+		+ "<td align='center' width='83px' id='yy' class='tr01'>0</td>"	
+		+ "<td align='center' width='83px' id='ey' class='tr01'>0</td> "
+		+ "<td align='center' width='83px' id='sany' class='tr01'>0</td>"
+		+ "<td align='center' width='83px' id='siy' class='tr01'>0</td>"
+		+ "<td align='center' width='83px' id='wy' class='tr01'>0</td>"
+		+ "<td align='center' width='83px' id='ly' class='tr01'>0</td>"
+		+ "<td align='center' width='83px' id='qy' class='tr01'>0</td>"
+		+ "<td align='center' width='83px' id='bay' class='tr01'>0</td> "
+		+ "<td align='center' width='83px' id='jy' class='tr01'>0</td>"
+		+ "<td align='center' width='83px' id='shiy' class='tr01'>0</td>"
+		+ "<td align='center' width='83px' id='syy' class='tr01'>0</td>"
+		+ "<td align='center' width='83px' id='sey' class='tr01'>0</td>"
+		+ "<td align='center' width='83px' id='lrsp' class='tr01'>0</td> "
+		+ "<td align='center' width='83px' style='display:none'   class='tr01'>1</td> "
+		+ "</tr>");
 		return Buffer;
 	}
 
@@ -131,11 +157,17 @@ public class ZjglBuild {
 							+ "@"+String.valueOf(list.get(i).get("parent_id"))
 							+ "@" + String.valueOf(list.get(i).get("sort"))
 							+ "@lrsp'>" + delNull(String.valueOf(list.get(i).get("LRSP"))));
+					stringBuffer.append("</td><td class='"+sytle+"' style='display:none' style='display:none'  >" + delNull(String.valueOf(list.get(i).get("leval"))));
 					stringBuffer.append("</td></tr>");
 				} else if(i != list.size() -1){
-					stringBuffer.append("<tr><td width:'240px'  class='"+sytle+"' ><span font-style:oblique;>"
-							+ delNull(String.valueOf(list.get(i).get("LJ")))
-							+ "</span></td><td class='"+sytle+"' id='" + String.valueOf(list.get(i).get("tree_id"))
+					if(i!= list.size()-2){
+						stringBuffer.append("<tr><td width:'240px'  class='"+sytle+"'><span style='font-style: italic;'>"
+								+ delNull(String.valueOf(list.get(i).get("LJ"))));
+					}else{
+						stringBuffer.append("<tr><td width:'240px'  class='"+sytle+"'>"
+								+ delNull(String.valueOf(list.get(i).get("LJ"))));
+					}
+					stringBuffer.append("</span></td><td class='"+sytle+"' id='" + String.valueOf(list.get(i).get("tree_id"))
 							+ "@" + String.valueOf(list.get(i).get("tree_name"))
 							+ "@"+String.valueOf(list.get(i).get("parent_id"))
 							+ "@" + String.valueOf(list.get(i).get("sort"))
@@ -168,6 +200,7 @@ public class ZjglBuild {
 							+ "@"+String.valueOf(list.get(i).get("parent_id"))
 							+ "@" + String.valueOf(list.get(i).get("sort"))
 							+ "@lrsp'>" + delNull(String.valueOf(list.get(i).get("LRSP"))));
+					stringBuffer.append("</td><td class='"+sytle+"' style='display:none'  >" + delNull(String.valueOf(list.get(i).get("leval"))));
 					stringBuffer.append("</td></tr>");
 				}else{
 					stringBuffer.append("<tr><td width:'240px'  class='"+sytle+"'>"
@@ -194,6 +227,132 @@ public class ZjglBuild {
 							+ "@"+String.valueOf(list.get(i).get("parent_id"))
 							+ "@" + String.valueOf(list.get(i).get("sort"))
 							+ "@lrsp'>" + delNull(String.valueOf(list.get(i).get("LRSP"))));
+					stringBuffer.append("</td><td class='"+sytle+"' style='display:none'  >" + delNull(String.valueOf(list.get(i).get("leval"))));
+					stringBuffer.append("</td></tr>");
+				}
+			}
+		}
+
+		return stringBuffer;
+	}
+	
+	public static StringBuffer buildZjzc_father_view(List<Map<String, Object>> list, String rolename,int leval) {
+		int month = Calendar.getInstance().get(Calendar.MONTH) + 1;
+		StringBuffer stringBuffer = new StringBuffer();
+		String sytle = "";
+		if(leval == 1){
+			sytle = "tr01";
+		}else if(leval == 2){
+			sytle = "tr02";
+		}else if(leval == 3){
+			sytle = "tr03";
+		}else if(leval == 4){
+			sytle = "tr04";
+		}
+		if (list != null) {
+			for (int i = 0; i < list.size(); i++) {
+				if (i == 0) {
+					stringBuffer.append("<tr><td  rowspan='8' class='"+sytle+"'>"
+					+ delNull(String.valueOf(list.get(i).get("tree_name")))
+					+ " </td><td rowspan='8' class='"+sytle+"'"
+					+ " id='" + String.valueOf(list.get(i).get("tree_id"))
+					+ "@" + String.valueOf(list.get(i).get("tree_name"))
+					+ "@"+String.valueOf(list.get(i).get("parent_id")) 
+					+ "@" + String.valueOf(list.get(i).get("sort"))
+					+ "@ysfy'>" + delNull(String.valueOf(list.get(i).get("YSFY"))) 
+					+ "</td><td  class='"+sytle+"' id='" + String.valueOf(list.get(i).get("tree_id"))
+					+ "@" + String.valueOf(list.get(i).get("tree_name"))
+					+ "@"+String.valueOf(list.get(i).get("parent_id"))
+					+ "@" + String.valueOf(list.get(i).get("sort"))
+					+ "@jl2'>"+ delNull(String.valueOf(list.get(i).get("JL2")))+"</td><td rowspan='8' class='"+sytle+"' id='" + String.valueOf(list.get(i).get("tree_id"))
+					+ "@" + String.valueOf(list.get(i).get("tree_name"))
+					+ "@"+String.valueOf(list.get(i).get("parent_id"))
+					+ "@" + String.valueOf(list.get(i).get("sort"))
+					+ "@yfsdz'>"+ delNull(String.valueOf(list.get(i).get("YFSDZ")))+"</td><td rowspan='8' class='"+sytle+"' id='" + String.valueOf(list.get(i).get("tree_id"))
+					+ "@" + String.valueOf(list.get(i).get("tree_name"))
+					+ "@"+String.valueOf(list.get(i).get("parent_id"))
+					+ "@" + String.valueOf(list.get(i).get("sort"))
+					+ "@zjjd'>"+ delNull(String.valueOf(list.get(i).get("ZJJD")))
+					+ "</td><td class='"+sytle+"' id='" + String.valueOf(list.get(i).get("tree_id"))
+					+ "@" + String.valueOf(list.get(i).get("tree_name"))
+					+ "@"+String.valueOf(list.get(i).get("parent_id"))
+					+ "@" + String.valueOf(list.get(i).get("sort"))
+					+ "@cqye'>"+ delNull(String.valueOf(list.get(i).get("CQYE"))));
+					for (int j = 0; j < items.length; j++) {
+						stringBuffer.append("</td><td class='"+sytle+"' id='" + String.valueOf(list.get(i).get("tree_id"))
+							+ "@" + String.valueOf(list.get(i).get("tree_name"))
+							+ "@"+String.valueOf(list.get(i).get("parent_id"))
+							+ "@" + String.valueOf(list.get(i).get("sort"))
+							+ "@"+ items[j] +"'>" + delNull(String.valueOf(list.get(i).get(items[j]))));
+					}
+					stringBuffer.append("</td><td class='"+sytle+"' id='" + String.valueOf(list.get(i).get("tree_id"))
+							+ "@" + String.valueOf(list.get(i).get("tree_name"))
+							+ "@"+String.valueOf(list.get(i).get("parent_id"))
+							+ "@" + String.valueOf(list.get(i).get("sort"))
+							+ "@lrsp'>" + delNull(String.valueOf(list.get(i).get("LRSP"))));
+					stringBuffer.append("</td><td class='"+sytle+"' style='display:none'  >" + delNull(String.valueOf(list.get(i).get("leval"))));
+					stringBuffer.append("</td><td class='"+sytle+"' style='display:none'  >" + delNull(String.valueOf(list.get(i).get("sort"))));
+					stringBuffer.append("</td></tr>");
+				} else if(i != list.size() -1){
+					stringBuffer.append("</span></td><td class='"+sytle+"' id='" + String.valueOf(list.get(i).get("tree_id"))
+							+ "@" + String.valueOf(list.get(i).get("tree_name"))
+							+ "@"+String.valueOf(list.get(i).get("parent_id"))
+							+ "@" + String.valueOf(list.get(i).get("sort"))
+							+ "@jl2'>" + delNull(String.valueOf(list.get(i).get("JL2")))+"</td><td class='"+sytle+"'"
+							+ "id='" + String.valueOf(list.get(i).get("tree_id"))
+							+ "@" + String.valueOf(list.get(i).get("tree_name"))
+							+ "@"+String.valueOf(list.get(i).get("parent_id"))
+							+ "@" + String.valueOf(list.get(i).get("sort"))
+							+ "@cqye'>"+ delNull(String.valueOf(list.get(i).get("CQYE"))));
+					for (int j = 0; j < items.length; j++) {
+						if (j + 1 == month || "市场部".equals(rolename) || "市场部部长".equals(rolename)) {
+						stringBuffer.append(" </td><td class='"+sytle+"'"
+												+ " id='" + String.valueOf(list.get(i).get("tree_id"))
+												+ "@" + String.valueOf(list.get(i).get("tree_name"))
+												+ "@"+String.valueOf(list.get(i).get("parent_id"))
+												+ "@" + String.valueOf(list.get(i).get("sort"))
+												+ "@" + items[j] + "'>" + delNull(String.valueOf(list.get(i).get(items[j]))));
+						}else{
+							stringBuffer.append(" </td><td class='"+sytle+"'  id='" + String.valueOf(list.get(i).get("tree_id"))
+												+ "@" + String.valueOf(list.get(i).get("tree_name"))
+												+ "@"+String.valueOf(list.get(i).get("parent_id"))
+												+ "@" + String.valueOf(list.get(i).get("sort"))
+												+ "@" + items[j] + "'>" + delNull(String.valueOf(list.get(i).get(items[j]))));
+						}
+					}
+					stringBuffer.append("</td><td class='"+sytle+"' id='" + String.valueOf(list.get(i).get("tree_id"))
+							+ "@" + String.valueOf(list.get(i).get("tree_name"))
+							+ "@"+String.valueOf(list.get(i).get("parent_id"))
+							+ "@" + String.valueOf(list.get(i).get("sort"))
+							+ "@lrsp'>" + delNull(String.valueOf(list.get(i).get("LRSP"))));
+					stringBuffer.append("</td><td class='"+sytle+"' style='display:none'  >" + delNull(String.valueOf(list.get(i).get("leval"))));
+					stringBuffer.append("</td><td class='"+sytle+"' style='display:none'  >" + delNull(String.valueOf(list.get(i).get("sort"))));
+					stringBuffer.append("</td></tr>");
+				}else{
+					stringBuffer.append("<tr><td class='"+sytle+"' id='" + String.valueOf(list.get(i).get("tree_id"))
+							+ "@" + String.valueOf(list.get(i).get("tree_name"))
+							+ "@"+String.valueOf(list.get(i).get("parent_id"))
+							+ "@" + String.valueOf(list.get(i).get("sort"))
+							+ "@jl2'>" + delNull(String.valueOf(list.get(i).get("JL2")))+"</td><td class='"+sytle+"'  id='" + String.valueOf(list.get(i).get("tree_id"))
+							+ "@" + String.valueOf(list.get(i).get("tree_name"))
+							+ "@"+String.valueOf(list.get(i).get("parent_id"))
+							+ "@" + String.valueOf(list.get(i).get("sort"))
+							+ "@cqye'>"
+							+ delNull(String.valueOf(list.get(i).get("CQYE"))));
+					for (int j = 0; j < items.length; j++) {
+						stringBuffer.append(" </td><td class='"+sytle+"' id='" + String.valueOf(list.get(i).get("tree_id"))
+							+ "@" + String.valueOf(list.get(i).get("tree_name"))
+							+ "@"+String.valueOf(list.get(i).get("parent_id"))
+							+ "@" + String.valueOf(list.get(i).get("sort"))
+							+ "@"+ items[j] +"'>" + delNull(String.valueOf(list.get(i).get(items[j]))));
+					}
+					stringBuffer.append("</td><td class='"+sytle+"' id='" + String.valueOf(list.get(i).get("tree_id"))
+							+ "@" + String.valueOf(list.get(i).get("tree_name"))
+							+ "@"+String.valueOf(list.get(i).get("parent_id"))
+							+ "@" + String.valueOf(list.get(i).get("sort"))
+							+ "@lrsp'>" + delNull(String.valueOf(list.get(i).get("LRSP"))));
+					stringBuffer.append("</td><td class='"+sytle+"' style='display:none'  >" + delNull(String.valueOf(list.get(i).get("leval"))));
+					stringBuffer.append("</td><td class='"+sytle+"' style='display:none'  >" + delNull(String.valueOf(list.get(i).get("sort"))));
 					stringBuffer.append("</td></tr>");
 				}
 			}
@@ -203,7 +362,7 @@ public class ZjglBuild {
 	}
 	
 	public static StringBuffer buildZjlr_father(List<Map<String, Object>> list, String rolename,int leval) {
-		int month = Calendar.getInstance().get(Calendar.MONTH) + 1;
+		
 		StringBuffer stringBuffer = new StringBuffer();
 		String sytle = "";
 		if(leval == 1){
@@ -224,9 +383,11 @@ public class ZjglBuild {
 					+ delNull(String.valueOf(list.get(i).get("YSFY")))
 					+ "' id='" + String.valueOf(list.get(i).get("tree_id"))
 					+ "@" + String.valueOf(list.get(i).get("tree_name"))
-					+ "@"+String.valueOf(list.get(i).get("parent_id"))+"@ysfy'/></td><td colspan='2' class='"+sytle+"' id='" + String.valueOf(list.get(i).get("tree_id"))
+					+ "@"+String.valueOf(list.get(i).get("parent_id"))+"@ysfy'/></td><td colspan='2' class='"+sytle+"'><input type='text'  style='width:70px;' onchange='addrzxq(this); return false' value='"
+					+  delNull(String.valueOf(list.get(i).get("lj")))
+					+ "' id='" + String.valueOf(list.get(i).get("tree_id"))
 					+ "@" + String.valueOf(list.get(i).get("tree_name"))
-					+ "@"+String.valueOf(list.get(i).get("parent_id"))+"@jl2'>"+ delNull(String.valueOf(list.get(i).get("JL2")))+"</td><td class='"+sytle+"' id='" + String.valueOf(list.get(i).get("tree_id"))
+					+ "@"+String.valueOf(list.get(i).get("parent_id"))+"@lj'/></td><td class='"+sytle+"' id='" + String.valueOf(list.get(i).get("tree_id"))
 					+ "@" + String.valueOf(list.get(i).get("tree_name"))
 					+ "@"+String.valueOf(list.get(i).get("parent_id"))+"@yfsdz'>"+ delNull(String.valueOf(list.get(i).get("YFSDZ")))+"</td><td class='"+sytle+"' id='" + String.valueOf(list.get(i).get("tree_id"))
 					+ "@" + String.valueOf(list.get(i).get("tree_name"))
@@ -245,6 +406,7 @@ public class ZjglBuild {
 					stringBuffer.append("</td><td class='"+sytle+"' id='" + String.valueOf(list.get(i).get("tree_id"))
 							+ "@" + String.valueOf(list.get(i).get("tree_name"))
 							+ "@"+String.valueOf(list.get(i).get("parent_id"))+"@lrsp'>" + delNull(String.valueOf(list.get(i).get("LRSP"))));
+					stringBuffer.append("</td><td class='"+sytle+"' style='display:none'  >" + delNull(String.valueOf(list.get(i).get("leval"))));
 					stringBuffer.append("</td></tr>");
 				}
 			}
@@ -252,6 +414,63 @@ public class ZjglBuild {
 
 		return stringBuffer;
 	}
+	
+public static StringBuffer buildZjlr_father_view(List<Map<String, Object>> list, String rolename,int leval) {
+		
+		StringBuffer stringBuffer = new StringBuffer();
+		String sytle = "";
+		if(leval == 1){
+			sytle = "tr01";
+		}else if(leval == 2){
+			sytle = "tr02";
+		}else if(leval == 3){
+			sytle = "tr03";
+		}else if(leval == 4){
+			sytle = "tr04";
+		}
+		if (list != null) {
+			for (int i = 0; i < list.size(); i++) {
+				if (i == 0) {
+					stringBuffer.append("<tr><td  class='"+sytle+"'>"
+					+ delNull(String.valueOf(list.get(i).get("tree_name")))
+					+ " </td><td class='"+sytle+"' "
+					+ " id='" + String.valueOf(list.get(i).get("tree_id"))
+					+ "@" + String.valueOf(list.get(i).get("tree_name"))
+					+ "@"+String.valueOf(list.get(i).get("parent_id"))+"@ysfy'>" 
+					+ delNull(String.valueOf(list.get(i).get("YSFY"))) 
+					+ "</td><td class='"+sytle+"'"
+					+ " id='" + String.valueOf(list.get(i).get("tree_id"))
+					+ "@" + String.valueOf(list.get(i).get("tree_name"))
+					+ "@"+String.valueOf(list.get(i).get("parent_id"))+"@lj'>" 
+					+  delNull(String.valueOf(list.get(i).get("lj")))
+					+ "</td><td class='"+sytle+"' id='" + String.valueOf(list.get(i).get("tree_id"))
+					+ "@" + String.valueOf(list.get(i).get("tree_name"))
+					+ "@"+String.valueOf(list.get(i).get("parent_id"))+"@yfsdz'>"+ delNull(String.valueOf(list.get(i).get("YFSDZ")))+"</td><td class='"+sytle+"' id='" + String.valueOf(list.get(i).get("tree_id"))
+					+ "@" + String.valueOf(list.get(i).get("tree_name"))
+					+ "@"+String.valueOf(list.get(i).get("parent_id"))+"@zjjd'>"+ delNull(String.valueOf(list.get(i).get("ZJJD")))+"</td><td class='"+sytle+"'"
+					+ " id='" + String.valueOf(list.get(i).get("tree_id"))
+					+ "@" + String.valueOf(list.get(i).get("tree_name"))
+					+ "@"+String.valueOf(list.get(i).get("parent_id"))+"@cqye'>" + delNull(String.valueOf(list.get(i).get("CQYE"))));
+					for (int j = 0; j < items.length; j++) {
+						stringBuffer.append("</td><td class='"+sytle+"'"
+					+ " id='" + String.valueOf(list.get(i).get("tree_id"))
+							+ "@" + String.valueOf(list.get(i).get("tree_name"))
+							+"@"+String.valueOf(list.get(i).get("parent_id"))+ "@"+ items[j] +"'>"
+						+ delNull(String.valueOf(list.get(i).get(items[j]))));
+					}
+					stringBuffer.append("</td><td class='"+sytle+"' id='" + String.valueOf(list.get(i).get("tree_id"))
+							+ "@" + String.valueOf(list.get(i).get("tree_name"))
+							+ "@"+String.valueOf(list.get(i).get("parent_id"))+"@lrsp'>" + delNull(String.valueOf(list.get(i).get("LRSP"))));
+					stringBuffer.append("</td><td class='"+sytle+"' style='display:none'  >" + delNull(String.valueOf(list.get(i).get("leval"))));
+					stringBuffer.append("</td><td class='"+sytle+"' style='display:none'  >" + delNull(String.valueOf(list.get(i).get("sort"))));
+					stringBuffer.append("</td></tr>");
+				}
+			}
+		}
+
+		return stringBuffer;
+	}
+
 
 	  
 	   public static StringBuffer buildZjzc_father_sum(List<Map<String, Object>> list,int leval) {
@@ -306,11 +525,19 @@ public class ZjglBuild {
 								+ "@"+String.valueOf(list.get(i).get("parent_id"))
 								+ "@" + String.valueOf(list.get(i).get("sort"))
 								+ "@lrsp'>");
+						stringBuffer.append("</td><td class='"+sytle+"' style='display:none'  >" + delNull(String.valueOf(list.get(i).get("leval"))));
+						stringBuffer.append("</td><td class='"+sytle+"' style='display:none'  >" + delNull(String.valueOf(list.get(i).get("sort"))));
 						stringBuffer.append("</td></tr>");
 					} else {
-						stringBuffer.append("<tr><td width:'240px'  class='"+sytle+"'>"
-								+ delNull(String.valueOf(list.get(i).get("LJ")))
-								+ "</td><td class='"+sytle+"' id='" + String.valueOf(list.get(i).get("tree_id"))
+						if(i!= list.size()-1 && i!= list.size()-2){
+							stringBuffer.append("<tr><td width:'240px'  class='"+sytle+"'><span style='font-style: italic;'>"
+									+ delNull(String.valueOf(list.get(i).get("LJ")))
+									+ "</span>");
+						}else{
+							stringBuffer.append("<tr><td width:'240px'  class='"+sytle+"'>"
+									+ delNull(String.valueOf(list.get(i).get("LJ"))));
+						}
+						stringBuffer.append("</td><td class='"+sytle+"' id='" + String.valueOf(list.get(i).get("tree_id"))
 								+ "@" + String.valueOf(list.get(i).get("tree_name"))
 								+ "@"+String.valueOf(list.get(i).get("parent_id"))
 								+ "@" + String.valueOf(list.get(i).get("sort"))
@@ -331,6 +558,8 @@ public class ZjglBuild {
 								+ "@"+String.valueOf(list.get(i).get("parent_id"))
 								+ "@" + String.valueOf(list.get(i).get("sort"))
 								+ "@lrsp'>");
+						stringBuffer.append("</td><td class='"+sytle+"' style='display:none'  >" + delNull(String.valueOf(list.get(i).get("leval"))));
+						stringBuffer.append("</td><td class='"+sytle+"' style='display:none'  >" + delNull(String.valueOf(list.get(i).get("sort"))));
 						stringBuffer.append("</td></tr>");
 					}
 				}
@@ -338,6 +567,92 @@ public class ZjglBuild {
 
 			return stringBuffer;
 		}
+	   
+	   public static StringBuffer buildZjzc_father_sum_view(List<Map<String, Object>> list,int leval) {
+			StringBuffer stringBuffer = new StringBuffer();
+			String sytle = "";
+			if(leval == 1){
+				sytle = "tr01";
+			}else if(leval == 2){
+				sytle = "tr02";
+			}else if(leval == 3){
+				sytle = "tr03";
+			}else if(leval == 4){
+				sytle = "tr04";
+			}
+			if (list != null) {
+				for (int i = 0; i < list.size(); i++) {
+					if (i == 0) {
+						stringBuffer.append("<tr><td  rowspan='8' class='"+sytle+"'>"
+						+ delNull(String.valueOf(list.get(i).get("tree_name")))
+						+ "</td><td rowspan='8' class='"+sytle+"' id='" + String.valueOf(list.get(i).get("tree_id"))
+						+ "@" + String.valueOf(list.get(i).get("tree_name"))
+						+ "@"+String.valueOf(list.get(i).get("parent_id"))
+						+ "@" + String.valueOf(list.get(i).get("sort"))
+						+ "@ysfy'></td><td  class='"+sytle+"' id='" + String.valueOf(list.get(i).get("tree_id"))
+						+ "@" + String.valueOf(list.get(i).get("tree_name"))
+						+ "@"+String.valueOf(list.get(i).get("parent_id"))
+						+ "@" + String.valueOf(list.get(i).get("sort"))
+						+ "@jl2'></td><td rowspan='8' class='"+sytle+"' id='" + String.valueOf(list.get(i).get("tree_id"))
+						+ "@" + String.valueOf(list.get(i).get("tree_name"))
+						+ "@"+String.valueOf(list.get(i).get("parent_id"))
+						+ "@" + String.valueOf(list.get(i).get("sort"))
+						+ "@yfsdz'></td><td rowspan='8' class='"+sytle+"' id='" + String.valueOf(list.get(i).get("tree_id"))
+						+ "@" + String.valueOf(list.get(i).get("tree_name"))
+						+ "@"+String.valueOf(list.get(i).get("parent_id"))
+						+ "@" + String.valueOf(list.get(i).get("sort"))
+						+ "@zjjd'></td><td class='"+sytle+"' id='" + String.valueOf(list.get(i).get("tree_id"))
+						+ "@" + String.valueOf(list.get(i).get("tree_name"))
+						+ "@"+String.valueOf(list.get(i).get("parent_id"))
+						+ "@" + String.valueOf(list.get(i).get("sort"))
+						+ "@cqye'>");
+						for (int j = 0; j < items.length; j++) {
+							stringBuffer.append("</td><td class='"+sytle+"' id='" + String.valueOf(list.get(i).get("tree_id"))
+								+ "@" + String.valueOf(list.get(i).get("tree_name"))
+								+ "@"+String.valueOf(list.get(i).get("parent_id"))
+								+ "@" + String.valueOf(list.get(i).get("sort"))
+								+ "@"+ items[j] +"'>");
+						}
+						stringBuffer.append("</td><td class='"+sytle+"' id='" + String.valueOf(list.get(i).get("tree_id"))
+								+ "@" + String.valueOf(list.get(i).get("tree_name"))
+								+ "@"+String.valueOf(list.get(i).get("parent_id"))
+								+ "@" + String.valueOf(list.get(i).get("sort"))
+								+ "@lrsp'>");
+						stringBuffer.append("</td><td class='"+sytle+"' style='display:none'  >" + delNull(String.valueOf(list.get(i).get("leval"))));
+						stringBuffer.append("</td><td class='"+sytle+"' style='display:none'  >" + delNull(String.valueOf(list.get(i).get("sort"))));
+						stringBuffer.append("</td></tr>");
+					} else {
+						stringBuffer.append("</td><td class='"+sytle+"' id='" + String.valueOf(list.get(i).get("tree_id"))
+								+ "@" + String.valueOf(list.get(i).get("tree_name"))
+								+ "@"+String.valueOf(list.get(i).get("parent_id"))
+								+ "@" + String.valueOf(list.get(i).get("sort"))
+								+ "@jl2'></td><td class='"+sytle+"' id='" + String.valueOf(list.get(i).get("tree_id"))
+								+ "@" + String.valueOf(list.get(i).get("tree_name"))
+								+ "@"+String.valueOf(list.get(i).get("parent_id"))
+								+ "@" + String.valueOf(list.get(i).get("sort"))
+								+ "@cqye'>");
+						for (int j = 0; j < items.length; j++) {
+							stringBuffer.append(" </td><td class='"+sytle+"' id='" + String.valueOf(list.get(i).get("tree_id"))
+								+ "@" + String.valueOf(list.get(i).get("tree_name"))
+								+ "@"+String.valueOf(list.get(i).get("parent_id"))
+								+ "@" + String.valueOf(list.get(i).get("sort"))
+								+ "@"+ items[j] +"'>");
+						}
+						stringBuffer.append("</td><td class='"+sytle+"' id='" + String.valueOf(list.get(i).get("tree_id"))
+								+ "@" + String.valueOf(list.get(i).get("tree_name"))
+								+ "@"+String.valueOf(list.get(i).get("parent_id"))
+								+ "@" + String.valueOf(list.get(i).get("sort"))
+								+ "@lrsp'>");
+						stringBuffer.append("</td><td class='"+sytle+"' style='display:none'  >" + delNull(String.valueOf(list.get(i).get("leval"))));
+						stringBuffer.append("</td><td class='"+sytle+"' style='display:none'  >" + delNull(String.valueOf(list.get(i).get("sort"))));
+						stringBuffer.append("</td></tr>");
+					}
+				}
+			}
+
+			return stringBuffer;
+		}
+	   
 	   
 	   
 	   public static StringBuffer buildZjlr_father_sum(List<Map<String, Object>> list,int leval) {
@@ -363,7 +678,7 @@ public class ZjglBuild {
 						+ "@ysfy'></td><td colspan='2' class='"+sytle+"' id='" + String.valueOf(list.get(i).get("tree_id"))
 						+ "@" + String.valueOf(list.get(i).get("tree_name"))
 						+ "@"+String.valueOf(list.get(i).get("parent_id"))
-						+ "@jl2'></td><td  class='"+sytle+"' id='" + String.valueOf(list.get(i).get("tree_id"))
+						+ "@lj'></td><td  class='"+sytle+"' id='" + String.valueOf(list.get(i).get("tree_id"))
 						+ "@" + String.valueOf(list.get(i).get("tree_name"))
 						+ "@"+String.valueOf(list.get(i).get("parent_id"))
 						+ "@yfsdz'></td><td class='"+sytle+"' id='" + String.valueOf(list.get(i).get("tree_id"))
@@ -383,6 +698,8 @@ public class ZjglBuild {
 								+ "@" + String.valueOf(list.get(i).get("tree_name"))
 								+ "@"+String.valueOf(list.get(i).get("parent_id"))
 								+ "@lrsp'>");
+						stringBuffer.append("</td><td class='"+sytle+"' style='display:none'  >" + delNull(String.valueOf(list.get(i).get("leval"))));
+						stringBuffer.append("</td><td class='"+sytle+"' style='display:none'  >" + delNull(String.valueOf(list.get(i).get("sort"))));
 						stringBuffer.append("</td></tr>");
 					} 
 				}
@@ -390,6 +707,61 @@ public class ZjglBuild {
 
 			return stringBuffer;
 		}
+	   
+	   
+	   public static StringBuffer buildZjlr_father_sum_view(List<Map<String, Object>> list,int leval) {
+			StringBuffer stringBuffer = new StringBuffer();
+			String sytle = "";
+			if(leval == 1){
+				sytle = "tr01";
+			}else if(leval == 2){
+				sytle = "tr02";
+			}else if(leval == 3){
+				sytle = "tr03";
+			}else if(leval == 4){
+				sytle = "tr04";
+			}
+			if (list != null) {
+				for (int i = 0; i < list.size(); i++) {
+					if (i == 0) {
+						stringBuffer.append("<tr><td class='"+sytle+"'>"
+						+ delNull(String.valueOf(list.get(i).get("tree_name")))
+						+ "</td><td class='"+sytle+"' id='" + String.valueOf(list.get(i).get("tree_id"))
+						+ "@" + String.valueOf(list.get(i).get("tree_name"))
+						+ "@"+String.valueOf(list.get(i).get("parent_id"))
+						+ "@ysfy'></td><td class='"+sytle+"' id='" + String.valueOf(list.get(i).get("tree_id"))
+						+ "@" + String.valueOf(list.get(i).get("tree_name"))
+						+ "@"+String.valueOf(list.get(i).get("parent_id"))
+						+ "@lj'></td><td  class='"+sytle+"' id='" + String.valueOf(list.get(i).get("tree_id"))
+						+ "@" + String.valueOf(list.get(i).get("tree_name"))
+						+ "@"+String.valueOf(list.get(i).get("parent_id"))
+						+ "@yfsdz'></td><td class='"+sytle+"' id='" + String.valueOf(list.get(i).get("tree_id"))
+						+ "@" + String.valueOf(list.get(i).get("tree_name"))
+						+ "@"+String.valueOf(list.get(i).get("parent_id"))
+						+ "@zjjd'></td><td class='"+sytle+"' id='" + String.valueOf(list.get(i).get("tree_id"))
+						+ "@" + String.valueOf(list.get(i).get("tree_name"))
+						+ "@"+String.valueOf(list.get(i).get("parent_id"))
+						+ "@cqye'>");
+						for (int j = 0; j < items.length; j++) {
+							stringBuffer.append("</td><td class='"+sytle+"' id='" + String.valueOf(list.get(i).get("tree_id"))
+								+ "@" + String.valueOf(list.get(i).get("tree_name"))
+								+ "@"+String.valueOf(list.get(i).get("parent_id"))
+								+ "@"+ items[j] +"'>");
+						}
+						stringBuffer.append("</td><td class='"+sytle+"' id='" + String.valueOf(list.get(i).get("tree_id"))
+								+ "@" + String.valueOf(list.get(i).get("tree_name"))
+								+ "@"+String.valueOf(list.get(i).get("parent_id"))
+								+ "@lrsp'>");
+						stringBuffer.append("</td><td class='"+sytle+"' style='display:none'  >" + delNull(String.valueOf(list.get(i).get("leval"))));
+						stringBuffer.append("</td><td class='"+sytle+"' style='display:none'  >" + delNull(String.valueOf(list.get(i).get("sort"))));
+						stringBuffer.append("</td></tr>");
+					} 
+				}
+			}
+
+			return stringBuffer;
+		}
+	   
 	   
 	
 	   public static StringBuffer buildZjzc_child(List<Map<String, Object>> list,String rolename,int leval) {
@@ -440,11 +812,18 @@ public class ZjglBuild {
 										+ "@" + String.valueOf(list.get(i).get("tree_name"))
 										+ "@"+String.valueOf(list.get(i).get("parent_id"))
 										+ "@" + String.valueOf(list.get(i).get("sort"))
-										+ "@lrsp'>" + delNull(String.valueOf(list.get(i).get("LRSP"))) + "</td></tr>");
+										+ "@lrsp'>" + delNull(String.valueOf(list.get(i).get("LRSP")))
+										+ "</td><td class='"+sytle+"' style='display:none'  >" + delNull(String.valueOf(list.get(i).get("leval")))
+										+ "</td></tr>");
 					} else if(i != list.size() - 1){
-						stringBuffer.append("<tr><td width='240px' class='"+sytle+"'>"
-							+ delNull(String.valueOf(list.get(i).get("LJ")))
-							+ "</td><td class='"+sytle+"' id='" + String.valueOf(list.get(i).get("tree_id"))
+						if(i!= list.size()-2){
+							stringBuffer.append("<tr><td width:'240px'  class='"+sytle+"'><span style='font-style: italic;'>"
+									+ delNull(String.valueOf(list.get(i).get("LJ"))));
+						}else{
+							stringBuffer.append("<tr><td width:'240px'  class='"+sytle+"'>"
+									+ delNull(String.valueOf(list.get(i).get("LJ"))));
+						}
+						stringBuffer.append("</span></td><td class='"+sytle+"' id='" + String.valueOf(list.get(i).get("tree_id"))
 										+ "@" + String.valueOf(list.get(i).get("tree_name"))
 										+ "@"+String.valueOf(list.get(i).get("parent_id"))
 										+ "@" + String.valueOf(list.get(i).get("sort"))
@@ -478,7 +857,9 @@ public class ZjglBuild {
 										+ "@" + String.valueOf(list.get(i).get("tree_name"))
 										+ "@"+String.valueOf(list.get(i).get("parent_id"))
 										+ "@" + String.valueOf(list.get(i).get("sort"))
-										+ "@lrsp'>" + delNull(String.valueOf(list.get(i).get("LRSP"))) + "</td></tr>");
+										+ "@lrsp'>" + delNull(String.valueOf(list.get(i).get("LRSP")))
+										+ "</td><td class='"+sytle+"' style='display:none'  >" + delNull(String.valueOf(list.get(i).get("leval")))
+										+ "</td></tr>");
 					}else{
 						stringBuffer.append("<tr><td width='240px' class='"+sytle+"'>"
 							+ delNull(String.valueOf(list.get(i).get("LJ")))
@@ -503,7 +884,9 @@ public class ZjglBuild {
 										+ "@" + String.valueOf(list.get(i).get("tree_name"))
 										+ "@"+String.valueOf(list.get(i).get("parent_id"))
 										+ "@" + String.valueOf(list.get(i).get("sort"))
-										+ "@lrsp'>" + delNull(String.valueOf(list.get(i).get("LRSP"))) + "</td></tr>");
+										+ "@lrsp'>" + delNull(String.valueOf(list.get(i).get("LRSP"))) 
+										+ "</td><td class='"+sytle+"' style='display:none'  >" + delNull(String.valueOf(list.get(i).get("leval")))
+										+ "</td></tr>");
 					}
 				}
 			}
@@ -525,19 +908,24 @@ public class ZjglBuild {
 			if (list != null) {
 				for (int i = 0; i < list.size(); i++) {
 					if (i == 0) {
-						stringBuffer.append("<tr><td  rowspan='8' class='"+sytle+"'>"
+						stringBuffer.append("<tr><td  class='"+sytle+"'>"
 										+ delNull(String.valueOf(list.get(i).get("tree_name")))
-										+ " </td><td rowspan='8' class='"+sytle+"'><input type='text' style='width:70px;' onchange='addrzxq(this); return false' value='"
+										+ " </td><td class='"+sytle+"'><input type='text' style='width:70px;' onchange='addrzxq(this); return false' value='"
 										+ delNull(String.valueOf(list.get(i).get("YSFY")))
 										+ "' id='" + String.valueOf(list.get(i).get("tree_id"))
 										+ "@" + String.valueOf(list.get(i).get("tree_name"))
 										+ "@"+String.valueOf(list.get(i).get("parent_id"))
-										+ "@ysfy'/></td><td colspan='2' class='"+sytle+"' id='" + String.valueOf(list.get(i).get("tree_id"))
+										+ "@ysfy'/></td><td colspan='2' class='"+sytle+"'><input type='text' style='width:70px;' onchange='addrzxq(this); return false' value='"
+										+ delNull(String.valueOf(list.get(i).get("LJ")))
+										+ "' id='" + String.valueOf(list.get(i).get("tree_id"))
 										+ "@" + String.valueOf(list.get(i).get("tree_name"))
 										+ "@"+String.valueOf(list.get(i).get("parent_id"))
-										+ "@jl2'>" + delNull(String.valueOf(list.get(i).get("JL2")))
-										+ "</td><td class='"+sytle+"' ></td><td class='"+sytle+"'>"
-										+ "</td><td class='"+sytle+"'  id='" + String.valueOf(list.get(i).get("tree_id"))
+										+ "@lj'/></td><td class='"+sytle+"' id='" + String.valueOf(list.get(i).get("tree_id"))
+					+ "@" + String.valueOf(list.get(i).get("tree_name"))
+					+ "@"+String.valueOf(list.get(i).get("parent_id"))+"@yfsdz'>"+ delNull(String.valueOf(list.get(i).get("YFSDZ")))+"</td><td class='"+sytle+"' id='" + String.valueOf(list.get(i).get("tree_id"))
+						+ "@" + String.valueOf(list.get(i).get("tree_name"))
+						+ "@"+String.valueOf(list.get(i).get("parent_id"))
+						+ "@zjjd'></td><td class='"+sytle+"'  id='" + String.valueOf(list.get(i).get("tree_id"))
 										+ "@" + String.valueOf(list.get(i).get("tree_name"))
 										+ "@"+String.valueOf(list.get(i).get("parent_id"))
 										+ "@cqye'>" + delNull(String.valueOf(list.get(i).get("CQYE"))) + "</td>");
@@ -552,7 +940,9 @@ public class ZjglBuild {
 						stringBuffer.append("<td class='"+sytle+"'  id='" + String.valueOf(list.get(i).get("tree_id"))
 										+ "@" + String.valueOf(list.get(i).get("tree_name"))
 										+ "@"+String.valueOf(list.get(i).get("parent_id"))
-										+ "@lrsp'>" + delNull(String.valueOf(list.get(i).get("LRSP"))) + "</td></tr>");
+										+ "@lrsp'>" + delNull(String.valueOf(list.get(i).get("LRSP")))
+										+ "</td><td class='"+sytle+"' style='display:none'  >" + delNull(String.valueOf(list.get(i).get("leval")))
+										+ "</td></tr>");
 					}
 				}
 			}
