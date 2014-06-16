@@ -209,75 +209,19 @@ scrollbar-3dlight-color:#D4D0C8;
 	   	});
 	   	
 	   	function showRighrClickMenu(node,e){
-	   		
-	   		var view = false;
-	   		var id ;
-	   		var parentId ;
-	   		var parent_parent_parentID;
-	   		var parent_parentId ;
-	   		if(node.parentNode==null){
-	   			id = node.id;
-	   		}else if(node.parentNode.parentNode==null){
-	   			id = node.id;
-	   			parentId = node.parentNode.id;
-	   		}else if(node.parentNode.parentNode.parentNode==null){
-	   			id = node.id;
-	   			parentId = node.parentNode.id;
-	   			parent_parentId = node.parentNode.parentNode.id;
-	   		}else {
-	   			id = node.id;
-	   			parentId = node.parentNode.id;
-	   			parent_parentId = node.parentNode.parentNode.id;
-	   			parent_parent_parentID = node.parentNode.parentNode.parentNode.id;
+	   		var depth = node.getDepth() ;
+	   		var rootNode;
+	   		if(depth == 1){
+	   			rootID = node.id;
+	   		}else  if(depth == 2){
+	   			rootID = node.parentNode.id;
+	   		}else{
+	   			rootNode = node.parentNode;
+	   			for(var i = 2 ; i < depth ; i++){
+	   				rootNode = rootNode.parentNode;
+	   			}
+	   			rootID = rootNode.id;
 	   		}
-	   		var type = "<%=type%>";
-	   		var editor ="<%=editor%>";
-	   		var editors = editor.split("@");
-	   		var array = type.split("@");
-	   		if(id=="YJKFZC"||id=="ZJZC"){
-	   			return ;
-	   		}
-	   		if(id=="QQFY"||id=="ZJLR"||id=="CQFY"||id=="SCFY"||id=="SZFY"||id=="CWFY"||id=="GLFY"||id=="CRZJFH"||id=="QTZC"){
-	   			for(var i=0;i<array.length;i++){
-	   				if(id==array[i] && editors[i]=="y"){
-	   					view = true;
-	   					if(parentId=="ZJLR"){
-	   						rootID="ZJLR";
-	   					}else {
-	   						rootID = "ZJZC";
-	   					}
-	   				}
-	   			}
-	   		}else if(parentId=="QQFY"||parentId=="ZJLR"||parentId=="CQFY"||parentId=="SCFY"||parentId=="SZFY"||parentId=="CWFY"||parentId=="GLFY"||parentId=="CRZJFH"||parentId=="QTZC"){
-	   			for(var i=0;i<array.length;i++){
-	   				if(parentId==array[i] && editors[i]=="y"){
-	   					view = true;
-	   					if(parentId=="ZJLR"){
-	   						rootID="ZJLR";
-	   					}else {
-	   						rootID = "ZJZC";
-	   					}
-	   				}
-	   			}
-	   		}else if(parent_parentId=="ZJLR"){
-	   			for(var i=0;i<array.length;i++){
-	   				if(parent_parentId==array[i] && editors[i]=="y"){
-	   					view = true;
-	   					rootID = "ZJLR";
-	   				}
-	   			}
-	   		}else if (parent_parent_parentID=="ZJLR"){
-	   			for(var i=0;i<array.length;i++){
-	   				if(parent_parent_parentID==array[i] && editors[i]=="y"){
-	   					view = true;
-	   					rootID = "ZJLR";
-	   				}
-	   			}
-	   		}
-	   	//	if(!view){
-	   	//	alert("您无权限编辑此项!请与管理员联系");
-	   	//		return;
-	   		//}
 	   		selected_leaf=node;
    			e.preventDefault();
    			node.select();

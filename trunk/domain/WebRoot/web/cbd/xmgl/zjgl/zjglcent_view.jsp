@@ -30,13 +30,12 @@
 	String keyset = "";
 	if(!yw_guid.equals("")&&!yw_guid.equals("null")){
 		if("all".equals(type)){
-			 // Contorl contorl=new Contorl(yw_guid,year);
-			 // table=contorl.getTextMode();
+
 		}else {
 			String types[] = type.split("@");
 			String edirots[] = editor.split("@");
 			ReportManager re  = new ReportManager();
-			table = re.getReport(yw_guid,year,rolename);
+			table = re.getReport_view(yw_guid,year,rolename);
 		}
    }
 %>
@@ -148,13 +147,35 @@ td1 {
     	complr();
     	compzc();
     	compsum();
+    	hide();
     	fix();
+    }
+    
+    function hide(){
+    	var obj = document.getElementById("table");
+    	var rowlen = obj.rows.length;
+    	for(var i = 4 ; i < rowlen ; i++){
+    		//var lastcolid = 
+    		if(parseInt(obj.rows[i].cells[obj.rows[i].cells.length - 2].innerText) > 4 ){
+    			obj.rows[i].style.display = 'none';
+    		} 
+    		if(parseInt(obj.rows[i].cells[obj.rows[i].cells.length - 1].innerText) > 1 ){
+    			obj.rows[i].style.display = 'none';
+    		} else{
+    			obj.rows[i].cells[0].rowSpan = '1';
+    			obj.rows[i].cells[1].rowSpan = '1';
+    			obj.rows[i].cells[3].rowSpan = '1';
+    			obj.rows[i].cells[4].rowSpan = '1';
+    		}
+    	}
+    	obj.rows[0].cells[2].colSpan = '1';
+    	obj.rows[rowlen-1].cells[2].colSpan = '1';
     }
     
     function fix(){
     	var width = document.body.clientWidth  ;
 		var height = document.body.clientHeight * 0.9;
-       	FixTable("table", 1,3, width, height);
+       	FixTable("table", 0,3, width, height);
     }
     
     function compsum(){

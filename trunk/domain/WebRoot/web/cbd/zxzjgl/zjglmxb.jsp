@@ -1,6 +1,5 @@
-<%@ page language="java" pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@page import="java.util.List" %>
-<%@page import="java.util.Map" %>
 <%@page import="com.klspta.console.ManagerFactory"%>
 <%@page import="org.springframework.security.core.context.SecurityContextHolder"%>
 <%@page import="com.klspta.console.user.User"%>
@@ -9,20 +8,27 @@
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-   	String year="2014";
+	String yw_guid=request.getParameter("yw_guid");
+	String xmmc=request.getParameter("xmmc");
+   	String year= Calendar.getInstance().get(Calendar.YEAR) + "";
 	String table="";
-	List<Map<String, Object>> lr=null;
-	List<Map<String, Object>> zc=null;
-	
+
+	if (xmmc != null) {
+		xmmc = new String(xmmc.getBytes("iso-8859-1"), "utf-8");
+	} else {
+		xmmc = "";
+	}
 	Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 	String userId = ((User)principal).getUserID();
 	User user = ManagerFactory.getUserManager().getUserWithId(userId);
 	List<Role>  role = ManagerFactory.getRoleManager().getRoleWithUserID(userId);
 	String rolename = role.get(0).getRolename();
-	//String types[] = "ZJLR@ZJZC@YJKFZC@QQFY@CQFY@SZFY@CWFY@GLFY@CRZJFH@QTZC".split("@");
-	//String edirots[] = "n@n@n@n@n@n@n@n@n@n".split("@");
-	ReportManager re  = new ReportManager();
-	table = re.getReport( year, rolename);
+	String keyset = "";
+
+			ReportManager re  = new ReportManager();
+			table = re.getReport(year,rolename);
+		
+   
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -36,7 +42,6 @@
 		<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 		<meta http-equiv="description" content="This is my page">
 		<script src="base/include/jquery-1.10.2.js"></script>
-		<%@ include file="/base/include/ext.jspf" %>
 		<%@ include file="/base/include/restRequest.jspf" %>
 
 <style type="text/css">
@@ -104,6 +109,15 @@ td1 {
 	line-height: 15px;
 	text-align: center;
 }
+
+.lj {
+	background-color:#C7EDCC;
+	font-weight: bold;
+	line-height: 15px;
+	text-align: center;
+	font-style: italic;
+}
+
 .tr05 {
 	background-color:#FFF69A;
 	background-color:#FFCC99;
@@ -112,12 +126,240 @@ td1 {
 }
 </style>
 <script type="text/javascript">
+	
+	var changeText = "";
+	var array = ["jl2", "yy", "ey", "cqye", "sany", "siy", "wy", "ly", "qy", "bqy" ,"jy" ,"siyue" ,"syy", "sey" ,"lrsp"];
+	var msg = "";
   	$(document).ready(function () { 
-		var width = document.body.clientWidth ;
+		
+    });
+    
+    function init(){
+    	complr();
+    	compzc();
+    	compsum();
+    	//hide();
+    	fix();
+    }
+    
+    function hide(){
+    	var obj = document.getElementById("table");
+    	var rowlen = obj.rows.length;
+    	for(var i = 4 ; i < rowlen ; i++){
+    		//var lastcolid = 
+    		if(parseInt(obj.rows[i].cells[obj.rows[i].cells.length - 2].innerText) > 3 ){
+    			obj.rows[i].style.display = 'none';
+    		} 
+    		if(parseInt(obj.rows[i].cells[obj.rows[i].cells.length - 1].innerText) > 1 ){
+    			obj.rows[i].style.display = 'none';
+    		} else{
+    			obj.rows[i].cells[0].rowSpan = '1';
+    			obj.rows[i].cells[1].rowSpan = '1';
+    			obj.rows[i].cells[3].rowSpan = '1';
+    			obj.rows[i].cells[4].rowSpan = '1';
+    		}
+    	}
+    	obj.rows[0].cells[2].colSpan = '1';
+    	obj.rows[rowlen-1].cells[2].colSpan = '1';
+    }
+    
+    function fix(){
+    	var width = document.body.clientWidth  ;
 		var height = document.body.clientHeight * 0.9;
        	FixTable("table", 0,3, width, height);
-    });
-
+    }
+    
+    function compsum(){
+    	var ysfylr = parseInt(document.getElementById("ZJLR@Ⅰ.资金流入@0@ysfy").innerText);
+    	var ysfyzc = parseInt(document.getElementById("ZJZC@Ⅱ.资金支出@0@1@ysfy").innerText);
+    	document.getElementById("ysfy").innerText = ysfylr - ysfyzc;
+    	var jl2zc = parseInt(document.getElementById("ZJZC@Ⅱ.资金支出@0@1@jl2").innerText);
+    	var jl2lr = parseInt(document.getElementById("ZJLR@Ⅰ.资金流入@0@lj").innerText);
+    	document.getElementById("jl2").innerText = jl2lr - jl2zc;
+    	
+    	var yfsdzzc = parseInt(document.getElementById("ZJZC@Ⅱ.资金支出@0@1@yfsdz").innerText);
+    	var yfsdzlr = parseInt(document.getElementById("ZJLR@Ⅰ.资金流入@0@yfsdz").innerText);
+    	document.getElementById("yfsdz").innerText = yfsdzlr - yfsdzzc;
+    	
+    	var cqyezc = parseInt(document.getElementById("ZJZC@Ⅱ.资金支出@0@1@cqye").innerText);
+    	var cqyelr = parseInt(document.getElementById("ZJLR@Ⅰ.资金流入@0@cqye").innerText);
+    	var cqye = cqyelr - cqyezc;
+    	document.getElementById("cqye").innerText = cqye;
+    	
+    	yfsdzzc = parseInt(document.getElementById("ZJZC@Ⅱ.资金支出@0@1@YY").innerText);
+    	yfsdzlr = parseInt(document.getElementById("ZJLR@Ⅰ.资金流入@0@YY").innerText);
+    	cqye = cqye + yfsdzlr - yfsdzzc;
+    	document.getElementById("yy").innerText = cqye;
+    	
+    	yfsdzzc = parseInt(document.getElementById("ZJZC@Ⅱ.资金支出@0@1@EY").innerText);
+    	yfsdzlr = parseInt(document.getElementById("ZJLR@Ⅰ.资金流入@0@EY").innerText);
+    	cqye = cqye + yfsdzlr - yfsdzzc;
+    	document.getElementById("ey").innerText = cqye;
+    	
+    	yfsdzzc = parseInt(document.getElementById("ZJZC@Ⅱ.资金支出@0@1@SANY").innerText);
+    	yfsdzlr = parseInt(document.getElementById("ZJLR@Ⅰ.资金流入@0@SANY").innerText);
+    	cqye = cqye + yfsdzlr - yfsdzzc;
+    	document.getElementById("sany").innerText = cqye;
+    	yfsdzzc = parseInt(document.getElementById("ZJZC@Ⅱ.资金支出@0@1@SIY").innerText);
+    	yfsdzlr = parseInt(document.getElementById("ZJLR@Ⅰ.资金流入@0@SIY").innerText);
+    	cqye = cqye + yfsdzlr - yfsdzzc;
+    	document.getElementById("siy").innerText = cqye;
+    	yfsdzzc = parseInt(document.getElementById("ZJZC@Ⅱ.资金支出@0@1@WY").innerText);
+    	yfsdzlr = parseInt(document.getElementById("ZJLR@Ⅰ.资金流入@0@WY").innerText);
+    	cqye = cqye + yfsdzlr - yfsdzzc;
+    	document.getElementById("wy").innerText = cqye;
+    	yfsdzzc = parseInt(document.getElementById("ZJZC@Ⅱ.资金支出@0@1@LY").innerText);
+    	yfsdzlr = parseInt(document.getElementById("ZJLR@Ⅰ.资金流入@0@LY").innerText);
+    	cqye = cqye + yfsdzlr - yfsdzzc;
+    	document.getElementById("ly").innerText = cqye;
+    	yfsdzzc = parseInt(document.getElementById("ZJZC@Ⅱ.资金支出@0@1@QY").innerText);
+    	yfsdzlr = parseInt(document.getElementById("ZJLR@Ⅰ.资金流入@0@QY").innerText);
+    	cqye = cqye + yfsdzlr - yfsdzzc;
+    	document.getElementById("qy").innerText = cqye;
+    	yfsdzzc = parseInt(document.getElementById("ZJZC@Ⅱ.资金支出@0@1@BQY").innerText);
+    	yfsdzlr = parseInt(document.getElementById("ZJLR@Ⅰ.资金流入@0@BQY").innerText);
+    	cqye = cqye + yfsdzlr - yfsdzzc;
+    	document.getElementById("bay").innerText = cqye;
+    	yfsdzzc = parseInt(document.getElementById("ZJZC@Ⅱ.资金支出@0@1@JY").innerText);
+    	yfsdzlr = parseInt(document.getElementById("ZJLR@Ⅰ.资金流入@0@JY").innerText);
+    	cqye = cqye + yfsdzlr - yfsdzzc;
+    	document.getElementById("jy").innerText = cqye;
+    	yfsdzzc = parseInt(document.getElementById("ZJZC@Ⅱ.资金支出@0@1@SIYUE").innerText);
+    	yfsdzlr = parseInt(document.getElementById("ZJLR@Ⅰ.资金流入@0@SIYUE").innerText);
+    	cqye = cqye + yfsdzlr - yfsdzzc;
+    	document.getElementById("shiy").innerText = cqye;
+    	yfsdzzc = parseInt(document.getElementById("ZJZC@Ⅱ.资金支出@0@1@SYY").innerText);
+    	yfsdzlr = parseInt(document.getElementById("ZJLR@Ⅰ.资金流入@0@SYY").innerText);
+    	cqye = cqye + yfsdzlr - yfsdzzc;
+    	document.getElementById("syy").innerText = cqye;
+    	yfsdzzc = parseInt(document.getElementById("ZJZC@Ⅱ.资金支出@0@1@SEY").innerText);
+    	yfsdzlr = parseInt(document.getElementById("ZJLR@Ⅰ.资金流入@0@SEY").innerText);
+    	cqye = cqye + yfsdzlr - yfsdzzc;
+    	document.getElementById("sey").innerText = cqye;
+    	yfsdzzc = parseInt(document.getElementById("ZJZC@Ⅱ.资金支出@0@1@LRSP").innerText);
+    	yfsdzlr = parseInt(document.getElementById("ZJLR@Ⅰ.资金流入@0@LRSP").innerText);
+    	cqye = cqye + yfsdzlr - yfsdzzc;
+    	document.getElementById("lrsp").innerText = cqye;
+    	
+    }
+    
+    function complr(){
+    	putClientCommond("xmmanager","getTreeMapLR");
+    	putRestParameter("year","<%=year%>");
+    	var msg = restRequest(); 
+    	msg = eval( '(' + msg + ')')[0];
+    	tobj = document.getElementById("table");
+    	for(var key in msg){
+    		var id = key + "@ysfy";
+			var value = 0;
+			var childids = msg[key].split(",");
+   			for(var j = 0 ; j < childids.length ; j++){
+    			if(document.getElementById(childids[j] + "@ysfy").tagName == "INPUT"){
+    				value += parseFloat(document.getElementById(childids[j] + "@ysfy").value==""?"0":
+    					document.getElementById(childids[j] + "@ysfy").value);
+    			}else{
+    				value += parseFloat(document.getElementById(childids[j] + "@ysfy").innerHTML==""?"0":
+    					document.getElementById(childids[j] + "@ysfy").innerHTML);
+    			}
+   			}
+  			document.getElementById(id).innerHTML=  value  ;
+  			
+  			var id = key + "@yfsdz";
+			var value = 0;
+			var childids = msg[key].split(",");
+   			for(var j = 0 ; j < childids.length ; j++){
+    			if(document.getElementById(childids[j] + "@yfsdz").tagName == "INPUT"){
+    				value += parseFloat(document.getElementById(childids[j] + "@yfsdz").value==""?"0":
+    					document.getElementById(childids[j] + "@yfsdz").value);
+    			}else{
+    				value += parseFloat(document.getElementById(childids[j] + "@yfsdz").innerHTML==""?"0":
+    					document.getElementById(childids[j] + "@yfsdz").innerHTML);
+    			}
+   			}
+  			document.getElementById(id).innerHTML=  value  ;
+    	
+    		var id = key + "@lj";
+			var value = 0;
+   			for(var j = 0 ; j < childids.length ; j++){
+    			if(document.getElementById(childids[j] + "@lj").tagName == "INPUT"){
+    				value += parseFloat(document.getElementById(childids[j] + "@lj").value==""?"0":
+    					document.getElementById(childids[j] + "@lj").value);
+    			}else{
+    				value += parseFloat(document.getElementById(childids[j] + "@lj").innerHTML==""?"0":
+    					document.getElementById(childids[j] + "@lj").innerHTML);
+    			}
+   			}
+  			document.getElementById(id).innerHTML=  value  ;
+    	
+    		for(var z = 1 ; z < array.length; z++){
+    			var id = key + "@"+ array[z];
+				var value = 0;
+    			for(var j = 0 ; j < childids.length ; j++){
+	    			if(document.getElementById(childids[j] + "@"+ array[z]).tagName == "INPUT"){
+	    				value += parseFloat(document.getElementById(childids[j] + "@" + array[z]).value==""?"0":
+	    					document.getElementById(childids[j] + "@"+array[z]).value);
+	    			}else{
+	    				value += parseFloat(document.getElementById(childids[j] + "@" + array[z]).innerHTML==""?"0":
+	    					document.getElementById(childids[j] + "@" + array[z]).innerHTML);
+	    			}
+    			}
+   				document.getElementById(id).innerHTML=  value  ;
+    		}
+    	}
+    }
+    
+    function compzc(){
+    	putClientCommond("xmmanager","getTreeMap");
+    	putRestParameter("year","<%=year%>");
+    	var msg = restRequest(); 
+    	msg = eval( '(' + msg + ')')[0];
+    	tobj = document.getElementById("table");
+    	for(var key in msg){
+    		var id = key + "@1@ysfy";
+			var value = 0;
+			var childids = msg[key].split(",");
+			
+   			for(var j = 0 ; j < childids.length ; j++){
+    			if(document.getElementById(childids[j] + "@1@ysfy").tagName == "INPUT"){
+    				value += parseFloat(document.getElementById(childids[j] + "@1@ysfy").value==""?"0":
+    					document.getElementById(childids[j] + "@1@ysfy").value);
+    			}else{
+    				value += parseFloat(document.getElementById(childids[j] + "@1@ysfy").innerHTML==""?"0":
+    					document.getElementById(childids[j] + "@1@ysfy").innerHTML);
+    			}
+   			}
+  			document.getElementById(id).innerHTML=  value  ;
+  			
+    	
+    		for(var z = 0 ; z < array.length; z++){
+	    		for(var t = 1; t <= 8 ;t++){
+	    			var id = key + "@"+t+"@"+ array[z];
+					var value = 0;
+	    			for(var j = 0 ; j < childids.length ; j++){
+		    			if(document.getElementById(childids[j] + "@"+t+"@"+ array[z]).tagName == "INPUT"){
+		    				value += parseFloat(document.getElementById(childids[j] + "@"+t+"@" + array[z]).value==""?"0":
+		    					document.getElementById(childids[j] + "@"+t+"@"+array[z]).value);
+		    			}else{
+		    				value += parseFloat(document.getElementById(childids[j] + "@"+t+"@" + array[z]).innerHTML==""?"0":
+		    					document.getElementById(childids[j] + "@"+t+"@" + array[z]).innerHTML);
+		    			}
+	    			}
+	    			if(z==0 && t==7){
+	    				document.getElementById(key + "@1@yfsdz").innerHTML=  value  ;
+	    				if(document.getElementById(key + "@1@ysfy").innerText=='0'){
+	    					document.getElementById(key + "@1@zjjd").innerHTML= "100.00%";
+	    				}else{
+	    					document.getElementById(key + "@1@zjjd").innerHTML=  (value/parseFloat(document.getElementById(key + "@1@ysfy").innerText)*100).toFixed(2)+"%"  ;
+	    				}
+	    			}
+    				document.getElementById(id).innerHTML=  value  ;
+	    		}
+    		}
+    		
+    		
+    	}
+    }
+    
  
   function FixTable(TableID, FixColumnNumber,FixRowNumber, width, height) {
     if ($("#" + TableID + "_tableLayout").length != 0) {
@@ -187,9 +429,40 @@ td1 {
     $("#" + TableID + "_tableColumn").offset($("#" + TableID + "_tableLayout").offset());
     $("#" + TableID + "_tableData").offset($("#" + TableID + "_tableLayout").offset());
 }
+
+function print(){
+		    var curTbl = document.getElementById("table"); 
+ 			try{
+		    	var oXL = new ActiveXObject("Excel.Application");
+		    }catch(err){
+		    	Ext.Msg.alert('提示','Excel生成失败，请先确定系统已安装office，并在浏览器的\'工具\' - Internet选项 -安全 - 自定义级别 - ActiveX控件和插件 - 对未标记为可安全执行脚本的ActiveX控件.. 标记为\'启用\'');
+		    	return;
+		    } 
+		    //创建AX对象excel 
+		    var oWB = oXL.Workbooks.Add(); 
+		    //获取workbook对象 
+		    var oSheet = oWB.ActiveSheet; 
+		    //激活当前sheet 
+		    var sel = document.body.createTextRange(); 
+		    sel.moveToElementText(curTbl); 
+		    //把表格中的内容移到TextRange中 
+		    sel.select(); 
+		    //全选TextRange中内容 
+		    sel.execCommand("Copy"); 
+		    //复制TextRange中内容  
+		    oSheet.Paste(); 
+		    //粘贴到活动的EXCEL中       
+		    oXL.Visible = true; 
+		    //设置excel可见属性 
+			
+		}
+
+</script>
+<script type="text/javascript">
+	
 </script>
 	</head>
-	<body bgcolor="#FFFFFF" topmargin="0" leftmargin="0" style="overflow-x:hidden;overflow-y:hidden;">
+	<body onload="init();"  bgcolor="#FFFFFF" topmargin="0" leftmargin="0" style="overflow-x:hidden;overflow-y:hidden;">
 	 <div align="center" style="margin-top: 10px;"><h3>资金管理明细表</h3></div>
 	   <%=table%>
 	</body>

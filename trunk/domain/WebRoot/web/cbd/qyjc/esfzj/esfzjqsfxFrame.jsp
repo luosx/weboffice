@@ -128,14 +128,14 @@
       		url=encodeURI(url);
       		document.getElementById("xxtj").src=url;
 		 	treeTextList="";
-        },'mouseover' : function(node) {  
+        } , 'mouseover' : function(node) {  
         		if(node.id==0){
         			return ;
         		}
         		
-        		putClientCommond("qyjcManager", "getFloatTable");
+        		putClientCommond("scjcManager", "getFloatTable");
         		putRestParameter("bh",node.id);
-        		putRestParameter("tablename","xzlzjqknd_pjzj");
+        		putRestParameter("tablename","esfzjqknd_pjzj");
     			mydata = restRequest();
                 Ext.QuickMsg.show('', mydata ,'100px', 2, Ext.get('fl'), [0, 0], 't-t', true, false);   
                 var oSon = window.document.getElementById("fl");  
