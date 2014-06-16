@@ -54,11 +54,13 @@
                 title: '办理经过',
                 html: "<iframe width='"+w+"' height='"+h+"' src='web/cbd/xmgl/blgc/blgcEditor.jsp?yw_guid=<%=yw_guid%>&xmmc=<%=xmmc%>'/>" 
             }
-            ,{
+            ,
+            {
                 title: '资金管理',
                 html: "<iframe width='"+w+"' height='"+h+"' src='web/cbd/xmgl/zjgl/zjgl.jsp?yw_guid=<%=yw_guid%>&xmmc=<%=xmmc%>&type=<%=type%>&editor=<%=editor %>'/>"
             }
-            ,{
+            ,
+            {
                 title: '档案管理',
                 html: "<iframe width='"+w+"' height='"+h+"' src='web/cbd/xmgl/dagl/accessorymain.jsp?yw_guid=<%=yw_guid%>&xmmc=<%=xmmc%>'/>"
             }

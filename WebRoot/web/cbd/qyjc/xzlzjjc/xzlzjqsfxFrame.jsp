@@ -55,12 +55,9 @@
   var mydata;
   var closeImageUrl="<%=basePath %>web/cbd/framework/images/save.png";
   Ext.onReady(function(){
-  
   	putClientCommond("qyjcManager", "getxzlTree");
     mydata = restRequest();
     
-    
-     
     NodeMouseoverPlugin = Ext.extend(Object, {  
 		   	init: function(tree) {  
 		       if (!tree.rendered) {  
