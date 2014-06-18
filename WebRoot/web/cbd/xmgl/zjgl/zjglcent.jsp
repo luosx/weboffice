@@ -6,6 +6,7 @@
 <%@page import="com.klspta.console.user.User"%>
 <%@page import="com.klspta.console.role.Role"%>
 <%@page import="com.klspta.web.cbd.xmgl.zjgl.ReportManager"%>
+<%@page import="com.klspta.base.util.UtilFactory"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -18,7 +19,7 @@
 	List<Map<String, Object>> lr=null;
 	List<Map<String, Object>> zc=null;
 	if (xmmc != null) {
-		xmmc = new String(xmmc.getBytes("iso-8859-1"), "utf-8");
+		xmmc = UtilFactory.getStrUtil().unescape(xmmc);
 	} else {
 		xmmc = "";
 	}
@@ -148,7 +149,9 @@ td1 {
     	complr();
     	compzc();
     	compsum();
-    	fix();
+    //	fix();
+    	document.getElementById("loading").style.display = "none";
+  		document.getElementById("table").style.display = "";
     }
     
     function fix(){
@@ -350,11 +353,46 @@ td1 {
     	}
     }
     
+    function getLevel3Sum(){
+    	var obj = document.getElementById("table");
+    	var rowlen = obj.rows.length;
+    	var sumtext = "";
+    	var sort = 0;
+    	for(var i = 3 ; i < rowlen ; i++){
+    		if(parseInt(obj.rows[i].cells[obj.rows[i].cells.length - 2].innerText) <=3 && parseInt(obj.rows[i].cells[obj.rows[i].cells.length - 1].innerText) == 1 ){
+    			for(var j = 0; j < obj.rows[i].cells.length -1  ; j++){
+   					if(obj.rows[i].cells[2].colSpan == 2){
+	    			    if(j != 4){
+		    				if(obj.rows[i].cells[j].children(0)!=null){
+		    					sumtext += obj.rows[i].cells[j].children(0).value==''?'0#' :obj.rows[i].cells[j].children(0).value + "#";
+		    				}else{
+		    					sumtext += obj.rows[i].cells[j].innerText==''?'0#':obj.rows[i].cells[j].innerText + "#";
+		    				}
+	    				}
+   					}else{
+   						 if(j != 2 && j != 5){
+		    				if(obj.rows[i].cells[j].children(0)!=null){
+		    					sumtext += obj.rows[i].cells[j].children(0).value==''?'0#' :obj.rows[i].cells[j].children(0).value + "#";
+		    				}else{
+		    					sumtext += obj.rows[i].cells[j].innerText==''?'0#':obj.rows[i].cells[j].innerText + "#";
+		    				}
+	    				}
+   					}
+    			}
+    			sumtext += sort++ + "#";
+    			sumtext += "@";
+    		} 
+    	}
+    	return sumtext;
+    }
+    
     function sava(){
+    	var sumtext = getLevel3Sum();
     	putClientCommond("xmmanager","saveZJGL_ZJZC");
     	putRestParameter("yw_guid","<%=yw_guid%>");
     	putRestParameter("year","<%=year%>");
     	putRestParameter("val",escape(escape(changeText)));
+    	putRestParameter("sumtext",escape(escape(sumtext)));
     	var msg=restRequest(); 
     	changeText = "";
     	if(msg){
@@ -370,20 +408,14 @@ td1 {
 				val="0";
 			}
 			changeText += id + "#" + val + ":";
+			complr();
+    		compzc();
+    		compsum();
 		}else{
 			alert("请填写有效数据！");
 			check.value="";
 		}
 	}
-	function addzjlr(check){
-		var val = check.value;
-		if(!isNaN(val)){  
-
-		}else{
-			alert("请填写有效数据！");
-			check.value="";
-		}
- 	 }
  
 	 function change(){
 	 	
@@ -490,11 +522,13 @@ function print(){
 	
 </script>
 	</head>
-	<body onload="init();" bgcolor="#FFFFFF" topmargin="0" leftmargin="0" style="overflow-x:hidden;overflow-y:hidden;">
+	<body onload="init();" bgcolor="#FFFFFF" topmargin="0" leftmargin="0" >
 	<div style="position:absolute; z-index:2008;"><img width="25" height="25" style="margin-top: 5" src="<%=basePath %>web/cbd/framework/images/save.png" onclick="sava();" alt="保存"></div>
 	<div style="position:absolute; z-index:2008;"><img width="25" height="25" style="margin-left: 40;margin-top: 5" src="base/form/images/print.png" onclick="print();" alt="导出excel"></div>
 	
-	 <div align="center" style="margin-top: 10px;"><h3><%=xmmc%>-资金管理</h3></div>
-	   <%=table + "</table>"%>
+	 <div  align="center" style="margin-top: 10px;"><h3><%=xmmc%>-资金管理</h3></div>
+	 <%=table%>
+  		<div class="proccess" id="loading"><b>正在加载中。。。</b></div> 
 	</body>
+	
 </html>

@@ -11,12 +11,11 @@
     	String editor=request.getParameter("editor");
     	if (xmmc != null) {
 		xmmc = new String(xmmc.getBytes("iso-8859-1"), "utf-8");
-	} else {
-		xmmc = "";
-	}
-    String tree=  new TreeManager().getTree(yw_guid,year);
-    
-    tree="["+tree+"]";
+		} else {
+			xmmc = "";
+		}
+    	String tree=  new TreeManager().getTree(yw_guid,year);
+    	tree="["+tree+"]";
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -276,13 +275,19 @@ function change(){
 	parent.left.location.href=urltree;
 }
 function  sele_year(){
-var slet=document.getElementById("selet");
-	for(var i=0;i<slet.length;i++){
-		if(slet.options[i].value=='<%=year%>'){
-		slet.options[i].selected='true';
+	var slet=document.getElementById("selet");
+		for(var i=0;i<slet.length;i++){
+			if(slet.options[i].value=='<%=year%>'){
+			slet.options[i].selected='true';
+		}
 	}
-}
-
+	  <%if(!"view".equals(type)){ %>
+			var url = "<%=basePath%>web/cbd/xmgl/zjgl/zjglcent.jsp?yw_guid=<%= yw_guid%>&xmmc="+escape(escape("<%=xmmc%>"))+"&year=<%=year%>&type=<%=type%>&editor=<%=editor %>"
+	  		parent.right.location.href=url;
+  	<%} else { %>
+  	 	var url ="<%=basePath%>web/cbd/xmgl/zjgl/zjglcent_view.jsp?yw_guid=<%= yw_guid%>&xmmc="+escape(escape("<%=xmmc%>"))+"&year=<%=year%>&type=<%=type%>&editor=<%=editor %>"
+  		parent.right.location.href=url;
+  	<%} %>
 }
 
 

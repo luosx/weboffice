@@ -70,7 +70,7 @@
   
    </script>
   </head>
-	<body bgcolor="#FFFFFF">
+	<body bgcolor="#FFFFFF" >
 		<div id="statusTab" style="width:100%"></div>
 	</body>
 </html>
