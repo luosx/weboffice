@@ -6,6 +6,7 @@
 <%@page import="com.klspta.console.user.User"%>
 <%@page import="com.klspta.console.role.Role"%>
 <%@page import="com.klspta.web.cbd.xmgl.zjgl.ReportManager"%>
+<%@page import="com.klspta.base.util.UtilFactory"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -18,7 +19,7 @@
 	List<Map<String, Object>> lr=null;
 	List<Map<String, Object>> zc=null;
 	if (xmmc != null) {
-		xmmc = new String(xmmc.getBytes("iso-8859-1"), "utf-8");
+		xmmc = UtilFactory.getStrUtil().unescape(xmmc);
 	} else {
 		xmmc = "";
 	}
@@ -148,6 +149,8 @@ td1 {
     	compzc();
     	compsum();
     	hide();
+    	document.getElementById("loading").style.display = "none";
+  		document.getElementById("table").style.display = "";
     	fix();
     }
     
@@ -516,6 +519,7 @@ function print(){
 	<div style="position:absolute; z-index:2008;"><img width="25" height="25" style="margin-left: 40;margin-top: 5" src="base/form/images/print.png" onclick="print();" alt="导出excel"></div>
 	
 	 <div align="center" style="margin-top: 10px;"><h3><%=xmmc%>-资金管理</h3></div>
-	   <%=table + "</table>"%>
+	   <div class="proccess" id="loading"><b>正在加载中。。。</b></div> 
+	   <%=table %>
 	</body>
 </html>

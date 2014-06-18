@@ -54,11 +54,12 @@
   var node;
   var mydata;
   var closeImageUrl="<%=basePath %>web/cbd/framework/images/save.png";
+  var nmp ;
   Ext.onReady(function(){
   	putClientCommond("qyjcManager", "getxzlTree");
     mydata = restRequest();
     
-    NodeMouseoverPlugin = Ext.extend(Object, {  
+    NodeMouseoverPlugin = Ext.extend(Object, { 
 		   	init: function(tree) {  
 		       if (!tree.rendered) {  
 		           tree.on('render', function() {this.init(tree)}, this);  
@@ -94,13 +95,15 @@
 	    expanded: true,
 	    children:  mydata                                    
 	});
+	
+	nmp = new NodeMouseoverPlugin();
   
   	left = new Ext.tree.TreePanel({
 		region:"west",
 		id:'west',
 		title:"基本信息列表",
 		collapsible: true,
-		plugins: new NodeMouseoverPlugin(),  
+		plugins: nmp,  
 	    useArrows: true,
 	    autoScroll: true,
 	    animate: true,
@@ -131,6 +134,7 @@
       		
 		 	treeTextList="";
         	},'mouseover' : function(node) {  
+               
         		if(node.id==0){
         			return ;
         		}
@@ -140,7 +144,8 @@
     			mydata = restRequest();
                 Ext.QuickMsg.show('', mydata ,'100px', 2, Ext.get('fl'), [0, 0], 't-t', true, false);   
                 var oSon = window.document.getElementById("fl");  
-			     if (oSon == null) return;  
+			     if (oSon == null) return;
+			       
 			     with (oSon){  
 			      //innerText = guoguo.value;  
 			      style.display = "block";  
@@ -176,8 +181,6 @@
                     }
                  }]	
 	});
-   
-    
     
 	var center = new Ext.Panel({
 		region:"center",
@@ -207,7 +210,5 @@ function init(){
 		<div id="west" ></div>
 		<div id="center1"  style="position:absolute; z-index:0; ">
 		</div>
-
-	
 	</body>
 </html>
