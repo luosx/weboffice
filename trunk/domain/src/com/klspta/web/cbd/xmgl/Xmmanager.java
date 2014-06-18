@@ -266,7 +266,10 @@ public class Xmmanager extends AbstractBaseBean {
 		String yw_guid = request.getParameter("yw_guid");
 		String year = request.getParameter("year");
 		String val = request.getParameter("val");
+		String sumtext = request.getParameter("sumtext");
 		val = UtilFactory.getStrUtil().unescape(val);
+		sumtext = UtilFactory.getStrUtil().unescape(sumtext);
+		saveLevel3(yw_guid, sumtext, year);
 		String[] values = val.split(":");
 		String sql = "";
 		for(int i =0 ; i < values.length ; i++){
@@ -286,9 +289,25 @@ public class Xmmanager extends AbstractBaseBean {
 				sql = "update xmzjgl_lr set " + column + "=? where yw_guid =? and  tree_id=? and rq = ?";
 				update(sql, YW, new Object[]{value,yw_guid,tree_id,year});
 			}
-			
 		}
 		response("true");
+	}
+	
+	public void saveLevel3(String yw_guid, String sumtext, String year){
+		String sql = "delete XMZJGL_MXB where yw_guid = ? and rq = ?";
+		update(sql, YW,new Object[]{ yw_guid, year});
+		sql = "insert into XMZJGL_MXB (tree_name ,ysfy, jl2, yfsdz, cqye, yy, ey, sany,siy,wy,ly,qy,bay,jy,siyue,syy,sey,lrsp,leval,sort,yw_guid, rq) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		String[] rowsum = sumtext.split("@");
+		Object[] obj = new Object[22];
+		for(int i = 0 ; i < rowsum.length ; i++){
+			String[] colsum = rowsum[i].split("#");
+			for(int j = 0 ; j < colsum.length; j++){
+				obj[j] = colsum[j];
+			}
+			obj[obj.length - 2] = yw_guid;
+			obj[obj.length - 1] = year;
+			update(sql, YW, obj);
+		}
 	}
 
 	/***************************************************************************
@@ -308,18 +327,18 @@ public class Xmmanager extends AbstractBaseBean {
 		tree_name = UtilFactory.getStrUtil().unescape(tree_name).trim();
 		String roorId = request.getParameter("rootID");
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd_HHmmss");
-		String date = dateFormat.format(new Date());
+		String tree_id = dateFormat.format(new Date());
 		if(roorId.equals("ZJLR")){
 			String sql = "select leval from xmzjgl_lr where tree_id=? and yw_guid=? and rq=?";
 			int leval = Integer.parseInt(query(sql, YW,new Object[]{parent_id,yw_guid,selet_year}).get(0).get("leval").toString());
 			sql = " insert into xmzjgl_lr (yw_guid,parent_id,tree_id,tree_name,rq,leval)values (?,?,?,?,?,?)";
-			update(sql, YW, new Object[] { yw_guid, parent_id, date,tree_name,selet_year ,leval + 1 + ""});
+			update(sql, YW, new Object[] { yw_guid, parent_id, tree_id,tree_name,selet_year ,leval + 1 + ""});
 		}else{
 			String sql = "select leval from xmzjgl_zc where tree_id=? and yw_guid=? and rq=?";
 			int leval = Integer.parseInt(query(sql, YW,new Object[]{parent_id,yw_guid,selet_year}).get(0).get("leval").toString());
 			sql = " insert into xmzjgl_zc (yw_guid,parent_id,tree_id,tree_name,rq,lj,sort,leval)values (?,?,?,?,?,?,?,?)";
 			for(int i = 1; i <= st.length ; i++){
-				update(sql, YW, new Object[] { yw_guid, parent_id, date,tree_name,selet_year ,st[i-1],i ,leval + 1 + ""});
+				update(sql, YW, new Object[] { yw_guid, parent_id, tree_id,tree_name,selet_year ,st[i-1],i ,leval + 1 + ""});
 			}
 		}
 	}

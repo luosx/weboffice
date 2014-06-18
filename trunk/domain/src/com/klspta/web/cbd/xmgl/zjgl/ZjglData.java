@@ -66,7 +66,7 @@ public class ZjglData extends AbstractBaseBean {
 			String sql = "select t.tree_name as tree_name ,t.tree_id as tree_id , t.parent_id as parent_id from xmzjgl_lr_view t,jc_xiangmu j  where t.tree_id=? and t.yw_guid=j.yw_guid  and t.rq=? ";
 			list = query(sql, YW, new Object[] { type,year });
 		}else{
-			String sql = "select t.tree_name as tree_name,t.tree_id as tree_id ,t.lj as lj,t.parent_id as parent_id,t.leval as leval from  XMZJGL_LR_view t where tree_id=? and yw_guid=?  and rq=? ";
+			String sql = "select t.tree_name as tree_name,t.tree_id as tree_id ,t.lj as lj,t.parent_id as parent_id,t.leval as leval,t.sort as sort from  XMZJGL_LR_view t where tree_id=? and yw_guid=?  and rq=? ";
 			list = query(sql, YW, new Object[] { type, yw_guid, year });
 		}
 		return list;

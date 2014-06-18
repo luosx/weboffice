@@ -97,6 +97,7 @@ public class ZjglBuild {
 		+ "<td align='center' width='83px' id='sey' class='tr01'>0</td>"
 		+ "<td align='center' width='83px' id='lrsp' class='tr01'>0</td> "
 		+ "<td align='center' width='83px' style='display:none'   class='tr01'>1</td> "
+		+ "<td align='center' width='83px' style='display:none'   class='tr01'>1</td> "
 		+ "</tr>");
 		return Buffer;
 	}
@@ -158,6 +159,7 @@ public class ZjglBuild {
 							+ "@" + String.valueOf(list.get(i).get("sort"))
 							+ "@lrsp'>" + delNull(String.valueOf(list.get(i).get("LRSP"))));
 					stringBuffer.append("</td><td class='"+sytle+"' style='display:none' style='display:none'  >" + delNull(String.valueOf(list.get(i).get("leval"))));
+					stringBuffer.append("</td><td class='"+sytle+"' style='display:none' style='display:none'  >" + delNull(String.valueOf(list.get(i).get("sort"))));
 					stringBuffer.append("</td></tr>");
 				} else if(i != list.size() -1){
 					if(i!= list.size()-2){
@@ -201,6 +203,7 @@ public class ZjglBuild {
 							+ "@" + String.valueOf(list.get(i).get("sort"))
 							+ "@lrsp'>" + delNull(String.valueOf(list.get(i).get("LRSP"))));
 					stringBuffer.append("</td><td class='"+sytle+"' style='display:none'  >" + delNull(String.valueOf(list.get(i).get("leval"))));
+					stringBuffer.append("</td><td class='"+sytle+"' style='display:none'  >" + delNull(String.valueOf(list.get(i).get("sort"))));
 					stringBuffer.append("</td></tr>");
 				}else{
 					stringBuffer.append("<tr><td width:'240px'  class='"+sytle+"'>"
@@ -228,6 +231,7 @@ public class ZjglBuild {
 							+ "@" + String.valueOf(list.get(i).get("sort"))
 							+ "@lrsp'>" + delNull(String.valueOf(list.get(i).get("LRSP"))));
 					stringBuffer.append("</td><td class='"+sytle+"' style='display:none'  >" + delNull(String.valueOf(list.get(i).get("leval"))));
+					stringBuffer.append("</td><td class='"+sytle+"' style='display:none'  >" + delNull(String.valueOf(list.get(i).get("sort"))));
 					stringBuffer.append("</td></tr>");
 				}
 			}
@@ -407,6 +411,7 @@ public class ZjglBuild {
 							+ "@" + String.valueOf(list.get(i).get("tree_name"))
 							+ "@"+String.valueOf(list.get(i).get("parent_id"))+"@lrsp'>" + delNull(String.valueOf(list.get(i).get("LRSP"))));
 					stringBuffer.append("</td><td class='"+sytle+"' style='display:none'  >" + delNull(String.valueOf(list.get(i).get("leval"))));
+					stringBuffer.append("</td><td class='"+sytle+"' style='display:none'  >" + delNull(String.valueOf(list.get(i).get("sort"))));
 					stringBuffer.append("</td></tr>");
 				}
 			}
@@ -814,6 +819,7 @@ public static StringBuffer buildZjlr_father_view(List<Map<String, Object>> list,
 										+ "@" + String.valueOf(list.get(i).get("sort"))
 										+ "@lrsp'>" + delNull(String.valueOf(list.get(i).get("LRSP")))
 										+ "</td><td class='"+sytle+"' style='display:none'  >" + delNull(String.valueOf(list.get(i).get("leval")))
+										+ "</td><td class='"+sytle+"' style='display:none'  >" + delNull(String.valueOf(list.get(i).get("sort")))
 										+ "</td></tr>");
 					} else if(i != list.size() - 1){
 						if(i!= list.size()-2){
@@ -859,6 +865,7 @@ public static StringBuffer buildZjlr_father_view(List<Map<String, Object>> list,
 										+ "@" + String.valueOf(list.get(i).get("sort"))
 										+ "@lrsp'>" + delNull(String.valueOf(list.get(i).get("LRSP")))
 										+ "</td><td class='"+sytle+"' style='display:none'  >" + delNull(String.valueOf(list.get(i).get("leval")))
+										+ "</td><td class='"+sytle+"' style='display:none'  >" + delNull(String.valueOf(list.get(i).get("sort")))
 										+ "</td></tr>");
 					}else{
 						stringBuffer.append("<tr><td width='240px' class='"+sytle+"'>"
@@ -886,6 +893,7 @@ public static StringBuffer buildZjlr_father_view(List<Map<String, Object>> list,
 										+ "@" + String.valueOf(list.get(i).get("sort"))
 										+ "@lrsp'>" + delNull(String.valueOf(list.get(i).get("LRSP"))) 
 										+ "</td><td class='"+sytle+"' style='display:none'  >" + delNull(String.valueOf(list.get(i).get("leval")))
+										+ "</td><td class='"+sytle+"' style='display:none'  >" + delNull(String.valueOf(list.get(i).get("sort")))
 										+ "</td></tr>");
 					}
 				}
@@ -942,6 +950,7 @@ public static StringBuffer buildZjlr_father_view(List<Map<String, Object>> list,
 										+ "@"+String.valueOf(list.get(i).get("parent_id"))
 										+ "@lrsp'>" + delNull(String.valueOf(list.get(i).get("LRSP")))
 										+ "</td><td class='"+sytle+"' style='display:none'  >" + delNull(String.valueOf(list.get(i).get("leval")))
+										+ "</td><td class='"+sytle+"' style='display:none'  >" + delNull(String.valueOf(list.get(i).get("sort")))
 										+ "</td></tr>");
 					}
 				}
