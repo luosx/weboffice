@@ -17,12 +17,16 @@ import com.klspta.base.AbstractBaseBean;
 public class ZjglData extends AbstractBaseBean {
 	private static String[] months = {"CQYE", "YY", "EY", "SANY", "SIY", "WY", "LY", "QY","BAY", "JY", "SIYUE", "SYY", "SEY" ,"LRSP" };
 	
-	public static final String SQL_ZJZC_FATHER = "select t.tree_name as tree_name,t.tree_id as tree_id ,t.lj as lj,t.sort as sort,t.parent_id as parent_id from  XMZJGL_ZC_view t where tree_id=?  and rq=? ";
+	public static final String SQL_ZJZC_FATHER = "select t.tree_name as tree_name, sum(t.YSFY) as ysfy ,sum(t.CQYE) as cqye,sum(t.YFSDZ) as yfsdz,"
+                                               + " sum(t.yy) as yy ,sum(t.ey) as ey,sum(t.sany) as sany,sum(t.siy) as siy,"
+                                               + " sum(t.wy) as wy,sum(t.ly) as ly,sum(t.qy) as qy,sum(t.bay) as bay,sum(t.jy) as jy"
+                                               + ",sum(t.siyue) as siyue,sum(t.syy) as syy ,sum(t.sey) as sey ,sum(t.LRSP) as lrsp,sum(t.sort) as sort ,t.leval as leval "
+                                               + "from xmzjgl_mxb t  where t.rq=? group by t.tree_name,t.leval order by sort asc";
 	public static final String SQL_ZJLR_FATHER = "select t.tree_name as tree_name,t.tree_id as tree_id ,t.lj as lj,t.parent_id as parent_id from  XMZJGL_LR_view t where tree_id=?  and rq=? ";
 
-	public List<Map<String, Object>> getFatherData(String type, String year, String sql) {
+	public List<Map<String, Object>> getFatherData( String year, String sql) {
 		List<Map<String, Object>> list =null;
-		list = query(sql, YW, new Object[] { type, year});
+		list = query(sql, YW, new Object[] {  year});
 		return list;
 	}
 
@@ -66,9 +70,6 @@ public class ZjglData extends AbstractBaseBean {
 		List<Map<String, Object>> list = null;
 		sql = "select * from  XMZJGL_LR_view where parent_id=? and tree_name=? and rq=? ";
 		list = query(sql, YW, new Object[] { parent_id, tree_name, year });
-		
 		return list;
 	}
-
-
 }

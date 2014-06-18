@@ -1,6 +1,5 @@
 package com.klspta.web.cbd.zxzjgl;
 
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,7 +17,6 @@ public class ZjglBuild {
 
 	private static String[] items = { "YY", "EY", "SANY", "SIY", "WY", "LY", "QY", "BQY", "JY", "SIYUE", "SYY", "SEY" };
     private static Map<String, StringBuffer> titleMap = new HashMap<String, StringBuffer>();
-    private static StringBuffer sumStringBuffer = null;
 	/***************************************************************************
 	 * 
 	 * <br>
@@ -35,7 +33,7 @@ public class ZjglBuild {
 	            .append("<tr class='title' style='text-align:center' >")
 	            .append("<td rowspan='3' align='center' width='150px' class='title'><div  width='200px'>类别<div></td>")
 	            .append("<td rowspan='3'  align='center' width='80px' class='title'>预算费用</td>")
-	            .append("<td rowspan='3' colspan='2'  align='center' width='300px' class='title'>累计已缴纳<br>/已审批资金</td>")
+	            .append("<td rowspan='3' align='center' width='150px' class='title'>累计已缴纳<br>/已审批资金</td>")
 	            .append("<td rowspan='2' colspan='2' align='center' width='160' class='title'>累计发生<br>(或返还)费用</td>")
 	            .append("<td rowspan='3'  align='center' width='80px' class='title'>期初余额</td>")
 	            .append("<td colspan='12'  align='center' width='1000px' class='title'>")
@@ -114,285 +112,32 @@ public class ZjglBuild {
 	        return "";
 	    }
 	}
-
-
-	   public static StringBuffer buildZjzc_father_view(List<Map<String, Object>> list, String rolename,int leval) {
-			int month = Calendar.getInstance().get(Calendar.MONTH) + 1;
-			StringBuffer stringBuffer = new StringBuffer();
-			String sytle = levelToStyle(leval);
-			if (list != null) {
-				for (int i = 0; i < list.size(); i++) {
-					if (i == 0) {
-						stringBuffer.append("<tr><td  rowspan='8' class='"+sytle+"'>"
-						+ delNull(String.valueOf(list.get(i).get("tree_name")))
-						+ " </td><td rowspan='8' class='"+sytle+"'"
-						+ " id='" + String.valueOf(list.get(i).get("tree_id"))
-						+ "@" + String.valueOf(list.get(i).get("tree_name"))
-						+ "@"+String.valueOf(list.get(i).get("parent_id")) 
-						+ "@" + String.valueOf(list.get(i).get("sort"))
-						+ "@ysfy'>" + delNull(String.valueOf(list.get(i).get("YSFY"))) 
-						+ "</td><td  class='"+sytle+"' id='" + String.valueOf(list.get(i).get("tree_id"))
-						+ "@" + String.valueOf(list.get(i).get("tree_name"))
-						+ "@"+String.valueOf(list.get(i).get("parent_id"))
-						+ "@" + String.valueOf(list.get(i).get("sort"))
-						+ "@jl2'>"+ delNull(String.valueOf(list.get(i).get("JL2")))+"</td><td rowspan='8' class='"+sytle+"' id='" + String.valueOf(list.get(i).get("tree_id"))
-						+ "@" + String.valueOf(list.get(i).get("tree_name"))
-						+ "@"+String.valueOf(list.get(i).get("parent_id"))
-						+ "@" + String.valueOf(list.get(i).get("sort"))
-						+ "@yfsdz'>"+ delNull(String.valueOf(list.get(i).get("YFSDZ")))+"</td><td rowspan='8' class='"+sytle+"' id='" + String.valueOf(list.get(i).get("tree_id"))
-						+ "@" + String.valueOf(list.get(i).get("tree_name"))
-						+ "@"+String.valueOf(list.get(i).get("parent_id"))
-						+ "@" + String.valueOf(list.get(i).get("sort"))
-						+ "@zjjd'>"+ delNull(String.valueOf(list.get(i).get("ZJJD")))
-						+ "</td><td class='"+sytle+"' id='" + String.valueOf(list.get(i).get("tree_id"))
-						+ "@" + String.valueOf(list.get(i).get("tree_name"))
-						+ "@"+String.valueOf(list.get(i).get("parent_id"))
-						+ "@" + String.valueOf(list.get(i).get("sort"))
-						+ "@cqye'>"+ delNull(String.valueOf(list.get(i).get("CQYE"))));
-						for (int j = 0; j < items.length; j++) {
-							stringBuffer.append("</td><td class='"+sytle+"' id='" + String.valueOf(list.get(i).get("tree_id"))
-								+ "@" + String.valueOf(list.get(i).get("tree_name"))
-								+ "@"+String.valueOf(list.get(i).get("parent_id"))
-								+ "@" + String.valueOf(list.get(i).get("sort"))
-								+ "@"+ items[j] +"'>" + delNull(String.valueOf(list.get(i).get(items[j]))));
-						}
-						stringBuffer.append("</td><td class='"+sytle+"' id='" + String.valueOf(list.get(i).get("tree_id"))
-								+ "@" + String.valueOf(list.get(i).get("tree_name"))
-								+ "@"+String.valueOf(list.get(i).get("parent_id"))
-								+ "@" + String.valueOf(list.get(i).get("sort"))
-								+ "@lrsp'>" + delNull(String.valueOf(list.get(i).get("LRSP"))));
-						stringBuffer.append("</td><td class='"+sytle+"' style='display:none'  >" + delNull(String.valueOf(list.get(i).get("leval"))));
-						stringBuffer.append("</td><td class='"+sytle+"' style='display:none'  >" + delNull(String.valueOf(list.get(i).get("sort"))));
-						stringBuffer.append("</td></tr>");
-					} else if(i != list.size() -1){
-						stringBuffer.append("</span></td><td class='"+sytle+"' id='" + String.valueOf(list.get(i).get("tree_id"))
-								+ "@" + String.valueOf(list.get(i).get("tree_name"))
-								+ "@"+String.valueOf(list.get(i).get("parent_id"))
-								+ "@" + String.valueOf(list.get(i).get("sort"))
-								+ "@jl2'>" + delNull(String.valueOf(list.get(i).get("JL2")))+"</td><td class='"+sytle+"'"
-								+ "id='" + String.valueOf(list.get(i).get("tree_id"))
-								+ "@" + String.valueOf(list.get(i).get("tree_name"))
-								+ "@"+String.valueOf(list.get(i).get("parent_id"))
-								+ "@" + String.valueOf(list.get(i).get("sort"))
-								+ "@cqye'>"+ delNull(String.valueOf(list.get(i).get("CQYE"))));
-						for (int j = 0; j < items.length; j++) {
-							if (j + 1 == month || "市场部".equals(rolename) || "市场部部长".equals(rolename)) {
-							stringBuffer.append(" </td><td class='"+sytle+"'"
-													+ " id='" + String.valueOf(list.get(i).get("tree_id"))
-													+ "@" + String.valueOf(list.get(i).get("tree_name"))
-													+ "@"+String.valueOf(list.get(i).get("parent_id"))
-													+ "@" + String.valueOf(list.get(i).get("sort"))
-													+ "@" + items[j] + "'>" + delNull(String.valueOf(list.get(i).get(items[j]))));
-							}else{
-								stringBuffer.append(" </td><td class='"+sytle+"'  id='" + String.valueOf(list.get(i).get("tree_id"))
-													+ "@" + String.valueOf(list.get(i).get("tree_name"))
-													+ "@"+String.valueOf(list.get(i).get("parent_id"))
-													+ "@" + String.valueOf(list.get(i).get("sort"))
-													+ "@" + items[j] + "'>" + delNull(String.valueOf(list.get(i).get(items[j]))));
-							}
-						}
-						stringBuffer.append("</td><td class='"+sytle+"' id='" + String.valueOf(list.get(i).get("tree_id"))
-								+ "@" + String.valueOf(list.get(i).get("tree_name"))
-								+ "@"+String.valueOf(list.get(i).get("parent_id"))
-								+ "@" + String.valueOf(list.get(i).get("sort"))
-								+ "@lrsp'>" + delNull(String.valueOf(list.get(i).get("LRSP"))));
-						stringBuffer.append("</td><td class='"+sytle+"' style='display:none'  >" + delNull(String.valueOf(list.get(i).get("leval"))));
-						stringBuffer.append("</td><td class='"+sytle+"' style='display:none'  >" + delNull(String.valueOf(list.get(i).get("sort"))));
-						stringBuffer.append("</td></tr>");
-					}else{
-						stringBuffer.append("<tr><td class='"+sytle+"' id='" + String.valueOf(list.get(i).get("tree_id"))
-								+ "@" + String.valueOf(list.get(i).get("tree_name"))
-								+ "@"+String.valueOf(list.get(i).get("parent_id"))
-								+ "@" + String.valueOf(list.get(i).get("sort"))
-								+ "@jl2'>" + delNull(String.valueOf(list.get(i).get("JL2")))+"</td><td class='"+sytle+"'  id='" + String.valueOf(list.get(i).get("tree_id"))
-								+ "@" + String.valueOf(list.get(i).get("tree_name"))
-								+ "@"+String.valueOf(list.get(i).get("parent_id"))
-								+ "@" + String.valueOf(list.get(i).get("sort"))
-								+ "@cqye'>"
-								+ delNull(String.valueOf(list.get(i).get("CQYE"))));
-						for (int j = 0; j < items.length; j++) {
-							stringBuffer.append(" </td><td class='"+sytle+"' id='" + String.valueOf(list.get(i).get("tree_id"))
-								+ "@" + String.valueOf(list.get(i).get("tree_name"))
-								+ "@"+String.valueOf(list.get(i).get("parent_id"))
-								+ "@" + String.valueOf(list.get(i).get("sort"))
-								+ "@"+ items[j] +"'>" + delNull(String.valueOf(list.get(i).get(items[j]))));
-						}
-						stringBuffer.append("</td><td class='"+sytle+"' id='" + String.valueOf(list.get(i).get("tree_id"))
-								+ "@" + String.valueOf(list.get(i).get("tree_name"))
-								+ "@"+String.valueOf(list.get(i).get("parent_id"))
-								+ "@" + String.valueOf(list.get(i).get("sort"))
-								+ "@lrsp'>" + delNull(String.valueOf(list.get(i).get("LRSP"))));
-						stringBuffer.append("</td><td class='"+sytle+"' style='display:none'  >" + delNull(String.valueOf(list.get(i).get("leval"))));
-						stringBuffer.append("</td><td class='"+sytle+"' style='display:none'  >" + delNull(String.valueOf(list.get(i).get("sort"))));
-						stringBuffer.append("</td></tr>");
-					}
-				}
-			}
-
-			return stringBuffer;
-		}
 	   
-	   
-	   public static StringBuffer buildZjlr_father_view(List<Map<String, Object>> list, String rolename,int leval) {
+	   public static StringBuffer buildZjlr_father_sum_view(List<Map<String, Object>> list) {
 			StringBuffer stringBuffer = new StringBuffer();
-			String sytle = levelToStyle(leval);
 			if (list != null) {
 				for (int i = 0; i < list.size(); i++) {
-					if (i == 0) {
-						stringBuffer.append("<tr><td  class='"+sytle+"'>"
-						+ delNull(String.valueOf(list.get(i).get("tree_name")))
-						+ " </td><td class='"+sytle+"' "
-						+ " id='" + String.valueOf(list.get(i).get("tree_id"))
-						+ "@" + String.valueOf(list.get(i).get("tree_name"))
-						+ "@"+String.valueOf(list.get(i).get("parent_id"))+"@ysfy'>" 
-						+ delNull(String.valueOf(list.get(i).get("YSFY"))) 
-						+ "</td><td class='"+sytle+"'"
-						+ " id='" + String.valueOf(list.get(i).get("tree_id"))
-						+ "@" + String.valueOf(list.get(i).get("tree_name"))
-						+ "@"+String.valueOf(list.get(i).get("parent_id"))+"@lj'>" 
-						+  delNull(String.valueOf(list.get(i).get("lj")))
-						+ "</td><td class='"+sytle+"' id='" + String.valueOf(list.get(i).get("tree_id"))
-						+ "@" + String.valueOf(list.get(i).get("tree_name"))
-						+ "@"+String.valueOf(list.get(i).get("parent_id"))+"@yfsdz'>"+ delNull(String.valueOf(list.get(i).get("YFSDZ")))+"</td><td class='"+sytle+"' id='" + String.valueOf(list.get(i).get("tree_id"))
-						+ "@" + String.valueOf(list.get(i).get("tree_name"))
-						+ "@"+String.valueOf(list.get(i).get("parent_id"))+"@zjjd'>"+ delNull(String.valueOf(list.get(i).get("ZJJD")))+"</td><td class='"+sytle+"'"
-						+ " id='" + String.valueOf(list.get(i).get("tree_id"))
-						+ "@" + String.valueOf(list.get(i).get("tree_name"))
-						+ "@"+String.valueOf(list.get(i).get("parent_id"))+"@cqye'>" + delNull(String.valueOf(list.get(i).get("CQYE"))));
-						for (int j = 0; j < items.length; j++) {
-							stringBuffer.append("</td><td class='"+sytle+"'"
-						+ " id='" + String.valueOf(list.get(i).get("tree_id"))
-								+ "@" + String.valueOf(list.get(i).get("tree_name"))
-								+"@"+String.valueOf(list.get(i).get("parent_id"))+ "@"+ items[j] +"'>"
-							+ delNull(String.valueOf(list.get(i).get(items[j]))));
-						}
-						stringBuffer.append("</td><td class='"+sytle+"' id='" + String.valueOf(list.get(i).get("tree_id"))
-								+ "@" + String.valueOf(list.get(i).get("tree_name"))
-								+ "@"+String.valueOf(list.get(i).get("parent_id"))+"@lrsp'>" + delNull(String.valueOf(list.get(i).get("LRSP"))));
-						stringBuffer.append("</td><td class='"+sytle+"' style='display:none'  >" + delNull(String.valueOf(list.get(i).get("leval"))));
-						stringBuffer.append("</td><td class='"+sytle+"' style='display:none'  >" + delNull(String.valueOf(list.get(i).get("sort"))));
-						stringBuffer.append("</td></tr>");
-					}
-				}
-			}
-
-			return stringBuffer;
-		}
-
-	   public static StringBuffer buildZjzc_father_sum_view(List<Map<String, Object>> list,int leval) {
-			StringBuffer stringBuffer = new StringBuffer();
-			String sytle = levelToStyle(leval);
-			if (list != null) {
-				for (int i = 0; i < list.size(); i++) {
-					if (i == 0) {
-						stringBuffer.append("<tr><td  rowspan='8' class='"+sytle+"'>"
-						+ delNull(String.valueOf(list.get(i).get("tree_name")))
-						+ "</td><td rowspan='8' class='"+sytle+"' id='" + String.valueOf(list.get(i).get("tree_id"))
-						+ "@" + String.valueOf(list.get(i).get("tree_name"))
-						+ "@"+String.valueOf(list.get(i).get("parent_id"))
-						+ "@" + String.valueOf(list.get(i).get("sort"))
-						+ "@ysfy'></td><td  class='"+sytle+"' id='" + String.valueOf(list.get(i).get("tree_id"))
-						+ "@" + String.valueOf(list.get(i).get("tree_name"))
-						+ "@"+String.valueOf(list.get(i).get("parent_id"))
-						+ "@" + String.valueOf(list.get(i).get("sort"))
-						+ "@jl2'></td><td rowspan='8' class='"+sytle+"' id='" + String.valueOf(list.get(i).get("tree_id"))
-						+ "@" + String.valueOf(list.get(i).get("tree_name"))
-						+ "@"+String.valueOf(list.get(i).get("parent_id"))
-						+ "@" + String.valueOf(list.get(i).get("sort"))
-						+ "@yfsdz'></td><td rowspan='8' class='"+sytle+"' id='" + String.valueOf(list.get(i).get("tree_id"))
-						+ "@" + String.valueOf(list.get(i).get("tree_name"))
-						+ "@"+String.valueOf(list.get(i).get("parent_id"))
-						+ "@" + String.valueOf(list.get(i).get("sort"))
-						+ "@zjjd'></td><td class='"+sytle+"' id='" + String.valueOf(list.get(i).get("tree_id"))
-						+ "@" + String.valueOf(list.get(i).get("tree_name"))
-						+ "@"+String.valueOf(list.get(i).get("parent_id"))
-						+ "@" + String.valueOf(list.get(i).get("sort"))
-						+ "@cqye'>");
-						for (int j = 0; j < items.length; j++) {
-							stringBuffer.append("</td><td class='"+sytle+"' id='" + String.valueOf(list.get(i).get("tree_id"))
-								+ "@" + String.valueOf(list.get(i).get("tree_name"))
-								+ "@"+String.valueOf(list.get(i).get("parent_id"))
-								+ "@" + String.valueOf(list.get(i).get("sort"))
-								+ "@"+ items[j] +"'>");
-						}
-						stringBuffer.append("</td><td class='"+sytle+"' id='" + String.valueOf(list.get(i).get("tree_id"))
-								+ "@" + String.valueOf(list.get(i).get("tree_name"))
-								+ "@"+String.valueOf(list.get(i).get("parent_id"))
-								+ "@" + String.valueOf(list.get(i).get("sort"))
-								+ "@lrsp'>");
-						stringBuffer.append("</td><td class='"+sytle+"' style='display:none'  >" + delNull(String.valueOf(list.get(i).get("leval"))));
-						stringBuffer.append("</td><td class='"+sytle+"' style='display:none'  >" + delNull(String.valueOf(list.get(i).get("sort"))));
-						stringBuffer.append("</td></tr>");
-					} else {
-						stringBuffer.append("</td><td class='"+sytle+"' id='" + String.valueOf(list.get(i).get("tree_id"))
-								+ "@" + String.valueOf(list.get(i).get("tree_name"))
-								+ "@"+String.valueOf(list.get(i).get("parent_id"))
-								+ "@" + String.valueOf(list.get(i).get("sort"))
-								+ "@jl2'></td><td class='"+sytle+"' id='" + String.valueOf(list.get(i).get("tree_id"))
-								+ "@" + String.valueOf(list.get(i).get("tree_name"))
-								+ "@"+String.valueOf(list.get(i).get("parent_id"))
-								+ "@" + String.valueOf(list.get(i).get("sort"))
-								+ "@cqye'>");
-						for (int j = 0; j < items.length; j++) {
-							stringBuffer.append(" </td><td class='"+sytle+"' id='" + String.valueOf(list.get(i).get("tree_id"))
-								+ "@" + String.valueOf(list.get(i).get("tree_name"))
-								+ "@"+String.valueOf(list.get(i).get("parent_id"))
-								+ "@" + String.valueOf(list.get(i).get("sort"))
-								+ "@"+ items[j] +"'>");
-						}
-						stringBuffer.append("</td><td class='"+sytle+"' id='" + String.valueOf(list.get(i).get("tree_id"))
-								+ "@" + String.valueOf(list.get(i).get("tree_name"))
-								+ "@"+String.valueOf(list.get(i).get("parent_id"))
-								+ "@" + String.valueOf(list.get(i).get("sort"))
-								+ "@lrsp'>");
-						stringBuffer.append("</td><td class='"+sytle+"' style='display:none'  >" + delNull(String.valueOf(list.get(i).get("leval"))));
-						stringBuffer.append("</td><td class='"+sytle+"' style='display:none'  >" + delNull(String.valueOf(list.get(i).get("sort"))));
-						stringBuffer.append("</td></tr>");
-					}
-				}
-			}
-
-			return stringBuffer;
-		}
-	   
-	   public static StringBuffer buildZjlr_father_sum_view(List<Map<String, Object>> list,int leval) {
-			StringBuffer stringBuffer = new StringBuffer();
-			String sytle = levelToStyle(leval);
-			if (list != null) {
-				for (int i = 0; i < list.size(); i++) {
-					if (i == 0) {
+						String sytle = levelToStyle(Integer.parseInt(list.get(i).get("leval").toString()));
 						stringBuffer.append("<tr><td class='"+sytle+"'>"
 						+ delNull(String.valueOf(list.get(i).get("tree_name")))
-						+ "</td><td class='"+sytle+"' id='" + String.valueOf(list.get(i).get("tree_id"))
-						+ "@" + String.valueOf(list.get(i).get("tree_name"))
-						+ "@"+String.valueOf(list.get(i).get("parent_id"))
-						+ "@ysfy'></td><td class='"+sytle+"' id='" + String.valueOf(list.get(i).get("tree_id"))
-						+ "@" + String.valueOf(list.get(i).get("tree_name"))
-						+ "@"+String.valueOf(list.get(i).get("parent_id"))
-						+ "@lj'></td><td  class='"+sytle+"' id='" + String.valueOf(list.get(i).get("tree_id"))
-						+ "@" + String.valueOf(list.get(i).get("tree_name"))
-						+ "@"+String.valueOf(list.get(i).get("parent_id"))
-						+ "@yfsdz'></td><td class='"+sytle+"' id='" + String.valueOf(list.get(i).get("tree_id"))
-						+ "@" + String.valueOf(list.get(i).get("tree_name"))
-						+ "@"+String.valueOf(list.get(i).get("parent_id"))
-						+ "@zjjd'></td><td class='"+sytle+"' id='" + String.valueOf(list.get(i).get("tree_id"))
-						+ "@" + String.valueOf(list.get(i).get("tree_name"))
-						+ "@"+String.valueOf(list.get(i).get("parent_id"))
-						+ "@cqye'>");
+						+ "</td><td class='"+sytle+"' >" 
+						+ delNull(String.valueOf(list.get(i).get("ysfy")))
+						+ "</td><td class='"+sytle+"'>" 
+						+ delNull(String.valueOf(list.get(i).get("jl2")))
+						+ "</td><td  class='"+sytle+"'>"
+						+ delNull(String.valueOf(list.get(i).get("yfsdz")))
+						+ "</td><td class='"+sytle+"'>" 
+						+ delNull(String.valueOf(list.get(i).get("zjjd")))
+						+ "</td><td class='"+sytle+"'>"
+						+ delNull(String.valueOf(list.get(i).get("cqye"))));
 						for (int j = 0; j < items.length; j++) {
-							stringBuffer.append("</td><td class='"+sytle+"' id='" + String.valueOf(list.get(i).get("tree_id"))
-								+ "@" + String.valueOf(list.get(i).get("tree_name"))
-								+ "@"+String.valueOf(list.get(i).get("parent_id"))
-								+ "@"+ items[j] +"'>");
+							stringBuffer.append("</td><td class='"+sytle+"'>" + delNull(String.valueOf(list.get(i).get(items[j]))));
 						}
-						stringBuffer.append("</td><td class='"+sytle+"' id='" + String.valueOf(list.get(i).get("tree_id"))
-								+ "@" + String.valueOf(list.get(i).get("tree_name"))
-								+ "@"+String.valueOf(list.get(i).get("parent_id"))
-								+ "@lrsp'>");
+						stringBuffer.append("</td><td class='"+sytle+"'>" + delNull(String.valueOf(list.get(i).get("lrsp"))));
 						stringBuffer.append("</td><td class='"+sytle+"' style='display:none'  >" + delNull(String.valueOf(list.get(i).get("leval"))));
 						stringBuffer.append("</td><td class='"+sytle+"' style='display:none'  >" + delNull(String.valueOf(list.get(i).get("sort"))));
 						stringBuffer.append("</td></tr>");
-					} 
+					
 				}
 			}
 
@@ -403,7 +148,7 @@ public class ZjglBuild {
 
 	public static String delNull(String str) {
 		if (str.equals("null") || str.equals("0")) {
-			return "";
+			return "0";
 		} else {
 			return str;
 		}
