@@ -30,11 +30,11 @@ public class XfjbManager extends AbstractBaseBean {
 		String condition = request.getParameter("condition");
 		String fullName = ManagerFactory.getUserManager().getUserWithId(userId)
 				.getFullName();
-		String sql = "select  t.yw_guid,t.bh,t.xzq,t.jbr,t.jbxs,t.lxdz,t.jbzywt,to_char(t.jbsj, 'yyyy-MM-dd')as jbsj ,t.lxdh ,t.jsr,t.jlr,j.activity_name_ ajblzt, j.wfinsid from xfdjb t join workflow.v_active_task j on t.yw_guid=j.yw_guid where j.assignee_=?";
+		String sql = "select  t.userid,t.yw_guid,t.bh,t.xzq,t.jbr,t.jbxs,t.lxdz,t.jbzywt,t.jbsj,t.lxdh ,t.jsr,t.jlr,j.activity_name_ ajblzt, j.wfinsid from xfdjb t join workflow.v_active_task j on t.yw_guid=j.yw_guid where j.assignee_=?";
 		if(condition!=null && !"".equals(condition)){
 	        condition = UtilFactory.getStrUtil().unescape(condition);
 	        condition="(select * from xfdjb where "+condition+")";
-	        sql = "select  t.yw_guid,t.bh,t.xzq,t.jbr,t.jbxs,t.lxdz,t.jbzywt,to_char(t.jbsj, 'yyyy-MM-dd')as jbsj ,t.lxdh ,t.jsr,t.jlr,j.activity_name_ ajblzt, j.wfinsid from "+condition+"  t join workflow.v_active_task j on t.yw_guid=j.yw_guid where j.assignee_=?";
+	        sql = "select  t.userid,t.yw_guid,t.bh,t.xzq,t.jbr,t.jbxs,t.lxdz,t.jbzywt,t.jbsj,t.lxdh ,t.jsr,t.jlr,j.activity_name_ ajblzt, j.wfinsid from "+condition+"  t join workflow.v_active_task j on t.yw_guid=j.yw_guid where j.assignee_=?";
 		}
 		if (keyWord != null && !"".equals(keyWord)) {
 			keyWord = UtilFactory.getStrUtil().unescape(keyWord);
@@ -69,11 +69,11 @@ public class XfjbManager extends AbstractBaseBean {
 		String fullName = ManagerFactory.getUserManager().getUserWithId(userId)
 				.getFullName();
 		// 获取数据
-		String sql = "select distinct t.yw_guid,t.bh,t.xzq,t.jbr,t.jbxs,t.lxdz,t.jbzywt,to_char(t.jbsj, 'yyyy-MM-dd')as jbsj ,t.lxdh ,t.jsr,t.jlr,j.activityname as ajblzt, j.wfinsid from xfdjb t inner join workflow.v_hist_task j on t.yw_guid=j.yw_guid where j.assignee_=?";
+		String sql = "select distinct t.userid,t.yw_guid,t.bh,t.xzq,t.jbr,t.jbxs,t.lxdz,t.jbzywt,t.jbsj,t.lxdh ,t.jsr,t.jlr,j.wfinsid from xfdjb t inner join workflow.v_hist_task j on t.yw_guid=j.yw_guid where j.assignee_=?";
 		if(condition!=null && !"".equals(condition)){
 	        condition = UtilFactory.getStrUtil().unescape(condition);
 	        condition="(select * from xfdjb where "+condition+")";
-	        sql = "select distinct t.yw_guid,t.bh,t.xzq,t.jbr,t.jbxs,t.lxdz,t.jbzywt,to_char(t.jbsj, 'yyyy-MM-dd')as jbsj ,t.lxdh ,t.jsr,t.jlr,j.activityname as ajblzt, j.wfinsid from "+condition+" t inner join workflow.v_hist_task j on t.yw_guid=j.yw_guid where j.assignee_=?";
+	        sql = "select distinct t.userid,t.yw_guid,t.bh,t.xzq,t.jbr,t.jbxs,t.lxdz,t.jbzywt,t.jbsj,t.lxdh ,t.jsr,t.jlr,j.wfinsid from "+condition+" t inner join workflow.v_hist_task j on t.yw_guid=j.yw_guid where j.assignee_=?";
 	    }
 		if (keyWord != null && !"".equals(keyWord)) {
 			keyWord = UtilFactory.getStrUtil().unescape(keyWord);
@@ -104,11 +104,11 @@ public class XfjbManager extends AbstractBaseBean {
 		String keyWord = request.getParameter("keyWord");
 		//String userId = request.getParameter("userId");
 		String condition = request.getParameter("condition");
-		String sql = "select t.bh,t.xzq, t.yw_guid,t.jbr,t.jbxs,t.lxdz,t.jbzywt,to_char(t.jbsj, 'yyyy-MM-dd')as jbsj ,t.lxdh ,t.jsr,t.jlr, j.activity_name_ ajblzt, j.wfinsid from xfdjb t inner join workflow.v_active_task j on t.yw_guid=j.yw_guid ";
+		String sql = "select t.userid,t.bh,t.xzq, t.yw_guid,t.jbr,t.jbxs,t.lxdz,t.jbzywt,t.jbsj,t.lxdh ,t.jsr,t.jlr, j.activity_name_ ajblzt, j.wfinsid from xfdjb t inner join workflow.v_active_task j on t.yw_guid=j.yw_guid ";
 		if(condition!=null && !"".equals(condition)){
 	        condition = UtilFactory.getStrUtil().unescape(condition);
 	        condition="(select * from xfdjb where "+condition+")";
-	        sql = "select t.bh,t.xzq, t.yw_guid,t.jbr,t.jbxs,t.lxdz,t.jbzywt,to_char(t.jbsj, 'yyyy-MM-dd')as jbsj ,t.lxdh ,t.jsr,t.jlr, j.activity_name_ ajblzt, j.wfinsid from "+condition+" t inner join workflow.v_active_task j on t.yw_guid=j.yw_guid ";
+	        sql = "select t.userid,t.bh,t.xzq, t.yw_guid,t.jbr,t.jbxs,t.lxdz,t.jbzywt,t.jbsj,t.lxdh ,t.jsr,t.jlr, j.activity_name_ ajblzt, j.wfinsid from "+condition+" t inner join workflow.v_active_task j on t.yw_guid=j.yw_guid ";
 		}
 		if (keyWord != null && !"".equals(keyWord)) {
 			keyWord = UtilFactory.getStrUtil().unescape(keyWord);
@@ -137,11 +137,11 @@ public class XfjbManager extends AbstractBaseBean {
 		//String userId = request.getParameter("userId");
         String condition = request.getParameter("condition");
 			// 获取数据
-			String sql = "select t.bh,t.xzq,t.yw_guid,t.jbr,t.jbxs,t.lxdz,t.jbzywt,to_char(t.jbsj, 'yyyy-MM-dd')as jbsj ,t.lxdh ,t.jsr,t.jlr,j.endactivity_ ajblzt, j.wfinsid from xfdjb t inner join workflow.v_end_wfins j on t.yw_guid=j.yw_guid ";
+			String sql = "select t.userid,t.bh,t.xzq,t.yw_guid,t.jbr,t.jbxs,t.lxdz,t.jbzywt,t.jbsj,t.lxdh ,t.jsr,t.jlr,j.endactivity_ ajblzt, j.wfinsid from xfdjb t inner join workflow.v_end_wfins j on t.yw_guid=j.yw_guid ";
 			if(condition!=null && !"".equals(condition)){
 	            condition = UtilFactory.getStrUtil().unescape(condition);
 	            condition="(select * from xfdjb where "+condition+")";
-	            sql = "select t.bh,t.xzq,t.yw_guid,t.jbr,t.jbxs,t.lxdz,t.jbzywt,to_char(t.jbsj, 'yyyy-MM-dd')as jbsj ,t.lxdh ,t.jsr,t.jlr,j.endactivity_ ajblzt, j.wfinsid from "+condition+" t inner join workflow.v_end_wfins j on t.yw_guid=j.yw_guid ";
+	            sql = "select t.userid,t.bh,t.xzq,t.yw_guid,t.jbr,t.jbxs,t.lxdz,t.jbzywt,t.jbsj,t.lxdh ,t.jsr,t.jlr,j.endactivity_ ajblzt, j.wfinsid from "+condition+" t inner join workflow.v_end_wfins j on t.yw_guid=j.yw_guid ";
 	        }
 			if (keyWord != null && !"".equals(keyWord)) {
 				keyWord = UtilFactory.getStrUtil().unescape(keyWord);
@@ -189,5 +189,22 @@ public void getReport(){
         conditionMap.put("query", query.toString());
         response(String.valueOf(new CBDReportManager().getReport("XFJBCX", new Object[]{conditionMap})));
     }
-    
+/**
+ * 
+ * <br>Description:判断是否已办结
+ * <br>Author:侯文超
+ * <br>Date:2014-07-11
+ */
+public void isEnd(){
+	String yw_guid = request.getParameter("yw_guid");
+	String sql="select t.userid,t.bh from xfdjb t inner join workflow.v_end_wfins j on t.yw_guid=j.yw_guid where t.yw_guid ='"+yw_guid+"'";
+	List<Map<String, Object>> result = query(sql, YW);
+	String isEnd ="";
+	if(result.size()>0){
+		isEnd="1";
+	}else{
+		isEnd="0";
+	}
+	response(isEnd);
+}
 }

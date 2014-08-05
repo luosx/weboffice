@@ -32,4 +32,28 @@ public class DevicePlayBack extends AbstractBaseBean {
 		List<Map<String, Object>> result = query(sql, YW, new Object[] { start, end });
 		response(result);
 	}
+	
+	/**
+	 * @Description:获取有轨迹的日期
+	 * @author 姚建林
+	 * @date 2014年8月1日
+	 * @return
+	 */
+	public void getGPSLog(){ 
+		List<Map<String,Object>> list = null;
+		StringBuffer resultString = new StringBuffer();
+		String year = request.getParameter("year").toString(); 
+		String month = request.getParameter("month").toString();
+		String gps_id = request.getParameter("gps_id").toString();
+		if(Integer.valueOf(month) < 10){
+			month = "0" + month;
+		}
+		String querySQL = "select distinct TO_NUMBER(DAY) as DAY from DEVICE_TRACK t where gps_id=? and month=? and year=?";
+		System.out.println(request.getParameter("gps_id"));
+		list = query(querySQL,GIS,new Object[]{gps_id,month,year});
+		for (int i = 0; i < list.size(); i++) {
+			resultString.append(list.get(i).get("DAY")).append(",");
+		}
+		response(resultString.toString());
+	}
 }

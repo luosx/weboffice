@@ -1,8 +1,12 @@
 package com.klspta.web.xiamen.xchc;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import com.klspta.base.AbstractBaseBean;
 import com.klspta.model.CBDReport.bean.TDBean;
@@ -14,13 +18,48 @@ public class Illegalreport extends AbstractBaseBean implements IDataClass {
 
     @Override
     public Map<String, TRBean> getTRBeans(Object[] obj, TRBean trBean) {
-        String userId = (String)obj[0];      
+        String userId = (String)obj[0];
+        String xzq = (String)obj[1];
+        String begindate = (String)obj[2];
+        String enddate = (String)obj[3];
+        
+        Date begintime= null;
+        Date endtime= null;     
+        SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss 'UTC 0800' yyyy",Locale.ENGLISH);
+        SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+        StringBuffer query = new StringBuffer();
+        if (xzq != null && !("".equals(xzq))) {
+        	if("350200".equals(xzq)){
+        		query.append(" and t.impxzqbm like '").append("3502").append("%'");
+        	}else{
+        		query.append(" and t.impxzqbm like '").append(xzq).append("%'");
+        	}
+        }       
+        if(begindate !=null && !("".equals(begindate))){
+            try {
+                begintime = sdf.parse(begindate);
+                begindate = sdf1.format(begintime);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            query.append(" and to_date(t.begindate,'YYYY-MM-DD') > ").append("to_date('").append(begindate).append("','YYYY-MM-DD')");
+        }
+        if(enddate !=null && !("".equals(enddate))){
+            try {         
+                endtime = sdf.parse(enddate);
+                enddate = sdf1.format(endtime);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            query.append(" and to_date(t.begindate,'YYYY-MM-DD') <").append("to_date('").append(enddate).append("','YYYY-MM-DD')");
+        }
+        
         Map<String, TRBean> trbeans = new LinkedHashMap<String, TRBean>();    
         List<TRBean> titleList = getTitle();
         for(int i=0;i<titleList.size();i++){
             trbeans.put(i+"0", titleList.get(i));
         }      
-        List<TRBean> bodyList = getBody(userId);
+        List<TRBean> bodyList = getBody(userId,query.toString());
         for(int i=0;i<bodyList.size();i++){
             trbeans.put(i+"1", bodyList.get(i));
         }               
@@ -84,12 +123,13 @@ public class Illegalreport extends AbstractBaseBean implements IDataClass {
         return list;      
     }
     
-    private List<TRBean> getBody(String userId){
+    private List<TRBean> getBody(String userId,String where){
         List<TRBean> list = new ArrayList<TRBean>();          
         List<Map<String,Object>> result = null;  
         String sql = "select rownum xh, t.ydxmmc,t.ydzt,t.ydwz,t.zdmj,t.gdmj,t.jzmj,t.jzxz,t.yt,t.fhgh,t.fxsj,t.zzqk,t.zztzsbh,t.wjzzhjxzz,t.yydspqcz from dc_ydqkdcb t " +
                      "where t.yw_guid like 'XC%' and t.state='未立案'";
         sql = XzqHandle.getXzqSql(userId, sql, "impxzqbm");
+        sql += where;
         result = query(sql,YW);
         for(int i=0;i<result.size();i++){
             TRBean tr = new TRBean();
