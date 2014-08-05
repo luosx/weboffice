@@ -121,7 +121,11 @@ input{
 		 	<td><input type="text" name="wjzzhjxzz" id="wjzzhjxzz" ></td>
 		 	<td>有用地审批<br>且超占</td>
 		 	<td><input type="text" name="yydspqcz" id="yydspqcz" ></td>
-		 </tr> 
+		 </tr>
+		 <tr>
+		 	<td>巡查人员</td>
+		 	<td colspan="3"><input type="text" name="xcry" id="xcry" ></td>
+		 </tr>  
 		</table>
 		<%}else{ %>
 		<table width="600px" cellspacing="0" cellpadding="0" align='center' border='1' style="text-align: center; border-left:1px solid #2C2B29; border-top:1px solid #2C2B29; border-bottom:none; background:#ffffff">

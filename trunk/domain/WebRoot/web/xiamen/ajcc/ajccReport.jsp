@@ -21,7 +21,9 @@ Object userprincipal = SecurityContextHolder.getContext().getAuthentication().ge
 	} catch (Exception e) {
 		e.printStackTrace();
 	}
-	
+	String xzq = request.getParameter("xzq");
+	String begindate = request.getParameter("begindate");
+	String enddate = request.getParameter("enddate");
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
@@ -122,7 +124,16 @@ Object userprincipal = SecurityContextHolder.getContext().getAuthentication().ge
 		    //复制TextRange中内容 
 		    //oSheet.Paste(); 
 		    oSheet.Paste(); 
-		    //粘贴到活动的EXCEL中       
+		    //粘贴到活动的EXCEL中
+		    
+		    //去掉表格背景颜色
+		    var AJCCtable = document.all.AJCC;//指定要写入的数据源的id
+			var hang = AJCCtable.rows.length;//取数据源行数
+			var lie = AJCCtable.rows(0).cells.length;//取数据源列数
+			for (var i=1;i<=hang;i++){
+				oSheet.Range(oSheet.Cells(i,1),oSheet.Cells(i,lie+1)).Interior.ColorIndex=2;
+			}
+		           
 		    oXL.Visible = true; 
 		    //设置excel可见属性 
 		}
@@ -131,8 +142,6 @@ Object userprincipal = SecurityContextHolder.getContext().getAuthentication().ge
   <body >
   	<div id="fixed" style="position: fixed; top: 5px; left: 0px">
   		&nbsp;
-  		<img src="base/form/images/print.png" width="20px" height="20px" title="打印" onClick="print();"  />&nbsp;&nbsp;&nbsp;
-		<img src="base/form/images/exportexcel.png" width="20px" height="20px" title="导出Excel" onClick="javascript:exportExcel();"  />
 	</div>
 	
 	   <div align="center" style="margin-top: 15px">
@@ -146,7 +155,7 @@ Object userprincipal = SecurityContextHolder.getContext().getAuthentication().ge
 	    </div>
 	    
 	<div align="center" id="center" style="position:absolute; top:65px; left: 20px;">
-  		<%=new CBDReportManager().getReport("AJCC",new Object[]{userid})%>
+  		<%=new CBDReportManager().getReport("AJCC",new Object[]{userid,xzq,begindate,enddate})%>
   	</div>
   </body>
 </html>

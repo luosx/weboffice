@@ -33,6 +33,7 @@ var tree = new Ext.tree.TreePanel({
 					}
 					if (trackNode.length == 1) {
 						Ext.getCmp("playBack").setDisabled(false);
+						Ext.getCmp("showWindow").setDisabled(false);
 					}
 					return;
 				}
@@ -40,6 +41,7 @@ var tree = new Ext.tree.TreePanel({
 				trackNode.push(node);
 				if (trackNode.length > 1) {
 					Ext.getCmp("playBack").setDisabled(true);
+					Ext.getCmp("showWindow").setDisabled(true);
 				}
 				return;
 			}

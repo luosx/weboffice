@@ -90,8 +90,9 @@ body {
 				<td width="100%"  background="<%=resourcePath%>images/top/bg_w.png">
 			
 					<%out.print(ManagerFactory.getMenuManager().getMenuCode(user,"",1));%>
-					<span style="font-size:12px;position:relative;top:5px;width:92%;text-align:right"><%=fullName%>,<%=today%>,星期<%=day%></span>
+					<span style="font-size:12px;position:relative;top:5px;width:82%;text-align:right"><%=fullName%>,<%=today%>,星期<%=day%></span>
 					<span style="font-size:12px;position:relative;top:5px;cursor:pointer;"><a onclick="fankui()" style="color:red;">反馈</a></span>
+					<span style="font-size:12px;position:relative;top:5px;cursor:pointer;"><a onclick="helpfile()" style="color:red;">资料下载</a></span>
 				</td>
 				
 				<td width=1950" align="left" style="background:url(<%=resourcePath%>images/top/bg_w.png);cursor:pointer;">			
@@ -126,7 +127,11 @@ function mouserNavMoveOnOrOut(obj,color,isMouseIn)
 		obj.style.color=color;	
 }
 function openMenu(menuId){
-parent.content.left.location.href="<%=basePath%>web/<%=name%>/framework/pages/left.jsp?menuId="+menuId;	
+if(isLoad == true){
+parent.content.left.location.href="<%=basePath%>web/<%=name%>/framework/pages/left.jsp?menuId="+menuId+"&firstFlag=true";	
+}else{
+parent.content.left.location.href="<%=basePath%>web/<%=name%>/framework/pages/left.jsp?menuId="+menuId+"&firstFlag=false";	
+}
 }
 function clickMenu(obj,menuId)
 {	
@@ -228,7 +233,7 @@ function openPage(obj,url){
 	//点击首页时，进入首页
 	function returnFirst(){
 		//top.location.href="<%=basePath%>login/login.jsp";
-		parent.location.href="<%=basePath%>web/xuzhouNW/main.jsp";
+		parent.location.href="<%=basePath%>web/<%=name%>/main.jsp";
 	}
 	//打开地图
 	function openMap(){
@@ -238,6 +243,12 @@ function openPage(obj,url){
 	//反馈功能模块
 	function fankui(){
 		var url = "/domain/web/xiamen/xxfk/xxfkTab.jsp";     
+		var height = window.screen.availHeight;
+		var width = window.screen.availWidth-5;
+		window.open(url,"","width="+width+",height="+height);
+	}
+	function helpfile(){
+		var url = "/domain/web/xiamen/download/downloadList.jsp";     
 		var height = window.screen.availHeight;
 		var width = window.screen.availWidth-5;
 		window.open(url,"","width="+width+",height="+height);

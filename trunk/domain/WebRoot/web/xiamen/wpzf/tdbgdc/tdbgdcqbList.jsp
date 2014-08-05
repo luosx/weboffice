@@ -23,6 +23,7 @@
 		var width;
 		var height;
 		var store;
+		var storeAll;
 		var grid;
 		var limitNum;
 		Ext.onReady(function(){
@@ -62,7 +63,39 @@
 					]
 			});
 			store.load({params:{start:0, limit:limitNum}});
+			storeAll = new Ext.data.JsonStore({
+				proxy:new Ext.ux.data.PagingMemoryProxy(myData),
+					remoteSort:true,
+					fields:[
+						{name:'YW_GUID'},
+						{name:'XZDM'},
+						{name:'TBBH'},
+						{name:'TBLX'},
+						{name:'XZB'},
+						{name:'YZB'},
+						{name:'QSX'},
+						{name:'HSX'},
+						{name:'JCMJ'},
+						{name:'YGSPMJ'},
+						{name:'YGSPBL'},
+						{name:'YGGDMJ'},
+						{name:'YGGDBL'},
+						{name:'NYDMJ'},
+						{name:'GDMJ'},
+						{name:'JSYDMJ'},
+						{name:'WLYDMJ'},
+						{name:'YXJSQ'},
+						{name:'YTJJSQ'},
+						{name:'XZJSQ'},
+						{name:'JZJSQ'},
+						{name:'FHGHMJ'},
+						{name:'BFHGHMJ'},
+						{name:'ZYJBNTMJ'}												
+					]
+			});
+			storeAll.load({params:{start:0, limit:myData.length}});
 			sm = new Ext.grid.CheckboxSelectionModel({handleMouseDown:Ext.emptyFn});
+			smAll = new Ext.grid.CheckboxSelectionModel({handleMouseDown:Ext.emptyFn});
 			var districtStore = new Ext.data.JsonStore({
 				fields : ['name','code'],
 				data :   <%=xzq%>
@@ -172,12 +205,6 @@
 							html : '&nbsp;&nbsp;注：单位为平方米'
 						}						
 			    ], 
-			    listeners:{
-		  			rowclick : function(grid, rowIndex, e)
-					{
-						
-					}
-        		},
 		        stripeRows: true,
 		        width:width,
 		        height: height-28 ,
@@ -196,10 +223,13 @@
 		        	text:'设为违法',
 		        	handler: setWf
 		        },{
-		        	text:'导出Excel',
+		        	text:'导出已选',
 		        	handler: expExcel
+		        },{
+		        	text:'导出全部',
+		        	handler: expExcelAll
 		        }]
-        	});         	 				
+        	});
 			grid.render('mygrid_container');
 			this.tb = new Ext.Toolbar({
 				renderTo : grid.tbar,
@@ -280,12 +310,14 @@
 	}
 	//导出Excel
 	function expExcel(){
-		downloadViewData(grid);	
+		downloadViewData(grid,"");	
 	}
 	
-	function downloadViewData(grid){		
-	  if(grid.getSelectionModel().hasSelection()){
-	   		var records=grid.getSelectionModel().getSelections();
+	function expExcelAll(){
+		downloadViewData(grid,"all");
+	}
+	function downloadViewData(grid,symbol){		
+	  if(grid.getSelectionModel().hasSelection() || "all" == symbol){
 			try {
 				var xls = new ActiveXObject("Excel.Application");
 				} catch (e) {
@@ -298,24 +330,36 @@
 		   		var xlBook = xls.Workbooks.Add;
 		   		var xlSheet = xlBook.Worksheets(1);    
 		   		var temp_obj = [];
+		   		var temp_dataIndex = [];
 		   		// 只下载没有隐藏的列(isHidden()为true表示隐藏,其他都为显示)    
 		   		for (i = 2; i < colCount; i++) {
 		    		if (cm.isHidden(i) == true) {
 		    		} else {
-		     			temp_obj.push(i);   
+		     			temp_obj.push(i);
 		     		}
 		   		}
 	   			for (l = 1; l <= temp_obj.length; l++) {
-	    			xlSheet.Cells(1, l).Value = cm.getColumnHeader(temp_obj[l-1]); 
+	    			xlSheet.Cells(1, l).Value = cm.getColumnHeader(temp_obj[l-1]);
+	    			temp_dataIndex.push(cm.getDataIndex(temp_obj[l-1]));
 	   			}
     			var store = grid.getStore();
    				var recordCount = store.getCount();
    				var view = grid.getView();
-   				for (k = 1; k <= records.length; k++) {
-    				for (j = 1; j <= temp_obj.length; j++) {
-     					xlSheet.Cells(k + 1, j).Value = records[k-1].get(records[k-1].fields.items[j].name);
-     				}		   					
-				}
+   				var records;
+   				if("all" == symbol){
+   					for (k = 1; k <= myData.length; k++) {
+   	   			  		for (j = 1; j <= temp_obj.length; j++) {
+   	   			  			xlSheet.Cells(k + 1, j).Value = myData[k-1][temp_dataIndex[j-1]];
+   	   			  		}		   					
+   	   			  	}
+   				}else{
+   	   			  	records = grid.getSelectionModel().getSelections();
+   	   			  	for (k = 1; k <= records.length; k++) {
+   	   			  		for (j = 1; j <= temp_obj.length; j++) {
+   	   			  			xlSheet.Cells(k + 1, j).Value = records[k-1].get(records[k-1].fields.items[j].name);
+   	   			  		}		   					
+   	   			  	}
+   				}
 				xlSheet.Columns.AutoFit;
    				xls.ActiveWindow.Zoom = 75;
    				xls.UserControl = true; // 很重要,不能省略,不然会出问题 意思是excel交由用户控制
@@ -350,7 +394,7 @@
     	  			  +	tblx+'@'+nydmj1+'@'+nydmj2+'@'+yggdmj1+'@'+yggdmj2+'@'+yggdbl1+'@'+yggdbl2+'@'+bfhghmj1+'@'+bfhghmj2;
 		  putClientCommond("tdbgdc","getqb");
           putRestParameter("keyword",escape(escape(keyWord)));
-          var myData = restRequest(); 
+          myData = restRequest(); 
           store = new Ext.data.JsonStore({
 		  proxy:new Ext.ux.data.PagingMemoryProxy(myData),
 			remoteSort:true,
@@ -413,6 +457,37 @@
 	grid.getBottomToolbar().bind(store);
 	//重新加载数据集
 	store.load({params:{start:0,limit:limitNum}}); 
+	
+	gridAll = new Ext.grid.GridPanel({
+        store: store,
+        columns: [
+        new Ext.grid.RowNumberer(),
+        sm,
+        {header: '业务编号', dataIndex:'YW_GUID', width: width*0.1 , sortable: true,hidden:true},
+		{header: '行政代码', dataIndex:'XZDM', width: width*0.1 , sortable: true},		
+		{header: '图斑编号', dataIndex:'TBBH', width: width*0.1, sortable: true},
+		{header: '图斑类型', dataIndex:'TBLX', width: width*0.1,sortable: true},
+		{header: '中心X坐标', dataIndex:'XZB', width: width*0.1, sortable: true},		
+		{header: '中心Y坐标', dataIndex:'YZB', width: width*0.1, sortable: true},
+		{header: '前时相', dataIndex:'QSX', width: width*0.1,sortable: true},
+		{header: '后时相', dataIndex:'HSX', width: width*0.1, sortable: true},		
+		{header: '监测面积', dataIndex:'JCMJ', width: width*0.1, sortable: true},
+		{header: '压盖审批面积', dataIndex:'YGSPMJ', width: width*0.1,sortable: true},
+		{header: '压盖审批比率', dataIndex:'YGSPBL', width: width*0.1, sortable: true},		
+		{header: '压盖供地面积', dataIndex:'YGGDMJ', width: width*0.1, sortable: true},
+		{header: '压盖供地比率', dataIndex:'YGGDBL', width: width*0.1, sortable: true},
+		{header: '农用地面积', dataIndex:'NYDMJ', width: width*0.1, sortable: true},		
+		{header: '耕地面积', dataIndex:'GDMJ', width: width*0.1, sortable: true},
+		{header: '建设用地面积', dataIndex:'JSYDMJ', width: width*0.1,sortable: true},
+		{header: '未利用地面积', dataIndex:'WLYDMJ', width: width*0.1, sortable: true},		
+		{header: '允许建设区', dataIndex:'YXJSQ', width: width*0.1, sortable: true},
+		{header: '有条件建设区', dataIndex:'YTJJSQ', width: width*0.1,sortable: true},
+		{header: '限制建设区', dataIndex:'XZJSQ', width: width*0.1, sortable: true},		
+		{header: '禁止建设区', dataIndex:'JZJSQ', width: width*0.1, sortable: true},
+		{header: '符合规划面积', dataIndex:'FHGHMJ', width: width*0.1,sortable: true},
+		{header: '不符合规划面积', dataIndex:'BFHGHMJ', width: width*0.1, sortable: true},		
+		{header: '占用基本农田面积', dataIndex:'ZYJBNTMJ', width: width*0.1, sortable: true}																										
+        ]});
    }
 
  function checkNotNull(value){

@@ -1,4 +1,5 @@
 ﻿<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@page import="com.klspta.base.util.UtilFactory"%>
 <%@page import="org.springframework.security.core.context.SecurityContextHolder"%>
 <%@page import="com.klspta.console.user.User"%>
 <%@page import="com.klspta.web.xiamen.xchc.XchcManager"%> 
@@ -8,6 +9,7 @@
 	Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 	String userid = ((User)principal).getUserID();
 	String[][] showList = XchcManager.showXCList;
+	String xzq = UtilFactory.getXzqhUtil().generateOptionByList(UtilFactory.getXzqhUtil().getChildListByParentId("350200"));
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -25,6 +27,7 @@
 		var myData;
 		var grid;
 		var store;
+		var xzqstore;
 		var limitNum;
 		Ext.onReady(function(){
 			//将是这个用户填写的巡查日志查询出来
@@ -41,6 +44,10 @@
 						{name: '<%=showList[showList.length - 1][0]%>'}
 					]
 			});
+			xzqstore = new Ext.data.JsonStore({
+				fields : ['name','code'],
+				data :   <%=xzq%>
+			});
 			width = document.body.clientWidth;
 			height = document.body.clientHeight * 0.995;
 			limitNum = parseInt(height/31);
@@ -51,17 +58,34 @@
 		        columns: [
 		        	new Ext.grid.RowNumberer(),
 			<%for(int i = 0; i < showList.length-4; i++){
-				if(!"hiddlen".equals(showList[i][2])){
+				if(!"hidden".equals(showList[i][3])){
 			%>
 				{header: '<%=showList[i][2]%>', dataIndex:'<%=showList[i][0]%>', width: width*<%=Float.parseFloat(showList[i][1])%>, sortable: true,renderer:changKeyword},
-			<%}}%>
-	          	{header: '详细信息', dataIndex:'XIANGXI',width: width*0.05, sortable: false,renderer:view},
+			<%}else{%>
+				{header: '<%=showList[i][2]%>', dataIndex:'<%=showList[i][0]%>', width: width*<%=Float.parseFloat(showList[i][1])%>, sortable: true,renderer:changKeyword,hidden:true},
+				<%}
+				}%>
+	          	{header: '详细信息', dataIndex:'XIANGXI',width: width*0.05, sortable: false,renderer:view,hidden:true},
 	          	{header: '发送短信', dataIndex:'SEND',width: width*0.05, sortable: false,renderer:send},
 	          	{header: '立案', dataIndex:'LIAN',width: width*0.05, sortable: false,renderer:lian},
           		{header: '删除',dataIndex:'DELETE',width: width*0.05, sortable: false,renderer:del}
 		        ], 
 		        tbar:[
-	    			{xtype:'label',text:'快速查询:',width:60},
+		            {xtype:'label',text:'行政区:',width:60},
+		            {
+		            	id : 'xzqh',
+						xtype : 'combo',
+						width :100,
+						store : xzqstore,
+						emptyText:'请选择行政区',
+						displayField : 'name',
+						valueField : 'code',
+						typeAhead : true,
+						mode : 'local',
+						triggerAction : 'all',
+						selectOnFocus : true
+		            },
+	    			{xtype:'label',text:'  快速查询:',width:60},
 	    			{xtype:'textfield',id:'keyword',width:350,emptyText:'请输入关键字进行查询'},
 	    			{xtype: 'button',text:'查询',handler: query}
 			    ],  
@@ -161,10 +185,12 @@
 		<!--查询方法 add by 姚建林 2013-6-20-->
         function query(){
            var keyWord=Ext.getCmp('keyword').getValue();
+           var xzqh = Ext.getCmp('xzqh').getValue();
   		   putClientCommond("xchc","getDclList");
 	       putRestParameter("userid","<%=userid%>");
            putRestParameter("keyword",escape(escape(keyWord)));
-           var myData = restRequest(); 
+           putRestParameter("xzqh",xzqh);
+           myData = restRequest(); 
            store = new Ext.data.JsonStore({
 				proxy:new Ext.ux.data.PagingMemoryProxy(myData),
 					remoteSort:true,
@@ -178,11 +204,14 @@
           grid.reconfigure(store, new Ext.grid.ColumnModel([
         	new Ext.grid.RowNumberer(),
 			<%for(int i = 0; i < showList.length-4 ; i++){
-				if(!"hiddlen".equals(showList[i][2])){
+				if(!"hidden".equals(showList[i][3])){
 			%>
 				{header: '<%=showList[i][2]%>', dataIndex:'<%=showList[i][0]%>', width: width*<%=Float.parseFloat(showList[i][1])%>, sortable: true,renderer:changKeyword},
-			<%}}%>
-	          	{header: '详细信息', dataIndex:'XIANGXI',width: width*0.05, sortable: false,renderer:view},
+				<%}else{%>
+				{header: '<%=showList[i][2]%>', dataIndex:'<%=showList[i][0]%>', width: width*<%=Float.parseFloat(showList[i][1])%>, sortable: true,renderer:changKeyword,hidden:true},
+				<%}
+				}%>
+	          	{header: '详细信息', dataIndex:'XIANGXI',width: width*0.05, sortable: false,renderer:view,hidden:true},
 	          	{header: '发送短信', dataIndex:'SEND',width: width*0.05, sortable: false,renderer:send},
 	          	{header: '立案', dataIndex:'LIAN',width: width*0.05, sortable: false,renderer:lian},
           		{header: '删除',dataIndex:'DELETE',width: width*0.05, sortable: false,renderer:del}

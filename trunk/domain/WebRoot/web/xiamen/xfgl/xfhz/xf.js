@@ -24,17 +24,17 @@ function initComponent() {
 	var xzqStore = new Ext.data.JsonStore({
 				fields : ['name'],
 				data : [{
-							name : '市局'
+							name : '局机关'
 						}, {
-							name : '直属区'
+							name : '直属分局'
 						}, {
-							name : '集美区'
+							name : '集美分局'
 						}, {
-							name : '海沧区'
+							name : '海沧分局'
 						}, {
-							name : '同安区'
+							name : '同安分局'
 						}, {
-							name : '翔安区'
+							name : '翔安分局'
 						}]
 			})
 
@@ -44,9 +44,21 @@ function initComponent() {
 				bodyStyle : 'padding:5px 5px 0',
 				tbar : [{
 							xtype : 'label',
-							text : '行政区：'
+							text : '举报形式：'
 						}, {
-							id : 'yddw',
+							id : 'dklx',
+							xtype : 'combo',
+							store : dklxStore,
+							displayField : 'name',
+							typeAhead : true,
+							mode : 'local',
+							triggerAction : 'all',
+							selectOnFocus : true
+						}, {
+							xtype : 'label',
+							text : '处理机关：'
+						}, {
+							id : 'xzq',
 							xtype : 'combo',
 							store : xzqStore,
 							displayField : 'name',
@@ -54,10 +66,7 @@ function initComponent() {
 							mode : 'local',
 							triggerAction : 'all',
 							selectOnFocus : true
-						},{
-							xtype : 'label',
-							text : '关键字：'
-						}, {xtype:'textfield',id:'keyword',width:200,emptyText:'请输入关键字进行查询'},'-', {
+						}, '-', {
 							xtype : 'button',
 							text : '查询',
 							handler : query
@@ -76,11 +85,13 @@ function initComponent() {
 }
 
 function query() {
-	var yddw = Ext.getCmp("yddw").getValue();
-	var keyword = Ext.getCmp("keyword").getValue();
-	document.frames['report'].query(yddw , keyword);
+	var dklx = Ext.getCmp("dklx").getValue();
+	var xzq = Ext.getCmp("xzq").getValue();
+	dklx = escape(escape(dklx));
+	xzq = escape(escape(xzq));
+	document.getElementById('report').src= url+"?dklx="+dklx+"&xzq="+xzq;
 }
 
 function exportExcel() {
-	document.frames['report'].print();
+	document.frames['report'].exportExcel();
 }

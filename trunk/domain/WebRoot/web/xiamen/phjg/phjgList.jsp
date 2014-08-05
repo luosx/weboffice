@@ -102,7 +102,7 @@
   		   putClientCommond("phjg","getList");
 	       putRestParameter("userid","<%=userid%>");
            putRestParameter("keyword",escape(escape(keyWord)));
-           var myData = restRequest(); 
+           myData = restRequest(); 
            store = new Ext.data.JsonStore({
 				proxy:new Ext.ux.data.PagingMemoryProxy(myData),
 					remoteSort:true,

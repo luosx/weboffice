@@ -87,6 +87,13 @@ Ext.onReady(function() {
 					tooltip : '清除',
 					handler : clear
 				}, {
+					xtype : 'tbbutton',
+					text : '属性查询',
+					cls : 'x-btn-text-icon',
+					icon : basePath + 'base/fxgis/framework/images/isearch.png',
+					tooltip : '属性查询',
+					handler : identify
+				}, {
 					text : '全屏',
 					id : 'full_screen',
 					cls : 'x-btn-text-icon',
@@ -110,7 +117,8 @@ Ext.onReady(function() {
 				width : width,
 				html : '<iframe name="center" id="map" frameborder="0" style="width: 100%; height: 100%; overflow: auto;" src="'
 						+ basePath
-						+ 'base/fxgis/fx/FxGIS.html?i=false&initFunction=[{$name$:$setMapExtent$,$parameters$:$45044.3121547718,5049.116018257262,72646.91380705396,14896.972418257263$}]"></iframe>'
+						+ 'base/fxgis/fx/FxGIS.html?i=false"></iframe>'
+						//+ 'base/fxgis/fx/FxGIS.html?i=false&initFunction=[{$name$:$setMapExtent$,$parameters$:$45044.3121547718,5049.116018257262,72646.91380705396,14896.972418257263$}]"></iframe>'
 			}],
 			collapsible : false,
 			margins : '0 0 0 0'
@@ -144,6 +152,24 @@ Ext.onReady(function() {
 						handler : function() {
 							Ext.getCmp("locate").doToggle();
 							changeMethod();
+						}
+					}, '->', {
+						xtype : 'tbbutton',
+						id : 'check_all',
+						text : '全选',
+						cls : 'text',
+						handler : function() {
+							check_all_nodes();
+							//延迟1毫秒，为了提高用户体验，树形结构及时显示勾选状态
+							setTimeout("show_all()",1);
+						}
+					},{
+						xtype : 'tbbutton',
+						id : 'uncheck_all',
+						text : '全不选',
+						cls : 'text',
+						handler : function() {
+							uncheck_all();
 						}
 					}],
 			items : [tree, {
@@ -184,16 +210,35 @@ Ext.onReady(function() {
 							return;
 						}
 						var deviceIds = "";
+						var deviceNames = "";
+						var sYear = "";
+						var sMonth = "";
+						var sDay = "";
+						var eYear = "";
+						var eMonth = "";
+						var eDay = "";
+						sYear = start.substr(0,4);
+						sMonth = start.substr(5,2);
+						sDay = start.substr(8,2);
+						eYear = end.substr(0,4);
+						eMonth = end.substr(5,2);
+						eDay = end.substr(8,2);
 						for (var i = 0; i < trackNode.length; i++) {
 							deviceIds += trackNode[i].attributes.GPS_ID + ","
+							deviceNames += trackNode[i].attributes.GPS_UNIT + trackNode[i].attributes.GPS_NAME + ","
 						}
 						deviceIds = deviceIds.substr(0, deviceIds.length - 1);
-						frames["center"].swfobject.getObjectById("FxGIS")
-								.showTrack(deviceIds, start, end);
+						deviceNames = deviceNames.substr(0, deviceNames.length - 1);
+						clear();
+						//frames["center"].swfobject.getObjectById("FxGIS").showTrack(deviceIds, start, end);
+						frames["center"].swfobject.getObjectById("FxGIS").queryFeatureAndAddMouseOn(deviceIds,deviceNames,"device_track","0", sYear, sMonth, sDay, eYear, eMonth, eDay);
 					}
-				}, {
+				},
+				
+				{
 					id : 'playBack',
 					text : '回放轨迹',
+					hidden : true,
 					handler : function() {
 						var start = Ext.getCmp("startTime").getValue();
 						var end = Ext.getCmp("endTime").getValue();
@@ -208,6 +253,20 @@ Ext.onReady(function() {
 								.playBack(trackNode[0].attributes.GPS_ID,
 										start, end);
 					}
+				},
+				
+						{
+					id : 'showWindow',
+					text : '轨迹查询',
+					handler : function() {
+						if (trackNode.length != 1) {
+							Ext.MessageBox.alert("提示",
+									"请选择一个设备!");
+							return;
+						}
+						clear();
+						showWindow(trackNode[0].attributes.GPS_ID,trackNode[0].attributes.GPS_UNIT,trackNode[0].attributes.GPS_NAME);
+					}
 				}]
 			}]
 		}]
@@ -215,7 +274,11 @@ Ext.onReady(function() {
 	// init
 	tree.setHeight(435);
 	if (type == "showTrack") {
-		Ext.getCmp("treePanel").topToolbar.hide();
+		//Ext.getCmp("treePanel").topToolbar.hide();
+		var itemshide = Ext.getCmp("treePanel").topToolbar.items.items;
+		for (var index = 0; index < 2; index++) {
+			itemshide[index].hide();
+		}
 		Ext.getCmp("timeSelector").show();
 		Ext.getCmp("treePanel").setTitle("设备列表");
 		tree.setHeight(335);
@@ -240,6 +303,46 @@ function changeMethod() {
 	}
 }
 
+//全选所有节点
+var arrayObj = new Array();
+function check_all_nodes() {
+	var rootnodes = tree.getRootNode().childNodes;
+	for (var index = 0; index < rootnodes.length; index++) {
+		var child = rootnodes[index].childNodes;
+		for (var j = 0; j < child.length; j++) {
+			if(child[j].attributes.checked == undefined || child[j].attributes.checked == false){
+				child[j].ui.toggleCheck(true);
+				child[j].attributes.checked = true;
+				arrayObj.push(child[j]);
+			}
+		}
+	}
+}
+function show_all(){
+	for (var index = 0; index < arrayObj.length; index++) {
+		arrayObj[index].fireEvent('checkchange', arrayObj[index], true);
+	}
+	//一次全选结束要清空数组
+	arrayObj.splice(0,arrayObj.length);
+	if(method != "TRACK"){
+		zoomToFullExtent();
+	}
+}
+//全部不选所有节点
+function uncheck_all() {
+	var rootnodes = tree.getRootNode().childNodes;
+	for (var index = 0; index < rootnodes.length; index++) {
+		var child = rootnodes[index].childNodes;
+		for (var j = 0; j < child.length; j++) {
+			if(child[j].attributes.checked == true){
+				child[j].ui.toggleCheck(false);
+				child[j].attributes.checked = false;
+				child[j].fireEvent('checkchange', child[j], false);
+			}
+		}
+	}
+	clear();//清屏
+}
 // ////////////////////////////////////////////////////////////////////////////////////
 // 放大
 function zoomIn() {
@@ -255,10 +358,10 @@ function pan() {
 }
 // 全图
 function zoomToFullExtent() {
-	frames["center"].swfobject.getObjectById("FxGIS").setMapExtent(
-			45044.3121547718, 5049.116018257262, 72646.91380705396,
-			14896.972418257263);
-	// frames["center"].swfobject.getObjectById("FxGIS").zoomToFullExtent();
+	frames["center"].swfobject.getObjectById("FxGIS").zoomToFullExtent();
+	//frames["center"].swfobject.getObjectById("FxGIS").setMapExtent(
+	//		45044.3121547718, 5049.116018257262, 72646.91380705396,
+	//		14896.972418257263);
 }
 // 前一视图
 function zoomToPrevExtent() {
@@ -295,4 +398,9 @@ function quitFullScreen() {
 	Ext.getCmp('quit_full_screen').setVisible(false);
 	parent.parent.parent.index.rows = "106,32,*"
 	parent.parent.content.cols = "0,9,*";
+}
+
+//属性查询
+function identify(){
+	frames["center"].swfobject.getObjectById("FxGIS").identify();
 }
