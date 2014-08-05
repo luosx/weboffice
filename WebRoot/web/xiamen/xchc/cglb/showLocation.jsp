@@ -25,6 +25,7 @@ System.out.println(url);
   </head>
       <script type="text/javascript" src="<%=basePath%>base/fxgis/framework/js/menu.js"></script>
       <script type="text/javascript" src="<%=basePath%>base/fxgis/framework/js/flexCallback.js"></script>
+      <script type="text/javascript" src="<%=basePath%>base/fxgis/framework/js/fields_to_chinese.js"></script>
       <script src="<%=basePath%>/base/fxgis/framework/js/toJson.js"></script>
 <script type="text/javascript">
 var yw_guid='<%=yw_guid%>';

@@ -7,6 +7,8 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 String userid = ((User)principal).getUserID();
+String dklx = request.getParameter("dklx");
+String xzq = request.getParameter("xzq");
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
@@ -69,8 +71,8 @@ String userid = ((User)principal).getUserID();
 	</style>
   </head>
   <script type="text/javascript">
-  		function print(){
-		    var curTbl = document.getElementById("XFJB"); 
+  		function exportExcel(){
+		    var curTbl = document.getElementById("XFJBCX"); 
  			try{
 		    	var oXL = new ActiveXObject("Excel.Application");
 		    }catch(err){
@@ -91,28 +93,26 @@ String userid = ((User)principal).getUserID();
 		    //复制TextRange中内容 
 		    //oSheet.Paste(); 
 		    oSheet.Paste(); 
-		    //粘贴到活动的EXCEL中       
+		    //粘贴到活动的EXCEL中
+		    
+		    //去掉表格背景颜色
+		    var XFJBCXtable = document.all.XFJBCX;//指定要写入的数据源的id
+			var hang = XFJBCXtable.rows.length;//取数据源行数
+			var lie = XFJBCXtable.rows(0).cells.length;//取数据源列数
+			for (var i=1;i<=hang;i++){
+				oSheet.Range(oSheet.Cells(i,1),oSheet.Cells(i,lie)).Interior.ColorIndex=2;
+			}
+		           
 		    oXL.Visible = true; 
 		    //设置excel可见属性 
 		}
   		
-  		//根据用地单位和关键字作过滤
-  		function query(yddw, keyword){
- 			putClientCommond("XfjbManager","getReport");
-		    putRestParameter("userid","<%=userid%>");
-		    putRestParameter("yddw",escape(escape(yddw)));
-		    putRestParameter("keyword",escape(escape(keyword)));
-			myData = restRequest();
-  			document.getElementById("center").innerHTML = myData;
-  		}
-  		
   </script>
   <body>
   	<div id="fixed" style="position: fixed; top: 5px; left: 0px">
-		<img src="base/form/images/print.png" width="20px" height="20px" onClick="javascript:print();"  />
 	</div>
 	<div align="center" id="center" style="position:absolute; top:30px; left: 20px;">
-  		<%=new CBDReportManager().getReport("XFJBCX", new Object[]{})%>
+  		<%=new CBDReportManager().getReport("XFJBCX", new Object[]{dklx,xzq})%>
   	</div>
   </body>
 </html>

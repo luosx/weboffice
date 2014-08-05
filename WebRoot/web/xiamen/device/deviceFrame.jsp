@@ -20,10 +20,20 @@
 		var basePath="<%=basePath%>";
 		var type="<%=type%>";
 </script>
+	</head>
+	<body bgcolor="#FFFFFF" topmargin="0" leftmargin="0">
+	<div id="result-win" class="x-hidden">    </div>
+    <div id="result-tabs"></div>
+    <div id='properties'   title="图斑属性" style="overflow: scroll;"></div>
+    <div id='xz'  title="现状叠加分析" style="overflow: scroll; "></div>
+    <div id='gh'   title="规划叠加分析" style="overflow: scroll;"></div>
+	</body>
 		<script src="deviceFrame.js"></script>
 		<script src="deviceTree.js"></script>
 		<script src="monitorView.js"></script>
-	</head>
-	<body bgcolor="#FFFFFF" topmargin="0" leftmargin="0">
-	</body>
+		<script src="control.js"></script>
+		<script src="buttons.js"></script>
+		<script src="flexCallback.js"></script>
+		<script type="text/javascript" src="<%=basePath%>base/fxgis/framework/js/fields_to_chinese.js"></script>
+		<script src="<%=basePath%>/base/fxgis/framework/js/toJson.js"></script>
 </html>

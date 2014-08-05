@@ -78,7 +78,7 @@ window.onload=function()
 <img id="icon" onclick="clickImage()"  src="<%=resourcePath%>/images/go.png" style="display:block;float:right;width:26px;height:26px;"/> 
 
 <div style="width:100%;text-align:center;float:right;padding:0;margin:0;">
-	<div  id="showimage" style="width:800px;text-align:center;padding:0;margin:0;overflow:hidden;">
+	<div id="showimage" style="width:800px;text-align:center;padding:0;margin:0 auto;overflow:hidden;">
 		<table cellpadding="0" cellspacing="0">
 			<tr>
 				<td width="790"><img id="img1"  class="image" src="<%=resourcePath%>/images/index3.png" style="border:none;"><td>

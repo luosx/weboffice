@@ -12,10 +12,13 @@
             + request.getServerPort() + path + "/";
     String permission = request.getParameter("permission");
     String yw_guid = request.getParameter("yw_guid");
+    String userid1 = request.getParameter("userid1");
     String fixed=request.getParameter("fixed");//显示打印按钮的标识符
     String wfInsId1 = "";
     IWorkflowOp workflow1 = null;
     String activityName1 ="";
+    if(!yw_guid.equals("")){
+    }
     if(permission==null){
         permission = "no";
         wfInsId1 = request.getParameter("wfInsId");
@@ -29,6 +32,7 @@
     //String name = UtilFactory.getXzqhUtil().getBeanById(xzqh).getCatonname();
        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd", new DateFormatSymbols());
  		String dateString = df.format(Calendar.getInstance().getTime());
+ 		
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -63,6 +67,20 @@
              				formlist[i].disabled=true;
          		 }		
 			}
+			var userid1 = "<%=userid1%>";
+			var userid = "<%=userid%>";
+		<%	if(!userid1.equals("") && !userid1.equals("null")){
+				if((userid1).equals(userid)){
+				
+				}else{
+				 %>
+					var butt1 = document.getElementById("butt");
+			
+		    		butt1.innerHTML = '<img src="base/form/images/print.png" onclick="print()" style="cursor:hand" title="打印"/>';
+	        <%
+				}
+			}
+			%>
 		}
 				
 			function save(){
@@ -209,6 +227,9 @@
 <td colspan="2"><input class="noborder"  type="text"   name="jsr" id="jsr" style="width: 95%;"/></td>
 <td>记录人</td>
 <td colspan="2"><input class="noborder"  type="text"   name="jlr" id="jlr" style="width:95%;"/></td>
+</tr>
+<tr>
+<td colspan="2" style="display:none"><textarea rows="2" name="userid" id=""userid"" style="display:none"><%=userid %></textarea></td>
 </tr>
 </table>
 </form>

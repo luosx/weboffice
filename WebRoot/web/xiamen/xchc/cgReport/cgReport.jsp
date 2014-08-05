@@ -94,7 +94,16 @@ String enddate = request.getParameter("enddate");
 		    //复制TextRange中内容 
 		    //oSheet.Paste(); 
 		    oSheet.Paste(); 
-		    //粘贴到活动的EXCEL中       
+		    //粘贴到活动的EXCEL中
+		    
+		    //去掉表格背景颜色
+		    var XCHCCGtable = document.all.XCHCCG;//指定要写入的数据源的id
+			var hang = XCHCCGtable.rows.length;//取数据源行数
+			var lie = XCHCCGtable.rows(1).cells.length;//取数据源列数
+			for (var i=1;i<=hang;i++){
+				oSheet.Range(oSheet.Cells(i,1),oSheet.Cells(i,lie+1)).Interior.ColorIndex=2;
+			}
+		           
 		    oXL.Visible = true; 
 		    //设置excel可见属性 
 		}

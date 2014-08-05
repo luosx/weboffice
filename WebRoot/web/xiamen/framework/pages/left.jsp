@@ -13,6 +13,7 @@
 	String name = ProjectInfo.getInstance().PROJECT_NAME;
 	String resourcePath = basePath + "web/"+name+"/framework";
 	String parentMenuId = request.getParameter("menuId");
+	String firstFlag = request.getParameter("firstFlag");
 //	if (parentMenuId == null)
 //		parentMenuId = "721651a8cb5855116e0ee6d40c85e4f2";
 
@@ -109,31 +110,45 @@ function openMenu(menuId)
 
 
 window.onload=function(){
-	//alert(document.getElementById("menuLeftDiv").children[0].);
+	//alert(document.getElementById("menuLeftDiv").children[0]);
 
 	var url=parent.right.location.href.replace('<%=basePath%>','');
 	if(document.getElementById("sel_"+url)!=null)
 		showSel(url);
 	
-//	document.getElementById("menuLeftDiv").children.length!=0;
-//	{
-//		var obj = document.getElementById("menuLeftDiv").children[0];
-//		if(obj!=null)
-//		{
-//				obj=obj.children[0];
-//			if( document.createEvent )
-//			{
-//				var evObj = document.createEvent('MouseEvents');
-//				evObj.initEvent( 'onclick', true, false );
-//				obj.dispatchEvent(evObj);
-//			}
-//			else if( document.createEventObject )
-//			{
-//				obj.fireEvent('onclick');
-//			}
-	
-//		}
-//	}
+	document.getElementById("menuLeftDiv").children.length!=0;
+	{
+		var obj = document.getElementById("menuLeftDiv").children[0];
+		if(obj!=null)
+		{
+				obj=obj.children[0];
+			if( document.createEvent )
+			{
+				var evObj = document.createEvent('MouseEvents');
+				evObj.initEvent( 'onclick', true, false );
+				obj.dispatchEvent(evObj);
+			}
+			else if( document.createEventObject )
+			{
+				//如果firstFlag为true，则显示主页，不自动展开菜单
+				if("true" == "<%=firstFlag%>"){
+				
+				}else{
+					//自动展开菜单二级菜单
+					obj.fireEvent('onclick');
+					//自动展开三级菜单,当不存在三级菜单会抛出异常，捕捉异常但不错处理
+					try{  
+						if(document.getElementById("menu"+obj.children[0].id.substring(4)+"_cm").children.length!=0){
+							obj = document.getElementById("menu"+obj.children[0].id.substring(4)+"_cm").children[0];
+							obj.fireEvent('onclick');
+						}
+					}catch(e){
+					
+					}
+				}
+			}
+		}
+	}
 //var leftMenuHeight=window.screen.availHeight-top.flash.document.body.clientHeight-top.menu.document.body.clientHeight-100;
 }
 -->
