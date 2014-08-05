@@ -67,7 +67,7 @@ public abstract class AbstractDataBaseSupport extends BaseLogSupport {
      * @param type
      * @return
      */
-    private JdbcTemplate findTemplate(String type) {
+    public JdbcTemplate findTemplate(String type) {
         JdbcTemplate jt = (JdbcTemplate) ContextHelper.getContext().getBean(type);
         return jt;
     }

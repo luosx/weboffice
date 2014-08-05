@@ -76,7 +76,15 @@ public class MapConfig extends AbstractBaseBean {
     }
 
     public void getInitMapService(){
-        String sql = "select t.serverid,t.layerid,t.type, (case t.checked  when '1' then 'true' when '0' then 'false' end) flag from GIS_MAPTREE t where t.parenttreeid not like '0' and t.flag = '1'";
+    	String enterFlag = request.getParameter("enterFlag");
+    	String sql = "";
+    	if("map_tree".equals(enterFlag)){
+    		sql = "select t.serverid,t.layerid,t.type, (case t.checked  when '1' then 'true' when '0' then 'false' end) flag from GIS_MAPTREE t where t.parenttreeid not like '0' and t.flag = '1'";
+    	}
+    	if("map_monitor".equals(enterFlag)){
+    		sql = "select t.serverid,t.layerid,t.type, (case g.opacity  when '1' then 'true' when '0' then 'false' end) flag from GIS_MAPSERVICES g,GIS_MAPTREE t "+
+    			"where t.parenttreeid not like '0' and t.flag = '1' and g.id = t.serverid";
+    	}
         List<Map<String,Object>> list = query(sql,CORE);
         response(list);
     }

@@ -1,0 +1,1 @@
+将download文件夹放到tomcat6\webapps目录下
