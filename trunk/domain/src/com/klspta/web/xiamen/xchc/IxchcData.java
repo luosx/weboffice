@@ -21,7 +21,7 @@ public interface IxchcData {
 	 * @param keyword
 	 * @return
 	 */
-	public List<Map<String, Object>>  getDclList(String userId,String keyword);
+	public List<Map<String, Object>>  getDclList(String userId,String keyword,String xzqh);
 	
 	public List<Map<String, Object>>  getHccgList(String userId,String keyword);
 	/**

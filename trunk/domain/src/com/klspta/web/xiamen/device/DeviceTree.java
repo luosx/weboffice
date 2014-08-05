@@ -3,6 +3,7 @@ package com.klspta.web.xiamen.device;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -34,8 +35,8 @@ public class DeviceTree extends AbstractBaseBean {
 	}
 
 	private void init() {
-		Map<String, List<Map<String, Object>>> devices = new HashMap<String, List<Map<String, Object>>>();
-		String sql = "select * from GPS_INFO t order by t.gps_cantoncode,t.sort";
+		LinkedHashMap<String, List<Map<String, Object>>> devices = new LinkedHashMap<String, List<Map<String, Object>>>();
+		String sql = "select * from GPS_INFO t order by t.sort";
 		treeResults = query(sql, YW);
 		for (Map<String, Object> one : treeResults) {
 			String unit = one.get("GPS_UNIT").toString();

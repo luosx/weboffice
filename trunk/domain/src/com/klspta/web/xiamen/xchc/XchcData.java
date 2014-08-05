@@ -53,11 +53,16 @@ public class XchcData extends AbstractBaseBean implements IxchcData {
 	}
 	
 	@Override
-	public List<Map<String, Object>> getDclList(String userId, String keyword) {
+	public List<Map<String, Object>> getDclList(String userId, String keyword,String xzqh) {
 		//String xzq = editXzq(userId);
 	    //String xzqs = XzqHandle.getXzqByUserxzq(userXzq)	    
 		StringBuffer sqlBuffer = new StringBuffer();
-		String sql ="select t.* from v_pad_data_xml t where 1=1";
+		String sql ="select t.*,g.GPS_UNIT as XCDW,concat(g.GPS_UNIT,g.GPS_NAME) as SBBH from v_pad_data_xml t LEFT JOIN GPS_INFO g on (t.IMSI = g.GPS_ID)";
+		if(xzqh == null || "".equals(xzqh)){
+			sql += " where 1=1 ";
+		}else{
+			sql += " where t.impxzqbm like '"+xzqh+"%' ";
+		}
 		//sqlBuffer.append(xzq);
 		String xzqSql = XzqHandle.getXzqSql(userId, sql, "impxzqbm");
 		sqlBuffer.append(xzqSql);

@@ -14,16 +14,17 @@ import com.klspta.console.ManagerFactory;
 import com.klspta.model.CBDReport.CBDReportManager;
 
 public class XchcManager extends AbstractBaseBean {
-	//public static final String[][] showList = new String[][]{{"READFLAG", "0.1","hiddlen"},{"GUID", "0.15","任务编号"},{"XZQMC", "0.1","所在政区"},{"XMMC", "0.1","项目名称"},{"YDDW", "0.1","用地单位"},{"RWLX","0.1","任务类型"},{"SFWF","0.1","是否违法"},{"XCR","0.05","巡查人"},{"XCRQ","0.1","巡查日期"},{"IMGNAME","0.1","hiddlen"},{"XIANGXI","0.1","详细信息"},{"DELETE","0.1","删除"}};
-    public static final String[][] showXCList = new String[][]{{"GUID", "0.10","任务编号"},{"YDXMMC", "0.13","用地项目名称"},{"YDZT", "0.10","用地主体"},{"YDWZ", "0.15","用地位置"},{"ZDMJ","0.08","占地面积(亩)"},{"GDMJ","0.08","耕地面积(亩)"},{"JZMJ","0.08","建筑面积(亩)"},{"STATE","0.05","立案状态"},{"XIANGXI","0.05","详细信息"},{"SEND","0.05","发送短信"},{"LIAN","0.05","立案"},{"DELETE","0.05","删除"}};//
+	//public static final String[][] showList = new String[][]{{"READFLAG", "0.1","hiddlen"},{"GUID", "0.15","任务编号"},{"XZQMC", "0.1","所在政区"},{"XMMC", "0.1","项目名称"},{"YDDW", "0.1","用地单位"},{"RWLX","0.1","任务类型"},{"SFWF","0.1","是否违法"},{"XCR","0.05","巡查人"},{"XCRQ","0.1","巡查日期"},{"IMGNAME","0.1","hiddlen"},{"XIANGXI","0.1","巡查时间"},{"DELETE","0.1","删除"}};
+    public static final String[][] showXCList = new String[][]{{"GUID", "0.10","任务编号","hidden"},{"YDXMMC", "0.13","用地项目名称",""},{"YDZT", "0.08","用地主体",""},{"YDWZ", "0.15","用地位置",""},{"ZDMJ","0.1","占地面积(亩)",""},{"XCDW","0.12","巡查单位",""},{"SBBH","0.15","设备编号",""},{"XCRY","0.05","巡查人员",""},{"BEGINDATE","0.08","巡查时间",""},{"STATE","0.05","立案状态",""},{"SEND","0.05","发送短信",""},{"LIAN","0.05","立案",""},{"DELETE","0.05","删除",""}};//
     public static final String[][] showLAList = new String[][]{{"GUID", "0.10","任务编号"},{"YDXMMC", "0.18","用地项目名称"},{"YDZT", "0.14","用地主体"},{"YDWZ", "0.22","用地位置"},{"ZDMJ","0.08","占地面积(亩)"},{"GDMJ","0.08","耕地面积(亩)"},{"JZMJ","0.08","建筑面积(亩)"},{"STATE","0.05","立案状态"},{"XIANGXI","0.05","详细信息"},{"SEND","0.05","发送短信"},{"LIAN","0.05","立案"},{"DELETE","0.05","删除"}};//
-    public static final String[][] showHCList = new String[][]{{"GUID", "0.10","任务编号"},{"XZQMC", "0.1","所在政区"},{"YDDW", "0.11","用地单位"},{"YDSJ", "0.09","用地时间"},{"TDYT","0.08","土地用途"},{"JSQK","0.08","建设情况"},{"YDQK","0.08","用地情况"},{"DFCCQK","0.08","地方查处情况"},{"WFWGLX","0.1","违法违规类型"},{"XIANGXI","0.05","详细信息"},{"SEND","0.05","发送短信"},{"DELETE","0.05","删除"}};//
+    public static final String[][] showHCList = new String[][]{{"GUID", "0.10","任务编号"},{"XZQMC", "0.1","所在政区"},{"YDDW", "0.11","用地单位"},{"YDSJ", "0.09","用地时间"},{"TDYT","0.08","土地用途"},{"JSQK","0.08","建设情况"},{"YDQK","0.08","用地情况"},{"DFCCQK","0.08","地方查处情况"},{"WFWGLX","0.1","违法违规类型"},{"XIANGXI","0.05","巡查时间"},{"SEND","0.05","发送短信"},{"DELETE","0.05","删除"}};//
 	
 	public void getDclList(){
 		String userId = request.getParameter("userid");
 		String keyword = request.getParameter("keyword");
+		String xzqh = request.getParameter("xzqh");
 		IxchcData xchc = new XchcData();
-		List<Map<String, Object>> queryList = xchc.getDclList(userId, keyword);
+		List<Map<String, Object>> queryList = xchc.getDclList(userId, keyword,xzqh);
 		response(queryList);
 	}
 	
@@ -101,6 +102,7 @@ public class XchcManager extends AbstractBaseBean {
 	     Map<String,Object> conditionMap = new HashMap<String,Object>();
 	     
 	     conditionMap.put("query", query.toString());
+	     System.out.println(String.valueOf(new CBDReportManager().getReport("XCHCCG", new Object[]{conditionMap})));
 	     response(String.valueOf(new CBDReportManager().getReport("XCHCCG", new Object[]{conditionMap})));
 	    
 	}

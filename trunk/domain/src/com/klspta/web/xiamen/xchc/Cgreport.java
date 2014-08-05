@@ -32,7 +32,11 @@ public class Cgreport extends AbstractBaseBean implements IDataClass {
         SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
         StringBuffer query = new StringBuffer();
         if (xzq != null && !("".equals(xzq))) {
-            query.append(" and t.impxzqbm = '").append(xzq).append("'");
+        	if("350200".equals(xzq)){
+        		query.append(" and t.impxzqbm like '").append("3502").append("%'");
+        	}else{
+        		query.append(" and t.impxzqbm like '").append(xzq).append("%'");
+        	}
         }       
         if(begindate !=null && !("".equals(begindate))){
             try {
