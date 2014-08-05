@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quartz>
+<!-- 轨迹坐标上图 -->
+<job>
+    <job-detail>
+      <name>xcJob</name>
+      <job-class>com.klspta.web.xiamen.device.job.WyxcJob</job-class>
+    </job-detail>
+    <trigger>
+      <cron>
+        <name>dealLine</name>
+        <job-name>xcJob</job-name>
+        <!-- 正式使用时, 将 10/1修改成 10/60 -->
+        <cron-expression>0/60 0-59 0-23 ? * *</cron-expression>
+     </cron>
+    </trigger>
+</job>
+</quartz>
