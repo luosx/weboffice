@@ -129,7 +129,12 @@ function showWindow(var_gps_id, gps_unit, gps_name) {
 					height : 260,
 					plain : true,
 					closeAction : 'hide',
-					items : panel
+					items : panel,
+					listeners:{
+						beforehide:function(){
+							clear();//在窗口关闭之前清屏
+						}
+					}
 				});
 	} else {
 		win.items.removeAt(0);

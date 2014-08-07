@@ -22,7 +22,7 @@ function identifyCallback(s) {
 	var attributes = tempValue.attributes;
 	layername = tempValue.layername;
 	if (layername == "外业巡查核查图层") {
-		var_YW_GUID = attributes.YW_GUID;
+		var_YW_GUID = attributes["巡查编号"];
 	}
 	var attr_fields = fields_to_chinese(layername);
 	var attritable = '<table border="1" cellpadding="0" cellspacing="0" width="330"  style="text-align:center; vertical-align:middle;font-family: 宋体, Arial; font-size: 12px;border-collapse:collapse;border:1px #000 solid;" >';
